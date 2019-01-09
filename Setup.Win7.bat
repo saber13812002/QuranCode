@@ -1,0 +1,1 @@
+COPY Setup\Win7\*.* .

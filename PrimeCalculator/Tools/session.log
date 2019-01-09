@@ -1,0 +1,10 @@
+08/15/17 14:20:45 v1.34.5 @ ALI-PC, System/Build Info: 
+Using GMP-ECM 6.3, Powered by GMP 5.1.1
+cached 78498 primes. pmax = 999983
+detected Intel(R) Core(TM) i5-5200U CPU @ 2.20GHz
+detected L1 = 32768 bytes, L2 = 3145728 bytes, CL = 64 bytes
+measured cpu frequency ~= 2342.640050
+using 20 random witnesses for Rabin-Miller PRP checks
+
+08/15/17 14:20:45 v1.34.5 @ ALI-PC, New random seeds: 2350639735, 3903344584
+
