@@ -106,7 +106,7 @@ public static class Numbers
         /* NumberType.AdditivePrime */          Color.Blue,
         /* NumberType.NonAdditivePrime */       Color.Green,
         /* NumberType.Composite */              Color.Black,
-        /* NumberType.AdditiveComposite */      Color.FromArgb(208,32,32),
+        /* NumberType.AdditiveComposite */      Color.FromArgb(240,32,32),
         /* NumberType.NonAdditiveComposite */   Color.FromArgb(128,32,32),
         /* NumberType.Odd */                    Color.Black,
         /* NumberType.Even */                   Color.Black,
