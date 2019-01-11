@@ -13097,8 +13097,8 @@ public partial class MainForm : Form, ISubscriber
 
                 DisplayWordFrequencies();
 
-                GenerateSentencesLabel.Visible = true;
-                DuplicateLettersCheckBox.Visible = true;
+                GenerateSentencesLabel.Visible = (Globals.EDITION == Edition.Ultimate);
+                DuplicateLettersCheckBox.Visible = (Globals.EDITION == Edition.Ultimate);
                 GenerateSentencesLabel.Refresh();
                 DuplicateLettersCheckBox.Refresh();
             }
@@ -16057,8 +16057,8 @@ public partial class MainForm : Form, ISubscriber
                     {
                         DisplayWordFrequencies();
 
-                        GenerateSentencesLabel.Visible = true;
-                        DuplicateLettersCheckBox.Visible = true;
+                        GenerateSentencesLabel.Visible = (Globals.EDITION == Edition.Ultimate);
+                        DuplicateLettersCheckBox.Visible = (Globals.EDITION == Edition.Ultimate);
                         GenerateSentencesLabel.Refresh();
                         DuplicateLettersCheckBox.Refresh();
                     }
