@@ -12761,6 +12761,13 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else if (e.KeyCode == Keys.F5)
                 {
+                    if (m_active_textbox != null)
+                    {
+                        if (m_active_textbox.Focused)
+                        {
+                            DoFindSimilarVerses(m_active_textbox);
+                        }
+                    }
                 }
                 else if (e.KeyCode == Keys.F6)
                 {
@@ -14937,6 +14944,20 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
+    private void MenuItem_SimilarVerses(object sender, EventArgs e)
+    {
+        if (sender is MenuItem)
+        {
+            if ((sender as MenuItem).Parent is ContextMenu)
+            {
+                Control control = ((sender as MenuItem).Parent as ContextMenu).SourceControl;
+                if ((control == MainTextBox) || (control == SearchResultTextBox))
+                {
+                    DoFindSimilarVerses(control);
+                }
+            }
+        }
+    }
     private void MenuItem_SameText(object sender, EventArgs e)
     {
         if (sender is MenuItem)
@@ -15116,6 +15137,20 @@ public partial class MainForm : Form, ISubscriber
                     }
                 }
             }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
+    }
+    private void DoFindSimilarVerses(object sender)
+    {
+        if (m_emlaaei_text) return;
+
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            FindBySimilarity();
         }
         finally
         {
@@ -15325,6 +15360,10 @@ public partial class MainForm : Form, ISubscriber
             MenuItem FindRelatedVersesMenuItem = new MenuItem(L[l]["Related Verses"] + "\tF5");
             FindRelatedVersesMenuItem.Click += new EventHandler(MenuItem_RelatedVerses);
             ContextMenu.MenuItems.Add(FindRelatedVersesMenuItem);
+
+            MenuItem FindSimilarVersesMenuItem = new MenuItem(L[l]["Similar Verses"] + "\tShift+F5");
+            FindSimilarVersesMenuItem.Click += new EventHandler(MenuItem_SimilarVerses);
+            ContextMenu.MenuItems.Add(FindSimilarVersesMenuItem);
 
             MenuItem MenuItemSeparator2 = new MenuItem("-");
             ContextMenu.MenuItems.Add(MenuItemSeparator2);
@@ -44034,7 +44073,7 @@ public partial class MainForm : Form, ISubscriber
                         }
                         else
                         {
-                            m_client.SaveLetterStatistics(filename, text);
+                            m_client.SaveLetterStatistics(filename, text, (ModifierKeys == Keys.Control));
                         }
                     }
                 }

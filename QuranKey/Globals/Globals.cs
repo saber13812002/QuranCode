@@ -3,7 +3,7 @@ public enum Edition { Standard }
 public static class Globals
 {
     public static Edition EDITION = Edition.Standard;
-    public static string VERSION = "6.19.829.4"; // updated by Version.bat (with AssemblyInfo.cs of all projects)
+    public static string VERSION = "6.19.839.4"; // updated by Version.bat (with AssemblyInfo.cs of all projects)
     public static string SHORT_VERSION
     {
         get
