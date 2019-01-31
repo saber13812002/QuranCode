@@ -578,6 +578,7 @@ partial class MainForm
             this.RadixValueDownLabel = new System.Windows.Forms.Label();
             this.RadixLabel = new System.Windows.Forms.Label();
             this.ValuePanel = new System.Windows.Forms.Panel();
+            this.Nth4n1NumberTextBox = new System.Windows.Forms.TextBox();
             this.SumOfDivisorsTextBox = new System.Windows.Forms.TextBox();
             this.SquareDiffTextBox = new System.Windows.Forms.TextBox();
             this.SquareSumTextBox = new System.Windows.Forms.TextBox();
@@ -5255,7 +5256,7 @@ partial class MainForm
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
             this.TabControl.ShowToolTips = true;
-            this.TabControl.Size = new System.Drawing.Size(816, 195);
+            this.TabControl.Size = new System.Drawing.Size(816, 193);
             this.TabControl.TabIndex = 102;
             this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             this.TabControl.Click += new System.EventHandler(this.TabControl_Click);
@@ -5268,7 +5269,7 @@ partial class MainForm
             this.TranslationTabPage.Location = new System.Drawing.Point(4, 22);
             this.TranslationTabPage.Name = "TranslationTabPage";
             this.TranslationTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.TranslationTabPage.Size = new System.Drawing.Size(808, 169);
+            this.TranslationTabPage.Size = new System.Drawing.Size(808, 167);
             this.TranslationTabPage.TabIndex = 190;
             this.TranslationTabPage.Text = "Translation";
             this.TranslationTabPage.ToolTipText = "Translations for current selection/verse\r\nترجمة الءاية أو الءايات المظللة";
@@ -5462,7 +5463,7 @@ partial class MainForm
             this.GrammarTabPage.Controls.Add(this.GrammarTextBox);
             this.GrammarTabPage.Location = new System.Drawing.Point(4, 22);
             this.GrammarTabPage.Name = "GrammarTabPage";
-            this.GrammarTabPage.Size = new System.Drawing.Size(808, 169);
+            this.GrammarTabPage.Size = new System.Drawing.Size(808, 167);
             this.GrammarTabPage.TabIndex = 193;
             this.GrammarTabPage.Text = " Grammar";
             this.GrammarTabPage.ToolTipText = "Grammar details of the current word in Arabic and English\r\nإعراب الكلمة بالعربي و" +
@@ -5496,7 +5497,7 @@ partial class MainForm
             this.RelatedWordsTabPage.Controls.Add(this.RelatedWordsTextBox);
             this.RelatedWordsTabPage.Location = new System.Drawing.Point(4, 22);
             this.RelatedWordsTabPage.Name = "RelatedWordsTabPage";
-            this.RelatedWordsTabPage.Size = new System.Drawing.Size(808, 169);
+            this.RelatedWordsTabPage.Size = new System.Drawing.Size(808, 167);
             this.RelatedWordsTabPage.TabIndex = 192;
             this.RelatedWordsTabPage.Text = "Related Words";
             this.RelatedWordsTabPage.ToolTipText = "Related words from the same root as the current word\r\nالكلمات المشتقة من نفس جذر " +
@@ -5551,7 +5552,7 @@ partial class MainForm
             this.SymmetryTabPage.Controls.Add(this.SymmetryTextBox);
             this.SymmetryTabPage.Location = new System.Drawing.Point(4, 22);
             this.SymmetryTabPage.Name = "SymmetryTabPage";
-            this.SymmetryTabPage.Size = new System.Drawing.Size(808, 169);
+            this.SymmetryTabPage.Size = new System.Drawing.Size(808, 167);
             this.SymmetryTabPage.TabIndex = 201;
             this.SymmetryTabPage.Text = "Symmetry";
             this.SymmetryTabPage.ToolTipText = "Text symmetries starting from both ends [Dr Waleed S. Mohammed]\r\nتناظر النص من ال" +
@@ -5631,7 +5632,7 @@ partial class MainForm
             this.ValuesSequenceTabPage.Controls.Add(this.ValuesSequenceTextBox);
             this.ValuesSequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.ValuesSequenceTabPage.Name = "ValuesSequenceTabPage";
-            this.ValuesSequenceTabPage.Size = new System.Drawing.Size(808, 169);
+            this.ValuesSequenceTabPage.Size = new System.Drawing.Size(808, 167);
             this.ValuesSequenceTabPage.TabIndex = 198;
             this.ValuesSequenceTabPage.Text = "Values";
             this.ValuesSequenceTabPage.ToolTipText = "Values of letter/word/verse/chapter values in bases 2 to 36\r\nقيم الحروف والكلمات " +
@@ -5752,7 +5753,7 @@ partial class MainForm
             this.CVWLSequenceTabPage.Controls.Add(this.CVWLSequenceTextBox);
             this.CVWLSequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.CVWLSequenceTabPage.Name = "CVWLSequenceTabPage";
-            this.CVWLSequenceTabPage.Size = new System.Drawing.Size(808, 169);
+            this.CVWLSequenceTabPage.Size = new System.Drawing.Size(808, 167);
             this.CVWLSequenceTabPage.TabIndex = 200;
             this.CVWLSequenceTabPage.Text = "CVWL";
             this.CVWLSequenceTabPage.ToolTipText = "Concatenated chapter/verse/word/letter numbers and counts\r\nرصف أرقام وأعداد الحرو" +
@@ -5847,7 +5848,7 @@ partial class MainForm
             this.DNASequenceTabPage.Controls.Add(this.DNASequenceTextBox);
             this.DNASequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.DNASequenceTabPage.Name = "DNASequenceTabPage";
-            this.DNASequenceTabPage.Size = new System.Drawing.Size(808, 169);
+            this.DNASequenceTabPage.Size = new System.Drawing.Size(808, 167);
             this.DNASequenceTabPage.TabIndex = 195;
             this.DNASequenceTabPage.Text = "DNA";
             this.DNASequenceTabPage.ToolTipText = "Convert text into a DNA sequence to compare with the human genome [Belkacem Meghz" +
@@ -5925,7 +5926,7 @@ partial class MainForm
             this.MathsTabPage.Controls.Add(this.MathsPanel);
             this.MathsTabPage.Location = new System.Drawing.Point(4, 22);
             this.MathsTabPage.Name = "MathsTabPage";
-            this.MathsTabPage.Size = new System.Drawing.Size(808, 169);
+            this.MathsTabPage.Size = new System.Drawing.Size(808, 167);
             this.MathsTabPage.TabIndex = 197;
             this.MathsTabPage.Text = "C+V";
             this.MathsTabPage.ToolTipText = "Chapter +/- Verse calculations\r\nحسابات مجاميع وفروق الءايات والسُوَر";
@@ -6039,7 +6040,7 @@ partial class MainForm
             this.MathsPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MathsPanel.Location = new System.Drawing.Point(0, 0);
             this.MathsPanel.Name = "MathsPanel";
-            this.MathsPanel.Size = new System.Drawing.Size(808, 169);
+            this.MathsPanel.Size = new System.Drawing.Size(808, 167);
             this.MathsPanel.TabIndex = 0;
             // 
             // MathsInterestingNumbersEditLabel
@@ -7327,7 +7328,7 @@ partial class MainForm
             this.DistancesTabPage.Controls.Add(this.DistancesPanel);
             this.DistancesTabPage.Location = new System.Drawing.Point(4, 22);
             this.DistancesTabPage.Name = "DistancesTabPage";
-            this.DistancesTabPage.Size = new System.Drawing.Size(808, 169);
+            this.DistancesTabPage.Size = new System.Drawing.Size(808, 167);
             this.DistancesTabPage.TabIndex = 199;
             this.DistancesTabPage.Text = "Distances";
             this.DistancesTabPage.ToolTipText = "Distances to the start and end of Book, current chapter/verse/word\r\nالمسافات الى " +
@@ -7404,7 +7405,7 @@ partial class MainForm
             this.DistancesPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DistancesPanel.Location = new System.Drawing.Point(0, 0);
             this.DistancesPanel.Name = "DistancesPanel";
-            this.DistancesPanel.Size = new System.Drawing.Size(808, 169);
+            this.DistancesPanel.Size = new System.Drawing.Size(808, 167);
             this.DistancesPanel.TabIndex = 1;
             // 
             // DistancesInterestingNumbersEditLabel
@@ -8263,7 +8264,7 @@ partial class MainForm
             this.UserTextTabPage.Controls.Add(this.UserTextTextBox);
             this.UserTextTabPage.Location = new System.Drawing.Point(4, 22);
             this.UserTextTabPage.Name = "UserTextTabPage";
-            this.UserTextTabPage.Size = new System.Drawing.Size(808, 169);
+            this.UserTextTabPage.Size = new System.Drawing.Size(808, 167);
             this.UserTextTabPage.TabIndex = 194;
             this.UserTextTabPage.Text = " User Text ";
             this.UserTextTabPage.ToolTipText = "Calculate the value of any given text or find all words with a given value\r\nحساب " +
@@ -8942,7 +8943,7 @@ partial class MainForm
             this.LetterFrequencyInspectLabel.Name = "LetterFrequencyInspectLabel";
             this.LetterFrequencyInspectLabel.Size = new System.Drawing.Size(16, 18);
             this.LetterFrequencyInspectLabel.TabIndex = 17;
-            this.ToolTip.SetToolTip(this.LetterFrequencyInspectLabel, "Inspect letter frequencies");
+            this.ToolTip.SetToolTip(this.LetterFrequencyInspectLabel, "Inspect letter frequencies\r\nCtrl+Click for verbose mode");
             this.LetterFrequencyInspectLabel.Click += new System.EventHandler(this.LetterFrequencyInspectLabel_Click);
             this.LetterFrequencyInspectLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
             // 
@@ -9445,6 +9446,7 @@ partial class MainForm
             // 
             this.ValuePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.ValuePanel.Controls.Add(this.Nth4n1NumberTextBox);
             this.ValuePanel.Controls.Add(this.PrimalogyARLabel);
             this.ValuePanel.Controls.Add(this.PrimalogyLabel);
             this.ValuePanel.Controls.Add(this.SumOfDivisorsTextBox);
@@ -9496,6 +9498,23 @@ partial class MainForm
             this.ValuePanel.Size = new System.Drawing.Size(181, 276);
             this.ValuePanel.TabIndex = 5;
             // 
+            // Nth4n1NumberTextBox
+            // 
+            this.Nth4n1NumberTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.Nth4n1NumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Nth4n1NumberTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.Nth4n1NumberTextBox.Location = new System.Drawing.Point(142, 60);
+            this.Nth4n1NumberTextBox.Name = "Nth4n1NumberTextBox";
+            this.Nth4n1NumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.Nth4n1NumberTextBox.Size = new System.Drawing.Size(37, 20);
+            this.Nth4n1NumberTextBox.TabIndex = 24;
+            this.Nth4n1NumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip.SetToolTip(this.Nth4n1NumberTextBox, "4n+1 index");
+            this.Nth4n1NumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.Nth4n1NumberTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
+            this.Nth4n1NumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Nth4n1NumberTextBox_KeyDown);
+            this.Nth4n1NumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
+            // 
             // SumOfDivisorsTextBox
             // 
             this.SumOfDivisorsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -9506,7 +9525,7 @@ partial class MainForm
             this.SumOfDivisorsTextBox.ReadOnly = true;
             this.SumOfDivisorsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.SumOfDivisorsTextBox.Size = new System.Drawing.Size(46, 20);
-            this.SumOfDivisorsTextBox.TabIndex = 30;
+            this.SumOfDivisorsTextBox.TabIndex = 31;
             this.SumOfDivisorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.SumOfDivisorsTextBox, "Sum of divisors");
             this.SumOfDivisorsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
@@ -9524,7 +9543,7 @@ partial class MainForm
             this.SquareDiffTextBox.Name = "SquareDiffTextBox";
             this.SquareDiffTextBox.ReadOnly = true;
             this.SquareDiffTextBox.Size = new System.Drawing.Size(178, 20);
-            this.SquareDiffTextBox.TabIndex = 24;
+            this.SquareDiffTextBox.TabIndex = 25;
             this.SquareDiffTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             this.SquareDiffTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
             this.SquareDiffTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -9539,7 +9558,7 @@ partial class MainForm
             this.SquareSumTextBox.Location = new System.Drawing.Point(1, 60);
             this.SquareSumTextBox.Name = "SquareSumTextBox";
             this.SquareSumTextBox.ReadOnly = true;
-            this.SquareSumTextBox.Size = new System.Drawing.Size(178, 20);
+            this.SquareSumTextBox.Size = new System.Drawing.Size(142, 20);
             this.SquareSumTextBox.TabIndex = 23;
             this.SquareSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             this.SquareSumTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
@@ -9570,7 +9589,7 @@ partial class MainForm
             this.NthNonAdditiveNumberTextBox.Name = "NthNonAdditiveNumberTextBox";
             this.NthNonAdditiveNumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.NthNonAdditiveNumberTextBox.Size = new System.Drawing.Size(60, 20);
-            this.NthNonAdditiveNumberTextBox.TabIndex = 27;
+            this.NthNonAdditiveNumberTextBox.TabIndex = 28;
             this.NthNonAdditiveNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NthNonAdditiveNumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             this.NthNonAdditiveNumberTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
@@ -9648,7 +9667,7 @@ partial class MainForm
             this.NumberKindIndexTextBox.Name = "NumberKindIndexTextBox";
             this.NumberKindIndexTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.NumberKindIndexTextBox.Size = new System.Drawing.Size(46, 20);
-            this.NumberKindIndexTextBox.TabIndex = 28;
+            this.NumberKindIndexTextBox.TabIndex = 29;
             this.NumberKindIndexTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.NumberKindIndexTextBox, "Deficient number index");
             this.NumberKindIndexTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
@@ -9666,7 +9685,7 @@ partial class MainForm
             this.SumOfProperDivisorsTextBox.ReadOnly = true;
             this.SumOfProperDivisorsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.SumOfProperDivisorsTextBox.Size = new System.Drawing.Size(46, 20);
-            this.SumOfProperDivisorsTextBox.TabIndex = 29;
+            this.SumOfProperDivisorsTextBox.TabIndex = 30;
             this.SumOfProperDivisorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.SumOfProperDivisorsTextBox, "Sum of proper divisors");
             this.SumOfProperDivisorsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
@@ -9717,7 +9736,7 @@ partial class MainForm
             this.IndexChainLengthTextBox.ReadOnly = true;
             this.IndexChainLengthTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.IndexChainLengthTextBox.Size = new System.Drawing.Size(18, 20);
-            this.IndexChainLengthTextBox.TabIndex = 35;
+            this.IndexChainLengthTextBox.TabIndex = 38;
             this.IndexChainLengthTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.IndexChainLengthTextBox.Click += new System.EventHandler(this.IndexChainLengthTextBox_Click);
             this.IndexChainLengthTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
@@ -9733,7 +9752,7 @@ partial class MainForm
             this.CPIndexChainL2RTextBox.ReadOnly = true;
             this.CPIndexChainL2RTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.CPIndexChainL2RTextBox.Size = new System.Drawing.Size(40, 20);
-            this.CPIndexChainL2RTextBox.TabIndex = 33;
+            this.CPIndexChainL2RTextBox.TabIndex = 36;
             this.CPIndexChainL2RTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.CPIndexChainL2RTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             this.CPIndexChainL2RTextBox.TextChanged += new System.EventHandler(this.CPIndexChainL2RTextBox_TextChanged);
@@ -9750,7 +9769,7 @@ partial class MainForm
             this.PCIndexChainR2LTextBox.ReadOnly = true;
             this.PCIndexChainR2LTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.PCIndexChainR2LTextBox.Size = new System.Drawing.Size(40, 20);
-            this.PCIndexChainR2LTextBox.TabIndex = 32;
+            this.PCIndexChainR2LTextBox.TabIndex = 35;
             this.PCIndexChainR2LTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.PCIndexChainR2LTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             this.PCIndexChainR2LTextBox.TextChanged += new System.EventHandler(this.PCIndexChainR2LTextBox_TextChanged);
@@ -9767,7 +9786,7 @@ partial class MainForm
             this.CPIndexChainR2LTextBox.ReadOnly = true;
             this.CPIndexChainR2LTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.CPIndexChainR2LTextBox.Size = new System.Drawing.Size(40, 20);
-            this.CPIndexChainR2LTextBox.TabIndex = 34;
+            this.CPIndexChainR2LTextBox.TabIndex = 37;
             this.CPIndexChainR2LTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.CPIndexChainR2LTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             this.CPIndexChainR2LTextBox.TextChanged += new System.EventHandler(this.CPIndexChainR2LTextBox_TextChanged);
@@ -9784,7 +9803,7 @@ partial class MainForm
             this.PCIndexChainL2RTextBox.ReadOnly = true;
             this.PCIndexChainL2RTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.PCIndexChainL2RTextBox.Size = new System.Drawing.Size(40, 20);
-            this.PCIndexChainL2RTextBox.TabIndex = 31;
+            this.PCIndexChainL2RTextBox.TabIndex = 34;
             this.PCIndexChainL2RTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.PCIndexChainL2RTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             this.PCIndexChainL2RTextBox.TextChanged += new System.EventHandler(this.PCIndexChainL2RTextBox_TextChanged);
@@ -9991,7 +10010,7 @@ partial class MainForm
             this.DigitalRootTextBox.ReadOnly = true;
             this.DigitalRootTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.DigitalRootTextBox.Size = new System.Drawing.Size(15, 20);
-            this.DigitalRootTextBox.TabIndex = 32;
+            this.DigitalRootTextBox.TabIndex = 33;
             this.DigitalRootTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.DigitalRootTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             this.DigitalRootTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
@@ -10008,7 +10027,7 @@ partial class MainForm
             this.DigitSumTextBox.ReadOnly = true;
             this.DigitSumTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.DigitSumTextBox.Size = new System.Drawing.Size(23, 20);
-            this.DigitSumTextBox.TabIndex = 31;
+            this.DigitSumTextBox.TabIndex = 32;
             this.DigitSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.DigitSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             this.DigitSumTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
@@ -10024,7 +10043,7 @@ partial class MainForm
             this.NthAdditiveNumberTextBox.Name = "NthAdditiveNumberTextBox";
             this.NthAdditiveNumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.NthAdditiveNumberTextBox.Size = new System.Drawing.Size(60, 20);
-            this.NthAdditiveNumberTextBox.TabIndex = 26;
+            this.NthAdditiveNumberTextBox.TabIndex = 27;
             this.NthAdditiveNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NthAdditiveNumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             this.NthAdditiveNumberTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
@@ -10038,8 +10057,8 @@ partial class MainForm
             this.NthNumberTextBox.Location = new System.Drawing.Point(1, 100);
             this.NthNumberTextBox.Name = "NthNumberTextBox";
             this.NthNumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.NthNumberTextBox.Size = new System.Drawing.Size(59, 20);
-            this.NthNumberTextBox.TabIndex = 25;
+            this.NthNumberTextBox.Size = new System.Drawing.Size(60, 20);
+            this.NthNumberTextBox.TabIndex = 26;
             this.NthNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NthNumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             this.NthNumberTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
@@ -11583,4 +11602,5 @@ partial class MainForm
     private System.Windows.Forms.Label FindByFrequencyTotalLabel;
     private System.Windows.Forms.Label ChineseLanguageLabel;
     private System.Windows.Forms.Label RussianLanguageLabel;
+    private System.Windows.Forms.TextBox Nth4n1NumberTextBox;
 }

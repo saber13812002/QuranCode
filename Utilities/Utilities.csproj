@@ -69,6 +69,12 @@
   <ItemGroup>
     <Content Include="BigInteger.html" />
     <Content Include="GraphViz.txt" />
+    <Content Include="Numbers\4n+1_composites.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Numbers\4n+1_primes.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Numbers\abundant_numbers.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

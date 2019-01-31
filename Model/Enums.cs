@@ -7,7 +7,7 @@ namespace Model
     public enum SelectionScope { Book, Station, Part, Group, Half, Quarter, Bowing, Chapter, Verse, Word, Letter, Page };
 
     public enum SearchScope { Book, Selection, Result };
-    public enum SearchType { Text, Similarity, Numbers, Frequency, Prostration, Revelation };
+    public enum SearchType { Text, Similarity, Numbers, Frequency };
 
     public enum TextSearchType { Exact, Proximity, Root };
     public enum TextSearchBlockSize { Verse, Chapter, Page, Station, Part, Group, Half, Quarter, Bowing };

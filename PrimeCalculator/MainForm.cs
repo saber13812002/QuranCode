@@ -234,7 +234,6 @@ public partial class MainForm : Form
             else
             {
                 ValueTextBox.Text = "";
-                ValueTextBox.Focus();
             }
         }
     }
@@ -633,20 +632,26 @@ public partial class MainForm : Form
 
             string squares1_str = "";
             string squares2_str = "";
+            int _4n1_index = -1;
             if (Numbers.IsUnit(number) || Numbers.IsPrime(number))
             {
-                squares1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(number);
-                squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(number);
+                squares1_str = Numbers.Get4n1EqualsSumOfTwoSquares(number);
+                squares2_str = Numbers.Get4n1EqualsDiffOfTwoSquares(number);
+                _4n1_index = Numbers.Prime4n1IndexOf(number) + 1;
             }
             else //if composite
             {
-                squares1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(number);
-                squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares2(number);
+                squares1_str = Numbers.Get4n1EqualsDiffOfTwoSquares(number);
+                squares2_str = Numbers.Get4n1EqualsDiffOfTwoSquares2(number);
+                _4n1_index = Numbers.Composite4n1IndexOf(number) + 1;
             }
             SquareSumTextBox.Text = squares1_str;
             SquareSumTextBox.Refresh();
             SquareDiffTextBox.Text = squares2_str;
             SquareDiffTextBox.Refresh();
+            Nth4n1NumberTextBox.Text = (_4n1_index > 0) ? _4n1_index.ToString() : "";
+            Nth4n1NumberTextBox.ForeColor = Numbers.GetNumberTypeColor(_4n1_index);
+            Nth4n1NumberTextBox.Refresh();
 
             UpdateNumberKind(number);
             UpdateSumOfDivisors(number);
@@ -684,6 +689,16 @@ public partial class MainForm : Form
                         ToolTip.SetToolTip(NthNumberTextBox, "Prime index");
                         ToolTip.SetToolTip(NthAdditiveNumberTextBox, "Additive prime index");
                         ToolTip.SetToolTip(NthNonAdditiveNumberTextBox, "Non-additive prime index");
+
+                        if (Nth4n1NumberTextBox.Text == "")
+                        {
+                            Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
+                        }
+                        else
+                        {
+                            Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
+                        }
+                        Nth4n1NumberTextBox.Refresh();
                     }
                     else // Composite
                     {
@@ -703,6 +718,16 @@ public partial class MainForm : Form
                         ToolTip.SetToolTip(NthNumberTextBox, "Composite index");
                         ToolTip.SetToolTip(NthAdditiveNumberTextBox, "Additive composite index");
                         ToolTip.SetToolTip(NthNonAdditiveNumberTextBox, "Non-additive composite index");
+
+                        if (Nth4n1NumberTextBox.Text == "")
+                        {
+                            Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
+                        }
+                        else
+                        {
+                            Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
+                        }
+                        Nth4n1NumberTextBox.Refresh();
                     }
                 }
             }
@@ -998,13 +1023,13 @@ public partial class MainForm : Form
             string squares2_str = "";
             if (Numbers.IsUnit(number) || Numbers.IsPrime(number))
             {
-                squares1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(number);
-                squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(number);
+                squares1_str = Numbers.Get4n1EqualsSumOfTwoSquares(number);
+                squares2_str = Numbers.Get4n1EqualsDiffOfTwoSquares(number);
             }
             else //if composite
             {
-                squares1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(number);
-                squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares2(number);
+                squares1_str = Numbers.Get4n1EqualsDiffOfTwoSquares(number);
+                squares2_str = Numbers.Get4n1EqualsDiffOfTwoSquares2(number);
             }
             str.AppendLine("4n+1 Squares1\t\t=\t" + squares1_str);
             str.AppendLine("4n+1 Squares2\t\t=\t" + squares2_str);
@@ -1547,21 +1572,40 @@ public partial class MainForm : Form
     private IndexType m_index_type = IndexType.Prime;
     private void NthNumberTextBox_KeyDown(object sender, KeyEventArgs e)
     {
-        if (e.KeyCode == Keys.Enter)
+        if (e.KeyCode == Keys.Up)
+        {
+            Control control = (sender as TextBoxBase);
+            if (control != null)
+            {
+                IncrementValue(control);
+            }
+        }
+        else if (e.KeyCode == Keys.Down)
+        {
+            Control control = (sender as TextBoxBase);
+            if (control != null)
+            {
+                DecrementValue(control);
+            }
+        }
+        else if (e.KeyCode == Keys.Enter)
         {
             try
             {
-                long number = 0L;
-                int nth_index = int.Parse(NthNumberTextBox.Text) - 1;
-                NthNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(nth_index);
-                if (m_index_type == IndexType.Prime)
+                long number = -1L;
+                Control control = (sender as TextBoxBase);
+                if (control != null)
                 {
-                    number = Numbers.Primes[nth_index];
-                    FactorizeValue(number);
-                }
-                else // any other index type will be treated as Composite
-                {
-                    number = Numbers.Composites[nth_index];
+                    int index = int.Parse(control.Text) - 1;
+                    control.ForeColor = Numbers.GetNumberTypeColor(index);
+                    if (m_index_type == IndexType.Prime)
+                    {
+                        number = Numbers.Primes[index];
+                    }
+                    else // any other index type will be treated as IndexNumberType.Composite
+                    {
+                        number = Numbers.Composites[index];
+                    }
                     FactorizeValue(number);
                 }
             }
@@ -1573,21 +1617,40 @@ public partial class MainForm : Form
     }
     private void NthAdditiveNumberTextBox_KeyDown(object sender, KeyEventArgs e)
     {
-        if (e.KeyCode == Keys.Enter)
+        if (e.KeyCode == Keys.Up)
+        {
+            Control control = (sender as TextBoxBase);
+            if (control != null)
+            {
+                IncrementValue(control);
+            }
+        }
+        else if (e.KeyCode == Keys.Down)
+        {
+            Control control = (sender as TextBoxBase);
+            if (control != null)
+            {
+                DecrementValue(control);
+            }
+        }
+        else if (e.KeyCode == Keys.Enter)
         {
             try
             {
-                long number = 0L;
-                int nth_index = int.Parse(NthAdditiveNumberTextBox.Text) - 1;
-                NthAdditiveNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(nth_index);
-                if (m_index_type == IndexType.Prime)
+                long number = -1L;
+                Control control = (sender as TextBoxBase);
+                if (control != null)
                 {
-                    number = Numbers.AdditivePrimes[nth_index];
-                    FactorizeValue(number);
-                }
-                else // any other index type will be treated as Composite
-                {
-                    number = Numbers.AdditiveComposites[nth_index];
+                    int index = int.Parse(control.Text) - 1;
+                    control.ForeColor = Numbers.GetNumberTypeColor(index);
+                    if (m_index_type == IndexType.Prime)
+                    {
+                        number = Numbers.AdditivePrimes[index];
+                    }
+                    else // any other index type will be treated as IndexNumberType.Composite
+                    {
+                        number = Numbers.AdditiveComposites[index];
+                    }
                     FactorizeValue(number);
                 }
             }
@@ -1599,21 +1662,40 @@ public partial class MainForm : Form
     }
     private void NthNonAdditiveNumberTextBox_KeyDown(object sender, KeyEventArgs e)
     {
-        if (e.KeyCode == Keys.Enter)
+        if (e.KeyCode == Keys.Up)
+        {
+            Control control = (sender as TextBoxBase);
+            if (control != null)
+            {
+                IncrementValue(control);
+            }
+        }
+        else if (e.KeyCode == Keys.Down)
+        {
+            Control control = (sender as TextBoxBase);
+            if (control != null)
+            {
+                DecrementValue(control);
+            }
+        }
+        else if (e.KeyCode == Keys.Enter)
         {
             try
             {
-                long number = 0L;
-                int nth_index = int.Parse(NthNonAdditiveNumberTextBox.Text) - 1;
-                NthNonAdditiveNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(nth_index);
-                if (m_index_type == IndexType.Prime)
+                long number = -1L;
+                Control control = (sender as TextBoxBase);
+                if (control != null)
                 {
-                    number = Numbers.NonAdditivePrimes[nth_index];
-                    FactorizeValue(number);
-                }
-                else // any other index type will be treated as Composite
-                {
-                    number = Numbers.NonAdditiveComposites[nth_index];
+                    int index = int.Parse(control.Text) - 1;
+                    control.ForeColor = Numbers.GetNumberTypeColor(index);
+                    if (m_index_type == IndexType.Prime)
+                    {
+                        number = Numbers.NonAdditivePrimes[index];
+                    }
+                    else // any other index type will be treated as IndexNumberType.Composite
+                    {
+                        number = Numbers.NonAdditiveComposites[index];
+                    }
                     FactorizeValue(number);
                 }
             }
@@ -1623,40 +1705,129 @@ public partial class MainForm : Form
             }
         }
     }
+    private void Nth4n1NumberTextBox_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Up)
+        {
+            Control control = (sender as TextBoxBase);
+            if (control != null)
+            {
+                IncrementValue(control);
+            }
+        }
+        else if (e.KeyCode == Keys.Down)
+        {
+            Control control = (sender as TextBoxBase);
+            if (control != null)
+            {
+                DecrementValue(control);
+            }
+        }
+        else if (e.KeyCode == Keys.Enter)
+        {
+            try
+            {
+                long number = -1L;
+                Control control = (sender as TextBoxBase);
+                if (control != null)
+                {
+                    int index = int.Parse(control.Text) - 1;
+                    control.ForeColor = Numbers.GetNumberTypeColor(index);
+                    if (m_index_type == IndexType.Prime)
+                    {
+                        number = Numbers.Primes4n1[index];
+                    }
+                    else // any other index type will be treated as IndexNumberType.Composite
+                    {
+                        number = Numbers.Composites4n1[index];
+                    }
+                    FactorizeValue(number);
+                }
+            }
+            catch
+            {
+                FactorizeValue(0L);
+            }
+        }
+    }
+    private void IncrementValue(Control control)
+    {
+        if (control is TextBoxBase)
+        {
+            long number = 0L;
+            if (long.TryParse(control.Text, out number))
+            {
+                if (number < long.MaxValue) number++;
+                control.Text = number.ToString();
+                SendKeys.Send("{Enter}");
+            }
+        }
+    }
+    private void DecrementValue(Control control)
+    {
+        if (control is TextBoxBase)
+        {
+            long number = 0L;
+            if (long.TryParse(control.Text, out number))
+            {
+                if (number > 0) number--;
+                control.Text = number.ToString();
+                SendKeys.Send("{Enter}");
+            }
+        }
+    }
 
     private NumberKind m_number_kind = NumberKind.Deficient;
     private void NumberKindIndexTextBox_KeyDown(object sender, KeyEventArgs e)
     {
-        if (e.KeyCode == Keys.Enter)
+        if (e.KeyCode == Keys.Up)
+        {
+            Control control = (sender as TextBoxBase);
+            if (control != null)
+            {
+                IncrementValue(control);
+            }
+        }
+        else if (e.KeyCode == Keys.Down)
+        {
+            Control control = (sender as TextBoxBase);
+            if (control != null)
+            {
+                DecrementValue(control);
+            }
+        }
+        else if (e.KeyCode == Keys.Enter)
         {
             try
             {
-                long number = 0L;
-                int nth_index = int.Parse(NumberKindIndexTextBox.Text) - 1;
-                switch (m_number_kind)
+                long number = -1L;
+                Control control = (sender as TextBoxBase);
+                if (control != null)
                 {
-                    case NumberKind.Deficient:
-                        {
-                            number = Numbers.Deficients[nth_index];
-                            FactorizeValue(number);
-                        }
-                        break;
-                    case NumberKind.Perfect:
-                        {
-                            number = Numbers.Perfects[nth_index];
-                            FactorizeValue(number);
-                        }
-                        break;
-                    case NumberKind.Abundant:
-                        {
-                            number = Numbers.Abundants[nth_index];
-                            FactorizeValue(number);
-                        }
-                        break;
-                    default:
-                        {
-                        }
-                        break;
+                    int index = int.Parse(control.Text) - 1;
+                    switch (m_number_kind)
+                    {
+                        case NumberKind.Deficient:
+                            {
+                                number = Numbers.Deficients[index];
+                            }
+                            break;
+                        case NumberKind.Perfect:
+                            {
+                                number = Numbers.Perfects[index];
+                            }
+                            break;
+                        case NumberKind.Abundant:
+                            {
+                                number = Numbers.Abundants[index];
+                            }
+                            break;
+                        default:
+                            {
+                            }
+                            break;
+                    }
+                    FactorizeValue(number);
                 }
             }
             catch
@@ -1807,7 +1978,6 @@ public partial class MainForm : Form
         ValueTextBox.Enabled = true;
         ValueTextBox.ForeColor = SystemColors.ControlText;
         ValueTextBox.Refresh();
-        ValueTextBox.Focus(); // will show the InputPanel too
 
         m_old_progress = -1;
         ProgressLabel.Text = "Progress";
@@ -1837,6 +2007,8 @@ public partial class MainForm : Form
         SquareSumTextBox.Refresh();
         SquareDiffTextBox.Text = string.Empty;
         SquareDiffTextBox.Refresh();
+        Nth4n1NumberTextBox.Text = string.Empty;
+        Nth4n1NumberTextBox.Refresh();
 
         NumberKindIndexTextBox.Text = string.Empty;
         NumberKindIndexTextBox.Refresh();
