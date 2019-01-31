@@ -1,4 +1,4 @@
-﻿RD /S /Q NET2
+RD /S /Q NET2
 "%PROGRAMFILES%\7-Zip\7z.exe" x Tools\NET2.zip
 echo .csproj > exclude.txt
 XCOPY /E /Y /EXCLUDE:exclude.txt Globals\*.* NET2\Globals\
