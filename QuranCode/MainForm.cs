@@ -36410,7 +36410,7 @@ public partial class MainForm : Form, ISubscriber
 
             text += L[l]["letters"] + letter_count_operator_symbol + ((letter_count > 0) ? letter_count.ToString() : ((letter_count_number_type != NumberType.None) ? FindByNumbersLettersNumberTypeLabel.Text : "*")) + " ";
             text += L[l]["unique"] + unique_letter_count_operator_symbol + ((unique_letter_count > 0) ? unique_letter_count.ToString() : ((unique_letter_count_number_type != NumberType.None) ? FindByNumbersUniqueLettersNumberTypeLabel.Text : "*")) + " ";
-            text += L[l]["value"] + value_operator_symbol + ((value > 0) ? value.ToString() : ((value_number_type != NumberType.None) ? FindByNumbersValueNumberTypeLabel.Text : "*"));
+            text += L[l]["value"] + value_operator_symbol + ((value > 0) ? value.ToString() : ((value_number_type != NumberType.None) ? FindByNumbersValueNumberTypeLabel.Text : "*")) + " ";
             text += L[l]["digit sum"] + value_digit_sum_operator_symbol + ((value_digit_sum > 0) ? value_digit_sum.ToString() : ((value_digit_sum_number_type != NumberType.None) ? FindByNumbersValueDigitSumNumberTypeLabel.Text : "*")) + " ";
             text += L[l]["digital root"] + value_digital_root_operator_symbol + ((value_digital_root > 0) ? value_digital_root.ToString() : ((value_digital_root_number_type != NumberType.None) ? FindByNumbersValueDigitalRootNumberTypeLabel.Text : "*")) + "";
 
@@ -41264,21 +41264,21 @@ public partial class MainForm : Form, ISubscriber
                 if (verse != null)
                 {
                     VerseByVerseNumberLabel.Text = verse.Address;
-                    ToolTip.SetToolTip(VerseByVerseNumberLabel, L[l]["Go to verse number = "] + ValueTextBox.Text + "\r\n" + verse.Text);
+                    ToolTip.SetToolTip(VerseByVerseNumberLabel, L[l]["Verse number = "] + ValueTextBox.Text + "\r\n" + verse.Text);
                 }
 
                 verse = m_client.Book.GetVerseByWordNumber((int)value);
                 if (verse != null)
                 {
                     VerseByWordNumberLabel.Text = verse.Address;
-                    ToolTip.SetToolTip(VerseByWordNumberLabel, L[l]["Go to verse with word number = "] + ValueTextBox.Text + "\r\n" + verse.Text);
+                    ToolTip.SetToolTip(VerseByWordNumberLabel, L[l]["Verse with word number = "] + ValueTextBox.Text + "\r\n" + verse.Text);
                 }
 
                 verse = m_client.Book.GetVerseByLetterNumber((int)value);
                 if (verse != null)
                 {
                     VerseByLetterNumberLabel.Text = verse.Address;
-                    ToolTip.SetToolTip(VerseByLetterNumberLabel, L[l]["Go to verse with letter number = "] + ValueTextBox.Text + "\r\n" + verse.Text);
+                    ToolTip.SetToolTip(VerseByLetterNumberLabel, L[l]["Verse with letter number = "] + ValueTextBox.Text + "\r\n" + verse.Text);
                 }
             }
         }
