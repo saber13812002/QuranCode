@@ -364,7 +364,7 @@ public partial class MainForm : Form, ISubscriber
 
                 UpdateEmlaaeiLabel();
 
-                LetterFrequencyColumnHeader.Text = L[l]["Freq"] + "  "; // + 2 spaces for sort marker after them
+                LetterFrequencyColumnHeader.Text = L[l]["Freq"];// +"  "; // + 2 spaces for sort marker after them
 
                 m_note_writing_instruction = L[l]["write a note for"];
                 DisplayNoteWritingInstruction();
