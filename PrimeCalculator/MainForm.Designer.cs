@@ -72,7 +72,7 @@
         this.betaTriangleLabel = new System.Windows.Forms.Label();
         this.alphaTriangleLabel = new System.Windows.Forms.Label();
         this.HelpTriangleLabel = new System.Windows.Forms.Label();
-        this.Nth4n1NumberTextBox = new System.Windows.Forms.TextBox();
+        this.Nth4nPlus1NumberTextBox = new System.Windows.Forms.TextBox();
         this.dCircleLabel = new System.Windows.Forms.Label();
         this.rCircleLabel = new System.Windows.Forms.Label();
         this.piCircleLabel = new System.Windows.Forms.Label();
@@ -766,22 +766,22 @@
         this.ToolTip.SetToolTip(this.HelpTriangleLabel, "Triangle Formulae");
         this.HelpTriangleLabel.Click += new System.EventHandler(this.LinkLabel_Click);
         // 
-        // Nth4n1NumberTextBox
+        // Nth4nPlus1NumberTextBox
         // 
-        this.Nth4n1NumberTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.Nth4n1NumberTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
-        this.Nth4n1NumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.Nth4n1NumberTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-        this.Nth4n1NumberTextBox.Location = new System.Drawing.Point(179, 42);
-        this.Nth4n1NumberTextBox.Name = "Nth4n1NumberTextBox";
-        this.Nth4n1NumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-        this.Nth4n1NumberTextBox.Size = new System.Drawing.Size(57, 20);
-        this.Nth4n1NumberTextBox.TabIndex = 253;
-        this.Nth4n1NumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.ToolTip.SetToolTip(this.Nth4n1NumberTextBox, "4n+1 index");
-        this.Nth4n1NumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
-        this.Nth4n1NumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Nth4n1NumberTextBox_KeyDown);
-        this.Nth4n1NumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
+        this.Nth4nPlus1NumberTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+        this.Nth4nPlus1NumberTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+        this.Nth4nPlus1NumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.Nth4nPlus1NumberTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+        this.Nth4nPlus1NumberTextBox.Location = new System.Drawing.Point(179, 42);
+        this.Nth4nPlus1NumberTextBox.Name = "Nth4nPlus1NumberTextBox";
+        this.Nth4nPlus1NumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+        this.Nth4nPlus1NumberTextBox.Size = new System.Drawing.Size(57, 20);
+        this.Nth4nPlus1NumberTextBox.TabIndex = 253;
+        this.Nth4nPlus1NumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+        this.ToolTip.SetToolTip(this.Nth4nPlus1NumberTextBox, "4n+1 index");
+        this.Nth4nPlus1NumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.Nth4nPlus1NumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Nth4nPlus1NumberTextBox_KeyDown);
+        this.Nth4nPlus1NumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
         // dCircleLabel
         // 
@@ -1174,7 +1174,7 @@
         // 
         // ValuePanel
         // 
-        this.ValuePanel.Controls.Add(this.Nth4n1NumberTextBox);
+        this.ValuePanel.Controls.Add(this.Nth4nPlus1NumberTextBox);
         this.ValuePanel.Controls.Add(this.DisplayAbundantNumbersLabel);
         this.ValuePanel.Controls.Add(this.ValueInspectLabel);
         this.ValuePanel.Controls.Add(this.HistoryClearLabel);
@@ -2276,5 +2276,5 @@
     private System.Windows.Forms.Label pi1000SphereLabel;
     private System.Windows.Forms.Label piSphereLabel;
     private System.Windows.Forms.TextBox piSphereTextBox;
-    private System.Windows.Forms.TextBox Nth4n1NumberTextBox;
+    private System.Windows.Forms.TextBox Nth4nPlus1NumberTextBox;
 }

@@ -1339,7 +1339,7 @@ public partial class MainForm : Form, ISubscriber
         this.RadixValueDownLabel = new System.Windows.Forms.Label();
         this.RadixLabel = new System.Windows.Forms.Label();
         this.ValuePanel = new System.Windows.Forms.Panel();
-        this.Nth4n1NumberTextBox = new System.Windows.Forms.TextBox();
+        this.Nth4nPlus1NumberTextBox = new System.Windows.Forms.TextBox();
         this.SumOfDivisorsTextBox = new System.Windows.Forms.TextBox();
         this.SquareDiffTextBox = new System.Windows.Forms.TextBox();
         this.SquareSumTextBox = new System.Windows.Forms.TextBox();
@@ -10673,7 +10673,7 @@ public partial class MainForm : Form, ISubscriber
         // 
         this.ValuePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
         | System.Windows.Forms.AnchorStyles.Right)));
-        this.ValuePanel.Controls.Add(this.Nth4n1NumberTextBox);
+        this.ValuePanel.Controls.Add(this.Nth4nPlus1NumberTextBox);
         this.ValuePanel.Controls.Add(this.PrimalogyARLabel);
         this.ValuePanel.Controls.Add(this.PrimalogyLabel);
         this.ValuePanel.Controls.Add(this.SumOfDivisorsTextBox);
@@ -10726,22 +10726,22 @@ public partial class MainForm : Form, ISubscriber
         this.ValuePanel.Size = new System.Drawing.Size(241, 327);
         this.ValuePanel.TabIndex = 5;
         // 
-        // Nth4n1NumberTextBox
+        // Nth4nPlus1NumberTextBox
         // 
-        this.Nth4n1NumberTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
-        this.Nth4n1NumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.Nth4n1NumberTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-        this.Nth4n1NumberTextBox.Location = new System.Drawing.Point(178, 69);
-        this.Nth4n1NumberTextBox.Name = "Nth4n1NumberTextBox";
-        this.Nth4n1NumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-        this.Nth4n1NumberTextBox.Size = new System.Drawing.Size(59, 23);
-        this.Nth4n1NumberTextBox.TabIndex = 24;
-        this.Nth4n1NumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.ToolTip.SetToolTip(this.Nth4n1NumberTextBox, "4n+1 index");
-        this.Nth4n1NumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
-        this.Nth4n1NumberTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
-        this.Nth4n1NumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Nth4n1NumberTextBox_KeyDown);
-        this.Nth4n1NumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
+        this.Nth4nPlus1NumberTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+        this.Nth4nPlus1NumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.Nth4nPlus1NumberTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+        this.Nth4nPlus1NumberTextBox.Location = new System.Drawing.Point(178, 69);
+        this.Nth4nPlus1NumberTextBox.Name = "Nth4nPlus1NumberTextBox";
+        this.Nth4nPlus1NumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+        this.Nth4nPlus1NumberTextBox.Size = new System.Drawing.Size(59, 23);
+        this.Nth4nPlus1NumberTextBox.TabIndex = 24;
+        this.Nth4nPlus1NumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+        this.ToolTip.SetToolTip(this.Nth4nPlus1NumberTextBox, "4n+1 index");
+        this.Nth4nPlus1NumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.Nth4nPlus1NumberTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
+        this.Nth4nPlus1NumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Nth4nPlus1NumberTextBox_KeyDown);
+        this.Nth4nPlus1NumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
         // SumOfDivisorsTextBox
         // 
@@ -15517,7 +15517,7 @@ public partial class MainForm : Form, ISubscriber
         RegisterContextMenu(NthNumberTextBox);
         RegisterContextMenu(NthAdditiveNumberTextBox);
         RegisterContextMenu(NthNonAdditiveNumberTextBox);
-        RegisterContextMenu(Nth4n1NumberTextBox);
+        RegisterContextMenu(Nth4nPlus1NumberTextBox);
         RegisterContextMenu(FindByFrequencyPhraseTextBox);
     }
     ///////////////////////////////////////////////////////////////////////////////
@@ -40307,7 +40307,7 @@ public partial class MainForm : Form, ISubscriber
             NthNonAdditiveNumberTextBox.Text = "";
             SquareSumTextBox.Text = "";
             SquareDiffTextBox.Text = "";
-            Nth4n1NumberTextBox.Text = "";
+            Nth4nPlus1NumberTextBox.Text = "";
             PCIndexChainL2RTextBox.Text = "";
             PCIndexChainR2LTextBox.Text = "";
             CPIndexChainL2RTextBox.Text = "";
@@ -40419,41 +40419,41 @@ public partial class MainForm : Form, ISubscriber
 
                 string squares1_str = "";
                 string squares2_str = "";
-                int _4n1_index = -1;
+                int _4nplus1_index = -1;
                 if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
                 {
-                    squares1_str = Numbers.Get4n1EqualsSumOfTwoSquares(value);
-                    squares2_str = Numbers.Get4n1EqualsDiffOfTwoSquares(value);
-                    _4n1_index = Numbers.Prime4n1IndexOf(value) + 1;
+                    squares1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(value);
+                    squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
+                    _4nplus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
                 }
                 else //if composite
                 {
-                    squares1_str = Numbers.Get4n1EqualsDiffOfTwoSquares(value);
-                    squares2_str = Numbers.Get4n1EqualsDiffOfTwoSquares2(value);
-                    _4n1_index = Numbers.Composite4n1IndexOf(value) + 1;
+                    squares1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(value);
+                    squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
+                    _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
                 }
                 SquareSumTextBox.Text = squares1_str;
                 SquareSumTextBox.Refresh();
                 SquareDiffTextBox.Text = squares2_str;
                 SquareDiffTextBox.Refresh();
-                Nth4n1NumberTextBox.Text = (_4n1_index > 0) ? _4n1_index.ToString() : "";
-                Nth4n1NumberTextBox.ForeColor = Numbers.GetNumberTypeColor(_4n1_index);
-                if (Nth4n1NumberTextBox.Text == "")
+                Nth4nPlus1NumberTextBox.Text = (_4nplus1_index > 0) ? _4nplus1_index.ToString() : "";
+                Nth4nPlus1NumberTextBox.ForeColor = Numbers.GetNumberTypeColor(_4nplus1_index);
+                if (Nth4nPlus1NumberTextBox.Text == "")
                 {
-                    Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
+                    Nth4nPlus1NumberTextBox.BackColor = SystemColors.ControlLight;
                 }
                 else
                 {
                     if (Numbers.IsPrime(value))
                     {
-                        Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
+                        Nth4nPlus1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
                     }
                     else // any other index type will be treated as IndexNumberType.Composite
                     {
-                        Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
+                        Nth4nPlus1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
                     }
                 }
-                Nth4n1NumberTextBox.Refresh();
+                Nth4nPlus1NumberTextBox.Refresh();
 
                 UpdateNumberKind(value);
                 UpdateSumOfDivisors(value);
@@ -41419,7 +41419,7 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
-    private void Nth4n1NumberTextBox_KeyDown(object sender, KeyEventArgs e)
+    private void Nth4nPlus1NumberTextBox_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode == Keys.Up)
         {
@@ -41441,11 +41441,11 @@ public partial class MainForm : Form, ISubscriber
                     control.ForeColor = Numbers.GetNumberTypeColor(index);
                     if (m_index_type == IndexType.Prime)
                     {
-                        number = Numbers.Primes4n1[index];
+                        number = Numbers.Primes4nPlus1[index];
                     }
                     else // any other index type will be treated as IndexNumberType.Composite
                     {
-                        number = Numbers.Composites4n1[index];
+                        number = Numbers.Composites4nPlus1[index];
                     }
                     FactorizeValue(number, true);
                 }
@@ -44437,13 +44437,13 @@ public partial class MainForm : Form, ISubscriber
                         string squares2_str = "";
                         if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
                         {
-                            squares1_str = Numbers.Get4n1EqualsSumOfTwoSquares(value);
-                            squares2_str = Numbers.Get4n1EqualsDiffOfTwoSquares(value);
+                            squares1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(value);
+                            squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
                         }
-                        else //if composite
+                        else // if composite
                         {
-                            squares1_str = Numbers.Get4n1EqualsDiffOfTwoSquares(value);
-                            squares2_str = Numbers.Get4n1EqualsDiffOfTwoSquares2(value);
+                            squares1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(value);
+                            squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
                         }
                         str.AppendLine("4n+1 Squares1\t\t=\t" + squares1_str);
                         str.AppendLine("4n+1 Squares2\t\t=\t" + squares2_str);

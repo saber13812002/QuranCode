@@ -1407,7 +1407,7 @@ public static class Numbers
     private static List<long> s_primes = null;
     private static List<long> s_additive_primes = null;
     private static List<long> s_non_additive_primes = null;
-    private static List<long> s_primes_4n1 = null;
+    private static List<long> s_primes_4nplus1 = null;
     public static List<long> Primes
     {
         get
@@ -1441,15 +1441,15 @@ public static class Numbers
             return s_non_additive_primes;
         }
     }
-    public static List<long> Primes4n1
+    public static List<long> Primes4nPlus1
     {
         get
         {
-            if (s_primes_4n1 == null)
+            if (s_primes_4nplus1 == null)
             {
-                LoadPrimes4n1();
+                LoadPrimes4nPlus1();
             }
-            return s_primes_4n1;
+            return s_primes_4nplus1;
         }
     }
     public static int PrimeIndexOf(long number)
@@ -1524,17 +1524,17 @@ public static class Numbers
         }
         return -1;
     }
-    public static int Prime4n1IndexOf(long number)
+    public static int Prime4nPlus1IndexOf(long number)
     {
         if (number < 0L) number *= -1L;
 
         if (IsPrime(number))
         {
-            if (s_primes_4n1 == null)
+            if (s_primes_4nplus1 == null)
             {
-                LoadPrimes4n1();
+                LoadPrimes4nPlus1();
             }
-            return BinarySearch(s_primes_4n1, number);
+            return BinarySearch(s_primes_4nplus1, number);
         }
         return -1;
     }
@@ -1553,10 +1553,10 @@ public static class Numbers
         long number = Radix.Decode(value, radix);
         return NonAdditivePrimeIndexOf(number);
     }
-    public static int Prime4n1IndexOf(string value, long radix)
+    public static int Prime4nPlus1IndexOf(string value, long radix)
     {
         long number = Radix.Decode(value, radix);
-        return Prime4n1IndexOf(number);
+        return Prime4nPlus1IndexOf(number);
     }
     private static void GeneratePrimes(int max)
     {
@@ -1652,7 +1652,7 @@ public static class Numbers
     private static string s_primes_filename = "primes.txt";
     private static string s_additive_primes_filename = "additive_primes.txt";
     private static string s_non_additive_primes_filename = "non_additive_primes.txt";
-    private static string s_primes_4n1_filename = "4n+1_primes.txt";
+    private static string s_primes_4nplus1_filename = "4n+1_primes.txt";
     private static void LoadPrimes()
     {
         try
@@ -1752,16 +1752,16 @@ public static class Numbers
             Console.WriteLine(ex.Message);
         }
     }
-    private static void LoadPrimes4n1()
+    private static void LoadPrimes4nPlus1()
     {
         try
         {
-            string filename = Globals.NUMBERS_FOLDER + "/" + s_primes_4n1_filename;
+            string filename = Globals.NUMBERS_FOLDER + "/" + s_primes_4nplus1_filename;
             if (File.Exists(filename))
             {
                 FileHelper.WaitForReady(filename);
 
-                s_primes_4n1 = new List<long>();
+                s_primes_4nplus1 = new List<long>();
                 using (StreamReader reader = new StreamReader(filename))
                 {
                     string line = "";
@@ -1770,7 +1770,7 @@ public static class Numbers
                         try
                         {
                             line = reader.ReadLine();
-                            s_primes_4n1.Add(long.Parse(line));
+                            s_primes_4nplus1.Add(long.Parse(line));
                         }
                         catch
                         {
@@ -1822,7 +1822,7 @@ public static class Numbers
     private static List<long> s_composites = null;
     private static List<long> s_additive_composites = null;
     private static List<long> s_non_additive_composites = null;
-    private static List<long> s_composites_4n1 = null;
+    private static List<long> s_composites_4nplus1 = null;
     public static List<long> Composites
     {
         get
@@ -1856,15 +1856,15 @@ public static class Numbers
             return s_non_additive_composites;
         }
     }
-    public static List<long> Composites4n1
+    public static List<long> Composites4nPlus1
     {
         get
         {
-            if (s_composites_4n1 == null)
+            if (s_composites_4nplus1 == null)
             {
-                LoadComposites4n1();
+                LoadComposites4nPlus1();
             }
-            return s_composites_4n1;
+            return s_composites_4nplus1;
         }
     }
     public static int CompositeIndexOf(long number)
@@ -1939,17 +1939,17 @@ public static class Numbers
         }
         return -1;
     }
-    public static int Composite4n1IndexOf(long number)
+    public static int Composite4nPlus1IndexOf(long number)
     {
         if (number < 0L) number *= -1L;
 
         if (IsComposite(number))
         {
-            if (s_composites_4n1 == null)
+            if (s_composites_4nplus1 == null)
             {
-                LoadComposites4n1();
+                LoadComposites4nPlus1();
             }
-            return BinarySearch(s_composites_4n1, number);
+            return BinarySearch(s_composites_4nplus1, number);
         }
         return -1;
     }
@@ -1968,10 +1968,10 @@ public static class Numbers
         long number = Radix.Decode(value, radix);
         return NonAdditiveCompositeIndexOf(number);
     }
-    public static int Composite4n1IndexOf(string value, long radix)
+    public static int Composite4nPlus1IndexOf(string value, long radix)
     {
         long number = Radix.Decode(value, radix);
-        return Composite4n1IndexOf(number);
+        return Composite4nPlus1IndexOf(number);
     }
     private static void GenerateComposites(int max)
     {
@@ -2076,7 +2076,7 @@ public static class Numbers
     private static string s_composites_filename = "composites.txt";
     private static string s_additive_composites_filename = "additive_composites.txt";
     private static string s_non_additive_composites_filename = "non_additive_composites.txt";
-    private static string s_composites_4n1_filename = "4n+1_composites.txt";
+    private static string s_composites_4nplus1_filename = "4n+1_composites.txt";
     private static void LoadComposites()
     {
         try
@@ -2176,16 +2176,16 @@ public static class Numbers
             Console.WriteLine(ex.Message);
         }
     }
-    private static void LoadComposites4n1()
+    private static void LoadComposites4nPlus1()
     {
         try
         {
-            string filename = Globals.NUMBERS_FOLDER + "/" + s_composites_4n1_filename;
+            string filename = Globals.NUMBERS_FOLDER + "/" + s_composites_4nplus1_filename;
             if (File.Exists(filename))
             {
                 FileHelper.WaitForReady(filename);
 
-                s_composites_4n1 = new List<long>();
+                s_composites_4nplus1 = new List<long>();
                 using (StreamReader reader = new StreamReader(filename))
                 {
                     string line = "";
@@ -2194,7 +2194,7 @@ public static class Numbers
                         try
                         {
                             line = reader.ReadLine();
-                            s_composites_4n1.Add(long.Parse(line));
+                            s_composites_4nplus1.Add(long.Parse(line));
                         }
                         catch
                         {
@@ -3853,23 +3853,24 @@ public static class Numbers
         }
         return str.ToString();
     }
-    public static void GetTwoSquaresInSum(long number, out long square1, out long square2)
+
+    public static void GetSquaresOf4nPlus1EqualsSumOfTwoSquares(long number, out long square1, out long square2)
     {
         square1 = 0L;
         square2 = 0L;
         long max = (long)Math.Sqrt(number);
         for (long i = 0L; i <= max; i++)
         {
-            // remove i square from number
+            // remove squared i from number
             square1 = i * i;
             square2 = number - square1;
 
-            // test diff if square or not
+            // if square2 is a perfect square, return
             long j = (long)Math.Sqrt(square2);
             if (j * j == square2) return;
         }
     }
-    public static void GetTwoSquaresInDiff(long number, out long square1, out long square2)
+    public static void GetSquaresOf4nPlus1EqualsDiffOfTwoSquares(long number, out long square1, out long square2)
     {
         square1 = 0L;
         square2 = 0L;
@@ -3877,49 +3878,44 @@ public static class Numbers
         long max = number * number;
         for (long i = 0L; i <= max; i++)
         {
-            // add i square to number
+            // add squared i from number
             square2 = i * i;
             square1 = number + square2;
 
-            // test sum if square or not
+            // if square1 is a perfect square, return
             long j = (long)Math.Sqrt(square1);
             if (j * j == square1) return;
         }
     }
-    public static string Get4n1EqualsSumOfTwoSquares(long number)
+    public static string Get4nPlus1EqualsSumOfTwoSquares(long number)
     {
         string result = "";
-
         long square1 = 0L;
         long square2 = 0L;
         long n = (number - 1L) / 4L;
         if (number == ((n * 4L) + 1L))
         {
-            GetTwoSquaresInSum(number, out square1, out square2);
+            GetSquaresOf4nPlus1EqualsSumOfTwoSquares(number, out square1, out square2);
             result = "4×" + n.ToString() + "+1 = " + (long)Math.Sqrt(square2) + "^2 + " + (long)Math.Sqrt(square1) + "^2";
         }
-
         return result;
     }
-    public static string Get4n1EqualsDiffOfTwoSquares(long number)
+    public static string Get4nPlus1EqualsDiffOfTwoSquares(long number)
     {
         string result = "";
-
         long square1 = 0L;
         long square2 = 0L;
         long n = (number - 1L) / 4L;
         if (number == ((n * 4L) + 1L))
         {
-            GetTwoSquaresInDiff(number, out square1, out square2);
+            GetSquaresOf4nPlus1EqualsDiffOfTwoSquares(number, out square1, out square2);
             result = "4×" + n.ToString() + "+1 = " + (long)Math.Sqrt(square1) + "^2 - " + (long)Math.Sqrt(square2) + "^2";
         }
-
         return result;
     }
-    public static string Get4n1EqualsDiffOfTwoSquares2(long number)
+    public static string Get4nPlus1EqualsDiffOfTwoTrivialSquares(long number)
     {
         string result = "";
-
         long square1 = 0L;
         long square2 = 0L;
         long n = (number - 1L) / 4L;
@@ -3929,7 +3925,6 @@ public static class Numbers
             square2 = (2 * n) * (2 * n);
             result = "4×" + n.ToString() + "+1 = " + (long)Math.Sqrt(square1) + "^2 - " + (long)Math.Sqrt(square2) + "^2";
         }
-
         return result;
     }
 

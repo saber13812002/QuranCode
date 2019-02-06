@@ -677,7 +677,7 @@ public partial class MainForm : Form
                             long n = (p - 1) / 4;
                             long a;
                             long b;
-                            Numbers.GetTwoSquaresInSum(p, out a, out b);
+                            Numbers.GetSquaresOf4nPlus1EqualsSumOfTwoSquares(p, out a, out b);
                             a = (long)Math.Sqrt(a);
                             b = (long)Math.Sqrt(b);
                             controls[point.X, 9].Text = n.ToString();
@@ -699,7 +699,7 @@ public partial class MainForm : Form
                             long n = (c - 1) / 4;
                             long a;
                             long b;
-                            Numbers.GetTwoSquaresInDiff(c, out a, out b);
+                            Numbers.GetSquaresOf4nPlus1EqualsDiffOfTwoSquares(c, out a, out b);
                             a = (long)Math.Sqrt(a);
                             b = (long)Math.Sqrt(b);
                             controls[point.X, 12].Text = n.ToString();
