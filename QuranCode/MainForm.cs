@@ -37375,7 +37375,7 @@ public partial class MainForm : Form, ISubscriber
                                 {
                                     if (phrase != null)
                                     {
-                                        phrase_texts.Append(phrase.Text);
+                                        phrase_texts.AppendLine(phrase.Text);
 
                                         if (phrase.Verse != null)
                                         {

@@ -87,13 +87,28 @@
     <Content Include="Values\Original_Abjad_ReptendPrimes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Values\Original_Alphabet_4n+1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Values\Original_Alphabet_Primes1.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Original_Alphabet_ReptendPrimes.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Original_Appearance_AdditiveComposites.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Values\Original_Appearance_Composites.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Values\Original_Appearance_ReptendPrimes.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Values\Original_Frequency_Linear.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Original_Frequency_ReptendPrimes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Values\Simplified28_Abjad_4n+1.txt">
@@ -222,13 +237,10 @@
     <Content Include="Values\Simplified29_Abjad_Gematria.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified29_Abjad_Gematria1.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Values\Simplified29_Abjad_Linear.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified29_Abjad_Primes1.txt">
+    <Content Include="Values\Simplified29_Abjad_Primes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Values\Simplified29_Abjad_ReptendPrimes.txt">
