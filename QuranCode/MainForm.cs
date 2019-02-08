@@ -35868,7 +35868,6 @@ public partial class MainForm : Form, ISubscriber
         // some operations take too long and may frustrate user
         if (
             (sender is NumericUpDown) &&
-            ((sender as NumericUpDown).Value > 0) &&
             (m_numbers_result_type != NumbersResultType.Letters) &&
             (m_numbers_result_type != NumbersResultType.WordRanges) &&
             (m_numbers_result_type != NumbersResultType.VerseRanges) &&
