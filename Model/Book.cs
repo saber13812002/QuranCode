@@ -1074,6 +1074,7 @@ namespace Model
                 this.distances_within_chapters = distances_within_chapters;
 
                 SetupDistancesToPrevious(distances_within_chapters);
+                SetupDistancesToNext(distances_within_chapters);
             }
         }
         private void SetupDistancesToPrevious(bool distances_within_chapters)
@@ -1210,6 +1211,150 @@ namespace Model
                                                 letter_previous_word_numbers[letters[l].Character] = words[w].Number;
                                                 letter_previous_verse_numbers[letters[l].Character] = verses[v].Number;
                                                 letter_previous_chapter_numbers[letters[l].Character] = chapters[c].SortedNumber;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        private void SetupDistancesToNext(bool distances_within_chapters)
+        {
+            // foreach chapter: no repeated chapters so no distances to next same chapter
+
+            // foreach verse: calculate distance back to next occurrence
+            Dictionary<string, int> verse_next_verse_numbers = new Dictionary<string, int>();
+            Dictionary<string, int> verse_next_chapter_numbers = new Dictionary<string, int>();
+
+            // foreach word: calculate distance back to next occurrence
+            Dictionary<string, int> word_next_word_numbers = new Dictionary<string, int>();
+            Dictionary<string, int> word_next_verse_numbers = new Dictionary<string, int>();
+            Dictionary<string, int> word_next_chapter_numbers = new Dictionary<string, int>();
+
+            // foreach letter: calculate distance back to next occurrence
+            Dictionary<char, int> letter_next_letter_numbers = new Dictionary<char, int>();
+            Dictionary<char, int> letter_next_word_numbers = new Dictionary<char, int>();
+            Dictionary<char, int> letter_next_verse_numbers = new Dictionary<char, int>();
+            Dictionary<char, int> letter_next_chapter_numbers = new Dictionary<char, int>();
+
+            if (this.chapters != null)
+            {
+                List<Chapter> chapters = this.chapters;
+                for (int c = chapters.Count - 1; c >= 0; c--)
+                {
+                    if (distances_within_chapters)
+                    {
+                        verse_next_verse_numbers.Clear();
+                        verse_next_chapter_numbers.Clear();
+                        word_next_word_numbers.Clear();
+                        word_next_verse_numbers.Clear();
+                        word_next_chapter_numbers.Clear();
+                        letter_next_letter_numbers.Clear();
+                        letter_next_word_numbers.Clear();
+                        letter_next_verse_numbers.Clear();
+                        letter_next_chapter_numbers.Clear();
+                    }
+
+                    if (chapters[c].Verses != null)
+                    {
+                        List<Verse> verses = chapters[c].Verses;
+                        for (int v = verses.Count - 1; v >= 0; v--)
+                        {
+                            string verse_text = verses[v].Text;
+                            if ((this.text_mode == "Original") && (!with_diacritics))
+                            {
+                                verse_text = verse_text.Simplify29();
+                            }
+
+                            if (!verse_next_verse_numbers.ContainsKey(verse_text))
+                            {
+                                verses[v].DistanceToNext.dL = -1; // non-applicable
+                                verses[v].DistanceToNext.dW = -1; // non-applicable
+                                verses[v].DistanceToNext.dV = 0;
+                                verses[v].DistanceToNext.dC = 0;
+
+                                verse_next_verse_numbers.Add(verse_text, verses[v].Number);
+                                verse_next_chapter_numbers.Add(verse_text, chapters[c].SortedNumber);
+                            }
+                            else
+                            {
+                                verses[v].DistanceToNext.dL = -1; // non-applicable
+                                verses[v].DistanceToNext.dW = -1; // non-applicable
+                                verses[v].DistanceToNext.dV = -1 * (verses[v].Number - verse_next_verse_numbers[verse_text]);
+                                verses[v].DistanceToNext.dC = -1 * (chapters[c].SortedNumber - verse_next_chapter_numbers[verse_text]);
+
+                                // save latest chapter and verse numbers for next iteration
+                                verse_next_verse_numbers[verse_text] = verses[v].Number;
+                                verse_next_chapter_numbers[verse_text] = chapters[c].SortedNumber;
+                            }
+
+                            if (verses[v].Words != null)
+                            {
+                                List<Word> words = verses[v].Words;
+                                for (int w = words.Count - 1; w >= 0; w--)
+                                {
+                                    string word_text = words[w].Text;
+                                    if ((this.text_mode == "Original") && (!with_diacritics))
+                                    {
+                                        verse_text = verse_text.Simplify29();
+                                    }
+
+                                    if (!word_next_verse_numbers.ContainsKey(word_text))
+                                    {
+                                        words[w].DistanceToNext.dL = -1; // non-applicable
+                                        words[w].DistanceToNext.dW = 0;
+                                        words[w].DistanceToNext.dV = 0;
+                                        words[w].DistanceToNext.dC = 0;
+
+                                        word_next_word_numbers.Add(word_text, words[w].Number);
+                                        word_next_verse_numbers.Add(word_text, verses[v].Number);
+                                        word_next_chapter_numbers.Add(word_text, chapters[c].SortedNumber);
+                                    }
+                                    else
+                                    {
+                                        words[w].DistanceToNext.dL = -1; // non-applicable
+                                        words[w].DistanceToNext.dW = -1 * (words[w].Number - word_next_word_numbers[word_text]);
+                                        words[w].DistanceToNext.dV = -1 * (verses[v].Number - word_next_verse_numbers[word_text]);
+                                        words[w].DistanceToNext.dC = -1 * (chapters[c].SortedNumber - word_next_chapter_numbers[word_text]);
+
+                                        // save latest chapter, verse and word numbers for next iteration
+                                        word_next_word_numbers[word_text] = words[w].Number;
+                                        word_next_verse_numbers[word_text] = verses[v].Number;
+                                        word_next_chapter_numbers[word_text] = chapters[c].SortedNumber;
+                                    }
+
+                                    if (words[w].Letters != null)
+                                    {
+                                        List<Letter> letters = words[w].Letters;
+                                        for (int l = letters.Count - 1; l >= 0; l--)
+                                        {
+                                            if (!letter_next_verse_numbers.ContainsKey(letters[l].Character))
+                                            {
+                                                letters[l].DistanceToNext.dL = 0;
+                                                letters[l].DistanceToNext.dW = 0;
+                                                letters[l].DistanceToNext.dV = 0;
+                                                letters[l].DistanceToNext.dC = 0;
+
+                                                letter_next_letter_numbers.Add(letters[l].Character, letters[l].Number);
+                                                letter_next_word_numbers.Add(letters[l].Character, words[w].Number);
+                                                letter_next_verse_numbers.Add(letters[l].Character, verses[v].Number);
+                                                letter_next_chapter_numbers.Add(letters[l].Character, chapters[c].SortedNumber);
+                                            }
+                                            else
+                                            {
+                                                letters[l].DistanceToNext.dL = -1 * (letters[l].Number - letter_next_letter_numbers[letters[l].Character]);
+                                                letters[l].DistanceToNext.dW = -1 * (words[w].Number - letter_next_word_numbers[letters[l].Character]);
+                                                letters[l].DistanceToNext.dV = -1 * (verses[v].Number - letter_next_verse_numbers[letters[l].Character]);
+                                                letters[l].DistanceToNext.dC = -1 * (chapters[c].SortedNumber - letter_next_chapter_numbers[letters[l].Character]);
+
+                                                // save latest chapter, verse, word and letter numbers for next iteration
+                                                letter_next_letter_numbers[letters[l].Character] = letters[l].Number;
+                                                letter_next_word_numbers[letters[l].Character] = words[w].Number;
+                                                letter_next_verse_numbers[letters[l].Character] = verses[v].Number;
+                                                letter_next_chapter_numbers[letters[l].Character] = chapters[c].SortedNumber;
                                             }
                                         }
                                     }

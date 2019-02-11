@@ -2259,22 +2259,26 @@ public class Server : IPublisher
 
                 if (s_numerology_system.AddToLetterLDistance)
                 {
-                    result += letter.DistanceToPrevious.dL;
+                    if (s_numerology_system.AddDistancesToPrevious) result += letter.DistanceToPrevious.dL;
+                    if (s_numerology_system.AddDistancesToNext) result += letter.DistanceToNext.dL;
                 }
 
                 if (s_numerology_system.AddToLetterWDistance)
                 {
-                    result += letter.DistanceToPrevious.dW;
+                    if (s_numerology_system.AddDistancesToPrevious) result += letter.DistanceToPrevious.dW;
+                    if (s_numerology_system.AddDistancesToNext) result += letter.DistanceToNext.dW;
                 }
 
                 if (s_numerology_system.AddToLetterVDistance)
                 {
-                    result += letter.DistanceToPrevious.dV;
+                    if (s_numerology_system.AddDistancesToPrevious) result += letter.DistanceToPrevious.dV;
+                    if (s_numerology_system.AddDistancesToNext) result += letter.DistanceToNext.dV;
                 }
 
                 if (s_numerology_system.AddToLetterCDistance)
                 {
-                    result += letter.DistanceToPrevious.dC;
+                    if (s_numerology_system.AddDistancesToPrevious) result += letter.DistanceToPrevious.dC;
+                    if (s_numerology_system.AddDistancesToNext) result += letter.DistanceToNext.dC;
                 }
             }
         }
@@ -2304,17 +2308,20 @@ public class Server : IPublisher
 
                 if (s_numerology_system.AddToWordWDistance)
                 {
-                    result += word.DistanceToPrevious.dW;
+                    if (s_numerology_system.AddDistancesToPrevious) result += word.DistanceToPrevious.dW;
+                    if (s_numerology_system.AddDistancesToNext) result += word.DistanceToNext.dW;
                 }
 
                 if (s_numerology_system.AddToWordVDistance)
                 {
-                    result += word.DistanceToPrevious.dV;
+                    if (s_numerology_system.AddDistancesToPrevious) result += word.DistanceToPrevious.dV;
+                    if (s_numerology_system.AddDistancesToNext) result += word.DistanceToNext.dV;
                 }
 
                 if (s_numerology_system.AddToWordCDistance)
                 {
-                    result += word.DistanceToPrevious.dC;
+                    if (s_numerology_system.AddDistancesToPrevious) result += word.DistanceToPrevious.dC;
+                    if (s_numerology_system.AddDistancesToNext) result += word.DistanceToNext.dC;
                 }
             }
         }
@@ -2339,12 +2346,14 @@ public class Server : IPublisher
 
                 if (s_numerology_system.AddToVerseVDistance)
                 {
-                    result += verse.DistanceToPrevious.dV;
+                    if (s_numerology_system.AddDistancesToPrevious) result += verse.DistanceToPrevious.dV;
+                    if (s_numerology_system.AddDistancesToNext) result += verse.DistanceToNext.dV;
                 }
 
                 if (s_numerology_system.AddToVerseCDistance)
                 {
-                    result += verse.DistanceToPrevious.dC;
+                    if (s_numerology_system.AddDistancesToPrevious) result += verse.DistanceToPrevious.dC;
+                    if (s_numerology_system.AddDistancesToNext) result += verse.DistanceToNext.dC;
                 }
             }
         }

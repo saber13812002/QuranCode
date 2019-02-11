@@ -342,10 +342,12 @@ public partial class MainForm : Form
             else if (e.KeyCode == Keys.Z)
             {
                 HistoryBackwardLabel_Click(null, null);
+                CallRun();
             }
             else if (e.KeyCode == Keys.Y)
             {
                 HistoryForewardLabel_Click(null, null);
+                CallRun();
             }
             else if (e.KeyCode == Keys.Up)
             {
@@ -1021,17 +1023,20 @@ public partial class MainForm : Form
             str.AppendLine();
             string squares1_str = "";
             string squares2_str = "";
+            int _4nplus1_index = -1;
             if (Numbers.IsUnit(number) || Numbers.IsPrime(number))
             {
                 squares1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(number);
                 squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(number);
+                _4nplus1_index = Numbers.Prime4nPlus1IndexOf(number) + 1;
             }
-            else // if composite
+            else //if composite
             {
                 squares1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(number);
                 squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(number);
+                _4nplus1_index = Numbers.Composite4nPlus1IndexOf(number) + 1;
             }
-            str.AppendLine("4n+1 Squares1\t\t=\t" + squares1_str);
+            str.AppendLine("4n+1 Squares1\t\t=\t" + squares1_str + "\t\t4n+1 Index = " + _4nplus1_index.ToString());
             str.AppendLine("4n+1 Squares2\t\t=\t" + squares2_str);
 
             str.AppendLine();
@@ -2147,6 +2152,7 @@ public partial class MainForm : Form
     {
         EnableEntryControls();
         ClearProgress();
+        ValueTextBox.Focus();
     }
     private void AfterProcessing()
     {
@@ -2171,6 +2177,8 @@ public partial class MainForm : Form
                 AnalyzeValue(number);
             }
         }
+
+        ValueTextBox.Focus();
     }
 
     private enum TimeDisplayMode { Elapsed, Remaining }

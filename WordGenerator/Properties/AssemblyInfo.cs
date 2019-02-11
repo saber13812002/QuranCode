@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ٱللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَءَالِ مُحَمَّدٍ")]
 [assembly: AssemblyProduct("QuranCode")]
-[assembly: AssemblyCopyright("©2009-2019 Ali Adams - علي عبد الرزاق عبد الكريم القره غولي")]
+[assembly: AssemblyCopyright("©2009-2018 Ali Adams - علي عبد الرزاق عبد الكريم القره غولي")]
 [assembly: AssemblyTrademark("http://qurancode.com/")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.0.*")]
-[assembly: AssemblyVersion("6.19.877.4")]
-[assembly: AssemblyFileVersion("6.19.877.4")]
+[assembly: AssemblyVersion("6.19.881.4")]
+[assembly: AssemblyFileVersion("6.19.881.4")]

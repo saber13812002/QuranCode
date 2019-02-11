@@ -146,6 +146,8 @@ namespace Model
         public bool AddToVerseCDistance;
         public bool AddToChapterCNumber;
 
+        public bool AddDistancesToPrevious;
+        public bool AddDistancesToNext;
         public bool AddDistancesWithinChapters = true;
 
         public NumerologySystem()
@@ -292,17 +294,18 @@ namespace Model
                  AddToLetterCDistance
                )
             {
-                str.Append("Add to each letter  value" + "\t");
-                str.Append("\t"); if (AddToLetterLNumber) str.Append("L");
-                str.Append("\t"); if (AddToLetterWNumber) str.Append("W");
-                str.Append("\t"); if (AddToLetterVNumber) str.Append("V");
-                str.Append("\t"); if (AddToLetterCNumber) str.Append("C");
-                str.Append("\t"); if (AddToLetterLDistance) str.Append("∆L");
-                str.Append("\t"); if (AddToLetterWDistance) str.Append("∆W");
-                str.Append("\t"); if (AddToLetterVDistance) str.Append("∆V");
-                str.Append("\t"); if (AddToLetterCDistance) str.Append("∆C");
+                str.Append("Add to each letter  value");
+                if (AddToLetterLNumber) str.Append("\t" + "L");
+                if (AddToLetterWNumber) str.Append("\t" + "W");
+                if (AddToLetterVNumber) str.Append("\t" + "V");
+                if (AddToLetterCNumber) str.Append("\t" + "C");
+                if (AddToLetterLDistance) str.Append("\t" + "∆L");
+                if (AddToLetterWDistance) str.Append("\t" + "∆W");
+                if (AddToLetterVDistance) str.Append("\t" + "∆V");
+                if (AddToLetterCDistance) str.Append("\t" + "∆C");
                 str.AppendLine();
             }
+
 
             if (
                  AddToWordWNumber ||
@@ -313,17 +316,16 @@ namespace Model
                  AddToWordCDistance
                )
             {
-                str.Append("Add to each word    value" + "\t");
-                str.Append("\t");
-                str.Append("\t"); if (AddToWordWNumber) str.Append("W");
-                str.Append("\t"); if (AddToWordVNumber) str.Append("V");
-                str.Append("\t"); if (AddToWordCNumber) str.Append("C");
-                str.Append("\t");
-                str.Append("\t"); if (AddToWordWDistance) str.Append("∆W");
-                str.Append("\t"); if (AddToWordVDistance) str.Append("∆V");
-                str.Append("\t"); if (AddToWordCDistance) str.Append("∆C");
+                str.Append("Add to each word    value");
+                if (AddToWordWNumber) str.Append("\t" + "W");
+                if (AddToWordVNumber) str.Append("\t" + "V");
+                if (AddToWordCNumber) str.Append("\t" + "C");
+                if (AddToWordWDistance) str.Append("\t" + "∆W");
+                if (AddToWordVDistance) str.Append("\t" + "∆V");
+                if (AddToWordCDistance) str.Append("\t" + "∆C");
                 str.AppendLine();
             }
+
 
             if (
                  AddToVerseVNumber ||
@@ -332,15 +334,11 @@ namespace Model
                  AddToVerseCDistance
                )
             {
-                str.Append("Add to each verse   value" + "\t");
-                str.Append("\t");
-                str.Append("\t");
-                str.Append("\t"); if (AddToVerseVNumber) str.Append("V");
-                str.Append("\t"); if (AddToVerseCNumber) str.Append("C");
-                str.Append("\t");
-                str.Append("\t");
-                str.Append("\t"); if (AddToVerseVDistance) str.Append("∆V");
-                str.Append("\t"); if (AddToVerseCDistance) str.Append("∆C");
+                str.Append("Add to each verse   value");
+                if (AddToVerseVNumber) str.Append("\t" + "V");
+                if (AddToVerseCNumber) str.Append("\t" + "C");
+                if (AddToVerseVDistance) str.Append("\t" + "∆V");
+                if (AddToVerseCDistance) str.Append("\t" + "∆C");
                 str.AppendLine();
             }
 
@@ -348,91 +346,24 @@ namespace Model
                  AddToChapterCNumber
                )
             {
-                str.Append("Add to each chapter value" + "\t");
-                str.Append("\t");
-                str.Append("\t");
-                str.Append("\t");
-                str.Append("\t"); if (AddToChapterCNumber) str.Append("C");
-                str.Append("\t");
-                str.Append("\t");
-                str.Append("\t");
-                str.Append("\t");
+                str.Append("Add to each chapter value");
+                if (AddToChapterCNumber) str.Append("\t" + "C");
                 str.AppendLine();
             }
 
+            str.AppendLine("AddDistancesToPrevious = " + AddDistancesToPrevious);
+            str.AppendLine("AddDistancesToNext     = " + AddDistancesToNext);
+            str.AppendLine("AddDistancesWithinChapters = " + AddDistancesWithinChapters);
             str.AppendLine();
 
-            if (
-                 AddToLetterLDistance ||
-                 AddToLetterWDistance ||
-                 AddToLetterVDistance ||
-                 AddToLetterCDistance ||
-                 AddToWordWDistance ||
-                 AddToWordVDistance ||
-                 AddToWordCDistance ||
-                 AddToVerseVDistance ||
-                 AddToVerseCDistance
-               )
-            {
-                str.AppendLine("AddDistancesWithinChapters = " + AddDistancesWithinChapters);
-                str.AppendLine();
-            }
-
-            if (
-                 AddToLetterLNumber ||
-                 AddToLetterWNumber ||
-                 AddToLetterVNumber ||
-                 AddToLetterCNumber ||
-                 AddToLetterLDistance ||
-                 AddToLetterWDistance ||
-                 AddToLetterVDistance ||
-                 AddToLetterCDistance ||
-                 AddToWordWNumber ||
-                 AddToWordVNumber ||
-                 AddToWordCNumber ||
-                 AddToWordWDistance ||
-                 AddToWordVDistance ||
-                 AddToWordCDistance ||
-                 AddToVerseVNumber ||
-                 AddToVerseCNumber ||
-                 AddToVerseVDistance ||
-                 AddToVerseCDistance ||
-                 AddToChapterCNumber
-               )
-            {
-                str.AppendLine("L" + "\t" + "Add letter number in word to each letter value" + "\t" + "أضف رقم الحرف في كلمته الى قيمة كل حرف");
-                str.AppendLine("W" + "\t" + "Add word number in verse to each letter value" + "\t" + "أضف رقم كلمة الحرف في ءايتها الى قيمة كل حرف");
-                str.AppendLine("V" + "\t" + "Add verse number in chapter to each letter value" + "\t" + "أضف رقم ءاية الحرف في سورتها الى قيمة كل حرف");
-                str.AppendLine("C" + "\t" + "Add chapter number in book to each letter value" + "\t" + "أضف رقم سورة الحرف في القرءان الى قيمة كل حرف");
-                str.AppendLine("∆L" + "\t" + "Add the number of letters back to the same letter" + "\t" + "أضف عدد الحروف بين الحروف المتماثلة الى قيمة كل حرف");
-                str.AppendLine("∆W" + "\t" + "Add the number of words back to the same letter" + "\t" + "أضف عدد الكلمات بين الحروف المتماثلة الى قيمة كل حرف");
-                str.AppendLine("∆V" + "\t" + "Add the number of verses back to the same letter" + "\t" + "أضف عدد الءايات بين الحروف المتماثلة الى قيمة كل حرف");
-                str.AppendLine("∆C" + "\t" + "Add the number of chapters back to the same letter" + "\t" + "أضف عدد السُوَر بين الحروف المتماثلة الى قيمة كل حرف");
-                str.AppendLine("W" + "\t" + "Add word number in verse to each word value" + "\t" + "أضف رقم الكلمة في ءايتها الى قيمة كل كلمة");
-                str.AppendLine("V" + "\t" + "Add verse number in chapter to each word value" + "\t" + "أضف رقم ءاية الكلمة في سورتها الى قيمة كل كلمة");
-                str.AppendLine("C" + "\t" + "Add chapter number in book to each word value" + "\t" + "أضف رقم سورة الكلمة في القرءان الى قيمة كل كلمة");
-                str.AppendLine("∆W" + "\t" + "Add the number of words back to the same word" + "\t" + "أضف عدد الكلمات بين الكلمات المتماثلة الى قيمة كل كلمة");
-                str.AppendLine("∆V" + "\t" + "Add the number of verses back to the same word" + "\t" + "أضف عدد الءايات بين الكلمات المتماثلة الى قيمة كل كلمة");
-                str.AppendLine("∆C" + "\t" + "Add the number of chapters back to the same word" + "\t" + "أضف عدد السُوَر بين الكلمات المتماثلة الى قيمة كل كلمة");
-                str.AppendLine("V" + "\t" + "Add verse number in chapter to each verse value" + "\t" + "أضف رقم الءاية في سورتها الى قيمة كل ءاية");
-                str.AppendLine("C" + "\t" + "Add chapter number in book to each verse value" + "\t" + "أضف رقم سورة الءاية في القرءان الى قيمة كل ءاية");
-                str.AppendLine("∆V" + "\t" + "Add the number of verses back to the same verse" + "\t" + "أضف عدد الءايات بين الءايات المتماثلة الى قيمة كل ءاية");
-                str.AppendLine("∆C" + "\t" + "Add the number of chapters back to the same verse" + "\t" + "أضف عدد السُوَر بين الءايات المتماثلة الى قيمة كل ءاية");
-                str.AppendLine("C" + "\t" + "Add chapter number in book to each chapter value" + "\t" + "أضف رقم السورة في القرءان الى قيمة كل سورة");
-                str.AppendLine("Pos" + "\t" + "Add positions of letters/words/verses/chapters" + "\t" + "أضف مواقع الحروف/الكلمات/الءايات/السُوَر");
-                str.AppendLine("∆" + "\t" + "Add distances to same letters/words/verses back" + "\t" + "أضف المسافات الى الحروف/الكلمات/الءايات المتماثلة السابقة");
-                str.AppendLine("∆ ضمن السُوَر" + "\t" + "Add distances within chapters" + "\t" + "أضف المسافات ضمن السُوَر");
-                str.AppendLine();
-            }
-
-            str.AppendLine("--------------------------");
+            str.AppendLine("----------------------------------------");
             str.AppendLine("Letter" + "\t" + "Value");
-            str.AppendLine("--------------------------");
+            str.AppendLine("----------------------------------------");
             foreach (char letter in LetterValues.Keys)
             {
                 str.AppendLine(letter.ToString() + "\t" + LetterValues[letter].ToString());
             }
-            str.AppendLine("--------------------------");
+            str.AppendLine("----------------------------------------");
 
             return str.ToString();
         }
@@ -460,6 +391,8 @@ namespace Model
             "\t" + (AddToVerseVDistance ? "∆V" : "") +
             "\t" + (AddToVerseCDistance ? "∆C" : "") +
             "\t" + (AddToChapterCNumber ? "C" : "") +
+            "\t" + (AddDistancesToPrevious) +
+            "\t" + (AddDistancesToNext) +
             "\t" + (AddDistancesWithinChapters)
             );
         }

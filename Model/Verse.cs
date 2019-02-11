@@ -35,6 +35,7 @@ namespace Model
         }
 
         public Distance DistanceToPrevious = new Distance();
+        public Distance DistanceToNext = new Distance();
 
         public string Address
         {

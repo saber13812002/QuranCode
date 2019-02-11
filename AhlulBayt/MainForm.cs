@@ -288,6 +288,8 @@ public partial class MainForm : Form
             m_client.NumerologySystem.AddToVerseCDistance = false;
             m_client.NumerologySystem.AddToChapterCNumber = false;
 
+            m_client.NumerologySystem.AddDistancesToPrevious = m_add_distances_to_previous_to_letter_value;
+            m_client.NumerologySystem.AddDistancesToNext = m_add_distances_to_next_to_letter_value;
             m_client.NumerologySystem.AddDistancesWithinChapters = true;
             if (m_client.Book != null)
             {
@@ -298,6 +300,7 @@ public partial class MainForm : Form
     private bool m_add_verse_and_word_values_to_letter_value = false;
     private bool m_add_positions_to_letter_value = false;
     private bool m_add_distances_to_previous_to_letter_value = false;
+    private bool m_add_distances_to_next_to_letter_value = false;
     private void AddVerseAndWordValuesCheckBox_CheckedChanged(object sender, EventArgs e)
     {
         m_add_verse_and_word_values_to_letter_value = AddVerseAndWordValuesCheckBox.Checked;
@@ -310,6 +313,11 @@ public partial class MainForm : Form
     private void AddDistancesToPreviousCheckBox_CheckedChanged(object sender, EventArgs e)
     {
         m_add_distances_to_previous_to_letter_value = AddDistancesToPreviousCheckBox.Checked;
+        UpdateNumerologySystem();
+    }
+    private void AddDistancesToNextCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+        m_add_distances_to_next_to_letter_value = AddDistancesToNextCheckBox.Checked;
         UpdateNumerologySystem();
     }
     private void YaHuseinCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -580,6 +588,7 @@ public partial class MainForm : Form
         AddVerseAndWordValuesCheckBox.Enabled = false;
         AddPositionsCheckBox.Enabled = false;
         AddDistancesToPreviousCheckBox.Enabled = false;
+        AddDistancesToNextCheckBox.Enabled = false;
         ValueCombinationDirectionLabel.Enabled = false;
         NumberTypeLabel.Enabled = false;
         AutoGenerateWordsButton.Enabled = false;
@@ -590,6 +599,7 @@ public partial class MainForm : Form
         AddVerseAndWordValuesCheckBox.Refresh();
         AddPositionsCheckBox.Refresh();
         AddDistancesToPreviousCheckBox.Refresh();
+        AddDistancesToNextCheckBox.Refresh();
         ValueCombinationDirectionLabel.Refresh();
         NumberTypeLabel.Refresh();
         AutoGenerateWordsButton.Refresh();
@@ -676,6 +686,7 @@ public partial class MainForm : Form
             AddVerseAndWordValuesCheckBox.Enabled = true;
             AddPositionsCheckBox.Enabled = true;
             AddDistancesToPreviousCheckBox.Enabled = true;
+            AddDistancesToNextCheckBox.Enabled = true;
             ValueCombinationDirectionLabel.Enabled = true;
             NumberTypeLabel.Enabled = true;
             AutoGenerateWordsButton.Enabled = true;
@@ -692,6 +703,7 @@ public partial class MainForm : Form
         AddVerseAndWordValuesCheckBox.Enabled = false;
         AddPositionsCheckBox.Enabled = false;
         AddDistancesToPreviousCheckBox.Enabled = false;
+        AddDistancesToNextCheckBox.Enabled = false;
         ValueCombinationDirectionLabel.Enabled = false;
         NumberTypeLabel.Enabled = false;
         AutoGenerateWordsButton.Enabled = false;
@@ -702,6 +714,7 @@ public partial class MainForm : Form
         AddVerseAndWordValuesCheckBox.Refresh();
         AddPositionsCheckBox.Refresh();
         AddDistancesToPreviousCheckBox.Refresh();
+        AddDistancesToNextCheckBox.Refresh();
         ValueCombinationDirectionLabel.Refresh();
         NumberTypeLabel.Refresh();
         AutoGenerateWordsButton.Refresh();
@@ -788,6 +801,7 @@ public partial class MainForm : Form
             AddVerseAndWordValuesCheckBox.Enabled = true;
             AddPositionsCheckBox.Enabled = true;
             AddDistancesToPreviousCheckBox.Enabled = true;
+            AddDistancesToNextCheckBox.Enabled = true;
             ValueCombinationDirectionLabel.Enabled = true;
             NumberTypeLabel.Enabled = true;
             AutoGenerateWordsButton.Enabled = true;
@@ -819,26 +833,30 @@ public partial class MainForm : Form
                             for (int l = 0; l < 2; l++)
                             {
                                 AddDistancesToPreviousCheckBox.Checked = (l == 1);
-                                for (int n = 0; n < 5; n++)
+                                for (int m = 0; m < 2; m++)
                                 {
-                                    ValueInterlaceLabel_Click(null, null);
-                                    for (int o = 0; o < 2; o++)
+                                    AddDistancesToNextCheckBox.Checked = (m == 1);
+                                    for (int n = 0; n < 5; n++)
                                     {
-                                        ValueCombinationDirectionLabel_Click(null, null);
-                                        for (int p = 0; p < 6; p++)
+                                        ValueInterlaceLabel_Click(null, null);
+                                        for (int o = 0; o < 2; o++)
                                         {
-                                            GotoNextNumberType();
-                                            // skip Natural type
-                                            if (m_number_type == NumberType.Natural) // skip natural type
+                                            ValueCombinationDirectionLabel_Click(null, null);
+                                            for (int p = 0; p < 6; p++)
                                             {
                                                 GotoNextNumberType();
-                                            }
+                                                // skip Natural type
+                                                if (m_number_type == NumberType.Natural) // skip natural type
+                                                {
+                                                    GotoNextNumberType();
+                                                }
 
-                                            GenerateLine();
+                                                GenerateLine();
 
-                                        } // for NumberType
-                                    } // for Direction
-                                } // for Combination
+                                            } // for NumberType
+                                        } // for Direction
+                                    } // for Combination
+                                } // for AddDistancesToNext
                             } // for AddDistancesToPrevious
                         } // for AddPositions
                     } // for AddVerseAndWordValues
@@ -930,7 +948,8 @@ public partial class MainForm : Form
                         m_numerology_system_name + "_"
                         + (m_add_verse_and_word_values_to_letter_value ? "vw" : "__")
                         + (m_add_positions_to_letter_value ? "_n" : "__")
-                        + (m_add_distances_to_previous_to_letter_value ? "_d" : "_-_")
+                        + (m_add_distances_to_previous_to_letter_value ? "_-d" : "_-_")
+                        + (m_add_distances_to_next_to_letter_value ? "_d-" : "__-")
                         + ("_" + m_combination_method.ToString().ToLower())
                         + ((m_value_combination_direction == Direction.RightToLeft) ? "_r" : "_l")
                         + ((m_number_type != NumberType.None) ? "_" : "")
