@@ -146,6 +146,7 @@ namespace Model
         public bool AddToVerseCDistance;
         public bool AddToChapterCNumber;
 
+        public bool AddPositions;
         public bool AddDistancesToPrevious;
         public bool AddDistancesToNext;
         public bool AddDistancesWithinChapters = true;
@@ -351,6 +352,7 @@ namespace Model
                 str.AppendLine();
             }
 
+            str.AppendLine("AddPositions = " + AddPositions);
             str.AppendLine("AddDistancesToPrevious = " + AddDistancesToPrevious);
             str.AppendLine("AddDistancesToNext     = " + AddDistancesToNext);
             str.AppendLine("AddDistancesWithinChapters = " + AddDistancesWithinChapters);
@@ -391,6 +393,7 @@ namespace Model
             "\t" + (AddToVerseVDistance ? "∆V" : "") +
             "\t" + (AddToVerseCDistance ? "∆C" : "") +
             "\t" + (AddToChapterCNumber ? "C" : "") +
+            "\t" + (AddPositions) +
             "\t" + (AddDistancesToPrevious) +
             "\t" + (AddDistancesToNext) +
             "\t" + (AddDistancesWithinChapters)

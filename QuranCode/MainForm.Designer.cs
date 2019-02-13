@@ -5257,7 +5257,7 @@ partial class MainForm
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
             this.TabControl.ShowToolTips = true;
-            this.TabControl.Size = new System.Drawing.Size(816, 195);
+            this.TabControl.Size = new System.Drawing.Size(816, 194);
             this.TabControl.TabIndex = 102;
             this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             this.TabControl.Click += new System.EventHandler(this.TabControl_Click);
@@ -10287,9 +10287,8 @@ partial class MainForm
             this.AddPositionsCheckBox.Size = new System.Drawing.Size(172, 16);
             this.AddPositionsCheckBox.TabIndex = 140;
             this.AddPositionsCheckBox.Text = "Pos";
-            this.AddPositionsCheckBox.ThreeState = true;
             this.AddPositionsCheckBox.UseVisualStyleBackColor = false;
-            this.AddPositionsCheckBox.CheckStateChanged += new System.EventHandler(this.AddPositionsCheckBox_CheckStateChanged);
+            this.AddPositionsCheckBox.CheckedChanged += new System.EventHandler(this.AddPositionsCheckBox_CheckedChanged);
             // 
             // AddDistancesWithinChaptersCheckBox
             // 

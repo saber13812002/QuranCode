@@ -2239,22 +2239,22 @@ public class Server : IPublisher
             {
                 if (s_numerology_system.AddToLetterLNumber)
                 {
-                    result += letter.NumberInWord;
+                    if (s_numerology_system.AddPositions) result += letter.NumberInWord;
                 }
 
                 if (s_numerology_system.AddToLetterWNumber)
                 {
-                    result += letter.Word.NumberInVerse;
+                    if (s_numerology_system.AddPositions) result += letter.Word.NumberInVerse;
                 }
 
                 if (s_numerology_system.AddToLetterVNumber)
                 {
-                    result += letter.Word.Verse.NumberInChapter;
+                    if (s_numerology_system.AddPositions) result += letter.Word.Verse.NumberInChapter;
                 }
 
                 if (s_numerology_system.AddToLetterCNumber)
                 {
-                    result += letter.Word.Verse.Chapter.SortedNumber;
+                    if (s_numerology_system.AddPositions) result += letter.Word.Verse.Chapter.SortedNumber;
                 }
 
                 if (s_numerology_system.AddToLetterLDistance)
@@ -2293,17 +2293,17 @@ public class Server : IPublisher
             {
                 if (s_numerology_system.AddToWordWNumber)
                 {
-                    result += word.NumberInVerse;
+                    if (s_numerology_system.AddPositions) result += word.NumberInVerse;
                 }
 
                 if (s_numerology_system.AddToWordVNumber)
                 {
-                    result += word.Verse.NumberInChapter;
+                    if (s_numerology_system.AddPositions) result += word.Verse.NumberInChapter;
                 }
 
                 if (s_numerology_system.AddToWordCNumber)
                 {
-                    result += word.Verse.Chapter.SortedNumber;
+                    if (s_numerology_system.AddPositions) result += word.Verse.Chapter.SortedNumber;
                 }
 
                 if (s_numerology_system.AddToWordWDistance)
@@ -2336,12 +2336,12 @@ public class Server : IPublisher
             {
                 if (s_numerology_system.AddToVerseVNumber)
                 {
-                    result += verse.NumberInChapter;
+                    if (s_numerology_system.AddPositions) result += verse.NumberInChapter;
                 }
 
                 if (s_numerology_system.AddToVerseCNumber)
                 {
-                    result += verse.Chapter.SortedNumber;
+                    if (s_numerology_system.AddPositions) result += verse.Chapter.SortedNumber;
                 }
 
                 if (s_numerology_system.AddToVerseVDistance)
@@ -2368,7 +2368,7 @@ public class Server : IPublisher
             {
                 if (s_numerology_system.AddToChapterCNumber)
                 {
-                    result += chapter.SortedNumber;
+                    if (s_numerology_system.AddPositions) result += chapter.SortedNumber;
                 }
             }
         }
