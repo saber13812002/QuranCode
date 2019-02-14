@@ -38956,7 +38956,7 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (m_client.NumerologySystem != null)
                 {
-                    bool is_checked = (sender as CheckBox).Enabled && (sender as CheckBox).Checked;
+                    bool is_checked = (sender as CheckBox).Checked;
 
                     // Letter value modifiers
                     if (sender == AddToLetterLNumberCheckBox)
