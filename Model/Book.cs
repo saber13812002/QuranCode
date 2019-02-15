@@ -15,7 +15,7 @@ namespace Model
             set { text_mode = value; }
         }
 
-        private bool with_diacritics = true;
+        private bool with_diacritics = false;
         public bool WithDiacritics
         {
             get { return with_diacritics; }
@@ -1091,14 +1091,13 @@ namespace Model
             Dictionary<string, int> word_previous_chapter_numbers = new Dictionary<string, int>();
 
             // foreach letter: calculate distance back to previous occurrence
-            Dictionary<char, int> letter_previous_letter_numbers = new Dictionary<char, int>();
-            Dictionary<char, int> letter_previous_word_numbers = new Dictionary<char, int>();
-            Dictionary<char, int> letter_previous_verse_numbers = new Dictionary<char, int>();
-            Dictionary<char, int> letter_previous_chapter_numbers = new Dictionary<char, int>();
+            Dictionary<string, int> letter_previous_letter_numbers = new Dictionary<string, int>();
+            Dictionary<string, int> letter_previous_word_numbers = new Dictionary<string, int>();
+            Dictionary<string, int> letter_previous_verse_numbers = new Dictionary<string, int>();
+            Dictionary<string, int> letter_previous_chapter_numbers = new Dictionary<string, int>();
 
-            if (this.chapters != null)
+            if (chapters != null)
             {
-                List<Chapter> chapters = this.chapters;
                 for (int c = 0; c < chapters.Count; c++)
                 {
                     if (distances_within_chapters)
@@ -1120,9 +1119,9 @@ namespace Model
                         for (int v = 0; v < verses.Count; v++)
                         {
                             string verse_text = verses[v].Text;
-                            if ((this.text_mode == "Original") && (!with_diacritics))
+                            if (!with_diacritics)
                             {
-                                verse_text = verse_text.Simplify29();
+                                verse_text = verse_text.SimplifyTo(this.text_mode);
                             }
 
                             if (!verse_previous_verse_numbers.ContainsKey(verse_text))
@@ -1153,9 +1152,9 @@ namespace Model
                                 for (int w = 0; w < words.Count; w++)
                                 {
                                     string word_text = words[w].Text;
-                                    if ((this.text_mode == "Original") && (!with_diacritics))
+                                    if (!with_diacritics)
                                     {
-                                        verse_text = verse_text.Simplify29();
+                                        word_text = word_text.SimplifyTo(this.text_mode);
                                     }
 
                                     if (!word_previous_verse_numbers.ContainsKey(word_text))
@@ -1187,30 +1186,36 @@ namespace Model
                                         List<Letter> letters = words[w].Letters;
                                         for (int l = 0; l < letters.Count; l++)
                                         {
-                                            if (!letter_previous_verse_numbers.ContainsKey(letters[l].Character))
+                                            string letter_text = letters[l].Character.ToString();
+                                            if (!with_diacritics)
+                                            {
+                                                letter_text = letter_text.SimplifyTo(this.text_mode);
+                                            }
+
+                                            if (!letter_previous_verse_numbers.ContainsKey(letter_text))
                                             {
                                                 letters[l].DistanceToPrevious.dL = 0;
                                                 letters[l].DistanceToPrevious.dW = 0;
                                                 letters[l].DistanceToPrevious.dV = 0;
                                                 letters[l].DistanceToPrevious.dC = 0;
 
-                                                letter_previous_letter_numbers.Add(letters[l].Character, letters[l].Number);
-                                                letter_previous_word_numbers.Add(letters[l].Character, words[w].Number);
-                                                letter_previous_verse_numbers.Add(letters[l].Character, verses[v].Number);
-                                                letter_previous_chapter_numbers.Add(letters[l].Character, chapters[c].SortedNumber);
+                                                letter_previous_letter_numbers.Add(letter_text, letters[l].Number);
+                                                letter_previous_word_numbers.Add(letter_text, words[w].Number);
+                                                letter_previous_verse_numbers.Add(letter_text, verses[v].Number);
+                                                letter_previous_chapter_numbers.Add(letter_text, chapters[c].SortedNumber);
                                             }
                                             else
                                             {
-                                                letters[l].DistanceToPrevious.dL = letters[l].Number - letter_previous_letter_numbers[letters[l].Character];
-                                                letters[l].DistanceToPrevious.dW = words[w].Number - letter_previous_word_numbers[letters[l].Character];
-                                                letters[l].DistanceToPrevious.dV = verses[v].Number - letter_previous_verse_numbers[letters[l].Character];
-                                                letters[l].DistanceToPrevious.dC = chapters[c].SortedNumber - letter_previous_chapter_numbers[letters[l].Character];
+                                                letters[l].DistanceToPrevious.dL = letters[l].Number - letter_previous_letter_numbers[letter_text];
+                                                letters[l].DistanceToPrevious.dW = words[w].Number - letter_previous_word_numbers[letter_text];
+                                                letters[l].DistanceToPrevious.dV = verses[v].Number - letter_previous_verse_numbers[letter_text];
+                                                letters[l].DistanceToPrevious.dC = chapters[c].SortedNumber - letter_previous_chapter_numbers[letter_text];
 
                                                 // save latest chapter, verse, word and letter numbers for next iteration
-                                                letter_previous_letter_numbers[letters[l].Character] = letters[l].Number;
-                                                letter_previous_word_numbers[letters[l].Character] = words[w].Number;
-                                                letter_previous_verse_numbers[letters[l].Character] = verses[v].Number;
-                                                letter_previous_chapter_numbers[letters[l].Character] = chapters[c].SortedNumber;
+                                                letter_previous_letter_numbers[letter_text] = letters[l].Number;
+                                                letter_previous_word_numbers[letter_text] = words[w].Number;
+                                                letter_previous_verse_numbers[letter_text] = verses[v].Number;
+                                                letter_previous_chapter_numbers[letter_text] = chapters[c].SortedNumber;
                                             }
                                         }
                                     }
@@ -1235,14 +1240,13 @@ namespace Model
             Dictionary<string, int> word_next_chapter_numbers = new Dictionary<string, int>();
 
             // foreach letter: calculate distance back to next occurrence
-            Dictionary<char, int> letter_next_letter_numbers = new Dictionary<char, int>();
-            Dictionary<char, int> letter_next_word_numbers = new Dictionary<char, int>();
-            Dictionary<char, int> letter_next_verse_numbers = new Dictionary<char, int>();
-            Dictionary<char, int> letter_next_chapter_numbers = new Dictionary<char, int>();
+            Dictionary<string, int> letter_next_letter_numbers = new Dictionary<string, int>();
+            Dictionary<string, int> letter_next_word_numbers = new Dictionary<string, int>();
+            Dictionary<string, int> letter_next_verse_numbers = new Dictionary<string, int>();
+            Dictionary<string, int> letter_next_chapter_numbers = new Dictionary<string, int>();
 
-            if (this.chapters != null)
+            if (chapters != null)
             {
-                List<Chapter> chapters = this.chapters;
                 for (int c = chapters.Count - 1; c >= 0; c--)
                 {
                     if (distances_within_chapters)
@@ -1264,9 +1268,9 @@ namespace Model
                         for (int v = verses.Count - 1; v >= 0; v--)
                         {
                             string verse_text = verses[v].Text;
-                            if ((this.text_mode == "Original") && (!with_diacritics))
+                            if (!with_diacritics)
                             {
-                                verse_text = verse_text.Simplify29();
+                                verse_text = verse_text.SimplifyTo(this.text_mode);
                             }
 
                             if (!verse_next_verse_numbers.ContainsKey(verse_text))
@@ -1297,9 +1301,9 @@ namespace Model
                                 for (int w = words.Count - 1; w >= 0; w--)
                                 {
                                     string word_text = words[w].Text;
-                                    if ((this.text_mode == "Original") && (!with_diacritics))
+                                    if (!with_diacritics)
                                     {
-                                        verse_text = verse_text.Simplify29();
+                                        word_text = word_text.SimplifyTo(this.text_mode);
                                     }
 
                                     if (!word_next_verse_numbers.ContainsKey(word_text))
@@ -1331,30 +1335,36 @@ namespace Model
                                         List<Letter> letters = words[w].Letters;
                                         for (int l = letters.Count - 1; l >= 0; l--)
                                         {
-                                            if (!letter_next_verse_numbers.ContainsKey(letters[l].Character))
+                                            string letter_text = letters[l].Character.ToString();
+                                            if (!with_diacritics)
+                                            {
+                                                letter_text = letter_text.SimplifyTo(this.text_mode);
+                                            }
+
+                                            if (!letter_next_verse_numbers.ContainsKey(letter_text))
                                             {
                                                 letters[l].DistanceToNext.dL = 0;
                                                 letters[l].DistanceToNext.dW = 0;
                                                 letters[l].DistanceToNext.dV = 0;
                                                 letters[l].DistanceToNext.dC = 0;
 
-                                                letter_next_letter_numbers.Add(letters[l].Character, letters[l].Number);
-                                                letter_next_word_numbers.Add(letters[l].Character, words[w].Number);
-                                                letter_next_verse_numbers.Add(letters[l].Character, verses[v].Number);
-                                                letter_next_chapter_numbers.Add(letters[l].Character, chapters[c].SortedNumber);
+                                                letter_next_letter_numbers.Add(letter_text, letters[l].Number);
+                                                letter_next_word_numbers.Add(letter_text, words[w].Number);
+                                                letter_next_verse_numbers.Add(letter_text, verses[v].Number);
+                                                letter_next_chapter_numbers.Add(letter_text, chapters[c].SortedNumber);
                                             }
                                             else
                                             {
-                                                letters[l].DistanceToNext.dL = -1 * (letters[l].Number - letter_next_letter_numbers[letters[l].Character]);
-                                                letters[l].DistanceToNext.dW = -1 * (words[w].Number - letter_next_word_numbers[letters[l].Character]);
-                                                letters[l].DistanceToNext.dV = -1 * (verses[v].Number - letter_next_verse_numbers[letters[l].Character]);
-                                                letters[l].DistanceToNext.dC = -1 * (chapters[c].SortedNumber - letter_next_chapter_numbers[letters[l].Character]);
+                                                letters[l].DistanceToNext.dL = -1 * (letters[l].Number - letter_next_letter_numbers[letter_text]);
+                                                letters[l].DistanceToNext.dW = -1 * (words[w].Number - letter_next_word_numbers[letter_text]);
+                                                letters[l].DistanceToNext.dV = -1 * (verses[v].Number - letter_next_verse_numbers[letter_text]);
+                                                letters[l].DistanceToNext.dC = -1 * (chapters[c].SortedNumber - letter_next_chapter_numbers[letter_text]);
 
                                                 // save latest chapter, verse, word and letter numbers for next iteration
-                                                letter_next_letter_numbers[letters[l].Character] = letters[l].Number;
-                                                letter_next_word_numbers[letters[l].Character] = words[w].Number;
-                                                letter_next_verse_numbers[letters[l].Character] = verses[v].Number;
-                                                letter_next_chapter_numbers[letters[l].Character] = chapters[c].SortedNumber;
+                                                letter_next_letter_numbers[letter_text] = letters[l].Number;
+                                                letter_next_word_numbers[letter_text] = words[w].Number;
+                                                letter_next_verse_numbers[letter_text] = verses[v].Number;
+                                                letter_next_chapter_numbers[letter_text] = chapters[c].SortedNumber;
                                             }
                                         }
                                     }
