@@ -24,7 +24,7 @@ using System.IO;
 using System.Threading;
 using Model;
 
-public static partial class Research
+public static class Research
 {
     private static List<Verse> GetSourceVerses(Client client, bool in_search_result)
     {

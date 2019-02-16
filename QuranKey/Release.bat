@@ -14,4 +14,9 @@
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranKey.Source.zip Common\*.*
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranKey.Source.zip QuranKey\*.*
 
-"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranKey.zip Build\Release\*.*
+CD Build\Release
+"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranKey.zip *.*
+MOVE QuranKey.zip ..\..\QuranKey.zip
+CD ..\..
+
+CALL Version.bat

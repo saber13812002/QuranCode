@@ -148,7 +148,7 @@ partial class SplashForm
             this.VersionLabel.Size = new System.Drawing.Size(239, 17);
             this.VersionLabel.TabIndex = 16;
             this.VersionLabel.Tag = "http://heliwave.com";
-            this.VersionLabel.Text = "©2009-2019  Ali Adams ";
+            this.VersionLabel.Text = "©2009-2019 Ali Adams";
             this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.ToolTip.SetToolTip(this.VersionLabel, "©2009-2019 Ali Adams - علي عبد الرزاق عبد الكريم القره غولي");
             // 

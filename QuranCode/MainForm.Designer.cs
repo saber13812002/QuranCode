@@ -266,6 +266,8 @@ partial class MainForm
             this.ChapterComboBox = new System.Windows.Forms.ComboBox();
             this.ChapterGroupBox = new System.Windows.Forms.GroupBox();
             this.WordsListBox = new System.Windows.Forms.ListBox();
+            this.WordsListBoxContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.FindSelectedWordsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.PinChapter1CheckBox = new System.Windows.Forms.CheckBox();
             this.ChaptersListBox = new ListBoxEx();
             this.InspectChaptersLabel = new System.Windows.Forms.Label();
@@ -711,6 +713,7 @@ partial class MainForm
             ((System.ComponentModel.ISupportInitialize)(this.ChapterWordNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ChapterVerseNumericUpDown)).BeginInit();
             this.ChapterGroupBox.SuspendLayout();
+            this.WordsListBoxContextMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ClientSplitContainer)).BeginInit();
             this.ClientSplitContainer.Panel1.SuspendLayout();
             this.ClientSplitContainer.Panel2.SuspendLayout();
@@ -4805,6 +4808,7 @@ partial class MainForm
             // 
             this.WordsListBox.BackColor = System.Drawing.Color.LightSteelBlue;
             this.WordsListBox.ColumnWidth = 63;
+            this.WordsListBox.ContextMenuStrip = this.WordsListBoxContextMenuStrip;
             this.WordsListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.WordsListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.WordsListBox.FormattingEnabled = true;
@@ -4821,6 +4825,20 @@ partial class MainForm
             this.WordsListBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.WordsListBox_KeyDown);
             this.WordsListBox.MouseDown += new System.Windows.Forms.MouseEventHandler(this.WordsListBox_MouseDown);
             this.WordsListBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.WordsListBox_MouseMove);
+            // 
+            // WordsListBoxContextMenuStrip
+            // 
+            this.WordsListBoxContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FindSelectedWordsMenuItem});
+            this.WordsListBoxContextMenuStrip.Name = "WordsListBoxContextMenuStrip";
+            this.WordsListBoxContextMenuStrip.Size = new System.Drawing.Size(98, 26);
+            // 
+            // FindSelectedWordsMenuItem
+            // 
+            this.FindSelectedWordsMenuItem.Name = "FindSelectedWordsMenuItem";
+            this.FindSelectedWordsMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.FindSelectedWordsMenuItem.Text = "Find";
+            this.FindSelectedWordsMenuItem.Click += new System.EventHandler(this.FindSelectedWordsMenuItem_Click);
             // 
             // PinChapter1CheckBox
             // 
@@ -8525,7 +8543,7 @@ partial class MainForm
             this.UserTextValueButton.ForeColor = System.Drawing.Color.RoyalBlue;
             this.UserTextValueButton.Location = new System.Drawing.Point(728, 146);
             this.UserTextValueButton.Name = "UserTextValueButton";
-            this.UserTextValueButton.Size = new System.Drawing.Size(58, 20);
+            this.UserTextValueButton.Size = new System.Drawing.Size(58, 21);
             this.UserTextValueButton.TabIndex = 4;
             this.UserTextValueButton.Text = "Find";
             this.UserTextValueButton.UseVisualStyleBackColor = true;
@@ -8924,7 +8942,7 @@ partial class MainForm
             this.FindByFrequencyTotalLabel.BackColor = System.Drawing.Color.Transparent;
             this.FindByFrequencyTotalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByFrequencyTotalLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.FindByFrequencyTotalLabel.Location = new System.Drawing.Point(0, 195);
+            this.FindByFrequencyTotalLabel.Location = new System.Drawing.Point(0, 194);
             this.FindByFrequencyTotalLabel.Name = "FindByFrequencyTotalLabel";
             this.FindByFrequencyTotalLabel.Size = new System.Drawing.Size(29, 18);
             this.FindByFrequencyTotalLabel.TabIndex = 248;
@@ -9050,7 +9068,7 @@ partial class MainForm
             this.LetterFrequencyCountLabel.BackColor = System.Drawing.Color.Transparent;
             this.LetterFrequencyCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LetterFrequencyCountLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.LetterFrequencyCountLabel.Location = new System.Drawing.Point(29, 192);
+            this.LetterFrequencyCountLabel.Location = new System.Drawing.Point(28, 192);
             this.LetterFrequencyCountLabel.Name = "LetterFrequencyCountLabel";
             this.LetterFrequencyCountLabel.Size = new System.Drawing.Size(22, 18);
             this.LetterFrequencyCountLabel.TabIndex = 14;
@@ -10934,6 +10952,7 @@ partial class MainForm
             ((System.ComponentModel.ISupportInitialize)(this.ChapterVerseNumericUpDown)).EndInit();
             this.ChapterGroupBox.ResumeLayout(false);
             this.ChapterGroupBox.PerformLayout();
+            this.WordsListBoxContextMenuStrip.ResumeLayout(false);
             this.ClientSplitContainer.Panel1.ResumeLayout(false);
             this.ClientSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ClientSplitContainer)).EndInit();
@@ -11635,4 +11654,6 @@ partial class MainForm
     private System.Windows.Forms.Label ChineseLanguageLabel;
     private System.Windows.Forms.Label RussianLanguageLabel;
     private System.Windows.Forms.TextBox Nth4nPlus1NumberTextBox;
+    private System.Windows.Forms.ContextMenuStrip WordsListBoxContextMenuStrip;
+    private System.Windows.Forms.ToolStripMenuItem FindSelectedWordsMenuItem;
 }
