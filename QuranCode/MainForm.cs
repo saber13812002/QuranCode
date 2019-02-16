@@ -15496,7 +15496,7 @@ public partial class MainForm : Form, ISubscriber
 
             MenuItem EditGenerateSentencesMenuItem = new MenuItem(L[l]["Generate Sentences"] + "\t\tCtrl+G");
             EditGenerateSentencesMenuItem.Click += new EventHandler(MenuItem_GenerateSentences);
-            ContextMenu.MenuItems.Add(EditGenerateSentencesMenuItem);
+            if (Globals.EDITION == Edition.Ultimate) ContextMenu.MenuItems.Add(EditGenerateSentencesMenuItem);
 
             MenuItem MenuItemSeparator1 = new MenuItem("-");
             ContextMenu.MenuItems.Add(MenuItemSeparator1);
@@ -16798,47 +16798,10 @@ public partial class MainForm : Form, ISubscriber
     }
     private void GenerateSentencesLabel_Click(object sender, EventArgs e)
     {
-        GenerateAnagrams();
-    }
-    private void GenerateAnagrams()
-    {
         this.Cursor = Cursors.WaitCursor;
         try
         {
-            if (!String.IsNullOrEmpty(m_current_text))
-            {
-                string filename = Globals.DATA_FOLDER + "/" + "dictionary.txt";
-                if (File.Exists(filename))
-                {
-                    string text = m_current_text.SimplifyTo(m_client.NumerologySystem.TextMode);
-                    if (!DuplicateLettersCheckBox.Checked)
-                    {
-                        text = text.RemoveDuplicateLetters();
-                    }
-                    List<string> sentences = Anagrams.GenerateAnagrams(filename, text);
-                    sentences.Sort();
-
-                    if (Directory.Exists(Globals.STATISTICS_FOLDER))
-                    {
-                        filename = Globals.STATISTICS_FOLDER + "/" + text + ".txt";
-                        if (sentences != null)
-                        {
-                            using (StreamWriter writer = new StreamWriter(filename, false, Encoding.Unicode))
-                            {
-                                writer.WriteLine("{0} sentences from {1}", sentences.Count, m_current_text);
-                                writer.WriteLine("---------------------");
-                                foreach (string sentence in sentences)
-                                {
-                                    writer.WriteLine(sentence);
-                                }
-                            }
-
-                            // show file content after save
-                            FileHelper.DisplayFile(filename);
-                        }
-                    }
-                }
-            }
+            GenerateAnagrams();
         }
         catch
         {
@@ -16847,6 +16810,43 @@ public partial class MainForm : Form, ISubscriber
         finally
         {
             this.Cursor = Cursors.Default;
+        }
+    }
+    private void GenerateAnagrams()
+    {
+        if (!String.IsNullOrEmpty(m_current_text))
+        {
+            string filename = Globals.DATA_FOLDER + "/" + "dictionary.txt";
+            if (File.Exists(filename))
+            {
+                string text = m_current_text.SimplifyTo(m_client.NumerologySystem.TextMode);
+                if (!DuplicateLettersCheckBox.Checked)
+                {
+                    text = text.RemoveDuplicateLetters();
+                }
+                List<string> sentences = Anagrams.GenerateAnagrams(filename, text);
+                sentences.Sort();
+
+                if (Directory.Exists(Globals.STATISTICS_FOLDER))
+                {
+                    filename = Globals.STATISTICS_FOLDER + "/" + text + ".txt";
+                    if (sentences != null)
+                    {
+                        using (StreamWriter writer = new StreamWriter(filename, false, Encoding.Unicode))
+                        {
+                            writer.WriteLine("{0} sentences from {1}", sentences.Count, m_current_text);
+                            writer.WriteLine("---------------------");
+                            foreach (string sentence in sentences)
+                            {
+                                writer.WriteLine(sentence);
+                            }
+                        }
+
+                        // show file content after save
+                        FileHelper.DisplayFile(filename);
+                    }
+                }
+            }
         }
     }
     // wordwrap mode
@@ -20000,63 +20000,71 @@ public partial class MainForm : Form, ISubscriber
     }
     private void ChapterSortLabel_Click(object sender, EventArgs e)
     {
-        if (m_client != null)
+        this.Cursor = Cursors.WaitCursor;
+        try
         {
-            if (m_client.Book != null)
+            if (m_client != null)
             {
-                if (m_client.Selection != null)
+                if (m_client.Book != null)
                 {
-                    // backup selection verses
-                    List<Verse> backup_verses = new List<Verse>();
-                    if (m_client.Selection.Scope == SelectionScope.Verse)
+                    if (m_client.Selection != null)
                     {
-                        if (m_client.Selection.Indexes != null)
+                        // backup selection verses
+                        List<Verse> backup_verses = new List<Verse>();
+                        if (m_client.Selection.Scope == SelectionScope.Verse)
                         {
-                            foreach (int index in m_client.Selection.Indexes)
+                            if (m_client.Selection.Indexes != null)
                             {
-                                backup_verses.Add(m_client.Book.Verses[index]);
+                                foreach (int index in m_client.Selection.Indexes)
+                                {
+                                    backup_verses.Add(m_client.Book.Verses[index]);
+                                }
                             }
                         }
-                    }
 
-                    if (Chapter.SortOrder == ChapterSortOrder.Ascending)
-                    {
-                        m_chapter_sort_order = ChapterSortOrder.Descending;
-                        if (File.Exists(Globals.IMAGES_FOLDER + "/" + "arrow_down.png"))
+                        if (Chapter.SortOrder == ChapterSortOrder.Ascending)
                         {
-                            ChapterSortLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "arrow_down.png");
-                            ToolTip.SetToolTip(ChapterSortLabel, L[l]["Descending"]);
-                        }
-                    }
-                    else
-                    {
-                        m_chapter_sort_order = ChapterSortOrder.Ascending;
-                        if (File.Exists(Globals.IMAGES_FOLDER + "/" + "arrow_up.png"))
-                        {
-                            ChapterSortLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "arrow_up.png");
-                            ToolTip.SetToolTip(ChapterSortLabel, L[l]["Ascending"]);
-                        }
-                    }
-                    m_client.Book.SortChapters(m_chapter_sort_method, m_chapter_sort_order, m_pin_chapter1);
-
-                    // restore selection verses
-                    if (m_client.Selection.Scope == SelectionScope.Verse)
-                    {
-                        if (m_client.Selection.Indexes != null)
-                        {
-                            List<int> verse_indexes = new List<int>();
-                            foreach (Verse verse in backup_verses)
+                            m_chapter_sort_order = ChapterSortOrder.Descending;
+                            if (File.Exists(Globals.IMAGES_FOLDER + "/" + "arrow_down.png"))
                             {
-                                verse_indexes.Add(verse.Number - 1);
+                                ChapterSortLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "arrow_down.png");
+                                ToolTip.SetToolTip(ChapterSortLabel, L[l]["Descending"]);
                             }
-                            m_client.Selection = new Selection(m_client.Book, SelectionScope.Verse, verse_indexes);
                         }
-                    }
+                        else
+                        {
+                            m_chapter_sort_order = ChapterSortOrder.Ascending;
+                            if (File.Exists(Globals.IMAGES_FOLDER + "/" + "arrow_up.png"))
+                            {
+                                ChapterSortLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "arrow_up.png");
+                                ToolTip.SetToolTip(ChapterSortLabel, L[l]["Ascending"]);
+                            }
+                        }
+                        m_client.Book.SortChapters(m_chapter_sort_method, m_chapter_sort_order, m_pin_chapter1);
 
-                    // display chapters in new order
-                    DisplaySortedChapters();
+                        // restore selection verses
+                        if (m_client.Selection.Scope == SelectionScope.Verse)
+                        {
+                            if (m_client.Selection.Indexes != null)
+                            {
+                                List<int> verse_indexes = new List<int>();
+                                foreach (Verse verse in backup_verses)
+                                {
+                                    verse_indexes.Add(verse.Number - 1);
+                                }
+                                m_client.Selection = new Selection(m_client.Book, SelectionScope.Verse, verse_indexes);
+                            }
+                        }
+
+                        // display chapters in new order
+                        DisplaySortedChapters();
+                    }
                 }
             }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
         }
     }
     private void UpdateChapterSortControls()
@@ -32399,21 +32407,129 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayWordVerses(string item_text)
     {
-        if (!String.IsNullOrEmpty(item_text))
+        if (Globals.EDITION == Edition.Ultimate)
+        {
+            if (!String.IsNullOrEmpty(item_text))
+            {
+                if (m_client != null)
+                {
+                    List<Verse> backup_found_verses = null;
+                    List<Phrase> backup_found_phrases = null;
+                    if (m_client.FoundVerses != null)
+                    {
+                        backup_found_verses = new List<Verse>(m_client.FoundVerses);
+                    }
+                    if (m_client.FoundPhrases != null)
+                    {
+                        backup_found_phrases = new List<Phrase>(m_client.FoundPhrases);
+                    }
+
+                    // get startup text from FindTextBox
+                    string[] startup_words = FindByTextTextBox.Text.Split();
+                    int count = startup_words.Length;
+                    // ignore final incomplete word
+                    if (!FindByTextTextBox.Text.EndsWith(" "))
+                    {
+                        count--;
+                    }
+                    string startup_text = "";
+                    for (int i = 0; i < count; i++)
+                    {
+                        startup_text += startup_words[i] + " ";
+                    }
+                    if (startup_text.Length > 0)
+                    {
+                        startup_text = startup_text.Remove(startup_text.Length - 1, 1);
+                    }
+
+                    List<string> word_texts = new List<string>();
+                    char[] separators = { ' ' };
+                    string[] parts = item_text.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                    if (parts.Length == 1)  // root
+                    {
+                        word_texts.Add(parts[0]);
+                    }
+                    else if (parts.Length == 2) // exact or proximity
+                    {
+                        word_texts.Add(parts[1]);
+                    }
+
+                    // setup search parameters
+                    string text = "";
+                    //string translation = Client.DEFAULT_TRANSLATION;
+
+                    // update m_text_location_in_verse and m_text_location_in_word
+                    UpdateFindByTextOptions();
+
+                    List<Verse> total_verses = new List<Verse>();
+                    if (word_texts.Count > 0)
+                    {
+                        foreach (string word_text in word_texts)
+                        {
+                            if (startup_text.Length > 0)
+                            {
+                                text = startup_text + " " + word_text;
+                            }
+                            else
+                            {
+                                text = word_text;
+                            }
+
+                            if (!String.IsNullOrEmpty(text))
+                            {
+                                switch (m_text_search_type)
+                                {
+                                    case TextSearchType.Exact:
+                                        {
+                                            m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_location_in_chapter, m_text_location_in_verse, m_text_location_in_word, TextWordness.WholeWord, m_case_sensitive, m_with_diacritics, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
+                                        }
+                                        break;
+                                    case TextSearchType.Root:
+                                        {
+                                            m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
+                                        }
+                                        break;
+                                    case TextSearchType.Proximity:
+                                        {
+                                            m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_proximity_type, TextWordness.WholeWord, m_case_sensitive, m_with_diacritics);
+                                        }
+                                        break;
+                                }
+
+                                total_verses = total_verses.Union(m_client.FoundVerses);
+                            }
+                        }
+
+                        int i = 0;
+                        StringBuilder str = new StringBuilder();
+                        foreach (Verse verse in total_verses)
+                        {
+                            i++;
+                            if (i > 114) break;
+                            str.AppendLine(verse.Text);
+                        }
+                        ToolTip.SetToolTip(WordsListBox, str.ToString());
+                    }
+
+                    if (backup_found_verses != null)
+                    {
+                        m_client.FoundVerses = backup_found_verses;
+                    }
+                    if (backup_found_phrases != null)
+                    {
+                        m_client.FoundPhrases = backup_found_phrases;
+                    }
+                }
+            }
+        }
+    }
+    private void FindSelectedWordsMenuItem_Click(object sender, EventArgs e)
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
         {
             if (m_client != null)
             {
-                List<Verse> backup_found_verses = null;
-                List<Phrase> backup_found_phrases = null;
-                if (m_client.FoundVerses != null)
-                {
-                    backup_found_verses = new List<Verse>(m_client.FoundVerses);
-                }
-                if (m_client.FoundPhrases != null)
-                {
-                    backup_found_phrases = new List<Phrase>(m_client.FoundPhrases);
-                }
-
                 // get startup text from FindTextBox
                 string[] startup_words = FindByTextTextBox.Text.Split();
                 int count = startup_words.Length;
@@ -32422,26 +32538,37 @@ public partial class MainForm : Form, ISubscriber
                 {
                     count--;
                 }
+
                 string startup_text = "";
-                for (int i = 0; i < count; i++)
+                if (m_auto_complete_mode)
                 {
-                    startup_text += startup_words[i] + " ";
-                }
-                if (startup_text.Length > 0)
-                {
-                    startup_text = startup_text.Remove(startup_text.Length - 1, 1);
+                    for (int i = 0; i < count; i++)
+                    {
+                        startup_text += startup_words[i] + " ";
+                    }
+                    if (startup_text.Length > 0)
+                    {
+                        startup_text = startup_text.Remove(startup_text.Length - 1, 1);
+                    }
                 }
 
+                // get selected word texts
                 List<string> word_texts = new List<string>();
-                char[] separators = { ' ' };
-                string[] parts = item_text.Split(separators, StringSplitOptions.RemoveEmptyEntries);
-                if (parts.Length == 1)  // root
+                if (WordsListBox.SelectedIndices.Count > 0)
                 {
-                    word_texts.Add(parts[0]);
-                }
-                else if (parts.Length == 2) // exact or proximity
-                {
-                    word_texts.Add(parts[1]);
+                    char[] separators = { ' ' };
+                    foreach (object item in WordsListBox.SelectedItems)
+                    {
+                        string[] parts = item.ToString().Split(separators, StringSplitOptions.RemoveEmptyEntries);
+                        if (parts.Length == 1)  // root
+                        {
+                            word_texts.Add(parts[0]);
+                        }
+                        else if (parts.Length == 2) // exact or proximity
+                        {
+                            word_texts.Add(parts[1]);
+                        }
+                    }
                 }
 
                 // setup search parameters
@@ -32451,6 +32578,7 @@ public partial class MainForm : Form, ISubscriber
                 // update m_text_location_in_verse and m_text_location_in_word
                 UpdateFindByTextOptions();
 
+                List<Phrase> total_phrases = new List<Phrase>();
                 List<Verse> total_verses = new List<Verse>();
                 if (word_texts.Count > 0)
                 {
@@ -32471,7 +32599,14 @@ public partial class MainForm : Form, ISubscriber
                             {
                                 case TextSearchType.Exact:
                                     {
-                                        m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_location_in_chapter, m_text_location_in_verse, m_text_location_in_word, TextWordness.WholeWord, m_case_sensitive, m_with_diacritics, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
+                                        if (FindByTextTextBox.Text.EndsWith(" "))
+                                        {
+                                            m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_location_in_chapter, m_text_location_in_verse, m_text_location_in_word, TextWordness.Any, m_case_sensitive, m_with_diacritics, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
+                                        }
+                                        else
+                                        {
+                                            m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_location_in_chapter, m_text_location_in_verse, m_text_location_in_word, TextWordness.WholeWord, m_case_sensitive, m_with_diacritics, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
+                                        }
                                     }
                                     break;
                                 case TextSearchType.Root:
@@ -32481,159 +32616,43 @@ public partial class MainForm : Form, ISubscriber
                                     break;
                                 case TextSearchType.Proximity:
                                     {
-                                        m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_proximity_type, TextWordness.WholeWord, m_case_sensitive, m_with_diacritics);
+                                        m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_proximity_type, TextWordness.Any, m_case_sensitive, m_with_diacritics);
                                     }
                                     break;
                             }
 
+                            total_phrases = total_phrases.Union(m_client.FoundPhrases);
                             total_verses = total_verses.Union(m_client.FoundVerses);
                         }
                     }
 
-                    int i = 0;
-                    StringBuilder str = new StringBuilder();
-                    foreach (Verse verse in total_verses)
-                    {
-                        i++;
-                        if (i > 114) break;
-                        str.AppendLine(verse.Text);
-                    }
-                    ToolTip.SetToolTip(WordsListBox, str.ToString());
+                    // write final result to m_client
+                    m_client.FoundPhrases = total_phrases;
+                    m_client.FoundVerses = total_verses;
                 }
 
-                if (backup_found_verses != null)
+                // display results
+                if (m_client.FoundPhrases != null)
                 {
-                    m_client.FoundVerses = backup_found_verses;
-                }
-                if (backup_found_phrases != null)
-                {
-                    m_client.FoundPhrases = backup_found_phrases;
+                    int phrase_count = GetPhraseCount(m_client.FoundPhrases);
+                    if (m_client.FoundVerses != null)
+                    {
+                        int verse_count = m_client.FoundVerses.Count;
+                        m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " C_" + m_text_location_in_chapter.ToString() + " V_" + m_text_location_in_verse.ToString() + " W_" + m_text_location_in_word.ToString() + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                        DisplayFoundVerses(true, true);
+
+                        //SearchResultTextBox.Focus();
+                        //SearchResultTextBox.Refresh();
+
+                        WordsListBoxLabel.Visible = false;
+                        WordsListBox.Visible = false;
+                    }
                 }
             }
         }
-    }
-    private void FindSelectedWordsMenuItem_Click(object sender, EventArgs e)
-    {
-        if (m_client != null)
+        finally
         {
-            // get startup text from FindTextBox
-            string[] startup_words = FindByTextTextBox.Text.Split();
-            int count = startup_words.Length;
-            // ignore final incomplete word
-            if (!FindByTextTextBox.Text.EndsWith(" "))
-            {
-                count--;
-            }
-
-            string startup_text = "";
-            if (m_auto_complete_mode)
-            {
-                for (int i = 0; i < count; i++)
-                {
-                    startup_text += startup_words[i] + " ";
-                }
-                if (startup_text.Length > 0)
-                {
-                    startup_text = startup_text.Remove(startup_text.Length - 1, 1);
-                }
-            }
-
-            // get selected word texts
-            List<string> word_texts = new List<string>();
-            if (WordsListBox.SelectedIndices.Count > 0)
-            {
-                char[] separators = { ' ' };
-                foreach (object item in WordsListBox.SelectedItems)
-                {
-                    string[] parts = item.ToString().Split(separators, StringSplitOptions.RemoveEmptyEntries);
-                    if (parts.Length == 1)  // root
-                    {
-                        word_texts.Add(parts[0]);
-                    }
-                    else if (parts.Length == 2) // exact or proximity
-                    {
-                        word_texts.Add(parts[1]);
-                    }
-                }
-            }
-
-            // setup search parameters
-            string text = "";
-            //string translation = Client.DEFAULT_TRANSLATION;
-
-            // update m_text_location_in_verse and m_text_location_in_word
-            UpdateFindByTextOptions();
-
-            List<Phrase> total_phrases = new List<Phrase>();
-            List<Verse> total_verses = new List<Verse>();
-            if (word_texts.Count > 0)
-            {
-                foreach (string word_text in word_texts)
-                {
-                    if (startup_text.Length > 0)
-                    {
-                        text = startup_text + " " + word_text;
-                    }
-                    else
-                    {
-                        text = word_text;
-                    }
-
-                    if (!String.IsNullOrEmpty(text))
-                    {
-                        switch (m_text_search_type)
-                        {
-                            case TextSearchType.Exact:
-                                {
-                                    if (FindByTextTextBox.Text.EndsWith(" "))
-                                    {
-                                        m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_location_in_chapter, m_text_location_in_verse, m_text_location_in_word, TextWordness.Any, m_case_sensitive, m_with_diacritics, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
-                                    }
-                                    else
-                                    {
-                                        m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_location_in_chapter, m_text_location_in_verse, m_text_location_in_word, TextWordness.WholeWord, m_case_sensitive, m_with_diacritics, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
-                                    }
-                                }
-                                break;
-                            case TextSearchType.Root:
-                                {
-                                    m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
-                                }
-                                break;
-                            case TextSearchType.Proximity:
-                                {
-                                    m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_proximity_type, TextWordness.Any, m_case_sensitive, m_with_diacritics);
-                                }
-                                break;
-                        }
-
-                        total_phrases = total_phrases.Union(m_client.FoundPhrases);
-                        total_verses = total_verses.Union(m_client.FoundVerses);
-                    }
-                }
-
-                // write final result to m_client
-                m_client.FoundPhrases = total_phrases;
-                m_client.FoundVerses = total_verses;
-            }
-
-            // display results
-            if (m_client.FoundPhrases != null)
-            {
-                int phrase_count = GetPhraseCount(m_client.FoundPhrases);
-                if (m_client.FoundVerses != null)
-                {
-                    int verse_count = m_client.FoundVerses.Count;
-                    m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " C_" + m_text_location_in_chapter.ToString() + " V_" + m_text_location_in_verse.ToString() + " W_" + m_text_location_in_word.ToString() + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                    DisplayFoundVerses(true, true);
-
-                    //SearchResultTextBox.Focus();
-                    //SearchResultTextBox.Refresh();
-
-                    WordsListBoxLabel.Visible = false;
-                    WordsListBox.Visible = false;
-                }
-            }
+            this.Cursor = Cursors.Default;
         }
     }
     private void InspectWordFrequencies()
@@ -33287,45 +33306,53 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FindByTextButton_Click(object sender, EventArgs e)
     {
-        switch (m_text_search_type)
+        this.Cursor = Cursors.WaitCursor;
+        try
         {
-            case TextSearchType.Exact:
-                {
-                    if (WordsListBox.SelectedIndices.Count > 1)
+            switch (m_text_search_type)
+            {
+                case TextSearchType.Exact:
                     {
-                        FindSelectedWordsMenuItem_Click(null, null);
+                        if (WordsListBox.SelectedIndices.Count > 1)
+                        {
+                            FindSelectedWordsMenuItem_Click(null, null);
+                        }
+                        else
+                        {
+                            FindByExact();
+                        }
                     }
-                    else
+                    break;
+                case TextSearchType.Proximity:
+                    {
+                        FindByProximity();
+                    }
+                    break;
+                case TextSearchType.Root:
+                    {
+                        if (WordsListBox.SelectedIndices.Count > 1)
+                        {
+                            FindSelectedWordsMenuItem_Click(null, null);
+                        }
+                        else
+                        {
+                            FindByRoot();
+                        }
+                    }
+                    break;
+                default:
                     {
                         FindByExact();
                     }
-                }
-                break;
-            case TextSearchType.Proximity:
-                {
-                    FindByProximity();
-                }
-                break;
-            case TextSearchType.Root:
-                {
-                    if (WordsListBox.SelectedIndices.Count > 1)
-                    {
-                        FindSelectedWordsMenuItem_Click(null, null);
-                    }
-                    else
-                    {
-                        FindByRoot();
-                    }
-                }
-                break;
-            default:
-                {
-                    FindByExact();
-                }
-                break;
-        }
+                    break;
+            }
 
-        SearchGroupBox_Leave(null, null);
+            SearchGroupBox_Leave(null, null);
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
     }
     private void FindByExact()
     {
@@ -34295,7 +34322,15 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FindBySimilarityButton_Click(object sender, EventArgs e)
     {
-        FindBySimilarity();
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            FindBySimilarity();
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
     }
     private void FindBySimilarity()
     {
@@ -36041,7 +36076,15 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FindByNumbersButton_Click(object sender, EventArgs e)
     {
-        FindByNumbers();
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            FindByNumbers();
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
     }
     private void FindByNumbers()
     {
@@ -37011,7 +37054,15 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FindByFrequencyButton_Click(object sender, EventArgs e)
     {
-        FindByFrequencySum();
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            FindByFrequencySum();
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
     }
     private void FindByFrequencySum()
     {
