@@ -5,3 +5,5 @@ Tools\Touch\bin\Release\Touch.exe Tools                            2009-07-29 7:
 Tools\Touch\bin\Release\Touch.exe  .                  6:19                  -Tools
 COPY QuranKey.zip                  ..\Backup\QuranKey_6.19.888.zip
 COPY QuranKey.Source.zip           ..\Backup\QuranKey_6.19.888.Source.zip
+COPY QuranKey.zip                  ..\Backup\
+COPY QuranKey.Source.zip           ..\Backup\
