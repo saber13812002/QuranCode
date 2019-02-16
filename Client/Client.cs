@@ -249,6 +249,7 @@ public class Client : IPublisher, ISubscriber
         Server.SaveTranslation(translation);
     }
 
+    public bool Logging = false;
     // used for non-Quran text
     public long CalculateValueUserText(char character)
     {
@@ -261,50 +262,140 @@ public class Client : IPublisher, ISubscriber
     // used for Quran text only
     public long CalculateValue(Letter letter)
     {
-        return Server.CalculateValue(letter);
+        if (Logging)
+        {
+            Server.ClearLog();
+            return Server.CalculateValueWithLogging(letter);
+        }
+        else
+        {
+            return Server.CalculateValue(letter);
+        }
     }
     public long CalculateValue(List<Letter> letters)
     {
-        return Server.CalculateValue(letters);
+        if (Logging)
+        {
+            Server.ClearLog();
+            return Server.CalculateValueWithLogging(letters);
+        }
+        else
+        {
+            return Server.CalculateValue(letters);
+        }
     }
     public long CalculateValue(Word word)
     {
-        return Server.CalculateValue(word);
+        if (Logging)
+        {
+            Server.ClearLog();
+            return Server.CalculateValueWithLogging(word);
+        }
+        else
+        {
+            return Server.CalculateValue(word);
+        }
     }
     public long CalculateValue(List<Word> words)
     {
-        return Server.CalculateValue(words);
+        if (Logging)
+        {
+            Server.ClearLog();
+            return Server.CalculateValueWithLogging(words);
+        }
+        else
+        {
+            return Server.CalculateValue(words);
+        }
     }
     public long CalculateValue(Verse verse)
     {
-        return Server.CalculateValue(verse);
+        if (Logging)
+        {
+            Server.ClearLog();
+            return Server.CalculateValueWithLogging(verse);
+        }
+        else
+        {
+            return Server.CalculateValue(verse);
+        }
     }
     public long CalculateValue(List<Verse> verses)
     {
-        return Server.CalculateValue(verses);
+        if (Logging)
+        {
+            Server.ClearLog();
+            return Server.CalculateValueWithLogging(verses);
+        }
+        else
+        {
+            return Server.CalculateValue(verses);
+        }
     }
     public long CalculateValue(Chapter chapter)
     {
-        return Server.CalculateValue(chapter);
+        if (Logging)
+        {
+            Server.ClearLog();
+            return Server.CalculateValueWithLogging(chapter);
+        }
+        else
+        {
+            return Server.CalculateValue(chapter);
+        }
     }
     public long CalculateValue(List<Chapter> chapters)
     {
-        return Server.CalculateValue(chapters);
+        if (Logging)
+        {
+            Server.ClearLog();
+            return Server.CalculateValueWithLogging(chapters);
+        }
+        else
+        {
+            return Server.CalculateValue(chapters);
+        }
     }
     public long CalculateValue(Book book)
     {
-        return Server.CalculateValue(book);
+        if (Logging)
+        {
+            Server.ClearLog();
+            return Server.CalculateValueWithLogging(book);
+        }
+        else
+        {
+            return Server.CalculateValue(book);
+        }
     }
     public long CalculateValue(List<Verse> verses, Letter start_letter, Letter end_letter)
     {
-        return Server.CalculateValue(verses, start_letter, end_letter);
+        if (Logging)
+        {
+            Server.ClearLog();
+            return Server.CalculateValueWithLogging(verses, start_letter, end_letter);
+        }
+        else
+        {
+            return Server.CalculateValue(verses, start_letter, end_letter);
+        }
     }
     public List<long> CalculateVerseValues(List<Verse> verses)
     {
         List<long> result = new List<long>();
         foreach (Verse verse in verses)
         {
-            long value = Server.CalculateValue(verse);
+            Server.ClearLog();
+            long value = 0L;
+            if (Logging)
+            {
+                Server.ClearLog();
+                value = Server.CalculateValue(verse);
+            }
+            else
+            {
+                value = Server.CalculateValue(verse);
+            }
             result.Add(value);
         }
         return result;
@@ -316,7 +407,17 @@ public class Client : IPublisher, ISubscriber
         {
             foreach (Word word in verse.Words)
             {
-                long value = Server.CalculateValue(word);
+                Server.ClearLog();
+                long value = 0L;
+                if (Logging)
+                {
+                    Server.ClearLog();
+                    value = Server.CalculateValue(word);
+                }
+                else
+                {
+                    value = Server.CalculateValue(word);
+                }
                 result.Add(value);
             }
         }
@@ -331,7 +432,17 @@ public class Client : IPublisher, ISubscriber
             {
                 foreach (Letter letter in word.Letters)
                 {
-                    long value = Server.CalculateValue(letter);
+                    Server.ClearLog();
+                    long value = 0L;
+                    if (Logging)
+                    {
+                        Server.ClearLog();
+                        value = Server.CalculateValue(letter);
+                    }
+                    else
+                    {
+                        value = Server.CalculateValue(letter);
+                    }
                     result.Add(value);
                 }
             }
@@ -412,55 +523,70 @@ public class Client : IPublisher, ISubscriber
                             numbers.Remove(numbers.Length - 2, 2);
                         }
 
-                        writer.WriteLine("--------------------------------------------------------------------------------------------------");
+                        writer.WriteLine("------------------------------------------------------------------------------------------");
                         writer.WriteLine(NumerologySystem.Name);
                         writer.WriteLine("Selection = " + Selection.Scope.ToString() + " " + numbers.ToString());
-                        writer.WriteLine("--------------------------------------------------------------------------------------------------");
+                        writer.WriteLine("------------------------------------------------------------------------------------------");
                         writer.WriteLine(NumerologySystem.ToOverview());
                         writer.WriteLine();
-                        writer.WriteLine("--------------------------------------------------------------------------------------------------");
+                        writer.WriteLine("------------------------------------------------------------------------------------------");
                         writer.WriteLine("Text");
                         writer.WriteLine(text);
-                        writer.WriteLine("--------------------------------------------------------------------------------------------------");
-                        writer.WriteLine("Letter" + "\t" + "Value");
-                        writer.WriteLine("--------------------------------------------------------------------------------------------------");
-                        text = text.Replace("--------------------------------------------------------------------------------------------------", "");
-                        int pos = text.IndexOf("Verses");
-                        text = text.Substring(0, pos).Trim();
+                        writer.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
+                        //if (Logging)
+                        //{
+                        writer.WriteLine("Letter" + "\t" + "Value" + "\t" + "\t" + "\t" + "\t" + "L" + "\t" + "W" + "\t" + "V" + "\t" + "C" + "\t" + "L←" + "\t" + "W←" + "\t" + "V←" + "\t" + "C←" + "\t" + "L→" + "\t" + "W→" + "\t" + "V→" + "\t" + "C→");
+                        writer.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
+                        writer.WriteLine(Server.Log.ToString());
+                        writer.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
+                        writer.WriteLine("Sum" + "\t" + Server.ValueSum + "\t" + "\t" + "\t" + "\t" + Server.LSum + "\t" + Server.WSum + "\t" + Server.VSum + "\t" + Server.CSum + "\t" + Server.pLSum + "\t" + Server.pWSum + "\t" + Server.pVSum + "\t" + Server.pCSum + "\t" + Server.nLSum + "\t" + Server.nWSum + "\t" + Server.nVSum + "\t" + Server.nCSum);
+                        writer.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
+                        long total = Server.ValueSum + Server.LSum + Server.WSum + Server.VSum + Server.CSum + Server.pLSum + Server.pWSum + Server.pVSum + Server.pCSum + Server.nLSum + Server.nWSum + Server.nVSum + Server.nCSum;
+                        writer.WriteLine("Total" + "\t" + total);
+                        writer.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
+                        //}
+                        //else
+                        //{
+                        //    writer.WriteLine("Letter" + "\t" + "Value");
+                        //    writer.WriteLine("--------------------------------------------------------------------------------------------------");
+                        //    text = text.Replace("--------------------------------------------------------------------------------------------------", "");
+                        //    int pos = text.IndexOf("Verses");
+                        //    text = text.Substring(0, pos).Trim();
 
-                        if (!text.IsArabic())  // eg English
-                        {
-                            text = text.ToUpper();
-                        }
+                        //    if (!text.IsArabic())  // eg English
+                        //    {
+                        //        text = text.ToUpper();
+                        //    }
 
-                        text = text.SimplifyTo(NumerologySystem.TextMode);
-                        foreach (char character in text)
-                        {
-                            if (character == '-')
-                            {
-                                break;
-                            }
-                            else if (character == ' ')
-                            {
-                                writer.WriteLine();
-                            }
-                            else if (character == '\r')
-                            {
-                                writer.WriteLine();
-                            }
-                            else if (character == '\n')
-                            {
-                                writer.WriteLine();
-                            }
-                            else
-                            {
-                                writer.WriteLine(character.ToString() + "\t" + CalculateValueUserText(character.ToString().ToUpper()));
-                            }
-                        }
+                        //    text = text.SimplifyTo(NumerologySystem.TextMode);
+                        //    foreach (char character in text)
+                        //    {
+                        //        if (character == '-')
+                        //        {
+                        //            break;
+                        //        }
+                        //        else if (character == ' ')
+                        //        {
+                        //            writer.WriteLine();
+                        //        }
+                        //        else if (character == '\r')
+                        //        {
+                        //            writer.WriteLine();
+                        //        }
+                        //        else if (character == '\n')
+                        //        {
+                        //            writer.WriteLine();
+                        //        }
+                        //        else
+                        //        {
+                        //            writer.WriteLine(character.ToString() + "\t" + CalculateValueUserText(character.ToString().ToUpper()));
+                        //        }
+                        //    }
 
-                        writer.WriteLine("--------------------------------------------------------------------------------------------------");
-                        writer.WriteLine("Total" + "\t" + CalculateValueUserText(text));
-                        writer.WriteLine("--------------------------------------------------------------------------------------------------");
+                        //    writer.WriteLine("--------------------------------------------------------------------------------------------------");
+                        //    writer.WriteLine("Total" + "\t" + CalculateValueUserText(text));
+                        //    writer.WriteLine("--------------------------------------------------------------------------------------------------");
+                        //}
                     }
                 }
             }

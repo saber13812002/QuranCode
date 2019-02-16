@@ -9814,6 +9814,7 @@ partial class MainForm
             // AddToChapterCNumberCheckBox
             // 
             this.AddToChapterCNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToChapterCNumberCheckBox.Enabled = false;
             this.AddToChapterCNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToChapterCNumberCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToChapterCNumberCheckBox.Location = new System.Drawing.Point(139, 258);
@@ -9829,6 +9830,7 @@ partial class MainForm
             // AddToVerseCDistanceCheckBox
             // 
             this.AddToVerseCDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToVerseCDistanceCheckBox.Enabled = false;
             this.AddToVerseCDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToVerseCDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToVerseCDistanceCheckBox.Location = new System.Drawing.Point(139, 244);
@@ -9845,6 +9847,7 @@ partial class MainForm
             // AddToVerseCNumberCheckBox
             // 
             this.AddToVerseCNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToVerseCNumberCheckBox.Enabled = false;
             this.AddToVerseCNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToVerseCNumberCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToVerseCNumberCheckBox.Location = new System.Drawing.Point(139, 231);
@@ -9861,6 +9864,7 @@ partial class MainForm
             // AddToWordCDistanceCheckBox
             // 
             this.AddToWordCDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToWordCDistanceCheckBox.Enabled = false;
             this.AddToWordCDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToWordCDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToWordCDistanceCheckBox.Location = new System.Drawing.Point(139, 217);
@@ -9877,6 +9881,7 @@ partial class MainForm
             // AddToWordCNumberCheckBox
             // 
             this.AddToWordCNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToWordCNumberCheckBox.Enabled = false;
             this.AddToWordCNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToWordCNumberCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToWordCNumberCheckBox.Location = new System.Drawing.Point(139, 204);
@@ -9893,6 +9898,7 @@ partial class MainForm
             // AddToVerseVDistanceCheckBox
             // 
             this.AddToVerseVDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToVerseVDistanceCheckBox.Enabled = false;
             this.AddToVerseVDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToVerseVDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToVerseVDistanceCheckBox.Location = new System.Drawing.Point(95, 244);
@@ -9923,6 +9929,7 @@ partial class MainForm
             // AddToVerseVNumberCheckBox
             // 
             this.AddToVerseVNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToVerseVNumberCheckBox.Enabled = false;
             this.AddToVerseVNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToVerseVNumberCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToVerseVNumberCheckBox.Location = new System.Drawing.Point(95, 231);
@@ -9939,6 +9946,7 @@ partial class MainForm
             // AddToWordVDistanceCheckBox
             // 
             this.AddToWordVDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToWordVDistanceCheckBox.Enabled = false;
             this.AddToWordVDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToWordVDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToWordVDistanceCheckBox.Location = new System.Drawing.Point(95, 217);
@@ -9955,6 +9963,7 @@ partial class MainForm
             // AddToWordWDistanceCheckBox
             // 
             this.AddToWordWDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToWordWDistanceCheckBox.Enabled = false;
             this.AddToWordWDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToWordWDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToWordWDistanceCheckBox.Location = new System.Drawing.Point(51, 217);
@@ -9971,6 +9980,7 @@ partial class MainForm
             // AddToWordVNumberCheckBox
             // 
             this.AddToWordVNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToWordVNumberCheckBox.Enabled = false;
             this.AddToWordVNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToWordVNumberCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToWordVNumberCheckBox.Location = new System.Drawing.Point(95, 204);
@@ -9987,6 +9997,7 @@ partial class MainForm
             // AddToWordWNumberCheckBox
             // 
             this.AddToWordWNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToWordWNumberCheckBox.Enabled = false;
             this.AddToWordWNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToWordWNumberCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToWordWNumberCheckBox.Location = new System.Drawing.Point(51, 204);
@@ -10069,6 +10080,7 @@ partial class MainForm
             // AddToLetterCDistanceCheckBox
             // 
             this.AddToLetterCDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToLetterCDistanceCheckBox.Enabled = false;
             this.AddToLetterCDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToLetterCDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToLetterCDistanceCheckBox.Location = new System.Drawing.Point(139, 190);
@@ -10085,6 +10097,7 @@ partial class MainForm
             // AddToLetterCNumberCheckBox
             // 
             this.AddToLetterCNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToLetterCNumberCheckBox.Enabled = false;
             this.AddToLetterCNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToLetterCNumberCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToLetterCNumberCheckBox.Location = new System.Drawing.Point(139, 177);
@@ -10101,6 +10114,7 @@ partial class MainForm
             // AddToLetterVDistanceCheckBox
             // 
             this.AddToLetterVDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToLetterVDistanceCheckBox.Enabled = false;
             this.AddToLetterVDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToLetterVDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToLetterVDistanceCheckBox.Location = new System.Drawing.Point(95, 190);
@@ -10117,6 +10131,7 @@ partial class MainForm
             // AddToLetterWDistanceCheckBox
             // 
             this.AddToLetterWDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToLetterWDistanceCheckBox.Enabled = false;
             this.AddToLetterWDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToLetterWDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToLetterWDistanceCheckBox.Location = new System.Drawing.Point(51, 190);
@@ -10133,6 +10148,7 @@ partial class MainForm
             // AddToLetterLDistanceCheckBox
             // 
             this.AddToLetterLDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToLetterLDistanceCheckBox.Enabled = false;
             this.AddToLetterLDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToLetterLDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToLetterLDistanceCheckBox.Location = new System.Drawing.Point(7, 190);
@@ -10149,6 +10165,7 @@ partial class MainForm
             // AddToLetterVNumberCheckBox
             // 
             this.AddToLetterVNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToLetterVNumberCheckBox.Enabled = false;
             this.AddToLetterVNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToLetterVNumberCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToLetterVNumberCheckBox.Location = new System.Drawing.Point(95, 177);
@@ -10165,6 +10182,7 @@ partial class MainForm
             // AddToLetterWNumberCheckBox
             // 
             this.AddToLetterWNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToLetterWNumberCheckBox.Enabled = false;
             this.AddToLetterWNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToLetterWNumberCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToLetterWNumberCheckBox.Location = new System.Drawing.Point(51, 177);
@@ -10181,6 +10199,7 @@ partial class MainForm
             // AddToLetterLNumberCheckBox
             // 
             this.AddToLetterLNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.AddToLetterLNumberCheckBox.Enabled = false;
             this.AddToLetterLNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AddToLetterLNumberCheckBox.ForeColor = System.Drawing.Color.Black;
             this.AddToLetterLNumberCheckBox.Location = new System.Drawing.Point(7, 177);

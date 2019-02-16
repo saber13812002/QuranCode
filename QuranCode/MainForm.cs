@@ -39055,9 +39055,9 @@ public partial class MainForm : Form, ISubscriber
             if (m_client.NumerologySystem != null)
             {
                 m_client.NumerologySystem.AddPositions = AddPositionsCheckBox.Checked;
-                CalculateCurrentValue();
-
                 EnableDisableAddToCheckBoxes();
+
+                CalculateCurrentValue();
             }
         }
     }
@@ -39068,9 +39068,9 @@ public partial class MainForm : Form, ISubscriber
             if (m_client.NumerologySystem != null)
             {
                 m_client.NumerologySystem.AddDistancesToPrevious = AddDistancesToPreviousCheckBox.Checked;
-                CalculateCurrentValue();
-
                 EnableDisableAddToCheckBoxes();
+
+                CalculateCurrentValue();
             }
         }
     }
@@ -39081,9 +39081,9 @@ public partial class MainForm : Form, ISubscriber
             if (m_client.NumerologySystem != null)
             {
                 m_client.NumerologySystem.AddDistancesToNext = AddDistancesToNextCheckBox.Checked;
-                CalculateCurrentValue();
-
                 EnableDisableAddToCheckBoxes();
+
+                CalculateCurrentValue();
             }
         }
     }
@@ -39101,6 +39101,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         m_client.Book.SetupDistances(m_client.NumerologySystem.AddDistancesWithinChapters);
                     }
+
                     CalculateCurrentValue();
                 }
             }
@@ -39112,28 +39113,76 @@ public partial class MainForm : Form, ISubscriber
     }
     private void EnableDisableAddToCheckBoxes()
     {
-        bool is_enabled = m_client.NumerologySystem.AddPositions;
-        AddToLetterLNumberCheckBox.Enabled = is_enabled;
-        AddToLetterWNumberCheckBox.Enabled = is_enabled;
-        AddToLetterVNumberCheckBox.Enabled = is_enabled;
-        AddToLetterCNumberCheckBox.Enabled = is_enabled;
-        AddToWordWNumberCheckBox.Enabled = is_enabled;
-        AddToWordVNumberCheckBox.Enabled = is_enabled;
-        AddToWordCNumberCheckBox.Enabled = is_enabled;
-        AddToVerseVNumberCheckBox.Enabled = is_enabled;
-        AddToVerseCNumberCheckBox.Enabled = is_enabled;
-        AddToChapterCNumberCheckBox.Enabled = is_enabled;
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            for (int i = 0; i < 3; i++) AddToLetterLNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterWNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterVNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterCNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterLDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterWDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterVDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterCDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToWordWNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToWordVNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToWordCNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToWordWDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToWordVDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToWordCDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToVerseVNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToVerseCNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToVerseVDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToVerseCDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToChapterCNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
 
-        is_enabled = m_client.NumerologySystem.AddDistancesToPrevious || m_client.NumerologySystem.AddDistancesToNext;
-        AddToLetterLDistanceCheckBox.Enabled = is_enabled;
-        AddToLetterWDistanceCheckBox.Enabled = is_enabled;
-        AddToLetterVDistanceCheckBox.Enabled = is_enabled;
-        AddToLetterCDistanceCheckBox.Enabled = is_enabled;
-        AddToWordWDistanceCheckBox.Enabled = is_enabled;
-        AddToWordVDistanceCheckBox.Enabled = is_enabled;
-        AddToWordCDistanceCheckBox.Enabled = is_enabled;
-        AddToVerseVDistanceCheckBox.Enabled = is_enabled;
-        AddToVerseCDistanceCheckBox.Enabled = is_enabled;
+            bool is_enabled = m_client.NumerologySystem.AddPositions;
+            AddToLetterLNumberCheckBox.Enabled = is_enabled;
+            AddToLetterWNumberCheckBox.Enabled = is_enabled;
+            AddToLetterVNumberCheckBox.Enabled = is_enabled;
+            AddToLetterCNumberCheckBox.Enabled = is_enabled;
+            AddToWordWNumberCheckBox.Enabled = is_enabled;
+            AddToWordVNumberCheckBox.Enabled = is_enabled;
+            AddToWordCNumberCheckBox.Enabled = is_enabled;
+            AddToVerseVNumberCheckBox.Enabled = is_enabled;
+            AddToVerseCNumberCheckBox.Enabled = is_enabled;
+            AddToChapterCNumberCheckBox.Enabled = is_enabled;
+
+            is_enabled = m_client.NumerologySystem.AddDistancesToPrevious || m_client.NumerologySystem.AddDistancesToNext;
+            AddToLetterLDistanceCheckBox.Enabled = is_enabled;
+            AddToLetterWDistanceCheckBox.Enabled = is_enabled;
+            AddToLetterVDistanceCheckBox.Enabled = is_enabled;
+            AddToLetterCDistanceCheckBox.Enabled = is_enabled;
+            AddToWordWDistanceCheckBox.Enabled = is_enabled;
+            AddToWordVDistanceCheckBox.Enabled = is_enabled;
+            AddToWordCDistanceCheckBox.Enabled = is_enabled;
+            AddToVerseVDistanceCheckBox.Enabled = is_enabled;
+            AddToVerseCDistanceCheckBox.Enabled = is_enabled;
+        }
+        finally
+        {
+            for (int i = 0; i < 3; i++) AddToLetterLNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterWNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterVNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterCNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterLDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterWDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterVDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterCDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToWordWNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToWordVNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToWordCNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToWordWDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToWordVDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToWordCDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToVerseVNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToVerseCNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToVerseVDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToVerseCDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToChapterCNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+
+            this.Cursor = Cursors.Default;
+        }
     }
 
     private void LoadNumerologySystem(string numerology_system_name)
@@ -44248,7 +44297,15 @@ public partial class MainForm : Form, ISubscriber
     }
     private void ValueInspectLabel_Click(object sender, EventArgs e)
     {
-        InspectValueCalculations();
+        if (m_client != null)
+        {
+            m_client.Logging = true;    // log Adjust letter/word/verse/chapter
+            CalculateCurrentValue();    // SLOW calculations due to logging
+
+            InspectValueCalculations(); // display inspection information
+
+            m_client.Logging = false;   // return to FAST calculations without logging
+        }
     }
     private void InspectValueCalculations()
     {

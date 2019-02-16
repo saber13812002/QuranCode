@@ -1005,9 +1005,9 @@ namespace Model
                 foreach (Word word in verse.Words)
                 {
                     string word_text = word.Text;
-                    if (text_mode == "Original")
+                    if (!with_diacritics)
                     {
-                        word_text = word_text.Simplify29();
+                        word_text = word_text.SimplifyTo(this.text_mode).Trim();
                     }
 
                     if (frequencies.ContainsKey(word_text))
@@ -1031,9 +1031,9 @@ namespace Model
                 foreach (Word word in verse.Words)
                 {
                     string word_text = word.Text;
-                    if (text_mode == "Original")
+                    if (!with_diacritics)
                     {
-                        word_text = word_text.Simplify29();
+                        word_text = word_text.SimplifyTo(this.text_mode).Trim();
                     }
 
                     if (frequencies.ContainsKey(word_text))
@@ -1051,9 +1051,9 @@ namespace Model
                 foreach (Word word in verse.Words)
                 {
                     string word_text = word.Text;
-                    if (text_mode == "Original")
+                    if (!with_diacritics)
                     {
-                        word_text = word_text.Simplify29();
+                        word_text = word_text.SimplifyTo(this.text_mode).Trim();
                     }
 
                     if (frequencies.ContainsKey(word_text))
@@ -1118,32 +1118,32 @@ namespace Model
                         List<Verse> verses = chapters[c].Verses;
                         for (int v = 0; v < verses.Count; v++)
                         {
-                            string verse_text = verses[v].Text;
-                            if (!with_diacritics)
+                            string verse_key = verses[v].Text;
+                            //if (!with_diacritics)
                             {
-                                verse_text = verse_text.SimplifyTo(this.text_mode);
+                                verse_key = verse_key.SimplifyTo(this.text_mode).Trim();
                             }
 
-                            if (!verse_previous_verse_numbers.ContainsKey(verse_text))
+                            if (!verse_previous_verse_numbers.ContainsKey(verse_key))
                             {
                                 verses[v].DistanceToPrevious.dL = -1; // non-applicable
                                 verses[v].DistanceToPrevious.dW = -1; // non-applicable
                                 verses[v].DistanceToPrevious.dV = 0;
                                 verses[v].DistanceToPrevious.dC = 0;
 
-                                verse_previous_verse_numbers.Add(verse_text, verses[v].Number);
-                                verse_previous_chapter_numbers.Add(verse_text, chapters[c].SortedNumber);
+                                verse_previous_verse_numbers.Add(verse_key, verses[v].Number);
+                                verse_previous_chapter_numbers.Add(verse_key, chapters[c].SortedNumber);
                             }
                             else
                             {
                                 verses[v].DistanceToPrevious.dL = -1; // non-applicable
                                 verses[v].DistanceToPrevious.dW = -1; // non-applicable
-                                verses[v].DistanceToPrevious.dV = verses[v].Number - verse_previous_verse_numbers[verse_text];
-                                verses[v].DistanceToPrevious.dC = chapters[c].SortedNumber - verse_previous_chapter_numbers[verse_text];
+                                verses[v].DistanceToPrevious.dV = verses[v].Number - verse_previous_verse_numbers[verse_key];
+                                verses[v].DistanceToPrevious.dC = chapters[c].SortedNumber - verse_previous_chapter_numbers[verse_key];
 
                                 // save latest chapter and verse numbers for next iteration
-                                verse_previous_verse_numbers[verse_text] = verses[v].Number;
-                                verse_previous_chapter_numbers[verse_text] = chapters[c].SortedNumber;
+                                verse_previous_verse_numbers[verse_key] = verses[v].Number;
+                                verse_previous_chapter_numbers[verse_key] = chapters[c].SortedNumber;
                             }
 
                             if (verses[v].Words != null)
@@ -1151,34 +1151,34 @@ namespace Model
                                 List<Word> words = verses[v].Words;
                                 for (int w = 0; w < words.Count; w++)
                                 {
-                                    string word_text = words[w].Text;
-                                    if (!with_diacritics)
+                                    string word_key = words[w].Text;
+                                    //if (!with_diacritics)
                                     {
-                                        word_text = word_text.SimplifyTo(this.text_mode);
+                                        word_key = word_key.SimplifyTo(this.text_mode).Trim();
                                     }
 
-                                    if (!word_previous_verse_numbers.ContainsKey(word_text))
+                                    if (!word_previous_word_numbers.ContainsKey(word_key))
                                     {
                                         words[w].DistanceToPrevious.dL = -1; // non-applicable
                                         words[w].DistanceToPrevious.dW = 0;
                                         words[w].DistanceToPrevious.dV = 0;
                                         words[w].DistanceToPrevious.dC = 0;
 
-                                        word_previous_word_numbers.Add(word_text, words[w].Number);
-                                        word_previous_verse_numbers.Add(word_text, verses[v].Number);
-                                        word_previous_chapter_numbers.Add(word_text, chapters[c].SortedNumber);
+                                        word_previous_word_numbers.Add(word_key, words[w].Number);
+                                        word_previous_verse_numbers.Add(word_key, verses[v].Number);
+                                        word_previous_chapter_numbers.Add(word_key, chapters[c].SortedNumber);
                                     }
                                     else
                                     {
                                         words[w].DistanceToPrevious.dL = -1; // non-applicable
-                                        words[w].DistanceToPrevious.dW = words[w].Number - word_previous_word_numbers[word_text];
-                                        words[w].DistanceToPrevious.dV = verses[v].Number - word_previous_verse_numbers[word_text];
-                                        words[w].DistanceToPrevious.dC = chapters[c].SortedNumber - word_previous_chapter_numbers[word_text];
+                                        words[w].DistanceToPrevious.dW = words[w].Number - word_previous_word_numbers[word_key];
+                                        words[w].DistanceToPrevious.dV = verses[v].Number - word_previous_verse_numbers[word_key];
+                                        words[w].DistanceToPrevious.dC = chapters[c].SortedNumber - word_previous_chapter_numbers[word_key];
 
                                         // save latest chapter, verse and word numbers for next iteration
-                                        word_previous_word_numbers[word_text] = words[w].Number;
-                                        word_previous_verse_numbers[word_text] = verses[v].Number;
-                                        word_previous_chapter_numbers[word_text] = chapters[c].SortedNumber;
+                                        word_previous_word_numbers[word_key] = words[w].Number;
+                                        word_previous_verse_numbers[word_key] = verses[v].Number;
+                                        word_previous_chapter_numbers[word_key] = chapters[c].SortedNumber;
                                     }
 
                                     if (words[w].Letters != null)
@@ -1186,36 +1186,36 @@ namespace Model
                                         List<Letter> letters = words[w].Letters;
                                         for (int l = 0; l < letters.Count; l++)
                                         {
-                                            string letter_text = letters[l].Character.ToString();
-                                            if (!with_diacritics)
+                                            string letter_key = letters[l].Character.ToString();
+                                            //if (!with_diacritics)
                                             {
-                                                letter_text = letter_text.SimplifyTo(this.text_mode);
+                                                letter_key = letter_key.SimplifyTo(this.text_mode).Trim();
                                             }
 
-                                            if (!letter_previous_verse_numbers.ContainsKey(letter_text))
+                                            if (!letter_previous_letter_numbers.ContainsKey(letter_key))
                                             {
                                                 letters[l].DistanceToPrevious.dL = 0;
                                                 letters[l].DistanceToPrevious.dW = 0;
                                                 letters[l].DistanceToPrevious.dV = 0;
                                                 letters[l].DistanceToPrevious.dC = 0;
 
-                                                letter_previous_letter_numbers.Add(letter_text, letters[l].Number);
-                                                letter_previous_word_numbers.Add(letter_text, words[w].Number);
-                                                letter_previous_verse_numbers.Add(letter_text, verses[v].Number);
-                                                letter_previous_chapter_numbers.Add(letter_text, chapters[c].SortedNumber);
+                                                letter_previous_letter_numbers.Add(letter_key, letters[l].Number);
+                                                letter_previous_word_numbers.Add(letter_key, words[w].Number);
+                                                letter_previous_verse_numbers.Add(letter_key, verses[v].Number);
+                                                letter_previous_chapter_numbers.Add(letter_key, chapters[c].SortedNumber);
                                             }
                                             else
                                             {
-                                                letters[l].DistanceToPrevious.dL = letters[l].Number - letter_previous_letter_numbers[letter_text];
-                                                letters[l].DistanceToPrevious.dW = words[w].Number - letter_previous_word_numbers[letter_text];
-                                                letters[l].DistanceToPrevious.dV = verses[v].Number - letter_previous_verse_numbers[letter_text];
-                                                letters[l].DistanceToPrevious.dC = chapters[c].SortedNumber - letter_previous_chapter_numbers[letter_text];
+                                                letters[l].DistanceToPrevious.dL = letters[l].Number - letter_previous_letter_numbers[letter_key];
+                                                letters[l].DistanceToPrevious.dW = words[w].Number - letter_previous_word_numbers[letter_key];
+                                                letters[l].DistanceToPrevious.dV = verses[v].Number - letter_previous_verse_numbers[letter_key];
+                                                letters[l].DistanceToPrevious.dC = chapters[c].SortedNumber - letter_previous_chapter_numbers[letter_key];
 
                                                 // save latest chapter, verse, word and letter numbers for next iteration
-                                                letter_previous_letter_numbers[letter_text] = letters[l].Number;
-                                                letter_previous_word_numbers[letter_text] = words[w].Number;
-                                                letter_previous_verse_numbers[letter_text] = verses[v].Number;
-                                                letter_previous_chapter_numbers[letter_text] = chapters[c].SortedNumber;
+                                                letter_previous_letter_numbers[letter_key] = letters[l].Number;
+                                                letter_previous_word_numbers[letter_key] = words[w].Number;
+                                                letter_previous_verse_numbers[letter_key] = verses[v].Number;
+                                                letter_previous_chapter_numbers[letter_key] = chapters[c].SortedNumber;
                                             }
                                         }
                                     }
@@ -1267,32 +1267,32 @@ namespace Model
                         List<Verse> verses = chapters[c].Verses;
                         for (int v = verses.Count - 1; v >= 0; v--)
                         {
-                            string verse_text = verses[v].Text;
-                            if (!with_diacritics)
+                            string verse_key = verses[v].Text;
+                            //if (!with_diacritics)
                             {
-                                verse_text = verse_text.SimplifyTo(this.text_mode);
+                                verse_key = verse_key.SimplifyTo(this.text_mode).Trim();
                             }
 
-                            if (!verse_next_verse_numbers.ContainsKey(verse_text))
+                            if (!verse_next_verse_numbers.ContainsKey(verse_key))
                             {
                                 verses[v].DistanceToNext.dL = -1; // non-applicable
                                 verses[v].DistanceToNext.dW = -1; // non-applicable
                                 verses[v].DistanceToNext.dV = 0;
                                 verses[v].DistanceToNext.dC = 0;
 
-                                verse_next_verse_numbers.Add(verse_text, verses[v].Number);
-                                verse_next_chapter_numbers.Add(verse_text, chapters[c].SortedNumber);
+                                verse_next_verse_numbers.Add(verse_key, verses[v].Number);
+                                verse_next_chapter_numbers.Add(verse_key, chapters[c].SortedNumber);
                             }
                             else
                             {
                                 verses[v].DistanceToNext.dL = -1; // non-applicable
                                 verses[v].DistanceToNext.dW = -1; // non-applicable
-                                verses[v].DistanceToNext.dV = -1 * (verses[v].Number - verse_next_verse_numbers[verse_text]);
-                                verses[v].DistanceToNext.dC = -1 * (chapters[c].SortedNumber - verse_next_chapter_numbers[verse_text]);
+                                verses[v].DistanceToNext.dV = -1 * (verses[v].Number - verse_next_verse_numbers[verse_key]);
+                                verses[v].DistanceToNext.dC = -1 * (chapters[c].SortedNumber - verse_next_chapter_numbers[verse_key]);
 
                                 // save latest chapter and verse numbers for next iteration
-                                verse_next_verse_numbers[verse_text] = verses[v].Number;
-                                verse_next_chapter_numbers[verse_text] = chapters[c].SortedNumber;
+                                verse_next_verse_numbers[verse_key] = verses[v].Number;
+                                verse_next_chapter_numbers[verse_key] = chapters[c].SortedNumber;
                             }
 
                             if (verses[v].Words != null)
@@ -1300,34 +1300,34 @@ namespace Model
                                 List<Word> words = verses[v].Words;
                                 for (int w = words.Count - 1; w >= 0; w--)
                                 {
-                                    string word_text = words[w].Text;
-                                    if (!with_diacritics)
+                                    string word_key = words[w].Text;
+                                    //if (!with_diacritics)
                                     {
-                                        word_text = word_text.SimplifyTo(this.text_mode);
+                                        word_key = word_key.SimplifyTo(this.text_mode).Trim();
                                     }
 
-                                    if (!word_next_verse_numbers.ContainsKey(word_text))
+                                    if (!word_next_word_numbers.ContainsKey(word_key))
                                     {
                                         words[w].DistanceToNext.dL = -1; // non-applicable
                                         words[w].DistanceToNext.dW = 0;
                                         words[w].DistanceToNext.dV = 0;
                                         words[w].DistanceToNext.dC = 0;
 
-                                        word_next_word_numbers.Add(word_text, words[w].Number);
-                                        word_next_verse_numbers.Add(word_text, verses[v].Number);
-                                        word_next_chapter_numbers.Add(word_text, chapters[c].SortedNumber);
+                                        word_next_word_numbers.Add(word_key, words[w].Number);
+                                        word_next_verse_numbers.Add(word_key, verses[v].Number);
+                                        word_next_chapter_numbers.Add(word_key, chapters[c].SortedNumber);
                                     }
                                     else
                                     {
                                         words[w].DistanceToNext.dL = -1; // non-applicable
-                                        words[w].DistanceToNext.dW = -1 * (words[w].Number - word_next_word_numbers[word_text]);
-                                        words[w].DistanceToNext.dV = -1 * (verses[v].Number - word_next_verse_numbers[word_text]);
-                                        words[w].DistanceToNext.dC = -1 * (chapters[c].SortedNumber - word_next_chapter_numbers[word_text]);
+                                        words[w].DistanceToNext.dW = -1 * (words[w].Number - word_next_word_numbers[word_key]);
+                                        words[w].DistanceToNext.dV = -1 * (verses[v].Number - word_next_verse_numbers[word_key]);
+                                        words[w].DistanceToNext.dC = -1 * (chapters[c].SortedNumber - word_next_chapter_numbers[word_key]);
 
                                         // save latest chapter, verse and word numbers for next iteration
-                                        word_next_word_numbers[word_text] = words[w].Number;
-                                        word_next_verse_numbers[word_text] = verses[v].Number;
-                                        word_next_chapter_numbers[word_text] = chapters[c].SortedNumber;
+                                        word_next_word_numbers[word_key] = words[w].Number;
+                                        word_next_verse_numbers[word_key] = verses[v].Number;
+                                        word_next_chapter_numbers[word_key] = chapters[c].SortedNumber;
                                     }
 
                                     if (words[w].Letters != null)
@@ -1335,36 +1335,36 @@ namespace Model
                                         List<Letter> letters = words[w].Letters;
                                         for (int l = letters.Count - 1; l >= 0; l--)
                                         {
-                                            string letter_text = letters[l].Character.ToString();
-                                            if (!with_diacritics)
+                                            string letter_key = letters[l].Character.ToString();
+                                            //if (!with_diacritics)
                                             {
-                                                letter_text = letter_text.SimplifyTo(this.text_mode);
+                                                letter_key = letter_key.SimplifyTo(this.text_mode).Trim();
                                             }
 
-                                            if (!letter_next_verse_numbers.ContainsKey(letter_text))
+                                            if (!letter_next_letter_numbers.ContainsKey(letter_key))
                                             {
                                                 letters[l].DistanceToNext.dL = 0;
                                                 letters[l].DistanceToNext.dW = 0;
                                                 letters[l].DistanceToNext.dV = 0;
                                                 letters[l].DistanceToNext.dC = 0;
 
-                                                letter_next_letter_numbers.Add(letter_text, letters[l].Number);
-                                                letter_next_word_numbers.Add(letter_text, words[w].Number);
-                                                letter_next_verse_numbers.Add(letter_text, verses[v].Number);
-                                                letter_next_chapter_numbers.Add(letter_text, chapters[c].SortedNumber);
+                                                letter_next_letter_numbers.Add(letter_key, letters[l].Number);
+                                                letter_next_word_numbers.Add(letter_key, words[w].Number);
+                                                letter_next_verse_numbers.Add(letter_key, verses[v].Number);
+                                                letter_next_chapter_numbers.Add(letter_key, chapters[c].SortedNumber);
                                             }
                                             else
                                             {
-                                                letters[l].DistanceToNext.dL = -1 * (letters[l].Number - letter_next_letter_numbers[letter_text]);
-                                                letters[l].DistanceToNext.dW = -1 * (words[w].Number - letter_next_word_numbers[letter_text]);
-                                                letters[l].DistanceToNext.dV = -1 * (verses[v].Number - letter_next_verse_numbers[letter_text]);
-                                                letters[l].DistanceToNext.dC = -1 * (chapters[c].SortedNumber - letter_next_chapter_numbers[letter_text]);
+                                                letters[l].DistanceToNext.dL = -1 * (letters[l].Number - letter_next_letter_numbers[letter_key]);
+                                                letters[l].DistanceToNext.dW = -1 * (words[w].Number - letter_next_word_numbers[letter_key]);
+                                                letters[l].DistanceToNext.dV = -1 * (verses[v].Number - letter_next_verse_numbers[letter_key]);
+                                                letters[l].DistanceToNext.dC = -1 * (chapters[c].SortedNumber - letter_next_chapter_numbers[letter_key]);
 
                                                 // save latest chapter, verse, word and letter numbers for next iteration
-                                                letter_next_letter_numbers[letter_text] = letters[l].Number;
-                                                letter_next_word_numbers[letter_text] = words[w].Number;
-                                                letter_next_verse_numbers[letter_text] = verses[v].Number;
-                                                letter_next_chapter_numbers[letter_text] = chapters[c].SortedNumber;
+                                                letter_next_letter_numbers[letter_key] = letters[l].Number;
+                                                letter_next_word_numbers[letter_key] = words[w].Number;
+                                                letter_next_verse_numbers[letter_key] = verses[v].Number;
+                                                letter_next_chapter_numbers[letter_key] = chapters[c].SortedNumber;
                                             }
                                         }
                                     }
@@ -1923,17 +1923,17 @@ namespace Model
                     text = text.Trim();
                     if (!text.Contains(" "))
                     {
-                        if ((this.text_mode == "Original") && (!with_diacritics))
+                        if (!with_diacritics)
                         {
-                            text = text.Simplify29();
+                            text = text.SimplifyTo(this.text_mode).Trim();
                         }
 
                         foreach (Verse verse in verses)
                         {
                             string verse_text = verse.Text;
-                            if ((this.text_mode == "Original") && (!with_diacritics))
+                            if (!with_diacritics)
                             {
-                                verse_text = verse_text.Simplify29();
+                                verse_text = verse_text.SimplifyTo(this.text_mode).Trim();
                             }
 
                             verse_text = verse_text.Trim();
@@ -2100,9 +2100,9 @@ namespace Model
                         text = text.Replace("-", "");
                     }
 
-                    if ((this.text_mode == "Original") && (!with_diacritics))
+                    if (!with_diacritics)
                     {
-                        text = text.Simplify29();
+                        text = text.SimplifyTo(this.text_mode).Trim();
                     }
 
                     string[] text_words = text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -2111,9 +2111,9 @@ namespace Model
                         foreach (Verse verse in verses)
                         {
                             string verse_text = verse.Text;
-                            if ((this.text_mode == "Original") && (!with_diacritics))
+                            if (!with_diacritics)
                             {
-                                verse_text = verse_text.Simplify29();
+                                verse_text = verse_text.SimplifyTo(this.text_mode).Trim();
                             }
 
                             verse_text = verse_text.Trim();
@@ -2418,9 +2418,9 @@ namespace Model
                         text = text.Replace("-", "");
                     }
 
-                    if ((this.text_mode == "Original") && (!with_diacritics))
+                    if (!with_diacritics)
                     {
-                        text = text.Simplify29();
+                        text = text.SimplifyTo(this.text_mode).Trim();
                     }
 
                     string[] text_words = text.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
@@ -2429,9 +2429,9 @@ namespace Model
                         foreach (Verse verse in verses)
                         {
                             string verse_text = verse.Text;
-                            if ((this.text_mode == "Original") && (!with_diacritics))
+                            if (!with_diacritics)
                             {
-                                verse_text = verse_text.Simplify29();
+                                verse_text = verse_text.SimplifyTo(this.text_mode).Trim();
                             }
 
                             verse_text = verse_text.Trim();
@@ -2596,19 +2596,10 @@ namespace Model
                                                         }
                                                         else
                                                         {
-                                                            if ((this.text_mode == "Original") && (!with_diacritics))
+                                                            text = text.Simplify36();
+                                                            if (key.StartsWith(text))
                                                             {
-                                                                if (key.StartsWith(text.Simplify36()))
-                                                                {
-                                                                    result.Add(key, count);
-                                                                }
-                                                            }
-                                                            else
-                                                            {
-                                                                if (key.StartsWith(text))
-                                                                {
-                                                                    result.Add(key, count);
-                                                                }
+                                                                result.Add(key, count);
                                                             }
                                                         }
                                                     }
@@ -2621,19 +2612,10 @@ namespace Model
                                                         }
                                                         else
                                                         {
-                                                            if ((this.text_mode == "Original") && (!with_diacritics))
+                                                            text = text.Simplify36();
+                                                            if (key.ContainsInside(text))
                                                             {
-                                                                if (key.ContainsInside(text.Simplify36()))
-                                                                {
-                                                                    result.Add(key, count);
-                                                                }
-                                                            }
-                                                            else
-                                                            {
-                                                                if (key.ContainsInside(text))
-                                                                {
-                                                                    result.Add(key, count);
-                                                                }
+                                                                result.Add(key, count);
                                                             }
                                                         }
                                                     }
@@ -2646,19 +2628,10 @@ namespace Model
                                                         }
                                                         else
                                                         {
-                                                            if ((this.text_mode == "Original") && (!with_diacritics))
+                                                            text = text.Simplify36();
+                                                            if (key.EndsWith(text))
                                                             {
-                                                                if (key.EndsWith(text.Simplify36()))
-                                                                {
-                                                                    result.Add(key, count);
-                                                                }
-                                                            }
-                                                            else
-                                                            {
-                                                                if (key.EndsWith(text))
-                                                                {
-                                                                    result.Add(key, count);
-                                                                }
+                                                                result.Add(key, count);
                                                             }
                                                         }
                                                     }
@@ -2671,19 +2644,10 @@ namespace Model
                                                         }
                                                         else
                                                         {
-                                                            if ((this.text_mode == "Original") && (!with_diacritics))
+                                                            text = text.Simplify36();
+                                                            if (key.Contains(text))
                                                             {
-                                                                if (key.Contains(text.Simplify36()))
-                                                                {
-                                                                    result.Add(key, count);
-                                                                }
-                                                            }
-                                                            else
-                                                            {
-                                                                if (key.Contains(text))
-                                                                {
-                                                                    result.Add(key, count);
-                                                                }
+                                                                result.Add(key, count);
                                                             }
                                                         }
                                                     }

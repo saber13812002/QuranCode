@@ -285,76 +285,76 @@ namespace Model
             StringBuilder str = new StringBuilder();
 
             if (
-                 AddToLetterLNumber ||
-                 AddToLetterWNumber ||
-                 AddToLetterVNumber ||
-                 AddToLetterCNumber ||
-                 AddToLetterLDistance ||
-                 AddToLetterWDistance ||
-                 AddToLetterVDistance ||
-                 AddToLetterCDistance
+                 (AddPositions && AddToLetterLNumber) ||
+                 (AddPositions && AddToLetterWNumber) ||
+                 (AddPositions && AddToLetterVNumber) ||
+                 (AddPositions && AddToLetterCNumber) ||
+                 ((AddDistancesToPrevious || AddDistancesToNext) && AddToLetterLDistance) ||
+                 ((AddDistancesToPrevious || AddDistancesToNext) && AddToLetterWDistance) ||
+                 ((AddDistancesToPrevious || AddDistancesToNext) && AddToLetterVDistance) ||
+                 ((AddDistancesToPrevious || AddDistancesToNext) && AddToLetterCDistance)
                )
             {
                 str.Append("Add to each letter  value");
-                if (AddToLetterLNumber) str.Append("\t" + "L");
-                if (AddToLetterWNumber) str.Append("\t" + "W");
-                if (AddToLetterVNumber) str.Append("\t" + "V");
-                if (AddToLetterCNumber) str.Append("\t" + "C");
-                if (AddToLetterLDistance) str.Append("\t" + "∆L");
-                if (AddToLetterWDistance) str.Append("\t" + "∆W");
-                if (AddToLetterVDistance) str.Append("\t" + "∆V");
-                if (AddToLetterCDistance) str.Append("\t" + "∆C");
+                str.Append("\t"); if (AddPositions && AddToLetterLNumber) str.Append("L");
+                str.Append("\t"); if (AddPositions && AddToLetterWNumber) str.Append("W");
+                str.Append("\t"); if (AddPositions && AddToLetterVNumber) str.Append("V");
+                str.Append("\t"); if (AddPositions && AddToLetterCNumber) str.Append("C");
+                str.Append("\t"); if ((AddDistancesToPrevious || AddDistancesToNext) && AddToLetterLDistance) str.Append("∆L");
+                str.Append("\t"); if ((AddDistancesToPrevious || AddDistancesToNext) && AddToLetterWDistance) str.Append("∆W");
+                str.Append("\t"); if ((AddDistancesToPrevious || AddDistancesToNext) && AddToLetterVDistance) str.Append("∆V");
+                str.Append("\t"); if ((AddDistancesToPrevious || AddDistancesToNext) && AddToLetterCDistance) str.Append("∆C");
                 str.AppendLine();
             }
 
 
             if (
-                 AddToWordWNumber ||
-                 AddToWordVNumber ||
-                 AddToWordCNumber ||
-                 AddToWordWDistance ||
-                 AddToWordVDistance ||
-                 AddToWordCDistance
+                 (AddPositions && AddToWordWNumber) ||
+                 (AddPositions && AddToWordVNumber) ||
+                 (AddPositions && AddToWordCNumber) ||
+                 ((AddDistancesToPrevious || AddDistancesToNext) && AddToWordWDistance) ||
+                 ((AddDistancesToPrevious || AddDistancesToNext) && AddToWordVDistance) ||
+                 ((AddDistancesToPrevious || AddDistancesToNext) && AddToWordCDistance)
                )
             {
                 str.Append("Add to each word    value");
-                if (AddToWordWNumber) str.Append("\t" + "W");
-                if (AddToWordVNumber) str.Append("\t" + "V");
-                if (AddToWordCNumber) str.Append("\t" + "C");
-                if (AddToWordWDistance) str.Append("\t" + "∆W");
-                if (AddToWordVDistance) str.Append("\t" + "∆V");
-                if (AddToWordCDistance) str.Append("\t" + "∆C");
+                str.Append("\t"); if (AddPositions && AddToWordWNumber) str.Append("W");
+                str.Append("\t"); if (AddPositions && AddToWordVNumber) str.Append("V");
+                str.Append("\t"); if (AddPositions && AddToWordCNumber) str.Append("C");
+                str.Append("\t"); if ((AddDistancesToPrevious || AddDistancesToNext) && AddToWordWDistance) str.Append("∆W");
+                str.Append("\t"); if ((AddDistancesToPrevious || AddDistancesToNext) && AddToWordVDistance) str.Append("∆V");
+                str.Append("\t"); if ((AddDistancesToPrevious || AddDistancesToNext) && AddToWordCDistance) str.Append("∆C");
                 str.AppendLine();
             }
 
 
             if (
-                 AddToVerseVNumber ||
-                 AddToVerseCNumber ||
-                 AddToVerseVDistance ||
-                 AddToVerseCDistance
+                 (AddPositions && AddToVerseVNumber) ||
+                 (AddPositions && AddToVerseCNumber) ||
+                 ((AddDistancesToPrevious || AddDistancesToNext) && AddToVerseVDistance) ||
+                 ((AddDistancesToPrevious || AddDistancesToNext) && AddToVerseCDistance)
                )
             {
                 str.Append("Add to each verse   value");
-                if (AddToVerseVNumber) str.Append("\t" + "V");
-                if (AddToVerseCNumber) str.Append("\t" + "C");
-                if (AddToVerseVDistance) str.Append("\t" + "∆V");
-                if (AddToVerseCDistance) str.Append("\t" + "∆C");
+                str.Append("\t"); if (AddPositions && AddToVerseVNumber) str.Append("V");
+                str.Append("\t"); if (AddPositions && AddToVerseCNumber) str.Append("C");
+                str.Append("\t"); if ((AddDistancesToPrevious || AddDistancesToNext) && AddToVerseVDistance) str.Append("∆V");
+                str.Append("\t"); if ((AddDistancesToPrevious || AddDistancesToNext) && AddToVerseCDistance) str.Append("∆C");
                 str.AppendLine();
             }
 
             if (
-                 AddToChapterCNumber
+                 (AddPositions && AddToChapterCNumber)
                )
             {
                 str.Append("Add to each chapter value");
-                if (AddToChapterCNumber) str.Append("\t" + "C");
+                str.Append("\t"); if (AddPositions && AddToChapterCNumber) str.Append("C");
                 str.AppendLine();
             }
 
-            str.AppendLine("AddPositions = " + AddPositions);
-            str.AppendLine("AddDistancesToPrevious = " + AddDistancesToPrevious);
-            str.AppendLine("AddDistancesToNext     = " + AddDistancesToNext);
+            str.AppendLine("AddPositions               = " + AddPositions);
+            str.AppendLine("AddDistancesToPrevious     = " + AddDistancesToPrevious);
+            str.AppendLine("AddDistancesToNext         = " + AddDistancesToNext);
             str.AppendLine("AddDistancesWithinChapters = " + AddDistancesWithinChapters);
             str.AppendLine();
 

@@ -97,8 +97,8 @@ public static class Constants
     public static List<char> QURANMARKS = new List<char> 
     { 
         '۞',    // Partition mark
-        '۩',    // Prostaration mark (Obligatory)
-        '⌂'     // Prostaration mark (Recommended)
+        '۩',    // Prostration mark (Obligatory)
+        '⌂'     // Prostration mark (Recommended)
     };
 
     public static List<char> DIACRITICS = new List<char> 
@@ -591,8 +591,8 @@ public static class StringExtensions
             if (
                   !Constants.ARABIC_DIGITS.Contains(character) &&
                   !Constants.INDIAN_DIGITS.Contains(character) &&
-                  (Constants.OPEN_BRACKET[0] != character) &&
-                  (Constants.CLOSE_BRACKET[0] != character) &&
+                  !(Constants.OPEN_BRACKET[0] == character) &&
+                  !(Constants.CLOSE_BRACKET[0] == character) &&
                   !Constants.STOPMARKS.Contains(character) &&
                   !Constants.QURANMARKS.Contains(character) &&
                   !Constants.DIACRITICS.Contains(character)
