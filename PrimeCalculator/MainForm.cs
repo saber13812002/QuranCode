@@ -647,9 +647,19 @@ public partial class MainForm : Form
                 squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(number);
                 _4nplus1_index = Numbers.Composite4nPlus1IndexOf(number) + 1;
             }
+            //long n = 0L;
+            //if (squares1_str.StartsWith("4×")) // 4n+1
+            //{
+            //    int start = "4×".Length;
+            //    int end = squares1_str.IndexOf("+");
+            //    string text = squares1_str.Substring(start, end - start);
+            //    n = Radix.Decode(text, 10L);
+            //}
             SquareSumTextBox.Text = squares1_str;
+            //SquareSumTextBox.ForeColor = Numbers.GetNumberTypeColor(n);
             SquareSumTextBox.Refresh();
             SquareDiffTextBox.Text = squares2_str;
+            //SquareDiffTextBox.ForeColor = Numbers.GetNumberTypeColor(n);
             SquareDiffTextBox.Refresh();
             Nth4nPlus1NumberTextBox.Text = (_4nplus1_index > 0) ? _4nplus1_index.ToString() : "";
             Nth4nPlus1NumberTextBox.ForeColor = Numbers.GetNumberTypeColor(_4nplus1_index);

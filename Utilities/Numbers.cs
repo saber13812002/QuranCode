@@ -197,6 +197,7 @@ public static class Numbers
         /* NumberKind.Abundant */           Color.FromArgb(255, 192, 255)
     };
 
+    //                             int.MaxValue = 2^32 - 1 = 2147483647;
     public static int MAX_NUMBER = int.MaxValue / (Globals.EDITION == Edition.Standard ? 1024 : 16);
 
     // pi = circumference / diameter ~= 355/113

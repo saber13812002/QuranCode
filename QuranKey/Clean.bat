@@ -5,8 +5,6 @@ cd Tools
 CALL Clean
 cd ..
 
-del *.zip
-del *.rar
 del /F /S /Q *.tmp
 del /F /S /Q *.bak
 del /F /S /Q *.ini
