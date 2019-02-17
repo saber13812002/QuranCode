@@ -331,6 +331,17 @@ public partial class MainForm : Form, ISubscriber
                     }
                 }
 
+                if (m_find_by_phrase_letter_frequency)
+                {
+                    ToolTip.SetToolTip(LetterFrequencyPositionSumSumLabel, L[l]["Base-10 letter frequency concatenation"]);
+                    ToolTip.SetToolTip(LetterFrequencyDistanceSumSumLabel, L[l]["Base-19 letter frequency concatenation"]);
+                }
+                else
+                {
+                    ToolTip.SetToolTip(LetterFrequencyPositionSumSumLabel, L[l]["Sum of letter position sums"]);
+                    ToolTip.SetToolTip(LetterFrequencyDistanceSumSumLabel, L[l]["Sum of letter distance sums"]);
+                }
+
                 int pos = ValueLabel.Text.IndexOf(" ");
                 string text = ValueLabel.Text.Substring(pos + 1).Trim();
                 if (L[l].ContainsKey(text))
@@ -44299,14 +44310,13 @@ public partial class MainForm : Form, ISubscriber
             long frequency_sum = 0L;
             long position_sum = 0L;
             long distance_sum = 0L;
+
             if (LetterFrequencyListView.SelectedIndices.Count > 0)
             {
                 count = LetterFrequencyListView.SelectedIndices.Count;
                 foreach (ListViewItem item in LetterFrequencyListView.SelectedItems)
                 {
                     frequency_sum += long.Parse(item.SubItems[2].Text);
-                    position_sum += long.Parse(item.SubItems[3].Text);
-                    distance_sum += long.Parse(item.SubItems[4].Text);
                 }
             }
             else
@@ -44315,8 +44325,55 @@ public partial class MainForm : Form, ISubscriber
                 foreach (ListViewItem item in LetterFrequencyListView.Items)
                 {
                     frequency_sum += long.Parse(item.SubItems[2].Text);
-                    position_sum += long.Parse(item.SubItems[3].Text);
-                    distance_sum += long.Parse(item.SubItems[4].Text);
+                }
+            }
+
+            if (m_find_by_phrase_letter_frequency)
+            {
+                // position_sum = base-10 frequency sum --- طسم letter frequencies in Initial Letters = 1754
+                // distance_sum = base-19 frequency sum --- طسم letter frequencies in Initial Letters = 4*1 + 5*19 + 17*19*19 = 6236
+                long base10_multiplier = 1L;
+                long base19_multiplier = 1L;
+                if (LetterFrequencyListView.SelectedIndices.Count > 0)
+                {
+                    foreach (ListViewItem item in LetterFrequencyListView.SelectedItems)
+                    {
+                        long digit = long.Parse(item.SubItems[2].Text);
+                        position_sum += digit * base10_multiplier;
+                        distance_sum += digit * base19_multiplier;
+                        base10_multiplier *= 10L;
+                        base19_multiplier *= 19L;
+                    }
+                }
+                else
+                {
+                    foreach (ListViewItem item in LetterFrequencyListView.Items)
+                    {
+                        long digit = long.Parse(item.SubItems[2].Text);
+                        position_sum += digit * base10_multiplier;
+                        distance_sum += digit * base19_multiplier;
+                        base10_multiplier *= 10L;
+                        base19_multiplier *= 19L;
+                    }
+                }
+            }
+            else
+            {
+                if (LetterFrequencyListView.SelectedIndices.Count > 0)
+                {
+                    foreach (ListViewItem item in LetterFrequencyListView.SelectedItems)
+                    {
+                        position_sum += long.Parse(item.SubItems[3].Text);
+                        distance_sum += long.Parse(item.SubItems[4].Text);
+                    }
+                }
+                else
+                {
+                    foreach (ListViewItem item in LetterFrequencyListView.Items)
+                    {
+                        position_sum += long.Parse(item.SubItems[3].Text);
+                        distance_sum += long.Parse(item.SubItems[4].Text);
+                    }
                 }
             }
 

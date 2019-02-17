@@ -8940,11 +8940,11 @@ partial class MainForm
             // 
             this.FindByFrequencyTotalLabel.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.FindByFrequencyTotalLabel.BackColor = System.Drawing.Color.Transparent;
-            this.FindByFrequencyTotalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByFrequencyTotalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByFrequencyTotalLabel.ForeColor = System.Drawing.SystemColors.WindowText;
             this.FindByFrequencyTotalLabel.Location = new System.Drawing.Point(0, 194);
             this.FindByFrequencyTotalLabel.Name = "FindByFrequencyTotalLabel";
-            this.FindByFrequencyTotalLabel.Size = new System.Drawing.Size(29, 18);
+            this.FindByFrequencyTotalLabel.Size = new System.Drawing.Size(23, 18);
             this.FindByFrequencyTotalLabel.TabIndex = 248;
             this.FindByFrequencyTotalLabel.Text = "∑";
             this.FindByFrequencyTotalLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -8997,7 +8997,7 @@ partial class MainForm
             // LetterOrderColumnHeader
             // 
             this.LetterOrderColumnHeader.Text = "#";
-            this.LetterOrderColumnHeader.Width = 24;
+            this.LetterOrderColumnHeader.Width = 21;
             // 
             // LetterCharacterColumnHeader
             // 
@@ -9054,7 +9054,7 @@ partial class MainForm
             this.LetterFrequencySumLabel.ForeColor = System.Drawing.SystemColors.WindowText;
             this.LetterFrequencySumLabel.Location = new System.Drawing.Point(49, 192);
             this.LetterFrequencySumLabel.Name = "LetterFrequencySumLabel";
-            this.LetterFrequencySumLabel.Size = new System.Drawing.Size(50, 18);
+            this.LetterFrequencySumLabel.Size = new System.Drawing.Size(47, 18);
             this.LetterFrequencySumLabel.TabIndex = 15;
             this.LetterFrequencySumLabel.Text = "0";
             this.LetterFrequencySumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -9068,9 +9068,9 @@ partial class MainForm
             this.LetterFrequencyCountLabel.BackColor = System.Drawing.Color.Transparent;
             this.LetterFrequencyCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LetterFrequencyCountLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.LetterFrequencyCountLabel.Location = new System.Drawing.Point(28, 192);
+            this.LetterFrequencyCountLabel.Location = new System.Drawing.Point(18, 192);
             this.LetterFrequencyCountLabel.Name = "LetterFrequencyCountLabel";
-            this.LetterFrequencyCountLabel.Size = new System.Drawing.Size(22, 18);
+            this.LetterFrequencyCountLabel.Size = new System.Drawing.Size(32, 18);
             this.LetterFrequencyCountLabel.TabIndex = 14;
             this.LetterFrequencyCountLabel.Text = "0";
             this.LetterFrequencyCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
