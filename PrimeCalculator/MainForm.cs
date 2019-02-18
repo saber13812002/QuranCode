@@ -202,6 +202,8 @@ public partial class MainForm : Form
 
         EnableEntryControls();
         SetupToolTips();
+
+        ValueTextBox.Focus();
     }
     private void SetupToolTips()
     {
@@ -2162,7 +2164,7 @@ public partial class MainForm : Form
     {
         EnableEntryControls();
         ClearProgress();
-        ValueTextBox.Focus();
+        //ValueTextBox.Focus();
     }
     private void AfterProcessing()
     {
@@ -2188,7 +2190,7 @@ public partial class MainForm : Form
             }
         }
 
-        ValueTextBox.Focus();
+        //ValueTextBox.Focus();
     }
 
     private enum TimeDisplayMode { Elapsed, Remaining }
