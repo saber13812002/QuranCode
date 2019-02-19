@@ -1303,7 +1303,6 @@ partial class MainForm
         // 
         // VerseDiffTextBox
         // 
-        this.VerseDiffTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.VerseDiffTextBox.BackColor = System.Drawing.SystemColors.Control;
         this.VerseDiffTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.VerseDiffTextBox.Location = new System.Drawing.Point(788, 14);
@@ -1320,7 +1319,6 @@ partial class MainForm
         // 
         // LetterDiffTextBox
         // 
-        this.LetterDiffTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.LetterDiffTextBox.BackColor = System.Drawing.SystemColors.Control;
         this.LetterDiffTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.LetterDiffTextBox.Location = new System.Drawing.Point(868, 14);
@@ -1337,7 +1335,6 @@ partial class MainForm
         // 
         // WordDiffTextBox
         // 
-        this.WordDiffTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.WordDiffTextBox.BackColor = System.Drawing.SystemColors.Control;
         this.WordDiffTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.WordDiffTextBox.Location = new System.Drawing.Point(825, 14);
@@ -4333,7 +4330,6 @@ partial class MainForm
         // 
         // DifferenceStatisticsLabel
         // 
-        this.DifferenceStatisticsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.DifferenceStatisticsLabel.BackColor = System.Drawing.Color.LightSteelBlue;
         this.DifferenceStatisticsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.DifferenceStatisticsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -4348,7 +4344,6 @@ partial class MainForm
         // 
         // DifferencesLabel
         // 
-        this.DifferencesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.DifferencesLabel.Cursor = System.Windows.Forms.Cursors.Default;
         this.DifferencesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DifferencesLabel.ForeColor = System.Drawing.Color.LightSteelBlue;
@@ -4362,7 +4357,6 @@ partial class MainForm
         // 
         // VerseWordLetterPositionLabel
         // 
-        this.VerseWordLetterPositionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.VerseWordLetterPositionLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.VerseWordLetterPositionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.VerseWordLetterPositionLabel.ForeColor = System.Drawing.Color.LightSteelBlue;
@@ -4493,7 +4487,6 @@ partial class MainForm
         // 
         // ChapterDiffTextBox
         // 
-        this.ChapterDiffTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.ChapterDiffTextBox.BackColor = System.Drawing.SystemColors.Control;
         this.ChapterDiffTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.ChapterDiffTextBox.Location = new System.Drawing.Point(755, 14);
@@ -4510,7 +4503,6 @@ partial class MainForm
         // 
         // LetterNumericUpDown
         // 
-        this.LetterNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.LetterNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
         this.LetterNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.LetterNumericUpDown.Location = new System.Drawing.Point(687, 14);
@@ -4531,7 +4523,6 @@ partial class MainForm
         // 
         // WordNumericUpDown
         // 
-        this.WordNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.WordNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
         this.WordNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.WordNumericUpDown.Location = new System.Drawing.Point(629, 14);
@@ -4552,7 +4543,6 @@ partial class MainForm
         // 
         // VerseNumericUpDown
         // 
-        this.VerseNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.VerseNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
         this.VerseNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.VerseNumericUpDown.Location = new System.Drawing.Point(577, 14);
@@ -5275,7 +5265,7 @@ partial class MainForm
         this.TabControl.Name = "TabControl";
         this.TabControl.SelectedIndex = 0;
         this.TabControl.ShowToolTips = true;
-        this.TabControl.Size = new System.Drawing.Size(816, 194);
+        this.TabControl.Size = new System.Drawing.Size(816, 195);
         this.TabControl.TabIndex = 102;
         this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
         this.TabControl.Click += new System.EventHandler(this.TabControl_Click);

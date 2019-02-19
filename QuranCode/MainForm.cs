@@ -2110,7 +2110,6 @@ public partial class MainForm : Form, ISubscriber
         // 
         // VerseDiffTextBox
         // 
-        this.VerseDiffTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.VerseDiffTextBox.BackColor = System.Drawing.SystemColors.Control;
         this.VerseDiffTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.VerseDiffTextBox.Location = new System.Drawing.Point(978, 17);
@@ -2126,27 +2125,8 @@ public partial class MainForm : Form, ISubscriber
         this.VerseDiffTextBox.Enter += new System.EventHandler(this.NumericUpDown_Enter);
         this.VerseDiffTextBox.Leave += new System.EventHandler(this.NumericUpDown_Leave);
         // 
-        // LetterDiffTextBox
-        // 
-        this.LetterDiffTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.LetterDiffTextBox.BackColor = System.Drawing.SystemColors.Control;
-        this.LetterDiffTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.LetterDiffTextBox.Location = new System.Drawing.Point(1085, 17);
-        this.LetterDiffTextBox.Margin = new System.Windows.Forms.Padding(4);
-        this.LetterDiffTextBox.Name = "LetterDiffTextBox";
-        this.LetterDiffTextBox.ReadOnly = true;
-        this.LetterDiffTextBox.Size = new System.Drawing.Size(63, 23);
-        this.LetterDiffTextBox.TabIndex = 22;
-        this.LetterDiffTextBox.Text = "-/+";
-        this.LetterDiffTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.ToolTip.SetToolTip(this.LetterDiffTextBox, "Letters between mouse clicks");
-        this.LetterDiffTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
-        this.LetterDiffTextBox.Enter += new System.EventHandler(this.NumericUpDown_Enter);
-        this.LetterDiffTextBox.Leave += new System.EventHandler(this.NumericUpDown_Leave);
-        // 
         // WordDiffTextBox
         // 
-        this.WordDiffTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.WordDiffTextBox.BackColor = System.Drawing.SystemColors.Control;
         this.WordDiffTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.WordDiffTextBox.Location = new System.Drawing.Point(1026, 17);
@@ -2161,6 +2141,23 @@ public partial class MainForm : Form, ISubscriber
         this.WordDiffTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
         this.WordDiffTextBox.Enter += new System.EventHandler(this.NumericUpDown_Enter);
         this.WordDiffTextBox.Leave += new System.EventHandler(this.NumericUpDown_Leave);
+        // 
+        // LetterDiffTextBox
+        // 
+        this.LetterDiffTextBox.BackColor = System.Drawing.SystemColors.Control;
+        this.LetterDiffTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.LetterDiffTextBox.Location = new System.Drawing.Point(1085, 17);
+        this.LetterDiffTextBox.Margin = new System.Windows.Forms.Padding(4);
+        this.LetterDiffTextBox.Name = "LetterDiffTextBox";
+        this.LetterDiffTextBox.ReadOnly = true;
+        this.LetterDiffTextBox.Size = new System.Drawing.Size(63, 23);
+        this.LetterDiffTextBox.TabIndex = 22;
+        this.LetterDiffTextBox.Text = "-/+";
+        this.LetterDiffTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+        this.ToolTip.SetToolTip(this.LetterDiffTextBox, "Letters between mouse clicks");
+        this.LetterDiffTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.LetterDiffTextBox.Enter += new System.EventHandler(this.NumericUpDown_Enter);
+        this.LetterDiffTextBox.Leave += new System.EventHandler(this.NumericUpDown_Leave);
         // 
         // VerseByVerseNumberLabel
         // 
@@ -5305,7 +5302,6 @@ public partial class MainForm : Form, ISubscriber
         // 
         // DifferenceStatisticsLabel
         // 
-        this.DifferenceStatisticsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.DifferenceStatisticsLabel.BackColor = System.Drawing.Color.LightSteelBlue;
         this.DifferenceStatisticsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.DifferenceStatisticsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -5321,7 +5317,6 @@ public partial class MainForm : Form, ISubscriber
         // 
         // DifferencesLabel
         // 
-        this.DifferencesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.DifferencesLabel.Cursor = System.Windows.Forms.Cursors.Default;
         this.DifferencesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DifferencesLabel.ForeColor = System.Drawing.Color.LightSteelBlue;
@@ -5336,7 +5331,6 @@ public partial class MainForm : Form, ISubscriber
         // 
         // VerseWordLetterPositionLabel
         // 
-        this.VerseWordLetterPositionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.VerseWordLetterPositionLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.VerseWordLetterPositionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.VerseWordLetterPositionLabel.ForeColor = System.Drawing.Color.LightSteelBlue;
@@ -5345,7 +5339,7 @@ public partial class MainForm : Form, ISubscriber
         this.VerseWordLetterPositionLabel.Name = "VerseWordLetterPositionLabel";
         this.VerseWordLetterPositionLabel.Size = new System.Drawing.Size(231, 16);
         this.VerseWordLetterPositionLabel.TabIndex = 95;
-        this.VerseWordLetterPositionLabel.Text = "Verse      Word     Letter";
+        this.VerseWordLetterPositionLabel.Text = "Verse      Word        Letter";
         this.ToolTip.SetToolTip(this.VerseWordLetterPositionLabel, "Book word symmetry");
         this.VerseWordLetterPositionLabel.Click += new System.EventHandler(this.VerseWordLetterPositionLabel_Click);
         // 
@@ -5477,7 +5471,6 @@ public partial class MainForm : Form, ISubscriber
         // 
         // ChapterDiffTextBox
         // 
-        this.ChapterDiffTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.ChapterDiffTextBox.BackColor = System.Drawing.SystemColors.Control;
         this.ChapterDiffTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.ChapterDiffTextBox.Location = new System.Drawing.Point(933, 17);
@@ -5495,7 +5488,6 @@ public partial class MainForm : Form, ISubscriber
         // 
         // LetterNumericUpDown
         // 
-        this.LetterNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.LetterNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
         this.LetterNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.LetterNumericUpDown.Location = new System.Drawing.Point(825, 17);
@@ -5517,7 +5509,6 @@ public partial class MainForm : Form, ISubscriber
         // 
         // WordNumericUpDown
         // 
-        this.WordNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.WordNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
         this.WordNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.WordNumericUpDown.Location = new System.Drawing.Point(762, 17);
@@ -5539,7 +5530,6 @@ public partial class MainForm : Form, ISubscriber
         // 
         // VerseNumericUpDown
         // 
-        this.VerseNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.VerseNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
         this.VerseNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.VerseNumericUpDown.Location = new System.Drawing.Point(693, 17);
