@@ -32,7 +32,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ٱللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَءَالِ مُحَمَّدٍ")]
 [assembly: AssemblyProduct("QuranKey")]
-[assembly: AssemblyCopyright("©2018 Ali Adams علي عبد الرزاق عبد الكريم القره غولي")]
+[assembly: AssemblyCopyright("©2009-2019 Ali Adams علي عبد الرزاق عبد الكريم القره غولي")]
 [assembly: AssemblyTrademark("http://heliwave.com/")]
 [assembly: AssemblyCulture("")]
 

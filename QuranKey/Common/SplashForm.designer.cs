@@ -129,9 +129,9 @@ partial class SplashForm
         this.VersionLabel.Size = new System.Drawing.Size(225, 21);
         this.VersionLabel.TabIndex = 16;
         this.VersionLabel.Tag = "";
-        this.VersionLabel.Text = "©2018 Ali Adams";
+        this.VersionLabel.Text = "©2009-2019 Ali Adams";
         this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.VersionLabel, "©2018 Ali Adams - علي عبد الرزاق عبد الكريم القره غولي");
+        this.ToolTip.SetToolTip(this.VersionLabel, "©2009-2019 Ali Adams - علي عبد الرزاق عبد الكريم القره غولي");
         this.VersionLabel.Click += new System.EventHandler(this.VersionLabel_Click);
         // 
         // InitialLettersLabel

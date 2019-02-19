@@ -13196,7 +13196,18 @@ public partial class MainForm : Form, ISubscriber
 
             // this code has been moved out of SelectionChanged and brought to MouseClick and KeyUp
             // to keep all verse translations visible until the user clicks a verse then show one verse translation
-            if (m_active_textbox.SelectionLength == 0)
+            if (m_active_textbox.SelectionLength > 0)
+            {
+                // selected text is processed by CalculateAndDisplayCounts 
+
+                DisplayWordFrequencies();
+
+                GenerateSentencesLabel.Visible = (Globals.EDITION == Edition.Ultimate);
+                DuplicateLettersCheckBox.Visible = (Globals.EDITION == Edition.Ultimate);
+                GenerateSentencesLabel.Refresh();
+                DuplicateLettersCheckBox.Refresh();
+            }
+            else
             {
                 Verse verse = GetCurrentVerse();
                 if (verse != null)
@@ -13229,17 +13240,6 @@ public partial class MainForm : Form, ISubscriber
 
                 GenerateSentencesLabel.Visible = false;
                 DuplicateLettersCheckBox.Visible = false;
-                GenerateSentencesLabel.Refresh();
-                DuplicateLettersCheckBox.Refresh();
-            }
-            else
-            {
-                // selected text is dealt with by CalculateAndDisplayCounts 
-
-                DisplayWordFrequencies();
-
-                GenerateSentencesLabel.Visible = (Globals.EDITION == Edition.Ultimate);
-                DuplicateLettersCheckBox.Visible = (Globals.EDITION == Edition.Ultimate);
                 GenerateSentencesLabel.Refresh();
                 DuplicateLettersCheckBox.Refresh();
             }
@@ -32987,7 +32987,6 @@ public partial class MainForm : Form, ISubscriber
                 m_client.Book.WithDiacritics = m_with_diacritics;
 
                 PopulateWordsListBox();
-                DisplayWordFrequencies();
 
                 LetterFrequencyWithDiacriticsCheckBox.Checked = FindByTextWithDiacriticsCheckBox.Checked;
                 BuildLetterFrequencies();
