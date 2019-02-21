@@ -1408,7 +1408,6 @@ public static class Numbers
     private static List<long> s_primes = null;
     private static List<long> s_additive_primes = null;
     private static List<long> s_non_additive_primes = null;
-    private static List<long> s_primes_4nplus1 = null;
     public static List<long> Primes
     {
         get
@@ -1440,17 +1439,6 @@ public static class Numbers
                 GenerateNonAdditivePrimes(MAX_NUMBER);
             }
             return s_non_additive_primes;
-        }
-    }
-    public static List<long> Primes4nPlus1
-    {
-        get
-        {
-            if (s_primes_4nplus1 == null)
-            {
-                LoadPrimes4nPlus1();
-            }
-            return s_primes_4nplus1;
         }
     }
     public static int PrimeIndexOf(long number)
@@ -1525,20 +1513,6 @@ public static class Numbers
         }
         return -1;
     }
-    public static int Prime4nPlus1IndexOf(long number)
-    {
-        if (number < 0L) number *= -1L;
-
-        if (IsPrime(number))
-        {
-            if (s_primes_4nplus1 == null)
-            {
-                LoadPrimes4nPlus1();
-            }
-            return BinarySearch(s_primes_4nplus1, number);
-        }
-        return -1;
-    }
     public static int PrimeIndexOf(string value, long radix)
     {
         long number = Radix.Decode(value, radix);
@@ -1553,11 +1527,6 @@ public static class Numbers
     {
         long number = Radix.Decode(value, radix);
         return NonAdditivePrimeIndexOf(number);
-    }
-    public static int Prime4nPlus1IndexOf(string value, long radix)
-    {
-        long number = Radix.Decode(value, radix);
-        return Prime4nPlus1IndexOf(number);
     }
     private static void GeneratePrimes(int max)
     {
@@ -1653,7 +1622,6 @@ public static class Numbers
     private static string s_primes_filename = "primes.txt";
     private static string s_additive_primes_filename = "additive_primes.txt";
     private static string s_non_additive_primes_filename = "non_additive_primes.txt";
-    private static string s_primes_4nplus1_filename = "4n+1_primes.txt";
     private static void LoadPrimes()
     {
         try
@@ -1753,39 +1721,6 @@ public static class Numbers
             Console.WriteLine(ex.Message);
         }
     }
-    private static void LoadPrimes4nPlus1()
-    {
-        try
-        {
-            string filename = Globals.NUMBERS_FOLDER + "/" + s_primes_4nplus1_filename;
-            if (File.Exists(filename))
-            {
-                FileHelper.WaitForReady(filename);
-
-                s_primes_4nplus1 = new List<long>();
-                using (StreamReader reader = new StreamReader(filename))
-                {
-                    string line = "";
-                    while (!reader.EndOfStream)
-                    {
-                        try
-                        {
-                            line = reader.ReadLine();
-                            s_primes_4nplus1.Add(long.Parse(line));
-                        }
-                        catch
-                        {
-                            // ignore non-long line
-                        }
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-    }
     private static void SavePrimes()
     {
         if (s_primes != null)
@@ -1819,11 +1754,140 @@ public static class Numbers
             }
         }
     }
+    private static List<long> s_primes_4nplus1 = null;
+    public static List<long> Primes4nPlus1
+    {
+        get
+        {
+            if (s_primes_4nplus1 == null)
+            {
+                LoadPrimes4nPlus1();
+            }
+            return s_primes_4nplus1;
+        }
+    }
+    public static int Prime4nPlus1IndexOf(long number)
+    {
+        if (number < 0L) number *= -1L;
+
+        if (IsPrime(number))
+        {
+            if (s_primes_4nplus1 == null)
+            {
+                LoadPrimes4nPlus1();
+            }
+            return BinarySearch(s_primes_4nplus1, number);
+        }
+        return -1;
+    }
+    public static int Prime4nPlus1IndexOf(string value, long radix)
+    {
+        long number = Radix.Decode(value, radix);
+        return Prime4nPlus1IndexOf(number);
+    }
+    private static string s_primes_4nplus1_filename = "4n+1_primes.txt";
+    private static void LoadPrimes4nPlus1()
+    {
+        try
+        {
+            string filename = Globals.NUMBERS_FOLDER + "/" + s_primes_4nplus1_filename;
+            if (File.Exists(filename))
+            {
+                FileHelper.WaitForReady(filename);
+
+                s_primes_4nplus1 = new List<long>();
+                using (StreamReader reader = new StreamReader(filename))
+                {
+                    string line = "";
+                    while (!reader.EndOfStream)
+                    {
+                        try
+                        {
+                            line = reader.ReadLine();
+                            s_primes_4nplus1.Add(long.Parse(line));
+                        }
+                        catch
+                        {
+                            // ignore non-long line
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+    private static List<long> s_primes_4nminus1 = null;
+    public static List<long> Primes4nMinus1
+    {
+        get
+        {
+            if (s_primes_4nminus1 == null)
+            {
+                LoadPrimes4nMinus1();
+            }
+            return s_primes_4nminus1;
+        }
+    }
+    public static int Prime4nMinus1IndexOf(long number)
+    {
+        if (number < 0L) number *= -1L;
+
+        if (IsPrime(number))
+        {
+            if (s_primes_4nminus1 == null)
+            {
+                LoadPrimes4nMinus1();
+            }
+            return BinarySearch(s_primes_4nminus1, number);
+        }
+        return -1;
+    }
+    public static int Prime4nMinus1IndexOf(string value, long radix)
+    {
+        long number = Radix.Decode(value, radix);
+        return Prime4nMinus1IndexOf(number);
+    }
+    private static string s_primes_4nminus1_filename = "4n-1_primes.txt";
+    private static void LoadPrimes4nMinus1()
+    {
+        try
+        {
+            string filename = Globals.NUMBERS_FOLDER + "/" + s_primes_4nminus1_filename;
+            if (File.Exists(filename))
+            {
+                FileHelper.WaitForReady(filename);
+
+                s_primes_4nminus1 = new List<long>();
+                using (StreamReader reader = new StreamReader(filename))
+                {
+                    string line = "";
+                    while (!reader.EndOfStream)
+                    {
+                        try
+                        {
+                            line = reader.ReadLine();
+                            s_primes_4nminus1.Add(long.Parse(line));
+                        }
+                        catch
+                        {
+                            // ignore non-long line
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
 
     private static List<long> s_composites = null;
     private static List<long> s_additive_composites = null;
     private static List<long> s_non_additive_composites = null;
-    private static List<long> s_composites_4nplus1 = null;
     public static List<long> Composites
     {
         get
@@ -1855,17 +1919,6 @@ public static class Numbers
                 GenerateNonAdditiveComposites(MAX_NUMBER / 2);
             }
             return s_non_additive_composites;
-        }
-    }
-    public static List<long> Composites4nPlus1
-    {
-        get
-        {
-            if (s_composites_4nplus1 == null)
-            {
-                LoadComposites4nPlus1();
-            }
-            return s_composites_4nplus1;
         }
     }
     public static int CompositeIndexOf(long number)
@@ -1940,20 +1993,6 @@ public static class Numbers
         }
         return -1;
     }
-    public static int Composite4nPlus1IndexOf(long number)
-    {
-        if (number < 0L) number *= -1L;
-
-        if (IsComposite(number))
-        {
-            if (s_composites_4nplus1 == null)
-            {
-                LoadComposites4nPlus1();
-            }
-            return BinarySearch(s_composites_4nplus1, number);
-        }
-        return -1;
-    }
     public static int CompositeIndexOf(string value, long radix)
     {
         long number = Radix.Decode(value, radix);
@@ -1968,11 +2007,6 @@ public static class Numbers
     {
         long number = Radix.Decode(value, radix);
         return NonAdditiveCompositeIndexOf(number);
-    }
-    public static int Composite4nPlus1IndexOf(string value, long radix)
-    {
-        long number = Radix.Decode(value, radix);
-        return Composite4nPlus1IndexOf(number);
     }
     private static void GenerateComposites(int max)
     {
@@ -2077,7 +2111,6 @@ public static class Numbers
     private static string s_composites_filename = "composites.txt";
     private static string s_additive_composites_filename = "additive_composites.txt";
     private static string s_non_additive_composites_filename = "non_additive_composites.txt";
-    private static string s_composites_4nplus1_filename = "4n+1_composites.txt";
     private static void LoadComposites()
     {
         try
@@ -2177,39 +2210,6 @@ public static class Numbers
             Console.WriteLine(ex.Message);
         }
     }
-    private static void LoadComposites4nPlus1()
-    {
-        try
-        {
-            string filename = Globals.NUMBERS_FOLDER + "/" + s_composites_4nplus1_filename;
-            if (File.Exists(filename))
-            {
-                FileHelper.WaitForReady(filename);
-
-                s_composites_4nplus1 = new List<long>();
-                using (StreamReader reader = new StreamReader(filename))
-                {
-                    string line = "";
-                    while (!reader.EndOfStream)
-                    {
-                        try
-                        {
-                            line = reader.ReadLine();
-                            s_composites_4nplus1.Add(long.Parse(line));
-                        }
-                        catch
-                        {
-                            // ignore non-long line
-                        }
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-    }
     private static void SaveComposites()
     {
         if (s_composites != null)
@@ -2243,6 +2243,137 @@ public static class Numbers
             }
         }
     }
+    private static List<long> s_composites_4nplus1 = null;
+    public static List<long> Composites4nPlus1
+    {
+        get
+        {
+            if (s_composites_4nplus1 == null)
+            {
+                LoadComposites4nPlus1();
+            }
+            return s_composites_4nplus1;
+        }
+    }
+    public static int Composite4nPlus1IndexOf(long number)
+    {
+        if (number < 0L) number *= -1L;
+
+        if (IsComposite(number))
+        {
+            if (s_composites_4nplus1 == null)
+            {
+                LoadComposites4nPlus1();
+            }
+            return BinarySearch(s_composites_4nplus1, number);
+        }
+        return -1;
+    }
+    public static int Composite4nPlus1IndexOf(string value, long radix)
+    {
+        long number = Radix.Decode(value, radix);
+        return Composite4nPlus1IndexOf(number);
+    }
+    private static string s_composites_4nplus1_filename = "4n+1_composites.txt";
+    private static void LoadComposites4nPlus1()
+    {
+        try
+        {
+            string filename = Globals.NUMBERS_FOLDER + "/" + s_composites_4nplus1_filename;
+            if (File.Exists(filename))
+            {
+                FileHelper.WaitForReady(filename);
+
+                s_composites_4nplus1 = new List<long>();
+                using (StreamReader reader = new StreamReader(filename))
+                {
+                    string line = "";
+                    while (!reader.EndOfStream)
+                    {
+                        try
+                        {
+                            line = reader.ReadLine();
+                            s_composites_4nplus1.Add(long.Parse(line));
+                        }
+                        catch
+                        {
+                            // ignore non-long line
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+    private static List<long> s_composites_4nminus1 = null;
+    public static List<long> Composites4nMinus1
+    {
+        get
+        {
+            if (s_composites_4nminus1 == null)
+            {
+                LoadComposites4nMinus1();
+            }
+            return s_composites_4nminus1;
+        }
+    }
+    public static int Composite4nMinus1IndexOf(long number)
+    {
+        if (number < 0L) number *= -1L;
+
+        if (IsComposite(number))
+        {
+            if (s_composites_4nminus1 == null)
+            {
+                LoadComposites4nMinus1();
+            }
+            return BinarySearch(s_composites_4nminus1, number);
+        }
+        return -1;
+    }
+    public static int Composite4nMinus1IndexOf(string value, long radix)
+    {
+        long number = Radix.Decode(value, radix);
+        return Composite4nMinus1IndexOf(number);
+    }
+    private static string s_composites_4nminus1_filename = "4n-1_composites.txt";
+    private static void LoadComposites4nMinus1()
+    {
+        try
+        {
+            string filename = Globals.NUMBERS_FOLDER + "/" + s_composites_4nminus1_filename;
+            if (File.Exists(filename))
+            {
+                FileHelper.WaitForReady(filename);
+
+                s_composites_4nminus1 = new List<long>();
+                using (StreamReader reader = new StreamReader(filename))
+                {
+                    string line = "";
+                    while (!reader.EndOfStream)
+                    {
+                        try
+                        {
+                            line = reader.ReadLine();
+                            s_composites_4nminus1.Add(long.Parse(line));
+                        }
+                        catch
+                        {
+                            // ignore non-long line
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
 
     // prime repeated units 1111111.....1111111 numbers
     public static List<long> PrimeRepunits;

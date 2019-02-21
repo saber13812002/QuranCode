@@ -102,10 +102,10 @@ public partial class MainForm : Form
                                             {
                                                 foreach (string item in sub_sub_parts)
                                                 {
-                                                    m_history.Add(item);
+                                                    m_history_items.Add(item);
                                                     m_history_index++;
                                                 }
-                                                ValueTextBox.Text = m_history[m_history_index];
+                                                ValueTextBox.Text = m_history_items[m_history_index];
                                             }
                                         }
                                     }
@@ -124,9 +124,6 @@ public partial class MainForm : Form
         {
             RestoreLocation();
         }
-
-        HistoryDeleteLabel.Enabled = (m_history.Count > 0);
-        HistoryClearLabel.Enabled = (m_history.Count > 0);
     }
     private void SaveSettings()
     {
@@ -141,8 +138,8 @@ public partial class MainForm : Form
                 writer.WriteLine("Height=" + this.Height);
 
                 writer.WriteLine("[History]");
-                StringBuilder str = new StringBuilder("Count=" + this.m_history.Count + "\t");
-                foreach (string item in m_history)
+                StringBuilder str = new StringBuilder("Count=" + this.m_history_items.Count + "\t");
+                foreach (string item in m_history_items)
                 {
                     str.Append(item + ",");
                 }
@@ -190,9 +187,9 @@ public partial class MainForm : Form
         XCLabel.ForeColor = Numbers.NUMBER_TYPE_COLORS[7];
         //DFLabel.ForeColor = Numbers.NUMBER_KIND_COLORS[0];
         //ABLabel.ForeColor = Numbers.NUMBER_KIND_COLORS[2];
-        DisplayDeficientNumbersLabel.BackColor = Numbers.NUMBER_KIND_COLORS[0];
-        DisplayPerfectNumbersLabel.BackColor = Numbers.NUMBER_KIND_COLORS[1];
-        DisplayAbundantNumbersLabel.BackColor = Numbers.NUMBER_KIND_COLORS[2];
+        DeficientNumbersLabel.BackColor = Numbers.NUMBER_KIND_COLORS[0];
+        PerfectNumbersLabel.BackColor = Numbers.NUMBER_KIND_COLORS[1];
+        AbundantNumbersLabel.BackColor = Numbers.NUMBER_KIND_COLORS[2];
         DFTextBox.BackColor = Numbers.NUMBER_KIND_COLORS[0];
         ABTextBox.BackColor = Numbers.NUMBER_KIND_COLORS[2];
     }
@@ -302,8 +299,8 @@ public partial class MainForm : Form
         int length = ValueTextBox.Text.Replace(" ", "").Length;
         if (digits == length)
         {
-            HistoryBackwardLabel.Enabled = (digits > 0);
-            HistoryForewardLabel.Enabled = (digits > 0);
+            PreviousPrimeNumberLabel.Enabled = (digits > 0);
+            NextPrimeNumberLabel.Enabled = (digits > 0);
         }
         DigitsLabel.Text = (digits == 0) ? "digits" : digits.ToString();
 
@@ -325,14 +322,7 @@ public partial class MainForm : Form
     }
     private void ValueTextBox_KeyDown(object sender, KeyEventArgs e)
     {
-        if (ModifierKeys == (Keys.Shift | Keys.Control))
-        {
-            if (e.KeyCode == Keys.Delete)
-            {
-                HistoryClearLabel_Click(null, null);
-            }
-        }
-        else if (ModifierKeys == Keys.Control)
+        if (ModifierKeys == Keys.Control)
         {
             if (e.KeyCode == Keys.A)
             {
@@ -343,13 +333,11 @@ public partial class MainForm : Form
             }
             else if (e.KeyCode == Keys.Z)
             {
-                HistoryBackwardLabel_Click(null, null);
-                CallRun();
+                PreviousHistoryItem();
             }
             else if (e.KeyCode == Keys.Y)
             {
-                HistoryForewardLabel_Click(null, null);
-                CallRun();
+                NextHistoryItem();
             }
             else if (e.KeyCode == Keys.Up)
             {
@@ -361,7 +349,6 @@ public partial class MainForm : Form
             }
             else if (e.KeyCode == Keys.Delete)
             {
-                HistoryDeleteLabel_Click(null, null);
             }
         }
         else if (e.KeyCode == Keys.Up)
@@ -386,11 +373,14 @@ public partial class MainForm : Form
         long value = 0L;
         if (long.TryParse(ValueTextBox.Text, out value))
         {
-            if (value < long.MaxValue) value++;
-            ValueTextBox.Text = value.ToString();
-            ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
-            ValueTextBox.Refresh();
-            FactorizeValue(value);
+            if (value < long.MaxValue)
+            {
+                value++;
+                ValueTextBox.Text = value.ToString();
+                ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
+                ValueTextBox.Refresh();
+                FactorizeValue(value);
+            }
         }
     }
     private void DecrementValue()
@@ -398,11 +388,14 @@ public partial class MainForm : Form
         long value = 0L;
         if (long.TryParse(ValueTextBox.Text, out value))
         {
-            if (value > 0) value--;
-            ValueTextBox.Text = value.ToString();
-            ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
-            ValueTextBox.Refresh();
-            FactorizeValue(value);
+            if (value > 0L)
+            {
+                value--;
+                ValueTextBox.Text = value.ToString();
+                ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
+                ValueTextBox.Refresh();
+                FactorizeValue(value);
+            }
         }
     }
     private void NextPrimeNumber()
@@ -472,79 +465,33 @@ public partial class MainForm : Form
             this.Cursor = Cursors.Default;
         }
     }
-
-    private List<string> m_history = new List<string>();
-    private int m_history_index = -1;
-    private void HistoryForewardLabel_Click(object sender, EventArgs e)
+    private void NextPrimeNumberLabel_Click(object sender, EventArgs e)
     {
-        if ((m_history_index >= 0) && (m_history_index < m_history.Count - 1))
+        NextPrimeNumber();
+    }
+    private void PreviousPrimeNumberLabel_Click(object sender, EventArgs e)
+    {
+        PreviousPrimeNumber();
+    }
+
+    private List<string> m_history_items = new List<string>();
+    private int m_history_index = -1;
+    private void NextHistoryItem()
+    {
+        if ((m_history_index >= 0) && (m_history_index < m_history_items.Count - 1))
         {
             m_history_index++;
-            ValueTextBox.Text = m_history[m_history_index];
+            ValueTextBox.Text = m_history_items[m_history_index];
         }
         ValueTextBox.Focus();
     }
-    private void HistoryBackwardLabel_Click(object sender, EventArgs e)
+    private void PreviousHistoryItem()
     {
-        if ((m_history_index > 0) && (m_history_index < m_history.Count))
+        if ((m_history_index > 0) && (m_history_index < m_history_items.Count))
         {
             m_history_index--;
-            ValueTextBox.Text = m_history[m_history_index];
+            ValueTextBox.Text = m_history_items[m_history_index];
         }
-        ValueTextBox.Focus();
-    }
-    private void HistoryDeleteLabel_Click(object sender, EventArgs e)
-    {
-        if ((m_history_index >= 0) && (m_history_index < m_history.Count))
-        {
-            m_history.RemoveAt(m_history_index);
-
-            if ((m_history_index >= m_history.Count))
-            {
-                m_history_index--;
-            }
-            if ((m_history_index >= 0) && (m_history_index < m_history.Count))
-            {
-                ValueTextBox.Text = m_history[m_history_index];
-            }
-            else
-            {
-                ValueTextBox.Text = "";
-            }
-        }
-        else
-        {
-            if (m_history.Count > 0)
-            {
-                ValueTextBox.Text = m_history[m_history.Count - 1];
-            }
-            else
-            {
-                ValueTextBox.Text = "";
-            }
-
-            if ((m_history_index >= m_history.Count))
-            {
-                m_history_index--;
-            }
-        }
-        ValueTextBox.Refresh();
-
-        HistoryDeleteLabel.Enabled = (m_history.Count > 0);
-        HistoryClearLabel.Enabled = (m_history.Count > 0);
-
-        ValueTextBox.Focus();
-    }
-    private void HistoryClearLabel_Click(object sender, EventArgs e)
-    {
-        m_history.Clear();
-        m_history_index = -1;
-        ValueTextBox.Text = "";
-        ValueTextBox.Refresh();
-
-        HistoryDeleteLabel.Enabled = false;
-        HistoryClearLabel.Enabled = false;
-
         ValueTextBox.Focus();
     }
 
@@ -637,17 +584,20 @@ public partial class MainForm : Form
             string squares1_str = "";
             string squares2_str = "";
             int _4nplus1_index = -1;
+            int _4nminus1_index = -1;
             if (Numbers.IsUnit(number) || Numbers.IsPrime(number))
             {
                 squares1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(number);
                 squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(number);
                 _4nplus1_index = Numbers.Prime4nPlus1IndexOf(number) + 1;
+                _4nminus1_index = Numbers.Prime4nMinus1IndexOf(number) + 1;
             }
             else // if composite
             {
                 squares1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(number);
                 squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(number);
                 _4nplus1_index = Numbers.Composite4nPlus1IndexOf(number) + 1;
+                _4nminus1_index = Numbers.Composite4nMinus1IndexOf(number) + 1;
             }
             //long n = 0L;
             //if (squares1_str.StartsWith("4×")) // 4n+1
@@ -663,9 +613,10 @@ public partial class MainForm : Form
             SquareDiffTextBox.Text = squares2_str;
             //SquareDiffTextBox.ForeColor = Numbers.GetNumberTypeColor(n);
             SquareDiffTextBox.Refresh();
-            Nth4nPlus1NumberTextBox.Text = (_4nplus1_index > 0) ? _4nplus1_index.ToString() : "";
-            Nth4nPlus1NumberTextBox.ForeColor = Numbers.GetNumberTypeColor(_4nplus1_index);
-            Nth4nPlus1NumberTextBox.Refresh();
+            int _4n1_index = (_4nplus1_index > 0) ? _4nplus1_index : (_4nminus1_index > 0) ? _4nminus1_index : 0;
+            Nth4n1NumberTextBox.Text = (_4n1_index > 0) ? _4n1_index.ToString() : "";
+            Nth4n1NumberTextBox.ForeColor = Numbers.GetNumberTypeColor(_4n1_index);
+            Nth4n1NumberTextBox.Refresh();
 
             UpdateNumberKind(number);
             UpdateSumOfDivisors(number);
@@ -704,15 +655,15 @@ public partial class MainForm : Form
                         ToolTip.SetToolTip(NthAdditiveNumberTextBox, "Additive prime index");
                         ToolTip.SetToolTip(NthNonAdditiveNumberTextBox, "Non-additive prime index");
 
-                        if (Nth4nPlus1NumberTextBox.Text == "")
+                        if (Nth4n1NumberTextBox.Text == "")
                         {
-                            Nth4nPlus1NumberTextBox.BackColor = SystemColors.ControlLight;
+                            Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
                         }
                         else
                         {
-                            Nth4nPlus1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
+                            Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
                         }
-                        Nth4nPlus1NumberTextBox.Refresh();
+                        Nth4n1NumberTextBox.Refresh();
                     }
                     else // Composite
                     {
@@ -733,17 +684,19 @@ public partial class MainForm : Form
                         ToolTip.SetToolTip(NthAdditiveNumberTextBox, "Additive composite index");
                         ToolTip.SetToolTip(NthNonAdditiveNumberTextBox, "Non-additive composite index");
 
-                        if (Nth4nPlus1NumberTextBox.Text == "")
+                        if (Nth4n1NumberTextBox.Text == "")
                         {
-                            Nth4nPlus1NumberTextBox.BackColor = SystemColors.ControlLight;
+                            Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
                         }
                         else
                         {
-                            Nth4nPlus1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
+                            Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
                         }
-                        Nth4nPlus1NumberTextBox.Refresh();
+                        Nth4n1NumberTextBox.Refresh();
                     }
                 }
+
+                UpdateToolTipNth4n1NumberTextBox();
             }
             else  // BigIntegr so Yafu tool is used
             {
@@ -845,91 +798,121 @@ public partial class MainForm : Form
         ToolTip.SetToolTip(NumberKindIndexTextBox, m_number_kind.ToString() + " number index");
         NumberKindIndexTextBox.Refresh();
     }
-    private void DisplayPerfectNumbersLabel_Click(object sender, EventArgs e)
+    private void UpdateNumberKind(int index)
     {
-        if (Directory.Exists(Globals.NUMBERS_FOLDER))
+        long number = 0L;
+        switch (m_number_kind)
         {
-            this.Cursor = Cursors.WaitCursor;
-            try
+            case NumberKind.Perfect:
+                {
+                    if ((index > 0) && (index < Numbers.Perfects.Count))
+                    {
+                        number = Numbers.Perfects[index - 1];
+                        FactorizeValue(number);
+                    }
+                } 
+                break;
+            case NumberKind.Abundant:
+                {
+                    if ((index > 0) && (index < Numbers.Abundants.Count))
+                    {
+                        number = Numbers.Abundants[index - 1];
+                        FactorizeValue(number);
+                    }
+                } 
+                break;
+            case NumberKind.Deficient:
+                {
+                    if ((index > 0) && (index < Numbers.Deficients.Count))
+                    {
+                        number = Numbers.Deficients[index - 1];
+                        FactorizeValue(number);
+                    }
+                } 
+                break;
+        }
+    }
+    private void PerfectNumbersLabel_Click(object sender, EventArgs e)
+    {
+        if (ModifierKeys == Keys.Control)
+        {
+            if (Directory.Exists(Globals.NUMBERS_FOLDER))
             {
-                string filename = Globals.NUMBERS_FOLDER + "/" + "perfect_numbers.txt";
-                FileHelper.DisplayFile(filename);
+                this.Cursor = Cursors.WaitCursor;
+                try
+                {
+                    string filename = Globals.NUMBERS_FOLDER + "/" + "perfect_numbers.txt";
+                    FileHelper.DisplayFile(filename);
+                }
+                finally
+                {
+                    this.Cursor = Cursors.Default;
+                }
             }
-            finally
+        }
+        else
+        {
+            m_number_kind = NumberKind.Perfect;
+            int index = 0;
+            if (int.TryParse(NumberKindIndexTextBox.Text, out index))
             {
-                this.Cursor = Cursors.Default;
+                UpdateNumberKind(index);
             }
         }
     }
-    private void DisplayAbundantNumbersLabel_Click(object sender, EventArgs e)
+    private void AbundantNumbersLabel_Click(object sender, EventArgs e)
     {
-        if (Directory.Exists(Globals.NUMBERS_FOLDER))
+        if (ModifierKeys == Keys.Control)
         {
-            this.Cursor = Cursors.WaitCursor;
-            try
+            if (Directory.Exists(Globals.NUMBERS_FOLDER))
             {
-                string filename = Globals.NUMBERS_FOLDER + "/" + "abundant_numbers.txt";
-                using (StreamWriter writer = new StreamWriter(filename, false))
+                this.Cursor = Cursors.WaitCursor;
+                try
                 {
-                    StringBuilder str = new StringBuilder();
-
-                    str.AppendLine("----------------------------------------");
-                    str.AppendLine("Abundant numbers are those with the sum of their proper divisors greater than themselves.");
-                    str.AppendLine("----------------------------------------");
-                    str.AppendLine("#" + "\t" + "Number");
-                    str.AppendLine("----------------------------------------");
-
-                    for (int i = 0; i < Numbers.Abundants.Count; i++)
-                    {
-                        str.AppendLine((i + 1).ToString() + "\t" + Numbers.Abundants[i]);
-                    }
-                    str.AppendLine("----------------------------------------");
-
-                    writer.WriteLine(str.ToString());
+                    string filename = Globals.NUMBERS_FOLDER + "/" + "abundant_numbers.txt";
+                    FileHelper.DisplayFile(filename);
                 }
-
-                // show file content after save
-                FileHelper.DisplayFile(filename);
+                finally
+                {
+                    this.Cursor = Cursors.Default;
+                }
             }
-            finally
+        }
+        else
+        {
+            m_number_kind = NumberKind.Abundant;
+            int index = 0;
+            if (int.TryParse(NumberKindIndexTextBox.Text, out index))
             {
-                this.Cursor = Cursors.Default;
+                UpdateNumberKind(index);
             }
         }
     }
-    private void DisplayDeficientNumbersLabel_Click(object sender, EventArgs e)
+    private void DeficientNumbersLabel_Click(object sender, EventArgs e)
     {
-        if (Directory.Exists(Globals.NUMBERS_FOLDER))
+        if (ModifierKeys == Keys.Control)
         {
-            this.Cursor = Cursors.WaitCursor;
-            try
+            if (Directory.Exists(Globals.NUMBERS_FOLDER))
             {
-                string filename = Globals.NUMBERS_FOLDER + "/" + "deficient_numbers.txt";
-                using (StreamWriter writer = new StreamWriter(filename, false))
+                this.Cursor = Cursors.WaitCursor;
+                try
                 {
-                    StringBuilder str = new StringBuilder();
-
-                    str.AppendLine("----------------------------------------");
-                    str.AppendLine("Deficient numbers are those with the sum of their proper divisors less than themselves.");
-                    str.AppendLine("----------------------------------------");
-                    str.AppendLine("#" + "\t" + "Number");
-                    str.AppendLine("----------------------------------------");
-
-                    for (int i = 0; i < Numbers.Deficients.Count; i++)
-                    {
-                        str.AppendLine((i + 1).ToString() + "\t" + Numbers.Deficients[i]);
-                    }
-                    str.AppendLine("----------------------------------------");
-
-                    writer.WriteLine(str.ToString());
+                    string filename = Globals.NUMBERS_FOLDER + "/" + "deficient_numbers.txt";
+                    FileHelper.DisplayFile(filename);
                 }
-
-                // show file content after save
-                FileHelper.DisplayFile(filename);
+                finally
+                {
+                    this.Cursor = Cursors.Default;
+                }
             }
-            finally
+        }
+        else
+        {
+            m_number_kind = NumberKind.Deficient;
+            int index = 0;
+            if (int.TryParse(NumberKindIndexTextBox.Text, out index))
             {
-                this.Cursor = Cursors.Default;
+                UpdateNumberKind(index);
             }
         }
     }
@@ -940,14 +923,14 @@ public partial class MainForm : Form
         SumOfDivisorsTextBox.Text = sum_of_divisors.ToString();
         SumOfDivisorsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_divisors);
         SumOfDivisorsTextBox.Refresh();
-        ToolTip.SetToolTip(SumOfDivisorsTextBox, "Sum Of Divisors\r\n" + divisors + " = " + sum_of_divisors);
+        ToolTip.SetToolTip(SumOfDivisorsTextBox, "Sum of divisors\r\n" + divisors + " = " + sum_of_divisors);
 
         long sum_of_proper_divisors = Numbers.SumOfProperDivisors(number);
         string proper_divisors = Numbers.GetProperDivisorsString(number);
         SumOfProperDivisorsTextBox.Text = sum_of_proper_divisors.ToString();
         SumOfProperDivisorsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_proper_divisors);
         SumOfProperDivisorsTextBox.Refresh();
-        ToolTip.SetToolTip(SumOfProperDivisorsTextBox, "Sum Of Proper Divisors\r\n" + proper_divisors + " = " + sum_of_proper_divisors);
+        ToolTip.SetToolTip(SumOfProperDivisorsTextBox, "Sum of proper divisors\r\n" + proper_divisors + " = " + sum_of_proper_divisors);
     }
 
     private void ValueInspectLabel_Click(object sender, EventArgs e)
@@ -1036,19 +1019,22 @@ public partial class MainForm : Form
             string squares1_str = "";
             string squares2_str = "";
             int _4nplus1_index = -1;
+            int _4nminus1_index = -1;
             if (Numbers.IsUnit(number) || Numbers.IsPrime(number))
             {
                 squares1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(number);
                 squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(number);
                 _4nplus1_index = Numbers.Prime4nPlus1IndexOf(number) + 1;
+                _4nminus1_index = Numbers.Prime4nMinus1IndexOf(number) + 1;
             }
             else //if composite
             {
                 squares1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(number);
                 squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(number);
                 _4nplus1_index = Numbers.Composite4nPlus1IndexOf(number) + 1;
+                _4nminus1_index = Numbers.Composite4nMinus1IndexOf(number) + 1;
             }
-            str.AppendLine("4n+1 Squares1\t\t=\t" + squares1_str + "\t\t4n+1 Index = " + _4nplus1_index.ToString());
+            str.AppendLine("4n+1 Squares1\t\t=\t" + squares1_str + "\t\t" + ((_4nplus1_index > 0) ? ("4n+1 Index = " + _4nplus1_index.ToString()) : (_4nplus1_index > 0) ? ("4n-1 Index = " + _4nminus1_index.ToString()) : ""));
             str.AppendLine("4n+1 Squares2\t\t=\t" + squares2_str);
 
             str.AppendLine();
@@ -1586,80 +1572,57 @@ public partial class MainForm : Form
         }
     }
 
+    private NumberKind m_number_kind = NumberKind.Deficient;
     private IndexType m_index_type = IndexType.Prime;
-    private void NthNumberTextBox_KeyDown(object sender, KeyEventArgs e)
+    private bool m_4nplus1_index = false;
+    private bool m_4nminus1_index = false;
+    private void IndexTextBox_KeyDown(object sender, KeyEventArgs e)
     {
-        if (e.KeyCode == Keys.Up)
+        Control control = (sender as TextBoxBase);
+        if (control != null)
         {
-            Control control = (sender as TextBoxBase);
-            if (control != null)
+            if (e.KeyCode == Keys.Up)
             {
                 IncrementValue(control);
             }
-        }
-        else if (e.KeyCode == Keys.Down)
-        {
-            Control control = (sender as TextBoxBase);
-            if (control != null)
+            else if (e.KeyCode == Keys.Down)
             {
                 DecrementValue(control);
             }
-        }
-        else if (e.KeyCode == Keys.Enter)
-        {
-            try
+            else if (e.KeyCode == Keys.Enter)
             {
-                long number = -1L;
-                Control control = (sender as TextBoxBase);
-                if (control != null)
+                FactorizeValue(control);
+            }
+        }
+    }
+    private void FactorizeValue(Control control)
+    {
+        long number = -1L;
+        int index = 0;
+        if (int.TryParse(control.Text, out index))
+        {
+            index--;
+            if (index > -1)
+            {
+                control.ForeColor = Numbers.GetNumberTypeColor(index + 1);
+
+                if (control == NthNumberTextBox)
                 {
-                    int index = int.Parse(control.Text) - 1;
-                    control.ForeColor = Numbers.GetNumberTypeColor(index);
                     if (m_index_type == IndexType.Prime)
                     {
                         number = Numbers.Primes[index];
+                        m_4nplus1_index = true;
+                        m_4nminus1_index = false;
                     }
                     else // any other index type will be treated as IndexNumberType.Composite
                     {
                         number = Numbers.Composites[index];
+                        m_4nplus1_index = false;
+                        m_4nminus1_index = true;
                     }
-                    FactorizeValue(number);
                 }
-            }
-            catch
-            {
-                FactorizeValue(0L);
-            }
-        }
-    }
-    private void NthAdditiveNumberTextBox_KeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.Up)
-        {
-            Control control = (sender as TextBoxBase);
-            if (control != null)
-            {
-                IncrementValue(control);
-            }
-        }
-        else if (e.KeyCode == Keys.Down)
-        {
-            Control control = (sender as TextBoxBase);
-            if (control != null)
-            {
-                DecrementValue(control);
-            }
-        }
-        else if (e.KeyCode == Keys.Enter)
-        {
-            try
-            {
-                long number = -1L;
-                Control control = (sender as TextBoxBase);
-                if (control != null)
+                else if (control == NthAdditiveNumberTextBox)
                 {
-                    int index = int.Parse(control.Text) - 1;
-                    control.ForeColor = Numbers.GetNumberTypeColor(index);
                     if (m_index_type == IndexType.Prime)
                     {
                         number = Numbers.AdditivePrimes[index];
@@ -1668,43 +1631,9 @@ public partial class MainForm : Form
                     {
                         number = Numbers.AdditiveComposites[index];
                     }
-                    FactorizeValue(number);
                 }
-            }
-            catch
-            {
-                FactorizeValue(0L);
-            }
-        }
-    }
-    private void NthNonAdditiveNumberTextBox_KeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.Up)
-        {
-            Control control = (sender as TextBoxBase);
-            if (control != null)
-            {
-                IncrementValue(control);
-            }
-        }
-        else if (e.KeyCode == Keys.Down)
-        {
-            Control control = (sender as TextBoxBase);
-            if (control != null)
-            {
-                DecrementValue(control);
-            }
-        }
-        else if (e.KeyCode == Keys.Enter)
-        {
-            try
-            {
-                long number = -1L;
-                Control control = (sender as TextBoxBase);
-                if (control != null)
+                else if (control == NthNonAdditiveNumberTextBox)
                 {
-                    int index = int.Parse(control.Text) - 1;
-                    control.ForeColor = Numbers.GetNumberTypeColor(index);
                     if (m_index_type == IndexType.Prime)
                     {
                         number = Numbers.NonAdditivePrimes[index];
@@ -1713,115 +1642,44 @@ public partial class MainForm : Form
                     {
                         number = Numbers.NonAdditiveComposites[index];
                     }
-                    FactorizeValue(number);
                 }
-            }
-            catch
-            {
-                FactorizeValue(0L);
-            }
-        }
-    }
-    private void Nth4nPlus1NumberTextBox_KeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.Up)
-        {
-            Control control = (sender as TextBoxBase);
-            if (control != null)
-            {
-                IncrementValue(control);
-            }
-        }
-        else if (e.KeyCode == Keys.Down)
-        {
-            Control control = (sender as TextBoxBase);
-            if (control != null)
-            {
-                DecrementValue(control);
-            }
-        }
-        else if (e.KeyCode == Keys.Enter)
-        {
-            try
-            {
-                long number = -1L;
-                Control control = (sender as TextBoxBase);
-                if (control != null)
+                else if (control == Nth4n1NumberTextBox)
                 {
-                    int index = int.Parse(control.Text) - 1;
-                    control.ForeColor = Numbers.GetNumberTypeColor(index);
                     if (m_index_type == IndexType.Prime)
                     {
-                        number = Numbers.Primes4nPlus1[index];
+                        if (m_4nplus1_index)
+                        {
+                            number = Numbers.Primes4nPlus1[index];
+                        }
+                        else if (m_4nminus1_index)
+                        {
+                            number = Numbers.Primes4nMinus1[index];
+                        }
+                        else
+                        {
+                            // do nothing
+                        }
                     }
                     else // any other index type will be treated as IndexNumberType.Composite
                     {
-                        number = Numbers.Composites4nPlus1[index];
+                        if (m_4nplus1_index)
+                        {
+                            number = Numbers.Composites4nPlus1[index];
+                        }
+                        else if (m_4nminus1_index)
+                        {
+                            number = Numbers.Composites4nMinus1[index];
+                        }
+                        else
+                        {
+                            // do nothing
+                        }
                     }
-                    FactorizeValue(number);
-                }
-            }
-            catch
-            {
-                FactorizeValue(0L);
-            }
-        }
-    }
-    private void IncrementValue(Control control)
-    {
-        if (control is TextBoxBase)
-        {
-            long number = 0L;
-            if (long.TryParse(control.Text, out number))
-            {
-                if (number < long.MaxValue) number++;
-                control.Text = number.ToString();
-                SendKeys.Send("{Enter}");
-            }
-        }
-    }
-    private void DecrementValue(Control control)
-    {
-        if (control is TextBoxBase)
-        {
-            long number = 0L;
-            if (long.TryParse(control.Text, out number))
-            {
-                if (number > 0) number--;
-                control.Text = number.ToString();
-                SendKeys.Send("{Enter}");
-            }
-        }
-    }
 
-    private NumberKind m_number_kind = NumberKind.Deficient;
-    private void NumberKindIndexTextBox_KeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.Up)
-        {
-            Control control = (sender as TextBoxBase);
-            if (control != null)
-            {
-                IncrementValue(control);
-            }
-        }
-        else if (e.KeyCode == Keys.Down)
-        {
-            Control control = (sender as TextBoxBase);
-            if (control != null)
-            {
-                DecrementValue(control);
-            }
-        }
-        else if (e.KeyCode == Keys.Enter)
-        {
-            try
-            {
-                long number = -1L;
-                Control control = (sender as TextBoxBase);
-                if (control != null)
+                    UpdateToolTipNth4n1NumberTextBox();
+                }
+                else if (control == NumberKindIndexTextBox)
                 {
-                    int index = int.Parse(control.Text) - 1;
                     switch (m_number_kind)
                     {
                         case NumberKind.Deficient:
@@ -1844,13 +1702,227 @@ public partial class MainForm : Form
                             }
                             break;
                     }
-                    FactorizeValue(number);
                 }
+                else
+                {
+                    // do nothing
+                }
+
+                FactorizeValue(number);
             }
-            catch
+            else
             {
                 FactorizeValue(0L);
             }
+        }
+        else
+        {
+            FactorizeValue(0L);
+        }
+    }
+    private void IncrementValue(Control control)
+    {
+        if (control is TextBoxBase)
+        {
+            long number = 0L;
+            if (long.TryParse(control.Text, out number))
+            {
+                if (number < long.MaxValue)
+                {
+                    number++;
+                    control.Text = number.ToString();
+                    FactorizeValue(control);
+                }
+            }
+        }
+    }
+    private void DecrementValue(Control control)
+    {
+        if (control is TextBoxBase)
+        {
+            long number = 0L;
+            if (long.TryParse(control.Text, out number))
+            {
+                if (number > 0L)
+                {
+                    number--;
+                    control.Text = number.ToString();
+                    FactorizeValue(control);
+                }
+            }
+        }
+    }
+    private void UpdateToolTipNth4n1NumberTextBox()
+    {
+        long value = 0L;
+        if (long.TryParse(ValueTextBox.Text, out value))
+        {
+            int _4nplus1_index = -1;
+            int _4nminus1_index = -1;
+            Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
+            Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
+            Nth4nPlus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
+            Nth4nMinus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
+            if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
+            {
+                _4nplus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
+                _4nminus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
+            }
+            else //if composite
+            {
+                _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
+                _4nminus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
+            }
+
+            m_4nplus1_index = (_4nplus1_index > 0);
+            m_4nminus1_index = (_4nminus1_index > 0);
+            if (m_4nplus1_index || m_4nminus1_index)
+            {
+                if (Numbers.IsPrime(value))
+                {
+                    if (m_4nplus1_index)
+                    {
+                        ToolTip.SetToolTip(Nth4n1NumberTextBox, "4n+1 prime index");
+                        Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLightLight;
+                    }
+                    else if (m_4nminus1_index)
+                    {
+                        ToolTip.SetToolTip(Nth4n1NumberTextBox, "4n-1 prime index");
+                        Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLightLight;
+                    }
+                    else
+                    {
+                        ToolTip.SetToolTip(Nth4n1NumberTextBox, null);
+                    }
+                }
+                else // any other index type will be treated as IndexNumberType.Composite
+                {
+                    if (m_4nplus1_index)
+                    {
+                        ToolTip.SetToolTip(Nth4n1NumberTextBox, "4n+1 composite index");
+                        Nth4nPlus1CompositeNumberLabel.BackColor = SystemColors.ControlLightLight;
+                    }
+                    else if (m_4nminus1_index)
+                    {
+                        ToolTip.SetToolTip(Nth4n1NumberTextBox, "4n-1 composite index");
+                        Nth4nMinus1CompositeNumberLabel.BackColor = SystemColors.ControlLightLight;
+                    }
+                    else
+                    {
+                        ToolTip.SetToolTip(Nth4n1NumberTextBox, null);
+                    }
+                }
+            }
+            else
+            {
+                ToolTip.SetToolTip(Nth4n1NumberTextBox, null);
+            }
+            Nth4n1NumberTextBox.Refresh();
+        }
+    }
+    private void Nth4nPlus1PrimeNumberLabel_Click(object sender, EventArgs e)
+    {
+        if (ModifierKeys == Keys.Control)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            if (Directory.Exists(Globals.NUMBERS_FOLDER))
+            {
+                this.Cursor = Cursors.WaitCursor;
+                try
+                {
+                    string filename = Globals.NUMBERS_FOLDER + "/" + "4n+1_primes.txt";
+                    FileHelper.DisplayFile(filename);
+                }
+                finally
+                {
+                    this.Cursor = Cursors.Default;
+                }
+            }
+        }
+        else
+        {
+            m_index_type = IndexType.Prime;
+            m_4nplus1_index = true;
+            m_4nminus1_index = false;
+            FactorizeValue(Nth4n1NumberTextBox);
+        }
+    }
+    private void Nth4nMinus1PrimeNumberLabel_Click(object sender, EventArgs e)
+    {
+        if (ModifierKeys == Keys.Control)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            if (Directory.Exists(Globals.NUMBERS_FOLDER))
+            {
+                try
+                {
+                    string filename = Globals.NUMBERS_FOLDER + "/" + "4n-1_primes.txt";
+                    FileHelper.DisplayFile(filename);
+                }
+                finally
+                {
+                    this.Cursor = Cursors.Default;
+                }
+            }
+        }
+        else
+        {
+            m_index_type = IndexType.Prime;
+            m_4nplus1_index = false;
+            m_4nminus1_index = true;
+            FactorizeValue(Nth4n1NumberTextBox);
+        }
+    }
+    private void Nth4nPlus1CompositeNumberLabel_Click(object sender, EventArgs e)
+    {
+        if (ModifierKeys == Keys.Control)
+        {
+            if (Directory.Exists(Globals.NUMBERS_FOLDER))
+            {
+                this.Cursor = Cursors.WaitCursor;
+                try
+                {
+                    string filename = Globals.NUMBERS_FOLDER + "/" + "4n+1_composites.txt";
+                    FileHelper.DisplayFile(filename);
+                }
+                finally
+                {
+                    this.Cursor = Cursors.Default;
+                }
+            }
+        }
+        else
+        {
+            m_index_type = IndexType.Composite;
+            m_4nplus1_index = true;
+            m_4nminus1_index = false;
+            FactorizeValue(Nth4n1NumberTextBox);
+        }
+    }
+    private void Nth4nMinus1CompositeNumberLabel_Click(object sender, EventArgs e)
+    {
+        if (ModifierKeys == Keys.Control)
+        {
+            if (Directory.Exists(Globals.NUMBERS_FOLDER))
+            {
+                this.Cursor = Cursors.WaitCursor;
+                try
+                {
+                    string filename = Globals.NUMBERS_FOLDER + "/" + "4n-1_composites.txt";
+                    FileHelper.DisplayFile(filename);
+                }
+                finally
+                {
+                    this.Cursor = Cursors.Default;
+                }
+            }
+        }
+        else
+        {
+            m_index_type = IndexType.Composite;
+            m_4nplus1_index = false;
+            m_4nminus1_index = true;
+            FactorizeValue(Nth4n1NumberTextBox);
         }
     }
 
@@ -2024,8 +2096,8 @@ public partial class MainForm : Form
         SquareSumTextBox.Refresh();
         SquareDiffTextBox.Text = string.Empty;
         SquareDiffTextBox.Refresh();
-        Nth4nPlus1NumberTextBox.Text = string.Empty;
-        Nth4nPlus1NumberTextBox.Refresh();
+        Nth4n1NumberTextBox.Text = string.Empty;
+        Nth4n1NumberTextBox.Refresh();
 
         NumberKindIndexTextBox.Text = string.Empty;
         NumberKindIndexTextBox.Refresh();
@@ -2164,18 +2236,16 @@ public partial class MainForm : Form
     {
         EnableEntryControls();
         ClearProgress();
-        //ValueTextBox.Focus();
+        ValueTextBox.Focus();
     }
     private void AfterProcessing()
     {
         string item = ValueTextBox.Text;
-        if (!m_history.Contains(item))
+        if (!m_history_items.Contains(item))
         {
-            m_history.Insert(m_history_index + 1, item);
+            m_history_items.Insert(m_history_index + 1, item);
             m_history_index++;
         }
-        HistoryDeleteLabel.Enabled = (m_history.Count > 0);
-        HistoryClearLabel.Enabled = (m_history.Count > 0);
 
         m_index_type = IndexType.Prime;
 
@@ -2189,8 +2259,7 @@ public partial class MainForm : Form
                 AnalyzeValue(number);
             }
         }
-
-        //ValueTextBox.Focus();
+        ValueTextBox.Focus();
     }
 
     private enum TimeDisplayMode { Elapsed, Remaining }
@@ -2497,17 +2566,17 @@ public partial class MainForm : Form
             ABTextBox.Text = "";
         }
     }
-    private void IndexTextBox_KeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.Up)
-        {
-            IncrementIndex();
-        }
-        else if (e.KeyCode == Keys.Down)
-        {
-            DecrementIndex();
-        }
-    }
+    //private void IndexTextBox_KeyDown(object sender, KeyEventArgs e)
+    //{
+    //    if (e.KeyCode == Keys.Up)
+    //    {
+    //        IncrementIndex();
+    //    }
+    //    else if (e.KeyCode == Keys.Down)
+    //    {
+    //        DecrementIndex();
+    //    }
+    //}
     private void IncrementIndex()
     {
         int index = 0;
