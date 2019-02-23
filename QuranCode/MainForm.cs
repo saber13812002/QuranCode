@@ -6273,6 +6273,7 @@ public partial class MainForm : Form, ISubscriber
         this.PictureBox.ZoomFactor = 1F;
         this.PictureBox.MouseHover += new System.EventHandler(this.PictureBox_MouseHover);
         this.PictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseMove);
+        this.PictureBox.DoubleClick += new System.EventHandler(this.PictureBox_DoubleClick);
         // 
         // TabControl
         // 
@@ -13198,45 +13199,51 @@ public partial class MainForm : Form, ISubscriber
         // must clear to go back to main results not main text
         ChaptersListBox.SelectedIndices.Clear();
 
-        int pos = m_find_result_header.IndexOf(" of ");
-        if (pos > -1)
+        if (!String.IsNullOrEmpty(m_find_result_header))
         {
-            m_find_result_header = m_find_result_header.Substring(pos + 4);
-        }
-
-        m_client.FilterChapters = null;
-        ClearFindMatches(); // clear m_find_matches for F3 to work correctly in filtered result
-        if (m_search_type == SearchType.Numbers)
-        {
-            switch (m_numbers_result_type)
+            int pos = m_find_result_header.IndexOf(" of ");
+            if (pos > -1)
             {
-                case NumbersResultType.Letters:
-                case NumbersResultType.Words:
-                case NumbersResultType.WordRanges:
-                case NumbersResultType.Verses:
-                    DisplayFoundVerses(false, false);
-                    break;
-                case NumbersResultType.VerseRanges:
-                    DisplayFoundVerseRanges(false, false);
-                    break;
-                case NumbersResultType.Chapters:
-                    DisplayFoundChapters(false, false);
-                    break;
-                case NumbersResultType.ChapterRanges:
-                    DisplayFoundChapterRanges(false, false);
-                    break;
-                default:
-                    DisplayFoundVerses(false, false);
-                    break;
+                m_find_result_header = m_find_result_header.Substring(pos + 4);
             }
         }
-        else
-        {
-            DisplayFoundVerses(false, false);
-        }
 
-        //SearchResultTextBox.Focus();
-        //SearchResultTextBox.Refresh();
+        if (m_client != null)
+        {
+            m_client.FilterChapters = null;
+            ClearFindMatches(); // clear m_find_matches for F3 to work correctly in filtered result
+            if (m_search_type == SearchType.Numbers)
+            {
+                switch (m_numbers_result_type)
+                {
+                    case NumbersResultType.Letters:
+                    case NumbersResultType.Words:
+                    case NumbersResultType.WordRanges:
+                    case NumbersResultType.Verses:
+                        DisplayFoundVerses(false, false);
+                        break;
+                    case NumbersResultType.VerseRanges:
+                        DisplayFoundVerseRanges(false, false);
+                        break;
+                    case NumbersResultType.Chapters:
+                        DisplayFoundChapters(false, false);
+                        break;
+                    case NumbersResultType.ChapterRanges:
+                        DisplayFoundChapterRanges(false, false);
+                        break;
+                    default:
+                        DisplayFoundVerses(false, false);
+                        break;
+                }
+            }
+            else
+            {
+                DisplayFoundVerses(false, false);
+            }
+
+            //SearchResultTextBox.Focus();
+            //SearchResultTextBox.Refresh();
+        }
     }
     private void SwitchActiveTextBox()
     {
@@ -13248,7 +13255,14 @@ public partial class MainForm : Form, ISubscriber
             }
             else
             {
-                SwitchToSearchResultTextBox();
+                if (m_current_drawing_type != DrawingType.None)
+                {
+                    SwitchToPictureBox();
+                }
+                else
+                {
+                    SwitchToSearchResultTextBox();
+                }
             }
 
             PlayerStopLabel_Click(null, null);
@@ -15528,89 +15542,92 @@ public partial class MainForm : Form, ISubscriber
         }
         return result;
     }
-    private void RegisterContextMenu(TextBoxBase control)
+    private void RegisterContextMenu(Control control)
     {
-        ContextMenu ContextMenu = new ContextMenu();
-        if ((control != MainTextBox) && (control != SearchResultTextBox))
+        if ((control is TextBoxBase) || (control is PictureBoxEx))
         {
-            MenuItem EditUndoMenuItem = new MenuItem(L[l]["Undo"] + "\t\tCtrl+Z");
-            EditUndoMenuItem.Click += new EventHandler(MenuItem_Undo);
-            ContextMenu.MenuItems.Add(EditUndoMenuItem);
+            ContextMenu ContextMenu = new ContextMenu();
+            if ((control != MainTextBox) && (control != SearchResultTextBox))
+            {
+                MenuItem EditUndoMenuItem = new MenuItem(L[l]["Undo"] + "\t\tCtrl+Z");
+                EditUndoMenuItem.Click += new EventHandler(MenuItem_Undo);
+                ContextMenu.MenuItems.Add(EditUndoMenuItem);
 
-            MenuItem MenuItemSeparator1 = new MenuItem("-");
-            ContextMenu.MenuItems.Add(MenuItemSeparator1);
+                MenuItem MenuItemSeparator1 = new MenuItem("-");
+                ContextMenu.MenuItems.Add(MenuItemSeparator1);
 
-            MenuItem EditCutMenuItem = new MenuItem(L[l]["Cut"] + "\t\tCtrl+X");
-            EditCutMenuItem.Click += new EventHandler(MenuItem_Cut);
-            ContextMenu.MenuItems.Add(EditCutMenuItem);
+                MenuItem EditCutMenuItem = new MenuItem(L[l]["Cut"] + "\t\tCtrl+X");
+                EditCutMenuItem.Click += new EventHandler(MenuItem_Cut);
+                ContextMenu.MenuItems.Add(EditCutMenuItem);
 
-            MenuItem EditCopyMenuItem = new MenuItem(L[l]["Copy"] + "\t\tCtrl+C");
-            EditCopyMenuItem.Click += new EventHandler(MenuItem_Copy);
-            ContextMenu.MenuItems.Add(EditCopyMenuItem);
+                MenuItem EditCopyMenuItem = new MenuItem(L[l]["Copy"] + "\t\tCtrl+C");
+                EditCopyMenuItem.Click += new EventHandler(MenuItem_Copy);
+                ContextMenu.MenuItems.Add(EditCopyMenuItem);
 
-            MenuItem EditPasteMenuItem = new MenuItem(L[l]["Paste"] + "\t\tCtrl+V");
-            EditPasteMenuItem.Click += new EventHandler(MenuItem_Paste);
-            ContextMenu.MenuItems.Add(EditPasteMenuItem);
+                MenuItem EditPasteMenuItem = new MenuItem(L[l]["Paste"] + "\t\tCtrl+V");
+                EditPasteMenuItem.Click += new EventHandler(MenuItem_Paste);
+                ContextMenu.MenuItems.Add(EditPasteMenuItem);
 
-            MenuItem MenuItemSeparator2 = new MenuItem("-");
-            ContextMenu.MenuItems.Add(MenuItemSeparator2);
+                MenuItem MenuItemSeparator2 = new MenuItem("-");
+                ContextMenu.MenuItems.Add(MenuItemSeparator2);
 
-            MenuItem EditSelectAllMenuItem = new MenuItem(L[l]["Select All"] + "\tCtrl+A");
-            EditSelectAllMenuItem.Click += new EventHandler(MenuItem_SelectAll);
-            ContextMenu.MenuItems.Add(EditSelectAllMenuItem);
+                MenuItem EditSelectAllMenuItem = new MenuItem(L[l]["Select All"] + "\tCtrl+A");
+                EditSelectAllMenuItem.Click += new EventHandler(MenuItem_SelectAll);
+                ContextMenu.MenuItems.Add(EditSelectAllMenuItem);
+            }
+            else
+            {
+                MenuItem EditCopyMenuItem = new MenuItem(L[l]["Copy"] + "\t\tCtrl+C");
+                EditCopyMenuItem.Click += new EventHandler(MenuItem_Copy);
+                ContextMenu.MenuItems.Add(EditCopyMenuItem);
+
+                MenuItem EditGenerateSentencesMenuItem = new MenuItem(L[l]["Generate Sentences"] + "\t\tCtrl+G");
+                EditGenerateSentencesMenuItem.Click += new EventHandler(MenuItem_GenerateSentences);
+                if (Globals.EDITION == Edition.Ultimate) ContextMenu.MenuItems.Add(EditGenerateSentencesMenuItem);
+
+                MenuItem MenuItemSeparator1 = new MenuItem("-");
+                ContextMenu.MenuItems.Add(MenuItemSeparator1);
+
+                MenuItem FindRelatedWordsMenuItem = new MenuItem(L[l]["Related Words"] + "\tF4");
+                FindRelatedWordsMenuItem.Click += new EventHandler(MenuItem_RelatedWords);
+                ContextMenu.MenuItems.Add(FindRelatedWordsMenuItem);
+
+                MenuItem FindRelatedVersesMenuItem = new MenuItem(L[l]["Related Verses"] + "\tF5");
+                FindRelatedVersesMenuItem.Click += new EventHandler(MenuItem_RelatedVerses);
+                ContextMenu.MenuItems.Add(FindRelatedVersesMenuItem);
+
+                MenuItem FindSimilarVersesMenuItem = new MenuItem(L[l]["Similar Verses"] + "\tShift+F5");
+                FindSimilarVersesMenuItem.Click += new EventHandler(MenuItem_SimilarVerses);
+                ContextMenu.MenuItems.Add(FindSimilarVersesMenuItem);
+
+                MenuItem MenuItemSeparator2 = new MenuItem("-");
+                ContextMenu.MenuItems.Add(MenuItemSeparator2);
+
+                MenuItem FindSameTextMenuItem = new MenuItem(L[l]["Same Text"] + "\tF6");
+                FindSameTextMenuItem.Click += new EventHandler(MenuItem_SameText);
+                ContextMenu.MenuItems.Add(FindSameTextMenuItem);
+
+                MenuItem FindSameHarakatMenuItem = new MenuItem(L[l]["Same Harakat"] + "\tF7");
+                FindSameHarakatMenuItem.Click += new EventHandler(MenuItem_SameHarakat);
+                ContextMenu.MenuItems.Add(FindSameHarakatMenuItem);
+
+                MenuItem FindSameVersesMenuItem = new MenuItem(L[l]["Same Verses"] + "\tF8");
+                FindSameVersesMenuItem.Click += new EventHandler(MenuItem_SameVerses);
+                ContextMenu.MenuItems.Add(FindSameVersesMenuItem);
+
+                MenuItem MenuItemSeparator3 = new MenuItem("-");
+                ContextMenu.MenuItems.Add(MenuItemSeparator3);
+
+                MenuItem FindSameValueMenuItem = new MenuItem(L[l]["Same Value"] + "\tF9");
+                FindSameValueMenuItem.Click += new EventHandler(MenuItem_SameValue);
+                ContextMenu.MenuItems.Add(FindSameValueMenuItem);
+            }
+
+            ContextMenu.Popup += new EventHandler(ContextMenu_Popup);
+            ContextMenu.Collapse += new EventHandler(ContextMenu_Collapse);
+
+            control.ContextMenu = ContextMenu;
         }
-        else
-        {
-            MenuItem EditCopyMenuItem = new MenuItem(L[l]["Copy"] + "\t\tCtrl+C");
-            EditCopyMenuItem.Click += new EventHandler(MenuItem_Copy);
-            ContextMenu.MenuItems.Add(EditCopyMenuItem);
-
-            MenuItem EditGenerateSentencesMenuItem = new MenuItem(L[l]["Generate Sentences"] + "\t\tCtrl+G");
-            EditGenerateSentencesMenuItem.Click += new EventHandler(MenuItem_GenerateSentences);
-            if (Globals.EDITION == Edition.Ultimate) ContextMenu.MenuItems.Add(EditGenerateSentencesMenuItem);
-
-            MenuItem MenuItemSeparator1 = new MenuItem("-");
-            ContextMenu.MenuItems.Add(MenuItemSeparator1);
-
-            MenuItem FindRelatedWordsMenuItem = new MenuItem(L[l]["Related Words"] + "\tF4");
-            FindRelatedWordsMenuItem.Click += new EventHandler(MenuItem_RelatedWords);
-            ContextMenu.MenuItems.Add(FindRelatedWordsMenuItem);
-
-            MenuItem FindRelatedVersesMenuItem = new MenuItem(L[l]["Related Verses"] + "\tF5");
-            FindRelatedVersesMenuItem.Click += new EventHandler(MenuItem_RelatedVerses);
-            ContextMenu.MenuItems.Add(FindRelatedVersesMenuItem);
-
-            MenuItem FindSimilarVersesMenuItem = new MenuItem(L[l]["Similar Verses"] + "\tShift+F5");
-            FindSimilarVersesMenuItem.Click += new EventHandler(MenuItem_SimilarVerses);
-            ContextMenu.MenuItems.Add(FindSimilarVersesMenuItem);
-
-            MenuItem MenuItemSeparator2 = new MenuItem("-");
-            ContextMenu.MenuItems.Add(MenuItemSeparator2);
-
-            MenuItem FindSameTextMenuItem = new MenuItem(L[l]["Same Text"] + "\tF6");
-            FindSameTextMenuItem.Click += new EventHandler(MenuItem_SameText);
-            ContextMenu.MenuItems.Add(FindSameTextMenuItem);
-
-            MenuItem FindSameHarakatMenuItem = new MenuItem(L[l]["Same Harakat"] + "\tF7");
-            FindSameHarakatMenuItem.Click += new EventHandler(MenuItem_SameHarakat);
-            ContextMenu.MenuItems.Add(FindSameHarakatMenuItem);
-
-            MenuItem FindSameVersesMenuItem = new MenuItem(L[l]["Same Verses"] + "\tF8");
-            FindSameVersesMenuItem.Click += new EventHandler(MenuItem_SameVerses);
-            ContextMenu.MenuItems.Add(FindSameVersesMenuItem);
-
-            MenuItem MenuItemSeparator3 = new MenuItem("-");
-            ContextMenu.MenuItems.Add(MenuItemSeparator3);
-
-            MenuItem FindSameValueMenuItem = new MenuItem(L[l]["Same Value"] + "\tF9");
-            FindSameValueMenuItem.Click += new EventHandler(MenuItem_SameValue);
-            ContextMenu.MenuItems.Add(FindSameValueMenuItem);
-        }
-
-        ContextMenu.Popup += new EventHandler(ContextMenu_Popup);
-        ContextMenu.Collapse += new EventHandler(ContextMenu_Collapse);
-
-        control.ContextMenu = ContextMenu;
     }
     private void ContextMenu_Popup(object sender, EventArgs e)
     {
@@ -15633,6 +15650,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void RegisterContextMenus()
     {
+        RegisterContextMenu(PictureBox);
         RegisterContextMenu(MainTextBox);
         RegisterContextMenu(SearchResultTextBox);
         RegisterContextMenu(TranslationTextBox);
@@ -16711,6 +16729,7 @@ public partial class MainForm : Form, ISubscriber
                         MainTextBox.AlignToStart();
                         HighlightVerse(verse);
                         UpdateHeaderLabel();
+                        UpdateProgressBar(verse);
 
                         CalculateCurrentValue();
 
@@ -19866,23 +19885,26 @@ public partial class MainForm : Form, ISubscriber
                         }
                         m_client.FilterChapters = chapters;
 
-                        int pos = m_find_result_header.IndexOf(" of ");
-                        if (pos > -1)
+                        if (!String.IsNullOrEmpty(m_find_result_header))
                         {
-                            m_find_result_header = m_find_result_header.Substring(pos + 4);
-                        }
-                        int selected_chapters_match_count = 0;
-                        foreach (int index in ChaptersListBox.SelectedIndices)
-                        {
-                            if (m_matches_per_chapter != null)
+                            int pos = m_find_result_header.IndexOf(" of ");
+                            if (pos > -1)
                             {
-                                if ((index >= 0) && (index < m_matches_per_chapter.Length))
+                                m_find_result_header = m_find_result_header.Substring(pos + 4);
+                            }
+                            int selected_chapters_match_count = 0;
+                            foreach (int index in ChaptersListBox.SelectedIndices)
+                            {
+                                if (m_matches_per_chapter != null)
                                 {
-                                    selected_chapters_match_count += m_matches_per_chapter[index];
+                                    if ((index >= 0) && (index < m_matches_per_chapter.Length))
+                                    {
+                                        selected_chapters_match_count += m_matches_per_chapter[index];
+                                    }
                                 }
                             }
+                            m_find_result_header = selected_chapters_match_count + " of " + m_find_result_header;
                         }
-                        m_find_result_header = selected_chapters_match_count + " of " + m_find_result_header;
 
                         ClearFindMatches(); // clear m_find_matches for F3 to work correctly in filtered result
                         if (m_search_type == SearchType.Numbers)
@@ -37546,6 +37568,8 @@ public partial class MainForm : Form, ISubscriber
         {
             // allow subsequent Finds to update chapter list, and browse history
             m_found_verses_displayed = true;
+            m_current_drawing_type = DrawingType.None; // so not to SwitchToPictureBox
+
             PopulateChaptersListBox();
 
             // in all cases
@@ -37572,6 +37596,10 @@ public partial class MainForm : Form, ISubscriber
             this.Text = Application.ProductName + " | " + GetSelectionSummary();
             UpdateFindMatchCaption();
         }
+    }
+    private void SwitchToPictureBox()
+    {
+        ShowPictureBox();
     }
 
     private int[] m_matches_per_chapter = null;
@@ -37713,10 +37741,7 @@ public partial class MainForm : Form, ISubscriber
         }
         finally
         {
-            if (PictureBox.Visible)
-            {
-                PictureBox.Visible = false;
-            }
+            HidePictureBox();
             SearchResultTextBox.EndUpdate();
             SearchResultTextBox.SelectionChanged += new EventHandler(MainTextBox_SelectionChanged);
             SearchResultTextBox.TextChanged += new EventHandler(MainTextBox_TextChanged);
@@ -37876,10 +37901,7 @@ public partial class MainForm : Form, ISubscriber
         }
         finally
         {
-            if (PictureBox.Visible)
-            {
-                PictureBox.Visible = false;
-            }
+            HidePictureBox();
             SearchResultTextBox.EndUpdate();
             SearchResultTextBox.SelectionChanged += new EventHandler(MainTextBox_SelectionChanged);
             SearchResultTextBox.TextChanged += new EventHandler(MainTextBox_TextChanged);
@@ -38003,10 +38025,7 @@ public partial class MainForm : Form, ISubscriber
         }
         finally
         {
-            if (PictureBox.Visible)
-            {
-                PictureBox.Visible = false;
-            }
+            HidePictureBox();
             SearchResultTextBox.EndUpdate();
             SearchResultTextBox.SelectionChanged += new EventHandler(MainTextBox_SelectionChanged);
             SearchResultTextBox.TextChanged += new EventHandler(MainTextBox_TextChanged);
@@ -38133,10 +38152,7 @@ public partial class MainForm : Form, ISubscriber
         }
         finally
         {
-            if (PictureBox.Visible)
-            {
-                PictureBox.Visible = false;
-            }
+            HidePictureBox();
             SearchResultTextBox.EndUpdate();
             SearchResultTextBox.SelectionChanged += new EventHandler(MainTextBox_SelectionChanged);
             SearchResultTextBox.TextChanged += new EventHandler(MainTextBox_TextChanged);
@@ -40982,7 +40998,7 @@ public partial class MainForm : Form, ISubscriber
                         number = Numbers.Perfects[index - 1];
                         FactorizeValue(number, true);
                     }
-                } 
+                }
                 break;
             case NumberKind.Abundant:
                 {
@@ -40991,7 +41007,7 @@ public partial class MainForm : Form, ISubscriber
                         number = Numbers.Abundants[index - 1];
                         FactorizeValue(number, true);
                     }
-                } 
+                }
                 break;
             case NumberKind.Deficient:
                 {
@@ -41000,7 +41016,7 @@ public partial class MainForm : Form, ISubscriber
                         number = Numbers.Deficients[index - 1];
                         FactorizeValue(number, true);
                     }
-                } 
+                }
                 break;
         }
     }
@@ -42938,9 +42954,10 @@ public partial class MainForm : Form, ISubscriber
     #region Value Drawings
     ///////////////////////////////////////////////////////////////////////////////
     //public enum DrawingShape { Lines, Spiral, SquareSpiral, Square, HGoldenRect, VGoldenRect, Cube };
-    private enum DrawingType { LetterValues, WordValues, WordLengths, SearchTerms, AllahWords, WithAllahWords, Primes, AdditivePrimes, NonAdditivePrimes, GeneratePrimeDrawings };
+    private enum DrawingType { None, LetterValues, WordValues, WordLengths, SearchTerms, AllahWords, WithAllahWords, Primes, AdditivePrimes, NonAdditivePrimes, GeneratePrimeDrawings };
     private DrawingShape m_drawing_shape = DrawingShape.Lines;
-    private DrawingType m_current_drawing_type = DrawingType.LetterValues;
+    private DrawingType m_current_drawing_type = DrawingType.None;
+    private Letter m_current_letter = null;
     private Bitmap m_bitmap = null;
     private void PictureBox_MouseHover(object sender, EventArgs e)
     {
@@ -43018,10 +43035,10 @@ public partial class MainForm : Form, ISubscriber
                             {
                                 if ((position >= 0) && (position < page_letters.Count))
                                 {
-                                    Letter found_letter = page_letters[position];
-                                    if (found_letter != null) // not space
+                                    m_current_letter = page_letters[position];
+                                    if (m_current_letter != null) // not space
                                     {
-                                        Word word = found_letter.Word;
+                                        Word word = m_current_letter.Word;
                                         if (word != null)
                                         {
                                             this.Text = Application.ProductName + " | " + "Chapter " + word.Verse.Chapter.SortedNumber;
@@ -43058,6 +43075,43 @@ public partial class MainForm : Form, ISubscriber
         else
         {
             ToolTip.SetToolTip(PictureBox, null);
+        }
+    }
+    private void PictureBox_DoubleClick(object sender, EventArgs e)
+    {
+        if (m_current_letter != null)
+        {
+            Word word = m_current_letter.Word;
+            if (word != null)
+            {
+                try
+                {
+                    for (int i = 0; i < 3; i++) MainTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
+                    for (int i = 0; i < 3; i++) MainTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
+                    MainTextBox.BeginUpdate();
+
+                    Verse verse = word.Verse;
+                    if (verse != null)
+                    {
+                        GotoVerse(verse);
+                        m_found_verses_displayed = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                }
+                finally
+                {
+                    HidePictureBox();
+
+                    MainTextBox.EndUpdate();
+                    MainTextBox.SelectionChanged += new EventHandler(MainTextBox_SelectionChanged);
+                    MainTextBox.TextChanged += new EventHandler(MainTextBox_TextChanged);
+                }
+
+
+            }
         }
     }
     private void ChangeDrawingShapeLabel_Click(object sender, EventArgs e)
@@ -44006,6 +44060,7 @@ public partial class MainForm : Form, ISubscriber
     {
         PictureBox.Visible = true;
         PictureBox.BringToFront();
+        PictureBox.Refresh();
 
         // restore graphic zoom icons
         ZoomInLabel.Enabled = (m_text_zoom_factor <= (m_max_zoom_factor - m_zoom_factor_increment + m_error_margin));
@@ -44013,14 +44068,17 @@ public partial class MainForm : Form, ISubscriber
     }
     private void HidePictureBox()
     {
-        PictureBox.Visible = false;
+        if (PictureBox.Visible)
+        {
+            PictureBox.Visible = false;
 
-        // restore text heading
-        UpdateHeaderLabel();
+            // restore text heading
+            UpdateHeaderLabel();
 
-        // restore text zoom icons
-        ZoomInLabel.Enabled = (m_text_zoom_factor <= (m_max_zoom_factor - m_zoom_factor_increment + m_error_margin));
-        ZoomOutLabel.Enabled = (m_text_zoom_factor >= (m_min_zoom_factor + m_zoom_factor_increment - m_error_margin));
+            // restore text zoom icons
+            ZoomInLabel.Enabled = (m_text_zoom_factor <= (m_max_zoom_factor - m_zoom_factor_increment + m_error_margin));
+            ZoomOutLabel.Enabled = (m_text_zoom_factor >= (m_min_zoom_factor + m_zoom_factor_increment - m_error_margin));
+        }
     }
     private void RedrawImage()
     {
