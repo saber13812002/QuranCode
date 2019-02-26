@@ -1602,7 +1602,7 @@ public partial class MainForm : Form
         if (int.TryParse(control.Text, out index))
         {
             index--;
-            if (index > -1)
+            if (index >= 0)
             {
                 control.ForeColor = Numbers.GetNumberTypeColor(index + 1);
 
@@ -1610,37 +1610,51 @@ public partial class MainForm : Form
                 {
                     if (m_index_type == IndexType.Prime)
                     {
-                        number = Numbers.Primes[index];
-                        m_4nplus1_index = true;
-                        m_4nminus1_index = false;
+                        if (index < Numbers.Primes.Count)
+                        {
+                            number = Numbers.Primes[index];
+                        }
                     }
                     else // any other index type will be treated as IndexNumberType.Composite
                     {
-                        number = Numbers.Composites[index];
-                        m_4nplus1_index = false;
-                        m_4nminus1_index = true;
+                        if (index < Numbers.Composites.Count)
+                        {
+                            number = Numbers.Composites[index];
+                        }
                     }
                 }
                 else if (control == NthAdditiveNumberTextBox)
                 {
                     if (m_index_type == IndexType.Prime)
                     {
-                        number = Numbers.AdditivePrimes[index];
+                        if (index < Numbers.AdditivePrimes.Count)
+                        {
+                            number = Numbers.AdditivePrimes[index];
+                        }
                     }
                     else // any other index type will be treated as IndexNumberType.Composite
                     {
-                        number = Numbers.AdditiveComposites[index];
+                        if (index < Numbers.AdditiveComposites.Count)
+                        {
+                            number = Numbers.AdditiveComposites[index];
+                        }
                     }
                 }
                 else if (control == NthNonAdditiveNumberTextBox)
                 {
                     if (m_index_type == IndexType.Prime)
                     {
-                        number = Numbers.NonAdditivePrimes[index];
+                        if (index < Numbers.NonAdditivePrimes.Count)
+                        {
+                            number = Numbers.NonAdditivePrimes[index];
+                        }
                     }
                     else // any other index type will be treated as IndexNumberType.Composite
                     {
-                        number = Numbers.NonAdditiveComposites[index];
+                        if (index < Numbers.NonAdditiveComposites.Count)
+                        {
+                            number = Numbers.NonAdditiveComposites[index];
+                        }
                     }
                 }
                 else if (control == Nth4n1NumberTextBox)
@@ -1649,11 +1663,17 @@ public partial class MainForm : Form
                     {
                         if (m_4nplus1_index)
                         {
-                            number = Numbers.Primes4nPlus1[index];
+                            if (index < Numbers.Primes4nPlus1.Count)
+                            {
+                                number = Numbers.Primes4nPlus1[index];
+                            }
                         }
                         else if (m_4nminus1_index)
                         {
-                            number = Numbers.Primes4nMinus1[index];
+                            if (index < Numbers.Primes4nMinus1.Count)
+                            {
+                                number = Numbers.Primes4nMinus1[index];
+                            }
                         }
                         else
                         {
@@ -1664,11 +1684,17 @@ public partial class MainForm : Form
                     {
                         if (m_4nplus1_index)
                         {
-                            number = Numbers.Composites4nPlus1[index];
+                            if (index < Numbers.Composites4nPlus1.Count)
+                            {
+                                number = Numbers.Composites4nPlus1[index];
+                            }
                         }
                         else if (m_4nminus1_index)
                         {
-                            number = Numbers.Composites4nMinus1[index];
+                            if (index < Numbers.Composites4nMinus1.Count)
+                            {
+                                number = Numbers.Composites4nMinus1[index];
+                            }
                         }
                         else
                         {
@@ -1684,17 +1710,26 @@ public partial class MainForm : Form
                     {
                         case NumberKind.Deficient:
                             {
-                                number = Numbers.Deficients[index];
+                                if (index < Numbers.Deficients.Count)
+                                {
+                                    number = Numbers.Deficients[index];
+                                }
                             }
                             break;
                         case NumberKind.Perfect:
                             {
-                                number = Numbers.Perfects[index];
+                                if (index < Numbers.Perfects.Count)
+                                {
+                                    number = Numbers.Perfects[index];
+                                }
                             }
                             break;
                         case NumberKind.Abundant:
                             {
-                                number = Numbers.Abundants[index];
+                                if (index < Numbers.Abundants.Count)
+                                {
+                                    number = Numbers.Abundants[index];
+                                }
                             }
                             break;
                         default:
