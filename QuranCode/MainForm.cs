@@ -44491,9 +44491,11 @@ public partial class MainForm : Form, ISubscriber
     {
         if (m_client != null)
         {
-            if (
-                 (m_text_display_mode == TextDisplayMode.None) ||
-                 (m_text_display_mode == TextDisplayMode.TranslationOnly)
+            if ((!m_user_text_mode) &&
+                   (
+                     (m_text_display_mode == TextDisplayMode.None) ||
+                     (m_text_display_mode == TextDisplayMode.TranslationOnly)
+                   )
                )
             {
                 if (!m_found_verses_displayed)
