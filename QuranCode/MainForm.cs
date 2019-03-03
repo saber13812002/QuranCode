@@ -500,26 +500,6 @@ public partial class MainForm : Form, ISubscriber
             this.ToolTip.SetToolTip(this.NthNumberTextBox, L[l]["Prime index"]);
             this.ToolTip.SetToolTip(this.NthAdditiveNumberTextBox, L[l]["Additive prime index"]);
             this.ToolTip.SetToolTip(this.NthNonAdditiveNumberTextBox, L[l]["Non-additive prime index"]);
-            this.ToolTip.SetToolTip(this.AddPositionsAndDistancesToValueLabel, L[l]["Dynamic Numerology System - ©2008 Ali Adams"]);
-            this.ToolTip.SetToolTip(this.AddToLetterLNumberCheckBox, L[l]["Add letter number in word to each letter value"]);
-            this.ToolTip.SetToolTip(this.AddToLetterWNumberCheckBox, L[l]["Add word number in verse to each letter value"]);
-            this.ToolTip.SetToolTip(this.AddToLetterVNumberCheckBox, L[l]["Add verse number in chapter to each letter value"]);
-            this.ToolTip.SetToolTip(this.AddToLetterCNumberCheckBox, L[l]["Add chapter number in book to each letter value"]);
-            this.ToolTip.SetToolTip(this.AddToLetterLDistanceCheckBox, L[l]["Add the number of letters back to the same letter"]);
-            this.ToolTip.SetToolTip(this.AddToLetterWDistanceCheckBox, L[l]["Add the number of words back to the same letter"]);
-            this.ToolTip.SetToolTip(this.AddToLetterVDistanceCheckBox, L[l]["Add the number of verses back to the same letter"]);
-            this.ToolTip.SetToolTip(this.AddToLetterCDistanceCheckBox, L[l]["Add the number of chapters back to the same letter"]);
-            this.ToolTip.SetToolTip(this.AddToWordWNumberCheckBox, L[l]["Add word number in verse to each word value"]);
-            this.ToolTip.SetToolTip(this.AddToWordVNumberCheckBox, L[l]["Add verse number in chapter to each word value"]);
-            this.ToolTip.SetToolTip(this.AddToWordCNumberCheckBox, L[l]["Add chapter number in book to each word value"]);
-            this.ToolTip.SetToolTip(this.AddToWordWDistanceCheckBox, L[l]["Add the number of words back to the same word"]);
-            this.ToolTip.SetToolTip(this.AddToWordVDistanceCheckBox, L[l]["Add the number of verses back to the same word"]);
-            this.ToolTip.SetToolTip(this.AddToWordCDistanceCheckBox, L[l]["Add the number of chapters back to the same word"]);
-            this.ToolTip.SetToolTip(this.AddToVerseVNumberCheckBox, L[l]["Add verse number in chapter to each verse value"]);
-            this.ToolTip.SetToolTip(this.AddToVerseCNumberCheckBox, L[l]["Add chapter number in book to each verse value"]);
-            this.ToolTip.SetToolTip(this.AddToVerseVDistanceCheckBox, L[l]["Add the number of verses back to the same verse"]);
-            this.ToolTip.SetToolTip(this.AddToVerseCDistanceCheckBox, L[l]["Add the number of chapters back to the same verse"]);
-            this.ToolTip.SetToolTip(this.AddToChapterCNumberCheckBox, L[l]["Add chapter number in book to each chapter value"]);
             this.ToolTip.SetToolTip(this.ChapterComboBox, "C, C-C, C:V, C:V-C, C-C:V, C:V-C:V, ..." + "\r\n" + "36  40-46  15:87  18:9-25  1-2:5  24:35-27:62  2:29,41:9-12");
             this.ToolTip.SetToolTip(this.ChapterVerseNumericUpDown, "V, V-V, ...");
             this.ToolTip.SetToolTip(this.ChapterWordNumericUpDown, "W, W-W, ...");
@@ -3781,7 +3761,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindBySimilarityButton.Name = "FindBySimilarityButton";
         this.FindBySimilarityButton.Size = new System.Drawing.Size(87, 22);
         this.FindBySimilarityButton.TabIndex = 80;
-        this.FindBySimilarityButton.Text = "Find";
+        this.FindBySimilarityButton.Text = "Find 100%";
         this.FindBySimilarityButton.UseVisualStyleBackColor = true;
         this.FindBySimilarityButton.Click += new System.EventHandler(this.FindBySimilarityButton_Click);
         this.FindBySimilarityButton.Enter += new System.EventHandler(this.FindBySimilarityControls_Enter);
@@ -11167,6 +11147,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToChapterCNumberCheckBox
         // 
         this.AddToChapterCNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToChapterCNumberCheckBox.Checked = true;
         this.AddToChapterCNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToChapterCNumberCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToChapterCNumberCheckBox.Location = new System.Drawing.Point(185, 305);
@@ -11183,6 +11164,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToVerseCDistanceCheckBox
         // 
         this.AddToVerseCDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToVerseCDistanceCheckBox.Checked = true;
         this.AddToVerseCDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToVerseCDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToVerseCDistanceCheckBox.Location = new System.Drawing.Point(185, 287);
@@ -11200,6 +11182,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToVerseCNumberCheckBox
         // 
         this.AddToVerseCNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToVerseCNumberCheckBox.Checked = true;
         this.AddToVerseCNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToVerseCNumberCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToVerseCNumberCheckBox.Location = new System.Drawing.Point(185, 271);
@@ -11217,6 +11200,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToWordCDistanceCheckBox
         // 
         this.AddToWordCDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToWordCDistanceCheckBox.Checked = true;
         this.AddToWordCDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToWordCDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToWordCDistanceCheckBox.Location = new System.Drawing.Point(185, 255);
@@ -11234,6 +11218,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToWordCNumberCheckBox
         // 
         this.AddToWordCNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToWordCNumberCheckBox.Checked = true;
         this.AddToWordCNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToWordCNumberCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToWordCNumberCheckBox.Location = new System.Drawing.Point(185, 239);
@@ -11251,6 +11236,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToVerseVDistanceCheckBox
         // 
         this.AddToVerseVDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToVerseVDistanceCheckBox.Checked = true;
         this.AddToVerseVDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToVerseVDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToVerseVDistanceCheckBox.Location = new System.Drawing.Point(127, 287);
@@ -11283,6 +11269,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToVerseVNumberCheckBox
         // 
         this.AddToVerseVNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToVerseVNumberCheckBox.Checked = true;
         this.AddToVerseVNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToVerseVNumberCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToVerseVNumberCheckBox.Location = new System.Drawing.Point(127, 271);
@@ -11300,6 +11287,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToWordVDistanceCheckBox
         // 
         this.AddToWordVDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToWordVDistanceCheckBox.Checked = true;
         this.AddToWordVDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToWordVDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToWordVDistanceCheckBox.Location = new System.Drawing.Point(127, 255);
@@ -11317,6 +11305,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToWordWDistanceCheckBox
         // 
         this.AddToWordWDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToWordWDistanceCheckBox.Checked = true;
         this.AddToWordWDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToWordWDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToWordWDistanceCheckBox.Location = new System.Drawing.Point(68, 255);
@@ -11334,6 +11323,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToWordVNumberCheckBox
         // 
         this.AddToWordVNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToWordVNumberCheckBox.Checked = true;
         this.AddToWordVNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToWordVNumberCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToWordVNumberCheckBox.Location = new System.Drawing.Point(127, 239);
@@ -11351,6 +11341,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToWordWNumberCheckBox
         // 
         this.AddToWordWNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToWordWNumberCheckBox.Checked = true;
         this.AddToWordWNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToWordWNumberCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToWordWNumberCheckBox.Location = new System.Drawing.Point(68, 239);
@@ -11438,6 +11429,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToLetterCDistanceCheckBox
         // 
         this.AddToLetterCDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToLetterCDistanceCheckBox.Checked = true;
         this.AddToLetterCDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToLetterCDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToLetterCDistanceCheckBox.Location = new System.Drawing.Point(185, 222);
@@ -11455,6 +11447,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToLetterCNumberCheckBox
         // 
         this.AddToLetterCNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToLetterCNumberCheckBox.Checked = true;
         this.AddToLetterCNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToLetterCNumberCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToLetterCNumberCheckBox.Location = new System.Drawing.Point(185, 206);
@@ -11472,6 +11465,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToLetterVDistanceCheckBox
         // 
         this.AddToLetterVDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToLetterVDistanceCheckBox.Checked = true;
         this.AddToLetterVDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToLetterVDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToLetterVDistanceCheckBox.Location = new System.Drawing.Point(127, 222);
@@ -11489,6 +11483,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToLetterWDistanceCheckBox
         // 
         this.AddToLetterWDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToLetterWDistanceCheckBox.Checked = true;
         this.AddToLetterWDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToLetterWDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToLetterWDistanceCheckBox.Location = new System.Drawing.Point(68, 222);
@@ -11506,6 +11501,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToLetterLDistanceCheckBox
         // 
         this.AddToLetterLDistanceCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToLetterLDistanceCheckBox.Checked = true;
         this.AddToLetterLDistanceCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToLetterLDistanceCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToLetterLDistanceCheckBox.Location = new System.Drawing.Point(9, 222);
@@ -11523,6 +11519,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToLetterVNumberCheckBox
         // 
         this.AddToLetterVNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToLetterVNumberCheckBox.Checked = true;
         this.AddToLetterVNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToLetterVNumberCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToLetterVNumberCheckBox.Location = new System.Drawing.Point(127, 206);
@@ -11540,6 +11537,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToLetterWNumberCheckBox
         // 
         this.AddToLetterWNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToLetterWNumberCheckBox.Checked = true;
         this.AddToLetterWNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToLetterWNumberCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToLetterWNumberCheckBox.Location = new System.Drawing.Point(68, 206);
@@ -11557,6 +11555,7 @@ public partial class MainForm : Form, ISubscriber
         // AddToLetterLNumberCheckBox
         // 
         this.AddToLetterLNumberCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.AddToLetterLNumberCheckBox.Checked = true;
         this.AddToLetterLNumberCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AddToLetterLNumberCheckBox.ForeColor = System.Drawing.Color.Black;
         this.AddToLetterLNumberCheckBox.Location = new System.Drawing.Point(9, 206);
@@ -34386,9 +34385,10 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FindBySimilarityPercentageTrackBar_ValueChanged(object sender, EventArgs e)
     {
-        if (m_similarity_search_source == SimilaritySearchSource.CurrentVerse)
+        if (sender is TrackBar)
         {
-            if (sender is TrackBar)
+            FindBySimilarityButton.Text = L[l]["Find"] + " " + FindBySimilarityPercentageTrackBar.Value + "%";
+            if (m_similarity_search_source == SimilaritySearchSource.CurrentVerse)
             {
                 FindBySimilarity();
             }
@@ -39432,6 +39432,7 @@ public partial class MainForm : Form, ISubscriber
                 m_client.NumerologySystem.AddToVerseCDistance = AddToVerseCDistanceCheckBox.Checked;
                 m_client.NumerologySystem.AddToChapterCNumber = AddToChapterCNumberCheckBox.Checked;
 
+                m_client.NumerologySystem.AddPositions = AddPositionsCheckBox.Checked;
                 m_client.NumerologySystem.AddDistancesToPrevious = AddDistancesToPreviousCheckBox.Checked;
                 m_client.NumerologySystem.AddDistancesToNext = AddDistancesToNextCheckBox.Checked;
                 m_client.NumerologySystem.AddDistancesWithinChapters = AddDistancesWithinChaptersCheckBox.Checked;
@@ -44774,9 +44775,7 @@ public partial class MainForm : Form, ISubscriber
         {
             m_client.Logging = true;    // log Adjust letter/word/verse/chapter
             CalculateCurrentValue();    // SLOW calculations due to logging
-
             InspectValueCalculations(); // display inspection information
-
             m_client.Logging = false;   // return to FAST calculations without logging
         }
     }

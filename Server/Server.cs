@@ -1407,10 +1407,13 @@ public class Server : IPublisher
     public static long CalculateValueUserText(char character)
     {
         if (character == '\0') return 0L;
+        if (character == '\r') return 0L;
+        if (character == '\n') return 0L;
 
         long result = 0L;
         if (s_numerology_system != null)
         {
+            character = character.ToString().SimplifyTo(s_numerology_system.TextMode)[0];
             result = s_numerology_system.CalculateValue(character);
         }
         return result;
@@ -1422,7 +1425,57 @@ public class Server : IPublisher
         long result = 0L;
         if (s_numerology_system != null)
         {
+            text = text.Replace("\r\n", "\n");
+            text = text.SimplifyTo(s_numerology_system.TextMode);
             result = s_numerology_system.CalculateValue(text);
+        }
+        return result;
+    }
+    public static long CalculateValueUserTextWithLogging(char character)
+    {
+        if (character == '\0') return 0L;
+        if (character == '\r') return 0L;
+        if (character == '\n') return 0L;
+
+        long result = 0L;
+        if (s_numerology_system != null)
+        {
+            character = character.ToString().SimplifyTo(s_numerology_system.TextMode)[0];
+            Log.Append(character.ToString());
+            long value = s_numerology_system.CalculateValue(character);
+            result += value; ValueSum += value;
+            Log.AppendLine("\t" + value);
+        }
+        return result;
+    }
+    public static long CalculateValueUserTextWithLogging(string text)
+    {
+        if (string.IsNullOrEmpty(text)) return 0L;
+
+        long result = 0L;
+        if (s_numerology_system != null)
+        {
+            text = text.Replace("\r\n", "\n");
+            text = text.SimplifyTo(s_numerology_system.TextMode);
+            foreach (char character in text)
+            {
+                if (character == '\n')
+                {
+                    Log.AppendLine();
+                    Log.AppendLine();
+                }
+                else if (character == ' ')
+                {
+                    Log.AppendLine();
+                }
+                else
+                {
+                    Log.Append(character.ToString());
+                    long value = s_numerology_system.CalculateValue(character);
+                    result += value; ValueSum += value;
+                    Log.AppendLine("\t" + value);
+                }
+            }
         }
         return result;
     }

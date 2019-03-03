@@ -288,6 +288,7 @@ public partial class MainForm : Form
             m_client.NumerologySystem.AddToVerseCDistance = false;
             m_client.NumerologySystem.AddToChapterCNumber = false;
 
+            m_client.NumerologySystem.AddPositions = m_add_positions_to_letter_value;
             m_client.NumerologySystem.AddDistancesToPrevious = m_add_distances_to_previous_to_letter_value;
             m_client.NumerologySystem.AddDistancesToNext = m_add_distances_to_next_to_letter_value;
             m_client.NumerologySystem.AddDistancesWithinChapters = true;
