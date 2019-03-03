@@ -253,11 +253,27 @@ public class Client : IPublisher, ISubscriber
     // used for non-Quran text
     public long CalculateValueUserText(char character)
     {
-        return Server.CalculateValueUserText(character);
+        if (Logging)
+        {
+            Server.ClearLog();
+            return Server.CalculateValueUserTextWithLogging(character);
+        }
+        else
+        {
+            return Server.CalculateValueUserText(character);
+        }
     }
     public long CalculateValueUserText(string text)
     {
-        return Server.CalculateValueUserText(text);
+        if (Logging)
+        {
+            Server.ClearLog();
+            return Server.CalculateValueUserTextWithLogging(text);
+        }
+        else
+        {
+            return Server.CalculateValueUserText(text);
+        }
     }
     // used for Quran text only
     public long CalculateValue(Letter letter)
