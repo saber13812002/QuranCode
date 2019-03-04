@@ -3758,15 +3758,27 @@ public partial class MainForm : Form, ISubscriber
         this.FindBySimilarityButton.Enabled = false;
         this.FindBySimilarityButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindBySimilarityButton.ForeColor = System.Drawing.Color.RoyalBlue;
-        this.FindBySimilarityButton.Location = new System.Drawing.Point(112, 0);
+        this.FindBySimilarityButton.Location = new System.Drawing.Point(131, 0);
         this.FindBySimilarityButton.Margin = new System.Windows.Forms.Padding(4);
         this.FindBySimilarityButton.Name = "FindBySimilarityButton";
-        this.FindBySimilarityButton.Size = new System.Drawing.Size(87, 22);
+        this.FindBySimilarityButton.Size = new System.Drawing.Size(68, 22);
         this.FindBySimilarityButton.TabIndex = 80;
         this.FindBySimilarityButton.Text = "Find";
         this.FindBySimilarityButton.UseVisualStyleBackColor = true;
         this.FindBySimilarityButton.Click += new System.EventHandler(this.FindBySimilarityButton_Click);
         this.FindBySimilarityButton.Enter += new System.EventHandler(this.FindBySimilarityControls_Enter);
+        // 
+        // FindBySimilarityPercentageLabel
+        // 
+        this.FindBySimilarityPercentageLabel.BackColor = System.Drawing.Color.Transparent;
+        this.FindBySimilarityPercentageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindBySimilarityPercentageLabel.ForeColor = System.Drawing.Color.MidnightBlue;
+        this.FindBySimilarityPercentageLabel.Location = new System.Drawing.Point(99, 5);
+        this.FindBySimilarityPercentageLabel.Name = "FindBySimilarityPercentageLabel";
+        this.FindBySimilarityPercentageLabel.Size = new System.Drawing.Size(29, 13);
+        this.FindBySimilarityPercentageLabel.TabIndex = 0;
+        this.FindBySimilarityPercentageLabel.Text = "80%";
+        this.FindBySimilarityPercentageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
         // 
         // FindBySimilarityFirstHalfRadioButton
         // 
@@ -12255,18 +12267,6 @@ public partial class MainForm : Form, ISubscriber
         // FontDialog
         // 
         this.FontDialog.Apply += new System.EventHandler(this.FontDialog_Apply);
-        // 
-        // FindBySimilarityPercentageLabel
-        // 
-        this.FindBySimilarityPercentageLabel.BackColor = System.Drawing.Color.Transparent;
-        this.FindBySimilarityPercentageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindBySimilarityPercentageLabel.ForeColor = System.Drawing.Color.MidnightBlue;
-        this.FindBySimilarityPercentageLabel.Location = new System.Drawing.Point(73, 4);
-        this.FindBySimilarityPercentageLabel.Name = "FindBySimilarityPercentageLabel";
-        this.FindBySimilarityPercentageLabel.Size = new System.Drawing.Size(29, 13);
-        this.FindBySimilarityPercentageLabel.TabIndex = 0;
-        this.FindBySimilarityPercentageLabel.Text = "80%";
-        this.FindBySimilarityPercentageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
         // 
         // LetterFrequencyContextMenuStrip
         // 
