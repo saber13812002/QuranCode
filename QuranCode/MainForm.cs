@@ -1427,6 +1427,7 @@ public partial class MainForm : Form, ISubscriber
         this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         this.FontDialog = new System.Windows.Forms.FontDialog();
+        this.FindBySimilarityPercentageLabel = new System.Windows.Forms.Label();
         this.LetterFrequencyContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
         this.PositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         this.DistancesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -3633,13 +3634,14 @@ public partial class MainForm : Form, ISubscriber
         this.FindBySimilarityPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
         | System.Windows.Forms.AnchorStyles.Right)));
         this.FindBySimilarityPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+        this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityButton);
+        this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityPercentageLabel);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityAllVersesTypeLabel);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityPercentageTrackBar);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityWordsRadioButton);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityLastHalfRadioButton);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityLastWordRadioButton);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityFirstWordRadioButton);
-        this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityButton);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityFirstHalfRadioButton);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityCurrentVerseTypeLabel);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityLabel);
@@ -3761,7 +3763,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindBySimilarityButton.Name = "FindBySimilarityButton";
         this.FindBySimilarityButton.Size = new System.Drawing.Size(87, 22);
         this.FindBySimilarityButton.TabIndex = 80;
-        this.FindBySimilarityButton.Text = "Find 100%";
+        this.FindBySimilarityButton.Text = "Find";
         this.FindBySimilarityButton.UseVisualStyleBackColor = true;
         this.FindBySimilarityButton.Click += new System.EventHandler(this.FindBySimilarityButton_Click);
         this.FindBySimilarityButton.Enter += new System.EventHandler(this.FindBySimilarityControls_Enter);
@@ -11158,6 +11160,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToChapterCNumberCheckBox.Text = "C";
         this.AddToChapterCNumberCheckBox.UseVisualStyleBackColor = false;
         this.AddToChapterCNumberCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
+        this.AddToChapterCNumberCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToChapterCNumberCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
         this.AddToChapterCNumberCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
@@ -12252,6 +12255,18 @@ public partial class MainForm : Form, ISubscriber
         // FontDialog
         // 
         this.FontDialog.Apply += new System.EventHandler(this.FontDialog_Apply);
+        // 
+        // FindBySimilarityPercentageLabel
+        // 
+        this.FindBySimilarityPercentageLabel.BackColor = System.Drawing.Color.Transparent;
+        this.FindBySimilarityPercentageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindBySimilarityPercentageLabel.ForeColor = System.Drawing.Color.MidnightBlue;
+        this.FindBySimilarityPercentageLabel.Location = new System.Drawing.Point(73, 4);
+        this.FindBySimilarityPercentageLabel.Name = "FindBySimilarityPercentageLabel";
+        this.FindBySimilarityPercentageLabel.Size = new System.Drawing.Size(29, 13);
+        this.FindBySimilarityPercentageLabel.TabIndex = 0;
+        this.FindBySimilarityPercentageLabel.Text = "80%";
+        this.FindBySimilarityPercentageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
         // 
         // LetterFrequencyContextMenuStrip
         // 
@@ -34387,7 +34402,7 @@ public partial class MainForm : Form, ISubscriber
     {
         if (sender is TrackBar)
         {
-            FindBySimilarityButton.Text = L[l]["Find"] + " " + FindBySimilarityPercentageTrackBar.Value + "%";
+            FindBySimilarityPercentageLabel.Text = FindBySimilarityPercentageTrackBar.Value + "%";
             if (m_similarity_search_source == SimilaritySearchSource.CurrentVerse)
             {
                 FindBySimilarity();
@@ -39470,6 +39485,7 @@ public partial class MainForm : Form, ISubscriber
                     for (int i = 0; i < 3; i++) AddToVerseVDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
                     for (int i = 0; i < 3; i++) AddToVerseCDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
                     for (int i = 0; i < 3; i++) AddToChapterCNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+
                     for (int i = 0; i < 3; i++) AddPositionsCheckBox.CheckedChanged -= new EventHandler(AddPositionsCheckBox_CheckedChanged);
                     for (int i = 0; i < 3; i++) AddDistancesToPreviousCheckBox.CheckedChanged -= new EventHandler(AddDistancesToPreviousCheckBox_CheckedChanged);
                     for (int i = 0; i < 3; i++) AddDistancesToNextCheckBox.CheckedChanged -= new EventHandler(AddDistancesToNextCheckBox_CheckedChanged);
@@ -39495,6 +39511,7 @@ public partial class MainForm : Form, ISubscriber
                     AddToVerseVDistanceCheckBox.Checked = m_client.NumerologySystem.AddToVerseVDistance;
                     AddToVerseCDistanceCheckBox.Checked = m_client.NumerologySystem.AddToVerseCDistance;
                     AddToChapterCNumberCheckBox.Checked = m_client.NumerologySystem.AddToChapterCNumber;
+
                     AddPositionsCheckBox.Checked = m_client.NumerologySystem.AddPositions;
                     AddDistancesToPreviousCheckBox.Checked = m_client.NumerologySystem.AddDistancesToPrevious;
                     AddDistancesToNextCheckBox.Checked = m_client.NumerologySystem.AddDistancesToNext;
@@ -39521,6 +39538,7 @@ public partial class MainForm : Form, ISubscriber
                     AddToVerseVDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
                     AddToVerseCDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
                     AddToChapterCNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+
                     AddPositionsCheckBox.CheckedChanged += new EventHandler(AddPositionsCheckBox_CheckedChanged);
                     AddDistancesToPreviousCheckBox.CheckedChanged += new EventHandler(AddDistancesToPreviousCheckBox_CheckedChanged);
                     AddDistancesToNextCheckBox.CheckedChanged += new EventHandler(AddDistancesToNextCheckBox_CheckedChanged);

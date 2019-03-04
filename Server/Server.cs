@@ -1877,18 +1877,14 @@ public class Server : IPublisher
                 foreach (Verse verse in verses)
                 {
                     result += CalculateValue(verse);
+                }
 
-                    Chapter chapter = verse.Chapter;
+                foreach (Chapter chapter in chapters)
+                {
                     if (chapter != null)
                     {
-                        if (verse.NumberInChapter == chapter.Verses.Count)
-                        {
-                            if (chapters.Contains(chapter))
-                            {
-                                // adjust value of chapter
-                                result += AdjustValue(chapter);
-                            }
-                        }
+                        // adjust value of chapter
+                        result += AdjustValue(chapter);
                     }
                 }
             }
