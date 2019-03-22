@@ -2173,8 +2173,8 @@ public class Client : IPublisher, ISubscriber
                 text = text.Replace("\t", "");
                 text = text.Replace("_", "");
                 text = text.Replace(" ", "");
-                text = text.Replace(Constants.OPEN_BRACKET, "");
-                text = text.Replace(Constants.CLOSE_BRACKET, "");
+                text = text.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+                text = text.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
                 foreach (char character in Constants.INDIAN_DIGITS)
                 {
                     text = text.Replace(character.ToString(), "");
@@ -2347,8 +2347,8 @@ public class Client : IPublisher, ISubscriber
                 text = text.Replace("\t", "");
                 text = text.Replace("_", "");
                 text = text.Replace(" ", "");
-                text = text.Replace(Constants.OPEN_BRACKET, "");
-                text = text.Replace(Constants.CLOSE_BRACKET, "");
+                text = text.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+                text = text.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
                 foreach (char character in Constants.INDIAN_DIGITS)
                 {
                     text = text.Replace(character.ToString(), "");
@@ -2362,8 +2362,8 @@ public class Client : IPublisher, ISubscriber
                     phrase = phrase.Replace("\t", "");
                     phrase = phrase.Replace("_", "");
                     phrase = phrase.Replace(" ", "");
-                    phrase = phrase.Replace(Constants.OPEN_BRACKET, "");
-                    phrase = phrase.Replace(Constants.CLOSE_BRACKET, "");
+                    phrase = phrase.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+                    phrase = phrase.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
                     foreach (char character in Constants.INDIAN_DIGITS)
                     {
                         phrase = phrase.Replace(character.ToString(), "");

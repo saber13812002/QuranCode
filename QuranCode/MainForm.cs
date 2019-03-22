@@ -17109,7 +17109,7 @@ public partial class MainForm : Form, ISubscriber
     private List<Verse> GetCurrentVerses()
     {
         List<Verse> result = new List<Verse>();
-        char[] separators = { '\n', Constants.OPEN_BRACKET[0] };
+        char[] separators = { '\n', Constants.ORNATE_RIGHT_PARENTHESIS[0] };
         string[] lines = m_current_text.Split(separators);
         int current_verse_index = CurrentVerseIndex;
         for (int i = current_verse_index; i < current_verse_index + lines.Length; i++)
@@ -24899,8 +24899,8 @@ public partial class MainForm : Form, ISubscriber
                     text = text.Replace("\r", "");
                     text = text.Replace("\t", "");
                     text = text.Replace("_", "");
-                    text = text.Replace(Constants.OPEN_BRACKET, "");
-                    text = text.Replace(Constants.CLOSE_BRACKET, "");
+                    text = text.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+                    text = text.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
                     foreach (char character in Constants.INDIAN_DIGITS)
                     {
                         text = text.Replace(character.ToString(), "");
@@ -31572,8 +31572,8 @@ public partial class MainForm : Form, ISubscriber
         text = text.Replace("\r", "");
         text = text.Replace("\t", "");
         text = text.Replace("_", "");
-        text = text.Replace(Constants.OPEN_BRACKET, "");
-        text = text.Replace(Constants.CLOSE_BRACKET, "");
+        text = text.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+        text = text.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
         foreach (char character in Constants.INDIAN_DIGITS)
         {
             text = text.Replace(character.ToString(), "");
@@ -32436,8 +32436,8 @@ public partial class MainForm : Form, ISubscriber
                     text = text.Replace("\r", "");
                     text = text.Replace("\t", "");
                     text = text.Replace("_", "");
-                    text = text.Replace(Constants.OPEN_BRACKET, "");
-                    text = text.Replace(Constants.CLOSE_BRACKET, "");
+                    text = text.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+                    text = text.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
                     foreach (char character in Constants.INDIAN_DIGITS)
                     {
                         text = text.Replace(character.ToString(), "");
@@ -38679,8 +38679,8 @@ public partial class MainForm : Form, ISubscriber
                     if (Constants.INDIAN_DIGITS.Contains(character)) continue;
                     if (Constants.STOPMARKS.Contains(character)) continue;
                     if (Constants.QURANMARKS.Contains(character)) continue;
-                    if (Constants.OPEN_BRACKET[0] == character) continue;
-                    if (Constants.CLOSE_BRACKET[0] == character) continue;
+                    if (Constants.ORNATE_RIGHT_PARENTHESIS[0] == character) continue;
+                    if (Constants.ORNATE_LEFT_PARENTHESIS[0] == character) continue;
                     str.Append(verse.GetLetterFrequency(character).ToString() + "\t");
                 }
 
@@ -40112,8 +40112,8 @@ public partial class MainForm : Form, ISubscriber
                           (selected_text[0] == '\t') ||
                           (selected_text[0] == '_') ||
                           (selected_text[0] == ' ') ||
-                          (selected_text[0] == Constants.OPEN_BRACKET[0]) ||
-                          (selected_text[0] == Constants.CLOSE_BRACKET[0]) ||
+                          (selected_text[0] == Constants.ORNATE_RIGHT_PARENTHESIS[0]) ||
+                          (selected_text[0] == Constants.ORNATE_LEFT_PARENTHESIS[0]) ||
                           Constants.INDIAN_DIGITS.Contains(selected_text[0]) ||
                           Constants.STOPMARKS.Contains(selected_text[0]) ||
                           Constants.QURANMARKS.Contains(selected_text[0])
@@ -40134,8 +40134,8 @@ public partial class MainForm : Form, ISubscriber
                           (selected_text[selected_text.Length - 1] == '\t') ||
                           (selected_text[selected_text.Length - 1] == '_') ||
                           (selected_text[selected_text.Length - 1] == ' ') ||
-                          (selected_text[selected_text.Length - 1] == Constants.OPEN_BRACKET[0]) ||
-                          (selected_text[selected_text.Length - 1] == Constants.CLOSE_BRACKET[0]) ||
+                          (selected_text[selected_text.Length - 1] == Constants.ORNATE_RIGHT_PARENTHESIS[0]) ||
+                          (selected_text[selected_text.Length - 1] == Constants.ORNATE_LEFT_PARENTHESIS[0]) ||
                           (selected_text[selected_text.Length - 1] == ' ') ||
                           Constants.INDIAN_DIGITS.Contains(selected_text[selected_text.Length - 1]) ||
                           Constants.STOPMARKS.Contains(selected_text[selected_text.Length - 1]) ||
@@ -40228,10 +40228,10 @@ public partial class MainForm : Form, ISubscriber
         return text; // for now
 
         //if (string.IsNullOrEmpty(text)) return null;
-        //while (text.Contains(Verse.OPEN_BRACKET) || text.Contains(Verse.CLOSE_BRACKET))
+        //while (text.Contains(Verse.ORNATE_RIGHT_PARENTHESIS) || text.Contains(Verse.ORNATE_LEFT_PARENTHESIS))
         //{
-        //    int start = text.IndexOf(Verse.OPEN_BRACKET);
-        //    int end = text.IndexOf(Verse.CLOSE_BRACKET);
+        //    int start = text.IndexOf(Verse.ORNATE_RIGHT_PARENTHESIS);
+        //    int end = text.IndexOf(Verse.ORNATE_LEFT_PARENTHESIS);
         //    if ((start >= 0) && (end >= 0))
         //    {
         //        if (start < end)
@@ -44259,8 +44259,8 @@ public partial class MainForm : Form, ISubscriber
             text = text.Replace("\t", "");
             text = text.Replace("_", "");
             text = text.Replace(" ", "");
-            text = text.Replace(Constants.OPEN_BRACKET, "");
-            text = text.Replace(Constants.CLOSE_BRACKET, "");
+            text = text.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+            text = text.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
             foreach (char c in Constants.INDIAN_DIGITS)
             {
                 text = text.Replace(c.ToString(), "");
@@ -44367,8 +44367,8 @@ public partial class MainForm : Form, ISubscriber
             text = text.Replace("\t", "");
             text = text.Replace("_", "");
             text = text.Replace(" ", "");
-            text = text.Replace(Constants.OPEN_BRACKET, "");
-            text = text.Replace(Constants.CLOSE_BRACKET, "");
+            text = text.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+            text = text.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
             foreach (char c in Constants.INDIAN_DIGITS)
             {
                 text = text.Replace(c.ToString(), "");
@@ -44443,8 +44443,8 @@ public partial class MainForm : Form, ISubscriber
             text = text.Replace("\t", "");
             text = text.Replace("_", "");
             text = text.Replace(" ", "");
-            text = text.Replace(Constants.OPEN_BRACKET, "");
-            text = text.Replace(Constants.CLOSE_BRACKET, "");
+            text = text.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+            text = text.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
             foreach (char c in Constants.INDIAN_DIGITS)
             {
                 text = text.Replace(c.ToString(), "");
