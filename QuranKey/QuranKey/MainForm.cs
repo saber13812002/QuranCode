@@ -1614,7 +1614,7 @@ public partial class MainForm : Form
             m_current_word = word;
 
             // in all cases
-            //this.Text = Application.ProductName + " | " + GetSelectionSummary();
+            this.Text = Application.ProductName + " | " + GetSelectionSummary();
             UpdateFindMatchCaption();
 
             string word_info = GetWordInformation(word);
@@ -1625,17 +1625,17 @@ public partial class MainForm : Form
             }
             ToolTip.SetToolTip(m_active_textbox, word_info);
 
-            //// display word info at application caption
-            //this.Text += SPACE_GAP +
-            //(
-            //    word.Verse.Chapter.Name + SPACE_GAP +
-            //    L[l]["verse"] + " " + word.Verse.NumberInChapter + "-" + word.Verse.Number + SPACE_GAP +
-            //    L[l]["word"] + " " + word.NumberInVerse + "-" + word.NumberInChapter + "-" + word.Number + SPACE_GAP +
-            //    word.Transliteration + SPACE_GAP +
-            //    word.Text + SPACE_GAP +
-            //    word.Meaning + SPACE_GAP +
-            //    word.Occurrence.ToString() + "/" + word.Frequency.ToString()
-            //);
+            // display word info at application caption
+            this.Text += SPACE_GAP +
+            (
+                word.Verse.Chapter.Name + SPACE_GAP +
+                L[l]["verse"] + " " + word.Verse.NumberInChapter + "-" + word.Verse.Number + SPACE_GAP +
+                L[l]["word"] + " " + word.NumberInVerse + "-" + word.NumberInChapter + "-" + word.Number + SPACE_GAP +
+                word.Transliteration + SPACE_GAP +
+                word.Text + SPACE_GAP +
+                word.Meaning + SPACE_GAP +
+                word.Occurrence.ToString() + "/" + word.Frequency.ToString()
+            );
         }
     }
     private void MainTextBox_MouseUp(object sender, MouseEventArgs e)
@@ -3477,6 +3477,10 @@ public partial class MainForm : Form
                         DisplaySelection(true);
                     }
 
+                    // update Caption
+                    this.Text = Application.ProductName + " | " + GetSelectionSummary();
+                    UpdateFindMatchCaption();
+
                     ChaptersListBox.Focus();
                 }
             }
@@ -4045,18 +4049,33 @@ public partial class MainForm : Form
                                             {
                                                 if (chapter.Verses != null)
                                                 {
-                                                    Verse verse = null;
-                                                    if (control == ChapterWordNumericUpDown)
+                                                    word_number = number + chapter.Verses[0].Words[0].Number - 1;
+                                                    Verse verse = m_client.Book.GetVerseByWordNumber(word_number);
+                                                    if (verse != null)
                                                     {
-                                                        word_number = number + chapter.Verses[0].Words[0].Number - 1;
-                                                        verse = m_client.Book.GetVerseByWordNumber(word_number);
+                                                        number = verse.Number;
                                                     }
-                                                    else if (control == ChapterLetterNumericUpDown)
-                                                    {
-                                                        letter_number = number + chapter.Verses[0].Words[0].Letters[0].Number - 1;
-                                                        verse = m_client.Book.GetVerseByLetterNumber(letter_number);
-                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else if (control == ChapterLetterNumericUpDown)
+                                {
+                                    scope = SelectionScope.Verse;
 
+                                    if (m_client.Book.Chapters != null)
+                                    {
+                                        int selected_index = ChapterComboBox.SelectedIndex;
+                                        if ((selected_index >= 0) && (selected_index < m_client.Book.Chapters.Count))
+                                        {
+                                            Chapter chapter = m_client.Book.Chapters[selected_index];
+                                            if (chapter != null)
+                                            {
+                                                if (chapter.Verses != null)
+                                                {
+                                                    letter_number = number + chapter.Verses[0].Words[0].Letters[0].Number - 1;
+                                                    Verse verse = m_client.Book.GetVerseByLetterNumber(letter_number);
                                                     if (verse != null)
                                                     {
                                                         number = verse.Number;
