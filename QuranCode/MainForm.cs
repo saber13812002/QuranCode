@@ -44818,8 +44818,12 @@ public partial class MainForm : Form, ISubscriber
                             str.AppendLine("Verses\t\t=\t" + VersesTextBox.Text);
                             str.AppendLine("Words\t\t=\t" + WordsTextBox.Text);
                             str.AppendLine("Letters\t\t=\t" + LettersTextBox.Text);
+                            str.AppendLine("Value\t\t=\t" + ValueTextBox.Text + ((m_radix == DEFAULT_RADIX) ? "" : " in base " + m_radix.ToString()));
                         }
-                        str.AppendLine("Value\t\t=\t" + ValueTextBox.Text + ((m_radix == DEFAULT_RADIX) ? "" : " in base " + m_radix.ToString()));
+                        else
+                        {
+                            str.AppendLine("Number\t\t=\t" + ValueTextBox.Text + ((m_radix == DEFAULT_RADIX) ? "" : " in base " + m_radix.ToString()));
+                        }
 
                         str.AppendLine();
                         str.AppendLine("Prime Factors\t=\t" + Numbers.FactorizeToString(value));
