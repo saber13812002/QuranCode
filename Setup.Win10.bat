@@ -1,1 +1,1 @@
-COPY Setup\Win10\*.* .
+COPY Files\Win10\*.* .

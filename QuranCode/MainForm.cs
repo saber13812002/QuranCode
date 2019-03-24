@@ -20388,7 +20388,7 @@ public partial class MainForm : Form, ISubscriber
                 value = -1L; // error
             }
 
-            FactorizeValue(value, false);
+            FactorizeValue(value, "Position", true);
         }
     }
     private void NumericUpDown_Leave(object sender, EventArgs e)
@@ -37715,7 +37715,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         if (m_client.FoundPhrases.Count > 0)
                         {
-                            CalcLaatePhraseStatistics();
+                            CalculatePhraseStatistics();
                         }
                     }
 
@@ -37763,7 +37763,7 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void CalcLaatePhraseStatistics()
+    private void CalculatePhraseStatistics()
     {
         if (m_client != null)
         {
@@ -37810,7 +37810,7 @@ public partial class MainForm : Form, ISubscriber
                 DecimalValueTextBox.Visible = (m_radix != DEFAULT_RADIX);
                 DecimalValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
                 DecimalValueTextBox.Refresh();
-                FactorizeValue(value, true);
+                FactorizeValue(value, "Value", true);
             }
         }
     }
@@ -40253,7 +40253,7 @@ public partial class MainForm : Form, ISubscriber
         if (m_client != null)
         {
             long value = m_client.CalculateValueUserText(user_text);
-            FactorizeValue(value, false);
+            FactorizeValue(value, "User", true);
         }
     }
     // used for Quran text only
@@ -40262,7 +40262,7 @@ public partial class MainForm : Form, ISubscriber
         if (m_client != null)
         {
             long value = m_client.CalculateValue(verse);
-            FactorizeValue(value, false);
+            FactorizeValue(value, "Value", true);
         }
     }
     private void CalculateValueAndDisplayFactors()
@@ -40287,7 +40287,7 @@ public partial class MainForm : Form, ISubscriber
             }
 
             long value = m_client.CalculateValue(verses);
-            FactorizeValue(value, false);
+            FactorizeValue(value, "Value", true);
         }
     }
     private void CalculateValueAndDisplayFactors(Chapter chapter)
@@ -40295,7 +40295,7 @@ public partial class MainForm : Form, ISubscriber
         if (m_client != null)
         {
             long value = m_client.CalculateValue(chapter);
-            FactorizeValue(value, false);
+            FactorizeValue(value, "Value", true);
         }
     }
     private void CalculateValueAndDisplayFactors(List<Verse> verses, Letter start_letter, Letter end_letter)
@@ -40303,7 +40303,7 @@ public partial class MainForm : Form, ISubscriber
         if (m_client != null)
         {
             long value = m_client.CalculateValue(verses, start_letter, end_letter);
-            FactorizeValue(value, false);
+            FactorizeValue(value, "Value", true);
         }
     }
 
@@ -40360,8 +40360,7 @@ public partial class MainForm : Form, ISubscriber
             {
                 value++;
                 ValueTextBox.Text = value.ToString();
-                FactorizeValue(value, true);
-                ValueLabel.Text = (m_show_add_controls ? "-- " : "+ ") + "↑";
+                FactorizeValue(value, "↑", true);
             }
         }
     }
@@ -40374,8 +40373,7 @@ public partial class MainForm : Form, ISubscriber
             {
                 value--;
                 ValueTextBox.Text = value.ToString();
-                FactorizeValue(value, true);
-                ValueLabel.Text = (m_show_add_controls ? "-- " : "+ ") + "↓";
+                FactorizeValue(value, "↓", true);
             }
         }
     }
@@ -40389,15 +40387,13 @@ public partial class MainForm : Form, ISubscriber
             if (long.TryParse(expression, out value))
             {
                 m_double_value = (double)value;
-                FactorizeValue(value, true);
-                ValueLabel.Text = (m_show_add_controls ? "-- " : "+ ") + L[l]["Number"];
+                FactorizeValue(value, "Math", false);
             }
             else if (expression.IsArabic() || ((m_radix <= 10) && expression.IsEnglish()))
             {
                 m_double_value = m_client.CalculateValueUserText(expression);
                 value = (long)Math.Round(m_double_value);
-                FactorizeValue(value, true); // direct text enty
-                ValueLabel.Text = (m_show_add_controls ? "-- " : "+ ") + L[l]["Text"];
+                FactorizeValue(value, "Text", true);
             }
             else if ((m_radix == 10) && (expression.ToUpper().ContainsInside("C")))
             {
@@ -40408,16 +40404,14 @@ public partial class MainForm : Form, ISubscriber
                     int k = 0; int.TryParse(parts[1], out k);
                     BigInteger combinations = Numbers.NChooseK(n, k);
                     ValueTextBox.Text = combinations.ToString();
-                    FactorizeValue((long)combinations, true);
-                    ValueLabel.Text = (m_show_add_controls ? "-- " : "+ ") + L[l]["nCk"];
+                    FactorizeValue((long)combinations, "nCk", true);
                 }
             }
             else
             {
                 m_double_value = DoCalculateExpression(expression, m_radix);
                 value = (long)Math.Round(m_double_value);
-                FactorizeValue(value, true);
-                ValueLabel.Text = (m_show_add_controls ? "-- " : "+ ") + L[l]["Math"];
+                FactorizeValue(value, "Math", false);
             }
 
             // if result has fraction, display it as is
@@ -40474,7 +40468,7 @@ public partial class MainForm : Form, ISubscriber
         }
         return result;
     }
-    private void FactorizeValue(long value, bool overwrite)
+    private void FactorizeValue(long value, string caption, bool overwrite)
     {
         try
         {
@@ -40673,7 +40667,14 @@ public partial class MainForm : Form, ISubscriber
                 UpdateValueNavigator(value);
             }
 
-            ValueLabel.Text = (m_show_add_controls ? "-- " : "+ ") + (m_user_text_mode ? L[l]["User"] : L[l]["Value"]);
+            try
+            {
+                ValueLabel.Text = (m_show_add_controls ? "-- " : "+ ") + L[l][caption];
+            }
+            catch
+            {
+                ValueLabel.Text = (m_show_add_controls ? "-- " : "+ ") + caption;
+            }
 
             ////TODO: freeze program if comes from Position
             //ValueTextBox.SelectionLength = 0;
@@ -40908,7 +40909,7 @@ public partial class MainForm : Form, ISubscriber
                     }
                 }
             }
-            FactorizeValue(value, false);
+            FactorizeValue(value, "Number", true);
         }
     }
     private void FactorizeNumber(TextBox control)
@@ -40949,7 +40950,7 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
 
-                    FactorizeValue(value, false);
+                    FactorizeValue(value, "Number", true);
                 }
                 catch
                 {
@@ -41007,15 +41008,14 @@ public partial class MainForm : Form, ISubscriber
     }
     private void UpdateNumberKind(int index)
     {
-        long number = 0L;
+        long value = 0L;
         switch (m_number_kind)
         {
             case NumberKind.Perfect:
                 {
                     if ((index > 0) && (index < Numbers.Perfects.Count))
                     {
-                        number = Numbers.Perfects[index - 1];
-                        FactorizeValue(number, true);
+                        value = Numbers.Perfects[index - 1];
                     }
                 }
                 break;
@@ -41023,8 +41023,7 @@ public partial class MainForm : Form, ISubscriber
                 {
                     if ((index > 0) && (index < Numbers.Abundants.Count))
                     {
-                        number = Numbers.Abundants[index - 1];
-                        FactorizeValue(number, true);
+                        value = Numbers.Abundants[index - 1];
                     }
                 }
                 break;
@@ -41032,12 +41031,12 @@ public partial class MainForm : Form, ISubscriber
                 {
                     if ((index > 0) && (index < Numbers.Deficients.Count))
                     {
-                        number = Numbers.Deficients[index - 1];
-                        FactorizeValue(number, true);
+                        value = Numbers.Deficients[index - 1];
                     }
                 }
                 break;
         }
+        FactorizeValue(value, "Number", true);
     }
     private void PerfectNumbersLabel_Click(object sender, EventArgs e)
     {
@@ -41165,7 +41164,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FactorizeValue(Control control)
     {
-        long number = -1L;
+        long value = -1L;
         int index = 0;
         if (int.TryParse(control.Text, out index))
         {
@@ -41180,14 +41179,14 @@ public partial class MainForm : Form, ISubscriber
                     {
                         if (index < Numbers.Primes.Count)
                         {
-                            number = Numbers.Primes[index];
+                            value = Numbers.Primes[index];
                         }
                     }
                     else // any other index type will be treated as IndexNumberType.Composite
                     {
                         if (index < Numbers.Composites.Count)
                         {
-                            number = Numbers.Composites[index];
+                            value = Numbers.Composites[index];
                         }
                     }
                 }
@@ -41197,14 +41196,14 @@ public partial class MainForm : Form, ISubscriber
                     {
                         if (index < Numbers.AdditivePrimes.Count)
                         {
-                            number = Numbers.AdditivePrimes[index];
+                            value = Numbers.AdditivePrimes[index];
                         }
                     }
                     else // any other index type will be treated as IndexNumberType.Composite
                     {
                         if (index < Numbers.AdditiveComposites.Count)
                         {
-                            number = Numbers.AdditiveComposites[index];
+                            value = Numbers.AdditiveComposites[index];
                         }
                     }
                 }
@@ -41214,14 +41213,14 @@ public partial class MainForm : Form, ISubscriber
                     {
                         if (index < Numbers.NonAdditivePrimes.Count)
                         {
-                            number = Numbers.NonAdditivePrimes[index];
+                            value = Numbers.NonAdditivePrimes[index];
                         }
                     }
                     else // any other index type will be treated as IndexNumberType.Composite
                     {
                         if (index < Numbers.NonAdditiveComposites.Count)
                         {
-                            number = Numbers.NonAdditiveComposites[index];
+                            value = Numbers.NonAdditiveComposites[index];
                         }
                     }
                 }
@@ -41233,14 +41232,14 @@ public partial class MainForm : Form, ISubscriber
                         {
                             if (index < Numbers.Primes4nPlus1.Count)
                             {
-                                number = Numbers.Primes4nPlus1[index];
+                                value = Numbers.Primes4nPlus1[index];
                             }
                         }
                         else if (m_4nminus1_index)
                         {
                             if (index < Numbers.Primes4nMinus1.Count)
                             {
-                                number = Numbers.Primes4nMinus1[index];
+                                value = Numbers.Primes4nMinus1[index];
                             }
                         }
                         else
@@ -41254,14 +41253,14 @@ public partial class MainForm : Form, ISubscriber
                         {
                             if (index < Numbers.Composites4nPlus1.Count)
                             {
-                                number = Numbers.Composites4nPlus1[index];
+                                value = Numbers.Composites4nPlus1[index];
                             }
                         }
                         else if (m_4nminus1_index)
                         {
                             if (index < Numbers.Composites4nMinus1.Count)
                             {
-                                number = Numbers.Composites4nMinus1[index];
+                                value = Numbers.Composites4nMinus1[index];
                             }
                         }
                         else
@@ -41280,7 +41279,7 @@ public partial class MainForm : Form, ISubscriber
                             {
                                 if (index < Numbers.Deficients.Count)
                                 {
-                                    number = Numbers.Deficients[index];
+                                    value = Numbers.Deficients[index];
                                 }
                             }
                             break;
@@ -41288,7 +41287,7 @@ public partial class MainForm : Form, ISubscriber
                             {
                                 if (index < Numbers.Perfects.Count)
                                 {
-                                    number = Numbers.Perfects[index];
+                                    value = Numbers.Perfects[index];
                                 }
                             }
                             break;
@@ -41296,7 +41295,7 @@ public partial class MainForm : Form, ISubscriber
                             {
                                 if (index < Numbers.Abundants.Count)
                                 {
-                                    number = Numbers.Abundants[index];
+                                    value = Numbers.Abundants[index];
                                 }
                             }
                             break;
@@ -41311,16 +41310,16 @@ public partial class MainForm : Form, ISubscriber
                     // do nothing
                 }
 
-                FactorizeValue(number, true);
+                FactorizeValue(value, "Number", true);
             }
             else
             {
-                FactorizeValue(0L, true);
+                FactorizeValue(0L, "Number", true);
             }
         }
         else
         {
-            FactorizeValue(0L, true);
+            FactorizeValue(0L, "Number", true);
         }
     }
     private void IncrementValue(Control control)
@@ -41935,7 +41934,7 @@ public partial class MainForm : Form, ISubscriber
             // display values in next radix
             //DisplayCounts(chapter_count, verse_count, word_count, letter_count, chapter_number_sum, verse_number_sum, word_number_sum, letter_number_sum);
             DisplayCounts(chapter_count, verse_count, word_count, letter_count, -1, -1, -1, -1); // -1 means don't change what is displayed
-            FactorizeValue(value, true);
+            FactorizeValue(value, "Value", true);
         }
         catch
         {
@@ -41973,7 +41972,7 @@ public partial class MainForm : Form, ISubscriber
             // display values in next radix
             //DisplayCounts(chapter_count, verse_count, word_count, letter_count, chapter_number_sum, verse_number_sum, word_number_sum, letter_number_sum);
             DisplayCounts(chapter_count, verse_count, word_count, letter_count, -1, -1, -1, -1); // -1 means don't change what is displayed
-            FactorizeValue(value, true);
+            FactorizeValue(value, "Value", true);
         }
         catch
         {
@@ -42007,7 +42006,7 @@ public partial class MainForm : Form, ISubscriber
             // display values in next radix
             //DisplayCounts(chapter_count, verse_count, word_count, letter_count, chapter_number_sum, verse_number_sum, word_number_sum, letter_number_sum);
             DisplayCounts(chapter_count, verse_count, word_count, letter_count, -1, -1, -1, -1); // -1 means don't change what is displayed
-            FactorizeValue(value, true);
+            FactorizeValue(value, "Value", true);
         }
         catch
         {
@@ -44731,16 +44730,14 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (FindByFrequencyPhraseTextBox.SelectionLength > 0)
                 {
-                    FactorizeValue(frequency_sum, true);
+                    FactorizeValue(frequency_sum, "Freq", true);
 
                     if (m_show_add_controls)
                     {
-                        ValueLabel.Text = "-- " + L[l]["Freq"];
                         ToolTip.SetToolTip(ValueLabel, L[l]["Hide value-added positions and distances"]);
                     }
                     else
                     {
-                        ValueLabel.Text = "+ " + L[l]["Freq"];
                         ToolTip.SetToolTip(ValueLabel, L[l]["Show value-added positions and distances"]);
                     }
                 }
@@ -44789,15 +44786,10 @@ public partial class MainForm : Form, ISubscriber
     }
     private void ValueInspectLabel_Click(object sender, EventArgs e)
     {
-        if (m_client != null)
-        {
-            m_client.Logging = true;    // log Adjust letter/word/verse/chapter
-            CalculateCurrentValue();    // SLOW calculations due to logging
-            InspectValueCalculations(); // display inspection information
-            m_client.Logging = false;   // return to FAST calculations without logging
-        }
+        bool verbose = (ValueLabel.Text.EndsWith(L[l]["Value"]));
+        InspectValueCalculations(verbose);
     }
-    private void InspectValueCalculations()
+    private void InspectValueCalculations(bool verbose)
     {
         this.Cursor = Cursors.WaitCursor;
         try
@@ -44808,17 +44800,25 @@ public partial class MainForm : Form, ISubscriber
                 {
                     string filename = DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss") + "_" + m_client.NumerologySystem.Name + ".txt";
 
+                    if (verbose)
+                    {
+                        m_client.Logging = true;    // log Adjust letter/word/verse/chapter
+                        CalculateCurrentValue();    // Calculate value with logging - SLOW but very informative
+                    }
+
                     long value = 0;
                     StringBuilder str = new StringBuilder();
                     if (long.TryParse(ValueTextBox.Text, out value))
                     {
-                        str.AppendLine("--------------------------------------------------------------------------------------------------");
-                        str.AppendLine(m_current_text);
-                        str.AppendLine("--------------------------------------------------------------------------------------------------");
-                        str.AppendLine();
-                        str.AppendLine("Verses\t\t=\t" + VersesTextBox.Text);
-                        str.AppendLine("Words\t\t=\t" + WordsTextBox.Text);
-                        str.AppendLine("Letters\t\t=\t" + LettersTextBox.Text);
+                        if (verbose)
+                        {
+                            str.AppendLine(m_current_text);
+                            str.AppendLine("--------------------------------------------------------------------------------------------------");
+                            str.AppendLine();
+                            str.AppendLine("Verses\t\t=\t" + VersesTextBox.Text);
+                            str.AppendLine("Words\t\t=\t" + WordsTextBox.Text);
+                            str.AppendLine("Letters\t\t=\t" + LettersTextBox.Text);
+                        }
                         str.AppendLine("Value\t\t=\t" + ValueTextBox.Text + ((m_radix == DEFAULT_RADIX) ? "" : " in base " + m_radix.ToString()));
 
                         str.AppendLine();
@@ -44951,7 +44951,8 @@ public partial class MainForm : Form, ISubscriber
                         str.AppendLine("--------------------------------------------------------------------------------------------------");
                         str.AppendLine();
 
-                        m_client.SaveValueCalculations(filename, str.ToString(), m_current_verses, m_current_start_letter, m_current_end_letter);
+                        m_client.SaveValueCalculations(filename, str.ToString(), verbose);
+                        m_client.Logging = false;   // return to FAST calculations without logging
                     }
                 }
             }

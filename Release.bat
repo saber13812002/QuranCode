@@ -54,18 +54,18 @@ CD Build\Release
 MOVE QuranCode1433.zip ..\..\QuranCode1433.zip
 CD ..\..
 
-MD Setup
-CD Setup
+MD Files
+CD Files
 MD Win7
 MD Win10
 CD ..
-COPY /Y NET2\Build\Release\*.exe Setup\Win7\
-COPY /Y NET2\Build\Release\*.dll Setup\Win7\
-COPY /Y      Build\Release\*.exe Setup\Win10\
-COPY /Y      Build\Release\*.dll Setup\Win10\
-"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Setup\*.*
+COPY /Y NET2\Build\Release\*.exe Files\Win7\
+COPY /Y NET2\Build\Release\*.dll Files\Win7\
+COPY /Y      Build\Release\*.exe Files\Win10\
+COPY /Y      Build\Release\*.dll Files\Win10\
+"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Files\*.*
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Setup.Win7.bat
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Setup.Win10.bat
-RD /S /Q Setup
+RD /S /Q Files
 
 CALL Version.bat

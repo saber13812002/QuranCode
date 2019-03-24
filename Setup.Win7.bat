@@ -1,1 +1,1 @@
-COPY Setup\Win7\*.* .
+COPY Files\Win7\*.* .
