@@ -200,11 +200,11 @@ public static class FileHelper
 
             try
             {
-                System.Diagnostics.Process.Start(path);
+                System.Diagnostics.Process.Start(path.Replace(@"/", @"\"));
             }
             catch
             {
-                System.Diagnostics.Process.Start(path.Replace(@"/", @"\"));
+                System.Diagnostics.Process.Start(path);
             }
         }
     }

@@ -37715,7 +37715,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         if (m_client.FoundPhrases.Count > 0)
                         {
-                            CalculatePhraseStatistics();
+                            CalculateFoundPhrasesStatistics();
                         }
                     }
 
@@ -37763,7 +37763,7 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void CalculatePhraseStatistics()
+    private void CalculateFoundPhrasesStatistics()
     {
         if (m_client != null)
         {
@@ -44906,9 +44906,11 @@ public partial class MainForm : Form, ISubscriber
                             _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
                             _4nminus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
                         }
-                        int _4n1_index = (_4nplus1_index > 0) ? _4nplus1_index : (_4nminus1_index > 0) ? _4nminus1_index : 0;
-                        str.AppendLine("4n+1 Squares1\t\t=\t" + squares1_str + "\t\t" + ((_4nplus1_index > 0) ? ("4n+1 Index = " + _4nplus1_index.ToString()) : (_4nplus1_index > 0) ? ("4n-1 Index = " + _4nminus1_index.ToString()) : ""));
-                        str.AppendLine("4n+1 Squares2\t\t=\t" + squares2_str);
+                        str.AppendLine(((_4nplus1_index > 0) ? "4n+1 Squares1\t\t=\t" : "4n-1 Squares1\t\t=\t") + squares1_str +
+                              "\t\t" + ((_4nplus1_index > 0) ? ("4n+1 Index = " + _4nplus1_index.ToString()) :
+                                        (_4nminus1_index > 0) ? ("4n-1 Index = " + _4nminus1_index.ToString()) :
+                                         ""));
+                        str.AppendLine(((_4nplus1_index > 0) ? "4n+1 Squares2\t\t=\t" : "4n-1 Squares2\t\t=\t") + squares2_str);
 
                         str.AppendLine();
                         if (m_client.Book != null)

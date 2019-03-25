@@ -268,11 +268,11 @@ namespace InitialLetters
             {
                 try
                 {
-                    System.Diagnostics.Process.Start(filename);
+                    System.Diagnostics.Process.Start(filename.Replace(@"/", @"\"));
                 }
                 catch
                 {
-                    System.Diagnostics.Process.Start(filename.Replace(@"/", @"\"));
+                    System.Diagnostics.Process.Start(filename);
                 }
             }
         }
