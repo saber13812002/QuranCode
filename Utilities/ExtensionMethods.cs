@@ -565,6 +565,18 @@ public static class StringExtensions
         }
     }
 
+    /// <summary>
+    /// truncate source string to maximum length if too long.
+    /// </summary>
+    /// <param name="source"></param>
+    /// <param name="length">maximum length</param>
+    /// <returns></returns>
+    public static string Truncate(this string source, int length)
+    {
+        if (string.IsNullOrEmpty(source)) return source;
+        return source.Length <= length ? source : source.Substring(0, length - 3) + "...";
+    }
+
     public static string ToArabicNumber(this string source)
     {
         if (String.IsNullOrEmpty(source)) return "";
