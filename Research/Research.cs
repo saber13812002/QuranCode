@@ -69,7 +69,7 @@ public static class Research
 
         string result = DoAllDigits(client, verses);
 
-        string filename = "AllDigits" + Globals.OUTPUT_FILE_EXT;
+        string filename = "AllDigits" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -84,7 +84,7 @@ public static class Research
 
         string result = DoOddDigitChapters(client, verses);
 
-        string filename = "OddDigitChapters" + Globals.OUTPUT_FILE_EXT;
+        string filename = "OddDigitChapters" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -99,7 +99,7 @@ public static class Research
 
         string result = DoEvenDigitChapters(client, verses);
 
-        string filename = "EvenDigitChapters" + Globals.OUTPUT_FILE_EXT;
+        string filename = "EvenDigitChapters" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -114,7 +114,7 @@ public static class Research
 
         string result = DoPrimeDigitChapters(client, verses);
 
-        string filename = "PrimeDigitChapters" + Globals.OUTPUT_FILE_EXT;
+        string filename = "PrimeDigitChapters" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -129,7 +129,7 @@ public static class Research
 
         string result = DoCompositeDigitChapters(client, verses);
 
-        string filename = "CompositeDigitChapters" + Globals.OUTPUT_FILE_EXT;
+        string filename = "CompositeDigitChapters" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -144,7 +144,7 @@ public static class Research
 
         string result = DoPrimeOr1DigitChapters(client, verses);
 
-        string filename = "PrimeOr1DigitChapters" + Globals.OUTPUT_FILE_EXT;
+        string filename = "PrimeOr1DigitChapters" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -159,7 +159,7 @@ public static class Research
 
         string result = DoCompositeOr0DigitChapters(client, verses);
 
-        string filename = "CompositeOr0DigitChapters" + Globals.OUTPUT_FILE_EXT;
+        string filename = "CompositeOr0DigitChapters" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -174,7 +174,7 @@ public static class Research
 
         string result = DoOddDigitVerses(client, verses);
 
-        string filename = "OddDigitVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "OddDigitVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -189,7 +189,7 @@ public static class Research
 
         string result = DoEvenDigitVerses(client, verses);
 
-        string filename = "EvenDigitVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "EvenDigitVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -204,7 +204,7 @@ public static class Research
 
         string result = DoPrimeDigitVerses(client, verses);
 
-        string filename = "PrimeDigitVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "PrimeDigitVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -219,7 +219,7 @@ public static class Research
 
         string result = DoCompositeDigitVerses(client, verses);
 
-        string filename = "CompositeDigitVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "CompositeDigitVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -234,7 +234,7 @@ public static class Research
 
         string result = DoPrimeOr1DigitVerses(client, verses);
 
-        string filename = "PrimeOr1DigitVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "PrimeOr1DigitVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -249,7 +249,7 @@ public static class Research
 
         string result = DoCompositeOr0DigitVerses(client, verses);
 
-        string filename = "CompositeOr0DigitVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "CompositeOr0DigitVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -264,7 +264,7 @@ public static class Research
 
         string result = DoOODigitChaptersVerses(client, verses);
 
-        string filename = "OODigitChaptersVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "OODigitChaptersVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -279,7 +279,7 @@ public static class Research
 
         string result = DoEEDigitChaptersVerses(client, verses);
 
-        string filename = "EEDigitChaptersVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "EEDigitChaptersVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -294,7 +294,7 @@ public static class Research
 
         string result = DoPPDigitChaptersVerses(client, verses);
 
-        string filename = "PPDigitChaptersVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "PPDigitChaptersVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -309,7 +309,7 @@ public static class Research
 
         string result = DoCCDigitChaptersVerses(client, verses);
 
-        string filename = "CCDigitChaptersVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "CCDigitChaptersVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -324,7 +324,7 @@ public static class Research
 
         string result = DoP1P1DigitChaptersVerses(client, verses);
 
-        string filename = "P1P1DigitChaptersVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "P1P1DigitChaptersVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -339,7 +339,7 @@ public static class Research
 
         string result = DoC0C0DigitChaptersVerses(client, verses);
 
-        string filename = "C0C0DigitChaptersVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "C0C0DigitChaptersVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -354,7 +354,7 @@ public static class Research
 
         string result = DoOEDigitChaptersVerses(client, verses);
 
-        string filename = "OEDigitChaptersVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "OEDigitChaptersVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -369,7 +369,7 @@ public static class Research
 
         string result = DoEODigitChaptersVerses(client, verses);
 
-        string filename = "EODigitChaptersVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "EODigitChaptersVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -384,7 +384,7 @@ public static class Research
 
         string result = DoPCDigitChaptersVerses(client, verses);
 
-        string filename = "PCDigitChaptersVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "PCDigitChaptersVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -399,7 +399,7 @@ public static class Research
 
         string result = DoCPDigitChaptersVerses(client, verses);
 
-        string filename = "CPDigitChaptersVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "CPDigitChaptersVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -414,7 +414,7 @@ public static class Research
 
         string result = DoP1C0DigitChaptersVerses(client, verses);
 
-        string filename = "P1C0DigitChaptersVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "P1C0DigitChaptersVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -429,7 +429,7 @@ public static class Research
 
         string result = DoC0P1DigitChaptersVerses(client, verses);
 
-        string filename = "C0P1DigitChaptersVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "C0P1DigitChaptersVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -983,7 +983,7 @@ public static class Research
 
         List<string> result = DoJumpWordsByX(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByX" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByX" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -999,7 +999,7 @@ public static class Research
 
         List<string> result = DoJumpWordsByValue(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByValue" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByValue" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1015,7 +1015,7 @@ public static class Research
 
         List<string> result = DoJumpWordsByPrimeNumbers(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByPrimeNumbers" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByPrimeNumbers" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1031,7 +1031,7 @@ public static class Research
 
         List<string> result = DoJumpWordsByAdditivePrimeNumbers(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByAdditivePrimeNumbers" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByAdditivePrimeNumbers" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1047,7 +1047,7 @@ public static class Research
 
         List<string> result = DoJumpWordsByNonAdditivePrimeNumbers(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByNonAdditivePrimeNumbers" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByNonAdditivePrimeNumbers" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1063,7 +1063,7 @@ public static class Research
 
         List<string> result = DoJumpWordsByCompositeNumbers(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByCompositeNumbers" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByCompositeNumbers" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1079,7 +1079,7 @@ public static class Research
 
         List<string> result = DoJumpWordsByAdditiveCompositeNumbers(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByAdditiveCompositeNumbers" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByAdditiveCompositeNumbers" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1095,7 +1095,7 @@ public static class Research
 
         List<string> result = DoJumpWordsByNonAdditiveCompositeNumbers(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByNonAdditiveCompositeNumbers" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByNonAdditiveCompositeNumbers" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1111,7 +1111,7 @@ public static class Research
 
         List<string> result = DoJumpWordsByFibonacciNumbers(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByFibonacciNumbers" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByFibonacciNumbers" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1127,7 +1127,7 @@ public static class Research
 
         List<string> result = DoJumpWordsByPiDigits(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByPiDigits" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByPiDigits" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1143,7 +1143,7 @@ public static class Research
 
         List<string> result = DoJumpWordsByEulerDigits(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByEulerDigits" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByEulerDigits" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1159,7 +1159,7 @@ public static class Research
 
         List<string> result = DoJumpWordsByGoldenRatioDigits(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByGoldenRatioDigits" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByGoldenRatioDigits" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1488,7 +1488,7 @@ public static class Research
 
         List<string> result = DoPrimeWords(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "PrimeWords" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "PrimeWords" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1504,7 +1504,7 @@ public static class Research
 
         List<string> result = DoAdditivePrimeWords(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "AdditivePrimeWords" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "AdditivePrimeWords" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1520,7 +1520,7 @@ public static class Research
 
         List<string> result = DoCompositeWords(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "CompositeWords" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "CompositeWords" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1536,7 +1536,7 @@ public static class Research
 
         List<string> result = DoAdditiveCompositeWords(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "AdditiveCompositeWords" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "AdditiveCompositeWords" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1552,7 +1552,7 @@ public static class Research
 
         List<string> result = DoFibonacciWords(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "FibonacciWords" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "FibonacciWords" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1678,7 +1678,7 @@ public static class Research
             values.Add(chapter.Verses.Count);
         }
 
-        string filename = client.NumerologySystem.Name + "_" + "ChapterVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "ChapterVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1699,7 +1699,7 @@ public static class Research
             values.Add(chapter.WordCount);
         }
 
-        string filename = client.NumerologySystem.Name + "_" + "ChapterWords" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "ChapterWords" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1720,7 +1720,7 @@ public static class Research
             values.Add(chapter.LetterCount);
         }
 
-        string filename = client.NumerologySystem.Name + "_" + "ChapterLetters" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "ChapterLetters" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1741,7 +1741,7 @@ public static class Research
             values.Add(client.CalculateValue(chapter));
         }
 
-        string filename = client.NumerologySystem.Name + "_" + "ChapterValues" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "ChapterValues" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1760,7 +1760,7 @@ public static class Research
             values.Add(verse.Words.Count);
         }
 
-        string filename = client.NumerologySystem.Name + "_" + "VerseWords" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "VerseWords" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1779,7 +1779,7 @@ public static class Research
             values.Add(verse.LetterCount);
         }
 
-        string filename = client.NumerologySystem.Name + "_" + "VerseLetters" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "VerseLetters" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1798,7 +1798,7 @@ public static class Research
             values.Add(client.CalculateValue(verse));
         }
 
-        string filename = client.NumerologySystem.Name + "_" + "VerseValues" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "VerseValues" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1817,7 +1817,7 @@ public static class Research
             values.Add(verse.DistanceToPrevious.dV);
         }
 
-        string filename = client.NumerologySystem.Name + "_" + "VerseDistances" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "VerseDistances" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1839,7 +1839,7 @@ public static class Research
             }
         }
 
-        string filename = client.NumerologySystem.Name + "_" + "WordLetters" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "WordLetters" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1861,7 +1861,7 @@ public static class Research
             }
         }
 
-        string filename = client.NumerologySystem.Name + "_" + "WordValues" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "WordValues" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1883,7 +1883,7 @@ public static class Research
             }
         }
 
-        string filename = client.NumerologySystem.Name + "_" + "WordDistances" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "WordDistances" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1906,7 +1906,7 @@ public static class Research
             }
         }
 
-        string filename = client.NumerologySystem.Name + "_" + "WordFrequencies" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "WordFrequencies" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1931,7 +1931,7 @@ public static class Research
             }
         }
 
-        string filename = client.NumerologySystem.Name + "_" + "LetterValues" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "LetterValues" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -1956,7 +1956,7 @@ public static class Research
             }
         }
 
-        string filename = client.NumerologySystem.Name + "_" + "LetterDistances" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "LetterDistances" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -2002,7 +2002,7 @@ public static class Research
 
         string result = DoChapterInformation(client, chapters);
 
-        string filename = client.NumerologySystem.Name + "_" + "ChapterStatistics" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "ChapterStatistics" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -2020,7 +2020,7 @@ public static class Research
 
         string result = DoChapterValues(client, chapters);
 
-        string filename = "ChapterValues" + "_" + client.NumerologySystem.TextMode + Globals.OUTPUT_FILE_EXT;
+        string filename = "ChapterValues" + "_" + client.NumerologySystem.TextMode + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -2038,7 +2038,7 @@ public static class Research
 
         string result = DoChapterLetterRatios(client, chapters);
 
-        string filename = client.NumerologySystem.Name + "_" + "ChapterLetterRatios" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "ChapterLetterRatios" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -2054,7 +2054,7 @@ public static class Research
 
         string result = DoVerseInformation(client, verses);
 
-        string filename = client.NumerologySystem.Name + "_" + "VerseStatistics" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "VerseStatistics" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -2070,7 +2070,7 @@ public static class Research
 
         string result = DoVerseValues(client, verses);
 
-        string filename = "VerseValues" + "_" + client.NumerologySystem.TextMode + Globals.OUTPUT_FILE_EXT;
+        string filename = "VerseValues" + "_" + client.NumerologySystem.TextMode + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -2086,7 +2086,7 @@ public static class Research
 
         string result = DoVerseStarts(client, verses);
 
-        string filename = "VerseStarts" + "_" + client.NumerologySystem.TextMode + Globals.OUTPUT_FILE_EXT;
+        string filename = "VerseStarts" + "_" + client.NumerologySystem.TextMode + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -2102,7 +2102,7 @@ public static class Research
 
         string result = DoVerseEnds(client, verses);
 
-        string filename = "VerseEnds" + "_" + client.NumerologySystem.TextMode + Globals.OUTPUT_FILE_EXT;
+        string filename = "VerseEnds" + "_" + client.NumerologySystem.TextMode + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -2122,7 +2122,7 @@ public static class Research
         }
         string result = DoWordInformation(client, words);
 
-        string filename = "WordInformation" + Globals.OUTPUT_FILE_EXT;
+        string filename = "WordInformation" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -2142,7 +2142,7 @@ public static class Research
         }
         string result = DoWordPartInformation(client, words);
 
-        string filename = "WordPartInformation" + Globals.OUTPUT_FILE_EXT;
+        string filename = "WordPartInformation" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -2157,7 +2157,7 @@ public static class Research
 
         string result = DoLetterFrequencySums(client, verses, param);
 
-        string filename = "LetterFrequencySums" + Globals.OUTPUT_FILE_EXT;
+        string filename = "LetterFrequencySums" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -2235,7 +2235,7 @@ public static class Research
             str.AppendLine();
         }
 
-        string filename = "UniqueChapterWords" + Globals.OUTPUT_FILE_EXT;
+        string filename = "UniqueChapterWords" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -2313,7 +2313,7 @@ public static class Research
             str.AppendLine();
         }
 
-        string filename = "UniqueChapterRoots" + Globals.OUTPUT_FILE_EXT;
+        string filename = "UniqueChapterRoots" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3082,7 +3082,7 @@ public static class Research
 
         string result = DoAllahWords(client, verses);
 
-        string filename = "AllahWords" + Globals.OUTPUT_FILE_EXT;
+        string filename = "AllahWords" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3097,7 +3097,7 @@ public static class Research
 
         string result = DoNonAllahWords(client, verses);
 
-        string filename = "NonAllahWords" + Globals.OUTPUT_FILE_EXT;
+        string filename = "NonAllahWords" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3112,7 +3112,7 @@ public static class Research
 
         string result = DoRepeatedWords(client, verses);
 
-        string filename = "RepeatedWords" + Globals.OUTPUT_FILE_EXT;
+        string filename = "RepeatedWords" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3127,7 +3127,7 @@ public static class Research
 
         string result = DoAllWords(client, verses);
 
-        string filename = "AllWords" + Globals.OUTPUT_FILE_EXT;
+        string filename = "AllWords" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3142,7 +3142,7 @@ public static class Research
 
         string result = DoWordVerbForms(client, verses);
 
-        string filename = "WordVerbForms" + Globals.OUTPUT_FILE_EXT;
+        string filename = "WordVerbForms" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3157,7 +3157,7 @@ public static class Research
 
         string result = DoVerbForms(client, verses);
 
-        string filename = "VerbForms" + Globals.OUTPUT_FILE_EXT;
+        string filename = "VerbForms" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3172,7 +3172,7 @@ public static class Research
 
         string result = DoStopmarks(client, verses);
 
-        string filename = "Stopmarks" + Globals.OUTPUT_FILE_EXT;
+        string filename = "Stopmarks" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3193,7 +3193,7 @@ public static class Research
             }
             string result = str.ToString().ToBuckwalter();
 
-            string filename = "ASCII_Text" + Globals.OUTPUT_FILE_EXT;
+            string filename = "ASCII_Text" + ".txt";
             if (Directory.Exists(Globals.RESEARCH_FOLDER))
             {
                 string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3765,10 +3765,10 @@ public static class Research
         return str.ToString();
     }
 
-    public static void __________________________(Client client, string param, bool in_search_result)
+    private static void __________________________(Client client, string param, bool in_search_result)
     {
     }
-    public static void nWords_kLetters(Client client, string param, bool in_search_result)
+    private static void nWords_kLetters(Client client, string param, bool in_search_result)
     {
         if (client == null) return;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3808,7 +3808,7 @@ public static class Research
                 str.AppendLine();
             }
 
-            string filename = "ChooseWords" + "_" + number_of_words + "_" + number_of_letters + Globals.OUTPUT_FILE_EXT;
+            string filename = "ChooseWords" + "_" + number_of_words + "_" + number_of_letters + ".txt";
             if (Directory.Exists(Globals.RESEARCH_FOLDER))
             {
                 string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3817,7 +3817,7 @@ public static class Research
             }
         }
     }
-    public static void nVerses_kWords(Client client, string param, bool in_search_result)
+    private static void nVerses_kWords(Client client, string param, bool in_search_result)
     {
         if (client == null) return;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3851,7 +3851,7 @@ public static class Research
                 str.AppendLine();
             }
 
-            string filename = "ChooseVerses" + "_" + number_of_verses + "_" + number_of_words + Globals.OUTPUT_FILE_EXT;
+            string filename = "ChooseVerses" + "_" + number_of_verses + "_" + number_of_words + ".txt";
             if (Directory.Exists(Globals.RESEARCH_FOLDER))
             {
                 string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3860,7 +3860,7 @@ public static class Research
             }
         }
     }
-    public static void nChapters_kVerses(Client client, string param, bool in_search_result)
+    private static void nChapters_kVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3897,7 +3897,7 @@ public static class Research
                     str.AppendLine();
                 }
 
-                string filename = "ChooseChapters" + "_" + number_of_chapters + "_" + number_of_verses + Globals.OUTPUT_FILE_EXT;
+                string filename = "ChooseChapters" + "_" + number_of_chapters + "_" + number_of_verses + ".txt";
                 if (Directory.Exists(Globals.RESEARCH_FOLDER))
                 {
                     string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3918,7 +3918,7 @@ public static class Research
 
         string result = DoRelatedWords(client, verses);
 
-        string filename = "RelatedWords" + Globals.OUTPUT_FILE_EXT;
+        string filename = "RelatedWords" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3933,7 +3933,7 @@ public static class Research
 
         string result = DoRelatedWordsMeanings(client, verses);
 
-        string filename = "RelatedWordsMeanings" + Globals.OUTPUT_FILE_EXT;
+        string filename = "RelatedWordsMeanings" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3948,7 +3948,7 @@ public static class Research
 
         string result = DoRelatedWordAddresses(client, verses);
 
-        string filename = "RelatedWordAddresses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "RelatedWordAddresses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3963,7 +3963,7 @@ public static class Research
 
         string result = DoRelatedWordVerses(client, verses);
 
-        string filename = "RelatedWordVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "RelatedWordVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3978,7 +3978,7 @@ public static class Research
 
         string result = DoRelatedWordsVerseMeanings(client, verses);
 
-        string filename = "RelatedWordsVerseMeanings" + Globals.OUTPUT_FILE_EXT;
+        string filename = "RelatedWordsVerseMeanings" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -3993,7 +3993,7 @@ public static class Research
 
         string result = DoRelatedWordVerseAddresses(client, verses);
 
-        string filename = "RelatedWordVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = "RelatedWordVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -4343,7 +4343,7 @@ public static class Research
 
         string result = DoChapterVerseWordLetterFactors(client, chapters);
 
-        string filename = "ChapterVerseWordLetterFactors" + Globals.OUTPUT_FILE_EXT;
+        string filename = "ChapterVerseWordLetterFactors" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -4360,7 +4360,7 @@ public static class Research
 
         string result = DoChapterVerseSumFactors(client, chapters);
 
-        string filename = "ChapterVerseSumFactors" + Globals.OUTPUT_FILE_EXT;
+        string filename = "ChapterVerseSumFactors" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -4377,7 +4377,7 @@ public static class Research
 
         string result = DoChapterVerseSquaresSumFactors(client, chapters);
 
-        string filename = "ChapterVerseSquaresSumFactors" + Globals.OUTPUT_FILE_EXT;
+        string filename = "ChapterVerseSquaresSumFactors" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -4394,7 +4394,7 @@ public static class Research
 
         string result = DoChapterVerseCubesSumFactors(client, chapters);
 
-        string filename = "ChapterVerseCubesSumFactors" + Globals.OUTPUT_FILE_EXT;
+        string filename = "ChapterVerseCubesSumFactors" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -4411,7 +4411,7 @@ public static class Research
 
         string result = DoChapterVerseWordLetterSumAZ(client, chapters);
 
-        string filename = "ChapterVerseWordLetterSumAZ" + Globals.OUTPUT_FILE_EXT;
+        string filename = "ChapterVerseWordLetterSumAZ" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -4428,7 +4428,7 @@ public static class Research
 
         string result = DoChapterVerseWordLetterSumZA(client, chapters);
 
-        string filename = "ChapterVerseWordLetterSumZA" + Globals.OUTPUT_FILE_EXT;
+        string filename = "ChapterVerseWordLetterSumZA" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -4951,7 +4951,7 @@ public static class Research
 
         string result = DoFirstWordFrequencyEqualsVerseNumber(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "FirstWordFrequencyEqualsVerseNumber" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "FirstWordFrequencyEqualsVerseNumber" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -4967,7 +4967,7 @@ public static class Research
 
         string result = DoLastWordFrequencyEqualsVerseNumber(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "LastWordFrequencyEqualsVerseNumber" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "LastWordFrequencyEqualsVerseNumber" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -5087,7 +5087,7 @@ public static class Research
 
         string result = DoP_PivotConsecutiveVerses(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "P_PivotConsecutiveVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "P_PivotConsecutiveVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -5095,7 +5095,7 @@ public static class Research
             FileHelper.DisplayFile(path);
         }
     }
-    public static void AP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static void AP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return;
         if (client.NumerologySystem == null) return;
@@ -5103,7 +5103,7 @@ public static class Research
 
         string result = DoAP_PivotConsecutiveVerses(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "AP_PivotConsecutiveVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "AP_PivotConsecutiveVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -5111,7 +5111,7 @@ public static class Research
             FileHelper.DisplayFile(path);
         }
     }
-    public static void XP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static void XP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return;
         if (client.NumerologySystem == null) return;
@@ -5119,7 +5119,7 @@ public static class Research
 
         string result = DoXP_PivotConsecutiveVerses(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "XP_PivotConsecutiveVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "XP_PivotConsecutiveVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -5127,7 +5127,7 @@ public static class Research
             FileHelper.DisplayFile(path);
         }
     }
-    public static void C_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static void C_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return;
         if (client.NumerologySystem == null) return;
@@ -5135,7 +5135,7 @@ public static class Research
 
         string result = DoC_PivotConsecutiveVerses(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "C_PivotConsecutiveVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "C_PivotConsecutiveVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -5143,7 +5143,7 @@ public static class Research
             FileHelper.DisplayFile(path);
         }
     }
-    public static void AC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static void AC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return;
         if (client.NumerologySystem == null) return;
@@ -5151,7 +5151,7 @@ public static class Research
 
         string result = DoAC_PivotConsecutiveVerses(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "AC_PivotConsecutiveVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "AC_PivotConsecutiveVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -5159,7 +5159,7 @@ public static class Research
             FileHelper.DisplayFile(path);
         }
     }
-    public static void XC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static void XC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return;
         if (client.NumerologySystem == null) return;
@@ -5167,7 +5167,7 @@ public static class Research
 
         string result = DoXC_PivotConsecutiveVerses(client, verses, param);
 
-        string filename = client.NumerologySystem.Name + "_" + "XC_PivotConsecutiveVerses" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "XC_PivotConsecutiveVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -5701,8 +5701,344 @@ public static class Research
         return result;
     }
 
-    private static void ___________________________________________(Client client, string param, bool in_search_result)
+    public static void ___________________________________________(Client client, string param, bool in_search_result)
     {
+    }
+    public static void VersesWithIntialLetters(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return;
+        if (client.NumerologySystem == null) return;
+
+        string result = DoVersesWithIntialLetters(client, param, in_search_result);
+
+        string filename = client.NumerologySystem.Name + "_" + "VersesWithIntialLetters" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
+        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        {
+            string path = Globals.RESEARCH_FOLDER + "/" + filename;
+            FileHelper.SaveText(path, result);
+            FileHelper.DisplayFile(path);
+        }
+    }
+    public static void VersesWithNonIntialLetters(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return;
+        if (client.NumerologySystem == null) return;
+
+        string result = DoVersesWithNonIntialLetters(client, param, in_search_result);
+
+        string filename = client.NumerologySystem.Name + "_" + "VersesWithNonIntialLetters" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
+        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        {
+            string path = Globals.RESEARCH_FOLDER + "/" + filename;
+            FileHelper.SaveText(path, result);
+            FileHelper.DisplayFile(path);
+        }
+    }
+    public static void VersesWithOnlyIntialLetters(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return;
+        if (client.NumerologySystem == null) return;
+
+        string result = DoVersesWithOnlyIntialLetters(client, param, in_search_result);
+
+        string filename = client.NumerologySystem.Name + "_" + "VersesWithOnlyIntialLetters" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
+        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        {
+            string path = Globals.RESEARCH_FOLDER + "/" + filename;
+            FileHelper.SaveText(path, result);
+            FileHelper.DisplayFile(path);
+        }
+    }
+    public static void VersesWithOnlyNonIntialLetters(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return;
+        if (client.NumerologySystem == null) return;
+
+        string result = DoVersesWithOnlyNonIntialLetters(client, param, in_search_result);
+
+        string filename = client.NumerologySystem.Name + "_" + "VersesWithOnlyNonIntialLetters" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
+        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        {
+            string path = Globals.RESEARCH_FOLDER + "/" + filename;
+            FileHelper.SaveText(path, result);
+            FileHelper.DisplayFile(path);
+        }
+    }
+    public static void VersesWithAllIntialLetters(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return;
+        if (client.NumerologySystem == null) return;
+
+        string result = DoVersesWithAllIntialLetters(client, param, in_search_result);
+
+        string filename = client.NumerologySystem.Name + "_" + "VersesWithAllIntialLetters" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
+        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        {
+            string path = Globals.RESEARCH_FOLDER + "/" + filename;
+            FileHelper.SaveText(path, result);
+            FileHelper.DisplayFile(path);
+        }
+    }
+    public static void VersesWithAllNonIntialLetters(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return;
+        if (client.NumerologySystem == null) return;
+
+        string result = DoVersesWithAllNonIntialLetters(client, param, in_search_result);
+
+        string filename = client.NumerologySystem.Name + "_" + "VersesWithAllNonIntialLetters" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
+        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        {
+            string path = Globals.RESEARCH_FOLDER + "/" + filename;
+            FileHelper.SaveText(path, result);
+            FileHelper.DisplayFile(path);
+        }
+    }
+    private static string DoVersesWithIntialLetters(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.Book.Verses == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
+        str.Append("\r\n");
+
+        int count = 0;
+        foreach (Verse verse in client.Book.Verses)
+        {
+            bool contain_initial_letters = false;
+            foreach (char c in Constants.INITIAL_LETTERS)
+            {
+                if (verse.Text.Contains(c.ToString()))
+                {
+                    contain_initial_letters = true;
+                    break;
+                }
+            }
+
+            if (contain_initial_letters)
+            {
+                count++;
+                str.Append(count.ToString() + "\t");
+                str.Append(verse.Number.ToString() + "\t");
+                str.Append(verse.Address.ToString() + "\t");
+                str.Append(verse.Words.Count.ToString() + "\t");
+                str.Append(verse.LetterCount.ToString() + "\t");
+                str.Append(verse.UniqueLetters.Count.ToString() + "\t");
+                long value = client.CalculateValue(verse);
+                str.Append(value.ToString() + "\t");
+                str.Append(Numbers.DigitSum(value).ToString() + "\t");
+                str.Append(verse.Text + "\t");
+                str.Append("\r\n");
+            }
+        }
+        return str.ToString();
+    }
+    private static string DoVersesWithNonIntialLetters(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.Book.Verses == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
+        str.Append("\r\n");
+
+        int count = 0;
+        foreach (Verse verse in client.Book.Verses)
+        {
+            bool contain_non_initial_letters = false;
+            foreach (char c in Constants.NON_INITIAL_LETTERS)
+            {
+                if (verse.Text.Contains(c.ToString()))
+                {
+                    contain_non_initial_letters = true;
+                    break;
+                }
+            }
+
+            if (contain_non_initial_letters)
+            {
+                count++;
+                str.Append(count.ToString() + "\t");
+                str.Append(verse.Number.ToString() + "\t");
+                str.Append(verse.Address.ToString() + "\t");
+                str.Append(verse.Words.Count.ToString() + "\t");
+                str.Append(verse.LetterCount.ToString() + "\t");
+                str.Append(verse.UniqueLetters.Count.ToString() + "\t");
+                long value = client.CalculateValue(verse);
+                str.Append(value.ToString() + "\t");
+                str.Append(Numbers.DigitSum(value).ToString() + "\t");
+                str.Append(verse.Text + "\t");
+                str.Append("\r\n");
+            }
+        }
+        return str.ToString();
+    }
+    private static string DoVersesWithOnlyIntialLetters(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.Book.Verses == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
+        str.Append("\r\n");
+
+        int count = 0;
+        foreach (Verse verse in client.Book.Verses)
+        {
+            bool contain_non_initial_letters = false;
+            foreach (char c in Constants.NON_INITIAL_LETTERS)
+            {
+                if (verse.Text.Contains(c.ToString()))
+                {
+                    contain_non_initial_letters = true;
+                    break;
+                }
+            }
+
+            if (!contain_non_initial_letters)
+            {
+                count++;
+                str.Append(count.ToString() + "\t");
+                str.Append(verse.Number.ToString() + "\t");
+                str.Append(verse.Address.ToString() + "\t");
+                str.Append(verse.Words.Count.ToString() + "\t");
+                str.Append(verse.LetterCount.ToString() + "\t");
+                str.Append(verse.UniqueLetters.Count.ToString() + "\t");
+                long value = client.CalculateValue(verse);
+                str.Append(value.ToString() + "\t");
+                str.Append(Numbers.DigitSum(value).ToString() + "\t");
+                str.Append(verse.Text + "\t");
+                str.Append("\r\n");
+            }
+        }
+        return str.ToString();
+    }
+    private static string DoVersesWithOnlyNonIntialLetters(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.Book.Verses == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
+        str.Append("\r\n");
+
+        int count = 0;
+        foreach (Verse verse in client.Book.Verses)
+        {
+            bool contain_non_initial_letters = false;
+            foreach (char c in Constants.INITIAL_LETTERS)
+            {
+                if (verse.Text.Contains(c.ToString()))
+                {
+                    contain_non_initial_letters = true;
+                    break;
+                }
+            }
+
+            if (!contain_non_initial_letters)
+            {
+                count++;
+                str.Append(count.ToString() + "\t");
+                str.Append(verse.Number.ToString() + "\t");
+                str.Append(verse.Address.ToString() + "\t");
+                str.Append(verse.Words.Count.ToString() + "\t");
+                str.Append(verse.LetterCount.ToString() + "\t");
+                str.Append(verse.UniqueLetters.Count.ToString() + "\t");
+                long value = client.CalculateValue(verse);
+                str.Append(value.ToString() + "\t");
+                str.Append(Numbers.DigitSum(value).ToString() + "\t");
+                str.Append(verse.Text + "\t");
+                str.Append("\r\n");
+            }
+        }
+        return str.ToString();
+    }
+    private static string DoVersesWithAllIntialLetters(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.Book.Verses == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
+        str.Append("\r\n");
+
+        int count = 0;
+        foreach (Verse verse in client.Book.Verses)
+        {
+            bool contain_all_initial_letters = true;
+            foreach (char c in Constants.INITIAL_LETTERS)
+            {
+                if (!verse.Text.Contains(c.ToString()))
+                {
+                    contain_all_initial_letters = false;
+                    break;
+                }
+            }
+
+            if (contain_all_initial_letters)
+            {
+                count++;
+                str.Append(count.ToString() + "\t");
+                str.Append(verse.Number.ToString() + "\t");
+                str.Append(verse.Address.ToString() + "\t");
+                str.Append(verse.Words.Count.ToString() + "\t");
+                str.Append(verse.LetterCount.ToString() + "\t");
+                str.Append(verse.UniqueLetters.Count.ToString() + "\t");
+                long value = client.CalculateValue(verse);
+                str.Append(value.ToString() + "\t");
+                str.Append(Numbers.DigitSum(value).ToString() + "\t");
+                str.Append(verse.Text + "\t");
+                str.Append("\r\n");
+            }
+        }
+        return str.ToString();
+    }
+    private static string DoVersesWithAllNonIntialLetters(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.Book.Verses == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
+        str.Append("\r\n");
+
+        int count = 0;
+        foreach (Verse verse in client.Book.Verses)
+        {
+            bool contain_all_non_initial_letters = true;
+            foreach (char c in Constants.NON_INITIAL_LETTERS)
+            {
+                if (!verse.Text.Contains(c.ToString()))
+                {
+                    contain_all_non_initial_letters = false;
+                    break;
+                }
+            }
+
+            if (contain_all_non_initial_letters)
+            {
+                count++;
+                str.Append(count.ToString() + "\t");
+                str.Append(verse.Number.ToString() + "\t");
+                str.Append(verse.Address.ToString() + "\t");
+                str.Append(verse.Words.Count.ToString() + "\t");
+                str.Append(verse.LetterCount.ToString() + "\t");
+                str.Append(verse.UniqueLetters.Count.ToString() + "\t");
+                long value = client.CalculateValue(verse);
+                str.Append(value.ToString() + "\t");
+                str.Append(Numbers.DigitSum(value).ToString() + "\t");
+                str.Append(verse.Text + "\t");
+                str.Append("\r\n");
+            }
+        }
+        return str.ToString();
     }
     private static void FindVersesWithXValueDigitSum(Client client, string param, bool in_search_result)
     {
@@ -5711,7 +6047,7 @@ public static class Research
 
         string result = DoFindVersesWithXValueDigitSum(client, param, in_search_result, NumberType.Natural);
 
-        string filename = client.NumerologySystem.Name + "_" + "FindVersesWithXValueDigitSum" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "FindVersesWithXValueDigitSum" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -5726,7 +6062,7 @@ public static class Research
 
         string result = DoFindVersesWithXValueDigitSum(client, param, in_search_result, NumberType.Prime);
 
-        string filename = client.NumerologySystem.Name + "_" + "FindVersesWithPValueAndXDigitSum" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "FindVersesWithPValueAndXDigitSum" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -5741,7 +6077,7 @@ public static class Research
 
         string result = DoFindVersesWithXValueDigitSum(client, param, in_search_result, NumberType.AdditivePrime);
 
-        string filename = client.NumerologySystem.Name + "_" + "FindVersesWithAPValueAndXDigitSum" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "FindVersesWithAPValueAndXDigitSum" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -5756,7 +6092,7 @@ public static class Research
 
         string result = DoFindVersesWithXValueDigitSum(client, param, in_search_result, NumberType.Composite);
 
-        string filename = client.NumerologySystem.Name + "_" + "FindVersesWithCValueAndXDigitSum" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "FindVersesWithCValueAndXDigitSum" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -5771,7 +6107,7 @@ public static class Research
 
         string result = DoFindVersesWithXValueDigitSum(client, param, in_search_result, NumberType.AdditiveComposite);
 
-        string filename = client.NumerologySystem.Name + "_" + "FindVersesWithACValueAndXDigitSum" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystem.Name + "_" + "FindVersesWithACValueAndXDigitSum" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -6003,7 +6339,7 @@ public static class Research
 
                 } // next PERMUTATION
 
-                string filename = "BismAllahEqualsAlFatiha" + number_type.ToString() + "IndexSystem" + Globals.OUTPUT_FILE_EXT;
+                string filename = "BismAllahEqualsAlFatiha" + number_type.ToString() + "IndexSystem" + ".txt";
                 if (Directory.Exists(Globals.RESEARCH_FOLDER))
                 {
                     string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -6221,7 +6557,7 @@ public static class Research
                                     best_numerology_systems.Add(best_numerology_system);
 
                                     // prinet out the current matching system now
-                                    string i_filename = "AlFatihaEqualsQuran" + number_type.ToString() + "IndexSystem" + Globals.OUTPUT_FILE_EXT;
+                                    string i_filename = "AlFatihaEqualsQuran" + number_type.ToString() + "IndexSystem" + ".txt";
                                     if (Directory.Exists(Globals.RESEARCH_FOLDER))
                                     {
                                         string i_path = Globals.RESEARCH_FOLDER + "/" + i_filename;
@@ -6276,7 +6612,7 @@ public static class Research
 
                 } // next PERMUTATION
 
-                string filename = "AlFatihaEqualsQuran" + number_type.ToString() + "IndexSystem" + Globals.OUTPUT_FILE_EXT;
+                string filename = "AlFatihaEqualsQuran" + number_type.ToString() + "IndexSystem" + ".txt";
                 if (Directory.Exists(Globals.RESEARCH_FOLDER))
                 {
                     string path = Globals.RESEARCH_FOLDER + "/" + filename;

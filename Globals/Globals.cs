@@ -3,7 +3,7 @@ public enum Edition { Standard, Ultimate }
 public static class Globals
 {
     public static Edition EDITION = Edition.Standard;
-    public static string VERSION = "6.19.941.4"; // updated by Version.bat (with AssemblyInfo.cs of all projects)
+    public static string VERSION = "6.19.947.4"; // updated by Version.bat (with AssemblyInfo.cs of all projects)
     public static string SHORT_VERSION
     {
         get
@@ -42,7 +42,6 @@ public static class Globals
     }
 
     // Global Variables
-    public static string OUTPUT_FILE_EXT = ".csv"; // to open in Excel
     public static string DELIMITER = "\t";
     public static string SUB_DELIMITER = "|";
     public static string DATE_FORMAT = "yyyy-MM-dd";

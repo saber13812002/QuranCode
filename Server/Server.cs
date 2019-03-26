@@ -377,7 +377,7 @@ public class Server : IPublisher
                     //        }
                     //    }
                     //}
-                    //string filename = "Stopmarks" + Globals.OUTPUT_FILE_EXT;
+                    //string filename = "Stopmarks" + ".txt";
                     //if (Directory.Exists(Globals.DATA_FOLDER))
                     //{
                     //    string path = Globals.DATA_FOLDER + "/" + filename;

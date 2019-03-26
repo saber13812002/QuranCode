@@ -6,6 +6,42 @@ public static class Constants
     public static string ORNATE_RIGHT_PARENTHESIS = "\uFD3F";  // ﴿
     public static string ORNATE_LEFT_PARENTHESIS = "\uFD3E";   // ﴾
 
+    public static List<char> INITIAL_LETTERS = new List<char>()
+    {
+        'ا',
+        'ح',
+        'ر',
+        'س',
+        'ص',
+        'ط',
+        'ع',
+        'ق',
+        'ك',
+        'ل',
+        'م',
+        'ن',
+        'ه',
+        'ي'
+    };
+
+    public static List<char> NON_INITIAL_LETTERS = new List<char>()
+    {
+        'ب',
+        'ت',
+        'ث',
+        'ج',
+        'خ',
+        'د',
+        'ذ',
+        'ز',
+        'ش',
+        'ض',
+        'ظ',
+        'غ',
+        'ف',
+        'و'
+    };
+
     public static List<char> ARABIC_DIGITS = new List<char>()
     { 
         '0',

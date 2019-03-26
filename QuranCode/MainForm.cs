@@ -15999,7 +15999,7 @@ public partial class MainForm : Form, ISubscriber
                                                             verse1.Chapter.SortedNumber.ToString("000") + verse1.NumberInChapter.ToString("000") +
                                                             "-" +
                                                             verse2.Chapter.SortedNumber.ToString("000") + verse2.NumberInChapter.ToString("000") +
-                                                            Globals.OUTPUT_FILE_EXT;
+                                                            ".txt";
                                             if (Directory.Exists(Globals.STATISTICS_FOLDER))
                                             {
                                                 string path = Globals.STATISTICS_FOLDER + "/" + filename;
@@ -20328,7 +20328,7 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
 
-            string filename = m_client.NumerologySystem.Name + "_" + "Chapters" + m_chapter_sort_method.ToString() + m_chapter_sort_order.ToString() + str.ToString() + Globals.OUTPUT_FILE_EXT;
+            string filename = m_client.NumerologySystem.Name + "_" + "Chapters" + m_chapter_sort_method.ToString() + m_chapter_sort_order.ToString() + str.ToString() + ".txt";
             if (Directory.Exists(Globals.STATISTICS_FOLDER))
             {
                 string path = Globals.STATISTICS_FOLDER + "/" + filename;
@@ -25088,7 +25088,7 @@ public partial class MainForm : Form, ISubscriber
         {
             if (m_client.NumerologySystem != null)
             {
-                string filename = SymmetryTypeComboBox.SelectedItem.ToString() + "_" + (m_symmetry_include_boundary_cases ? "Boundaries" : "") + "_" + m_client.NumerologySystem.TextMode + "_" + GetSelectionSummary().Replace(" ", "") + "_" + Globals.OUTPUT_FILE_EXT;
+                string filename = SymmetryTypeComboBox.SelectedItem.ToString() + "_" + (m_symmetry_include_boundary_cases ? "Boundaries" : "") + "_" + m_client.NumerologySystem.TextMode + "_" + GetSelectionSummary().Replace(" ", "") + "_" + ".txt";
                 if (Directory.Exists(Globals.STATISTICS_FOLDER))
                 {
                     string path = Globals.STATISTICS_FOLDER + "/" + filename;
@@ -31087,7 +31087,7 @@ public partial class MainForm : Form, ISubscriber
     private void CVWLSequenceInspectLabel_Click(object sender, EventArgs e)
     {
         string cvwl_sequence_type = CVWLSequenceTypeComboBox.SelectedItem.ToString();
-        string filename = (m_cvwl_sequence_right_to_left ? "R2L" : "L2R") + "_" + cvwl_sequence_type + Globals.OUTPUT_FILE_EXT;
+        string filename = (m_cvwl_sequence_right_to_left ? "R2L" : "L2R") + "_" + cvwl_sequence_type + ".txt";
         if (Directory.Exists(Globals.STATISTICS_FOLDER))
         {
             string path = Globals.STATISTICS_FOLDER + "/" + filename;
@@ -31348,7 +31348,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void ValuesSequenceInspectLabel_Click(object sender, EventArgs e)
     {
-        string filename = (m_values_sequence_right_to_left ? "R2L" : "L2R") + "_" + "Base" + m_values_sequence_radix + " " + ValuesSequenceScopeComboBox.SelectedItem.ToString() + Globals.OUTPUT_FILE_EXT;
+        string filename = (m_values_sequence_right_to_left ? "R2L" : "L2R") + "_" + "Base" + m_values_sequence_radix + " " + ValuesSequenceScopeComboBox.SelectedItem.ToString() + ".txt";
         if (Directory.Exists(Globals.STATISTICS_FOLDER))
         {
             string path = Globals.STATISTICS_FOLDER + "/" + filename;
@@ -31781,7 +31781,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void UserTextInspectLabel_Click(object sender, EventArgs e)
     {
-        string filename = "UserText" + "_" + DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss") + Globals.OUTPUT_FILE_EXT;
+        string filename = "UserText" + "_" + DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss") + ".txt";
         if (Directory.Exists(Globals.STATISTICS_FOLDER))
         {
             string path = Globals.STATISTICS_FOLDER + "/" + filename;
@@ -38488,7 +38488,7 @@ public partial class MainForm : Form, ISubscriber
                     }
                     break;
             }
-            filename = m_client.NumerologySystem.Name + "_" + m_find_result_header.Replace(" ", "_").Replace("*", "") + Globals.OUTPUT_FILE_EXT;
+            filename = m_client.NumerologySystem.Name + "_" + m_find_result_header.Replace(" ", "_").Replace("*", "") + ".txt";
         }
         else
         {
@@ -38533,7 +38533,7 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
 
-            filename = m_client.NumerologySystem.Name + "_" + "VersesOf" + str.ToString() + Globals.OUTPUT_FILE_EXT;
+            filename = m_client.NumerologySystem.Name + "_" + "VersesOf" + str.ToString() + ".txt";
         }
         if (Directory.Exists(Globals.STATISTICS_FOLDER))
         {
@@ -44340,7 +44340,7 @@ public partial class MainForm : Form, ISubscriber
                 str.AppendLine();
             }
 
-            string filename = letter.ToString() + "_" + "LetterPositionsAndDistances" + Globals.OUTPUT_FILE_EXT;
+            string filename = letter.ToString() + "_" + "LetterPositionsAndDistances" + ".txt";
             if (Directory.Exists(Globals.RESEARCH_FOLDER))
             {
                 string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -44416,7 +44416,7 @@ public partial class MainForm : Form, ISubscriber
                 str.AppendLine();
             }
 
-            string filename = "LetterPositions" + Globals.OUTPUT_FILE_EXT;
+            string filename = "LetterPositions" + ".txt";
             if (Directory.Exists(Globals.RESEARCH_FOLDER))
             {
                 string path = Globals.RESEARCH_FOLDER + "/" + filename;
@@ -44496,7 +44496,7 @@ public partial class MainForm : Form, ISubscriber
                 str.AppendLine();
             }
 
-            string filename = "LetterDistances" + Globals.OUTPUT_FILE_EXT;
+            string filename = "LetterDistances" + ".txt";
             if (Directory.Exists(Globals.RESEARCH_FOLDER))
             {
                 string path = Globals.RESEARCH_FOLDER + "/" + filename;
