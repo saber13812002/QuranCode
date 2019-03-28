@@ -702,7 +702,7 @@ public class TextAnalyzer
         {
             str.Append(position.ToString() + ",");
         }
-        str.Append("\r\n");
+        str.AppendLine();
         WriteFile(filename + ".pattern.csv", str.ToString());
         Console.WriteLine("\r\n" + str.ToString());
         return str.ToString();

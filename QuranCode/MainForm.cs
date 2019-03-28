@@ -15762,28 +15762,55 @@ public partial class MainForm : Form, ISubscriber
             ResearchMethodsComboBox.SelectedIndexChanged += new EventHandler(ResearchMethodsComboBox_SelectedIndexChanged);
         }
     }
-    private void RunResearchMethod()
+    private object RunResearchMethod()
     {
         if (m_client != null)
         {
             if (m_client.Selection != null)
             {
-                if (ResearchMethodsComboBox.SelectedIndex > -1)
+                if (m_client.NumerologySystem != null)
                 {
-                    if (ResearchMethodsComboBox.SelectedItem != null)
+                    if (ResearchMethodsComboBox.SelectedIndex > -1)
                     {
-                        string method_name = ResearchMethodsComboBox.SelectedItem.ToString();
-                        string param = ResearchMethodParameterTextBox.Text;
-                        if (!string.IsNullOrEmpty(method_name))
+                        if (ResearchMethodsComboBox.SelectedItem != null)
                         {
-                            InvokeResearchMethod(method_name, m_client, param, m_found_verses_displayed);
+                            string method_name = ResearchMethodsComboBox.SelectedItem.ToString();
+                            string param = ResearchMethodParameterTextBox.Text;
+                            if (!string.IsNullOrEmpty(method_name))
+                            {
+                                string result = InvokeResearchMethod(method_name, m_client, param, m_found_verses_displayed);
+                                if (method_name.StartsWith("Run_") || method_name.StartsWith("Open_"))
+                                {
+                                    // do nothing
+                                }
+                                else
+                                {
+                                    if ((m_client.FoundVerses != null) && (m_client.FoundVerses.Count > 0))
+                                    {
+                                        DisplaySearchResults();
+                                        HeaderLabel.Text = (m_client.FoundVerses.Count.ToString() + " verses found");
+                                        HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(m_client.FoundVerses.Count);
+                                    }
+                                    else
+                                    {
+                                        string filename = m_client.NumerologySystem.Name + "_" + method_name + "_" + ((param.Length > 0) ? (param + "_") : "") + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
+                                        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+                                        {
+                                            string path = Globals.RESEARCH_FOLDER + "/" + filename;
+                                            FileHelper.SaveText(path, result);
+                                            FileHelper.DisplayFile(path);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
             }
         }
+        return null;
     }
-    private void InvokeResearchMethod(string method_name, Client client, string param, bool in_search_result)
+    private string InvokeResearchMethod(string method_name, Client client, string param, bool in_search_result)
     {
         try
         {
@@ -15796,7 +15823,12 @@ public partial class MainForm : Form, ISubscriber
                     if (method_info != null)
                     {
                         object[] parameters = { client, param, in_search_result };
-                        object result = method_info.Invoke(null, parameters);
+                        object obj = method_info.Invoke(null, parameters);
+                        if (obj != null)
+                        {
+                            return obj.ToString();
+                        }
+                        return null;
                     }
                 }
             }
@@ -15810,6 +15842,7 @@ public partial class MainForm : Form, ISubscriber
                 ex = ex.InnerException;
             }
         }
+        return null;
     }
     private void ResearchMethodsComboBox_DropDown(object sender, EventArgs e)
     {
@@ -15922,7 +15955,7 @@ public partial class MainForm : Form, ISubscriber
         {
             if (ResearchMethodsComboBox.SelectedItem != null)
             {
-                RunResearchMethod();
+                object result = RunResearchMethod();
             }
         }
         catch (Exception ex)
@@ -37495,14 +37528,30 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (m_find_result_header != null)
                 {
-                    text = m_find_result_header;
-
-                    string[] parts = m_find_result_header.Split();
-                    if (parts.Length > 0)
+                    if (m_find_result_header != null)
                     {
-                        if (int.TryParse(parts[0], out number))
+                        text = m_find_result_header;
+
+                        string[] parts = m_find_result_header.Split();
+                        if (parts.Length > 0)
                         {
-                            // do nothing
+                            if (int.TryParse(parts[0], out number))
+                            {
+                                // do nothing
+                            }
+                        }
+                        m_find_result_header = null; // to signal to DisplaySearchResult to not diaply the total found result but the current verse info.
+                    }
+                }
+                else
+                {
+                    Verse verse = GetCurrentVerse();
+                    if (verse != null)
+                    {
+                        if (verse.Chapter != null)
+                        {
+                            text = GetVerseSummary(verse);
+                            number = verse.NumberInChapter;
                         }
                     }
                 }
@@ -37514,20 +37563,7 @@ public partial class MainForm : Form, ISubscriber
                 {
                     if (verse.Chapter != null)
                     {
-                        //text = L[l]["Chapter"] + "   " + verse.Chapter.SortedNumber + ": " + L[l][verse.Chapter.TransliteratedName] + "   "
-                        text = L[l][verse.Chapter.TransliteratedName] + " "
-                             + ((l == "Arabic") ? "     " : verse.Chapter.Name + "     ")
-                             + L[l]["Verse"] + " " + verse.NumberInChapter //+ "/" + verse.Chapter.Verses.Count + "   "
-                            //+ L[l]["Station"] + " " + ((verse.Station != null) ? verse.Station.Number : -1) + "   "
-                            //+ L[l]["Part"] + " " + ((verse.Part != null) ? verse.Part.Number : -1) + "   "
-                            //+ L[l]["Group"] + " " + ((verse.Group != null) ? verse.Group.Number : -1) + "   "
-                            //+ L[l]["Half"] + " " + ((verse.Half != null) ? verse.Half.Number : -1) + "   "
-                            //+ L[l]["Quarter"] + " " + ((verse.Quarter != null) ? verse.Quarter.Number : -1) + "   "
-                            //+ L[l]["Bowing"] + " " + ((verse.Bowing != null) ? verse.Bowing.Number : -1) + "   "
-                             + "     "
-                             + L[l]["Page"] + " " + ((verse.Page != null) ? verse.Page.Number : -1)
-                        ;
-
+                        text = GetVerseSummary(verse);
                         number = verse.NumberInChapter;
                     }
                 }
@@ -37537,6 +37573,27 @@ public partial class MainForm : Form, ISubscriber
             HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(number);
             HeaderLabel.Refresh();
         }
+    }
+    private string GetVerseSummary(Verse verse)
+    {
+        if (verse != null)
+        {
+            //string text = L[l]["Chapter"] + "   " + verse.Chapter.SortedNumber + ": " + L[l][verse.Chapter.TransliteratedName] + "   "
+            string text = L[l][verse.Chapter.TransliteratedName] + " "
+                 + ((l == "Arabic") ? "     " : verse.Chapter.Name + "     ")
+                 + L[l]["Verse"] + " " + verse.NumberInChapter //+ "/" + verse.Chapter.Verses.Count + "   "
+                //+ L[l]["Station"] + " " + ((verse.Station != null) ? verse.Station.Number : -1) + "   "
+                //+ L[l]["Part"] + " " + ((verse.Part != null) ? verse.Part.Number : -1) + "   "
+                //+ L[l]["Group"] + " " + ((verse.Group != null) ? verse.Group.Number : -1) + "   "
+                //+ L[l]["Half"] + " " + ((verse.Half != null) ? verse.Half.Number : -1) + "   "
+                //+ L[l]["Quarter"] + " " + ((verse.Quarter != null) ? verse.Quarter.Number : -1) + "   "
+                //+ L[l]["Bowing"] + " " + ((verse.Bowing != null) ? verse.Bowing.Number : -1) + "   "
+                 + "     "
+                 + L[l]["Page"] + " " + ((verse.Page != null) ? verse.Page.Number : -1)
+            ;
+            return text;
+        }
+        return null;
     }
 
     private RichTextBoxEx m_active_textbox = null;
@@ -37669,9 +37726,8 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
-
-                        SwitchToSearchResultTextBox();
                     }
+                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
                     for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
@@ -37777,11 +37833,14 @@ public partial class MainForm : Form, ISubscriber
                 {
                     if (phrase != null)
                     {
-                        phrase_str.AppendLine(phrase.Text);
-                        word_count += phrase.Text.Split(' ').Length;
-                        string phrase_nospaces = phrase.Text.SimplifyTo(m_client.NumerologySystem.TextMode).Replace(" ", "");
-                        letter_count += phrase_nospaces.Length;
-                        value += m_client.CalculateValueUserText(phrase.Text);
+                        if (phrase.Text != null)
+                        {
+                            phrase_str.AppendLine(phrase.Text);
+                            word_count += phrase.Text.Split(' ').Length;
+                            string phrase_nospaces = phrase.Text.SimplifyTo(m_client.NumerologySystem.TextMode).Replace(" ", "");
+                            letter_count += phrase_nospaces.Length;
+                            value += m_client.CalculateValueUserText(phrase.Text);
+                        }
                     }
                 }
 
@@ -37846,9 +37905,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
-
-                        SwitchToSearchResultTextBox();
                     }
+
+                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
                     for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
@@ -37949,9 +38008,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
-
-                        SwitchToSearchResultTextBox();
                     }
+
+                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) ChaptersListBox.SelectedIndexChanged -= new EventHandler(ChaptersListBox_SelectedIndexChanged);
                     if (m_client.FoundChapters.Count > 0)
@@ -38076,9 +38135,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
-
-                        SwitchToSearchResultTextBox();
                     }
+
+                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) ChaptersListBox.SelectedIndexChanged -= new EventHandler(ChaptersListBox_SelectedIndexChanged);
                     if (m_client.FoundChapterRanges.Count > 0)
@@ -38563,7 +38622,7 @@ public partial class MainForm : Form, ISubscriber
                 {
                     str.Remove(str.Length - 1, 1); // \t
                 }
-                str.Append("\r\n");
+                str.AppendLine();
             }
 
             int count = 0;
@@ -38613,7 +38672,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         str.Remove(str.Length - 1, 1); // \t
                     }
-                    str.Append("\r\n");
+                    str.AppendLine();
                 }
             }
             if (str.Length > 2)
@@ -38621,7 +38680,7 @@ public partial class MainForm : Form, ISubscriber
                 str.Remove(str.Length - 2, 2);
             }
 
-            str.Append("\r\n");
+            str.AppendLine();
             str.AppendLine(sum + "\t" + "Sum" + "\t" + chapter_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
         }
         return str.ToString();
@@ -38643,7 +38702,7 @@ public partial class MainForm : Form, ISubscriber
                 str.Append(key.ToString() + "\t");
             }
             str.Append("Text");
-            str.Append("\r\n");
+            str.AppendLine();
 
             int count = 0;
             int sum = 0;
@@ -38686,14 +38745,14 @@ public partial class MainForm : Form, ISubscriber
 
                 str.Append(verse.Text);
 
-                str.Append("\r\n");
+                str.AppendLine();
             }
             if (str.Length > 2)
             {
                 str.Remove(str.Length - 2, 2);
             }
 
-            str.Append("\r\n");
+            str.AppendLine();
             str.AppendLine(sum + "\t" + verse_sum + "\t" + "Sum" + "\t" + chapter_sum + "\t" + chapter_verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
         }
         return str.ToString();

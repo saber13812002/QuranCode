@@ -24,24 +24,6 @@ public static class Constants
         'ي'
     };
 
-    public static List<char> NON_INITIAL_LETTERS = new List<char>()
-    {
-        'ب',
-        'ت',
-        'ث',
-        'ج',
-        'خ',
-        'د',
-        'ذ',
-        'ز',
-        'ش',
-        'ض',
-        'ظ',
-        'غ',
-        'ف',
-        'و'
-    };
-
     public static List<char> ARABIC_DIGITS = new List<char>()
     { 
         '0',

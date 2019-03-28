@@ -24,6 +24,8 @@ using System.IO;
 using System.Threading;
 using Model;
 
+// TODO: If result is words, verses or chapter then fill m_client.FoundWords, m_client.FoundVerses, m_client.FoundChapters in Reseach.dll and DisplaySearchResults().
+
 public static class Research
 {
     private static List<Verse> GetSourceVerses(Client client, bool in_search_result)
@@ -59,383 +61,259 @@ public static class Research
         return verses;
     }
 
-    private static void ______________________________(Client client, string param, bool in_search_result)
+    private static string ______________________________(Client client, string param, bool in_search_result)
     {
+        return null;
     }
-    private static void AllDigits(Client client, string param, bool in_search_result)
+    private static string AllDigits(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoAllDigits(client, verses);
-
-        string filename = "AllDigits" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoAllDigits(client, verses);
         }
+        return null;
     }
-    private static void OddDigitChapters(Client client, string param, bool in_search_result)
+    private static string OddDigitChapters(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoOddDigitChapters(client, verses);
-
-        string filename = "OddDigitChapters" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoOddDigitChapters(client, verses);
         }
+        return null;
     }
-    private static void EvenDigitChapters(Client client, string param, bool in_search_result)
+    private static string EvenDigitChapters(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoEvenDigitChapters(client, verses);
-
-        string filename = "EvenDigitChapters" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoEvenDigitChapters(client, verses);
         }
+        return null;
     }
-    private static void PrimeDigitChapters(Client client, string param, bool in_search_result)
+    private static string PrimeDigitChapters(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoPrimeDigitChapters(client, verses);
-
-        string filename = "PrimeDigitChapters" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoPrimeDigitChapters(client, verses);
         }
+        return null;
     }
-    private static void CompositeDigitChapters(Client client, string param, bool in_search_result)
+    private static string CompositeDigitChapters(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoCompositeDigitChapters(client, verses);
-
-        string filename = "CompositeDigitChapters" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoCompositeDigitChapters(client, verses);
         }
+        return null;
     }
-    private static void PrimeOr1DigitChapters(Client client, string param, bool in_search_result)
+    private static string PrimeOr1DigitChapters(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoPrimeOr1DigitChapters(client, verses);
-
-        string filename = "PrimeOr1DigitChapters" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoPrimeOr1DigitChapters(client, verses);
         }
+        return null;
     }
-    private static void CompositeOr0DigitChapters(Client client, string param, bool in_search_result)
+    private static string CompositeOr0DigitChapters(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoCompositeOr0DigitChapters(client, verses);
-
-        string filename = "CompositeOr0DigitChapters" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoCompositeOr0DigitChapters(client, verses);
         }
+        return null;
     }
-    private static void OddDigitVerses(Client client, string param, bool in_search_result)
+    private static string OddDigitVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoOddDigitVerses(client, verses);
-
-        string filename = "OddDigitVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoOddDigitVerses(client, verses);
         }
+        return null;
     }
-    private static void EvenDigitVerses(Client client, string param, bool in_search_result)
+    private static string EvenDigitVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoEvenDigitVerses(client, verses);
-
-        string filename = "EvenDigitVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoEvenDigitVerses(client, verses);
         }
+        return null;
     }
-    private static void PrimeDigitVerses(Client client, string param, bool in_search_result)
+    private static string PrimeDigitVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoPrimeDigitVerses(client, verses);
-
-        string filename = "PrimeDigitVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoPrimeDigitVerses(client, verses);
         }
+        return null;
     }
-    private static void CompositeDigitVerses(Client client, string param, bool in_search_result)
+    private static string CompositeDigitVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoCompositeDigitVerses(client, verses);
-
-        string filename = "CompositeDigitVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoCompositeDigitVerses(client, verses);
         }
+        return null;
     }
-    private static void PrimeOr1DigitVerses(Client client, string param, bool in_search_result)
+    private static string PrimeOr1DigitVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoPrimeOr1DigitVerses(client, verses);
-
-        string filename = "PrimeOr1DigitVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoPrimeOr1DigitVerses(client, verses);
         }
+        return null;
     }
-    private static void CompositeOr0DigitVerses(Client client, string param, bool in_search_result)
+    private static string CompositeOr0DigitVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoCompositeOr0DigitVerses(client, verses);
-
-        string filename = "CompositeOr0DigitVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoCompositeOr0DigitVerses(client, verses);
         }
+        return null;
     }
-    private static void OODigitChaptersVerses(Client client, string param, bool in_search_result)
+    private static string OODigitChaptersVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoOODigitChaptersVerses(client, verses);
-
-        string filename = "OODigitChaptersVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoOODigitChaptersVerses(client, verses);
         }
+        return null;
     }
-    private static void EEDigitChaptersVerses(Client client, string param, bool in_search_result)
+    private static string EEDigitChaptersVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoEEDigitChaptersVerses(client, verses);
-
-        string filename = "EEDigitChaptersVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoEEDigitChaptersVerses(client, verses);
         }
+        return null;
     }
-    private static void PPDigitChaptersVerses(Client client, string param, bool in_search_result)
+    private static string PPDigitChaptersVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoPPDigitChaptersVerses(client, verses);
-
-        string filename = "PPDigitChaptersVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoPPDigitChaptersVerses(client, verses);
         }
+        return null;
     }
-    private static void CCDigitChaptersVerses(Client client, string param, bool in_search_result)
+    private static string CCDigitChaptersVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoCCDigitChaptersVerses(client, verses);
-
-        string filename = "CCDigitChaptersVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoCCDigitChaptersVerses(client, verses);
         }
+        return null;
     }
-    private static void P1P1DigitChaptersVerses(Client client, string param, bool in_search_result)
+    private static string P1P1DigitChaptersVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoP1P1DigitChaptersVerses(client, verses);
-
-        string filename = "P1P1DigitChaptersVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoP1P1DigitChaptersVerses(client, verses);
         }
+        return null;
     }
-    private static void C0C0DigitChaptersVerses(Client client, string param, bool in_search_result)
+    private static string C0C0DigitChaptersVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoC0C0DigitChaptersVerses(client, verses);
-
-        string filename = "C0C0DigitChaptersVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoC0C0DigitChaptersVerses(client, verses);
         }
+        return null;
     }
-    private static void OEDigitChaptersVerses(Client client, string param, bool in_search_result)
+    private static string OEDigitChaptersVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoOEDigitChaptersVerses(client, verses);
-
-        string filename = "OEDigitChaptersVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoOEDigitChaptersVerses(client, verses);
         }
+        return null;
     }
-    private static void EODigitChaptersVerses(Client client, string param, bool in_search_result)
+    private static string EODigitChaptersVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoEODigitChaptersVerses(client, verses);
-
-        string filename = "EODigitChaptersVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoEODigitChaptersVerses(client, verses);
         }
+        return null;
     }
-    private static void PCDigitChaptersVerses(Client client, string param, bool in_search_result)
+    private static string PCDigitChaptersVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoPCDigitChaptersVerses(client, verses);
-
-        string filename = "PCDigitChaptersVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoPCDigitChaptersVerses(client, verses);
         }
+        return null;
     }
-    private static void CPDigitChaptersVerses(Client client, string param, bool in_search_result)
+    private static string CPDigitChaptersVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoCPDigitChaptersVerses(client, verses);
-
-        string filename = "CPDigitChaptersVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoCPDigitChaptersVerses(client, verses);
         }
+        return null;
     }
-    private static void P1C0DigitChaptersVerses(Client client, string param, bool in_search_result)
+    private static string P1C0DigitChaptersVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoP1C0DigitChaptersVerses(client, verses);
-
-        string filename = "P1C0DigitChaptersVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoP1C0DigitChaptersVerses(client, verses);
         }
+        return null;
     }
-    private static void C0P1DigitChaptersVerses(Client client, string param, bool in_search_result)
+    private static string C0P1DigitChaptersVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoC0P1DigitChaptersVerses(client, verses);
-
-        string filename = "C0P1DigitChaptersVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoC0P1DigitChaptersVerses(client, verses);
         }
+        return null;
     }
     private static string DoAllDigits(Client client, List<Verse> verses)
     {
@@ -972,200 +850,201 @@ public static class Research
         return str.ToString();
     }
 
-    private static void _______________________________(Client client, string param, bool in_search_result)
+    private static string _______________________________(Client client, string param, bool in_search_result)
     {
+        return null;
     }
-    private static void JumpWordsByX(Client client, string param, bool in_search_result)
+    private static string JumpWordsByX(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoJumpWordsByX(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByX" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoJumpWordsByX(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void JumpWordsByValue(Client client, string param, bool in_search_result)
+    private static string JumpWordsByValue(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoJumpWordsByValue(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByValue" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoJumpWordsByValue(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void JumpWordsByPrimeNumbers(Client client, string param, bool in_search_result)
+    private static string JumpWordsByPrimeNumbers(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoJumpWordsByPrimeNumbers(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByPrimeNumbers" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoJumpWordsByPrimeNumbers(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void JumpWordsByAdditivePrimeNumbers(Client client, string param, bool in_search_result)
+    private static string JumpWordsByAdditivePrimeNumbers(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoJumpWordsByAdditivePrimeNumbers(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByAdditivePrimeNumbers" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoJumpWordsByAdditivePrimeNumbers(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void JumpWordsByNonAdditivePrimeNumbers(Client client, string param, bool in_search_result)
+    private static string JumpWordsByNonAdditivePrimeNumbers(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoJumpWordsByNonAdditivePrimeNumbers(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByNonAdditivePrimeNumbers" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoJumpWordsByNonAdditivePrimeNumbers(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void JumpWordsByCompositeNumbers(Client client, string param, bool in_search_result)
+    private static string JumpWordsByCompositeNumbers(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoJumpWordsByCompositeNumbers(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByCompositeNumbers" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoJumpWordsByCompositeNumbers(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void JumpWordsByAdditiveCompositeNumbers(Client client, string param, bool in_search_result)
+    private static string JumpWordsByAdditiveCompositeNumbers(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoJumpWordsByAdditiveCompositeNumbers(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByAdditiveCompositeNumbers" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoJumpWordsByAdditiveCompositeNumbers(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void JumpWordsByNonAdditiveCompositeNumbers(Client client, string param, bool in_search_result)
+    private static string JumpWordsByNonAdditiveCompositeNumbers(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoJumpWordsByNonAdditiveCompositeNumbers(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByNonAdditiveCompositeNumbers" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoJumpWordsByNonAdditiveCompositeNumbers(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void JumpWordsByFibonacciNumbers(Client client, string param, bool in_search_result)
+    private static string JumpWordsByFibonacciNumbers(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoJumpWordsByFibonacciNumbers(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByFibonacciNumbers" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoJumpWordsByFibonacciNumbers(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void JumpWordsByPiDigits(Client client, string param, bool in_search_result)
+    private static string JumpWordsByPiDigits(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoJumpWordsByPiDigits(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByPiDigits" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoJumpWordsByPiDigits(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void JumpWordsByEulerDigits(Client client, string param, bool in_search_result)
+    private static string JumpWordsByEulerDigits(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoJumpWordsByEulerDigits(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByEulerDigits" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoJumpWordsByEulerDigits(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void JumpWordsByGoldenRatioDigits(Client client, string param, bool in_search_result)
+    private static string JumpWordsByGoldenRatioDigits(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoJumpWordsByGoldenRatioDigits(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "JumpWordsByGoldenRatioDigits" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoJumpWordsByGoldenRatioDigits(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
     private static List<string> DoJumpWordsByX(Client client, List<Verse> verses, string param)
     {
@@ -1477,88 +1356,121 @@ public static class Research
         return result;
     }
 
-    private static void ________________________________(Client client, string param, bool in_search_result)
+    private static string ________________________________(Client client, string param, bool in_search_result)
     {
+        return null;
     }
-    private static void PrimeWords(Client client, string param, bool in_search_result)
+    private static string PrimeWords(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoPrimeWords(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "PrimeWords" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoPrimeWords(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void AdditivePrimeWords(Client client, string param, bool in_search_result)
+    private static string AdditivePrimeWords(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoAdditivePrimeWords(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "AdditivePrimeWords" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoAdditivePrimeWords(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void CompositeWords(Client client, string param, bool in_search_result)
+    private static string NonAdditivePrimeWords(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoCompositeWords(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "CompositeWords" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoNonAdditivePrimeWords(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void AdditiveCompositeWords(Client client, string param, bool in_search_result)
+    private static string CompositeWords(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoAdditiveCompositeWords(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "AdditiveCompositeWords" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoCompositeWords(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void FibonacciWords(Client client, string param, bool in_search_result)
+    private static string AdditiveCompositeWords(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<string> result = DoFibonacciWords(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "FibonacciWords" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveWords(path, result);
-            FileHelper.DisplayFile(path);
+            List<string> result = DoAdditiveCompositeWords(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
         }
+        return null;
+    }
+    private static string NonAdditiveCompositeWords(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        List<Verse> verses = GetSourceVerses(client, in_search_result);
+        if (verses != null)
+        {
+            List<string> result = DoNonAdditiveCompositeWords(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
+        }
+        return null;
+    }
+    private static string FibonacciWords(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        List<Verse> verses = GetSourceVerses(client, in_search_result);
+        if (verses != null)
+        {
+            List<string> result = DoFibonacciWords(client, verses, param);
+            StringBuilder str = new StringBuilder();
+            foreach (string xxx in result)
+            {
+                str.AppendLine(xxx);
+            }
+            return str.ToString();
+        }
+        return null;
     }
     private static List<string> DoPrimeWords(Client client, List<Verse> verses, string param)
     {
@@ -1593,6 +1505,26 @@ public static class Research
         for (int i = 0; i < words.Count; i++)
         {
             if (Numbers.IsAdditivePrime(i + 1))
+            {
+                result.Add(words[i].Text + " ");
+            }
+        }
+
+        return result;
+    }
+    private static List<string> DoNonAdditivePrimeWords(Client client, List<Verse> verses, string param)
+    {
+        List<string> result = new List<string>();
+
+        List<Word> words = new List<Word>();
+        foreach (Verse verse in verses)
+        {
+            words.AddRange(verse.Words);
+        }
+
+        for (int i = 0; i < words.Count; i++)
+        {
+            if (Numbers.IsNonAdditivePrime(i + 1))
             {
                 result.Add(words[i].Text + " ");
             }
@@ -1640,6 +1572,26 @@ public static class Research
 
         return result;
     }
+    private static List<string> DoNonAdditiveCompositeWords(Client client, List<Verse> verses, string param)
+    {
+        List<string> result = new List<string>();
+
+        List<Word> words = new List<Word>();
+        foreach (Verse verse in verses)
+        {
+            words.AddRange(verse.Words);
+        }
+
+        for (int i = 0; i < words.Count; i++)
+        {
+            if (Numbers.IsNonAdditiveComposite(i + 1))
+            {
+                result.Add(words[i].Text + " ");
+            }
+        }
+
+        return result;
+    }
     private static List<string> DoFibonacciWords(Client client, List<Verse> verses, string param)
     {
         List<string> result = new List<string>();
@@ -1661,181 +1613,238 @@ public static class Research
         return result;
     }
 
-    public static void _________________________________(Client client, string param, bool in_search_result)
+    public static string _________________________________(Client client, string param, bool in_search_result)
     {
+        return null;
     }
-    public static void ChapterVersesSound(Client client, string param, bool in_search_result)
+    public static string ChapterVersesSound(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Book == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         List<Chapter> chapters = client.Book.GetChapters(verses);
 
-        List<long> values = new List<long>();
+        List<long> result = new List<long>();
         foreach (Chapter chapter in chapters)
         {
-            values.Add(chapter.Verses.Count);
+            result.Add(chapter.Verses.Count);
         }
 
         string filename = client.NumerologySystem.Name + "_" + "ChapterVerses" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            DoSaveAndPlayWAVFile(path, values, param);
+            DoSaveAndPlayWAVFile(path, result, param);
         }
+
+        StringBuilder str = new StringBuilder();
+        foreach (long xxx in result)
+        {
+            str.AppendLine(xxx.ToString());
+        }
+        return str.ToString();
     }
-    public static void ChapterWordsSound(Client client, string param, bool in_search_result)
+    public static string ChapterWordsSound(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Book == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         List<Chapter> chapters = client.Book.GetChapters(verses);
 
-        List<long> values = new List<long>();
+        List<long> result = new List<long>();
         foreach (Chapter chapter in chapters)
         {
-            values.Add(chapter.WordCount);
+            result.Add(chapter.WordCount);
         }
 
         string filename = client.NumerologySystem.Name + "_" + "ChapterWords" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            DoSaveAndPlayWAVFile(path, values, param);
+            DoSaveAndPlayWAVFile(path, result, param);
         }
+
+        StringBuilder str = new StringBuilder();
+        foreach (long xxx in result)
+        {
+            str.AppendLine(xxx.ToString());
+        }
+        return str.ToString();
     }
-    public static void ChapterLettersSound(Client client, string param, bool in_search_result)
+    public static string ChapterLettersSound(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Book == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         List<Chapter> chapters = client.Book.GetChapters(verses);
 
-        List<long> values = new List<long>();
+        List<long> result = new List<long>();
         foreach (Chapter chapter in chapters)
         {
-            values.Add(chapter.LetterCount);
+            result.Add(chapter.LetterCount);
         }
 
         string filename = client.NumerologySystem.Name + "_" + "ChapterLetters" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            DoSaveAndPlayWAVFile(path, values, param);
+            DoSaveAndPlayWAVFile(path, result, param);
         }
+
+        StringBuilder str = new StringBuilder();
+        foreach (long xxx in result)
+        {
+            str.AppendLine(xxx.ToString());
+        }
+        return str.ToString();
     }
-    public static void ChapterValuesSound(Client client, string param, bool in_search_result)
+    public static string ChapterValuesSound(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Book == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         List<Chapter> chapters = client.Book.GetChapters(verses);
 
-        List<long> values = new List<long>();
+        List<long> result = new List<long>();
         foreach (Chapter chapter in chapters)
         {
-            values.Add(client.CalculateValue(chapter));
+            result.Add(client.CalculateValue(chapter));
         }
 
         string filename = client.NumerologySystem.Name + "_" + "ChapterValues" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            DoSaveAndPlayWAVFile(path, values, param);
+            DoSaveAndPlayWAVFile(path, result, param);
         }
+
+        StringBuilder str = new StringBuilder();
+        foreach (long xxx in result)
+        {
+            str.AppendLine(xxx.ToString());
+        }
+        return str.ToString();
     }
-    public static void VerseWordsSound(Client client, string param, bool in_search_result)
+    public static string VerseWordsSound(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
 
-        List<long> values = new List<long>();
+        List<long> result = new List<long>();
         foreach (Verse verse in verses)
         {
-            values.Add(verse.Words.Count);
+            result.Add(verse.Words.Count);
         }
 
         string filename = client.NumerologySystem.Name + "_" + "VerseWords" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            DoSaveAndPlayWAVFile(path, values, param);
+            DoSaveAndPlayWAVFile(path, result, param);
         }
+
+        StringBuilder str = new StringBuilder();
+        foreach (long xxx in result)
+        {
+            str.AppendLine(xxx.ToString());
+        }
+        return str.ToString();
     }
-    public static void VerseLettersSound(Client client, string param, bool in_search_result)
+    public static string VerseLettersSound(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
 
-        List<long> values = new List<long>();
+        List<long> result = new List<long>();
         foreach (Verse verse in verses)
         {
-            values.Add(verse.LetterCount);
+            result.Add(verse.LetterCount);
         }
 
         string filename = client.NumerologySystem.Name + "_" + "VerseLetters" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            DoSaveAndPlayWAVFile(path, values, param);
+            DoSaveAndPlayWAVFile(path, result, param);
         }
+
+        StringBuilder str = new StringBuilder();
+        foreach (long xxx in result)
+        {
+            str.AppendLine(xxx.ToString());
+        }
+        return str.ToString();
     }
-    public static void VerseValuesSound(Client client, string param, bool in_search_result)
+    public static string VerseValuesSound(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
 
-        List<long> values = new List<long>();
+        List<long> result = new List<long>();
         foreach (Verse verse in verses)
         {
-            values.Add(client.CalculateValue(verse));
+            result.Add(client.CalculateValue(verse));
         }
 
         string filename = client.NumerologySystem.Name + "_" + "VerseValues" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            DoSaveAndPlayWAVFile(path, values, param);
+            DoSaveAndPlayWAVFile(path, result, param);
         }
+
+        StringBuilder str = new StringBuilder();
+        foreach (long xxx in result)
+        {
+            str.AppendLine(xxx.ToString());
+        }
+        return str.ToString();
     }
-    public static void VerseDistancesSound(Client client, string param, bool in_search_result)
+    public static string VerseDistancesSound(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
 
-        List<long> values = new List<long>();
+        List<long> result = new List<long>();
         foreach (Verse verse in verses)
         {
-            values.Add(verse.DistanceToPrevious.dV);
+            result.Add(verse.DistanceToPrevious.dV);
         }
 
         string filename = client.NumerologySystem.Name + "_" + "VerseDistances" + ".txt";
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            DoSaveAndPlayWAVFile(path, values, param);
+            DoSaveAndPlayWAVFile(path, result, param);
         }
+
+        StringBuilder str = new StringBuilder();
+        foreach (long xxx in result)
+        {
+            str.AppendLine(xxx.ToString());
+        }
+        return str.ToString();
     }
-    public static void WordLettersSound(Client client, string param, bool in_search_result)
+    public static string WordLettersSound(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
 
-        List<long> values = new List<long>();
+        List<long> result = new List<long>();
         foreach (Verse verse in verses)
         {
             foreach (Word word in verse.Words)
             {
-                values.Add(word.Letters.Count);
+                result.Add(word.Letters.Count);
             }
         }
 
@@ -1843,21 +1852,28 @@ public static class Research
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            DoSaveAndPlayWAVFile(path, values, param);
+            DoSaveAndPlayWAVFile(path, result, param);
         }
+
+        StringBuilder str = new StringBuilder();
+        foreach (long xxx in result)
+        {
+            str.AppendLine(xxx.ToString());
+        }
+        return str.ToString();
     }
-    public static void WordValuesSound(Client client, string param, bool in_search_result)
+    public static string WordValuesSound(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
 
-        List<long> values = new List<long>();
+        List<long> result = new List<long>();
         foreach (Verse verse in verses)
         {
             foreach (Word word in verse.Words)
             {
-                values.Add(client.CalculateValue(word));
+                result.Add(client.CalculateValue(word));
             }
         }
 
@@ -1865,21 +1881,28 @@ public static class Research
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            DoSaveAndPlayWAVFile(path, values, param);
+            DoSaveAndPlayWAVFile(path, result, param);
         }
+
+        StringBuilder str = new StringBuilder();
+        foreach (long xxx in result)
+        {
+            str.AppendLine(xxx.ToString());
+        }
+        return str.ToString();
     }
-    public static void WordDistancesSound(Client client, string param, bool in_search_result)
+    public static string WordDistancesSound(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
 
-        List<long> values = new List<long>();
+        List<long> result = new List<long>();
         foreach (Verse verse in verses)
         {
             foreach (Word word in verse.Words)
             {
-                values.Add(word.DistanceToPrevious.dW);
+                result.Add(word.DistanceToPrevious.dW);
             }
         }
 
@@ -1887,22 +1910,29 @@ public static class Research
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            DoSaveAndPlayWAVFile(path, values, param);
+            DoSaveAndPlayWAVFile(path, result, param);
         }
+
+        StringBuilder str = new StringBuilder();
+        foreach (long xxx in result)
+        {
+            str.AppendLine(xxx.ToString());
+        }
+        return str.ToString();
     }
-    public static void WordFrequenciesSound(Client client, string param, bool in_search_result)
+    public static string WordFrequenciesSound(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
 
-        List<long> values = new List<long>();
+        List<long> result = new List<long>();
         foreach (Verse verse in verses)
         {
             foreach (Word word in verse.Words)
             {
                 string word_text = word.Text.SimplifyTo(client.NumerologySystem.TextMode);
-                values.Add(word.Frequency);
+                result.Add(word.Frequency);
             }
         }
 
@@ -1910,23 +1940,30 @@ public static class Research
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            DoSaveAndPlayWAVFile(path, values, param);
+            DoSaveAndPlayWAVFile(path, result, param);
         }
+
+        StringBuilder str = new StringBuilder();
+        foreach (long xxx in result)
+        {
+            str.AppendLine(xxx.ToString());
+        }
+        return str.ToString();
     }
-    public static void LetterValuesSound(Client client, string param, bool in_search_result)
+    public static string LetterValuesSound(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
 
-        List<long> values = new List<long>();
+        List<long> result = new List<long>();
         foreach (Verse verse in verses)
         {
             foreach (Word word in verse.Words)
             {
                 foreach (Letter letter in word.Letters)
                 {
-                    values.Add(client.CalculateValue(letter));
+                    result.Add(client.CalculateValue(letter));
                 }
             }
         }
@@ -1935,23 +1972,30 @@ public static class Research
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            DoSaveAndPlayWAVFile(path, values, param);
+            DoSaveAndPlayWAVFile(path, result, param);
         }
+
+        StringBuilder str = new StringBuilder();
+        foreach (long xxx in result)
+        {
+            str.AppendLine(xxx.ToString());
+        }
+        return str.ToString();
     }
-    public static void LetterDistancesSound(Client client, string param, bool in_search_result)
+    public static string LetterDistancesSound(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
 
-        List<long> values = new List<long>();
+        List<long> result = new List<long>();
         foreach (Verse verse in verses)
         {
             foreach (Word word in verse.Words)
             {
                 foreach (Letter letter in word.Letters)
                 {
-                    values.Add(letter.DistanceToPrevious.dL);
+                    result.Add(letter.DistanceToPrevious.dL);
                 }
             }
         }
@@ -1960,12 +2004,19 @@ public static class Research
         if (Directory.Exists(Globals.RESEARCH_FOLDER))
         {
             string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            DoSaveAndPlayWAVFile(path, values, param);
+            DoSaveAndPlayWAVFile(path, result, param);
         }
+
+        StringBuilder str = new StringBuilder();
+        foreach (long xxx in result)
+        {
+            str.AppendLine(xxx.ToString());
+        }
+        return str.ToString();
     }
-    private static void DoSaveAndPlayWAVFile(string path, List<long> values, string param)
+    private static void DoSaveAndPlayWAVFile(string path, List<long> result, string param)
     {
-        FileHelper.SaveValues(path, values);
+        FileHelper.SaveValues(path, result);
         FileHelper.DisplayFile(path); // *.csv
 
         int sample_rate = 0;
@@ -1976,7 +2027,7 @@ public static class Research
                 if (sample_rate > 0)
                 {
                     // update ref path.csv to .wav
-                    WAVFile.GenerateWAVFile(ref path, values, sample_rate);
+                    WAVFile.GenerateWAVFile(ref path, result, sample_rate);
 
                     // play .wav file
                     WAVFile.PlayWAVFile(path);
@@ -1989,191 +2040,145 @@ public static class Research
         }
     }
 
-    public static void ___________________________________(Client client, string param, bool in_search_result)
+    public static string ___________________________________(Client client, string param, bool in_search_result)
     {
+        return null;
     }
-    public static void ChapterInformation(Client client, string param, bool in_search_result)
+    public static string ChapterInformation(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Book == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-        List<Chapter> chapters = client.Book.GetChapters(verses);
-
-        string result = DoChapterInformation(client, chapters);
-
-        string filename = client.NumerologySystem.Name + "_" + "ChapterStatistics" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            List<Chapter> chapters = client.Book.GetChapters(verses);
+            if (chapters != null)
+            {
+                return DoChapterInformation(client, chapters);
+            }
         }
+        return null;
     }
-    public static void ChapterValues(Client client, string param, bool in_search_result)
+    public static string ChapterValues(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Book == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-        List<Chapter> chapters = client.Book.GetChapters(verses);
-
-        string result = DoChapterValues(client, chapters);
-
-        string filename = "ChapterValues" + "_" + client.NumerologySystem.TextMode + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            List<Chapter> chapters = client.Book.GetChapters(verses);
+            if (chapters != null)
+            {
+                return DoChapterValues(client, chapters);
+            }
         }
+        return null;
     }
-    public static void ChapterLetterRatios(Client client, string param, bool in_search_result)
+    public static string ChapterLetterRatios(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Book == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-        List<Chapter> chapters = client.Book.GetChapters(verses);
-
-        string result = DoChapterLetterRatios(client, chapters);
-
-        string filename = client.NumerologySystem.Name + "_" + "ChapterLetterRatios" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            List<Chapter> chapters = client.Book.GetChapters(verses);
+            if (chapters != null)
+            {
+                return DoChapterLetterRatios(client, chapters);
+            }
         }
+        return null;
     }
-    public static void VerseInformation(Client client, string param, bool in_search_result)
+    public static string VerseInformation(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoVerseInformation(client, verses);
-
-        string filename = client.NumerologySystem.Name + "_" + "VerseStatistics" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoVerseInformation(client, verses);
         }
+        return null;
     }
-    public static void VerseValues(Client client, string param, bool in_search_result)
+    public static string VerseValues(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoVerseValues(client, verses);
-
-        string filename = "VerseValues" + "_" + client.NumerologySystem.TextMode + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoVerseValues(client, verses);
         }
+        return null;
     }
-    public static void VerseStarts(Client client, string param, bool in_search_result)
+    public static string VerseStarts(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoVerseStarts(client, verses);
-
-        string filename = "VerseStarts" + "_" + client.NumerologySystem.TextMode + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoVerseStarts(client, verses);
         }
+        return null;
     }
-    public static void VerseEnds(Client client, string param, bool in_search_result)
+    public static string VerseEnds(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoVerseEnds(client, verses);
-
-        string filename = "VerseEnds" + "_" + client.NumerologySystem.TextMode + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoVerseEnds(client, verses);
         }
+        return null;
     }
-    public static void WordInformation(Client client, string param, bool in_search_result)
+    public static string WordInformation(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<Word> words = new List<Word>();
-        foreach (Verse verse in verses)
+        if (verses != null)
         {
-            words.AddRange(verse.Words);
+            List<Word> words = new List<Word>();
+            foreach (Verse verse in verses)
+            {
+                words.AddRange(verse.Words);
+            }
+            return DoWordInformation(client, words);
         }
-        string result = DoWordInformation(client, words);
-
-        string filename = "WordInformation" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-        {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
-        }
+        return null;
     }
-    public static void WordPartInformation(Client client, string param, bool in_search_result)
+    public static string WordPartInformation(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        List<Word> words = new List<Word>();
-        foreach (Verse verse in verses)
+        if (verses != null)
         {
-            words.AddRange(verse.Words);
+            List<Word> words = new List<Word>();
+            foreach (Verse verse in verses)
+            {
+                words.AddRange(verse.Words);
+            }
+            return DoWordPartInformation(client, words);
         }
-        string result = DoWordPartInformation(client, words);
-
-        string filename = "WordPartInformation" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-        {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
-        }
+        return null;
     }
-    public static void LetterFrequencySums(Client client, string param, bool in_search_result)
+    public static string LetterFrequencySums(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoLetterFrequencySums(client, verses, param);
-
-        string filename = "LetterFrequencySums" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoLetterFrequencySums(client, verses, param);
         }
+        return null;
     }
-    public static void UniqueChapterWords(Client client, string param, bool in_search_result)
+    public static string UniqueChapterWords(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Selection == null) return;
-        if (client.FoundVerses == null) return;
-        if (client.Selection.Chapters == null) return;
-        if (client.Book == null) return;
-        List<Chapter> chapters = in_search_result ? client.Book.GetChapters(client.FoundVerses) : client.Selection.Chapters;
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.Book.Chapters == null) return null;
 
+        List<Chapter> chapters = client.Book.Chapters;
         Dictionary<Chapter, List<Word>> unique_chapter_words = new Dictionary<Chapter, List<Word>>();
         foreach (Chapter chapter in chapters)
         {
@@ -2235,23 +2240,15 @@ public static class Research
             str.AppendLine();
         }
 
-        string filename = "UniqueChapterWords" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-        {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, str.ToString());
-            FileHelper.DisplayFile(path);
-        }
+        return str.ToString();
     }
-    public static void UniqueChapterRoots(Client client, string param, bool in_search_result)
+    public static string UniqueChapterRoots(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Selection == null) return;
-        if (client.FoundVerses == null) return;
-        if (client.Selection.Chapters == null) return;
-        if (client.Book == null) return;
-        List<Chapter> chapters = in_search_result ? client.Book.GetChapters(client.FoundVerses) : client.Selection.Chapters;
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.Book.Chapters == null) return null;
 
+        List<Chapter> chapters = client.Book.Chapters;
         Dictionary<Chapter, List<string>> unique_chapter_roots = new Dictionary<Chapter, List<string>>();
         foreach (Chapter chapter in chapters)
         {
@@ -2313,13 +2310,7 @@ public static class Research
             str.AppendLine();
         }
 
-        string filename = "UniqueChapterRoots" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-        {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, str.ToString());
-            FileHelper.DisplayFile(path);
-        }
+        return str.ToString();
     }
     private static string DoChapterInformation(Client client, List<Chapter> chapters)
     {
@@ -2343,7 +2334,7 @@ public static class Research
                 {
                     str.Remove(str.Length - 1, 1); // \t
                 }
-                str.Append("\r\n");
+                str.AppendLine();
             }
 
             int count = 0;
@@ -2392,7 +2383,7 @@ public static class Research
                     {
                         str.Remove(str.Length - 1, 1); // \t
                     }
-                    str.Append("\r\n");
+                    str.AppendLine();
                 }
             }
             if (str.Length > 2)
@@ -2420,7 +2411,7 @@ public static class Research
         {
             str.Remove(str.Length - 1, 1); // \t
         }
-        str.Append("\r\n");
+        str.AppendLine();
 
         int count = 0;
         foreach (Chapter chapter in chapters)
@@ -2441,8 +2432,9 @@ public static class Research
             {
                 str.Remove(str.Length - 1, 1);
             }
-            str.Append("\r\n");
+            str.AppendLine();
         }
+        str.AppendLine();
 
         string duplicates = GetDuplicateChapterValues(client, chapters);
         if (duplicates.Length > 0)
@@ -2483,7 +2475,7 @@ public static class Research
                 {
                     str.Remove(str.Length - 1, 1); // \t
                 }
-                str.Append("\r\n");
+                str.AppendLine();
             }
 
             int count = 0;
@@ -2518,7 +2510,7 @@ public static class Research
                     {
                         str.Remove(str.Length - 1, 1); // \t
                     }
-                    str.Append("\r\n");
+                    str.AppendLine();
                 }
             }
             if (str.Length > 2)
@@ -2526,7 +2518,7 @@ public static class Research
                 str.Remove(str.Length - 2, 2);
             }
 
-            str.Append("\r\n");
+            str.AppendLine();
             str.AppendLine(sum + "\t" + "Sum" + "\t" + chapter_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum);
         }
 
@@ -2549,7 +2541,7 @@ public static class Research
                 str.Append(key.ToString() + "\t");
             }
             str.Append("Text");
-            str.Append("\r\n");
+            str.AppendLine();
 
             int count = 0;
             foreach (Verse verse in verses)
@@ -2595,7 +2587,7 @@ public static class Research
 
                 str.Append(verse.Text);
 
-                str.Append("\r\n");
+                str.AppendLine();
             }
             if (str.Length > 2)
             {
@@ -2622,7 +2614,7 @@ public static class Research
         {
             str.Remove(str.Length - 1, 1); // \t
         }
-        str.Append("\r\n");
+        str.AppendLine();
 
         int count = 0;
         foreach (Verse verse in verses)
@@ -2643,8 +2635,9 @@ public static class Research
             {
                 str.Remove(str.Length - 1, 1);
             }
-            str.Append("\r\n");
+            str.AppendLine();
         }
+        str.AppendLine();
 
         string duplicates = GetDuplicateVerseValues(client, verses);
         if (duplicates.Length > 0)
@@ -2853,7 +2846,7 @@ public static class Research
                         + (ac == 0 ? "-" : ac.ToString()) + "\t"
                         + (xc == 0 ? "-" : xc.ToString())
                              );
-                str.Append("\r\n");
+                str.AppendLine();
             }
         }
         return str.ToString();
@@ -2983,35 +2976,45 @@ public static class Research
                 foreach (Chapter chapter in chapters)
                 {
                     long value = numerology_system.CalculateValue(chapter.Text);
-                    if (!value_frequencies.ContainsKey(value))
+                    if (value > 0)
                     {
-                        value_frequencies.Add(value, 1);
-                    }
-                    else
-                    {
-                        value_frequencies[value]++;
-                        duplicates++;
-                    }
+                        if (!value_frequencies.ContainsKey(value))
+                        {
+                            value_frequencies.Add(value, 1);
+                        }
+                        else
+                        {
+                            value_frequencies[value]++;
+                            duplicates++;
+                        }
 
-                    if (!duplicate_values.ContainsKey(value))
-                    {
-                        duplicate_values.Add(value, chapter.Name);
-                    }
-                    else
-                    {
-                        duplicate_values[value] += "=" + chapter.Name;
+                        if (!duplicate_values.ContainsKey(value))
+                        {
+                            duplicate_values.Add(value, chapter.Name);
+                        }
+                        else
+                        {
+                            duplicate_values[value] += "\t" + chapter.Name;
+                        }
                     }
                 }
+
                 if (duplicates > 0)
                 {
-                    str.Append(duplicates + " duplicate value" + ((duplicates > 1) ? "s" : " ") + " in " + numerology_system.Name.Substring(numerology_system.TextMode.Length + 1) + "\t");
+                    str.AppendLine("--------------------------------------------------------------------------");
+                    str.AppendLine(duplicates + " chapter group" + ((duplicates > 1) ? "s" : "") + " with the same value in " + numerology_system.Name.Substring(numerology_system.TextMode.Length + 1));
+                    str.AppendLine("--------------------------------------------------------------------------");
+                    str.AppendLine("Value" + "\t" + "Chapters");
+                    str.AppendLine("--------------------------------------------------------------------------");
                     foreach (long value in duplicate_values.Keys)
                     {
-                        if (duplicate_values[value].Contains("="))
+                        if (duplicate_values[value].Contains("\t"))
                         {
                             str.AppendLine(value.ToString() + "\t" + duplicate_values[value]);
                         }
                     }
+                    str.AppendLine("--------------------------------------------------------------------------");
+                    str.AppendLine();
                 }
             }
         }
@@ -3036,35 +3039,45 @@ public static class Research
                 foreach (Verse verse in verses)
                 {
                     long value = numerology_system.CalculateValue(verse.Text);
-                    if (!value_frequencies.ContainsKey(value))
+                    if (value > 0)
                     {
-                        value_frequencies.Add(value, 1);
-                    }
-                    else
-                    {
-                        value_frequencies[value]++;
-                        duplicates++;
-                    }
+                        if (!value_frequencies.ContainsKey(value))
+                        {
+                            value_frequencies.Add(value, 1);
+                        }
+                        else
+                        {
+                            value_frequencies[value]++;
+                            duplicates++;
+                        }
 
-                    if (!duplicate_values.ContainsKey(value))
-                    {
-                        duplicate_values.Add(value, verse.Address);
-                    }
-                    else
-                    {
-                        duplicate_values[value] += "=" + verse.Address;
+                        if (!duplicate_values.ContainsKey(value))
+                        {
+                            duplicate_values.Add(value, verse.Address);
+                        }
+                        else
+                        {
+                            duplicate_values[value] += "\t" + verse.Address;
+                        }
                     }
                 }
+
                 if (duplicates > 0)
                 {
-                    str.Append(duplicates + " duplicate value" + ((duplicates > 1) ? "s" : " ") + " in " + numerology_system.Name.Substring(numerology_system.TextMode.Length + 1) + "\r\n");
+                    str.AppendLine("--------------------------------------------------------------------------");
+                    str.AppendLine(duplicates + " verse group" + ((duplicates > 1) ? "s" : "") + " with the same value in " + numerology_system.Name.Substring(numerology_system.TextMode.Length + 1));
+                    str.AppendLine("--------------------------------------------------------------------------");
+                    str.AppendLine("Value" + "\t" + "Verses");
+                    str.AppendLine("--------------------------------------------------------------------------");
                     foreach (long value in duplicate_values.Keys)
                     {
-                        if (duplicate_values[value].Contains("="))
+                        if (duplicate_values[value].Contains("\t"))
                         {
                             str.AppendLine(value.ToString() + "\t" + duplicate_values[value]);
                         }
                     }
+                    str.AppendLine("--------------------------------------------------------------------------");
+                    str.AppendLine();
                 }
             }
         }
@@ -3072,117 +3085,83 @@ public static class Research
         return str.ToString();
     }
 
-    private static void ____________________________(Client client, string param, bool in_search_result)
+    private static string ____________________________(Client client, string param, bool in_search_result)
     {
+        return null;
     }
-    public static void AllahWords(Client client, string param, bool in_search_result)
+    public static string AllahWords(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoAllahWords(client, verses);
-
-        string filename = "AllahWords" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoAllahWords(client, verses);
         }
+        return null;
     }
-    public static void NonAllahWords(Client client, string param, bool in_search_result)
+    public static string NonAllahWords(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoNonAllahWords(client, verses);
-
-        string filename = "NonAllahWords" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoNonAllahWords(client, verses);
         }
+        return null;
     }
-    public static void RepeatedWords(Client client, string param, bool in_search_result)
+    public static string RepeatedWords(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoRepeatedWords(client, verses);
-
-        string filename = "RepeatedWords" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoRepeatedWords(client, verses);
         }
+        return null;
     }
-    public static void AllWords(Client client, string param, bool in_search_result)
+    public static string AllWords(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoAllWords(client, verses);
-
-        string filename = "AllWords" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoAllWords(client, verses);
         }
+        return null;
     }
-    public static void WordVerbForms(Client client, string param, bool in_search_result)
+    public static string WordVerbForms(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoWordVerbForms(client, verses);
-
-        string filename = "WordVerbForms" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoWordVerbForms(client, verses);
         }
+        return null;
     }
-    public static void VerbForms(Client client, string param, bool in_search_result)
+    public static string VerbForms(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoVerbForms(client, verses);
-
-        string filename = "VerbForms" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoVerbForms(client, verses);
         }
+        return null;
     }
-    public static void Stopmarks(Client client, string param, bool in_search_result)
+    public static string Stopmarks(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoStopmarks(client, verses);
-
-        string filename = "Stopmarks" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoStopmarks(client, verses);
         }
+        return null;
     }
-    public static void ASCII_Text(Client client, string param, bool in_search_result)
+    public static string ASCII_Text(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         if (verses != null)
         {
@@ -3191,16 +3170,9 @@ public static class Research
             {
                 str.AppendLine(verse.Text);
             }
-            string result = str.ToString().ToBuckwalter();
-
-            string filename = "ASCII_Text" + ".txt";
-            if (Directory.Exists(Globals.RESEARCH_FOLDER))
-            {
-                string path = Globals.RESEARCH_FOLDER + "/" + filename;
-                FileHelper.SaveText(path, result);
-                FileHelper.DisplayFile(path);
-            }
+            return str.ToString().ToBuckwalter();
         }
+        return null;
     }
     private static string DoAllahWords(Client client, List<Verse> verses)
     {
@@ -3765,12 +3737,13 @@ public static class Research
         return str.ToString();
     }
 
-    private static void __________________________(Client client, string param, bool in_search_result)
+    private static string __________________________(Client client, string param, bool in_search_result)
     {
+        return null;
     }
-    private static void nWords_kLetters(Client client, string param, bool in_search_result)
+    private static string nWords_kLetters(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         if (verses != null)
         {
@@ -3808,18 +3781,13 @@ public static class Research
                 str.AppendLine();
             }
 
-            string filename = "ChooseWords" + "_" + number_of_words + "_" + number_of_letters + ".txt";
-            if (Directory.Exists(Globals.RESEARCH_FOLDER))
-            {
-                string path = Globals.RESEARCH_FOLDER + "/" + filename;
-                FileHelper.SaveText(path, str.ToString());
-                FileHelper.DisplayFile(path);
-            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void nVerses_kWords(Client client, string param, bool in_search_result)
+    private static string nVerses_kWords(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         if (verses != null)
         {
@@ -3851,18 +3819,13 @@ public static class Research
                 str.AppendLine();
             }
 
-            string filename = "ChooseVerses" + "_" + number_of_verses + "_" + number_of_words + ".txt";
-            if (Directory.Exists(Globals.RESEARCH_FOLDER))
-            {
-                string path = Globals.RESEARCH_FOLDER + "/" + filename;
-                FileHelper.SaveText(path, str.ToString());
-                FileHelper.DisplayFile(path);
-            }
+            return str.ToString();
         }
+        return null;
     }
-    private static void nChapters_kVerses(Client client, string param, bool in_search_result)
+    private static string nChapters_kVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         if (verses != null)
         {
@@ -3897,109 +3860,75 @@ public static class Research
                     str.AppendLine();
                 }
 
-                string filename = "ChooseChapters" + "_" + number_of_chapters + "_" + number_of_verses + ".txt";
-                if (Directory.Exists(Globals.RESEARCH_FOLDER))
-                {
-                    string path = Globals.RESEARCH_FOLDER + "/" + filename;
-                    FileHelper.SaveText(path, str.ToString());
-                    FileHelper.DisplayFile(path);
-                }
+                return str.ToString();
             }
         }
+        return null;
     }
 
-    public static void ______________________________________(Client client, string param, bool in_search_result)
+    public static string ______________________________________(Client client, string param, bool in_search_result)
     {
+        return null;
     }
-    public static void RelatedWords(Client client, string param, bool in_search_result)
+    public static string RelatedWords(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoRelatedWords(client, verses);
-
-        string filename = "RelatedWords" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoRelatedWords(client, verses);
         }
+        return null;
     }
-    public static void RelatedWordsMeanings(Client client, string param, bool in_search_result)
+    public static string RelatedWordsMeanings(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoRelatedWordsMeanings(client, verses);
-
-        string filename = "RelatedWordsMeanings" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoRelatedWordsMeanings(client, verses);
         }
+        return null;
     }
-    public static void RelatedWordAddresses(Client client, string param, bool in_search_result)
+    public static string RelatedWordAddresses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoRelatedWordAddresses(client, verses);
-
-        string filename = "RelatedWordAddresses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoRelatedWordAddresses(client, verses);
         }
+        return null;
     }
-    public static void RelatedWordVerses(Client client, string param, bool in_search_result)
+    public static string RelatedWordVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoRelatedWordVerses(client, verses);
-
-        string filename = "RelatedWordVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoRelatedWordVerses(client, verses);
         }
+        return null;
     }
-    public static void RelatedWordsVerseMeanings(Client client, string param, bool in_search_result)
+    public static string RelatedWordsVerseMeanings(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoRelatedWordsVerseMeanings(client, verses);
-
-        string filename = "RelatedWordsVerseMeanings" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoRelatedWordsVerseMeanings(client, verses);
         }
+        return null;
     }
-    public static void RelatedWordVerseAddresses(Client client, string param, bool in_search_result)
+    public static string RelatedWordVerseAddresses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
+        if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoRelatedWordVerseAddresses(client, verses);
-
-        string filename = "RelatedWordVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoRelatedWordVerseAddresses(client, verses);
         }
+        return null;
     }
     private static string DoRelatedWords(Client client, List<Verse> verses)
     {
@@ -4331,110 +4260,99 @@ public static class Research
         return str.ToString();
     }
 
-    private static void ________________________________________(Client client, string param, bool in_search_result)
+    private static string ________________________________________(Client client, string param, bool in_search_result)
     {
+        return null;
     }
-    private static void ChapterVerseWordLetterFactors(Client client, string param, bool in_search_result)
+    private static string ChapterVerseWordLetterFactors(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Book == null) return;
+        if (client == null) return null;
+        if (client.Book == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-        List<Chapter> chapters = client.Book.GetChapters(verses);
-
-        string result = DoChapterVerseWordLetterFactors(client, chapters);
-
-        string filename = "ChapterVerseWordLetterFactors" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            List<Chapter> chapters = client.Book.GetChapters(verses);
+            if (chapters != null)
+            {
+                return DoChapterVerseWordLetterFactors(client, chapters);
+            }
         }
+        return null;
     }
-    private static void ChapterVerseSumFactors(Client client, string param, bool in_search_result)
+    private static string ChapterVerseSumFactors(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Book == null) return;
+        if (client == null) return null;
+        if (client.Book == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-        List<Chapter> chapters = client.Book.GetChapters(verses);
-
-        string result = DoChapterVerseSumFactors(client, chapters);
-
-        string filename = "ChapterVerseSumFactors" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            List<Chapter> chapters = client.Book.GetChapters(verses);
+            if (chapters != null)
+            {
+                return DoChapterVerseSumFactors(client, chapters);
+            }
         }
+        return null;
     }
-    private static void ChapterVerseSquaresSumFactors(Client client, string param, bool in_search_result)
+    private static string ChapterVerseSquaresSumFactors(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Book == null) return;
+        if (client == null) return null;
+        if (client.Book == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-        List<Chapter> chapters = client.Book.GetChapters(verses);
-
-        string result = DoChapterVerseSquaresSumFactors(client, chapters);
-
-        string filename = "ChapterVerseSquaresSumFactors" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            List<Chapter> chapters = client.Book.GetChapters(verses);
+            if (chapters != null)
+            {
+                return DoChapterVerseSquaresSumFactors(client, chapters);
+            }
         }
+        return null;
     }
-    private static void ChapterVerseCubesSumFactors(Client client, string param, bool in_search_result)
+    private static string ChapterVerseCubesSumFactors(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Book == null) return;
+        if (client == null) return null;
+        if (client.Book == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-        List<Chapter> chapters = client.Book.GetChapters(verses);
-
-        string result = DoChapterVerseCubesSumFactors(client, chapters);
-
-        string filename = "ChapterVerseCubesSumFactors" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            List<Chapter> chapters = client.Book.GetChapters(verses);
+            if (chapters != null)
+            {
+                return DoChapterVerseCubesSumFactors(client, chapters);
+            }
         }
+        return null;
     }
-    private static void ChapterVerseWordLetterSumAZ(Client client, string param, bool in_search_result)
+    private static string ChapterVerseWordLetterSumAZ(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Book == null) return;
+        if (client == null) return null;
+        if (client.Book == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-        List<Chapter> chapters = client.Book.GetChapters(verses);
-
-        string result = DoChapterVerseWordLetterSumAZ(client, chapters);
-
-        string filename = "ChapterVerseWordLetterSumAZ" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            List<Chapter> chapters = client.Book.GetChapters(verses);
+            if (chapters != null)
+            {
+                return DoChapterVerseWordLetterSumAZ(client, chapters);
+            }
         }
+        return null;
     }
-    private static void ChapterVerseWordLetterSumZA(Client client, string param, bool in_search_result)
+    private static string ChapterVerseWordLetterSumZA(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Book == null) return;
+        if (client == null) return null;
+        if (client.Book == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-        List<Chapter> chapters = client.Book.GetChapters(verses);
-
-        string result = DoChapterVerseWordLetterSumZA(client, chapters);
-
-        string filename = "ChapterVerseWordLetterSumZA" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            List<Chapter> chapters = client.Book.GetChapters(verses);
+            if (chapters != null)
+            {
+                return DoChapterVerseWordLetterSumZA(client, chapters);
+            }
         }
+        return null;
     }
     private static string DoChapterVerseWordLetterFactors(Client client, List<Chapter> chapters)
     {
@@ -4940,40 +4858,31 @@ public static class Research
         return str.ToString();
     }
 
-    public static void _____________________________________________________(Client client, string param, bool in_search_result)
+    public static string _____________________________________________________(Client client, string param, bool in_search_result)
     {
+        return null;
     }
-    public static void FirstWordFrequencyEqualsVerseNumber(Client client, string param, bool in_search_result)
+    public static string FirstWordFrequencyEqualsVerseNumber(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoFirstWordFrequencyEqualsVerseNumber(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "FirstWordFrequencyEqualsVerseNumber" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoFirstWordFrequencyEqualsVerseNumber(client, verses, param);
         }
+        return null;
     }
-    public static void LastWordFrequencyEqualsVerseNumber(Client client, string param, bool in_search_result)
+    public static string LastWordFrequencyEqualsVerseNumber(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoLastWordFrequencyEqualsVerseNumber(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "LastWordFrequencyEqualsVerseNumber" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoLastWordFrequencyEqualsVerseNumber(client, verses, param);
         }
+        return null;
     }
     private static string DoFirstWordFrequencyEqualsVerseNumber(Client client, List<Verse> verses, string param)
     {
@@ -5076,104 +4985,75 @@ public static class Research
         return str.ToString();
     }
 
-    public static void __________________________________________________(Client client, string param, bool in_search_result)
+    public static string __________________________________________________(Client client, string param, bool in_search_result)
     {
+        return null;
     }
-    public static void P_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    public static string P_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoP_PivotConsecutiveVerses(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "P_PivotConsecutiveVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoP_PivotConsecutiveVerses(client, verses, param);
         }
+        return null;
     }
-    private static void AP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static string AP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoAP_PivotConsecutiveVerses(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "AP_PivotConsecutiveVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoAP_PivotConsecutiveVerses(client, verses, param);
         }
+        return null;
     }
-    private static void XP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static string XP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoXP_PivotConsecutiveVerses(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "XP_PivotConsecutiveVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoXP_PivotConsecutiveVerses(client, verses, param);
         }
+        return null;
     }
-    private static void C_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static string C_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoC_PivotConsecutiveVerses(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "C_PivotConsecutiveVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoC_PivotConsecutiveVerses(client, verses, param);
         }
+        return null;
     }
-    private static void AC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static string AC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoAC_PivotConsecutiveVerses(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "AC_PivotConsecutiveVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoAC_PivotConsecutiveVerses(client, verses, param);
         }
+        return null;
     }
-    private static void XC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static string XC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
-
-        string result = DoXC_PivotConsecutiveVerses(client, verses, param);
-
-        string filename = client.NumerologySystem.Name + "_" + "XC_PivotConsecutiveVerses" + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
+        if (verses != null)
         {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
+            return DoXC_PivotConsecutiveVerses(client, verses, param);
         }
+        return null;
     }
     private static string DoP_PivotConsecutiveVerses(Client client, List<Verse> verses, string param)
     {
@@ -5701,98 +5581,34 @@ public static class Research
         return result;
     }
 
-    public static void ___________________________________________(Client client, string param, bool in_search_result)
+    public static string ___________________________________________(Client client, string param, bool in_search_result)
     {
+        return null;
     }
-    public static void VersesWithIntialLetters(Client client, string param, bool in_search_result)
+    public static string VersesWithIntialLetters(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
-
-        string result = DoVersesWithIntialLetters(client, param, in_search_result);
-
-        string filename = client.NumerologySystem.Name + "_" + "VersesWithIntialLetters" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-        {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
-        }
+        if (client == null) return null;
+        return DoVersesWithIntialLetters(client, param, in_search_result);
     }
-    public static void VersesWithNonIntialLetters(Client client, string param, bool in_search_result)
+    public static string VersesWithOnlyIntialLetters(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
-
-        string result = DoVersesWithNonIntialLetters(client, param, in_search_result);
-
-        string filename = client.NumerologySystem.Name + "_" + "VersesWithNonIntialLetters" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-        {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
-        }
+        if (client == null) return null;
+        return DoVersesWithOnlyIntialLetters(client, param, in_search_result);
     }
-    public static void VersesWithOnlyIntialLetters(Client client, string param, bool in_search_result)
+    public static string VersesWithAllIntialLetters(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
-
-        string result = DoVersesWithOnlyIntialLetters(client, param, in_search_result);
-
-        string filename = client.NumerologySystem.Name + "_" + "VersesWithOnlyIntialLetters" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-        {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
-        }
+        if (client == null) return null;
+        return DoVersesWithAllIntialLetters(client, param, in_search_result);
     }
-    public static void VersesWithOnlyNonIntialLetters(Client client, string param, bool in_search_result)
+    public static string VersesWithOnlyAllIntialLetters(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
-
-        string result = DoVersesWithOnlyNonIntialLetters(client, param, in_search_result);
-
-        string filename = client.NumerologySystem.Name + "_" + "VersesWithOnlyNonIntialLetters" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-        {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
-        }
+        if (client == null) return null;
+        return DoVersesWithOnlyAllIntialLetters(client, param, in_search_result);
     }
-    public static void VersesWithAllIntialLetters(Client client, string param, bool in_search_result)
+    public static string VersesWithNoIntialLetters(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
-
-        string result = DoVersesWithAllIntialLetters(client, param, in_search_result);
-
-        string filename = client.NumerologySystem.Name + "_" + "VersesWithAllIntialLetters" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-        {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
-        }
-    }
-    public static void VersesWithAllNonIntialLetters(Client client, string param, bool in_search_result)
-    {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
-
-        string result = DoVersesWithAllNonIntialLetters(client, param, in_search_result);
-
-        string filename = client.NumerologySystem.Name + "_" + "VersesWithAllNonIntialLetters" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-        {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
-        }
+        if (client == null) return null;
+        return DoVersesWithNoIntialLetters(client, param, in_search_result);
     }
     private static string DoVersesWithIntialLetters(Client client, string param, bool in_search_result)
     {
@@ -5802,22 +5618,25 @@ public static class Research
 
         StringBuilder str = new StringBuilder();
         str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
-        str.Append("\r\n");
+        str.AppendLine();
 
         int count = 0;
+        client.FoundVerses = new List<Verse>();
+        client.FoundPhrases = new List<Phrase>();
+        client.ClearSearchResults();
         foreach (Verse verse in client.Book.Verses)
         {
-            bool contain_initial_letters = false;
+            bool contains_initial_letters = false;
             foreach (char c in Constants.INITIAL_LETTERS)
             {
                 if (verse.Text.Contains(c.ToString()))
                 {
-                    contain_initial_letters = true;
+                    contains_initial_letters = true;
                     break;
                 }
             }
 
-            if (contain_initial_letters)
+            if (contains_initial_letters)
             {
                 count++;
                 str.Append(count.ToString() + "\t");
@@ -5830,48 +5649,10 @@ public static class Research
                 str.Append(value.ToString() + "\t");
                 str.Append(Numbers.DigitSum(value).ToString() + "\t");
                 str.Append(verse.Text + "\t");
-                str.Append("\r\n");
-            }
-        }
-        return str.ToString();
-    }
-    private static string DoVersesWithNonIntialLetters(Client client, string param, bool in_search_result)
-    {
-        if (client == null) return null;
-        if (client.Book == null) return null;
-        if (client.Book.Verses == null) return null;
+                str.AppendLine();
 
-        StringBuilder str = new StringBuilder();
-        str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
-        str.Append("\r\n");
-
-        int count = 0;
-        foreach (Verse verse in client.Book.Verses)
-        {
-            bool contain_non_initial_letters = false;
-            foreach (char c in Constants.NON_INITIAL_LETTERS)
-            {
-                if (verse.Text.Contains(c.ToString()))
-                {
-                    contain_non_initial_letters = true;
-                    break;
-                }
-            }
-
-            if (contain_non_initial_letters)
-            {
-                count++;
-                str.Append(count.ToString() + "\t");
-                str.Append(verse.Number.ToString() + "\t");
-                str.Append(verse.Address.ToString() + "\t");
-                str.Append(verse.Words.Count.ToString() + "\t");
-                str.Append(verse.LetterCount.ToString() + "\t");
-                str.Append(verse.UniqueLetters.Count.ToString() + "\t");
-                long value = client.CalculateValue(verse);
-                str.Append(value.ToString() + "\t");
-                str.Append(Numbers.DigitSum(value).ToString() + "\t");
-                str.Append(verse.Text + "\t");
-                str.Append("\r\n");
+                client.FoundVerses.Add(verse);
+                client.FoundPhrases.Add(new Phrase(verse, 0, null));
             }
         }
         return str.ToString();
@@ -5879,27 +5660,33 @@ public static class Research
     private static string DoVersesWithOnlyIntialLetters(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
         if (client.Book == null) return null;
         if (client.Book.Verses == null) return null;
 
         StringBuilder str = new StringBuilder();
         str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
-        str.Append("\r\n");
+        str.AppendLine();
 
         int count = 0;
+        client.FoundVerses = new List<Verse>();
+        client.FoundPhrases = new List<Phrase>();
+        client.ClearSearchResults();
         foreach (Verse verse in client.Book.Verses)
         {
-            bool contain_non_initial_letters = false;
-            foreach (char c in Constants.NON_INITIAL_LETTERS)
+            string verse_text = verse.Text.SimplifyTo(client.NumerologySystem.TextMode);
+            bool contains_only_initial_letters = true;
+            foreach (char c in verse_text)
             {
-                if (verse.Text.Contains(c.ToString()))
+                if (c == ' ') continue;
+                if (!Constants.INITIAL_LETTERS.Contains(c))
                 {
-                    contain_non_initial_letters = true;
+                    contains_only_initial_letters = false;
                     break;
                 }
             }
 
-            if (!contain_non_initial_letters)
+            if (contains_only_initial_letters)
             {
                 count++;
                 str.Append(count.ToString() + "\t");
@@ -5912,48 +5699,10 @@ public static class Research
                 str.Append(value.ToString() + "\t");
                 str.Append(Numbers.DigitSum(value).ToString() + "\t");
                 str.Append(verse.Text + "\t");
-                str.Append("\r\n");
-            }
-        }
-        return str.ToString();
-    }
-    private static string DoVersesWithOnlyNonIntialLetters(Client client, string param, bool in_search_result)
-    {
-        if (client == null) return null;
-        if (client.Book == null) return null;
-        if (client.Book.Verses == null) return null;
+                str.AppendLine();
 
-        StringBuilder str = new StringBuilder();
-        str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
-        str.Append("\r\n");
-
-        int count = 0;
-        foreach (Verse verse in client.Book.Verses)
-        {
-            bool contain_non_initial_letters = false;
-            foreach (char c in Constants.INITIAL_LETTERS)
-            {
-                if (verse.Text.Contains(c.ToString()))
-                {
-                    contain_non_initial_letters = true;
-                    break;
-                }
-            }
-
-            if (!contain_non_initial_letters)
-            {
-                count++;
-                str.Append(count.ToString() + "\t");
-                str.Append(verse.Number.ToString() + "\t");
-                str.Append(verse.Address.ToString() + "\t");
-                str.Append(verse.Words.Count.ToString() + "\t");
-                str.Append(verse.LetterCount.ToString() + "\t");
-                str.Append(verse.UniqueLetters.Count.ToString() + "\t");
-                long value = client.CalculateValue(verse);
-                str.Append(value.ToString() + "\t");
-                str.Append(Numbers.DigitSum(value).ToString() + "\t");
-                str.Append(verse.Text + "\t");
-                str.Append("\r\n");
+                client.FoundVerses.Add(verse);
+                client.FoundPhrases.Add(new Phrase(verse, 0, null));
             }
         }
         return str.ToString();
@@ -5963,25 +5712,29 @@ public static class Research
         if (client == null) return null;
         if (client.Book == null) return null;
         if (client.Book.Verses == null) return null;
+        if (client.FoundVerses == null) client.FoundVerses = new List<Verse>();
 
         StringBuilder str = new StringBuilder();
         str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
-        str.Append("\r\n");
+        str.AppendLine();
 
         int count = 0;
+        client.FoundVerses = new List<Verse>();
+        client.FoundPhrases = new List<Phrase>();
+        client.ClearSearchResults();
         foreach (Verse verse in client.Book.Verses)
         {
-            bool contain_all_initial_letters = true;
+            bool contains_all_initial_letters = true;
             foreach (char c in Constants.INITIAL_LETTERS)
             {
                 if (!verse.Text.Contains(c.ToString()))
                 {
-                    contain_all_initial_letters = false;
+                    contains_all_initial_letters = false;
                     break;
                 }
             }
 
-            if (contain_all_initial_letters)
+            if (contains_all_initial_letters)
             {
                 count++;
                 str.Append(count.ToString() + "\t");
@@ -5994,35 +5747,106 @@ public static class Research
                 str.Append(value.ToString() + "\t");
                 str.Append(Numbers.DigitSum(value).ToString() + "\t");
                 str.Append(verse.Text + "\t");
-                str.Append("\r\n");
+                str.AppendLine();
+
+                client.FoundVerses.Add(verse);
+                client.FoundPhrases.Add(new Phrase(verse, 0, null));
             }
         }
         return str.ToString();
     }
-    private static string DoVersesWithAllNonIntialLetters(Client client, string param, bool in_search_result)
+    private static string DoVersesWithOnlyAllIntialLetters(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (client.NumerologySystem == null) return null;
+        if (client.Book == null) return null;
+        if (client.Book.Verses == null) return null;
+        if (client.FoundVerses == null) client.FoundVerses = new List<Verse>();
+
+        StringBuilder str = new StringBuilder();
+        str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
+        str.AppendLine();
+
+        int count = 0;
+        client.FoundVerses = new List<Verse>();
+        client.FoundPhrases = new List<Phrase>();
+        client.ClearSearchResults();
+        foreach (Verse verse in client.Book.Verses)
+        {
+            bool contains_all_initial_letters = true;
+            foreach (char c in Constants.INITIAL_LETTERS)
+            {
+                if (!verse.Text.Contains(c.ToString()))
+                {
+                    contains_all_initial_letters = false;
+                    break;
+                }
+            }
+
+            if (contains_all_initial_letters)
+            {
+                string verse_text = verse.Text.SimplifyTo(client.NumerologySystem.TextMode);
+                bool contains_only_initial_letters = true;
+                foreach (char c in verse_text)
+                {
+                    if (c == ' ') continue;
+                    if (!Constants.INITIAL_LETTERS.Contains(c))
+                    {
+                        contains_only_initial_letters = false;
+                        break;
+                    }
+                }
+
+                if (contains_only_initial_letters)
+                {
+                    count++;
+                    str.Append(count.ToString() + "\t");
+                    str.Append(verse.Number.ToString() + "\t");
+                    str.Append(verse.Address.ToString() + "\t");
+                    str.Append(verse.Words.Count.ToString() + "\t");
+                    str.Append(verse.LetterCount.ToString() + "\t");
+                    str.Append(verse.UniqueLetters.Count.ToString() + "\t");
+                    long value = client.CalculateValue(verse);
+                    str.Append(value.ToString() + "\t");
+                    str.Append(Numbers.DigitSum(value).ToString() + "\t");
+                    str.Append(verse.Text + "\t");
+                    str.AppendLine();
+
+                    client.FoundVerses.Add(verse);
+                    client.FoundPhrases.Add(new Phrase(verse, 0, null));
+                }
+            }
+        }
+        return str.ToString();
+    }
+    private static string DoVersesWithNoIntialLetters(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.Book == null) return null;
         if (client.Book.Verses == null) return null;
+        if (client.FoundVerses == null) client.FoundVerses = new List<Verse>();
 
         StringBuilder str = new StringBuilder();
         str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
-        str.Append("\r\n");
+        str.AppendLine();
 
         int count = 0;
+        client.FoundVerses = new List<Verse>();
+        client.FoundPhrases = new List<Phrase>();
+        client.ClearSearchResults();
         foreach (Verse verse in client.Book.Verses)
         {
-            bool contain_all_non_initial_letters = true;
-            foreach (char c in Constants.NON_INITIAL_LETTERS)
+            bool contain_no_initial_letters = true;
+            foreach (char c in Constants.INITIAL_LETTERS)
             {
-                if (!verse.Text.Contains(c.ToString()))
+                if (verse.Text.Contains(c.ToString()))
                 {
-                    contain_all_non_initial_letters = false;
+                    contain_no_initial_letters = false;
                     break;
                 }
             }
 
-            if (contain_all_non_initial_letters)
+            if (contain_no_initial_letters)
             {
                 count++;
                 str.Append(count.ToString() + "\t");
@@ -6035,85 +5859,43 @@ public static class Research
                 str.Append(value.ToString() + "\t");
                 str.Append(Numbers.DigitSum(value).ToString() + "\t");
                 str.Append(verse.Text + "\t");
-                str.Append("\r\n");
+                str.AppendLine();
+
+                client.FoundVerses.Add(verse);
+                client.FoundPhrases.Add(new Phrase(verse, 0, null));
             }
         }
         return str.ToString();
     }
-    private static void FindVersesWithXValueDigitSum(Client client, string param, bool in_search_result)
+
+    private static string _________________________________________(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
-
-        string result = DoFindVersesWithXValueDigitSum(client, param, in_search_result, NumberType.Natural);
-
-        string filename = client.NumerologySystem.Name + "_" + "FindVersesWithXValueDigitSum" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-        {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
-        }
+        return null;
     }
-    private static void FindVersesWithPValueAndXDigitSum(Client client, string param, bool in_search_result)
+    private static string FindVersesWithXValueDigitSum(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
-
-        string result = DoFindVersesWithXValueDigitSum(client, param, in_search_result, NumberType.Prime);
-
-        string filename = client.NumerologySystem.Name + "_" + "FindVersesWithPValueAndXDigitSum" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-        {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
-        }
+        if (client == null) return null;
+        return DoFindVersesWithXValueDigitSum(client, param, in_search_result, NumberType.Natural);
     }
-    private static void FindVersesWithAPValueAndXDigitSum(Client client, string param, bool in_search_result)
+    private static string FindVersesWithPValueAndXDigitSum(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
-
-        string result = DoFindVersesWithXValueDigitSum(client, param, in_search_result, NumberType.AdditivePrime);
-
-        string filename = client.NumerologySystem.Name + "_" + "FindVersesWithAPValueAndXDigitSum" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-        {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
-        }
+        if (client == null) return null;
+        return DoFindVersesWithXValueDigitSum(client, param, in_search_result, NumberType.Prime);
     }
-    private static void FindVersesWithCValueAndXDigitSum(Client client, string param, bool in_search_result)
+    private static string FindVersesWithAPValueAndXDigitSum(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
-
-        string result = DoFindVersesWithXValueDigitSum(client, param, in_search_result, NumberType.Composite);
-
-        string filename = client.NumerologySystem.Name + "_" + "FindVersesWithCValueAndXDigitSum" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-        {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
-        }
+        if (client == null) return null;
+        return DoFindVersesWithXValueDigitSum(client, param, in_search_result, NumberType.AdditivePrime);
     }
-    private static void FindVersesWithACValueAndXDigitSum(Client client, string param, bool in_search_result)
+    private static string FindVersesWithCValueAndXDigitSum(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.NumerologySystem == null) return;
-
-        string result = DoFindVersesWithXValueDigitSum(client, param, in_search_result, NumberType.AdditiveComposite);
-
-        string filename = client.NumerologySystem.Name + "_" + "FindVersesWithACValueAndXDigitSum" + "_" + param + "_" + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
-        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-        {
-            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-            FileHelper.SaveText(path, result);
-            FileHelper.DisplayFile(path);
-        }
+        if (client == null) return null;
+        return DoFindVersesWithXValueDigitSum(client, param, in_search_result, NumberType.Composite);
+    }
+    private static string FindVersesWithACValueAndXDigitSum(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        return DoFindVersesWithXValueDigitSum(client, param, in_search_result, NumberType.AdditiveComposite);
     }
     private static string DoFindVersesWithXValueDigitSum(Client client, string param, bool in_search_result, NumberType number_type)
     {
@@ -6123,7 +5905,7 @@ public static class Research
 
         StringBuilder str = new StringBuilder();
         str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
-        str.Append("\r\n");
+        str.AppendLine();
 
         int count = 0;
         foreach (Verse verse in client.Book.Verses)
@@ -6199,14 +5981,15 @@ public static class Research
                 str.Append(value.ToString() + "\t");
                 str.Append(Numbers.DigitSum(value).ToString() + "\t");
                 str.Append(verse.Text + "\t");
-                str.Append("\r\n");
+                str.AppendLine();
             }
         }
         return str.ToString();
     }
 
-    private static void __________________________________________(Client client, string param, bool in_search_result)
+    private static string __________________________________________(Client client, string param, bool in_search_result)
     {
+        return null;
     }
     private class ZeroDifferenceNumerologySystem
     {
@@ -6221,15 +6004,15 @@ public static class Research
         public long AlFatihaValue = -1L;
         public int BookValueIndex = -1; // PrimeIndex | AdditivePrimeIndex
     }
-    private static void FindSystemOfBismAllahEqualsAlFatihaIndex(Client client, string param, bool in_search_result)
+    private static string FindSystemOfBismAllahEqualsAlFatihaIndex(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Book == null) return;
-        if (client.Book.Chapters == null) return;
-        if (client.Book.Chapters.Count <= 0) return;
-        if (client.Book.Chapters[0].Verses == null) return;
-        if (client.Book.Chapters[0].Verses.Count <= 0) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.Book.Chapters == null) return null;
+        if (client.Book.Chapters.Count <= 0) return null;
+        if (client.Book.Chapters[0].Verses == null) return null;
+        if (client.Book.Chapters[0].Verses.Count <= 0) return null;
+        if (client.NumerologySystem == null) return null;
 
         NumerologySystem backup_numerology_system = new NumerologySystem(client.NumerologySystem);
 
@@ -6389,16 +6172,18 @@ public static class Research
         } // next NumberType
 
         client.NumerologySystem = backup_numerology_system;
+
+        return null;
     }
-    private static void FindSystemOfAlFatihaEqualsQuranIndex(Client client, string param, bool in_search_result)
+    private static string FindSystemOfAlFatihaEqualsQuranIndex(Client client, string param, bool in_search_result)
     {
-        if (client == null) return;
-        if (client.Book == null) return;
-        if (client.Book.Chapters == null) return;
-        if (client.Book.Chapters.Count <= 0) return;
-        if (client.Book.Chapters[0].Verses == null) return;
-        if (client.Book.Chapters[0].Verses.Count <= 0) return;
-        if (client.NumerologySystem == null) return;
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.Book.Chapters == null) return null;
+        if (client.Book.Chapters.Count <= 0) return null;
+        if (client.Book.Chapters[0].Verses == null) return null;
+        if (client.Book.Chapters[0].Verses.Count <= 0) return null;
+        if (client.NumerologySystem == null) return null;
 
         NumerologySystem backup_numerology_system = new NumerologySystem(client.NumerologySystem);
 
@@ -6667,5 +6452,52 @@ public static class Research
         } // next NumberType
 
         client.NumerologySystem = backup_numerology_system;
+
+        return null;
+    }
+
+    public static string _____________________________(Client client, string param, bool in_search_result)
+    {
+        return null;
+    }
+    public static string Run_AhlulBayt(Client client, string extra, bool in_search_result)
+    {
+        System.Diagnostics.Process.Start("AhlulBayt.exe");
+        return null;
+    }
+    public static string Run_Composites(Client client, string extra, bool in_search_result)
+    {
+        System.Diagnostics.Process.Start("Composites.exe");
+        return null;
+    }
+    public static string Run_Numbers(Client client, string extra, bool in_search_result)
+    {
+        System.Diagnostics.Process.Start("Numbers.exe");
+        return null;
+    }
+    public static string Run_InitialLetters(Client client, string extra, bool in_search_result)
+    {
+        System.Diagnostics.Process.Start("InitialLetters.exe");
+        return null;
+    }
+    public static string Run_PrimeCalculator(Client client, string extra, bool in_search_result)
+    {
+        System.Diagnostics.Process.Start("PrimeCalculator.exe");
+        return null;
+    }
+    public static string Run_QuranLab(Client client, string extra, bool in_search_result)
+    {
+        System.Diagnostics.Process.Start("QuranLab.exe");
+        return null;
+    }
+    public static string Run_WordGenerator(Client client, string extra, bool in_search_result)
+    {
+        System.Diagnostics.Process.Start("WordGenerator.exe");
+        return null;
+    }
+    public static string Open_HelpFolder(Client client, string extra, bool in_search_result)
+    {
+        System.Diagnostics.Process.Start("Help");
+        return null;
     }
 }

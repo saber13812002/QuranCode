@@ -938,7 +938,7 @@ public class Client : IPublisher, ISubscriber
             return filtered_found_chapter_ranges;
         }
     }
-    private void ClearSearchResults()
+    public void ClearSearchResults()
     {
         m_filter_chapters = null;
 
