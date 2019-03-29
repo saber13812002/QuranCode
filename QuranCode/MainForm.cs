@@ -16611,9 +16611,10 @@ public partial class MainForm : Form, ISubscriber
             this.Text = Application.ProductName + " | " + GetSelectionSummary();
             UpdateFindMatchCaption();
 
-            string word_info = GetWordInformation(word);
+            string word_info = null;
             if (ModifierKeys == Keys.Control)
             {
+                word_info = GetWordInformation(word);
                 word_info += "\r\n\r\n";
                 word_info += GetGrammarInformation(word);
 
