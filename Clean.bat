@@ -34,6 +34,7 @@ rd /S /Q Client\obj
 rd /S /Q Research\obj
 rd /S /Q Common\obj
 rd /S /Q QuranCode\obj
+rd /S /Q ScriptRunner\obj
 rd /S /Q PrimeCalculator\obj
 rd /S /Q QuranLab\obj
 rd /S /Q InitialLetters\obj

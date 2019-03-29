@@ -3,7 +3,7 @@ public enum Edition { Standard, Ultimate }
 public static class Globals
 {
     public static Edition EDITION = Edition.Standard;
-    public static string VERSION = "6.19.953.4"; // updated by Version.bat (with AssemblyInfo.cs of all projects)
+    public static string VERSION = "6.19.961.4"; // updated by Version.bat (with AssemblyInfo.cs of all projects)
     public static string SHORT_VERSION
     {
         get
@@ -58,6 +58,7 @@ public static class Globals
     public static string TRANSLATIONS_FOLDER = "Translations";
     public static string TRANSLATIONS_OFFLINE_FOLDER = "Translations/Offline";
     public static string TRANSLATIONS_FLAGS_FOLDER = "Translations/Flags";
+    public static string SCRIPTS_FOLDER = "Scripts";
     public static string RULES_FOLDER = "Rules";
     public static string VALUES_FOLDER = "Values";
     public static string NUMBERS_FOLDER = "Numbers";

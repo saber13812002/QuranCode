@@ -34,6 +34,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordGenerator", "WordGenera
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AhlulBayt", "AhlulBayt\AhlulBayt.csproj", "{976E0235-3DDB-4B63-9DE4-11DA51C82775}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptRunner", "ScriptRunner\ScriptRunner.csproj", "{61438304-4125-4174-AF1C-49E81800DAA6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -204,6 +206,16 @@ Global
 		{976E0235-3DDB-4B63-9DE4-11DA51C82775}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{976E0235-3DDB-4B63-9DE4-11DA51C82775}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{976E0235-3DDB-4B63-9DE4-11DA51C82775}.Release|x86.ActiveCfg = Release|Any CPU
+		{61438304-4125-4174-AF1C-49E81800DAA6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61438304-4125-4174-AF1C-49E81800DAA6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61438304-4125-4174-AF1C-49E81800DAA6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{61438304-4125-4174-AF1C-49E81800DAA6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{61438304-4125-4174-AF1C-49E81800DAA6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{61438304-4125-4174-AF1C-49E81800DAA6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61438304-4125-4174-AF1C-49E81800DAA6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61438304-4125-4174-AF1C-49E81800DAA6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{61438304-4125-4174-AF1C-49E81800DAA6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{61438304-4125-4174-AF1C-49E81800DAA6}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -10,6 +10,7 @@ XCOPY /E /Y /EXCLUDE:exclude.txt Client\*.* NET2\Client\
 XCOPY /E /Y /EXCLUDE:exclude.txt Research\*.* NET2\Research\
 XCOPY /E /Y /EXCLUDE:exclude.txt Common\*.* NET2\Common\
 XCOPY /E /Y /EXCLUDE:exclude.txt QuranCode\*.* NET2\QuranCode\
+XCOPY /E /Y /EXCLUDE:exclude.txt ScriptRunner\*.* NET2\ScriptRunner\
 XCOPY /E /Y /EXCLUDE:exclude.txt PrimeCalculator\*.* NET2\PrimeCalculator\
 XCOPY /E /Y /EXCLUDE:exclude.txt QuranLab\*.* NET2\QuranLab\
 XCOPY /E /Y /EXCLUDE:exclude.txt InitialLetters\*.* NET2\InitialLetters\
