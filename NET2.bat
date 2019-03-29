@@ -1,26 +1,22 @@
 RD /S /Q NET2
-XCOPY /E /Y Tools\NET2\*.* NET2\
-
-ECHO  .csproj > exclude.txt
-XCOPY /E /Y /EXCLUDE:exclude.txt Globals\*.* NET2\Globals\
-XCOPY /E /Y /EXCLUDE:exclude.txt Utilities\*.* NET2\Utilities\
-XCOPY /E /Y /EXCLUDE:exclude.txt Model\*.* NET2\Model\
-XCOPY /E /Y /EXCLUDE:exclude.txt DataAccess\*.* NET2\DataAccess\
-XCOPY /E /Y /EXCLUDE:exclude.txt Server\*.* NET2\Server\
-XCOPY /E /Y /EXCLUDE:exclude.txt Client\*.* NET2\Client\
-XCOPY /E /Y /EXCLUDE:exclude.txt Research\*.* NET2\Research\
-XCOPY /E /Y /EXCLUDE:exclude.txt Common\*.* NET2\Common\
-XCOPY /E /Y /EXCLUDE:exclude.txt QuranCode\*.* NET2\QuranCode\
-XCOPY /E /Y /EXCLUDE:exclude.txt ScriptRunner\*.* NET2\ScriptRunner\
-XCOPY /E /Y /EXCLUDE:exclude.txt PrimeCalculator\*.* NET2\PrimeCalculator\
-XCOPY /E /Y /EXCLUDE:exclude.txt QuranLab\*.* NET2\QuranLab\
-XCOPY /E /Y /EXCLUDE:exclude.txt InitialLetters\*.* NET2\InitialLetters\
-XCOPY /E /Y /EXCLUDE:exclude.txt Composites\*.* NET2\Composites\
-XCOPY /E /Y /EXCLUDE:exclude.txt Numbers\*.* NET2\Numbers\
-XCOPY /E /Y /EXCLUDE:exclude.txt WordGenerator\*.* NET2\WordGenerator\
-XCOPY /E /Y /EXCLUDE:exclude.txt AhlulBayt\*.* NET2\AhlulBayt\
-DEL exclude.txt
-
+XCOPY /O /X /E /H /K /Y Globals\*.* NET2\Globals\
+XCOPY /O /X /E /H /K /Y Utilities\*.* NET2\Utilities\
+XCOPY /O /X /E /H /K /Y Model\*.* NET2\Model\
+XCOPY /O /X /E /H /K /Y DataAccess\*.* NET2\DataAccess\
+XCOPY /O /X /E /H /K /Y Server\*.* NET2\Server\
+XCOPY /O /X /E /H /K /Y Client\*.* NET2\Client\
+XCOPY /O /X /E /H /K /Y Research\*.* NET2\Research\
+XCOPY /O /X /E /H /K /Y Common\*.* NET2\Common\
+XCOPY /O /X /E /H /K /Y QuranCode\*.* NET2\QuranCode\
+XCOPY /O /X /E /H /K /Y ScriptRunner\*.* NET2\ScriptRunner\
+XCOPY /O /X /E /H /K /Y PrimeCalculator\*.* NET2\PrimeCalculator\
+XCOPY /O /X /E /H /K /Y QuranLab\*.* NET2\QuranLab\
+XCOPY /O /X /E /H /K /Y InitialLetters\*.* NET2\InitialLetters\
+XCOPY /O /X /E /H /K /Y Composites\*.* NET2\Composites\
+XCOPY /O /X /E /H /K /Y Numbers\*.* NET2\Numbers\
+XCOPY /O /X /E /H /K /Y WordGenerator\*.* NET2\WordGenerator\
+XCOPY /O /X /E /H /K /Y AhlulBayt\*.* NET2\AhlulBayt\
+XCOPY /O /X /E /H /K /Y Tools\NET2\*.* NET2\
 Tools\Replace\bin\Release\Replace.exe NET2 *.cs ((System.ComponentModel.ISupportInitialize) //((System.ComponentModel.ISupportInitialize)
 
 Version.bat
