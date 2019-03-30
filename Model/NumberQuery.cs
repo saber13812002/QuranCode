@@ -71,10 +71,13 @@ namespace Model
                         );
                     }
                 case NumbersResultType.WordRanges:
+                case NumbersResultType.WordSets:
                     {
                         return
                         (
-                            (WordCount > 1)
+                            (WordCount != 1)
+                            &&
+                            IsValidWordSearch()
                         );
                     }
                 case NumbersResultType.Sentences:
@@ -94,10 +97,13 @@ namespace Model
                         );
                     }
                 case NumbersResultType.VerseRanges:
+                case NumbersResultType.VerseSets:
                     {
                         return
                         (
-                            (VerseCount > 1)
+                            (VerseCount != 1)
+                            &&
+                            IsValidVerseSearch()
                         );
                     }
                 case NumbersResultType.Chapters:
@@ -110,10 +116,13 @@ namespace Model
                         );
                     }
                 case NumbersResultType.ChapterRanges:
+                case NumbersResultType.ChapterSets:
                     {
                         return
                         (
-                            (ChapterCount > 1)
+                            (ChapterCount != 1)
+                            &&
+                            IsValidChapterSearch()
                         );
                     }
                 default:

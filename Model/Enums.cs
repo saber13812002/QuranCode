@@ -21,7 +21,7 @@ namespace Model
     public enum SimilarityMethod { SimilarText, SimilarFirstHalf, SimilarLastHalf, SimilarWords, SimilarFirstWord, SimilarLastWord };
 
     public enum NumberScope { Number, NumberInChapter, NumberInVerse, NumberInWord };
-    public enum NumbersResultType { Letters, Words, Sentences, Verses, Chapters, WordRanges, VerseRanges, ChapterRanges };
+    public enum NumbersResultType { Letters, Words, Sentences, Verses, Chapters, WordRanges, VerseRanges, ChapterRanges, WordSets, VerseSets, ChapterSets };
 
     public enum RevelationPlace { Makkah, Medina, Both };
 

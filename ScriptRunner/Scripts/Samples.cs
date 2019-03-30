@@ -48,7 +48,7 @@ public class MyScript : IScriptRunner
             verse_text = verse_text.Replace("ث", "");
             str.AppendLine(verse_text);
         }
-        string filename = client.NumerologySystemName + "_" + "OnlyKeyLetters" + Globals.OUTPUT_FILE_EXT;
+        string filename = client.NumerologySystemName + "_" + "OnlyKeyLetters" + ".txt";
         ScriptRunner.SaveText(filename, str.ToString());
         ScriptRunner.DisplayFile(filename);
         return false; // so not to close Script window
@@ -141,7 +141,7 @@ public class MyScript : IScriptRunner
             str.Replace("ج", "");
             str.Replace("ث", "");
 
-            string filename = client.NumerologySystemName + "_" + "OnlyInitialLetters" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "OnlyInitialLetters" + ".txt";
             ScriptRunner.SaveText(filename, str.ToString());
             ScriptRunner.DisplayFile(filename);
              return false; // so not to close Script window
@@ -168,7 +168,7 @@ public class MyScript : IScriptRunner
             }
             string verses_text = str.ToString();
             char[] result = DoJumpByXLetters(client, verses_text, extra);
-            string filename = client.NumerologySystemName + "_" + "JumpByXLetters" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "JumpByXLetters" + ".txt";
             ScriptRunner.SaveLetters(filename, result);
             ScriptRunner.DisplayFile(filename);
              return false; // so not to close Script window
@@ -195,7 +195,7 @@ public class MyScript : IScriptRunner
             string verses_text = str.ToString();
             char[] result = DoJumpByLetterValues(client, verses_text, extra);
 
-            string filename = client.NumerologySystemName + "_" + "JumpByLetterValues" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "JumpByLetterValues" + ".txt";
             ScriptRunner.SaveLetters(filename, result);
             ScriptRunner.DisplayFile(filename);
              return false; // so not to close Script window
@@ -222,7 +222,7 @@ public class MyScript : IScriptRunner
             string verses_text = str.ToString();
             char[] result = DoJumpByPrimeNumbers(client, verses_text, extra);
 
-            string filename = client.NumerologySystemName + "_" + "JumpByPrimeNumbers" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "JumpByPrimeNumbers" + ".txt";
             ScriptRunner.SaveLetters(filename, result);
             ScriptRunner.DisplayFile(filename);
              return false; // so not to close Script window
@@ -250,7 +250,7 @@ public class MyScript : IScriptRunner
             string verses_text = str.ToString();
             char[] result = DoJumpByFibonacciNumbers(client, verses_text, extra);
 
-            string filename = client.NumerologySystemName + "_" + "JumpByFibonacciNumbers" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "JumpByFibonacciNumbers" + ".txt";
             ScriptRunner.SaveLetters(filename, result);
             ScriptRunner.DisplayFile(filename);
              return false; // so not to close Script window
@@ -278,7 +278,7 @@ public class MyScript : IScriptRunner
             string verses_text = str.ToString();
             char[] result = DoJumpByConstantNumberDigits(client, verses_text, "PI");
 
-            string filename = client.NumerologySystemName + "_" + "JumpByPiDigits" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "JumpByPiDigits" + ".txt";
             ScriptRunner.SaveLetters(filename, result);
             ScriptRunner.DisplayFile(filename);
              return false; // so not to close Script window
@@ -306,7 +306,7 @@ public class MyScript : IScriptRunner
             string verses_text = str.ToString();
             char[] result = DoJumpByConstantNumberDigits(client, verses_text, "E");
 
-            string filename = client.NumerologySystemName + "_" + "JumpByEulerDigits" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "JumpByEulerDigits" + ".txt";
             ScriptRunner.SaveLetters(filename, result);
             ScriptRunner.DisplayFile(filename);
              return false; // so not to close Script window
@@ -334,7 +334,7 @@ public class MyScript : IScriptRunner
             string verses_text = str.ToString();
             char[] result = DoJumpByConstantNumberDigits(client, verses_text, "PHI");
 
-            string filename = client.NumerologySystemName + "_" + "JumpByGoldenRatioDigits" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "JumpByGoldenRatioDigits" + ".txt";
             ScriptRunner.SaveLetters(filename, result);
             ScriptRunner.DisplayFile(filename);
              return false; // so not to close Script window
@@ -553,7 +553,7 @@ public class MyScript : IScriptRunner
                 values.Add(chapter.Verses.Count);
             }
 
-            string filename = client.NumerologySystemName + "_" + "ChapterVerses" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "ChapterVerses" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -584,7 +584,7 @@ public class MyScript : IScriptRunner
                 values.Add(sum);
             }
 
-            string filename = client.NumerologySystemName + "_" + "ChapterWords" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "ChapterWords" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -608,7 +608,7 @@ public class MyScript : IScriptRunner
                 values.Add(verse.Words.Count);
             }
 
-            string filename = client.NumerologySystemName + "_" + "VerseWords" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "VerseWords" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -639,7 +639,7 @@ public class MyScript : IScriptRunner
                 values.Add(sum);
             }
 
-            string filename = client.NumerologySystemName + "_" + "ChapterLetters" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "ChapterLetters" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -663,7 +663,7 @@ public class MyScript : IScriptRunner
                 values.Add(verse.LetterCount);
             }
 
-            string filename = client.NumerologySystemName + "_" + "VerseLetters" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "VerseLetters" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -690,7 +690,7 @@ public class MyScript : IScriptRunner
                 }
             }
 
-            string filename = client.NumerologySystemName + "_" + "WordLetters" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "WordLetters" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -721,7 +721,7 @@ public class MyScript : IScriptRunner
                 values.Add(sum);
             }
 
-            string filename = client.NumerologySystemName + "_" + "ChapterValues" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "ChapterValues" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -745,7 +745,7 @@ public class MyScript : IScriptRunner
                 values.Add((int)verse.Value);
             }
 
-            string filename = client.NumerologySystemName + "_" + "VerseValues" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "VerseValues" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -772,7 +772,7 @@ public class MyScript : IScriptRunner
                 }
             }
 
-            string filename = client.NumerologySystemName + "_" + "WordValues" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "WordValues" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -802,7 +802,7 @@ public class MyScript : IScriptRunner
                 }
             }
 
-            string filename = client.NumerologySystemName + "_" + "LetterValues" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "LetterValues" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -840,7 +840,7 @@ public class MyScript : IScriptRunner
                 value_diffs.Add(value_diff);
             }
 
-            string filename = client.NumerologySystemName + "_" + "ChapterValueDiffs" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "ChapterValueDiffs" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -871,7 +871,7 @@ public class MyScript : IScriptRunner
                 value_diffs.Add(value_diff);
             }
 
-            string filename = client.NumerologySystemName + "_" + "VerseValueDiffs" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "VerseValueDiffs" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -905,7 +905,7 @@ public class MyScript : IScriptRunner
                 value_diffs.Add(value_diff);
             }
 
-            string filename = client.NumerologySystemName + "_" + "WordValueDiffs" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "WordValueDiffs" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -942,7 +942,7 @@ public class MyScript : IScriptRunner
                 value_diffs.Add(value_diff);
             }
 
-            string filename = client.NumerologySystemName + "_" + "LetterValueDiffs" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "LetterValueDiffs" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -1001,7 +1001,7 @@ public class MyScript : IScriptRunner
                 }
             }
 
-            string filename = client.NumerologySystemName + "_" + "SameLetterGaps" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "SameLetterGaps" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -1060,7 +1060,7 @@ public class MyScript : IScriptRunner
                 }
             }
 
-            string filename = client.NumerologySystemName + "_" + "SameLetterBackwardGaps" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "SameLetterBackwardGaps" + ".txt";
             DoSaveAndPlayWAVFile(filename, values, extra);
              return false; // so not to close Script window
         }
@@ -1101,7 +1101,7 @@ public class MyScript : IScriptRunner
 
         try
         {
-            string filename = "AllahWords" + Globals.OUTPUT_FILE_EXT;
+            string filename = "AllahWords" + ".txt";
             if (Client.Books.ContainsKey("Simplified29"))
             {
                 verses = Client.Books["Simplified29"].Verses;
@@ -1125,7 +1125,7 @@ public class MyScript : IScriptRunner
 
         try
         {
-            string filename = "NotAllahWords" + Globals.OUTPUT_FILE_EXT;
+            string filename = "NotAllahWords" + ".txt";
             if (Client.Books.ContainsKey("Simplified29"))
             {
                 verses = Client.Books["Simplified29"].Verses;
@@ -1149,7 +1149,7 @@ public class MyScript : IScriptRunner
 
         try
         {
-            string filename = "WordMeaning" + Globals.OUTPUT_FILE_EXT;
+            string filename = "WordMeaning" + ".txt";
             string result = DoWordMeaning(client, verses);
             ScriptRunner.SaveText(filename, result);
             ScriptRunner.DisplayFile(filename);
@@ -1169,7 +1169,7 @@ public class MyScript : IScriptRunner
 
         try
         {
-            string filename = "WordTransliteration" + Globals.OUTPUT_FILE_EXT;
+            string filename = "WordTransliteration" + ".txt";
             string result = DoWordTransliteration(client, verses);
             ScriptRunner.SaveText(filename, result);
             ScriptRunner.DisplayFile(filename);
@@ -1189,7 +1189,7 @@ public class MyScript : IScriptRunner
 
         try
         {
-            string filename = "WordRoots" + Globals.OUTPUT_FILE_EXT;
+            string filename = "WordRoots" + ".txt";
             string result = DoWordRoots(client, verses);
             ScriptRunner.SaveText(filename, result);
             ScriptRunner.DisplayFile(filename);
@@ -1209,7 +1209,7 @@ public class MyScript : IScriptRunner
 
         try
         {
-            string filename = "WordFrequency" + Globals.OUTPUT_FILE_EXT;
+            string filename = "WordFrequency" + ".txt";
             string result = DoWordFrequency(client, verses);
             ScriptRunner.SaveText(filename, result);
             ScriptRunner.DisplayFile(filename);
@@ -1229,7 +1229,7 @@ public class MyScript : IScriptRunner
 
         try
         {
-            string filename = "WordOccurrences" + Globals.OUTPUT_FILE_EXT;
+            string filename = "WordOccurrences" + ".txt";
             string result = DoWordOccurrences(client, verses);
             ScriptRunner.SaveText(filename, result);
             ScriptRunner.DisplayFile(filename);
@@ -1249,7 +1249,7 @@ public class MyScript : IScriptRunner
 
         try
         {
-            string filename = "WordInformation" + Globals.OUTPUT_FILE_EXT;
+            string filename = "WordInformation" + ".txt";
             string result = DoWordInformation(client, verses);
             ScriptRunner.SaveText(filename, result);
             ScriptRunner.DisplayFile(filename);
@@ -1747,7 +1747,7 @@ public class MyScript : IScriptRunner
         {
             string result = DoVerseStatistics(client, verses);
 
-            string filename = client.NumerologySystemName + "_" + "VerseStatistics" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "VerseStatistics" + ".txt";
             ScriptRunner.SaveText(filename, result);
             ScriptRunner.DisplayFile(filename);
              return false; // so not to close Script window
@@ -1769,7 +1769,7 @@ public class MyScript : IScriptRunner
             List<Chapter> chapters = Book.GetChapters(verses);
             string result = DoChapterStatistics(client, chapters);
 
-            string filename = client.NumerologySystemName + "_" + "ChapterStatistics" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "ChapterStatistics" + ".txt";
             ScriptRunner.SaveText(filename, result);
             ScriptRunner.DisplayFile(filename);
              return false; // so not to close Script window
@@ -1796,7 +1796,7 @@ public class MyScript : IScriptRunner
                 str.Append(verse.PaddedAddress + "\t" + value.ToString(Globals.NUMBER_FORMAT) + "\t" + digit_sum.ToString() + "\r\n");
             }
 
-            string filename = client.NumerologySystemName + "_" + "VerseValueDigitSums" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "VerseValueDigitSums" + ".txt";
             ScriptRunner.SaveText(filename, str.ToString());
             ScriptRunner.DisplayFile(filename);
              return false; // so not to close Script window
@@ -1824,7 +1824,7 @@ public class MyScript : IScriptRunner
                 str.Append(chapter.Number + "\t" + value.ToString(Globals.NUMBER_FORMAT) + "\t" + digit_sum.ToString() + "\r\n");
             }
 
-            string filename = client.NumerologySystemName + "_" + "ChapterValueDigitSums" + Globals.OUTPUT_FILE_EXT;
+            string filename = client.NumerologySystemName + "_" + "ChapterValueDigitSums" + ".txt";
             ScriptRunner.SaveText(filename, str.ToString());
             ScriptRunner.DisplayFile(filename);
              return false; // so not to close Script window
@@ -2048,7 +2048,7 @@ public class MyScript : IScriptRunner
             }
             str.Append("\r\n" + str.Length); // 12705 digits != prime 12791 of the Amazing Quran Statistics on heliwave.com
 
-            string filename = "ConcatenateChapterVerses" + Globals.OUTPUT_FILE_EXT;
+            string filename = "ConcatenateChapterVerses" + ".txt";
             ScriptRunner.SaveText(filename, str.ToString());
             ScriptRunner.DisplayFile(filename);
              return false; // so not to close Script window
@@ -2080,7 +2080,7 @@ public class MyScript : IScriptRunner
             }
             str.Append("\r\n" + str.Length); // 12705 digits != prime 12791 of the Amazing Quran Statistics on heliwave.com
 
-            string filename = "ConcatenateChaptersVerses" + Globals.OUTPUT_FILE_EXT;
+            string filename = "ConcatenateChaptersVerses" + ".txt";
             ScriptRunner.SaveText(filename, str.ToString());
             ScriptRunner.DisplayFile(filename);
              return false; // so not to close Script window

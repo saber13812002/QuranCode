@@ -12751,6 +12751,91 @@ public class Server : IPublisher
         }
         return result;
     }
+    // find by numbers - WordSets
+    public static List<List<Word>> FindWordSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindWordSets(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Word>> DoFindWordSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindWordSets(source, query);
+    }
+    private static List<List<Word>> DoFindWordSets(List<Verse> source, NumberQuery query)
+    {
+        List<List<Word>> result = new List<List<Word>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Word> words = new List<Word>();
+                    if (words != null)
+                    {
+                        int set_size = query.WordCount;
+                        if (set_size == 1)
+                        {
+                            result.Add(DoFindWords(source, query));
+                            return result;
+                        }
+
+                        foreach (Verse verse in source)
+                        {
+                            words.AddRange(verse.Words);
+                        }
+
+                        if (set_size == 0) // non-specified set size
+                        {
+                            // limit range length to minimum
+                            int word_count = 0;
+                            foreach (Verse verse in source)
+                            {
+                                word_count += verse.Words.Count;
+                            }
+
+                            int limit = word_count - 1;
+                            if (query.LetterCount > 0)
+                            {
+                                limit = query.LetterCount / 3;
+                            }
+                            if (query.Value > 0L)
+                            {
+                                limit = (int)(query.Value / 114L);
+                            }
+
+                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            {
+                                int size = i + 1;
+                                Combinations<Word> sets = new Combinations<Word>(words, size, GenerateOption.WithoutRepetition);
+                                foreach (List<Word> set in sets)
+                                {
+                                    // check set against query
+                                    if (Compare(set, query))
+                                    {
+                                        result.Add(set);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified set size
+                        {
+                            Combinations<Word> sets = new Combinations<Word>(words, set_size, GenerateOption.WithoutRepetition);
+                            foreach (List<Word> set in sets)
+                            {
+                                // check set against query
+                                if (Compare(set, query))
+                                {
+                                    result.Add(set);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
     // find by numbers - Sentences
     public static List<Sentence> FindSentences(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
     {
@@ -13215,6 +13300,87 @@ public class Server : IPublisher
         }
         return result;
     }
+    // find by numbers - VerseSets
+    public static List<List<Verse>> FindVerseSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindVerseSets(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Verse>> DoFindVerseSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindVerseSets(source, query);
+    }
+    private static List<List<Verse>> DoFindVerseSets(List<Verse> source, NumberQuery query)
+    {
+        List<List<Verse>> result = new List<List<Verse>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Verse> verses = source;
+                    if (verses != null)
+                    {
+                        int set_size = query.VerseCount;
+                        if (set_size == 1)
+                        {
+                            result.Add(DoFindVerses(source, query));
+                            return result;
+                        }
+
+                        if (set_size == 0) // non-specified set size
+                        {
+                            int limit = source.Count;
+                            if (query.VerseCount > 0)
+                            {
+                                limit = query.VerseCount;
+                            }
+                            if (query.WordCount > 0)
+                            {
+                                limit = query.WordCount / 7;
+                            }
+                            if (query.LetterCount > 0)
+                            {
+                                limit = query.LetterCount / 29;
+                            }
+                            if (query.Value > 0L)
+                            {
+                                limit = (int)(query.Value / 449L);
+                            }
+
+                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            {
+                                int size = i + 1;
+                                Combinations<Verse> sets = new Combinations<Verse>(verses, size, GenerateOption.WithoutRepetition);
+                                foreach (List<Verse> set in sets)
+                                {
+                                    // check set against query
+                                    if (Compare(set, query))
+                                    {
+                                        result.Add(set);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified set size
+                        {
+                            Combinations<Verse> sets = new Combinations<Verse>(verses, set_size, GenerateOption.WithoutRepetition);
+                            foreach (List<Verse> set in sets)
+                            {
+                                // check set against query
+                                if (Compare(set, query))
+                                {
+                                    result.Add(set);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
     // find by numbers - Chapters
     public static List<Chapter> FindChapters(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
     {
@@ -13336,6 +13502,88 @@ public class Server : IPublisher
                                 if (Compare(range, query))
                                 {
                                     result.Add(range);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    // find by numbers - ChapterSets
+    public static List<List<Chapter>> FindChapterSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindChapterSets(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Chapter>> DoFindChapterSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindChapterSets(source, query);
+    }
+    private static List<List<Chapter>> DoFindChapterSets(List<Verse> source, NumberQuery query)
+    {
+        List<List<Chapter>> result = new List<List<Chapter>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Chapter> chapters = s_book.GetChapters(source);
+                    if (chapters != null)
+                    {
+                        int set_size = query.ChapterCount;
+                        if (set_size == 1)
+                        {
+                            result.Add(DoFindChapters(source, query));
+                            return result;
+                        }
+
+                        if (set_size == 0) // non-specified set size
+                        {
+                            // limit range length to minimum
+                            int limit = chapters.Count;
+                            //if (query.VerseCount > 0)
+                            //{
+                            //    limit = query.VerseCount;
+                            //}
+                            //if (query.WordCount > 0)
+                            //{
+                            //    limit = query.WordCount;
+                            //}
+                            //if (query.LetterCount > 0)
+                            //{
+                            //    limit = query.LetterCount;
+                            //}
+                            //if (query.Value > 0L)
+                            //{
+                            //    limit = (int)(query.Value / 10L);
+                            //}
+
+                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            {
+                                int size = i + 1;
+                                Combinations<Chapter> sets = new Combinations<Chapter>(chapters, size, GenerateOption.WithoutRepetition);
+                                foreach (List<Chapter> set in sets)
+                                {
+                                    // check set against query
+                                    if (Compare(set, query))
+                                    {
+                                        result.Add(set);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified set size
+                        {
+                            Combinations<Chapter> sets = new Combinations<Chapter>(chapters, set_size, GenerateOption.WithoutRepetition);
+                            foreach (List<Chapter> set in sets)
+                            {
+                                // check set against query
+                                if (Compare(set, query))
+                                {
+                                    result.Add(set);
                                 }
                             }
                         }

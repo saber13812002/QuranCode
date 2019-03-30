@@ -673,6 +673,7 @@ partial class MainForm
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FontDialog = new System.Windows.Forms.FontDialog();
+            this.FindByNumbersSetsCheckBox = new System.Windows.Forms.CheckBox();
             this.StatusPanel.SuspendLayout();
             this.ChapterSortPanel.SuspendLayout();
             this.DrawingsPanel.SuspendLayout();
@@ -2092,6 +2093,7 @@ partial class MainForm
             this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueLabel);
             this.FindByNumbersPanel.Controls.Add(this.FindByNumbersLettersLabel);
             this.FindByNumbersPanel.Controls.Add(this.FindByNumbersWordsLabel);
+            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersSetsCheckBox);
             this.FindByNumbersPanel.Controls.Add(this.FindByNumbersLabel);
             this.FindByNumbersPanel.Location = new System.Drawing.Point(4, 329);
             this.FindByNumbersPanel.Name = "FindByNumbersPanel";
@@ -5287,7 +5289,7 @@ partial class MainForm
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
             this.TabControl.ShowToolTips = true;
-            this.TabControl.Size = new System.Drawing.Size(816, 194);
+            this.TabControl.Size = new System.Drawing.Size(816, 195);
             this.TabControl.TabIndex = 102;
             this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             this.TabControl.Click += new System.EventHandler(this.TabControl_Click);
@@ -10988,6 +10990,21 @@ partial class MainForm
             // 
             this.FontDialog.Apply += new System.EventHandler(this.FontDialog_Apply);
             // 
+            // FindByNumbersSetsCheckBox
+            // 
+            this.FindByNumbersSetsCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.FindByNumbersSetsCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.FindByNumbersSetsCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByNumbersSetsCheckBox.ForeColor = System.Drawing.Color.Navy;
+            this.FindByNumbersSetsCheckBox.Location = new System.Drawing.Point(71, 2);
+            this.FindByNumbersSetsCheckBox.Name = "FindByNumbersSetsCheckBox";
+            this.FindByNumbersSetsCheckBox.Size = new System.Drawing.Size(40, 17);
+            this.FindByNumbersSetsCheckBox.TabIndex = 72;
+            this.FindByNumbersSetsCheckBox.Text = "{}";
+            this.ToolTip.SetToolTip(this.FindByNumbersSetsCheckBox, "find any combinations (not just consecutive ranges)");
+            this.FindByNumbersSetsCheckBox.UseVisualStyleBackColor = false;
+            this.FindByNumbersSetsCheckBox.CheckedChanged += new System.EventHandler(this.FindByNumbersSetsCheckBox_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AcceptButton = this.FindByTextButton;
@@ -11773,4 +11790,5 @@ partial class MainForm
     private System.Windows.Forms.Label Nth4nMinus1PrimeNumberLabel;
     private System.Windows.Forms.Label Nth4nPlus1PrimeNumberLabel;
     private System.Windows.Forms.Label FindBySimilarityPercentageLabel;
+    private System.Windows.Forms.CheckBox FindByNumbersSetsCheckBox;
 }

@@ -13230,20 +13230,20 @@ public partial class MainForm : Form, ISubscriber
             {
                 switch (m_numbers_result_type)
                 {
-                    case NumbersResultType.Letters:
-                    case NumbersResultType.Words:
-                    case NumbersResultType.WordRanges:
-                    case NumbersResultType.Verses:
-                        DisplayFoundVerses(false, false);
-                        break;
                     case NumbersResultType.VerseRanges:
                         DisplayFoundVerseRanges(false, false);
+                        break;
+                    case NumbersResultType.VerseSets:
+                        DisplayFoundVerseSets(false, false);
                         break;
                     case NumbersResultType.Chapters:
                         DisplayFoundChapters(false, false);
                         break;
                     case NumbersResultType.ChapterRanges:
                         DisplayFoundChapterRanges(false, false);
+                        break;
+                    case NumbersResultType.ChapterSets:
+                        DisplayFoundChapterSets(false, false);
                         break;
                     default:
                         DisplayFoundVerses(false, false);
@@ -18254,7 +18254,7 @@ public partial class MainForm : Form, ISubscriber
     }
     // helper helper helpers
     /// <summary>
-    /// Use only when no duplicate verses are displayed like with VerseRanges or ChapterRanges
+    /// Use only when no duplicate verses are displayed like with VerseRanges, ChapterRanges or VerseSets or ChapterSets
     /// </summary>
     /// <param name="verse"></param>
     /// <returns>index of first matching verse</returns>
@@ -19959,20 +19959,20 @@ public partial class MainForm : Form, ISubscriber
                         {
                             switch (m_numbers_result_type)
                             {
-                                case NumbersResultType.Letters:
-                                case NumbersResultType.Words:
-                                case NumbersResultType.WordRanges:
-                                case NumbersResultType.Verses:
-                                    DisplayFoundVerses(false, false);
-                                    break;
                                 case NumbersResultType.VerseRanges:
                                     DisplayFoundVerseRanges(false, false);
+                                    break;
+                                case NumbersResultType.VerseSets:
+                                    DisplayFoundVerseSets(false, false);
                                     break;
                                 case NumbersResultType.Chapters:
                                     DisplayFoundChapters(false, false);
                                     break;
                                 case NumbersResultType.ChapterRanges:
                                     DisplayFoundChapterRanges(false, false);
+                                    break;
+                                case NumbersResultType.ChapterSets:
+                                    DisplayFoundChapterSets(false, false);
                                     break;
                                 default:
                                     DisplayFoundVerses(false, false);
@@ -34585,6 +34585,12 @@ public partial class MainForm : Form, ISubscriber
     #region Search By Numbers
     ///////////////////////////////////////////////////////////////////////////////
     private NumbersResultType m_numbers_result_type = NumbersResultType.Verses;
+    private bool m_find_by_numbers_sets = false;
+    private void FindByNumbersSetsCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+        m_find_by_numbers_sets = FindByNumbersSetsCheckBox.Checked;
+        UpdateFindByNumbersResultType();
+    }
     private void FindByNumbersLabel_Click(object sender, EventArgs e)
     {
         FindByNumbersControls_Enter(null, null);
@@ -34636,6 +34642,7 @@ public partial class MainForm : Form, ISubscriber
                 }
                 break;
             case NumbersResultType.WordRanges:
+            case NumbersResultType.WordSets:
                 {
                 }
                 break;
@@ -34656,6 +34663,7 @@ public partial class MainForm : Form, ISubscriber
                 }
                 break;
             case NumbersResultType.VerseRanges:
+            case NumbersResultType.VerseSets:
                 {
                 }
                 break;
@@ -34668,6 +34676,7 @@ public partial class MainForm : Form, ISubscriber
                 }
                 break;
             case NumbersResultType.ChapterRanges:
+            case NumbersResultType.ChapterSets:
                 {
                 }
                 break;
@@ -35169,6 +35178,7 @@ public partial class MainForm : Form, ISubscriber
         {
             case NumbersResultType.Words:
             case NumbersResultType.WordRanges:
+            case NumbersResultType.WordSets:
                 {
                     if ((FindByNumbersWordsNumericUpDown.Value == 1) && (FindByNumbersWordsNumberTypeLabel.Text.Length == 0))
                     {
@@ -35176,7 +35186,14 @@ public partial class MainForm : Form, ISubscriber
                     }
                     else if ((FindByNumbersWordsNumericUpDown.Value > 1) || (FindByNumbersWordsNumberTypeLabel.Text.Length > 0))
                     {
-                        m_numbers_result_type = NumbersResultType.WordRanges;
+                        if (!m_find_by_numbers_sets)
+                        {
+                            m_numbers_result_type = NumbersResultType.WordRanges;
+                        }
+                        else
+                        {
+                            m_numbers_result_type = NumbersResultType.WordSets;
+                        }
                     }
                 }
                 break;
@@ -35187,6 +35204,7 @@ public partial class MainForm : Form, ISubscriber
                 break;
             case NumbersResultType.Verses:
             case NumbersResultType.VerseRanges:
+            case NumbersResultType.VerseSets:
                 {
                     if ((FindByNumbersVersesNumericUpDown.Value == 1) && (FindByNumbersVersesNumberTypeLabel.Text.Length == 0))
                     {
@@ -35194,12 +35212,20 @@ public partial class MainForm : Form, ISubscriber
                     }
                     else if ((FindByNumbersVersesNumericUpDown.Value > 1) || (FindByNumbersVersesNumberTypeLabel.Text.Length > 0))
                     {
-                        m_numbers_result_type = NumbersResultType.VerseRanges;
+                        if (!m_find_by_numbers_sets)
+                        {
+                            m_numbers_result_type = NumbersResultType.VerseRanges;
+                        }
+                        else
+                        {
+                            m_numbers_result_type = NumbersResultType.VerseSets;
+                        }
                     }
                 }
                 break;
             case NumbersResultType.Chapters:
             case NumbersResultType.ChapterRanges:
+            case NumbersResultType.ChapterSets:
                 {
                     if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
                     {
@@ -35207,7 +35233,14 @@ public partial class MainForm : Form, ISubscriber
                     }
                     else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
                     {
-                        m_numbers_result_type = NumbersResultType.ChapterRanges;
+                        if (!m_find_by_numbers_sets)
+                        {
+                            m_numbers_result_type = NumbersResultType.ChapterRanges;
+                        }
+                        else
+                        {
+                            m_numbers_result_type = NumbersResultType.ChapterSets;
+                        }
                     }
                 }
                 break;
@@ -35274,6 +35307,14 @@ public partial class MainForm : Form, ISubscriber
                             ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of word numbers"]);
                         }
                         break;
+                    case NumbersResultType.WordSets:
+                        {
+                            FindByNumbersResultTypeWordsLabel.Text = "Ws";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeWordsLabel, L[l]["find word sets"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of word numbers"]);
+                        }
+                        break;
                     case NumbersResultType.Sentences:
                         {
                             FindByNumbersResultTypeSentencesLabel.Text = "S";
@@ -35308,6 +35349,14 @@ public partial class MainForm : Form, ISubscriber
                             ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of verse numbers"]);
                         }
                         break;
+                    case NumbersResultType.VerseSets:
+                        {
+                            FindByNumbersResultTypeVersesLabel.Text = "Vs";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeVersesLabel, L[l]["find verse sets"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of verse numbers"]);
+                        }
+                        break;
                     case NumbersResultType.Chapters:
                         {
                             FindByNumbersResultTypeChaptersLabel.Text = "C";
@@ -35331,6 +35380,14 @@ public partial class MainForm : Form, ISubscriber
                             ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of chapter numbers"]);
                         }
                         break;
+                    case NumbersResultType.ChapterSets:
+                        {
+                            FindByNumbersResultTypeChaptersLabel.Text = "Cs";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeChaptersLabel, L[l]["find chapter sets"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of chapter numbers"]);
+                        }
+                        break;
                     default:
                         {
                         }
@@ -35339,6 +35396,52 @@ public partial class MainForm : Form, ISubscriber
             }
         }
         FindByNumbersNumberLabel.Refresh();
+
+        //switch (m_numbers_result_type)
+        //{
+        //    case NumbersResultType.Words:
+        //    case NumbersResultType.WordRanges:
+        //    case NumbersResultType.WordSets:
+        //        {
+        //            FindByNumbersWordsComparisonOperatorLabel.Text = "=";
+        //            FindByNumbersWordsComparisonOperatorLabel.Enabled = false;
+        //            FindByNumbersWordsNumberTypeLabel.Text = "";
+        //            FindByNumbersWordsNumberTypeLabel.Enabled = false;
+        //        }
+        //        break;
+        //    case NumbersResultType.Sentences:
+        //        {
+        //            FindByNumbersNumberLabel.Enabled = false;
+        //            FindByNumbersNumberComparisonOperatorLabel.Enabled = false;
+        //            FindByNumbersNumberNumericUpDown.Enabled = false;
+        //            FindByNumbersNumberNumberTypeLabel.Enabled = false;
+        //            FindByNumbersNumberComparisonOperatorLabel.Text = "=";
+        //            FindByNumbersNumberNumericUpDown.Value = 0;
+        //        }
+        //        break;
+        //    case NumbersResultType.Verses:
+        //    case NumbersResultType.VerseRanges:
+        //    case NumbersResultType.VerseSets:
+        //        {
+        //            FindByNumbersVersesComparisonOperatorLabel.Text = "=";
+        //            FindByNumbersVersesComparisonOperatorLabel.Enabled = false;
+        //            FindByNumbersVersesNumberTypeLabel.Text = "";
+        //            FindByNumbersVersesNumberTypeLabel.Enabled = false;
+        //        }
+        //        break;
+        //    case NumbersResultType.Chapters:
+        //    case NumbersResultType.ChapterRanges:
+        //    case NumbersResultType.ChapterSets:
+        //        {
+        //            FindByNumbersChaptersComparisonOperatorLabel.Text = "=";
+        //            FindByNumbersChaptersComparisonOperatorLabel.Enabled = false;
+        //            FindByNumbersChaptersNumberTypeLabel.Text = "";
+        //            FindByNumbersChaptersNumberTypeLabel.Enabled = false;
+        //        }
+        //        break;
+        //    default:
+        //        break;
+        //}
     }
     private bool UpdateComparisonOperator(Control control)
     {
@@ -35896,8 +35999,11 @@ public partial class MainForm : Form, ISubscriber
         // some operations take too long and may frustrate user
         if (
             (m_numbers_result_type != NumbersResultType.WordRanges) &&
+            (m_numbers_result_type != NumbersResultType.WordSets) &&
             (m_numbers_result_type != NumbersResultType.VerseRanges) &&
-            (m_numbers_result_type != NumbersResultType.ChapterRanges)
+            (m_numbers_result_type != NumbersResultType.VerseSets) &&
+            (m_numbers_result_type != NumbersResultType.ChapterRanges) &&
+            (m_numbers_result_type != NumbersResultType.ChapterSets)
            )
         {
             //FindByNumbers();
@@ -36051,8 +36157,11 @@ public partial class MainForm : Form, ISubscriber
         // some operations take too long and may frustrate user
         if (
             (m_numbers_result_type != NumbersResultType.WordRanges) &&
+            (m_numbers_result_type != NumbersResultType.WordSets) &&
             (m_numbers_result_type != NumbersResultType.VerseRanges) &&
-            (m_numbers_result_type != NumbersResultType.ChapterRanges)
+            (m_numbers_result_type != NumbersResultType.VerseSets) &&
+            (m_numbers_result_type != NumbersResultType.ChapterRanges) &&
+            (m_numbers_result_type != NumbersResultType.ChapterSets)
            )
         {
             //FindByNumbers();
@@ -36097,6 +36206,7 @@ public partial class MainForm : Form, ISubscriber
                 break;
             case NumbersResultType.Words:
             case NumbersResultType.WordRanges:
+            case NumbersResultType.WordSets:
                 {
                     FindByNumbersResultTypeWordsLabel.BackColor = Color.SteelBlue;
                     FindByNumbersResultTypeWordsLabel.BorderStyle = BorderStyle.Fixed3D;
@@ -36110,6 +36220,7 @@ public partial class MainForm : Form, ISubscriber
                 break;
             case NumbersResultType.Verses:
             case NumbersResultType.VerseRanges:
+            case NumbersResultType.VerseSets:
                 {
                     FindByNumbersResultTypeVersesLabel.BackColor = Color.SteelBlue;
                     FindByNumbersResultTypeVersesLabel.BorderStyle = BorderStyle.Fixed3D;
@@ -36117,6 +36228,7 @@ public partial class MainForm : Form, ISubscriber
                 break;
             case NumbersResultType.Chapters:
             case NumbersResultType.ChapterRanges:
+            case NumbersResultType.ChapterSets:
                 {
                     FindByNumbersResultTypeChaptersLabel.BackColor = Color.SteelBlue;
                     FindByNumbersResultTypeChaptersLabel.BorderStyle = BorderStyle.Fixed3D;
@@ -36151,8 +36263,11 @@ public partial class MainForm : Form, ISubscriber
             (sender is NumericUpDown) &&
             (m_numbers_result_type != NumbersResultType.Letters) &&
             (m_numbers_result_type != NumbersResultType.WordRanges) &&
+            (m_numbers_result_type != NumbersResultType.WordSets) &&
             (m_numbers_result_type != NumbersResultType.VerseRanges) &&
-            (m_numbers_result_type != NumbersResultType.ChapterRanges)
+            (m_numbers_result_type != NumbersResultType.VerseSets) &&
+            (m_numbers_result_type != NumbersResultType.ChapterRanges) &&
+            (m_numbers_result_type != NumbersResultType.ChapterSets)
            )
         {
             FindByNumbers();
@@ -36669,7 +36784,8 @@ public partial class MainForm : Form, ISubscriber
             text += L[l]["number"] + number_operator_symbol + ((number > 0) ? number.ToString() : ((number_number_type != NumberType.None) ? FindByNumbersNumberNumberTypeLabel.Text : "*")) + " ";
 
             if (
-                (m_numbers_result_type == NumbersResultType.ChapterRanges)
+                (m_numbers_result_type == NumbersResultType.ChapterRanges) ||
+                (m_numbers_result_type == NumbersResultType.ChapterSets)
                )
             {
                 text += L[l]["chapters"] + chapter_count_operator_symbol + ((chapter_count > 0) ? chapter_count.ToString() : ((chapter_count_number_type != NumberType.None) ? FindByNumbersChaptersNumberTypeLabel.Text : "*")) + " ";
@@ -36678,7 +36794,9 @@ public partial class MainForm : Form, ISubscriber
             if (
                 (m_numbers_result_type == NumbersResultType.Chapters) ||
                 (m_numbers_result_type == NumbersResultType.ChapterRanges) ||
-                (m_numbers_result_type == NumbersResultType.VerseRanges)
+                (m_numbers_result_type == NumbersResultType.ChapterSets) ||
+                (m_numbers_result_type == NumbersResultType.VerseRanges) ||
+                (m_numbers_result_type == NumbersResultType.VerseSets)
                )
             {
                 text += L[l]["verses"] + verse_count_operator_symbol + ((verse_count > 0) ? verse_count.ToString() : ((verse_count_number_type != NumberType.None) ? FindByNumbersVersesNumberTypeLabel.Text : "*")) + " ";
@@ -36687,10 +36805,13 @@ public partial class MainForm : Form, ISubscriber
             if (
                 (m_numbers_result_type == NumbersResultType.Chapters) ||
                 (m_numbers_result_type == NumbersResultType.ChapterRanges) ||
+                (m_numbers_result_type == NumbersResultType.ChapterSets) ||
                 (m_numbers_result_type == NumbersResultType.Verses) ||
                 (m_numbers_result_type == NumbersResultType.VerseRanges) ||
+                (m_numbers_result_type == NumbersResultType.VerseSets) ||
                 (m_numbers_result_type == NumbersResultType.Sentences) ||
-                (m_numbers_result_type == NumbersResultType.WordRanges)
+                (m_numbers_result_type == NumbersResultType.WordRanges) ||
+                (m_numbers_result_type == NumbersResultType.WordSets)
                )
             {
                 text += L[l]["words"] + word_count_operator_symbol + ((word_count > 0) ? word_count.ToString() : ((word_count_number_type != NumberType.None) ? FindByNumbersWordsNumberTypeLabel.Text : "*")) + " ";
@@ -36791,6 +36912,20 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                         break;
+                    case NumbersResultType.WordSets:
+                        {
+                            query.NumberScope = m_word_number_scope;
+                            match_count = m_client.FindWordSets(query);
+                            if (m_client.FoundWordSets != null)
+                            {
+                                if (m_client.FoundVerses != null)
+                                {
+                                    m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["word set"] : " " + L[l]["word sets"]) + " " + L[l]["in"] + " " + m_client.FoundVerses.Count + ((m_client.FoundVerses.Count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                    DisplayFoundVerses(true, true);
+                                }
+                            }
+                        }
+                        break;
                     case NumbersResultType.Sentences:
                         {
                             query.NumberScope = NumberScope.Number;
@@ -36824,6 +36959,17 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                         break;
+                    case NumbersResultType.VerseSets:
+                        {
+                            query.NumberScope = m_verse_number_scope;
+                            match_count = m_client.FindVerseSets(query);
+                            if (m_client.FoundVerseSets != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["verse set"] : " " + L[l]["verse sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundVerseSets(true, true);
+                            }
+                        }
+                        break;
                     case NumbersResultType.Chapters:
                         {
                             query.NumberScope = m_chapter_number_scope;
@@ -36843,6 +36989,17 @@ public partial class MainForm : Form, ISubscriber
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["chapter range"] : " " + L[l]["chapter ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
                                 DisplayFoundChapterRanges(true, true);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.ChapterSets:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindChapterSets(query);
+                            if (m_client.FoundChapterSets != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["chapter set"] : " " + L[l]["chapter sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundChapterSets(true, true);
                             }
                         }
                         break;
@@ -37983,6 +38140,58 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
+    private void DisplayFoundVerseSets(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (m_client != null)
+            {
+                if (m_client.FoundVerseSets != null)
+                {
+                    if (m_client.FoundVerseSets.Count > 0)
+                    {
+                        StringBuilder str = new StringBuilder();
+                        foreach (List<Verse> set in m_client.FoundVerseSets)
+                        {
+                            foreach (Verse verse in set)
+                            {
+                                if (verse != null)
+                                {
+                                    str.Append(verse.Address + ", ");
+                                }
+                            }
+                            if (set.Count > 0)
+                            {
+                                str.Remove(str.Length - 2, 2);
+                            }
+                            str.AppendLine();
+                        }
+
+                        string filename = "FoundVerseSets" + ".txt";
+                        if (Directory.Exists(Globals.STATISTICS_FOLDER))
+                        {
+                            string path = Globals.STATISTICS_FOLDER + "/" + filename;
+                            FileHelper.SaveText(path, str.ToString());
+                            FileHelper.DisplayFile(path);
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, Application.ProductName);
+        }
+        finally
+        {
+            if (PictureBox.Visible)
+            {
+                PictureBox.Visible = false;
+            }
+            this.Cursor = Cursors.Default;
+        }
+    }
     private void DisplayFoundChapters(bool add_to_history, bool colorize_chapters_by_matches)
     {
         this.Cursor = Cursors.WaitCursor;
@@ -38234,6 +38443,58 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
+    private void DisplayFoundChapterSets(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (m_client != null)
+            {
+                if (m_client.FoundChapterSets != null)
+                {
+                    if (m_client.FoundChapterSets.Count > 0)
+                    {
+                        StringBuilder str = new StringBuilder();
+                        foreach (List<Chapter> set in m_client.FoundChapterSets)
+                        {
+                            foreach (Chapter chapter in set)
+                            {
+                                if (chapter != null)
+                                {
+                                    str.Append(chapter.SortedNumber + "." + chapter.Verses.Count + ", ");
+                                }
+                            }
+                            if (set.Count > 0)
+                            {
+                                str.Remove(str.Length - 2, 2);
+                            }
+                            str.AppendLine();
+                        }
+
+                        string filename = "FoundChapterSets" + ".txt";
+                        if (Directory.Exists(Globals.STATISTICS_FOLDER))
+                        {
+                            string path = Globals.STATISTICS_FOLDER + "/" + filename;
+                            FileHelper.SaveText(path, str.ToString());
+                            FileHelper.DisplayFile(path);
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, Application.ProductName);
+        }
+        finally
+        {
+            if (PictureBox.Visible)
+            {
+                PictureBox.Visible = false;
+            }
+            this.Cursor = Cursors.Default;
+        }
+    }
 
     private void BuildFindMatches()
     {
@@ -38422,6 +38683,41 @@ public partial class MainForm : Form, ISubscriber
         SearchResultTextBox.Select(0, 0);
         SearchResultTextBox.SelectionColor = Color.Navy;
     }
+    private void ColorizeVerseSets()
+    {
+        if (m_client != null)
+        {
+            if (m_client.FoundVerseSets != null)
+            {
+                if (m_client.FoundVerseSets.Count > 0)
+                {
+                    bool colorize = true; // colorize sets alternatively
+
+                    int line_index = 0;
+                    foreach (List<Verse> set in m_client.FoundVerseSets)
+                    {
+                        colorize = !colorize; // alternate colorization of sets
+
+                        int start = SearchResultTextBox.GetLinePosition(line_index);
+                        int length = 0;
+                        foreach (Verse verse in set)
+                        {
+                            length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
+                            line_index++;
+                        }
+                        SearchResultTextBox.Select(start, length);
+                        SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
+                    }
+                }
+            }
+        }
+
+        //FIX to reset SelectionColor
+        SearchResultTextBox.Select(0, 1);
+        SearchResultTextBox.SelectionColor = Color.Navy;
+        SearchResultTextBox.Select(0, 0);
+        SearchResultTextBox.SelectionColor = Color.Navy;
+    }
     private void ColorizeChapters()
     {
         if (m_client != null)
@@ -38501,6 +38797,47 @@ public partial class MainForm : Form, ISubscriber
         SearchResultTextBox.Select(0, 0);
         SearchResultTextBox.SelectionColor = Color.Navy;
     }
+    private void ColorizeChapterSets()
+    {
+        if (m_client != null)
+        {
+            if (m_client.FoundChapterSets != null)
+            {
+                if (m_client.FoundChapterSets.Count > 0)
+                {
+                    bool colorize = true; // colorize sets alternatively
+
+                    int line_index = 0;
+                    foreach (List<Chapter> set in m_client.FoundChapterSets)
+                    {
+                        if (set != null)
+                        {
+                            colorize = !colorize; // alternate colorization of sets
+
+                            int start = SearchResultTextBox.GetLinePosition(line_index);
+                            int length = 0;
+                            foreach (Chapter chapter in set)
+                            {
+                                foreach (Verse verse in chapter.Verses)
+                                {
+                                    length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
+                                    line_index++;
+                                }
+                            }
+                            SearchResultTextBox.Select(start, length);
+                            SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
+                        }
+                    }
+                }
+            }
+        }
+
+        //FIX to reset SelectionColor
+        SearchResultTextBox.Select(0, 1);
+        SearchResultTextBox.SelectionColor = Color.Navy;
+        SearchResultTextBox.Select(0, 0);
+        SearchResultTextBox.SelectionColor = Color.Navy;
+    }
 
     private void InspectVersesLabel_Click(object sender, EventArgs e)
     {
@@ -38522,6 +38859,7 @@ public partial class MainForm : Form, ISubscriber
                     break;
                 case NumbersResultType.Words:
                 case NumbersResultType.WordRanges:
+                case NumbersResultType.WordSets:
                     {
                         result = DisplayWordInformation(m_client.FoundWords);
                     }
@@ -38533,12 +38871,14 @@ public partial class MainForm : Form, ISubscriber
                     break;
                 case NumbersResultType.Verses:
                 case NumbersResultType.VerseRanges:
+                case NumbersResultType.VerseSets:
                     {
                         result = DisplayVerseInformation(m_client.FoundVerses);
                     }
                     break;
                 case NumbersResultType.Chapters:
                 case NumbersResultType.ChapterRanges:
+                case NumbersResultType.ChapterSets:
                     {
                         List<Chapter> chapters = m_client.Book.GetChapters(m_client.FoundVerses);
                         if (chapters != null)
@@ -39112,28 +39452,35 @@ public partial class MainForm : Form, ISubscriber
                     }
                     else
                     {
-                        // no NumberQuery is saved so we cannot colorize ranges
-                        // so just display all verses and let user re-run search if they need colorization
+                        //// no NumberQuery is saved so we cannot colorize ranges or sets
+                        //// so just display all verses and let user re-run search if they need colorization
                         //switch (search_history_item.NumbersResultType)
                         //{
                         //    case NumbersResultType.Letters:
                         //    case NumbersResultType.Words:
                         //    case NumbersResultType.WordRanges:
+                        //    case NumbersResultType.WordSets:
                         //    case NumbersResultType.Verses:
-                        //        DisplayFoundVerses(false);
+                        //        DisplayFoundVerses(false, true);
                         //        break;
                         //    case NumbersResultType.VerseRanges:
-                        //        DisplayFoundVerseRanges(false);
+                        //        DisplayFoundVerseRanges(false, false);
+                        //        break;
+                        //    case NumbersResultType.VerseSets:
+                        //        DisplayFoundVerseSets(false, false);
                         //        break;
                         //    case NumbersResultType.Chapters:
-                        //        DisplayFoundChapters(false);
+                        //        DisplayFoundChapters(false, false);
                         //        break;
                         //    case NumbersResultType.ChapterRanges:
-                        //        DisplayFoundChapterRanges(false);
+                        //        DisplayFoundChapterRanges(false, false);
+                        //        break;
+                        //    case NumbersResultType.ChapterSets:
+                        //        DisplayFoundChapterSets(false, false);
                         //        break;
                         //}
 
-                        // for now use:
+                        // ????? or just use this for now :)
                         DisplayFoundVerses(false, true);
                     }
                 }
