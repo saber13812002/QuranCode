@@ -9,6 +9,10 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Reflection;
 using System.ComponentModel;
+using System.Security;
+using System.Security.Permissions;
+//using System.Security.Principal;
+using System.CodeDom.Compiler;
 using Model;
 
 public partial class MainForm : Form, ISubscriber
@@ -710,6 +714,12 @@ public partial class MainForm : Form, ISubscriber
     private string m_current_text = null;
     public MainForm()
     {
+        this.m_permission_set = new PermissionSet(PermissionState.None);
+        this.m_permission_set.AddPermission(new SecurityPermission(SecurityPermissionFlag.Execution));
+        this.m_permission_set.AddPermission(new ReflectionPermission(ReflectionPermissionFlag.MemberAccess));
+        this.m_permission_set.AddPermission(new UIPermission(UIPermissionWindow.SafeSubWindows));
+        this.m_permission_set.AddPermission(new IsolatedStorageFilePermission(PermissionState.Unrestricted));
+
         using (Graphics graphics = this.CreateGraphics())
         {
             m_dpi_x = graphics.DpiX;    // 100% = 96.0F,   125% = 120.0F,   150% = 144.0F
@@ -737,6 +747,8 @@ public partial class MainForm : Form, ISubscriber
         FindBySimilarityButton.Enabled = false;
         FindByNumbersButton.Enabled = false;
         FindByFrequencyButton.Enabled = false;
+
+        RunScriptLabel.Visible = false;
 
         m_ini_filename = AppDomain.CurrentDomain.FriendlyName.Replace(".exe", ".ini");
 
@@ -13013,6 +13025,8 @@ public partial class MainForm : Form, ISubscriber
             m_maximized_before_minimized = this.WindowState == FormWindowState.Maximized;
         }
 
+        if (ScriptTextBox.Visible) return;
+
         if (PictureBox.Visible)
         {
             RedrawImage();
@@ -13184,6 +13198,12 @@ public partial class MainForm : Form, ISubscriber
         else if ((LetterFrequencyListView.Focused) && (LetterFrequencyListView.SelectedIndices.Count > 0))
         {
             LetterFrequencyListView.SelectedIndices.Clear();
+        }
+        else if (ScriptTextBox.Visible)
+        {
+            //??? Script
+            //DisplaySelection(sender, false);
+            //PictureBoxPanel.Visible = false;
         }
         else
         {
@@ -15667,6 +15687,8 @@ public partial class MainForm : Form, ISubscriber
         RegisterContextMenu(PictureBox);
         RegisterContextMenu(MainTextBox);
         RegisterContextMenu(SearchResultTextBox);
+        RegisterContextMenu(ScriptTextBox);
+        RegisterContextMenu(ScriptOutputTextBox);
         RegisterContextMenu(TranslationTextBox);
         RegisterContextMenu(TranslationsTextBox);
         RegisterContextMenu(RelatedWordsTextBox);
@@ -15860,8 +15882,7 @@ public partial class MainForm : Form, ISubscriber
             if (method_name == "NewResearchMethod")
             {
                 ResearchMethodParameterTextBox.Text = "";
-                ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Target");
-                ResearchMethodParameterTextBox.Visible = true;
+                ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Script \"param\" parameter [text | number | P | AP | XP | C | AC | XC]");
             }
             else if ((method_name.Contains("ByX")) || (method_name.Contains("WithX")))
             {
@@ -15955,7 +15976,37 @@ public partial class MainForm : Form, ISubscriber
         {
             if (ResearchMethodsComboBox.SelectedItem != null)
             {
-                object result = RunResearchMethod();
+                if (ResearchMethodsComboBox.SelectedItem.ToString() == "NewResearchMethod")
+                {
+                    HeaderLabel.Text = "New Research Method";
+                    HeaderLabel.Refresh();
+
+                    if (ScriptTextBox.Text == "")
+                    {
+                        ScriptTextBox.Text = ScriptRunner.LoadScript("Template.cs");
+                    }
+
+                    ScriptTextBox.BringToFront();
+                    ScriptTextBox.Visible = true;
+                    ScriptOutputGroupBox.Visible = true;
+                    CompileScriptLabel.Visible = true;
+                    RunScriptLabel.Visible = true;
+                    ScriptSamplesLabel.Visible = true;
+                    NewScriptLabel.Visible = true;
+                    CloseScriptLabel.Visible = true;
+                    WordWrapLabel.Visible = false;
+                    DisplayProstrationVersesLabel.Visible = false;
+                    InspectVersesLabel.Visible = false;
+                    GoldenRatioScopeLabel.Visible = false;
+                    GoldenRatioTypeLabel.Visible = false;
+                    GoldenRatioOrderLabel.Visible = false;
+                    DuplicateLettersCheckBox.Visible = false;
+                    GenerateSentencesLabel.Visible = false;
+                }
+                else
+                {
+                    object result = RunResearchMethod();
+                }
             }
         }
         catch (Exception ex)
@@ -15968,6 +16019,156 @@ public partial class MainForm : Form, ISubscriber
         }
     }
     ///////////////////////////////////////////////////////////////////////////////
+    #endregion
+    #region ScriptRunner
+    ///////////////////////////////////////////////////////////////////////////////
+    private Assembly compiled_assembly = null;
+    private PermissionSet m_permission_set = null;
+    private void NewScriptLabel_Click(object sender, EventArgs e)
+    {
+        ScriptTextBox.Text = ScriptRunner.LoadScript("Template.cs");
+        ScriptOutputTextBox.Text = "";
+    }
+    private void ScriptSamplesLabel_Click(object sender, EventArgs e)
+    {
+        ScriptTextBox.Text = ScriptRunner.LoadScript("Samples.cs");
+        ScriptOutputTextBox.Text = "";
+    }
+    private void CompileScriptLabel_Click(object sender, EventArgs e)
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            string source_code = ScriptTextBox.Text;
+            if (source_code.Length > 0)
+            {
+                CompilerResults compiler_results = ScriptRunner.CompileCode(source_code);
+                ScriptOutputTextBox.Text = "";
+                if (compiler_results != null)
+                {
+                    if ((compiler_results.Errors.HasWarnings) || (compiler_results.Errors.HasErrors))
+                    {
+                        if (compiler_results.Errors.HasWarnings)
+                        {
+                            foreach (CompilerError error in compiler_results.Errors)
+                            {
+                                if (error.IsWarning)
+                                {
+                                    ScriptOutputTextBox.Text += ("Warning at line " + error.Line + ": " + error.ErrorText) + "\r\n";
+                                }
+                            }
+                        }
+
+                        ScriptOutputTextBox.Text += "\r\n";
+                        if (compiler_results.Errors.HasErrors)
+                        {
+                            foreach (CompilerError error in compiler_results.Errors)
+                            {
+                                if (!error.IsWarning)
+                                {
+                                    ScriptOutputTextBox.Text += ("Error at line " + error.Line + ": " + error.ErrorText) + "\r\n";
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        compiled_assembly = compiler_results.CompiledAssembly;
+                        if (compiled_assembly != null)
+                        {
+                            ScriptOutputTextBox.Text = "Script was compiled successfully.";
+                            ScriptOutputTextBox.Refresh();
+                        }
+                    }
+
+                    // in all cases, clear for next complation run
+                    compiler_results.Errors.Clear();
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, Application.ProductName);
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
+    }
+    private void RunScriptLabel_Click(object sender, EventArgs e)
+    {
+        CompileScriptLabel_Click(sender, e);
+
+        // to stop race conditions
+        Thread.Sleep(1000);
+
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (compiled_assembly != null)
+            {
+
+                string param = ResearchMethodParameterTextBox.Text;
+                object[] args = new object[] { m_client, param };
+                object result = ScriptRunner.Run(compiled_assembly, args, this.m_permission_set);
+
+                // if result is true, then show results in QuranCode MainTextBox
+                if ((bool)result == true)
+                {
+                    CloseScriptLabel_Click(sender, e);
+
+                    if (m_client.FoundVerses != null)
+                    {
+                        int verse_count = m_client.FoundVerses.Count;
+                        m_find_result_header = verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]);
+                        DisplayFoundVerses(false, false);
+
+                        //SearchResultTextBox.Focus();
+                        //SearchResultTextBox.Refresh();
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, Application.ProductName);
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
+    }
+    private void ScriptTextBox_MouseHover(object sender, EventArgs e)
+    {
+        if (!ScriptTextBox.Focused)
+        {
+            ScriptTextBox.Focus();
+            ScriptTextBox.SelectionLength = 0;
+        }
+    }
+    private void CloseScriptLabel_Click(object sender, EventArgs e)
+    {
+        if (ScriptTextBox.Visible)
+        {
+            ScriptTextBox.SendToBack();
+            ScriptTextBox.Visible = false;
+            ScriptOutputGroupBox.Visible = false;
+            CompileScriptLabel.Visible = false;
+            //RunScriptLabel.Visible = false;
+            ScriptSamplesLabel.Visible = false;
+            NewScriptLabel.Visible = false;
+            CloseScriptLabel.Visible = false;
+            WordWrapLabel.Visible = true;
+            DisplayProstrationVersesLabel.Visible = true;
+            InspectVersesLabel.Visible = true;
+            GoldenRatioScopeLabel.Visible = (m_active_textbox == MainTextBox);
+            GoldenRatioTypeLabel.Visible = (m_active_textbox == MainTextBox);
+            GoldenRatioOrderLabel.Visible = (m_active_textbox == MainTextBox);
+            DuplicateLettersCheckBox.Visible = (m_active_textbox != null) && (m_active_textbox.SelectionLength > 0) && (Globals.EDITION == Edition.Ultimate);
+            GenerateSentencesLabel.Visible = (m_active_textbox != null) && (m_active_textbox.SelectionLength > 0) && (Globals.EDITION == Edition.Ultimate);
+        }
+    }
+    /////////////////////////////////////////////////////////////////////////////
     #endregion
     #region MainTextBox
     ///////////////////////////////////////////////////////////////////////////////
@@ -19307,6 +19508,8 @@ public partial class MainForm : Form, ISubscriber
 
     private void ChapterComboBox_KeyDown(object sender, KeyEventArgs e)
     {
+        if (ScriptTextBox.Visible) return;
+
         bool SeparatorKeys = (
             ((e.KeyCode == Keys.Subtract) && (e.Modifiers != Keys.Shift))           // HYPHEN
             || ((e.KeyCode == Keys.OemMinus) && (e.Modifiers != Keys.Shift))        // HYPHEN
@@ -19915,6 +20118,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void ChaptersListBox_SelectedIndexChanged(object sender, EventArgs e)
     {
+        if (ScriptTextBox.Visible) return;
+
         if (sender == ChaptersListBox)
         {
             PlayerStopLabel_Click(null, null);
@@ -20790,6 +20995,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void NumericUpDown_ValueChanged(object sender, EventArgs e)
     {
+        if (ScriptTextBox.Visible) return;
+
         Control control = sender as NumericUpDown;
         if (control != null)
         {
@@ -37684,22 +37891,19 @@ public partial class MainForm : Form, ISubscriber
 
             if (m_found_verses_displayed)
             {
-                if (m_find_result_header != null)
+                if (!String.IsNullOrEmpty(m_find_result_header))
                 {
-                    if (m_find_result_header != null)
-                    {
-                        text = m_find_result_header;
+                    text = m_find_result_header;
 
-                        string[] parts = m_find_result_header.Split();
-                        if (parts.Length > 0)
+                    string[] parts = text.Split();
+                    if (parts.Length > 0)
+                    {
+                        if (int.TryParse(parts[0], out number))
                         {
-                            if (int.TryParse(parts[0], out number))
-                            {
-                                // do nothing
-                            }
+                            // do nothing
                         }
-                        m_find_result_header = null; // to signal to DisplaySearchResult to not diaply the total found result but the current verse info.
                     }
+                    m_find_result_header = null; // to signal to DisplaySearchResult to not diaply the total found result but the current verse info.
                 }
                 else
                 {
@@ -38888,7 +39092,15 @@ public partial class MainForm : Form, ISubscriber
                     }
                     break;
             }
-            filename = m_client.NumerologySystem.Name + "_" + m_find_result_header.Replace(" ", "_").Replace("*", "") + ".txt";
+
+            if (!String.IsNullOrEmpty(m_find_result_header))
+            {
+                filename = m_client.NumerologySystem.Name + "_" + m_find_result_header.Replace(" ", "_").Replace("*", "") + ".txt";
+            }
+            else
+            {
+                filename = m_client.NumerologySystem.Name + ".txt";
+            }
         }
         else
         {
@@ -40071,6 +40283,8 @@ public partial class MainForm : Form, ISubscriber
     {
         try
         {
+            if (ScriptTextBox.Visible) return;
+
             if (m_client != null)
             {
                 if (m_client.NumerologySystem != null)
@@ -43743,6 +43957,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawLetterValuesLabel_Click(object sender, EventArgs e)
     {
+        if (ScriptTextBox.Visible) return;
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -43825,6 +44041,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawWordValuesLabel_Click(object sender, EventArgs e)
     {
+        if (ScriptTextBox.Visible) return;
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -43905,6 +44123,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawSearchTermsLabel_Click(object sender, EventArgs e)
     {
+        if (ScriptTextBox.Visible) return;
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -44074,6 +44294,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawWordAllahLabel_Click(object sender, EventArgs e)
     {
+        if (ScriptTextBox.Visible) return;
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -44177,6 +44399,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawWordsWithAllahLabel_Click(object sender, EventArgs e)
     {
+        if (ScriptTextBox.Visible) return;
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -44339,6 +44563,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayWordsWithAllahLabel_Click(object sender, EventArgs e)
     {
+        if (ScriptTextBox.Visible) return;
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -44356,6 +44582,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawPrimesLabel_Click(object sender, EventArgs e)
     {
+        if (ScriptTextBox.Visible) return;
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -44409,6 +44637,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawAdditivePrimesLabel_Click(object sender, EventArgs e)
     {
+        if (ScriptTextBox.Visible) return;
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -44458,6 +44688,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawNonAdditivePrimesLabel_Click(object sender, EventArgs e)
     {
+        if (ScriptTextBox.Visible) return;
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -44507,6 +44739,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void GeneratePrimeDrawingsLabel_Click(object sender, EventArgs e)
     {
+        if (ScriptTextBox.Visible) return;
+
         this.Cursor = Cursors.WaitCursor;
         try
         {

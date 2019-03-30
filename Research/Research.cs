@@ -5912,34 +5912,34 @@ public static class Research
         {
             long value = client.CalculateValue(verse);
 
-            bool extra_condition = false;
+            bool param_condition = false;
             if (param == "") // target == any digit sum
             {
-                extra_condition = true;
+                param_condition = true;
             }
             else if (param.ToUpper() == "P") // target == prime digit sum
             {
-                extra_condition = Numbers.IsPrime(Numbers.DigitSum(value));
+                param_condition = Numbers.IsPrime(Numbers.DigitSum(value));
             }
             else if (param.ToUpper() == "AP") // target == additive prime digit sum
             {
-                extra_condition = Numbers.IsAdditivePrime(Numbers.DigitSum(value));
+                param_condition = Numbers.IsAdditivePrime(Numbers.DigitSum(value));
             }
             else if (param.ToUpper() == "XP") // target == non-additive prime digit sum
             {
-                extra_condition = Numbers.IsNonAdditivePrime(Numbers.DigitSum(value));
+                param_condition = Numbers.IsNonAdditivePrime(Numbers.DigitSum(value));
             }
             else if (param.ToUpper() == "C") // target == composite digit sum
             {
-                extra_condition = Numbers.IsComposite(Numbers.DigitSum(value));
+                param_condition = Numbers.IsComposite(Numbers.DigitSum(value));
             }
             else if (param.ToUpper() == "AC") // target == additive composite digit sum
             {
-                extra_condition = Numbers.IsAdditiveComposite(Numbers.DigitSum(value));
+                param_condition = Numbers.IsAdditiveComposite(Numbers.DigitSum(value));
             }
             else if (param.ToUpper() == "XC") // target == non-additive composite digit sum
             {
-                extra_condition = Numbers.IsNonAdditiveComposite(Numbers.DigitSum(value));
+                param_condition = Numbers.IsNonAdditiveComposite(Numbers.DigitSum(value));
             }
             else
             {
@@ -5948,11 +5948,11 @@ public static class Research
                 {
                     if (target == 0) // target == any digit sum
                     {
-                        extra_condition = true;
+                        param_condition = true;
                     }
                     else
                     {
-                        extra_condition = (Numbers.DigitSum(value) == target);
+                        param_condition = (Numbers.DigitSum(value) == target);
                     }
                 }
                 else
@@ -5968,7 +5968,7 @@ public static class Research
                     (Numbers.IsNumberType(value, number_type))
                  )
                  &&
-                 extra_condition
+                 param_condition
                )
             {
                 count++;
@@ -6460,44 +6460,55 @@ public static class Research
     {
         return null;
     }
-    public static string Run_AhlulBayt(Client client, string extra, bool in_search_result)
+    public static string Run_AhlulBayt(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("AhlulBayt.exe");
         return null;
     }
-    public static string Run_Composites(Client client, string extra, bool in_search_result)
+    public static string Run_Composites(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("Composites.exe");
         return null;
     }
-    public static string Run_Numbers(Client client, string extra, bool in_search_result)
+    public static string Run_Numbers(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("Numbers.exe");
         return null;
     }
-    public static string Run_InitialLetters(Client client, string extra, bool in_search_result)
+    public static string Run_InitialLetters(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("InitialLetters.exe");
         return null;
     }
-    public static string Run_PrimeCalculator(Client client, string extra, bool in_search_result)
+    public static string Run_PrimeCalculator(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("PrimeCalculator.exe");
         return null;
     }
-    public static string Run_QuranLab(Client client, string extra, bool in_search_result)
+    public static string Run_QuranLab(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("QuranLab.exe");
         return null;
     }
-    public static string Run_WordGenerator(Client client, string extra, bool in_search_result)
+    public static string Run_WordGenerator(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("WordGenerator.exe");
         return null;
     }
-    public static string Open_HelpFolder(Client client, string extra, bool in_search_result)
+    public static string Open_HelpFolder(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("Help");
+        return null;
+    }
+
+    public static string _____________________________________________(Client client, string param, bool in_search_result)
+    {
+        return null;
+    }
+    public static string NewResearchMethod(Client client, string param, bool in_search_result)
+    {
+        // RunButton will display ScriptTextBox
+        // do anything here
         return null;
     }
 }

@@ -115,7 +115,7 @@ public static class ScriptRunner
             }
 
             // revert security restrictions
-            //???CodeAccessPermission.RevertPermitOnly();
+            CodeAccessPermission.RevertPermitOnly();
         }
         return null;
     }

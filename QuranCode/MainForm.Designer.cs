@@ -142,6 +142,7 @@ partial class MainForm
             this.FindByNumbersVersesLabel = new System.Windows.Forms.Label();
             this.FindByNumbersLettersLabel = new System.Windows.Forms.Label();
             this.FindByNumbersWordsLabel = new System.Windows.Forms.Label();
+            this.FindByNumbersSetsCheckBox = new System.Windows.Forms.CheckBox();
             this.FindByNumbersLabel = new System.Windows.Forms.Label();
             this.SearchScopeResultLabel = new System.Windows.Forms.Label();
             this.SearchScopeSelectionLabel = new System.Windows.Forms.Label();
@@ -275,9 +276,15 @@ partial class MainForm
             this.FontComboBox = new System.Windows.Forms.ComboBox();
             this.WordsListBoxLabel = new System.Windows.Forms.Label();
             this.ClientSplitContainer = new System.Windows.Forms.SplitContainer();
+            this.ScriptTextBox = new System.Windows.Forms.TextBox();
             this.MainTextBox = new RichTextBoxEx();
             this.SearchResultTextBox = new RichTextBoxEx();
             this.HeaderPanel = new System.Windows.Forms.Panel();
+            this.CloseScriptLabel = new System.Windows.Forms.Label();
+            this.RunScriptLabel = new System.Windows.Forms.Label();
+            this.CompileScriptLabel = new System.Windows.Forms.Label();
+            this.NewScriptLabel = new System.Windows.Forms.Label();
+            this.ScriptSamplesLabel = new System.Windows.Forms.Label();
             this.GoldenRatioScopeLabel = new System.Windows.Forms.Label();
             this.GoldenRatioTypeLabel = new System.Windows.Forms.Label();
             this.GoldenRatioOrderLabel = new System.Windows.Forms.Label();
@@ -292,6 +299,8 @@ partial class MainForm
             this.InspectVersesLabel = new System.Windows.Forms.Label();
             this.HeaderLabel = new System.Windows.Forms.Label();
             this.PictureBox = new PictureBoxEx();
+            this.ScriptOutputGroupBox = new System.Windows.Forms.GroupBox();
+            this.ScriptOutputTextBox = new System.Windows.Forms.TextBox();
             this.TabControl = new System.Windows.Forms.TabControl();
             this.TranslationTabPage = new System.Windows.Forms.TabPage();
             this.TranslationSplitContainer = new System.Windows.Forms.SplitContainer();
@@ -673,7 +682,6 @@ partial class MainForm
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FontDialog = new System.Windows.Forms.FontDialog();
-            this.FindByNumbersSetsCheckBox = new System.Windows.Forms.CheckBox();
             this.StatusPanel.SuspendLayout();
             this.ChapterSortPanel.SuspendLayout();
             this.DrawingsPanel.SuspendLayout();
@@ -725,6 +733,7 @@ partial class MainForm
             this.ClientSplitContainer.Panel2.SuspendLayout();
             this.ClientSplitContainer.SuspendLayout();
             this.HeaderPanel.SuspendLayout();
+            this.ScriptOutputGroupBox.SuspendLayout();
             this.TabControl.SuspendLayout();
             this.TranslationTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TranslationSplitContainer)).BeginInit();
@@ -2706,6 +2715,21 @@ partial class MainForm
             this.ToolTip.SetToolTip(this.FindByNumbersWordsLabel, "number of words");
             this.FindByNumbersWordsLabel.Click += new System.EventHandler(this.FindByNumbersLabel_Click);
             this.FindByNumbersWordsLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+            // 
+            // FindByNumbersSetsCheckBox
+            // 
+            this.FindByNumbersSetsCheckBox.BackColor = System.Drawing.Color.Transparent;
+            this.FindByNumbersSetsCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.FindByNumbersSetsCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByNumbersSetsCheckBox.ForeColor = System.Drawing.Color.Navy;
+            this.FindByNumbersSetsCheckBox.Location = new System.Drawing.Point(71, 2);
+            this.FindByNumbersSetsCheckBox.Name = "FindByNumbersSetsCheckBox";
+            this.FindByNumbersSetsCheckBox.Size = new System.Drawing.Size(40, 17);
+            this.FindByNumbersSetsCheckBox.TabIndex = 72;
+            this.FindByNumbersSetsCheckBox.Text = "{}";
+            this.ToolTip.SetToolTip(this.FindByNumbersSetsCheckBox, "find any combinations (not just consecutive ranges)");
+            this.FindByNumbersSetsCheckBox.UseVisualStyleBackColor = false;
+            this.FindByNumbersSetsCheckBox.CheckedChanged += new System.EventHandler(this.FindByNumbersSetsCheckBox_CheckedChanged);
             // 
             // FindByNumbersLabel
             // 
@@ -4941,6 +4965,7 @@ partial class MainForm
             // ClientSplitContainer.Panel1
             // 
             this.ClientSplitContainer.Panel1.BackColor = System.Drawing.Color.Transparent;
+            this.ClientSplitContainer.Panel1.Controls.Add(this.ScriptTextBox);
             this.ClientSplitContainer.Panel1.Controls.Add(this.MainTextBox);
             this.ClientSplitContainer.Panel1.Controls.Add(this.SearchResultTextBox);
             this.ClientSplitContainer.Panel1.Controls.Add(this.HeaderPanel);
@@ -4950,6 +4975,7 @@ partial class MainForm
             // ClientSplitContainer.Panel2
             // 
             this.ClientSplitContainer.Panel2.BackColor = System.Drawing.Color.LightGray;
+            this.ClientSplitContainer.Panel2.Controls.Add(this.ScriptOutputGroupBox);
             this.ClientSplitContainer.Panel2.Controls.Add(this.TabControl);
             this.ClientSplitContainer.Size = new System.Drawing.Size(816, 639);
             this.ClientSplitContainer.SplitterDistance = 449;
@@ -4957,6 +4983,23 @@ partial class MainForm
             this.ClientSplitContainer.TabIndex = 6;
             this.ClientSplitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.ClientSplitContainer_SplitterMoved);
             this.ClientSplitContainer.Resize += new System.EventHandler(this.ClientSplitContainer_Resize);
+            // 
+            // ScriptTextBox
+            // 
+            this.ScriptTextBox.BackColor = System.Drawing.SystemColors.Window;
+            this.ScriptTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ScriptTextBox.Font = new System.Drawing.Font("Lucida Console", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ScriptTextBox.Location = new System.Drawing.Point(0, 16);
+            this.ScriptTextBox.MaxLength = 999999;
+            this.ScriptTextBox.Multiline = true;
+            this.ScriptTextBox.Name = "ScriptTextBox";
+            this.ScriptTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.ScriptTextBox.Size = new System.Drawing.Size(816, 433);
+            this.ScriptTextBox.TabIndex = 110;
+            this.ScriptTextBox.Visible = false;
+            this.ScriptTextBox.WordWrap = false;
+            this.ScriptTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
+            this.ScriptTextBox.MouseHover += new System.EventHandler(this.ScriptTextBox_MouseHover);
             // 
             // MainTextBox
             // 
@@ -5025,6 +5068,11 @@ partial class MainForm
             // HeaderPanel
             // 
             this.HeaderPanel.BackColor = System.Drawing.Color.Transparent;
+            this.HeaderPanel.Controls.Add(this.CloseScriptLabel);
+            this.HeaderPanel.Controls.Add(this.RunScriptLabel);
+            this.HeaderPanel.Controls.Add(this.CompileScriptLabel);
+            this.HeaderPanel.Controls.Add(this.NewScriptLabel);
+            this.HeaderPanel.Controls.Add(this.ScriptSamplesLabel);
             this.HeaderPanel.Controls.Add(this.GoldenRatioScopeLabel);
             this.HeaderPanel.Controls.Add(this.GoldenRatioTypeLabel);
             this.HeaderPanel.Controls.Add(this.GoldenRatioOrderLabel);
@@ -5044,6 +5092,91 @@ partial class MainForm
             this.HeaderPanel.Name = "HeaderPanel";
             this.HeaderPanel.Size = new System.Drawing.Size(816, 16);
             this.HeaderPanel.TabIndex = 88;
+            // 
+            // CloseScriptLabel
+            // 
+            this.CloseScriptLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.CloseScriptLabel.BackColor = System.Drawing.Color.Transparent;
+            this.CloseScriptLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CloseScriptLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CloseScriptLabel.ForeColor = System.Drawing.Color.Transparent;
+            this.CloseScriptLabel.Image = ((System.Drawing.Image)(resources.GetObject("CloseScriptLabel.Image")));
+            this.CloseScriptLabel.Location = new System.Drawing.Point(796, -1);
+            this.CloseScriptLabel.Name = "CloseScriptLabel";
+            this.CloseScriptLabel.Size = new System.Drawing.Size(18, 17);
+            this.CloseScriptLabel.TabIndex = 134;
+            this.CloseScriptLabel.Tag = "";
+            this.CloseScriptLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.CloseScriptLabel, "Close");
+            this.CloseScriptLabel.Visible = false;
+            this.CloseScriptLabel.Click += new System.EventHandler(this.CloseScriptLabel_Click);
+            // 
+            // RunScriptLabel
+            // 
+            this.RunScriptLabel.BackColor = System.Drawing.Color.Transparent;
+            this.RunScriptLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.RunScriptLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.RunScriptLabel.ForeColor = System.Drawing.Color.Transparent;
+            this.RunScriptLabel.Image = ((System.Drawing.Image)(resources.GetObject("RunScriptLabel.Image")));
+            this.RunScriptLabel.Location = new System.Drawing.Point(75, -1);
+            this.RunScriptLabel.Name = "RunScriptLabel";
+            this.RunScriptLabel.Size = new System.Drawing.Size(23, 17);
+            this.RunScriptLabel.TabIndex = 133;
+            this.RunScriptLabel.Tag = "";
+            this.RunScriptLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.RunScriptLabel, "Run");
+            this.RunScriptLabel.Click += new System.EventHandler(this.RunScriptLabel_Click);
+            // 
+            // CompileScriptLabel
+            // 
+            this.CompileScriptLabel.BackColor = System.Drawing.Color.Transparent;
+            this.CompileScriptLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.CompileScriptLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.CompileScriptLabel.ForeColor = System.Drawing.Color.Transparent;
+            this.CompileScriptLabel.Image = ((System.Drawing.Image)(resources.GetObject("CompileScriptLabel.Image")));
+            this.CompileScriptLabel.Location = new System.Drawing.Point(55, -1);
+            this.CompileScriptLabel.Name = "CompileScriptLabel";
+            this.CompileScriptLabel.Size = new System.Drawing.Size(23, 17);
+            this.CompileScriptLabel.TabIndex = 137;
+            this.CompileScriptLabel.Tag = "";
+            this.CompileScriptLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.CompileScriptLabel, "Compile");
+            this.CompileScriptLabel.Visible = false;
+            this.CompileScriptLabel.Click += new System.EventHandler(this.CompileScriptLabel_Click);
+            // 
+            // NewScriptLabel
+            // 
+            this.NewScriptLabel.BackColor = System.Drawing.Color.Transparent;
+            this.NewScriptLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.NewScriptLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NewScriptLabel.ForeColor = System.Drawing.Color.Transparent;
+            this.NewScriptLabel.Image = ((System.Drawing.Image)(resources.GetObject("NewScriptLabel.Image")));
+            this.NewScriptLabel.Location = new System.Drawing.Point(16, -1);
+            this.NewScriptLabel.Name = "NewScriptLabel";
+            this.NewScriptLabel.Size = new System.Drawing.Size(23, 17);
+            this.NewScriptLabel.TabIndex = 136;
+            this.NewScriptLabel.Tag = "";
+            this.NewScriptLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.NewScriptLabel, "New");
+            this.NewScriptLabel.Visible = false;
+            this.NewScriptLabel.Click += new System.EventHandler(this.NewScriptLabel_Click);
+            // 
+            // ScriptSamplesLabel
+            // 
+            this.ScriptSamplesLabel.BackColor = System.Drawing.Color.Transparent;
+            this.ScriptSamplesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ScriptSamplesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ScriptSamplesLabel.ForeColor = System.Drawing.Color.Transparent;
+            this.ScriptSamplesLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptSamplesLabel.Image")));
+            this.ScriptSamplesLabel.Location = new System.Drawing.Point(34, -1);
+            this.ScriptSamplesLabel.Name = "ScriptSamplesLabel";
+            this.ScriptSamplesLabel.Size = new System.Drawing.Size(23, 17);
+            this.ScriptSamplesLabel.TabIndex = 135;
+            this.ScriptSamplesLabel.Tag = "";
+            this.ScriptSamplesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.ScriptSamplesLabel, "Script Samples");
+            this.ScriptSamplesLabel.Visible = false;
+            this.ScriptSamplesLabel.Click += new System.EventHandler(this.ScriptSamplesLabel_Click);
             // 
             // GoldenRatioScopeLabel
             // 
@@ -5269,6 +5402,35 @@ partial class MainForm
             this.PictureBox.MouseHover += new System.EventHandler(this.PictureBox_MouseHover);
             this.PictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.PictureBox_MouseMove);
             // 
+            // ScriptOutputGroupBox
+            // 
+            this.ScriptOutputGroupBox.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.ScriptOutputGroupBox.Controls.Add(this.ScriptOutputTextBox);
+            this.ScriptOutputGroupBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 0);
+            this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
+            this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
+            this.ScriptOutputGroupBox.Size = new System.Drawing.Size(816, 187);
+            this.ScriptOutputGroupBox.TabIndex = 103;
+            this.ScriptOutputGroupBox.TabStop = false;
+            this.ScriptOutputGroupBox.Text = " Output ";
+            this.ScriptOutputGroupBox.Visible = false;
+            // 
+            // ScriptOutputTextBox
+            // 
+            this.ScriptOutputTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ScriptOutputTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ScriptOutputTextBox.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ScriptOutputTextBox.Location = new System.Drawing.Point(10, 18);
+            this.ScriptOutputTextBox.Multiline = true;
+            this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
+            this.ScriptOutputTextBox.ReadOnly = true;
+            this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.ScriptOutputTextBox.Size = new System.Drawing.Size(796, 159);
+            this.ScriptOutputTextBox.TabIndex = 0;
+            this.ScriptOutputTextBox.WordWrap = false;
+            this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
+            // 
             // TabControl
             // 
             this.TabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -5289,7 +5451,7 @@ partial class MainForm
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
             this.TabControl.ShowToolTips = true;
-            this.TabControl.Size = new System.Drawing.Size(816, 195);
+            this.TabControl.Size = new System.Drawing.Size(816, 197);
             this.TabControl.TabIndex = 102;
             this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             this.TabControl.Click += new System.EventHandler(this.TabControl_Click);
@@ -5302,7 +5464,7 @@ partial class MainForm
             this.TranslationTabPage.Location = new System.Drawing.Point(4, 22);
             this.TranslationTabPage.Name = "TranslationTabPage";
             this.TranslationTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.TranslationTabPage.Size = new System.Drawing.Size(808, 169);
+            this.TranslationTabPage.Size = new System.Drawing.Size(808, 171);
             this.TranslationTabPage.TabIndex = 190;
             this.TranslationTabPage.Text = "Translation";
             this.TranslationTabPage.ToolTipText = "Translations for current selection/verse\r\nترجمة الءاية أو الءايات المظللة";
@@ -5496,7 +5658,7 @@ partial class MainForm
             this.GrammarTabPage.Controls.Add(this.GrammarTextBox);
             this.GrammarTabPage.Location = new System.Drawing.Point(4, 22);
             this.GrammarTabPage.Name = "GrammarTabPage";
-            this.GrammarTabPage.Size = new System.Drawing.Size(808, 169);
+            this.GrammarTabPage.Size = new System.Drawing.Size(808, 171);
             this.GrammarTabPage.TabIndex = 193;
             this.GrammarTabPage.Text = " Grammar";
             this.GrammarTabPage.ToolTipText = "Grammar details of the current word in Arabic and English\r\nإعراب الكلمة بالعربي و" +
@@ -5530,7 +5692,7 @@ partial class MainForm
             this.RelatedWordsTabPage.Controls.Add(this.RelatedWordsTextBox);
             this.RelatedWordsTabPage.Location = new System.Drawing.Point(4, 22);
             this.RelatedWordsTabPage.Name = "RelatedWordsTabPage";
-            this.RelatedWordsTabPage.Size = new System.Drawing.Size(808, 169);
+            this.RelatedWordsTabPage.Size = new System.Drawing.Size(808, 171);
             this.RelatedWordsTabPage.TabIndex = 192;
             this.RelatedWordsTabPage.Text = "Related Words";
             this.RelatedWordsTabPage.ToolTipText = "Related words from the same root as the current word\r\nالكلمات المشتقة من نفس جذر " +
@@ -5585,7 +5747,7 @@ partial class MainForm
             this.SymmetryTabPage.Controls.Add(this.SymmetryTextBox);
             this.SymmetryTabPage.Location = new System.Drawing.Point(4, 22);
             this.SymmetryTabPage.Name = "SymmetryTabPage";
-            this.SymmetryTabPage.Size = new System.Drawing.Size(808, 169);
+            this.SymmetryTabPage.Size = new System.Drawing.Size(808, 171);
             this.SymmetryTabPage.TabIndex = 201;
             this.SymmetryTabPage.Text = "Symmetry";
             this.SymmetryTabPage.ToolTipText = "Text symmetries starting from both ends [Dr Waleed S. Mohammed]\r\nتناظر النص من ال" +
@@ -5665,7 +5827,7 @@ partial class MainForm
             this.ValuesSequenceTabPage.Controls.Add(this.ValuesSequenceTextBox);
             this.ValuesSequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.ValuesSequenceTabPage.Name = "ValuesSequenceTabPage";
-            this.ValuesSequenceTabPage.Size = new System.Drawing.Size(808, 169);
+            this.ValuesSequenceTabPage.Size = new System.Drawing.Size(808, 171);
             this.ValuesSequenceTabPage.TabIndex = 198;
             this.ValuesSequenceTabPage.Text = "Values";
             this.ValuesSequenceTabPage.ToolTipText = "Values of letter/word/verse/chapter values in bases 2 to 36\r\nقيم الحروف والكلمات " +
@@ -5786,7 +5948,7 @@ partial class MainForm
             this.CVWLSequenceTabPage.Controls.Add(this.CVWLSequenceTextBox);
             this.CVWLSequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.CVWLSequenceTabPage.Name = "CVWLSequenceTabPage";
-            this.CVWLSequenceTabPage.Size = new System.Drawing.Size(808, 169);
+            this.CVWLSequenceTabPage.Size = new System.Drawing.Size(808, 171);
             this.CVWLSequenceTabPage.TabIndex = 200;
             this.CVWLSequenceTabPage.Text = "CVWL";
             this.CVWLSequenceTabPage.ToolTipText = "Concatenated chapter/verse/word/letter numbers and counts\r\nرصف أرقام وأعداد الحرو" +
@@ -5881,7 +6043,7 @@ partial class MainForm
             this.DNASequenceTabPage.Controls.Add(this.DNASequenceTextBox);
             this.DNASequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.DNASequenceTabPage.Name = "DNASequenceTabPage";
-            this.DNASequenceTabPage.Size = new System.Drawing.Size(808, 169);
+            this.DNASequenceTabPage.Size = new System.Drawing.Size(808, 171);
             this.DNASequenceTabPage.TabIndex = 195;
             this.DNASequenceTabPage.Text = "DNA";
             this.DNASequenceTabPage.ToolTipText = "Convert text into a DNA sequence to compare with the human genome [Belkacem Meghz" +
@@ -5959,7 +6121,7 @@ partial class MainForm
             this.MathsTabPage.Controls.Add(this.MathsPanel);
             this.MathsTabPage.Location = new System.Drawing.Point(4, 22);
             this.MathsTabPage.Name = "MathsTabPage";
-            this.MathsTabPage.Size = new System.Drawing.Size(808, 169);
+            this.MathsTabPage.Size = new System.Drawing.Size(808, 171);
             this.MathsTabPage.TabIndex = 197;
             this.MathsTabPage.Text = "C+V";
             this.MathsTabPage.ToolTipText = "Chapter +/- Verse calculations\r\nحسابات مجاميع وفروق الءايات والسُوَر";
@@ -6073,7 +6235,7 @@ partial class MainForm
             this.MathsPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MathsPanel.Location = new System.Drawing.Point(0, 0);
             this.MathsPanel.Name = "MathsPanel";
-            this.MathsPanel.Size = new System.Drawing.Size(808, 169);
+            this.MathsPanel.Size = new System.Drawing.Size(808, 171);
             this.MathsPanel.TabIndex = 0;
             // 
             // MathsInterestingNumbersEditLabel
@@ -7361,7 +7523,7 @@ partial class MainForm
             this.DistancesTabPage.Controls.Add(this.DistancesPanel);
             this.DistancesTabPage.Location = new System.Drawing.Point(4, 22);
             this.DistancesTabPage.Name = "DistancesTabPage";
-            this.DistancesTabPage.Size = new System.Drawing.Size(808, 169);
+            this.DistancesTabPage.Size = new System.Drawing.Size(808, 171);
             this.DistancesTabPage.TabIndex = 199;
             this.DistancesTabPage.Text = "Distances";
             this.DistancesTabPage.ToolTipText = "Distances to the start and end of Book, current chapter/verse/word\r\nالمسافات الى " +
@@ -7438,7 +7600,7 @@ partial class MainForm
             this.DistancesPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DistancesPanel.Location = new System.Drawing.Point(0, 0);
             this.DistancesPanel.Name = "DistancesPanel";
-            this.DistancesPanel.Size = new System.Drawing.Size(808, 169);
+            this.DistancesPanel.Size = new System.Drawing.Size(808, 171);
             this.DistancesPanel.TabIndex = 1;
             // 
             // DistancesInterestingNumbersEditLabel
@@ -8297,7 +8459,7 @@ partial class MainForm
             this.UserTextTabPage.Controls.Add(this.UserTextTextBox);
             this.UserTextTabPage.Location = new System.Drawing.Point(4, 22);
             this.UserTextTabPage.Name = "UserTextTabPage";
-            this.UserTextTabPage.Size = new System.Drawing.Size(808, 169);
+            this.UserTextTabPage.Size = new System.Drawing.Size(808, 171);
             this.UserTextTabPage.TabIndex = 194;
             this.UserTextTabPage.Text = " User Text ";
             this.UserTextTabPage.ToolTipText = "Calculate the value of any given text or find all words with a given value\r\nحساب " +
@@ -10990,21 +11152,6 @@ partial class MainForm
             // 
             this.FontDialog.Apply += new System.EventHandler(this.FontDialog_Apply);
             // 
-            // FindByNumbersSetsCheckBox
-            // 
-            this.FindByNumbersSetsCheckBox.BackColor = System.Drawing.Color.Transparent;
-            this.FindByNumbersSetsCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.FindByNumbersSetsCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersSetsCheckBox.ForeColor = System.Drawing.Color.Navy;
-            this.FindByNumbersSetsCheckBox.Location = new System.Drawing.Point(71, 2);
-            this.FindByNumbersSetsCheckBox.Name = "FindByNumbersSetsCheckBox";
-            this.FindByNumbersSetsCheckBox.Size = new System.Drawing.Size(40, 17);
-            this.FindByNumbersSetsCheckBox.TabIndex = 72;
-            this.FindByNumbersSetsCheckBox.Text = "{}";
-            this.ToolTip.SetToolTip(this.FindByNumbersSetsCheckBox, "find any combinations (not just consecutive ranges)");
-            this.FindByNumbersSetsCheckBox.UseVisualStyleBackColor = false;
-            this.FindByNumbersSetsCheckBox.CheckedChanged += new System.EventHandler(this.FindByNumbersSetsCheckBox_CheckedChanged);
-            // 
             // MainForm
             // 
             this.AcceptButton = this.FindByTextButton;
@@ -11083,10 +11230,13 @@ partial class MainForm
             this.ChapterGroupBox.PerformLayout();
             this.WordsListBoxContextMenuStrip.ResumeLayout(false);
             this.ClientSplitContainer.Panel1.ResumeLayout(false);
+            this.ClientSplitContainer.Panel1.PerformLayout();
             this.ClientSplitContainer.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ClientSplitContainer)).EndInit();
             this.ClientSplitContainer.ResumeLayout(false);
             this.HeaderPanel.ResumeLayout(false);
+            this.ScriptOutputGroupBox.ResumeLayout(false);
+            this.ScriptOutputGroupBox.PerformLayout();
             this.TabControl.ResumeLayout(false);
             this.TranslationTabPage.ResumeLayout(false);
             this.TranslationSplitContainer.Panel1.ResumeLayout(false);
@@ -11791,4 +11941,12 @@ partial class MainForm
     private System.Windows.Forms.Label Nth4nPlus1PrimeNumberLabel;
     private System.Windows.Forms.Label FindBySimilarityPercentageLabel;
     private System.Windows.Forms.CheckBox FindByNumbersSetsCheckBox;
+    private System.Windows.Forms.Label CloseScriptLabel;
+    private System.Windows.Forms.Label RunScriptLabel;
+    private System.Windows.Forms.Label CompileScriptLabel;
+    private System.Windows.Forms.Label NewScriptLabel;
+    private System.Windows.Forms.Label ScriptSamplesLabel;
+    private System.Windows.Forms.TextBox ScriptTextBox;
+    private System.Windows.Forms.GroupBox ScriptOutputGroupBox;
+    private System.Windows.Forms.TextBox ScriptOutputTextBox;
 }

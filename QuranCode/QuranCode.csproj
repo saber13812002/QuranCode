@@ -120,6 +120,10 @@
       <Project>{c5b10851-ddcc-4336-a1d2-56b31feabafc}</Project>
       <Name>Research</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ScriptRunner\ScriptRunner.csproj">
+      <Project>{61438304-4125-4174-af1c-49e81800daa6}</Project>
+      <Name>ScriptRunner</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Utilities\Utilities.csproj">
       <Project>{B0138CBF-A11A-4F54-AD14-2D9217D90F27}</Project>
       <Name>Utilities</Name>
