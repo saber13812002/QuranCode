@@ -360,7 +360,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             if (text == L[previous_l][key])
                             {
-                                text = L[l][key].ToTitleCase();
+                                text = L[l][key];
                                 break;
                             }
                         }
@@ -40965,6 +40965,28 @@ public partial class MainForm : Form, ISubscriber
         SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
         SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
         SumOfDigitSumsTextBox.Refresh();
+
+        UpdateNumberKind(value);
+        UpdateSumOfDivisors(value);
+
+        PCIndexChainL2RTextBox.Text = DecimalPCIndexChainL2R(value).ToString();
+        PCIndexChainL2RTextBox.ForeColor = Numbers.GetNumberTypeColor(DecimalPCIndexChainL2R(value));
+        PCIndexChainL2RTextBox.Refresh();
+        PCIndexChainR2LTextBox.Text = DecimalPCIndexChainR2L(value).ToString();
+        PCIndexChainR2LTextBox.ForeColor = Numbers.GetNumberTypeColor(DecimalPCIndexChainR2L(value));
+        PCIndexChainR2LTextBox.Refresh();
+        CPIndexChainL2RTextBox.Text = DecimalCPIndexChainL2R(value).ToString();
+        CPIndexChainL2RTextBox.ForeColor = Numbers.GetNumberTypeColor(DecimalCPIndexChainL2R(value));
+        CPIndexChainL2RTextBox.Refresh();
+        CPIndexChainR2LTextBox.Text = DecimalCPIndexChainR2L(value).ToString();
+        CPIndexChainR2LTextBox.ForeColor = Numbers.GetNumberTypeColor(DecimalCPIndexChainR2L(value));
+        CPIndexChainR2LTextBox.Refresh();
+        IndexChainLengthTextBox.Text = IndexChainLength(value).ToString();
+        //IndexChainLengthTextBox.ForeColor = Numbers.GetNumberTypeColor(IndexChainLength(value));
+        IndexChainLengthTextBox.Refresh();
+
+        // update the ValueNavigator fields
+        UpdateValueNavigator(value);
     }
     private void ValueTextBox_KeyDown(object sender, KeyEventArgs e)
     {
@@ -41048,7 +41070,7 @@ public partial class MainForm : Form, ISubscriber
                     int k = 0; int.TryParse(parts[1], out k);
                     BigInteger combinations = Numbers.NChooseK(n, k);
                     ValueTextBox.Text = combinations.ToString();
-                    FactorizeValue((long)combinations, "nCk", true);
+                    FactorizeValue((long)combinations, L[l]["nCk"], true);
                 }
             }
             else
@@ -41116,8 +41138,6 @@ public partial class MainForm : Form, ISubscriber
     {
         try
         {
-            DigitSumTextBox.Text = "";
-            DigitalRootTextBox.Text = "";
             PrimeFactorsTextBox.Text = "";
             NthNumberTextBox.Text = "";
             NthAdditiveNumberTextBox.Text = "";
@@ -41125,30 +41145,12 @@ public partial class MainForm : Form, ISubscriber
             SquareSumTextBox.Text = "";
             SquareDiffTextBox.Text = "";
             Nth4n1NumberTextBox.Text = "";
-            PCIndexChainL2RTextBox.Text = "";
-            PCIndexChainR2LTextBox.Text = "";
-            CPIndexChainL2RTextBox.Text = "";
-            CPIndexChainR2LTextBox.Text = "";
-            IndexChainLengthTextBox.Text = "";
-            DigitSumTextBox.Refresh();
-            DigitalRootTextBox.Refresh();
             PrimeFactorsTextBox.Refresh();
             NthNumberTextBox.Refresh();
             NthAdditiveNumberTextBox.Refresh();
             NthNonAdditiveNumberTextBox.Refresh();
             SquareSumTextBox.Refresh();
             SquareDiffTextBox.Refresh();
-            NumberKindIndexTextBox.Text = "";
-            NumberKindIndexTextBox.Refresh();
-            SumOfDigitSumsTextBox.Text = "";
-            SumOfDigitSumsTextBox.Refresh();
-            SumOfProperDivisorsTextBox.Text = "";
-            SumOfProperDivisorsTextBox.Refresh();
-            PCIndexChainL2RTextBox.Refresh();
-            PCIndexChainR2LTextBox.Refresh();
-            CPIndexChainL2RTextBox.Refresh();
-            CPIndexChainR2LTextBox.Refresh();
-            IndexChainLengthTextBox.Refresh();
 
             // if there is a math expression, add to it, don't overwrite it
             if (!overwrite &&
@@ -41287,28 +41289,6 @@ public partial class MainForm : Form, ISubscriber
                 }
                 UpdateToolTipNth4n1NumberTextBox();
                 Nth4n1NumberTextBox.Refresh();
-
-                UpdateNumberKind(value);
-                UpdateSumOfDivisors(value);
-
-                PCIndexChainL2RTextBox.Text = DecimalPCIndexChainL2R(value).ToString();
-                PCIndexChainL2RTextBox.ForeColor = Numbers.GetNumberTypeColor(DecimalPCIndexChainL2R(value));
-                PCIndexChainL2RTextBox.Refresh();
-                PCIndexChainR2LTextBox.Text = DecimalPCIndexChainR2L(value).ToString();
-                PCIndexChainR2LTextBox.ForeColor = Numbers.GetNumberTypeColor(DecimalPCIndexChainR2L(value));
-                PCIndexChainR2LTextBox.Refresh();
-                CPIndexChainL2RTextBox.Text = DecimalCPIndexChainL2R(value).ToString();
-                CPIndexChainL2RTextBox.ForeColor = Numbers.GetNumberTypeColor(DecimalCPIndexChainL2R(value));
-                CPIndexChainL2RTextBox.Refresh();
-                CPIndexChainR2LTextBox.Text = DecimalCPIndexChainR2L(value).ToString();
-                CPIndexChainR2LTextBox.ForeColor = Numbers.GetNumberTypeColor(DecimalCPIndexChainR2L(value));
-                CPIndexChainR2LTextBox.Refresh();
-                IndexChainLengthTextBox.Text = IndexChainLength(value).ToString();
-                //IndexChainLengthTextBox.ForeColor = Numbers.GetNumberTypeColor(IndexChainLength(value));
-                IndexChainLengthTextBox.Refresh();
-
-                // update the ValueNavigator fields
-                UpdateValueNavigator(value);
             }
 
             try
