@@ -304,19 +304,27 @@ public partial class MainForm : Form
         }
         DigitsLabel.Text = (digits == 0) ? "digits" : digits.ToString();
 
-        int digit_sum = Numbers.DigitSum(ValueTextBox.Text);
-        DigitSumTextBox.Text = digit_sum.ToString();
-        DigitSumTextBox.ForeColor = Numbers.GetNumberTypeColor(digit_sum);
-        DigitSumTextBox.Refresh();
-
-        int digital_root = Numbers.DigitalRoot(ValueTextBox.Text);
-        DigitalRootTextBox.Text = digital_root.ToString();
-        DigitalRootTextBox.ForeColor = Numbers.GetNumberTypeColor(digital_root);
-        DigitalRootTextBox.Refresh();
-
         ClearFactors();
         ClearProgress();
         ClearNumberAnalyses();
+
+        long value = 0L;
+        long.TryParse(ValueTextBox.Text, out value);
+
+        int digit_sum = Numbers.DigitSum(value);
+        DigitSumTextBox.Text = (digit_sum == 0) ? "" : digit_sum.ToString();
+        DigitSumTextBox.ForeColor = Numbers.GetNumberTypeColor(digit_sum);
+        DigitSumTextBox.Refresh();
+
+        int digital_root = Numbers.DigitalRoot(value);
+        DigitalRootTextBox.Text = (digital_root == 0) ? "" : digital_root.ToString();
+        DigitalRootTextBox.ForeColor = Numbers.GetNumberTypeColor(digital_root);
+        DigitalRootTextBox.Refresh();
+
+        long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
+        SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
+        SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
+        SumOfDigitSumsTextBox.Refresh();
 
         this.ToolTip.SetToolTip(this.ValueTextBox, null);
     }
@@ -810,7 +818,7 @@ public partial class MainForm : Form
                         number = Numbers.Perfects[index - 1];
                         FactorizeValue(number);
                     }
-                } 
+                }
                 break;
             case NumberKind.Abundant:
                 {
@@ -819,7 +827,7 @@ public partial class MainForm : Form
                         number = Numbers.Abundants[index - 1];
                         FactorizeValue(number);
                     }
-                } 
+                }
                 break;
             case NumberKind.Deficient:
                 {
@@ -828,7 +836,7 @@ public partial class MainForm : Form
                         number = Numbers.Deficients[index - 1];
                         FactorizeValue(number);
                     }
-                } 
+                }
                 break;
         }
     }
@@ -918,13 +926,6 @@ public partial class MainForm : Form
     }
     private void UpdateSumOfDivisors(long number)
     {
-        long sum_of_divisors = Numbers.SumOfDivisors(number);
-        string divisors = Numbers.GetDivisorsString(number);
-        SumOfDivisorsTextBox.Text = sum_of_divisors.ToString();
-        SumOfDivisorsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_divisors);
-        SumOfDivisorsTextBox.Refresh();
-        ToolTip.SetToolTip(SumOfDivisorsTextBox, "Sum of divisors\r\n" + divisors + " = " + sum_of_divisors);
-
         long sum_of_proper_divisors = Numbers.SumOfProperDivisors(number);
         string proper_divisors = Numbers.GetProperDivisorsString(number);
         SumOfProperDivisorsTextBox.Text = sum_of_proper_divisors.ToString();
@@ -980,9 +981,12 @@ public partial class MainForm : Form
             }
 
             str.AppendLine();
-            string divisors = Numbers.GetDivisorsString(number);
-            long sum_of_divisors = Numbers.SumOfDivisors(number);
-            str.AppendLine("Sum Of Divisors\t\t=\t" + sum_of_divisors + " = " + divisors);
+            long digit_sum = Numbers.DigitSum(number);
+            str.AppendLine("Digit Sum        " + "\t\t=\t" + digit_sum);
+            long digital_roor = Numbers.DigitalRoot(number);
+            str.AppendLine("Digital Root     " + "\t\t=\t" + digital_roor);
+            long sum_of_digit_sums = Numbers.SumOfDigitSums(number);
+            str.AppendLine("Sum Of Digit Sums" + "\t\t=\t" + sum_of_digit_sums);
 
             string proper_divisors = Numbers.GetProperDivisorsString(number);
             long sum_of_proper_divisors = Numbers.SumOfProperDivisors(number);
@@ -2138,8 +2142,8 @@ public partial class MainForm : Form
         NumberKindIndexTextBox.Refresh();
         SumOfProperDivisorsTextBox.Text = string.Empty;
         SumOfProperDivisorsTextBox.Refresh();
-        SumOfDivisorsTextBox.Text = string.Empty;
-        SumOfDivisorsTextBox.Refresh();
+        SumOfDigitSumsTextBox.Text = string.Empty;
+        SumOfDigitSumsTextBox.Refresh();
 
         PCIndexChainL2RTextBox.Text = string.Empty;
         PCIndexChainL2RTextBox.Refresh();

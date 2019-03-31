@@ -1351,7 +1351,7 @@ public partial class MainForm : Form, ISubscriber
         this.Nth4nMinus1PrimeNumberLabel = new System.Windows.Forms.Label();
         this.Nth4nPlus1PrimeNumberLabel = new System.Windows.Forms.Label();
         this.Nth4n1NumberTextBox = new System.Windows.Forms.TextBox();
-        this.SumOfDivisorsTextBox = new System.Windows.Forms.TextBox();
+        this.SumOfDigitSumsTextBox = new System.Windows.Forms.TextBox();
         this.SquareDiffTextBox = new System.Windows.Forms.TextBox();
         this.SquareSumTextBox = new System.Windows.Forms.TextBox();
         this.ValueInspectLabel = new System.Windows.Forms.Label();
@@ -10713,7 +10713,7 @@ public partial class MainForm : Form, ISubscriber
         this.ValuePanel.Controls.Add(this.Nth4n1NumberTextBox);
         this.ValuePanel.Controls.Add(this.PrimalogyARLabel);
         this.ValuePanel.Controls.Add(this.PrimalogyLabel);
-        this.ValuePanel.Controls.Add(this.SumOfDivisorsTextBox);
+        this.ValuePanel.Controls.Add(this.SumOfDigitSumsTextBox);
         this.ValuePanel.Controls.Add(this.SquareDiffTextBox);
         this.ValuePanel.Controls.Add(this.SquareSumTextBox);
         this.ValuePanel.Controls.Add(this.ValueInspectLabel);
@@ -10841,23 +10841,23 @@ public partial class MainForm : Form, ISubscriber
         this.Nth4n1NumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IndexTextBox_KeyDown);
         this.Nth4n1NumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
-        // SumOfDivisorsTextBox
+        // SumOfDigitSumsTextBox
         // 
-        this.SumOfDivisorsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
-        this.SumOfDivisorsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.SumOfDivisorsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-        this.SumOfDivisorsTextBox.Location = new System.Drawing.Point(129, 138);
-        this.SumOfDivisorsTextBox.Margin = new System.Windows.Forms.Padding(4);
-        this.SumOfDivisorsTextBox.Name = "SumOfDivisorsTextBox";
-        this.SumOfDivisorsTextBox.ReadOnly = true;
-        this.SumOfDivisorsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-        this.SumOfDivisorsTextBox.Size = new System.Drawing.Size(60, 23);
-        this.SumOfDivisorsTextBox.TabIndex = 31;
-        this.SumOfDivisorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.ToolTip.SetToolTip(this.SumOfDivisorsTextBox, "Sum of divisors");
-        this.SumOfDivisorsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
-        this.SumOfDivisorsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
-        this.SumOfDivisorsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
+        this.SumOfDigitSumsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+        this.SumOfDigitSumsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.SumOfDigitSumsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+        this.SumOfDigitSumsTextBox.Location = new System.Drawing.Point(129, 138);
+        this.SumOfDigitSumsTextBox.Margin = new System.Windows.Forms.Padding(4);
+        this.SumOfDigitSumsTextBox.Name = "SumOfDigitSumsTextBox";
+        this.SumOfDigitSumsTextBox.ReadOnly = true;
+        this.SumOfDigitSumsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+        this.SumOfDigitSumsTextBox.Size = new System.Drawing.Size(60, 23);
+        this.SumOfDigitSumsTextBox.TabIndex = 31;
+        this.SumOfDigitSumsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+        this.ToolTip.SetToolTip(this.SumOfDigitSumsTextBox, "Sum of digit sums");
+        this.SumOfDigitSumsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfDigitSumsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
+        this.SumOfDigitSumsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
         // SquareDiffTextBox
         // 
@@ -40933,15 +40933,38 @@ public partial class MainForm : Form, ISubscriber
         //int digits = Numbers.DigitCount(ValueTextBox.Text, m_radix);
         //ValueInspectLabel.Text = digits.ToString();
 
-        int digit_sum = Numbers.DigitSum(ValueTextBox.Text);
-        DigitSumTextBox.Text = digit_sum.ToString();
+        PrimeFactorsTextBox.Text = "";
+        SquareSumTextBox.Text = "";
+        SquareDiffTextBox.Text = "";
+        Nth4n1NumberTextBox.Text = "";
+        NthNumberTextBox.Text = "";
+        NthAdditiveNumberTextBox.Text = "";
+        NthNonAdditiveNumberTextBox.Text = "";
+        NumberKindIndexTextBox.Text = "";
+        SumOfProperDivisorsTextBox.Text = "";
+        PCIndexChainL2RTextBox.Text = "";
+        PCIndexChainR2LTextBox.Text = "";
+        CPIndexChainL2RTextBox.Text = "";
+        CPIndexChainR2LTextBox.Text = "";
+        IndexChainLengthTextBox.Text = "";
+
+        long value = 0L;
+        long.TryParse(ValueTextBox.Text, out value);
+
+        int digit_sum = Numbers.DigitSum(value);
+        DigitSumTextBox.Text = (digit_sum == 0) ? "" : digit_sum.ToString();
         DigitSumTextBox.ForeColor = Numbers.GetNumberTypeColor(digit_sum);
         DigitSumTextBox.Refresh();
 
-        int digital_root = Numbers.DigitalRoot(ValueTextBox.Text);
-        DigitalRootTextBox.Text = digital_root.ToString();
+        int digital_root = Numbers.DigitalRoot(value);
+        DigitalRootTextBox.Text = (digital_root == 0) ? "" : digital_root.ToString();
         DigitalRootTextBox.ForeColor = Numbers.GetNumberTypeColor(digital_root);
         DigitalRootTextBox.Refresh();
+
+        long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
+        SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
+        SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
+        SumOfDigitSumsTextBox.Refresh();
     }
     private void ValueTextBox_KeyDown(object sender, KeyEventArgs e)
     {
@@ -41117,8 +41140,8 @@ public partial class MainForm : Form, ISubscriber
             SquareDiffTextBox.Refresh();
             NumberKindIndexTextBox.Text = "";
             NumberKindIndexTextBox.Refresh();
-            SumOfDivisorsTextBox.Text = "";
-            SumOfDivisorsTextBox.Refresh();
+            SumOfDigitSumsTextBox.Text = "";
+            SumOfDigitSumsTextBox.Refresh();
             SumOfProperDivisorsTextBox.Text = "";
             SumOfProperDivisorsTextBox.Refresh();
             PCIndexChainL2RTextBox.Refresh();
@@ -41745,13 +41768,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void UpdateSumOfDivisors(long value)
     {
-        long sum_of_divisors = Numbers.SumOfDivisors(value);
-        string divisors = Numbers.GetDivisorsString(value);
-        SumOfDivisorsTextBox.Text = sum_of_divisors.ToString();
-        SumOfDivisorsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_divisors);
-        SumOfDivisorsTextBox.Refresh();
-        ToolTip.SetToolTip(SumOfDivisorsTextBox, L[l]["Sum of divisors"] + "\r\n" + divisors + " = " + sum_of_divisors);
-
         long sum_of_proper_divisors = Numbers.SumOfProperDivisors(value);
         string proper_divisors = Numbers.GetProperDivisorsString(value);
         SumOfProperDivisorsTextBox.Text = sum_of_proper_divisors.ToString();
@@ -45493,9 +45509,12 @@ public partial class MainForm : Form, ISubscriber
                         }
 
                         str.AppendLine();
-                        string divisors = Numbers.GetDivisorsString(value);
-                        long sum_of_divisors = Numbers.SumOfDivisors(value);
-                        str.AppendLine("Sum Of Divisors" + "\t\t=\t" + sum_of_divisors + " = " + divisors);
+                        long digit_sum = Numbers.DigitSum(value);
+                        str.AppendLine("Digit Sum        " + "\t\t=\t" + digit_sum);
+                        long digital_roor = Numbers.DigitalRoot(value);
+                        str.AppendLine("Digital Root     " + "\t\t=\t" + digital_roor);
+                        long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
+                        str.AppendLine("Sum Of Digit Sums" + "\t\t=\t" + sum_of_digit_sums);
 
                         string proper_divisors = Numbers.GetProperDivisorsString(value);
                         long sum_of_proper_divisors = Numbers.SumOfProperDivisors(value);

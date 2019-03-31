@@ -1264,6 +1264,24 @@ public static class Numbers
         }
         return result;
     }
+    public static long SumOfDigitSums(string value)
+    {
+        long number;
+        if (long.TryParse(value, out number))
+        {
+            return SumOfDigitSums(number);
+        }
+        return 0L;
+    }
+    public static long SumOfDigitSums(long number)
+    {
+        long result = 0L;
+        for (long i = 1; i <= number; i++)
+        {
+            result += DigitSum(i);
+        }
+        return result;
+    }
 
     public static bool IsDigitsOnly(string text)
     {

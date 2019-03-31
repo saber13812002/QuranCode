@@ -47,7 +47,7 @@
             this.VersionLabel = new System.Windows.Forms.Label();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.MultithreadingCheckBox = new System.Windows.Forms.CheckBox();
-            this.SumOfDivisorsTextBox = new System.Windows.Forms.TextBox();
+            this.SumOfDigitSumsTextBox = new System.Windows.Forms.TextBox();
             this.PerfectNumbersLabel = new System.Windows.Forms.Label();
             this.AbundantNumbersLabel = new System.Windows.Forms.Label();
             this.DeficientNumbersLabel = new System.Windows.Forms.Label();
@@ -184,7 +184,7 @@
             this.ElapsedTimeLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ElapsedTimeLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.ElapsedTimeLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.ElapsedTimeLabel.Location = new System.Drawing.Point(57, 342);
+            this.ElapsedTimeLabel.Location = new System.Drawing.Point(57, 363);
             this.ElapsedTimeLabel.Name = "ElapsedTimeLabel";
             this.ElapsedTimeLabel.Size = new System.Drawing.Size(180, 16);
             this.ElapsedTimeLabel.TabIndex = 26;
@@ -199,7 +199,7 @@
             this.ProgressLabel.BackColor = System.Drawing.SystemColors.Info;
             this.ProgressLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.ProgressLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.ProgressLabel.Location = new System.Drawing.Point(0, 342);
+            this.ProgressLabel.Location = new System.Drawing.Point(0, 363);
             this.ProgressLabel.Name = "ProgressLabel";
             this.ProgressLabel.Size = new System.Drawing.Size(56, 16);
             this.ProgressLabel.TabIndex = 25;
@@ -214,7 +214,7 @@
             this.ElapsedTimeValueLabel.BackColor = System.Drawing.SystemColors.ControlText;
             this.ElapsedTimeValueLabel.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.ElapsedTimeValueLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.ElapsedTimeValueLabel.Location = new System.Drawing.Point(57, 357);
+            this.ElapsedTimeValueLabel.Location = new System.Drawing.Point(57, 378);
             this.ElapsedTimeValueLabel.Name = "ElapsedTimeValueLabel";
             this.ElapsedTimeValueLabel.Size = new System.Drawing.Size(180, 17);
             this.ElapsedTimeValueLabel.TabIndex = 28;
@@ -228,7 +228,7 @@
             this.MilliSecondsLabel.BackColor = System.Drawing.SystemColors.ControlText;
             this.MilliSecondsLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.MilliSecondsLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.MilliSecondsLabel.Location = new System.Drawing.Point(180, 359);
+            this.MilliSecondsLabel.Location = new System.Drawing.Point(180, 380);
             this.MilliSecondsLabel.Name = "MilliSecondsLabel";
             this.MilliSecondsLabel.Size = new System.Drawing.Size(37, 12);
             this.MilliSecondsLabel.TabIndex = 29;
@@ -241,7 +241,7 @@
             this.ProgressValueLabel.BackColor = System.Drawing.SystemColors.ControlText;
             this.ProgressValueLabel.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.ProgressValueLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.ProgressValueLabel.Location = new System.Drawing.Point(0, 357);
+            this.ProgressValueLabel.Location = new System.Drawing.Point(0, 378);
             this.ProgressValueLabel.Name = "ProgressValueLabel";
             this.ProgressValueLabel.Size = new System.Drawing.Size(56, 17);
             this.ProgressValueLabel.TabIndex = 27;
@@ -260,7 +260,7 @@
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ReadOnly = true;
             this.OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.OutputTextBox.Size = new System.Drawing.Size(226, 209);
+            this.OutputTextBox.Size = new System.Drawing.Size(226, 230);
             this.OutputTextBox.TabIndex = 29;
             this.OutputTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.OutputTextBox, "Factorization result");
@@ -271,7 +271,7 @@
             // 
             this.ProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ProgressBar.Location = new System.Drawing.Point(0, 378);
+            this.ProgressBar.Location = new System.Drawing.Point(0, 399);
             this.ProgressBar.Name = "ProgressBar";
             this.ProgressBar.Size = new System.Drawing.Size(240, 6);
             this.ProgressBar.TabIndex = 0;
@@ -284,7 +284,7 @@
             this.WebsiteLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.WebsiteLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.WebsiteLabel.ForeColor = System.Drawing.Color.Purple;
-            this.WebsiteLabel.Location = new System.Drawing.Point(0, 387);
+            this.WebsiteLabel.Location = new System.Drawing.Point(0, 408);
             this.WebsiteLabel.Name = "WebsiteLabel";
             this.WebsiteLabel.Size = new System.Drawing.Size(240, 16);
             this.WebsiteLabel.TabIndex = 31;
@@ -379,7 +379,7 @@
             this.VersionLabel.BackColor = System.Drawing.SystemColors.Control;
             this.VersionLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.VersionLabel.ForeColor = System.Drawing.Color.Purple;
-            this.VersionLabel.Location = new System.Drawing.Point(177, 386);
+            this.VersionLabel.Location = new System.Drawing.Point(177, 407);
             this.VersionLabel.Name = "VersionLabel";
             this.VersionLabel.Size = new System.Drawing.Size(63, 17);
             this.VersionLabel.TabIndex = 32;
@@ -403,7 +403,7 @@
             this.MultithreadingCheckBox.Checked = true;
             this.MultithreadingCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.MultithreadingCheckBox.ForeColor = System.Drawing.Color.Purple;
-            this.MultithreadingCheckBox.Location = new System.Drawing.Point(4, 388);
+            this.MultithreadingCheckBox.Location = new System.Drawing.Point(4, 409);
             this.MultithreadingCheckBox.Name = "MultithreadingCheckBox";
             this.MultithreadingCheckBox.Size = new System.Drawing.Size(15, 14);
             this.MultithreadingCheckBox.TabIndex = 30;
@@ -411,22 +411,22 @@
             this.MultithreadingCheckBox.UseVisualStyleBackColor = true;
             this.MultithreadingCheckBox.CheckedChanged += new System.EventHandler(this.MultithreadingCheckBox_CheckedChanged);
             // 
-            // SumOfDivisorsTextBox
+            // SumOfDigitSumsTextBox
             // 
-            this.SumOfDivisorsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SumOfDivisorsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.SumOfDivisorsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SumOfDivisorsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.SumOfDivisorsTextBox.Location = new System.Drawing.Point(108, 102);
-            this.SumOfDivisorsTextBox.Name = "SumOfDivisorsTextBox";
-            this.SumOfDivisorsTextBox.ReadOnly = true;
-            this.SumOfDivisorsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.SumOfDivisorsTextBox.Size = new System.Drawing.Size(52, 20);
-            this.SumOfDivisorsTextBox.TabIndex = 20;
-            this.SumOfDivisorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ToolTip.SetToolTip(this.SumOfDivisorsTextBox, "Sum of divisors");
-            this.SumOfDivisorsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
-            this.SumOfDivisorsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
+            this.SumOfDigitSumsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.SumOfDigitSumsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.SumOfDigitSumsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SumOfDigitSumsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.SumOfDigitSumsTextBox.Location = new System.Drawing.Point(108, 102);
+            this.SumOfDigitSumsTextBox.Name = "SumOfDigitSumsTextBox";
+            this.SumOfDigitSumsTextBox.ReadOnly = true;
+            this.SumOfDigitSumsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.SumOfDigitSumsTextBox.Size = new System.Drawing.Size(52, 20);
+            this.SumOfDigitSumsTextBox.TabIndex = 20;
+            this.SumOfDigitSumsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip.SetToolTip(this.SumOfDigitSumsTextBox, "Sum of digit sums");
+            this.SumOfDigitSumsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.SumOfDigitSumsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // PerfectNumbersLabel
             // 
@@ -744,7 +744,7 @@
             this.Nth4n1NumberTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
             this.Nth4n1NumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Nth4n1NumberTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.Nth4n1NumberTextBox.Location = new System.Drawing.Point(172, 42);
+            this.Nth4n1NumberTextBox.Location = new System.Drawing.Point(178, 42);
             this.Nth4n1NumberTextBox.Name = "Nth4n1NumberTextBox";
             this.Nth4n1NumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.Nth4n1NumberTextBox.Size = new System.Drawing.Size(60, 20);
@@ -762,7 +762,7 @@
             this.Nth4nMinus1CompositeNumberLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Nth4nMinus1CompositeNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Nth4nMinus1CompositeNumberLabel.ForeColor = System.Drawing.SystemColors.Window;
-            this.Nth4nMinus1CompositeNumberLabel.Location = new System.Drawing.Point(233, 58);
+            this.Nth4nMinus1CompositeNumberLabel.Location = new System.Drawing.Point(174, 58);
             this.Nth4nMinus1CompositeNumberLabel.Name = "Nth4nMinus1CompositeNumberLabel";
             this.Nth4nMinus1CompositeNumberLabel.Size = new System.Drawing.Size(4, 4);
             this.Nth4nMinus1CompositeNumberLabel.TabIndex = 0;
@@ -777,7 +777,7 @@
             this.Nth4nPlus1CompositeNumberLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Nth4nPlus1CompositeNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Nth4nPlus1CompositeNumberLabel.ForeColor = System.Drawing.SystemColors.Window;
-            this.Nth4nPlus1CompositeNumberLabel.Location = new System.Drawing.Point(233, 53);
+            this.Nth4nPlus1CompositeNumberLabel.Location = new System.Drawing.Point(174, 53);
             this.Nth4nPlus1CompositeNumberLabel.Name = "Nth4nPlus1CompositeNumberLabel";
             this.Nth4nPlus1CompositeNumberLabel.Size = new System.Drawing.Size(4, 4);
             this.Nth4nPlus1CompositeNumberLabel.TabIndex = 0;
@@ -792,7 +792,7 @@
             this.Nth4nMinus1PrimeNumberLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Nth4nMinus1PrimeNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Nth4nMinus1PrimeNumberLabel.ForeColor = System.Drawing.SystemColors.Window;
-            this.Nth4nMinus1PrimeNumberLabel.Location = new System.Drawing.Point(233, 48);
+            this.Nth4nMinus1PrimeNumberLabel.Location = new System.Drawing.Point(174, 48);
             this.Nth4nMinus1PrimeNumberLabel.Name = "Nth4nMinus1PrimeNumberLabel";
             this.Nth4nMinus1PrimeNumberLabel.Size = new System.Drawing.Size(4, 4);
             this.Nth4nMinus1PrimeNumberLabel.TabIndex = 0;
@@ -807,7 +807,7 @@
             this.Nth4nPlus1PrimeNumberLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Nth4nPlus1PrimeNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Nth4nPlus1PrimeNumberLabel.ForeColor = System.Drawing.SystemColors.Window;
-            this.Nth4nPlus1PrimeNumberLabel.Location = new System.Drawing.Point(233, 43);
+            this.Nth4nPlus1PrimeNumberLabel.Location = new System.Drawing.Point(174, 43);
             this.Nth4nPlus1PrimeNumberLabel.Name = "Nth4nPlus1PrimeNumberLabel";
             this.Nth4nPlus1PrimeNumberLabel.Size = new System.Drawing.Size(4, 4);
             this.Nth4nPlus1PrimeNumberLabel.TabIndex = 0;
@@ -1214,7 +1214,7 @@
             this.ValuePanel.Controls.Add(this.AbundantNumbersLabel);
             this.ValuePanel.Controls.Add(this.ValueInspectLabel);
             this.ValuePanel.Controls.Add(this.PCIndexChainLabel);
-            this.ValuePanel.Controls.Add(this.SumOfDivisorsTextBox);
+            this.ValuePanel.Controls.Add(this.SumOfDigitSumsTextBox);
             this.ValuePanel.Controls.Add(this.SquareDiffTextBox);
             this.ValuePanel.Controls.Add(this.SquareSumTextBox);
             this.ValuePanel.Controls.Add(this.IndexChainLengthTextBox);
@@ -1505,7 +1505,7 @@
             this.IndexPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.IndexPanel.Location = new System.Drawing.Point(3, 3);
             this.IndexPanel.Name = "IndexPanel";
-            this.IndexPanel.Size = new System.Drawing.Size(226, 188);
+            this.IndexPanel.Size = new System.Drawing.Size(226, 209);
             this.IndexPanel.TabIndex = 33;
             // 
             // EditionLabel
@@ -1651,7 +1651,7 @@
             this.MainTabControl.Location = new System.Drawing.Point(0, 146);
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(240, 241);
+            this.MainTabControl.Size = new System.Drawing.Size(240, 262);
             this.MainTabControl.TabIndex = 34;
             this.MainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
             // 
@@ -1662,7 +1662,7 @@
             this.FactorsTabPage.Location = new System.Drawing.Point(4, 22);
             this.FactorsTabPage.Name = "FactorsTabPage";
             this.FactorsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FactorsTabPage.Size = new System.Drawing.Size(232, 215);
+            this.FactorsTabPage.Size = new System.Drawing.Size(232, 236);
             this.FactorsTabPage.TabIndex = 0;
             this.FactorsTabPage.Text = "Factors";
             // 
@@ -1673,7 +1673,7 @@
             this.IndexTabPage.Location = new System.Drawing.Point(4, 22);
             this.IndexTabPage.Name = "IndexTabPage";
             this.IndexTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.IndexTabPage.Size = new System.Drawing.Size(232, 194);
+            this.IndexTabPage.Size = new System.Drawing.Size(232, 215);
             this.IndexTabPage.TabIndex = 1;
             this.IndexTabPage.Text = "Index";
             // 
@@ -1711,7 +1711,7 @@
             this.TriangleTabPage.Controls.Add(this.aTriangleTextBox);
             this.TriangleTabPage.Location = new System.Drawing.Point(4, 22);
             this.TriangleTabPage.Name = "TriangleTabPage";
-            this.TriangleTabPage.Size = new System.Drawing.Size(232, 194);
+            this.TriangleTabPage.Size = new System.Drawing.Size(232, 215);
             this.TriangleTabPage.TabIndex = 3;
             this.TriangleTabPage.Text = "Triangle";
             // 
@@ -1915,7 +1915,7 @@
             this.CircleTabPage.Controls.Add(this.rCircleTextBox);
             this.CircleTabPage.Location = new System.Drawing.Point(4, 22);
             this.CircleTabPage.Name = "CircleTabPage";
-            this.CircleTabPage.Size = new System.Drawing.Size(232, 194);
+            this.CircleTabPage.Size = new System.Drawing.Size(232, 215);
             this.CircleTabPage.TabIndex = 2;
             this.CircleTabPage.Text = "Circle";
             // 
@@ -2025,7 +2025,7 @@
             this.SphereTabPage.Controls.Add(this.vEqSphereLabel);
             this.SphereTabPage.Location = new System.Drawing.Point(4, 22);
             this.SphereTabPage.Name = "SphereTabPage";
-            this.SphereTabPage.Size = new System.Drawing.Size(232, 194);
+            this.SphereTabPage.Size = new System.Drawing.Size(232, 215);
             this.SphereTabPage.TabIndex = 4;
             this.SphereTabPage.Text = "Sphere";
             // 
@@ -2129,7 +2129,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(240, 403);
+            this.ClientSize = new System.Drawing.Size(240, 424);
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.ValuePanel);
             this.Controls.Add(this.MultithreadingCheckBox);
@@ -2196,7 +2196,7 @@
     private System.Windows.Forms.ToolTip ToolTip;
     private System.Windows.Forms.CheckBox MultithreadingCheckBox;
     private System.Windows.Forms.Panel ValuePanel;
-    private System.Windows.Forms.TextBox SumOfDivisorsTextBox;
+    private System.Windows.Forms.TextBox SumOfDigitSumsTextBox;
     private System.Windows.Forms.TextBox SquareDiffTextBox;
     private System.Windows.Forms.TextBox SquareSumTextBox;
     private System.Windows.Forms.TextBox NthNonAdditiveNumberTextBox;

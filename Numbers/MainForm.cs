@@ -28,7 +28,7 @@ public partial class MainForm : Form
     }
 
     private static int ROWS = 30;
-    private static int COLS = 19;
+    private static int COLS = 20;
     private TextBox[,] controls = new TextBox[ROWS, COLS];
 
     private float m_dpi = 0F;
@@ -138,6 +138,7 @@ public partial class MainForm : Form
                     case 16: { control.Text = "Half"; ToolTip.SetToolTip(control, "i/2"); break; }
                     case 17: { control.Text = "Median"; ToolTip.SetToolTip(control, "Median(1..i/2) = ((i/2)+1)/2"); break; }
                     case 18: { control.Text = "Product"; ToolTip.SetToolTip(control, "Half * Median"); break; }
+                    case 19: { control.Text = "∑Digits"; ToolTip.SetToolTip(control, "Sum(DigitSum(1..i))"); break; }
                     default: break;
                 }
             }
@@ -174,7 +175,7 @@ public partial class MainForm : Form
                     switch (j)
                     {
                         case 0:
-                            control.BackColor = Color.Snow;
+                            control.BackColor = Color.White;
                             break;
                         case 1:
                         case 2:
@@ -207,6 +208,9 @@ public partial class MainForm : Form
                         case 17:
                         case 18:
                             control.BackColor = Color.Snow;
+                            break;
+                        case 19:
+                            control.BackColor = Color.LightYellow;
                             break;
                         default:
                             control.BackColor = SystemColors.Window;
@@ -284,9 +288,9 @@ public partial class MainForm : Form
                 string filename = Globals.NUMBERS_FOLDER + "/" + DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss") + "_" + "Numbers.txt";
 
                 StringBuilder str = new StringBuilder();
-                str.AppendLine("-------------------------------------------------------------------------------------------------------------------------------------------------------");
-                str.AppendLine("i" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "C" + "\t" + "AC" + "\t" + "XC" + "\t" + "DF" + "\t" + "AB" + "\t" + "P=4n+1" + "\t" + "a" + "\t" + "b" + "\t" + "C=4n+1" + "\t" + "a" + "\t" + "b" + "\t" + "Sum" + "\t" + "Half" + "\t" + "Median" + "\t" + "Product");
-                str.AppendLine("-------------------------------------------------------------------------------------------------------------------------------------------------------");
+                str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                str.AppendLine("i" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "C" + "\t" + "AC" + "\t" + "XC" + "\t" + "DF" + "\t" + "AB" + "\t" + "P=4n+1" + "\t" + "a" + "\t" + "b" + "\t" + "C=4n+1" + "\t" + "a" + "\t" + "b" + "\t" + "Sum" + "\t" + "Half" + "\t" + "Median" + "\t" + "Product" + "\t" + "∑Digits");
+                str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 for (int i = 0; i < ROWS; i++)
                 {
                     for (int j = 0; j < COLS; j++)
@@ -299,7 +303,7 @@ public partial class MainForm : Form
                     }
                     str.AppendLine();
                 }
-                str.AppendLine("-------------------------------------------------------------------------------------------------------------------------------------------------------");
+                str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
                 FileHelper.SaveText(filename, str.ToString());
                 FileHelper.DisplayFile(filename);
@@ -728,6 +732,10 @@ public partial class MainForm : Form
                         controls[point.X, 16].ForeColor = Numbers.GetNumberTypeColor(half);
                         controls[point.X, 17].ForeColor = Numbers.GetNumberTypeColor(median);
                         controls[point.X, 18].ForeColor = Numbers.GetNumberTypeColor(product);
+
+                        long sum_of_digit_sums = Numbers.SumOfDigitSums(index);
+                        controls[point.X, 19].Text = (sum_of_digit_sums > 0) ? sum_of_digit_sums.ToString() : "";
+                        controls[point.X, 19].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
                     }
                     catch
                     {
@@ -745,6 +753,7 @@ public partial class MainForm : Form
                         controls[point.X, 16].Text = "";
                         controls[point.X, 17].Text = "";
                         controls[point.X, 18].Text = "";
+                        controls[point.X, 19].Text = "";
                     }
                     finally
                     {
@@ -791,6 +800,7 @@ public partial class MainForm : Form
                     controls[point.X, 16].Text = "";
                     controls[point.X, 17].Text = "";
                     controls[point.X, 18].Text = "";
+                    controls[point.X, 19].Text = "";
                 }
             }
             else
@@ -813,6 +823,7 @@ public partial class MainForm : Form
                 controls[point.X, 16].Text = "";
                 controls[point.X, 17].Text = "";
                 controls[point.X, 18].Text = "";
+                controls[point.X, 19].Text = "";
             }
         }
     }
@@ -990,9 +1001,9 @@ public partial class MainForm : Form
                 string filename = Globals.NUMBERS_FOLDER + "/" + DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss") + "_" + "Numbers.txt";
 
                 StringBuilder str = new StringBuilder();
-                str.AppendLine("-------------------------------------------------------------------------------------------------------------------------------------------------------");
-                str.AppendLine("i" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "C" + "\t" + "AC" + "\t" + "XC" + "\t" + "DF" + "\t" + "AB" + "\t" + "P=4n+1" + "\t" + "a" + "\t" + "b" + "\t" + "C=4n+1" + "\t" + "a" + "\t" + "b" + "\t" + "Sum" + "\t" + "Half" + "\t" + "Median" + "\t" + "Product");
-                str.AppendLine("-------------------------------------------------------------------------------------------------------------------------------------------------------");
+                str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
+                str.AppendLine("i" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "C" + "\t" + "AC" + "\t" + "XC" + "\t" + "DF" + "\t" + "AB" + "\t" + "P=4n+1" + "\t" + "a" + "\t" + "b" + "\t" + "C=4n+1" + "\t" + "a" + "\t" + "b" + "\t" + "Sum" + "\t" + "Half" + "\t" + "Median" + "\t" + "Product" + "\t" + "∑Digits");
+                str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
                 if (controls != null)
                 {
@@ -1018,7 +1029,7 @@ public partial class MainForm : Form
                     }
                 }
 
-                str.AppendLine("-------------------------------------------------------------------------------------------------------------------------------------------------------");
+                str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 FileHelper.SaveText(filename, str.ToString());
                 FileHelper.DisplayFile(filename);
             }
