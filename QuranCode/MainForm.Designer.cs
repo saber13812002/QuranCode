@@ -590,6 +590,7 @@ partial class MainForm
             this.RadixValueDownLabel = new System.Windows.Forms.Label();
             this.RadixLabel = new System.Windows.Forms.Label();
             this.ValuePanel = new System.Windows.Forms.Panel();
+            this.SumOfDigitSumsTextBox = new System.Windows.Forms.TextBox();
             this.Nth4nMinus1CompositeNumberLabel = new System.Windows.Forms.Label();
             this.Nth4nPlus1CompositeNumberLabel = new System.Windows.Forms.Label();
             this.Nth4nMinus1PrimeNumberLabel = new System.Windows.Forms.Label();
@@ -681,7 +682,6 @@ partial class MainForm
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FontDialog = new System.Windows.Forms.FontDialog();
-            this.SumOfDigitSumsTextBox = new System.Windows.Forms.TextBox();
             this.StatusPanel.SuspendLayout();
             this.ChapterSortPanel.SuspendLayout();
             this.DrawingsPanel.SuspendLayout();
@@ -5451,7 +5451,7 @@ partial class MainForm
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
             this.TabControl.ShowToolTips = true;
-            this.TabControl.Size = new System.Drawing.Size(816, 198);
+            this.TabControl.Size = new System.Drawing.Size(816, 194);
             this.TabControl.TabIndex = 102;
             this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             this.TabControl.Click += new System.EventHandler(this.TabControl_Click);
@@ -5464,7 +5464,7 @@ partial class MainForm
             this.TranslationTabPage.Location = new System.Drawing.Point(4, 22);
             this.TranslationTabPage.Name = "TranslationTabPage";
             this.TranslationTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.TranslationTabPage.Size = new System.Drawing.Size(808, 172);
+            this.TranslationTabPage.Size = new System.Drawing.Size(808, 173);
             this.TranslationTabPage.TabIndex = 190;
             this.TranslationTabPage.Text = "Translation";
             this.TranslationTabPage.ToolTipText = "Translations for current selection/verse\r\nترجمة الءاية أو الءايات المظللة";
@@ -5658,7 +5658,7 @@ partial class MainForm
             this.GrammarTabPage.Controls.Add(this.GrammarTextBox);
             this.GrammarTabPage.Location = new System.Drawing.Point(4, 22);
             this.GrammarTabPage.Name = "GrammarTabPage";
-            this.GrammarTabPage.Size = new System.Drawing.Size(808, 172);
+            this.GrammarTabPage.Size = new System.Drawing.Size(808, 173);
             this.GrammarTabPage.TabIndex = 193;
             this.GrammarTabPage.Text = " Grammar";
             this.GrammarTabPage.ToolTipText = "Grammar details of the current word in Arabic and English\r\nإعراب الكلمة بالعربي و" +
@@ -5692,7 +5692,7 @@ partial class MainForm
             this.RelatedWordsTabPage.Controls.Add(this.RelatedWordsTextBox);
             this.RelatedWordsTabPage.Location = new System.Drawing.Point(4, 22);
             this.RelatedWordsTabPage.Name = "RelatedWordsTabPage";
-            this.RelatedWordsTabPage.Size = new System.Drawing.Size(808, 172);
+            this.RelatedWordsTabPage.Size = new System.Drawing.Size(808, 173);
             this.RelatedWordsTabPage.TabIndex = 192;
             this.RelatedWordsTabPage.Text = "Related Words";
             this.RelatedWordsTabPage.ToolTipText = "Related words from the same root as the current word\r\nالكلمات المشتقة من نفس جذر " +
@@ -5747,7 +5747,7 @@ partial class MainForm
             this.SymmetryTabPage.Controls.Add(this.SymmetryTextBox);
             this.SymmetryTabPage.Location = new System.Drawing.Point(4, 22);
             this.SymmetryTabPage.Name = "SymmetryTabPage";
-            this.SymmetryTabPage.Size = new System.Drawing.Size(808, 172);
+            this.SymmetryTabPage.Size = new System.Drawing.Size(808, 173);
             this.SymmetryTabPage.TabIndex = 201;
             this.SymmetryTabPage.Text = "Symmetry";
             this.SymmetryTabPage.ToolTipText = "Text symmetries starting from both ends [Dr Waleed S. Mohammed]\r\nتناظر النص من ال" +
@@ -5827,7 +5827,7 @@ partial class MainForm
             this.ValuesSequenceTabPage.Controls.Add(this.ValuesSequenceTextBox);
             this.ValuesSequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.ValuesSequenceTabPage.Name = "ValuesSequenceTabPage";
-            this.ValuesSequenceTabPage.Size = new System.Drawing.Size(808, 172);
+            this.ValuesSequenceTabPage.Size = new System.Drawing.Size(808, 173);
             this.ValuesSequenceTabPage.TabIndex = 198;
             this.ValuesSequenceTabPage.Text = "Values";
             this.ValuesSequenceTabPage.ToolTipText = "Values of letter/word/verse/chapter values in bases 2 to 36\r\nقيم الحروف والكلمات " +
@@ -5948,7 +5948,7 @@ partial class MainForm
             this.CVWLSequenceTabPage.Controls.Add(this.CVWLSequenceTextBox);
             this.CVWLSequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.CVWLSequenceTabPage.Name = "CVWLSequenceTabPage";
-            this.CVWLSequenceTabPage.Size = new System.Drawing.Size(808, 172);
+            this.CVWLSequenceTabPage.Size = new System.Drawing.Size(808, 173);
             this.CVWLSequenceTabPage.TabIndex = 200;
             this.CVWLSequenceTabPage.Text = "CVWL";
             this.CVWLSequenceTabPage.ToolTipText = "Concatenated chapter/verse/word/letter numbers and counts\r\nرصف أرقام وأعداد الحرو" +
@@ -6043,7 +6043,7 @@ partial class MainForm
             this.DNASequenceTabPage.Controls.Add(this.DNASequenceTextBox);
             this.DNASequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.DNASequenceTabPage.Name = "DNASequenceTabPage";
-            this.DNASequenceTabPage.Size = new System.Drawing.Size(808, 172);
+            this.DNASequenceTabPage.Size = new System.Drawing.Size(808, 173);
             this.DNASequenceTabPage.TabIndex = 195;
             this.DNASequenceTabPage.Text = "DNA";
             this.DNASequenceTabPage.ToolTipText = "Convert text into a DNA sequence to compare with the human genome [Belkacem Meghz" +
@@ -6121,7 +6121,7 @@ partial class MainForm
             this.MathsTabPage.Controls.Add(this.MathsPanel);
             this.MathsTabPage.Location = new System.Drawing.Point(4, 22);
             this.MathsTabPage.Name = "MathsTabPage";
-            this.MathsTabPage.Size = new System.Drawing.Size(808, 172);
+            this.MathsTabPage.Size = new System.Drawing.Size(808, 173);
             this.MathsTabPage.TabIndex = 197;
             this.MathsTabPage.Text = "C+V";
             this.MathsTabPage.ToolTipText = "Chapter +/- Verse calculations\r\nحسابات مجاميع وفروق الءايات والسُوَر";
@@ -6235,7 +6235,7 @@ partial class MainForm
             this.MathsPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MathsPanel.Location = new System.Drawing.Point(0, 0);
             this.MathsPanel.Name = "MathsPanel";
-            this.MathsPanel.Size = new System.Drawing.Size(808, 172);
+            this.MathsPanel.Size = new System.Drawing.Size(808, 173);
             this.MathsPanel.TabIndex = 0;
             // 
             // MathsInterestingNumbersEditLabel
@@ -7523,7 +7523,7 @@ partial class MainForm
             this.DistancesTabPage.Controls.Add(this.DistancesPanel);
             this.DistancesTabPage.Location = new System.Drawing.Point(4, 22);
             this.DistancesTabPage.Name = "DistancesTabPage";
-            this.DistancesTabPage.Size = new System.Drawing.Size(808, 172);
+            this.DistancesTabPage.Size = new System.Drawing.Size(808, 173);
             this.DistancesTabPage.TabIndex = 199;
             this.DistancesTabPage.Text = "Distances";
             this.DistancesTabPage.ToolTipText = "Distances to the start and end of Book, current chapter/verse/word\r\nالمسافات الى " +
@@ -7600,7 +7600,7 @@ partial class MainForm
             this.DistancesPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DistancesPanel.Location = new System.Drawing.Point(0, 0);
             this.DistancesPanel.Name = "DistancesPanel";
-            this.DistancesPanel.Size = new System.Drawing.Size(808, 172);
+            this.DistancesPanel.Size = new System.Drawing.Size(808, 173);
             this.DistancesPanel.TabIndex = 1;
             // 
             // DistancesInterestingNumbersEditLabel
@@ -8459,7 +8459,7 @@ partial class MainForm
             this.UserTextTabPage.Controls.Add(this.UserTextTextBox);
             this.UserTextTabPage.Location = new System.Drawing.Point(4, 22);
             this.UserTextTabPage.Name = "UserTextTabPage";
-            this.UserTextTabPage.Size = new System.Drawing.Size(808, 172);
+            this.UserTextTabPage.Size = new System.Drawing.Size(808, 173);
             this.UserTextTabPage.TabIndex = 194;
             this.UserTextTabPage.Text = " User Text ";
             this.UserTextTabPage.ToolTipText = "Calculate the value of any given text or find all words with a given value\r\nحساب " +
@@ -9696,6 +9696,22 @@ partial class MainForm
             this.ValuePanel.Name = "ValuePanel";
             this.ValuePanel.Size = new System.Drawing.Size(181, 276);
             this.ValuePanel.TabIndex = 5;
+            // 
+            // SumOfDigitSumsTextBox
+            // 
+            this.SumOfDigitSumsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.SumOfDigitSumsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SumOfDigitSumsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.SumOfDigitSumsTextBox.Location = new System.Drawing.Point(97, 120);
+            this.SumOfDigitSumsTextBox.Name = "SumOfDigitSumsTextBox";
+            this.SumOfDigitSumsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.SumOfDigitSumsTextBox.Size = new System.Drawing.Size(46, 20);
+            this.SumOfDigitSumsTextBox.TabIndex = 32;
+            this.SumOfDigitSumsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip.SetToolTip(this.SumOfDigitSumsTextBox, "Sum of digit sums");
+            this.SumOfDigitSumsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.SumOfDigitSumsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
+            this.SumOfDigitSumsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // Nth4nMinus1CompositeNumberLabel
             // 
@@ -11134,19 +11150,6 @@ partial class MainForm
             // FontDialog
             // 
             this.FontDialog.Apply += new System.EventHandler(this.FontDialog_Apply);
-            // 
-            // SumOfDigitSumsTextBox
-            // 
-            this.SumOfDigitSumsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.SumOfDigitSumsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SumOfDigitSumsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.SumOfDigitSumsTextBox.Location = new System.Drawing.Point(97, 120);
-            this.SumOfDigitSumsTextBox.Name = "SumOfDigitSumsTextBox";
-            this.SumOfDigitSumsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.SumOfDigitSumsTextBox.Size = new System.Drawing.Size(46, 20);
-            this.SumOfDigitSumsTextBox.TabIndex = 32;
-            this.SumOfDigitSumsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ToolTip.SetToolTip(this.SumOfDigitSumsTextBox, "Sum of digit sums");
             // 
             // MainForm
             // 

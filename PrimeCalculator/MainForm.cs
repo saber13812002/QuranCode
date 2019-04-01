@@ -994,11 +994,11 @@ public partial class MainForm : Form
 
             str.AppendLine();
             long digit_sum = Numbers.DigitSum(number);
-            str.AppendLine("Digit Sum        " + "\t\t=\t" + digit_sum);
+            str.AppendLine("Digit Sum        " + "\t=\t" + digit_sum);
             long digital_roor = Numbers.DigitalRoot(number);
-            str.AppendLine("Digital Root     " + "\t\t=\t" + digital_roor);
+            str.AppendLine("Digital Root     " + "\t=\t" + digital_roor);
             long sum_of_digit_sums = Numbers.SumOfDigitSums(number);
-            str.AppendLine("Sum Of Digit Sums" + "\t\t=\t" + sum_of_digit_sums);
+            str.AppendLine("Sum Of Digit Sums" + "\t=\t" + sum_of_digit_sums);
 
             string proper_divisors = Numbers.GetProperDivisorsString(number);
             long sum_of_proper_divisors = Numbers.SumOfProperDivisors(number);
