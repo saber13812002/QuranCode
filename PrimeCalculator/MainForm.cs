@@ -2292,7 +2292,7 @@ public partial class MainForm : Form
                 AnalyzeValue(number);
             }
         }
-        ValueTextBox.Focus();
+        //ValueTextBox.Focus();
     }
 
     private enum TimeDisplayMode { Elapsed, Remaining }

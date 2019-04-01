@@ -1264,6 +1264,7 @@ public static class Numbers
         }
         return result;
     }
+    //https://ideone.com/ik8iE6
     public static long SumOfDigitSums(string value)
     {
         long number;
@@ -1275,10 +1276,25 @@ public static class Numbers
     }
     public static long SumOfDigitSums(long number)
     {
+        return SumOfDigitSums(number, 10L);
+    }
+    public static long SumOfDigitSums(long number, long radix)
+    {
         long result = 0L;
-        for (long i = 1; i <= number; i++)
+        long pos = 1L;
+        long previous = 0L;
+        long count = 0L;
+
+        while (number > 0)
         {
-            result += DigitSum(i);
+            long r = number % radix;
+            number /= radix;
+
+            result += (r * (r - 1L) / 2L) * pos + r * (((radix - 1L) * (radix / 2L)) * count * pos / radix) + r * (previous + 1L);
+            previous += pos * r;
+            count++;
+
+            pos *= radix;
         }
         return result;
     }
