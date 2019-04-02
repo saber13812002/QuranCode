@@ -13,7 +13,7 @@ using System.Security;
 using System.Security.Permissions;
 //using System.Security.Principal;
 using System.CodeDom.Compiler;
-using ICSharpCode.TextEditor;
+using ICSharpCode.TextEditor.Document;
 using Model;
 
 public partial class MainForm : Form, ISubscriber
@@ -12726,6 +12726,9 @@ public partial class MainForm : Form, ISubscriber
         }
 
         ScriptTextBox.SetHighlighting("C#");
+        ScriptTextBox.Document.FoldingManager.FoldingStrategy = new CSharpFoldingStrategy();
+        ScriptTextBox.Document.FoldingManager.UpdateFoldings(null, null);
+        ScriptTextBox.TextEditorProperties.EnableFolding = true;
 
         NotifyIcon.Visible = true;
 
@@ -21636,7 +21639,7 @@ public partial class MainForm : Form, ISubscriber
                             }
                             UpdateVersePositions(verse);
 
-                            Bookmark bookmark = m_client.GotoBookmark(m_client.Selection.Scope, m_client.Selection.Indexes);
+                            Model.Bookmark bookmark = m_client.GotoBookmark(m_client.Selection.Scope, m_client.Selection.Indexes);
                             if (bookmark != null)
                             {
                                 BookmarkTextBox.ForeColor = m_note_view_color;
@@ -22321,7 +22324,7 @@ public partial class MainForm : Form, ISubscriber
 
         UpdateBookmarkButtons();
     }
-    private void DisplayNote(Bookmark bookmark)
+    private void DisplayNote(Model.Bookmark bookmark)
     {
         if (bookmark != null)
         {
@@ -22340,7 +22343,7 @@ public partial class MainForm : Form, ISubscriber
             DisplayNoteWritingInstruction();
         }
     }
-    private void DisplayBookmark(Bookmark bookmark)
+    private void DisplayBookmark(Model.Bookmark bookmark)
     {
         if (bookmark != null)
         {
@@ -22389,7 +22392,7 @@ public partial class MainForm : Form, ISubscriber
                         if (m_client.Selection != null)
                         {
                             Selection selection = new Selection(m_client.Book, m_client.Selection.Scope, m_client.Selection.Indexes);
-                            Bookmark bookmark = m_client.CreateBookmark(selection, BookmarkTextBox.Text);
+                            Model.Bookmark bookmark = m_client.CreateBookmark(selection, BookmarkTextBox.Text);
 
                             BookmarkTextBox.ForeColor = m_note_view_color;
                             UpdateBookmarkButtons();
@@ -22403,7 +22406,7 @@ public partial class MainForm : Form, ISubscriber
     {
         if (m_client != null)
         {
-            Bookmark bookmark = m_client.GotoPreviousBookmark();
+            Model.Bookmark bookmark = m_client.GotoPreviousBookmark();
             if (bookmark != null)
             {
                 DisplayBookmark(bookmark);
@@ -22414,7 +22417,7 @@ public partial class MainForm : Form, ISubscriber
     {
         if (m_client != null)
         {
-            Bookmark bookmark = m_client.GotoNextBookmark();
+            Model.Bookmark bookmark = m_client.GotoNextBookmark();
             if (bookmark != null)
             {
                 DisplayBookmark(bookmark);
@@ -22446,7 +22449,7 @@ public partial class MainForm : Form, ISubscriber
             // remove existing bookmark (if any)
             m_client.DeleteCurrentBookmark();
 
-            Bookmark bookmark = m_client.CurrentBookmark;
+            Model.Bookmark bookmark = m_client.CurrentBookmark;
             if (bookmark != null)
             {
                 DisplayBookmark(bookmark);
