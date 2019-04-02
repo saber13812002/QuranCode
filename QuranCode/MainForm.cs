@@ -13,6 +13,7 @@ using System.Security;
 using System.Security.Permissions;
 //using System.Security.Principal;
 using System.CodeDom.Compiler;
+using ICSharpCode.TextEditor;
 using Model;
 
 public partial class MainForm : Form, ISubscriber
@@ -12724,6 +12725,8 @@ public partial class MainForm : Form, ISubscriber
             }
         }
 
+        ScriptTextBox.SetHighlighting("C#");
+
         NotifyIcon.Visible = true;
 
         // start user at chapter list box
@@ -15160,7 +15163,7 @@ public partial class MainForm : Form, ISubscriber
                 if (((sender as MenuItem).Parent as ContextMenu).SourceControl is TextBoxBase)
                 {
                     (((sender as MenuItem).Parent as ContextMenu).SourceControl as TextBoxBase).SelectAll();
-                    (((sender as MenuItem).Parent as ContextMenu).SourceControl as TextBoxBase).KeyDown += new KeyEventHandler(TextBox_KeyDown);
+                    (((sender as MenuItem).Parent as ContextMenu).SourceControl as TextBoxBase).KeyDown += new System.Windows.Forms.KeyEventHandler(TextBox_KeyDown);
                 }
             }
         }
@@ -15687,7 +15690,6 @@ public partial class MainForm : Form, ISubscriber
         RegisterContextMenu(PictureBox);
         RegisterContextMenu(MainTextBox);
         RegisterContextMenu(SearchResultTextBox);
-        RegisterContextMenu(ScriptTextBox);
         RegisterContextMenu(ScriptOutputTextBox);
         RegisterContextMenu(TranslationTextBox);
         RegisterContextMenu(TranslationsTextBox);
@@ -16143,7 +16145,6 @@ public partial class MainForm : Form, ISubscriber
         if (!ScriptTextBox.Focused)
         {
             ScriptTextBox.Focus();
-            ScriptTextBox.SelectionLength = 0;
         }
     }
     private void CloseScriptLabel_Click(object sender, EventArgs e)
