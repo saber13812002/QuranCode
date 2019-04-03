@@ -299,4 +299,3 @@ namespace InitialLetters
         private System.Windows.Forms.CheckBox DuplicateLettersCheckBox;
     }
 }
-

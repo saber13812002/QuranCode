@@ -13,7 +13,6 @@ using System.Security;
 using System.Security.Permissions;
 //using System.Security.Principal;
 using System.CodeDom.Compiler;
-using ICSharpCode.TextEditor.Document;
 using Model;
 
 public partial class MainForm : Form, ISubscriber
@@ -166,6 +165,14 @@ public partial class MainForm : Form, ISubscriber
                 {
                     LanguageComboBox.Items.Add(language_name);
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -396,6 +403,14 @@ public partial class MainForm : Form, ISubscriber
                 SetToolTipPlayerSelectionSilenceGapTrackBar();
 
                 SetToolTips();
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -636,6 +651,14 @@ public partial class MainForm : Form, ISubscriber
         try
         {
             Downloader.Download(uri, path, 30000);
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -12667,7 +12690,6 @@ public partial class MainForm : Form, ISubscriber
         {
             while (ex != null)
             {
-                //Console.WriteLine(ex.Message);
                 MessageBox.Show(ex.Message, Application.ProductName);
                 ex = ex.InnerException;
             }
@@ -12724,11 +12746,6 @@ public partial class MainForm : Form, ISubscriber
                 ToolTip.SetToolTip(EditNumerologySystemLabel, str.ToString());
             }
         }
-
-        ScriptTextBox.SetHighlighting("C#");
-        ScriptTextBox.Document.FoldingManager.FoldingStrategy = new CSharpFoldingStrategy();
-        ScriptTextBox.Document.FoldingManager.UpdateFoldings(null, null);
-        ScriptTextBox.TextEditorProperties.EnableFolding = true;
 
         NotifyIcon.Visible = true;
 
@@ -13669,7 +13686,6 @@ public partial class MainForm : Form, ISubscriber
         {
             while (ex != null)
             {
-                //Console.WriteLine(ex.Message);
                 MessageBox.Show(ex.Message, Application.ProductName);
                 ex = ex.InnerException;
             }
@@ -15330,6 +15346,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -15372,6 +15396,14 @@ public partial class MainForm : Form, ISubscriber
                 FindByRoot(text);
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -15411,6 +15443,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -15424,6 +15464,14 @@ public partial class MainForm : Form, ISubscriber
         try
         {
             FindBySimilarity();
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -15471,6 +15519,14 @@ public partial class MainForm : Form, ISubscriber
                         //SearchResultTextBox.Refresh();
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -15557,6 +15613,14 @@ public partial class MainForm : Form, ISubscriber
                     //SearchResultTextBox.Focus();
                     //SearchResultTextBox.Refresh();
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -15780,9 +15844,13 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
-        catch
+        catch (Exception ex)
         {
-            // cannot load Research assembly, so just ignore
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -15864,7 +15932,6 @@ public partial class MainForm : Form, ISubscriber
         {
             while (ex != null)
             {
-                //Console.WriteLine(ex.Message);
                 MessageBox.Show(ex.Message, Application.ProductName);
                 ex = ex.InnerException;
             }
@@ -15981,42 +16048,16 @@ public partial class MainForm : Form, ISubscriber
         {
             if (ResearchMethodsComboBox.SelectedItem != null)
             {
-                if (ResearchMethodsComboBox.SelectedItem.ToString() == "NewResearchMethod")
-                {
-                    HeaderLabel.Text = "New Research Method";
-                    HeaderLabel.Refresh();
-
-                    if (ScriptTextBox.Text == "")
-                    {
-                        ScriptTextBox.Text = ScriptRunner.LoadScript("Template.cs");
-                    }
-
-                    ScriptTextBox.BringToFront();
-                    ScriptTextBox.Visible = true;
-                    ScriptOutputGroupBox.Visible = true;
-                    CompileScriptLabel.Visible = true;
-                    RunScriptLabel.Visible = true;
-                    ScriptSamplesLabel.Visible = true;
-                    NewScriptLabel.Visible = true;
-                    CloseScriptLabel.Visible = true;
-                    WordWrapLabel.Visible = false;
-                    DisplayProstrationVersesLabel.Visible = false;
-                    InspectVersesLabel.Visible = false;
-                    GoldenRatioScopeLabel.Visible = false;
-                    GoldenRatioTypeLabel.Visible = false;
-                    GoldenRatioOrderLabel.Visible = false;
-                    DuplicateLettersCheckBox.Visible = false;
-                    GenerateSentencesLabel.Visible = false;
-                }
-                else
-                {
-                    object result = RunResearchMethod();
-                }
+                object result = RunResearchMethod();
             }
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, Application.ProductName);
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -16029,6 +16070,38 @@ public partial class MainForm : Form, ISubscriber
     ///////////////////////////////////////////////////////////////////////////////
     private Assembly compiled_assembly = null;
     private PermissionSet m_permission_set = null;
+    private void ScriptLabel_Click(object sender, EventArgs e)
+    {
+        if (!ScriptTextBox.Visible)
+        {
+            HeaderLabel.Text = "New Script";
+            HeaderLabel.Refresh();
+
+            if (ScriptTextBox.Text == "")
+            {
+                ScriptTextBox.Text = ScriptRunner.LoadScript("Template.cs");
+            }
+
+            ScriptTextBox.BringToFront();
+            ScriptTextBox.Visible = true;
+            ScriptOutputGroupBox.Visible = true;
+            CompileScriptLabel.Visible = true;
+            RunScriptLabel.Visible = true;
+            ScriptSamplesLabel.Visible = true;
+            NewScriptLabel.Visible = true;
+            CloseScriptLabel.Visible = true;
+            WordWrapLabel.Visible = false;
+            DisplayProstrationVersesLabel.Visible = false;
+            InspectVersesLabel.Visible = false;
+            GoldenRatioScopeLabel.Visible = false;
+            GoldenRatioTypeLabel.Visible = false;
+            GoldenRatioOrderLabel.Visible = false;
+            DuplicateLettersCheckBox.Visible = false;
+            GenerateSentencesLabel.Visible = false;
+        }
+
+        this.KeyPreview = false;
+    }
     private void NewScriptLabel_Click(object sender, EventArgs e)
     {
         ScriptTextBox.Text = ScriptRunner.LoadScript("Template.cs");
@@ -16093,11 +16166,15 @@ public partial class MainForm : Form, ISubscriber
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, Application.ProductName);
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
-            this.Cursor = Cursors.Default;
+            if (sender != RunScriptLabel) this.Cursor = Cursors.Default;
         }
     }
     private void RunScriptLabel_Click(object sender, EventArgs e)
@@ -16105,24 +16182,18 @@ public partial class MainForm : Form, ISubscriber
         CompileScriptLabel_Click(sender, e);
 
         // to stop race conditions
-        Thread.Sleep(1000);
+        Thread.Sleep(10);
 
-        this.Cursor = Cursors.WaitCursor;
+        //this.Cursor = Cursors.WaitCursor;
         try
         {
             if (compiled_assembly != null)
             {
-
-                string param = ResearchMethodParameterTextBox.Text;
-                object[] args = new object[] { m_client, param };
+                object[] args = new object[] { m_client, null };
                 object result = ScriptRunner.Run(compiled_assembly, args, this.m_permission_set);
-
-                // if result is true, then show results in QuranCode MainTextBox
-                if ((bool)result == true)
+                if (result is bool)
                 {
-                    CloseScriptLabel_Click(sender, e);
-
-                    if (m_client.FoundVerses != null)
+                    if ((bool)result == true)
                     {
                         int verse_count = m_client.FoundVerses.Count;
                         m_find_result_header = verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]);
@@ -16130,13 +16201,19 @@ public partial class MainForm : Form, ISubscriber
 
                         //SearchResultTextBox.Focus();
                         //SearchResultTextBox.Refresh();
+
+                        CloseScriptLabel_Click(null, null);
                     }
                 }
             }
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, Application.ProductName);
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -16158,7 +16235,7 @@ public partial class MainForm : Form, ISubscriber
             ScriptTextBox.Visible = false;
             ScriptOutputGroupBox.Visible = false;
             CompileScriptLabel.Visible = false;
-            //RunScriptLabel.Visible = false;
+            RunScriptLabel.Visible = false;
             ScriptSamplesLabel.Visible = false;
             NewScriptLabel.Visible = false;
             CloseScriptLabel.Visible = false;
@@ -16171,6 +16248,8 @@ public partial class MainForm : Form, ISubscriber
             DuplicateLettersCheckBox.Visible = (m_active_textbox != null) && (m_active_textbox.SelectionLength > 0) && (Globals.EDITION == Edition.Ultimate);
             GenerateSentencesLabel.Visible = (m_active_textbox != null) && (m_active_textbox.SelectionLength > 0) && (Globals.EDITION == Edition.Ultimate);
         }
+
+        this.KeyPreview = true;
     }
     /////////////////////////////////////////////////////////////////////////////
     #endregion
@@ -16251,6 +16330,14 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -16369,6 +16456,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             FontComboBox.EndUpdate();
@@ -16440,6 +16535,14 @@ public partial class MainForm : Form, ISubscriber
                         MainTextBox.Refresh();
                         SearchResultTextBox.Refresh();
                     }
+                    catch (Exception ex)
+                    {
+                        while (ex != null)
+                        {
+                            MessageBox.Show(ex.Message, Application.ProductName);
+                            ex = ex.InnerException;
+                        }
+                    }
                     finally
                     {
                         MainTextBox.EndUpdate();
@@ -16469,6 +16572,14 @@ public partial class MainForm : Form, ISubscriber
                     SearchResultTextBox.AlignToStart();
                     MainTextBox.Refresh();
                     SearchResultTextBox.Refresh();
+                }
+                catch (Exception ex)
+                {
+                    while (ex != null)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName);
+                        ex = ex.InnerException;
+                    }
                 }
                 finally
                 {
@@ -16673,6 +16784,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             UpdateMouseCursor();
@@ -16713,6 +16832,14 @@ public partial class MainForm : Form, ISubscriber
                         // selected text is dealt with by CalculateAndDisplayCounts 
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -16938,7 +17065,11 @@ public partial class MainForm : Form, ISubscriber
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, Application.ProductName);
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -17146,9 +17277,13 @@ public partial class MainForm : Form, ISubscriber
         {
             GenerateAnagrams();
         }
-        catch
+        catch (Exception ex)
         {
-            // silence IO error in case running from read-only media (CD/DVD)
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -17207,6 +17342,14 @@ public partial class MainForm : Form, ISubscriber
             SearchResultTextBox.WordWrap = m_word_wrap_search_textbox;
 
             Verse.IncludeNumber = m_word_wrap_main_textbox;
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -17284,6 +17427,14 @@ public partial class MainForm : Form, ISubscriber
                 {
                     HighlightVerse(current_verse);
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -17549,6 +17700,14 @@ public partial class MainForm : Form, ISubscriber
                     m_active_textbox.TextChanged += new EventHandler(MainTextBox_TextChanged);
                 }
             }
+            catch (Exception ex)
+            {
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
+            }
             finally
             {
                 //// ####### already re-wired above
@@ -17646,6 +17805,14 @@ public partial class MainForm : Form, ISubscriber
 
             DisplaySelectionText();
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -17682,6 +17849,14 @@ public partial class MainForm : Form, ISubscriber
 
             DisplaySelectionText();
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -17717,6 +17892,14 @@ public partial class MainForm : Form, ISubscriber
             }
 
             DisplaySelectionText();
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -18003,6 +18186,14 @@ public partial class MainForm : Form, ISubscriber
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
+            }
             finally
             {
                 MainTextBox.EndUpdate();
@@ -18203,6 +18394,14 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                     }
+                }
+            }
+            catch (Exception ex)
+            {
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
                 }
             }
             finally
@@ -18574,6 +18773,14 @@ public partial class MainForm : Form, ISubscriber
 
             ChapterSortComboBox.SelectedIndex = 0;
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             ChapterSortComboBox.EndUpdate();
@@ -18599,6 +18806,14 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -18688,6 +18903,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             ChaptersListBox.EndUpdate();
@@ -18710,6 +18933,14 @@ public partial class MainForm : Form, ISubscriber
             if (ChapterSelectionComboBox.Items.Count > 0)
             {
                 ChapterSelectionComboBox.SelectedIndex = 0;
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -19452,6 +19683,14 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        while (ex != null)
+                        {
+                            MessageBox.Show(ex.Message, Application.ProductName);
+                            ex = ex.InnerException;
+                        }
+                    }
                     finally
                     {
                         ChaptersListBox.SelectedIndexChanged += new EventHandler(ChaptersListBox_SelectedIndexChanged);
@@ -19487,6 +19726,14 @@ public partial class MainForm : Form, ISubscriber
 
                                 ChapterLetterNumericUpDown.Minimum = 1;
                                 ChapterLetterNumericUpDown.Maximum = chapter.LetterCount;
+                            }
+                            catch (Exception ex)
+                            {
+                                while (ex != null)
+                                {
+                                    MessageBox.Show(ex.Message, Application.ProductName);
+                                    ex = ex.InnerException;
+                                }
                             }
                             finally
                             {
@@ -20412,6 +20659,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -20498,6 +20753,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
             //////////////////////////////////////////////////////////
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -20977,6 +21240,14 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        while (ex != null)
+                        {
+                            MessageBox.Show(ex.Message, Application.ProductName);
+                            ex = ex.InnerException;
+                        }
+                    }
                     finally
                     {
                         ChapterVerseNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
@@ -21248,6 +21519,14 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
+                catch (Exception ex)
+                {
+                    while (ex != null)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName);
+                        ex = ex.InnerException;
+                    }
+                }
                 finally
                 {
                     ChapterVerseNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
@@ -21343,7 +21622,11 @@ public partial class MainForm : Form, ISubscriber
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, Application.ProductName);
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -21915,11 +22198,16 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
                     // ignore poosible error due to non-Arabic search result
                     // showing verses with more words than the words in the Arabic verse
                     // and throwing exception when assigned to WordNumericUpDown.Value or LetterNumericUpDown.Value
+                    while (ex != null)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName);
+                        ex = ex.InnerException;
+                    }
                 }
                 finally
                 {
@@ -23538,6 +23826,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             RecitationsCheckedListBox.EndUpdate();
@@ -23576,6 +23872,14 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -23805,7 +24109,11 @@ public partial class MainForm : Form, ISubscriber
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show(ex.Message, Application.ProductName);
+                            while (ex != null)
+                            {
+                                MessageBox.Show(ex.Message, Application.ProductName);
+                                ex = ex.InnerException;
+                            }
                         }
                         finally
                         {
@@ -23987,6 +24295,14 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -24326,6 +24642,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             Thread.Sleep(100);
@@ -24378,6 +24702,14 @@ public partial class MainForm : Form, ISubscriber
                         e.Handled = true; // stop annoying beep for no default button defined
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -24543,7 +24875,11 @@ public partial class MainForm : Form, ISubscriber
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.Message, Application.ProductName);
+                        while (ex != null)
+                        {
+                            MessageBox.Show(ex.Message, Application.ProductName);
+                            ex = ex.InnerException;
+                        }
                     }
                     finally
                     {
@@ -25111,6 +25447,14 @@ public partial class MainForm : Form, ISubscriber
                 SymmetryTypeComboBox.SelectedIndex = 0;
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             SymmetryTypeComboBox.EndUpdate();
@@ -25354,6 +25698,14 @@ public partial class MainForm : Form, ISubscriber
                 m_client.CalculateWordSymmetry(SelectionScope.Chapter, (ModifierKeys == Keys.Control));
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -25367,6 +25719,14 @@ public partial class MainForm : Form, ISubscriber
             if (m_client != null)
             {
                 m_client.CalculateWordSymmetry(SelectionScope.Verse, (ModifierKeys == Keys.Control));
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -25384,6 +25744,14 @@ public partial class MainForm : Form, ISubscriber
                 m_client.CalculateWordSymmetry(SelectionScope.Page, (ModifierKeys == Keys.Control));
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -25397,6 +25765,14 @@ public partial class MainForm : Form, ISubscriber
             if (m_client != null)
             {
                 m_client.CalculateWordSymmetry(SelectionScope.Station, (ModifierKeys == Keys.Control));
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -25414,6 +25790,14 @@ public partial class MainForm : Form, ISubscriber
                 m_client.CalculateWordSymmetry(SelectionScope.Part, (ModifierKeys == Keys.Control));
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -25427,6 +25811,14 @@ public partial class MainForm : Form, ISubscriber
             if (m_client != null)
             {
                 m_client.CalculateWordSymmetry(SelectionScope.Group, (ModifierKeys == Keys.Control));
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -25444,6 +25836,14 @@ public partial class MainForm : Form, ISubscriber
                 m_client.CalculateWordSymmetry(SelectionScope.Half, (ModifierKeys == Keys.Control));
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -25457,6 +25857,14 @@ public partial class MainForm : Form, ISubscriber
             if (m_client != null)
             {
                 m_client.CalculateWordSymmetry(SelectionScope.Quarter, (ModifierKeys == Keys.Control));
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -25474,6 +25882,14 @@ public partial class MainForm : Form, ISubscriber
                 m_client.CalculateWordSymmetry(SelectionScope.Bowing, (ModifierKeys == Keys.Control));
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -25487,6 +25903,14 @@ public partial class MainForm : Form, ISubscriber
             if (m_client != null)
             {
                 m_client.CalculateWordSymmetry(SelectionScope.Book, (ModifierKeys == Keys.Control));
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -25535,7 +25959,11 @@ public partial class MainForm : Form, ISubscriber
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, Application.ProductName);
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -27197,6 +27625,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -27766,6 +28202,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -27816,7 +28260,11 @@ public partial class MainForm : Form, ISubscriber
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, Application.ProductName);
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -29221,6 +29669,14 @@ public partial class MainForm : Form, ISubscriber
             if (CVWLSequenceTypeComboBox.Items.Count > 0)
             {
                 CVWLSequenceTypeComboBox.SelectedIndex = 0;
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -31370,6 +31826,14 @@ public partial class MainForm : Form, ISubscriber
                 ValuesSequenceScopeComboBox.SelectedIndex = 0;
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             ValuesSequenceScopeComboBox.EndUpdate();
@@ -31623,6 +32087,14 @@ public partial class MainForm : Form, ISubscriber
                         DNASequenceSystemComboBox.Items.Add(dna_sequence_system.Name);
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -32019,6 +32491,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -32096,6 +32576,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -32149,6 +32637,14 @@ public partial class MainForm : Form, ISubscriber
 
                 //SearchResultTextBox.Focus();
                 //SearchResultTextBox.Refresh();
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -32441,6 +32937,14 @@ public partial class MainForm : Form, ISubscriber
                                 {
                                     FindByTextTextBox.Text = FindByTextTextBox.Text.Remove(FindByTextTextBox.Text.Length - 1);
                                 }
+                                catch (Exception ex)
+                                {
+                                    while (ex != null)
+                                    {
+                                        MessageBox.Show(ex.Message, Application.ProductName);
+                                        ex = ex.InnerException;
+                                    }
+                                }
                                 finally
                                 {
                                     FindByTextTextBox.TextChanged += new EventHandler(FindByTextTextBox_TextChanged);
@@ -32453,6 +32957,14 @@ public partial class MainForm : Form, ISubscriber
                         WordsListBoxLabel.Refresh();
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -32540,6 +33052,14 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -32652,6 +33172,14 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -32767,6 +33295,14 @@ public partial class MainForm : Form, ISubscriber
                         WordsListBoxLabel.Refresh();
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -33026,6 +33562,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -33086,6 +33630,14 @@ public partial class MainForm : Form, ISubscriber
 
                 // show file content after save
                 FileHelper.DisplayFile(filename);
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -33723,6 +34275,14 @@ public partial class MainForm : Form, ISubscriber
             }
 
             SearchGroupBox_Leave(null, null);
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -34703,6 +35263,14 @@ public partial class MainForm : Form, ISubscriber
         {
             FindBySimilarity();
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -34937,6 +35505,14 @@ public partial class MainForm : Form, ISubscriber
             //FindByNumbersValueDigitSumNumericUpDown.Value = 0;
             //FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             FindByNumbersNumberNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -34991,6 +35567,14 @@ public partial class MainForm : Form, ISubscriber
             //FindByNumbersValueNumericUpDown.Value = 0;
             //FindByNumbersValueDigitSumNumericUpDown.Value = 0;
             //FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -35047,6 +35631,14 @@ public partial class MainForm : Form, ISubscriber
             //FindByNumbersValueDigitSumNumericUpDown.Value = 0;
             //FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             FindByNumbersNumberNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -35102,6 +35694,14 @@ public partial class MainForm : Form, ISubscriber
             //FindByNumbersValueDigitSumNumericUpDown.Value = 0;
             //FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             FindByNumbersNumberNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -35156,6 +35756,14 @@ public partial class MainForm : Form, ISubscriber
             //FindByNumbersValueNumericUpDown.Value = 0;
             //FindByNumbersValueDigitSumNumericUpDown.Value = 0;
             //FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -36572,6 +37180,14 @@ public partial class MainForm : Form, ISubscriber
         {
             FindByNumbers();
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -37592,6 +38208,14 @@ public partial class MainForm : Form, ISubscriber
         {
             FindByFrequencySum();
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -38174,7 +38798,11 @@ public partial class MainForm : Form, ISubscriber
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, Application.ProductName);
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -38337,7 +38965,11 @@ public partial class MainForm : Form, ISubscriber
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, Application.ProductName);
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -38389,7 +39021,11 @@ public partial class MainForm : Form, ISubscriber
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, Application.ProductName);
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -38513,7 +39149,11 @@ public partial class MainForm : Form, ISubscriber
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, Application.ProductName);
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -38640,7 +39280,11 @@ public partial class MainForm : Form, ISubscriber
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, Application.ProductName);
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -38692,7 +39336,11 @@ public partial class MainForm : Form, ISubscriber
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, Application.ProductName);
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -38847,6 +39495,14 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -39467,6 +40123,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             SearchResultTextBox.SelectionChanged += MainTextBox_SelectionChanged;
@@ -39882,6 +40546,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -39945,6 +40617,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -39997,6 +40677,14 @@ public partial class MainForm : Form, ISubscriber
             AddToWordCDistanceCheckBox.Enabled = is_enabled;
             AddToVerseVDistanceCheckBox.Enabled = is_enabled;
             AddToVerseCDistanceCheckBox.Enabled = is_enabled;
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -40140,6 +40828,14 @@ public partial class MainForm : Form, ISubscriber
                     AddDistancesToNextCheckBox.Checked = m_client.NumerologySystem.AddDistancesToNext;
                     AddDistancesWithinChaptersCheckBox.Checked = m_client.NumerologySystem.AddDistancesWithinChapters;
                 }
+                catch (Exception ex)
+                {
+                    while (ex != null)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName);
+                        ex = ex.InnerException;
+                    }
+                }
                 finally
                 {
                     AddToLetterLNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
@@ -40189,6 +40885,14 @@ public partial class MainForm : Form, ISubscriber
 
                     UpdateKeyboard(m_client.NumerologySystem.TextMode);
                 }
+                catch (Exception ex)
+                {
+                    while (ex != null)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName);
+                        ex = ex.InnerException;
+                    }
+                }
                 finally
                 {
                     TextModeComboBox.SelectedIndexChanged += new EventHandler(TextModeComboBox_SelectedIndexChanged);
@@ -40230,6 +40934,14 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -40275,6 +40987,14 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -40327,6 +41047,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             UpdateKeyboard(m_client.NumerologySystem.TextMode);
@@ -40363,6 +41091,14 @@ public partial class MainForm : Form, ISubscriber
                 WithBismAllahCheckBox.Refresh();
                 WawAsWordCheckBox.Refresh();
                 ShaddaAsLetterCheckBox.Refresh();
+            }
+            catch (Exception ex)
+            {
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
             }
             finally
             {
@@ -40497,6 +41233,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             this.Cursor = Cursors.Default;
@@ -40571,6 +41315,14 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -41395,7 +42147,11 @@ public partial class MainForm : Form, ISubscriber
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, Application.ProductName);
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
             }
             finally
             {
@@ -41422,7 +42178,11 @@ public partial class MainForm : Form, ISubscriber
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, Application.ProductName);
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
             }
             finally
             {
@@ -41449,7 +42209,11 @@ public partial class MainForm : Form, ISubscriber
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, Application.ProductName);
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
             }
             finally
             {
@@ -41476,7 +42240,11 @@ public partial class MainForm : Form, ISubscriber
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, Application.ProductName);
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
             }
             finally
             {
@@ -41678,6 +42446,14 @@ public partial class MainForm : Form, ISubscriber
                     string filename = Globals.NUMBERS_FOLDER + "/" + "perfect_numbers.txt";
                     FileHelper.DisplayFile(filename);
                 }
+                catch (Exception ex)
+                {
+                    while (ex != null)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName);
+                        ex = ex.InnerException;
+                    }
+                }
                 finally
                 {
                     this.Cursor = Cursors.Default;
@@ -41706,6 +42482,14 @@ public partial class MainForm : Form, ISubscriber
                     string filename = Globals.NUMBERS_FOLDER + "/" + "abundant_numbers.txt";
                     FileHelper.DisplayFile(filename);
                 }
+                catch (Exception ex)
+                {
+                    while (ex != null)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName);
+                        ex = ex.InnerException;
+                    }
+                }
                 finally
                 {
                     this.Cursor = Cursors.Default;
@@ -41733,6 +42517,14 @@ public partial class MainForm : Form, ISubscriber
                 {
                     string filename = Globals.NUMBERS_FOLDER + "/" + "deficient_numbers.txt";
                     FileHelper.DisplayFile(filename);
+                }
+                catch (Exception ex)
+                {
+                    while (ex != null)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName);
+                        ex = ex.InnerException;
+                    }
                 }
                 finally
                 {
@@ -42469,6 +43261,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
             m_client.SaveIndexChainLength(filename, NumberType.Natural, length, str.ToString());
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -43775,7 +44575,11 @@ public partial class MainForm : Form, ISubscriber
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, Application.ProductName);
+                    while (ex != null)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName);
+                        ex = ex.InnerException;
+                    }
                 }
                 finally
                 {
@@ -44031,7 +44835,11 @@ public partial class MainForm : Form, ISubscriber
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message);
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
             HidePictureBox();
         }
         finally
@@ -44573,7 +45381,11 @@ public partial class MainForm : Form, ISubscriber
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message, Application.ProductName);
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
         }
         finally
         {
@@ -44746,6 +45558,10 @@ public partial class MainForm : Form, ISubscriber
         {
             m_current_drawing_type = DrawingType.GeneratePrimeDrawings;
             Drawing.GeneratePrimeDrawings(Color.LightGreen, Color.CornflowerBlue);
+        }
+        catch (Exception ex)
+        {
+            HidePictureBox();
         }
         finally
         {
@@ -45271,6 +46087,14 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
         finally
         {
             LetterFrequencyListView.SelectedIndexChanged += new EventHandler(LetterFrequencyListView_SelectedIndexChanged);
@@ -45418,6 +46242,14 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -45605,6 +46437,14 @@ public partial class MainForm : Form, ISubscriber
                         m_client.Logging = false;   // return to FAST calculations without logging
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally
@@ -45800,7 +46640,6 @@ public partial class MainForm : Form, ISubscriber
         {
             while (ex != null)
             {
-                //Console.WriteLine(ex.Message);
                 MessageBox.Show(ex.Message, Application.ProductName);
                 ex = ex.InnerException;
             }
@@ -45832,7 +46671,6 @@ public partial class MainForm : Form, ISubscriber
         {
             while (ex != null)
             {
-                //Console.WriteLine(ex.Message);
                 MessageBox.Show(ex.Message, Application.ProductName);
                 ex = ex.InnerException;
             }
@@ -45869,7 +46707,6 @@ public partial class MainForm : Form, ISubscriber
         //{
         //    while (ex != null)
         //    {
-        //        //Console.WriteLine(ex.Message);
         //        MessageBox.Show(ex.Message, Application.ProductName);
         //        ex = ex.InnerException;
         //    }
@@ -45899,13 +46736,20 @@ public partial class MainForm : Form, ISubscriber
                         {
                             while (ex != null)
                             {
-                                //Console.WriteLine(ex.Message);
                                 MessageBox.Show(ex.Message, Application.ProductName);
                                 ex = ex.InnerException;
                             }
                         }
                     }
                 }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
             }
         }
         finally

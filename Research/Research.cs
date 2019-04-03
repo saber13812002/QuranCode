@@ -6500,15 +6500,4 @@ public static class Research
         System.Diagnostics.Process.Start("Help");
         return null;
     }
-
-    public static string _____________________________________________(Client client, string param, bool in_search_result)
-    {
-        return null;
-    }
-    public static string NewResearchMethod(Client client, string param, bool in_search_result)
-    {
-        // RunButton will display ScriptTextBox
-        // do anything here
-        return null;
-    }
 }

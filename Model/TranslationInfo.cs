@@ -19,4 +19,3 @@ namespace Model
         public string Name = null; // Language - Translator
     }
 }
-

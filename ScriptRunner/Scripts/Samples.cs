@@ -1,157 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Text;
-using System.IO;
 using Model;
 
 public class MyScript : IScriptRunner
 {
-    /// <summary>
-    /// Write your C# script inside this method.
-    /// Don't change its name or parameter list
-    /// </summary>
-    /// <param name="client">Client object holding a reference to the currently selected Book object in TextMode (eg Simplified29)</param>
-    /// <param name="param">any user parameter in the TextBox next to the EXE button (ex Frequency, LettersToJump, DigitSum target, etc)</param>
-    /// <returns>true to disply back in QuranCode matching verses. false to keep script window open</returns>
-    private bool MyMethod(Client client, string param)
+    private bool MyMethod(Client client)
     {
         if (client == null) return false;
-        if (client.Selection == null) return false;
-        List<Verse> verses = client.Selection.Verses;
+        if (client.Book == null) return false;
+        if (client.Book.Verses == null) return false;
+        if (client.FoundVerses == null) client.FoundVerses = new List<Verse>();
 
-        if (client.Book != null)
+        client.FoundVerses.Clear();
+        foreach (Verse verse in client.Book.Verses)
         {
-            // Query the whole book, not just the current verses
-            verses = client.Book.Verses;
-
-            int target;
-            if (param == "")
+            if (Numbers.IsPrime(verse.Number))                    // verse number in the Quran is prime
+            //if (verse.Number % 19)                                // verse number in the Quran is divisble by 19
+            //if (verse.NumberInChapter == verse.Words.Count)       // verse number = verse words
+            //if (verse.NumberInChapter == verse.LetterCount)       // verse number = verse letters
+            //if (client.CalulateValue(verse) == 114)               // verse value = 114 in current Client.NumerologySystem
+            //if (verse.Text.Simplify29().ContainsWords("تر كتب")) // verse contines whole words in any order
             {
-                target = 0;
+                client.FoundVerses.Add(verse);
             }
-            else
+        }
+        return true; // to close Script window and show client.FoundVerses
+    }
+
+    // QuranCode USE ONLY
+    /// <summary>
+    /// Run implements IScriptRunner interface to be invoked by QuranCode application.
+    /// </summary>
+    /// <param name="args">Must pass a Client object here.</param>
+    /// <returns>Return bool to indicate success or not.</returns>
+    public object Run(object[] args)
+    {
+        if (args.Length >= 1)
+        {
+            Client client = args[0] as Client;
+            if (client != null)
             {
-                if (!int.TryParse(param, out target))
-                {
-                    string[] parts = param.Split(',');
-                    if (parts.Length == 2)
-                    {
-                        try
-                        {
-                            int unique_letters = int.Parse(parts[0]);
-                            int letter_frequency = int.Parse(parts[1]);
-                            foreach (Verse verse in verses)
-                            {
-                                if (verse.UniqueLetters.Count == unique_letters)
-                                {
-                                    foreach (char key in client.NumerologySystem.Keys)
-                                    {
-                                        if (verse.GetLetterFrequency(key) == letter_frequency)
-                                        {
-                                            client.FoundVerses.Add(verse);
-                                        }
-                                    }
-                                }
-                            }
-                            return true;
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show(ex.Message, Application.ProductName);
-                            return false;
-                        }
-                    }
-                    return false;
-                }
-            }
-
-            try
-            {
-                client.FoundVerses = new List<Verse>();
-                foreach (Verse verse in verses)
-                {
-                    long value = client.CalculateValue(verse);
-
-                    bool param_condition = false;
-                    if (target == 0) // target == any digit sum
-                    {
-                        param_condition = true;
-                    }
-                    else
-                    {
-                        if (param.ToUpper() == "P") // target == prime digit sum
-                        {
-                            param_condition = Numbers.IsPrime(Numbers.DigitSum(value));
-                        }
-                        else if (param.ToUpper() == "AP") // target == additive prime digit sum
-                        {
-                            param_condition = Numbers.IsAdditivePrime(Numbers.DigitSum(value));
-                        }
-                        else if (param.ToUpper() == "XP") // target == non-additive prime digit sum
-                        {
-                            param_condition = Numbers.IsNonAdditivePrime(Numbers.DigitSum(value));
-                        }
-                        else if (param.ToUpper() == "C") // target == composite digit sum
-                        {
-                            param_condition = Numbers.IsComposite(Numbers.DigitSum(value));
-                        }
-                        else if (param.ToUpper() == "AC") // target == additive composite digit sum
-                        {
-                            param_condition = Numbers.IsAdditiveComposite(Numbers.DigitSum(value));
-                        }
-                        else if (param.ToUpper() == "XC") // target == non-additive composite digit sum
-                        {
-                            param_condition = Numbers.IsNonAdditiveComposite(Numbers.DigitSum(value));
-                        }
-                        else
-                        {
-                            param_condition = (Numbers.DigitSum(value) == target);
-                        }
-                    }
-
-                    if ((Numbers.IsAdditivePrime(value) && param_condition))
-                    {
-                        client.FoundVerses.Add(verse);
-                    }
-                }
-
-                return true; // to close Script window and show Selection
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, Application.ProductName);
-                return false; // to stay in the Script window
+                return MyMethod(client);
             }
         }
         return false;
-    }
-
-    /// <summary>
-    /// Run implements IScriptRunner interface to be invoked by QuranCode application
-    /// </summary>
-    /// <param name="args">any number and type of arguments</param>
-    /// <returns>return any type</returns>
-    public object Run(object[] args)
-    {
-        try
-        {
-            if (args.Length == 2)   // ScriptMethod(Client, string)
-            {
-                Client client = args[0] as Client;
-                string param = args[1].ToString();
-
-                if (client != null)
-                {
-                    return MyMethod(client, param);
-                }
-            }
-            return null;
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(ex.Message, Application.ProductName);
-            return null;
-        }
     }
 }

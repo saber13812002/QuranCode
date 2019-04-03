@@ -7118,7 +7118,7 @@ public class Server : IPublisher
 
                                                 if (
                                                      (unsigned_words.Count == 0) ||
-                                                     (verse_emlaaei_text.ContainsWordsOf(unsigned_words))
+                                                     (verse_emlaaei_text.ContainsWords(unsigned_words))
                                                    )
                                                 {
                                                     result.Add(new Phrase(verse, 0, ""));
@@ -7190,7 +7190,7 @@ public class Server : IPublisher
                                                      (positive_words.Count > 0) ||
                                                      (
                                                        (unsigned_words.Count == 0) ||
-                                                       (verse_emlaaei_text.ContainsWordOf(unsigned_words))
+                                                       (verse_emlaaei_text.ContainsWord(unsigned_words))
                                                      )
                                                    )
                                                 {
@@ -7304,7 +7304,7 @@ public class Server : IPublisher
 
                                 if (
                                      (unsigned_words.Count == 0) ||
-                                     (verse.Translations[translation].ContainsWordsOf(unsigned_words))
+                                     (verse.Translations[translation].ContainsWords(unsigned_words))
                                    )
                                 {
                                     result.Add(new Phrase(verse, 0, ""));
@@ -7376,7 +7376,7 @@ public class Server : IPublisher
                                      (positive_words.Count > 0) ||
                                      (
                                        (unsigned_words.Count == 0) ||
-                                       (verse.Translations[translation].ContainsWordOf(unsigned_words))
+                                       (verse.Translations[translation].ContainsWord(unsigned_words))
                                      )
                                    )
                                 {
@@ -7446,7 +7446,7 @@ public class Server : IPublisher
 
                             if (
                                  (unsigned_words.Count == 0) ||
-                                 (chapter_text.ContainsWordsOf(unsigned_words))
+                                 (chapter_text.ContainsWords(unsigned_words))
                                )
                             {
                                 if (!result.Contains(chapter))
@@ -7483,7 +7483,7 @@ public class Server : IPublisher
                                  (positive_words.Count > 0) ||
                                  (
                                    (unsigned_words.Count == 0) ||
-                                   (chapter_text.ContainsWordOf(unsigned_words))
+                                   (chapter_text.ContainsWord(unsigned_words))
                                  )
                                )
                             {
@@ -7556,7 +7556,7 @@ public class Server : IPublisher
 
                             if (
                                  (unsigned_words.Count == 0) ||
-                                 (page_text.ContainsWordsOf(unsigned_words))
+                                 (page_text.ContainsWords(unsigned_words))
                                )
                             {
                                 if (!result.Contains(page))
@@ -7593,7 +7593,7 @@ public class Server : IPublisher
                                  (positive_words.Count > 0) ||
                                  (
                                    (unsigned_words.Count == 0) ||
-                                   (page_text.ContainsWordOf(unsigned_words))
+                                   (page_text.ContainsWord(unsigned_words))
                                  )
                                )
                             {
@@ -7666,7 +7666,7 @@ public class Server : IPublisher
 
                             if (
                                  (unsigned_words.Count == 0) ||
-                                 (station_text.ContainsWordsOf(unsigned_words))
+                                 (station_text.ContainsWords(unsigned_words))
                                )
                             {
                                 if (!result.Contains(station))
@@ -7703,7 +7703,7 @@ public class Server : IPublisher
                                  (positive_words.Count > 0) ||
                                  (
                                    (unsigned_words.Count == 0) ||
-                                   (station_text.ContainsWordOf(unsigned_words))
+                                   (station_text.ContainsWord(unsigned_words))
                                  )
                                )
                             {
@@ -7776,7 +7776,7 @@ public class Server : IPublisher
 
                             if (
                                  (unsigned_words.Count == 0) ||
-                                 (part_text.ContainsWordsOf(unsigned_words))
+                                 (part_text.ContainsWords(unsigned_words))
                                )
                             {
                                 if (!result.Contains(part))
@@ -7813,7 +7813,7 @@ public class Server : IPublisher
                                  (positive_words.Count > 0) ||
                                  (
                                    (unsigned_words.Count == 0) ||
-                                   (part_text.ContainsWordOf(unsigned_words))
+                                   (part_text.ContainsWord(unsigned_words))
                                  )
                                )
                             {
@@ -7886,7 +7886,7 @@ public class Server : IPublisher
 
                             if (
                                  (unsigned_words.Count == 0) ||
-                                 (group_text.ContainsWordsOf(unsigned_words))
+                                 (group_text.ContainsWords(unsigned_words))
                                )
                             {
                                 if (!result.Contains(group))
@@ -7923,7 +7923,7 @@ public class Server : IPublisher
                                  (positive_words.Count > 0) ||
                                  (
                                    (unsigned_words.Count == 0) ||
-                                   (group_text.ContainsWordOf(unsigned_words))
+                                   (group_text.ContainsWord(unsigned_words))
                                  )
                                )
                             {
@@ -7996,7 +7996,7 @@ public class Server : IPublisher
 
                             if (
                                  (unsigned_words.Count == 0) ||
-                                 (half_text.ContainsWordsOf(unsigned_words))
+                                 (half_text.ContainsWords(unsigned_words))
                                )
                             {
                                 if (!result.Contains(half))
@@ -8033,7 +8033,7 @@ public class Server : IPublisher
                                  (positive_words.Count > 0) ||
                                  (
                                    (unsigned_words.Count == 0) ||
-                                   (half_text.ContainsWordOf(unsigned_words))
+                                   (half_text.ContainsWord(unsigned_words))
                                  )
                                )
                             {
@@ -8106,7 +8106,7 @@ public class Server : IPublisher
 
                             if (
                                  (unsigned_words.Count == 0) ||
-                                 (quarter_text.ContainsWordsOf(unsigned_words))
+                                 (quarter_text.ContainsWords(unsigned_words))
                                )
                             {
                                 if (!result.Contains(quarter))
@@ -8143,7 +8143,7 @@ public class Server : IPublisher
                                  (positive_words.Count > 0) ||
                                  (
                                    (unsigned_words.Count == 0) ||
-                                   (quarter_text.ContainsWordOf(unsigned_words))
+                                   (quarter_text.ContainsWord(unsigned_words))
                                  )
                                )
                             {
@@ -8216,7 +8216,7 @@ public class Server : IPublisher
 
                             if (
                                  (unsigned_words.Count == 0) ||
-                                 (bowing_text.ContainsWordsOf(unsigned_words))
+                                 (bowing_text.ContainsWords(unsigned_words))
                                )
                             {
                                 if (!result.Contains(bowing))
@@ -8253,7 +8253,7 @@ public class Server : IPublisher
                                  (positive_words.Count > 0) ||
                                  (
                                    (unsigned_words.Count == 0) ||
-                                   (bowing_text.ContainsWordOf(unsigned_words))
+                                   (bowing_text.ContainsWord(unsigned_words))
                                  )
                                )
                             {

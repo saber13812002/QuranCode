@@ -459,18 +459,18 @@ public static class StringExtensions
     public static bool Contains(this string source, string value, StringComparison string_comparison)
     {
         if (String.IsNullOrEmpty(source)) return false;
+        if (String.IsNullOrEmpty(value)) return false;
 
         return source.IndexOf(value, string_comparison) != -1;
     }
     public static bool Contains(this string source, string value)
     {
-        if (String.IsNullOrEmpty(source)) return false;
-
         return Contains(source, value, false);
     }
     public static bool Contains(this string source, string value, bool case_sensitive)
     {
         if (String.IsNullOrEmpty(source)) return false;
+        if (String.IsNullOrEmpty(value)) return false;
 
         return case_sensitive ? source.Contains(value, StringComparison.InvariantCulture) : source.Contains(value, StringComparison.InvariantCultureIgnoreCase);
     }
@@ -639,11 +639,11 @@ public static class StringExtensions
     /// <summary> 
     /// returns true if source contains any word of target, else false. 
     /// </summary>
-    public static bool ContainsWordOf(this string source, string target)
+    public static bool ContainsWord(this string source, string target)
     {
-        return ContainsWordOf(source, target, false);
+        return ContainsWord(source, target, false);
     }
-    public static bool ContainsWordOf(this string source, string target, bool case_sensitive)
+    public static bool ContainsWord(this string source, string target, bool case_sensitive)
     {
         if (String.IsNullOrEmpty(source)) return false;
         if (String.IsNullOrEmpty(target)) return false;
@@ -660,14 +660,14 @@ public static class StringExtensions
             {
                 if (case_sensitive)
                 {
-                    if (source_words[i].Contains(target_words[j]))
+                    if (source_words[i] == target_words[j])
                     {
                         return true;
                     }
                 }
                 else
                 {
-                    if (source_words[i].ToLower().Contains(target_words[j].ToLower()))
+                    if (source_words[i].ToLower() == target_words[j].ToLower())
                     {
                         return true;
                     }
@@ -679,11 +679,11 @@ public static class StringExtensions
     /// <summary> 
     /// returns true if source contains word_count words of target in any order, else false. 
     /// </summary>
-    public static bool ContainsWordsOf(this string source, string target, int word_count)
+    public static bool ContainsWords(this string source, string target, int word_count)
     {
-        return ContainsWordsOf(source, target, word_count, false);
+        return ContainsWords(source, target, word_count, false);
     }
-    public static bool ContainsWordsOf(this string source, string target, int word_count, bool case_sensitive)
+    public static bool ContainsWords(this string source, string target, int word_count, bool case_sensitive)
     {
         if (String.IsNullOrEmpty(source)) return false;
         if (String.IsNullOrEmpty(target)) return false;
@@ -703,7 +703,7 @@ public static class StringExtensions
                 {
                     if (source_words[i] != null)
                     {
-                        if (source_words[i].Contains(target_words[j]))
+                        if (source_words[i] == target_words[j])
                         {
                             source_words[i] = null; // remove it from list so not to be reused
                             common_word_count++;
@@ -715,7 +715,7 @@ public static class StringExtensions
                 {
                     if (source_words[i] != null)
                     {
-                        if (source_words[i].ToLower().Contains(target_words[j].ToLower()))
+                        if (source_words[i].ToLower() == target_words[j].ToLower())
                         {
                             source_words[i] = null; // remove it from list so not to be reused
                             common_word_count++;
@@ -734,11 +734,11 @@ public static class StringExtensions
     /// <summary> 
     /// returns true if source contains all words of target in any order, else false. 
     /// </summary>
-    public static bool ContainsWordsOf(this string source, string target)
+    public static bool ContainsWords(this string source, string target)
     {
-        return ContainsWordsOf(source, target, false);
+        return ContainsWords(source, target, false);
     }
-    public static bool ContainsWordsOf(this string source, string target, bool case_sensitive)
+    public static bool ContainsWords(this string source, string target, bool case_sensitive)
     {
         if (String.IsNullOrEmpty(source)) return false;
         if (String.IsNullOrEmpty(target)) return false;
@@ -747,17 +747,17 @@ public static class StringExtensions
         string[] target_words = target.Split();
         int target_word_count = target_words.Length;
 
-        return ContainsWordsOf(source, target, target_word_count, case_sensitive);
+        return ContainsWords(source, target, target_word_count, case_sensitive);
     }
 
     /// <summary> 
     /// returns true if source contains any word of target_words, else false. 
     /// </summary>
-    public static bool ContainsWordOf(this string source, List<string> target_words)
+    public static bool ContainsWord(this string source, List<string> target_words)
     {
-        return ContainsWordOf(source, target_words, false);
+        return ContainsWord(source, target_words, false);
     }
-    public static bool ContainsWordOf(this string source, List<string> target_words, bool case_sensitive)
+    public static bool ContainsWord(this string source, List<string> target_words, bool case_sensitive)
     {
         if (String.IsNullOrEmpty(source)) return false;
         if ((target_words == null) || (target_words.Count == 0)) return false;
@@ -791,11 +791,11 @@ public static class StringExtensions
     /// <summary> 
     /// returns true if source contains word_count words of target_words in any order, else false. 
     /// </summary>
-    public static bool ContainsWordsOf(this string source, List<string> target_words, int word_count)
+    public static bool ContainsWords(this string source, List<string> target_words, int word_count)
     {
-        return ContainsWordsOf(source, target_words, word_count, false);
+        return ContainsWords(source, target_words, word_count, false);
     }
-    public static bool ContainsWordsOf(this string source, List<string> target_words, int word_count, bool case_sensitive)
+    public static bool ContainsWords(this string source, List<string> target_words, int word_count, bool case_sensitive)
     {
         if (String.IsNullOrEmpty(source)) return false;
         if ((target_words == null) || (target_words.Count == 0)) return false;
@@ -845,18 +845,18 @@ public static class StringExtensions
     /// <summary> 
     /// returns true if source contains all words of target_words in any order, else false. 
     /// </summary>
-    public static bool ContainsWordsOf(this string source, List<string> target_words)
+    public static bool ContainsWords(this string source, List<string> target_words)
     {
-        return ContainsWordsOf(source, target_words, false);
+        return ContainsWords(source, target_words, false);
     }
-    public static bool ContainsWordsOf(this string source, List<string> target_words, bool case_sensitive)
+    public static bool ContainsWords(this string source, List<string> target_words, bool case_sensitive)
     {
         if (String.IsNullOrEmpty(source)) return false;
         if ((target_words == null) || (target_words.Count == 0)) return false;
 
         int target_word_count = target_words.Count;
 
-        return ContainsWordsOf(source, target_words, target_word_count, case_sensitive);
+        return ContainsWords(source, target_words, target_word_count, case_sensitive);
     }
 
     /// <summary> 

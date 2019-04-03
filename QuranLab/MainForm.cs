@@ -1382,7 +1382,6 @@ public partial class MainForm : Form
         {
             while (ex != null)
             {
-                //Console.WriteLine(ex.Message);
                 MessageBox.Show(ex.Message, Application.ProductName);
                 ex = ex.InnerException;
             }
@@ -1668,7 +1667,6 @@ public partial class MainForm : Form
                         {
                             while (ex != null)
                             {
-                                //Console.WriteLine(ex.Message);
                                 MessageBox.Show(ex.Message, Application.ProductName);
                                 ex = ex.InnerException;
                             }

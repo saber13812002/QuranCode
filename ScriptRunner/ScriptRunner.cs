@@ -76,9 +76,9 @@ public static class ScriptRunner
         if (compiled_assembly != null)
         {
             // security is not implemented yet !NIY
-            // using Utilties.PrivateStorage was can save but not diaplay in Notepad
+            // using Utilties.PrivateStorage was can save but not display in Notepad
             // plus the output is saved in C:\Users\<user>\AppData\Local\IsolatedStorage\...
-            // no contral over where to save make QuranCode unportable applicaton, which is a no no
+            // no control over where to save make QuranCode unportable applicaton, which is a not acceptable
             //// restrict code security
             //???permission_set.PermitOnly();
 
