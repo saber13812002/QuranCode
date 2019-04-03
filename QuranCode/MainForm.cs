@@ -13222,12 +13222,6 @@ public partial class MainForm : Form, ISubscriber
         {
             LetterFrequencyListView.SelectedIndices.Clear();
         }
-        else if (ScriptTextBox.Visible)
-        {
-            //??? Script
-            //DisplaySelection(sender, false);
-            //PictureBoxPanel.Visible = false;
-        }
         else
         {
             if (m_found_verses_displayed)
@@ -15779,8 +15773,8 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Research
     ///////////////////////////////////////////////////////////////////////////////
+    private Assembly m_research_assembly = null;
     private string m_research_assembly_name = "Research";
-    private Assembly m_research_methods_assembly = null;
     private void LoadResearchMethods()
     {
         try
@@ -15791,7 +15785,7 @@ public partial class MainForm : Form, ISubscriber
             if (domain != null)
             {
                 //????? dynamic loading of DLL library is dangerous!!!
-                m_research_methods_assembly = domain.Load(m_research_assembly_name);
+                m_research_assembly = domain.Load(m_research_assembly_name);
 
                 //// instead add to referenced assemblies in QuranCode project
                 //// find it and extract research methods
@@ -15804,9 +15798,9 @@ public partial class MainForm : Form, ISubscriber
                 //    }
                 //}
 
-                if (m_research_methods_assembly != null)
+                if (m_research_assembly != null)
                 {
-                    Type class_type = m_research_methods_assembly.GetType(m_research_assembly_name);
+                    Type class_type = m_research_assembly.GetType(m_research_assembly_name);
                     if (class_type != null)
                     {
                         MethodInfo[] method_infos = null;
@@ -15909,9 +15903,9 @@ public partial class MainForm : Form, ISubscriber
     {
         try
         {
-            if (m_research_methods_assembly != null)
+            if (m_research_assembly != null)
             {
-                Type assembly_type = m_research_methods_assembly.GetType(m_research_assembly_name);
+                Type assembly_type = m_research_assembly.GetType(m_research_assembly_name);
                 if (assembly_type != null)
                 {
                     MethodInfo method_info = assembly_type.GetMethod(method_name, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
@@ -16070,17 +16064,88 @@ public partial class MainForm : Form, ISubscriber
     ///////////////////////////////////////////////////////////////////////////////
     private Assembly compiled_assembly = null;
     private PermissionSet m_permission_set = null;
+    //private string[] LoadAssemblyMethods(string assembly_name)
+    //{
+    //    string[] result = null;
+    //    try
+    //    {
+    //        AppDomain domain = AppDomain.CurrentDomain;
+    //        if (domain != null)
+    //        {
+    //            Assembly assembly = domain.Load(assembly_name);
+    //            if (assembly != null)
+    //            {
+    //                Type class_type = assembly.GetType(assembly_name);
+    //                if (class_type != null)
+    //                {
+    //                    MethodInfo[] method_infos = class_type.GetMethods(BindingFlags.Public | BindingFlags.Instance);
+    //                    result = new string[method_infos.Length];
+    //                    for (int i = 0; i < method_infos.Length; i++)
+    //                    {
+    //                        result[i] = method_infos[i].Name;
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        while (ex != null)
+    //        {
+    //            MessageBox.Show(ex.Message, Application.ProductName);
+    //            ex = ex.InnerException;
+    //        }
+    //    }
+    //    return result;
+    //}
+    private void ScriptTextBox_KeyDown(object sender, KeyEventArgs e)
+    {
+        // Autocomplete
+        //if (e.KeyCode == Keys.OemPeriod)
+        //{
+        //    string[] method_names = LoadAssemblyMethods("Client");
+        //    if (method_names != null)
+        //    {
+        //        ComboBox cb = new ComboBox();
+        //        cb.Items.AddRange(method_names);
+        //        cb.Location = new Point(600, 100);
+        //        cb.BringToFront();
+        //        cb.DroppedDown = true;
+        //    }
+        //}
+
+        if ((ModifierKeys == Keys.Control) && (e.KeyCode == Keys.S)) // Save
+        {
+            SaveScriptLabel_Click(sender, e);
+        }
+        if ((ModifierKeys == Keys.Alt) && (e.KeyCode == Keys.F4)) // Close
+        {
+            CloseScriptLabel_Click(sender, e);
+        }
+        if (e.KeyCode == Keys.Escape) // Close
+        {
+            CloseScriptLabel_Click(sender, e);
+        }
+        else if (e.KeyCode == Keys.F5)  // Run
+        {
+            RunScriptLabel_Click(sender, e);
+        }
+        else if (e.KeyCode == Keys.F7)  // Compile
+        {
+            CompileScriptLabel_Click(sender, e);
+        }
+    }
     private void ScriptLabel_Click(object sender, EventArgs e)
     {
         if (!ScriptTextBox.Visible)
         {
-            HeaderLabel.Text = "New Script";
-            HeaderLabel.Refresh();
-
-            if (ScriptTextBox.Text == "")
+            if (ScriptTextBox.Text == "") //
             {
-                ScriptTextBox.Text = ScriptRunner.LoadScript("Template.cs");
+                m_script_filename = "Template.cs";
+                ScriptTextBox.Text = ScriptRunner.LoadScript(m_script_filename);
             }
+            HeaderLabel.Text = m_script_filename;
+            HeaderLabel.Refresh();
 
             ScriptTextBox.BringToFront();
             ScriptTextBox.Visible = true;
@@ -16089,6 +16154,7 @@ public partial class MainForm : Form, ISubscriber
             RunScriptLabel.Visible = true;
             ScriptSamplesLabel.Visible = true;
             NewScriptLabel.Visible = true;
+            SaveScriptLabel.Visible = true;
             CloseScriptLabel.Visible = true;
             WordWrapLabel.Visible = false;
             DisplayProstrationVersesLabel.Visible = false;
@@ -16099,18 +16165,78 @@ public partial class MainForm : Form, ISubscriber
             DuplicateLettersCheckBox.Visible = false;
             GenerateSentencesLabel.Visible = false;
         }
-
-        this.KeyPreview = false;
+        ScriptTextBox.Focus();
     }
+    private string m_script_filename = null;
     private void NewScriptLabel_Click(object sender, EventArgs e)
     {
-        ScriptTextBox.Text = ScriptRunner.LoadScript("Template.cs");
-        ScriptOutputTextBox.Text = "";
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            m_script_filename = "Template.cs";
+            ScriptTextBox.Text = ScriptRunner.LoadScript(m_script_filename);
+            ScriptOutputTextBox.Text = "";
+            Thread.Sleep(10);
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
+    }
+    private void SaveScriptLabel_Click(object sender, EventArgs e)
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (!String.IsNullOrEmpty(m_script_filename))
+            {
+                ScriptRunner.SaveScript(m_script_filename, ScriptTextBox.Text);
+            }
+            Thread.Sleep(10);
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
     }
     private void ScriptSamplesLabel_Click(object sender, EventArgs e)
     {
-        ScriptTextBox.Text = ScriptRunner.LoadScript("Samples.cs");
-        ScriptOutputTextBox.Text = "";
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            m_script_filename = "Samples.cs";
+            ScriptTextBox.Text = ScriptRunner.LoadScript(m_script_filename);
+            ScriptOutputTextBox.Text = "";
+            Thread.Sleep(10);
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
     }
     private void CompileScriptLabel_Click(object sender, EventArgs e)
     {
@@ -16184,7 +16310,7 @@ public partial class MainForm : Form, ISubscriber
         // to stop race conditions
         Thread.Sleep(10);
 
-        //this.Cursor = Cursors.WaitCursor;
+        if (sender != RunScriptLabel) this.Cursor = Cursors.WaitCursor;
         try
         {
             if (compiled_assembly != null)
@@ -16238,6 +16364,7 @@ public partial class MainForm : Form, ISubscriber
             RunScriptLabel.Visible = false;
             ScriptSamplesLabel.Visible = false;
             NewScriptLabel.Visible = false;
+            SaveScriptLabel.Visible = false;
             CloseScriptLabel.Visible = false;
             WordWrapLabel.Visible = true;
             DisplayProstrationVersesLabel.Visible = true;
@@ -16248,8 +16375,6 @@ public partial class MainForm : Form, ISubscriber
             DuplicateLettersCheckBox.Visible = (m_active_textbox != null) && (m_active_textbox.SelectionLength > 0) && (Globals.EDITION == Edition.Ultimate);
             GenerateSentencesLabel.Visible = (m_active_textbox != null) && (m_active_textbox.SelectionLength > 0) && (Globals.EDITION == Edition.Ultimate);
         }
-
-        this.KeyPreview = true;
     }
     /////////////////////////////////////////////////////////////////////////////
     #endregion

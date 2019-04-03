@@ -44,6 +44,24 @@ public static class ScriptRunner
     }
 
     /// <summary>
+    /// Save a C# script fie
+    /// </summary>
+    /// <param name="filename">file to save</param>
+    /// <returns></returns>
+    public static void SaveScript(string filename, string text)
+    {
+        string path = Globals.SCRIPTS_FOLDER + "/" + filename;
+        if (File.Exists(path))
+        {
+            using (StreamWriter writer = new StreamWriter(path, false, Encoding.Unicode))
+            {
+                writer.WriteLine(text);
+                writer.Close();
+            }
+        }
+    }
+
+    /// <summary>
     /// Compiles the source_code 
     /// </summary>
     /// <param name="source_code">source_code must implements IScript interface</param>
