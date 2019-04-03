@@ -13222,6 +13222,10 @@ public partial class MainForm : Form, ISubscriber
         {
             LetterFrequencyListView.SelectedIndices.Clear();
         }
+        else if (ScriptTextBox.Visible)
+        {
+            CloseScriptLabel_Click(sender, e);
+        }
         else
         {
             if (m_found_verses_displayed)
