@@ -15,7 +15,7 @@ public class MyScript : IScriptRunner
         foreach (Verse verse in client.Book.Verses)
         {
             if (Numbers.IsPrime(verse.Number))                    // verse number in the Quran is prime
-            //if (verse.Number % 19)                                // verse number in the Quran is divisble by 19
+            //if ((verse.Number % 19) == 0)                         // verse number in the Quran is divisble by 19
             //if (verse.NumberInChapter == verse.Words.Count)       // verse number = verse words
             //if (verse.NumberInChapter == verse.LetterCount)       // verse number = verse letters
             //if (client.CalulateValue(verse) == 114)               // verse value = 114 in current Client.NumerologySystem
