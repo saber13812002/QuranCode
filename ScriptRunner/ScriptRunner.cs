@@ -48,11 +48,16 @@ public static class ScriptRunner
     /// </summary>
     /// <param name="filename">file to save</param>
     /// <returns></returns>
-    public static void SaveScript(string filename, string text)
+    public static string SaveScript(string filename, string text)
     {
+        string[] parts = filename.Split('~');
+        if (parts.Length > 1)
+        {
+            filename = parts[0] + ".cs";
+        }
         if ((filename == "Template.cs") || (filename == "Samples.cs"))
         {
-            throw new Exception(filename + " is not allowed to be modified.");
+            filename = filename.Insert(filename.Length - 3, "~" + DateTime.Now.ToString("yyyyMMdd_hhmmss"));
         }
 
         string path = Globals.SCRIPTS_FOLDER + "/" + filename;
@@ -64,6 +69,8 @@ public static class ScriptRunner
                 writer.Close();
             }
         }
+
+        return filename;
     }
 
     /// <summary>

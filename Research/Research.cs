@@ -6456,46 +6456,46 @@ public static class Research
         return null;
     }
 
-    public static string _____________________________(Client client, string param, bool in_search_result)
+    private static string _____________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
-    public static string Run_AhlulBayt(Client client, string param, bool in_search_result)
+    private static string Run_AhlulBayt(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("AhlulBayt.exe");
         return null;
     }
-    public static string Run_Composites(Client client, string param, bool in_search_result)
+    private static string Run_Composites(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("Composites.exe");
         return null;
     }
-    public static string Run_Numbers(Client client, string param, bool in_search_result)
+    private static string Run_Numbers(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("Numbers.exe");
         return null;
     }
-    public static string Run_InitialLetters(Client client, string param, bool in_search_result)
+    private static string Run_InitialLetters(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("InitialLetters.exe");
         return null;
     }
-    public static string Run_PrimeCalculator(Client client, string param, bool in_search_result)
+    private static string Run_PrimeCalculator(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("PrimeCalculator.exe");
         return null;
     }
-    public static string Run_QuranLab(Client client, string param, bool in_search_result)
+    private static string Run_QuranLab(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("QuranLab.exe");
         return null;
     }
-    public static string Run_WordGenerator(Client client, string param, bool in_search_result)
+    private static string Run_WordGenerator(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("WordGenerator.exe");
         return null;
     }
-    public static string Open_HelpFolder(Client client, string param, bool in_search_result)
+    private static string Open_HelpFolder(Client client, string param, bool in_search_result)
     {
         System.Diagnostics.Process.Start("Help");
         return null;

@@ -101,7 +101,7 @@ public static class Numbers
     public const int DEFAULT_RADIX = 10;                               // base for current number system. Decimal by default.
     public const int RADIX_NINTEEN = 19;                               // base for current number system. 19 for OverItNineteen.
     public const int DEFAULT_DIVISOR = 19;                             // 19 for OverItNineteen.
-    public static Color DIVISOR_COLOR = Color.FromArgb(255, 255, 180); // background color if number is divisible by 19.
+    public static Color DIVISOR_COLOR = Color.FromArgb(224, 255, 224); // background color if number is divisible by 19.
     public static Color INTERESTING_NUMBER_COLOR = Color.Yellow;       // background color if number is interesting.
 
     public static Color[] NUMBER_TYPE_COLORS =

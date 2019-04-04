@@ -639,7 +639,7 @@ public partial class MainForm : Form, ISubscriber
                         }
                         else if (e.KeyCode == Keys.S)
                         {
-                            // Save As dialog
+                            // Save dialog
                         }
                     }
                 }
@@ -1070,7 +1070,7 @@ public partial class MainForm : Form, ISubscriber
         this.MainTextBox = new RichTextBoxEx();
         this.SearchResultTextBox = new RichTextBoxEx();
         this.HeaderPanel = new System.Windows.Forms.Panel();
-        this.ScriptSaveAsLabel = new System.Windows.Forms.Label();
+        this.ScriptSaveLabel = new System.Windows.Forms.Label();
         this.ScriptRunLabel = new System.Windows.Forms.Label();
         this.ScriptCompileLabel = new System.Windows.Forms.Label();
         this.ScriptOpenLabel = new System.Windows.Forms.Label();
@@ -6055,7 +6055,7 @@ public partial class MainForm : Form, ISubscriber
         // HeaderPanel
         // 
         this.HeaderPanel.BackColor = System.Drawing.Color.Transparent;
-        this.HeaderPanel.Controls.Add(this.ScriptSaveAsLabel);
+        this.HeaderPanel.Controls.Add(this.ScriptSaveLabel);
         this.HeaderPanel.Controls.Add(this.ScriptRunLabel);
         this.HeaderPanel.Controls.Add(this.ScriptCompileLabel);
         this.HeaderPanel.Controls.Add(this.ScriptOpenLabel);
@@ -6081,22 +6081,22 @@ public partial class MainForm : Form, ISubscriber
         this.HeaderPanel.Size = new System.Drawing.Size(762, 17);
         this.HeaderPanel.TabIndex = 88;
         // 
-        // ScriptSaveAsLabel
+        // ScriptSaveLabel
         // 
-        this.ScriptSaveAsLabel.BackColor = System.Drawing.Color.Transparent;
-        this.ScriptSaveAsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.ScriptSaveAsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.ScriptSaveAsLabel.ForeColor = System.Drawing.Color.Transparent;
-        this.ScriptSaveAsLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptSaveAsLabel.Image")));
-        this.ScriptSaveAsLabel.Location = new System.Drawing.Point(59, -2);
-        this.ScriptSaveAsLabel.Name = "ScriptSaveAsLabel";
-        this.ScriptSaveAsLabel.Size = new System.Drawing.Size(23, 17);
-        this.ScriptSaveAsLabel.TabIndex = 0;
-        this.ScriptSaveAsLabel.Tag = "";
-        this.ScriptSaveAsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.ScriptSaveAsLabel, "Save");
-        this.ScriptSaveAsLabel.Visible = false;
-        this.ScriptSaveAsLabel.Click += new System.EventHandler(this.ScriptSaveAsLabel_Click);
+        this.ScriptSaveLabel.BackColor = System.Drawing.Color.Transparent;
+        this.ScriptSaveLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.ScriptSaveLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.ScriptSaveLabel.ForeColor = System.Drawing.Color.Transparent;
+        this.ScriptSaveLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptSaveLabel.Image")));
+        this.ScriptSaveLabel.Location = new System.Drawing.Point(59, -2);
+        this.ScriptSaveLabel.Name = "ScriptSaveLabel";
+        this.ScriptSaveLabel.Size = new System.Drawing.Size(23, 17);
+        this.ScriptSaveLabel.TabIndex = 0;
+        this.ScriptSaveLabel.Tag = "";
+        this.ScriptSaveLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.ToolTip.SetToolTip(this.ScriptSaveLabel, "Save");
+        this.ScriptSaveLabel.Visible = false;
+        this.ScriptSaveLabel.Click += new System.EventHandler(this.ScriptSaveLabel_Click);
         // 
         // ScriptRunLabel
         // 
@@ -16289,9 +16289,9 @@ public partial class MainForm : Form, ISubscriber
         //    }
         //}
 
-        if ((ModifierKeys == Keys.Control) && (e.KeyCode == Keys.S)) // SaveAs
+        if ((ModifierKeys == Keys.Control) && (e.KeyCode == Keys.S)) // Save
         {
-            ScriptSaveAsLabel_Click(sender, e);
+            ScriptSaveLabel_Click(sender, e);
         }
         if ((ModifierKeys == Keys.Control) && (e.KeyCode == Keys.F4)) // Close
         {
@@ -16335,6 +16335,7 @@ public partial class MainForm : Form, ISubscriber
             ScriptCompileLabel.Visible = true;
             ScriptRunLabel.Visible = true;
             ScriptOpenLabel.Visible = true;
+            ScriptSaveLabel.Visible = true;
             ScriptSaveAsLabel.Visible = true;
             WordWrapLabel.Visible = false;
             DisplayProstrationVersesLabel.Visible = false;
@@ -16355,7 +16356,7 @@ public partial class MainForm : Form, ISubscriber
             if (OpenFileDialog != null)
             {
                 OpenFileDialog.InitialDirectory = Path.Combine(Application.StartupPath, Globals.SCRIPTS_FOLDER);
-                OpenFileDialog.Title = Application.ProductName;
+                //OpenFileDialog.Title = Application.ProductName;
                 OpenFileDialog.CheckFileExists = true;
                 OpenFileDialog.CheckPathExists = true;
                 OpenFileDialog.DefaultExt = "cs";
@@ -16390,6 +16391,32 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
+    private void ScriptSaveLabel_Click(object sender, EventArgs e)
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (!String.IsNullOrEmpty(m_script_filename))
+            {
+                m_script_filename = ScriptRunner.SaveScript(m_script_filename, ScriptTextBox.Text);
+                HeaderLabel.Text = m_script_filename;
+                HeaderLabel.Refresh();
+            }
+            Thread.Sleep(10);
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
+    }
     private void ScriptSaveAsLabel_Click(object sender, EventArgs e)
     {
         this.Cursor = Cursors.WaitCursor;
@@ -16398,7 +16425,7 @@ public partial class MainForm : Form, ISubscriber
             if (SaveFileDialog != null)
             {
                 SaveFileDialog.InitialDirectory = Path.Combine(Application.StartupPath, Globals.SCRIPTS_FOLDER);
-                SaveFileDialog.Title = Application.ProductName;
+                //SaveFileDialog.Title = Application.ProductName;
                 SaveFileDialog.CheckPathExists = true;
                 SaveFileDialog.DefaultExt = "cs";
                 SaveFileDialog.Filter = "C# files (*.cs)|*.cs";
@@ -16412,7 +16439,7 @@ public partial class MainForm : Form, ISubscriber
                     m_script_filename = Path.GetFileName(SaveFileDialog.FileName);
                     if (!String.IsNullOrEmpty(m_script_filename))
                     {
-                        ScriptRunner.SaveScript(m_script_filename, ScriptTextBox.Text);
+                        m_script_filename = ScriptRunner.SaveScript(m_script_filename, ScriptTextBox.Text);
                         HeaderLabel.Text = m_script_filename;
                         HeaderLabel.Refresh();
                     }
@@ -16551,6 +16578,7 @@ public partial class MainForm : Form, ISubscriber
             ScriptCompileLabel.Visible = false;
             ScriptRunLabel.Visible = false;
             ScriptOpenLabel.Visible = false;
+            ScriptSaveLabel.Visible = false;
             ScriptSaveAsLabel.Visible = false;
             WordWrapLabel.Visible = true;
             DisplayProstrationVersesLabel.Visible = true;
@@ -47109,6 +47137,27 @@ public partial class MainForm : Form, ISubscriber
             {
                 m_about_box.ShowDialog();
             }
+        }
+    }
+
+    private void CalculatorLabel_Click(object sender, EventArgs e)
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            System.Diagnostics.Process.Start("PrimeCalculator.exe");
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
         }
     }
     /////////////////////////////////////////////////////////////////////////////
