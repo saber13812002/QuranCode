@@ -98,6 +98,12 @@ public enum ArithmeticOperator { Plus, Minus, Multiply, Divide, Modulus };
 
 public static class Numbers
 {
+    public const int DEFAULT_RADIX = 10;                               // base for current number system. Decimal by default.
+    public const int RADIX_NINTEEN = 19;                               // base for current number system. 19 for OverItNineteen.
+    public const int DEFAULT_DIVISOR = 19;                             // 19 for OverItNineteen.
+    public static Color DIVISOR_COLOR = Color.FromArgb(255, 255, 180); // background color if number is divisible by 19.
+    public static Color INTERESTING_NUMBER_COLOR = Color.Yellow;       // background color if number is interesting.
+
     public static Color[] NUMBER_TYPE_COLORS =
     { 
         /* NumberType.None */                   Color.Black,
@@ -198,7 +204,7 @@ public static class Numbers
     };
 
     //                             int.MaxValue = 2^32 - 1 = 2147483647;
-    public static int MAX_NUMBER = int.MaxValue / (Globals.EDITION == Edition.Standard ? 1024 : 16);
+    public static int MAX_NUMBER = int.MaxValue / (Globals.EDITION == Edition.Standard ? 1024 : 64);
 
     // pi = circumference / diameter ~= 355/113
     public const double PI = 3.141592653589793238462643383279D;

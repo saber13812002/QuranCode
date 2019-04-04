@@ -517,6 +517,8 @@ public partial class MainForm : Form, ISubscriber
             this.ToolTip.SetToolTip(this.IndexChainLengthTextBox, L[l]["Prime-composite index chain length"]);
             this.ToolTip.SetToolTip(this.DigitSumTextBox, L[l]["Digit sum"]);
             this.ToolTip.SetToolTip(this.DigitalRootTextBox, L[l]["Digital root"]);
+            this.ToolTip.SetToolTip(this.PrimeNumbersLabel, L[l]["Prime numbers"]);
+            this.ToolTip.SetToolTip(this.CompositeNumbersLabel, L[l]["Composite numbers"]);
             this.ToolTip.SetToolTip(this.NthNumberTextBox, L[l]["Prime index"]);
             this.ToolTip.SetToolTip(this.NthAdditiveNumberTextBox, L[l]["Additive prime index"]);
             this.ToolTip.SetToolTip(this.NthNonAdditiveNumberTextBox, L[l]["Non-additive prime index"]);
@@ -690,6 +692,9 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Constants
     ///////////////////////////////////////////////////////////////////////////////
+    private const int MIN_DIVISOR = 2;
+    private const int MAX_DIVISOR = 9999;
+
     private static int c = 140;
     private static Color[] CHAPTER_INITIALIZATION_COLORS =
     { 
@@ -720,13 +725,6 @@ public partial class MainForm : Form, ISubscriber
     private const float DEFAULT_TEXT_ZOOM_FACTOR = 1.0F;
     private const float DEFAULT_GRAPHICS_ZOOM_FACTOR = 1.0F;
     private const int SELECTON_SCOPE_TEXT_MAX_LENGTH = 32;  // for longer text, use elipses (...)
-    private const int DEFAULT_RADIX = 10;                   // base for current number system. Decimal by default.
-    private const int RADIX_NINTEEN = 19;                   // base for current number system. 19 for OverItNineteen.
-    private const int DEFAULT_DIVISOR = 19;                 // 19 for OverItNineteen.
-    private const int MIN_DIVISOR = 2;                      // minimum divisor
-    private const int MAX_DIVISOR = 9999;                   // maximum divisor
-    private static Color DIVISOR_COLOR = Color.FromArgb(204, 255, 204); // background color if number is divisible by DEFAULT_DIVISOR or DISTANCES_DIVISOR.
-    private static Color INTERESTING_NUMBER_COLOR = Color.Yellow; // background color if number is InterestingNumber, InterestingRatio.
     private const float DEFAULT_DPI_X = 96.0F;              // 100% = 96.0F,   125% = 120.0F,   150% = 144.0F
     ///////////////////////////////////////////////////////////////////////////////
     #endregion
@@ -850,7 +848,6 @@ public partial class MainForm : Form, ISubscriber
         this.ResearchMethodsRunButton = new System.Windows.Forms.Button();
         this.ResearchMethodParameterTextBox = new System.Windows.Forms.TextBox();
         this.ResearchMethodsComboBox = new System.Windows.Forms.ComboBox();
-        this.PrimeNumbersLabel = new System.Windows.Forms.Label();
         this.VersionLabel = new System.Windows.Forms.Label();
         this.HelpFolderLabel = new System.Windows.Forms.Label();
         this.HelpMessageLabel = new System.Windows.Forms.Label();
@@ -888,8 +885,8 @@ public partial class MainForm : Form, ISubscriber
         this.BrowseHistoryForwardButton = new System.Windows.Forms.Button();
         this.BrowseHistoryBackwardButton = new System.Windows.Forms.Button();
         this.LanguageComboBox = new System.Windows.Forms.ComboBox();
-        this.PrimalogyARLabel = new System.Windows.Forms.Label();
-        this.PrimalogyLabel = new System.Windows.Forms.Label();
+        this.CompositeNumbersLabel = new System.Windows.Forms.Label();
+        this.PrimeNumbersLabel = new System.Windows.Forms.Label();
         this.ToolbarPanel = new System.Windows.Forms.Panel();
         this.ProgressBar = new System.Windows.Forms.ProgressBar();
         this.MainSplitContainer = new System.Windows.Forms.SplitContainer();
@@ -1978,7 +1975,6 @@ public partial class MainForm : Form, ISubscriber
         this.ResearchPanel.Controls.Add(this.ResearchMethodsRunButton);
         this.ResearchPanel.Controls.Add(this.ResearchMethodParameterTextBox);
         this.ResearchPanel.Controls.Add(this.ResearchMethodsComboBox);
-        this.ResearchPanel.Controls.Add(this.PrimeNumbersLabel);
         this.ResearchPanel.Dock = System.Windows.Forms.DockStyle.Left;
         this.ResearchPanel.Location = new System.Drawing.Point(0, 0);
         this.ResearchPanel.Margin = new System.Windows.Forms.Padding(4);
@@ -2049,24 +2045,6 @@ public partial class MainForm : Form, ISubscriber
         this.ResearchMethodsComboBox.SelectedIndexChanged += new System.EventHandler(this.ResearchMethodsComboBox_SelectedIndexChanged);
         this.ResearchMethodsComboBox.Enter += new System.EventHandler(this.StatusControls_Enter);
         this.ResearchMethodsComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ResearchMethodsComboBox_KeyDown);
-        // 
-        // PrimeNumbersLabel
-        // 
-        this.PrimeNumbersLabel.BackColor = System.Drawing.Color.Transparent;
-        this.PrimeNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.PrimeNumbersLabel.Dock = System.Windows.Forms.DockStyle.Fill;
-        this.PrimeNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.PrimeNumbersLabel.ForeColor = System.Drawing.Color.SteelBlue;
-        this.PrimeNumbersLabel.Location = new System.Drawing.Point(0, 0);
-        this.PrimeNumbersLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.PrimeNumbersLabel.Name = "PrimeNumbersLabel";
-        this.PrimeNumbersLabel.Size = new System.Drawing.Size(220, 26);
-        this.PrimeNumbersLabel.TabIndex = 1;
-        this.PrimeNumbersLabel.Tag = "http://heliwave.com/";
-        this.PrimeNumbersLabel.Text = "Quran and Prime Numbers";
-        this.PrimeNumbersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.PrimeNumbersLabel, "القرءان والأعداد الأولية");
-        this.PrimeNumbersLabel.Click += new System.EventHandler(this.LinkLabel_Click);
         // 
         // VersionLabel
         // 
@@ -2709,37 +2687,37 @@ public partial class MainForm : Form, ISubscriber
         this.LanguageComboBox.TabIndex = 1;
         this.LanguageComboBox.SelectedIndexChanged += new System.EventHandler(this.LanguageComboBox_SelectedIndexChanged);
         // 
-        // PrimalogyARLabel
+        // CompositeNumbersLabel
         // 
-        this.PrimalogyARLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.PrimalogyARLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-        this.PrimalogyARLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.PrimalogyARLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.PrimalogyARLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.PrimalogyARLabel.Location = new System.Drawing.Point(3, 11);
-        this.PrimalogyARLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.PrimalogyARLabel.Name = "PrimalogyARLabel";
-        this.PrimalogyARLabel.Size = new System.Drawing.Size(5, 10);
-        this.PrimalogyARLabel.TabIndex = 155;
-        this.PrimalogyARLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-        this.ToolTip.SetToolTip(this.PrimalogyARLabel, "نظام الجُمَّل الوتري  - البرايمولوجي\r\n©علي عبد الرزاق عبد الكريم القره غولي 2008");
-        this.PrimalogyARLabel.Click += new System.EventHandler(this.PrimalogyARLabel_Click);
+        this.CompositeNumbersLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+        this.CompositeNumbersLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+        this.CompositeNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.CompositeNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.CompositeNumbersLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.CompositeNumbersLabel.Location = new System.Drawing.Point(3, 11);
+        this.CompositeNumbersLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+        this.CompositeNumbersLabel.Name = "CompositeNumbersLabel";
+        this.CompositeNumbersLabel.Size = new System.Drawing.Size(5, 10);
+        this.CompositeNumbersLabel.TabIndex = 155;
+        this.CompositeNumbersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        this.ToolTip.SetToolTip(this.CompositeNumbersLabel, "Composite numbers");
+        this.CompositeNumbersLabel.Click += new System.EventHandler(this.CompositeNumbersLabel_Click);
         // 
-        // PrimalogyLabel
+        // PrimeNumbersLabel
         // 
-        this.PrimalogyLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.PrimalogyLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-        this.PrimalogyLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.PrimalogyLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.PrimalogyLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.PrimalogyLabel.Location = new System.Drawing.Point(3, 2);
-        this.PrimalogyLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.PrimalogyLabel.Name = "PrimalogyLabel";
-        this.PrimalogyLabel.Size = new System.Drawing.Size(5, 10);
-        this.PrimalogyLabel.TabIndex = 154;
-        this.PrimalogyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-        this.ToolTip.SetToolTip(this.PrimalogyLabel, "Primalogy System ©2008 Ali Adams");
-        this.PrimalogyLabel.Click += new System.EventHandler(this.PrimalogyLabel_Click);
+        this.PrimeNumbersLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+        this.PrimeNumbersLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+        this.PrimeNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.PrimeNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.PrimeNumbersLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.PrimeNumbersLabel.Location = new System.Drawing.Point(3, 2);
+        this.PrimeNumbersLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+        this.PrimeNumbersLabel.Name = "PrimeNumbersLabel";
+        this.PrimeNumbersLabel.Size = new System.Drawing.Size(5, 10);
+        this.PrimeNumbersLabel.TabIndex = 154;
+        this.PrimeNumbersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        this.ToolTip.SetToolTip(this.PrimeNumbersLabel, "Prime numbers");
+        this.PrimeNumbersLabel.Click += new System.EventHandler(this.PrimeNumbersLabel_Click);
         // 
         // ToolbarPanel
         // 
@@ -10938,8 +10916,8 @@ public partial class MainForm : Form, ISubscriber
         this.ValuePanel.Controls.Add(this.Nth4nMinus1PrimeNumberLabel);
         this.ValuePanel.Controls.Add(this.Nth4nPlus1PrimeNumberLabel);
         this.ValuePanel.Controls.Add(this.Nth4n1NumberTextBox);
-        this.ValuePanel.Controls.Add(this.PrimalogyARLabel);
-        this.ValuePanel.Controls.Add(this.PrimalogyLabel);
+        this.ValuePanel.Controls.Add(this.CompositeNumbersLabel);
+        this.ValuePanel.Controls.Add(this.PrimeNumbersLabel);
         this.ValuePanel.Controls.Add(this.SumOfDigitSumsTextBox);
         this.ValuePanel.Controls.Add(this.SquareDiffTextBox);
         this.ValuePanel.Controls.Add(this.SquareSumTextBox);
@@ -12781,7 +12759,8 @@ public partial class MainForm : Form, ISubscriber
                             splash_form.Progress = 65;
                             Thread.Sleep(100);
 
-                            splash_form.Information = "Loading user settings ...";
+                            //splash_form.Information = "Loading user settings ...";
+                            splash_form.Information = "Generating primes and composites ...";
                             LoadApplicationSettings();
                             splash_form.Progress = 70;
                             Thread.Sleep(100);
@@ -12848,7 +12827,8 @@ public partial class MainForm : Form, ISubscriber
 
                             UpdateTextModeOptions();
 
-                            splash_form.Information = "Building prime/composite indexes ...";
+                            //splash_form.Information = "Building prime/composite indexes ...";
+                            splash_form.Information = "Loading and calculating text value ...";
 
                             // refresh chapter sort method/order/pin_chapter1
                             m_client.Book.SortChapters(m_chapter_sort_method, m_chapter_sort_order, m_pin_chapter1);
@@ -12927,6 +12907,12 @@ public partial class MainForm : Form, ISubscriber
     private void MainForm_Shown(object sender, EventArgs e)
     {
         VersionLabel.Text = " " + Globals.SHORT_VERSION;
+
+        DivisorValueDownLabel.ForeColor = Numbers.DIVISOR_COLOR;
+        DivisorValueLabel.ForeColor = Numbers.DIVISOR_COLOR;
+        DivisorValueUpLabel.ForeColor = Numbers.DIVISOR_COLOR;
+        PrimeNumbersLabel.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[3];
+        CompositeNumbersLabel.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[6];
 
         // setup C V W L start for distance caluclations
         MainTextBox.AlignToStart();
@@ -13301,12 +13287,12 @@ public partial class MainForm : Form, ISubscriber
     }
     private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
     {
-        //// prevent user from closing from the X close button
-        //if (e.CloseReason == CloseReason.UserClosing)
-        //{
-        //    e.Cancel = true;
-        //    this.Visible = false;
-        //}
+        // prevent user from closing from the X close button
+        if (e.CloseReason == CloseReason.UserClosing)
+        {
+            e.Cancel = true;
+            this.Visible = false;
+        }
     }
     private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
     {
@@ -14218,7 +14204,7 @@ public partial class MainForm : Form, ISubscriber
                                                     }
                                                     catch
                                                     {
-                                                        m_values_sequence_radix = DEFAULT_RADIX;
+                                                        m_values_sequence_radix = Numbers.DEFAULT_RADIX;
                                                     }
                                                     ValuesSequenceRadixNumericUpDown.Value = m_values_sequence_radix;
                                                 }
@@ -14298,7 +14284,7 @@ public partial class MainForm : Form, ISubscriber
                                                     }
                                                     catch
                                                     {
-                                                        m_radix = DEFAULT_RADIX;
+                                                        m_radix = Numbers.DEFAULT_RADIX;
                                                     }
                                                     RadixValueLabel.Text = m_radix.ToString();
                                                 }
@@ -14311,7 +14297,7 @@ public partial class MainForm : Form, ISubscriber
                                                     }
                                                     catch
                                                     {
-                                                        m_divisor = DEFAULT_DIVISOR;
+                                                        m_divisor = Numbers.DEFAULT_DIVISOR;
                                                     }
                                                     DivisorValueLabel.Text = m_divisor.ToString();
                                                 }
@@ -14527,7 +14513,7 @@ public partial class MainForm : Form, ISubscriber
                                                     }
                                                     catch
                                                     {
-                                                        m_maths_divisor = DEFAULT_DIVISOR;
+                                                        m_maths_divisor = Numbers.DEFAULT_DIVISOR;
                                                     }
                                                     MathsDivisorNumericUpDown.Value = m_maths_divisor;
                                                 }
@@ -14625,7 +14611,7 @@ public partial class MainForm : Form, ISubscriber
                                                     }
                                                     catch
                                                     {
-                                                        m_distances_divisor = DEFAULT_DIVISOR;
+                                                        m_distances_divisor = Numbers.DEFAULT_DIVISOR;
                                                     }
                                                     DistancesDivisorNumericUpDown.Value = m_distances_divisor;
                                                 }
@@ -15043,11 +15029,11 @@ public partial class MainForm : Form, ISubscriber
                             this.DNASequenceSystemComboBox.SelectedItem = item;
                         }
 
-                        m_values_sequence_radix = DEFAULT_RADIX;
+                        m_values_sequence_radix = Numbers.DEFAULT_RADIX;
                         ValuesSequenceRadixNumericUpDown.Value = m_values_sequence_radix;
-                        m_maths_divisor = DEFAULT_DIVISOR;
+                        m_maths_divisor = Numbers.DEFAULT_DIVISOR;
                         MathsDivisorNumericUpDown.Value = m_maths_divisor;
-                        m_distances_divisor = DEFAULT_DIVISOR;
+                        m_distances_divisor = Numbers.DEFAULT_DIVISOR;
                         DistancesDivisorNumericUpDown.Value = m_distances_divisor;
 
                         ShowToolTipsCheckBox.Checked = true;
@@ -22597,7 +22583,7 @@ public partial class MainForm : Form, ISubscriber
                     int chapter_number = m_client.Book.Chapters[ChapterComboBox.SelectedIndex].SortedNumber;
                     //ChapterComboBox.ForeColor = ChaptersListBox.GetItemColor(chapter_number - 1);
                     ChapterComboBox.ForeColor = Numbers.GetNumberTypeColor(chapter_number);
-                    ChapterComboBox.BackColor = (Numbers.Compare(chapter_number, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
+                    ChapterComboBox.BackColor = (Numbers.Compare(chapter_number, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
                 }
             }
         }
@@ -22616,19 +22602,19 @@ public partial class MainForm : Form, ISubscriber
         WordNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)WordNumericUpDown.Value);
         LetterNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)LetterNumericUpDown.Value);
 
-        ChapterVerseNumericUpDown.BackColor = (Numbers.Compare((int)ChapterVerseNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-        ChapterWordNumericUpDown.BackColor = (Numbers.Compare((int)ChapterWordNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-        ChapterLetterNumericUpDown.BackColor = (Numbers.Compare((int)ChapterLetterNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-        PageNumericUpDown.BackColor = (Numbers.Compare((int)PageNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-        StationNumericUpDown.BackColor = (Numbers.Compare((int)StationNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-        PartNumericUpDown.BackColor = (Numbers.Compare((int)PartNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-        GroupNumericUpDown.BackColor = (Numbers.Compare((int)GroupNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-        HalfNumericUpDown.BackColor = (Numbers.Compare((int)HalfNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-        QuarterNumericUpDown.BackColor = (Numbers.Compare((int)QuarterNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-        BowingNumericUpDown.BackColor = (Numbers.Compare((int)BowingNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-        VerseNumericUpDown.BackColor = (Numbers.Compare((int)VerseNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-        WordNumericUpDown.BackColor = (Numbers.Compare((int)WordNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-        LetterNumericUpDown.BackColor = (Numbers.Compare((int)LetterNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
+        ChapterVerseNumericUpDown.BackColor = (Numbers.Compare((int)ChapterVerseNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        ChapterWordNumericUpDown.BackColor = (Numbers.Compare((int)ChapterWordNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        ChapterLetterNumericUpDown.BackColor = (Numbers.Compare((int)ChapterLetterNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        PageNumericUpDown.BackColor = (Numbers.Compare((int)PageNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        StationNumericUpDown.BackColor = (Numbers.Compare((int)StationNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        PartNumericUpDown.BackColor = (Numbers.Compare((int)PartNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        GroupNumericUpDown.BackColor = (Numbers.Compare((int)GroupNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        HalfNumericUpDown.BackColor = (Numbers.Compare((int)HalfNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        QuarterNumericUpDown.BackColor = (Numbers.Compare((int)QuarterNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        BowingNumericUpDown.BackColor = (Numbers.Compare((int)BowingNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        VerseNumericUpDown.BackColor = (Numbers.Compare((int)VerseNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        WordNumericUpDown.BackColor = (Numbers.Compare((int)WordNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        LetterNumericUpDown.BackColor = (Numbers.Compare((int)LetterNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
 
         ChapterComboBox.Refresh();
         ChapterVerseNumericUpDown.Refresh();
@@ -26279,7 +26265,7 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region C+V Maths
     ///////////////////////////////////////////////////////////////////////////////
-    private long m_maths_divisor = DEFAULT_DIVISOR;
+    private long m_maths_divisor = Numbers.DEFAULT_DIVISOR;
     private bool m_maths_update_global_divisor = false;
     private void MathsDivisorNumericUpDown_ValueChanged(object sender, EventArgs e)
     {
@@ -26301,7 +26287,7 @@ public partial class MainForm : Form, ISubscriber
         }
         else
         {
-            m_divisor = DEFAULT_DIVISOR;
+            m_divisor = Numbers.DEFAULT_DIVISOR;
         }
         DivisorValueLabel.Text = m_divisor.ToString();
     }
@@ -26597,68 +26583,68 @@ public partial class MainForm : Form, ISubscriber
                             MathsChaptersCDivideVPrimeSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)pCDivideV);
                             MathsChaptersCDivideVCompositeSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)cCDivideV);
 
-                            MathsChaptersCSumTextBox.BackColor = (Numbers.Compare(C, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCOddSumTextBox.BackColor = (Numbers.Compare(oC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCEvenSumTextBox.BackColor = (Numbers.Compare(eC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCPrimeSumTextBox.BackColor = (Numbers.Compare(pC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCCompositeSumTextBox.BackColor = (Numbers.Compare(cC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersVSumTextBox.BackColor = (Numbers.Compare(V, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersVOddSumTextBox.BackColor = (Numbers.Compare(oV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersVEvenSumTextBox.BackColor = (Numbers.Compare(eV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersVPrimeSumTextBox.BackColor = (Numbers.Compare(pV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersVCompositeSumTextBox.BackColor = (Numbers.Compare(cV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCPlusVSumTextBox.BackColor = (Numbers.Compare(CPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCPlusVOddSumTextBox.BackColor = (Numbers.Compare(oCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCPlusVEvenSumTextBox.BackColor = (Numbers.Compare(eCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCPlusVPrimeSumTextBox.BackColor = (Numbers.Compare(pCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCPlusVCompositeSumTextBox.BackColor = (Numbers.Compare(cCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCMinusVSumTextBox.BackColor = (Numbers.Compare(CMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCMinusVOddSumTextBox.BackColor = (Numbers.Compare(oCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCMinusVEvenSumTextBox.BackColor = (Numbers.Compare(eCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCMinusVPrimeSumTextBox.BackColor = (Numbers.Compare(pCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCMinusVCompositeSumTextBox.BackColor = (Numbers.Compare(cCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCMultiplyVSumTextBox.BackColor = (Numbers.Compare(CMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCMultiplyVOddSumTextBox.BackColor = (Numbers.Compare(oCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCMultiplyVEvenSumTextBox.BackColor = (Numbers.Compare(eCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCMultiplyVPrimeSumTextBox.BackColor = (Numbers.Compare(pCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCMultiplyVCompositeSumTextBox.BackColor = (Numbers.Compare(cCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCDivideVSumTextBox.BackColor = (Numbers.Compare((long)CDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCDivideVOddSumTextBox.BackColor = (Numbers.Compare((long)oCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCDivideVEvenSumTextBox.BackColor = (Numbers.Compare((long)eCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCDivideVPrimeSumTextBox.BackColor = (Numbers.Compare((long)pCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                            MathsChaptersCDivideVCompositeSumTextBox.BackColor = (Numbers.Compare((long)cCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCSumTextBox.BackColor = (Numbers.Compare(C, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCOddSumTextBox.BackColor = (Numbers.Compare(oC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCEvenSumTextBox.BackColor = (Numbers.Compare(eC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCPrimeSumTextBox.BackColor = (Numbers.Compare(pC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCCompositeSumTextBox.BackColor = (Numbers.Compare(cC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersVSumTextBox.BackColor = (Numbers.Compare(V, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersVOddSumTextBox.BackColor = (Numbers.Compare(oV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersVEvenSumTextBox.BackColor = (Numbers.Compare(eV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersVPrimeSumTextBox.BackColor = (Numbers.Compare(pV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersVCompositeSumTextBox.BackColor = (Numbers.Compare(cV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCPlusVSumTextBox.BackColor = (Numbers.Compare(CPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCPlusVOddSumTextBox.BackColor = (Numbers.Compare(oCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCPlusVEvenSumTextBox.BackColor = (Numbers.Compare(eCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCPlusVPrimeSumTextBox.BackColor = (Numbers.Compare(pCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCPlusVCompositeSumTextBox.BackColor = (Numbers.Compare(cCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCMinusVSumTextBox.BackColor = (Numbers.Compare(CMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCMinusVOddSumTextBox.BackColor = (Numbers.Compare(oCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCMinusVEvenSumTextBox.BackColor = (Numbers.Compare(eCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCMinusVPrimeSumTextBox.BackColor = (Numbers.Compare(pCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCMinusVCompositeSumTextBox.BackColor = (Numbers.Compare(cCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCMultiplyVSumTextBox.BackColor = (Numbers.Compare(CMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCMultiplyVOddSumTextBox.BackColor = (Numbers.Compare(oCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCMultiplyVEvenSumTextBox.BackColor = (Numbers.Compare(eCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCMultiplyVPrimeSumTextBox.BackColor = (Numbers.Compare(pCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCMultiplyVCompositeSumTextBox.BackColor = (Numbers.Compare(cCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCDivideVSumTextBox.BackColor = (Numbers.Compare((long)CDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCDivideVOddSumTextBox.BackColor = (Numbers.Compare((long)oCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCDivideVEvenSumTextBox.BackColor = (Numbers.Compare((long)eCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCDivideVPrimeSumTextBox.BackColor = (Numbers.Compare((long)pCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            MathsChaptersCDivideVCompositeSumTextBox.BackColor = (Numbers.Compare((long)cCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
 
                             // Interesting numbers
-                            if (C.IsInteresting()) MathsChaptersCSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (oC.IsInteresting()) MathsChaptersCOddSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (eC.IsInteresting()) MathsChaptersCEvenSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (pC.IsInteresting()) MathsChaptersCPrimeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (cC.IsInteresting()) MathsChaptersCCompositeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (V.IsInteresting()) MathsChaptersVSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (oV.IsInteresting()) MathsChaptersVOddSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (eV.IsInteresting()) MathsChaptersVEvenSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (pV.IsInteresting()) MathsChaptersVPrimeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (cV.IsInteresting()) MathsChaptersVCompositeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (CPlusV.IsInteresting()) MathsChaptersCPlusVSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (oCPlusV.IsInteresting()) MathsChaptersCPlusVOddSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (eCPlusV.IsInteresting()) MathsChaptersCPlusVEvenSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (pCPlusV.IsInteresting()) MathsChaptersCPlusVPrimeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (cCPlusV.IsInteresting()) MathsChaptersCPlusVCompositeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (CMinusV.IsInteresting()) MathsChaptersCMinusVSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (oCMinusV.IsInteresting()) MathsChaptersCMinusVOddSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (eCMinusV.IsInteresting()) MathsChaptersCMinusVEvenSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (pCMinusV.IsInteresting()) MathsChaptersCMinusVPrimeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (cCMinusV.IsInteresting()) MathsChaptersCMinusVCompositeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (CMultiplyV.IsInteresting()) MathsChaptersCMultiplyVSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (oCMultiplyV.IsInteresting()) MathsChaptersCMultiplyVOddSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (eCMultiplyV.IsInteresting()) MathsChaptersCMultiplyVEvenSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (pCMultiplyV.IsInteresting()) MathsChaptersCMultiplyVPrimeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (cCMultiplyV.IsInteresting()) MathsChaptersCMultiplyVCompositeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (CDivideV.IsInteresting()) MathsChaptersCDivideVSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (oCDivideV.IsInteresting()) MathsChaptersCDivideVOddSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (eCDivideV.IsInteresting()) MathsChaptersCDivideVEvenSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (pCDivideV.IsInteresting()) MathsChaptersCDivideVPrimeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                            if (cCDivideV.IsInteresting()) MathsChaptersCDivideVCompositeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                            if (C.IsInteresting()) MathsChaptersCSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (oC.IsInteresting()) MathsChaptersCOddSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (eC.IsInteresting()) MathsChaptersCEvenSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (pC.IsInteresting()) MathsChaptersCPrimeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (cC.IsInteresting()) MathsChaptersCCompositeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (V.IsInteresting()) MathsChaptersVSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (oV.IsInteresting()) MathsChaptersVOddSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (eV.IsInteresting()) MathsChaptersVEvenSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (pV.IsInteresting()) MathsChaptersVPrimeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (cV.IsInteresting()) MathsChaptersVCompositeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (CPlusV.IsInteresting()) MathsChaptersCPlusVSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (oCPlusV.IsInteresting()) MathsChaptersCPlusVOddSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (eCPlusV.IsInteresting()) MathsChaptersCPlusVEvenSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (pCPlusV.IsInteresting()) MathsChaptersCPlusVPrimeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (cCPlusV.IsInteresting()) MathsChaptersCPlusVCompositeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (CMinusV.IsInteresting()) MathsChaptersCMinusVSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (oCMinusV.IsInteresting()) MathsChaptersCMinusVOddSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (eCMinusV.IsInteresting()) MathsChaptersCMinusVEvenSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (pCMinusV.IsInteresting()) MathsChaptersCMinusVPrimeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (cCMinusV.IsInteresting()) MathsChaptersCMinusVCompositeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (CMultiplyV.IsInteresting()) MathsChaptersCMultiplyVSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (oCMultiplyV.IsInteresting()) MathsChaptersCMultiplyVOddSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (eCMultiplyV.IsInteresting()) MathsChaptersCMultiplyVEvenSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (pCMultiplyV.IsInteresting()) MathsChaptersCMultiplyVPrimeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (cCMultiplyV.IsInteresting()) MathsChaptersCMultiplyVCompositeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (CDivideV.IsInteresting()) MathsChaptersCDivideVSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (oCDivideV.IsInteresting()) MathsChaptersCDivideVOddSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (eCDivideV.IsInteresting()) MathsChaptersCDivideVEvenSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (pCDivideV.IsInteresting()) MathsChaptersCDivideVPrimeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                            if (cCDivideV.IsInteresting()) MathsChaptersCDivideVCompositeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
                         }
                     }
                 }
@@ -26713,7 +26699,7 @@ public partial class MainForm : Form, ISubscriber
                                 if (uC != 0) duC = (double)dC / (double)uC;
                                 MathsChaptersCDUSumTextBox.Text = duC.ToString("0.00000");
                                 MathsChaptersCDUSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)duC);
-                                if (duC.IsInteresting()) MathsChaptersCDUSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                                if (duC.IsInteresting()) MathsChaptersCDUSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
 
                                 ToolTip.SetToolTip(MathsChaptersCDUSumTextBox, dC.ToString() + "/" + uC.ToString());
 
@@ -26747,7 +26733,7 @@ public partial class MainForm : Form, ISubscriber
                                 if (uV != 0) duV = (double)dV / (double)uV;
                                 MathsChaptersVDUSumTextBox.Text = duV.ToString("0.00000");
                                 MathsChaptersVDUSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)duV);
-                                if (duV.IsInteresting()) MathsChaptersVDUSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                                if (duV.IsInteresting()) MathsChaptersVDUSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
                                 ToolTip.SetToolTip(MathsChaptersVDUSumTextBox, dV.ToString() + "/" + uV.ToString());
 
                                 frequencies.Clear();
@@ -26780,7 +26766,7 @@ public partial class MainForm : Form, ISubscriber
                                 if (uCPlusV != 0) duCPlusV = (double)dCPlusV / (double)uCPlusV;
                                 MathsChaptersCPlusVDUSumTextBox.Text = duCPlusV.ToString("0.00000");
                                 MathsChaptersCPlusVDUSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)duCPlusV);
-                                if (duCPlusV.IsInteresting()) MathsChaptersCPlusVDUSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                                if (duCPlusV.IsInteresting()) MathsChaptersCPlusVDUSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
                                 ToolTip.SetToolTip(MathsChaptersCPlusVDUSumTextBox, dCPlusV.ToString() + "/" + uCPlusV.ToString());
 
                                 frequencies.Clear();
@@ -26813,7 +26799,7 @@ public partial class MainForm : Form, ISubscriber
                                 if (uCMinusV != 0) duCMinusV = (double)dCMinusV / (double)uCMinusV;
                                 MathsChaptersCMinusVDUSumTextBox.Text = duCMinusV.ToString("0.00000");
                                 MathsChaptersCMinusVDUSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)duCMinusV);
-                                if (duCMinusV.IsInteresting()) MathsChaptersCMinusVDUSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                                if (duCMinusV.IsInteresting()) MathsChaptersCMinusVDUSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
                                 ToolTip.SetToolTip(MathsChaptersCMinusVDUSumTextBox, dCMinusV.ToString() + "/" + uCMinusV.ToString());
 
                                 frequencies.Clear();
@@ -26846,7 +26832,7 @@ public partial class MainForm : Form, ISubscriber
                                 if (uCMultiplyV != 0) duCMultiplyV = (double)dCMultiplyV / (double)uCMultiplyV;
                                 MathsChaptersCMultiplyVDUSumTextBox.Text = duCMultiplyV.ToString("0.00000");
                                 MathsChaptersCMultiplyVDUSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)duCMultiplyV);
-                                if (duCMultiplyV.IsInteresting()) MathsChaptersCMultiplyVDUSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                                if (duCMultiplyV.IsInteresting()) MathsChaptersCMultiplyVDUSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
                                 ToolTip.SetToolTip(MathsChaptersCMultiplyVDUSumTextBox, dCMultiplyV.ToString() + "/" + uCMultiplyV.ToString());
 
                                 frequencies.Clear();
@@ -26879,7 +26865,7 @@ public partial class MainForm : Form, ISubscriber
                                 if (uCDivideV != 0) duCDivideV = (double)dCDivideV / (double)uCDivideV;
                                 MathsChaptersCDivideVDUSumTextBox.Text = duCDivideV.ToString("0.00000");
                                 MathsChaptersCDivideVDUSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)duCDivideV);
-                                if (duCDivideV.IsInteresting()) MathsChaptersCDivideVDUSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                                if (duCDivideV.IsInteresting()) MathsChaptersCDivideVDUSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
                                 ToolTip.SetToolTip(MathsChaptersCDivideVDUSumTextBox, dCDivideV.ToString() + "/" + uCDivideV.ToString());
                             }
                         }
@@ -27123,68 +27109,68 @@ public partial class MainForm : Form, ISubscriber
                 MathsVersesCDivideVPrimeSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)pCDivideV);
                 MathsVersesCDivideVCompositeSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)cCDivideV);
 
-                MathsVersesCSumTextBox.BackColor = (Numbers.Compare(C, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCOddSumTextBox.BackColor = (Numbers.Compare(oC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCEvenSumTextBox.BackColor = (Numbers.Compare(eC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCPrimeSumTextBox.BackColor = (Numbers.Compare(pC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCCompositeSumTextBox.BackColor = (Numbers.Compare(cC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesVSumTextBox.BackColor = (Numbers.Compare(V, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesVOddSumTextBox.BackColor = (Numbers.Compare(oV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesVEvenSumTextBox.BackColor = (Numbers.Compare(eV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesVPrimeSumTextBox.BackColor = (Numbers.Compare(pV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesVCompositeSumTextBox.BackColor = (Numbers.Compare(cV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCPlusVSumTextBox.BackColor = (Numbers.Compare(CPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCPlusVOddSumTextBox.BackColor = (Numbers.Compare(oCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCPlusVEvenSumTextBox.BackColor = (Numbers.Compare(eCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCPlusVPrimeSumTextBox.BackColor = (Numbers.Compare(pCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCPlusVCompositeSumTextBox.BackColor = (Numbers.Compare(cCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCMinusVSumTextBox.BackColor = (Numbers.Compare(CMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCMinusVOddSumTextBox.BackColor = (Numbers.Compare(oCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCMinusVEvenSumTextBox.BackColor = (Numbers.Compare(eCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCMinusVPrimeSumTextBox.BackColor = (Numbers.Compare(pCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCMinusVCompositeSumTextBox.BackColor = (Numbers.Compare(cCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCMultiplyVSumTextBox.BackColor = (Numbers.Compare(CMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCMultiplyVOddSumTextBox.BackColor = (Numbers.Compare(oCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCMultiplyVEvenSumTextBox.BackColor = (Numbers.Compare(eCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCMultiplyVPrimeSumTextBox.BackColor = (Numbers.Compare(pCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCMultiplyVCompositeSumTextBox.BackColor = (Numbers.Compare(cCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCDivideVSumTextBox.BackColor = (Numbers.Compare((long)CDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCDivideVOddSumTextBox.BackColor = (Numbers.Compare((long)oCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCDivideVEvenSumTextBox.BackColor = (Numbers.Compare((long)eCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCDivideVPrimeSumTextBox.BackColor = (Numbers.Compare((long)pCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                MathsVersesCDivideVCompositeSumTextBox.BackColor = (Numbers.Compare((long)cCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCSumTextBox.BackColor = (Numbers.Compare(C, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCOddSumTextBox.BackColor = (Numbers.Compare(oC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCEvenSumTextBox.BackColor = (Numbers.Compare(eC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCPrimeSumTextBox.BackColor = (Numbers.Compare(pC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCCompositeSumTextBox.BackColor = (Numbers.Compare(cC, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesVSumTextBox.BackColor = (Numbers.Compare(V, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesVOddSumTextBox.BackColor = (Numbers.Compare(oV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesVEvenSumTextBox.BackColor = (Numbers.Compare(eV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesVPrimeSumTextBox.BackColor = (Numbers.Compare(pV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesVCompositeSumTextBox.BackColor = (Numbers.Compare(cV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCPlusVSumTextBox.BackColor = (Numbers.Compare(CPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCPlusVOddSumTextBox.BackColor = (Numbers.Compare(oCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCPlusVEvenSumTextBox.BackColor = (Numbers.Compare(eCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCPlusVPrimeSumTextBox.BackColor = (Numbers.Compare(pCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCPlusVCompositeSumTextBox.BackColor = (Numbers.Compare(cCPlusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCMinusVSumTextBox.BackColor = (Numbers.Compare(CMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCMinusVOddSumTextBox.BackColor = (Numbers.Compare(oCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCMinusVEvenSumTextBox.BackColor = (Numbers.Compare(eCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCMinusVPrimeSumTextBox.BackColor = (Numbers.Compare(pCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCMinusVCompositeSumTextBox.BackColor = (Numbers.Compare(cCMinusV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCMultiplyVSumTextBox.BackColor = (Numbers.Compare(CMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCMultiplyVOddSumTextBox.BackColor = (Numbers.Compare(oCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCMultiplyVEvenSumTextBox.BackColor = (Numbers.Compare(eCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCMultiplyVPrimeSumTextBox.BackColor = (Numbers.Compare(pCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCMultiplyVCompositeSumTextBox.BackColor = (Numbers.Compare(cCMultiplyV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCDivideVSumTextBox.BackColor = (Numbers.Compare((long)CDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCDivideVOddSumTextBox.BackColor = (Numbers.Compare((long)oCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCDivideVEvenSumTextBox.BackColor = (Numbers.Compare((long)eCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCDivideVPrimeSumTextBox.BackColor = (Numbers.Compare((long)pCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                MathsVersesCDivideVCompositeSumTextBox.BackColor = (Numbers.Compare((long)cCDivideV, m_maths_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
 
                 // Interesting numbers
-                if (C.IsInteresting()) MathsVersesCSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (oC.IsInteresting()) MathsVersesCOddSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (eC.IsInteresting()) MathsVersesCEvenSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (pC.IsInteresting()) MathsVersesCPrimeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (cC.IsInteresting()) MathsVersesCCompositeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (V.IsInteresting()) MathsVersesVSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (oV.IsInteresting()) MathsVersesVOddSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (eV.IsInteresting()) MathsVersesVEvenSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (pV.IsInteresting()) MathsVersesVPrimeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (cV.IsInteresting()) MathsVersesVCompositeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (CPlusV.IsInteresting()) MathsVersesCPlusVSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (oCPlusV.IsInteresting()) MathsVersesCPlusVOddSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (eCPlusV.IsInteresting()) MathsVersesCPlusVEvenSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (pCPlusV.IsInteresting()) MathsVersesCPlusVPrimeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (cCPlusV.IsInteresting()) MathsVersesCPlusVCompositeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (CMinusV.IsInteresting()) MathsVersesCMinusVSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (oCMinusV.IsInteresting()) MathsVersesCMinusVOddSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (eCMinusV.IsInteresting()) MathsVersesCMinusVEvenSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (pCMinusV.IsInteresting()) MathsVersesCMinusVPrimeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (cCMinusV.IsInteresting()) MathsVersesCMinusVCompositeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (CMultiplyV.IsInteresting()) MathsVersesCMultiplyVSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (oCMultiplyV.IsInteresting()) MathsVersesCMultiplyVOddSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (eCMultiplyV.IsInteresting()) MathsVersesCMultiplyVEvenSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (pCMultiplyV.IsInteresting()) MathsVersesCMultiplyVPrimeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (cCMultiplyV.IsInteresting()) MathsVersesCMultiplyVCompositeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (CDivideV.IsInteresting()) MathsVersesCDivideVSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (oCDivideV.IsInteresting()) MathsVersesCDivideVOddSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (eCDivideV.IsInteresting()) MathsVersesCDivideVEvenSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (pCDivideV.IsInteresting()) MathsVersesCDivideVPrimeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                if (cCDivideV.IsInteresting()) MathsVersesCDivideVCompositeSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                if (C.IsInteresting()) MathsVersesCSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (oC.IsInteresting()) MathsVersesCOddSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (eC.IsInteresting()) MathsVersesCEvenSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (pC.IsInteresting()) MathsVersesCPrimeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (cC.IsInteresting()) MathsVersesCCompositeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (V.IsInteresting()) MathsVersesVSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (oV.IsInteresting()) MathsVersesVOddSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (eV.IsInteresting()) MathsVersesVEvenSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (pV.IsInteresting()) MathsVersesVPrimeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (cV.IsInteresting()) MathsVersesVCompositeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (CPlusV.IsInteresting()) MathsVersesCPlusVSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (oCPlusV.IsInteresting()) MathsVersesCPlusVOddSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (eCPlusV.IsInteresting()) MathsVersesCPlusVEvenSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (pCPlusV.IsInteresting()) MathsVersesCPlusVPrimeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (cCPlusV.IsInteresting()) MathsVersesCPlusVCompositeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (CMinusV.IsInteresting()) MathsVersesCMinusVSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (oCMinusV.IsInteresting()) MathsVersesCMinusVOddSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (eCMinusV.IsInteresting()) MathsVersesCMinusVEvenSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (pCMinusV.IsInteresting()) MathsVersesCMinusVPrimeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (cCMinusV.IsInteresting()) MathsVersesCMinusVCompositeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (CMultiplyV.IsInteresting()) MathsVersesCMultiplyVSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (oCMultiplyV.IsInteresting()) MathsVersesCMultiplyVOddSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (eCMultiplyV.IsInteresting()) MathsVersesCMultiplyVEvenSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (pCMultiplyV.IsInteresting()) MathsVersesCMultiplyVPrimeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (cCMultiplyV.IsInteresting()) MathsVersesCMultiplyVCompositeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (CDivideV.IsInteresting()) MathsVersesCDivideVSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (oCDivideV.IsInteresting()) MathsVersesCDivideVOddSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (eCDivideV.IsInteresting()) MathsVersesCDivideVEvenSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (pCDivideV.IsInteresting()) MathsVersesCDivideVPrimeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                if (cCDivideV.IsInteresting()) MathsVersesCDivideVCompositeSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
             }
         }
     }
@@ -27229,7 +27215,7 @@ public partial class MainForm : Form, ISubscriber
                     if (uC != 0) duC = (double)dC / (double)uC;
                     MathsVersesCDUSumTextBox.Text = duC.ToString("0.00000");
                     MathsVersesCDUSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)duC);
-                    if (duC.IsInteresting()) MathsVersesCDUSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                    if (duC.IsInteresting()) MathsVersesCDUSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
                     ToolTip.SetToolTip(MathsVersesCDUSumTextBox, dC.ToString() + "/" + uC.ToString());
 
                     frequencies.Clear();
@@ -27262,7 +27248,7 @@ public partial class MainForm : Form, ISubscriber
                     if (uV != 0) duV = (double)dV / (double)uV;
                     MathsVersesVDUSumTextBox.Text = duV.ToString("0.00000");
                     MathsVersesVDUSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)duV);
-                    if (duV.IsInteresting()) MathsVersesVDUSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                    if (duV.IsInteresting()) MathsVersesVDUSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
                     ToolTip.SetToolTip(MathsVersesVDUSumTextBox, dV.ToString() + "/" + uV.ToString());
 
                     frequencies.Clear();
@@ -27295,7 +27281,7 @@ public partial class MainForm : Form, ISubscriber
                     if (uCPlusV != 0) duCPlusV = (double)dCPlusV / (double)uCPlusV;
                     MathsVersesCPlusVDUSumTextBox.Text = duCPlusV.ToString("0.00000");
                     MathsVersesCPlusVDUSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)duCPlusV);
-                    if (duCPlusV.IsInteresting()) MathsVersesCPlusVDUSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                    if (duCPlusV.IsInteresting()) MathsVersesCPlusVDUSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
                     ToolTip.SetToolTip(MathsVersesCPlusVDUSumTextBox, dCPlusV.ToString() + "/" + uCPlusV.ToString());
 
                     frequencies.Clear();
@@ -27328,7 +27314,7 @@ public partial class MainForm : Form, ISubscriber
                     if (uCMinusV != 0) duCMinusV = (double)dCMinusV / (double)uCMinusV;
                     MathsVersesCMinusVDUSumTextBox.Text = duCMinusV.ToString("0.00000");
                     MathsVersesCMinusVDUSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)duCMinusV);
-                    if (duCMinusV.IsInteresting()) MathsVersesCMinusVDUSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                    if (duCMinusV.IsInteresting()) MathsVersesCMinusVDUSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
                     ToolTip.SetToolTip(MathsVersesCMinusVDUSumTextBox, dCMinusV.ToString() + "/" + uCMinusV.ToString());
 
                     frequencies.Clear();
@@ -27361,7 +27347,7 @@ public partial class MainForm : Form, ISubscriber
                     if (uCMultiplyV != 0) duCMultiplyV = (double)dCMultiplyV / (double)uCMultiplyV;
                     MathsVersesCMultiplyVDUSumTextBox.Text = duCMultiplyV.ToString("0.00000");
                     MathsVersesCMultiplyVDUSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)duCMultiplyV);
-                    if (duCMultiplyV.IsInteresting()) MathsVersesCMultiplyVDUSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                    if (duCMultiplyV.IsInteresting()) MathsVersesCMultiplyVDUSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
                     ToolTip.SetToolTip(MathsVersesCMultiplyVDUSumTextBox, dCMultiplyV.ToString() + "/" + uCMultiplyV.ToString());
 
                     frequencies.Clear();
@@ -27394,7 +27380,7 @@ public partial class MainForm : Form, ISubscriber
                     if (uCDivideV != 0) duCDivideV = (double)dCDivideV / (double)uCDivideV;
                     MathsVersesCDivideVDUSumTextBox.Text = duCDivideV.ToString("0.00000");
                     MathsVersesCDivideVDUSumTextBox.ForeColor = Numbers.GetNumberTypeColor((long)duCDivideV);
-                    if (duCDivideV.IsInteresting()) MathsVersesCDivideVDUSumTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                    if (duCDivideV.IsInteresting()) MathsVersesCDivideVDUSumTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
                     ToolTip.SetToolTip(MathsVersesCDivideVDUSumTextBox, dCDivideV.ToString() + "/" + uCDivideV.ToString());
                 }
             }
@@ -28576,7 +28562,7 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Distances
     ///////////////////////////////////////////////////////////////////////////////
-    private int m_distances_divisor = DEFAULT_DIVISOR;
+    private int m_distances_divisor = Numbers.DEFAULT_DIVISOR;
     private bool m_distances_update_global_divisor = false;
     private void DistancesDivisorNumericUpDown_ValueChanged(object sender, EventArgs e)
     {
@@ -28602,7 +28588,7 @@ public partial class MainForm : Form, ISubscriber
         }
         else
         {
-            m_divisor = DEFAULT_DIVISOR;
+            m_divisor = Numbers.DEFAULT_DIVISOR;
         }
         DivisorValueLabel.Text = m_divisor.ToString();
     }
@@ -29867,106 +29853,106 @@ public partial class MainForm : Form, ISubscriber
                                 DistancesWordDifferenceWithinVerseRunningTotalTextBox.ForeColor = Numbers.GetNumberTypeColor(DistancesWordDifferenceWithinVerseRunningTotal);
 
                                 // Divisor coloring
-                                DistancesChapterBeforeWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesChapterBeforeWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesChapterWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesChapterWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesChapterAfterWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesChapterAfterWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesChapterDifferenceWithinBookTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesChapterDifferenceWithinBook), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseBeforeWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesVerseBeforeWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesVerseWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseAfterWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesVerseAfterWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseDifferenceWithinBookTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesVerseDifferenceWithinBook), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseBeforeWithinChapterTextBox.BackColor = (Numbers.Compare((long)DistancesVerseBeforeWithinChapter, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseWithinChapterTextBox.BackColor = (Numbers.Compare((long)DistancesVerseWithinChapter, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseAfterWithinChapterTextBox.BackColor = (Numbers.Compare((long)DistancesVerseAfterWithinChapter, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseDifferenceWithinChapterTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesVerseDifferenceWithinChapter), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordBeforeWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesWordBeforeWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesWordWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordAfterWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesWordAfterWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordDifferenceWithinBookTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesWordDifferenceWithinBook), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordBeforeWithinChapterTextBox.BackColor = (Numbers.Compare((long)DistancesWordBeforeWithinChapter, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordWithinChapterTextBox.BackColor = (Numbers.Compare((long)DistancesWordWithinChapter, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordAfterWithinChapterTextBox.BackColor = (Numbers.Compare((long)DistancesWordAfterWithinChapter, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordDifferenceWithinChapterTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesWordDifferenceWithinChapter), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordBeforeWithinVerseTextBox.BackColor = (Numbers.Compare((long)DistancesWordBeforeWithinVerse, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordWithinVerseTextBox.BackColor = (Numbers.Compare((long)DistancesWordWithinVerse, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordAfterWithinVerseTextBox.BackColor = (Numbers.Compare((long)DistancesWordAfterWithinVerse, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordDifferenceWithinVerseTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesWordDifferenceWithinVerse), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
+                                DistancesChapterBeforeWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesChapterBeforeWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesChapterWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesChapterWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesChapterAfterWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesChapterAfterWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesChapterDifferenceWithinBookTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesChapterDifferenceWithinBook), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseBeforeWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesVerseBeforeWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesVerseWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseAfterWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesVerseAfterWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseDifferenceWithinBookTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesVerseDifferenceWithinBook), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseBeforeWithinChapterTextBox.BackColor = (Numbers.Compare((long)DistancesVerseBeforeWithinChapter, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseWithinChapterTextBox.BackColor = (Numbers.Compare((long)DistancesVerseWithinChapter, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseAfterWithinChapterTextBox.BackColor = (Numbers.Compare((long)DistancesVerseAfterWithinChapter, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseDifferenceWithinChapterTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesVerseDifferenceWithinChapter), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordBeforeWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesWordBeforeWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesWordWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordAfterWithinBookTextBox.BackColor = (Numbers.Compare((long)DistancesWordAfterWithinBook, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordDifferenceWithinBookTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesWordDifferenceWithinBook), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordBeforeWithinChapterTextBox.BackColor = (Numbers.Compare((long)DistancesWordBeforeWithinChapter, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordWithinChapterTextBox.BackColor = (Numbers.Compare((long)DistancesWordWithinChapter, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordAfterWithinChapterTextBox.BackColor = (Numbers.Compare((long)DistancesWordAfterWithinChapter, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordDifferenceWithinChapterTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesWordDifferenceWithinChapter), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordBeforeWithinVerseTextBox.BackColor = (Numbers.Compare((long)DistancesWordBeforeWithinVerse, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordWithinVerseTextBox.BackColor = (Numbers.Compare((long)DistancesWordWithinVerse, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordAfterWithinVerseTextBox.BackColor = (Numbers.Compare((long)DistancesWordAfterWithinVerse, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordDifferenceWithinVerseTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesWordDifferenceWithinVerse), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
                                 // Running totals ...
-                                DistancesChapterBeforeWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesChapterBeforeWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesChapterWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesChapterWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesChapterAfterWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesChapterAfterWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesChapterDifferenceWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesChapterDifferenceWithinBookRunningTotal), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseBeforeWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesVerseBeforeWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesVerseWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseAfterWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesVerseAfterWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseDifferenceWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesVerseDifferenceWithinBookRunningTotal), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseBeforeWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesVerseBeforeWithinChapterRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesVerseWithinChapterRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseAfterWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesVerseAfterWithinChapterRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesVerseDifferenceWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesVerseDifferenceWithinChapterRunningTotal), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordBeforeWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordBeforeWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordAfterWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordAfterWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordDifferenceWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesWordDifferenceWithinBookRunningTotal), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordBeforeWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordBeforeWithinChapterRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordWithinChapterRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordAfterWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordAfterWithinChapterRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordDifferenceWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesWordDifferenceWithinChapterRunningTotal), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordBeforeWithinVerseRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordBeforeWithinVerseRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordWithinVerseRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordWithinVerseRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordAfterWithinVerseRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordAfterWithinVerseRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
-                                DistancesWordDifferenceWithinVerseRunningTotalTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesWordDifferenceWithinVerseRunningTotal), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.Window;
+                                DistancesChapterBeforeWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesChapterBeforeWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesChapterWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesChapterWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesChapterAfterWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesChapterAfterWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesChapterDifferenceWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesChapterDifferenceWithinBookRunningTotal), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseBeforeWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesVerseBeforeWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesVerseWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseAfterWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesVerseAfterWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseDifferenceWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesVerseDifferenceWithinBookRunningTotal), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseBeforeWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesVerseBeforeWithinChapterRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesVerseWithinChapterRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseAfterWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesVerseAfterWithinChapterRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesVerseDifferenceWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesVerseDifferenceWithinChapterRunningTotal), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordBeforeWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordBeforeWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordAfterWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordAfterWithinBookRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordDifferenceWithinBookRunningTotalTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesWordDifferenceWithinBookRunningTotal), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordBeforeWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordBeforeWithinChapterRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordWithinChapterRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordAfterWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordAfterWithinChapterRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordDifferenceWithinChapterRunningTotalTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesWordDifferenceWithinChapterRunningTotal), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordBeforeWithinVerseRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordBeforeWithinVerseRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordWithinVerseRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordWithinVerseRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordAfterWithinVerseRunningTotalTextBox.BackColor = (Numbers.Compare((long)DistancesWordAfterWithinVerseRunningTotal, m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                                DistancesWordDifferenceWithinVerseRunningTotalTextBox.BackColor = (Numbers.Compare((long)Math.Abs(DistancesWordDifferenceWithinVerseRunningTotal), m_distances_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
 
                                 // Interesting numbers
-                                if (DistancesChapterBeforeWithinBook.IsInteresting()) DistancesChapterBeforeWithinBookTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesChapterWithinBook.IsInteresting()) DistancesChapterWithinBookTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesChapterAfterWithinBook.IsInteresting()) DistancesChapterAfterWithinBookTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (Math.Abs(DistancesChapterDifferenceWithinBook).IsInteresting()) DistancesChapterDifferenceWithinBookTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesVerseBeforeWithinBook.IsInteresting()) DistancesVerseBeforeWithinBookTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesVerseWithinBook.IsInteresting()) DistancesVerseWithinBookTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesVerseAfterWithinBook.IsInteresting()) DistancesVerseAfterWithinBookTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (Math.Abs(DistancesVerseDifferenceWithinBook).IsInteresting()) DistancesVerseDifferenceWithinBookTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesVerseBeforeWithinChapter.IsInteresting()) DistancesVerseBeforeWithinChapterTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesVerseWithinChapter.IsInteresting()) DistancesVerseWithinChapterTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesVerseAfterWithinChapter.IsInteresting()) DistancesVerseAfterWithinChapterTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (Math.Abs(DistancesVerseDifferenceWithinChapter).IsInteresting()) DistancesVerseDifferenceWithinChapterTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordBeforeWithinBook.IsInteresting()) DistancesWordBeforeWithinBookTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordWithinBook.IsInteresting()) DistancesWordWithinBookTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordAfterWithinBook.IsInteresting()) DistancesWordAfterWithinBookTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (Math.Abs(DistancesWordDifferenceWithinBook).IsInteresting()) DistancesWordDifferenceWithinBookTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordBeforeWithinChapter.IsInteresting()) DistancesWordBeforeWithinChapterTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordWithinChapter.IsInteresting()) DistancesWordWithinChapterTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordAfterWithinChapter.IsInteresting()) DistancesWordAfterWithinChapterTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (Math.Abs(DistancesWordDifferenceWithinChapter).IsInteresting()) DistancesWordDifferenceWithinChapterTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordBeforeWithinVerse.IsInteresting()) DistancesWordBeforeWithinVerseTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordWithinVerse.IsInteresting()) DistancesWordWithinVerseTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordAfterWithinVerse.IsInteresting()) DistancesWordAfterWithinVerseTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (Math.Abs(DistancesWordDifferenceWithinVerse).IsInteresting()) DistancesWordDifferenceWithinVerseTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                                if (DistancesChapterBeforeWithinBook.IsInteresting()) DistancesChapterBeforeWithinBookTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesChapterWithinBook.IsInteresting()) DistancesChapterWithinBookTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesChapterAfterWithinBook.IsInteresting()) DistancesChapterAfterWithinBookTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (Math.Abs(DistancesChapterDifferenceWithinBook).IsInteresting()) DistancesChapterDifferenceWithinBookTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesVerseBeforeWithinBook.IsInteresting()) DistancesVerseBeforeWithinBookTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesVerseWithinBook.IsInteresting()) DistancesVerseWithinBookTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesVerseAfterWithinBook.IsInteresting()) DistancesVerseAfterWithinBookTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (Math.Abs(DistancesVerseDifferenceWithinBook).IsInteresting()) DistancesVerseDifferenceWithinBookTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesVerseBeforeWithinChapter.IsInteresting()) DistancesVerseBeforeWithinChapterTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesVerseWithinChapter.IsInteresting()) DistancesVerseWithinChapterTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesVerseAfterWithinChapter.IsInteresting()) DistancesVerseAfterWithinChapterTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (Math.Abs(DistancesVerseDifferenceWithinChapter).IsInteresting()) DistancesVerseDifferenceWithinChapterTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordBeforeWithinBook.IsInteresting()) DistancesWordBeforeWithinBookTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordWithinBook.IsInteresting()) DistancesWordWithinBookTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordAfterWithinBook.IsInteresting()) DistancesWordAfterWithinBookTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (Math.Abs(DistancesWordDifferenceWithinBook).IsInteresting()) DistancesWordDifferenceWithinBookTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordBeforeWithinChapter.IsInteresting()) DistancesWordBeforeWithinChapterTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordWithinChapter.IsInteresting()) DistancesWordWithinChapterTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordAfterWithinChapter.IsInteresting()) DistancesWordAfterWithinChapterTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (Math.Abs(DistancesWordDifferenceWithinChapter).IsInteresting()) DistancesWordDifferenceWithinChapterTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordBeforeWithinVerse.IsInteresting()) DistancesWordBeforeWithinVerseTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordWithinVerse.IsInteresting()) DistancesWordWithinVerseTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordAfterWithinVerse.IsInteresting()) DistancesWordAfterWithinVerseTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (Math.Abs(DistancesWordDifferenceWithinVerse).IsInteresting()) DistancesWordDifferenceWithinVerseTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
                                 // Running totals ...
-                                if (DistancesChapterBeforeWithinBookRunningTotal.IsInteresting()) DistancesChapterBeforeWithinBookRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesChapterWithinBookRunningTotal.IsInteresting()) DistancesChapterWithinBookRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesChapterAfterWithinBookRunningTotal.IsInteresting()) DistancesChapterAfterWithinBookRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (Math.Abs(DistancesChapterDifferenceWithinBookRunningTotal).IsInteresting()) DistancesChapterDifferenceWithinBookRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesVerseBeforeWithinBookRunningTotal.IsInteresting()) DistancesVerseBeforeWithinBookRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesVerseWithinBookRunningTotal.IsInteresting()) DistancesVerseWithinBookRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesVerseAfterWithinBookRunningTotal.IsInteresting()) DistancesVerseAfterWithinBookRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (Math.Abs(DistancesVerseDifferenceWithinBookRunningTotal).IsInteresting()) DistancesVerseDifferenceWithinBookRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesVerseBeforeWithinChapterRunningTotal.IsInteresting()) DistancesVerseBeforeWithinChapterRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesVerseWithinChapterRunningTotal.IsInteresting()) DistancesVerseWithinChapterRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesVerseAfterWithinChapterRunningTotal.IsInteresting()) DistancesVerseAfterWithinChapterRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (Math.Abs(DistancesVerseDifferenceWithinChapterRunningTotal).IsInteresting()) DistancesVerseDifferenceWithinChapterRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordBeforeWithinBookRunningTotal.IsInteresting()) DistancesWordBeforeWithinBookRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordWithinBookRunningTotal.IsInteresting()) DistancesWordWithinBookRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordAfterWithinBookRunningTotal.IsInteresting()) DistancesWordAfterWithinBookRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (Math.Abs(DistancesWordDifferenceWithinBookRunningTotal).IsInteresting()) DistancesWordDifferenceWithinBookRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordBeforeWithinChapterRunningTotal.IsInteresting()) DistancesWordBeforeWithinChapterRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordWithinChapterRunningTotal.IsInteresting()) DistancesWordWithinChapterRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordAfterWithinChapterRunningTotal.IsInteresting()) DistancesWordAfterWithinChapterRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (Math.Abs(DistancesWordDifferenceWithinChapterRunningTotal).IsInteresting()) DistancesWordDifferenceWithinChapterRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordBeforeWithinVerseRunningTotal.IsInteresting()) DistancesWordBeforeWithinVerseRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordWithinVerseRunningTotal.IsInteresting()) DistancesWordWithinVerseRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (DistancesWordAfterWithinVerseRunningTotal.IsInteresting()) DistancesWordAfterWithinVerseRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
-                                if (Math.Abs(DistancesWordDifferenceWithinVerseRunningTotal).IsInteresting()) DistancesWordDifferenceWithinVerseRunningTotalTextBox.BackColor = INTERESTING_NUMBER_COLOR;
+                                if (DistancesChapterBeforeWithinBookRunningTotal.IsInteresting()) DistancesChapterBeforeWithinBookRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesChapterWithinBookRunningTotal.IsInteresting()) DistancesChapterWithinBookRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesChapterAfterWithinBookRunningTotal.IsInteresting()) DistancesChapterAfterWithinBookRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (Math.Abs(DistancesChapterDifferenceWithinBookRunningTotal).IsInteresting()) DistancesChapterDifferenceWithinBookRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesVerseBeforeWithinBookRunningTotal.IsInteresting()) DistancesVerseBeforeWithinBookRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesVerseWithinBookRunningTotal.IsInteresting()) DistancesVerseWithinBookRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesVerseAfterWithinBookRunningTotal.IsInteresting()) DistancesVerseAfterWithinBookRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (Math.Abs(DistancesVerseDifferenceWithinBookRunningTotal).IsInteresting()) DistancesVerseDifferenceWithinBookRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesVerseBeforeWithinChapterRunningTotal.IsInteresting()) DistancesVerseBeforeWithinChapterRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesVerseWithinChapterRunningTotal.IsInteresting()) DistancesVerseWithinChapterRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesVerseAfterWithinChapterRunningTotal.IsInteresting()) DistancesVerseAfterWithinChapterRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (Math.Abs(DistancesVerseDifferenceWithinChapterRunningTotal).IsInteresting()) DistancesVerseDifferenceWithinChapterRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordBeforeWithinBookRunningTotal.IsInteresting()) DistancesWordBeforeWithinBookRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordWithinBookRunningTotal.IsInteresting()) DistancesWordWithinBookRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordAfterWithinBookRunningTotal.IsInteresting()) DistancesWordAfterWithinBookRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (Math.Abs(DistancesWordDifferenceWithinBookRunningTotal).IsInteresting()) DistancesWordDifferenceWithinBookRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordBeforeWithinChapterRunningTotal.IsInteresting()) DistancesWordBeforeWithinChapterRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordWithinChapterRunningTotal.IsInteresting()) DistancesWordWithinChapterRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordAfterWithinChapterRunningTotal.IsInteresting()) DistancesWordAfterWithinChapterRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (Math.Abs(DistancesWordDifferenceWithinChapterRunningTotal).IsInteresting()) DistancesWordDifferenceWithinChapterRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordBeforeWithinVerseRunningTotal.IsInteresting()) DistancesWordBeforeWithinVerseRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordWithinVerseRunningTotal.IsInteresting()) DistancesWordWithinVerseRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (DistancesWordAfterWithinVerseRunningTotal.IsInteresting()) DistancesWordAfterWithinVerseRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
+                                if (Math.Abs(DistancesWordDifferenceWithinVerseRunningTotal).IsInteresting()) DistancesWordDifferenceWithinVerseRunningTotalTextBox.BackColor = Numbers.INTERESTING_NUMBER_COLOR;
                             }
                         }
                     }
@@ -32157,7 +32143,7 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region ValuesSequence
     ///////////////////////////////////////////////////////////////////////////////
-    private int m_values_sequence_radix = DEFAULT_RADIX;
+    private int m_values_sequence_radix = Numbers.DEFAULT_RADIX;
     private enum ValuesSequenceScope
     {
         LetterValues,
@@ -39197,19 +39183,19 @@ public partial class MainForm : Form, ISubscriber
 
                 WordsTextBox.Text = Radix.Encode(word_count, m_radix);
                 WordsTextBox.ForeColor = Numbers.GetNumberTypeColor(WordsTextBox.Text, m_radix);
-                WordsTextBox.BackColor = (Numbers.Compare(word_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+                WordsTextBox.BackColor = (Numbers.Compare(word_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
                 WordsTextBox.Refresh();
                 DecimalWordsTextBox.Text = word_count.ToString();
                 DecimalWordsTextBox.ForeColor = Numbers.GetNumberTypeColor(word_count);
-                DecimalWordsTextBox.Visible = (m_radix != DEFAULT_RADIX);
+                DecimalWordsTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
                 DecimalWordsTextBox.Refresh();
                 LettersTextBox.Text = Radix.Encode(letter_count, m_radix);
                 LettersTextBox.ForeColor = Numbers.GetNumberTypeColor(LettersTextBox.Text, m_radix);
-                LettersTextBox.BackColor = (Numbers.Compare(letter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+                LettersTextBox.BackColor = (Numbers.Compare(letter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
                 LettersTextBox.Refresh();
                 DecimalLettersTextBox.Text = letter_count.ToString();
                 DecimalLettersTextBox.ForeColor = Numbers.GetNumberTypeColor(letter_count);
-                DecimalLettersTextBox.Visible = (m_radix != DEFAULT_RADIX);
+                DecimalLettersTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
                 DecimalLettersTextBox.Refresh();
                 ValueTextBox.Text = Radix.Encode(value, m_radix);
                 ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
@@ -39217,7 +39203,7 @@ public partial class MainForm : Form, ISubscriber
                 ValueTextBox.SelectionLength = 0;
                 ValueTextBox.Refresh();
                 DecimalValueTextBox.Text = value.ToString();
-                DecimalValueTextBox.Visible = (m_radix != DEFAULT_RADIX);
+                DecimalValueTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
                 DecimalValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
                 DecimalValueTextBox.Refresh();
                 FactorizeValue(value, "Value", true);
@@ -42293,7 +42279,7 @@ public partial class MainForm : Form, ISubscriber
                 ValueTextBox.Refresh();
 
                 DecimalValueTextBox.Text = value.ToString();
-                DecimalValueTextBox.Visible = (m_radix != DEFAULT_RADIX);
+                DecimalValueTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
                 DecimalValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
                 DecimalValueTextBox.Refresh();
 
@@ -42307,7 +42293,7 @@ public partial class MainForm : Form, ISubscriber
 
                 string factors_str = Numbers.FactorizeToString(value);
                 PrimeFactorsTextBox.Text = factors_str;
-                PrimeFactorsTextBox.BackColor = (Numbers.Compare(value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+                PrimeFactorsTextBox.BackColor = (Numbers.Compare(value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
                 PrimeFactorsTextBox.Refresh();
 
                 int nth_number_index = 0;
@@ -42387,17 +42373,17 @@ public partial class MainForm : Form, ISubscriber
                 Nth4n1NumberTextBox.ForeColor = Numbers.GetNumberTypeColor(_4n1_index);
                 if (Nth4n1NumberTextBox.Text == "")
                 {
-                    Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
+                    //Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
                 }
                 else
                 {
                     if (Numbers.IsPrime(value))
                     {
-                        Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
+                        //Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
                     }
                     else // any other index type will be treated as IndexNumberType.Composite
                     {
-                        Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
+                        //Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
                     }
                 }
                 UpdateToolTipNth4n1NumberTextBox();
@@ -43678,7 +43664,7 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Value Display
     ///////////////////////////////////////////////////////////////////////////////
-    private long m_radix = DEFAULT_RADIX;
+    private long m_radix = Numbers.DEFAULT_RADIX;
     private void RadixValueLabel_Click(object sender, EventArgs e)
     {
         try
@@ -43699,13 +43685,13 @@ public partial class MainForm : Form, ISubscriber
             long value = Radix.Decode(ValueTextBox.Text, m_radix);
 
             // toggle radix
-            if (m_radix == DEFAULT_RADIX)
+            if (m_radix == Numbers.DEFAULT_RADIX)
             {
-                m_radix = RADIX_NINTEEN;
+                m_radix = Numbers.RADIX_NINTEEN;
             }
             else
             {
-                m_radix = DEFAULT_RADIX;
+                m_radix = Numbers.DEFAULT_RADIX;
             }
             RadixValueLabel.Text = m_radix.ToString();
 
@@ -43791,10 +43777,10 @@ public partial class MainForm : Form, ISubscriber
             // log exception
         }
     }
-    private long m_divisor = DEFAULT_DIVISOR;
+    private long m_divisor = Numbers.DEFAULT_DIVISOR;
     private void DivisorValueLabel_Click(object sender, EventArgs e)
     {
-        m_divisor = DEFAULT_DIVISOR;
+        m_divisor = Numbers.DEFAULT_DIVISOR;
         DivisorValueLabel.Text = m_divisor.ToString();
     }
     private void DivisorValueLabel_TextChanged(object sender, EventArgs e)
@@ -43900,43 +43886,43 @@ public partial class MainForm : Form, ISubscriber
             }
 
             long value = long.Parse(ValueTextBox.Text);
-            PrimeFactorsTextBox.BackColor = (Numbers.Compare(value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+            PrimeFactorsTextBox.BackColor = (Numbers.Compare(value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
             PrimeFactorsTextBox.Refresh();
 
             int chapter_count = int.Parse(ChaptersTextBox.Text);
-            ChaptersTextBox.BackColor = (Numbers.Compare(chapter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+            ChaptersTextBox.BackColor = (Numbers.Compare(chapter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
             ChaptersTextBox.Refresh();
 
             int verse_count = int.Parse(VersesTextBox.Text);
-            VersesTextBox.BackColor = (Numbers.Compare(verse_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+            VersesTextBox.BackColor = (Numbers.Compare(verse_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
             VersesTextBox.Refresh();
 
             int word_count = int.Parse(WordsTextBox.Text);
-            WordsTextBox.BackColor = (Numbers.Compare(word_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+            WordsTextBox.BackColor = (Numbers.Compare(word_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
             WordsTextBox.Refresh();
 
             int letter_count = int.Parse(LettersTextBox.Text);
-            LettersTextBox.BackColor = (Numbers.Compare(letter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+            LettersTextBox.BackColor = (Numbers.Compare(letter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
             LettersTextBox.Refresh();
 
             string chapter_number_sum_text = ChapterNumberSumTextBox.Text.Substring(1);
             int chapter_number_sum = int.Parse(chapter_number_sum_text);
-            ChapterNumberSumTextBox.BackColor = (Numbers.Compare(chapter_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+            ChapterNumberSumTextBox.BackColor = (Numbers.Compare(chapter_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
             ChapterNumberSumTextBox.Refresh();
 
             string verse_number_sum_text = VerseNumberSumTextBox.Text.Substring(1);
             int verse_number_sum = int.Parse(verse_number_sum_text);
-            VerseNumberSumTextBox.BackColor = (Numbers.Compare(verse_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+            VerseNumberSumTextBox.BackColor = (Numbers.Compare(verse_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
             VerseNumberSumTextBox.Refresh();
 
             string word_number_sum_text = WordNumberSumTextBox.Text.Substring(1);
             int word_number_sum = int.Parse(word_number_sum_text);
-            WordNumberSumTextBox.BackColor = (Numbers.Compare(word_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+            WordNumberSumTextBox.BackColor = (Numbers.Compare(word_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
             WordNumberSumTextBox.Refresh();
 
             string letter_number_sum_text = LetterNumberSumTextBox.Text.Substring(1);
             int letter_number_sum = int.Parse(letter_number_sum_text);
-            LetterNumberSumTextBox.BackColor = (Numbers.Compare(letter_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+            LetterNumberSumTextBox.BackColor = (Numbers.Compare(letter_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
             LetterNumberSumTextBox.Refresh();
 
             UpdateMathsChapterVerseSums();
@@ -44563,7 +44549,7 @@ public partial class MainForm : Form, ISubscriber
             //ChapterNumberSumTextBox.ForeColor = Numbers.GetNumberTypeColor(ChapterNumberSumTextBox.Text.Split()[1], m_radix);
             ChapterNumberSumTextBox.Text = SUM_SYMBOL + chapter_number_sum.ToString();
             ChapterNumberSumTextBox.ForeColor = Numbers.GetNumberTypeColor(chapter_number_sum);
-            ChapterNumberSumTextBox.BackColor = (Numbers.Compare(chapter_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+            ChapterNumberSumTextBox.BackColor = (Numbers.Compare(chapter_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
             ChapterNumberSumTextBox.Refresh();
         }
 
@@ -44573,7 +44559,7 @@ public partial class MainForm : Form, ISubscriber
             //VerseNumberSumTextBox.ForeColor = Numbers.GetNumberTypeColor(VerseNumberSumTextBox.Text.Split()[1], m_radix);
             VerseNumberSumTextBox.Text = SUM_SYMBOL + verse_number_sum.ToString();
             VerseNumberSumTextBox.ForeColor = Numbers.GetNumberTypeColor(verse_number_sum);
-            VerseNumberSumTextBox.BackColor = (Numbers.Compare(verse_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+            VerseNumberSumTextBox.BackColor = (Numbers.Compare(verse_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
             VerseNumberSumTextBox.Refresh();
         }
 
@@ -44583,7 +44569,7 @@ public partial class MainForm : Form, ISubscriber
             //WordNumberSumTextBox.ForeColor = Numbers.GetNumberTypeColor(WordNumberSumTextBox.Text.Split()[1], m_radix);
             WordNumberSumTextBox.Text = SUM_SYMBOL + word_number_sum.ToString();
             WordNumberSumTextBox.ForeColor = Numbers.GetNumberTypeColor(word_number_sum);
-            WordNumberSumTextBox.BackColor = (Numbers.Compare(word_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+            WordNumberSumTextBox.BackColor = (Numbers.Compare(word_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
             WordNumberSumTextBox.Refresh();
         }
 
@@ -44593,7 +44579,7 @@ public partial class MainForm : Form, ISubscriber
             //LetterNumberSumTextBox.ForeColor = Numbers.GetNumberTypeColor(LetterNumberSumTextBox.Text.Split()[1], m_radix);
             LetterNumberSumTextBox.Text = SUM_SYMBOL + letter_number_sum.ToString();
             LetterNumberSumTextBox.ForeColor = Numbers.GetNumberTypeColor(letter_number_sum);
-            LetterNumberSumTextBox.BackColor = (Numbers.Compare(letter_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+            LetterNumberSumTextBox.BackColor = (Numbers.Compare(letter_number_sum, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
             LetterNumberSumTextBox.Refresh();
         }
     }
@@ -44601,42 +44587,42 @@ public partial class MainForm : Form, ISubscriber
     {
         ChaptersTextBox.Text = Radix.Encode(chapter_count, m_radix);
         ChaptersTextBox.ForeColor = Numbers.GetNumberTypeColor(ChaptersTextBox.Text, m_radix);
-        ChaptersTextBox.BackColor = (Numbers.Compare(chapter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+        ChaptersTextBox.BackColor = (Numbers.Compare(chapter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
         ChaptersTextBox.Refresh();
 
         DecimalChaptersTextBox.Text = chapter_count.ToString();
         DecimalChaptersTextBox.ForeColor = Numbers.GetNumberTypeColor(chapter_count);
-        DecimalChaptersTextBox.Visible = (m_radix != DEFAULT_RADIX);
+        DecimalChaptersTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
         DecimalChaptersTextBox.Refresh();
 
         VersesTextBox.Text = Radix.Encode(verse_count, m_radix);
         VersesTextBox.ForeColor = Numbers.GetNumberTypeColor(VersesTextBox.Text, m_radix);
-        VersesTextBox.BackColor = (Numbers.Compare(verse_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+        VersesTextBox.BackColor = (Numbers.Compare(verse_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
         VersesTextBox.Refresh();
 
         DecimalVersesTextBox.Text = verse_count.ToString();
         DecimalVersesTextBox.ForeColor = Numbers.GetNumberTypeColor(verse_count);
-        DecimalVersesTextBox.Visible = (m_radix != DEFAULT_RADIX);
+        DecimalVersesTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
         DecimalVersesTextBox.Refresh();
 
         WordsTextBox.Text = Radix.Encode(word_count, m_radix);
         WordsTextBox.ForeColor = Numbers.GetNumberTypeColor(WordsTextBox.Text, m_radix);
-        WordsTextBox.BackColor = (Numbers.Compare(word_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+        WordsTextBox.BackColor = (Numbers.Compare(word_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
         WordsTextBox.Refresh();
 
         DecimalWordsTextBox.Text = word_count.ToString();
         DecimalWordsTextBox.ForeColor = Numbers.GetNumberTypeColor(word_count);
-        DecimalWordsTextBox.Visible = (m_radix != DEFAULT_RADIX);
+        DecimalWordsTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
         DecimalWordsTextBox.Refresh();
 
         LettersTextBox.Text = Radix.Encode(letter_count, m_radix);
         LettersTextBox.ForeColor = Numbers.GetNumberTypeColor(LettersTextBox.Text, m_radix);
-        LettersTextBox.BackColor = (Numbers.Compare(letter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+        LettersTextBox.BackColor = (Numbers.Compare(letter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
         LettersTextBox.Refresh();
 
         DecimalLettersTextBox.Text = letter_count.ToString();
         DecimalLettersTextBox.ForeColor = Numbers.GetNumberTypeColor(letter_count);
-        DecimalLettersTextBox.Visible = (m_radix != DEFAULT_RADIX);
+        DecimalLettersTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
         DecimalLettersTextBox.Refresh();
     }
     ///////////////////////////////////////////////////////////////////////////////
@@ -46648,11 +46634,11 @@ public partial class MainForm : Form, ISubscriber
                             str.AppendLine("Verses\t\t=\t" + VersesTextBox.Text);
                             str.AppendLine("Words\t\t=\t" + WordsTextBox.Text);
                             str.AppendLine("Letters\t\t=\t" + LettersTextBox.Text);
-                            str.AppendLine("Value\t\t=\t" + ValueTextBox.Text + ((m_radix == DEFAULT_RADIX) ? "" : " in base " + m_radix.ToString()));
+                            str.AppendLine("Value\t\t=\t" + ValueTextBox.Text + ((m_radix == Numbers.DEFAULT_RADIX) ? "" : " in base " + m_radix.ToString()));
                         }
                         else
                         {
-                            str.AppendLine("Number\t\t=\t" + ValueTextBox.Text + ((m_radix == DEFAULT_RADIX) ? "" : " in base " + m_radix.ToString()));
+                            str.AppendLine("Number\t\t=\t" + ValueTextBox.Text + ((m_radix == Numbers.DEFAULT_RADIX) ? "" : " in base " + m_radix.ToString()));
                         }
 
                         str.AppendLine();
@@ -46975,66 +46961,94 @@ public partial class MainForm : Form, ISubscriber
         //    FileHelper.DisplayFile(path);
         //}
     }
-    private void PrimalogyLabel_Click(object sender, EventArgs e)
+    private void PrimeNumbersLabel_Click(object sender, EventArgs e)
     {
-        this.Cursor = Cursors.WaitCursor;
-        try
+        if (ModifierKeys == Keys.Control)
         {
-            string filename = "Primalogy.pdf";
-            string path = Application.StartupPath + "/" + Globals.HELP_FOLDER + "/" + filename;
-            if (!File.Exists(path))
+            this.Cursor = Cursors.WaitCursor;
+            try
             {
-                DownloadFile("http://heliwave.com/" + filename, path);
-            }
-            if (File.Exists(path))
-            {
-                FileHelper.WaitForReady(path);
+                string filename = Globals.NUMBERS_FOLDER + "/" + "primes.txt";
+                FileHelper.DisplayFile(filename);
+                filename = Globals.NUMBERS_FOLDER + "/" + "additive_primes.txt";
+                FileHelper.DisplayFile(filename);
+                filename = Globals.NUMBERS_FOLDER + "/" + "non_additive_primes.txt";
+                FileHelper.DisplayFile(filename);
+                //string filename = "Primalogy.pdf";
+                //string path = Application.StartupPath + "/" + Globals.HELP_FOLDER + "/" + filename;
+                //if (!File.Exists(path))
+                //{
+                //    DownloadFile("http://heliwave.com/" + filename, path);
+                //}
+                //if (File.Exists(path))
+                //{
+                //    FileHelper.WaitForReady(path);
 
-                System.Diagnostics.Process.Start(path);
+                //    System.Diagnostics.Process.Start(path);
+                //}
             }
-        }
-        catch (Exception ex)
-        {
-            while (ex != null)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, Application.ProductName);
-                ex = ex.InnerException;
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
             }
         }
-        finally
+        else
         {
-            this.Cursor = Cursors.Default;
+            m_index_type = IndexType.Prime;
+            FactorizeValue(NthNumberTextBox);
         }
     }
-    private void PrimalogyARLabel_Click(object sender, EventArgs e)
+    private void CompositeNumbersLabel_Click(object sender, EventArgs e)
     {
-        this.Cursor = Cursors.WaitCursor;
-        try
+        if (ModifierKeys == Keys.Control)
         {
-            string filename = "Primalogy_AR.pdf";
-            string path = Application.StartupPath + "/" + Globals.HELP_FOLDER + "/" + filename;
-            if (!File.Exists(path))
+            this.Cursor = Cursors.WaitCursor;
+            try
             {
-                DownloadFile("http://heliwave.com/" + filename, path);
-            }
-            if (File.Exists(path))
-            {
-                FileHelper.WaitForReady(path);
+                string filename = Globals.NUMBERS_FOLDER + "/" + "composites.txt";
+                FileHelper.DisplayFile(filename);
+                filename = Globals.NUMBERS_FOLDER + "/" + "additive_composites.txt";
+                FileHelper.DisplayFile(filename);
+                filename = Globals.NUMBERS_FOLDER + "/" + "non_additive_composites.txt";
+                FileHelper.DisplayFile(filename);
+                //string filename = "Primalogy_AR.pdf";
+                //string path = Application.StartupPath + "/" + Globals.HELP_FOLDER + "/" + filename;
+                //if (!File.Exists(path))
+                //{
+                //    DownloadFile("http://heliwave.com/" + filename, path);
+                //}
+                //if (File.Exists(path))
+                //{
+                //    FileHelper.WaitForReady(path);
 
-                System.Diagnostics.Process.Start(path);
+                //    System.Diagnostics.Process.Start(path);
+                //}
             }
-        }
-        catch (Exception ex)
-        {
-            while (ex != null)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, Application.ProductName);
-                ex = ex.InnerException;
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
             }
         }
-        finally
+        else
         {
-            this.Cursor = Cursors.Default;
+            m_index_type = IndexType.Composite;
+            FactorizeValue(NthNumberTextBox);
         }
     }
     private void HelpFolderLabel_Click(object sender, EventArgs e)

@@ -537,7 +537,7 @@ public partial class MainForm : Form
 
         //string factors_str = Numbers.FactorizeToString(number);
         //PrimeFactorsTextBox.Text = factors_str;
-        //PrimeFactorsTextBox.BackColor = (Numbers.Compare(number, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? DIVISOR_COLOR : SystemColors.ControlLight;
+        //PrimeFactorsTextBox.BackColor = (Numbers.Compare(number, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
         //PrimeFactorsTextBox.Refresh();
         CallRun();
     }
@@ -628,11 +628,18 @@ public partial class MainForm : Form
 
                         if (Nth4n1NumberTextBox.Text == "")
                         {
-                            Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
+                            //Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
                         }
                         else
                         {
-                            Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
+                            if (Numbers.IsPrime(number))
+                            {
+                                //Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
+                            }
+                            else // any other index type will be treated as IndexNumberType.Composite
+                            {
+                                //Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
+                            }
                         }
                         Nth4n1NumberTextBox.Refresh();
                     }
@@ -657,11 +664,11 @@ public partial class MainForm : Form
 
                         if (Nth4n1NumberTextBox.Text == "")
                         {
-                            Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
+                            //Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
                         }
                         else
                         {
-                            Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
+                            //Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
                         }
                         Nth4n1NumberTextBox.Refresh();
                     }
