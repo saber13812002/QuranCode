@@ -50,8 +50,13 @@ public static class ScriptRunner
     /// <returns></returns>
     public static void SaveScript(string filename, string text)
     {
+        if ((filename == "Template.cs") || (filename == "Samples.cs"))
+        {
+            throw new Exception(filename + " is not allowed to be modified.");
+        }
+
         string path = Globals.SCRIPTS_FOLDER + "/" + filename;
-        if (File.Exists(path))
+        if (Directory.Exists(Globals.SCRIPTS_FOLDER))
         {
             using (StreamWriter writer = new StreamWriter(path, false, Encoding.Unicode))
             {

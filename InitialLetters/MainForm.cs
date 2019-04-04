@@ -247,7 +247,7 @@ namespace InitialLetters
         {
             GenerateAnagrams();
         }
-        private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             string filename = "";
             if (ListView.Sorting == SortOrder.None)
@@ -308,7 +308,7 @@ namespace InitialLetters
                 ListView.Enabled = false;
                 InitialsToolStripMenuItem.Enabled = false;
                 RunToolStripMenuItem.Enabled = false;
-                SaveToolStripMenuItem.Enabled = false;
+                OpenToolStripMenuItem.Enabled = false;
                 m_start_time = DateTime.Now;
                 ElapsedTimeLabel.Text = "00:00:00";
                 Timer.Enabled = true;
@@ -350,7 +350,7 @@ namespace InitialLetters
                     }
                     InitialsToolStripMenuItem.Enabled = true;
                     RunToolStripMenuItem.Enabled = true;
-                    SaveToolStripMenuItem.Enabled = true;
+                    OpenToolStripMenuItem.Enabled = true;
 
                     SaveResults();
 

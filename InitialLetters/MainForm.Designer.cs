@@ -36,7 +36,7 @@ namespace InitialLetters
             this.UniqueWordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.AllWordsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.RunToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.SaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.InitialLettersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
@@ -59,7 +59,7 @@ namespace InitialLetters
             this.MenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.InitialsToolStripMenuItem,
             this.RunToolStripMenuItem,
-            this.SaveToolStripMenuItem,
+            this.OpenToolStripMenuItem,
             this.HelpToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
@@ -107,13 +107,13 @@ namespace InitialLetters
             this.RunToolStripMenuItem.ToolTipText = "Generate sentences";
             this.RunToolStripMenuItem.Click += new System.EventHandler(this.RunToolStripMenuItem_Click);
             // 
-            // SaveToolStripMenuItem
+            // OpenToolStripMenuItem
             // 
-            this.SaveToolStripMenuItem.Enabled = false;
-            this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
-            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(52, 24);
-            this.SaveToolStripMenuItem.Text = "&Save";
-            this.SaveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
+            this.OpenToolStripMenuItem.Enabled = false;
+            this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(52, 24);
+            this.OpenToolStripMenuItem.Text = "&Open";
+            this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // HelpToolStripMenuItem
             // 
@@ -151,8 +151,8 @@ namespace InitialLetters
             // 
             // ListView
             // 
-            this.ListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.ListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ColumnHeader});
@@ -198,7 +198,7 @@ namespace InitialLetters
             // 
             // ResultPanel
             // 
-            this.ResultPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.ResultPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ResultPanel.Controls.Add(this.DuplicateLettersCheckBox);
             this.ResultPanel.Controls.Add(this.ResultLabel);
@@ -286,7 +286,7 @@ namespace InitialLetters
         private System.Windows.Forms.ToolStripMenuItem UniqueWordsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem AllWordsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem RunToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem SaveToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem OpenToolStripMenuItem;
         private System.Windows.Forms.ListView ListView;
         private System.Windows.Forms.ProgressBar ProgressBar;
         private System.Windows.Forms.TextBox LettersTextBox;

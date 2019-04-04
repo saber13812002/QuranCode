@@ -279,13 +279,11 @@ partial class MainForm
             this.MainTextBox = new RichTextBoxEx();
             this.SearchResultTextBox = new RichTextBoxEx();
             this.HeaderPanel = new System.Windows.Forms.Panel();
-            this.ScriptSaveLabel = new System.Windows.Forms.Label();
             this.ScriptRunLabel = new System.Windows.Forms.Label();
-            this.ScriptCompileLabel = new System.Windows.Forms.Label();
-            this.ScriptNewLabel = new System.Windows.Forms.Label();
-            this.ScriptSamplesLabel = new System.Windows.Forms.Label();
             this.ScriptLabel = new System.Windows.Forms.Label();
-            this.ScriptCloseLabel = new System.Windows.Forms.Label();
+            this.ScriptSaveAsLabel = new System.Windows.Forms.Label();
+            this.ScriptCompileLabel = new System.Windows.Forms.Label();
+            this.ScriptOpenLabel = new System.Windows.Forms.Label();
             this.GoldenRatioScopeLabel = new System.Windows.Forms.Label();
             this.GoldenRatioTypeLabel = new System.Windows.Forms.Label();
             this.GoldenRatioOrderLabel = new System.Windows.Forms.Label();
@@ -683,6 +681,8 @@ partial class MainForm
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FontDialog = new System.Windows.Forms.FontDialog();
+            this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.StatusPanel.SuspendLayout();
             this.ChapterSortPanel.SuspendLayout();
             this.DrawingsPanel.SuspendLayout();
@@ -1889,7 +1889,7 @@ partial class MainForm
             // CompositeNumbersLabel
             // 
             this.CompositeNumbersLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.CompositeNumbersLabel.BackColor = System.Drawing.Color.Red;
+            this.CompositeNumbersLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.CompositeNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.CompositeNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CompositeNumbersLabel.ForeColor = System.Drawing.SystemColors.Window;
@@ -1904,7 +1904,7 @@ partial class MainForm
             // PrimeNumbersLabel
             // 
             this.PrimeNumbersLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.PrimeNumbersLabel.BackColor = System.Drawing.Color.Blue;
+            this.PrimeNumbersLabel.BackColor = System.Drawing.Color.CornflowerBlue;
             this.PrimeNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PrimeNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PrimeNumbersLabel.ForeColor = System.Drawing.SystemColors.Window;
@@ -5052,13 +5052,11 @@ partial class MainForm
             // HeaderPanel
             // 
             this.HeaderPanel.BackColor = System.Drawing.Color.Transparent;
-            this.HeaderPanel.Controls.Add(this.ScriptSaveLabel);
             this.HeaderPanel.Controls.Add(this.ScriptRunLabel);
-            this.HeaderPanel.Controls.Add(this.ScriptCompileLabel);
-            this.HeaderPanel.Controls.Add(this.ScriptNewLabel);
-            this.HeaderPanel.Controls.Add(this.ScriptSamplesLabel);
             this.HeaderPanel.Controls.Add(this.ScriptLabel);
-            this.HeaderPanel.Controls.Add(this.ScriptCloseLabel);
+            this.HeaderPanel.Controls.Add(this.ScriptSaveAsLabel);
+            this.HeaderPanel.Controls.Add(this.ScriptCompileLabel);
+            this.HeaderPanel.Controls.Add(this.ScriptOpenLabel);
             this.HeaderPanel.Controls.Add(this.GoldenRatioScopeLabel);
             this.HeaderPanel.Controls.Add(this.GoldenRatioTypeLabel);
             this.HeaderPanel.Controls.Add(this.GoldenRatioOrderLabel);
@@ -5079,23 +5077,6 @@ partial class MainForm
             this.HeaderPanel.Size = new System.Drawing.Size(816, 16);
             this.HeaderPanel.TabIndex = 88;
             // 
-            // ScriptSaveLabel
-            // 
-            this.ScriptSaveLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ScriptSaveLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ScriptSaveLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ScriptSaveLabel.ForeColor = System.Drawing.Color.Transparent;
-            this.ScriptSaveLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptSaveLabel.Image")));
-            this.ScriptSaveLabel.Location = new System.Drawing.Point(59, -2);
-            this.ScriptSaveLabel.Name = "ScriptSaveLabel";
-            this.ScriptSaveLabel.Size = new System.Drawing.Size(23, 17);
-            this.ScriptSaveLabel.TabIndex = 0;
-            this.ScriptSaveLabel.Tag = "";
-            this.ScriptSaveLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTip.SetToolTip(this.ScriptSaveLabel, "Save");
-            this.ScriptSaveLabel.Visible = false;
-            this.ScriptSaveLabel.Click += new System.EventHandler(this.ScriptSaveLabel_Click);
-            // 
             // ScriptRunLabel
             // 
             this.ScriptRunLabel.BackColor = System.Drawing.Color.Transparent;
@@ -5103,66 +5084,15 @@ partial class MainForm
             this.ScriptRunLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ScriptRunLabel.ForeColor = System.Drawing.Color.Transparent;
             this.ScriptRunLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptRunLabel.Image")));
-            this.ScriptRunLabel.Location = new System.Drawing.Point(100, -3);
+            this.ScriptRunLabel.Location = new System.Drawing.Point(79, -2);
             this.ScriptRunLabel.Name = "ScriptRunLabel";
-            this.ScriptRunLabel.Size = new System.Drawing.Size(23, 17);
+            this.ScriptRunLabel.Size = new System.Drawing.Size(17, 17);
             this.ScriptRunLabel.TabIndex = 0;
             this.ScriptRunLabel.Tag = "";
             this.ScriptRunLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ToolTip.SetToolTip(this.ScriptRunLabel, "Run");
             this.ScriptRunLabel.Visible = false;
             this.ScriptRunLabel.Click += new System.EventHandler(this.ScriptRunLabel_Click);
-            // 
-            // ScriptCompileLabel
-            // 
-            this.ScriptCompileLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ScriptCompileLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ScriptCompileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ScriptCompileLabel.ForeColor = System.Drawing.Color.Transparent;
-            this.ScriptCompileLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptCompileLabel.Image")));
-            this.ScriptCompileLabel.Location = new System.Drawing.Point(80, -3);
-            this.ScriptCompileLabel.Name = "ScriptCompileLabel";
-            this.ScriptCompileLabel.Size = new System.Drawing.Size(23, 17);
-            this.ScriptCompileLabel.TabIndex = 137;
-            this.ScriptCompileLabel.Tag = "";
-            this.ScriptCompileLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTip.SetToolTip(this.ScriptCompileLabel, "Compile");
-            this.ScriptCompileLabel.Visible = false;
-            this.ScriptCompileLabel.Click += new System.EventHandler(this.ScriptCompileLabel_Click);
-            // 
-            // ScriptNewLabel
-            // 
-            this.ScriptNewLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ScriptNewLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ScriptNewLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ScriptNewLabel.ForeColor = System.Drawing.Color.Transparent;
-            this.ScriptNewLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptNewLabel.Image")));
-            this.ScriptNewLabel.Location = new System.Drawing.Point(18, -3);
-            this.ScriptNewLabel.Name = "ScriptNewLabel";
-            this.ScriptNewLabel.Size = new System.Drawing.Size(23, 17);
-            this.ScriptNewLabel.TabIndex = 0;
-            this.ScriptNewLabel.Tag = "";
-            this.ScriptNewLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTip.SetToolTip(this.ScriptNewLabel, "New");
-            this.ScriptNewLabel.Visible = false;
-            this.ScriptNewLabel.Click += new System.EventHandler(this.ScriptNewLabel_Click);
-            // 
-            // ScriptSamplesLabel
-            // 
-            this.ScriptSamplesLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ScriptSamplesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ScriptSamplesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ScriptSamplesLabel.ForeColor = System.Drawing.Color.Transparent;
-            this.ScriptSamplesLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptSamplesLabel.Image")));
-            this.ScriptSamplesLabel.Location = new System.Drawing.Point(36, -3);
-            this.ScriptSamplesLabel.Name = "ScriptSamplesLabel";
-            this.ScriptSamplesLabel.Size = new System.Drawing.Size(23, 17);
-            this.ScriptSamplesLabel.TabIndex = 0;
-            this.ScriptSamplesLabel.Tag = "";
-            this.ScriptSamplesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTip.SetToolTip(this.ScriptSamplesLabel, "Script Samples");
-            this.ScriptSamplesLabel.Visible = false;
-            this.ScriptSamplesLabel.Click += new System.EventHandler(this.ScriptSamplesLabel_Click);
             // 
             // ScriptLabel
             // 
@@ -5171,32 +5101,65 @@ partial class MainForm
             this.ScriptLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ScriptLabel.ForeColor = System.Drawing.Color.Transparent;
             this.ScriptLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptLabel.Image")));
-            this.ScriptLabel.Location = new System.Drawing.Point(75, -2);
+            this.ScriptLabel.Location = new System.Drawing.Point(79, -2);
             this.ScriptLabel.Name = "ScriptLabel";
-            this.ScriptLabel.Size = new System.Drawing.Size(23, 17);
+            this.ScriptLabel.Size = new System.Drawing.Size(17, 17);
             this.ScriptLabel.TabIndex = 0;
             this.ScriptLabel.Tag = "";
             this.ScriptLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ToolTip.SetToolTip(this.ScriptLabel, "Script");
             this.ScriptLabel.Click += new System.EventHandler(this.ScriptLabel_Click);
             // 
-            // ScriptCloseLabel
+            // ScriptSaveAsLabel
             // 
-            this.ScriptCloseLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.ScriptCloseLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ScriptCloseLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ScriptCloseLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ScriptCloseLabel.ForeColor = System.Drawing.Color.Transparent;
-            this.ScriptCloseLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptCloseLabel.Image")));
-            this.ScriptCloseLabel.Location = new System.Drawing.Point(796, -1);
-            this.ScriptCloseLabel.Name = "ScriptCloseLabel";
-            this.ScriptCloseLabel.Size = new System.Drawing.Size(18, 17);
-            this.ScriptCloseLabel.TabIndex = 134;
-            this.ScriptCloseLabel.Tag = "";
-            this.ScriptCloseLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTip.SetToolTip(this.ScriptCloseLabel, "Close");
-            this.ScriptCloseLabel.Visible = false;
-            this.ScriptCloseLabel.Click += new System.EventHandler(this.ScriptCloseLabel_Click);
+            this.ScriptSaveAsLabel.BackColor = System.Drawing.Color.Transparent;
+            this.ScriptSaveAsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ScriptSaveAsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ScriptSaveAsLabel.ForeColor = System.Drawing.Color.Transparent;
+            this.ScriptSaveAsLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptSaveAsLabel.Image")));
+            this.ScriptSaveAsLabel.Location = new System.Drawing.Point(41, -2);
+            this.ScriptSaveAsLabel.Name = "ScriptSaveAsLabel";
+            this.ScriptSaveAsLabel.Size = new System.Drawing.Size(17, 17);
+            this.ScriptSaveAsLabel.TabIndex = 0;
+            this.ScriptSaveAsLabel.Tag = "";
+            this.ScriptSaveAsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.ScriptSaveAsLabel, "Save As");
+            this.ScriptSaveAsLabel.Visible = false;
+            this.ScriptSaveAsLabel.Click += new System.EventHandler(this.ScriptSaveAsLabel_Click);
+            // 
+            // ScriptCompileLabel
+            // 
+            this.ScriptCompileLabel.BackColor = System.Drawing.Color.Transparent;
+            this.ScriptCompileLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ScriptCompileLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ScriptCompileLabel.ForeColor = System.Drawing.Color.Transparent;
+            this.ScriptCompileLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptCompileLabel.Image")));
+            this.ScriptCompileLabel.Location = new System.Drawing.Point(61, -2);
+            this.ScriptCompileLabel.Name = "ScriptCompileLabel";
+            this.ScriptCompileLabel.Size = new System.Drawing.Size(17, 17);
+            this.ScriptCompileLabel.TabIndex = 0;
+            this.ScriptCompileLabel.Tag = "";
+            this.ScriptCompileLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.ScriptCompileLabel, "Compile");
+            this.ScriptCompileLabel.Visible = false;
+            this.ScriptCompileLabel.Click += new System.EventHandler(this.ScriptCompileLabel_Click);
+            // 
+            // ScriptOpenLabel
+            // 
+            this.ScriptOpenLabel.BackColor = System.Drawing.Color.Transparent;
+            this.ScriptOpenLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ScriptOpenLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ScriptOpenLabel.ForeColor = System.Drawing.Color.Transparent;
+            this.ScriptOpenLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptOpenLabel.Image")));
+            this.ScriptOpenLabel.Location = new System.Drawing.Point(21, -2);
+            this.ScriptOpenLabel.Name = "ScriptOpenLabel";
+            this.ScriptOpenLabel.Size = new System.Drawing.Size(17, 17);
+            this.ScriptOpenLabel.TabIndex = 0;
+            this.ScriptOpenLabel.Tag = "";
+            this.ScriptOpenLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.ScriptOpenLabel, "Open");
+            this.ScriptOpenLabel.Visible = false;
+            this.ScriptOpenLabel.Click += new System.EventHandler(this.ScriptOpenLabel_Click);
             // 
             // GoldenRatioScopeLabel
             // 
@@ -5254,9 +5217,9 @@ partial class MainForm
             this.DisplayProstrationVersesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DisplayProstrationVersesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DisplayProstrationVersesLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.DisplayProstrationVersesLabel.Location = new System.Drawing.Point(785, 1);
+            this.DisplayProstrationVersesLabel.Location = new System.Drawing.Point(784, 0);
             this.DisplayProstrationVersesLabel.Name = "DisplayProstrationVersesLabel";
-            this.DisplayProstrationVersesLabel.Size = new System.Drawing.Size(14, 14);
+            this.DisplayProstrationVersesLabel.Size = new System.Drawing.Size(17, 17);
             this.DisplayProstrationVersesLabel.TabIndex = 117;
             this.DisplayProstrationVersesLabel.Text = "۩";
             this.DisplayProstrationVersesLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -5304,7 +5267,7 @@ partial class MainForm
             this.WordWrapLabel.Image = ((System.Drawing.Image)(resources.GetObject("WordWrapLabel.Image")));
             this.WordWrapLabel.Location = new System.Drawing.Point(799, 0);
             this.WordWrapLabel.Name = "WordWrapLabel";
-            this.WordWrapLabel.Size = new System.Drawing.Size(14, 14);
+            this.WordWrapLabel.Size = new System.Drawing.Size(17, 17);
             this.WordWrapLabel.TabIndex = 99;
             this.WordWrapLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ToolTip.SetToolTip(this.WordWrapLabel, "Wrap text");
@@ -5380,7 +5343,7 @@ partial class MainForm
             this.InspectVersesLabel.Image = ((System.Drawing.Image)(resources.GetObject("InspectVersesLabel.Image")));
             this.InspectVersesLabel.Location = new System.Drawing.Point(769, 0);
             this.InspectVersesLabel.Name = "InspectVersesLabel";
-            this.InspectVersesLabel.Size = new System.Drawing.Size(14, 14);
+            this.InspectVersesLabel.Size = new System.Drawing.Size(17, 17);
             this.InspectVersesLabel.TabIndex = 113;
             this.ToolTip.SetToolTip(this.InspectVersesLabel, "Inspect verses");
             this.InspectVersesLabel.Click += new System.EventHandler(this.InspectVersesLabel_Click);
@@ -5471,7 +5434,7 @@ partial class MainForm
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
             this.TabControl.ShowToolTips = true;
-            this.TabControl.Size = new System.Drawing.Size(816, 197);
+            this.TabControl.Size = new System.Drawing.Size(816, 196);
             this.TabControl.TabIndex = 102;
             this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             this.TabControl.Click += new System.EventHandler(this.TabControl_Click);
@@ -5484,7 +5447,7 @@ partial class MainForm
             this.TranslationTabPage.Location = new System.Drawing.Point(4, 22);
             this.TranslationTabPage.Name = "TranslationTabPage";
             this.TranslationTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.TranslationTabPage.Size = new System.Drawing.Size(808, 171);
+            this.TranslationTabPage.Size = new System.Drawing.Size(808, 170);
             this.TranslationTabPage.TabIndex = 190;
             this.TranslationTabPage.Text = "Translation";
             this.TranslationTabPage.ToolTipText = "Translations for current selection/verse\r\nترجمة الءاية أو الءايات المظللة";
@@ -5678,7 +5641,7 @@ partial class MainForm
             this.GrammarTabPage.Controls.Add(this.GrammarTextBox);
             this.GrammarTabPage.Location = new System.Drawing.Point(4, 22);
             this.GrammarTabPage.Name = "GrammarTabPage";
-            this.GrammarTabPage.Size = new System.Drawing.Size(808, 171);
+            this.GrammarTabPage.Size = new System.Drawing.Size(808, 170);
             this.GrammarTabPage.TabIndex = 193;
             this.GrammarTabPage.Text = " Grammar";
             this.GrammarTabPage.ToolTipText = "Grammar details of the current word in Arabic and English\r\nإعراب الكلمة بالعربي و" +
@@ -5712,7 +5675,7 @@ partial class MainForm
             this.RelatedWordsTabPage.Controls.Add(this.RelatedWordsTextBox);
             this.RelatedWordsTabPage.Location = new System.Drawing.Point(4, 22);
             this.RelatedWordsTabPage.Name = "RelatedWordsTabPage";
-            this.RelatedWordsTabPage.Size = new System.Drawing.Size(808, 171);
+            this.RelatedWordsTabPage.Size = new System.Drawing.Size(808, 170);
             this.RelatedWordsTabPage.TabIndex = 192;
             this.RelatedWordsTabPage.Text = "Related Words";
             this.RelatedWordsTabPage.ToolTipText = "Related words from the same root as the current word\r\nالكلمات المشتقة من نفس جذر " +
@@ -5767,7 +5730,7 @@ partial class MainForm
             this.SymmetryTabPage.Controls.Add(this.SymmetryTextBox);
             this.SymmetryTabPage.Location = new System.Drawing.Point(4, 22);
             this.SymmetryTabPage.Name = "SymmetryTabPage";
-            this.SymmetryTabPage.Size = new System.Drawing.Size(808, 171);
+            this.SymmetryTabPage.Size = new System.Drawing.Size(808, 170);
             this.SymmetryTabPage.TabIndex = 201;
             this.SymmetryTabPage.Text = "Symmetry";
             this.SymmetryTabPage.ToolTipText = "Text symmetries starting from both ends [Dr Waleed S. Mohammed]\r\nتناظر النص من ال" +
@@ -5847,7 +5810,7 @@ partial class MainForm
             this.ValuesSequenceTabPage.Controls.Add(this.ValuesSequenceTextBox);
             this.ValuesSequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.ValuesSequenceTabPage.Name = "ValuesSequenceTabPage";
-            this.ValuesSequenceTabPage.Size = new System.Drawing.Size(808, 171);
+            this.ValuesSequenceTabPage.Size = new System.Drawing.Size(808, 170);
             this.ValuesSequenceTabPage.TabIndex = 198;
             this.ValuesSequenceTabPage.Text = "Values";
             this.ValuesSequenceTabPage.ToolTipText = "Values of letter/word/verse/chapter values in bases 2 to 36\r\nقيم الحروف والكلمات " +
@@ -5968,7 +5931,7 @@ partial class MainForm
             this.CVWLSequenceTabPage.Controls.Add(this.CVWLSequenceTextBox);
             this.CVWLSequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.CVWLSequenceTabPage.Name = "CVWLSequenceTabPage";
-            this.CVWLSequenceTabPage.Size = new System.Drawing.Size(808, 171);
+            this.CVWLSequenceTabPage.Size = new System.Drawing.Size(808, 170);
             this.CVWLSequenceTabPage.TabIndex = 200;
             this.CVWLSequenceTabPage.Text = "CVWL";
             this.CVWLSequenceTabPage.ToolTipText = "Concatenated chapter/verse/word/letter numbers and counts\r\nرصف أرقام وأعداد الحرو" +
@@ -6063,7 +6026,7 @@ partial class MainForm
             this.DNASequenceTabPage.Controls.Add(this.DNASequenceTextBox);
             this.DNASequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.DNASequenceTabPage.Name = "DNASequenceTabPage";
-            this.DNASequenceTabPage.Size = new System.Drawing.Size(808, 171);
+            this.DNASequenceTabPage.Size = new System.Drawing.Size(808, 170);
             this.DNASequenceTabPage.TabIndex = 195;
             this.DNASequenceTabPage.Text = "DNA";
             this.DNASequenceTabPage.ToolTipText = "Convert text into a DNA sequence to compare with the human genome [Belkacem Meghz" +
@@ -6141,7 +6104,7 @@ partial class MainForm
             this.MathsTabPage.Controls.Add(this.MathsPanel);
             this.MathsTabPage.Location = new System.Drawing.Point(4, 22);
             this.MathsTabPage.Name = "MathsTabPage";
-            this.MathsTabPage.Size = new System.Drawing.Size(808, 171);
+            this.MathsTabPage.Size = new System.Drawing.Size(808, 170);
             this.MathsTabPage.TabIndex = 197;
             this.MathsTabPage.Text = "C+V";
             this.MathsTabPage.ToolTipText = "Chapter +/- Verse calculations\r\nحسابات مجاميع وفروق الءايات والسُوَر";
@@ -6255,7 +6218,7 @@ partial class MainForm
             this.MathsPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MathsPanel.Location = new System.Drawing.Point(0, 0);
             this.MathsPanel.Name = "MathsPanel";
-            this.MathsPanel.Size = new System.Drawing.Size(808, 171);
+            this.MathsPanel.Size = new System.Drawing.Size(808, 170);
             this.MathsPanel.TabIndex = 0;
             // 
             // MathsInterestingNumbersEditLabel
@@ -7543,7 +7506,7 @@ partial class MainForm
             this.DistancesTabPage.Controls.Add(this.DistancesPanel);
             this.DistancesTabPage.Location = new System.Drawing.Point(4, 22);
             this.DistancesTabPage.Name = "DistancesTabPage";
-            this.DistancesTabPage.Size = new System.Drawing.Size(808, 171);
+            this.DistancesTabPage.Size = new System.Drawing.Size(808, 170);
             this.DistancesTabPage.TabIndex = 199;
             this.DistancesTabPage.Text = "Distances";
             this.DistancesTabPage.ToolTipText = "Distances to the start and end of Book, current chapter/verse/word\r\nالمسافات الى " +
@@ -7620,7 +7583,7 @@ partial class MainForm
             this.DistancesPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DistancesPanel.Location = new System.Drawing.Point(0, 0);
             this.DistancesPanel.Name = "DistancesPanel";
-            this.DistancesPanel.Size = new System.Drawing.Size(808, 171);
+            this.DistancesPanel.Size = new System.Drawing.Size(808, 170);
             this.DistancesPanel.TabIndex = 1;
             // 
             // DistancesInterestingNumbersEditLabel
@@ -8479,7 +8442,7 @@ partial class MainForm
             this.UserTextTabPage.Controls.Add(this.UserTextTextBox);
             this.UserTextTabPage.Location = new System.Drawing.Point(4, 22);
             this.UserTextTabPage.Name = "UserTextTabPage";
-            this.UserTextTabPage.Size = new System.Drawing.Size(808, 171);
+            this.UserTextTabPage.Size = new System.Drawing.Size(808, 170);
             this.UserTextTabPage.TabIndex = 194;
             this.UserTextTabPage.Text = " User Text ";
             this.UserTextTabPage.ToolTipText = "Calculate the value of any given text or find all words with a given value\r\nحساب " +
@@ -9014,7 +8977,7 @@ partial class MainForm
             this.DivisorValueUpLabel.BackColor = System.Drawing.Color.Black;
             this.DivisorValueUpLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DivisorValueUpLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DivisorValueUpLabel.ForeColor = System.Drawing.Color.Thistle;
+            this.DivisorValueUpLabel.ForeColor = System.Drawing.SystemColors.Window;
             this.DivisorValueUpLabel.Location = new System.Drawing.Point(175, -1);
             this.DivisorValueUpLabel.Name = "DivisorValueUpLabel";
             this.DivisorValueUpLabel.Size = new System.Drawing.Size(10, 14);
@@ -9028,7 +8991,7 @@ partial class MainForm
             this.DivisorValueDownLabel.BackColor = System.Drawing.Color.Black;
             this.DivisorValueDownLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DivisorValueDownLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DivisorValueDownLabel.ForeColor = System.Drawing.Color.Thistle;
+            this.DivisorValueDownLabel.ForeColor = System.Drawing.SystemColors.Window;
             this.DivisorValueDownLabel.Location = new System.Drawing.Point(136, -1);
             this.DivisorValueDownLabel.Name = "DivisorValueDownLabel";
             this.DivisorValueDownLabel.Size = new System.Drawing.Size(10, 14);
@@ -10756,7 +10719,7 @@ partial class MainForm
             this.DivisorValueLabel.BackColor = System.Drawing.Color.Black;
             this.DivisorValueLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DivisorValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DivisorValueLabel.ForeColor = System.Drawing.Color.Thistle;
+            this.DivisorValueLabel.ForeColor = System.Drawing.SystemColors.Window;
             this.DivisorValueLabel.Location = new System.Drawing.Point(143, 0);
             this.DivisorValueLabel.Name = "DivisorValueLabel";
             this.DivisorValueLabel.Size = new System.Drawing.Size(36, 13);
@@ -11170,6 +11133,14 @@ partial class MainForm
             // FontDialog
             // 
             this.FontDialog.Apply += new System.EventHandler(this.FontDialog_Apply);
+            // 
+            // OpenFileDialog
+            // 
+            this.OpenFileDialog.DefaultExt = "cs";
+            this.OpenFileDialog.FileName = "Samples";
+            this.OpenFileDialog.Filter = "C# files|*.cs|All files|*.*";
+            this.OpenFileDialog.InitialDirectory = "Scripts";
+            this.OpenFileDialog.Title = "QuranCode";
             // 
             // MainForm
             // 
@@ -11957,15 +11928,15 @@ partial class MainForm
     private System.Windows.Forms.Label Nth4nPlus1PrimeNumberLabel;
     private System.Windows.Forms.Label FindBySimilarityPercentageLabel;
     private System.Windows.Forms.CheckBox FindByNumbersSetsCheckBox;
-    private System.Windows.Forms.Label ScriptCloseLabel;
     private System.Windows.Forms.Label ScriptRunLabel;
     private System.Windows.Forms.Label ScriptCompileLabel;
-    private System.Windows.Forms.Label ScriptNewLabel;
-    private System.Windows.Forms.Label ScriptSamplesLabel;
+    private System.Windows.Forms.Label ScriptOpenLabel;
     private RichTextBoxEx ScriptTextBox;
     private System.Windows.Forms.GroupBox ScriptOutputGroupBox;
     private System.Windows.Forms.TextBox ScriptOutputTextBox;
     private System.Windows.Forms.TextBox SumOfDigitSumsTextBox;
+    private System.Windows.Forms.Label ScriptSaveAsLabel;
+    private System.Windows.Forms.OpenFileDialog OpenFileDialog;
     private System.Windows.Forms.Label ScriptLabel;
-    private System.Windows.Forms.Label ScriptSaveLabel;
+    private System.Windows.Forms.SaveFileDialog SaveFileDialog;
 }

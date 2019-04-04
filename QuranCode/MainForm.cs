@@ -1070,13 +1070,11 @@ public partial class MainForm : Form, ISubscriber
         this.MainTextBox = new RichTextBoxEx();
         this.SearchResultTextBox = new RichTextBoxEx();
         this.HeaderPanel = new System.Windows.Forms.Panel();
-        this.ScriptSaveLabel = new System.Windows.Forms.Label();
+        this.ScriptSaveAsLabel = new System.Windows.Forms.Label();
         this.ScriptRunLabel = new System.Windows.Forms.Label();
         this.ScriptCompileLabel = new System.Windows.Forms.Label();
-        this.ScriptNewLabel = new System.Windows.Forms.Label();
-        this.ScriptSamplesLabel = new System.Windows.Forms.Label();
+        this.ScriptOpenLabel = new System.Windows.Forms.Label();
         this.ScriptLabel = new System.Windows.Forms.Label();
-        this.ScriptCloseLabel = new System.Windows.Forms.Label();
         this.GenerateSentencesLabel = new System.Windows.Forms.Label();
         this.DuplicateLettersCheckBox = new System.Windows.Forms.CheckBox();
         this.GoldenRatioScopeLabel = new System.Windows.Forms.Label();
@@ -6057,13 +6055,11 @@ public partial class MainForm : Form, ISubscriber
         // HeaderPanel
         // 
         this.HeaderPanel.BackColor = System.Drawing.Color.Transparent;
-        this.HeaderPanel.Controls.Add(this.ScriptSaveLabel);
+        this.HeaderPanel.Controls.Add(this.ScriptSaveAsLabel);
         this.HeaderPanel.Controls.Add(this.ScriptRunLabel);
         this.HeaderPanel.Controls.Add(this.ScriptCompileLabel);
-        this.HeaderPanel.Controls.Add(this.ScriptNewLabel);
-        this.HeaderPanel.Controls.Add(this.ScriptSamplesLabel);
+        this.HeaderPanel.Controls.Add(this.ScriptOpenLabel);
         this.HeaderPanel.Controls.Add(this.ScriptLabel);
-        this.HeaderPanel.Controls.Add(this.ScriptCloseLabel);
         this.HeaderPanel.Controls.Add(this.GenerateSentencesLabel);
         this.HeaderPanel.Controls.Add(this.DuplicateLettersCheckBox);
         this.HeaderPanel.Controls.Add(this.GoldenRatioScopeLabel);
@@ -6085,22 +6081,22 @@ public partial class MainForm : Form, ISubscriber
         this.HeaderPanel.Size = new System.Drawing.Size(762, 17);
         this.HeaderPanel.TabIndex = 88;
         // 
-        // ScriptSaveLabel
+        // ScriptSaveAsLabel
         // 
-        this.ScriptSaveLabel.BackColor = System.Drawing.Color.Transparent;
-        this.ScriptSaveLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.ScriptSaveLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.ScriptSaveLabel.ForeColor = System.Drawing.Color.Transparent;
-        this.ScriptSaveLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptSaveLabel.Image")));
-        this.ScriptSaveLabel.Location = new System.Drawing.Point(59, -2);
-        this.ScriptSaveLabel.Name = "ScriptSaveLabel";
-        this.ScriptSaveLabel.Size = new System.Drawing.Size(23, 17);
-        this.ScriptSaveLabel.TabIndex = 0;
-        this.ScriptSaveLabel.Tag = "";
-        this.ScriptSaveLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.ScriptSaveLabel, "Save");
-        this.ScriptSaveLabel.Visible = false;
-        this.ScriptSaveLabel.Click += new System.EventHandler(this.ScriptSaveLabel_Click);
+        this.ScriptSaveAsLabel.BackColor = System.Drawing.Color.Transparent;
+        this.ScriptSaveAsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.ScriptSaveAsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.ScriptSaveAsLabel.ForeColor = System.Drawing.Color.Transparent;
+        this.ScriptSaveAsLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptSaveAsLabel.Image")));
+        this.ScriptSaveAsLabel.Location = new System.Drawing.Point(59, -2);
+        this.ScriptSaveAsLabel.Name = "ScriptSaveAsLabel";
+        this.ScriptSaveAsLabel.Size = new System.Drawing.Size(23, 17);
+        this.ScriptSaveAsLabel.TabIndex = 0;
+        this.ScriptSaveAsLabel.Tag = "";
+        this.ScriptSaveAsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.ToolTip.SetToolTip(this.ScriptSaveAsLabel, "Save");
+        this.ScriptSaveAsLabel.Visible = false;
+        this.ScriptSaveAsLabel.Click += new System.EventHandler(this.ScriptSaveAsLabel_Click);
         // 
         // ScriptRunLabel
         // 
@@ -6136,39 +6132,22 @@ public partial class MainForm : Form, ISubscriber
         this.ScriptCompileLabel.Visible = false;
         this.ScriptCompileLabel.Click += new System.EventHandler(this.ScriptCompileLabel_Click);
         // 
-        // ScriptNewLabel
+        // ScriptOpenLabel
         // 
-        this.ScriptNewLabel.BackColor = System.Drawing.Color.Transparent;
-        this.ScriptNewLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.ScriptNewLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.ScriptNewLabel.ForeColor = System.Drawing.Color.Transparent;
-        this.ScriptNewLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptNewLabel.Image")));
-        this.ScriptNewLabel.Location = new System.Drawing.Point(18, -3);
-        this.ScriptNewLabel.Name = "ScriptNewLabel";
-        this.ScriptNewLabel.Size = new System.Drawing.Size(23, 17);
-        this.ScriptNewLabel.TabIndex = 0;
-        this.ScriptNewLabel.Tag = "";
-        this.ScriptNewLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.ScriptNewLabel, "New");
-        this.ScriptNewLabel.Visible = false;
-        this.ScriptNewLabel.Click += new System.EventHandler(this.ScriptNewLabel_Click);
-        // 
-        // ScriptSamplesLabel
-        // 
-        this.ScriptSamplesLabel.BackColor = System.Drawing.Color.Transparent;
-        this.ScriptSamplesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.ScriptSamplesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.ScriptSamplesLabel.ForeColor = System.Drawing.Color.Transparent;
-        this.ScriptSamplesLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptSamplesLabel.Image")));
-        this.ScriptSamplesLabel.Location = new System.Drawing.Point(36, -3);
-        this.ScriptSamplesLabel.Name = "ScriptSamplesLabel";
-        this.ScriptSamplesLabel.Size = new System.Drawing.Size(23, 17);
-        this.ScriptSamplesLabel.TabIndex = 0;
-        this.ScriptSamplesLabel.Tag = "";
-        this.ScriptSamplesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.ScriptSamplesLabel, "Script Samples");
-        this.ScriptSamplesLabel.Visible = false;
-        this.ScriptSamplesLabel.Click += new System.EventHandler(this.ScriptSamplesLabel_Click);
+        this.ScriptOpenLabel.BackColor = System.Drawing.Color.Transparent;
+        this.ScriptOpenLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.ScriptOpenLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.ScriptOpenLabel.ForeColor = System.Drawing.Color.Transparent;
+        this.ScriptOpenLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptOpenLabel.Image")));
+        this.ScriptOpenLabel.Location = new System.Drawing.Point(36, -3);
+        this.ScriptOpenLabel.Name = "ScriptOpenLabel";
+        this.ScriptOpenLabel.Size = new System.Drawing.Size(23, 17);
+        this.ScriptOpenLabel.TabIndex = 0;
+        this.ScriptOpenLabel.Tag = "";
+        this.ScriptOpenLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.ToolTip.SetToolTip(this.ScriptOpenLabel, "Script Samples");
+        this.ScriptOpenLabel.Visible = false;
+        this.ScriptOpenLabel.Click += new System.EventHandler(this.ScriptOpenLabel_Click);
         // 
         // ScriptLabel
         // 
@@ -6185,24 +6164,6 @@ public partial class MainForm : Form, ISubscriber
         this.ScriptLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.ToolTip.SetToolTip(this.ScriptLabel, "Script");
         this.ScriptLabel.Click += new System.EventHandler(this.ScriptLabel_Click);
-        // 
-        // ScriptCloseLabel
-        // 
-        this.ScriptCloseLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.ScriptCloseLabel.BackColor = System.Drawing.Color.Transparent;
-        this.ScriptCloseLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.ScriptCloseLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.ScriptCloseLabel.ForeColor = System.Drawing.Color.Transparent;
-        this.ScriptCloseLabel.Image = ((System.Drawing.Image)(resources.GetObject("ScriptCloseLabel.Image")));
-        this.ScriptCloseLabel.Location = new System.Drawing.Point(744, -1);
-        this.ScriptCloseLabel.Name = "ScriptCloseLabel";
-        this.ScriptCloseLabel.Size = new System.Drawing.Size(18, 17);
-        this.ScriptCloseLabel.TabIndex = 134;
-        this.ScriptCloseLabel.Tag = "";
-        this.ScriptCloseLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.ScriptCloseLabel, "Close");
-        this.ScriptCloseLabel.Visible = false;
-        this.ScriptCloseLabel.Click += new System.EventHandler(this.ScriptCloseLabel_Click);
         // 
         // GenerateSentencesLabel
         // 
@@ -12668,7 +12629,6 @@ public partial class MainForm : Form, ISubscriber
         this.LetterFrequencyContextMenuStrip.ResumeLayout(false);
         this.ResumeLayout(false);
     }
-
     private void ShowToolTipsCheckBox_CheckedChanged(object sender, EventArgs e)
     {
         ToolTip.Active = ShowToolTipsCheckBox.Checked;
@@ -13434,7 +13394,7 @@ public partial class MainForm : Form, ISubscriber
         }
         else if (ScriptTextBox.Visible)
         {
-            ScriptCloseLabel_Click(sender, e);
+            CloseScript(sender, e);
         }
         else
         {
@@ -16329,17 +16289,17 @@ public partial class MainForm : Form, ISubscriber
         //    }
         //}
 
-        if ((ModifierKeys == Keys.Control) && (e.KeyCode == Keys.S)) // Save
+        if ((ModifierKeys == Keys.Control) && (e.KeyCode == Keys.S)) // SaveAs
         {
-            ScriptSaveLabel_Click(sender, e);
+            ScriptSaveAsLabel_Click(sender, e);
         }
-        if ((ModifierKeys == Keys.Alt) && (e.KeyCode == Keys.F4)) // Close
+        if ((ModifierKeys == Keys.Control) && (e.KeyCode == Keys.F4)) // Close
         {
-            ScriptCloseLabel_Click(sender, e);
+            CloseScript(sender, e);
         }
         if (e.KeyCode == Keys.Escape) // Close
         {
-            ScriptCloseLabel_Click(sender, e);
+            CloseScript(sender, e);
         }
         else if (e.KeyCode == Keys.F5)  // Run
         {
@@ -16374,10 +16334,8 @@ public partial class MainForm : Form, ISubscriber
             ScriptOutputGroupBox.Visible = true;
             ScriptCompileLabel.Visible = true;
             ScriptRunLabel.Visible = true;
-            ScriptSamplesLabel.Visible = true;
-            ScriptNewLabel.Visible = true;
-            ScriptSaveLabel.Visible = true;
-            ScriptCloseLabel.Visible = true;
+            ScriptOpenLabel.Visible = true;
+            ScriptSaveAsLabel.Visible = true;
             WordWrapLabel.Visible = false;
             DisplayProstrationVersesLabel.Visible = false;
             InspectVersesLabel.Visible = false;
@@ -16389,17 +16347,35 @@ public partial class MainForm : Form, ISubscriber
         }
         ScriptTextBox.Focus();
     }
-    private void ScriptNewLabel_Click(object sender, EventArgs e)
+    private void ScriptOpenLabel_Click(object sender, EventArgs e)
     {
         this.Cursor = Cursors.WaitCursor;
         try
         {
-            m_script_filename = "Template.cs";
-            ScriptTextBox.Text = ScriptRunner.LoadScript(m_script_filename);
-            ScriptOutputTextBox.Text = "";
-            HeaderLabel.Text = m_script_filename;
-            HeaderLabel.Refresh();
-            Thread.Sleep(10);
+            if (OpenFileDialog != null)
+            {
+                OpenFileDialog.InitialDirectory = Path.Combine(Application.StartupPath, Globals.SCRIPTS_FOLDER);
+                OpenFileDialog.Title = Application.ProductName;
+                OpenFileDialog.CheckFileExists = true;
+                OpenFileDialog.CheckPathExists = true;
+                OpenFileDialog.DefaultExt = "cs";
+                OpenFileDialog.Filter = "C# files (*.cs)|*.cs|All files (*.*)|*.*";
+                OpenFileDialog.FilterIndex = 1;
+                //OpenFileDialog.RestoreDirectory = true;
+                OpenFileDialog.AutoUpgradeEnabled = true;
+                //OpenFileDialog.ReadOnlyChecked = true;
+                //OpenFileDialog.ShowReadOnly = true;
+
+                if (OpenFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    m_script_filename = OpenFileDialog.SafeFileName;
+                    ScriptTextBox.Text = ScriptRunner.LoadScript(m_script_filename);
+                    ScriptOutputTextBox.Text = "";
+                    HeaderLabel.Text = m_script_filename;
+                    HeaderLabel.Refresh();
+                    Thread.Sleep(10);
+                }
+            }
         }
         catch (Exception ex)
         {
@@ -16414,41 +16390,35 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void ScriptSamplesLabel_Click(object sender, EventArgs e)
+    private void ScriptSaveAsLabel_Click(object sender, EventArgs e)
     {
         this.Cursor = Cursors.WaitCursor;
         try
         {
-            m_script_filename = "Samples.cs";
-            ScriptTextBox.Text = ScriptRunner.LoadScript(m_script_filename);
-            ScriptOutputTextBox.Text = "";
-            HeaderLabel.Text = m_script_filename;
-            HeaderLabel.Refresh();
-            Thread.Sleep(10);
-        }
-        catch (Exception ex)
-        {
-            while (ex != null)
+            if (SaveFileDialog != null)
             {
-                MessageBox.Show(ex.Message, Application.ProductName);
-                ex = ex.InnerException;
+                SaveFileDialog.InitialDirectory = Path.Combine(Application.StartupPath, Globals.SCRIPTS_FOLDER);
+                SaveFileDialog.Title = Application.ProductName;
+                SaveFileDialog.CheckPathExists = true;
+                SaveFileDialog.DefaultExt = "cs";
+                SaveFileDialog.Filter = "C# files (*.cs)|*.cs";
+                SaveFileDialog.FilterIndex = 1;
+                //SaveFileDialog.RestoreDirectory = false;
+                OpenFileDialog.AutoUpgradeEnabled = true;
+
+                SaveFileDialog.FileName = "";
+                if (SaveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    m_script_filename = Path.GetFileName(SaveFileDialog.FileName);
+                    if (!String.IsNullOrEmpty(m_script_filename))
+                    {
+                        ScriptRunner.SaveScript(m_script_filename, ScriptTextBox.Text);
+                        HeaderLabel.Text = m_script_filename;
+                        HeaderLabel.Refresh();
+                    }
+                    Thread.Sleep(10);
+                }
             }
-        }
-        finally
-        {
-            this.Cursor = Cursors.Default;
-        }
-    }
-    private void ScriptSaveLabel_Click(object sender, EventArgs e)
-    {
-        this.Cursor = Cursors.WaitCursor;
-        try
-        {
-            if (!String.IsNullOrEmpty(m_script_filename))
-            {
-                ScriptRunner.SaveScript(m_script_filename, ScriptTextBox.Text);
-            }
-            Thread.Sleep(10);
         }
         catch (Exception ex)
         {
@@ -16553,7 +16523,7 @@ public partial class MainForm : Form, ISubscriber
                         //SearchResultTextBox.Focus();
                         //SearchResultTextBox.Refresh();
 
-                        ScriptCloseLabel_Click(null, null);
+                        CloseScript(sender, e);
                     }
                 }
             }
@@ -16571,7 +16541,7 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void ScriptCloseLabel_Click(object sender, EventArgs e)
+    private void CloseScript(object sender, EventArgs e)
     {
         if (ScriptTextBox.Visible)
         {
@@ -16580,10 +16550,8 @@ public partial class MainForm : Form, ISubscriber
             ScriptOutputGroupBox.Visible = false;
             ScriptCompileLabel.Visible = false;
             ScriptRunLabel.Visible = false;
-            ScriptSamplesLabel.Visible = false;
-            ScriptNewLabel.Visible = false;
-            ScriptSaveLabel.Visible = false;
-            ScriptCloseLabel.Visible = false;
+            ScriptOpenLabel.Visible = false;
+            ScriptSaveAsLabel.Visible = false;
             WordWrapLabel.Visible = true;
             DisplayProstrationVersesLabel.Visible = true;
             InspectVersesLabel.Visible = true;
