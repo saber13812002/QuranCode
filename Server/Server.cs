@@ -1371,6 +1371,7 @@ public class Server : IPublisher
         }
     }
 
+    public static CalculationMode CalculationMode = CalculationMode.SumOfLetterValues;
     // log value calculations
     public static StringBuilder Log = new StringBuilder();
     public static long ValueSum = 0L;
@@ -1590,11 +1591,44 @@ public class Server : IPublisher
             }
             else
             {
-                foreach (Letter letter in word.Letters)
+                switch (CalculationMode)
                 {
-                    result += CalculateValue(letter);
+                    case CalculationMode.SumOfLetterValues:
+                        {
+                            foreach (Letter letter in word.Letters)
+                            {
+                                result += CalculateValue(letter);
+                            }
+                        }
+                        break;
+                    case CalculationMode.SumOfWordDigitSums:
+                        {
+                            long word_value = 0L;
+                            foreach (Letter letter in word.Letters)
+                            {
+                                word_value += CalculateValue(letter);
+                            }
+                            result += Numbers.DigitSum(word_value);
+                        }
+                        break;
+                    case CalculationMode.SumOfWordDigitalRoots:
+                        {
+                            long word_value = 0L;
+                            foreach (Letter letter in word.Letters)
+                            {
+                                word_value += CalculateValue(letter);
+                            }
+                            result += Numbers.DigitalRoot(word_value);
+                        }
+                        break;
+                    default:
+                        {
+                            // do nothing
+                        }
+                        break;
                 }
 
+                //????? update the following code too to take into account CalculationMode
                 // adjust value of word
                 result += AdjustValue(word);
 
@@ -1749,13 +1783,7 @@ public class Server : IPublisher
             {
                 foreach (Word word in verse.Words)
                 {
-                    foreach (Letter letter in word.Letters)
-                    {
-                        result += CalculateValue(letter);
-                    }
-
-                    // adjust value of word
-                    result += AdjustValue(word);
+                    result += CalculateValue(word);
                 }
 
                 // adjust value of verse
@@ -2193,11 +2221,44 @@ public class Server : IPublisher
             }
             else
             {
-                foreach (Letter letter in word.Letters)
+                switch (CalculationMode)
                 {
-                    result += CalculateValueWithLogging(letter);
+                    case CalculationMode.SumOfLetterValues:
+                        {
+                            foreach (Letter letter in word.Letters)
+                            {
+                                result += CalculateValueWithLogging(letter);
+                            }
+                        }
+                        break;
+                    case CalculationMode.SumOfWordDigitSums:
+                        {
+                            long word_value = 0L;
+                            foreach (Letter letter in word.Letters)
+                            {
+                                word_value += CalculateValueWithLogging(letter);
+                            }
+                            result += Numbers.DigitSum(word_value);
+                        }
+                        break;
+                    case CalculationMode.SumOfWordDigitalRoots:
+                        {
+                            long word_value = 0L;
+                            foreach (Letter letter in word.Letters)
+                            {
+                                word_value += CalculateValueWithLogging(letter);
+                            }
+                            result += Numbers.DigitalRoot(word_value);
+                        }
+                        break;
+                    default:
+                        {
+                            // do nothing
+                        }
+                        break;
                 }
 
+                //????? update the following code too to take into account CalculationMode
                 value = s_numerology_system.CalculateValue(word.Text);
                 Log.Append("\t" + "\t" + value);
                 // adjust value of word
@@ -2371,15 +2432,7 @@ public class Server : IPublisher
             {
                 foreach (Word word in verse.Words)
                 {
-                    foreach (Letter letter in word.Letters)
-                    {
-                        result += CalculateValueWithLogging(letter);
-                    }
-
-                    value = s_numerology_system.CalculateValue(word.Text);
-                    Log.Append("\t" + "\t" + value);
-                    // adjust value of word
-                    result += AdjustValueWithLogging(word);
+                    result += CalculateValueWithLogging(word);
                 }
 
                 value = s_numerology_system.CalculateValue(verse.Text);

@@ -251,6 +251,11 @@ public class Client : IPublisher, ISubscriber
         Server.SaveTranslation(translation);
     }
 
+    public CalculationMode CalculationMode
+    {
+        get { return Server.CalculationMode; }
+        set { Server.CalculationMode = value; }
+    }
     public bool Logging = false;
     // used for non-Quran text
     public long CalculateValueUserText(char character)

@@ -415,7 +415,7 @@ public class ZipFile : IDisposable
 
         try
         {
-            ZipFile tempZip = ZipFile.Create(tempZipName, string.Empty);
+            ZipFile tempZip = ZipFile.Create(tempZipName, "");
 
             foreach (Entry zfe in fullList)
             {

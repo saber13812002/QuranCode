@@ -2,6 +2,8 @@
 
 namespace Model
 {
+    public enum CalculationMode { SumOfLetterValues, SumOfWordDigitSums, SumOfWordDigitalRoots };
+
     public enum LanguageType { RightToLeft, LeftToRight };
 
     public enum SelectionScope { Book, Station, Part, Group, Half, Quarter, Bowing, Chapter, Verse, Word, Letter, Page };

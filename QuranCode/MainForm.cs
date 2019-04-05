@@ -314,6 +314,8 @@ public partial class MainForm : Form, ISubscriber
                     }
                 }
 
+                ToolTip.SetToolTip(CalculationModeLabel, L[l][m_client.CalculationMode.ToString()]);
+
                 ToolTip.SetToolTip(NumberKindIndexTextBox, L[l][m_number_kind.ToString() + " number index"]);
                 if (ChapterSortComboBox.SelectedItem != null) ToolTip.SetToolTip(ChapterSortComboBox, L[l][ChapterSortComboBox.SelectedItem.ToString()]);
                 ToolTip.SetToolTip(ChapterSortLabel, L[l][Chapter.SortOrder.ToString()]);
@@ -41503,6 +41505,40 @@ public partial class MainForm : Form, ISubscriber
     {
         TextModeComboBox.DropDownHeight = StatisticsGroupBox.Height - TextModeComboBox.Top - TextModeComboBox.Height - 1;
     }
+    private void CalculationModeLabel_Click(object sender, EventArgs e)
+    {
+        switch (m_client.CalculationMode)
+        {
+            case CalculationMode.SumOfLetterValues:
+                {
+                    m_client.CalculationMode = CalculationMode.SumOfWordDigitSums;
+                    CalculationModeLabel.BackColor = Color.Red;
+                }
+                break;
+            case CalculationMode.SumOfWordDigitSums:
+                {
+                    m_client.CalculationMode = CalculationMode.SumOfWordDigitalRoots;
+                    CalculationModeLabel.BackColor = Color.Green;
+                }
+                break;
+            case CalculationMode.SumOfWordDigitalRoots:
+                {
+                    m_client.CalculationMode = CalculationMode.SumOfLetterValues;
+                    CalculationModeLabel.BackColor = Color.Blue;
+                }
+                break;
+            default:
+                {
+                    CalculationModeLabel.BackColor = Color.Black;
+                }
+                break;
+        }
+        ToolTip.SetToolTip(CalculationModeLabel, L[l][m_client.CalculationMode.ToString()]);
+
+        // re-calculate value
+        CalculateValueAndDisplayFactors();
+    }
+
     private bool m_emlaaei_text = false;
     private bool m_with_bism_Allah = true;
     private bool m_waw_as_word = false;
@@ -42025,14 +42061,6 @@ public partial class MainForm : Form, ISubscriber
         }
     }
     // used for Quran text only
-    private void CalculateValueAndDisplayFactors(Verse verse)
-    {
-        if (m_client != null)
-        {
-            long value = m_client.CalculateValue(verse);
-            FactorizeValue(value, "Value", true);
-        }
-    }
     private void CalculateValueAndDisplayFactors()
     {
         if (m_client != null)
@@ -42055,6 +42083,14 @@ public partial class MainForm : Form, ISubscriber
             }
 
             long value = m_client.CalculateValue(verses);
+            FactorizeValue(value, "Value", true);
+        }
+    }
+    private void CalculateValueAndDisplayFactors(Verse verse)
+    {
+        if (m_client != null)
+        {
+            long value = m_client.CalculateValue(verse);
             FactorizeValue(value, "Value", true);
         }
     }
@@ -47191,7 +47227,8 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
-
+    /////////////////////////////////////////////////////////////////////////////
+    #endregion
     private void CalculatorLabel_Click(object sender, EventArgs e)
     {
         this.Cursor = Cursors.WaitCursor;
@@ -47212,6 +47249,4 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    /////////////////////////////////////////////////////////////////////////////
-    #endregion
 }
