@@ -394,15 +394,8 @@ public partial class MainForm : Form, ISubscriber
                 m_note_writing_instruction = L[l]["write a note for"];
                 DisplayNoteWritingInstruction();
 
-                long value = 0L;
-                if (m_radix == Numbers.DEFAULT_RADIX)
-                {
-                    long.TryParse(ValueTextBox.Text, out value);
-                }
-                else
-                {
-                    long.TryParse(DecimalValueTextBox.Text, out value);
-                }
+                long value = Radix.Decode(ValueTextBox.Text, m_radix);
+                //????? more updates here
                 UpdateValueNavigator(value);
 
                 RegisterContextMenus();
@@ -41510,38 +41503,111 @@ public partial class MainForm : Form, ISubscriber
     {
         TextModeComboBox.DropDownHeight = StatisticsGroupBox.Height - TextModeComboBox.Top - TextModeComboBox.Height - 1;
     }
+
+    CalculationMode m_clicked_calculation_mode = CalculationMode.SumOfLetterValues;
     private void CalculationModeLabel_Click(object sender, EventArgs e)
     {
-        switch (m_client.CalculationMode)
+        if (m_client != null)
         {
-            case CalculationMode.SumOfLetterValues:
+            if (ModifierKeys == Keys.Shift)
+            {
+                switch (m_client.CalculationMode)
                 {
-                    m_client.CalculationMode = CalculationMode.SumOfWordDigitSums;
-                    CalculationModeLabel.BackColor = Color.Red;
+                    case CalculationMode.SumOfLetterValues:
+                        {
+                            m_client.CalculationMode = CalculationMode.SumOfWordDigitalRoots;
+                            CalculationModeLabel.BackColor = Color.Green;
+                        }
+                        break;
+                    case CalculationMode.SumOfWordDigitSums:
+                        {
+                            m_client.CalculationMode = CalculationMode.SumOfLetterValues;
+                            CalculationModeLabel.BackColor = Color.Blue;
+                        }
+                        break;
+                    case CalculationMode.SumOfWordDigitalRoots:
+                        {
+                            m_client.CalculationMode = CalculationMode.SumOfWordDigitSums;
+                            CalculationModeLabel.BackColor = Color.Red;
+                        }
+                        break;
+                    default:
+                        {
+                            CalculationModeLabel.BackColor = Color.Black;
+                        }
+                        break;
                 }
-                break;
-            case CalculationMode.SumOfWordDigitSums:
+            }
+            else
+            {
+                switch (m_client.CalculationMode)
                 {
-                    m_client.CalculationMode = CalculationMode.SumOfWordDigitalRoots;
-                    CalculationModeLabel.BackColor = Color.Green;
+                    case CalculationMode.SumOfLetterValues:
+                        {
+                            m_client.CalculationMode = CalculationMode.SumOfWordDigitSums;
+                            CalculationModeLabel.BackColor = Color.Red;
+                        }
+                        break;
+                    case CalculationMode.SumOfWordDigitSums:
+                        {
+                            m_client.CalculationMode = CalculationMode.SumOfWordDigitalRoots;
+                            CalculationModeLabel.BackColor = Color.Green;
+                        }
+                        break;
+                    case CalculationMode.SumOfWordDigitalRoots:
+                        {
+                            m_client.CalculationMode = CalculationMode.SumOfLetterValues;
+                            CalculationModeLabel.BackColor = Color.Blue;
+                        }
+                        break;
+                    default:
+                        {
+                            CalculationModeLabel.BackColor = Color.Black;
+                        }
+                        break;
                 }
-                break;
-            case CalculationMode.SumOfWordDigitalRoots:
-                {
-                    m_client.CalculationMode = CalculationMode.SumOfLetterValues;
-                    CalculationModeLabel.BackColor = Color.Blue;
-                }
-                break;
-            default:
-                {
-                    CalculationModeLabel.BackColor = Color.Black;
-                }
-                break;
-        }
-        ToolTip.SetToolTip(CalculationModeLabel, L[l][m_client.CalculationMode.ToString()]);
+            }
+            ToolTip.SetToolTip(CalculationModeLabel, L[l][m_client.CalculationMode.ToString()]);
 
-        // re-calculate value
-        CalculateValueAndDisplayFactors();
+            // re-calculate value
+            CalculateValueAndDisplayFactors();
+
+            // backup
+            m_clicked_calculation_mode = m_client.CalculationMode;
+        }
+    }
+    private void SetCalculationMode(CalculationMode temp_calculation_mode)
+    {
+        if (m_client != null)
+        {
+            switch (temp_calculation_mode)
+            {
+                case CalculationMode.SumOfLetterValues:
+                    {
+                        CalculationModeLabel.BackColor = Color.Blue;
+                    }
+                    break;
+                case CalculationMode.SumOfWordDigitSums:
+                    {
+                        CalculationModeLabel.BackColor = Color.Red;
+                    }
+                    break;
+                case CalculationMode.SumOfWordDigitalRoots:
+                    {
+                        CalculationModeLabel.BackColor = Color.Green;
+                    }
+                    break;
+                default:
+                    {
+                        CalculationModeLabel.BackColor = Color.Black;
+                    }
+                    break;
+            }
+
+            ToolTip.SetToolTip(CalculationModeLabel, L[l][temp_calculation_mode.ToString()]);
+
+            m_client.CalculationMode = temp_calculation_mode;
+        }
     }
 
     private bool m_emlaaei_text = false;
@@ -41785,7 +41851,7 @@ public partial class MainForm : Form, ISubscriber
     private bool m_user_text_mode = false;
     private List<Verse> m_current_verses = null;
     private Letter m_current_start_letter = null;
-    private Letter m_current_end_letter = null;
+    private Letter m_current_last_letter = null;
     private void CalculateCurrentValue()
     {
         if (m_active_textbox != null)
@@ -41836,7 +41902,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                                 else // edit mode so user can paste any text they like to calculate its value
                                 {
+                                    SetCalculationMode(CalculationMode.SumOfLetterValues);
                                     CalculateValueAndDisplayFactors(m_current_text);
+
                                 }
                             }
                             else // some text is highlighted
@@ -41869,6 +41937,7 @@ public partial class MainForm : Form, ISubscriber
                 if (m_selection_mode)
                 {
                     m_current_text = m_active_textbox.Text;
+                    SetCalculationMode(m_clicked_calculation_mode);
                 }
                 else
                 {
@@ -41883,10 +41952,12 @@ public partial class MainForm : Form, ISubscriber
                         {
                             m_current_text = "";
                         }
+                        SetCalculationMode(m_clicked_calculation_mode);
                     }
                     else // get current selected text
                     {
                         m_current_text = m_active_textbox.SelectedText;
+                        SetCalculationMode(CalculationMode.SumOfLetterValues);
                     }
                 }
 
@@ -41988,14 +42059,29 @@ public partial class MainForm : Form, ISubscriber
                             m_current_start_letter = GetLetterAtChar(first_char);
                             if (m_current_start_letter != null)
                             {
-                                m_current_end_letter = GetLetterAtChar(last_char);
-                                if (m_current_end_letter != null)
+                                m_current_last_letter = GetLetterAtChar(last_char);
+                                if (m_current_last_letter != null)
                                 {
-                                    // calculate and display verse_number_sum, word_number_sum, letter_number_sum
-                                    CalculateAndDisplayCounts(m_current_verses, m_current_start_letter, m_current_end_letter);
+                                    if ( // full text selection
+                                        (first_verse_index == 0) && (last_verse_index == verses.Count - 1)
+                                        &&
+                                        (m_active_textbox.SelectionLength == m_active_textbox.Text.Length)
+                                       )
+                                    {
+                                        SetCalculationMode(m_clicked_calculation_mode);
 
-                                    // calculate Letters value
-                                    CalculateValueAndDisplayFactors(m_current_verses, m_current_start_letter, m_current_end_letter);
+                                        CalculateValueAndDisplayFactors(verses);
+                                    }
+                                    else // part text selection
+                                    {
+                                        SetCalculationMode(CalculationMode.SumOfLetterValues);
+
+                                        // calculate and display verse_number_sum, word_number_sum, letter_number_sum
+                                        CalculateAndDisplayCounts(m_current_verses, m_current_start_letter, m_current_last_letter);
+
+                                        // calculate Letters value
+                                        CalculateValueAndDisplayFactors(m_current_verses, m_current_start_letter, m_current_last_letter);
+                                    }
                                 }
                             }
                         }
@@ -42004,6 +42090,7 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
+
     private string RemoveVerseAddresses(string text)
     {
         if (string.IsNullOrEmpty(text)) return null;
@@ -42099,6 +42186,14 @@ public partial class MainForm : Form, ISubscriber
             FactorizeValue(value, "Value", true);
         }
     }
+    private void CalculateValueAndDisplayFactors(List<Verse> verses)
+    {
+        if (m_client != null)
+        {
+            long value = m_client.CalculateValue(verses);
+            FactorizeValue(value, "Value", true);
+        }
+    }
     private void CalculateValueAndDisplayFactors(Chapter chapter)
     {
         if (m_client != null)
@@ -42118,16 +42213,10 @@ public partial class MainForm : Form, ISubscriber
 
     private void ValueTextBox_TextChanged(object sender, EventArgs e)
     {
-        int digits = 0;
-        if (m_radix == Numbers.DEFAULT_RADIX)
+        if (Globals.EDITION == Edition.Ultimate)
         {
-            digits = Numbers.DigitCount(ValueTextBox.Text, m_radix);
+            int digits = Numbers.DigitCount(ValueTextBox.Text, m_radix);
             ValueInspectLabel.Text = digits.ToString();
-        }
-        else
-        {
-            //digits = Numbers.DigitCount(DecimalValueTextBox.Text, m_radix);
-            ValueInspectLabel.Text = "";
         }
 
         PrimeFactorsTextBox.Text = "";
@@ -42145,15 +42234,7 @@ public partial class MainForm : Form, ISubscriber
         CPIndexChainR2LTextBox.Text = "";
         IndexChainLengthTextBox.Text = "";
 
-        long value = 0L;
-        if (m_radix == Numbers.DEFAULT_RADIX)
-        {
-            long.TryParse(ValueTextBox.Text, out value);
-        }
-        else
-        {
-            long.TryParse(DecimalValueTextBox.Text, out value);
-        }
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
 
         if (m_radix == Numbers.DEFAULT_RADIX)
         {
@@ -42174,15 +42255,13 @@ public partial class MainForm : Form, ISubscriber
         }
         else
         {
-            long.TryParse(DecimalValueTextBox.Text, out value);
-
             DigitSumTextBox.Text = "";
             DigitalRootTextBox.Text = "";
             SumOfDigitSumsTextBox.Text = "";
         }
 
         UpdateNumberKind(value);
-        UpdateSumOfDivisors(value);
+        UpdateSumOfProperDivisors(value);
 
         PCIndexChainL2RTextBox.Text = DecimalPCIndexChainL2R(value).ToString();
         PCIndexChainL2RTextBox.ForeColor = Numbers.GetNumberTypeColor(DecimalPCIndexChainL2R(value));
@@ -42234,58 +42313,22 @@ public partial class MainForm : Form, ISubscriber
     }
     private void IncrementValue()
     {
-        long value = 0L;
-        if (m_radix == Numbers.DEFAULT_RADIX)
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
+        if (value < long.MaxValue)
         {
-            if (long.TryParse(ValueTextBox.Text, out value))
-            {
-                if (value < long.MaxValue)
-                {
-                    value++;
-                    ValueTextBox.Text = value.ToString();
-                    FactorizeValue(value, "↑", true);
-                }
-            }
-        }
-        else
-        {
-            if (long.TryParse(DecimalValueTextBox.Text, out value))
-            {
-                if (value < long.MaxValue)
-                {
-                    value++;
-                    ValueTextBox.Text = Radix.Encode(value, m_radix);
-                    FactorizeValue(value, "↑", true);
-                }
-            }
+            value++;
+            ValueTextBox.Text = Radix.Encode(value, m_radix);
+            FactorizeValue(value, "↑", true);
         }
     }
     private void DecrementValue()
     {
-        long value = 0L;
-        if (m_radix == Numbers.DEFAULT_RADIX)
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
+        if (value > 0L)
         {
-            if (long.TryParse(ValueTextBox.Text, out value))
-            {
-                if (value > 0L)
-                {
-                    value--;
-                    ValueTextBox.Text = value.ToString();
-                    FactorizeValue(value, "↓", true);
-                }
-            }
-        }
-        else
-        {
-            if (long.TryParse(DecimalValueTextBox.Text, out value))
-            {
-                if (value > 0L)
-                {
-                    value--;
-                    ValueTextBox.Text = Radix.Encode(value, m_radix);
-                    FactorizeValue(value, "↓", true);
-                }
-            }
+            value--;
+            ValueTextBox.Text = Radix.Encode(value, m_radix);
+            FactorizeValue(value, "↓", true);
         }
     }
     private void CalculateExpression()
@@ -42574,15 +42617,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void UpdateToolTipNth4n1NumberTextBox()
     {
-        long value = 0L;
-        if (m_radix == Numbers.DEFAULT_RADIX)
-        {
-            long.TryParse(ValueTextBox.Text, out value);
-        }
-        else
-        {
-            long.TryParse(DecimalValueTextBox.Text, out value);
-        }
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
 
         int _4nplus1_index = -1;
         int _4nminus1_index = -1;
@@ -43058,7 +43093,7 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
-    private void UpdateSumOfDivisors(long value)
+    private void UpdateSumOfProperDivisors(long value)
     {
         long sum_of_proper_divisors = Numbers.SumOfProperDivisors(value);
         string proper_divisors = Numbers.GetProperDivisorsString(value);
@@ -44175,109 +44210,7 @@ public partial class MainForm : Form, ISubscriber
             DisplayMathsChapterVerseSums(null);     // reset C, V, C+V, C-V, C×V, C÷V, etc.
         }
     }
-    private void CalculateAndDisplayCounts(Verse verse)
-    {
-        if (verse != null)
-        {
-            if (m_total_chapter_counts)
-            {
-                CalculateAndDisplayCountsTotal(verse);
-            }
-            else
-            {
-                CalculateAndDisplayCountsLocal(verse);
-            }
-        }
-    }
-    private void CalculateAndDisplayCountsLocal(Verse verse)
-    {
-        if (verse != null)
-        {
-            int chapter_count = 1;
-            int verse_count = 1;
-            int word_count = verse.Words.Count;
-            int letter_count = verse.LetterCount;
-            int chapter_number_sum = verse.Chapter.SortedNumber;
-            int verse_number_sum = verse.NumberInChapter;
-            int word_number_sum = 0;
-            int letter_number_sum = 0;
-
-            if (verse.Words != null)
-            {
-                foreach (Word word in verse.Words)
-                {
-                    word_number_sum += word.NumberInVerse;
-                    if ((word.Letters != null) && (word.Letters.Count > 0))
-                    {
-                        foreach (Letter letter in word.Letters)
-                        {
-                            letter_number_sum += letter.NumberInWord;
-                        }
-                    }
-                }
-            }
-            DisplayCounts(chapter_count, verse_count, word_count, letter_count, chapter_number_sum, verse_number_sum, word_number_sum, letter_number_sum);
-            DisplayMathsChapterVerseSums(new List<Verse>() { verse }); // update C, V, C+V, C-V, C×V, C÷V, etc.
-        }
-    }
-    private void CalculateAndDisplayCountsTotal(Verse verse)
-    {
-        if (verse != null)
-        {
-            int chapter_count = 1;
-            int verse_count = 0;
-            int word_count = 0;
-            int letter_count = 0;
-            int chapter_number_sum = 0;
-            int verse_number_sum = 0;
-            int word_number_sum = 0;
-            int letter_number_sum = 0;
-
-            Chapter chapter = verse.Chapter;
-            if (chapter != null)
-            {
-                chapter_number_sum += chapter.SortedNumber;
-                verse_count += chapter.Verses.Count;
-
-                foreach (Verse v in chapter.Verses)
-                {
-                    word_count += v.Words.Count;
-                    letter_count += v.LetterCount;
-
-                    verse_number_sum += v.NumberInChapter;
-                    if (v.Words != null)
-                    {
-                        foreach (Word word in v.Words)
-                        {
-                            word_number_sum += word.NumberInVerse;
-                            if ((word.Letters != null) && (word.Letters.Count > 0))
-                            {
-                                foreach (Letter letter in word.Letters)
-                                {
-                                    letter_number_sum += letter.NumberInWord;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            DisplayCounts(chapter_count, verse_count, word_count, letter_count, chapter_number_sum, verse_number_sum, word_number_sum, letter_number_sum);
-            DisplayMathsChapterVerseSums(new List<Verse>() { verse }); // update C, V, C+V, C-V, C×V, C÷V, etc.
-        }
-    }
     private void CalculateAndDisplayCounts()
-    {
-        if (m_total_chapter_counts)
-        {
-            CalculateAndDisplayCountsTotal();
-        }
-        else
-        {
-            CalculateAndDisplayCountsLocal();
-        }
-    }
-    private void CalculateAndDisplayCountsLocal()
     {
         List<Verse> verses = null;
         if (m_found_verses_displayed)
@@ -44301,6 +44234,17 @@ public partial class MainForm : Form, ISubscriber
             }
         }
 
+        if (m_total_chapter_counts)
+        {
+            CalculateAndDisplayCountsTotal(verses);
+        }
+        else
+        {
+            CalculateAndDisplayCountsLocal(verses);
+        }
+    }
+    private void CalculateAndDisplayCountsLocal(List<Verse> verses)
+    {
         if (verses != null)
         {
             if (m_client != null)
@@ -44360,30 +44304,8 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
-    private void CalculateAndDisplayCountsTotal()
+    private void CalculateAndDisplayCountsTotal(List<Verse> verses)
     {
-        List<Verse> verses = null;
-        if (m_found_verses_displayed)
-        {
-            if (m_client != null)
-            {
-                verses = m_client.FoundVerses;
-            }
-        }
-        else
-        {
-            if (m_client != null)
-            {
-                if (m_client.Selection != null)
-                {
-                    if (m_client.Selection.Verses != null)
-                    {
-                        verses = m_client.Selection.Verses;
-                    }
-                }
-            }
-        }
-
         if (verses != null)
         {
             if (m_client != null)
@@ -44442,6 +44364,21 @@ public partial class MainForm : Form, ISubscriber
                         DisplayDNASequence();
                     }
                 }
+            }
+        }
+    }
+    private void CalculateAndDisplayCounts(Verse verse)
+    {
+        if (verse != null)
+        {
+            List<Verse> verses = new List<Verse>() { verse };
+            if (m_total_chapter_counts)
+            {
+                CalculateAndDisplayCountsTotal(verses);
+            }
+            else
+            {
+                CalculateAndDisplayCountsLocal(verses);
             }
         }
     }
@@ -44699,6 +44636,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             // do nothing
                         }
+
                         DisplayCounts(chapter_count, verse_count, word_count, letter_count, chapter_number_sum, verse_number_sum, word_number_sum, letter_number_sum);
                         DisplayMathsChapterVerseSums(verses); // update C, V, C+V, C-V, C×V, C÷V, etc.
 
@@ -46796,15 +46734,17 @@ public partial class MainForm : Form, ISubscriber
                     }
 
                     StringBuilder str = new StringBuilder();
-                    long value = 0L;
+
+                    str.AppendLine(m_current_text);
+                    str.AppendLine("--------------------------------------------------------------------------------------------------");
+                    str.AppendLine();
+
+                    long value = Radix.Decode(ValueTextBox.Text, m_radix);
+
                     if (m_radix == Numbers.DEFAULT_RADIX)
                     {
-                        long.TryParse(ValueTextBox.Text, out value);
                         if (verbose)
                         {
-                            str.AppendLine(m_current_text);
-                            str.AppendLine("--------------------------------------------------------------------------------------------------");
-                            str.AppendLine();
                             str.AppendLine("Chapters\t=\t" + ChaptersTextBox.Text);
                             str.AppendLine("Verses\t\t=\t" + VersesTextBox.Text);
                             str.AppendLine("Words\t\t=\t" + WordsTextBox.Text);
@@ -46818,12 +46758,8 @@ public partial class MainForm : Form, ISubscriber
                     }
                     else
                     {
-                        long.TryParse(DecimalValueTextBox.Text, out value);
                         if (verbose)
                         {
-                            str.AppendLine(m_current_text);
-                            str.AppendLine("--------------------------------------------------------------------------------------------------");
-                            str.AppendLine();
                             str.AppendLine("Chapters\t=\t" + DecimalChaptersTextBox.Text);
                             str.AppendLine("Verses\t\t=\t" + DecimalVersesTextBox.Text);
                             str.AppendLine("Words\t\t=\t" + DecimalWordsTextBox.Text);
@@ -46863,12 +46799,21 @@ public partial class MainForm : Form, ISubscriber
                     }
 
                     str.AppendLine();
-                    long digit_sum = Numbers.DigitSum(value);
-                    str.AppendLine("Digit Sum        " + "\t=\t" + digit_sum);
-                    long digital_roor = Numbers.DigitalRoot(value);
-                    str.AppendLine("Digital Root     " + "\t=\t" + digital_roor);
-                    long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
-                    str.AppendLine("Sum Of Digit Sums" + "\t=\t" + sum_of_digit_sums);
+                    if (m_radix == Numbers.DEFAULT_RADIX)
+                    {
+                        long digit_sum = Numbers.DigitSum(value);
+                        str.AppendLine("Digit Sum        " + "\t=\t" + digit_sum);
+                        long digital_root = Numbers.DigitalRoot(value);
+                        str.AppendLine("Digital Root     " + "\t=\t" + digital_root);
+                        long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
+                        str.AppendLine("Sum Of Digit Sums" + "\t=\t" + sum_of_digit_sums);
+                    }
+                    else
+                    {
+                        str.AppendLine("Digit Sum        " + "\t=\t" + "");
+                        str.AppendLine("Digital Root     " + "\t=\t" + "");
+                        str.AppendLine("Sum Of Digit Sums" + "\t=\t" + "");
+                    }
 
                     string proper_divisors = Numbers.GetProperDivisorsString(value);
                     long sum_of_proper_divisors = Numbers.SumOfProperDivisors(value);
@@ -47029,54 +46974,22 @@ public partial class MainForm : Form, ISubscriber
     }
     private void PCIndexChainL2RTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = 0L;
-        if (m_radix == Numbers.DEFAULT_RADIX)
-        {
-            long.TryParse(ValueTextBox.Text, out value);
-        }
-        else
-        {
-            long.TryParse(DecimalValueTextBox.Text, out value);
-        }
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
         this.ToolTip.SetToolTip(this.PCIndexChainL2RTextBox, "Left-to-right prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainL2R(value) + "  =  " + DecimalPCIndexChainL2R(value));
     }
     private void PCIndexChainR2LTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = 0L;
-        if (m_radix == Numbers.DEFAULT_RADIX)
-        {
-            long.TryParse(ValueTextBox.Text, out value);
-        }
-        else
-        {
-            long.TryParse(DecimalValueTextBox.Text, out value);
-        }
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
         this.ToolTip.SetToolTip(this.PCIndexChainR2LTextBox, "Right-to-left prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainR2L(value) + "  =  " + DecimalPCIndexChainR2L(value));
     }
     private void CPIndexChainL2RTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = 0L;
-        if (m_radix == Numbers.DEFAULT_RADIX)
-        {
-            long.TryParse(ValueTextBox.Text, out value);
-        }
-        else
-        {
-            long.TryParse(DecimalValueTextBox.Text, out value);
-        }
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
         this.ToolTip.SetToolTip(this.CPIndexChainL2RTextBox, "Left-to-right composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainL2R(value) + "  =  " + DecimalCPIndexChainL2R(value));
     }
     private void CPIndexChainR2LTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = 0L;
-        if (m_radix == Numbers.DEFAULT_RADIX)
-        {
-            long.TryParse(ValueTextBox.Text, out value);
-        }
-        else
-        {
-            long.TryParse(DecimalValueTextBox.Text, out value);
-        }
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
         this.ToolTip.SetToolTip(this.CPIndexChainR2LTextBox, "Right-to-left composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainR2L(value) + "  =  " + DecimalCPIndexChainR2L(value));
     }
     private void IndexChainLengthTextBox_Click(object sender, EventArgs e)

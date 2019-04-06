@@ -1282,10 +1282,8 @@ public static class Numbers
     }
     public static long SumOfDigitSums(long number)
     {
-        return SumOfDigitSums(number, Numbers.DEFAULT_RADIX);
-    }
-    public static long SumOfDigitSums(long number, int radix)
-    {
+        // method works correctly for radix = 10 only, for now
+        int radix = 10;
         long result = 0L;
         long pos = 1L;
         long previous = 0L;
