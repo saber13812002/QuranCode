@@ -395,10 +395,15 @@ public partial class MainForm : Form, ISubscriber
                 DisplayNoteWritingInstruction();
 
                 long value = 0L;
-                if (long.TryParse(ValueTextBox.Text, out value))
+                if (m_radix == Numbers.DEFAULT_RADIX)
                 {
-                    UpdateValueNavigator(value);
+                    long.TryParse(ValueTextBox.Text, out value);
                 }
+                else
+                {
+                    long.TryParse(DecimalValueTextBox.Text, out value);
+                }
+                UpdateValueNavigator(value);
 
                 RegisterContextMenus();
                 SetToolTipPlayerVerseSilenceGapTrackBar();
@@ -36829,7 +36834,7 @@ public partial class MainForm : Form, ISubscriber
                         else if (control.Text == "#")
                         {
                             control.Text = "P";
-                            control.ForeColor = Numbers.GetNumberTypeColor(19L);
+                            control.ForeColor = Numbers.GetNumberTypeColor(73L);
                             ToolTip.SetToolTip(control, L[l]["prime = divisible by itself only"]);
                         }
                         else if (control.Text == "P")
@@ -36841,7 +36846,7 @@ public partial class MainForm : Form, ISubscriber
                         else if (control.Text == "AP")
                         {
                             control.Text = "XP";
-                            control.ForeColor = Numbers.GetNumberTypeColor(19L);
+                            control.ForeColor = Numbers.GetNumberTypeColor(73L);
                             ToolTip.SetToolTip(control, L[l]["non-additive prime = prime with a non-prime digit sum"]);
                         }
                         else if (control.Text == "XP")
@@ -36988,7 +36993,7 @@ public partial class MainForm : Form, ISubscriber
                         else if (control.Text == "C")
                         {
                             control.Text = "XP";
-                            control.ForeColor = Numbers.GetNumberTypeColor(19L);
+                            control.ForeColor = Numbers.GetNumberTypeColor(73L);
                             ToolTip.SetToolTip(control, L[l]["non-additive prime = prime with a non-prime digit sum"]);
                         }
                         else if (control.Text == "XP")
@@ -37000,7 +37005,7 @@ public partial class MainForm : Form, ISubscriber
                         else if (control.Text == "AP")
                         {
                             control.Text = "P";
-                            control.ForeColor = Numbers.GetNumberTypeColor(19L);
+                            control.ForeColor = Numbers.GetNumberTypeColor(73L);
                             ToolTip.SetToolTip(control, L[l]["prime = divisible by itself only"]);
                         }
                         else if (control.Text == "P")
@@ -42113,8 +42118,17 @@ public partial class MainForm : Form, ISubscriber
 
     private void ValueTextBox_TextChanged(object sender, EventArgs e)
     {
-        //int digits = Numbers.DigitCount(ValueTextBox.Text, m_radix);
-        //ValueInspectLabel.Text = digits.ToString();
+        int digits = 0;
+        if (m_radix == Numbers.DEFAULT_RADIX)
+        {
+            digits = Numbers.DigitCount(ValueTextBox.Text, m_radix);
+            ValueInspectLabel.Text = digits.ToString();
+        }
+        else
+        {
+            //digits = Numbers.DigitCount(DecimalValueTextBox.Text, m_radix);
+            ValueInspectLabel.Text = "";
+        }
 
         PrimeFactorsTextBox.Text = "";
         SquareSumTextBox.Text = "";
@@ -42132,22 +42146,40 @@ public partial class MainForm : Form, ISubscriber
         IndexChainLengthTextBox.Text = "";
 
         long value = 0L;
-        long.TryParse(ValueTextBox.Text, out value);
+        if (m_radix == Numbers.DEFAULT_RADIX)
+        {
+            long.TryParse(ValueTextBox.Text, out value);
+        }
+        else
+        {
+            long.TryParse(DecimalValueTextBox.Text, out value);
+        }
 
-        int digit_sum = Numbers.DigitSum(value);
-        DigitSumTextBox.Text = (digit_sum == 0) ? "" : digit_sum.ToString();
-        DigitSumTextBox.ForeColor = Numbers.GetNumberTypeColor(digit_sum);
-        DigitSumTextBox.Refresh();
+        if (m_radix == Numbers.DEFAULT_RADIX)
+        {
+            int digit_sum = Numbers.DigitSum(value);
+            DigitSumTextBox.Text = (digit_sum == 0) ? "" : digit_sum.ToString();
+            DigitSumTextBox.ForeColor = Numbers.GetNumberTypeColor(digit_sum);
+            DigitSumTextBox.Refresh();
 
-        int digital_root = Numbers.DigitalRoot(value);
-        DigitalRootTextBox.Text = (digital_root == 0) ? "" : digital_root.ToString();
-        DigitalRootTextBox.ForeColor = Numbers.GetNumberTypeColor(digital_root);
-        DigitalRootTextBox.Refresh();
+            int digital_root = Numbers.DigitalRoot(value);
+            DigitalRootTextBox.Text = (digital_root == 0) ? "" : digital_root.ToString();
+            DigitalRootTextBox.ForeColor = Numbers.GetNumberTypeColor(digital_root);
+            DigitalRootTextBox.Refresh();
 
-        long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
-        SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
-        SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
-        SumOfDigitSumsTextBox.Refresh();
+            long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
+            SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
+            SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
+            SumOfDigitSumsTextBox.Refresh();
+        }
+        else
+        {
+            long.TryParse(DecimalValueTextBox.Text, out value);
+
+            DigitSumTextBox.Text = "";
+            DigitalRootTextBox.Text = "";
+            SumOfDigitSumsTextBox.Text = "";
+        }
 
         UpdateNumberKind(value);
         UpdateSumOfDivisors(value);
@@ -42203,26 +42235,56 @@ public partial class MainForm : Form, ISubscriber
     private void IncrementValue()
     {
         long value = 0L;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        if (m_radix == Numbers.DEFAULT_RADIX)
         {
-            if (value < long.MaxValue)
+            if (long.TryParse(ValueTextBox.Text, out value))
             {
-                value++;
-                ValueTextBox.Text = value.ToString();
-                FactorizeValue(value, "↑", true);
+                if (value < long.MaxValue)
+                {
+                    value++;
+                    ValueTextBox.Text = value.ToString();
+                    FactorizeValue(value, "↑", true);
+                }
+            }
+        }
+        else
+        {
+            if (long.TryParse(DecimalValueTextBox.Text, out value))
+            {
+                if (value < long.MaxValue)
+                {
+                    value++;
+                    ValueTextBox.Text = Radix.Encode(value, m_radix);
+                    FactorizeValue(value, "↑", true);
+                }
             }
         }
     }
     private void DecrementValue()
     {
         long value = 0L;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        if (m_radix == Numbers.DEFAULT_RADIX)
         {
-            if (value > 0L)
+            if (long.TryParse(ValueTextBox.Text, out value))
             {
-                value--;
-                ValueTextBox.Text = value.ToString();
-                FactorizeValue(value, "↓", true);
+                if (value > 0L)
+                {
+                    value--;
+                    ValueTextBox.Text = value.ToString();
+                    FactorizeValue(value, "↓", true);
+                }
+            }
+        }
+        else
+        {
+            if (long.TryParse(DecimalValueTextBox.Text, out value))
+            {
+                if (value > 0L)
+                {
+                    value--;
+                    ValueTextBox.Text = Radix.Encode(value, m_radix);
+                    FactorizeValue(value, "↓", true);
+                }
             }
         }
     }
@@ -42272,7 +42334,7 @@ public partial class MainForm : Form, ISubscriber
         }
     }
     private double m_double_value = 0.0D;
-    private string CalculateExpression(string expression, long radix)
+    private string CalculateExpression(string expression, int radix)
     {
         try
         {
@@ -42283,7 +42345,7 @@ public partial class MainForm : Form, ISubscriber
             return expression;
         }
     }
-    private double DoCalculateExpression(string expression, long radix)
+    private double DoCalculateExpression(string expression, int radix)
     {
         double result = 0D;
         if (m_client != null)
@@ -42367,13 +42429,29 @@ public partial class MainForm : Form, ISubscriber
                 DecimalValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
                 DecimalValueTextBox.Refresh();
 
-                DigitSumTextBox.Text = Numbers.DigitSum(value).ToString();
-                DigitSumTextBox.ForeColor = Numbers.GetNumberTypeColor(Numbers.DigitSum(value));
-                DigitSumTextBox.Refresh();
+                if (m_radix == Numbers.DEFAULT_RADIX)
+                {
+                    int digit_sum = Numbers.DigitSum(value);
+                    DigitSumTextBox.Text = (digit_sum == 0) ? "" : digit_sum.ToString();
+                    DigitSumTextBox.ForeColor = Numbers.GetNumberTypeColor(digit_sum);
+                    DigitSumTextBox.Refresh();
 
-                DigitalRootTextBox.Text = Numbers.DigitalRoot(value).ToString();
-                DigitalRootTextBox.ForeColor = Numbers.GetNumberTypeColor(Numbers.DigitalRoot(value));
-                DigitalRootTextBox.Refresh();
+                    int digital_root = Numbers.DigitalRoot(value);
+                    DigitalRootTextBox.Text = (digital_root == 0) ? "" : digital_root.ToString();
+                    DigitalRootTextBox.ForeColor = Numbers.GetNumberTypeColor(digital_root);
+                    DigitalRootTextBox.Refresh();
+
+                    long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
+                    SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
+                    SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
+                    SumOfDigitSumsTextBox.Refresh();
+                }
+                else
+                {
+                    DigitSumTextBox.Text = "";
+                    DigitalRootTextBox.Text = "";
+                    SumOfDigitSumsTextBox.Text = "";
+                }
 
                 string factors_str = Numbers.FactorizeToString(value);
                 PrimeFactorsTextBox.Text = factors_str;
@@ -42443,7 +42521,7 @@ public partial class MainForm : Form, ISubscriber
                 //    int start = "4×".Length;
                 //    int end = squares1_str.IndexOf("+");
                 //    string text = squares1_str.Substring(start, end - start);
-                //    n = Radix.Decode(text, 10L);
+                //    n = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                 //}
                 SquareSumTextBox.Text = squares1_str;
                 //SquareSumTextBox.ForeColor = Numbers.GetNumberTypeColor(n);
@@ -42497,70 +42575,76 @@ public partial class MainForm : Form, ISubscriber
     private void UpdateToolTipNth4n1NumberTextBox()
     {
         long value = 0L;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        if (m_radix == Numbers.DEFAULT_RADIX)
         {
-            int _4nplus1_index = -1;
-            int _4nminus1_index = -1;
-            Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
-            Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
-            Nth4nPlus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
-            Nth4nMinus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
-            if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
-            {
-                _4nplus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
-                _4nminus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
-            }
-            else //if composite
-            {
-                _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
-                _4nminus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
-            }
-
-            m_4nplus1_index = (_4nplus1_index > 0);
-            m_4nminus1_index = (_4nminus1_index > 0);
-            if (m_4nplus1_index || m_4nminus1_index)
-            {
-                if (Numbers.IsPrime(value))
-                {
-                    if (m_4nplus1_index)
-                    {
-                        ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n+1 prime index"]);
-                        Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLightLight;
-                    }
-                    else if (m_4nminus1_index)
-                    {
-                        ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n-1 prime index"]);
-                        Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLightLight;
-                    }
-                    else
-                    {
-                        ToolTip.SetToolTip(Nth4n1NumberTextBox, null);
-                    }
-                }
-                else // any other index type will be treated as IndexNumberType.Composite
-                {
-                    if (m_4nplus1_index)
-                    {
-                        ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n+1 composite index"]);
-                        Nth4nPlus1CompositeNumberLabel.BackColor = SystemColors.ControlLightLight;
-                    }
-                    else if (m_4nminus1_index)
-                    {
-                        ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n-1 composite index"]);
-                        Nth4nMinus1CompositeNumberLabel.BackColor = SystemColors.ControlLightLight;
-                    }
-                    else
-                    {
-                        ToolTip.SetToolTip(Nth4n1NumberTextBox, null);
-                    }
-                }
-            }
-            else
-            {
-                ToolTip.SetToolTip(Nth4n1NumberTextBox, null);
-            }
-            Nth4n1NumberTextBox.Refresh();
+            long.TryParse(ValueTextBox.Text, out value);
         }
+        else
+        {
+            long.TryParse(DecimalValueTextBox.Text, out value);
+        }
+
+        int _4nplus1_index = -1;
+        int _4nminus1_index = -1;
+        Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
+        Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
+        Nth4nPlus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
+        Nth4nMinus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
+        if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
+        {
+            _4nplus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
+            _4nminus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
+        }
+        else //if composite
+        {
+            _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
+            _4nminus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
+        }
+
+        m_4nplus1_index = (_4nplus1_index > 0);
+        m_4nminus1_index = (_4nminus1_index > 0);
+        if (m_4nplus1_index || m_4nminus1_index)
+        {
+            if (Numbers.IsPrime(value))
+            {
+                if (m_4nplus1_index)
+                {
+                    ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n+1 prime index"]);
+                    Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLightLight;
+                }
+                else if (m_4nminus1_index)
+                {
+                    ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n-1 prime index"]);
+                    Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLightLight;
+                }
+                else
+                {
+                    ToolTip.SetToolTip(Nth4n1NumberTextBox, null);
+                }
+            }
+            else // any other index type will be treated as IndexNumberType.Composite
+            {
+                if (m_4nplus1_index)
+                {
+                    ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n+1 composite index"]);
+                    Nth4nPlus1CompositeNumberLabel.BackColor = SystemColors.ControlLightLight;
+                }
+                else if (m_4nminus1_index)
+                {
+                    ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n-1 composite index"]);
+                    Nth4nMinus1CompositeNumberLabel.BackColor = SystemColors.ControlLightLight;
+                }
+                else
+                {
+                    ToolTip.SetToolTip(Nth4n1NumberTextBox, null);
+                }
+            }
+        }
+        else
+        {
+            ToolTip.SetToolTip(Nth4n1NumberTextBox, null);
+        }
+        Nth4n1NumberTextBox.Refresh();
     }
     private void Nth4nPlus1PrimeNumberLabel_Click(object sender, EventArgs e)
     {
@@ -42751,25 +42835,30 @@ public partial class MainForm : Form, ISubscriber
                         {
                             value = Math.Abs((long)double.Parse(text));
                         }
-                        else if (control.Name.StartsWith("Decimal"))
-                        {
-                            value = Radix.Decode(text, 10L);
-                        }
                         else if (text.StartsWith(SUM_SYMBOL))
                         {
                             text = text.Substring(SUM_SYMBOL.Length, text.Length - SUM_SYMBOL.Length);
-                            value = Radix.Decode(text, 10L);
+                            value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                        }
+                        else if (
+                                    (control == ChaptersTextBox) ||
+                                    (control == VersesTextBox) ||
+                                    (control == WordsTextBox) ||
+                                    (control == LettersTextBox)
+                                )
+                        {
+                            value = Radix.Decode(text, m_radix);
                         }
                         else if (text.StartsWith("4×")) // 4n+1
                         {
                             int start = "4×".Length;
                             int end = text.IndexOf("+");
                             text = text.Substring(start, end - start);
-                            value = Radix.Decode(text, 10L);
+                            value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                         }
                         else
                         {
-                            value = Radix.Decode(text, m_radix);
+                            value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                         }
                     }
 
@@ -43748,7 +43837,7 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Value Display
     ///////////////////////////////////////////////////////////////////////////////
-    private long m_radix = Numbers.DEFAULT_RADIX;
+    private int m_radix = Numbers.DEFAULT_RADIX;
     private void RadixValueLabel_Click(object sender, EventArgs e)
     {
         try
@@ -43771,7 +43860,7 @@ public partial class MainForm : Form, ISubscriber
             // toggle radix
             if (m_radix == Numbers.DEFAULT_RADIX)
             {
-                m_radix = Numbers.RADIX_NINTEEN;
+                m_radix = Numbers.RADIX_NINETEEN;
             }
             else
             {
@@ -46566,8 +46655,8 @@ public partial class MainForm : Form, ISubscriber
                         long digit = long.Parse(item.SubItems[2].Text);
                         position_sum += digit * base10_multiplier;
                         distance_sum += digit * base19_multiplier;
-                        base10_multiplier *= 10L;
-                        base19_multiplier *= 19L;
+                        base10_multiplier *= Numbers.DEFAULT_RADIX;
+                        base19_multiplier *= Numbers.RADIX_NINETEEN;
                     }
                 }
                 else
@@ -46577,8 +46666,8 @@ public partial class MainForm : Form, ISubscriber
                         long digit = long.Parse(item.SubItems[2].Text);
                         position_sum += digit * base10_multiplier;
                         distance_sum += digit * base19_multiplier;
-                        base10_multiplier *= 10L;
-                        base19_multiplier *= 19L;
+                        base10_multiplier *= Numbers.DEFAULT_RADIX;
+                        base19_multiplier *= Numbers.RADIX_NINETEEN;
                     }
                 }
             }
@@ -46706,163 +46795,184 @@ public partial class MainForm : Form, ISubscriber
                         CalculateCurrentValue();    // Calculate value with logging - SLOW but very informative
                     }
 
-                    long value = 0;
                     StringBuilder str = new StringBuilder();
-                    if (long.TryParse(ValueTextBox.Text, out value))
+                    long value = 0L;
+                    if (m_radix == Numbers.DEFAULT_RADIX)
                     {
+                        long.TryParse(ValueTextBox.Text, out value);
                         if (verbose)
                         {
                             str.AppendLine(m_current_text);
                             str.AppendLine("--------------------------------------------------------------------------------------------------");
                             str.AppendLine();
+                            str.AppendLine("Chapters\t=\t" + ChaptersTextBox.Text);
                             str.AppendLine("Verses\t\t=\t" + VersesTextBox.Text);
                             str.AppendLine("Words\t\t=\t" + WordsTextBox.Text);
                             str.AppendLine("Letters\t\t=\t" + LettersTextBox.Text);
-                            str.AppendLine("Value\t\t=\t" + ValueTextBox.Text + ((m_radix == Numbers.DEFAULT_RADIX) ? "" : " in base " + m_radix.ToString()));
+                            str.AppendLine("Value\t\t=\t" + ValueTextBox.Text);
                         }
                         else
                         {
-                            str.AppendLine("Number\t\t=\t" + ValueTextBox.Text + ((m_radix == Numbers.DEFAULT_RADIX) ? "" : " in base " + m_radix.ToString()));
+                            str.AppendLine("Value\t\t=\t" + ValueTextBox.Text);
                         }
-
-                        str.AppendLine();
-                        str.AppendLine("Prime Factors\t=\t" + Numbers.FactorizeToString(value));
-                        int nth_number_index = 0;
-                        int nth_additive_number_index = 0;
-                        int nth_non_additive_number_index = 0;
-                        if (Numbers.IsPrime(value))
-                        {
-                            m_index_type = IndexType.Prime;
-                            nth_number_index = Numbers.PrimeIndexOf(value) + 1;
-                            nth_additive_number_index = Numbers.AdditivePrimeIndexOf(value) + 1;
-                            nth_non_additive_number_index = Numbers.NonAdditivePrimeIndexOf(value) + 1;
-                            str.AppendLine("P  Index\t=\t" + ((nth_number_index > 0) ? nth_number_index.ToString() : ""));
-                            str.AppendLine("AP Index\t=\t" + ((nth_additive_number_index > 0) ? nth_additive_number_index.ToString() : ""));
-                            str.AppendLine("XP Index\t=\t" + ((nth_non_additive_number_index > 0) ? nth_non_additive_number_index.ToString() : ""));
-                        }
-                        else // any other index type will be treated as IndexNumberType.Composite
-                        {
-                            m_index_type = IndexType.Composite;
-                            nth_number_index = Numbers.CompositeIndexOf(value) + 1;
-                            nth_additive_number_index = Numbers.AdditiveCompositeIndexOf(value) + 1;
-                            nth_non_additive_number_index = Numbers.NonAdditiveCompositeIndexOf(value) + 1;
-                            str.AppendLine("C  Index\t=\t" + ((nth_number_index > 0) ? nth_number_index.ToString() : ""));
-                            str.AppendLine("AC Index\t=\t" + ((nth_additive_number_index > 0) ? nth_additive_number_index.ToString() : ""));
-                            str.AppendLine("XC Index\t=\t" + ((nth_non_additive_number_index > 0) ? nth_non_additive_number_index.ToString() : ""));
-                        }
-
-                        str.AppendLine();
-                        long digit_sum = Numbers.DigitSum(value);
-                        str.AppendLine("Digit Sum        " + "\t=\t" + digit_sum);
-                        long digital_roor = Numbers.DigitalRoot(value);
-                        str.AppendLine("Digital Root     " + "\t=\t" + digital_roor);
-                        long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
-                        str.AppendLine("Sum Of Digit Sums" + "\t=\t" + sum_of_digit_sums);
-
-                        string proper_divisors = Numbers.GetProperDivisorsString(value);
-                        long sum_of_proper_divisors = Numbers.SumOfProperDivisors(value);
-                        str.AppendLine("Sum Of Proper Divisors" + "\t=\t" + sum_of_proper_divisors + " = " + proper_divisors);
-
-                        m_number_kind = Numbers.GetNumberKind(value);
-                        int number_kind_index = 0;
-                        switch (m_number_kind)
-                        {
-                            case NumberKind.Deficient:
-                                {
-                                    number_kind_index = Numbers.DeficientIndexOf(value) + 1;
-                                }
-                                break;
-                            case NumberKind.Perfect:
-                                {
-                                    number_kind_index = Numbers.PerfectIndexOf(value) + 1;
-                                }
-                                break;
-                            case NumberKind.Abundant:
-                                {
-                                    number_kind_index = Numbers.AbundantIndexOf(value) + 1;
-                                }
-                                break;
-                            default:
-                                {
-                                    number_kind_index = 0;
-                                }
-                                break;
-                        }
-                        str.AppendLine(m_number_kind.ToString() + " Index\t\t=\t" + number_kind_index);
-
-                        str.AppendLine();
-                        string squares1_str = "";
-                        string squares2_str = "";
-                        int _4nplus1_index = -1;
-                        int _4nminus1_index = -1;
-                        if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
-                        {
-                            squares1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(value);
-                            squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
-                            _4nplus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
-                            _4nminus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
-                        }
-                        else //if composite
-                        {
-                            squares1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(value);
-                            squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
-                            _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
-                            _4nminus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
-                        }
-                        str.AppendLine(((_4nplus1_index > 0) ? "4n+1 Squares1\t\t=\t" : "4n-1 Squares1\t\t=\t") + squares1_str +
-                              "\t\t" + ((_4nplus1_index > 0) ? ("4n+1 Index = " + _4nplus1_index.ToString()) :
-                                        (_4nminus1_index > 0) ? ("4n-1 Index = " + _4nminus1_index.ToString()) :
-                                         ""));
-                        str.AppendLine(((_4nplus1_index > 0) ? "4n+1 Squares2\t\t=\t" : "4n-1 Squares2\t\t=\t") + squares2_str);
-
-                        str.AppendLine();
-                        if (m_client.Book != null)
-                        {
-                            Verse verse = m_client.Book.GetVerseByVerseNumber((int)value);
-                            if (verse != null)
-                            {
-                                str.AppendLine("VerseByVerseNumber\t=\t" + verse.Address);
-                            }
-                            else
-                            {
-                                str.AppendLine("VerseByVerseNumber\t=\t\"---:---\"");
-                            }
-
-                            verse = m_client.Book.GetVerseByWordNumber((int)value);
-                            if (verse != null)
-                            {
-                                str.AppendLine("VerseByWordNumber\t=\t" + verse.Address);
-                            }
-                            else
-                            {
-                                str.AppendLine("VerseByWordNumber\t=\t\"---:---\"");
-                            }
-
-                            verse = m_client.Book.GetVerseByLetterNumber((int)value);
-                            if (verse != null)
-                            {
-                                str.AppendLine("VerseByLetterNumber\t=\t" + verse.Address);
-                            }
-                            else
-                            {
-                                str.AppendLine("VerseByLetterNumber\t=\t\"---:---\"");
-                            }
-                        }
-
-                        str.AppendLine();
-                        str.AppendLine("Left-to-right prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainL2R(value) + "  =  " + DecimalPCIndexChainL2R(value));
-                        str.AppendLine();
-                        str.AppendLine("Right-to-left prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainR2L(value) + "  =  " + DecimalPCIndexChainR2L(value));
-                        str.AppendLine();
-                        str.AppendLine("Left-to-right composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainL2R(value) + "  =  " + DecimalCPIndexChainL2R(value));
-                        str.AppendLine();
-                        str.AppendLine("Right-to-left composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainR2L(value) + "  =  " + DecimalCPIndexChainR2L(value));
-                        str.AppendLine("--------------------------------------------------------------------------------------------------");
-                        str.AppendLine();
-
-                        m_client.SaveValueCalculations(filename, str.ToString(), verbose);
-                        m_client.Logging = false;   // return to FAST calculations without logging
                     }
+                    else
+                    {
+                        long.TryParse(DecimalValueTextBox.Text, out value);
+                        if (verbose)
+                        {
+                            str.AppendLine(m_current_text);
+                            str.AppendLine("--------------------------------------------------------------------------------------------------");
+                            str.AppendLine();
+                            str.AppendLine("Chapters\t=\t" + DecimalChaptersTextBox.Text);
+                            str.AppendLine("Verses\t\t=\t" + DecimalVersesTextBox.Text);
+                            str.AppendLine("Words\t\t=\t" + DecimalWordsTextBox.Text);
+                            str.AppendLine("Letters\t\t=\t" + DecimalLettersTextBox.Text);
+                            str.AppendLine("Value\t\t=\t" + DecimalValueTextBox.Text);
+                        }
+                        else
+                        {
+                            str.AppendLine("Value\t\t=\t" + DecimalValueTextBox.Text);
+                        }
+                    }
+
+                    str.AppendLine();
+                    str.AppendLine("Prime Factors\t=\t" + Numbers.FactorizeToString(value));
+                    int nth_number_index = 0;
+                    int nth_additive_number_index = 0;
+                    int nth_non_additive_number_index = 0;
+                    if (Numbers.IsPrime(value))
+                    {
+                        m_index_type = IndexType.Prime;
+                        nth_number_index = Numbers.PrimeIndexOf(value) + 1;
+                        nth_additive_number_index = Numbers.AdditivePrimeIndexOf(value) + 1;
+                        nth_non_additive_number_index = Numbers.NonAdditivePrimeIndexOf(value) + 1;
+                        str.AppendLine("P  Index\t=\t" + ((nth_number_index > 0) ? nth_number_index.ToString() : ""));
+                        str.AppendLine("AP Index\t=\t" + ((nth_additive_number_index > 0) ? nth_additive_number_index.ToString() : ""));
+                        str.AppendLine("XP Index\t=\t" + ((nth_non_additive_number_index > 0) ? nth_non_additive_number_index.ToString() : ""));
+                    }
+                    else // any other index type will be treated as IndexNumberType.Composite
+                    {
+                        m_index_type = IndexType.Composite;
+                        nth_number_index = Numbers.CompositeIndexOf(value) + 1;
+                        nth_additive_number_index = Numbers.AdditiveCompositeIndexOf(value) + 1;
+                        nth_non_additive_number_index = Numbers.NonAdditiveCompositeIndexOf(value) + 1;
+                        str.AppendLine("C  Index\t=\t" + ((nth_number_index > 0) ? nth_number_index.ToString() : ""));
+                        str.AppendLine("AC Index\t=\t" + ((nth_additive_number_index > 0) ? nth_additive_number_index.ToString() : ""));
+                        str.AppendLine("XC Index\t=\t" + ((nth_non_additive_number_index > 0) ? nth_non_additive_number_index.ToString() : ""));
+                    }
+
+                    str.AppendLine();
+                    long digit_sum = Numbers.DigitSum(value);
+                    str.AppendLine("Digit Sum        " + "\t=\t" + digit_sum);
+                    long digital_roor = Numbers.DigitalRoot(value);
+                    str.AppendLine("Digital Root     " + "\t=\t" + digital_roor);
+                    long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
+                    str.AppendLine("Sum Of Digit Sums" + "\t=\t" + sum_of_digit_sums);
+
+                    string proper_divisors = Numbers.GetProperDivisorsString(value);
+                    long sum_of_proper_divisors = Numbers.SumOfProperDivisors(value);
+                    str.AppendLine("Sum Of Proper Divisors" + "\t=\t" + sum_of_proper_divisors + " = " + proper_divisors);
+
+                    m_number_kind = Numbers.GetNumberKind(value);
+                    int number_kind_index = 0;
+                    switch (m_number_kind)
+                    {
+                        case NumberKind.Deficient:
+                            {
+                                number_kind_index = Numbers.DeficientIndexOf(value) + 1;
+                            }
+                            break;
+                        case NumberKind.Perfect:
+                            {
+                                number_kind_index = Numbers.PerfectIndexOf(value) + 1;
+                            }
+                            break;
+                        case NumberKind.Abundant:
+                            {
+                                number_kind_index = Numbers.AbundantIndexOf(value) + 1;
+                            }
+                            break;
+                        default:
+                            {
+                                number_kind_index = 0;
+                            }
+                            break;
+                    }
+                    str.AppendLine(m_number_kind.ToString() + " Index\t\t=\t" + number_kind_index);
+
+                    str.AppendLine();
+                    string squares1_str = "";
+                    string squares2_str = "";
+                    int _4nplus1_index = -1;
+                    int _4nminus1_index = -1;
+                    if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
+                    {
+                        squares1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(value);
+                        squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
+                        _4nplus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
+                        _4nminus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
+                    }
+                    else //if composite
+                    {
+                        squares1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(value);
+                        squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
+                        _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
+                        _4nminus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
+                    }
+                    str.AppendLine(((_4nplus1_index > 0) ? "4n+1 Squares1\t\t=\t" : "4n-1 Squares1\t\t=\t") + squares1_str +
+                          "\t\t" + ((_4nplus1_index > 0) ? ("4n+1 Index = " + _4nplus1_index.ToString()) :
+                                    (_4nminus1_index > 0) ? ("4n-1 Index = " + _4nminus1_index.ToString()) :
+                                     ""));
+                    str.AppendLine(((_4nplus1_index > 0) ? "4n+1 Squares2\t\t=\t" : "4n-1 Squares2\t\t=\t") + squares2_str);
+
+                    str.AppendLine();
+                    if (m_client.Book != null)
+                    {
+                        Verse verse = m_client.Book.GetVerseByVerseNumber((int)value);
+                        if (verse != null)
+                        {
+                            str.AppendLine("VerseByVerseNumber\t=\t" + verse.Address);
+                        }
+                        else
+                        {
+                            str.AppendLine("VerseByVerseNumber\t=\t\"---:---\"");
+                        }
+
+                        verse = m_client.Book.GetVerseByWordNumber((int)value);
+                        if (verse != null)
+                        {
+                            str.AppendLine("VerseByWordNumber\t=\t" + verse.Address);
+                        }
+                        else
+                        {
+                            str.AppendLine("VerseByWordNumber\t=\t\"---:---\"");
+                        }
+
+                        verse = m_client.Book.GetVerseByLetterNumber((int)value);
+                        if (verse != null)
+                        {
+                            str.AppendLine("VerseByLetterNumber\t=\t" + verse.Address);
+                        }
+                        else
+                        {
+                            str.AppendLine("VerseByLetterNumber\t=\t\"---:---\"");
+                        }
+                    }
+
+                    str.AppendLine();
+                    str.AppendLine("Left-to-right prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainL2R(value) + "  =  " + DecimalPCIndexChainL2R(value));
+                    str.AppendLine();
+                    str.AppendLine("Right-to-left prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainR2L(value) + "  =  " + DecimalPCIndexChainR2L(value));
+                    str.AppendLine();
+                    str.AppendLine("Left-to-right composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainL2R(value) + "  =  " + DecimalCPIndexChainL2R(value));
+                    str.AppendLine();
+                    str.AppendLine("Right-to-left composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainR2L(value) + "  =  " + DecimalCPIndexChainR2L(value));
+                    str.AppendLine("--------------------------------------------------------------------------------------------------");
+                    str.AppendLine();
+
+                    m_client.SaveValueCalculations(filename, str.ToString(), verbose);
+                    m_client.Logging = false;   // return to FAST calculations without logging
                 }
             }
         }
@@ -46919,35 +47029,55 @@ public partial class MainForm : Form, ISubscriber
     }
     private void PCIndexChainL2RTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = 0;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        long value = 0L;
+        if (m_radix == Numbers.DEFAULT_RADIX)
         {
-            this.ToolTip.SetToolTip(this.PCIndexChainL2RTextBox, "Left-to-right prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainL2R(value) + "  =  " + DecimalPCIndexChainL2R(value));
+            long.TryParse(ValueTextBox.Text, out value);
         }
+        else
+        {
+            long.TryParse(DecimalValueTextBox.Text, out value);
+        }
+        this.ToolTip.SetToolTip(this.PCIndexChainL2RTextBox, "Left-to-right prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainL2R(value) + "  =  " + DecimalPCIndexChainL2R(value));
     }
     private void PCIndexChainR2LTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = 0;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        long value = 0L;
+        if (m_radix == Numbers.DEFAULT_RADIX)
         {
-            this.ToolTip.SetToolTip(this.PCIndexChainR2LTextBox, "Right-to-left prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainR2L(value) + "  =  " + DecimalPCIndexChainR2L(value));
+            long.TryParse(ValueTextBox.Text, out value);
         }
+        else
+        {
+            long.TryParse(DecimalValueTextBox.Text, out value);
+        }
+        this.ToolTip.SetToolTip(this.PCIndexChainR2LTextBox, "Right-to-left prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainR2L(value) + "  =  " + DecimalPCIndexChainR2L(value));
     }
     private void CPIndexChainL2RTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = 0;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        long value = 0L;
+        if (m_radix == Numbers.DEFAULT_RADIX)
         {
-            this.ToolTip.SetToolTip(this.CPIndexChainL2RTextBox, "Left-to-right composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainL2R(value) + "  =  " + DecimalCPIndexChainL2R(value));
+            long.TryParse(ValueTextBox.Text, out value);
         }
+        else
+        {
+            long.TryParse(DecimalValueTextBox.Text, out value);
+        }
+        this.ToolTip.SetToolTip(this.CPIndexChainL2RTextBox, "Left-to-right composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainL2R(value) + "  =  " + DecimalCPIndexChainL2R(value));
     }
     private void CPIndexChainR2LTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = 0;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        long value = 0L;
+        if (m_radix == Numbers.DEFAULT_RADIX)
         {
-            this.ToolTip.SetToolTip(this.CPIndexChainR2LTextBox, "Right-to-left composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainR2L(value) + "  =  " + DecimalCPIndexChainR2L(value));
+            long.TryParse(ValueTextBox.Text, out value);
         }
+        else
+        {
+            long.TryParse(DecimalValueTextBox.Text, out value);
+        }
+        this.ToolTip.SetToolTip(this.CPIndexChainR2LTextBox, "Right-to-left composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainR2L(value) + "  =  " + DecimalCPIndexChainR2L(value));
     }
     private void IndexChainLengthTextBox_Click(object sender, EventArgs e)
     {
@@ -47229,6 +47359,8 @@ public partial class MainForm : Form, ISubscriber
     }
     /////////////////////////////////////////////////////////////////////////////
     #endregion
+    #region Run
+    ///////////////////////////////////////////////////////////////////////////////
     private void CalculatorLabel_Click(object sender, EventArgs e)
     {
         this.Cursor = Cursors.WaitCursor;
@@ -47249,4 +47381,6 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
+    /////////////////////////////////////////////////////////////////////////////
+    #endregion
 }

@@ -99,7 +99,7 @@ public enum ArithmeticOperator { Plus, Minus, Multiply, Divide, Modulus };
 public static class Numbers
 {
     public const int DEFAULT_RADIX = 10;                               // base for current number system. Decimal by default.
-    public const int RADIX_NINTEEN = 19;                               // base for current number system. 19 for OverItNineteen.
+    public const int RADIX_NINETEEN = 19;                               // base for current number system. 19 for OverItNineteen.
     public const int DEFAULT_DIVISOR = 19;                             // 19 for OverItNineteen.
     public static Color DIVISOR_COLOR = Color.FromArgb(192, 255, 255); // background color if number is divisible by 19.
     public static Color INTERESTING_NUMBER_COLOR = Color.Yellow;       // background color if number is interesting.
@@ -152,9 +152,9 @@ public static class Numbers
     };
     public static Color GetNumberTypeColor(long number)
     {
-        return GetNumberTypeColor(number.ToString(), 10L);
+        return GetNumberTypeColor(number.ToString(), Numbers.DEFAULT_RADIX);
     }
-    public static Color GetNumberTypeColor(string value, long radix)
+    public static Color GetNumberTypeColor(string value, int radix)
     {
         // if negative number, remove -ve sign
         if (value.StartsWith("-")) value = value.Remove(0, 1);
@@ -747,7 +747,7 @@ public static class Numbers
         if (number < 0L) number *= -1L;
         return (number == 1L);
     }
-    public static bool IsUnit(string value, long radix)
+    public static bool IsUnit(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return IsUnit(number);
@@ -757,7 +757,7 @@ public static class Numbers
         if (number < 0L) number *= -1L;
         return ((number % 2) == 1L);
     }
-    public static bool IsOdd(string value, long radix)
+    public static bool IsOdd(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return IsOdd(number);
@@ -767,7 +767,7 @@ public static class Numbers
         if (number < 0L) number *= -1L;
         return ((number % 2) == 0L);
     }
-    public static bool IsEven(string value, long radix)
+    public static bool IsEven(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return IsEven(number);
@@ -962,7 +962,7 @@ public static class Numbers
         }
         return true;
     }
-    public static bool IsPrime(string value, long radix)
+    public static bool IsPrime(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return IsPrime(number);
@@ -975,7 +975,7 @@ public static class Numbers
         }
         return false;
     }
-    public static bool IsAdditivePrime(string value, long radix)
+    public static bool IsAdditivePrime(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return IsAdditivePrime(number);
@@ -988,7 +988,7 @@ public static class Numbers
         }
         return false;
     }
-    public static bool IsNonAdditivePrime(string value, long radix)
+    public static bool IsNonAdditivePrime(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return IsNonAdditivePrime(number);
@@ -1019,7 +1019,7 @@ public static class Numbers
         }
         return false;
     }
-    public static bool IsComposite(string value, long radix)
+    public static bool IsComposite(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return IsComposite(number);
@@ -1032,7 +1032,7 @@ public static class Numbers
         }
         return false;
     }
-    public static bool IsAdditiveComposite(string value, long radix)
+    public static bool IsAdditiveComposite(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return IsAdditiveComposite(number);
@@ -1045,7 +1045,7 @@ public static class Numbers
         }
         return false;
     }
-    public static bool IsNonAdditiveComposite(string value, long radix)
+    public static bool IsNonAdditiveComposite(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return IsNonAdditiveComposite(number);
@@ -1061,7 +1061,7 @@ public static class Numbers
     /// <param name="n2"></param>
     /// <param name="n3"></param>
     /// <returns></returns>
-    public static bool ArePrimeTriplets(string value1, string value2, string value3, long radix)
+    public static bool ArePrimeTriplets(string value1, string value2, string value3, int radix)
     {
         long number1 = Radix.Decode(value1, radix);
         long number2 = Radix.Decode(value2, radix);
@@ -1200,7 +1200,7 @@ public static class Numbers
     }
     public static int DigitCount(string value)
     {
-        return DigitCount(value, 10L);
+        return DigitCount(value, Numbers.DEFAULT_RADIX);
         //int result = 0;
         //if (value.Length > 0)
         //{
@@ -1215,11 +1215,11 @@ public static class Numbers
         //}
         //return result;
     }
-    public static int DigitCount(long number, long radix)
+    public static int DigitCount(long number, int radix)
     {
         return DigitCount(number.ToString(), radix);
     }
-    public static int DigitCount(string value, long radix)
+    public static int DigitCount(string value, int radix)
     {
         int result = 0;
         if (value.Length > 0)
@@ -1282,9 +1282,9 @@ public static class Numbers
     }
     public static long SumOfDigitSums(long number)
     {
-        return SumOfDigitSums(number, 10L);
+        return SumOfDigitSums(number, Numbers.DEFAULT_RADIX);
     }
-    public static long SumOfDigitSums(long number, long radix)
+    public static long SumOfDigitSums(long number, int radix)
     {
         long result = 0L;
         long pos = 1L;
@@ -1553,17 +1553,17 @@ public static class Numbers
         }
         return -1;
     }
-    public static int PrimeIndexOf(string value, long radix)
+    public static int PrimeIndexOf(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return PrimeIndexOf(number);
     }
-    public static int AdditivePrimeIndexOf(string value, long radix)
+    public static int AdditivePrimeIndexOf(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return AdditivePrimeIndexOf(number);
     }
-    public static int NonAdditivePrimeIndexOf(string value, long radix)
+    public static int NonAdditivePrimeIndexOf(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return NonAdditivePrimeIndexOf(number);
@@ -1820,7 +1820,7 @@ public static class Numbers
         }
         return -1;
     }
-    public static int Prime4nPlus1IndexOf(string value, long radix)
+    public static int Prime4nPlus1IndexOf(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return Prime4nPlus1IndexOf(number);
@@ -1885,7 +1885,7 @@ public static class Numbers
         }
         return -1;
     }
-    public static int Prime4nMinus1IndexOf(string value, long radix)
+    public static int Prime4nMinus1IndexOf(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return Prime4nMinus1IndexOf(number);
@@ -2033,17 +2033,17 @@ public static class Numbers
         }
         return -1;
     }
-    public static int CompositeIndexOf(string value, long radix)
+    public static int CompositeIndexOf(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return CompositeIndexOf(number);
     }
-    public static int AdditiveCompositeIndexOf(string value, long radix)
+    public static int AdditiveCompositeIndexOf(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return AdditiveCompositeIndexOf(number);
     }
-    public static int NonAdditiveCompositeIndexOf(string value, long radix)
+    public static int NonAdditiveCompositeIndexOf(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return NonAdditiveCompositeIndexOf(number);
@@ -2309,7 +2309,7 @@ public static class Numbers
         }
         return -1;
     }
-    public static int Composite4nPlus1IndexOf(string value, long radix)
+    public static int Composite4nPlus1IndexOf(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return Composite4nPlus1IndexOf(number);
@@ -2374,7 +2374,7 @@ public static class Numbers
         }
         return -1;
     }
-    public static int Composite4nMinus1IndexOf(string value, long radix)
+    public static int Composite4nMinus1IndexOf(string value, int radix)
     {
         long number = Radix.Decode(value, radix);
         return Composite4nMinus1IndexOf(number);

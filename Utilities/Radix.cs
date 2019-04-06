@@ -55,11 +55,11 @@ public class Radix
         }
     }
 
-    public static string Encode(long value, long radix)
+    public static string Encode(long value, int radix)
     {
         return Encode(value, radix, false);
     }
-    public static string Encode(long value, long radix, bool symbolic_display)
+    public static string Encode(long value, int radix, bool symbolic_display)
     {
         // check parameters
         CheckArg(radix, symbolic_display);
@@ -122,11 +122,11 @@ public class Radix
         }
         return result;
     }
-    public static long Decode(string value, long radix)
+    public static long Decode(string value, int radix)
     {
         return Decode(value, radix, false);
     }
-    public static long Decode(string value, long radix, bool symbolic_display)
+    public static long Decode(string value, int radix, bool symbolic_display)
     {
         if (String.IsNullOrEmpty(value)) return 0L;
         CheckArg(radix, symbolic_display);
@@ -203,11 +203,11 @@ public class Radix
         return result;
     }
 
-    public static string Encode(double value, long radix)
+    public static string Encode(double value, int radix)
     {
         return Encode(value, radix, false);
     }
-    public static string Encode(double value, long radix, bool symbolic_display)
+    public static string Encode(double value, int radix, bool symbolic_display)
     {
         CheckArg(radix, symbolic_display);
 
@@ -297,11 +297,11 @@ public class Radix
         }
         return result;
     }
-    public static void Decode(string value, long radix, out double result)
+    public static void Decode(string value, int radix, out double result)
     {
         Decode(value, radix, out result, false);
     }
-    public static void Decode(string value, long radix, out double result, bool symbolic_display)
+    public static void Decode(string value, int radix, out double result, bool symbolic_display)
     {
         result = 0.0D; // out param must be filled before return
         if (String.IsNullOrEmpty(value)) return;

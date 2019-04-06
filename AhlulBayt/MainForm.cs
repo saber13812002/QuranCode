@@ -105,7 +105,7 @@ public partial class MainForm : Form
 
             m_number_type = NumberType.Prime;
             NumberTypeLabel.Text = "P";
-            NumberTypeLabel.ForeColor = Numbers.GetNumberTypeColor(19L);
+            NumberTypeLabel.ForeColor = Numbers.GetNumberTypeColor(73L);
             ToolTip.SetToolTip(ValueInterlaceLabel, "concatenate letter values");
             ToolTip.SetToolTip(ValueCombinationDirectionLabel, "combine letter values right to left");
             ToolTip.SetToolTip(NumberTypeLabel, "allow prime combined letter values only");
@@ -479,7 +479,7 @@ public partial class MainForm : Form
                 {
                     m_number_type = NumberType.NonAdditivePrime;
                     NumberTypeLabel.Text = "XP";
-                    NumberTypeLabel.ForeColor = Numbers.GetNumberTypeColor(19L);
+                    NumberTypeLabel.ForeColor = Numbers.GetNumberTypeColor(73L);
                     ToolTip.SetToolTip(NumberTypeLabel, "allow non-additive prime combined letter values only");
                 }
                 break;
@@ -495,7 +495,7 @@ public partial class MainForm : Form
                 {
                     m_number_type = NumberType.Prime;
                     NumberTypeLabel.Text = "P";
-                    NumberTypeLabel.ForeColor = Numbers.GetNumberTypeColor(19L);
+                    NumberTypeLabel.ForeColor = Numbers.GetNumberTypeColor(73L);
                     ToolTip.SetToolTip(NumberTypeLabel, "allow prime combined letter values only");
                 }
                 break;
@@ -526,7 +526,7 @@ public partial class MainForm : Form
                 {
                     m_number_type = NumberType.Prime;
                     NumberTypeLabel.Text = "P";
-                    NumberTypeLabel.ForeColor = Numbers.GetNumberTypeColor(19L);
+                    NumberTypeLabel.ForeColor = Numbers.GetNumberTypeColor(73L);
                     ToolTip.SetToolTip(NumberTypeLabel, "allow prime combined letter values only");
                 }
                 break;
@@ -542,7 +542,7 @@ public partial class MainForm : Form
                 {
                     m_number_type = NumberType.NonAdditivePrime;
                     NumberTypeLabel.Text = "XP";
-                    NumberTypeLabel.ForeColor = Numbers.GetNumberTypeColor(19L);
+                    NumberTypeLabel.ForeColor = Numbers.GetNumberTypeColor(73L);
                     ToolTip.SetToolTip(NumberTypeLabel, "allow non-additive prime combined letter values only");
                 }
                 break;

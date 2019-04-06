@@ -62,9 +62,9 @@ public static class Evaluator
     }
     public static string Evaluate(string expression)
     {
-        return Evaluate(expression, 10L);
+        return Evaluate(expression, Numbers.DEFAULT_RADIX);
     }
-    public static string Evaluate(string expression, long radix)
+    public static string Evaluate(string expression, int radix)
     {
         string processed_expression = ProcessExpression(expression, radix);
         string source = GenerateCode(processed_expression);
@@ -120,7 +120,7 @@ public static class Evaluator
             Console.WriteLine("Error: An exception occurred while executing the script", ex);
         }
     }
-    private static string ProcessExpression(string expression, long radix)
+    private static string ProcessExpression(string expression, int radix)
     {
         char[] separators = { '(', ')', '+', '-', '*', '/', '%', '\\', '^', '!' };
 

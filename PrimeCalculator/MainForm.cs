@@ -493,7 +493,7 @@ public partial class MainForm : Form
         double result = 0D;
         try
         {
-            result = Radix.Decode(expression, 10L);
+            result = Radix.Decode(expression, Numbers.DEFAULT_RADIX);
             this.ToolTip.SetToolTip(this.ValueTextBox, result.ToString());
         }
         catch // if expression
@@ -516,7 +516,7 @@ public partial class MainForm : Form
     {
         try
         {
-            return Evaluator.Evaluate(expression, 10L);
+            return Evaluator.Evaluate(expression, Numbers.DEFAULT_RADIX);
         }
         catch
         {
@@ -525,7 +525,7 @@ public partial class MainForm : Form
     }
     private void FactorizeValue(long value)
     {
-        ValueTextBox.Text = Radix.Encode(value, 10L);
+        ValueTextBox.Text = Radix.Encode(value, Numbers.DEFAULT_RADIX);
         ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
         ValueTextBox.Refresh();
 
@@ -573,7 +573,7 @@ public partial class MainForm : Form
             //    int start = "4×".Length;
             //    int end = squares1_str.IndexOf("+");
             //    string text = squares1_str.Substring(start, end - start);
-            //    n = Radix.Decode(text, 10L);
+            //    n = Radix.Decode(text, Numbers.DEFAULT_RADIX);
             //}
             SquareSumTextBox.Text = squares1_str;
             //SquareSumTextBox.ForeColor = Numbers.GetNumberTypeColor(n);
@@ -676,7 +676,7 @@ public partial class MainForm : Form
                 {
                     m_index_type = IndexType.Prime;
 
-                    ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(19L);
+                    ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(73L);
                     if (Numbers.IsPrime(Numbers.DigitSum(m_factorizer.Number)))
                     {
                         ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(29L);
@@ -2087,18 +2087,18 @@ public partial class MainForm : Form
                         }
                         else if (control.Name.StartsWith("Decimal"))
                         {
-                            value = Radix.Decode(text, 10L);
+                            value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                         }
                         else if (text.StartsWith("4×")) // 4n+1
                         {
                             int start = "4×".Length;
                             int end = text.IndexOf("+");
                             text = text.Substring(start, end - start);
-                            value = Radix.Decode(text, 10L);
+                            value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                         }
                         else
                         {
-                            value = Radix.Decode(text, 10L);
+                            value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                         }
                     }
 

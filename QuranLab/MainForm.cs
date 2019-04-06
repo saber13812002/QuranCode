@@ -661,7 +661,7 @@ public partial class MainForm : Form
             if (control.Text == "")
             {
                 control.Text = "P";
-                control.ForeColor = Numbers.GetNumberTypeColor(19L);
+                control.ForeColor = Numbers.GetNumberTypeColor(73L);
                 ToolTip.SetToolTip(control, "prime = divisible by itself only");
             }
             else if (control.Text == "P")
@@ -673,7 +673,7 @@ public partial class MainForm : Form
             else if (control.Text == "AP")
             {
                 control.Text = "XP";
-                control.ForeColor = Numbers.GetNumberTypeColor(19L);
+                control.ForeColor = Numbers.GetNumberTypeColor(73L);
                 ToolTip.SetToolTip(control, "non-additive prime = prime with a composite digit sum");
             }
             else if (control.Text == "XP")
@@ -796,7 +796,7 @@ public partial class MainForm : Form
             else if (control.Text == "C")
             {
                 control.Text = "XP";
-                control.ForeColor = Numbers.GetNumberTypeColor(19L);
+                control.ForeColor = Numbers.GetNumberTypeColor(73L);
                 ToolTip.SetToolTip(control, "non-additive prime = prime with a composite digit sum");
             }
             else if (control.Text == "XP")
@@ -808,7 +808,7 @@ public partial class MainForm : Form
             else if (control.Text == "AP")
             {
                 control.Text = "P";
-                control.ForeColor = Numbers.GetNumberTypeColor(19L);
+                control.ForeColor = Numbers.GetNumberTypeColor(73L);
                 ToolTip.SetToolTip(control, "prime = divisible by itself only");
             }
             else if (control.Text == "P")
