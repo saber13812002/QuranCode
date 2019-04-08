@@ -394,9 +394,11 @@ public partial class MainForm : Form, ISubscriber
                 m_note_writing_instruction = L[l]["write a note for"];
                 DisplayNoteWritingInstruction();
 
-                long value = Radix.Decode(ValueTextBox.Text, m_radix);
-                //????? more updates here
-                UpdateValueNavigator(value);
+                long value = 0L;
+                if (long.TryParse(ValueTextBox.Text, out value))
+                {
+                    UpdateValueNavigator(value);
+                }
 
                 RegisterContextMenus();
                 SetToolTipPlayerVerseSilenceGapTrackBar();
