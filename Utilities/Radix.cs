@@ -197,7 +197,7 @@ public class Radix
         }
         catch
         {
-            throw new Exception(ErrRadixDecode);
+            //throw new Exception(ErrRadixDecode);
         }
 
         return result;
@@ -405,7 +405,7 @@ public class Radix
         }
         catch
         {
-            throw new Exception(ErrRadixDecode);
+            //throw new Exception(ErrRadixDecode);
         }
     }
 

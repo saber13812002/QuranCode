@@ -310,7 +310,7 @@ public partial class MainForm : Form
         UpdateSumOfDivisors(value);
         UpdateDigitSumRootPCChains(value);
 
-        this.ToolTip.SetToolTip(this.ValueTextBox, null);
+        //this.ToolTip.SetToolTip(this.ValueTextBox, null);
     }
     private void ValueTextBox_KeyDown(object sender, KeyEventArgs e)
     {
@@ -494,12 +494,12 @@ public partial class MainForm : Form
         try
         {
             result = Radix.Decode(expression, Numbers.DEFAULT_RADIX);
-            this.ToolTip.SetToolTip(this.ValueTextBox, result.ToString());
+            //this.ToolTip.SetToolTip(this.ValueTextBox, result.ToString());
         }
         catch // if expression
         {
             string text = CalculateExpression(expression);
-            this.ToolTip.SetToolTip(this.ValueTextBox, text); // display the decimal expansion
+            //this.ToolTip.SetToolTip(this.ValueTextBox, text); // display the decimal expansion
 
             try
             {

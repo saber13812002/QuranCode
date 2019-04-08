@@ -454,8 +454,8 @@ public partial class MainForm : Form, ISubscriber
             this.ToolTip.SetToolTip(this.VerseNumberSumTextBox, L[l]["Sum of verse numbers in their chapters"]);
             this.ToolTip.SetToolTip(this.WordNumberSumTextBox, L[l]["Sum of word numbers in their verses"]);
             this.ToolTip.SetToolTip(this.LetterNumberSumTextBox, L[l]["Sum of letter numbers in their words"]);
-            //this.ToolTip.SetToolTip(this.ValueTextBox, L[l]["Value of selection"]);
-            //this.ToolTip.SetToolTip(this.PrimeFactorsTextBox, L[l]["Prime factors of Value"]);
+            this.ToolTip.SetToolTip(this.ValueTextBox, L[l]["Value of selection"]);
+            this.ToolTip.SetToolTip(this.PrimeFactorsTextBox, L[l]["Prime factors of Value"]);
             this.ToolTip.SetToolTip(this.TranslationFontLabel, L[l]["Font"]);
             this.ToolTip.SetToolTip(this.SearchScopeBookLabel, L[l]["Search in entire book"]);
             this.ToolTip.SetToolTip(this.SearchScopeSelectionLabel, L[l]["Search in current selection"]);
@@ -32666,6 +32666,11 @@ public partial class MainForm : Form, ISubscriber
     private int m_user_text_selection_length = 0;
     private void CalculateUserTextValue(Point location)
     {
+        if (m_client != null)
+        {
+            SetCalculationMode(CalculationMode.SumOfLetterValues);
+        }
+
         m_user_text_selection_length = UserTextTextBox.SelectionLength;
         m_user_text_selection_start = UserTextTextBox.SelectionStart;
 
@@ -42253,7 +42258,15 @@ public partial class MainForm : Form, ISubscriber
         CPIndexChainR2LTextBox.Text = "";
         IndexChainLengthTextBox.Text = "";
 
-        long value = Radix.Decode(ValueTextBox.Text, m_radix);
+        long value = 0L;
+        try
+        {
+            value = Radix.Decode(ValueTextBox.Text, m_radix);
+        }
+        catch
+        {
+            // slience exception
+        }
 
         if (m_radix == Numbers.DEFAULT_RADIX)
         {
@@ -42324,6 +42337,7 @@ public partial class MainForm : Form, ISubscriber
         else if (e.KeyCode == Keys.Enter)
         {
             CalculateExpression();
+            SetCalculationMode(CalculationMode.SumOfLetterValues);
         }
         else
         {
@@ -42396,17 +42410,6 @@ public partial class MainForm : Form, ISubscriber
         }
     }
     private double m_double_value = 0.0D;
-    private string CalculateExpression(string expression, int radix)
-    {
-        try
-        {
-            return Evaluator.Evaluate(expression, radix);
-        }
-        catch
-        {
-            return expression;
-        }
-    }
     private double DoCalculateExpression(string expression, int radix)
     {
         double result = 0D;
@@ -42415,27 +42418,19 @@ public partial class MainForm : Form, ISubscriber
             try
             {
                 result = Radix.Decode(expression, radix);
-                this.ToolTip.SetToolTip(this.ValueTextBox, result.ToString());
+                //this.ToolTip.SetToolTip(this.ValueTextBox, result.ToString());
             }
             catch // if expression
             {
-                string text = CalculateExpression(expression, radix);
-                this.ToolTip.SetToolTip(this.ValueTextBox, text); // display the decimal expansion
-
-                try
+                string text = Evaluator.Evaluate(expression, radix);
+                if (double.TryParse(text, out result))
                 {
-                    result = double.Parse(text);
+                    result = m_client.CalculateValueUserText(expression);
+                    //this.ToolTip.SetToolTip(this.ValueTextBox, text); // display the decimal expansion
                 }
-                catch
+                else
                 {
-                    try
-                    {
-                        result = m_client.CalculateValueUserText(expression);
-                    }
-                    catch // text
-                    {
-                        //result = m_client.CalculateValue(expression);
-                    }
+                    //this.ToolTip.SetToolTip(this.ValueTextBox, null);
                 }
             }
         }
@@ -46993,23 +46988,51 @@ public partial class MainForm : Form, ISubscriber
     }
     private void PCIndexChainL2RTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = Radix.Decode(ValueTextBox.Text, m_radix);
-        this.ToolTip.SetToolTip(this.PCIndexChainL2RTextBox, "Left-to-right prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainL2R(value) + "  =  " + DecimalPCIndexChainL2R(value));
+        try
+        {
+            long value = Radix.Decode(ValueTextBox.Text, m_radix);
+            this.ToolTip.SetToolTip(this.PCIndexChainL2RTextBox, "Left-to-right prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainL2R(value) + "  =  " + DecimalPCIndexChainL2R(value));
+        }
+        catch
+        {
+            // slience exception
+        }
     }
     private void PCIndexChainR2LTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = Radix.Decode(ValueTextBox.Text, m_radix);
-        this.ToolTip.SetToolTip(this.PCIndexChainR2LTextBox, "Right-to-left prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainR2L(value) + "  =  " + DecimalPCIndexChainR2L(value));
+        try
+        {
+            long value = Radix.Decode(ValueTextBox.Text, m_radix);
+            this.ToolTip.SetToolTip(this.PCIndexChainR2LTextBox, "Right-to-left prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainR2L(value) + "  =  " + DecimalPCIndexChainR2L(value));
+        }
+        catch
+        {
+            // slience exception
+        }
     }
     private void CPIndexChainL2RTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = Radix.Decode(ValueTextBox.Text, m_radix);
-        this.ToolTip.SetToolTip(this.CPIndexChainL2RTextBox, "Left-to-right composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainL2R(value) + "  =  " + DecimalCPIndexChainL2R(value));
+        try
+        {
+            long value = Radix.Decode(ValueTextBox.Text, m_radix);
+            this.ToolTip.SetToolTip(this.CPIndexChainL2RTextBox, "Left-to-right composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainL2R(value) + "  =  " + DecimalCPIndexChainL2R(value));
+        }
+        catch
+        {
+            // slience exception
+        }
     }
     private void CPIndexChainR2LTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = Radix.Decode(ValueTextBox.Text, m_radix);
-        this.ToolTip.SetToolTip(this.CPIndexChainR2LTextBox, "Right-to-left composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainR2L(value) + "  =  " + DecimalCPIndexChainR2L(value));
+        try
+        {
+            long value = Radix.Decode(ValueTextBox.Text, m_radix);
+            this.ToolTip.SetToolTip(this.CPIndexChainR2LTextBox, "Right-to-left composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainR2L(value) + "  =  " + DecimalCPIndexChainR2L(value));
+        }
+        catch
+        {
+            // slience exception
+        }
     }
     private void IndexChainLengthTextBox_Click(object sender, EventArgs e)
     {
