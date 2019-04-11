@@ -295,6 +295,8 @@ public partial class MainForm : Form
 
     private void ValueTextBox_TextChanged(object sender, EventArgs e)
     {
+        ClearNumberAnalyses();
+
         int digits = Numbers.DigitCount(ValueTextBox.Text);
         int length = ValueTextBox.Text.Replace(" ", "").Length;
         if (digits == length)
@@ -544,10 +546,6 @@ public partial class MainForm : Form
             ValueTextBox.SelectionLength = 0;
             ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
             ValueTextBox.Refresh();
-
-            //UpdateNumberKind(value);
-            //UpdateSumOfDivisors(value);
-            //UpdateDigitSumRootSumOfSums(value);
 
             string squares1_str = "";
             string squares2_str = "";
@@ -2137,37 +2135,22 @@ public partial class MainForm : Form
     }
     private void ClearNumberAnalyses()
     {
-        DigitSumTextBox.Text = "";
-        DigitalRootTextBox.Text = "";
-        SumOfDigitSumsTextBox.Text = "";
+        Nth4n1NumberTextBox.Text = "";
+        Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
+        Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
+        Nth4nPlus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
+        Nth4nMinus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
+
         NthNumberTextBox.Text = "";
         NthAdditiveNumberTextBox.Text = "";
         NthNonAdditiveNumberTextBox.Text = "";
+
         SquareSumTextBox.Text = "";
         SquareSumTextBox.Refresh();
         SquareDiffTextBox.Text = "";
         SquareDiffTextBox.Refresh();
-        PCIndexChainL2RTextBox.Text = "";
-        PCIndexChainR2LTextBox.Text = "";
-        CPIndexChainL2RTextBox.Text = "";
-        CPIndexChainR2LTextBox.Text = "";
-        IndexChainLengthTextBox.Text = "";
 
-        DigitSumTextBox.Refresh();
-        DigitalRootTextBox.Refresh();
-        SumOfDigitSumsTextBox.Refresh();
-        NthNumberTextBox.Refresh();
-        NthAdditiveNumberTextBox.Refresh();
-        NthNonAdditiveNumberTextBox.Refresh();
-        SquareSumTextBox.Refresh();
-        SquareSumTextBox.Refresh();
-        SquareDiffTextBox.Refresh();
-        SquareDiffTextBox.Refresh();
-        PCIndexChainL2RTextBox.Refresh();
-        PCIndexChainR2LTextBox.Refresh();
-        CPIndexChainL2RTextBox.Refresh();
-        CPIndexChainR2LTextBox.Refresh();
-        IndexChainLengthTextBox.Refresh();
+        ClearFactors();
     }
     private void ClearFactors()
     {
