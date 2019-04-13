@@ -1628,17 +1628,19 @@ public class Server : IPublisher
                         break;
                 }
 
-                //????? update the following code too to take into account CalculationMode
-                // adjust value of word
-                result += AdjustValue(word);
-
-                Verse verse = word.Verse;
-                if (verse != null)
+                if (word.Letters.Count > 0)
                 {
-                    if (word.Verse.Words.Count == 1)
+                    // adjust value of word
+                    result += AdjustValue(word);
+
+                    Verse verse = word.Verse;
+                    if (verse != null)
                     {
-                        // adjust value of verse
-                        result += AdjustValue(word.Verse);
+                        if (word.Verse.Words.Count == 1)
+                        {
+                            // adjust value of verse
+                            result += AdjustValue(word.Verse);
+                        }
                     }
                 }
             }

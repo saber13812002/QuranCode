@@ -126,29 +126,29 @@ namespace Model
             return letter_values.ContainsKey(letter);
         }
 
-        public bool AddToLetterLNumber;
-        public bool AddToLetterWNumber;
-        public bool AddToLetterVNumber;
-        public bool AddToLetterCNumber;
-        public bool AddToLetterLDistance;
-        public bool AddToLetterWDistance;
-        public bool AddToLetterVDistance;
-        public bool AddToLetterCDistance;
-        public bool AddToWordWNumber;
-        public bool AddToWordVNumber;
-        public bool AddToWordCNumber;
-        public bool AddToWordWDistance;
-        public bool AddToWordVDistance;
-        public bool AddToWordCDistance;
-        public bool AddToVerseVNumber;
-        public bool AddToVerseCNumber;
-        public bool AddToVerseVDistance;
-        public bool AddToVerseCDistance;
-        public bool AddToChapterCNumber;
+        public bool AddToLetterLNumber = true;
+        public bool AddToLetterWNumber = true;
+        public bool AddToLetterVNumber = true;
+        public bool AddToLetterCNumber = true;
+        public bool AddToLetterLDistance = true;
+        public bool AddToLetterWDistance = true;
+        public bool AddToLetterVDistance = true;
+        public bool AddToLetterCDistance = true;
+        public bool AddToWordWNumber = true;
+        public bool AddToWordVNumber = true;
+        public bool AddToWordCNumber = true;
+        public bool AddToWordWDistance = true;
+        public bool AddToWordVDistance = true;
+        public bool AddToWordCDistance = true;
+        public bool AddToVerseVNumber = true;
+        public bool AddToVerseCNumber = true;
+        public bool AddToVerseVDistance = true;
+        public bool AddToVerseCDistance = true;
+        public bool AddToChapterCNumber = true;
 
-        public bool AddPositions;
-        public bool AddDistancesToPrevious;
-        public bool AddDistancesToNext;
+        public bool AddPositions = false;
+        public bool AddDistancesToPrevious = false;
+        public bool AddDistancesToNext = false;
         public bool AddDistancesWithinChapters = true;
 
         public NumerologySystem()

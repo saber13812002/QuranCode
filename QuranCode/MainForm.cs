@@ -13283,11 +13283,16 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
+    private bool m_was_maximized = false;
     private void MainForm_Resize(object sender, EventArgs e)
     {
-        if (this.WindowState != FormWindowState.Minimized)
+        if (this.WindowState == FormWindowState.Minimized)
         {
-            m_maximized_before_minimized = this.WindowState == FormWindowState.Maximized;
+            //this.Close(); // send to system try instead of minimize
+        }
+        else
+        {
+            m_was_maximized = this.WindowState == FormWindowState.Maximized;
         }
 
         if (ScriptTextBox.Visible) return;
@@ -13372,7 +13377,6 @@ public partial class MainForm : Form, ISubscriber
             MessageBox.Show(ex.Message, Application.ProductName);
         }
     }
-    private bool m_maximized_before_minimized = false;
     private void NotifyIcon_MouseClick(object sender, MouseEventArgs e)
     {
         if (e.Button == MouseButtons.Left)
@@ -13386,7 +13390,7 @@ public partial class MainForm : Form, ISubscriber
                 this.Visible = true;
                 if (this.WindowState == FormWindowState.Minimized)
                 {
-                    if (m_maximized_before_minimized)
+                    if (m_was_maximized)
                     {
                         this.WindowState = FormWindowState.Maximized;
                     }
@@ -25326,11 +25330,11 @@ public partial class MainForm : Form, ISubscriber
              (m_text_display_mode == TextDisplayMode.TranslationOnly)
            )
         {
-            //if (
-            //    (TabControl.SelectedTab == TranslationTabPage) ||
-            //    (TabControl.SelectedTab == GrammarTabPage) ||
-            //    (TabControl.SelectedTab == RelatedWordsTabPage)
-            //   )
+            if (
+                (TabControl.SelectedTab == TranslationTabPage) ||
+                (TabControl.SelectedTab == GrammarTabPage) ||
+                (TabControl.SelectedTab == RelatedWordsTabPage)
+               )
             {
                 if (verses != null)
                 {
@@ -25460,11 +25464,11 @@ public partial class MainForm : Form, ISubscriber
              (m_text_display_mode == TextDisplayMode.TranslationOnly)
            )
         {
-            //if (
-            //    (TabControl.SelectedTab == TranslationTabPage) ||
-            //    (TabControl.SelectedTab == GrammarTabPage) ||
-            //    (TabControl.SelectedTab == RelatedWordsTabPage)
-            //   )
+            if (
+                (TabControl.SelectedTab == TranslationTabPage) ||
+                (TabControl.SelectedTab == GrammarTabPage) ||
+                (TabControl.SelectedTab == RelatedWordsTabPage)
+               )
             {
                 if (verse != null)
                 {
@@ -25699,11 +25703,11 @@ public partial class MainForm : Form, ISubscriber
              (m_text_display_mode == TextDisplayMode.TranslationOnly)
            )
         {
-            //if (
-            //    (TabControl.SelectedTab == TranslationTabPage) ||
-            //    (TabControl.SelectedTab == GrammarTabPage) ||
-            //    (TabControl.SelectedTab == RelatedWordsTabPage)
-            //   )
+            if (
+                (TabControl.SelectedTab == TranslationTabPage) ||
+                (TabControl.SelectedTab == GrammarTabPage) ||
+                (TabControl.SelectedTab == RelatedWordsTabPage)
+               )
             {
                 if (word != null)
                 {
@@ -25731,11 +25735,11 @@ public partial class MainForm : Form, ISubscriber
              (m_text_display_mode == TextDisplayMode.TranslationOnly)
            )
         {
-            //if (
-            //    (TabControl.SelectedTab == TranslationTabPage) ||
-            //    (TabControl.SelectedTab == GrammarTabPage) ||
-            //    (TabControl.SelectedTab == RelatedWordsTabPage)
-            //   )
+            if (
+                (TabControl.SelectedTab == TranslationTabPage) ||
+                (TabControl.SelectedTab == GrammarTabPage) ||
+                (TabControl.SelectedTab == RelatedWordsTabPage)
+               )
             {
                 if (word != null)
                 {
@@ -26073,7 +26077,7 @@ public partial class MainForm : Form, ISubscriber
              (m_text_display_mode == TextDisplayMode.TranslationOnly)
            )
         {
-            //if (TabControl.SelectedTab == SymmetryTabPage)
+            if (TabControl.SelectedTab == SymmetryTabPage)
             {
                 SymmetryTypeComboBox_SelectedIndexChanged(null, null);
             }
@@ -26413,7 +26417,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayMathsChapterSums(List<Verse> verses)
     {
-        //if (TabControl.SelectedTab == MathsTabPage)
+        if (TabControl.SelectedTab == MathsTabPage)
         {
             if (m_client != null)
             {
@@ -26723,7 +26727,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayMathsChapterSumRatios(List<Verse> verses)
     {
-        //if (TabControl.SelectedTab == MathsTabPage)
+        if (TabControl.SelectedTab == MathsTabPage)
         {
             if (m_client != null)
             {
@@ -26946,7 +26950,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayMathsVerseSums(List<Verse> verses)
     {
-        //if (TabControl.SelectedTab == MathsTabPage)
+        if (TabControl.SelectedTab == MathsTabPage)
         {
             if (verses != null)
             {
@@ -27246,7 +27250,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayMathsVerseSumRatios(List<Verse> verses)
     {
-        //if (TabControl.SelectedTab == MathsTabPage)
+        if (TabControl.SelectedTab == MathsTabPage)
         {
             if (verses != null)
             {
@@ -29730,7 +29734,7 @@ public partial class MainForm : Form, ISubscriber
     // display the results
     private void UpdateVerseDistances(Verse verse)
     {
-        //if (TabControl.SelectedTab == DistancesTabPage)
+        if (TabControl.SelectedTab == DistancesTabPage)
         {
             if (verse != null)
             {
@@ -32192,7 +32196,7 @@ public partial class MainForm : Form, ISubscriber
              (m_text_display_mode == TextDisplayMode.TranslationOnly)
            )
         {
-            //if (TabControl.SelectedTab == CVWLSequenceTabPage)
+            if (TabControl.SelectedTab == CVWLSequenceTabPage)
             {
                 CVWLSequenceTypeComboBox_SelectedIndexChanged(null, null);
             }
@@ -32462,7 +32466,7 @@ public partial class MainForm : Form, ISubscriber
              (m_text_display_mode == TextDisplayMode.TranslationOnly)
            )
         {
-            //if (TabControl.SelectedTab == ValuesSequenceTabPage)
+            if (TabControl.SelectedTab == ValuesSequenceTabPage)
             {
                 ValuesSequenceScopeComboBox_SelectedIndexChanged(null, null);
             }
@@ -32653,7 +32657,7 @@ public partial class MainForm : Form, ISubscriber
              (m_text_display_mode == TextDisplayMode.TranslationOnly)
            )
         {
-            //if (TabControl.SelectedTab == DNASequenceTabPage)
+            if (TabControl.SelectedTab == DNASequenceTabPage)
             {
                 DNASequenceSystemComboBox_SelectedIndexChanged(null, null);
             }
@@ -41930,7 +41934,6 @@ public partial class MainForm : Form, ISubscriber
                                 {
                                     SetCalculationMode(CalculationMode.SumOfLetterValues);
                                     CalculateValueAndDisplayFactors(m_current_text);
-
                                 }
                             }
                             else // some text is highlighted

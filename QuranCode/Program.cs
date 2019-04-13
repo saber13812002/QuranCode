@@ -1,57 +1,26 @@
 ﻿using System;
 using System.Windows.Forms;
-using System.Threading;
-using System.Runtime.InteropServices;
+//using System.Threading;
+//using System.Runtime.InteropServices;
 
 static class Program
 {
-    //// disable the x close icon
-    //const int mf_byposition = 0x400;
-    //[dllimport("user32")]
-    //private static extern int removemenu(intptr hmenu, int nposition, int wflags);
-    //[dllimport("user32")]
-    //private static extern intptr getsystemmenu(intptr hwnd, bool brevert);
-    //[dllimport("user32")]
-    //private static extern int getmenuitemcount(intptr hwnd);
-    //static void disablecloseicon(intptr system_menu_handle)
+    //// disable the X close button
+    //const int MF_BYPOSITION = 0x400;
+    //[DllImport("User32")]
+    //private static extern int RemoveMenu(IntPtr hMenu, int nPosition, int wFlags);
+    //[DllImport("User32")]
+    //private static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+    //[DllImport("User32")]
+    //private static extern int GetMenuItemCount(IntPtr hWnd);
+    //static void DisableCloseButton(IntPtr system_menu_handle)
     //{
-    //    int system_menu_item_count = getmenuitemcount(system_menu_handle);
-    //    removemenu(system_menu_handle, system_menu_item_count - 1, mf_byposition);
-    //}
-
-    //// single instance
-    //    bool m_first_instance = true;
-    //    using (mutex mutex = new mutex(true, application.productname, out m_first_instance))
-    //    {
-    //        if (m_first_instance)
-    //        {
-    //            application.enablevisualstyles();
-    //            application.setcompatibletextrenderingdefault(false);
-    //            mainform form = new mainform();
-
-    //            // disable the x close button of the form
-    //            intptr system_menu_handle = getsystemmenu(form.handle, false);
-    //            disablecloseicon(system_menu_handle);
-
-    //            application.run(form);
-    //        }
-    //        else
-    //        {
-    //            windows windows = new windows(true, true);
-    //            foreach (window window in windows)
-    //            {
-    //                if (window.title.startswith(application.productname))
-    //                {
-    //                    window.visible = true;
-    //                    window.bringtofront();
-    //                }
-    //            }
-    //        }
-    //    }
+    //    int system_menu_item_count = GetMenuItemCount(system_menu_handle);
+    //    RemoveMenu(system_menu_handle, system_menu_item_count - 1, MF_BYPOSITION);
     //}
 
     /// <summary>
-    /// The main entry point for the application.
+    /// The main entry point for the Application.
     /// </summary>
     [STAThread]
     static void Main(string[] args)
@@ -87,21 +56,46 @@ static class Program
             }
         }
 
+        //// ensure single instance
+        //bool m_first_instance = true;
+        //using (Mutex mutex = new Mutex(true, Application.ProductName, out m_first_instance))
+        //{
+        //    if (m_first_instance)
+        //    {
         Application.EnableVisualStyles();
         Application.SetCompatibleTextRenderingDefault(false);
         MainForm form = new MainForm();
-
-        //// disable the X close button of the form
-        //IntPtr system_menu_handle = GetSystemMenu(form.Handle, false);
-        //DisableCloseIcon(system_menu_handle);
-
-        try
+        if (form != null)
         {
-            Application.Run(form);
+            //            // disable the X close button of the form
+            //            IntPtr system_menu_handle = GetSystemMenu(form.Handle, false);
+            //            DisableCloseIcon(system_menu_handle);
+
+            try
+            {
+                Application.Run(form);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+            }
         }
-        catch (Exception ex)
-        {
-            MessageBox.Show(ex.Message, Application.ProductName);
-        }
+        //    }
+        //    else
+        //    {
+        //        Windows windows = new Windows(true, true);
+        //        if (windows != null)
+        //        {
+        //            foreach (Window window in windows)
+        //            {
+        //                if (window.Title.StartsWith(Application.ProductName))
+        //                {
+        //                    window.Visible = true;
+        //                    window.BringToFront();
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

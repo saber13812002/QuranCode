@@ -1069,13 +1069,10 @@ namespace Model
         }
         public void SetupDistances(bool distances_within_chapters)
         {
-            if (this.distances_within_chapters != distances_within_chapters)
-            {
-                this.distances_within_chapters = distances_within_chapters;
+            this.distances_within_chapters = distances_within_chapters;
 
-                SetupDistancesToPrevious(distances_within_chapters);
-                SetupDistancesToNext(distances_within_chapters);
-            }
+            SetupDistancesToPrevious(distances_within_chapters);
+            SetupDistancesToNext(distances_within_chapters);
         }
         private void SetupDistancesToPrevious(bool distances_within_chapters)
         {
