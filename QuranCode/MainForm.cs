@@ -13924,7 +13924,8 @@ public partial class MainForm : Form, ISubscriber
             UpdateFindByNumbersResultType();
             UpdateDistancesOptions();
 
-            EnableDisableAddToCheckBoxes();
+            EnableDisableAddToPositionCheckBoxes();
+            EnableDisableAddToDistanceCheckBoxes();
         }
         catch (Exception ex)
         {
@@ -40874,95 +40875,119 @@ public partial class MainForm : Form, ISubscriber
     }
     private void AddToControlCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-        this.Cursor = Cursors.WaitCursor;
-        try
+        if (m_client != null)
         {
-            if (m_client != null)
+            if (m_client.NumerologySystem != null)
             {
-                if (m_client.NumerologySystem != null)
+                if (sender is CheckBox)
                 {
-                    bool is_checked = (sender as CheckBox).Checked;
+                    CheckBox checkbox = (sender as CheckBox);
+
+                    // show the check update
+                    checkbox.Refresh();
+
+                    bool is_checked = checkbox.Checked;
 
                     // Letter value modifiers
-                    if (sender == AddToLetterLNumberCheckBox)
+                    if (checkbox == AddToLetterLNumberCheckBox)
                     {
                         m_client.NumerologySystem.AddToLetterLNumber = is_checked;
                     }
-                    else if (sender == AddToLetterWNumberCheckBox)
+                    else if (checkbox == AddToLetterWNumberCheckBox)
                     {
                         m_client.NumerologySystem.AddToLetterWNumber = is_checked;
                     }
-                    else if (sender == AddToLetterVNumberCheckBox)
+                    else if (checkbox == AddToLetterVNumberCheckBox)
                     {
                         m_client.NumerologySystem.AddToLetterVNumber = is_checked;
                     }
-                    else if (sender == AddToLetterCNumberCheckBox)
+                    else if (checkbox == AddToLetterCNumberCheckBox)
                     {
                         m_client.NumerologySystem.AddToLetterCNumber = is_checked;
                     }
-                    else if (sender == AddToLetterLDistanceCheckBox)
+                    else if (checkbox == AddToLetterLDistanceCheckBox)
                     {
                         m_client.NumerologySystem.AddToLetterLDistance = is_checked;
                     }
-                    else if (sender == AddToLetterWDistanceCheckBox)
+                    else if (checkbox == AddToLetterWDistanceCheckBox)
                     {
                         m_client.NumerologySystem.AddToLetterWDistance = is_checked;
                     }
-                    else if (sender == AddToLetterVDistanceCheckBox)
+                    else if (checkbox == AddToLetterVDistanceCheckBox)
                     {
                         m_client.NumerologySystem.AddToLetterVDistance = is_checked;
                     }
-                    else if (sender == AddToLetterCDistanceCheckBox)
+                    else if (checkbox == AddToLetterCDistanceCheckBox)
                     {
                         m_client.NumerologySystem.AddToLetterCDistance = is_checked;
                     }
                     // Word value modifiers
-                    else if (sender == AddToWordWNumberCheckBox)
+                    else if (checkbox == AddToWordWNumberCheckBox)
                     {
                         m_client.NumerologySystem.AddToWordWNumber = is_checked;
                     }
-                    else if (sender == AddToWordVNumberCheckBox)
+                    else if (checkbox == AddToWordVNumberCheckBox)
                     {
                         m_client.NumerologySystem.AddToWordVNumber = is_checked;
                     }
-                    else if (sender == AddToWordCNumberCheckBox)
+                    else if (checkbox == AddToWordCNumberCheckBox)
                     {
                         m_client.NumerologySystem.AddToWordCNumber = is_checked;
                     }
-                    else if (sender == AddToWordWDistanceCheckBox)
+                    else if (checkbox == AddToWordWDistanceCheckBox)
                     {
                         m_client.NumerologySystem.AddToWordWDistance = is_checked;
                     }
-                    else if (sender == AddToWordVDistanceCheckBox)
+                    else if (checkbox == AddToWordVDistanceCheckBox)
                     {
                         m_client.NumerologySystem.AddToWordVDistance = is_checked;
                     }
-                    else if (sender == AddToWordCDistanceCheckBox)
+                    else if (checkbox == AddToWordCDistanceCheckBox)
                     {
                         m_client.NumerologySystem.AddToWordCDistance = is_checked;
                     }
                     // Verse value modifiers
-                    else if (sender == AddToVerseVNumberCheckBox)
+                    else if (checkbox == AddToVerseVNumberCheckBox)
                     {
                         m_client.NumerologySystem.AddToVerseVNumber = is_checked;
                     }
-                    else if (sender == AddToVerseCNumberCheckBox)
+                    else if (checkbox == AddToVerseCNumberCheckBox)
                     {
                         m_client.NumerologySystem.AddToVerseCNumber = is_checked;
                     }
-                    else if (sender == AddToVerseVDistanceCheckBox)
+                    else if (checkbox == AddToVerseVDistanceCheckBox)
                     {
                         m_client.NumerologySystem.AddToVerseVDistance = is_checked;
                     }
-                    else if (sender == AddToVerseCDistanceCheckBox)
+                    else if (checkbox == AddToVerseCDistanceCheckBox)
                     {
                         m_client.NumerologySystem.AddToVerseCDistance = is_checked;
                     }
                     // Chapter value modifier
-                    else if (sender == AddToChapterCNumberCheckBox)
+                    else if (checkbox == AddToChapterCNumberCheckBox)
                     {
                         m_client.NumerologySystem.AddToChapterCNumber = is_checked;
                     }
+
+                    CalculateCurrentValue();
+                }
+            }
+        }
+    }
+    private void AddPositionsCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            // show the check update
+            AddPositionsCheckBox.Refresh();
+
+            if (m_client != null)
+            {
+                if (m_client.NumerologySystem != null)
+                {
+                    m_client.NumerologySystem.AddPositions = AddPositionsCheckBox.Checked;
+                    EnableDisableAddToPositionCheckBoxes();
 
                     CalculateCurrentValue();
                 }
@@ -40981,43 +41006,68 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void AddPositionsCheckBox_CheckedChanged(object sender, EventArgs e)
-    {
-        if (m_client != null)
-        {
-            if (m_client.NumerologySystem != null)
-            {
-                m_client.NumerologySystem.AddPositions = AddPositionsCheckBox.Checked;
-                EnableDisableAddToCheckBoxes();
-
-                CalculateCurrentValue();
-            }
-        }
-    }
     private void AddDistancesToPreviousCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-        if (m_client != null)
+        this.Cursor = Cursors.WaitCursor;
+        try
         {
-            if (m_client.NumerologySystem != null)
-            {
-                m_client.NumerologySystem.AddDistancesToPrevious = AddDistancesToPreviousCheckBox.Checked;
-                EnableDisableAddToCheckBoxes();
+            // show the check update
+            AddDistancesToPreviousCheckBox.Refresh();
 
-                CalculateCurrentValue();
+            if (m_client != null)
+            {
+                if (m_client.NumerologySystem != null)
+                {
+                    m_client.NumerologySystem.AddDistancesToPrevious = AddDistancesToPreviousCheckBox.Checked;
+                    EnableDisableAddToDistanceCheckBoxes();
+
+                    CalculateCurrentValue();
+                }
             }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
         }
     }
     private void AddDistancesToNextCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-        if (m_client != null)
+        this.Cursor = Cursors.WaitCursor;
+        try
         {
-            if (m_client.NumerologySystem != null)
-            {
-                m_client.NumerologySystem.AddDistancesToNext = AddDistancesToNextCheckBox.Checked;
-                EnableDisableAddToCheckBoxes();
+            // show the check update
+            AddDistancesToNextCheckBox.Refresh();
 
-                CalculateCurrentValue();
+            if (m_client != null)
+            {
+                if (m_client.NumerologySystem != null)
+                {
+                    m_client.NumerologySystem.AddDistancesToNext = AddDistancesToNextCheckBox.Checked;
+                    EnableDisableAddToDistanceCheckBoxes();
+
+                    CalculateCurrentValue();
+                }
             }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
         }
     }
     private void AddDistancesWithinChaptersCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -41025,6 +41075,9 @@ public partial class MainForm : Form, ISubscriber
         this.Cursor = Cursors.WaitCursor;
         try
         {
+            // show the check update
+            AddDistancesWithinChaptersCheckBox.Refresh();
+
             if (m_client != null)
             {
                 if (m_client.NumerologySystem != null)
@@ -41052,29 +41105,19 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void EnableDisableAddToCheckBoxes()
+    private void EnableDisableAddToPositionCheckBoxes()
     {
-        this.Cursor = Cursors.WaitCursor;
         try
         {
             for (int i = 0; i < 3; i++) AddToLetterLNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
             for (int i = 0; i < 3; i++) AddToLetterWNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
             for (int i = 0; i < 3; i++) AddToLetterVNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
             for (int i = 0; i < 3; i++) AddToLetterCNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToLetterLDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToLetterWDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToLetterVDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToLetterCDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
             for (int i = 0; i < 3; i++) AddToWordWNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
             for (int i = 0; i < 3; i++) AddToWordVNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
             for (int i = 0; i < 3; i++) AddToWordCNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToWordWDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToWordVDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToWordCDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
             for (int i = 0; i < 3; i++) AddToVerseVNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
             for (int i = 0; i < 3; i++) AddToVerseCNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToVerseVDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToVerseCDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
             for (int i = 0; i < 3; i++) AddToChapterCNumberCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
 
             bool is_enabled = m_client.NumerologySystem.AddPositions;
@@ -41088,17 +41131,6 @@ public partial class MainForm : Form, ISubscriber
             AddToVerseVNumberCheckBox.Enabled = is_enabled;
             AddToVerseCNumberCheckBox.Enabled = is_enabled;
             AddToChapterCNumberCheckBox.Enabled = is_enabled;
-
-            is_enabled = m_client.NumerologySystem.AddDistancesToPrevious || m_client.NumerologySystem.AddDistancesToNext;
-            AddToLetterLDistanceCheckBox.Enabled = is_enabled;
-            AddToLetterWDistanceCheckBox.Enabled = is_enabled;
-            AddToLetterVDistanceCheckBox.Enabled = is_enabled;
-            AddToLetterCDistanceCheckBox.Enabled = is_enabled;
-            AddToWordWDistanceCheckBox.Enabled = is_enabled;
-            AddToWordVDistanceCheckBox.Enabled = is_enabled;
-            AddToWordCDistanceCheckBox.Enabled = is_enabled;
-            AddToVerseVDistanceCheckBox.Enabled = is_enabled;
-            AddToVerseCDistanceCheckBox.Enabled = is_enabled;
         }
         catch (Exception ex)
         {
@@ -41110,27 +41142,66 @@ public partial class MainForm : Form, ISubscriber
         }
         finally
         {
-            for (int i = 0; i < 3; i++) AddToLetterLNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToLetterWNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToLetterVNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToLetterCNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToLetterLDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToLetterWDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToLetterVDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToLetterCDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToWordWNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToWordVNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToWordCNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToWordWDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToWordVDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToWordCDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToVerseVNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToVerseCNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToVerseVDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToVerseCDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
-            for (int i = 0; i < 3; i++) AddToChapterCNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToLetterLNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToLetterWNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToLetterVNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToLetterCNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToWordWNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToWordVNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToWordCNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToVerseVNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToVerseCNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToChapterCNumberCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+        }
+    }
+    private void EnableDisableAddToDistanceCheckBoxes()
+    {
+        try
+        {
+            for (int i = 0; i < 3; i++) AddToLetterLDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterWDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterVDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToLetterCDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToWordWDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToWordVDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToWordCDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToVerseVDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
+            for (int i = 0; i < 3; i++) AddToVerseCDistanceCheckBox.CheckedChanged -= new EventHandler(AddToControlCheckBox_CheckedChanged);
 
-            this.Cursor = Cursors.Default;
+            bool is_enabled = m_client.NumerologySystem.AddDistancesToPrevious || m_client.NumerologySystem.AddDistancesToNext;
+            AddToLetterLDistanceCheckBox.Enabled = is_enabled;
+            AddToLetterWDistanceCheckBox.Enabled = is_enabled;
+            AddToLetterVDistanceCheckBox.Enabled = is_enabled;
+            AddToLetterCDistanceCheckBox.Enabled = is_enabled;
+            AddToWordWDistanceCheckBox.Enabled = is_enabled;
+            AddToWordVDistanceCheckBox.Enabled = is_enabled;
+            AddToWordCDistanceCheckBox.Enabled = is_enabled;
+            AddToVerseVDistanceCheckBox.Enabled = is_enabled;
+            AddToVerseCDistanceCheckBox.Enabled = is_enabled;
+            if (m_client.Book != null)
+            {
+                m_client.Book.SetupDistances(is_enabled);
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            AddToLetterLDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToLetterWDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToLetterVDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToLetterCDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToWordWDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToWordVDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToWordCDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToVerseVDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
+            AddToVerseCDistanceCheckBox.CheckedChanged += new EventHandler(AddToControlCheckBox_CheckedChanged);
         }
     }
 
@@ -41184,10 +41255,6 @@ public partial class MainForm : Form, ISubscriber
                 m_client.NumerologySystem.AddDistancesToPrevious = AddDistancesToPreviousCheckBox.Checked;
                 m_client.NumerologySystem.AddDistancesToNext = AddDistancesToNextCheckBox.Checked;
                 m_client.NumerologySystem.AddDistancesWithinChapters = AddDistancesWithinChaptersCheckBox.Checked;
-                if (m_client.Book != null)
-                {
-                    m_client.Book.SetupDistances(m_client.NumerologySystem.AddDistancesWithinChapters);
-                }
             }
         }
     }
@@ -41435,27 +41502,22 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (m_client.NumerologySystem != null)
                 {
-                    string backup_valuation_system = null;
-                    if (NumerologySystemComboBox.SelectedItem != null)
-                    {
-                        backup_valuation_system = NumerologySystemComboBox.SelectedItem.ToString();
-                    }
-
                     BuildSimplifiedBookAndDisplaySelection();
 
                     PopulateNumerologySystemComboBox();
                     if (NumerologySystemComboBox.Items.Count > 0)
                     {
-                        if (backup_valuation_system != null)
+                        if (TextModeComboBox.SelectedItem.ToString() == "Original")
                         {
-                            if (NumerologySystemComboBox.Items.Contains(backup_valuation_system))
-                            {
-                                NumerologySystemComboBox.SelectedItem = backup_valuation_system;
-                            }
-                            else
-                            {
-                                NumerologySystemComboBox.SelectedIndex = 0;
-                            }
+                            NumerologySystemComboBox.SelectedItem = "Alphabet_Primes1";
+                        }
+                        else if (TextModeComboBox.SelectedItem.ToString() == "Simplified28")
+                        {
+                            NumerologySystemComboBox.SelectedItem = "Abjad_Gematria";
+                        }
+                        else if (TextModeComboBox.SelectedItem.ToString() == "Simplified29")
+                        {
+                            NumerologySystemComboBox.SelectedItem = "Alphabet_Primes1";
                         }
                         else
                         {
@@ -41776,7 +41838,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void NumerologySystemComboBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        this.Cursor = Cursors.WaitCursor;
+        //this.Cursor = Cursors.WaitCursor;
         try
         {
             for (int i = 0; i < 3; i++) NumerologySystemComboBox.SelectedIndexChanged -= new EventHandler(NumerologySystemComboBox_SelectedIndexChanged);
@@ -41856,7 +41918,7 @@ public partial class MainForm : Form, ISubscriber
         finally
         {
             NumerologySystemComboBox.SelectedIndexChanged += new EventHandler(NumerologySystemComboBox_SelectedIndexChanged);
-            this.Cursor = Cursors.Default;
+            //this.Cursor = Cursors.Default;
         }
     }
     private void NumerologySystemComboBox_DropDown(object sender, EventArgs e)

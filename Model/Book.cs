@@ -478,7 +478,6 @@ namespace Model
             SetupPartitions(verses);
             SetupNumbersAndDistances(distances_within_chapters);
         }
-
         private void SetupPartitions(List<Verse> verses)
         {
             if (verses != null)
@@ -943,7 +942,6 @@ namespace Model
                 }
             }
         }
-
         public void SetupNumbersAndDistances(bool distances_within_chapters)
         {
             SetupNumbers();

@@ -642,12 +642,10 @@ public class Server : IPublisher
                 }
 
                 // update verses/words/letters numbers and distances
-                bool distances_within_chapters = true;
                 if (s_numerology_system != null)
                 {
-                    distances_within_chapters = s_numerology_system.AddDistancesWithinChapters;
+                    book.SetupNumbersAndDistances(s_numerology_system.AddDistancesWithinChapters);
                 }
-                book.SetupNumbersAndDistances(distances_within_chapters);
             }
         }
     }
