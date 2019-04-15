@@ -17114,35 +17114,35 @@ public partial class MainForm : Form, ISubscriber
                         UpdatePlayerButtons(verse);
                         UpdateHeaderLabel();
                     }
+                }
 
-                    CalculateCurrentValue();
+                CalculateCurrentValue();
 
-                    BuildLetterFrequencies();
-                    DisplayLetterFrequencies();
+                BuildLetterFrequencies();
+                DisplayLetterFrequencies();
 
-                    DisplayCurrentPositions();
+                DisplayCurrentPositions();
 
-                    if (m_active_textbox.SelectionLength > 0)
-                    {
-                        DisplayWordFrequencies();
+                if (m_active_textbox.SelectionLength > 0)
+                {
+                    DisplayWordFrequencies();
 
-                        GenerateSentencesLabel.Visible = (Globals.EDITION == Edition.Ultimate);
-                        DuplicateLettersCheckBox.Visible = (Globals.EDITION == Edition.Ultimate);
-                        GenerateSentencesLabel.Refresh();
-                        DuplicateLettersCheckBox.Refresh();
-                    }
-                    else
-                    {
-                        ToolTip.SetToolTip(InspectChaptersLabel, L[l]["Inspect chapters"]);
-                        WordsListBoxLabel.Visible = false;
-                        WordsListBox.Visible = false;
-                        WordsListBox.SendToBack();
+                    GenerateSentencesLabel.Visible = (Globals.EDITION == Edition.Ultimate);
+                    DuplicateLettersCheckBox.Visible = (Globals.EDITION == Edition.Ultimate);
+                    GenerateSentencesLabel.Refresh();
+                    DuplicateLettersCheckBox.Refresh();
+                }
+                else
+                {
+                    ToolTip.SetToolTip(InspectChaptersLabel, L[l]["Inspect chapters"]);
+                    WordsListBoxLabel.Visible = false;
+                    WordsListBox.Visible = false;
+                    WordsListBox.SendToBack();
 
-                        GenerateSentencesLabel.Visible = false;
-                        DuplicateLettersCheckBox.Visible = false;
-                        GenerateSentencesLabel.Refresh();
-                        DuplicateLettersCheckBox.Refresh();
-                    }
+                    GenerateSentencesLabel.Visible = false;
+                    DuplicateLettersCheckBox.Visible = false;
+                    GenerateSentencesLabel.Refresh();
+                    DuplicateLettersCheckBox.Refresh();
                 }
             }
         }
@@ -17151,7 +17151,15 @@ public partial class MainForm : Form, ISubscriber
     {
         try
         {
-            if ((e.Control) && (e.KeyCode == Keys.C))
+            if ((e.Control) && (e.KeyCode == Keys.A))
+            {
+                if (m_active_textbox != null)
+                {
+                    CalculateAndDisplayCounts();
+                    CalculateValueAndDisplayFactors();
+                }
+            }
+            else if ((e.Control) && (e.KeyCode == Keys.C))
             {
                 if (m_active_textbox != null)
                 {
