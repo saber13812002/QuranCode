@@ -20678,7 +20678,7 @@ public partial class MainForm : Form, ISubscriber
         // reject all other keys
         if (!(SeparatorKeys || NumericKeys || EditKeys || NavigationKeys))
         {
-            e.SuppressKeyPress = true;
+            e.SuppressKeyPress = true; // stop beep
             e.Handled = true;
         }
     }
@@ -21665,6 +21665,8 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
+
+                        e.SuppressKeyPress = true; // stop beep
                     }
                     catch (Exception ex)
                     {
@@ -43930,48 +43932,6 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-
-    private void UpdateValueNavigator(long value)
-    {
-        if (m_client != null)
-        {
-            if (m_client.Book != null)
-            {
-                //VerseByVerseNumberLabel.Text = "---:---";
-                //ToolTip.SetToolTip(VerseByVerseNumberLabel, null);
-                //VerseByVerseNumberLabel.Refresh();
-
-                //VerseByWordNumberLabel.Text = "---:---";
-                //ToolTip.SetToolTip(VerseByWordNumberLabel, null);
-                //VerseByWordNumberLabel.Refresh();
-
-                //VerseByLetterNumberLabel.Text = "---:---";
-                //ToolTip.SetToolTip(VerseByLetterNumberLabel, null);
-                //VerseByLetterNumberLabel.Refresh();
-
-                Verse verse = m_client.Book.GetVerseByVerseNumber((int)value);
-                if (verse != null)
-                {
-                    VerseByVerseNumberLabel.Text = verse.Address;
-                    ToolTip.SetToolTip(VerseByVerseNumberLabel, L[l]["Verse number = "] + ValueTextBox.Text + "\r\n" + verse.Text);
-                }
-
-                verse = m_client.Book.GetVerseByWordNumber((int)value);
-                if (verse != null)
-                {
-                    VerseByWordNumberLabel.Text = verse.Address;
-                    ToolTip.SetToolTip(VerseByWordNumberLabel, L[l]["Verse with word number = "] + ValueTextBox.Text + "\r\n" + verse.Text);
-                }
-
-                verse = m_client.Book.GetVerseByLetterNumber((int)value);
-                if (verse != null)
-                {
-                    VerseByLetterNumberLabel.Text = verse.Address;
-                    ToolTip.SetToolTip(VerseByLetterNumberLabel, L[l]["Verse with letter number = "] + ValueTextBox.Text + "\r\n" + verse.Text);
-                }
-            }
-        }
-    }
     ///////////////////////////////////////////////////////////////////////////////
     #endregion
     #region Value Display
@@ -44844,6 +44804,47 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Value Navigator
     ///////////////////////////////////////////////////////////////////////////////
+    private void UpdateValueNavigator(long value)
+    {
+        if (m_client != null)
+        {
+            if (m_client.Book != null)
+            {
+                VerseByVerseNumberLabel.Text = "---:---";
+                ToolTip.SetToolTip(VerseByVerseNumberLabel, null);
+                VerseByVerseNumberLabel.Refresh();
+
+                VerseByWordNumberLabel.Text = "---:---";
+                ToolTip.SetToolTip(VerseByWordNumberLabel, null);
+                VerseByWordNumberLabel.Refresh();
+
+                VerseByLetterNumberLabel.Text = "---:---";
+                ToolTip.SetToolTip(VerseByLetterNumberLabel, null);
+                VerseByLetterNumberLabel.Refresh();
+
+                Verse verse = m_client.Book.GetVerseByVerseNumber((int)value);
+                if (verse != null)
+                {
+                    VerseByVerseNumberLabel.Text = verse.Address;
+                    ToolTip.SetToolTip(VerseByVerseNumberLabel, L[l]["Verse number = "] + ValueTextBox.Text + "\r\n" + verse.Text);
+                }
+
+                verse = m_client.Book.GetVerseByWordNumber((int)value);
+                if (verse != null)
+                {
+                    VerseByWordNumberLabel.Text = verse.Address;
+                    ToolTip.SetToolTip(VerseByWordNumberLabel, L[l]["Verse with word number = "] + ValueTextBox.Text + "\r\n" + verse.Text);
+                }
+
+                verse = m_client.Book.GetVerseByLetterNumber((int)value);
+                if (verse != null)
+                {
+                    VerseByLetterNumberLabel.Text = verse.Address;
+                    ToolTip.SetToolTip(VerseByLetterNumberLabel, L[l]["Verse with letter number = "] + ValueTextBox.Text + "\r\n" + verse.Text);
+                }
+            }
+        }
+    }
     private Stack<int> m_navigation_undo_stack = new Stack<int>();
     private Stack<int> m_navigation_redo_stack = new Stack<int>();
     private void VerseFromNumerologyValue_Click(object sender, EventArgs e)

@@ -323,7 +323,9 @@ namespace Model
             {
                 if (this.verses.Count > 0)
                 {
-                    number %= verses.Count;
+                    number %= this.verses.Count;
+                    if (number == 0) number = this.verses.Count;
+
                     if ((number > 0) && (number <= this.verses.Count))
                     {
                         return this.verses[number - 1];
@@ -334,9 +336,11 @@ namespace Model
         }
         public Verse GetVerseByWordNumber(int number)
         {
-            if (WordCount > 0)
+            if (this.WordCount > 0)
             {
-                number %= WordCount;
+                number %= this.WordCount;
+                if (number == 0) number = this.WordCount;
+
                 if ((number > 0) && (number <= this.WordCount))
                 {
                     if (this.chapters != null)
@@ -365,9 +369,11 @@ namespace Model
         }
         public Verse GetVerseByLetterNumber(int number)
         {
-            if (LetterCount > 0)
+            if (this.LetterCount > 0)
             {
-                number %= LetterCount;
+                number %= this.LetterCount;
+                if (number == 0) number = this.LetterCount;
+
                 if ((number > 0) && (number <= this.LetterCount))
                 {
                     if (this.chapters != null)
@@ -397,9 +403,11 @@ namespace Model
         }
         public Word GetWordByWordNumber(int number)
         {
-            if (WordCount > 0)
+            if (this.WordCount > 0)
             {
-                number %= WordCount;
+                number %= this.WordCount;
+                if (number == 0) number = this.WordCount;
+
                 if ((number > 0) && (number <= this.WordCount))
                 {
                     if (this.chapters != null)
@@ -432,9 +440,11 @@ namespace Model
         }
         public Word GetWordByLetterNumber(int number)
         {
-            if (LetterCount > 0)
+            if (this.LetterCount > 0)
             {
-                number %= LetterCount;
+                number %= this.LetterCount;
+                if (number == 0) number = this.LetterCount;
+
                 if ((number > 0) && (number <= this.LetterCount))
                 {
                     if (this.chapters != null)
