@@ -1403,21 +1403,7 @@ public class Server : IPublisher
         nCSum = 0L;
     }
     // used for non-Quran text
-    public static long CalculateValueUserText(char character)
-    {
-        if (character == '\0') return 0L;
-        if (character == '\r') return 0L;
-        if (character == '\n') return 0L;
-
-        long result = 0L;
-        if (s_numerology_system != null)
-        {
-            character = character.ToString().SimplifyTo(s_numerology_system.TextMode)[0];
-            result = s_numerology_system.CalculateValue(character);
-        }
-        return result;
-    }
-    public static long CalculateValueUserText(string text)
+    public static long CalculateValue(string text)
     {
         if (string.IsNullOrEmpty(text)) return 0L;
 
@@ -1426,28 +1412,11 @@ public class Server : IPublisher
         {
             text = text.Replace("\r\n", "\n");
             text = text.SimplifyTo(s_numerology_system.TextMode);
-            result = s_numerology_system.CalculateValue(text);
+            result = s_numerology_system.CalculateValue(text, CalculationMode);
         }
         return result;
     }
-    public static long CalculateValueUserTextWithLogging(char character)
-    {
-        if (character == '\0') return 0L;
-        if (character == '\r') return 0L;
-        if (character == '\n') return 0L;
-
-        long result = 0L;
-        if (s_numerology_system != null)
-        {
-            character = character.ToString().SimplifyTo(s_numerology_system.TextMode)[0];
-            Log.Append(character.ToString());
-            long value = s_numerology_system.CalculateValue(character);
-            result += value; ValueSum += value;
-            Log.AppendLine("\t" + value);
-        }
-        return result;
-    }
-    public static long CalculateValueUserTextWithLogging(string text)
+    public static long CalculateValueWithLogging(string text)
     {
         if (string.IsNullOrEmpty(text)) return 0L;
 
@@ -1470,7 +1439,7 @@ public class Server : IPublisher
                 else
                 {
                     Log.Append(character.ToString());
-                    long value = s_numerology_system.CalculateValue(character);
+                    long value = s_numerology_system.CalculateValue(character.ToString(), CalculationMode);
                     result += value; ValueSum += value;
                     Log.AppendLine("\t" + value);
                 }
@@ -1486,7 +1455,7 @@ public class Server : IPublisher
         long result = 0L;
         if (s_numerology_system != null)
         {
-            result = s_numerology_system.CalculateValue(letter.Character);
+            result = s_numerology_system.CalculateValue(letter.ToString(), CalculationMode);
 
             if (s_numerology_system.LetterValue.StartsWith("Base"))
             {
@@ -1582,49 +1551,14 @@ public class Server : IPublisher
                     StringBuilder str = new StringBuilder();
                     foreach (Letter letter in word.Letters)
                     {
-                        str.Insert(0, s_numerology_system.CalculateValue(letter.Character));
+                        str.Insert(0, s_numerology_system.CalculateValue(letter.ToString(), CalculationMode));
                     }
                     result += Radix.Decode(str.ToString(), radix);
                 }
             }
             else
             {
-                switch (CalculationMode)
-                {
-                    case CalculationMode.SumOfLetterValues:
-                        {
-                            foreach (Letter letter in word.Letters)
-                            {
-                                result += CalculateValue(letter);
-                            }
-                        }
-                        break;
-                    case CalculationMode.SumOfWordDigitSums:
-                        {
-                            long word_value = 0L;
-                            foreach (Letter letter in word.Letters)
-                            {
-                                word_value += CalculateValue(letter);
-                            }
-                            result += Numbers.DigitSum(word_value);
-                        }
-                        break;
-                    case CalculationMode.SumOfWordDigitalRoots:
-                        {
-                            long word_value = 0L;
-                            foreach (Letter letter in word.Letters)
-                            {
-                                word_value += CalculateValue(letter);
-                            }
-                            result += Numbers.DigitalRoot(word_value);
-                        }
-                        break;
-                    default:
-                        {
-                            // do nothing
-                        }
-                        break;
-                }
+                result = s_numerology_system.CalculateValue(word.Text, CalculationMode);
 
                 if (word.Letters.Count > 0)
                 {
@@ -1708,7 +1642,7 @@ public class Server : IPublisher
                         {
                             foreach (Letter letter in word.Letters)
                             {
-                                str.Insert(0, s_numerology_system.CalculateValue(letter.Character));
+                                str.Insert(0, s_numerology_system.CalculateValue(letter.ToString(), CalculationMode));
                             }
                             result += Radix.Decode(str.ToString(), radix);
 
@@ -1724,10 +1658,7 @@ public class Server : IPublisher
                 {
                     foreach (Word word in words)
                     {
-                        foreach (Letter letter in word.Letters)
-                        {
-                            result += CalculateValue(letter);
-                        }
+                        result = s_numerology_system.CalculateValue(word.Text, CalculationMode);
 
                         // adjust value of word
                         result += AdjustValue(word);
@@ -1771,7 +1702,7 @@ public class Server : IPublisher
                     {
                         foreach (Letter letter in word.Letters)
                         {
-                            str.Insert(0, s_numerology_system.CalculateValue(letter.Character));
+                            str.Insert(0, s_numerology_system.CalculateValue(letter.ToString(), CalculationMode));
                         }
                         result += Radix.Decode(str.ToString(), radix);
 
@@ -1833,7 +1764,7 @@ public class Server : IPublisher
                                     break;
                                 }
 
-                                str.Insert(0, s_numerology_system.CalculateValue(letter.Character));
+                                str.Insert(0, s_numerology_system.CalculateValue(letter.ToString(), CalculationMode));
                             }
                         }
                         result += Radix.Decode(str.ToString(), radix);
@@ -1846,46 +1777,94 @@ public class Server : IPublisher
             }
             else
             {
-                int word_index = -1;   // in verse
-                int letter_index = -1; // in verse
-                bool done = false;
-                foreach (Word word in verse.Words)
+                switch (CalculationMode)
                 {
-                    word_index++;
-
-                    if ((word.Letters != null) && (word.Letters.Count > 0))
-                    {
-                        foreach (Letter letter in word.Letters)
+                    case CalculationMode.SumOfLetterValues:
                         {
-                            letter_index++;
-
-                            if (letter_index < from_letter.NumberInVerse - 1) continue;
-                            if (letter_index > to_letter.NumberInVerse - 1)
+                            //for (int i = 0; i < text.Length; i++)
+                            //{
+                            //    if (letter_values.ContainsKey(text[i]))
+                            //    {
+                            //        result += letter_values[text[i]];
+                            //    }
+                            //}
+                            int word_index = -1;   // in verse
+                            int letter_index = -1; // in verse
+                            bool done = false;
+                            foreach (Word word in verse.Words)
                             {
-                                done = true;
-                                break;
+                                word_index++;
+
+                                if ((word.Letters != null) && (word.Letters.Count > 0))
+                                {
+                                    foreach (Letter letter in word.Letters)
+                                    {
+                                        letter_index++;
+
+                                        if (letter_index < from_letter.NumberInVerse - 1) continue;
+                                        if (letter_index > to_letter.NumberInVerse - 1)
+                                        {
+                                            done = true;
+                                            break;
+                                        }
+
+                                        result += CalculateValue(letter);
+                                    }
+
+                                    if ((from_letter.NumberInVerse <= word.Letters[0].NumberInVerse)                    // if selection starts before or at first letter in word
+                                        &&                                                                              // AND
+                                        (to_letter.NumberInVerse >= word.Letters[word.Letters.Count - 1].NumberInVerse) // if selection ends   at or after  last  letter in word
+                                       )
+                                    {
+                                        // adjust value of word
+                                        result += AdjustValue(word);
+                                    }
+                                }
+
+                                if (done) break;
                             }
 
-                            result += CalculateValue(letter);
+                            if ((from_letter.NumberInVerse == 1) && (to_letter.NumberInVerse == verse.LetterCount))
+                            {
+                                // adjust value of verse
+                                result += AdjustValue(verse);
+                            }
                         }
-
-                        if ((from_letter.NumberInVerse <= word.Letters[0].NumberInVerse)                    // if selection starts before or at first letter in word
-                            &&                                                                              // AND
-                            (to_letter.NumberInVerse >= word.Letters[word.Letters.Count - 1].NumberInVerse) // if selection ends   at or after  last  letter in word
-                           )
+                        break;
+                    case CalculationMode.SumOfWordDigitSums:
                         {
-                            // adjust value of word
-                            result += AdjustValue(word);
+                            //string[] words = text.Split();
+                            //foreach (string word in words)
+                            //{
+                            //    long word_value = 0L;
+                            //    for (int i = 0; i < word.Length; i++)
+                            //    {
+                            //        if (letter_values.ContainsKey(word[i]))
+                            //        {
+                            //            word_value += letter_values[word[i]];
+                            //        }
+                            //    }
+                            //    result += Numbers.DigitSum(word_value);
+                            //}
                         }
-                    }
-
-                    if (done) break;
-                }
-
-                if ((from_letter.NumberInVerse == 1) && (to_letter.NumberInVerse == verse.LetterCount))
-                {
-                    // adjust value of verse
-                    result += AdjustValue(verse);
+                        break;
+                    case CalculationMode.SumOfWordDigitalRoots:
+                        {
+                            //string[] words = text.Split();
+                            //foreach (string word in words)
+                            //{
+                            //    long word_value = 0L;
+                            //    for (int i = 0; i < word.Length; i++)
+                            //    {
+                            //        if (letter_values.ContainsKey(word[i]))
+                            //        {
+                            //            word_value += letter_values[word[i]];
+                            //        }
+                            //    }
+                            //    result += Numbers.DigitalRoot(word_value);
+                            //}
+                        }
+                        break;
                 }
             }
         }
@@ -2106,7 +2085,7 @@ public class Server : IPublisher
         {
             Log.Append(letter.ToString());
 
-            long value = s_numerology_system.CalculateValue(letter.Character);
+            long value = s_numerology_system.CalculateValue(letter.ToString(), CalculationMode);
             result += value; ValueSum += value;
             Log.Append("\t" + value);
 
@@ -2156,7 +2135,7 @@ public class Server : IPublisher
             {
                 foreach (Word word in words)
                 {
-                    value = s_numerology_system.CalculateValue(word.Text);
+                    value = s_numerology_system.CalculateValue(word.Text, CalculationMode);
                     Log.Append("\t" + "\t" + value);
                     // adjust value of word
                     result += AdjustValueWithLogging(word);
@@ -2168,7 +2147,7 @@ public class Server : IPublisher
             {
                 foreach (Verse verse in verses)
                 {
-                    value = s_numerology_system.CalculateValue(verse.Text);
+                    value = s_numerology_system.CalculateValue(verse.Text, CalculationMode);
                     Log.Append("\t" + "\t" + "\t" + value);
                     // adjust value of verse
                     result += AdjustValueWithLogging(verse);
@@ -2180,7 +2159,7 @@ public class Server : IPublisher
             {
                 foreach (Chapter chapter in chapters)
                 {
-                    value = s_numerology_system.CalculateValue(chapter.Text);
+                    value = s_numerology_system.CalculateValue(chapter.Text, CalculationMode);
                     Log.Append("\t" + "\t" + "\t" + "\t" + value);
                     // adjust value of chapter
                     result += AdjustValueWithLogging(chapter);
@@ -2212,7 +2191,7 @@ public class Server : IPublisher
                     StringBuilder str = new StringBuilder();
                     foreach (Letter letter in word.Letters)
                     {
-                        str.Insert(0, s_numerology_system.CalculateValue(letter.Character));
+                        str.Insert(0, s_numerology_system.CalculateValue(letter.ToString(), CalculationMode));
                     }
                     value = Radix.Decode(str.ToString(), radix);
                     result += value; ValueSum += value;
@@ -2221,45 +2200,9 @@ public class Server : IPublisher
             }
             else
             {
-                switch (CalculationMode)
-                {
-                    case CalculationMode.SumOfLetterValues:
-                        {
-                            foreach (Letter letter in word.Letters)
-                            {
-                                result += CalculateValueWithLogging(letter);
-                            }
-                        }
-                        break;
-                    case CalculationMode.SumOfWordDigitSums:
-                        {
-                            long word_value = 0L;
-                            foreach (Letter letter in word.Letters)
-                            {
-                                word_value += CalculateValueWithLogging(letter);
-                            }
-                            result += Numbers.DigitSum(word_value);
-                        }
-                        break;
-                    case CalculationMode.SumOfWordDigitalRoots:
-                        {
-                            long word_value = 0L;
-                            foreach (Letter letter in word.Letters)
-                            {
-                                word_value += CalculateValueWithLogging(letter);
-                            }
-                            result += Numbers.DigitalRoot(word_value);
-                        }
-                        break;
-                    default:
-                        {
-                            // do nothing
-                        }
-                        break;
-                }
+                result = s_numerology_system.CalculateValue(word.Text, CalculationMode);
 
-                //????? update the following code too to take into account CalculationMode
-                value = s_numerology_system.CalculateValue(word.Text);
+                value = result;
                 Log.Append("\t" + "\t" + value);
                 // adjust value of word
                 result += AdjustValueWithLogging(word);
@@ -2269,7 +2212,7 @@ public class Server : IPublisher
                 {
                     if (word.Verse.Words.Count == 1)
                     {
-                        value = s_numerology_system.CalculateValue(verse.Text);
+                        value = s_numerology_system.CalculateValue(verse.Text, CalculationMode);
                         Log.Append("\t" + "\t" + "\t" + value);
                         // adjust value of verse
                         result += AdjustValueWithLogging(word.Verse);
@@ -2298,7 +2241,7 @@ public class Server : IPublisher
             {
                 foreach (Verse verse in verses)
                 {
-                    value = s_numerology_system.CalculateValue(verse.Text);
+                    value = s_numerology_system.CalculateValue(verse.Text, CalculationMode);
                     Log.Append("\t" + "\t" + "\t" + value);
                     // adjust value of verse
                     result += AdjustValueWithLogging(verse);
@@ -2310,7 +2253,7 @@ public class Server : IPublisher
             {
                 foreach (Chapter chapter in chapters)
                 {
-                    value = s_numerology_system.CalculateValue(chapter.Text);
+                    value = s_numerology_system.CalculateValue(chapter.Text, CalculationMode);
                     Log.Append("\t" + "\t" + "\t" + "\t" + value);
                     // adjust value of chapter
                     result += AdjustValueWithLogging(chapter);
@@ -2348,7 +2291,7 @@ public class Server : IPublisher
                         {
                             foreach (Letter letter in word.Letters)
                             {
-                                str.Insert(0, s_numerology_system.CalculateValue(letter.Character));
+                                str.Insert(0, s_numerology_system.CalculateValue(letter.ToString(), CalculationMode));
                             }
                             value = Radix.Decode(str.ToString(), radix);
                             result += value; ValueSum += value;
@@ -2366,12 +2309,9 @@ public class Server : IPublisher
                 {
                     foreach (Word word in words)
                     {
-                        foreach (Letter letter in word.Letters)
-                        {
-                            result += CalculateValueWithLogging(letter);
-                        }
+                        result = s_numerology_system.CalculateValue(word.Text, CalculationMode);
 
-                        value = s_numerology_system.CalculateValue(word.Text);
+                        value = result;
                         Log.Append("\t" + "\t" + value);
                         // adjust value of word
                         result += AdjustValueWithLogging(word);
@@ -2383,7 +2323,7 @@ public class Server : IPublisher
                 {
                     foreach (Verse verse in verses)
                     {
-                        value = s_numerology_system.CalculateValue(verse.Text);
+                        value = s_numerology_system.CalculateValue(verse.Text, CalculationMode);
                         Log.Append("\t" + "\t" + "\t" + value);
                         // adjust value of verse
                         result += AdjustValueWithLogging(verse);
@@ -2418,7 +2358,7 @@ public class Server : IPublisher
                     {
                         foreach (Letter letter in word.Letters)
                         {
-                            str.Insert(0, s_numerology_system.CalculateValue(letter.Character));
+                            str.Insert(0, s_numerology_system.CalculateValue(letter.ToString(), CalculationMode));
                         }
                         value = Radix.Decode(str.ToString(), radix);
                         result += value; ValueSum += value;
@@ -2435,7 +2375,7 @@ public class Server : IPublisher
                     result += CalculateValueWithLogging(word);
                 }
 
-                value = s_numerology_system.CalculateValue(verse.Text);
+                value = s_numerology_system.CalculateValue(verse.Text, CalculationMode);
                 Log.Append("\t" + "\t" + "\t" + value);
                 // adjust value of verse
                 result += AdjustValueWithLogging(verse);
@@ -2485,7 +2425,7 @@ public class Server : IPublisher
                                     break;
                                 }
 
-                                str.Insert(0, s_numerology_system.CalculateValue(letter.Character));
+                                str.Insert(0, s_numerology_system.CalculateValue(letter.ToString(), CalculationMode));
                             }
                         }
                         value = Radix.Decode(str.ToString(), radix);
@@ -2500,58 +2440,106 @@ public class Server : IPublisher
             }
             else
             {
-                int word_index = -1;   // in verse
-                int letter_index = -1; // in verse
-                bool done = false;
-                foreach (Word word in verse.Words)
+                switch (CalculationMode)
                 {
-                    word_index++;
-
-                    if ((word.Letters != null) && (word.Letters.Count > 0))
-                    {
-                        foreach (Letter letter in word.Letters)
+                    case CalculationMode.SumOfLetterValues:
                         {
-                            letter_index++;
-
-                            if (letter_index < from_letter.NumberInVerse - 1) continue;
-                            if (letter_index > to_letter.NumberInVerse - 1)
+                            //for (int i = 0; i < text.Length; i++)
+                            //{
+                            //    if (letter_values.ContainsKey(text[i]))
+                            //    {
+                            //        result += letter_values[text[i]];
+                            //    }
+                            //}
+                            int word_index = -1;   // in verse
+                            int letter_index = -1; // in verse
+                            bool done = false;
+                            foreach (Word word in verse.Words)
                             {
-                                done = true;
-                                break;
+                                word_index++;
+
+                                if ((word.Letters != null) && (word.Letters.Count > 0))
+                                {
+                                    foreach (Letter letter in word.Letters)
+                                    {
+                                        letter_index++;
+
+                                        if (letter_index < from_letter.NumberInVerse - 1) continue;
+                                        if (letter_index > to_letter.NumberInVerse - 1)
+                                        {
+                                            done = true;
+                                            break;
+                                        }
+
+                                        result += CalculateValueWithLogging(letter);
+                                    }
+
+                                    if ((from_letter.NumberInVerse <= word.Letters[0].NumberInVerse)                    // if selection starts before or at first letter in word
+                                        &&                                                                              // AND
+                                        (to_letter.NumberInVerse >= word.Letters[word.Letters.Count - 1].NumberInVerse) // if selection ends   at or after  last  letter in word
+                                       )
+                                    {
+                                        value = s_numerology_system.CalculateValue(word.Text, CalculationMode);
+                                        Log.Append("\t" + "\t" + value);
+                                        // adjust value of word
+                                        result += AdjustValueWithLogging(word);
+                                    }
+                                    else
+                                    {
+                                        Log.AppendLine("\t" + "\t" + "---");
+                                    }
+                                }
+
+                                if (done) break;
                             }
 
-                            result += CalculateValueWithLogging(letter);
+                            if ((from_letter.NumberInVerse == 1) && (to_letter.NumberInVerse == verse.LetterCount))
+                            {
+                                value = s_numerology_system.CalculateValue(verse.Text, CalculationMode);
+                                Log.Append("\t" + "\t" + "\t" + value);
+                                // adjust value of verse
+                                result += AdjustValueWithLogging(verse);
+                            }
+                            else
+                            {
+                                Log.AppendLine("\t" + "\t" + "\t" + "---");
+                            }
                         }
-
-                        if ((from_letter.NumberInVerse <= word.Letters[0].NumberInVerse)                    // if selection starts before or at first letter in word
-                            &&                                                                              // AND
-                            (to_letter.NumberInVerse >= word.Letters[word.Letters.Count - 1].NumberInVerse) // if selection ends   at or after  last  letter in word
-                           )
+                        break;
+                    case CalculationMode.SumOfWordDigitSums:
                         {
-                            value = s_numerology_system.CalculateValue(word.Text);
-                            Log.Append("\t" + "\t" + value);
-                            // adjust value of word
-                            result += AdjustValueWithLogging(word);
+                            //string[] words = text.Split();
+                            //foreach (string word in words)
+                            //{
+                            //    long word_value = 0L;
+                            //    for (int i = 0; i < word.Length; i++)
+                            //    {
+                            //        if (letter_values.ContainsKey(word[i]))
+                            //        {
+                            //            word_value += letter_values[word[i]];
+                            //        }
+                            //    }
+                            //    result += Numbers.DigitSum(word_value);
+                            //}
                         }
-                        else
+                        break;
+                    case CalculationMode.SumOfWordDigitalRoots:
                         {
-                            Log.AppendLine("\t" + "\t" + "---");
+                            //string[] words = text.Split();
+                            //foreach (string word in words)
+                            //{
+                            //    long word_value = 0L;
+                            //    for (int i = 0; i < word.Length; i++)
+                            //    {
+                            //        if (letter_values.ContainsKey(word[i]))
+                            //        {
+                            //            word_value += letter_values[word[i]];
+                            //        }
+                            //    }
+                            //    result += Numbers.DigitalRoot(word_value);
+                            //}
                         }
-                    }
-
-                    if (done) break;
-                }
-
-                if ((from_letter.NumberInVerse == 1) && (to_letter.NumberInVerse == verse.LetterCount))
-                {
-                    value = s_numerology_system.CalculateValue(verse.Text);
-                    Log.Append("\t" + "\t" + "\t" + value);
-                    // adjust value of verse
-                    result += AdjustValueWithLogging(verse);
-                }
-                else
-                {
-                    Log.AppendLine("\t" + "\t" + "\t" + "---");
+                        break;
                 }
             }
         }
@@ -2580,7 +2568,7 @@ public class Server : IPublisher
                         {
                             if (chapters.Contains(chapter))
                             {
-                                value = s_numerology_system.CalculateValue(chapter.Text);
+                                value = s_numerology_system.CalculateValue(chapter.Text, CalculationMode);
                                 Log.Append("\t" + "\t" + "\t" + "\t" + value);
                                 // adjust value of chapter
                                 result += AdjustValueWithLogging(chapter);
@@ -2683,7 +2671,7 @@ public class Server : IPublisher
                                     {
                                         if (chapters.Contains(chapter))
                                         {
-                                            value = s_numerology_system.CalculateValue(chapter.Text);
+                                            value = s_numerology_system.CalculateValue(chapter.Text, CalculationMode);
                                             Log.Append("\t" + "\t" + "\t" + "\t" + value);
                                             // adjust value of chapter
                                             result += AdjustValueWithLogging(chapter);
@@ -2728,7 +2716,7 @@ public class Server : IPublisher
                                             {
                                                 if (chapters.Contains(chapter))
                                                 {
-                                                    value = s_numerology_system.CalculateValue(chapter.Text);
+                                                    value = s_numerology_system.CalculateValue(chapter.Text, CalculationMode);
                                                     Log.Append("\t" + "\t" + "\t" + "\t" + value);
                                                     // adjust value of chapter
                                                     result += AdjustValueWithLogging(chapter);

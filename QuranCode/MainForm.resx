@@ -133,9 +133,6 @@
         LX6N1KIAAAAASUVORK5CYII=
 </value>
   </data>
-  <metadata name="ToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>2, -3</value>
-  </metadata>
   <data name="ChangeDrawingShapeLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -298,14 +295,6 @@
         qz+RTAQAlGjMinZjhS4AAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="CalculatorLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAABZSURBVDhPY2AYnuD/f4b/hHBDQ8N/DN8T0oQsj9cAkCRM
-        MTobxIdhnOGPSzPREUaRAcia0Z1PlAvw+Z2gAciaQYpJ8gq2KEKPVpyhjyt+0cWxxj1Bfw16BQDmtvmv
-        p1T8pQAAAABJRU5ErkJggg==
-</value>
-  </data>
   <data name="DrawSearchTermsLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
@@ -332,6 +321,14 @@
         fBiFTfv5kHFPxeS3wb/++tzZRl1qvAu9fepGpecz6F3mOsr5DGhERrwOHK9f/18DbPygf5+OdbSh1flB
         tDJvQ2mPGoV7yS9+eteGNRlgk3tmUufvqUexYRlEID+CeNOaItRGC+p3b/R17XD46Z3rquc/AVxruSNt
         RbqEAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="CalculatorLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAABZSURBVDhPY2AYnuD/f4b/hHBDQ8N/DN8T0oQsj9cAkCRM
+        MTobxIdhnOGPSzPREUaRAcia0Z1PlAvw+Z2gAciaQYpJ8gq2KEKPVpyhjyt+0cWxxj1Bfw16BQDmtvmv
+        p1T8pQAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="ScriptRunLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

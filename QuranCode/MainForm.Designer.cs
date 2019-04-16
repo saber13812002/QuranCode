@@ -1431,9 +1431,9 @@ partial class MainForm
         this.ValueTextBox.BackColor = System.Drawing.SystemColors.Window;
         this.ValueTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.ValueTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.ValueTextBox.Location = new System.Drawing.Point(77, 20);
+        this.ValueTextBox.Location = new System.Drawing.Point(69, 20);
         this.ValueTextBox.Name = "ValueTextBox";
-        this.ValueTextBox.Size = new System.Drawing.Size(102, 20);
+        this.ValueTextBox.Size = new System.Drawing.Size(110, 20);
         this.ValueTextBox.TabIndex = 21;
         this.ValueTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
         this.ValueTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
@@ -9662,6 +9662,7 @@ partial class MainForm
         // 
         this.ValuePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
         | System.Windows.Forms.AnchorStyles.Right)));
+        this.ValuePanel.Controls.Add(this.ValueInspectLabel);
         this.ValuePanel.Controls.Add(this.CalculationModeLabel);
         this.ValuePanel.Controls.Add(this.SumOfDigitSumsTextBox);
         this.ValuePanel.Controls.Add(this.Nth4nMinus1CompositeNumberLabel);
@@ -9674,7 +9675,6 @@ partial class MainForm
         this.ValuePanel.Controls.Add(this.PrimeNumbersLabel);
         this.ValuePanel.Controls.Add(this.SquareDiffTextBox);
         this.ValuePanel.Controls.Add(this.SquareSumTextBox);
-        this.ValuePanel.Controls.Add(this.ValueInspectLabel);
         this.ValuePanel.Controls.Add(this.NthNonAdditiveNumberTextBox);
         this.ValuePanel.Controls.Add(this.AbundantNumbersLabel);
         this.ValuePanel.Controls.Add(this.DeficientNumbersLabel);
@@ -9726,7 +9726,7 @@ partial class MainForm
         this.CalculationModeLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.CalculationModeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.CalculationModeLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.CalculationModeLabel.Location = new System.Drawing.Point(56, 21);
+        this.CalculationModeLabel.Location = new System.Drawing.Point(57, 21);
         this.CalculationModeLabel.Name = "CalculationModeLabel";
         this.CalculationModeLabel.Size = new System.Drawing.Size(5, 18);
         this.CalculationModeLabel.TabIndex = 256;
@@ -9878,7 +9878,7 @@ partial class MainForm
         this.ValueInspectLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.ValueInspectLabel.ForeColor = System.Drawing.Color.DimGray;
         this.ValueInspectLabel.Image = ((System.Drawing.Image)(resources.GetObject("ValueInspectLabel.Image")));
-        this.ValueInspectLabel.Location = new System.Drawing.Point(62, 21);
+        this.ValueInspectLabel.Location = new System.Drawing.Point(57, 21);
         this.ValueInspectLabel.Name = "ValueInspectLabel";
         this.ValueInspectLabel.Size = new System.Drawing.Size(16, 18);
         this.ValueInspectLabel.TabIndex = 251;

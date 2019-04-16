@@ -575,14 +575,15 @@ public partial class MainForm : Form
                 minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
             }
             //long n = 0L;
-            //if (squares1_str.StartsWith("4×")) // 4n+1
+            //if (squares1_str.StartsWith("4×")) // 4n+1 or 4n-1
             //{
             //    int start = "4×".Length;
             //    int end = squares1_str.IndexOf("+");
-            //    if ((start > 0) && (end > 0) && (start < end))
+            //    if (end == -1) end = squares1_str.IndexOf("-");
+            //    if ((start >= 0) && (end >= start))
             //    {
-            //      string text = squares1_str.Substring(start, end - start);
-            //      n = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+            //        string text = squares1_str.Substring(start, end - start);
+            //        n = Radix.Decode(text, Numbers.DEFAULT_RADIX);
             //    }
             //}
 
@@ -977,10 +978,10 @@ public partial class MainForm : Form
         StringBuilder str = new StringBuilder();
         if (long.TryParse(ValueTextBox.Text, out value))
         {
-            str.AppendLine("Number\t\t=\t" + ValueTextBox.Text);
+            str.AppendLine("Number\t\t\t=\t" + ValueTextBox.Text);
 
             str.AppendLine();
-            str.AppendLine("Prime Factors\t=\t" + Numbers.FactorizeToString(value));
+            str.AppendLine("Prime Factors\t\t=\t" + Numbers.FactorizeToString(value));
             int nth_number_index = 0;
             int nth_additive_number_index = 0;
             int nth_non_additive_number_index = 0;
@@ -990,9 +991,9 @@ public partial class MainForm : Form
                 nth_number_index = Numbers.PrimeIndexOf(value) + 1;
                 nth_additive_number_index = Numbers.AdditivePrimeIndexOf(value) + 1;
                 nth_non_additive_number_index = Numbers.NonAdditivePrimeIndexOf(value) + 1;
-                str.AppendLine("P  Index\t=\t" + ((nth_number_index > 0) ? nth_number_index.ToString() : ""));
-                str.AppendLine("AP Index\t=\t" + ((nth_additive_number_index > 0) ? nth_additive_number_index.ToString() : ""));
-                str.AppendLine("XP Index\t=\t" + ((nth_non_additive_number_index > 0) ? nth_non_additive_number_index.ToString() : ""));
+                str.AppendLine("P  Index\t\t=\t" + ((nth_number_index > 0) ? nth_number_index.ToString() : ""));
+                str.AppendLine("AP Index\t\t=\t" + ((nth_additive_number_index > 0) ? nth_additive_number_index.ToString() : ""));
+                str.AppendLine("XP Index\t\t=\t" + ((nth_non_additive_number_index > 0) ? nth_non_additive_number_index.ToString() : ""));
             }
             else // any other index type will be treated as IndexNumberType.Composite
             {
@@ -1000,9 +1001,9 @@ public partial class MainForm : Form
                 nth_number_index = Numbers.CompositeIndexOf(value) + 1;
                 nth_additive_number_index = Numbers.AdditiveCompositeIndexOf(value) + 1;
                 nth_non_additive_number_index = Numbers.NonAdditiveCompositeIndexOf(value) + 1;
-                str.AppendLine("C  Index\t=\t" + ((nth_number_index > 0) ? nth_number_index.ToString() : ""));
-                str.AppendLine("AC Index\t=\t" + ((nth_additive_number_index > 0) ? nth_additive_number_index.ToString() : ""));
-                str.AppendLine("XC Index\t=\t" + ((nth_non_additive_number_index > 0) ? nth_non_additive_number_index.ToString() : ""));
+                str.AppendLine("C  Index\t\t=\t" + ((nth_number_index > 0) ? nth_number_index.ToString() : ""));
+                str.AppendLine("AC Index\t\t=\t" + ((nth_additive_number_index > 0) ? nth_additive_number_index.ToString() : ""));
+                str.AppendLine("XC Index\t\t=\t" + ((nth_non_additive_number_index > 0) ? nth_non_additive_number_index.ToString() : ""));
             }
 
             str.AppendLine();
@@ -1011,7 +1012,7 @@ public partial class MainForm : Form
             long digital_roor = Numbers.DigitalRoot(value);
             str.AppendLine("Digital Root     " + "\t=\t" + digital_roor);
             long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
-            str.AppendLine("Sum Of Digit Sums" + "\t=\t" + sum_of_digit_sums);
+            str.AppendLine("Sum Of Digit Sums" + "\t=\t" + sum_of_digit_sums + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.SumOfDigitSumsString(value)) : ""));
 
             string proper_divisors = Numbers.GetProperDivisorsString(value);
             long sum_of_proper_divisors = Numbers.SumOfProperDivisors(value);
@@ -1045,26 +1046,34 @@ public partial class MainForm : Form
             str.AppendLine(m_number_kind.ToString() + " Index\t\t=\t" + number_kind_index);
 
             str.AppendLine();
-            string squares1_str = "";
-            string squares2_str = "";
             int _4nplus1_index = -1;
             int _4nminus1_index = -1;
+            string squares1_str = "";
+            string squares2_str = "";
+            string minus1_str = "";
+            string minus2_str = "";
             if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
             {
+                _4nplus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
                 squares1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(value);
                 squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
-                _4nplus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
                 _4nminus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
+                minus1_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
+                minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
             }
             else //if composite
             {
+                _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
                 squares1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(value);
                 squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
-                _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
                 _4nminus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
+                minus1_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
+                minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
             }
-            str.AppendLine("4n+1 Squares1\t\t=\t" + squares1_str + "\t\t" + ((_4nplus1_index > 0) ? ("4n+1 Index = " + _4nplus1_index.ToString()) : (_4nplus1_index > 0) ? ("4n-1 Index = " + _4nminus1_index.ToString()) : ""));
-            str.AppendLine("4n+1 Squares2\t\t=\t" + squares2_str);
+            str.AppendLine((_4nplus1_index > 0) ? ("4n+1 Squares1\t\t=\t" + squares1_str) : (_4nminus1_index > 0) ? ("4n-1 Squares1\t\t=\t" + minus1_str) : "");
+            str.AppendLine((_4nplus1_index > 0) ? ("4n+1 Squares2\t\t=\t" + squares2_str) : (_4nminus1_index > 0) ? ("4n-1 Squares2\t\t=\t" + minus2_str) : "");
+            str.AppendLine((_4nplus1_index > 0) ? ("4n+1 " + (Numbers.IsComposite(value) ? "Composite" : "Prime") + " Index\t=\t" + _4nplus1_index.ToString()) :
+                          (_4nminus1_index > 0) ? ("4n-1 " + (Numbers.IsComposite(value) ? "Composite" : "Prime") + " Index\t=\t" + _4nminus1_index.ToString()) : "");
 
             str.AppendLine();
             str.AppendLine("Left-to-right prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainL2R(value) + "  =  " + DecimalPCIndexChainL2R(value));
@@ -2101,12 +2110,16 @@ public partial class MainForm : Form
                         {
                             value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                         }
-                        else if (text.StartsWith("4×")) // 4n+1
+                        else if (text.StartsWith("4×")) // 4n+1 or 4n-1
                         {
                             int start = "4×".Length;
                             int end = text.IndexOf("+");
-                            text = text.Substring(start, end - start);
-                            value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                            if (end == -1) end = text.IndexOf("-");
+                            if ((start >= 0) && (end >= start))
+                            {
+                                text = text.Substring(start, end - start);
+                                value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                            }
                         }
                         else
                         {

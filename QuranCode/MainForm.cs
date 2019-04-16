@@ -10993,7 +10993,7 @@ public partial class MainForm : Form, ISubscriber
         this.CalculationModeLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.CalculationModeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.CalculationModeLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.CalculationModeLabel.Location = new System.Drawing.Point(75, 24);
+        this.CalculationModeLabel.Location = new System.Drawing.Point(74, 24);
         this.CalculationModeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.CalculationModeLabel.Name = "CalculationModeLabel";
         this.CalculationModeLabel.Size = new System.Drawing.Size(7, 22);
@@ -32320,7 +32320,7 @@ public partial class MainForm : Form, ISubscriber
                                         else
                                         {
                                             str.Insert(line_start, " ");
-                                            long value = m_client.CalculateValueUserText(c);
+                                            long value = m_client.CalculateValue(c.ToString());
                                             str.Insert(line_start, Radix.Encode(value, m_values_sequence_radix).PadLeft((m_values_sequence_radix > 2) ? 0 : 8, '0'));
                                         }
                                     }
@@ -32334,7 +32334,7 @@ public partial class MainForm : Form, ISubscriber
                                         string[] word_texts = line.Split(' ');
                                         foreach (string word_text in word_texts)
                                         {
-                                            long value = m_client.CalculateValueUserText(word_text);
+                                            long value = m_client.CalculateValue(word_text);
                                             str.Insert(line_start, Radix.Encode(value, m_values_sequence_radix).PadLeft((m_values_sequence_radix > 2) ? 0 : 16, '0'));
                                             str.Insert(line_start, " ");
                                         }
@@ -32349,7 +32349,7 @@ public partial class MainForm : Form, ISubscriber
                                     string[] lines = text.Split('\n');
                                     foreach (string line in lines)
                                     {
-                                        long value = m_client.CalculateValueUserText(line);
+                                        long value = m_client.CalculateValue(line);
                                         str.AppendLine(Radix.Encode(value, m_values_sequence_radix).PadLeft((m_values_sequence_radix > 2) ? 0 : 32, '0'));
                                     }
                                 }
@@ -32389,7 +32389,7 @@ public partial class MainForm : Form, ISubscriber
                                         }
                                         else
                                         {
-                                            long value = m_client.CalculateValueUserText(c);
+                                            long value = m_client.CalculateValue(c.ToString());
                                             str.Append(Radix.Encode(value, m_values_sequence_radix).PadLeft((m_values_sequence_radix > 2) ? 0 : 8, '0'));
                                             str.Append(" ");
                                         }
@@ -32404,7 +32404,7 @@ public partial class MainForm : Form, ISubscriber
                                         string[] word_texts = line.Split(' ');
                                         foreach (string word_text in word_texts)
                                         {
-                                            long value = m_client.CalculateValueUserText(word_text);
+                                            long value = m_client.CalculateValue(word_text);
                                             str.Append(Radix.Encode(value, m_values_sequence_radix).PadLeft((m_values_sequence_radix > 2) ? 0 : 16, '0'));
                                             str.Append(" ");
                                         }
@@ -32418,7 +32418,7 @@ public partial class MainForm : Form, ISubscriber
                                     string[] lines = text.Split('\n');
                                     foreach (string line in lines)
                                     {
-                                        long value = m_client.CalculateValueUserText(line);
+                                        long value = m_client.CalculateValue(line);
                                         str.AppendLine(Radix.Encode(value, m_values_sequence_radix).PadLeft((m_values_sequence_radix > 2) ? 0 : 32, '0'));
                                     }
                                 }
@@ -32683,11 +32683,6 @@ public partial class MainForm : Form, ISubscriber
     private int m_user_text_selection_length = 0;
     private void CalculateUserTextValue(Point location)
     {
-        if (m_client != null)
-        {
-            SetCalculationMode(CalculationMode.SumOfLetterValues);
-        }
-
         m_user_text_selection_length = UserTextTextBox.SelectionLength;
         m_user_text_selection_start = UserTextTextBox.SelectionStart;
 
@@ -39266,7 +39261,7 @@ public partial class MainForm : Form, ISubscriber
                             word_count += phrase.Text.Split(' ').Length;
                             string phrase_nospaces = phrase.Text.SimplifyTo(m_client.NumerologySystem.TextMode).Replace(" ", "");
                             letter_count += phrase_nospaces.Length;
-                            value += m_client.CalculateValueUserText(phrase.Text);
+                            value += m_client.CalculateValue(phrase.Text);
                         }
                     }
                 }
@@ -41607,82 +41602,13 @@ public partial class MainForm : Form, ISubscriber
         TextModeComboBox.DropDownHeight = StatisticsGroupBox.Height - TextModeComboBox.Top - TextModeComboBox.Height - 1;
     }
 
-    CalculationMode m_clicked_calculation_mode = CalculationMode.SumOfLetterValues;
-    private void CalculationModeLabel_Click(object sender, EventArgs e)
+    private void SetCalculationMode(CalculationMode calculation_mode)
     {
         if (m_client != null)
         {
-            if (ModifierKeys == Keys.Shift)
-            {
-                switch (m_client.CalculationMode)
-                {
-                    case CalculationMode.SumOfLetterValues:
-                        {
-                            m_client.CalculationMode = CalculationMode.SumOfWordDigitalRoots;
-                            CalculationModeLabel.BackColor = Color.Green;
-                        }
-                        break;
-                    case CalculationMode.SumOfWordDigitSums:
-                        {
-                            m_client.CalculationMode = CalculationMode.SumOfLetterValues;
-                            CalculationModeLabel.BackColor = Color.Blue;
-                        }
-                        break;
-                    case CalculationMode.SumOfWordDigitalRoots:
-                        {
-                            m_client.CalculationMode = CalculationMode.SumOfWordDigitSums;
-                            CalculationModeLabel.BackColor = Color.Red;
-                        }
-                        break;
-                    default:
-                        {
-                            CalculationModeLabel.BackColor = Color.Black;
-                        }
-                        break;
-                }
-            }
-            else
-            {
-                switch (m_client.CalculationMode)
-                {
-                    case CalculationMode.SumOfLetterValues:
-                        {
-                            m_client.CalculationMode = CalculationMode.SumOfWordDigitSums;
-                            CalculationModeLabel.BackColor = Color.Red;
-                        }
-                        break;
-                    case CalculationMode.SumOfWordDigitSums:
-                        {
-                            m_client.CalculationMode = CalculationMode.SumOfWordDigitalRoots;
-                            CalculationModeLabel.BackColor = Color.Green;
-                        }
-                        break;
-                    case CalculationMode.SumOfWordDigitalRoots:
-                        {
-                            m_client.CalculationMode = CalculationMode.SumOfLetterValues;
-                            CalculationModeLabel.BackColor = Color.Blue;
-                        }
-                        break;
-                    default:
-                        {
-                            CalculationModeLabel.BackColor = Color.Black;
-                        }
-                        break;
-                }
-            }
-            ToolTip.SetToolTip(CalculationModeLabel, L[l][m_client.CalculationMode.ToString()]);
+            m_client.CalculationMode = calculation_mode;
 
-            // backup first
-            m_clicked_calculation_mode = m_client.CalculationMode;
-            // then re-calculate value
-            CalculateCurrentValue();
-        }
-    }
-    private void SetCalculationMode(CalculationMode temp_calculation_mode)
-    {
-        if (m_client != null)
-        {
-            switch (temp_calculation_mode)
+            switch (m_client.CalculationMode)
             {
                 case CalculationMode.SumOfLetterValues:
                     {
@@ -41701,14 +41627,69 @@ public partial class MainForm : Form, ISubscriber
                     break;
                 default:
                     {
-                        CalculationModeLabel.BackColor = Color.Black;
                     }
                     break;
             }
 
-            ToolTip.SetToolTip(CalculationModeLabel, L[l][temp_calculation_mode.ToString()]);
+            ToolTip.SetToolTip(CalculationModeLabel, L[l][m_client.CalculationMode.ToString()]);
+        }
+    }
+    private void CalculationModeLabel_Click(object sender, EventArgs e)
+    {
+        if (m_client != null)
+        {
+            if (ModifierKeys == Keys.Shift)
+            {
+                switch (m_client.CalculationMode)
+                {
+                    case CalculationMode.SumOfLetterValues:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfWordDigitalRoots);
+                        }
+                        break;
+                    case CalculationMode.SumOfWordDigitSums:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfLetterValues);
+                        }
+                        break;
+                    case CalculationMode.SumOfWordDigitalRoots:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfWordDigitSums);
+                        }
+                        break;
+                    default:
+                        {
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                switch (m_client.CalculationMode)
+                {
+                    case CalculationMode.SumOfLetterValues:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfWordDigitSums);
+                        }
+                        break;
+                    case CalculationMode.SumOfWordDigitSums:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfWordDigitalRoots);
+                        }
+                        break;
+                    case CalculationMode.SumOfWordDigitalRoots:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfLetterValues);
+                        }
+                        break;
+                    default:
+                        {
+                        }
+                        break;
+                }
+            }
 
-            m_client.CalculationMode = temp_calculation_mode;
+            CalculateCurrentValue();
         }
     }
 
@@ -42004,7 +41985,6 @@ public partial class MainForm : Form, ISubscriber
                                 }
                                 else // edit mode so user can paste any text they like to calculate its value
                                 {
-                                    SetCalculationMode(CalculationMode.SumOfLetterValues);
                                     CalculateValueAndDisplayFactors(m_current_text);
                                 }
                             }
@@ -42038,7 +42018,6 @@ public partial class MainForm : Form, ISubscriber
                 if (m_selection_mode)
                 {
                     m_current_text = m_active_textbox.Text;
-                    SetCalculationMode(m_clicked_calculation_mode);
                 }
                 else
                 {
@@ -42053,12 +42032,10 @@ public partial class MainForm : Form, ISubscriber
                         {
                             m_current_text = "";
                         }
-                        SetCalculationMode(m_clicked_calculation_mode);
                     }
                     else // get current selected text
                     {
                         m_current_text = m_active_textbox.SelectedText;
-                        SetCalculationMode(CalculationMode.SumOfLetterValues);
                     }
                 }
 
@@ -42169,14 +42146,10 @@ public partial class MainForm : Form, ISubscriber
                                         (m_active_textbox.SelectionLength == m_active_textbox.Text.Length)
                                        )
                                     {
-                                        SetCalculationMode(m_clicked_calculation_mode);
-
                                         CalculateValueAndDisplayFactors(verses);
                                     }
                                     else // part text selection
                                     {
-                                        SetCalculationMode(CalculationMode.SumOfLetterValues);
-
                                         // calculate and display verse_number_sum, word_number_sum, letter_number_sum
                                         CalculateAndDisplayCounts(m_current_verses, m_current_start_letter, m_current_last_letter);
 
@@ -42249,7 +42222,7 @@ public partial class MainForm : Form, ISubscriber
     {
         if (m_client != null)
         {
-            long value = m_client.CalculateValueUserText(user_text);
+            long value = m_client.CalculateValue(user_text);
             FactorizeValue(value, "User", true);
         }
     }
@@ -42407,7 +42380,6 @@ public partial class MainForm : Form, ISubscriber
         else if (e.KeyCode == Keys.Enter)
         {
             CalculateExpression();
-            SetCalculationMode(CalculationMode.SumOfLetterValues);
         }
         else
         {
@@ -42455,7 +42427,7 @@ public partial class MainForm : Form, ISubscriber
             }
             else if (input.IsArabic() || ((m_radix <= 10) && input.IsEnglish()))
             {
-                m_double_value = m_client.CalculateValueUserText(input);
+                m_double_value = m_client.CalculateValue(input);
                 value = (long)Math.Round(m_double_value);
                 FactorizeValue(value, "Text", true);
             }
@@ -42515,7 +42487,7 @@ public partial class MainForm : Form, ISubscriber
                 }
                 catch // text
                 {
-                    result = m_client.CalculateValueUserText(input);
+                    result = m_client.CalculateValue(input);
                     this.ToolTip.SetToolTip(this.ValueTextBox, null);
                 }
             }
@@ -42667,14 +42639,15 @@ public partial class MainForm : Form, ISubscriber
                     minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
                 }
                 //long n = 0L;
-                //if (squares1_str.StartsWith("4×")) // 4n+1
+                //if (squares1_str.StartsWith("4×")) // 4n+1 or 4n-1
                 //{
                 //    int start = "4×".Length;
                 //    int end = squares1_str.IndexOf("+");
-                //    if ((start > 0) && (end > 0) && (start < end))
+                //    if (end == -1) end = squares1_str.IndexOf("-");
+                //    if ((start >= 0) && (end >= start))
                 //    {
-                //      string text = squares1_str.Substring(start, end - start);
-                //      n = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                //        string text = squares1_str.Substring(start, end - start);
+                //        n = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                 //    }
                 //}
 
@@ -43002,12 +42975,16 @@ public partial class MainForm : Form, ISubscriber
                         {
                             value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                         }
-                        else if (text.StartsWith("4×")) // 4n+1
+                        else if (text.StartsWith("4×")) // 4n+1 or 4n-1
                         {
                             int start = "4×".Length;
                             int end = text.IndexOf("+");
-                            text = text.Substring(start, end - start);
-                            value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                            if (end == -1) end = text.IndexOf("-");
+                            if ((start >= 0) && (end >= start))
+                            {
+                                text = text.Substring(start, end - start);
+                                value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                            }
                         }
                         else
                         {
@@ -46830,10 +46807,10 @@ public partial class MainForm : Form, ISubscriber
     }
     private void ValueInspectLabel_Click(object sender, EventArgs e)
     {
-        bool verbose = (ValueLabel.Text.EndsWith(L[l]["Value"]));
-        InspectValueCalculations(verbose);
+        bool is_value = (ValueLabel.Text.EndsWith(L[l]["Value"]));
+        InspectValueCalculations(is_value);
     }
-    private void InspectValueCalculations(bool verbose)
+    private void InspectValueCalculations(bool is_value)
     {
         this.Cursor = Cursors.WaitCursor;
         try
@@ -46844,7 +46821,7 @@ public partial class MainForm : Form, ISubscriber
                 {
                     string filename = DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss") + "_" + m_client.NumerologySystem.Name + ".txt";
 
-                    if (verbose)
+                    if (is_value)
                     {
                         m_client.Logging = true;    // log Adjust letter/word/verse/chapter
                         CalculateCurrentValue();    // Calculate value with logging - SLOW but very informative
@@ -46854,16 +46831,16 @@ public partial class MainForm : Form, ISubscriber
                     StringBuilder str = new StringBuilder();
                     if (long.TryParse(ValueTextBox.Text, out value))
                     {
-                        if (verbose)
+                        if (is_value)
                         {
                             str.AppendLine(m_current_text);
                             str.AppendLine("--------------------------------------------------------------------------------------------------");
                             str.AppendLine();
-                            str.AppendLine("Chapters\t=\t" + ChaptersTextBox.Text);
-                            str.AppendLine("Verses\t\t=\t" + VersesTextBox.Text);
-                            str.AppendLine("Words\t\t=\t" + WordsTextBox.Text);
-                            str.AppendLine("Letters\t\t=\t" + LettersTextBox.Text);
-                            str.AppendLine("Value\t\t=\t" + ValueTextBox.Text);
+                            str.AppendLine("Chapters\t\t=\t" + ChaptersTextBox.Text);
+                            str.AppendLine("Verses\t\t\t=\t" + VersesTextBox.Text);
+                            str.AppendLine("Words\t\t\t=\t" + WordsTextBox.Text);
+                            str.AppendLine("Letters\t\t\t=\t" + LettersTextBox.Text);
+                            str.AppendLine("Value\t\t\t=\t" + ValueTextBox.Text);
                         }
                         else
                         {
@@ -46872,22 +46849,22 @@ public partial class MainForm : Form, ISubscriber
                     }
                     else
                     {
-                        if (verbose)
+                        if (is_value)
                         {
-                            str.AppendLine("Chapters\t=\t" + DecimalChaptersTextBox.Text);
-                            str.AppendLine("Verses\t\t=\t" + DecimalVersesTextBox.Text);
-                            str.AppendLine("Words\t\t=\t" + DecimalWordsTextBox.Text);
-                            str.AppendLine("Letters\t\t=\t" + DecimalLettersTextBox.Text);
-                            str.AppendLine("Value\t\t=\t" + DecimalValueTextBox.Text);
+                            str.AppendLine("Chapters\t\t=\t" + DecimalChaptersTextBox.Text);
+                            str.AppendLine("Verses\t\t\t=\t" + DecimalVersesTextBox.Text);
+                            str.AppendLine("Words\t\t\t=\t" + DecimalWordsTextBox.Text);
+                            str.AppendLine("Letters\t\t\t=\t" + DecimalLettersTextBox.Text);
+                            str.AppendLine("Value\t\t\t=\t" + DecimalValueTextBox.Text);
                         }
                         else
                         {
-                            str.AppendLine("Value\t\t=\t" + DecimalValueTextBox.Text);
+                            str.AppendLine("Value\t\t\t=\t" + DecimalValueTextBox.Text);
                         }
                     }
 
                     str.AppendLine();
-                    str.AppendLine("Prime Factors\t=\t" + Numbers.FactorizeToString(value));
+                    str.AppendLine("Prime Factors\t\t=\t" + Numbers.FactorizeToString(value));
                     int nth_number_index = 0;
                     int nth_additive_number_index = 0;
                     int nth_non_additive_number_index = 0;
@@ -46897,9 +46874,9 @@ public partial class MainForm : Form, ISubscriber
                         nth_number_index = Numbers.PrimeIndexOf(value) + 1;
                         nth_additive_number_index = Numbers.AdditivePrimeIndexOf(value) + 1;
                         nth_non_additive_number_index = Numbers.NonAdditivePrimeIndexOf(value) + 1;
-                        str.AppendLine("P  Index\t=\t" + ((nth_number_index > 0) ? nth_number_index.ToString() : ""));
-                        str.AppendLine("AP Index\t=\t" + ((nth_additive_number_index > 0) ? nth_additive_number_index.ToString() : ""));
-                        str.AppendLine("XP Index\t=\t" + ((nth_non_additive_number_index > 0) ? nth_non_additive_number_index.ToString() : ""));
+                        str.AppendLine("P  Index\t\t=\t" + ((nth_number_index > 0) ? nth_number_index.ToString() : ""));
+                        str.AppendLine("AP Index\t\t=\t" + ((nth_additive_number_index > 0) ? nth_additive_number_index.ToString() : ""));
+                        str.AppendLine("XP Index\t\t=\t" + ((nth_non_additive_number_index > 0) ? nth_non_additive_number_index.ToString() : ""));
                     }
                     else // any other index type will be treated as IndexNumberType.Composite
                     {
@@ -46907,9 +46884,9 @@ public partial class MainForm : Form, ISubscriber
                         nth_number_index = Numbers.CompositeIndexOf(value) + 1;
                         nth_additive_number_index = Numbers.AdditiveCompositeIndexOf(value) + 1;
                         nth_non_additive_number_index = Numbers.NonAdditiveCompositeIndexOf(value) + 1;
-                        str.AppendLine("C  Index\t=\t" + ((nth_number_index > 0) ? nth_number_index.ToString() : ""));
-                        str.AppendLine("AC Index\t=\t" + ((nth_additive_number_index > 0) ? nth_additive_number_index.ToString() : ""));
-                        str.AppendLine("XC Index\t=\t" + ((nth_non_additive_number_index > 0) ? nth_non_additive_number_index.ToString() : ""));
+                        str.AppendLine("C  Index\t\t=\t" + ((nth_number_index > 0) ? nth_number_index.ToString() : ""));
+                        str.AppendLine("AC Index\t\t=\t" + ((nth_additive_number_index > 0) ? nth_additive_number_index.ToString() : ""));
+                        str.AppendLine("XC Index\t\t=\t" + ((nth_non_additive_number_index > 0) ? nth_non_additive_number_index.ToString() : ""));
                     }
 
                     str.AppendLine();
@@ -46961,29 +46938,34 @@ public partial class MainForm : Form, ISubscriber
                     str.AppendLine(m_number_kind.ToString() + " Index\t\t=\t" + number_kind_index);
 
                     str.AppendLine();
-                    string squares1_str = "";
-                    string squares2_str = "";
                     int _4nplus1_index = -1;
                     int _4nminus1_index = -1;
+                    string squares1_str = "";
+                    string squares2_str = "";
+                    string minus1_str = "";
+                    string minus2_str = "";
                     if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
                     {
+                        _4nplus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
                         squares1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(value);
                         squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
-                        _4nplus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
                         _4nminus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
+                        minus1_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
+                        minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
                     }
                     else //if composite
                     {
+                        _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
                         squares1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(value);
                         squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
-                        _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
                         _4nminus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
+                        minus1_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
+                        minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
                     }
-                    str.AppendLine(((_4nplus1_index > 0) ? "4n+1 Squares1\t\t=\t" : "4n-1 Squares1\t\t=\t") + squares1_str +
-                          "\t\t" + ((_4nplus1_index > 0) ? ("4n+1 Index = " + _4nplus1_index.ToString()) :
-                                    (_4nminus1_index > 0) ? ("4n-1 Index = " + _4nminus1_index.ToString()) :
-                                     ""));
-                    str.AppendLine(((_4nplus1_index > 0) ? "4n+1 Squares2\t\t=\t" : "4n-1 Squares2\t\t=\t") + squares2_str);
+                    str.AppendLine((_4nplus1_index > 0) ? ("4n+1 Squares1\t\t=\t" + squares1_str) : (_4nminus1_index > 0) ? ("4n-1 Squares1\t\t=\t" + minus1_str) : "");
+                    str.AppendLine((_4nplus1_index > 0) ? ("4n+1 Squares2\t\t=\t" + squares2_str) : (_4nminus1_index > 0) ? ("4n-1 Squares2\t\t=\t" + minus2_str) : "");
+                    str.AppendLine((_4nplus1_index > 0) ? ("4n+1 " + (Numbers.IsComposite(value) ? "Composite" : "Prime") + " Index\t=\t" + _4nplus1_index.ToString()) :
+                                  (_4nminus1_index > 0) ? ("4n-1 " + (Numbers.IsComposite(value) ? "Composite" : "Prime") + " Index\t=\t" + _4nminus1_index.ToString()) : "");
 
                     str.AppendLine();
                     if (m_client.Book != null)
@@ -47030,7 +47012,7 @@ public partial class MainForm : Form, ISubscriber
                     str.AppendLine("--------------------------------------------------------------------------------------------------");
                     str.AppendLine();
 
-                    m_client.SaveValueCalculations(filename, str.ToString(), verbose);
+                    m_client.SaveValueCalculations(filename, str.ToString(), is_value);
                     m_client.Logging = false;   // return to FAST calculations without logging
                 }
             }

@@ -258,28 +258,16 @@ public class Client : IPublisher, ISubscriber
     }
     public bool Logging = false;
     // used for non-Quran text
-    public long CalculateValueUserText(char character)
+    public long CalculateValue(string text)
     {
         if (Logging)
         {
             Server.ClearLog();
-            return Server.CalculateValueUserTextWithLogging(character);
+            return Server.CalculateValueWithLogging(text);
         }
         else
         {
-            return Server.CalculateValueUserText(character);
-        }
-    }
-    public long CalculateValueUserText(string text)
-    {
-        if (Logging)
-        {
-            Server.ClearLog();
-            return Server.CalculateValueUserTextWithLogging(text);
-        }
-        else
-        {
-            return Server.CalculateValueUserText(text);
+            return Server.CalculateValue(text);
         }
     }
     // used for Quran text only
