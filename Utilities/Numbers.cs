@@ -1302,6 +1302,22 @@ public static class Numbers
         }
         return result;
     }
+    public static string SumOfDigitSumsString(long number)
+    {
+        StringBuilder str = new StringBuilder();
+        for (int i = 1; i <= number; i++)
+        {
+            foreach (char c in i.ToString())
+            {
+                str.Append(c.ToString() + "+");
+            }
+        }
+        if (str.Length > 0)
+        {
+            str.Remove(str.Length - 1, 1);
+        }
+        return str.ToString();
+    }
 
     public static bool IsDigitsOnly(string text)
     {
@@ -4094,6 +4110,16 @@ public static class Numbers
             square1 = (2 * n + 1) * (2 * n + 1);
             square2 = (2 * n) * (2 * n);
             result = "4×" + n.ToString() + "+1 = " + (long)Math.Sqrt(square1) + "^2 - " + (long)Math.Sqrt(square2) + "^2";
+        }
+        return result;
+    }
+    public static string Get4nMinus1EqualsSumOfTwoSquares(long number)
+    {
+        string result = "";
+        long n = (number + 1L) / 4L;
+        if (number == ((n * 4L) - 1L))
+        {
+            result = "4×" + n.ToString() + "-1";
         }
         return result;
     }

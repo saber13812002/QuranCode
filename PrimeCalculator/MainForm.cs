@@ -547,38 +547,52 @@ public partial class MainForm : Form
             ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
             ValueTextBox.Refresh();
 
-            string squares1_str = "";
-            string squares2_str = "";
+
             int _4nplus1_index = -1;
             int _4nminus1_index = -1;
+            string squares1_str = "";
+            string squares2_str = "";
+            string minus1_str = "";
+            string minus2_str = "";
             if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
             {
+                _4nplus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
                 squares1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(value);
                 squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
-                _4nplus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
+
                 _4nminus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
+                minus1_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
+                minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
             }
-            else // if composite
+            else //if composite
             {
+                _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
                 squares1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(value);
                 squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
-                _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
+
                 _4nminus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
+                minus1_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
+                minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
             }
             //long n = 0L;
             //if (squares1_str.StartsWith("4×")) // 4n+1
             //{
             //    int start = "4×".Length;
             //    int end = squares1_str.IndexOf("+");
-            //    string text = squares1_str.Substring(start, end - start);
-            //    n = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+            //    if ((start > 0) && (end > 0) && (start < end))
+            //    {
+            //      string text = squares1_str.Substring(start, end - start);
+            //      n = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+            //    }
             //}
-            SquareSumTextBox.Text = squares1_str;
+
+            SquareSumTextBox.Text = (_4nplus1_index > 0) ? squares1_str : (_4nminus1_index > 0) ? minus1_str : "";
             //SquareSumTextBox.ForeColor = Numbers.GetNumberTypeColor(n);
             SquareSumTextBox.Refresh();
-            SquareDiffTextBox.Text = squares2_str;
+            SquareDiffTextBox.Text = (_4nplus1_index > 0) ? squares2_str : (_4nminus1_index > 0) ? minus2_str : "";
             //SquareDiffTextBox.ForeColor = Numbers.GetNumberTypeColor(n);
             SquareDiffTextBox.Refresh();
+
             int _4n1_index = (_4nplus1_index > 0) ? _4nplus1_index : (_4nminus1_index > 0) ? _4nminus1_index : 0;
             Nth4n1NumberTextBox.Text = (_4n1_index > 0) ? _4n1_index.ToString() : "";
             Nth4n1NumberTextBox.ForeColor = Numbers.GetNumberTypeColor(_4n1_index);
