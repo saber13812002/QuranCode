@@ -32320,7 +32320,7 @@ public partial class MainForm : Form, ISubscriber
                                         else
                                         {
                                             str.Insert(line_start, " ");
-                                            long value = m_client.CalculateValue(c.ToString());
+                                            long value = m_client.CalculateValue(c);
                                             str.Insert(line_start, Radix.Encode(value, m_values_sequence_radix).PadLeft((m_values_sequence_radix > 2) ? 0 : 8, '0'));
                                         }
                                     }
@@ -32389,7 +32389,7 @@ public partial class MainForm : Form, ISubscriber
                                         }
                                         else
                                         {
-                                            long value = m_client.CalculateValue(c.ToString());
+                                            long value = m_client.CalculateValue(c);
                                             str.Append(Radix.Encode(value, m_values_sequence_radix).PadLeft((m_values_sequence_radix > 2) ? 0 : 8, '0'));
                                             str.Append(" ");
                                         }
@@ -32683,6 +32683,11 @@ public partial class MainForm : Form, ISubscriber
     private int m_user_text_selection_length = 0;
     private void CalculateUserTextValue(Point location)
     {
+        if (m_client != null)
+        {
+            SetCalculationMode(CalculationMode.SumOfLetterValues);
+        }
+
         m_user_text_selection_length = UserTextTextBox.SelectionLength;
         m_user_text_selection_start = UserTextTextBox.SelectionStart;
 
@@ -41634,6 +41639,7 @@ public partial class MainForm : Form, ISubscriber
             ToolTip.SetToolTip(CalculationModeLabel, L[l][m_client.CalculationMode.ToString()]);
         }
     }
+    CalculationMode m_clicked_calculation_mode = CalculationMode.SumOfLetterValues;
     private void CalculationModeLabel_Click(object sender, EventArgs e)
     {
         if (m_client != null)
@@ -41689,6 +41695,9 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
 
+            // backup first
+            m_clicked_calculation_mode = m_client.CalculationMode;
+            // then re-calculate value
             CalculateCurrentValue();
         }
     }
@@ -41985,6 +41994,7 @@ public partial class MainForm : Form, ISubscriber
                                 }
                                 else // edit mode so user can paste any text they like to calculate its value
                                 {
+                                    SetCalculationMode(CalculationMode.SumOfLetterValues);
                                     CalculateValueAndDisplayFactors(m_current_text);
                                 }
                             }
@@ -42018,6 +42028,7 @@ public partial class MainForm : Form, ISubscriber
                 if (m_selection_mode)
                 {
                     m_current_text = m_active_textbox.Text;
+                    SetCalculationMode(m_clicked_calculation_mode);
                 }
                 else
                 {
@@ -42032,10 +42043,12 @@ public partial class MainForm : Form, ISubscriber
                         {
                             m_current_text = "";
                         }
+                        SetCalculationMode(m_clicked_calculation_mode);
                     }
                     else // get current selected text
                     {
                         m_current_text = m_active_textbox.SelectedText;
+                        SetCalculationMode(CalculationMode.SumOfLetterValues);
                     }
                 }
 
@@ -42146,10 +42159,14 @@ public partial class MainForm : Form, ISubscriber
                                         (m_active_textbox.SelectionLength == m_active_textbox.Text.Length)
                                        )
                                     {
+                                        SetCalculationMode(m_clicked_calculation_mode);
+
                                         CalculateValueAndDisplayFactors(verses);
                                     }
                                     else // part text selection
                                     {
+                                        SetCalculationMode(CalculationMode.SumOfLetterValues);
+
                                         // calculate and display verse_number_sum, word_number_sum, letter_number_sum
                                         CalculateAndDisplayCounts(m_current_verses, m_current_start_letter, m_current_last_letter);
 
@@ -42380,6 +42397,7 @@ public partial class MainForm : Form, ISubscriber
         else if (e.KeyCode == Keys.Enter)
         {
             CalculateExpression();
+            SetCalculationMode(CalculationMode.SumOfLetterValues);
         }
         else
         {

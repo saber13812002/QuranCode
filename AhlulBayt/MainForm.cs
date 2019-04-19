@@ -11,7 +11,6 @@ public partial class MainForm : Form
 {
     private Client m_client = null;
     private string m_numerology_system_name = null;
-    private CalculationMode m_calculation_mode = CalculationMode.SumOfLetterValues;
     private List<Letter> m_fatiha_letters = null;
     private string m_infallible_letters = null;
     private bool m_use_ya_husein = true;
@@ -885,7 +884,7 @@ public partial class MainForm : Form
                     if (m_use_ya_husein) value += m_ya_husein_letter_values[i];
                     fatiha_letter_values.Add(value);
 
-                    value = m_client.NumerologySystem.CalculateValue(m_infallible_letters[i].ToString(), m_calculation_mode);
+                    value = m_client.CalculateValue(m_infallible_letters[i]);
                     if (m_use_ya_husein) value -= m_ya_husein_letter_values[i];
                     infallible_letter_values.Add(Math.Abs(value));
                 }

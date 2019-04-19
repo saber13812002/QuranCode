@@ -205,7 +205,18 @@ namespace Model
             }
         }
 
-        public long CalculateValue(string text, CalculationMode calculation_mode)
+        public long CalculateValue(char character)
+        {
+            if (letter_values == null) return 0L;
+
+            if (letter_values.ContainsKey(character))
+            {
+                return letter_values[character];
+            }
+            return 0L;
+        }
+
+        public long CalculateValue(string text)
         {
             if (String.IsNullOrEmpty(text)) return 0L;
             if (letter_values == null) return 0L;
@@ -249,53 +260,12 @@ namespace Model
             }
             else
             {
-                switch (calculation_mode)
+                for (int i = 0; i < text.Length; i++)
                 {
-                    case CalculationMode.SumOfLetterValues:
-                        {
-                            for (int i = 0; i < text.Length; i++)
-                            {
-                                if (letter_values.ContainsKey(text[i]))
-                                {
-                                    result += letter_values[text[i]];
-                                }
-                            }
-                        }
-                        break;
-                    case CalculationMode.SumOfWordDigitSums:
-                        {
-                            string[] words = text.Split();
-                            foreach (string word in words)
-                            {
-                                long word_value = 0L;
-                                for (int i = 0; i < word.Length; i++)
-                                {
-                                    if (letter_values.ContainsKey(word[i]))
-                                    {
-                                        word_value += letter_values[word[i]];
-                                    }
-                                }
-                                result += Numbers.DigitSum(word_value);
-                            }
-                        }
-                        break;
-                    case CalculationMode.SumOfWordDigitalRoots:
-                        {
-                            string[] words = text.Split();
-                            foreach (string word in words)
-                            {
-                                long word_value = 0L;
-                                for (int i = 0; i < word.Length; i++)
-                                {
-                                    if (letter_values.ContainsKey(word[i]))
-                                    {
-                                        word_value += letter_values[word[i]];
-                                    }
-                                }
-                                result += Numbers.DigitalRoot(word_value);
-                            }
-                        }
-                        break;
+                    if (letter_values.ContainsKey(text[i]))
+                    {
+                        result += letter_values[text[i]];
+                    }
                 }
             }
             return result;

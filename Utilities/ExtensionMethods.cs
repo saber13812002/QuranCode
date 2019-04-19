@@ -1176,6 +1176,58 @@ public static class StringExtensions
         // Step 7
         return distance[source_word_count, target_word_count];
     }
+
+    //4n+1 HashKey Generation
+    public static long GetHashKey(this string source, int level)
+    {
+        long key = -1L;
+        if (source == null) return key;
+        if (source.Length < 5) return key;
+        if ((level <= 0) || (level > 3)) return key;
+
+        long odd = source.GetHashCode() * 2L + 1L;
+        long even = source.GetHashCode() * 2L;
+        switch (level)
+        {
+            case 0: // Lite
+                {
+                    key = (4L * even) - 1L;
+                }
+                break;
+            case 1: // Standard
+                {
+                    key = (4L * even) - 1L;
+                }
+                break;
+            case 2: // Professional
+                {
+                    key = (4L * odd) + 1L;
+                }
+                break;
+            case 3: // Ultimate
+                {
+                    key = (4L * odd) + 1L;
+                }
+                break;
+        }
+
+        return key;
+    }
+    public static int GetHashKeyLevel(this string source, long key)
+    {
+        int level = -1;
+        if (source == null) return level;
+        if (source.Length < 5) return level;
+        long odd = source.GetHashCode() * 2L + 1L;
+        long even = source.GetHashCode() * 2L;
+        if (key == (4L * even) - 1L) level = 0;
+        else if (key == (4L * odd) - 1L) level = 1;
+        else if (key == (4L * even) + 1L) level = 2;
+        else if (key == (4L * odd) + 1L) level = 3;
+        else level = -1;
+
+        return level;
+    }
 }
 
 public static class IntegerExtensions

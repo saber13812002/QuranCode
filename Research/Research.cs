@@ -2424,7 +2424,7 @@ public static class Research
             {
                 if (numerology_system.TextMode == client.NumerologySystem.TextMode)
                 {
-                    long value = numerology_system.CalculateValue(chapter.Text, client.CalculationMode);
+                    long value = numerology_system.CalculateValue(chapter.Text);
                     str.Append(value.ToString() + "\t");
                 }
             }
@@ -2627,7 +2627,7 @@ public static class Research
             {
                 if (numerology_system.TextMode == client.NumerologySystem.TextMode)
                 {
-                    long value = numerology_system.CalculateValue(verse.Text, client.CalculationMode);
+                    long value = numerology_system.CalculateValue(verse.Text);
                     str.Append(value.ToString() + "\t");
                 }
             }
@@ -2975,7 +2975,7 @@ public static class Research
                 int duplicates = 0;
                 foreach (Chapter chapter in chapters)
                 {
-                    long value = numerology_system.CalculateValue(chapter.Text, client.CalculationMode);
+                    long value = numerology_system.CalculateValue(chapter.Text);
                     if (value > 0)
                     {
                         if (!value_frequencies.ContainsKey(value))
@@ -3038,7 +3038,7 @@ public static class Research
                 int duplicates = 0;
                 foreach (Verse verse in verses)
                 {
-                    long value = numerology_system.CalculateValue(verse.Text, client.CalculationMode);
+                    long value = numerology_system.CalculateValue(verse.Text);
                     if (value > 0)
                     {
                         if (!value_frequencies.ContainsKey(value))
