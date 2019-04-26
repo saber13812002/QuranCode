@@ -1071,7 +1071,7 @@ public partial class MainForm : Form, ISubscriber
         this.WordsListBoxLabel = new System.Windows.Forms.Label();
         this.ClientSplitContainer = new System.Windows.Forms.SplitContainer();
         this.ScriptTextBox = new RichTextBoxEx();
-        this.CalculatorLabel = new System.Windows.Forms.Label();
+        this.AppPrimeCalculatorLabel = new System.Windows.Forms.Label();
         this.MainTextBox = new RichTextBoxEx();
         this.SearchResultTextBox = new RichTextBoxEx();
         this.HeaderPanel = new System.Windows.Forms.Panel();
@@ -5993,7 +5993,7 @@ public partial class MainForm : Form, ISubscriber
         // 
         this.ClientSplitContainer.Panel1.BackColor = System.Drawing.Color.Transparent;
         this.ClientSplitContainer.Panel1.Controls.Add(this.ScriptTextBox);
-        this.ClientSplitContainer.Panel1.Controls.Add(this.CalculatorLabel);
+        this.ClientSplitContainer.Panel1.Controls.Add(this.AppPrimeCalculatorLabel);
         this.ClientSplitContainer.Panel1.Controls.Add(this.MainTextBox);
         this.ClientSplitContainer.Panel1.Controls.Add(this.SearchResultTextBox);
         this.ClientSplitContainer.Panel1.Controls.Add(this.HeaderPanel);
@@ -6029,21 +6029,21 @@ public partial class MainForm : Form, ISubscriber
         this.ScriptTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         this.ScriptTextBox.MouseHover += new System.EventHandler(this.ScriptTextBox_MouseHover);
         // 
-        // CalculatorLabel
+        // AppPrimeCalculatorLabel
         // 
-        this.CalculatorLabel.BackColor = System.Drawing.SystemColors.Control;
-        this.CalculatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.CalculatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.CalculatorLabel.ForeColor = System.Drawing.Color.Transparent;
-        this.CalculatorLabel.Image = ((System.Drawing.Image)(resources.GetObject("CalculatorLabel.Image")));
-        this.CalculatorLabel.Location = new System.Drawing.Point(3, 389);
-        this.CalculatorLabel.Name = "CalculatorLabel";
-        this.CalculatorLabel.Size = new System.Drawing.Size(20, 20);
-        this.CalculatorLabel.TabIndex = 0;
-        this.CalculatorLabel.Tag = "";
-        this.CalculatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.CalculatorLabel, "Prime Calculator");
-        this.CalculatorLabel.Click += new System.EventHandler(this.CalculatorLabel_Click);
+        this.AppPrimeCalculatorLabel.BackColor = System.Drawing.SystemColors.Control;
+        this.AppPrimeCalculatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.AppPrimeCalculatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.AppPrimeCalculatorLabel.ForeColor = System.Drawing.Color.Transparent;
+        this.AppPrimeCalculatorLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppPrimeCalculatorLabel.Image")));
+        this.AppPrimeCalculatorLabel.Location = new System.Drawing.Point(3, 389);
+        this.AppPrimeCalculatorLabel.Name = "AppPrimeCalculatorLabel";
+        this.AppPrimeCalculatorLabel.Size = new System.Drawing.Size(20, 20);
+        this.AppPrimeCalculatorLabel.TabIndex = 0;
+        this.AppPrimeCalculatorLabel.Tag = "";
+        this.AppPrimeCalculatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.ToolTip.SetToolTip(this.AppPrimeCalculatorLabel, "Prime Calculator");
+        this.AppPrimeCalculatorLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
         // 
         // MainTextBox
         // 
@@ -47398,14 +47398,30 @@ public partial class MainForm : Form, ISubscriber
     }
     /////////////////////////////////////////////////////////////////////////////
     #endregion
-    #region Run
+    #region Apps
     ///////////////////////////////////////////////////////////////////////////////
-    private void CalculatorLabel_Click(object sender, EventArgs e)
+    private void AppLauncherLabel_Click(object sender, EventArgs e)
     {
         this.Cursor = Cursors.WaitCursor;
         try
         {
-            System.Diagnostics.Process.Start("PrimeCalculator.exe");
+            if (sender is Label)
+            {
+                string label_name = (sender as Label).Name;
+                if (!String.IsNullOrEmpty(label_name))
+                {
+                    if ((label_name.StartsWith("App")) && (label_name.EndsWith("Label")))
+                    {
+                        int start = "App".Length;
+                        int pos = label_name.IndexOf("Label");
+                        string process_name = label_name.Substring(start, pos - start);
+                        if (!String.IsNullOrEmpty(process_name))
+                        {
+                            System.Diagnostics.Process.Start(process_name + ".exe");
+                        }
+                    }
+                }
+            }
         }
         catch (Exception ex)
         {

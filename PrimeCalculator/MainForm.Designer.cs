@@ -151,7 +151,7 @@
             this.bTriangleTextBox = new System.Windows.Forms.TextBox();
             this.aTriangleTextBox = new System.Windows.Forms.TextBox();
             this.CircleTabPage = new System.Windows.Forms.TabPage();
-            this.p1000iCircleLabel = new System.Windows.Forms.Label();
+            this.pi1000CircleLabel = new System.Windows.Forms.Label();
             this.piCircleTextBox = new System.Windows.Forms.TextBox();
             this.aCircleTextBox = new System.Windows.Forms.TextBox();
             this.cCircleTextBox = new System.Windows.Forms.TextBox();
@@ -1897,7 +1897,7 @@
             // CircleTabPage
             // 
             this.CircleTabPage.BackColor = System.Drawing.SystemColors.Control;
-            this.CircleTabPage.Controls.Add(this.p1000iCircleLabel);
+            this.CircleTabPage.Controls.Add(this.pi1000CircleLabel);
             this.CircleTabPage.Controls.Add(this.piCircleLabel);
             this.CircleTabPage.Controls.Add(this.piCircleTextBox);
             this.CircleTabPage.Controls.Add(this.a2EqCircleLabel);
@@ -1919,17 +1919,17 @@
             this.CircleTabPage.TabIndex = 2;
             this.CircleTabPage.Text = "Circle";
             // 
-            // p1000iCircleLabel
+            // pi1000CircleLabel
             // 
-            this.p1000iCircleLabel.BackColor = System.Drawing.SystemColors.Control;
-            this.p1000iCircleLabel.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.p1000iCircleLabel.ForeColor = System.Drawing.Color.RosyBrown;
-            this.p1000iCircleLabel.Location = new System.Drawing.Point(26, 157);
-            this.p1000iCircleLabel.Name = "p1000iCircleLabel";
-            this.p1000iCircleLabel.Size = new System.Drawing.Size(200, 13);
-            this.p1000iCircleLabel.TabIndex = 0;
-            this.p1000iCircleLabel.Text = "1 0 0 0    d e c i m a l   d i g i t s   o f    π ";
-            this.p1000iCircleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.pi1000CircleLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.pi1000CircleLabel.Font = new System.Drawing.Font("Times New Roman", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pi1000CircleLabel.ForeColor = System.Drawing.Color.RosyBrown;
+            this.pi1000CircleLabel.Location = new System.Drawing.Point(26, 157);
+            this.pi1000CircleLabel.Name = "pi1000CircleLabel";
+            this.pi1000CircleLabel.Size = new System.Drawing.Size(200, 13);
+            this.pi1000CircleLabel.TabIndex = 0;
+            this.pi1000CircleLabel.Text = "1 0 0 0    d e c i m a l   d i g i t s   o f    π ";
+            this.pi1000CircleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // piCircleTextBox
             // 
@@ -2304,7 +2304,7 @@
     private System.Windows.Forms.TextBox h3TriangleTextBox;
     private System.Windows.Forms.TextBox h2TriangleTextBox;
     private System.Windows.Forms.Button ClearTriangleButton;
-    private System.Windows.Forms.Label p1000iCircleLabel;
+    private System.Windows.Forms.Label pi1000CircleLabel;
     private System.Windows.Forms.Label pi1000SphereLabel;
     private System.Windows.Forms.Label piSphereLabel;
     private System.Windows.Forms.TextBox piSphereTextBox;

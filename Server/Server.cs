@@ -1412,8 +1412,12 @@ public class Server : IPublisher
         long result = 0L;
         if (s_numerology_system != null)
         {
-            character = character.ToString().SimplifyTo(s_numerology_system.TextMode)[0];
-            result = s_numerology_system.CalculateValue(character);
+            string s = character.ToString().SimplifyTo(s_numerology_system.TextMode);
+            if (!String.IsNullOrEmpty(s))
+            {
+                char c = s[0];
+                result = s_numerology_system.CalculateValue(c);
+            }
         }
         return result;
     }
@@ -1439,11 +1443,15 @@ public class Server : IPublisher
         long result = 0L;
         if (s_numerology_system != null)
         {
-            character = character.ToString().SimplifyTo(s_numerology_system.TextMode)[0];
-            Log.Append(character.ToString());
-            long value = s_numerology_system.CalculateValue(character);
-            result += value; ValueSum += value;
-            Log.AppendLine("\t" + value);
+            string s = character.ToString().SimplifyTo(s_numerology_system.TextMode);
+            if (!String.IsNullOrEmpty(s))
+            {
+                Log.Append(s);
+                char c = s[0];
+                long value = s_numerology_system.CalculateValue(c);
+                result += value; ValueSum += value;
+                Log.AppendLine("\t" + value);
+            }
         }
         return result;
     }

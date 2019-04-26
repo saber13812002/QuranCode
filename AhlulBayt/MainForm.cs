@@ -963,7 +963,7 @@ public partial class MainForm : Form
                             (m_number_type == NumberType.NonAdditiveComposite) ? "XC" : ""
                             )
                         ;
-                        m_generated_lines.Add(generated_line + "\t" + parameters);
+                        m_generated_lines.Add(parameters + "\t" + generated_line);
                     }
                 }
             }
