@@ -9927,7 +9927,7 @@ public partial class MainForm : Form, ISubscriber
         | System.Windows.Forms.AnchorStyles.Right)));
         this.UserTextTextBox.BackColor = System.Drawing.SystemColors.Window;
         this.UserTextTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.UserTextTextBox.ForeColor = System.Drawing.Color.Blue;
+        this.UserTextTextBox.ForeColor = System.Drawing.Color.Navy;
         this.UserTextTextBox.HideSelection = false;
         this.UserTextTextBox.Location = new System.Drawing.Point(29, 0);
         this.UserTextTextBox.Margin = new System.Windows.Forms.Padding(4);
@@ -10989,7 +10989,7 @@ public partial class MainForm : Form, ISubscriber
         // CalculationModeLabel
         // 
         this.CalculationModeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.CalculationModeLabel.BackColor = System.Drawing.Color.Blue;
+        this.CalculationModeLabel.BackColor = System.Drawing.SystemColors.Window;
         this.CalculationModeLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.CalculationModeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.CalculationModeLabel.ForeColor = System.Drawing.SystemColors.Window;
@@ -16119,28 +16119,13 @@ public partial class MainForm : Form, ISubscriber
                             if (!string.IsNullOrEmpty(method_name))
                             {
                                 string result = InvokeResearchMethod(method_name, m_client, param, m_found_verses_displayed);
-                                if (method_name.StartsWith("Run_") || method_name.StartsWith("Open_"))
+
+                                string filename = m_client.NumerologySystem.Name + "_" + method_name + "_" + ((param.Length > 0) ? (param + "_") : "") + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
+                                if (Directory.Exists(Globals.RESEARCH_FOLDER))
                                 {
-                                    // do nothing
-                                }
-                                else
-                                {
-                                    if ((m_client.FoundVerses != null) && (m_client.FoundVerses.Count > 0))
-                                    {
-                                        DisplaySearchResults();
-                                        HeaderLabel.Text = (m_client.FoundVerses.Count.ToString() + " verses found");
-                                        HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(m_client.FoundVerses.Count);
-                                    }
-                                    else
-                                    {
-                                        string filename = m_client.NumerologySystem.Name + "_" + method_name + "_" + ((param.Length > 0) ? (param + "_") : "") + DateTime.Now.ToString("yyyyMMdd_hhmmss") + ".txt";
-                                        if (Directory.Exists(Globals.RESEARCH_FOLDER))
-                                        {
-                                            string path = Globals.RESEARCH_FOLDER + "/" + filename;
-                                            FileHelper.SaveText(path, result);
-                                            FileHelper.DisplayFile(path);
-                                        }
-                                    }
+                                    string path = Globals.RESEARCH_FOLDER + "/" + filename;
+                                    FileHelper.SaveText(path, result);
+                                    FileHelper.DisplayFile(path);
                                 }
                             }
                         }
@@ -22941,7 +22926,7 @@ public partial class MainForm : Form, ISubscriber
     private string m_note_writing_instruction = "write a note for";
     private Color m_note_writing_instruction_color = Color.Gray;
     private Color m_note_edit_color = Color.Black;
-    private Color m_note_view_color = Color.Blue;
+    private Color m_note_view_color = Color.Navy;
     private void BookmarkTextBox_Enter(object sender, EventArgs e)
     {
         SearchGroupBox_Leave(null, null);
@@ -41617,17 +41602,17 @@ public partial class MainForm : Form, ISubscriber
             {
                 case CalculationMode.SumOfLetterValues:
                     {
-                        CalculationModeLabel.BackColor = Color.Blue;
+                        CalculationModeLabel.BackColor = SystemColors.Window;
                     }
                     break;
                 case CalculationMode.SumOfWordDigitSums:
                     {
-                        CalculationModeLabel.BackColor = Color.Red;
+                        CalculationModeLabel.BackColor = Color.Gray;
                     }
                     break;
                 case CalculationMode.SumOfWordDigitalRoots:
                     {
-                        CalculationModeLabel.BackColor = Color.Green;
+                        CalculationModeLabel.BackColor = Color.Black;
                     }
                     break;
                 default:

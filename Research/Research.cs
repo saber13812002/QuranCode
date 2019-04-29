@@ -24,8 +24,6 @@ using System.IO;
 using System.Threading;
 using Model;
 
-// TODO: If result is words, verses or chapter then fill m_client.FoundWords, m_client.FoundVerses, m_client.FoundChapters in Reseach.dll and DisplaySearchResults().
-
 public static class Research
 {
     private static List<Verse> GetSourceVerses(Client client, bool in_search_result)
@@ -5000,7 +4998,7 @@ public static class Research
         }
         return null;
     }
-    private static string AP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    public static string AP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.NumerologySystem == null) return null;
@@ -5011,7 +5009,7 @@ public static class Research
         }
         return null;
     }
-    private static string XP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    public static string XP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.NumerologySystem == null) return null;
@@ -5022,7 +5020,7 @@ public static class Research
         }
         return null;
     }
-    private static string C_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    public static string C_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.NumerologySystem == null) return null;
@@ -5033,7 +5031,7 @@ public static class Research
         }
         return null;
     }
-    private static string AC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    public static string AC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.NumerologySystem == null) return null;
@@ -5044,7 +5042,7 @@ public static class Research
         }
         return null;
     }
-    private static string XC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    public static string XC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.NumerologySystem == null) return null;
@@ -5543,36 +5541,41 @@ public static class Research
     }
     private static string GetConsecutiveVerses(Client client, long value1, long value2, bool display_both)
     {
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.Book.Verses == null) return null;
+
         string result = "";
         if ((value1 > 0) && (value2 > 0))
         {
-            NumberQuery query = new NumberQuery();
-            query.Value = value1;
-            int matches = client.FindVerses(query);
-            if (matches > 0)
+            List<Verse> found_verses1 = new List<Verse>();
+            List<Verse> found_verses2 = new List<Verse>();
+            foreach (Verse verse in client.Book.Verses)
             {
-                List<Verse> found_verses1 = new List<Verse>(client.FoundVerses);
-                query = new NumberQuery();
-                query.Value = value2;
-                matches = client.FindVerses(query);
-                if (matches > 0)
+                long value = client.CalculateValue(verse);
+                if (value1 == value)
                 {
-                    List<Verse> found_verses2 = new List<Verse>(client.FoundVerses);
-                    foreach (Verse v1 in found_verses1)
+                    found_verses1.Add(verse);
+                }
+                if (value2 == value)
+                {
+                    found_verses2.Add(verse);
+                }
+            }
+
+            foreach (Verse verse1 in found_verses1)
+            {
+                foreach (Verse verse2 in found_verses2)
+                {
+                    if (Math.Abs(verse2.Number - verse1.Number) == 1)
                     {
-                        foreach (Verse v2 in found_verses2)
+                        if (display_both)
                         {
-                            if (Math.Abs(v2.Number - v1.Number) == 1)
-                            {
-                                if (display_both)
-                                {
-                                    result += v1.Text + "\t" + v2.Text + "\t";
-                                }
-                                else
-                                {
-                                    result += v1.Text + "\t";
-                                }
-                            }
+                            result += verse1.Text + "\t" + verse2.Text + "\t";
+                        }
+                        else
+                        {
+                            result += verse1.Text + "\t";
                         }
                     }
                 }
@@ -5621,9 +5624,6 @@ public static class Research
         str.AppendLine();
 
         int count = 0;
-        client.FoundVerses = new List<Verse>();
-        client.FoundPhrases = new List<Phrase>();
-        client.ClearSearchResults();
         foreach (Verse verse in client.Book.Verses)
         {
             bool contains_initial_letters = false;
@@ -5650,9 +5650,6 @@ public static class Research
                 str.Append(Numbers.DigitSum(value).ToString() + "\t");
                 str.Append(verse.Text + "\t");
                 str.AppendLine();
-
-                client.FoundVerses.Add(verse);
-                client.FoundPhrases.Add(new Phrase(verse, 0, null));
             }
         }
         return str.ToString();
@@ -5669,9 +5666,6 @@ public static class Research
         str.AppendLine();
 
         int count = 0;
-        client.FoundVerses = new List<Verse>();
-        client.FoundPhrases = new List<Phrase>();
-        client.ClearSearchResults();
         foreach (Verse verse in client.Book.Verses)
         {
             string verse_text = verse.Text.SimplifyTo(client.NumerologySystem.TextMode);
@@ -5700,9 +5694,6 @@ public static class Research
                 str.Append(Numbers.DigitSum(value).ToString() + "\t");
                 str.Append(verse.Text + "\t");
                 str.AppendLine();
-
-                client.FoundVerses.Add(verse);
-                client.FoundPhrases.Add(new Phrase(verse, 0, null));
             }
         }
         return str.ToString();
@@ -5712,16 +5703,12 @@ public static class Research
         if (client == null) return null;
         if (client.Book == null) return null;
         if (client.Book.Verses == null) return null;
-        if (client.FoundVerses == null) client.FoundVerses = new List<Verse>();
 
         StringBuilder str = new StringBuilder();
         str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
         str.AppendLine();
 
         int count = 0;
-        client.FoundVerses = new List<Verse>();
-        client.FoundPhrases = new List<Phrase>();
-        client.ClearSearchResults();
         foreach (Verse verse in client.Book.Verses)
         {
             bool contains_all_initial_letters = true;
@@ -5748,9 +5735,6 @@ public static class Research
                 str.Append(Numbers.DigitSum(value).ToString() + "\t");
                 str.Append(verse.Text + "\t");
                 str.AppendLine();
-
-                client.FoundVerses.Add(verse);
-                client.FoundPhrases.Add(new Phrase(verse, 0, null));
             }
         }
         return str.ToString();
@@ -5761,16 +5745,12 @@ public static class Research
         if (client.NumerologySystem == null) return null;
         if (client.Book == null) return null;
         if (client.Book.Verses == null) return null;
-        if (client.FoundVerses == null) client.FoundVerses = new List<Verse>();
 
         StringBuilder str = new StringBuilder();
         str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
         str.AppendLine();
 
         int count = 0;
-        client.FoundVerses = new List<Verse>();
-        client.FoundPhrases = new List<Phrase>();
-        client.ClearSearchResults();
         foreach (Verse verse in client.Book.Verses)
         {
             bool contains_all_initial_letters = true;
@@ -5811,9 +5791,6 @@ public static class Research
                     str.Append(Numbers.DigitSum(value).ToString() + "\t");
                     str.Append(verse.Text + "\t");
                     str.AppendLine();
-
-                    client.FoundVerses.Add(verse);
-                    client.FoundPhrases.Add(new Phrase(verse, 0, null));
                 }
             }
         }
@@ -5824,16 +5801,12 @@ public static class Research
         if (client == null) return null;
         if (client.Book == null) return null;
         if (client.Book.Verses == null) return null;
-        if (client.FoundVerses == null) client.FoundVerses = new List<Verse>();
 
         StringBuilder str = new StringBuilder();
         str.Append("#" + "\t" + "Verse" + "\t" + "Address" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "DigitSum" + "\t" + "Text");
         str.AppendLine();
 
         int count = 0;
-        client.FoundVerses = new List<Verse>();
-        client.FoundPhrases = new List<Phrase>();
-        client.ClearSearchResults();
         foreach (Verse verse in client.Book.Verses)
         {
             bool contain_no_initial_letters = true;
@@ -5860,9 +5833,6 @@ public static class Research
                 str.Append(Numbers.DigitSum(value).ToString() + "\t");
                 str.Append(verse.Text + "\t");
                 str.AppendLine();
-
-                client.FoundVerses.Add(verse);
-                client.FoundPhrases.Add(new Phrase(verse, 0, null));
             }
         }
         return str.ToString();
@@ -6453,51 +6423,6 @@ public static class Research
 
         client.NumerologySystem = backup_numerology_system;
 
-        return null;
-    }
-
-    private static string _____________________________(Client client, string param, bool in_search_result)
-    {
-        return null;
-    }
-    private static string Run_AhlulBayt(Client client, string param, bool in_search_result)
-    {
-        System.Diagnostics.Process.Start("AhlulBayt.exe");
-        return null;
-    }
-    private static string Run_Composites(Client client, string param, bool in_search_result)
-    {
-        System.Diagnostics.Process.Start("Composites.exe");
-        return null;
-    }
-    private static string Run_Numbers(Client client, string param, bool in_search_result)
-    {
-        System.Diagnostics.Process.Start("Numbers.exe");
-        return null;
-    }
-    private static string Run_InitialLetters(Client client, string param, bool in_search_result)
-    {
-        System.Diagnostics.Process.Start("InitialLetters.exe");
-        return null;
-    }
-    private static string Run_PrimeCalculator(Client client, string param, bool in_search_result)
-    {
-        System.Diagnostics.Process.Start("PrimeCalculator.exe");
-        return null;
-    }
-    private static string Run_QuranLab(Client client, string param, bool in_search_result)
-    {
-        System.Diagnostics.Process.Start("QuranLab.exe");
-        return null;
-    }
-    private static string Run_WordGenerator(Client client, string param, bool in_search_result)
-    {
-        System.Diagnostics.Process.Start("WordGenerator.exe");
-        return null;
-    }
-    private static string Open_HelpFolder(Client client, string param, bool in_search_result)
-    {
-        System.Diagnostics.Process.Start("Help");
         return null;
     }
 }
