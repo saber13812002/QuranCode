@@ -32,9 +32,10 @@ public static class Drawing
             {
                 case DrawingShape.Lines:
                     {
-                        //DrawPageLines(bitmap, values, color);
-                        return;
+                        width = (int)Math.Round(Math.Sqrt(count + 1));
+                        height = width;
                     }
+                    break;
                 case DrawingShape.Spiral:
                     {
                         DrawValuesSpiral(bitmap, values, color);
@@ -257,9 +258,10 @@ public static class Drawing
             {
                 case DrawingShape.Lines:
                     {
-                        //DrawPageLines(bitmap, values, colors);
-                        return;
+                        width = (int)Math.Round(Math.Sqrt(count + 1));
+                        height = width;
                     }
+                    break;
                 case DrawingShape.Spiral:
                     {
                         DrawPointsSpiral(bitmap, values, colors);

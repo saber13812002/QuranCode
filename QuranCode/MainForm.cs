@@ -45320,29 +45320,16 @@ public partial class MainForm : Form, ISubscriber
             if (m_client != null)
             {
                 List<Verse> verses = null;
-                switch (m_client.SearchScope)
+                if (m_found_verses_displayed)
                 {
-                    case SearchScope.Book:
-                        {
-                            if (m_client.Book != null)
-                            {
-                                verses = m_client.Book.Verses;
-                            }
-                        }
-                        break;
-                    case SearchScope.Selection:
-                        {
-                            if (m_client.Selection != null)
-                            {
-                                verses = m_client.Selection.Verses;
-                            }
-                        }
-                        break;
-                    case SearchScope.Result:
-                        {
-                            verses = m_client.FoundVerses;
-                        }
-                        break;
+                    verses = m_client.FoundVerses;
+                }
+                else
+                {
+                    if (m_client.Selection != null)
+                    {
+                        verses = m_client.Selection.Verses;
+                    }
                 }
 
                 if (verses != null)
@@ -45408,29 +45395,16 @@ public partial class MainForm : Form, ISubscriber
             if (m_client != null)
             {
                 List<Verse> verses = null;
-                switch (m_client.SearchScope)
+                if (m_found_verses_displayed)
                 {
-                    case SearchScope.Book:
-                        {
-                            if (m_client.Book != null)
-                            {
-                                verses = m_client.Book.Verses;
-                            }
-                        }
-                        break;
-                    case SearchScope.Selection:
-                        {
-                            if (m_client.Selection != null)
-                            {
-                                verses = m_client.Selection.Verses;
-                            }
-                        }
-                        break;
-                    case SearchScope.Result:
-                        {
-                            verses = m_client.FoundVerses;
-                        }
-                        break;
+                    verses = m_client.FoundVerses;
+                }
+                else
+                {
+                    if (m_client.Selection != null)
+                    {
+                        verses = m_client.Selection.Verses;
+                    }
                 }
 
                 if (verses != null)
@@ -45490,29 +45464,16 @@ public partial class MainForm : Form, ISubscriber
             if (m_client != null)
             {
                 List<Verse> verses = null;
-                switch (m_client.SearchScope)
+                if (m_found_verses_displayed)
                 {
-                    case SearchScope.Book:
-                        {
-                            if (m_client.Book != null)
-                            {
-                                verses = m_client.Book.Verses;
-                            }
-                        }
-                        break;
-                    case SearchScope.Selection:
-                        {
-                            if (m_client.Selection != null)
-                            {
-                                verses = m_client.Selection.Verses;
-                            }
-                        }
-                        break;
-                    case SearchScope.Result:
-                        {
-                            verses = m_client.FoundVerses;
-                        }
-                        break;
+                    verses = m_client.FoundVerses;
+                }
+                else
+                {
+                    if (m_client.Selection != null)
+                    {
+                        verses = m_client.Selection.Verses;
+                    }
                 }
 
                 if (verses != null)
@@ -45661,29 +45622,16 @@ public partial class MainForm : Form, ISubscriber
             if (m_client != null)
             {
                 List<Verse> verses = null;
-                switch (m_client.SearchScope)
+                if (m_found_verses_displayed)
                 {
-                    case SearchScope.Book:
-                        {
-                            if (m_client.Book != null)
-                            {
-                                verses = m_client.Book.Verses;
-                            }
-                        }
-                        break;
-                    case SearchScope.Selection:
-                        {
-                            if (m_client.Selection != null)
-                            {
-                                verses = m_client.Selection.Verses;
-                            }
-                        }
-                        break;
-                    case SearchScope.Result:
-                        {
-                            verses = m_client.FoundVerses;
-                        }
-                        break;
+                    verses = m_client.FoundVerses;
+                }
+                else
+                {
+                    if (m_client.Selection != null)
+                    {
+                        verses = m_client.Selection.Verses;
+                    }
                 }
 
                 if (verses != null)
@@ -45766,29 +45714,16 @@ public partial class MainForm : Form, ISubscriber
             if (m_client != null)
             {
                 List<Verse> verses = null;
-                switch (m_client.SearchScope)
+                if (m_found_verses_displayed)
                 {
-                    case SearchScope.Book:
-                        {
-                            if (m_client.Book != null)
-                            {
-                                verses = m_client.Book.Verses;
-                            }
-                        }
-                        break;
-                    case SearchScope.Selection:
-                        {
-                            if (m_client.Selection != null)
-                            {
-                                verses = m_client.Selection.Verses;
-                            }
-                        }
-                        break;
-                    case SearchScope.Result:
-                        {
-                            verses = m_client.FoundVerses;
-                        }
-                        break;
+                    verses = m_client.FoundVerses;
+                }
+                else
+                {
+                    if (m_client.Selection != null)
+                    {
+                        verses = m_client.Selection.Verses;
+                    }
                 }
 
                 if (verses != null)
