@@ -391,7 +391,7 @@ public partial class MainForm : Form, ISubscriber
 
                 LetterFrequencyColumnHeader.Text = L[l]["Freq"];// +"  "; // + 2 spaces for sort marker after them
 
-                m_note_writing_instruction = L[l]["write a note for"];
+                m_note_writing_instruction = L[l]["write a note for "];
                 DisplayNoteWritingInstruction();
 
                 long value = 0L;
@@ -22923,7 +22923,7 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Bookmarks/Notes
     ///////////////////////////////////////////////////////////////////////////////
-    private string m_note_writing_instruction = "write a note for";
+    private string m_note_writing_instruction = "";
     private Color m_note_writing_instruction_color = Color.Gray;
     private Color m_note_edit_color = Color.Black;
     private Color m_note_view_color = Color.Navy;
@@ -22987,8 +22987,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         if (m_client.Selection.Scope == SelectionScope.Book)
                         {
-                            BookmarkTextBox.Text = m_note_writing_instruction + " "
-                                + m_client.Selection.Scope.ToString();
+                            BookmarkTextBox.Text = m_note_writing_instruction + m_client.Selection.Scope.ToString();
                         }
                         else if ((m_client.Selection.Scope == SelectionScope.Verse) || (m_client.Selection.Scope == SelectionScope.Word) || (m_client.Selection.Scope == SelectionScope.Letter))
                         {
@@ -23011,9 +23010,7 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
 
-                            BookmarkTextBox.Text = m_note_writing_instruction + " "
-                                         + m_client.Selection.Scope.ToString() + " "
-                                         + str.ToString();
+                            BookmarkTextBox.Text = m_note_writing_instruction + L[l][m_client.Selection.Scope.ToString()] + " " + str.ToString();
                         }
                     }
                 }
