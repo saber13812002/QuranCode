@@ -548,53 +548,66 @@ public partial class MainForm : Form
             ValueTextBox.Refresh();
 
 
-            int _4nplus1_index = -1;
-            int _4nminus1_index = -1;
-            string squares1_str = "";
-            string squares2_str = "";
+            int plus1_index = -1;
+            int minus1_index = -1;
+            string plus1_str = "";
+            string plus2_str = "";
             string minus1_str = "";
             string minus2_str = "";
             if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
             {
-                _4nplus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
-                squares1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(value);
-                squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
+                plus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
+                plus1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(value);
+                plus2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
 
-                _4nminus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
+                minus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
                 minus1_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
                 minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
             }
             else //if composite
             {
-                _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
-                squares1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(value);
-                squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
+                plus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
+                plus1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(value);
 
-                _4nminus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
+                plus2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
+
+                minus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
                 minus1_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
                 minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
             }
-            //long n = 0L;
-            //if (squares1_str.StartsWith("4×")) // 4n+1 or 4n-1
-            //{
-            //    int start = "4×".Length;
-            //    int end = squares1_str.IndexOf("+");
-            //    if (end == -1) end = squares1_str.IndexOf("-");
-            //    if ((start >= 0) && (end >= start))
-            //    {
-            //        string text = squares1_str.Substring(start, end - start);
-            //        n = Radix.Decode(text, Numbers.DEFAULT_RADIX);
-            //    }
-            //}
 
-            SquareSumTextBox.Text = (_4nplus1_index > 0) ? squares1_str : (_4nminus1_index > 0) ? minus1_str : "";
-            //SquareSumTextBox.ForeColor = Numbers.GetNumberTypeColor(n);
+            SquareSumTextBox.Text = (plus1_index > 0) ? plus1_str : (minus1_index > 0) ? minus1_str : "";
+            SquareDiffTextBox.Text = (plus1_index > 0) ? plus2_str : (minus1_index > 0) ? minus2_str : "";
+            long n = 0L;
+            if (plus1_str.StartsWith("4×")) // 4n+1
+            {
+                int start = "4×".Length;
+                int end = plus1_str.IndexOf("+");
+                if ((start >= 0) && (end >= start))
+                {
+                    string text = plus1_str.Substring(start, end - start);
+                    n = long.Parse(text);
+                }
+            }
+            else if (minus1_str.StartsWith("4×")) // 4n-1
+            {
+                int start = "4×".Length;
+                int end = minus1_str.IndexOf("-");
+                if ((start >= 0) && (end >= start))
+                {
+                    string text = minus1_str.Substring(start, end - start);
+                    n = long.Parse(text);
+                }
+            }
+            Color n_color = Numbers.GetNumberTypeColor(n);
+            //double scale = 0.8d;
+            //n_color = Color.FromArgb((int)(n_color.R * scale), (int)(n_color.G * scale), (int)(n_color.B * scale));
+            SquareSumTextBox.ForeColor = n_color;
+            SquareDiffTextBox.ForeColor = n_color;
             SquareSumTextBox.Refresh();
-            SquareDiffTextBox.Text = (_4nplus1_index > 0) ? squares2_str : (_4nminus1_index > 0) ? minus2_str : "";
-            //SquareDiffTextBox.ForeColor = Numbers.GetNumberTypeColor(n);
             SquareDiffTextBox.Refresh();
 
-            int _4n1_index = (_4nplus1_index > 0) ? _4nplus1_index : (_4nminus1_index > 0) ? _4nminus1_index : 0;
+            int _4n1_index = (plus1_index > 0) ? plus1_index : (minus1_index > 0) ? minus1_index : 0;
             Nth4n1NumberTextBox.Text = (_4n1_index > 0) ? _4n1_index.ToString() : "";
             Nth4n1NumberTextBox.ForeColor = Numbers.GetNumberTypeColor(_4n1_index);
             Nth4n1NumberTextBox.Refresh();
@@ -1046,34 +1059,34 @@ public partial class MainForm : Form
             str.AppendLine(m_number_kind.ToString() + " Index\t\t=\t" + number_kind_index);
 
             str.AppendLine();
-            int _4nplus1_index = -1;
-            int _4nminus1_index = -1;
-            string squares1_str = "";
-            string squares2_str = "";
+            int plus1_index = -1;
+            int minus1_index = -1;
+            string plus1_str = "";
+            string plus2_str = "";
             string minus1_str = "";
             string minus2_str = "";
             if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
             {
-                _4nplus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
-                squares1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(value);
-                squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
-                _4nminus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
+                plus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
+                plus1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(value);
+                plus2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
+                minus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
                 minus1_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
                 minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
             }
             else //if composite
             {
-                _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
-                squares1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(value);
-                squares2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
-                _4nminus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
+                plus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
+                plus1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(value);
+                plus2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
+                minus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
                 minus1_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
                 minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
             }
-            str.AppendLine((_4nplus1_index > 0) ? ("4n+1 Squares1\t\t=\t" + squares1_str) : (_4nminus1_index > 0) ? ("4n-1 Squares1\t\t=\t" + minus1_str) : "");
-            str.AppendLine((_4nplus1_index > 0) ? ("4n+1 Squares2\t\t=\t" + squares2_str) : (_4nminus1_index > 0) ? ("4n-1 Squares2\t\t=\t" + minus2_str) : "");
-            str.AppendLine((_4nplus1_index > 0) ? ("4n+1 " + (Numbers.IsComposite(value) ? "Composite" : "Prime") + " Index\t=\t" + _4nplus1_index.ToString()) :
-                          (_4nminus1_index > 0) ? ("4n-1 " + (Numbers.IsComposite(value) ? "Composite" : "Prime") + " Index\t=\t" + _4nminus1_index.ToString()) : "");
+            str.AppendLine((plus1_index > 0) ? ("4n+1 Squares1\t\t=\t" + plus1_str) : (minus1_index > 0) ? ("4n-1 Squares1\t\t=\t" + minus1_str) : "");
+            str.AppendLine((plus1_index > 0) ? ("4n+1 Squares2\t\t=\t" + plus2_str) : (minus1_index > 0) ? ("4n-1 Squares2\t\t=\t" + minus2_str) : "");
+            str.AppendLine((plus1_index > 0) ? ("4n+1 " + (Numbers.IsComposite(value) ? "Composite" : "Prime") + " Index\t=\t" + plus1_index.ToString()) :
+                          (minus1_index > 0) ? ("4n-1 " + (Numbers.IsComposite(value) ? "Composite" : "Prime") + " Index\t=\t" + minus1_index.ToString()) : "");
 
             str.AppendLine();
             str.AppendLine("Left-to-right prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainL2R(value) + "  =  " + DecimalPCIndexChainL2R(value));
@@ -1612,8 +1625,8 @@ public partial class MainForm : Form
 
     private NumberKind m_number_kind = NumberKind.Deficient;
     private IndexType m_index_type = IndexType.Prime;
-    private bool m_4nplus1_index = false;
-    private bool m_4nminus1_index = false;
+    private bool m_plus1_index = false;
+    private bool m_minus1_index = false;
     private void IndexTextBox_KeyDown(object sender, KeyEventArgs e)
     {
         Control control = (sender as TextBoxBase);
@@ -1699,14 +1712,14 @@ public partial class MainForm : Form
                 {
                     if (m_index_type == IndexType.Prime)
                     {
-                        if (m_4nplus1_index)
+                        if (m_plus1_index)
                         {
                             if (index < Numbers.Primes4nPlus1.Count)
                             {
                                 value = Numbers.Primes4nPlus1[index];
                             }
                         }
-                        else if (m_4nminus1_index)
+                        else if (m_minus1_index)
                         {
                             if (index < Numbers.Primes4nMinus1.Count)
                             {
@@ -1720,14 +1733,14 @@ public partial class MainForm : Form
                     }
                     else // any other index type will be treated as IndexNumberType.Composite
                     {
-                        if (m_4nplus1_index)
+                        if (m_plus1_index)
                         {
                             if (index < Numbers.Composites4nPlus1.Count)
                             {
                                 value = Numbers.Composites4nPlus1[index];
                             }
                         }
-                        else if (m_4nminus1_index)
+                        else if (m_minus1_index)
                         {
                             if (index < Numbers.Composites4nMinus1.Count)
                             {
@@ -1830,35 +1843,35 @@ public partial class MainForm : Form
         long value = 0L;
         if (long.TryParse(ValueTextBox.Text, out value))
         {
-            int _4nplus1_index = -1;
-            int _4nminus1_index = -1;
+            int plus1_index = -1;
+            int minus1_index = -1;
             Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
             Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
             Nth4nPlus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
             Nth4nMinus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
             if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
             {
-                _4nplus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
-                _4nminus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
+                plus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
+                minus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
             }
             else //if composite
             {
-                _4nplus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
-                _4nminus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
+                plus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
+                minus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
             }
 
-            m_4nplus1_index = (_4nplus1_index > 0);
-            m_4nminus1_index = (_4nminus1_index > 0);
-            if (m_4nplus1_index || m_4nminus1_index)
+            m_plus1_index = (plus1_index > 0);
+            m_minus1_index = (minus1_index > 0);
+            if (m_plus1_index || m_minus1_index)
             {
                 if (Numbers.IsPrime(value))
                 {
-                    if (m_4nplus1_index)
+                    if (m_plus1_index)
                     {
                         ToolTip.SetToolTip(Nth4n1NumberTextBox, "4n+1 prime index");
                         Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLightLight;
                     }
-                    else if (m_4nminus1_index)
+                    else if (m_minus1_index)
                     {
                         ToolTip.SetToolTip(Nth4n1NumberTextBox, "4n-1 prime index");
                         Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLightLight;
@@ -1870,12 +1883,12 @@ public partial class MainForm : Form
                 }
                 else // any other index type will be treated as IndexNumberType.Composite
                 {
-                    if (m_4nplus1_index)
+                    if (m_plus1_index)
                     {
                         ToolTip.SetToolTip(Nth4n1NumberTextBox, "4n+1 composite index");
                         Nth4nPlus1CompositeNumberLabel.BackColor = SystemColors.ControlLightLight;
                     }
-                    else if (m_4nminus1_index)
+                    else if (m_minus1_index)
                     {
                         ToolTip.SetToolTip(Nth4n1NumberTextBox, "4n-1 composite index");
                         Nth4nMinus1CompositeNumberLabel.BackColor = SystemColors.ControlLightLight;
@@ -1915,8 +1928,8 @@ public partial class MainForm : Form
         else
         {
             m_index_type = IndexType.Prime;
-            m_4nplus1_index = true;
-            m_4nminus1_index = false;
+            m_plus1_index = true;
+            m_minus1_index = false;
             FactorizeValue(Nth4n1NumberTextBox);
         }
     }
@@ -1941,8 +1954,8 @@ public partial class MainForm : Form
         else
         {
             m_index_type = IndexType.Prime;
-            m_4nplus1_index = false;
-            m_4nminus1_index = true;
+            m_plus1_index = false;
+            m_minus1_index = true;
             FactorizeValue(Nth4n1NumberTextBox);
         }
     }
@@ -1967,8 +1980,8 @@ public partial class MainForm : Form
         else
         {
             m_index_type = IndexType.Composite;
-            m_4nplus1_index = true;
-            m_4nminus1_index = false;
+            m_plus1_index = true;
+            m_minus1_index = false;
             FactorizeValue(Nth4n1NumberTextBox);
         }
     }
@@ -1993,8 +2006,8 @@ public partial class MainForm : Form
         else
         {
             m_index_type = IndexType.Composite;
-            m_4nplus1_index = false;
-            m_4nminus1_index = true;
+            m_plus1_index = false;
+            m_minus1_index = true;
             FactorizeValue(Nth4n1NumberTextBox);
         }
     }
