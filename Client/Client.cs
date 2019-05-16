@@ -127,9 +127,9 @@ public class Client : IPublisher, ISubscriber
     {
         get { return Server.LoadedSimplificationSystems; }
     }
-    public void BuildSimplifiedBook(string text_mode, bool with_bism_Allah, bool waw_as_word, bool shadda_as_letter, bool emlaaei_text)
+    public void BuildSimplifiedBook(string text_mode, bool with_bism_Allah, bool waw_as_word, bool shadda_as_letter, bool superscript_hamza_as_letter, bool emlaaei_text)
     {
-        Server.BuildSimplifiedBook(text_mode, with_bism_Allah, waw_as_word, shadda_as_letter, emlaaei_text);
+        Server.BuildSimplifiedBook(text_mode, with_bism_Allah, waw_as_word, shadda_as_letter, superscript_hamza_as_letter, emlaaei_text);
         UpdatePhrasePositionsAndLengths(text_mode);
     }
 

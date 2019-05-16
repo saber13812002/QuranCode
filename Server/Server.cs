@@ -293,7 +293,7 @@ public class Server : IPublisher
             }
         }
     }
-    public static void BuildSimplifiedBook(string text_mode, bool with_bism_Allah, bool waw_as_word, bool shadda_as_letter, bool emlaaei_text)
+    public static void BuildSimplifiedBook(string text_mode, bool with_bism_Allah, bool waw_as_word, bool shadda_as_letter, bool superscript_hamza_as_letter, bool emlaaei_text)
     {
         if (!String.IsNullOrEmpty(text_mode))
         {
@@ -458,6 +458,15 @@ public class Server : IPublisher
                         }
                     }
 
+                    // convert superscript hamza to standalone hamza
+                    if (superscript_hamza_as_letter)
+                    {
+                        for (int i = 0; i < lines.Count; i++)
+                        {
+                            lines[i] = lines[i].Replace("ـٔ", "ء");
+                        }
+                    }
+
                     // simplify verse texts
                     List<string> verse_texts = new List<string>();
                     foreach (string line in lines)
@@ -486,6 +495,7 @@ public class Server : IPublisher
                             s_book.WithBismAllah = with_bism_Allah;
                             s_book.WawAsWord = waw_as_word;
                             s_book.ShaddaAsLetter = shadda_as_letter;
+                            s_book.SuperscriptHamzaAsLetter = superscript_hamza_as_letter;
 
                             // build words before DataAccess.Loads
                             if (waw_as_word)

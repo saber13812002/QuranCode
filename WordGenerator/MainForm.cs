@@ -57,7 +57,7 @@ public partial class MainForm : Form
             if (m_client != null)
             {
                 string default_text_mode = m_client.NumerologySystem.TextMode;
-                m_client.BuildSimplifiedBook(default_text_mode, true, false, false, false);
+                m_client.BuildSimplifiedBook(default_text_mode, true, false, false, false, false);
 
                 PopulateTextModeComboBox();
                 if (TextModeComboBox.Items.Count > 0)

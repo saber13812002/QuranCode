@@ -43,6 +43,13 @@ namespace Model
             set { shadda_as_letter = value; }
         }
 
+        private bool superscript_hamza_as_letter = false;
+        public bool SuperscriptHamzaAsLetter
+        {
+            get { return superscript_hamza_as_letter; }
+            set { superscript_hamza_as_letter = value; }
+        }
+
         private bool distances_within_chapters = false;
         public bool DistanceWithinChapters
         {
