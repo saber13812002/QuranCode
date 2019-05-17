@@ -6006,7 +6006,6 @@ public partial class MainForm : Form, ISubscriber
         this.ClientSplitContainer.Panel2.BackColor = System.Drawing.Color.LightGray;
         this.ClientSplitContainer.Panel2.Controls.Add(this.ScriptOutputGroupBox);
         this.ClientSplitContainer.Panel2.Controls.Add(this.TabControl);
-        this.ClientSplitContainer.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.ClientSplitContainer_Panel2_Paint);
         this.ClientSplitContainer.Size = new System.Drawing.Size(759, 658);
         this.ClientSplitContainer.SplitterDistance = 413;
         this.ClientSplitContainer.TabIndex = 6;
@@ -10177,7 +10176,7 @@ public partial class MainForm : Form, ISubscriber
         this.StatisticsGroupBox.Size = new System.Drawing.Size(251, 684);
         this.StatisticsGroupBox.TabIndex = 4;
         this.StatisticsGroupBox.TabStop = false;
-        this.StatisticsGroupBox.Text = "Statistics                                     ";
+        this.StatisticsGroupBox.Text = "                                                 ";
         // 
         // ValueNavigatorPanel
         // 
@@ -12770,7 +12769,7 @@ public partial class MainForm : Form, ISubscriber
                         LoadEmlaaeiBismWawShaddaOptions();
                         splash_form.Information = "Building book ...";
                         string text_mode = m_client.NumerologySystem.TextMode;
-                        m_client.BuildSimplifiedBook(text_mode, m_with_bism_Allah, m_waw_as_word, m_shadda_as_letter, m_superscript_hamza_as_letter, m_emlaaei_text);
+                        m_client.BuildSimplifiedBook(text_mode, m_with_bism_Allah, m_waw_as_word, m_shadda_as_letter, m_superscript_hamza_as_letter, m_superscript_elf_as_letter, m_superscript_yaa_as_letter, m_superscript_noon_as_letter, m_emlaaei_text);
                         EnableFindByTextControls();
                         splash_form.Progress = 40;
                         Thread.Sleep(100);
@@ -13916,6 +13915,42 @@ public partial class MainForm : Form, ISubscriber
                                         catch
                                         {
                                             m_superscript_hamza_as_letter = false;
+                                        }
+                                    }
+                                    break;
+                                case "SuperscriptElfAsLetter":
+                                    {
+                                        try
+                                        {
+                                            m_superscript_elf_as_letter = bool.Parse(parts[1].Trim());
+                                        }
+                                        catch
+                                        {
+                                            m_superscript_elf_as_letter = false;
+                                        }
+                                    }
+                                    break;
+                                case "SuperscriptYaaAsLetter":
+                                    {
+                                        try
+                                        {
+                                            m_superscript_yaa_as_letter = bool.Parse(parts[1].Trim());
+                                        }
+                                        catch
+                                        {
+                                            m_superscript_yaa_as_letter = false;
+                                        }
+                                    }
+                                    break;
+                                case "SuperscriptNoonAsLetter":
+                                    {
+                                        try
+                                        {
+                                            m_superscript_noon_as_letter = bool.Parse(parts[1].Trim());
+                                        }
+                                        catch
+                                        {
+                                            m_superscript_noon_as_letter = false;
                                         }
                                     }
                                     break;
@@ -15227,6 +15262,9 @@ public partial class MainForm : Form, ISubscriber
                     writer.WriteLine("WawAsWord" + "=" + m_waw_as_word);
                     writer.WriteLine("ShaddaAsLetter" + "=" + m_shadda_as_letter);
                     writer.WriteLine("SuperscriptHamzaAsLetter" + "=" + m_superscript_hamza_as_letter);
+                    writer.WriteLine("SuperscriptElfAsLetter" + "=" + m_superscript_elf_as_letter);
+                    writer.WriteLine("SuperscriptYaaAsLetter" + "=" + m_superscript_yaa_as_letter);
+                    writer.WriteLine("SuperscriptNoonAsLetter" + "=" + m_superscript_noon_as_letter);
                     writer.WriteLine("ChapterSortMethod" + "=" + m_chapter_sort_method);
                     writer.WriteLine("ChapterSortOrder" + "=" + m_chapter_sort_order);
                     writer.WriteLine("PinChapter1" + "=" + m_pin_chapter1);
@@ -41590,16 +41628,25 @@ public partial class MainForm : Form, ISubscriber
                 WawAsWordCheckBox.Checked = m_waw_as_word;
                 ShaddaAsLetterCheckBox.Checked = m_shadda_as_letter;
                 SuperscriptHamzaAsLetterCheckBox.Checked = m_superscript_hamza_as_letter;
+                SuperscriptElfAsLetterCheckBox.Checked = m_superscript_elf_as_letter;
+                SuperscriptYaaAsLetterCheckBox.Checked = m_superscript_yaa_as_letter;
+                SuperscriptNoonAsLetterCheckBox.Checked = m_superscript_noon_as_letter;
 
                 WithBismAllahCheckBox.Enabled = (text_mode != "Original");
                 WawAsWordCheckBox.Enabled = (text_mode != "Original");
                 ShaddaAsLetterCheckBox.Enabled = (text_mode != "Original");
                 SuperscriptHamzaAsLetterCheckBox.Enabled = (text_mode != "Original");
+                SuperscriptElfAsLetterCheckBox.Enabled = (text_mode != "Original");
+                SuperscriptYaaAsLetterCheckBox.Enabled = (text_mode != "Original");
+                SuperscriptNoonAsLetterCheckBox.Enabled = (text_mode != "Original");
 
                 WithBismAllahCheckBox.Refresh();
                 WawAsWordCheckBox.Refresh();
                 ShaddaAsLetterCheckBox.Refresh();
                 SuperscriptHamzaAsLetterCheckBox.Refresh();
+                SuperscriptElfAsLetterCheckBox.Refresh();
+                SuperscriptYaaAsLetterCheckBox.Refresh();
+                SuperscriptNoonAsLetterCheckBox.Refresh();
             }
             catch (Exception ex)
             {
@@ -41722,6 +41769,9 @@ public partial class MainForm : Form, ISubscriber
     private bool m_waw_as_word = false;
     private bool m_shadda_as_letter = false;
     private bool m_superscript_hamza_as_letter = false;
+    private bool m_superscript_elf_as_letter = false;
+    private bool m_superscript_yaa_as_letter = false;
+    private bool m_superscript_noon_as_letter = false;
     private void EmlaaeiTextLabel_Click(object sender, EventArgs e)
     {
         m_emlaaei_text = !m_emlaaei_text;
@@ -41771,6 +41821,21 @@ public partial class MainForm : Form, ISubscriber
         m_superscript_hamza_as_letter = SuperscriptHamzaAsLetterCheckBox.Checked;
         BuildSimplifiedBookAndDisplaySelection();
     }
+    private void SuperscriptElfAsLetterCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+        m_superscript_elf_as_letter = SuperscriptElfAsLetterCheckBox.Checked;
+        BuildSimplifiedBookAndDisplaySelection();
+    }
+    private void SuperscriptYaaAsLetterCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+        m_superscript_yaa_as_letter = SuperscriptYaaAsLetterCheckBox.Checked;
+        BuildSimplifiedBookAndDisplaySelection();
+    }
+    private void SuperscriptNoonAsLetterCheckBox_CheckedChanged(object sender, EventArgs e)
+    {
+        m_superscript_noon_as_letter = SuperscriptNoonAsLetterCheckBox.Checked;
+        BuildSimplifiedBookAndDisplaySelection();
+    }
     private void BuildSimplifiedBookAndDisplaySelection()
     {
         this.Cursor = Cursors.WaitCursor;
@@ -41791,6 +41856,9 @@ public partial class MainForm : Form, ISubscriber
                         ////    (m_client.Book.WawAsWord != m_waw_as_word) ||
                         ////    (m_client.Book.ShaddaAsLetter != m_shadda_as_letter)
                         ////    (m_client.Book.SuperscriptHamzaAsLetter != m_superscript_hamza_as_letter)
+                        ////    (m_client.Book.SuperscriptElfAsLetter != m_superscript_elf_as_letter)
+                        ////    (m_client.Book.SuperscriptYaaAsLetter != m_superscript_yaa_as_letter)
+                        ////    (m_client.Book.SuperscriptNoonAsLetter != m_superscript_noon_as_letter)
                         ////   )
                         {
                             if (text_mode == "Original")
@@ -41799,9 +41867,12 @@ public partial class MainForm : Form, ISubscriber
                                 m_waw_as_word = false;
                                 m_shadda_as_letter = false;
                                 m_superscript_hamza_as_letter = false;
+                                m_superscript_elf_as_letter = false;
+                                m_superscript_yaa_as_letter = false;
+                                m_superscript_noon_as_letter = false;
                             }
 
-                            m_client.BuildSimplifiedBook(text_mode, m_with_bism_Allah, m_waw_as_word, m_shadda_as_letter, m_superscript_hamza_as_letter, m_emlaaei_text);
+                            m_client.BuildSimplifiedBook(text_mode, m_with_bism_Allah, m_waw_as_word, m_shadda_as_letter, m_superscript_hamza_as_letter, m_superscript_elf_as_letter, m_superscript_yaa_as_letter, m_superscript_noon_as_letter, m_emlaaei_text);
 
                             bool backup_found_verses_displayed = m_found_verses_displayed;
 
@@ -47405,11 +47476,6 @@ public partial class MainForm : Form, ISubscriber
         {
             this.Cursor = Cursors.Default;
         }
-    }
-
-    private void ClientSplitContainer_Panel2_Paint(object sender, PaintEventArgs e)
-    {
-
     }
     /////////////////////////////////////////////////////////////////////////////
     #endregion

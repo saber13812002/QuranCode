@@ -50,6 +50,27 @@ namespace Model
             set { superscript_hamza_as_letter = value; }
         }
 
+        private bool superscript_elf_as_letter = false;
+        public bool SuperscriptElfAsLetter
+        {
+            get { return superscript_elf_as_letter; }
+            set { superscript_elf_as_letter = value; }
+        }
+
+        private bool superscript_yaa_as_letter = false;
+        public bool SuperscriptYaaAsLetter
+        {
+            get { return superscript_yaa_as_letter; }
+            set { superscript_yaa_as_letter = value; }
+        }
+
+        private bool superscript_noon_as_letter = false;
+        public bool SuperscriptNoonAsLetter
+        {
+            get { return superscript_noon_as_letter; }
+            set { superscript_noon_as_letter = value; }
+        }
+
         private bool distances_within_chapters = false;
         public bool DistanceWithinChapters
         {

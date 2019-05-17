@@ -65,7 +65,7 @@ public partial class MainForm : Form
                         }
                     }
 
-                    m_client.BuildSimplifiedBook(text_mode, true, false, false, false, false);
+                    m_client.BuildSimplifiedBook(text_mode, true, false, false, false, false, false, false, false);
                     if (m_client.Book != null)
                     {
                         if (m_client.Book.Chapters != null)
