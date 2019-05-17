@@ -293,7 +293,7 @@ public class Server : IPublisher
             }
         }
     }
-    public static void BuildSimplifiedBook(string text_mode, bool with_bism_Allah, bool waw_as_word, bool shadda_as_letter, bool superscript_hamza_as_letter, bool superscript_elf_as_letter, bool superscript_yaa_as_letter, bool superscript_noon_as_letter, bool emlaaei_text)
+    public static void BuildSimplifiedBook(string text_mode, bool with_bism_Allah, bool waw_as_word, bool shadda_as_letter, bool hamza_above_horizontal_line_as_letter, bool elf_above_horizontal_line_as_letter, bool yaa_above_horizontal_line_as_letter, bool noon_above_horizontal_line_as_letter, bool emlaaei_text)
     {
         if (!String.IsNullOrEmpty(text_mode))
         {
@@ -458,37 +458,25 @@ public class Server : IPublisher
                         }
                     }
 
-                    // convert superscript hamza to standalone hamza
-                    if (superscript_hamza_as_letter)
+                    // convert superscript above horizontal line to letter
+                    for (int i = 0; i < lines.Count; i++)
                     {
-                        for (int i = 0; i < lines.Count; i++)
+                        if (hamza_above_horizontal_line_as_letter)
                         {
                             lines[i] = lines[i].Replace("ـٔ", "ء");
                         }
-                    }
 
-                    // convert superscript elf to standalone elf
-                    if (superscript_elf_as_letter)
-                    {
-                        for (int i = 0; i < lines.Count; i++)
+                        if (elf_above_horizontal_line_as_letter)
                         {
                             lines[i] = lines[i].Replace("ـٰ", "ا");
                         }
-                    }
 
-                    // convert superscript yaa to standalone yaa
-                    if (superscript_yaa_as_letter)
-                    {
-                        for (int i = 0; i < lines.Count; i++)
+                        if (yaa_above_horizontal_line_as_letter)
                         {
                             lines[i] = lines[i].Replace("ـۧ", "ي");
                         }
-                    }
 
-                    // convert superscript noon to standalone noon
-                    if (superscript_noon_as_letter)
-                    {
-                        for (int i = 0; i < lines.Count; i++)
+                        if (noon_above_horizontal_line_as_letter)
                         {
                             lines[i] = lines[i].Replace("ـۨ", "ن");
                         }
@@ -502,7 +490,7 @@ public class Server : IPublisher
                         verse_texts.Add(verse_text);
                     }
 
-                    // buid verses
+                    // build verses
                     List<Verse> verses = new List<Verse>();
                     for (int i = 0; i < verse_texts.Count; i++)
                     {
@@ -522,10 +510,10 @@ public class Server : IPublisher
                             s_book.WithBismAllah = with_bism_Allah;
                             s_book.WawAsWord = waw_as_word;
                             s_book.ShaddaAsLetter = shadda_as_letter;
-                            s_book.SuperscriptHamzaAsLetter = superscript_hamza_as_letter;
-                            s_book.SuperscriptElfAsLetter = superscript_elf_as_letter;
-                            s_book.SuperscriptYaaAsLetter = superscript_yaa_as_letter;
-                            s_book.SuperscriptNoonAsLetter = superscript_noon_as_letter;
+                            s_book.HamzaAboveHorizontalLineAsLetter = hamza_above_horizontal_line_as_letter;
+                            s_book.ElfAboveHorizontalLineAsLetter = elf_above_horizontal_line_as_letter;
+                            s_book.YaaAboveHorizontalLineAsLetter = yaa_above_horizontal_line_as_letter;
+                            s_book.NoonAboveHorizontalLineAsLetter = noon_above_horizontal_line_as_letter;
 
                             // build words before DataAccess.Loads
                             if (waw_as_word)

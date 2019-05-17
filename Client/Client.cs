@@ -127,9 +127,9 @@ public class Client : IPublisher, ISubscriber
     {
         get { return Server.LoadedSimplificationSystems; }
     }
-    public void BuildSimplifiedBook(string text_mode, bool with_bism_Allah, bool waw_as_word, bool shadda_as_letter, bool superscript_hamza_as_letter, bool superscript_elf_as_letter, bool superscript_yaa_as_letter, bool superscript_noon_as_letter, bool emlaaei_text)
+    public void BuildSimplifiedBook(string text_mode, bool with_bism_Allah, bool waw_as_word, bool shadda_as_letter, bool hamza_above_horizontal_line_as_letter, bool elf_above_horizontal_line_as_letter, bool yaa_above_horizontal_line_as_letter, bool noon_above_horizontal_line_as_letter, bool emlaaei_text)
     {
-        Server.BuildSimplifiedBook(text_mode, with_bism_Allah, waw_as_word, shadda_as_letter, superscript_hamza_as_letter, superscript_elf_as_letter, superscript_yaa_as_letter, superscript_noon_as_letter, emlaaei_text);
+        Server.BuildSimplifiedBook(text_mode, with_bism_Allah, waw_as_word, shadda_as_letter, hamza_above_horizontal_line_as_letter, elf_above_horizontal_line_as_letter, yaa_above_horizontal_line_as_letter, noon_above_horizontal_line_as_letter, emlaaei_text);
         UpdatePhrasePositionsAndLengths(text_mode);
     }
 
@@ -2852,10 +2852,10 @@ public class Client : IPublisher, ISubscriber
                                                                 ((Book.WithBismAllah) ? "" : "_WithoutBismAllah") +
                                                                 ((Book.WawAsWord) ? "_WawAsWord" : "") +
                                                                 ((Book.ShaddaAsLetter) ? "_ShaddaAsLetter" : "") +
-                                                                ((Book.SuperscriptHamzaAsLetter) ? "_SuperscriptHamzaAsLetter" : "") +
-                                                                ((Book.SuperscriptElfAsLetter) ? "_SuperscriptElfAsLetter" : "") +
-                                                                ((Book.SuperscriptYaaAsLetter) ? "_SuperscriptYaaAsLetter" : "") +
-                                                                ((Book.SuperscriptNoonAsLetter) ? "_SuperscriptNoonAsLetter" : "") +
+                                                                ((Book.HamzaAboveHorizontalLineAsLetter) ? "_HamzaAboveHorizontalLineAsLetter" : "") +
+                                                                ((Book.ElfAboveHorizontalLineAsLetter) ? "_ElfAboveHorizontalLineAsLetter" : "") +
+                                                                ((Book.YaaAboveHorizontalLineAsLetter) ? "_YaaAboveHorizontalLineAsLetter" : "") +
+                                                                ((Book.NoonAboveHorizontalLineAsLetter) ? "_NoonAboveHorizontalLineAsLetter" : "") +
                                                                 ".txt";
             try
             {

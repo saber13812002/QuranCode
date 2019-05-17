@@ -1334,12 +1334,12 @@ public partial class MainForm : Form, ISubscriber
         this.EmlaaeiTextLabel = new System.Windows.Forms.Label();
         this.FindByFrequencySumNumericUpDown = new System.Windows.Forms.NumericUpDown();
         this.StatisticsGroupBox = new System.Windows.Forms.GroupBox();
-        this.SuperscriptNoonAsLetterCheckBox = new System.Windows.Forms.CheckBox();
-        this.SuperscriptYaaAsLetterCheckBox = new System.Windows.Forms.CheckBox();
-        this.SuperscriptElfAsLetterCheckBox = new System.Windows.Forms.CheckBox();
+        this.NoonAboveHorizontalLineAsLetterCheckBox = new System.Windows.Forms.CheckBox();
+        this.YaaAboveHorizontalLineAsLetterCheckBox = new System.Windows.Forms.CheckBox();
+        this.ElfAboveHorizontalLineAsLetterCheckBox = new System.Windows.Forms.CheckBox();
+        this.HamzaAboveHorizontalLineAsLetterCheckBox = new System.Windows.Forms.CheckBox();
         this.ValueNavigatorPanel = new System.Windows.Forms.Panel();
         this.ValueNavigatorLinkLabel = new System.Windows.Forms.Label();
-        this.SuperscriptHamzaAsLetterCheckBox = new System.Windows.Forms.CheckBox();
         this.ShaddaAsLetterCheckBox = new System.Windows.Forms.CheckBox();
         this.WawAsWordCheckBox = new System.Windows.Forms.CheckBox();
         this.WithBismAllahCheckBox = new System.Windows.Forms.CheckBox();
@@ -10080,10 +10080,10 @@ public partial class MainForm : Form, ISubscriber
         this.TanzilLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.TanzilLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.TanzilLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.TanzilLabel.Location = new System.Drawing.Point(230, 27);
+        this.TanzilLabel.Location = new System.Drawing.Point(230, 25);
         this.TanzilLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.TanzilLabel.Name = "TanzilLabel";
-        this.TanzilLabel.Size = new System.Drawing.Size(8, 8);
+        this.TanzilLabel.Size = new System.Drawing.Size(10, 21);
         this.TanzilLabel.TabIndex = 153;
         this.TanzilLabel.Tag = "http://tanzil.net/";
         this.TanzilLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -10134,13 +10134,13 @@ public partial class MainForm : Form, ISubscriber
         // 
         this.StatisticsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
         | System.Windows.Forms.AnchorStyles.Right)));
-        this.StatisticsGroupBox.Controls.Add(this.SuperscriptNoonAsLetterCheckBox);
-        this.StatisticsGroupBox.Controls.Add(this.SuperscriptYaaAsLetterCheckBox);
-        this.StatisticsGroupBox.Controls.Add(this.SuperscriptElfAsLetterCheckBox);
+        this.StatisticsGroupBox.Controls.Add(this.NoonAboveHorizontalLineAsLetterCheckBox);
+        this.StatisticsGroupBox.Controls.Add(this.YaaAboveHorizontalLineAsLetterCheckBox);
+        this.StatisticsGroupBox.Controls.Add(this.ElfAboveHorizontalLineAsLetterCheckBox);
+        this.StatisticsGroupBox.Controls.Add(this.HamzaAboveHorizontalLineAsLetterCheckBox);
         this.StatisticsGroupBox.Controls.Add(this.TanzilLabel);
         this.StatisticsGroupBox.Controls.Add(this.EmlaaeiTextLabel);
         this.StatisticsGroupBox.Controls.Add(this.ValueNavigatorPanel);
-        this.StatisticsGroupBox.Controls.Add(this.SuperscriptHamzaAsLetterCheckBox);
         this.StatisticsGroupBox.Controls.Add(this.ShaddaAsLetterCheckBox);
         this.StatisticsGroupBox.Controls.Add(this.WawAsWordCheckBox);
         this.StatisticsGroupBox.Controls.Add(this.WithBismAllahCheckBox);
@@ -10184,50 +10184,69 @@ public partial class MainForm : Form, ISubscriber
         this.StatisticsGroupBox.TabStop = false;
         this.StatisticsGroupBox.Text = "                                                 ";
         // 
-        // SuperscriptNoonAsLetterCheckBox
+        // NoonAboveHorizontalLineAsLetterCheckBox
         // 
-        this.SuperscriptNoonAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
-        this.SuperscriptNoonAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.SuperscriptNoonAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
-        this.SuperscriptNoonAsLetterCheckBox.Location = new System.Drawing.Point(211, 48);
-        this.SuperscriptNoonAsLetterCheckBox.Name = "SuperscriptNoonAsLetterCheckBox";
-        this.SuperscriptNoonAsLetterCheckBox.Size = new System.Drawing.Size(33, 17);
-        this.SuperscriptNoonAsLetterCheckBox.TabIndex = 9;
-        this.SuperscriptNoonAsLetterCheckBox.Tag = "";
-        this.SuperscriptNoonAsLetterCheckBox.Text = "ۨ";
-        this.SuperscriptNoonAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.SuperscriptNoonAsLetterCheckBox.UseVisualStyleBackColor = false;
-        this.SuperscriptNoonAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.SuperscriptNoonAsLetterCheckBox_CheckedChanged);
+        this.NoonAboveHorizontalLineAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.NoonAboveHorizontalLineAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.NoonAboveHorizontalLineAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
+        this.NoonAboveHorizontalLineAsLetterCheckBox.Location = new System.Drawing.Point(211, 48);
+        this.NoonAboveHorizontalLineAsLetterCheckBox.Name = "NoonAboveHorizontalLineAsLetterCheckBox";
+        this.NoonAboveHorizontalLineAsLetterCheckBox.Size = new System.Drawing.Size(33, 17);
+        this.NoonAboveHorizontalLineAsLetterCheckBox.TabIndex = 9;
+        this.NoonAboveHorizontalLineAsLetterCheckBox.Tag = "";
+        this.NoonAboveHorizontalLineAsLetterCheckBox.Text = "ۨ";
+        this.NoonAboveHorizontalLineAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.NoonAboveHorizontalLineAsLetterCheckBox.UseVisualStyleBackColor = false;
+        this.NoonAboveHorizontalLineAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.NoonAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
+        this.NoonAboveHorizontalLineAsLetterCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
-        // SuperscriptYaaAsLetterCheckBox
+        // YaaAboveHorizontalLineAsLetterCheckBox
         // 
-        this.SuperscriptYaaAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
-        this.SuperscriptYaaAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.SuperscriptYaaAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
-        this.SuperscriptYaaAsLetterCheckBox.Location = new System.Drawing.Point(179, 47);
-        this.SuperscriptYaaAsLetterCheckBox.Name = "SuperscriptYaaAsLetterCheckBox";
-        this.SuperscriptYaaAsLetterCheckBox.Size = new System.Drawing.Size(33, 17);
-        this.SuperscriptYaaAsLetterCheckBox.TabIndex = 8;
-        this.SuperscriptYaaAsLetterCheckBox.Tag = "";
-        this.SuperscriptYaaAsLetterCheckBox.Text = "ۧ";
-        this.SuperscriptYaaAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.SuperscriptYaaAsLetterCheckBox.UseVisualStyleBackColor = false;
-        this.SuperscriptYaaAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.SuperscriptYaaAsLetterCheckBox_CheckedChanged);
+        this.YaaAboveHorizontalLineAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.YaaAboveHorizontalLineAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.YaaAboveHorizontalLineAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
+        this.YaaAboveHorizontalLineAsLetterCheckBox.Location = new System.Drawing.Point(179, 47);
+        this.YaaAboveHorizontalLineAsLetterCheckBox.Name = "YaaAboveHorizontalLineAsLetterCheckBox";
+        this.YaaAboveHorizontalLineAsLetterCheckBox.Size = new System.Drawing.Size(33, 17);
+        this.YaaAboveHorizontalLineAsLetterCheckBox.TabIndex = 8;
+        this.YaaAboveHorizontalLineAsLetterCheckBox.Tag = "";
+        this.YaaAboveHorizontalLineAsLetterCheckBox.Text = "ۧ";
+        this.YaaAboveHorizontalLineAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.YaaAboveHorizontalLineAsLetterCheckBox.UseVisualStyleBackColor = false;
+        this.YaaAboveHorizontalLineAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.YaaAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
+        this.YaaAboveHorizontalLineAsLetterCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
-        // SuperscriptElfAsLetterCheckBox
+        // ElfAboveHorizontalLineAsLetterCheckBox
         // 
-        this.SuperscriptElfAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
-        this.SuperscriptElfAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.SuperscriptElfAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
-        this.SuperscriptElfAsLetterCheckBox.Location = new System.Drawing.Point(146, 46);
-        this.SuperscriptElfAsLetterCheckBox.Name = "SuperscriptElfAsLetterCheckBox";
-        this.SuperscriptElfAsLetterCheckBox.Size = new System.Drawing.Size(33, 17);
-        this.SuperscriptElfAsLetterCheckBox.TabIndex = 7;
-        this.SuperscriptElfAsLetterCheckBox.Tag = "";
-        this.SuperscriptElfAsLetterCheckBox.Text = "ٰ";
-        this.SuperscriptElfAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.SuperscriptElfAsLetterCheckBox.UseVisualStyleBackColor = false;
-        this.SuperscriptElfAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.SuperscriptElfAsLetterCheckBox_CheckedChanged);
+        this.ElfAboveHorizontalLineAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.ElfAboveHorizontalLineAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.ElfAboveHorizontalLineAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
+        this.ElfAboveHorizontalLineAsLetterCheckBox.Location = new System.Drawing.Point(146, 46);
+        this.ElfAboveHorizontalLineAsLetterCheckBox.Name = "ElfAboveHorizontalLineAsLetterCheckBox";
+        this.ElfAboveHorizontalLineAsLetterCheckBox.Size = new System.Drawing.Size(33, 17);
+        this.ElfAboveHorizontalLineAsLetterCheckBox.TabIndex = 7;
+        this.ElfAboveHorizontalLineAsLetterCheckBox.Tag = "";
+        this.ElfAboveHorizontalLineAsLetterCheckBox.Text = "ٰ";
+        this.ElfAboveHorizontalLineAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.ElfAboveHorizontalLineAsLetterCheckBox.UseVisualStyleBackColor = false;
+        this.ElfAboveHorizontalLineAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.ElfAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
+        this.ElfAboveHorizontalLineAsLetterCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
+        // 
+        // HamzaAboveHorizontalLineAsLetterCheckBox
+        // 
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.Location = new System.Drawing.Point(112, 46);
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.Name = "HamzaAboveHorizontalLineAsLetterCheckBox";
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.Size = new System.Drawing.Size(33, 17);
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.TabIndex = 6;
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.Tag = "";
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.Text = "ٔ";
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.UseVisualStyleBackColor = false;
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.HamzaAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // ValueNavigatorPanel
         // 
@@ -10262,21 +10281,6 @@ public partial class MainForm : Form, ISubscriber
         this.ToolTip.SetToolTip(this.ValueNavigatorLinkLabel, "©2009 Aminreza Ebrahimi Saba");
         this.ValueNavigatorLinkLabel.Click += new System.EventHandler(this.LinkLabel_Click);
         this.ValueNavigatorLinkLabel.Enter += new System.EventHandler(this.StatisticsControls_Enter);
-        // 
-        // SuperscriptHamzaAsLetterCheckBox
-        // 
-        this.SuperscriptHamzaAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
-        this.SuperscriptHamzaAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.SuperscriptHamzaAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
-        this.SuperscriptHamzaAsLetterCheckBox.Location = new System.Drawing.Point(112, 46);
-        this.SuperscriptHamzaAsLetterCheckBox.Name = "SuperscriptHamzaAsLetterCheckBox";
-        this.SuperscriptHamzaAsLetterCheckBox.Size = new System.Drawing.Size(33, 17);
-        this.SuperscriptHamzaAsLetterCheckBox.TabIndex = 6;
-        this.SuperscriptHamzaAsLetterCheckBox.Tag = "";
-        this.SuperscriptHamzaAsLetterCheckBox.Text = "ٔ";
-        this.SuperscriptHamzaAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.SuperscriptHamzaAsLetterCheckBox.UseVisualStyleBackColor = false;
-        this.SuperscriptHamzaAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.SuperscriptHamzaAsLetterCheckBox_CheckedChanged);
         // 
         // ShaddaAsLetterCheckBox
         // 
@@ -12820,7 +12824,7 @@ public partial class MainForm : Form, ISubscriber
                         LoadEmlaaeiBismWawShaddaOptions();
                         splash_form.Information = "Building book ...";
                         string text_mode = m_client.NumerologySystem.TextMode;
-                        m_client.BuildSimplifiedBook(text_mode, m_with_bism_Allah, m_waw_as_word, m_shadda_as_letter, m_superscript_hamza_as_letter, m_superscript_elf_as_letter, m_superscript_yaa_as_letter, m_superscript_noon_as_letter, m_emlaaei_text);
+                        m_client.BuildSimplifiedBook(text_mode, m_with_bism_Allah, m_waw_as_word, m_shadda_as_letter, m_hamza_above_horizontal_line_as_letter, m_elf_above_horizontal_line_as_letter, m_yaa_above_horizontal_line_as_letter, m_noon_above_horizontal_line_as_letter, m_emlaaei_text);
                         EnableFindByTextControls();
                         splash_form.Progress = 40;
                         Thread.Sleep(100);
@@ -13957,51 +13961,51 @@ public partial class MainForm : Form, ISubscriber
                                         }
                                     }
                                     break;
-                                case "SuperscriptHamzaAsLetter":
+                                case "HamzaAboveHorizontalLineAsLetter":
                                     {
                                         try
                                         {
-                                            m_superscript_hamza_as_letter = bool.Parse(parts[1].Trim());
+                                            m_hamza_above_horizontal_line_as_letter = bool.Parse(parts[1].Trim());
                                         }
                                         catch
                                         {
-                                            m_superscript_hamza_as_letter = false;
+                                            m_hamza_above_horizontal_line_as_letter = false;
                                         }
                                     }
                                     break;
-                                case "SuperscriptElfAsLetter":
+                                case "ElfAboveHorizontalLineAsLetter":
                                     {
                                         try
                                         {
-                                            m_superscript_elf_as_letter = bool.Parse(parts[1].Trim());
+                                            m_elf_above_horizontal_line_as_letter = bool.Parse(parts[1].Trim());
                                         }
                                         catch
                                         {
-                                            m_superscript_elf_as_letter = false;
+                                            m_elf_above_horizontal_line_as_letter = false;
                                         }
                                     }
                                     break;
-                                case "SuperscriptYaaAsLetter":
+                                case "YaaAboveHorizontalLineAsLetter":
                                     {
                                         try
                                         {
-                                            m_superscript_yaa_as_letter = bool.Parse(parts[1].Trim());
+                                            m_yaa_above_horizontal_line_as_letter = bool.Parse(parts[1].Trim());
                                         }
                                         catch
                                         {
-                                            m_superscript_yaa_as_letter = false;
+                                            m_yaa_above_horizontal_line_as_letter = false;
                                         }
                                     }
                                     break;
-                                case "SuperscriptNoonAsLetter":
+                                case "NoonAboveHorizontalLineAsLetter":
                                     {
                                         try
                                         {
-                                            m_superscript_noon_as_letter = bool.Parse(parts[1].Trim());
+                                            m_noon_above_horizontal_line_as_letter = bool.Parse(parts[1].Trim());
                                         }
                                         catch
                                         {
-                                            m_superscript_noon_as_letter = false;
+                                            m_noon_above_horizontal_line_as_letter = false;
                                         }
                                     }
                                     break;
@@ -15312,10 +15316,10 @@ public partial class MainForm : Form, ISubscriber
                     writer.WriteLine("WithBismAllah" + "=" + m_with_bism_Allah);
                     writer.WriteLine("WawAsWord" + "=" + m_waw_as_word);
                     writer.WriteLine("ShaddaAsLetter" + "=" + m_shadda_as_letter);
-                    writer.WriteLine("SuperscriptHamzaAsLetter" + "=" + m_superscript_hamza_as_letter);
-                    writer.WriteLine("SuperscriptElfAsLetter" + "=" + m_superscript_elf_as_letter);
-                    writer.WriteLine("SuperscriptYaaAsLetter" + "=" + m_superscript_yaa_as_letter);
-                    writer.WriteLine("SuperscriptNoonAsLetter" + "=" + m_superscript_noon_as_letter);
+                    writer.WriteLine("HamzaAboveHorizontalLineAsLetter" + "=" + m_hamza_above_horizontal_line_as_letter);
+                    writer.WriteLine("ElfAboveHorizontalLineAsLetter" + "=" + m_elf_above_horizontal_line_as_letter);
+                    writer.WriteLine("YaaAboveHorizontalLineAsLetter" + "=" + m_yaa_above_horizontal_line_as_letter);
+                    writer.WriteLine("NoonAboveHorizontalLineAsLetter" + "=" + m_noon_above_horizontal_line_as_letter);
                     writer.WriteLine("ChapterSortMethod" + "=" + m_chapter_sort_method);
                     writer.WriteLine("ChapterSortOrder" + "=" + m_chapter_sort_order);
                     writer.WriteLine("PinChapter1" + "=" + m_pin_chapter1);
@@ -41670,6 +41674,10 @@ public partial class MainForm : Form, ISubscriber
                 for (int i = 0; i < 3; i++) WithBismAllahCheckBox.CheckedChanged -= new EventHandler(WithBismAllahCheckBox_CheckedChanged);
                 for (int i = 0; i < 3; i++) WawAsWordCheckBox.CheckedChanged -= new EventHandler(WawAsWordCheckBox_CheckedChanged);
                 for (int i = 0; i < 3; i++) ShaddaAsLetterCheckBox.CheckedChanged -= new EventHandler(ShaddaAsLetterCheckBox_CheckedChanged);
+                for (int i = 0; i < 3; i++) HamzaAboveHorizontalLineAsLetterCheckBox.CheckedChanged -= new EventHandler(HamzaAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
+                for (int i = 0; i < 3; i++) ElfAboveHorizontalLineAsLetterCheckBox.CheckedChanged -= new EventHandler(ElfAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
+                for (int i = 0; i < 3; i++) YaaAboveHorizontalLineAsLetterCheckBox.CheckedChanged -= new EventHandler(YaaAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
+                for (int i = 0; i < 3; i++) NoonAboveHorizontalLineAsLetterCheckBox.CheckedChanged -= new EventHandler(NoonAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
 
                 UpdateEmlaaeiLabel();
 
@@ -41679,31 +41687,31 @@ public partial class MainForm : Form, ISubscriber
                     m_with_bism_Allah = true;
                     m_waw_as_word = false;
                     m_shadda_as_letter = false;
-                    m_superscript_hamza_as_letter = false;
+                    m_hamza_above_horizontal_line_as_letter = false;
                 }
                 WithBismAllahCheckBox.Checked = m_with_bism_Allah;
                 WawAsWordCheckBox.Checked = m_waw_as_word;
                 ShaddaAsLetterCheckBox.Checked = m_shadda_as_letter;
-                SuperscriptHamzaAsLetterCheckBox.Checked = m_superscript_hamza_as_letter;
-                SuperscriptElfAsLetterCheckBox.Checked = m_superscript_elf_as_letter;
-                SuperscriptYaaAsLetterCheckBox.Checked = m_superscript_yaa_as_letter;
-                SuperscriptNoonAsLetterCheckBox.Checked = m_superscript_noon_as_letter;
+                HamzaAboveHorizontalLineAsLetterCheckBox.Checked = m_hamza_above_horizontal_line_as_letter;
+                ElfAboveHorizontalLineAsLetterCheckBox.Checked = m_elf_above_horizontal_line_as_letter;
+                YaaAboveHorizontalLineAsLetterCheckBox.Checked = m_yaa_above_horizontal_line_as_letter;
+                NoonAboveHorizontalLineAsLetterCheckBox.Checked = m_noon_above_horizontal_line_as_letter;
 
                 WithBismAllahCheckBox.Enabled = (text_mode != "Original");
                 WawAsWordCheckBox.Enabled = (text_mode != "Original");
                 ShaddaAsLetterCheckBox.Enabled = (text_mode != "Original");
-                SuperscriptHamzaAsLetterCheckBox.Enabled = (text_mode != "Original");
-                SuperscriptElfAsLetterCheckBox.Enabled = (text_mode != "Original");
-                SuperscriptYaaAsLetterCheckBox.Enabled = (text_mode != "Original");
-                SuperscriptNoonAsLetterCheckBox.Enabled = (text_mode != "Original");
+                HamzaAboveHorizontalLineAsLetterCheckBox.Enabled = (text_mode != "Original");
+                ElfAboveHorizontalLineAsLetterCheckBox.Enabled = (text_mode != "Original");
+                YaaAboveHorizontalLineAsLetterCheckBox.Enabled = (text_mode != "Original");
+                NoonAboveHorizontalLineAsLetterCheckBox.Enabled = (text_mode != "Original");
 
                 WithBismAllahCheckBox.Refresh();
                 WawAsWordCheckBox.Refresh();
                 ShaddaAsLetterCheckBox.Refresh();
-                SuperscriptHamzaAsLetterCheckBox.Refresh();
-                SuperscriptElfAsLetterCheckBox.Refresh();
-                SuperscriptYaaAsLetterCheckBox.Refresh();
-                SuperscriptNoonAsLetterCheckBox.Refresh();
+                HamzaAboveHorizontalLineAsLetterCheckBox.Refresh();
+                ElfAboveHorizontalLineAsLetterCheckBox.Refresh();
+                YaaAboveHorizontalLineAsLetterCheckBox.Refresh();
+                NoonAboveHorizontalLineAsLetterCheckBox.Refresh();
             }
             catch (Exception ex)
             {
@@ -41718,6 +41726,10 @@ public partial class MainForm : Form, ISubscriber
                 WithBismAllahCheckBox.CheckedChanged += new EventHandler(WithBismAllahCheckBox_CheckedChanged);
                 WawAsWordCheckBox.CheckedChanged += new EventHandler(WawAsWordCheckBox_CheckedChanged);
                 ShaddaAsLetterCheckBox.CheckedChanged += new EventHandler(ShaddaAsLetterCheckBox_CheckedChanged);
+                HamzaAboveHorizontalLineAsLetterCheckBox.CheckedChanged += new EventHandler(HamzaAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
+                ElfAboveHorizontalLineAsLetterCheckBox.CheckedChanged += new EventHandler(ElfAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
+                YaaAboveHorizontalLineAsLetterCheckBox.CheckedChanged += new EventHandler(YaaAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
+                NoonAboveHorizontalLineAsLetterCheckBox.CheckedChanged += new EventHandler(NoonAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
             }
         }
     }
@@ -41821,14 +41833,14 @@ public partial class MainForm : Form, ISubscriber
         }
     }
 
-    private bool m_emlaaei_text = false;
     private bool m_with_bism_Allah = true;
     private bool m_waw_as_word = false;
     private bool m_shadda_as_letter = false;
-    private bool m_superscript_hamza_as_letter = false;
-    private bool m_superscript_elf_as_letter = false;
-    private bool m_superscript_yaa_as_letter = false;
-    private bool m_superscript_noon_as_letter = false;
+    private bool m_hamza_above_horizontal_line_as_letter = false;
+    private bool m_elf_above_horizontal_line_as_letter = false;
+    private bool m_yaa_above_horizontal_line_as_letter = false;
+    private bool m_noon_above_horizontal_line_as_letter = false;
+    private bool m_emlaaei_text = false;
     private void EmlaaeiTextLabel_Click(object sender, EventArgs e)
     {
         m_emlaaei_text = !m_emlaaei_text;
@@ -41873,24 +41885,24 @@ public partial class MainForm : Form, ISubscriber
         m_shadda_as_letter = ShaddaAsLetterCheckBox.Checked;
         BuildSimplifiedBookAndDisplaySelection();
     }
-    private void SuperscriptHamzaAsLetterCheckBox_CheckedChanged(object sender, EventArgs e)
+    private void HamzaAboveHorizontalLineAsLetterCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-        m_superscript_hamza_as_letter = SuperscriptHamzaAsLetterCheckBox.Checked;
+        m_hamza_above_horizontal_line_as_letter = HamzaAboveHorizontalLineAsLetterCheckBox.Checked;
         BuildSimplifiedBookAndDisplaySelection();
     }
-    private void SuperscriptElfAsLetterCheckBox_CheckedChanged(object sender, EventArgs e)
+    private void ElfAboveHorizontalLineAsLetterCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-        m_superscript_elf_as_letter = SuperscriptElfAsLetterCheckBox.Checked;
+        m_elf_above_horizontal_line_as_letter = ElfAboveHorizontalLineAsLetterCheckBox.Checked;
         BuildSimplifiedBookAndDisplaySelection();
     }
-    private void SuperscriptYaaAsLetterCheckBox_CheckedChanged(object sender, EventArgs e)
+    private void YaaAboveHorizontalLineAsLetterCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-        m_superscript_yaa_as_letter = SuperscriptYaaAsLetterCheckBox.Checked;
+        m_yaa_above_horizontal_line_as_letter = YaaAboveHorizontalLineAsLetterCheckBox.Checked;
         BuildSimplifiedBookAndDisplaySelection();
     }
-    private void SuperscriptNoonAsLetterCheckBox_CheckedChanged(object sender, EventArgs e)
+    private void NoonAboveHorizontalLineAsLetterCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-        m_superscript_noon_as_letter = SuperscriptNoonAsLetterCheckBox.Checked;
+        m_noon_above_horizontal_line_as_letter = NoonAboveHorizontalLineAsLetterCheckBox.Checked;
         BuildSimplifiedBookAndDisplaySelection();
     }
     private void BuildSimplifiedBookAndDisplaySelection()
@@ -41912,10 +41924,10 @@ public partial class MainForm : Form, ISubscriber
                         ////    (m_client.Book.WithBismAllah != m_with_bism_Allah) ||
                         ////    (m_client.Book.WawAsWord != m_waw_as_word) ||
                         ////    (m_client.Book.ShaddaAsLetter != m_shadda_as_letter)
-                        ////    (m_client.Book.SuperscriptHamzaAsLetter != m_superscript_hamza_as_letter)
-                        ////    (m_client.Book.SuperscriptElfAsLetter != m_superscript_elf_as_letter)
-                        ////    (m_client.Book.SuperscriptYaaAsLetter != m_superscript_yaa_as_letter)
-                        ////    (m_client.Book.SuperscriptNoonAsLetter != m_superscript_noon_as_letter)
+                        ////    (m_client.Book.HamzaAboveHorizontalLineAsLetter != m_hamza_above_horizontal_line_as_letter)
+                        ////    (m_client.Book.ElfAboveHorizontalLineAsLetter != m_elf_above_horizontal_line_as_letter)
+                        ////    (m_client.Book.YaaAboveHorizontalLineAsLetter != m_yaa_above_horizontal_line_as_letter)
+                        ////    (m_client.Book.NoonAboveHorizontalLineAsLetter != m_noon_above_horizontal_line_as_letter)
                         ////   )
                         {
                             if (text_mode == "Original")
@@ -41923,13 +41935,13 @@ public partial class MainForm : Form, ISubscriber
                                 m_with_bism_Allah = true;
                                 m_waw_as_word = false;
                                 m_shadda_as_letter = false;
-                                m_superscript_hamza_as_letter = false;
-                                m_superscript_elf_as_letter = false;
-                                m_superscript_yaa_as_letter = false;
-                                m_superscript_noon_as_letter = false;
+                                m_hamza_above_horizontal_line_as_letter = false;
+                                m_elf_above_horizontal_line_as_letter = false;
+                                m_yaa_above_horizontal_line_as_letter = false;
+                                m_noon_above_horizontal_line_as_letter = false;
                             }
 
-                            m_client.BuildSimplifiedBook(text_mode, m_with_bism_Allah, m_waw_as_word, m_shadda_as_letter, m_superscript_hamza_as_letter, m_superscript_elf_as_letter, m_superscript_yaa_as_letter, m_superscript_noon_as_letter, m_emlaaei_text);
+                            m_client.BuildSimplifiedBook(text_mode, m_with_bism_Allah, m_waw_as_word, m_shadda_as_letter, m_hamza_above_horizontal_line_as_letter, m_elf_above_horizontal_line_as_letter, m_yaa_above_horizontal_line_as_letter, m_noon_above_horizontal_line_as_letter, m_emlaaei_text);
 
                             bool backup_found_verses_displayed = m_found_verses_displayed;
 

@@ -43,32 +43,32 @@ namespace Model
             set { shadda_as_letter = value; }
         }
 
-        private bool superscript_hamza_as_letter = false;
-        public bool SuperscriptHamzaAsLetter
+        private bool hamza_above_horizontal_line_as_letter = false;
+        public bool HamzaAboveHorizontalLineAsLetter
         {
-            get { return superscript_hamza_as_letter; }
-            set { superscript_hamza_as_letter = value; }
+            get { return hamza_above_horizontal_line_as_letter; }
+            set { hamza_above_horizontal_line_as_letter = value; }
         }
 
-        private bool superscript_elf_as_letter = false;
-        public bool SuperscriptElfAsLetter
+        private bool elf_above_horizontal_line_as_letter = false;
+        public bool ElfAboveHorizontalLineAsLetter
         {
-            get { return superscript_elf_as_letter; }
-            set { superscript_elf_as_letter = value; }
+            get { return elf_above_horizontal_line_as_letter; }
+            set { elf_above_horizontal_line_as_letter = value; }
         }
 
-        private bool superscript_yaa_as_letter = false;
-        public bool SuperscriptYaaAsLetter
+        private bool yaa_above_horizontal_line_as_letter = false;
+        public bool YaaAboveHorizontalLineAsLetter
         {
-            get { return superscript_yaa_as_letter; }
-            set { superscript_yaa_as_letter = value; }
+            get { return yaa_above_horizontal_line_as_letter; }
+            set { yaa_above_horizontal_line_as_letter = value; }
         }
 
-        private bool superscript_noon_as_letter = false;
-        public bool SuperscriptNoonAsLetter
+        private bool noon_above_horizontal_line_as_letter = false;
+        public bool NoonAboveHorizontalLineAsLetter
         {
-            get { return superscript_noon_as_letter; }
-            set { superscript_noon_as_letter = value; }
+            get { return noon_above_horizontal_line_as_letter; }
+            set { noon_above_horizontal_line_as_letter = value; }
         }
 
         private bool distances_within_chapters = false;

@@ -546,10 +546,10 @@ partial class MainForm
         this.EmlaaeiTextLabel = new System.Windows.Forms.Label();
         this.FindByFrequencySumNumericUpDown = new System.Windows.Forms.NumericUpDown();
         this.StatisticsGroupBox = new System.Windows.Forms.GroupBox();
-        this.SuperscriptNoonAsLetterCheckBox = new System.Windows.Forms.CheckBox();
-        this.SuperscriptYaaAsLetterCheckBox = new System.Windows.Forms.CheckBox();
-        this.SuperscriptElfAsLetterCheckBox = new System.Windows.Forms.CheckBox();
-        this.SuperscriptHamzaAsLetterCheckBox = new System.Windows.Forms.CheckBox();
+        this.NoonAboveHorizontalLineAsLetterCheckBox = new System.Windows.Forms.CheckBox();
+        this.YaaAboveHorizontalLineAsLetterCheckBox = new System.Windows.Forms.CheckBox();
+        this.ElfAboveHorizontalLineAsLetterCheckBox = new System.Windows.Forms.CheckBox();
+        this.HamzaAboveHorizontalLineAsLetterCheckBox = new System.Windows.Forms.CheckBox();
         this.ShaddaAsLetterCheckBox = new System.Windows.Forms.CheckBox();
         this.WawAsWordCheckBox = new System.Windows.Forms.CheckBox();
         this.WithBismAllahCheckBox = new System.Windows.Forms.CheckBox();
@@ -5574,7 +5574,7 @@ partial class MainForm
         this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 0);
         this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
         this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(816, 200);
+        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(816, 203);
         this.ScriptOutputGroupBox.TabIndex = 103;
         this.ScriptOutputGroupBox.TabStop = false;
         this.ScriptOutputGroupBox.Text = " Output ";
@@ -5590,7 +5590,7 @@ partial class MainForm
         this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
         this.ScriptOutputTextBox.ReadOnly = true;
         this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.ScriptOutputTextBox.Size = new System.Drawing.Size(796, 172);
+        this.ScriptOutputTextBox.Size = new System.Drawing.Size(796, 175);
         this.ScriptOutputTextBox.TabIndex = 0;
         this.ScriptOutputTextBox.WordWrap = false;
         this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -8958,9 +8958,9 @@ partial class MainForm
         this.TanzilLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.TanzilLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.TanzilLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.TanzilLabel.Location = new System.Drawing.Point(172, 19);
+        this.TanzilLabel.Location = new System.Drawing.Point(171, 18);
         this.TanzilLabel.Name = "TanzilLabel";
-        this.TanzilLabel.Size = new System.Drawing.Size(5, 5);
+        this.TanzilLabel.Size = new System.Drawing.Size(7, 16);
         this.TanzilLabel.TabIndex = 0;
         this.TanzilLabel.Tag = "http://tanzil.net/";
         this.TanzilLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -9012,10 +9012,10 @@ partial class MainForm
         this.StatisticsGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
         | System.Windows.Forms.AnchorStyles.Left)
         | System.Windows.Forms.AnchorStyles.Right)));
-        this.StatisticsGroupBox.Controls.Add(this.SuperscriptNoonAsLetterCheckBox);
-        this.StatisticsGroupBox.Controls.Add(this.SuperscriptYaaAsLetterCheckBox);
-        this.StatisticsGroupBox.Controls.Add(this.SuperscriptElfAsLetterCheckBox);
-        this.StatisticsGroupBox.Controls.Add(this.SuperscriptHamzaAsLetterCheckBox);
+        this.StatisticsGroupBox.Controls.Add(this.NoonAboveHorizontalLineAsLetterCheckBox);
+        this.StatisticsGroupBox.Controls.Add(this.YaaAboveHorizontalLineAsLetterCheckBox);
+        this.StatisticsGroupBox.Controls.Add(this.ElfAboveHorizontalLineAsLetterCheckBox);
+        this.StatisticsGroupBox.Controls.Add(this.HamzaAboveHorizontalLineAsLetterCheckBox);
         this.StatisticsGroupBox.Controls.Add(this.ShaddaAsLetterCheckBox);
         this.StatisticsGroupBox.Controls.Add(this.WawAsWordCheckBox);
         this.StatisticsGroupBox.Controls.Add(this.WithBismAllahCheckBox);
@@ -9060,65 +9060,69 @@ partial class MainForm
         this.StatisticsGroupBox.TabStop = false;
         this.StatisticsGroupBox.Text = "                                                 ";
         // 
-        // SuperscriptNoonAsLetterCheckBox
+        // NoonAboveHorizontalLineAsLetterCheckBox
         // 
-        this.SuperscriptNoonAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
-        this.SuperscriptNoonAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.SuperscriptNoonAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
-        this.SuperscriptNoonAsLetterCheckBox.Location = new System.Drawing.Point(159, 37);
-        this.SuperscriptNoonAsLetterCheckBox.Name = "SuperscriptNoonAsLetterCheckBox";
-        this.SuperscriptNoonAsLetterCheckBox.Size = new System.Drawing.Size(28, 16);
-        this.SuperscriptNoonAsLetterCheckBox.TabIndex = 10;
-        this.SuperscriptNoonAsLetterCheckBox.Tag = "";
-        this.SuperscriptNoonAsLetterCheckBox.Text = "ۨ";
-        this.SuperscriptNoonAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.SuperscriptNoonAsLetterCheckBox.UseVisualStyleBackColor = false;
-        this.SuperscriptNoonAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.SuperscriptNoonAsLetterCheckBox_CheckedChanged);
+        this.NoonAboveHorizontalLineAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.NoonAboveHorizontalLineAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.NoonAboveHorizontalLineAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
+        this.NoonAboveHorizontalLineAsLetterCheckBox.Location = new System.Drawing.Point(159, 37);
+        this.NoonAboveHorizontalLineAsLetterCheckBox.Name = "NoonAboveHorizontalLineAsLetterCheckBox";
+        this.NoonAboveHorizontalLineAsLetterCheckBox.Size = new System.Drawing.Size(28, 16);
+        this.NoonAboveHorizontalLineAsLetterCheckBox.TabIndex = 10;
+        this.NoonAboveHorizontalLineAsLetterCheckBox.Tag = "";
+        this.NoonAboveHorizontalLineAsLetterCheckBox.Text = "ۨ";
+        this.NoonAboveHorizontalLineAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.NoonAboveHorizontalLineAsLetterCheckBox.UseVisualStyleBackColor = false;
+        this.NoonAboveHorizontalLineAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.NoonAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
+        this.NoonAboveHorizontalLineAsLetterCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
-        // SuperscriptYaaAsLetterCheckBox
+        // YaaAboveHorizontalLineAsLetterCheckBox
         // 
-        this.SuperscriptYaaAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
-        this.SuperscriptYaaAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.SuperscriptYaaAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
-        this.SuperscriptYaaAsLetterCheckBox.Location = new System.Drawing.Point(134, 37);
-        this.SuperscriptYaaAsLetterCheckBox.Name = "SuperscriptYaaAsLetterCheckBox";
-        this.SuperscriptYaaAsLetterCheckBox.Size = new System.Drawing.Size(28, 16);
-        this.SuperscriptYaaAsLetterCheckBox.TabIndex = 9;
-        this.SuperscriptYaaAsLetterCheckBox.Tag = "";
-        this.SuperscriptYaaAsLetterCheckBox.Text = "ۧ";
-        this.SuperscriptYaaAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.SuperscriptYaaAsLetterCheckBox.UseVisualStyleBackColor = false;
-        this.SuperscriptYaaAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.SuperscriptYaaAsLetterCheckBox_CheckedChanged);
+        this.YaaAboveHorizontalLineAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.YaaAboveHorizontalLineAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.YaaAboveHorizontalLineAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
+        this.YaaAboveHorizontalLineAsLetterCheckBox.Location = new System.Drawing.Point(134, 37);
+        this.YaaAboveHorizontalLineAsLetterCheckBox.Name = "YaaAboveHorizontalLineAsLetterCheckBox";
+        this.YaaAboveHorizontalLineAsLetterCheckBox.Size = new System.Drawing.Size(28, 16);
+        this.YaaAboveHorizontalLineAsLetterCheckBox.TabIndex = 9;
+        this.YaaAboveHorizontalLineAsLetterCheckBox.Tag = "";
+        this.YaaAboveHorizontalLineAsLetterCheckBox.Text = "ۧ";
+        this.YaaAboveHorizontalLineAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.YaaAboveHorizontalLineAsLetterCheckBox.UseVisualStyleBackColor = false;
+        this.YaaAboveHorizontalLineAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.YaaAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
+        this.YaaAboveHorizontalLineAsLetterCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
-        // SuperscriptElfAsLetterCheckBox
+        // ElfAboveHorizontalLineAsLetterCheckBox
         // 
-        this.SuperscriptElfAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
-        this.SuperscriptElfAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.SuperscriptElfAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
-        this.SuperscriptElfAsLetterCheckBox.Location = new System.Drawing.Point(109, 37);
-        this.SuperscriptElfAsLetterCheckBox.Name = "SuperscriptElfAsLetterCheckBox";
-        this.SuperscriptElfAsLetterCheckBox.Size = new System.Drawing.Size(28, 16);
-        this.SuperscriptElfAsLetterCheckBox.TabIndex = 8;
-        this.SuperscriptElfAsLetterCheckBox.Tag = "";
-        this.SuperscriptElfAsLetterCheckBox.Text = "ٰ";
-        this.SuperscriptElfAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.SuperscriptElfAsLetterCheckBox.UseVisualStyleBackColor = false;
-        this.SuperscriptElfAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.SuperscriptElfAsLetterCheckBox_CheckedChanged);
+        this.ElfAboveHorizontalLineAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.ElfAboveHorizontalLineAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.ElfAboveHorizontalLineAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
+        this.ElfAboveHorizontalLineAsLetterCheckBox.Location = new System.Drawing.Point(109, 37);
+        this.ElfAboveHorizontalLineAsLetterCheckBox.Name = "ElfAboveHorizontalLineAsLetterCheckBox";
+        this.ElfAboveHorizontalLineAsLetterCheckBox.Size = new System.Drawing.Size(28, 16);
+        this.ElfAboveHorizontalLineAsLetterCheckBox.TabIndex = 8;
+        this.ElfAboveHorizontalLineAsLetterCheckBox.Tag = "";
+        this.ElfAboveHorizontalLineAsLetterCheckBox.Text = "ٰ";
+        this.ElfAboveHorizontalLineAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.ElfAboveHorizontalLineAsLetterCheckBox.UseVisualStyleBackColor = false;
+        this.ElfAboveHorizontalLineAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.ElfAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
+        this.ElfAboveHorizontalLineAsLetterCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
-        // SuperscriptHamzaAsLetterCheckBox
+        // HamzaAboveHorizontalLineAsLetterCheckBox
         // 
-        this.SuperscriptHamzaAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
-        this.SuperscriptHamzaAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.SuperscriptHamzaAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
-        this.SuperscriptHamzaAsLetterCheckBox.Location = new System.Drawing.Point(84, 37);
-        this.SuperscriptHamzaAsLetterCheckBox.Name = "SuperscriptHamzaAsLetterCheckBox";
-        this.SuperscriptHamzaAsLetterCheckBox.Size = new System.Drawing.Size(28, 16);
-        this.SuperscriptHamzaAsLetterCheckBox.TabIndex = 7;
-        this.SuperscriptHamzaAsLetterCheckBox.Tag = "";
-        this.SuperscriptHamzaAsLetterCheckBox.Text = "ٔ";
-        this.SuperscriptHamzaAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.SuperscriptHamzaAsLetterCheckBox.UseVisualStyleBackColor = false;
-        this.SuperscriptHamzaAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.SuperscriptHamzaAsLetterCheckBox_CheckedChanged);
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.BackColor = System.Drawing.Color.Transparent;
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.ForeColor = System.Drawing.Color.Black;
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.Location = new System.Drawing.Point(84, 37);
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.Name = "HamzaAboveHorizontalLineAsLetterCheckBox";
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.Size = new System.Drawing.Size(28, 16);
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.TabIndex = 7;
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.Tag = "";
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.Text = "ٔ";
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.UseVisualStyleBackColor = false;
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.CheckedChanged += new System.EventHandler(this.HamzaAboveHorizontalLineAsLetterCheckBox_CheckedChanged);
+        this.HamzaAboveHorizontalLineAsLetterCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // ShaddaAsLetterCheckBox
         // 
@@ -11856,7 +11860,10 @@ partial class MainForm
     private System.Windows.Forms.Label ChaptersLabel;
     private System.Windows.Forms.ComboBox TextModeComboBox;
     private System.Windows.Forms.CheckBox WawAsWordCheckBox;
-    private System.Windows.Forms.CheckBox SuperscriptHamzaAsLetterCheckBox;
+    private System.Windows.Forms.CheckBox NoonAboveHorizontalLineAsLetterCheckBox;
+    private System.Windows.Forms.CheckBox YaaAboveHorizontalLineAsLetterCheckBox;
+    private System.Windows.Forms.CheckBox ElfAboveHorizontalLineAsLetterCheckBox;
+    private System.Windows.Forms.CheckBox HamzaAboveHorizontalLineAsLetterCheckBox;
     private System.Windows.Forms.CheckBox ShaddaAsLetterCheckBox;
     private System.Windows.Forms.CheckBox WithBismAllahCheckBox;
     private System.Windows.Forms.ComboBox FontComboBox;
@@ -12207,7 +12214,4 @@ partial class MainForm
     private System.Windows.Forms.Label AppCompositesLabel;
     private System.Windows.Forms.Label AppQuranLabLabel;
     private System.Windows.Forms.Label AppNumbersLabel;
-    private System.Windows.Forms.CheckBox SuperscriptNoonAsLetterCheckBox;
-    private System.Windows.Forms.CheckBox SuperscriptYaaAsLetterCheckBox;
-    private System.Windows.Forms.CheckBox SuperscriptElfAsLetterCheckBox;
 }
