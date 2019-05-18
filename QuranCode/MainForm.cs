@@ -7071,7 +7071,7 @@ public partial class MainForm : Form, ISubscriber
         this.CVWLSequenceShowFactorsCheckBox.Name = "CVWLSequenceShowFactorsCheckBox";
         this.CVWLSequenceShowFactorsCheckBox.Size = new System.Drawing.Size(18, 17);
         this.CVWLSequenceShowFactorsCheckBox.TabIndex = 273;
-        this.ToolTip.SetToolTip(this.CVWLSequenceShowFactorsCheckBox, "Include boundary cases");
+        this.ToolTip.SetToolTip(this.CVWLSequenceShowFactorsCheckBox, "Show prime factors");
         this.CVWLSequenceShowFactorsCheckBox.UseVisualStyleBackColor = false;
         this.CVWLSequenceShowFactorsCheckBox.CheckedChanged += new System.EventHandler(this.CVWLSequenceShowFactorsCheckBox_CheckedChanged);
         // 
@@ -30241,25 +30241,28 @@ public partial class MainForm : Form, ISubscriber
                 if (m_cvwl_sequence_show_factors)
                 {
                     string cvwl_str = BuildCVWLSequence(cvwl_sequence_type, m_current_text);
-                    cvwl_str = cvwl_str.Replace("\r", "");
-
-                    StringBuilder str = new StringBuilder();
-                    string[] lines = cvwl_str.Split('\n');
-                    foreach (string line in lines)
+                    if (!String.IsNullOrEmpty(cvwl_str))
                     {
-                        string factors_str = "";
-                        if (line.Length <= 19) // max long is 19 digits long
-                        {
-                            long number = 0L;
-                            if (long.TryParse(line, out number))
-                            {
-                                factors_str = Numbers.FactorizeToString(number);
-                            }
-                        }
-                        str.AppendLine(line + "\t\t" + factors_str);
-                    }
+                        cvwl_str = cvwl_str.Replace("\r", "");
 
-                    CVWLSequenceTextBox.Text = str.ToString();
+                        StringBuilder str = new StringBuilder();
+                        string[] lines = cvwl_str.Split('\n');
+                        foreach (string line in lines)
+                        {
+                            string factors_str = "";
+                            if (line.Length <= 19) // max long is 19 digits long
+                            {
+                                long number = 0L;
+                                if (long.TryParse(line, out number))
+                                {
+                                    factors_str = Numbers.FactorizeToString(number);
+                                }
+                            }
+                            str.AppendLine(line + "\t\t" + factors_str);
+                        }
+
+                        CVWLSequenceTextBox.Text = str.ToString();
+                    }
                 }
                 else
                 {
