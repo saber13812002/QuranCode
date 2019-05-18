@@ -32796,103 +32796,109 @@ public partial class MainForm : Form, ISubscriber
     private int m_user_text_selection_length = 0;
     private void CalculateUserTextValue(Point location)
     {
-        if (m_client != null)
+        if (!String.IsNullOrEmpty(UserTextTextBox.Text))
         {
-            SetCalculationMode(CalculationMode.SumOfLetterValues);
-        }
-
-        m_user_text_selection_length = UserTextTextBox.SelectionLength;
-        m_user_text_selection_start = UserTextTextBox.SelectionStart;
-
-        string text = "";
-        if (UserTextTextBox.SelectionLength > 0)
-        {
-            // selected text only
-            text = UserTextTextBox.SelectedText;
-        }
-        else
-        {
-            if ((location.X == 0) && (location.Y == 0))
+            if (m_client != null)
             {
-                // all text
-                text = UserTextTextBox.Text;
+                SetCalculationMode(CalculationMode.SumOfLetterValues);
+            }
+
+            m_user_text_selection_length = UserTextTextBox.SelectionLength;
+            m_user_text_selection_start = UserTextTextBox.SelectionStart;
+
+            string text = "";
+            if (UserTextTextBox.SelectionLength > 0)
+            {
+                // selected text only
+                text = UserTextTextBox.SelectedText;
             }
             else
             {
-                // current line text
-                int char_index = UserTextTextBox.GetCharIndexFromPosition(location);
-                int line_index = UserTextTextBox.GetLineFromCharIndex(char_index);
-                if ((line_index >= 0) && (line_index < UserTextTextBox.Lines.Length))
+                if ((location.X == 0) && (location.Y == 0))
                 {
-                    text = UserTextTextBox.Lines[line_index].ToString();
+                    // all text
+                    text = UserTextTextBox.Text;
                 }
                 else
                 {
-                    text = "";
+                    // current line text
+                    int char_index = UserTextTextBox.GetCharIndexFromPosition(location);
+                    int line_index = UserTextTextBox.GetLineFromCharIndex(char_index);
+                    if ((line_index >= 0) && (line_index < UserTextTextBox.Lines.Length))
+                    {
+                        text = UserTextTextBox.Lines[line_index].ToString();
+                    }
+                    else
+                    {
+                        text = "";
+                    }
                 }
             }
-        }
-        text = text.Replace("\r", "");
-        text = text.Replace("\t", "");
-        text = text.Replace("_", "");
-        text = text.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
-        text = text.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
-        foreach (char character in Constants.INDIAN_DIGITS)
-        {
-            text = text.Replace(character.ToString(), "");
-        }
-        foreach (char character in Constants.QURANMARKS)
-        {
-            text = text.Replace(character.ToString(), "");
-        }
-        foreach (char character in Constants.STOPMARKS)
-        {
-            text = text.Replace(character.ToString(), "");
-        }
-        text = text.Replace("\n ", "\n"); // quran marks
-        text = text.Replace(" \n", "\n"); // sijood marks
-        while (text.Contains("  "))
-        {
-            text = text.Replace("  ", " ");
-        }
-        text = text.Replace(",", "");
-        text = text.Replace(":", "");
-        text = text.Replace("0", "");
-        text = text.Replace("1", "");
-        text = text.Replace("2", "");
-        text = text.Replace("3", "");
-        text = text.Replace("4", "");
-        text = text.Replace("5", "");
-        text = text.Replace("6", "");
-        text = text.Replace("7", "");
-        text = text.Replace("8", "");
-        text = text.Replace("9", "");
-        text = text.Trim();
+            text = text.Replace("\r", "");
+            text = text.Replace("\t", "");
+            text = text.Replace("_", "");
+            text = text.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+            text = text.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
+            foreach (char character in Constants.INDIAN_DIGITS)
+            {
+                text = text.Replace(character.ToString(), "");
+            }
+            foreach (char character in Constants.QURANMARKS)
+            {
+                text = text.Replace(character.ToString(), "");
+            }
+            foreach (char character in Constants.STOPMARKS)
+            {
+                text = text.Replace(character.ToString(), "");
+            }
+            text = text.Replace("\n ", "\n"); // quran marks
+            text = text.Replace(" \n", "\n"); // sijood marks
+            while (text.Contains("  "))
+            {
+                text = text.Replace("  ", " ");
+            }
+            text = text.Replace(",", "");
+            text = text.Replace(":", "");
+            text = text.Replace("0", "");
+            text = text.Replace("1", "");
+            text = text.Replace("2", "");
+            text = text.Replace("3", "");
+            text = text.Replace("4", "");
+            text = text.Replace("5", "");
+            text = text.Replace("6", "");
+            text = text.Replace("7", "");
+            text = text.Replace("8", "");
+            text = text.Replace("9", "");
+            text = text.Trim();
 
-        ////////////////////////////////////////////////////
-        // overwrite m_current_text to show LetterStatistics
-        ////////////////////////////////////////////////////
-        m_current_text = text;
+            ////////////////////////////////////////////////////
+            // overwrite m_current_text to show LetterStatistics
+            ////////////////////////////////////////////////////
+            if (!String.IsNullOrEmpty(text))
+            {
+                m_current_text = text;
 
-        // calculate Letters value
-        CalculateValueAndDisplayFactors(m_current_text);
+                // calculate Letters value
+                CalculateValueAndDisplayFactors(m_current_text);
 
-        // calculate and display verse_number_sum, word_number_sum, letter_number_sum
-        CalculateAndDisplayCounts(m_current_text);
+                // calculate and display verse_number_sum, word_number_sum, letter_number_sum
+                CalculateAndDisplayCounts(m_current_text);
 
-        BuildLetterFrequencies();
-        DisplayLetterFrequencies();
+                BuildLetterFrequencies();
+                DisplayLetterFrequencies();
 
-        if (UserTextTextBox.SelectionLength > 0)
-        {
-            DisplayWordFrequencies();
-            this.AcceptButton = null;  // prevent steeling focus by this.AcceptButton = FindByTextButton;
-        }
-        else
-        {
-            WordsListBoxLabel.Visible = false;
-            WordsListBox.Visible = false;
-            WordsListBox.SendToBack();
+                if (UserTextTextBox.SelectionLength > 0)
+                {
+                    DisplayWordFrequencies();
+                    this.AcceptButton = null;  // prevent steeling focus by this.AcceptButton = FindByTextButton;
+                }
+                else
+                {
+                    WordsListBoxLabel.Visible = false;
+                    WordsListBox.Visible = false;
+                    WordsListBox.SendToBack();
+                }
+            }
         }
     }
     private Point m_caret_position = new Point(0, 0);
@@ -42405,8 +42411,11 @@ public partial class MainForm : Form, ISubscriber
     {
         if (m_client != null)
         {
-            long value = m_client.CalculateValue(user_text);
-            FactorizeValue(value, "User", true);
+            if (!String.IsNullOrEmpty(user_text))
+            {
+                long value = m_client.CalculateValue(user_text);
+                FactorizeValue(value, "User", true);
+            }
         }
     }
     // used for Quran text only
@@ -42439,32 +42448,44 @@ public partial class MainForm : Form, ISubscriber
     {
         if (m_client != null)
         {
-            long value = m_client.CalculateValue(verse);
-            FactorizeValue(value, "Value", true);
+            if (verse != null)
+            {
+                long value = m_client.CalculateValue(verse);
+                FactorizeValue(value, "Value", true);
+            }
         }
     }
     private void CalculateValueAndDisplayFactors(List<Verse> verses)
     {
         if (m_client != null)
         {
-            long value = m_client.CalculateValue(verses);
-            FactorizeValue(value, "Value", true);
+            if (verses != null)
+            {
+                long value = m_client.CalculateValue(verses);
+                FactorizeValue(value, "Value", true);
+            }
         }
     }
     private void CalculateValueAndDisplayFactors(Chapter chapter)
     {
         if (m_client != null)
         {
-            long value = m_client.CalculateValue(chapter);
-            FactorizeValue(value, "Value", true);
+            if (chapter != null)
+            {
+                long value = m_client.CalculateValue(chapter);
+                FactorizeValue(value, "Value", true);
+            }
         }
     }
     private void CalculateValueAndDisplayFactors(List<Verse> verses, Letter start_letter, Letter end_letter)
     {
         if (m_client != null)
         {
-            long value = m_client.CalculateValue(verses, start_letter, end_letter);
-            FactorizeValue(value, "Value", true);
+            if (verses != null)
+            {
+                long value = m_client.CalculateValue(verses, start_letter, end_letter);
+                FactorizeValue(value, "Value", true);
+            }
         }
     }
 
@@ -44398,15 +44419,15 @@ public partial class MainForm : Form, ISubscriber
     }
     private void CalculateAndDisplayCounts(string user_text)
     {
+        ChapterNumberSumTextBox.Text = "";
+        VerseNumberSumTextBox.Text = "";
+        WordNumberSumTextBox.Text = "";
+        LetterNumberSumTextBox.Text = "";
+
         if (!String.IsNullOrEmpty(user_text))
         {
             if (m_client != null)
             {
-                ChapterNumberSumTextBox.Text = "";
-                VerseNumberSumTextBox.Text = "";
-                WordNumberSumTextBox.Text = "";
-                LetterNumberSumTextBox.Text = "";
-
                 if (!user_text.IsArabic())  // eg English
                 {
                     user_text = user_text.ToUpper();
@@ -44902,6 +44923,11 @@ public partial class MainForm : Form, ISubscriber
     private void DisplayCounts(int chapter_count, int verse_count, int word_count, int letter_count, int chapter_number_sum, int verse_number_sum, int word_number_sum, int letter_number_sum)
     {
         DisplayCounts(chapter_count, verse_count, word_count, letter_count);
+
+        ChapterNumberSumTextBox.Text = "";
+        VerseNumberSumTextBox.Text = "";
+        WordNumberSumTextBox.Text = "";
+        LetterNumberSumTextBox.Text = "";
 
         if (chapter_number_sum != -1)
         {
