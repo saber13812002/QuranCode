@@ -32796,7 +32796,7 @@ public partial class MainForm : Form, ISubscriber
     private int m_user_text_selection_length = 0;
     private void CalculateUserTextValue(Point location)
     {
-        if (!String.IsNullOrEmpty(UserTextTextBox.Text))
+        if (UserTextTextBox.Text.Length > 0)
         {
             if (m_client != null)
             {
@@ -32834,48 +32834,49 @@ public partial class MainForm : Form, ISubscriber
                     }
                 }
             }
-            text = text.Replace("\r", "");
-            text = text.Replace("\t", "");
-            text = text.Replace("_", "");
-            text = text.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
-            text = text.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
-            foreach (char character in Constants.INDIAN_DIGITS)
-            {
-                text = text.Replace(character.ToString(), "");
-            }
-            foreach (char character in Constants.QURANMARKS)
-            {
-                text = text.Replace(character.ToString(), "");
-            }
-            foreach (char character in Constants.STOPMARKS)
-            {
-                text = text.Replace(character.ToString(), "");
-            }
-            text = text.Replace("\n ", "\n"); // quran marks
-            text = text.Replace(" \n", "\n"); // sijood marks
-            while (text.Contains("  "))
-            {
-                text = text.Replace("  ", " ");
-            }
-            text = text.Replace(",", "");
-            text = text.Replace(":", "");
-            text = text.Replace("0", "");
-            text = text.Replace("1", "");
-            text = text.Replace("2", "");
-            text = text.Replace("3", "");
-            text = text.Replace("4", "");
-            text = text.Replace("5", "");
-            text = text.Replace("6", "");
-            text = text.Replace("7", "");
-            text = text.Replace("8", "");
-            text = text.Replace("9", "");
-            text = text.Trim();
 
-            ////////////////////////////////////////////////////
-            // overwrite m_current_text to show LetterStatistics
-            ////////////////////////////////////////////////////
             if (!String.IsNullOrEmpty(text))
             {
+                text = text.Replace("\r", "");
+                text = text.Replace("\t", "");
+                text = text.Replace("_", "");
+                text = text.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+                text = text.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
+                foreach (char character in Constants.INDIAN_DIGITS)
+                {
+                    text = text.Replace(character.ToString(), "");
+                }
+                foreach (char character in Constants.QURANMARKS)
+                {
+                    text = text.Replace(character.ToString(), "");
+                }
+                foreach (char character in Constants.STOPMARKS)
+                {
+                    text = text.Replace(character.ToString(), "");
+                }
+                text = text.Replace("\n ", "\n"); // quran marks
+                text = text.Replace(" \n", "\n"); // sijood marks
+                while (text.Contains("  "))
+                {
+                    text = text.Replace("  ", " ");
+                }
+                text = text.Replace(",", "");
+                text = text.Replace(":", "");
+                text = text.Replace("0", "");
+                text = text.Replace("1", "");
+                text = text.Replace("2", "");
+                text = text.Replace("3", "");
+                text = text.Replace("4", "");
+                text = text.Replace("5", "");
+                text = text.Replace("6", "");
+                text = text.Replace("7", "");
+                text = text.Replace("8", "");
+                text = text.Replace("9", "");
+                text = text.Trim();
+
+                ////////////////////////////////////////////////////
+                // overwrite m_current_text to show LetterStatistics
+                ////////////////////////////////////////////////////
                 m_current_text = text;
 
                 // calculate Letters value
@@ -42127,15 +42128,18 @@ public partial class MainForm : Form, ISubscriber
                 {
                     if (m_user_text_mode)
                     {
-                        if (UserTextTextBox.SelectionLength == 0) // get text at current line
+                        if (UserTextTextBox.Text.Length > 0)
                         {
-                            CalculateUserTextValue(m_caret_position);
+                            if (UserTextTextBox.SelectionLength == 0) // get text at current line
+                            {
+                                CalculateUserTextValue(m_caret_position);
+                            }
+                            else // get current selected text
+                            {
+                                m_current_text = UserTextTextBox.SelectedText;
+                            }
+                            CalculateValueAndDisplayFactors(m_current_text);
                         }
-                        else // get current selected text
-                        {
-                            m_current_text = UserTextTextBox.SelectedText;
-                        }
-                        CalculateValueAndDisplayFactors(m_current_text);
                     }
                     else
                     {
@@ -42186,13 +42190,16 @@ public partial class MainForm : Form, ISubscriber
         {
             if (m_user_text_mode)
             {
-                if (UserTextTextBox.SelectionLength == 0) // get text at current line
+                if (UserTextTextBox.Text.Length > 0)
                 {
-                    CalculateUserTextValue(m_caret_position);
-                }
-                else // get current selected text
-                {
-                    m_current_text = UserTextTextBox.SelectedText;
+                    if (UserTextTextBox.SelectionLength == 0) // get text at current line
+                    {
+                        CalculateUserTextValue(m_caret_position);
+                    }
+                    else // get current selected text
+                    {
+                        m_current_text = UserTextTextBox.SelectedText;
+                    }
                 }
             }
             else
