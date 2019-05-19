@@ -9927,6 +9927,7 @@ public partial class MainForm : Form, ISubscriber
         // UserTextTextBox
         // 
         this.UserTextTextBox.AcceptsReturn = true;
+        this.UserTextTextBox.AcceptsTab = true;
         this.UserTextTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
         | System.Windows.Forms.AnchorStyles.Left)
         | System.Windows.Forms.AnchorStyles.Right)));
@@ -16477,11 +16478,11 @@ public partial class MainForm : Form, ISubscriber
         {
             ScriptSaveLabel_Click(sender, e);
         }
-        if ((ModifierKeys == Keys.Control) && (e.KeyCode == Keys.F4)) // Close
+        else if ((ModifierKeys == Keys.Control) && (e.KeyCode == Keys.F4)) // Close
         {
             CloseScript(sender, e);
         }
-        if (e.KeyCode == Keys.Escape) // Close
+        else if (e.KeyCode == Keys.Escape) // Close
         {
             CloseScript(sender, e);
         }
@@ -32791,6 +32792,7 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region UserText
     ///////////////////////////////////////////////////////////////////////////////
+    private Label m_clicked_label = null;
     private bool m_mouse_down = false;
     private int m_user_text_selection_start = 0;
     private int m_user_text_selection_length = 0;
@@ -32905,12 +32907,22 @@ public partial class MainForm : Form, ISubscriber
     private Point m_caret_position = new Point(0, 0);
     private void UserTextTextBox_KeyUp(object sender, KeyEventArgs e)
     {
-        int char_index = UserTextTextBox.GetFirstCharIndexOfCurrentLine();
-        if (char_index >= 0)
+        if ((ModifierKeys == Keys.Control) && (e.KeyCode == Keys.S)) // Save
         {
-            m_caret_position = UserTextTextBox.GetPositionFromCharIndex(char_index);
-            CalculateUserTextValue(m_caret_position);
+            UserTextSaveLabel_Click(m_clicked_label, null);
         }
+        else
+        {
+            int char_index = UserTextTextBox.GetFirstCharIndexOfCurrentLine();
+            if (char_index >= 0)
+            {
+                m_caret_position = UserTextTextBox.GetPositionFromCharIndex(char_index);
+                CalculateUserTextValue(m_caret_position);
+            }
+        }
+
+        e.SuppressKeyPress = true; // stop beep
+        e.Handled = true;
     }
     private void UserTextTextBox_MouseDown(object sender, MouseEventArgs e)
     {
@@ -33071,9 +33083,9 @@ public partial class MainForm : Form, ISubscriber
     {
         if (sender is Label)
         {
-            Control control = (sender as Label);
+            m_clicked_label = (sender as Label);
 
-            string control_name = control.Name;
+            string control_name = m_clicked_label.Name;
             int pos = control_name.IndexOf("LoadLabel");
             if (pos > -1)
             {
@@ -33094,11 +33106,15 @@ public partial class MainForm : Form, ISubscriber
         this.Cursor = Cursors.WaitCursor;
         try
         {
+            Thread.Sleep(100);
+            if (sender == null) sender = UserText6SaveLabel;
+
             if (sender is Label)
             {
-                Control control = (sender as Label);
-                string control_name = control.Name;
-                if (control_name == "UserText1SaveLabel") return;
+                Control m_clicked_label = (sender as Label);
+                string control_name = m_clicked_label.Name;
+                control_name = control_name.Replace("Load", "Save");
+                if (control_name == "UserText1SaveLabel") return; // readonly
 
                 int pos = control_name.IndexOf("SaveLabel");
                 if (pos > -1)
@@ -33118,12 +33134,12 @@ public partial class MainForm : Form, ISubscriber
                         UserTextTextBox.Focus();
 
                         string load_control_name = control_name.Replace("Save", "Load");
-                        control = GetControl(load_control_name);
-                        if (control != null)
+                        m_clicked_label = GetControl(load_control_name);
+                        if (m_clicked_label != null)
                         {
-                            ToolTip.SetToolTip(control, (text.Length > 0) ? text : L[l]["Load"]);
-                            control.ForeColor = (text.Length > 0) ? Color.Black : Color.Lime;
-                            control.BackColor = (text.Length > 0) ? Color.Lime : Color.Black;
+                            ToolTip.SetToolTip(m_clicked_label, (text.Length > 0) ? text : L[l]["Load"]);
+                            m_clicked_label.ForeColor = (text.Length > 0) ? Color.Black : Color.Lime;
+                            m_clicked_label.BackColor = (text.Length > 0) ? Color.Lime : Color.Black;
                         }
                     }
                 }
