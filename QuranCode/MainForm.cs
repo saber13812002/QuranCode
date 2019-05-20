@@ -404,6 +404,8 @@ public partial class MainForm : Form, ISubscriber
                 SetToolTipPlayerVerseSilenceGapTrackBar();
                 SetToolTipPlayerSelectionSilenceGapTrackBar();
 
+                UpdateNumberTypeLabelTooltips();
+
                 SetToolTips();
             }
         }
@@ -36034,9 +36036,31 @@ public partial class MainForm : Form, ISubscriber
 
         UpdateFindByNumbersResultType();
     }
+    private void UpdateNumberTypeLabelTooltips()
+    {
+        string text = "";
+        switch (m_numbers_result_type)
+        {
+            case NumbersResultType.Letters: { text = L[l]["letter number"]; break; }
+            case NumbersResultType.Words: { text = L[l]["word number"]; break; }
+            case NumbersResultType.Verses: { text = L[l]["verse number"]; break; }
+            case NumbersResultType.Chapters: { text = L[l]["chapter number"]; break; }
+            default: { text = L[l]["number"]; break; }
+        }
+        List<Control> controls = GetDescendentControls(this);
+        foreach (Control control in controls)
+        {
+            if ((control.Name.StartsWith("FindByNumbers")) && (control.Name.EndsWith("NumberTypeLabel")) && (control.Text == "#"))
+            {
+                ToolTip.SetToolTip(control, text);
+            }
+        }
+    }
     private void FindByNumbersResultTypeLettersLabel_Click(object sender, EventArgs e)
     {
         m_numbers_result_type = NumbersResultType.Letters;
+        UpdateNumberTypeLabelTooltips();
+
         //                          num   Cs     Vs     Ws    Ls    uLs   value dsum  droot
         EnableFindByNumbersControls(true, false, false, false, false, false, true, true, true);
         FindByNumbersControls_Enter(null, null);
@@ -36100,6 +36124,8 @@ public partial class MainForm : Form, ISubscriber
     private void FindByNumbersResultTypeWordsLabel_Click(object sender, EventArgs e)
     {
         m_numbers_result_type = NumbersResultType.Words;
+        UpdateNumberTypeLabelTooltips();
+
         //                          num   Cs     Vs     Ws    Ls    uLs   value dsum  droot
         EnableFindByNumbersControls(true, false, false, true, true, true, true, true, true);
         FindByNumbersControls_Enter(null, null);
@@ -36163,6 +36189,8 @@ public partial class MainForm : Form, ISubscriber
     private void FindByNumbersResultTypeSentencesLabel_Click(object sender, EventArgs e)
     {
         m_numbers_result_type = NumbersResultType.Sentences;
+        UpdateNumberTypeLabelTooltips();
+
         //                           num   Cs     Vs     Ws    Ls    uLs   value dsum  droot
         EnableFindByNumbersControls(true, false, false, true, true, true, true, true, true);
         FindByNumbersControls_Enter(null, null);
@@ -36226,6 +36254,8 @@ public partial class MainForm : Form, ISubscriber
     private void FindByNumbersResultTypeVersesLabel_Click(object sender, EventArgs e)
     {
         m_numbers_result_type = NumbersResultType.Verses;
+        UpdateNumberTypeLabelTooltips();
+
         //                           num   Cs     Vs    Ws    Ls    uLs   value dsum  droot
         EnableFindByNumbersControls(true, false, true, true, true, true, true, true, true);
         FindByNumbersControls_Enter(null, null);
@@ -36289,6 +36319,8 @@ public partial class MainForm : Form, ISubscriber
     private void FindByNumbersResultTypeChaptersLabel_Click(object sender, EventArgs e)
     {
         m_numbers_result_type = NumbersResultType.Chapters;
+        UpdateNumberTypeLabelTooltips();
+
         //                           num   Cs    Vs    Ws    Ls    uLs   value dsum  droot
         EnableFindByNumbersControls(true, true, true, true, true, true, true, true, true);
         FindByNumbersControls_Enter(null, null);
@@ -37542,6 +37574,9 @@ public partial class MainForm : Form, ISubscriber
         }
 
         UpdateFindByNumbersResultType();
+
+        UpdateNumberTypeLabelTooltips();
+        
         // some operations take too long and may frustrate user
         if (
             (m_numbers_result_type != NumbersResultType.WordRanges) &&
