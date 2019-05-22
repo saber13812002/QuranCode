@@ -14,7 +14,7 @@ namespace Model
     //// Create a StringComparer that uses the Turkish culture and ignores case.
     //private static StringComparer arabicICComp = StringComparer.Create(arabic, true);
 
-    public enum StatisticSortMethod { ByOrder, ByLetter, ByFrequency, ByPositionSum, ByDistanceSum }
+    public enum StatisticSortMethod { ByOrder, ByLetter, ByFrequency, ByPositionSum, ByDistanceSum, ByReversePositionSum, ByReverseDistanceSum }
     public enum StatisticSortOrder { Ascending, Descending }
 
     public class LetterStatistic : IComparable<LetterStatistic>
@@ -26,6 +26,10 @@ namespace Model
         public long PositionSum;
         public List<long> Distances = new List<long>();
         public long DistanceSum;
+        public List<long> ReversePositions = new List<long>();
+        public long ReversePositionSum;
+        public List<long> ReverseDistances = new List<long>();
+        public long ReverseDistanceSum;
 
         public static StatisticSortMethod SortMethod;
         public static StatisticSortOrder SortOrder;
@@ -68,6 +72,22 @@ namespace Model
                             }
                             return this.DistanceSum.CompareTo(obj.DistanceSum);
                         }
+                    case StatisticSortMethod.ByReversePositionSum:
+                        {
+                            if (this.ReversePositionSum.CompareTo(obj.ReversePositionSum) == 0)
+                            {
+                                return this.Order.CompareTo(obj.Order);
+                            }
+                            return this.ReversePositionSum.CompareTo(obj.ReversePositionSum);
+                        }
+                    case StatisticSortMethod.ByReverseDistanceSum:
+                        {
+                            if (this.ReverseDistanceSum.CompareTo(obj.ReverseDistanceSum) == 0)
+                            {
+                                return this.Order.CompareTo(obj.Order);
+                            }
+                            return this.ReverseDistanceSum.CompareTo(obj.ReverseDistanceSum);
+                        }
                     default:
                         return this.Order.CompareTo(obj.Order);
                 }
@@ -107,6 +127,22 @@ namespace Model
                                 return obj.Order.CompareTo(this.Order);
                             }
                             return obj.DistanceSum.CompareTo(this.DistanceSum);
+                        }
+                    case StatisticSortMethod.ByReversePositionSum:
+                        {
+                            if (obj.ReversePositionSum.CompareTo(this.ReversePositionSum) == 0)
+                            {
+                                return obj.Order.CompareTo(this.Order);
+                            }
+                            return obj.ReversePositionSum.CompareTo(this.ReversePositionSum);
+                        }
+                    case StatisticSortMethod.ByReverseDistanceSum:
+                        {
+                            if (obj.ReverseDistanceSum.CompareTo(this.ReverseDistanceSum) == 0)
+                            {
+                                return obj.Order.CompareTo(this.Order);
+                            }
+                            return obj.ReverseDistanceSum.CompareTo(this.ReverseDistanceSum);
                         }
                     default:
                         return obj.Order.CompareTo(this.Order);

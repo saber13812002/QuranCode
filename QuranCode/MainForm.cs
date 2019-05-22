@@ -1365,6 +1365,8 @@ public partial class MainForm : Form, ISubscriber
         this.LetterFrequencyColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
         this.LetterPositionSumColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
         this.LetterDistanceSumColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+        this.LetterReversePositionSumColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+        this.LetterReverseDistanceSumColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
         this.FindByFrequncyPanel = new System.Windows.Forms.Panel();
         this.FindByFrequencyLinkLabel = new System.Windows.Forms.Label();
         this.FindByFrequencyPhraseCheckBox = new System.Windows.Forms.CheckBox();
@@ -10578,7 +10580,9 @@ public partial class MainForm : Form, ISubscriber
             this.LetterCharacterColumnHeader,
             this.LetterFrequencyColumnHeader,
             this.LetterPositionSumColumnHeader,
-            this.LetterDistanceSumColumnHeader});
+            this.LetterDistanceSumColumnHeader,
+            this.LetterReversePositionSumColumnHeader,
+            this.LetterReverseDistanceSumColumnHeader});
         this.LetterFrequencyListView.Cursor = System.Windows.Forms.Cursors.Hand;
         this.LetterFrequencyListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.LetterFrequencyListView.FullRowSelect = true;
@@ -10622,6 +10626,16 @@ public partial class MainForm : Form, ISubscriber
         this.LetterDistanceSumColumnHeader.Text = "∑Δ";
         this.LetterDistanceSumColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.LetterDistanceSumColumnHeader.Width = 48;
+        // 
+        // LetterReversePositionSumColumnHeader
+        // 
+        this.LetterReversePositionSumColumnHeader.Text = "ƩrPos";
+        this.LetterReversePositionSumColumnHeader.Width = 0;
+        // 
+        // LetterReverseDistanceSumColumnHeader
+        // 
+        this.LetterReverseDistanceSumColumnHeader.Text = "ƩrΔ";
+        this.LetterReverseDistanceSumColumnHeader.Width = 0;
         // 
         // FindByFrequncyPanel
         // 
@@ -37576,7 +37590,7 @@ public partial class MainForm : Form, ISubscriber
         UpdateFindByNumbersResultType();
 
         UpdateNumberTypeLabelTooltips();
-        
+
         // some operations take too long and may frustrate user
         if (
             (m_numbers_result_type != NumbersResultType.WordRanges) &&
@@ -46806,12 +46820,14 @@ public partial class MainForm : Form, ISubscriber
                         List<int> selected_indexes = new List<int>();
                         for (int i = 0; i < m_client.LetterStatistics.Count; i++)
                         {
-                            string[] item_parts = new string[5];
+                            string[] item_parts = new string[7];
                             item_parts[0] = m_client.LetterStatistics[i].Order.ToString();
                             item_parts[1] = m_client.LetterStatistics[i].Letter.ToString();
                             item_parts[2] = m_client.LetterStatistics[i].Frequency.ToString();
                             item_parts[3] = m_client.LetterStatistics[i].PositionSum.ToString();
                             item_parts[4] = m_client.LetterStatistics[i].DistanceSum.ToString();
+                            item_parts[5] = m_client.LetterStatistics[i].ReversePositionSum.ToString();
+                            item_parts[6] = m_client.LetterStatistics[i].ReverseDistanceSum.ToString();
                             LetterFrequencyListView.Items.Add(new ListViewItem(item_parts, i));
 
                             // re-select user items if any were selected for previous selection

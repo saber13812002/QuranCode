@@ -572,6 +572,8 @@ partial class MainForm
         this.LetterFrequencyColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
         this.LetterPositionSumColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
         this.LetterDistanceSumColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+        this.LetterReversePositionSumColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+        this.LetterReverseDistanceSumColumnHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
         this.LetterFrequencyContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
         this.PositionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
         this.DistancesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -5574,7 +5576,7 @@ partial class MainForm
         this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 0);
         this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
         this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(816, 206);
+        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(816, 208);
         this.ScriptOutputGroupBox.TabIndex = 103;
         this.ScriptOutputGroupBox.TabStop = false;
         this.ScriptOutputGroupBox.Text = " Output ";
@@ -5590,7 +5592,7 @@ partial class MainForm
         this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
         this.ScriptOutputTextBox.ReadOnly = true;
         this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.ScriptOutputTextBox.Size = new System.Drawing.Size(796, 178);
+        this.ScriptOutputTextBox.Size = new System.Drawing.Size(796, 180);
         this.ScriptOutputTextBox.TabIndex = 0;
         this.ScriptOutputTextBox.WordWrap = false;
         this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -9386,7 +9388,9 @@ partial class MainForm
             this.LetterCharacterColumnHeader,
             this.LetterFrequencyColumnHeader,
             this.LetterPositionSumColumnHeader,
-            this.LetterDistanceSumColumnHeader});
+            this.LetterDistanceSumColumnHeader,
+            this.LetterReversePositionSumColumnHeader,
+            this.LetterReverseDistanceSumColumnHeader});
         this.LetterFrequencyListView.ContextMenuStrip = this.LetterFrequencyContextMenuStrip;
         this.LetterFrequencyListView.Cursor = System.Windows.Forms.Cursors.Hand;
         this.LetterFrequencyListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -9432,6 +9436,16 @@ partial class MainForm
         this.LetterDistanceSumColumnHeader.Text = "ƩΔ";
         this.LetterDistanceSumColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.LetterDistanceSumColumnHeader.Width = 32;
+        // 
+        // LetterReversePositionSumColumnHeader
+        // 
+        this.LetterReversePositionSumColumnHeader.Text = "ƩrPos";
+        this.LetterReversePositionSumColumnHeader.Width = 0;
+        // 
+        // LetterReverseDistanceSumColumnHeader
+        // 
+        this.LetterReverseDistanceSumColumnHeader.Text = "ƩrΔ";
+        this.LetterReverseDistanceSumColumnHeader.Width = 0;
         // 
         // LetterFrequencyContextMenuStrip
         // 
@@ -10091,7 +10105,7 @@ partial class MainForm
         this.ValueInspectLabel.ForeColor = System.Drawing.Color.DimGray;
         this.ValueInspectLabel.Image = ((System.Drawing.Image)(resources.GetObject("ValueInspectLabel.Image")));
         this.ValueInspectLabel.ImageAlign = System.Drawing.ContentAlignment.TopLeft;
-        this.ValueInspectLabel.Location = new System.Drawing.Point(62, 21);
+        this.ValueInspectLabel.Location = new System.Drawing.Point(61, 21);
         this.ValueInspectLabel.Name = "ValueInspectLabel";
         this.ValueInspectLabel.Size = new System.Drawing.Size(19, 19);
         this.ValueInspectLabel.TabIndex = 27;
@@ -12181,6 +12195,8 @@ partial class MainForm
     private System.Windows.Forms.Label LetterFrequencyPositionSumSumLabel;
     private System.Windows.Forms.ColumnHeader LetterPositionSumColumnHeader;
     private System.Windows.Forms.ColumnHeader LetterDistanceSumColumnHeader;
+    private System.Windows.Forms.ColumnHeader LetterReversePositionSumColumnHeader;
+    private System.Windows.Forms.ColumnHeader LetterReverseDistanceSumColumnHeader;
     private System.Windows.Forms.Label LetterFrequencyDistanceSumSumLabel;
     private System.Windows.Forms.Label FindByFrequencyTotalLabel;
     private System.Windows.Forms.Label ChineseLanguageLabel;

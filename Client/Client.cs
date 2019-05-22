@@ -2376,16 +2376,15 @@ public class Client : IPublisher, ISubscriber
                             {
                                 is_found = true;
                                 m_letter_statistics[j].Frequency++;
-                                int pos = i + 1;
-                                long last_pos = m_letter_statistics[j].Positions[m_letter_statistics[j].Positions.Count - 1];
-                                m_letter_statistics[j].Positions.Add(pos);
-                                m_letter_statistics[j].PositionSum += pos;
-                                long distance = pos - last_pos;
+                                int position = i + 1;
+                                long last_position = m_letter_statistics[j].Positions[m_letter_statistics[j].Positions.Count - 1];
+                                m_letter_statistics[j].Positions.Add(position);
+                                m_letter_statistics[j].PositionSum += position;
+                                long distance = position - last_position;
                                 m_letter_statistics[j].Distances.Add(distance);
                                 m_letter_statistics[j].DistanceSum += distance;
                             }
                         }
-
                         if (!is_found)
                         {
                             LetterStatistic letter_statistic = new LetterStatistic();
@@ -2393,13 +2392,42 @@ public class Client : IPublisher, ISubscriber
                             letter_statistic.Order = m_letter_statistics.Count + 1;
                             letter_statistic.Letter = text[i];
                             letter_statistic.Frequency = 1;
-                            int pos = i + 1;
-                            letter_statistic.Positions.Add(pos);
-                            letter_statistic.PositionSum += pos;
+                            int position = i + 1;
+                            letter_statistic.Positions.Add(position);
+                            letter_statistic.PositionSum += position;
 
                             m_letter_statistics.Add(letter_statistic);
                         }
                     }
+
+                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    // Reverse Positions and Disctances
+                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    for (int i = text.Length - 1; i >= 0; i--)
+                    {
+                        for (int j = 0; j < m_letter_statistics.Count; j++)
+                        {
+                            if (text[i] == m_letter_statistics[j].Letter)
+                            {
+                                int reverse_position = text.Length - i;
+                                if (m_letter_statistics[j].ReversePositions.Count == 0)
+                                {
+                                    m_letter_statistics[j].ReversePositions.Add(reverse_position);
+                                    m_letter_statistics[j].ReversePositionSum += reverse_position;
+                                }
+                                else
+                                {
+                                    long last_reverse_position = m_letter_statistics[j].ReversePositions[m_letter_statistics[j].ReversePositions.Count - 1];
+                                    m_letter_statistics[j].ReversePositions.Add(reverse_position);
+                                    m_letter_statistics[j].ReversePositionSum += reverse_position;
+                                    long reverse_distance = reverse_position - last_reverse_position;
+                                    m_letter_statistics[j].ReverseDistances.Add(reverse_distance);
+                                    m_letter_statistics[j].ReverseDistanceSum += reverse_distance;
+                                }
+                            }
+                        }
+                    }
+                    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 }
             }
         }
@@ -2439,14 +2467,16 @@ public class Client : IPublisher, ISubscriber
                         writer.WriteLine("-------------------------------------------------------------------");
                         writer.WriteLine();
                         writer.WriteLine("-------------------------------------------------------------------");
-                        if (verbose) writer.WriteLine("Order" + "\t" + "Letter" + "\t" + "Freq" + "\t" + "∑Pos" + "\t" + "\t" + "∑∆" + "\t");
-                        else writer.WriteLine("Order" + "\t" + "Letter" + "\t" + "Freq" + "\t" + "∑Pos" + "\t" + "∑∆");
+                        if (verbose) writer.WriteLine("Order" + "\t" + "Letter" + "\t" + "Freq" + "\t" + "∑Pos" + "\t" + "\t" + "∑∆" + "\t" + "\t" + "∑rPos" + "\t" + "\t" + "∑r∆" + "\t");
+                        else writer.WriteLine("Order" + "\t" + "Letter" + "\t" + "Freq" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "∑rPos" + "\t" + "∑r∆");
                         writer.WriteLine("-------------------------------------------------------------------");
                         int count = 0;
                         int running_sum = 0;
                         int frequence_sum = 0;
                         long positionsum_sum = 0;
                         long distancesum_sum = 0;
+                        long reverse_positionsum_sum = 0;
+                        long reverse_distancesum_sum = 0;
                         foreach (LetterStatistic letter_statistic in m_letter_statistics)
                         {
                             if (verbose)
@@ -2454,7 +2484,7 @@ public class Client : IPublisher, ISubscriber
                                 StringBuilder positions = new StringBuilder();
                                 foreach (int value in letter_statistic.Positions)
                                 {
-                                    positions.Append(value.ToString() + ",");
+                                    positions.Append(value.ToString() + "+");
                                 }
                                 if (positions.Length > 0)
                                 {
@@ -2464,18 +2494,40 @@ public class Client : IPublisher, ISubscriber
                                 StringBuilder distances = new StringBuilder();
                                 foreach (int value in letter_statistic.Distances)
                                 {
-                                    distances.Append(value.ToString() + ",");
+                                    distances.Append(value.ToString() + "+");
                                 }
                                 if (distances.Length > 0)
                                 {
                                     distances.Remove(distances.Length - 1, 1);
                                 }
 
+                                StringBuilder reverse_positions = new StringBuilder();
+                                foreach (int value in letter_statistic.ReversePositions)
+                                {
+                                    reverse_positions.Append(value.ToString() + "+");
+                                }
+                                if (reverse_positions.Length > 0)
+                                {
+                                    reverse_positions.Remove(reverse_positions.Length - 1, 1);
+                                }
+
+                                StringBuilder reverse_distances = new StringBuilder();
+                                foreach (int value in letter_statistic.ReverseDistances)
+                                {
+                                    reverse_distances.Append(value.ToString() + "+");
+                                }
+                                if (reverse_distances.Length > 0)
+                                {
+                                    reverse_distances.Remove(reverse_distances.Length - 1, 1);
+                                }
+
                                 writer.WriteLine(letter_statistic.Order.ToString() + "\t" +
                                                  letter_statistic.Letter.ToString() + '\t' +
                                                  letter_statistic.Frequency.ToString() + "\t" +
                                                  letter_statistic.PositionSum.ToString() + "\t" + positions.ToString() + "\t" +
-                                                 letter_statistic.DistanceSum.ToString() + "\t" + distances.ToString()
+                                                 letter_statistic.DistanceSum.ToString() + "\t" + distances.ToString() + "\t" +
+                                                 letter_statistic.ReversePositionSum.ToString() + "\t" + reverse_positions.ToString() + "\t" +
+                                                 letter_statistic.ReverseDistanceSum.ToString() + "\t" + reverse_distances.ToString()
                                                  );
                             }
                             else
@@ -2484,7 +2536,9 @@ public class Client : IPublisher, ISubscriber
                                                 letter_statistic.Letter.ToString() + '\t' +
                                                 letter_statistic.Frequency.ToString() + "\t" +
                                                 letter_statistic.PositionSum.ToString() + "\t" +
-                                                letter_statistic.DistanceSum.ToString() + "\t"
+                                                letter_statistic.DistanceSum.ToString() + "\t" +
+                                                letter_statistic.ReversePositionSum.ToString() + "\t" +
+                                                letter_statistic.ReverseDistanceSum.ToString() + "\t"
                                                 );
                             }
                             count++;
@@ -2492,10 +2546,11 @@ public class Client : IPublisher, ISubscriber
                             frequence_sum += letter_statistic.Frequency;
                             positionsum_sum += letter_statistic.PositionSum;
                             distancesum_sum += letter_statistic.DistanceSum;
+                            reverse_positionsum_sum += letter_statistic.ReversePositionSum;
+                            reverse_distancesum_sum += letter_statistic.ReverseDistanceSum;
                         }
                         writer.WriteLine("-------------------------------------------------------------------");
-                        //writer.WriteLine(running_sum + "\t" + "Sum" + "\t" + frequence_sum.ToString() + "\t" + positionsum_sum.ToString() + "\t" + "\t" + distancesum_sum.ToString());
-                        writer.WriteLine(running_sum + "\t" + "Sum" + "\t" + frequence_sum.ToString() + "\t" + positionsum_sum.ToString() + "\t" + distancesum_sum.ToString());
+                        writer.WriteLine(running_sum + "\t" + "Sum" + "\t" + frequence_sum.ToString() + "\t" + positionsum_sum.ToString() + "\t" + distancesum_sum.ToString() + "\t" + reverse_positionsum_sum.ToString() + "\t" + reverse_distancesum_sum.ToString());
                         writer.WriteLine("-------------------------------------------------------------------");
                     }
                 }
