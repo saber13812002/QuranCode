@@ -10625,7 +10625,7 @@ public partial class MainForm : Form, ISubscriber
         // 
         this.LetterDistanceSumColumnHeader.Text = "∑Δ";
         this.LetterDistanceSumColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.LetterDistanceSumColumnHeader.Width = 48;
+        this.LetterDistanceSumColumnHeader.Width = 42;
         // 
         // LetterReversePositionSumColumnHeader
         // 
@@ -14961,6 +14961,91 @@ public partial class MainForm : Form, ISubscriber
                                                     }
                                                 }
                                                 break;
+                                            // [LetterFrequency]
+                                            case "LetterOrderColumnHeader":
+                                                {
+                                                    try
+                                                    {
+                                                        LetterOrderColumnHeader.Width = int.Parse(parts[1].Trim());
+                                                    }
+                                                    catch
+                                                    {
+                                                        LetterOrderColumnHeader.Width = (m_dpi_x == 96.0F) ? 21 : 24;
+                                                    }
+                                                }
+                                                break;
+                                            case "LetterCharacterColumnHeader":
+                                                {
+                                                    try
+                                                    {
+                                                        LetterCharacterColumnHeader.Width = int.Parse(parts[1].Trim());
+                                                    }
+                                                    catch
+                                                    {
+                                                        LetterCharacterColumnHeader.Width = (m_dpi_x == 96.0F) ? 26 : 32;
+                                                    }
+                                                }
+                                                break;
+                                            case "LetterFrequencyColumnHeader":
+                                                {
+                                                    try
+                                                    {
+                                                        LetterFrequencyColumnHeader.Width = int.Parse(parts[1].Trim());
+                                                    }
+                                                    catch
+                                                    {
+                                                        LetterFrequencyColumnHeader.Width = (m_dpi_x == 96.0F) ? 40 : 50;
+                                                    }
+                                                }
+                                                break;
+                                            case "LetterPositionSumColumnHeader":
+                                                {
+                                                    try
+                                                    {
+                                                        LetterPositionSumColumnHeader.Width = int.Parse(parts[1].Trim());
+                                                    }
+                                                    catch
+                                                    {
+                                                        LetterPositionSumColumnHeader.Width = (m_dpi_x == 96.0F) ? 38 : 48;
+                                                    }
+                                                }
+                                                break;
+                                            case "LetterDistanceSumColumnHeader":
+                                                {
+                                                    try
+                                                    {
+                                                        LetterDistanceSumColumnHeader.Width = int.Parse(parts[1].Trim());
+                                                    }
+                                                    catch
+                                                    {
+                                                        LetterDistanceSumColumnHeader.Width = (m_dpi_x == 96.0F) ? 32 : 42;
+                                                    }
+                                                }
+                                                break;
+                                            case "LetterReversePositionSumColumnHeader":
+                                                {
+                                                    try
+                                                    {
+                                                        LetterReversePositionSumColumnHeader.Width = int.Parse(parts[1].Trim());
+                                                    }
+                                                    catch
+                                                    {
+                                                        LetterReversePositionSumColumnHeader.Width = 0;
+                                                    }
+                                                }
+                                                break;
+                                            case "LetterReverseDistanceSumColumnHeader":
+                                                {
+                                                    try
+                                                    {
+                                                        LetterReverseDistanceSumColumnHeader.Width = int.Parse(parts[1].Trim());
+                                                    }
+                                                    catch
+                                                    {
+                                                        LetterReverseDistanceSumColumnHeader.Width = 0;
+                                                    }
+                                                }
+                                                break;
                                             // [Audio]
                                             case "Reciter":
                                                 {
@@ -15370,6 +15455,21 @@ public partial class MainForm : Form, ISubscriber
                     writer.WriteLine("TranslationFont" + "=" + font_converter.ConvertToString(m_translation_font));
                     writer.WriteLine("TranslationColor" + "=" + color_converter.ConvertToString(m_translation_color));
                     writer.WriteLine("TextZoomFactor" + "=" + m_text_zoom_factor);
+                    writer.WriteLine();
+
+                    writer.WriteLine("[LetterFrequency]");
+                    writer.WriteLine("LetterOrderColumnHeader" + "=" + LetterOrderColumnHeader.Width);
+                    writer.WriteLine("LetterCharacterColumnHeader" + "=" + LetterCharacterColumnHeader.Width);
+                    writer.WriteLine("LetterFrequencyColumnHeader" + "=" + LetterFrequencyColumnHeader.Width);
+                    writer.WriteLine("LetterPositionSumColumnHeader" + "=" + LetterPositionSumColumnHeader.Width);
+                    writer.WriteLine("LetterDistanceSumColumnHeader" + "=" + LetterDistanceSumColumnHeader.Width);
+                    writer.WriteLine("LetterReversePositionSumColumnHeader" + "=" + LetterReversePositionSumColumnHeader.Width);
+                    writer.WriteLine("LetterReverseDistanceSumColumnHeader" + "=" + LetterReverseDistanceSumColumnHeader.Width);
+                    //// Or this but to avoid using reflection for Loading, use names directly in both Save and Load options.
+                    //foreach (ColumnHeader column in LetterFrequencyListView.Columns)
+                    //{
+                    //    writer.WriteLine(column.Name + "=" + column.Width);
+                    //}                    
                     writer.WriteLine();
 
                     writer.WriteLine("[Audio]");
@@ -46972,19 +47072,13 @@ public partial class MainForm : Form, ISubscriber
 
             if (m_find_by_phrase_letter_frequency)
             {
-                if (FindByFrequencyPhraseTextBox.SelectionLength > 0)
-                {
-                    FactorizeValue(frequency_sum, "Freq", true);
-
-                    if (m_show_add_controls)
-                    {
-                        ToolTip.SetToolTip(ValueLabel, L[l]["Hide value-added positions and distances"]);
-                    }
-                    else
-                    {
-                        ToolTip.SetToolTip(ValueLabel, L[l]["Show value-added positions and distances"]);
-                    }
-                }
+                ToolTip.SetToolTip(LetterFrequencyPositionSumSumLabel, L[l]["Base-10 letter frequency concatenation"]);
+                ToolTip.SetToolTip(LetterFrequencyDistanceSumSumLabel, L[l]["Base-19 letter frequency concatenation"]);
+            }
+            else
+            {
+                ToolTip.SetToolTip(LetterFrequencyPositionSumSumLabel, L[l]["Sum of letter position sums"]);
+                ToolTip.SetToolTip(LetterFrequencyDistanceSumSumLabel, L[l]["Sum of letter distance sums"]);
             }
         }
         catch
