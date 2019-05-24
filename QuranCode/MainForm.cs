@@ -347,8 +347,8 @@ public partial class MainForm : Form, ISubscriber
 
                 if (m_find_by_phrase_letter_frequency)
                 {
-                    ToolTip.SetToolTip(LetterFrequencyPositionSumSumLabel, L[l]["Base-10 letter frequency concatenation"]);
-                    ToolTip.SetToolTip(LetterFrequencyDistanceSumSumLabel, L[l]["Base-19 letter frequency concatenation"]);
+                    ToolTip.SetToolTip(LetterFrequencyPositionSumSumLabel, L[l]["<-- letter frequency concatenation"]);
+                    ToolTip.SetToolTip(LetterFrequencyDistanceSumSumLabel, L[l]["--> letter frequency concatenation"]);
                 }
                 else
                 {
@@ -44357,7 +44357,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void RadixValueLabel_TextChanged(object sender, EventArgs e)
     {
-
+        // طسم letter frequencies in Initial Letters = 4*1 + 5*19 + 17*19*19 = 6236
+        DisplayLetterFrequenciesTotals();
     }
     private void RadixValueUpLabel_Click(object sender, EventArgs e)
     {
@@ -47007,30 +47008,68 @@ public partial class MainForm : Form, ISubscriber
 
             if (m_find_by_phrase_letter_frequency)
             {
-                // position_sum = base-10 frequency sum --- طسم letter frequencies in Initial Letters = 1754
-                // distance_sum = base-19 frequency sum --- طسم letter frequencies in Initial Letters = 4*1 + 5*19 + 17*19*19 = 6236
-                long base10_multiplier = 1L;
-                long base19_multiplier = 1L;
+                //// position_sum = base-10 frequency sum --- طسم letter frequencies in Initial Letters = 1754
+                //// distance_sum = base-19 frequency sum --- طسم letter frequencies in Initial Letters = 4*1 + 5*19 + 17*19*19 = 6236
+                //long base10_multiplier = 1L;
+                //long base19_multiplier = 1L;
+                //if (LetterFrequencyListView.SelectedIndices.Count > 0)
+                //{
+                //    foreach (ListViewItem item in LetterFrequencyListView.SelectedItems)
+                //    {
+                //        long digit = long.Parse(item.SubItems[2].Text);
+                //        position_sum += digit * base10_multiplier;
+                //        distance_sum += digit * base19_multiplier;
+                //        base10_multiplier *= Numbers.DEFAULT_RADIX;
+                //        base19_multiplier *= Numbers.RADIX_NINETEEN;
+                //    }
+                //}
+                //else
+                //{
+                //    foreach (ListViewItem item in LetterFrequencyListView.Items)
+                //    {
+                //        long digit = long.Parse(item.SubItems[2].Text);
+                //        position_sum += digit * base10_multiplier;
+                //        distance_sum += digit * base19_multiplier;
+                //        base10_multiplier *= Numbers.DEFAULT_RADIX;
+                //        base19_multiplier *= Numbers.RADIX_NINETEEN;
+                //    }
+                //}
+
+                List<string> texts = new List<string>();
                 if (LetterFrequencyListView.SelectedIndices.Count > 0)
                 {
                     foreach (ListViewItem item in LetterFrequencyListView.SelectedItems)
                     {
-                        long digit = long.Parse(item.SubItems[2].Text);
-                        position_sum += digit * base10_multiplier;
-                        distance_sum += digit * base19_multiplier;
-                        base10_multiplier *= Numbers.DEFAULT_RADIX;
-                        base19_multiplier *= Numbers.RADIX_NINETEEN;
+                        texts.Add(item.SubItems[2].Text);
                     }
                 }
                 else
                 {
                     foreach (ListViewItem item in LetterFrequencyListView.Items)
                     {
-                        long digit = long.Parse(item.SubItems[2].Text);
-                        position_sum += digit * base10_multiplier;
-                        distance_sum += digit * base19_multiplier;
-                        base10_multiplier *= Numbers.DEFAULT_RADIX;
-                        base19_multiplier *= Numbers.RADIX_NINETEEN;
+                        texts.Add(item.SubItems[2].Text);
+                    }
+                }
+
+                long base_multiplier = 1L;
+                for (int i = 0; i < texts.Count; i++)
+                {
+                    long value = 0L;
+                    if (long.TryParse(texts[i], out value))
+                    {
+                        position_sum += value * base_multiplier;
+                        base_multiplier *= m_radix;
+                    }
+                }
+
+                base_multiplier = 1L;
+                for (int i = texts.Count - 1; i >= 0; i--)
+                {
+                    long value = 0L;
+                    if (long.TryParse(texts[i], out value))
+                    {
+                        distance_sum += value * base_multiplier;
+                        base_multiplier *= m_radix;
                     }
                 }
             }
@@ -47072,8 +47111,8 @@ public partial class MainForm : Form, ISubscriber
 
             if (m_find_by_phrase_letter_frequency)
             {
-                ToolTip.SetToolTip(LetterFrequencyPositionSumSumLabel, L[l]["Base-10 letter frequency concatenation"]);
-                ToolTip.SetToolTip(LetterFrequencyDistanceSumSumLabel, L[l]["Base-19 letter frequency concatenation"]);
+                ToolTip.SetToolTip(LetterFrequencyPositionSumSumLabel, L[l]["<-- letter frequency concatenation"]);
+                ToolTip.SetToolTip(LetterFrequencyDistanceSumSumLabel, L[l]["--> letter frequency concatenation"]);
             }
             else
             {
