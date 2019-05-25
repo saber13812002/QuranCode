@@ -13382,8 +13382,6 @@ public partial class MainForm : Form, ISubscriber
             m_was_maximized = this.WindowState == FormWindowState.Maximized;
         }
 
-        if (ScriptTextBox.Visible) return;
-
         if (PictureBox.Visible)
         {
             RedrawImage();
@@ -13557,7 +13555,7 @@ public partial class MainForm : Form, ISubscriber
         }
         else if (ScriptTextBox.Visible)
         {
-            CloseScript(sender, e);
+            CloseScript();
         }
         else
         {
@@ -13654,7 +13652,6 @@ public partial class MainForm : Form, ISubscriber
             }
 
             PlayerStopLabel_Click(null, null);
-
 
             // this code has been moved out of SelectionChanged and brought to MouseClick and KeyUp
             // to keep all verse translations visible until the user clicks a verse then show one verse translation
@@ -16596,11 +16593,11 @@ public partial class MainForm : Form, ISubscriber
         }
         else if ((ModifierKeys == Keys.Control) && (e.KeyCode == Keys.F4)) // Close
         {
-            CloseScript(sender, e);
+            CloseScript();
         }
         else if (e.KeyCode == Keys.Escape) // Close
         {
-            CloseScript(sender, e);
+            CloseScript();
         }
         else if (e.KeyCode == Keys.F5)  // Run
         {
@@ -16851,7 +16848,7 @@ public partial class MainForm : Form, ISubscriber
                         //SearchResultTextBox.Focus();
                         //SearchResultTextBox.Refresh();
 
-                        CloseScript(sender, e);
+                        CloseScript();
                     }
                 }
             }
@@ -16869,7 +16866,7 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void CloseScript(object sender, EventArgs e)
+    private void CloseScript()
     {
         if (ScriptTextBox.Visible)
         {
@@ -20415,8 +20412,6 @@ public partial class MainForm : Form, ISubscriber
 
     private void ChapterComboBox_KeyDown(object sender, KeyEventArgs e)
     {
-        if (ScriptTextBox.Visible) return;
-
         bool SeparatorKeys = (
             ((e.KeyCode == Keys.Subtract) && (e.Modifiers != Keys.Shift))           // HYPHEN
             || ((e.KeyCode == Keys.OemMinus) && (e.Modifiers != Keys.Shift))        // HYPHEN
@@ -21025,8 +21020,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void ChaptersListBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if (ScriptTextBox.Visible) return;
-
         if (sender == ChaptersListBox)
         {
             PlayerStopLabel_Click(null, null);
@@ -21928,8 +21921,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void NumericUpDown_ValueChanged(object sender, EventArgs e)
     {
-        if (ScriptTextBox.Visible) return;
-
         Control control = sender as NumericUpDown;
         if (control != null)
         {
@@ -39308,6 +39299,8 @@ public partial class MainForm : Form, ISubscriber
     private bool m_found_verses_displayed = false;
     private void SwitchToMainTextBox()
     {
+        CloseScript();
+
         if (m_active_textbox != null)
         {
             if (m_found_verses_displayed)
@@ -39344,6 +39337,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void SwitchToSearchResultTextBox()
     {
+        CloseScript();
+
         if (m_active_textbox != null)
         {
             // allow subsequent Finds to update chapter list, and browse history
@@ -39379,6 +39374,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void SwitchToPictureBox()
     {
+        CloseScript();
+
         ShowPictureBox();
     }
 
@@ -41791,8 +41788,6 @@ public partial class MainForm : Form, ISubscriber
     {
         try
         {
-            if (ScriptTextBox.Visible) return;
-
             if (m_client != null)
             {
                 if (m_client.NumerologySystem != null)
@@ -43018,32 +43013,32 @@ public partial class MainForm : Form, ISubscriber
 
                 SquareSumTextBox.Text = (plus1_index > 0) ? plus1_str : (minus1_index > 0) ? minus1_str : "";
                 SquareDiffTextBox.Text = (plus1_index > 0) ? plus2_str : (minus1_index > 0) ? minus2_str : "";
-                //long n = 0L;
-                //if (plus1_str.StartsWith("4×")) // 4n+1
-                //{
-                //    int start = "4×".Length;
-                //    int end = plus1_str.IndexOf("+");
-                //    if ((start >= 0) && (end >= start))
-                //    {
-                //        string text = plus1_str.Substring(start, end - start);
-                //        n = long.Parse(text);
-                //    }
-                //}
-                //else if (minus1_str.StartsWith("4×")) // 4n-1
-                //{
-                //    int start = "4×".Length;
-                //    int end = minus1_str.IndexOf("-");
-                //    if ((start >= 0) && (end >= start))
-                //    {
-                //        string text = minus1_str.Substring(start, end - start);
-                //        n = long.Parse(text);
-                //    }
-                //}
-                //Color n_color = Numbers.GetNumberTypeColor(n);
+                long n = 0L;
+                if (plus1_str.StartsWith("4×")) // 4n+1
+                {
+                    int start = "4×".Length;
+                    int end = plus1_str.IndexOf("+");
+                    if ((start >= 0) && (end >= start))
+                    {
+                        string text = plus1_str.Substring(start, end - start);
+                        n = long.Parse(text);
+                    }
+                }
+                else if (minus1_str.StartsWith("4×")) // 4n-1
+                {
+                    int start = "4×".Length;
+                    int end = minus1_str.IndexOf("-");
+                    if ((start >= 0) && (end >= start))
+                    {
+                        string text = minus1_str.Substring(start, end - start);
+                        n = long.Parse(text);
+                    }
+                }
+                Color n_color = Numbers.GetNumberTypeColor(n);
                 //double scale = 0.8D;
                 //n_color = Color.FromArgb((int)(n_color.R * scale), (int)(n_color.G * scale), (int)(n_color.B * scale));
-                //SquareSumTextBox.ForeColor = n_color;
-                //SquareDiffTextBox.ForeColor = n_color;
+                SquareSumTextBox.ForeColor = n_color;
+                SquareDiffTextBox.ForeColor = n_color;
                 SquareSumTextBox.Refresh();
                 SquareDiffTextBox.Refresh();
 
@@ -45704,8 +45699,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawLetterValuesLabel_Click(object sender, EventArgs e)
     {
-        if (ScriptTextBox.Visible) return;
-
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -45779,8 +45772,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawWordValuesLabel_Click(object sender, EventArgs e)
     {
-        if (ScriptTextBox.Visible) return;
-
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -45848,8 +45839,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawSearchTermsLabel_Click(object sender, EventArgs e)
     {
-        if (ScriptTextBox.Visible) return;
-
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -46006,8 +45995,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawWordAllahLabel_Click(object sender, EventArgs e)
     {
-        if (ScriptTextBox.Visible) return;
-
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -46098,8 +46085,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawWordsWithAllahLabel_Click(object sender, EventArgs e)
     {
-        if (ScriptTextBox.Visible) return;
-
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -46249,8 +46234,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayWordsWithAllahLabel_Click(object sender, EventArgs e)
     {
-        if (ScriptTextBox.Visible) return;
-
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -46272,8 +46255,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawPrimesLabel_Click(object sender, EventArgs e)
     {
-        if (ScriptTextBox.Visible) return;
-
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -46327,8 +46308,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawAdditivePrimesLabel_Click(object sender, EventArgs e)
     {
-        if (ScriptTextBox.Visible) return;
-
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -46378,8 +46357,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DrawNonAdditivePrimesLabel_Click(object sender, EventArgs e)
     {
-        if (ScriptTextBox.Visible) return;
-
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -46429,8 +46406,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void GeneratePrimeDrawingsLabel_Click(object sender, EventArgs e)
     {
-        if (ScriptTextBox.Visible) return;
-
         this.Cursor = Cursors.WaitCursor;
         try
         {

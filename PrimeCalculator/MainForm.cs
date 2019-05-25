@@ -301,8 +301,8 @@ public partial class MainForm : Form
         int length = ValueTextBox.Text.Replace(" ", "").Length;
         if (digits == length)
         {
-            PreviousPrimeNumberLabel.Enabled = (digits > 0);
-            NextPrimeNumberLabel.Enabled = (digits > 0);
+            UndoValueLabel.Enabled = (digits > 0);
+            RedoValueLabel.Enabled = (digits > 0);
         }
         DigitsLabel.Text = (digits == 0) ? "digits" : digits.ToString();
 
@@ -392,6 +392,7 @@ public partial class MainForm : Form
             }
         }
     }
+
     private void NextPrimeNumber()
     {
         // guard against multiple runs on multiple ENTER keys
@@ -459,14 +460,6 @@ public partial class MainForm : Form
             this.Cursor = Cursors.Default;
         }
     }
-    private void NextPrimeNumberLabel_Click(object sender, EventArgs e)
-    {
-        NextPrimeNumber();
-    }
-    private void PreviousPrimeNumberLabel_Click(object sender, EventArgs e)
-    {
-        PreviousPrimeNumber();
-    }
 
     private List<string> m_history_items = new List<string>();
     private int m_history_index = -1;
@@ -476,6 +469,7 @@ public partial class MainForm : Form
         {
             m_history_index++;
             ValueTextBox.Text = m_history_items[m_history_index];
+            CallRun();
         }
         ValueTextBox.Focus();
     }
@@ -485,8 +479,17 @@ public partial class MainForm : Form
         {
             m_history_index--;
             ValueTextBox.Text = m_history_items[m_history_index];
+            CallRun();
         }
         ValueTextBox.Focus();
+    }
+    private void RedoValueLabel_Click(object sender, EventArgs e)
+    {
+        NextHistoryItem();
+    }
+    private void UndoValueLabel_Click(object sender, EventArgs e)
+    {
+        PreviousHistoryItem();
     }
 
     private double m_double_value = 0.0D;
@@ -646,22 +649,22 @@ public partial class MainForm : Form
                         ToolTip.SetToolTip(NthAdditiveNumberTextBox, "Additive prime index");
                         ToolTip.SetToolTip(NthNonAdditiveNumberTextBox, "Non-additive prime index");
 
-                        if (Nth4n1NumberTextBox.Text == "")
-                        {
-                            //Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
-                        }
-                        else
-                        {
-                            if (Numbers.IsPrime(value))
-                            {
-                                //Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
-                            }
-                            else // any other index type will be treated as IndexNumberType.Composite
-                            {
-                                //Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
-                            }
-                        }
-                        Nth4n1NumberTextBox.Refresh();
+                        //if (Nth4n1NumberTextBox.Text == "")
+                        //{
+                        //    Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
+                        //}
+                        //else
+                        //{
+                        //    if (Numbers.IsPrime(value))
+                        //    {
+                        //        Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
+                        //    }
+                        //    else // any other index type will be treated as IndexNumberType.Composite
+                        //    {
+                        //        Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
+                        //    }
+                        //}
+                        //Nth4n1NumberTextBox.Refresh();
                     }
                     else // Composite
                     {
@@ -682,15 +685,15 @@ public partial class MainForm : Form
                         ToolTip.SetToolTip(NthAdditiveNumberTextBox, "Additive composite index");
                         ToolTip.SetToolTip(NthNonAdditiveNumberTextBox, "Non-additive composite index");
 
-                        if (Nth4n1NumberTextBox.Text == "")
-                        {
-                            //Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
-                        }
-                        else
-                        {
-                            //Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
-                        }
-                        Nth4n1NumberTextBox.Refresh();
+                        //if (Nth4n1NumberTextBox.Text == "")
+                        //{
+                        //    Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
+                        //}
+                        //else
+                        //{
+                        //    Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
+                        //}
+                        //Nth4n1NumberTextBox.Refresh();
                     }
                 }
 

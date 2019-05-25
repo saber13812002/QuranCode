@@ -42,8 +42,8 @@
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.DigitsLabel = new System.Windows.Forms.Label();
-            this.PreviousPrimeNumberLabel = new System.Windows.Forms.Button();
-            this.NextPrimeNumberLabel = new System.Windows.Forms.Button();
+            this.UndoValueLabel = new System.Windows.Forms.Button();
+            this.RedoValueLabel = new System.Windows.Forms.Button();
             this.VersionLabel = new System.Windows.Forms.Label();
             this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.MultithreadingCheckBox = new System.Windows.Forms.CheckBox();
@@ -184,7 +184,7 @@
             this.ElapsedTimeLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ElapsedTimeLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.ElapsedTimeLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.ElapsedTimeLabel.Location = new System.Drawing.Point(57, 320);
+            this.ElapsedTimeLabel.Location = new System.Drawing.Point(57, 362);
             this.ElapsedTimeLabel.Name = "ElapsedTimeLabel";
             this.ElapsedTimeLabel.Size = new System.Drawing.Size(180, 16);
             this.ElapsedTimeLabel.TabIndex = 26;
@@ -199,7 +199,7 @@
             this.ProgressLabel.BackColor = System.Drawing.SystemColors.Info;
             this.ProgressLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.ProgressLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.ProgressLabel.Location = new System.Drawing.Point(0, 320);
+            this.ProgressLabel.Location = new System.Drawing.Point(0, 362);
             this.ProgressLabel.Name = "ProgressLabel";
             this.ProgressLabel.Size = new System.Drawing.Size(56, 16);
             this.ProgressLabel.TabIndex = 25;
@@ -214,7 +214,7 @@
             this.ElapsedTimeValueLabel.BackColor = System.Drawing.SystemColors.ControlText;
             this.ElapsedTimeValueLabel.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.ElapsedTimeValueLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.ElapsedTimeValueLabel.Location = new System.Drawing.Point(57, 335);
+            this.ElapsedTimeValueLabel.Location = new System.Drawing.Point(57, 377);
             this.ElapsedTimeValueLabel.Name = "ElapsedTimeValueLabel";
             this.ElapsedTimeValueLabel.Size = new System.Drawing.Size(180, 17);
             this.ElapsedTimeValueLabel.TabIndex = 28;
@@ -228,7 +228,7 @@
             this.MilliSecondsLabel.BackColor = System.Drawing.SystemColors.ControlText;
             this.MilliSecondsLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.MilliSecondsLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.MilliSecondsLabel.Location = new System.Drawing.Point(180, 337);
+            this.MilliSecondsLabel.Location = new System.Drawing.Point(180, 379);
             this.MilliSecondsLabel.Name = "MilliSecondsLabel";
             this.MilliSecondsLabel.Size = new System.Drawing.Size(37, 12);
             this.MilliSecondsLabel.TabIndex = 29;
@@ -241,7 +241,7 @@
             this.ProgressValueLabel.BackColor = System.Drawing.SystemColors.ControlText;
             this.ProgressValueLabel.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.ProgressValueLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.ProgressValueLabel.Location = new System.Drawing.Point(0, 335);
+            this.ProgressValueLabel.Location = new System.Drawing.Point(0, 377);
             this.ProgressValueLabel.Name = "ProgressValueLabel";
             this.ProgressValueLabel.Size = new System.Drawing.Size(56, 17);
             this.ProgressValueLabel.TabIndex = 27;
@@ -260,7 +260,7 @@
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ReadOnly = true;
             this.OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.OutputTextBox.Size = new System.Drawing.Size(226, 231);
+            this.OutputTextBox.Size = new System.Drawing.Size(226, 229);
             this.OutputTextBox.TabIndex = 29;
             this.OutputTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.OutputTextBox, "Factorization result");
@@ -271,7 +271,7 @@
             // 
             this.ProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ProgressBar.Location = new System.Drawing.Point(0, 356);
+            this.ProgressBar.Location = new System.Drawing.Point(0, 398);
             this.ProgressBar.Name = "ProgressBar";
             this.ProgressBar.Size = new System.Drawing.Size(240, 6);
             this.ProgressBar.TabIndex = 0;
@@ -284,7 +284,7 @@
             this.WebsiteLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.WebsiteLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.WebsiteLabel.ForeColor = System.Drawing.Color.Purple;
-            this.WebsiteLabel.Location = new System.Drawing.Point(0, 365);
+            this.WebsiteLabel.Location = new System.Drawing.Point(0, 407);
             this.WebsiteLabel.Name = "WebsiteLabel";
             this.WebsiteLabel.Size = new System.Drawing.Size(240, 16);
             this.WebsiteLabel.TabIndex = 31;
@@ -340,38 +340,38 @@
             this.ToolTip.SetToolTip(this.DigitsLabel, "digits");
             this.DigitsLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             // 
-            // PreviousPrimeNumberLabel
+            // UndoValueLabel
             // 
-            this.PreviousPrimeNumberLabel.BackColor = System.Drawing.SystemColors.Control;
-            this.PreviousPrimeNumberLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PreviousPrimeNumberLabel.Enabled = false;
-            this.PreviousPrimeNumberLabel.FlatAppearance.BorderSize = 0;
-            this.PreviousPrimeNumberLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.PreviousPrimeNumberLabel.Image = ((System.Drawing.Image)(resources.GetObject("PreviousPrimeNumberLabel.Image")));
-            this.PreviousPrimeNumberLabel.Location = new System.Drawing.Point(2, 2);
-            this.PreviousPrimeNumberLabel.Name = "PreviousPrimeNumberLabel";
-            this.PreviousPrimeNumberLabel.Size = new System.Drawing.Size(10, 18);
-            this.PreviousPrimeNumberLabel.TabIndex = 1;
-            this.ToolTip.SetToolTip(this.PreviousPrimeNumberLabel, "Previous Prime");
-            this.PreviousPrimeNumberLabel.UseVisualStyleBackColor = false;
-            this.PreviousPrimeNumberLabel.Click += new System.EventHandler(this.PreviousPrimeNumberLabel_Click);
+            this.UndoValueLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.UndoValueLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.UndoValueLabel.Enabled = false;
+            this.UndoValueLabel.FlatAppearance.BorderSize = 0;
+            this.UndoValueLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.UndoValueLabel.Image = ((System.Drawing.Image)(resources.GetObject("UndoValueLabel.Image")));
+            this.UndoValueLabel.Location = new System.Drawing.Point(2, 2);
+            this.UndoValueLabel.Name = "UndoValueLabel";
+            this.UndoValueLabel.Size = new System.Drawing.Size(10, 18);
+            this.UndoValueLabel.TabIndex = 1;
+            this.ToolTip.SetToolTip(this.UndoValueLabel, "Previous Prime");
+            this.UndoValueLabel.UseVisualStyleBackColor = false;
+            this.UndoValueLabel.Click += new System.EventHandler(this.UndoValueLabel_Click);
             // 
-            // NextPrimeNumberLabel
+            // RedoValueLabel
             // 
-            this.NextPrimeNumberLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.NextPrimeNumberLabel.BackColor = System.Drawing.SystemColors.Control;
-            this.NextPrimeNumberLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.NextPrimeNumberLabel.Enabled = false;
-            this.NextPrimeNumberLabel.FlatAppearance.BorderSize = 0;
-            this.NextPrimeNumberLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.NextPrimeNumberLabel.Image = ((System.Drawing.Image)(resources.GetObject("NextPrimeNumberLabel.Image")));
-            this.NextPrimeNumberLabel.Location = new System.Drawing.Point(177, 2);
-            this.NextPrimeNumberLabel.Name = "NextPrimeNumberLabel";
-            this.NextPrimeNumberLabel.Size = new System.Drawing.Size(14, 18);
-            this.NextPrimeNumberLabel.TabIndex = 3;
-            this.ToolTip.SetToolTip(this.NextPrimeNumberLabel, "Next Prime");
-            this.NextPrimeNumberLabel.UseVisualStyleBackColor = false;
-            this.NextPrimeNumberLabel.Click += new System.EventHandler(this.NextPrimeNumberLabel_Click);
+            this.RedoValueLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.RedoValueLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.RedoValueLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.RedoValueLabel.Enabled = false;
+            this.RedoValueLabel.FlatAppearance.BorderSize = 0;
+            this.RedoValueLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.RedoValueLabel.Image = ((System.Drawing.Image)(resources.GetObject("RedoValueLabel.Image")));
+            this.RedoValueLabel.Location = new System.Drawing.Point(177, 2);
+            this.RedoValueLabel.Name = "RedoValueLabel";
+            this.RedoValueLabel.Size = new System.Drawing.Size(14, 18);
+            this.RedoValueLabel.TabIndex = 3;
+            this.ToolTip.SetToolTip(this.RedoValueLabel, "Next Prime");
+            this.RedoValueLabel.UseVisualStyleBackColor = false;
+            this.RedoValueLabel.Click += new System.EventHandler(this.RedoValueLabel_Click);
             // 
             // VersionLabel
             // 
@@ -379,7 +379,7 @@
             this.VersionLabel.BackColor = System.Drawing.SystemColors.Control;
             this.VersionLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.VersionLabel.ForeColor = System.Drawing.Color.Purple;
-            this.VersionLabel.Location = new System.Drawing.Point(177, 364);
+            this.VersionLabel.Location = new System.Drawing.Point(177, 406);
             this.VersionLabel.Name = "VersionLabel";
             this.VersionLabel.Size = new System.Drawing.Size(63, 17);
             this.VersionLabel.TabIndex = 32;
@@ -403,7 +403,7 @@
             this.MultithreadingCheckBox.Checked = true;
             this.MultithreadingCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.MultithreadingCheckBox.ForeColor = System.Drawing.Color.Purple;
-            this.MultithreadingCheckBox.Location = new System.Drawing.Point(4, 366);
+            this.MultithreadingCheckBox.Location = new System.Drawing.Point(4, 408);
             this.MultithreadingCheckBox.Name = "MultithreadingCheckBox";
             this.MultithreadingCheckBox.Size = new System.Drawing.Size(15, 14);
             this.MultithreadingCheckBox.TabIndex = 30;
@@ -1223,8 +1223,8 @@
             this.ValuePanel.Controls.Add(this.CPIndexChainL2RTextBox);
             this.ValuePanel.Controls.Add(this.PerfectNumbersLabel);
             this.ValuePanel.Controls.Add(this.PCIndexChainR2LTextBox);
-            this.ValuePanel.Controls.Add(this.NextPrimeNumberLabel);
-            this.ValuePanel.Controls.Add(this.PreviousPrimeNumberLabel);
+            this.ValuePanel.Controls.Add(this.RedoValueLabel);
+            this.ValuePanel.Controls.Add(this.UndoValueLabel);
             this.ValuePanel.Controls.Add(this.CPIndexChainR2LTextBox);
             this.ValuePanel.Controls.Add(this.PCIndexChainL2RTextBox);
             this.ValuePanel.Controls.Add(this.DeficientNumbersLabel);
@@ -1505,7 +1505,7 @@
             this.IndexPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.IndexPanel.Location = new System.Drawing.Point(3, 3);
             this.IndexPanel.Name = "IndexPanel";
-            this.IndexPanel.Size = new System.Drawing.Size(226, 210);
+            this.IndexPanel.Size = new System.Drawing.Size(226, 208);
             this.IndexPanel.TabIndex = 33;
             // 
             // EditionLabel
@@ -1651,7 +1651,7 @@
             this.MainTabControl.Location = new System.Drawing.Point(0, 146);
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(240, 219);
+            this.MainTabControl.Size = new System.Drawing.Size(240, 261);
             this.MainTabControl.TabIndex = 34;
             this.MainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
             // 
@@ -1662,7 +1662,7 @@
             this.FactorsTabPage.Location = new System.Drawing.Point(4, 22);
             this.FactorsTabPage.Name = "FactorsTabPage";
             this.FactorsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FactorsTabPage.Size = new System.Drawing.Size(232, 237);
+            this.FactorsTabPage.Size = new System.Drawing.Size(232, 235);
             this.FactorsTabPage.TabIndex = 0;
             this.FactorsTabPage.Text = "Factors";
             // 
@@ -1673,7 +1673,7 @@
             this.IndexTabPage.Location = new System.Drawing.Point(4, 22);
             this.IndexTabPage.Name = "IndexTabPage";
             this.IndexTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.IndexTabPage.Size = new System.Drawing.Size(232, 216);
+            this.IndexTabPage.Size = new System.Drawing.Size(232, 214);
             this.IndexTabPage.TabIndex = 1;
             this.IndexTabPage.Text = "Index";
             // 
@@ -1711,7 +1711,7 @@
             this.TriangleTabPage.Controls.Add(this.aTriangleTextBox);
             this.TriangleTabPage.Location = new System.Drawing.Point(4, 22);
             this.TriangleTabPage.Name = "TriangleTabPage";
-            this.TriangleTabPage.Size = new System.Drawing.Size(232, 237);
+            this.TriangleTabPage.Size = new System.Drawing.Size(232, 214);
             this.TriangleTabPage.TabIndex = 3;
             this.TriangleTabPage.Text = "Triangle";
             // 
@@ -1915,7 +1915,7 @@
             this.CircleTabPage.Controls.Add(this.rCircleTextBox);
             this.CircleTabPage.Location = new System.Drawing.Point(4, 22);
             this.CircleTabPage.Name = "CircleTabPage";
-            this.CircleTabPage.Size = new System.Drawing.Size(232, 193);
+            this.CircleTabPage.Size = new System.Drawing.Size(232, 214);
             this.CircleTabPage.TabIndex = 2;
             this.CircleTabPage.Text = "Circle";
             // 
@@ -2025,7 +2025,7 @@
             this.SphereTabPage.Controls.Add(this.vEqSphereLabel);
             this.SphereTabPage.Location = new System.Drawing.Point(4, 22);
             this.SphereTabPage.Name = "SphereTabPage";
-            this.SphereTabPage.Size = new System.Drawing.Size(232, 216);
+            this.SphereTabPage.Size = new System.Drawing.Size(232, 214);
             this.SphereTabPage.TabIndex = 4;
             this.SphereTabPage.Text = "Sphere";
             // 
@@ -2129,7 +2129,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(240, 381);
+            this.ClientSize = new System.Drawing.Size(240, 423);
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.ValuePanel);
             this.Controls.Add(this.MultithreadingCheckBox);
@@ -2190,8 +2190,8 @@
     private System.Windows.Forms.ToolStripMenuItem ExitToolStripMenuItem;
     private System.Windows.Forms.NotifyIcon NotifyIcon;
     private System.Windows.Forms.Label DigitsLabel;
-    private System.Windows.Forms.Button PreviousPrimeNumberLabel;
-    private System.Windows.Forms.Button NextPrimeNumberLabel;
+    private System.Windows.Forms.Button UndoValueLabel;
+    private System.Windows.Forms.Button RedoValueLabel;
     private System.Windows.Forms.Label VersionLabel;
     private System.Windows.Forms.ToolTip ToolTip;
     private System.Windows.Forms.CheckBox MultithreadingCheckBox;

@@ -140,7 +140,7 @@
         AAD4AQAA//8AAP//AAD//wAA
 </value>
   </data>
-  <data name="PreviousPrimeNumberLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="UndoValueLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAEpSURBVDhPY/j//z8DJZgizSCLiTIge/bD9tSZD79g
@@ -151,7 +151,7 @@
         C1tuJ88AkCGCBhtmCxlvId8AfLmVYF4glNUB0Irn/iPtCJEAAAAASUVORK5CYII=
 </value>
   </data>
-  <data name="NextPrimeNumberLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="RedoValueLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
         dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAE1SURBVDhPY/j//z8DJZgizSCLMQxoWP3iS93KF+3E
