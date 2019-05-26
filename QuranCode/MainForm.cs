@@ -39151,6 +39151,7 @@ public partial class MainForm : Form, ISubscriber
                         int length = m_find_matches[m_find_match_index].Length;
                         if ((start >= 0) && (start < SearchResultTextBox.Text.Length))
                         {
+                            SearchResultTextBox.Focus();
                             SearchResultTextBox.Select(start, length);
                             SearchResultTextBox.SelectionColor = Color.Red;
                         }
@@ -39185,6 +39186,7 @@ public partial class MainForm : Form, ISubscriber
                         int length = m_find_matches[m_find_match_index].Length;
                         if ((start >= 0) && (start < SearchResultTextBox.Text.Length))
                         {
+                            SearchResultTextBox.Focus();
                             SearchResultTextBox.Select(start, length);
                             SearchResultTextBox.SelectionColor = Color.Red;
                         }
