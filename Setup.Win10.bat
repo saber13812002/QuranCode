@@ -1,1 +1,0 @@
-COPY Files\Win10\*.* .

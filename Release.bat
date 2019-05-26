@@ -66,8 +66,7 @@ COPY /Y NET2\Build\Release\*.dll Files\Win7\
 COPY /Y      Build\Release\*.exe Files\Win10\
 COPY /Y      Build\Release\*.dll Files\Win10\
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Files\*.*
-"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Setup.Win7.bat
-"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Setup.Win10.bat
+"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Setup.bat
 RD /S /Q Files
 
 CALL Version.bat
