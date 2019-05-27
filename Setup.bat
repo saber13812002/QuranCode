@@ -20,8 +20,8 @@ if "%VERSION%" == "5.00" COPY Files\Win7\*.* .
 if "%VERSION%" == "5.0" COPY Files\Win7\*.* .
 if "%VERSION%" == "5.1" COPY Files\Win7\*.* .
 if "%VERSION%" == "5.2" COPY Files\Win7\*.* .
-if "%VERSION%" == "6.0" COPY Files\Win7\*.* .
-if "%VERSION%" == "6.1" COPY Files\Win7\*.* .
+if "%VERSION%" == "6.0" COPY Files\Win10\*.* .
+if "%VERSION%" == "6.1" COPY Files\Win10\*.* .
 if "%VERSION%" == "6.2" COPY Files\Win10\*.* .
 if "%VERSION%" == "6.3" COPY Files\Win10\*.* .
 if "%VERSION%" == "6.4" COPY Files\Win10\*.* .
