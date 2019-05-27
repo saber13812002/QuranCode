@@ -39291,6 +39291,7 @@ public partial class MainForm : Form, ISubscriber
                 //+ L[l]["Bowing"] + " " + ((verse.Bowing != null) ? verse.Bowing.Number : -1) + "   "
                  + "     "
                  + L[l]["Page"] + " " + ((verse.Page != null) ? verse.Page.Number : -1)
+                 + "     " + "#" + (CurrentVerseIndex + 1)
             ;
             return text;
         }
