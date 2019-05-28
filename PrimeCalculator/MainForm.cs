@@ -2014,6 +2014,96 @@ public partial class MainForm : Form
             FactorizeValue(Nth4n1NumberTextBox);
         }
     }
+    private void PrimeNumbersLabel_Click(object sender, EventArgs e)
+    {
+        if (ModifierKeys == Keys.Control)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                string filename = Globals.NUMBERS_FOLDER + "/" + "primes.txt";
+                FileHelper.DisplayFile(filename);
+                filename = Globals.NUMBERS_FOLDER + "/" + "additive_primes.txt";
+                FileHelper.DisplayFile(filename);
+                filename = Globals.NUMBERS_FOLDER + "/" + "non_additive_primes.txt";
+                FileHelper.DisplayFile(filename);
+                //string filename = "Primalogy.pdf";
+                //string path = Application.StartupPath + "/" + Globals.HELP_FOLDER + "/" + filename;
+                //if (!File.Exists(path))
+                //{
+                //    DownloadFile("http://heliwave.com/" + filename, path);
+                //}
+                //if (File.Exists(path))
+                //{
+                //    FileHelper.WaitForReady(path);
+
+                //    System.Diagnostics.Process.Start(path);
+                //}
+            }
+            catch (Exception ex)
+            {
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
+        else
+        {
+            m_index_type = IndexType.Prime;
+            FactorizeValue(NthNumberTextBox);
+        }
+    }
+    private void CompositeNumbersLabel_Click(object sender, EventArgs e)
+    {
+        if (ModifierKeys == Keys.Control)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                string filename = Globals.NUMBERS_FOLDER + "/" + "composites.txt";
+                FileHelper.DisplayFile(filename);
+                filename = Globals.NUMBERS_FOLDER + "/" + "additive_composites.txt";
+                FileHelper.DisplayFile(filename);
+                filename = Globals.NUMBERS_FOLDER + "/" + "non_additive_composites.txt";
+                FileHelper.DisplayFile(filename);
+                //string filename = "Primalogy_AR.pdf";
+                //string path = Application.StartupPath + "/" + Globals.HELP_FOLDER + "/" + filename;
+                //if (!File.Exists(path))
+                //{
+                //    DownloadFile("http://heliwave.com/" + filename, path);
+                //}
+                //if (File.Exists(path))
+                //{
+                //    FileHelper.WaitForReady(path);
+
+                //    System.Diagnostics.Process.Start(path);
+                //}
+            }
+            catch (Exception ex)
+            {
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
+        else
+        {
+            m_index_type = IndexType.Composite;
+            FactorizeValue(NthNumberTextBox);
+        }
+    }
 
     private void TextBoxLabelControls_CtrlClick(object sender, EventArgs e)
     {
