@@ -2761,7 +2761,7 @@ public partial class MainForm : Form, ISubscriber
         // CompositeNumbersLabel
         // 
         this.CompositeNumbersLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.CompositeNumbersLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+        this.CompositeNumbersLabel.BackColor = System.Drawing.Color.Pink;
         this.CompositeNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.CompositeNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.CompositeNumbersLabel.ForeColor = System.Drawing.SystemColors.Window;
@@ -2777,7 +2777,7 @@ public partial class MainForm : Form, ISubscriber
         // PrimeNumbersLabel
         // 
         this.PrimeNumbersLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.PrimeNumbersLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+        this.PrimeNumbersLabel.BackColor = System.Drawing.Color.CornflowerBlue;
         this.PrimeNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.PrimeNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.PrimeNumbersLabel.ForeColor = System.Drawing.SystemColors.Window;
