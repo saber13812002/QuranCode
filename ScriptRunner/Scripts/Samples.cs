@@ -14,23 +14,23 @@ public class MyScript : IScriptRunner
         client.FoundVerses.Clear();
         foreach (Verse verse in client.Book.Verses)
         {
-            //string text = verse.Text.Simplify28().Trim().Replace(" ", "");
-            //if (text.StartsWith("و"))
-            //{
-            //    int sum = 0;
-            //    for (int i = 0; i < text.Length; i++)
-            //    {
-            //        if (text[i] == 'و')
-            //        {
-            //            sum += (i + 1);
-            //        }
-            //    }
+            string text = verse.Text.Replace(" ", "");
+            if (text.StartsWith("و"))
+            {
+                int sum = 0;
+                for (int i = 0; i < text.Length; i++)
+                {
+                    if (text[i] == 'و')
+                    {
+                        sum += (i + 1);
+                    }
+                }
 
-            //    if (sum == 479)
-            //    {
-            //        client.FoundVerses.Add(verse);
-            //    }
-            //}
+                if (sum == 479)
+                {
+                    client.FoundVerses.Add(verse);
+                }
+            }
 
             //if (Numbers.IsPrime(verse.Number))                         //  811
             //if (Numbers.IsAdditivePrime(verse.Number))                 //  408
@@ -45,14 +45,13 @@ public class MyScript : IScriptRunner
             //if (Numbers.IsAdditiveComposite(verse.NumberInChapter))    // 2824
             //if (Numbers.IsNonAdditiveComposite(verse.NumberInChapter)) // 1568
 
-            //if ((verse.Number % 19) == 0)                         // verse number in the Quran is divisble by 19
-            //if (verse.NumberInChapter == verse.Words.Count)       // verse number = verse words
-            if (verse.NumberInChapter == verse.LetterCount)       // verse number = verse letters
-            //if (client.CalculateValue(verse) == 114)              // verse value = 114 in current Client.NumerologySystem
-            //if (verse.Text.Simplify29().ContainsWords("قرء كتب")) // verse contines whole words in any order
-            {
-                client.FoundVerses.Add(verse);
-            }
+            //if ((verse.Number % 19) == 0)                              // verse number in the Quran is divisble by 19
+            //if (verse.NumberInChapter == verse.Words.Count)            // verse number = verse words
+            //if (verse.NumberInChapter == verse.LetterCount)            // verse number = verse letters
+            //if (client.CalculateValue(verse) == 114)                   // verse value = 114 in current Client.NumerologySystem
+            //{
+            //    client.FoundVerses.Add(verse);
+            //}
         }
         return true; // to close Script window and show client.FoundVerses
     }
