@@ -16534,7 +16534,7 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region ScriptRunner
     ///////////////////////////////////////////////////////////////////////////////
-    private Assembly compiled_assembly = null;
+    private Assembly m_compiled_assembly = null;
     private PermissionSet m_permission_set = null;
     private string m_script_filename = null;
     //private string[] LoadAssemblyMethods(string assembly_name)
@@ -16797,8 +16797,8 @@ public partial class MainForm : Form, ISubscriber
                     }
                     else
                     {
-                        compiled_assembly = compiler_results.CompiledAssembly;
-                        if (compiled_assembly != null)
+                        m_compiled_assembly = compiler_results.CompiledAssembly;
+                        if (m_compiled_assembly != null)
                         {
                             ScriptOutputTextBox.Text = "Script was compiled successfully.";
                             ScriptOutputTextBox.Refresh();
@@ -16833,10 +16833,10 @@ public partial class MainForm : Form, ISubscriber
         if (sender != ScriptRunLabel) this.Cursor = Cursors.WaitCursor;
         try
         {
-            if (compiled_assembly != null)
+            if (m_compiled_assembly != null)
             {
                 object[] args = new object[] { m_client, null };
-                object result = ScriptRunner.Run(compiled_assembly, args, this.m_permission_set);
+                object result = ScriptRunner.Run(m_compiled_assembly, args, this.m_permission_set);
                 if (result is bool)
                 {
                     if ((bool)result == true)

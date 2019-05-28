@@ -58,13 +58,13 @@ CD ..\..
 
 MD Files
 CD Files
-MD Win7
-MD Win10
+MD NET2
+MD NET4
 CD ..
-COPY /Y NET2\Build\Release\*.exe Files\Win7\
-COPY /Y NET2\Build\Release\*.dll Files\Win7\
-COPY /Y      Build\Release\*.exe Files\Win10\
-COPY /Y      Build\Release\*.dll Files\Win10\
+COPY /Y NET2\Build\Release\*.exe Files\NET2\
+COPY /Y NET2\Build\Release\*.dll Files\NET2\
+COPY /Y      Build\Release\*.exe Files\NET4\
+COPY /Y      Build\Release\*.dll Files\NET4\
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Files\*.*
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Setup.bat
 RD /S /Q Files

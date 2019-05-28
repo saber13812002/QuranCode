@@ -8,7 +8,6 @@ using Microsoft.CSharp;
 using System.Security;
 //using System.IO.IsolatedStorage;
 //using System.Security.Permissions;
-using Model;
 
 public static class ScriptRunner
 {
@@ -50,26 +49,28 @@ public static class ScriptRunner
     /// <returns></returns>
     public static string SaveScript(string filename, string text)
     {
-        string[] parts = filename.Split('~');
-        if (parts.Length > 1)
+        if (!String.IsNullOrEmpty(filename))
         {
-            filename = parts[0] + ".cs";
-        }
-        if ((filename == "Template.cs") || (filename == "Samples.cs"))
-        {
-            filename = filename.Insert(filename.Length - 3, "~" + DateTime.Now.ToString("yyyyMMdd_hhmmss"));
-        }
-
-        string path = Globals.SCRIPTS_FOLDER + "/" + filename;
-        if (Directory.Exists(Globals.SCRIPTS_FOLDER))
-        {
-            using (StreamWriter writer = new StreamWriter(path, false, Encoding.Unicode))
+            string[] parts = filename.Split('~');
+            if (parts.Length > 1)
             {
-                writer.WriteLine(text);
-                writer.Close();
+                filename = parts[0] + ".cs";
+            }
+            if ((filename == "Template.cs") || (filename == "Samples.cs"))
+            {
+                filename = filename.Insert(filename.Length - 3, "~" + DateTime.Now.ToString("yyyyMMdd_hhmmss"));
+            }
+
+            string path = Globals.SCRIPTS_FOLDER + "/" + filename;
+            if (Directory.Exists(Globals.SCRIPTS_FOLDER))
+            {
+                using (StreamWriter writer = new StreamWriter(path, false, Encoding.Unicode))
+                {
+                    writer.WriteLine(text);
+                    writer.Close();
+                }
             }
         }
-
         return filename;
     }
 
@@ -81,18 +82,25 @@ public static class ScriptRunner
     public static CompilerResults CompileCode(string source_code)
     {
         CSharpCodeProvider provider = new CSharpCodeProvider();
-
-        CompilerParameters options = new CompilerParameters();
-        options.GenerateExecutable = false;  // generate a Class Library assembly
-        options.GenerateInMemory = true;     // so we don;t have to delete it from disk
-
-        Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
-        foreach (Assembly assembly in assemblies)
+        if (provider != null)
         {
-            options.ReferencedAssemblies.Add(assembly.Location);
-        }
+            CompilerParameters options = new CompilerParameters();
+            if (options != null)
+            {
+                options.GenerateExecutable = false;  // generate a Class Library assembly
+                options.GenerateInMemory = true;     // so we don't have to delete it from disk
 
-        return provider.CompileAssemblyFromSource(options, source_code);
+                Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+                foreach (Assembly assembly in assemblies)
+                {
+                    options.ReferencedAssemblies.Add(assembly.Location);
+                }
+
+                return provider.CompileAssemblyFromSource(options, source_code);
+            }
+            return null;
+        }
+        return null;
     }
 
     /// <summary>
@@ -105,10 +113,10 @@ public static class ScriptRunner
     {
         if (compiled_assembly != null)
         {
-            // security is not implemented yet !NIY
-            // using Utilties.PrivateStorage was can save but not display in Notepad
+            // security is not implemented yet!
+            // using Utilties.PrivateStorage can save but not display in Notepad
             // plus the output is saved in C:\Users\<user>\AppData\Local\IsolatedStorage\...
-            // no control over where to save make QuranCode unportable applicaton, which is a not acceptable
+            // no control over where to save make QuranCode unportable applicaton
             //// restrict code security
             //???permission_set.PermitOnly();
 
@@ -127,20 +135,11 @@ public static class ScriptRunner
                             {
                                 return obj.Run(args);
                             }
-                            else
-                            {
-                                throw new Exception("Invalid C# code!");
-                            }
+                            throw new Exception("Invalid C# code!");
                         }
-                        else
-                        {
-                            throw new Exception("No default constructor was found!");
-                        }
+                        throw new Exception("No default constructor was found!");
                     }
-                    else
-                    {
-                        throw new Exception("IScriptRunner is not implemented!");
-                    }
+                    throw new Exception("IScriptRunner is not implemented!");
                 }
             }
 
@@ -171,10 +170,7 @@ public static class ScriptRunner
                         {
                             return method.Invoke(null, args);
                         }
-                        else
-                        {
-                            throw new Exception("Cannot invoke method :" + methode_name);
-                        }
+                        throw new Exception("Cannot invoke method :" + methode_name);
                     }
                 }
             }
@@ -204,10 +200,7 @@ public static class ScriptRunner
                             object obj = Activator.CreateInstance(type, null);
                             return method.Invoke(obj, args);
                         }
-                        else
-                        {
-                            throw new Exception("Cannot invoke method :" + methode_name);
-                        }
+                        throw new Exception("Cannot invoke method :" + methode_name);
                     }
                 }
             }
