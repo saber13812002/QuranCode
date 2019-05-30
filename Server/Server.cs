@@ -4183,7 +4183,6 @@ public class Server : IPublisher
                 if (!String.IsNullOrEmpty(text))
                 {
                     text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
-                    RegexOptions regex_options = RegexOptions.IgnoreCase | RegexOptions.RightToLeft;
 
                     try
                     {
@@ -4195,7 +4194,7 @@ public class Server : IPublisher
                                 foreach (Verse verse in source)
                                 {
                                     string verse_text = verse.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(verse_text, pattern, regex_options);
+                                    MatchCollection matches = Regex.Matches(verse_text, pattern);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -4236,7 +4235,8 @@ public class Server : IPublisher
                                         {
                                             string verse_text = verse.Text.SimplifyTo(s_numerology_system.TextMode);
                                             verse_text = verse_text.Trim();
-                                            MatchCollection matches = Regex.Matches(verse_text, pattern, regex_options);
+                                            //MatchCollection matches = Regex.Matches(verse_text, pattern);
+                                            MatchCollection matches = Regex.Matches(verse_text, pattern);
                                             if (multiplicity == -1) // without multiplicity
                                             {
                                                 if (matches.Count > 0)
@@ -4292,7 +4292,7 @@ public class Server : IPublisher
                                                         emlaaei_text = emlaaei_text.Replace("  ", " ");
                                                     }
 
-                                                    MatchCollection matches = Regex.Matches(emlaaei_text, pattern, regex_options);
+                                                    MatchCollection matches = Regex.Matches(emlaaei_text, pattern);
                                                     if (multiplicity == -1) // without multiplicity
                                                     {
                                                         if (matches.Count > 0)
@@ -4339,10 +4339,6 @@ public class Server : IPublisher
                 {
                     text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
                     RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;
-                    if (text.IsArabic()) // Arabic letters in translation (Emlaaei, Urdu, Farsi, etc.) 
-                    {
-                        regex_options |= RegexOptions.RightToLeft;
-                    }
 
                     string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
                     foreach (Verse verse in source)
@@ -4384,7 +4380,6 @@ public class Server : IPublisher
         if (!String.IsNullOrEmpty(text))
         {
             text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
-            RegexOptions regex_options = RegexOptions.IgnoreCase | RegexOptions.RightToLeft;
 
             try
             {
@@ -4400,7 +4395,7 @@ public class Server : IPublisher
                                 foreach (Chapter chapter in s_book.Chapters)
                                 {
                                     string chapter_text = chapter.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(chapter_text, text, regex_options);
+                                    MatchCollection matches = Regex.Matches(chapter_text, text);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -4442,7 +4437,7 @@ public class Server : IPublisher
                                         string chapter_text = chapter.Text.Trim();
                                         chapter_text = chapter_text.SimplifyTo(s_numerology_system.TextMode);
                                         chapter_text = chapter_text.Trim();
-                                        MatchCollection matches = Regex.Matches(chapter_text, text, regex_options);
+                                        MatchCollection matches = Regex.Matches(chapter_text, text);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -4494,7 +4489,7 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -4537,7 +4532,6 @@ public class Server : IPublisher
         if (!String.IsNullOrEmpty(text))
         {
             text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
-            RegexOptions regex_options = RegexOptions.IgnoreCase | RegexOptions.RightToLeft;
 
             try
             {
@@ -4553,7 +4547,7 @@ public class Server : IPublisher
                                 foreach (Page page in s_book.Pages)
                                 {
                                     string page_text = page.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(page_text, text, regex_options);
+                                    MatchCollection matches = Regex.Matches(page_text, text);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -4595,7 +4589,7 @@ public class Server : IPublisher
                                         string page_text = page.Text.Trim();
                                         page_text = page_text.SimplifyTo(s_numerology_system.TextMode);
                                         page_text = page_text.Trim();
-                                        MatchCollection matches = Regex.Matches(page_text, text, regex_options);
+                                        MatchCollection matches = Regex.Matches(page_text, text);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -4647,7 +4641,7 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -4690,7 +4684,6 @@ public class Server : IPublisher
         if (!String.IsNullOrEmpty(text))
         {
             text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
-            RegexOptions regex_options = RegexOptions.IgnoreCase | RegexOptions.RightToLeft;
 
             try
             {
@@ -4706,7 +4699,7 @@ public class Server : IPublisher
                                 foreach (Station station in s_book.Stations)
                                 {
                                     string station_text = station.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(station_text, text, regex_options);
+                                    MatchCollection matches = Regex.Matches(station_text, text);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -4748,7 +4741,7 @@ public class Server : IPublisher
                                         string station_text = station.Text.Trim();
                                         station_text = station_text.SimplifyTo(s_numerology_system.TextMode);
                                         station_text = station_text.Trim();
-                                        MatchCollection matches = Regex.Matches(station_text, text, regex_options);
+                                        MatchCollection matches = Regex.Matches(station_text, text);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -4800,7 +4793,7 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -4843,7 +4836,6 @@ public class Server : IPublisher
         if (!String.IsNullOrEmpty(text))
         {
             text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
-            RegexOptions regex_options = RegexOptions.IgnoreCase | RegexOptions.RightToLeft;
 
             try
             {
@@ -4859,7 +4851,7 @@ public class Server : IPublisher
                                 foreach (Part part in s_book.Parts)
                                 {
                                     string part_text = part.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(part_text, text, regex_options);
+                                    MatchCollection matches = Regex.Matches(part_text, text);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -4901,7 +4893,7 @@ public class Server : IPublisher
                                         string part_text = part.Text.Trim();
                                         part_text = part_text.SimplifyTo(s_numerology_system.TextMode);
                                         part_text = part_text.Trim();
-                                        MatchCollection matches = Regex.Matches(part_text, text, regex_options);
+                                        MatchCollection matches = Regex.Matches(part_text, text);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -4953,7 +4945,7 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -4996,7 +4988,6 @@ public class Server : IPublisher
         if (!String.IsNullOrEmpty(text))
         {
             text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
-            RegexOptions regex_options = RegexOptions.IgnoreCase | RegexOptions.RightToLeft;
 
             try
             {
@@ -5012,7 +5003,7 @@ public class Server : IPublisher
                                 foreach (Model.Group group in s_book.Groups)
                                 {
                                     string group_text = group.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(group_text, text, regex_options);
+                                    MatchCollection matches = Regex.Matches(group_text, text);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -5054,7 +5045,7 @@ public class Server : IPublisher
                                         string group_text = group.Text.Trim();
                                         group_text = group_text.SimplifyTo(s_numerology_system.TextMode);
                                         group_text = group_text.Trim();
-                                        MatchCollection matches = Regex.Matches(group_text, text, regex_options);
+                                        MatchCollection matches = Regex.Matches(group_text, text);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -5106,7 +5097,7 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -5149,7 +5140,6 @@ public class Server : IPublisher
         if (!String.IsNullOrEmpty(text))
         {
             text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
-            RegexOptions regex_options = RegexOptions.IgnoreCase | RegexOptions.RightToLeft;
 
             try
             {
@@ -5165,7 +5155,7 @@ public class Server : IPublisher
                                 foreach (Half half in s_book.Halfs)
                                 {
                                     string half_text = half.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(half_text, text, regex_options);
+                                    MatchCollection matches = Regex.Matches(half_text, text);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -5207,7 +5197,7 @@ public class Server : IPublisher
                                         string half_text = half.Text.Trim();
                                         half_text = half_text.SimplifyTo(s_numerology_system.TextMode);
                                         half_text = half_text.Trim();
-                                        MatchCollection matches = Regex.Matches(half_text, text, regex_options);
+                                        MatchCollection matches = Regex.Matches(half_text, text);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -5259,7 +5249,7 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -5302,7 +5292,6 @@ public class Server : IPublisher
         if (!String.IsNullOrEmpty(text))
         {
             text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
-            RegexOptions regex_options = RegexOptions.IgnoreCase | RegexOptions.RightToLeft;
 
             try
             {
@@ -5318,7 +5307,7 @@ public class Server : IPublisher
                                 foreach (Quarter quarter in s_book.Quarters)
                                 {
                                     string quarter_text = quarter.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(quarter_text, text, regex_options);
+                                    MatchCollection matches = Regex.Matches(quarter_text, text);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -5360,7 +5349,7 @@ public class Server : IPublisher
                                         string quarter_text = quarter.Text.Trim();
                                         quarter_text = quarter_text.SimplifyTo(s_numerology_system.TextMode);
                                         quarter_text = quarter_text.Trim();
-                                        MatchCollection matches = Regex.Matches(quarter_text, text, regex_options);
+                                        MatchCollection matches = Regex.Matches(quarter_text, text);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -5412,7 +5401,7 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -5455,7 +5444,6 @@ public class Server : IPublisher
         if (!String.IsNullOrEmpty(text))
         {
             text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
-            RegexOptions regex_options = RegexOptions.IgnoreCase | RegexOptions.RightToLeft;
 
             try
             {
@@ -5471,7 +5459,7 @@ public class Server : IPublisher
                                 foreach (Bowing bowing in s_book.Bowings)
                                 {
                                     string bowing_text = bowing.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(bowing_text, text, regex_options);
+                                    MatchCollection matches = Regex.Matches(bowing_text, text);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -5513,7 +5501,7 @@ public class Server : IPublisher
                                         string bowing_text = bowing.Text.Trim();
                                         bowing_text = bowing_text.SimplifyTo(s_numerology_system.TextMode);
                                         bowing_text = bowing_text.Trim();
-                                        MatchCollection matches = Regex.Matches(bowing_text, text, regex_options);
+                                        MatchCollection matches = Regex.Matches(bowing_text, text);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -5565,7 +5553,7 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -7304,13 +7292,9 @@ public class Server : IPublisher
                 if (!String.IsNullOrEmpty(text))
                 {
                     text = text.SimplifyTo(s_numerology_system.TextMode);
-                    text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
 
                     RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;
-                    if (text.IsArabic()) // Arabic letters in translation (Emlaaei, Urdu, Farsi, etc.) 
-                    {
-                        regex_options |= RegexOptions.RightToLeft;
-                    }
+                    text = Regex.Replace(text, @"\s+", " ", regex_options); // remove double space or higher if any
 
                     try
                     {

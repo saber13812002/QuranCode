@@ -22551,7 +22551,7 @@ public partial class MainForm : Form, ISubscriber
                         Verse verse = verses[0];
                         if (verse != null)
                         {
-                            // show postion of selection in the Quran visually
+                            // show position of selection in the Quran visually
                             UpdateProgressBar(verse);
 
                             if (verse.Chapter != null)
@@ -22607,7 +22607,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             m_old_verse = verse;
 
-                            // show postion of verse in the Quran visually
+                            // show position of verse in the Quran visually
                             ProgressBar.Minimum = 1;
                             ProgressBar.Maximum = verse.Book.Verses.Count;
                             ProgressBar.Value = verse.Number;
@@ -23146,7 +23146,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                 }
 
-                // show postion of verse in the Quran visually
+                // show position of verse in the Quran visually
                 ProgressBar.Minimum = 1;
                 ProgressBar.Maximum = verse.Book.Verses.Count;
                 ProgressBar.Value = verse.Number;
@@ -39102,10 +39102,10 @@ public partial class MainForm : Form, ISubscriber
             m_find_match_index = -1;
             for (int i = 0; i < m_find_matches.Count; i++)
             {
-                if (m_find_matches[i].Start > SearchResultTextBox.SelectionStart)
+                if (SearchResultTextBox.SelectionStart <= m_find_matches[i].Start)
                 {
                     m_find_match_index = i - 1;
-                    break;
+                    return;
                 }
             }
         }
@@ -39117,10 +39117,10 @@ public partial class MainForm : Form, ISubscriber
             m_find_match_index = m_find_matches.Count;
             for (int i = m_find_matches.Count - 1; i >= 0; i--)
             {
-                if (m_find_matches[i].Start < SearchResultTextBox.SelectionStart)
+                if (SearchResultTextBox.SelectionStart >= m_find_matches[i].Start)
                 {
                     m_find_match_index = i + 1;
-                    break;
+                    return;
                 }
             }
         }
@@ -39133,9 +39133,7 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (m_find_matches.Count > 0)
                 {
-                    // find the index prior to the current cursor postion
-                    GotoPreviousFindMatch();
-                    m_find_match_index++;
+                    GotoNextFindMatch();
 
                     // round robin
                     if (m_find_match_index == m_find_matches.Count)
@@ -39168,9 +39166,7 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (m_find_matches.Count > 0)
                 {
-                    // find the index after the current cursor postion
-                    GotoNextFindMatch();
-                    m_find_match_index--;
+                    GotoPreviousFindMatch();
 
                     // round robin
                     if (m_find_match_index < 0)
@@ -39208,7 +39204,14 @@ public partial class MainForm : Form, ISubscriber
         {
             if (m_find_matches != null)
             {
-                caption += CAPTION_SEPARATOR + " " + L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count);
+                if (m_find_match_index == -1)
+                {
+                    caption += CAPTION_SEPARATOR + " " + "F3/Shift+F3";
+                }
+                else
+                {
+                    caption += CAPTION_SEPARATOR + " " + L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count);
+                }
             }
         }
         else
@@ -41380,9 +41383,9 @@ public partial class MainForm : Form, ISubscriber
                     if (m_client.Book != null)
                     {
                         m_client.Book.SetupDistances(m_client.NumerologySystem.AddDistancesWithinChapters);
-                    }
 
-                    CalculateCurrentValue();
+                        CalculateCurrentValue();
+                    }
                 }
             }
         }

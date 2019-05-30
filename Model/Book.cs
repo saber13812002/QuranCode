@@ -2218,8 +2218,7 @@ namespace Model
                                                                 {
                                                                     if (verse_words[i].ContainsInside(text_words[0]))
                                                                     {
-                                                                        RegexOptions regex_options = RegexOptions.IgnoreCase | RegexOptions.RightToLeft;
-                                                                        MatchCollection matches = Regex.Matches(verse_words[i], text_words[0], regex_options);
+                                                                        MatchCollection matches = Regex.Matches(verse_words[i], text_words[0]);
                                                                         match_count = matches.Count;
 
                                                                         if (match_count > 0)
@@ -2249,8 +2248,7 @@ namespace Model
                                                                 {
                                                                     if (verse_words[i].Contains(text_words[0]))
                                                                     {
-                                                                        RegexOptions regex_options = RegexOptions.IgnoreCase | RegexOptions.RightToLeft;
-                                                                        MatchCollection matches = Regex.Matches(verse_words[i], text_words[0], regex_options);
+                                                                        MatchCollection matches = Regex.Matches(verse_words[i], text_words[0]);
                                                                         match_count = matches.Count;
                                                                     }
                                                                 }
@@ -2275,8 +2273,7 @@ namespace Model
                                                             {
                                                                 if (verse_words[i].ContainsInside(text_words[0]))
                                                                 {
-                                                                    RegexOptions regex_options = RegexOptions.IgnoreCase | RegexOptions.RightToLeft;
-                                                                    MatchCollection matches = Regex.Matches(verse_words[i], text_words[0], regex_options);
+                                                                    MatchCollection matches = Regex.Matches(verse_words[i], text_words[0]);
                                                                     match_count = matches.Count;
 
                                                                     if (match_count > 0)
@@ -2306,8 +2303,7 @@ namespace Model
                                                             {
                                                                 if (verse_words[i].Contains(text_words[0]))
                                                                 {
-                                                                    RegexOptions regex_options = RegexOptions.IgnoreCase | RegexOptions.RightToLeft;
-                                                                    MatchCollection matches = Regex.Matches(verse_words[i], text_words[0], regex_options);
+                                                                    MatchCollection matches = Regex.Matches(verse_words[i], text_words[0]);
                                                                     match_count = matches.Count;
                                                                 }
                                                             }
@@ -2339,8 +2335,7 @@ namespace Model
                                                     {
                                                         if (verse_text.Contains(text))
                                                         {
-                                                            RegexOptions regex_options = RegexOptions.IgnoreCase | RegexOptions.RightToLeft;
-                                                            MatchCollection matches = Regex.Matches(verse_words[i], text_words[0], regex_options);
+                                                            MatchCollection matches = Regex.Matches(verse_words[i], text_words[0]);
                                                             match_count = matches.Count;
 
                                                             if (match_count > 0)
