@@ -39100,9 +39100,25 @@ public partial class MainForm : Form, ISubscriber
         if (m_find_matches != null)
         {
             m_find_match_index = -1;
+
+            int selection_start = SearchResultTextBox.SelectionStart;
+            int selection_length = SearchResultTextBox.SelectionLength;
             for (int i = 0; i < m_find_matches.Count; i++)
             {
-                if (SearchResultTextBox.SelectionStart <= m_find_matches[i].Start)
+                int start = m_find_matches[i].Start;
+                int length = m_find_matches[i].Length;
+
+                if ((selection_start == start) && (selection_length == length))
+                {
+                    m_find_match_index = i - 1;
+                    return;
+                }
+                else if ((selection_start >= start) && (selection_start < (start + length - 1)))
+                {
+                    m_find_match_index = i;
+                    return;
+                }
+                else if (selection_start < start)
                 {
                     m_find_match_index = i - 1;
                     return;
@@ -39115,48 +39131,31 @@ public partial class MainForm : Form, ISubscriber
         if (m_find_matches != null)
         {
             m_find_match_index = m_find_matches.Count;
+
+            int selection_start = SearchResultTextBox.SelectionStart;
+            int selection_length = SearchResultTextBox.SelectionLength;
             for (int i = m_find_matches.Count - 1; i >= 0; i--)
             {
-                if (SearchResultTextBox.SelectionStart >= m_find_matches[i].Start)
+                int start = m_find_matches[i].Start;
+                int length = m_find_matches[i].Length;
+
+                if ((selection_start == start) && (selection_length == length))
+                {
+                    m_find_match_index = i + 1;
+                    return;
+                }
+                else if ((selection_start >= start) && (selection_start < (start + length - 1)))
+                {
+                    m_find_match_index = i;
+                    return;
+                }
+                else if (selection_start > (start + length - 1))
                 {
                     m_find_match_index = i + 1;
                     return;
                 }
             }
         }
-    }
-    private void SelectNextFindMatch()
-    {
-        if (m_found_verses_displayed)
-        {
-            if (m_find_matches != null)
-            {
-                if (m_find_matches.Count > 0)
-                {
-                    GotoNextFindMatch();
-
-                    // round robin
-                    if (m_find_match_index == m_find_matches.Count)
-                    {
-                        m_find_match_index = 0;
-                    }
-
-                    // find next match
-                    if ((m_find_match_index >= 0) && (m_find_match_index < m_find_matches.Count))
-                    {
-                        int start = m_find_matches[m_find_match_index].Start;
-                        int length = m_find_matches[m_find_match_index].Length;
-                        if ((start >= 0) && (start < SearchResultTextBox.Text.Length))
-                        {
-                            SearchResultTextBox.Focus();
-                            SearchResultTextBox.Select(start, length);
-                            SearchResultTextBox.SelectionColor = Color.Red;
-                        }
-                    }
-                }
-            }
-        }
-        UpdateFindMatchCaption();
     }
     private void SelectPreviousFindMatch()
     {
@@ -39175,6 +39174,39 @@ public partial class MainForm : Form, ISubscriber
                     }
 
                     // find previous match
+                    if ((m_find_match_index >= 0) && (m_find_match_index < m_find_matches.Count))
+                    {
+                        int start = m_find_matches[m_find_match_index].Start;
+                        int length = m_find_matches[m_find_match_index].Length;
+                        if ((start >= 0) && (start < SearchResultTextBox.Text.Length))
+                        {
+                            SearchResultTextBox.Focus();
+                            SearchResultTextBox.Select(start, length);
+                            SearchResultTextBox.SelectionColor = Color.Red;
+                        }
+                    }
+                }
+            }
+        }
+        UpdateFindMatchCaption();
+    }
+    private void SelectNextFindMatch()
+    {
+        if (m_found_verses_displayed)
+        {
+            if (m_find_matches != null)
+            {
+                if (m_find_matches.Count > 0)
+                {
+                    GotoNextFindMatch();
+
+                    // round robin
+                    if (m_find_match_index == m_find_matches.Count)
+                    {
+                        m_find_match_index = 0;
+                    }
+
+                    // find next match
                     if ((m_find_match_index >= 0) && (m_find_match_index < m_find_matches.Count))
                     {
                         int start = m_find_matches[m_find_match_index].Start;
