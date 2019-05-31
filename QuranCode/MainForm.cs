@@ -14457,7 +14457,7 @@ public partial class MainForm : Form, ISubscriber
                                                     RadixValueLabel.Text = m_radix.ToString();
                                                 }
                                                 break;
-                                            case "GlobalDivisor":
+                                            case "Divisor":
                                                 {
                                                     try
                                                     {
@@ -14468,6 +14468,19 @@ public partial class MainForm : Form, ISubscriber
                                                         m_divisor = Numbers.DEFAULT_DIVISOR;
                                                     }
                                                     DivisorValueLabel.Text = m_divisor.ToString();
+                                                }
+                                                break;
+                                            case "CalculationMode":
+                                                {
+                                                    try
+                                                    {
+                                                        m_calculation_mode = (CalculationMode)Enum.Parse(typeof(CalculationMode), parts[1].Trim());
+                                                    }
+                                                    catch
+                                                    {
+                                                        m_calculation_mode = CalculationMode.SumOfLetterValues;
+                                                    }
+                                                    SetCalculationMode(m_calculation_mode);
                                                 }
                                                 break;
                                             case "TotalChapterCounts":
@@ -15367,7 +15380,8 @@ public partial class MainForm : Form, ISubscriber
 
                     writer.WriteLine("[Numbers]");
                     writer.WriteLine("Radix" + "=" + m_radix);
-                    writer.WriteLine("GlobalDivisor" + "=" + m_divisor);
+                    writer.WriteLine("Divisor" + "=" + m_divisor);
+                    writer.WriteLine("CalculationMode" + "=" + m_calculation_mode);
                     writer.WriteLine("TotalChapterCounts" + "=" + m_total_chapter_counts);
                     if (m_client.NumerologySystem != null)
                     {
@@ -17942,6 +17956,25 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
+    private string RemoveDuplicateLetters(string text)
+    {
+        if (String.IsNullOrEmpty(text)) return "";
+
+        string result = "";
+        foreach (char c in text)
+        {
+            if (!result.Contains(c.ToString()))
+            {
+                result += c + " ";
+            }
+        }
+        if (result.Length > 0)
+        {
+            result = result.Remove(result.Length - 1, 1);
+        }
+
+        return result;
+    }
     private void GenerateAnagrams()
     {
         if (!String.IsNullOrEmpty(m_current_text))
@@ -17952,7 +17985,7 @@ public partial class MainForm : Form, ISubscriber
                 string text = m_current_text.SimplifyTo(m_client.NumerologySystem.TextMode);
                 if (!DuplicateLettersCheckBox.Checked)
                 {
-                    text = text.RemoveDuplicateLetters();
+                    text = RemoveDuplicateLetters(text);
                 }
                 List<string> sentences = Anagrams.GenerateAnagrams(filename, text);
                 sentences.Sort();
@@ -32906,11 +32939,6 @@ public partial class MainForm : Form, ISubscriber
     {
         if (UserTextTextBox.Text.Length > 0)
         {
-            if (m_client != null)
-            {
-                SetCalculationMode(CalculationMode.SumOfLetterValues);
-            }
-
             m_user_text_selection_length = UserTextTextBox.SelectionLength;
             m_user_text_selection_start = UserTextTextBox.SelectionStart;
 
@@ -39615,6 +39643,7 @@ public partial class MainForm : Form, ISubscriber
                 DecimalValueTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
                 DecimalValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
                 DecimalValueTextBox.Refresh();
+
                 FactorizeValue(value, "Value", true);
             }
         }
@@ -41945,6 +41974,80 @@ public partial class MainForm : Form, ISubscriber
         TextModeComboBox.DropDownHeight = StatisticsGroupBox.Height - TextModeComboBox.Top - TextModeComboBox.Height - 1;
     }
 
+    CalculationMode m_calculation_mode = CalculationMode.SumOfLetterValues;
+    private void CalculationModeLabel_Click(object sender, EventArgs e)
+    {
+        if (m_client != null)
+        {
+            if (ModifierKeys == Keys.Shift)
+            {
+                switch (m_client.CalculationMode)
+                {
+                    case CalculationMode.SumOfWordValueDigitalRoots:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfWordValueDigitSums);
+                        }
+                        break;
+                    case CalculationMode.SumOfWordValueDigitSums:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfUniqueLetterValues);
+                        }
+                        break;
+                    case CalculationMode.SumOfUniqueLetterValues:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfLetterValues);
+                        }
+                        break;
+                    case CalculationMode.SumOfLetterValues:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfWordValueDigitalRoots);
+                        }
+                        break;
+                    default:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfLetterValues);
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                switch (m_client.CalculationMode)
+                {
+                    case CalculationMode.SumOfLetterValues:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfUniqueLetterValues);
+                        }
+                        break;
+                    case CalculationMode.SumOfUniqueLetterValues:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfWordValueDigitSums);
+                        }
+                        break;
+                    case CalculationMode.SumOfWordValueDigitSums:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfWordValueDigitalRoots);
+                        }
+                        break;
+                    case CalculationMode.SumOfWordValueDigitalRoots:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfLetterValues);
+                        }
+                        break;
+                    default:
+                        {
+                            SetCalculationMode(CalculationMode.SumOfLetterValues);
+                        }
+                        break;
+                }
+            }
+
+            // backup first
+            m_calculation_mode = m_client.CalculationMode;
+            // then re-calculate value
+            CalculateCurrentValue();
+        }
+    }
     private void SetCalculationMode(CalculationMode calculation_mode)
     {
         if (m_client != null)
@@ -41958,85 +42061,29 @@ public partial class MainForm : Form, ISubscriber
                         CalculationModeLabel.BackColor = SystemColors.Window;
                     }
                     break;
-                case CalculationMode.SumOfWordDigitSums:
+                case CalculationMode.SumOfUniqueLetterValues:
                     {
-                        CalculationModeLabel.BackColor = Color.Gray;
+                        CalculationModeLabel.BackColor = Color.Yellow;
                     }
                     break;
-                case CalculationMode.SumOfWordDigitalRoots:
+                case CalculationMode.SumOfWordValueDigitSums:
+                    {
+                        CalculationModeLabel.BackColor = Color.MediumOrchid;
+                    }
+                    break;
+                case CalculationMode.SumOfWordValueDigitalRoots:
                     {
                         CalculationModeLabel.BackColor = Color.Black;
                     }
                     break;
                 default:
                     {
+                        CalculationModeLabel.BackColor = SystemColors.Window;
                     }
                     break;
             }
 
             ToolTip.SetToolTip(CalculationModeLabel, L[l][m_client.CalculationMode.ToString()]);
-        }
-    }
-    CalculationMode m_clicked_calculation_mode = CalculationMode.SumOfLetterValues;
-    private void CalculationModeLabel_Click(object sender, EventArgs e)
-    {
-        if (m_client != null)
-        {
-            if (ModifierKeys == Keys.Shift)
-            {
-                switch (m_client.CalculationMode)
-                {
-                    case CalculationMode.SumOfLetterValues:
-                        {
-                            SetCalculationMode(CalculationMode.SumOfWordDigitalRoots);
-                        }
-                        break;
-                    case CalculationMode.SumOfWordDigitSums:
-                        {
-                            SetCalculationMode(CalculationMode.SumOfLetterValues);
-                        }
-                        break;
-                    case CalculationMode.SumOfWordDigitalRoots:
-                        {
-                            SetCalculationMode(CalculationMode.SumOfWordDigitSums);
-                        }
-                        break;
-                    default:
-                        {
-                        }
-                        break;
-                }
-            }
-            else
-            {
-                switch (m_client.CalculationMode)
-                {
-                    case CalculationMode.SumOfLetterValues:
-                        {
-                            SetCalculationMode(CalculationMode.SumOfWordDigitSums);
-                        }
-                        break;
-                    case CalculationMode.SumOfWordDigitSums:
-                        {
-                            SetCalculationMode(CalculationMode.SumOfWordDigitalRoots);
-                        }
-                        break;
-                    case CalculationMode.SumOfWordDigitalRoots:
-                        {
-                            SetCalculationMode(CalculationMode.SumOfLetterValues);
-                        }
-                        break;
-                    default:
-                        {
-                        }
-                        break;
-                }
-            }
-
-            // backup first
-            m_clicked_calculation_mode = m_client.CalculationMode;
-            // then re-calculate value
-            CalculateCurrentValue();
         }
     }
 
@@ -42367,13 +42414,19 @@ public partial class MainForm : Form, ISubscriber
                                 }
                                 else // edit mode so user can paste any text they like to calculate its value
                                 {
-                                    SetCalculationMode(CalculationMode.SumOfLetterValues);
                                     CalculateValueAndDisplayFactors(m_current_text);
                                 }
                             }
                             else // some text is highlighted
                             {
-                                CalculateSelectedTextValue();
+                                if (m_calculation_mode == CalculationMode.SumOfLetterValues)
+                                {
+                                    CalculateSelectedTextValue();
+                                }
+                                else
+                                {
+                                    CalculateValueAndDisplayFactors(m_current_text);
+                                }
                             }
                         }
                     }
@@ -42404,7 +42457,7 @@ public partial class MainForm : Form, ISubscriber
                 if (m_selection_mode)
                 {
                     m_current_text = m_active_textbox.Text;
-                    SetCalculationMode(m_clicked_calculation_mode);
+                    SetCalculationMode(m_calculation_mode);
                 }
                 else
                 {
@@ -42419,12 +42472,11 @@ public partial class MainForm : Form, ISubscriber
                         {
                             m_current_text = "";
                         }
-                        SetCalculationMode(m_clicked_calculation_mode);
+                        SetCalculationMode(m_calculation_mode);
                     }
                     else // get current selected text
                     {
                         m_current_text = m_active_textbox.SelectedText;
-                        SetCalculationMode(CalculationMode.SumOfLetterValues);
                     }
                 }
 
@@ -42535,14 +42587,12 @@ public partial class MainForm : Form, ISubscriber
                                         (m_active_textbox.SelectionLength == m_active_textbox.Text.Length)
                                        )
                                     {
-                                        SetCalculationMode(m_clicked_calculation_mode);
+                                        SetCalculationMode(m_calculation_mode);
 
                                         CalculateValueAndDisplayFactors(verses);
                                     }
-                                    else // part text selection
+                                    else // partial text selection
                                     {
-                                        SetCalculationMode(CalculationMode.SumOfLetterValues);
-
                                         // calculate and display verse_number_sum, word_number_sum, letter_number_sum
                                         CalculateAndDisplayCounts(m_current_verses, m_current_start_letter, m_current_last_letter);
 
@@ -42610,7 +42660,7 @@ public partial class MainForm : Form, ISubscriber
         //return text;
     }
 
-    // used for non-Quran text
+    // used for user text
     private void CalculateValueAndDisplayFactors(string user_text)
     {
         if (m_client != null)
@@ -42622,7 +42672,7 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
-    // used for Quran text only
+    // used for Quran text
     private void CalculateValueAndDisplayFactors()
     {
         if (m_client != null)
@@ -42788,7 +42838,6 @@ public partial class MainForm : Form, ISubscriber
         else if (e.KeyCode == Keys.Enter)
         {
             CalculateExpression();
-            SetCalculationMode(CalculationMode.SumOfLetterValues);
         }
         else
         {
@@ -42944,9 +42993,12 @@ public partial class MainForm : Form, ISubscriber
             {
                 ValueTextBox.Text = Radix.Encode(value, m_radix);
                 ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
+                ValueTextBox.BackColor = (Numbers.Compare(value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
                 ValueTextBox.SelectionStart = ValueTextBox.Text.Length;
                 ValueTextBox.SelectionLength = 0;
                 ValueTextBox.Refresh();
+                ValueInspectLabel.BackColor = (Numbers.Compare(value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                ValueInspectLabel.Refresh();
 
                 DecimalValueTextBox.Text = value.ToString();
                 DecimalValueTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
@@ -42979,8 +43031,6 @@ public partial class MainForm : Form, ISubscriber
 
                 string factors_str = Numbers.FactorizeToString(value);
                 PrimeFactorsTextBox.Text = factors_str;
-                PrimeFactorsTextBox.BackColor = (Numbers.Compare(value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
-                PrimeFactorsTextBox.Refresh();
 
                 int nth_number_index = 0;
                 int nth_additive_number_index = 0;
@@ -44659,8 +44709,10 @@ public partial class MainForm : Form, ISubscriber
             }
 
             long value = long.Parse(ValueTextBox.Text);
-            PrimeFactorsTextBox.BackColor = (Numbers.Compare(value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
-            PrimeFactorsTextBox.Refresh();
+            ValueTextBox.BackColor = (Numbers.Compare(value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+            ValueTextBox.Refresh();
+            ValueInspectLabel.BackColor = (Numbers.Compare(value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+            ValueInspectLabel.Refresh();
 
             int chapter_count = int.Parse(ChaptersTextBox.Text);
             ChaptersTextBox.BackColor = (Numbers.Compare(chapter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;

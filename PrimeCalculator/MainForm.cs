@@ -537,10 +537,6 @@ public partial class MainForm : Form
         ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
         ValueTextBox.Refresh();
 
-        //string factors_str = Numbers.FactorizeToString(value);
-        //PrimeFactorsTextBox.Text = factors_str;
-        //PrimeFactorsTextBox.BackColor = (Numbers.Compare(value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
-        //PrimeFactorsTextBox.Refresh();
         CallRun();
     }
     private void AnalyzeValue(long value)

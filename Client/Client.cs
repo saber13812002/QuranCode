@@ -257,7 +257,7 @@ public class Client : IPublisher, ISubscriber
         set { Server.CalculationMode = value; }
     }
     public bool Logging = false;
-    // used for non-Quran text
+    // used for user text
     public long CalculateValue(char character)
     {
         if (Logging)
@@ -282,7 +282,7 @@ public class Client : IPublisher, ISubscriber
             return Server.CalculateValue(text);
         }
     }
-    // used for Quran text only
+    // used for Quran text
     public long CalculateValue(Letter letter)
     {
         if (Logging)
@@ -2610,7 +2610,7 @@ public class Client : IPublisher, ISubscriber
 
                     if (frequency_search_type == FrequencySearchType.UniqueLetters)
                     {
-                        phrase = phrase.RemoveDuplicates();
+                        phrase = phrase.SimplifyTo(NumerologySystem.TextMode).RemoveDuplicates();
                     }
 
                     if (!String.IsNullOrEmpty(phrase))

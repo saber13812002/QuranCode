@@ -26,25 +26,6 @@ public static class StringExtensions
 
         return result;
     }
-    public static string RemoveDuplicateLetters(this string source)
-    {
-        if (String.IsNullOrEmpty(source)) return "";
-
-        string result = "";
-        foreach (char c in source)
-        {
-            if (!result.Contains(c.ToString()))
-            {
-                result += c + " ";
-            }
-        }
-        if (result.Length > 0)
-        {
-            result = result.Remove(result.Length - 1, 1);
-        }
-
-        return result;
-    }
     public static string ToNth(this string source)
     {
         if (String.IsNullOrEmpty(source)) return "";
