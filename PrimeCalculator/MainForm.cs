@@ -195,9 +195,6 @@ public partial class MainForm : Form
     }
     private void MainForm_Shown(object sender, EventArgs e)
     {
-        PrimeNumbersLabel.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[3];
-        CompositeNumbersLabel.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[6];
-
         NotifyIcon.Visible = true;
 
         EnableEntryControls();

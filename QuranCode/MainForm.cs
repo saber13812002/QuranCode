@@ -2760,7 +2760,6 @@ public partial class MainForm : Form, ISubscriber
         // 
         // CompositeNumbersLabel
         // 
-        this.CompositeNumbersLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.CompositeNumbersLabel.BackColor = System.Drawing.Color.Pink;
         this.CompositeNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.CompositeNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -2776,7 +2775,6 @@ public partial class MainForm : Form, ISubscriber
         // 
         // PrimeNumbersLabel
         // 
-        this.PrimeNumbersLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.PrimeNumbersLabel.BackColor = System.Drawing.Color.CornflowerBlue;
         this.PrimeNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.PrimeNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -13029,8 +13027,6 @@ public partial class MainForm : Form, ISubscriber
         DivisorValueDownLabel.ForeColor = Numbers.DIVISOR_COLOR;
         DivisorValueLabel.ForeColor = Numbers.DIVISOR_COLOR;
         DivisorValueUpLabel.ForeColor = Numbers.DIVISOR_COLOR;
-        PrimeNumbersLabel.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[3];
-        CompositeNumbersLabel.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[6];
 
         // setup C V W L start for distance caluclations
         MainTextBox.AlignToStart();
