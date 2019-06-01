@@ -12788,6 +12788,7 @@ public partial class MainForm : Form, ISubscriber
     private void ShowToolTipsCheckBox_CheckedChanged(object sender, EventArgs e)
     {
         ToolTip.Active = ShowToolTipsCheckBox.Checked;
+        TabControl.ShowToolTips = ShowToolTipsCheckBox.Checked;
     }
     private void MainForm_Load(object sender, EventArgs e)
     {
@@ -18082,11 +18083,6 @@ public partial class MainForm : Form, ISubscriber
                     m_word_wrap_search_textbox = m_active_textbox.WordWrap;
                     Verse.IncludeNumber = false;
 
-                    UpdateWordWrapLabel(m_word_wrap_search_textbox);
-                    CVWLSequenceTextBox.WordWrap = m_word_wrap_search_textbox;
-                    ValuesSequenceTextBox.WordWrap = m_word_wrap_search_textbox;
-                    DNASequenceTextBox.WordWrap = m_word_wrap_search_textbox;
-
                     // no text is changed so no need to redisplay and recolorize
                     //DisplayFoundVerses(false);
                 }
@@ -18095,14 +18091,11 @@ public partial class MainForm : Form, ISubscriber
                     m_word_wrap_main_textbox = m_active_textbox.WordWrap;
                     Verse.IncludeNumber = m_word_wrap_main_textbox;
 
-                    UpdateWordWrapLabel(m_word_wrap_main_textbox);
-                    CVWLSequenceTextBox.WordWrap = m_word_wrap_main_textbox;
-                    ValuesSequenceTextBox.WordWrap = m_word_wrap_main_textbox;
-                    DNASequenceTextBox.WordWrap = m_word_wrap_main_textbox;
-
                     // re-display as verse changed IncludeNumber
                     DisplaySelection(false);
                 }
+
+                UpdateWordWrapLabel(m_active_textbox.WordWrap);
 
                 if (current_verse != null)
                 {
