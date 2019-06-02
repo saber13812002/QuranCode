@@ -203,6 +203,14 @@ public static class Numbers
         /* NumberKind.Abundant */           Color.FromArgb(255, 192, 255)
     };
 
+    public static Color[] CALCULATION_MODE_COLORS =
+    { 
+        /* CalculationMode.SumOfLetterValues */             Color.White,
+        /* CalculationMode.SumOfUniqueLetterValues */       Color.Yellow,
+        /* CalculationMode.SumOfWordValueDigitSums */       Color.MediumOrchid,
+        /* CalculationMode.SumOfWordValueDigitalRoots */    Color.Black
+    };
+
     //                             int.MaxValue = 2^32 - 1 = 2147483647;
     public static int MAX_NUMBER = int.MaxValue / (Globals.EDITION == Edition.Standard ? 1024 : 64);
 
