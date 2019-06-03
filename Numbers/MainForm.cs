@@ -28,7 +28,7 @@ public partial class MainForm : Form
     }
 
     private static int ROWS = 30;
-    private static int COLS = 20;
+    private static int COLS = 22;
     private TextBox[,] controls = new TextBox[ROWS, COLS];
 
     private float m_dpi = 0F;
@@ -139,6 +139,8 @@ public partial class MainForm : Form
                     case 17: { control.Text = "Median"; ToolTip.SetToolTip(control, "Median(1..i/2) = ((i/2)+1)/2"); break; }
                     case 18: { control.Text = "Product"; ToolTip.SetToolTip(control, "Half * Median"); break; }
                     case 19: { control.Text = "∑Digits"; ToolTip.SetToolTip(control, "Sum(DigitSum(1..i))"); break; }
+                    case 20: { control.Text = "∑Digits^2"; ToolTip.SetToolTip(control, "Sum(DigitSum((1..i)^2))"); break; }
+                    case 21: { control.Text = "∑Digits^3"; ToolTip.SetToolTip(control, "Sum(DigitSum((1..i)^3))"); break; }
                     default: break;
                 }
             }
@@ -210,6 +212,8 @@ public partial class MainForm : Form
                             control.BackColor = Color.Snow;
                             break;
                         case 19:
+                        case 20:
+                        case 21:
                             control.BackColor = Color.LightYellow;
                             break;
                         default:
@@ -503,13 +507,13 @@ public partial class MainForm : Form
                 }
                 catch
                 {
-                    RestoreLocation();
+                    StartupLocationAndSize();
                 }
             }
         }
         else // first start
         {
-            RestoreLocation();
+            StartupLocationAndSize();
         }
     }
     private void SaveSettings()
@@ -530,11 +534,11 @@ public partial class MainForm : Form
             // silence IO error in case running from read-only media (CD/DVD)
         }
     }
-    private void RestoreLocation()
+    private void StartupLocationAndSize()
     {
         this.Top = Screen.PrimaryScreen.WorkingArea.Top;
         this.Left = Screen.PrimaryScreen.WorkingArea.Left;
-        this.Width = (m_dpi == 96.0F) ? 1053 : 1281;
+        this.Width = (m_dpi == 96.0F) ? 1210 : 1281;
         this.Height = (m_dpi == 96.0F) ? 681 : 752;
     }
 
@@ -549,7 +553,7 @@ public partial class MainForm : Form
 
         if (this.Top < 0)
         {
-            RestoreLocation();
+            StartupLocationAndSize();
         }
     }
     private void MainForm_Shown(object sender, EventArgs e)
@@ -647,22 +651,23 @@ public partial class MainForm : Form
         {
             index_control.Text = index_control.Text.Replace(" ", "");
 
-            int index = 0;
-            if (int.TryParse(index_control.Text, out index))
+            int number = 0;
+            if (int.TryParse(index_control.Text, out number))
             {
-                index_control.ForeColor = Numbers.GetNumberTypeColor(index);
+                index_control.ForeColor = Numbers.GetNumberTypeColor(number);
 
-                if (index >= 0)
+                if (number > 0)
                 {
                     this.Cursor = Cursors.WaitCursor;
                     try
                     {
-                        long p = Numbers.Primes[index - 1];
-                        long ap = Numbers.AdditivePrimes[index - 1];
-                        long xp = Numbers.NonAdditivePrimes[index - 1];
-                        long c = Numbers.Composites[index - 1];
-                        long ac = Numbers.AdditiveComposites[index - 1];
-                        long xc = Numbers.NonAdditiveComposites[index - 1];
+                        int index = number - 1;
+                        long p = Numbers.Primes[index];
+                        long ap = Numbers.AdditivePrimes[index];
+                        long xp = Numbers.NonAdditivePrimes[index];
+                        long c = Numbers.Composites[index];
+                        long ac = Numbers.AdditiveComposites[index];
+                        long xc = Numbers.NonAdditiveComposites[index];
                         controls[point.X, 1].Text = p.ToString();
                         controls[point.X, 2].Text = ap.ToString();
                         controls[point.X, 3].Text = xp.ToString();
@@ -720,8 +725,8 @@ public partial class MainForm : Form
                             controls[point.X, 14].Text = "";
                         }
 
-                        int sum = (index * (index + 1)) / 2;
-                        int half = ((index % 2) == 0) ? index / 2 : 0;
+                        int sum = (number * (number + 1)) / 2;
+                        int half = ((number % 2) == 0) ? number / 2 : 0;
                         int median = ((half % 2) == 1) ? (half + 1) / 2 : 0;
                         int product = half * median;
                         controls[point.X, 15].Text = sum.ToString();
@@ -733,9 +738,15 @@ public partial class MainForm : Form
                         controls[point.X, 17].ForeColor = Numbers.GetNumberTypeColor(median);
                         controls[point.X, 18].ForeColor = Numbers.GetNumberTypeColor(product);
 
-                        long sum_of_digit_sums = Numbers.SumOfDigitSums(index);
+                        long sum_of_digit_sums = Numbers.SumOfDigitSums(number);
                         controls[point.X, 19].Text = (sum_of_digit_sums > 0) ? sum_of_digit_sums.ToString() : "";
                         controls[point.X, 19].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
+                        long sum_of_digit_sums_2 = Numbers.SumOfDigitSums(number, 2);
+                        controls[point.X, 20].Text = (sum_of_digit_sums_2 > 0) ? sum_of_digit_sums_2.ToString() : "";
+                        controls[point.X, 20].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums_2);
+                        long sum_of_digit_sums_3 = Numbers.SumOfDigitSums(number, 3);
+                        controls[point.X, 21].Text = (sum_of_digit_sums_3 > 0) ? sum_of_digit_sums_3.ToString() : "";
+                        controls[point.X, 21].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums_3);
                     }
                     catch
                     {
@@ -754,6 +765,8 @@ public partial class MainForm : Form
                         controls[point.X, 17].Text = "";
                         controls[point.X, 18].Text = "";
                         controls[point.X, 19].Text = "";
+                        controls[point.X, 20].Text = "";
+                        controls[point.X, 21].Text = "";
                     }
                     finally
                     {
@@ -763,8 +776,8 @@ public partial class MainForm : Form
                     this.Cursor = Cursors.WaitCursor;
                     try
                     {
-                        long df = Numbers.Deficients[index - 1];
-                        long ab = Numbers.Abundants[index - 1];
+                        long df = Numbers.Deficients[number - 1];
+                        long ab = Numbers.Abundants[number - 1];
                         controls[point.X, 7].Text = df.ToString();
                         controls[point.X, 8].Text = ab.ToString();
                         controls[point.X, 7].ForeColor = Numbers.GetNumberTypeColor(df);
@@ -801,6 +814,8 @@ public partial class MainForm : Form
                     controls[point.X, 17].Text = "";
                     controls[point.X, 18].Text = "";
                     controls[point.X, 19].Text = "";
+                    controls[point.X, 20].Text = "";
+                    controls[point.X, 21].Text = "";
                 }
             }
             else
@@ -824,6 +839,8 @@ public partial class MainForm : Form
                 controls[point.X, 17].Text = "";
                 controls[point.X, 18].Text = "";
                 controls[point.X, 19].Text = "";
+                controls[point.X, 20].Text = "";
+                controls[point.X, 21].Text = "";
             }
         }
     }

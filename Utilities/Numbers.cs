@@ -1326,6 +1326,45 @@ public static class Numbers
         }
         return str.ToString();
     }
+    public static long SumOfDigitSums(string value, int power)
+    {
+        long number;
+        if (long.TryParse(value, out number))
+        {
+            return SumOfDigitSums(number, power);
+        }
+        return 0L;
+    }
+    public static long SumOfDigitSums(long number, int power)
+    {
+        long result = 0L;
+        for (int i = 1; i <= number; i++)
+        {
+            string text = Math.Pow(i, power).ToString();
+            foreach (char c in text)
+            {
+                result += long.Parse(c.ToString());
+            }
+        }
+        return result;
+    }
+    public static string SumOfDigitSumsString(long number, int power)
+    {
+        StringBuilder str = new StringBuilder();
+        for (int i = 1; i <= number; i++)
+        {
+            string text = Math.Pow(i, power).ToString();
+            foreach (char c in text)
+            {
+                str.Append(c.ToString() + "+");
+            }
+        }
+        if (str.Length > 0)
+        {
+            str.Remove(str.Length - 1, 1);
+        }
+        return str.ToString();
+    }
 
     public static bool IsDigitsOnly(string text)
     {
