@@ -1820,7 +1820,6 @@ public partial class MainForm : Form
                 {
                     value++;
                     control.Text = value.ToString();
-                    FactorizeValue(control);
                 }
             }
         }
@@ -1836,7 +1835,6 @@ public partial class MainForm : Form
                 {
                     value--;
                     control.Text = value.ToString();
-                    FactorizeValue(control);
                 }
             }
         }
