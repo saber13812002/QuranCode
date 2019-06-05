@@ -1730,7 +1730,7 @@ public partial class MainForm : Form
                             // do nothing
                         }
                     }
-                    else // any other index type will be treated as IndexNumberType.Composite
+                    else if (m_index_type == IndexType.Composite)
                     {
                         if (m_plus1_index)
                         {
@@ -1750,6 +1750,10 @@ public partial class MainForm : Form
                         {
                             // do nothing
                         }
+                    }
+                    else
+                    {
+                        // do nothing
                     }
 
                     UpdateToolTipNth4n1NumberTextBox();

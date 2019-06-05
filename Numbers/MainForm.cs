@@ -28,7 +28,7 @@ public partial class MainForm : Form
     }
 
     private static int ROWS = 30;
-    private static int COLS = 22;
+    private static int COLS = 20;
     private TextBox[,] controls = new TextBox[ROWS, COLS];
 
     private float m_dpi = 0F;
@@ -128,19 +128,17 @@ public partial class MainForm : Form
                     case 6: { control.Text = "XC"; ToolTip.SetToolTip(control, "Non-additive Composite"); break; }
                     case 7: { control.Text = "DF"; ToolTip.SetToolTip(control, "Deficient Number"); break; }
                     case 8: { control.Text = "AB"; ToolTip.SetToolTip(control, "Abundant Number"); break; }
-                    case 9: { control.Text = "P=4n+1"; ToolTip.SetToolTip(control, "n of Fermat's 4n+1 Prime = a^2 + b^2"); break; }
-                    case 10: { control.Text = "a"; ToolTip.SetToolTip(control, "a of 4n+1 Prime = a^2 + b^2"); break; }
-                    case 11: { control.Text = "b"; ToolTip.SetToolTip(control, "b of 4n+1 Prime = a^2 + b^2"); break; }
-                    case 12: { control.Text = "C=4n+1"; ToolTip.SetToolTip(control, "n of Ali Adams' 4n+1 Composite = a^2 - b^2"); break; }
-                    case 13: { control.Text = "a"; ToolTip.SetToolTip(control, "a of 4n+1 Composite = a^2 - b^2"); break; }
-                    case 14: { control.Text = "b"; ToolTip.SetToolTip(control, "b of 4n+1 Composite = a^2 - b^2"); break; }
-                    case 15: { control.Text = "Sum"; ToolTip.SetToolTip(control, "Sum(1..i) = (i*(i+1))/2"); break; }
-                    case 16: { control.Text = "Half"; ToolTip.SetToolTip(control, "i/2"); break; }
-                    case 17: { control.Text = "Median"; ToolTip.SetToolTip(control, "Median(1..i/2) = ((i/2)+1)/2"); break; }
-                    case 18: { control.Text = "Product"; ToolTip.SetToolTip(control, "Half * Median"); break; }
-                    case 19: { control.Text = "∑Digits"; ToolTip.SetToolTip(control, "Sum(DigitSum(1..i))"); break; }
-                    case 20: { control.Text = "∑Digits^2"; ToolTip.SetToolTip(control, "Sum(DigitSum((1..i)^2))"); break; }
-                    case 21: { control.Text = "∑Digits^3"; ToolTip.SetToolTip(control, "Sum(DigitSum((1..i)^3))"); break; }
+                    case 9: { control.Text = "P=4n+1"; ToolTip.SetToolTip(control, "ith 4n+1 Prime"); break; }
+                    case 10: { control.Text = "P=4n-1"; ToolTip.SetToolTip(control, "ith 4n-1 Prime"); break; }
+                    case 11: { control.Text = "C=4n+1"; ToolTip.SetToolTip(control, "ith 4n+1 Composite"); break; }
+                    case 12: { control.Text = "C=4n-1"; ToolTip.SetToolTip(control, "ith 4n-1 Composite"); break; }
+                    case 13: { control.Text = "Sum"; ToolTip.SetToolTip(control, "Sum(1..i) = (i*(i+1))/2"); break; }
+                    case 14: { control.Text = "Half"; ToolTip.SetToolTip(control, "i/2"); break; }
+                    case 15: { control.Text = "Median"; ToolTip.SetToolTip(control, "Median(1..i/2) = ((i/2)+1)/2"); break; }
+                    case 16: { control.Text = "Product"; ToolTip.SetToolTip(control, "Half * Median"); break; }
+                    case 17: { control.Text = "∑Digits"; ToolTip.SetToolTip(control, "Sum(DigitSum(1..i))"); break; }
+                    case 18: { control.Text = "∑Digits^2"; ToolTip.SetToolTip(control, "Sum(DigitSum((1..i)^2))"); break; }
+                    case 19: { control.Text = "∑Digits^3"; ToolTip.SetToolTip(control, "Sum(DigitSum((1..i)^3))"); break; }
                     default: break;
                 }
             }
@@ -197,23 +195,21 @@ public partial class MainForm : Form
                             break;
                         case 9:
                         case 10:
-                        case 11:
                             control.BackColor = Color.FromArgb(240, 240, 255);
                             break;
+                        case 11:
                         case 12:
-                        case 13:
-                        case 14:
                             control.BackColor = Color.FromArgb(255, 240, 240);
                             break;
+                        case 13:
+                        case 14:
                         case 15:
                         case 16:
-                        case 17:
-                        case 18:
                             control.BackColor = Color.Snow;
                             break;
+                        case 17:
+                        case 18:
                         case 19:
-                        case 20:
-                        case 21:
                             control.BackColor = Color.LightYellow;
                             break;
                         default:
@@ -293,7 +289,7 @@ public partial class MainForm : Form
 
                 StringBuilder str = new StringBuilder();
                 str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
-                str.AppendLine("i" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "C" + "\t" + "AC" + "\t" + "XC" + "\t" + "DF" + "\t" + "AB" + "\t" + "P=4n+1" + "\t" + "a" + "\t" + "b" + "\t" + "C=4n+1" + "\t" + "a" + "\t" + "b" + "\t" + "Sum" + "\t" + "Half" + "\t" + "Median" + "\t" + "Product" + "\t" + "∑Digits");
+                str.AppendLine("i" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "C" + "\t" + "AC" + "\t" + "XC" + "\t" + "DF" + "\t" + "AB" + "\t" + "P=4n+1" + "\t" + "P=4n-1" + "\t" + "C=4n+1" + "\t" + "C=4n-1" + "\t" + "Sum" + "\t" + "Half" + "\t" + "Median" + "\t" + "Product" + "\t" + "∑Digits" + "\t" + "∑Digits^2" + "\t" + "∑Digits^3");
                 str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 for (int i = 0; i < ROWS; i++)
                 {
@@ -538,7 +534,7 @@ public partial class MainForm : Form
     {
         this.Top = Screen.PrimaryScreen.WorkingArea.Top;
         this.Left = Screen.PrimaryScreen.WorkingArea.Left;
-        this.Width = (m_dpi == 96.0F) ? 1210 : 1281;
+        this.Width = (m_dpi == 96.0F) ? 1103 : 1281;
         this.Height = (m_dpi == 96.0F) ? 681 : 752;
     }
 
@@ -661,13 +657,13 @@ public partial class MainForm : Form
                     this.Cursor = Cursors.WaitCursor;
                     try
                     {
-                        int index = number - 1;
-                        long p = Numbers.Primes[index];
-                        long ap = Numbers.AdditivePrimes[index];
-                        long xp = Numbers.NonAdditivePrimes[index];
-                        long c = Numbers.Composites[index];
-                        long ac = Numbers.AdditiveComposites[index];
-                        long xc = Numbers.NonAdditiveComposites[index];
+                        int i = number - 1;
+                        long p = Numbers.Primes[i];
+                        long ap = Numbers.AdditivePrimes[i];
+                        long xp = Numbers.NonAdditivePrimes[i];
+                        long c = Numbers.Composites[i];
+                        long ac = Numbers.AdditiveComposites[i];
+                        long xc = Numbers.NonAdditiveComposites[i];
                         controls[point.X, 1].Text = p.ToString();
                         controls[point.X, 2].Text = ap.ToString();
                         controls[point.X, 3].Text = xp.ToString();
@@ -681,72 +677,48 @@ public partial class MainForm : Form
                         controls[point.X, 5].ForeColor = Numbers.GetNumberTypeColor(ac);
                         controls[point.X, 6].ForeColor = Numbers.GetNumberTypeColor(xc);
 
-                        if (((p - 1) % 4) == 0)  // 4n+1 Prime
-                        {
-                            long n = (p - 1) / 4;
-                            long a;
-                            long b;
-                            Numbers.GetSquaresOf4nPlus1EqualsSumOfTwoSquares(p, out a, out b);
-                            a = (long)Math.Sqrt(a);
-                            b = (long)Math.Sqrt(b);
-                            controls[point.X, 9].Text = n.ToString();
-                            controls[point.X, 10].Text = a.ToString();
-                            controls[point.X, 11].Text = b.ToString();
-                            controls[point.X, 9].ForeColor = Numbers.GetNumberTypeColor(n);
-                            controls[point.X, 10].ForeColor = Numbers.GetNumberTypeColor(a);
-                            controls[point.X, 11].ForeColor = Numbers.GetNumberTypeColor(b);
-                        }
-                        else
-                        {
-                            controls[point.X, 9].Text = "";
-                            controls[point.X, 10].Text = "";
-                            controls[point.X, 11].Text = "";
-                        }
+                        long df = Numbers.Deficients[i];
+                        long ab = Numbers.Abundants[i];
+                        controls[point.X, 7].Text = df.ToString();
+                        controls[point.X, 8].Text = ab.ToString();
+                        controls[point.X, 7].ForeColor = Numbers.GetNumberTypeColor(df);
+                        controls[point.X, 8].ForeColor = Numbers.GetNumberTypeColor(ab);
 
-                        if (((c - 1) % 4) == 0)  // 4n+1 Composite
-                        {
-                            long n = (c - 1) / 4;
-                            long a;
-                            long b;
-                            Numbers.GetSquaresOf4nPlus1EqualsDiffOfTwoSquares(c, out a, out b);
-                            a = (long)Math.Sqrt(a);
-                            b = (long)Math.Sqrt(b);
-                            controls[point.X, 12].Text = n.ToString();
-                            controls[point.X, 13].Text = a.ToString();
-                            controls[point.X, 14].Text = b.ToString();
-                            controls[point.X, 12].ForeColor = Numbers.GetNumberTypeColor(n);
-                            controls[point.X, 13].ForeColor = Numbers.GetNumberTypeColor(a);
-                            controls[point.X, 14].ForeColor = Numbers.GetNumberTypeColor(b);
-                        }
-                        else
-                        {
-                            controls[point.X, 12].Text = "";
-                            controls[point.X, 13].Text = "";
-                            controls[point.X, 14].Text = "";
-                        }
+                        long p4nplus1 = Numbers.Primes4nPlus1[i];
+                        long p4nminus1 = Numbers.Primes4nMinus1[i];
+                        long c4nplus1 = Numbers.Composites4nPlus1[i];
+                        long c4nminus1 = Numbers.Composites4nMinus1[i];
+                        controls[point.X, 9].Text = p4nplus1.ToString();
+                        controls[point.X, 10].Text = p4nminus1.ToString();
+                        controls[point.X, 11].Text = c4nplus1.ToString();
+                        controls[point.X, 12].Text = c4nminus1.ToString();
+                        controls[point.X, 9].ForeColor = Numbers.GetNumberTypeColor(p4nplus1);
+                        controls[point.X, 10].ForeColor = Numbers.GetNumberTypeColor(p4nminus1);
+                        controls[point.X, 11].ForeColor = Numbers.GetNumberTypeColor(c4nplus1);
+                        controls[point.X, 12].ForeColor = Numbers.GetNumberTypeColor(c4nminus1);
 
                         int sum = (number * (number + 1)) / 2;
                         int half = ((number % 2) == 0) ? number / 2 : 0;
                         int median = ((half % 2) == 1) ? (half + 1) / 2 : 0;
                         int product = half * median;
-                        controls[point.X, 15].Text = sum.ToString();
-                        controls[point.X, 16].Text = (half > 0) ? half.ToString() : "";
-                        controls[point.X, 17].Text = (median > 0) ? median.ToString() : "";
-                        controls[point.X, 18].Text = (product > 0) ? product.ToString() : "";
-                        controls[point.X, 15].ForeColor = Numbers.GetNumberTypeColor(sum);
-                        controls[point.X, 16].ForeColor = Numbers.GetNumberTypeColor(half);
-                        controls[point.X, 17].ForeColor = Numbers.GetNumberTypeColor(median);
-                        controls[point.X, 18].ForeColor = Numbers.GetNumberTypeColor(product);
+                        controls[point.X, 13].Text = sum.ToString();
+                        controls[point.X, 14].Text = (half > 0) ? half.ToString() : "";
+                        controls[point.X, 15].Text = (median > 0) ? median.ToString() : "";
+                        controls[point.X, 16].Text = (product > 0) ? product.ToString() : "";
+                        controls[point.X, 13].ForeColor = Numbers.GetNumberTypeColor(sum);
+                        controls[point.X, 14].ForeColor = Numbers.GetNumberTypeColor(half);
+                        controls[point.X, 15].ForeColor = Numbers.GetNumberTypeColor(median);
+                        controls[point.X, 16].ForeColor = Numbers.GetNumberTypeColor(product);
 
-                        long sum_of_digit_sums = Numbers.SumOfDigitSums(number);
-                        controls[point.X, 19].Text = (sum_of_digit_sums > 0) ? sum_of_digit_sums.ToString() : "";
-                        controls[point.X, 19].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
+                        long sum_of_digit_sums_1 = Numbers.SumOfDigitSums(number);
                         long sum_of_digit_sums_2 = Numbers.SumOfDigitSums(number, 2);
-                        controls[point.X, 20].Text = (sum_of_digit_sums_2 > 0) ? sum_of_digit_sums_2.ToString() : "";
-                        controls[point.X, 20].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums_2);
                         long sum_of_digit_sums_3 = Numbers.SumOfDigitSums(number, 3);
-                        controls[point.X, 21].Text = (sum_of_digit_sums_3 > 0) ? sum_of_digit_sums_3.ToString() : "";
-                        controls[point.X, 21].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums_3);
+                        controls[point.X, 17].Text = (sum_of_digit_sums_1 > 0) ? sum_of_digit_sums_1.ToString() : "";
+                        controls[point.X, 18].Text = (sum_of_digit_sums_2 > 0) ? sum_of_digit_sums_2.ToString() : "";
+                        controls[point.X, 19].Text = (sum_of_digit_sums_3 > 0) ? sum_of_digit_sums_3.ToString() : "";
+                        controls[point.X, 17].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums_1);
+                        controls[point.X, 18].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums_2);
+                        controls[point.X, 19].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums_3);
                     }
                     catch
                     {
@@ -756,6 +728,10 @@ public partial class MainForm : Form
                         controls[point.X, 4].Text = "";
                         controls[point.X, 5].Text = "";
                         controls[point.X, 6].Text = "";
+                        controls[point.X, 7].Text = "";
+                        controls[point.X, 8].Text = "";
+                        controls[point.X, 9].Text = "";
+                        controls[point.X, 10].Text = "";
                         controls[point.X, 11].Text = "";
                         controls[point.X, 12].Text = "";
                         controls[point.X, 13].Text = "";
@@ -765,28 +741,6 @@ public partial class MainForm : Form
                         controls[point.X, 17].Text = "";
                         controls[point.X, 18].Text = "";
                         controls[point.X, 19].Text = "";
-                        controls[point.X, 20].Text = "";
-                        controls[point.X, 21].Text = "";
-                    }
-                    finally
-                    {
-                        this.Cursor = Cursors.Default;
-                    }
-
-                    this.Cursor = Cursors.WaitCursor;
-                    try
-                    {
-                        long df = Numbers.Deficients[number - 1];
-                        long ab = Numbers.Abundants[number - 1];
-                        controls[point.X, 7].Text = df.ToString();
-                        controls[point.X, 8].Text = ab.ToString();
-                        controls[point.X, 7].ForeColor = Numbers.GetNumberTypeColor(df);
-                        controls[point.X, 8].ForeColor = Numbers.GetNumberTypeColor(ab);
-                    }
-                    catch
-                    {
-                        controls[point.X, 7].Text = "";
-                        controls[point.X, 8].Text = "";
                     }
                     finally
                     {
@@ -814,8 +768,6 @@ public partial class MainForm : Form
                     controls[point.X, 17].Text = "";
                     controls[point.X, 18].Text = "";
                     controls[point.X, 19].Text = "";
-                    controls[point.X, 20].Text = "";
-                    controls[point.X, 21].Text = "";
                 }
             }
             else
@@ -839,8 +791,6 @@ public partial class MainForm : Form
                 controls[point.X, 17].Text = "";
                 controls[point.X, 18].Text = "";
                 controls[point.X, 19].Text = "";
-                controls[point.X, 20].Text = "";
-                controls[point.X, 21].Text = "";
             }
         }
     }
@@ -862,35 +812,35 @@ public partial class MainForm : Form
                 Control index_control = controls[point.X, 0] as TextBox;
                 if (index_control != null)
                 {
-                    long value = 0L;
-                    if (long.TryParse((sender as TextBox).Text, out value))
+                    long number = 0L;
+                    if (long.TryParse((sender as TextBox).Text, out number))
                     {
                         int index = 0;
                         switch (point.Y)
                         {
                             case 1:
-                                index = Numbers.PrimeIndexOf(value) + 1;
+                                index = Numbers.PrimeIndexOf(number) + 1;
                                 break;
                             case 2:
-                                index = Numbers.AdditivePrimeIndexOf(value) + 1;
+                                index = Numbers.AdditivePrimeIndexOf(number) + 1;
                                 break;
                             case 3:
-                                index = Numbers.NonAdditivePrimeIndexOf(value) + 1;
+                                index = Numbers.NonAdditivePrimeIndexOf(number) + 1;
                                 break;
                             case 4:
-                                index = Numbers.CompositeIndexOf(value) + 1;
+                                index = Numbers.CompositeIndexOf(number) + 1;
                                 break;
                             case 5:
-                                index = Numbers.AdditiveCompositeIndexOf(value) + 1;
+                                index = Numbers.AdditiveCompositeIndexOf(number) + 1;
                                 break;
                             case 6:
-                                index = Numbers.NonAdditiveCompositeIndexOf(value) + 1;
+                                index = Numbers.NonAdditiveCompositeIndexOf(number) + 1;
                                 break;
                             case 7:
-                                index = Numbers.DeficientIndexOf(value) + 1;
+                                index = Numbers.DeficientIndexOf(number) + 1;
                                 break;
                             case 8:
-                                index = Numbers.AbundantIndexOf(value) + 1;
+                                index = Numbers.AbundantIndexOf(number) + 1;
                                 break;
                             default:
                                 index = 0;
@@ -1018,7 +968,7 @@ public partial class MainForm : Form
 
                 StringBuilder str = new StringBuilder();
                 str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
-                str.AppendLine("i" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "C" + "\t" + "AC" + "\t" + "XC" + "\t" + "DF" + "\t" + "AB" + "\t" + "P=4n+1" + "\t" + "a" + "\t" + "b" + "\t" + "C=4n+1" + "\t" + "a" + "\t" + "b" + "\t" + "Sum" + "\t" + "Half" + "\t" + "Median" + "\t" + "Product" + "\t" + "∑Digits");
+                str.AppendLine("i" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "C" + "\t" + "AC" + "\t" + "XC" + "\t" + "DF" + "\t" + "AB" + "\t" + "P=4n+1" + "\t" + "P=4n-1" + "\t" + "C=4n+1" + "\t" + "C=4n-1" + "\t" + "Sum" + "\t" + "Half" + "\t" + "Median" + "\t" + "Product" + "\t" + "∑Digits" + "\t" + "∑Digits^2" + "\t" + "∑Digits^3");
                 str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
                 if (controls != null)

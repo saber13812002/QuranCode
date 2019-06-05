@@ -4087,7 +4087,7 @@ public static class Numbers
         return str.ToString();
     }
 
-    public static void GetSquaresOf4nPlus1EqualsSumOfTwoSquares(long number, out long square1, out long square2)
+    private static void GetSquaresOf4nPlus1EqualsSumOfTwoSquares(long number, out long square1, out long square2)
     {
         square1 = 0L;
         square2 = 0L;
@@ -4103,7 +4103,7 @@ public static class Numbers
             if (j * j == square2) return;
         }
     }
-    public static void GetSquaresOf4nPlus1EqualsDiffOfTwoSquares(long number, out long square1, out long square2)
+    private static void GetSquaresOf4nPlus1EqualsDiffOfTwoSquares(long number, out long square1, out long square2)
     {
         square1 = 0L;
         square2 = 0L;
