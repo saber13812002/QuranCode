@@ -17657,6 +17657,14 @@ public partial class MainForm : Form, ISubscriber
             VerseDiffTextBox.ForeColor = Numbers.GetNumberTypeColor(m_clicked_verse_distance);
             WordDiffTextBox.ForeColor = Numbers.GetNumberTypeColor(m_clicked_word_distance);
             LetterDiffTextBox.ForeColor = Numbers.GetNumberTypeColor(m_clicked_letter_distance);
+            ChapterDiffTextBox.BackColor = (Numbers.Compare((int)m_clicked_chapter_distance, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Control;
+            VerseDiffTextBox.BackColor = (Numbers.Compare((int)m_clicked_verse_distance, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Control;
+            WordDiffTextBox.BackColor = (Numbers.Compare((int)m_clicked_word_distance, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Control;
+            LetterDiffTextBox.BackColor = (Numbers.Compare((int)m_clicked_letter_distance, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Control;
+            ChapterDiffTextBox.Refresh();
+            VerseDiffTextBox.Refresh();
+            WordDiffTextBox.Refresh();
+            LetterDiffTextBox.Refresh();
 
             m_clicked_chapter_number = chapter_number;
             m_clicked_verse_number = verse_number;

@@ -488,14 +488,14 @@ public static class Numbers
                     else
                     {
                         // ignore 0
-                        return ((number1 > 0) && (Math.Abs((number1 % number2)) == remainder));
+                        return ((number1 != 0) && (Math.Abs((number1 % number2)) == remainder));
                     }
                 }
             case ComparisonOperator.IndivisibleBy:
                 {
                     // ignore 0
                     if (number2 == 0) return false;
-                    return ((number1 > 0) && (Math.Abs((number1 % number2)) != 0));
+                    return ((number1 != 0) && (Math.Abs((number1 % number2)) != 0));
                 }
             case ComparisonOperator.EqualSum:
                 {
