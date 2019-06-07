@@ -649,6 +649,32 @@ public static class Numbers
         }
         return false;
     }
+    public static long SumOfNumbers(string value)
+    {
+        long number;
+        if (long.TryParse(value, out number))
+        {
+            return SumOfNumbers(number);
+        }
+        return 0L;
+    }
+    public static long SumOfNumbers(long number)
+    {
+        return ((number * (number + 1)) / 2);
+    }
+    public static string SumOfNumbersString(long number)
+    {
+        StringBuilder str = new StringBuilder();
+        for (int i = 1; i <= number; i++)
+        {
+            str.Append(number.ToString() + "+");
+        }
+        if (str.Length > 0)
+        {
+            str.Remove(str.Length - 1, 1);
+        }
+        return str.ToString();
+    }
 
 
     // pi = circumference / diameter ~= 355/113
@@ -1279,16 +1305,16 @@ public static class Numbers
         return result;
     }
     //https://ideone.com/ik8iE6
-    public static long SumOfDigitSums(string value)
+    public static long SumOfNumbersDigits(string value)
     {
         long number;
         if (long.TryParse(value, out number))
         {
-            return SumOfDigitSums(number);
+            return SumOfNumbersDigits(number);
         }
         return 0L;
     }
-    public static long SumOfDigitSums(long number)
+    public static long SumOfNumbersDigits(long number)
     {
         // method works correctly for radix = 10 only, for now
         int radix = 10;
@@ -1310,7 +1336,7 @@ public static class Numbers
         }
         return result;
     }
-    public static string SumOfDigitSumsString(long number)
+    public static string SumOfNumbersDigitsString(long number)
     {
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
@@ -1326,16 +1352,16 @@ public static class Numbers
         }
         return str.ToString();
     }
-    public static long SumOfDigitSums(string value, int power)
+    public static long SumOfNumbersDigits(string value, int power)
     {
         long number;
         if (long.TryParse(value, out number))
         {
-            return SumOfDigitSums(number, power);
+            return SumOfNumbersDigits(number, power);
         }
         return 0L;
     }
-    public static long SumOfDigitSums(long number, int power)
+    public static long SumOfNumbersDigits(long number, int power)
     {
         long result = 0L;
         for (int i = 1; i <= number; i++)
@@ -1348,7 +1374,7 @@ public static class Numbers
         }
         return result;
     }
-    public static string SumOfDigitSumsString(long number, int power)
+    public static string SumOfNumbersDigitsString(long number, int power)
     {
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)

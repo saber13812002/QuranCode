@@ -605,7 +605,8 @@ partial class MainForm
         this.RadixLabel = new System.Windows.Forms.Label();
         this.ValuePanel = new System.Windows.Forms.Panel();
         this.CalculationModeLabel = new System.Windows.Forms.Label();
-        this.SumOfDigitSumsTextBox = new System.Windows.Forms.TextBox();
+        this.SumOfNumbersDigitsTextBox = new System.Windows.Forms.TextBox();
+        this.SumOfNumbersTextBox = new System.Windows.Forms.TextBox();
         this.Nth4nMinus1CompositeNumberLabel = new System.Windows.Forms.Label();
         this.Nth4nPlus1CompositeNumberLabel = new System.Windows.Forms.Label();
         this.Nth4nMinus1PrimeNumberLabel = new System.Windows.Forms.Label();
@@ -839,7 +840,6 @@ partial class MainForm
         this.AppAhlulBaytLabel.Dock = System.Windows.Forms.DockStyle.Left;
         this.AppAhlulBaytLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AppAhlulBaytLabel.ForeColor = System.Drawing.Color.Transparent;
-        this.AppAhlulBaytLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppAhlulBaytLabel.Image")));
         this.AppAhlulBaytLabel.Location = new System.Drawing.Point(120, 0);
         this.AppAhlulBaytLabel.Name = "AppAhlulBaytLabel";
         this.AppAhlulBaytLabel.Size = new System.Drawing.Size(20, 21);
@@ -857,7 +857,6 @@ partial class MainForm
         this.AppWordGeneratorLabel.Dock = System.Windows.Forms.DockStyle.Left;
         this.AppWordGeneratorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AppWordGeneratorLabel.ForeColor = System.Drawing.Color.Transparent;
-        this.AppWordGeneratorLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppWordGeneratorLabel.Image")));
         this.AppWordGeneratorLabel.Location = new System.Drawing.Point(100, 0);
         this.AppWordGeneratorLabel.Name = "AppWordGeneratorLabel";
         this.AppWordGeneratorLabel.Size = new System.Drawing.Size(20, 21);
@@ -875,7 +874,6 @@ partial class MainForm
         this.AppInitialLettersLabel.Dock = System.Windows.Forms.DockStyle.Left;
         this.AppInitialLettersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AppInitialLettersLabel.ForeColor = System.Drawing.Color.Transparent;
-        this.AppInitialLettersLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppInitialLettersLabel.Image")));
         this.AppInitialLettersLabel.Location = new System.Drawing.Point(80, 0);
         this.AppInitialLettersLabel.Name = "AppInitialLettersLabel";
         this.AppInitialLettersLabel.Size = new System.Drawing.Size(20, 21);
@@ -893,7 +891,6 @@ partial class MainForm
         this.AppCompositesLabel.Dock = System.Windows.Forms.DockStyle.Left;
         this.AppCompositesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AppCompositesLabel.ForeColor = System.Drawing.Color.Transparent;
-        this.AppCompositesLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppCompositesLabel.Image")));
         this.AppCompositesLabel.Location = new System.Drawing.Point(60, 0);
         this.AppCompositesLabel.Name = "AppCompositesLabel";
         this.AppCompositesLabel.Size = new System.Drawing.Size(20, 21);
@@ -929,7 +926,6 @@ partial class MainForm
         this.AppNumbersLabel.Dock = System.Windows.Forms.DockStyle.Left;
         this.AppNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AppNumbersLabel.ForeColor = System.Drawing.Color.Transparent;
-        this.AppNumbersLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppNumbersLabel.Image")));
         this.AppNumbersLabel.Location = new System.Drawing.Point(20, 0);
         this.AppNumbersLabel.Name = "AppNumbersLabel";
         this.AppNumbersLabel.Size = new System.Drawing.Size(20, 21);
@@ -947,7 +943,6 @@ partial class MainForm
         this.AppQuranLabLabel.Dock = System.Windows.Forms.DockStyle.Left;
         this.AppQuranLabLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AppQuranLabLabel.ForeColor = System.Drawing.Color.Transparent;
-        this.AppQuranLabLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppQuranLabLabel.Image")));
         this.AppQuranLabLabel.Location = new System.Drawing.Point(0, 0);
         this.AppQuranLabLabel.Name = "AppQuranLabLabel";
         this.AppQuranLabLabel.Size = new System.Drawing.Size(20, 21);
@@ -5575,7 +5570,7 @@ partial class MainForm
         this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 0);
         this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
         this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(816, 217);
+        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(816, 221);
         this.ScriptOutputGroupBox.TabIndex = 103;
         this.ScriptOutputGroupBox.TabStop = false;
         this.ScriptOutputGroupBox.Text = " Output ";
@@ -5591,7 +5586,7 @@ partial class MainForm
         this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
         this.ScriptOutputTextBox.ReadOnly = true;
         this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.ScriptOutputTextBox.Size = new System.Drawing.Size(796, 189);
+        this.ScriptOutputTextBox.Size = new System.Drawing.Size(796, 193);
         this.ScriptOutputTextBox.TabIndex = 0;
         this.ScriptOutputTextBox.WordWrap = false;
         this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -5737,7 +5732,7 @@ partial class MainForm
         this.TranslatorsCheckedListBox.FormattingEnabled = true;
         this.TranslatorsCheckedListBox.Location = new System.Drawing.Point(198, -3);
         this.TranslatorsCheckedListBox.Name = "TranslatorsCheckedListBox";
-        this.TranslatorsCheckedListBox.Size = new System.Drawing.Size(183, 124);
+        this.TranslatorsCheckedListBox.Size = new System.Drawing.Size(183, 109);
         this.TranslatorsCheckedListBox.TabIndex = 98;
         this.TranslatorsCheckedListBox.Visible = false;
         // 
@@ -9229,7 +9224,7 @@ partial class MainForm
         this.DivisorValueUpLabel.BackColor = System.Drawing.Color.Black;
         this.DivisorValueUpLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.DivisorValueUpLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.DivisorValueUpLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.DivisorValueUpLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
         this.DivisorValueUpLabel.Location = new System.Drawing.Point(175, -1);
         this.DivisorValueUpLabel.Name = "DivisorValueUpLabel";
         this.DivisorValueUpLabel.Size = new System.Drawing.Size(10, 14);
@@ -9243,7 +9238,7 @@ partial class MainForm
         this.DivisorValueDownLabel.BackColor = System.Drawing.Color.Black;
         this.DivisorValueDownLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.DivisorValueDownLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.DivisorValueDownLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.DivisorValueDownLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
         this.DivisorValueDownLabel.Location = new System.Drawing.Point(136, -1);
         this.DivisorValueDownLabel.Name = "DivisorValueDownLabel";
         this.DivisorValueDownLabel.Size = new System.Drawing.Size(10, 14);
@@ -9847,7 +9842,7 @@ partial class MainForm
         this.RadixValueUpLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.RadixValueUpLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.RadixValueUpLabel.ForeColor = System.Drawing.Color.LightSteelBlue;
-        this.RadixValueUpLabel.Location = new System.Drawing.Point(103, -1);
+        this.RadixValueUpLabel.Location = new System.Drawing.Point(101, -1);
         this.RadixValueUpLabel.Name = "RadixValueUpLabel";
         this.RadixValueUpLabel.Size = new System.Drawing.Size(10, 14);
         this.RadixValueUpLabel.TabIndex = 2;
@@ -9861,7 +9856,7 @@ partial class MainForm
         this.RadixValueDownLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.RadixValueDownLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.RadixValueDownLabel.ForeColor = System.Drawing.Color.LightSteelBlue;
-        this.RadixValueDownLabel.Location = new System.Drawing.Point(77, -1);
+        this.RadixValueDownLabel.Location = new System.Drawing.Point(75, -1);
         this.RadixValueDownLabel.Name = "RadixValueDownLabel";
         this.RadixValueDownLabel.Size = new System.Drawing.Size(10, 14);
         this.RadixValueDownLabel.TabIndex = 1;
@@ -9871,16 +9866,16 @@ partial class MainForm
         // 
         // RadixLabel
         // 
-        this.RadixLabel.AutoSize = true;
         this.RadixLabel.BackColor = System.Drawing.Color.Transparent;
         this.RadixLabel.Cursor = System.Windows.Forms.Cursors.Default;
         this.RadixLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.RadixLabel.ForeColor = System.Drawing.Color.Black;
-        this.RadixLabel.Location = new System.Drawing.Point(65, 0);
+        this.RadixLabel.Location = new System.Drawing.Point(36, 0);
         this.RadixLabel.Name = "RadixLabel";
-        this.RadixLabel.Size = new System.Drawing.Size(14, 13);
+        this.RadixLabel.Size = new System.Drawing.Size(40, 13);
         this.RadixLabel.TabIndex = 184;
-        this.RadixLabel.Text = "#";
+        this.RadixLabel.Text = "base";
+        this.RadixLabel.TextAlign = System.Drawing.ContentAlignment.TopRight;
         this.ToolTip.SetToolTip(this.RadixLabel, "Number system base");
         // 
         // ValuePanel
@@ -9888,7 +9883,8 @@ partial class MainForm
         this.ValuePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
         | System.Windows.Forms.AnchorStyles.Right)));
         this.ValuePanel.Controls.Add(this.CalculationModeLabel);
-        this.ValuePanel.Controls.Add(this.SumOfDigitSumsTextBox);
+        this.ValuePanel.Controls.Add(this.SumOfNumbersDigitsTextBox);
+        this.ValuePanel.Controls.Add(this.SumOfNumbersTextBox);
         this.ValuePanel.Controls.Add(this.Nth4nMinus1CompositeNumberLabel);
         this.ValuePanel.Controls.Add(this.Nth4nPlus1CompositeNumberLabel);
         this.ValuePanel.Controls.Add(this.Nth4nMinus1PrimeNumberLabel);
@@ -9960,22 +9956,37 @@ partial class MainForm
         this.ToolTip.SetToolTip(this.CalculationModeLabel, "CalculationMode = LetterValue");
         this.CalculationModeLabel.Click += new System.EventHandler(this.CalculationModeLabel_Click);
         // 
-        // SumOfDigitSumsTextBox
+        // SumOfNumbersDigitsTextBox
         // 
-        this.SumOfDigitSumsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
-        this.SumOfDigitSumsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.SumOfDigitSumsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-        this.SumOfDigitSumsTextBox.Location = new System.Drawing.Point(119, 120);
-        this.SumOfDigitSumsTextBox.Name = "SumOfDigitSumsTextBox";
-        this.SumOfDigitSumsTextBox.ReadOnly = true;
-        this.SumOfDigitSumsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-        this.SumOfDigitSumsTextBox.Size = new System.Drawing.Size(60, 20);
-        this.SumOfDigitSumsTextBox.TabIndex = 40;
-        this.SumOfDigitSumsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.ToolTip.SetToolTip(this.SumOfDigitSumsTextBox, "Sum of digit sums");
-        this.SumOfDigitSumsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
-        this.SumOfDigitSumsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
-        this.SumOfDigitSumsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
+        this.SumOfNumbersDigitsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+        this.SumOfNumbersDigitsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.SumOfNumbersDigitsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+        this.SumOfNumbersDigitsTextBox.Location = new System.Drawing.Point(142, 120);
+        this.SumOfNumbersDigitsTextBox.Name = "SumOfNumbersDigitsTextBox";
+        this.SumOfNumbersDigitsTextBox.ReadOnly = true;
+        this.SumOfNumbersDigitsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+        this.SumOfNumbersDigitsTextBox.Size = new System.Drawing.Size(37, 20);
+        this.SumOfNumbersDigitsTextBox.TabIndex = 41;
+        this.SumOfNumbersDigitsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+        this.SumOfNumbersDigitsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfNumbersDigitsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
+        this.SumOfNumbersDigitsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
+        // 
+        // SumOfNumbersTextBox
+        // 
+        this.SumOfNumbersTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+        this.SumOfNumbersTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.SumOfNumbersTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+        this.SumOfNumbersTextBox.Location = new System.Drawing.Point(93, 120);
+        this.SumOfNumbersTextBox.Name = "SumOfNumbersTextBox";
+        this.SumOfNumbersTextBox.ReadOnly = true;
+        this.SumOfNumbersTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+        this.SumOfNumbersTextBox.Size = new System.Drawing.Size(50, 20);
+        this.SumOfNumbersTextBox.TabIndex = 40;
+        this.SumOfNumbersTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+        this.SumOfNumbersTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfNumbersTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
+        this.SumOfNumbersTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
         // Nth4nMinus1CompositeNumberLabel
         // 
@@ -10118,10 +10129,10 @@ partial class MainForm
         | System.Windows.Forms.AnchorStyles.Right)));
         this.NthNonAdditiveNumberTextBox.BackColor = System.Drawing.SystemColors.Window;
         this.NthNonAdditiveNumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.NthNonAdditiveNumberTextBox.Location = new System.Drawing.Point(119, 100);
+        this.NthNonAdditiveNumberTextBox.Location = new System.Drawing.Point(120, 100);
         this.NthNonAdditiveNumberTextBox.Name = "NthNonAdditiveNumberTextBox";
         this.NthNonAdditiveNumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-        this.NthNonAdditiveNumberTextBox.Size = new System.Drawing.Size(60, 20);
+        this.NthNonAdditiveNumberTextBox.Size = new System.Drawing.Size(59, 20);
         this.NthNonAdditiveNumberTextBox.TabIndex = 37;
         this.NthNonAdditiveNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.NthNonAdditiveNumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
@@ -10199,7 +10210,7 @@ partial class MainForm
         this.NumberKindIndexTextBox.Location = new System.Drawing.Point(7, 120);
         this.NumberKindIndexTextBox.Name = "NumberKindIndexTextBox";
         this.NumberKindIndexTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-        this.NumberKindIndexTextBox.Size = new System.Drawing.Size(54, 20);
+        this.NumberKindIndexTextBox.Size = new System.Drawing.Size(44, 20);
         this.NumberKindIndexTextBox.TabIndex = 38;
         this.NumberKindIndexTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.NumberKindIndexTextBox, "Deficient number index");
@@ -10213,11 +10224,11 @@ partial class MainForm
         this.SumOfProperDivisorsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
         this.SumOfProperDivisorsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.SumOfProperDivisorsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-        this.SumOfProperDivisorsTextBox.Location = new System.Drawing.Point(60, 120);
+        this.SumOfProperDivisorsTextBox.Location = new System.Drawing.Point(50, 120);
         this.SumOfProperDivisorsTextBox.Name = "SumOfProperDivisorsTextBox";
         this.SumOfProperDivisorsTextBox.ReadOnly = true;
         this.SumOfProperDivisorsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-        this.SumOfProperDivisorsTextBox.Size = new System.Drawing.Size(60, 20);
+        this.SumOfProperDivisorsTextBox.Size = new System.Drawing.Size(44, 20);
         this.SumOfProperDivisorsTextBox.TabIndex = 39;
         this.SumOfProperDivisorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.SumOfProperDivisorsTextBox, "Sum of proper divisors");
@@ -10269,7 +10280,7 @@ partial class MainForm
         this.IndexChainLengthTextBox.ReadOnly = true;
         this.IndexChainLengthTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.IndexChainLengthTextBox.Size = new System.Drawing.Size(18, 20);
-        this.IndexChainLengthTextBox.TabIndex = 45;
+        this.IndexChainLengthTextBox.TabIndex = 46;
         this.IndexChainLengthTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.IndexChainLengthTextBox.Click += new System.EventHandler(this.IndexChainLengthTextBox_Click);
         this.IndexChainLengthTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
@@ -10285,7 +10296,7 @@ partial class MainForm
         this.CPIndexChainL2RTextBox.ReadOnly = true;
         this.CPIndexChainL2RTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.CPIndexChainL2RTextBox.Size = new System.Drawing.Size(41, 20);
-        this.CPIndexChainL2RTextBox.TabIndex = 43;
+        this.CPIndexChainL2RTextBox.TabIndex = 44;
         this.CPIndexChainL2RTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.CPIndexChainL2RTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
         this.CPIndexChainL2RTextBox.TextChanged += new System.EventHandler(this.CPIndexChainL2RTextBox_TextChanged);
@@ -10302,7 +10313,7 @@ partial class MainForm
         this.PCIndexChainR2LTextBox.ReadOnly = true;
         this.PCIndexChainR2LTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.PCIndexChainR2LTextBox.Size = new System.Drawing.Size(41, 20);
-        this.PCIndexChainR2LTextBox.TabIndex = 42;
+        this.PCIndexChainR2LTextBox.TabIndex = 43;
         this.PCIndexChainR2LTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.PCIndexChainR2LTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
         this.PCIndexChainR2LTextBox.TextChanged += new System.EventHandler(this.PCIndexChainR2LTextBox_TextChanged);
@@ -10319,7 +10330,7 @@ partial class MainForm
         this.CPIndexChainR2LTextBox.ReadOnly = true;
         this.CPIndexChainR2LTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.CPIndexChainR2LTextBox.Size = new System.Drawing.Size(41, 20);
-        this.CPIndexChainR2LTextBox.TabIndex = 44;
+        this.CPIndexChainR2LTextBox.TabIndex = 45;
         this.CPIndexChainR2LTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.CPIndexChainR2LTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
         this.CPIndexChainR2LTextBox.TextChanged += new System.EventHandler(this.CPIndexChainR2LTextBox_TextChanged);
@@ -10336,7 +10347,7 @@ partial class MainForm
         this.PCIndexChainL2RTextBox.ReadOnly = true;
         this.PCIndexChainL2RTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.PCIndexChainL2RTextBox.Size = new System.Drawing.Size(41, 20);
-        this.PCIndexChainL2RTextBox.TabIndex = 41;
+        this.PCIndexChainL2RTextBox.TabIndex = 42;
         this.PCIndexChainL2RTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.PCIndexChainL2RTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
         this.PCIndexChainL2RTextBox.TextChanged += new System.EventHandler(this.PCIndexChainL2RTextBox_TextChanged);
@@ -10606,10 +10617,10 @@ partial class MainForm
         | System.Windows.Forms.AnchorStyles.Right)));
         this.NthAdditiveNumberTextBox.BackColor = System.Drawing.SystemColors.Window;
         this.NthAdditiveNumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.NthAdditiveNumberTextBox.Location = new System.Drawing.Point(60, 100);
+        this.NthAdditiveNumberTextBox.Location = new System.Drawing.Point(62, 100);
         this.NthAdditiveNumberTextBox.Name = "NthAdditiveNumberTextBox";
         this.NthAdditiveNumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-        this.NthAdditiveNumberTextBox.Size = new System.Drawing.Size(60, 20);
+        this.NthAdditiveNumberTextBox.Size = new System.Drawing.Size(59, 20);
         this.NthAdditiveNumberTextBox.TabIndex = 36;
         this.NthAdditiveNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.NthAdditiveNumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
@@ -10624,7 +10635,7 @@ partial class MainForm
         this.NthNumberTextBox.Location = new System.Drawing.Point(7, 100);
         this.NthNumberTextBox.Name = "NthNumberTextBox";
         this.NthNumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-        this.NthNumberTextBox.Size = new System.Drawing.Size(54, 20);
+        this.NthNumberTextBox.Size = new System.Drawing.Size(56, 20);
         this.NthNumberTextBox.TabIndex = 35;
         this.NthNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.NthNumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
@@ -10987,7 +10998,7 @@ partial class MainForm
         this.DivisorLabel.Cursor = System.Windows.Forms.Cursors.Default;
         this.DivisorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DivisorLabel.ForeColor = System.Drawing.Color.Black;
-        this.DivisorLabel.Location = new System.Drawing.Point(123, 0);
+        this.DivisorLabel.Location = new System.Drawing.Point(122, 0);
         this.DivisorLabel.Name = "DivisorLabel";
         this.DivisorLabel.Size = new System.Drawing.Size(17, 14);
         this.DivisorLabel.TabIndex = 250;
@@ -11001,7 +11012,7 @@ partial class MainForm
         this.DivisorValueLabel.BackColor = System.Drawing.Color.Black;
         this.DivisorValueLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.DivisorValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.DivisorValueLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.DivisorValueLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
         this.DivisorValueLabel.Location = new System.Drawing.Point(143, 0);
         this.DivisorValueLabel.Name = "DivisorValueLabel";
         this.DivisorValueLabel.Size = new System.Drawing.Size(36, 13);
@@ -11019,7 +11030,7 @@ partial class MainForm
         this.RadixValueLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.RadixValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.RadixValueLabel.ForeColor = System.Drawing.Color.LightSteelBlue;
-        this.RadixValueLabel.Location = new System.Drawing.Point(84, 0);
+        this.RadixValueLabel.Location = new System.Drawing.Point(82, 0);
         this.RadixValueLabel.Name = "RadixValueLabel";
         this.RadixValueLabel.Size = new System.Drawing.Size(22, 13);
         this.RadixValueLabel.TabIndex = 0;
@@ -12215,7 +12226,8 @@ partial class MainForm
     private RichTextBoxEx ScriptTextBox;
     private System.Windows.Forms.GroupBox ScriptOutputGroupBox;
     private System.Windows.Forms.TextBox ScriptOutputTextBox;
-    private System.Windows.Forms.TextBox SumOfDigitSumsTextBox;
+    private System.Windows.Forms.TextBox SumOfNumbersTextBox;
+    private System.Windows.Forms.TextBox SumOfNumbersDigitsTextBox;
     private System.Windows.Forms.Label ScriptSaveLabel;
     private System.Windows.Forms.OpenFileDialog OpenFileDialog;
     private System.Windows.Forms.Label ScriptLabel;

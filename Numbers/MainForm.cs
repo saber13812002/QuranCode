@@ -710,15 +710,15 @@ public partial class MainForm : Form
                         controls[point.X, 15].ForeColor = Numbers.GetNumberTypeColor(median);
                         controls[point.X, 16].ForeColor = Numbers.GetNumberTypeColor(product);
 
-                        long sum_of_digit_sums_1 = Numbers.SumOfDigitSums(number);
-                        long sum_of_digit_sums_2 = Numbers.SumOfDigitSums(number, 2);
-                        long sum_of_digit_sums_3 = Numbers.SumOfDigitSums(number, 3);
-                        controls[point.X, 17].Text = (sum_of_digit_sums_1 > 0) ? sum_of_digit_sums_1.ToString() : "";
-                        controls[point.X, 18].Text = (sum_of_digit_sums_2 > 0) ? sum_of_digit_sums_2.ToString() : "";
-                        controls[point.X, 19].Text = (sum_of_digit_sums_3 > 0) ? sum_of_digit_sums_3.ToString() : "";
-                        controls[point.X, 17].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums_1);
-                        controls[point.X, 18].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums_2);
-                        controls[point.X, 19].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums_3);
+                        long sum_of_numbers_digits = Numbers.SumOfNumbersDigits(number);
+                        long sum_of_numbers_digits_2 = Numbers.SumOfNumbersDigits(number, 2);
+                        long sum_of_numbers_digits_3 = Numbers.SumOfNumbersDigits(number, 3);
+                        controls[point.X, 17].Text = (sum_of_numbers_digits > 0) ? sum_of_numbers_digits.ToString() : "";
+                        controls[point.X, 18].Text = (sum_of_numbers_digits_2 > 0) ? sum_of_numbers_digits_2.ToString() : "";
+                        controls[point.X, 19].Text = (sum_of_numbers_digits_3 > 0) ? sum_of_numbers_digits_3.ToString() : "";
+                        controls[point.X, 17].ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers_digits);
+                        controls[point.X, 18].ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers_digits_2);
+                        controls[point.X, 19].ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers_digits_3);
                     }
                     catch
                     {

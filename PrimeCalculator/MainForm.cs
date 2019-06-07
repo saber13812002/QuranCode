@@ -774,10 +774,15 @@ public partial class MainForm : Form
             DigitalRootTextBox.ForeColor = Numbers.GetNumberTypeColor(digital_root);
             DigitalRootTextBox.Refresh();
 
-            long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
-            SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
-            SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
-            SumOfDigitSumsTextBox.Refresh();
+            long sum_of_numbers = Numbers.SumOfNumbers(value);
+            SumOfNumbersTextBox.Text = (sum_of_numbers == 0) ? "" : sum_of_numbers.ToString();
+            SumOfNumbersTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers);
+            SumOfNumbersTextBox.Refresh();
+
+            long sum_of_numbers_digits = Numbers.SumOfNumbersDigits(value);
+            SumOfNumbersDigitsTextBox.Text = (sum_of_numbers_digits == 0) ? "" : sum_of_numbers_digits.ToString();
+            SumOfNumbersDigitsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers_digits);
+            SumOfNumbersDigitsTextBox.Refresh();
 
             PCIndexChainL2RTextBox.Text = DecimalPCIndexChainL2R(value).ToString();
             PCIndexChainL2RTextBox.ForeColor = Numbers.GetNumberTypeColor(DecimalPCIndexChainL2R(value));
@@ -839,6 +844,8 @@ public partial class MainForm : Form
                 }
                 break;
         }
+        SumOfProperDivisorsTextBox.BackColor = NumberKindIndexTextBox.BackColor;
+
         NumberKindIndexTextBox.Text = number_kind_index.ToString();
         NumberKindIndexTextBox.ForeColor = Numbers.GetNumberTypeColor(number_kind_index);
         ToolTip.SetToolTip(NumberKindIndexTextBox, m_number_kind.ToString() + " value index");
@@ -1020,15 +1027,17 @@ public partial class MainForm : Form
 
             str.AppendLine();
             long digit_sum = Numbers.DigitSum(value);
-            str.AppendLine("Digit Sum        " + "\t=\t" + digit_sum);
+            str.AppendLine("Digit Sum            " + "\t=\t" + digit_sum);
             long digital_roor = Numbers.DigitalRoot(value);
-            str.AppendLine("Digital Root     " + "\t=\t" + digital_roor);
-            long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
-            str.AppendLine("Sum Of Digit Sums" + "\t=\t" + sum_of_digit_sums + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.SumOfDigitSumsString(value)) : ""));
+            str.AppendLine("Digital Root         " + "\t=\t" + digital_roor);
+            long sum_of_numbers = Numbers.SumOfNumbers(value);
+            str.AppendLine("Sum Of Numbers       " + "\t=\t" + sum_of_numbers + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.SumOfNumbersString(value)) : ""));
+            long sum_of_numbers_digits = Numbers.SumOfNumbersDigits(value);
+            str.AppendLine("Sum Of Numbers Digits" + "\t=\t" + sum_of_numbers_digits + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.SumOfNumbersDigitsString(value)) : ""));
 
             string proper_divisors = Numbers.GetProperDivisorsString(value);
             long sum_of_proper_divisors = Numbers.SumOfProperDivisors(value);
-            str.AppendLine("Sum Of Proper Divisors\t=\t" + sum_of_proper_divisors + " = " + proper_divisors);
+            str.AppendLine("Sum Of Proper Divisors" + "\t=\t" + sum_of_proper_divisors + " = " + proper_divisors);
 
             m_number_kind = Numbers.GetNumberKind(value);
             int number_kind_index = 0;
