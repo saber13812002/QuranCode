@@ -667,7 +667,7 @@ public static class Numbers
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
         {
-            str.Append(number.ToString() + "+");
+            str.Append(i.ToString() + "+");
         }
         if (str.Length > 0)
         {

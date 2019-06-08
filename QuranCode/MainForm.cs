@@ -17412,6 +17412,11 @@ public partial class MainForm : Form, ISubscriber
                     DuplicateLettersCheckBox.Refresh();
                 }
             }
+
+            DisplaySymmetry();
+            DisplayCVWLSequence();
+            DisplayValuesSequence();
+            DisplayDNASequence();
         }
     }
     private void MainTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -43034,8 +43039,6 @@ public partial class MainForm : Form, ISubscriber
                 ValueTextBox.SelectionStart = ValueTextBox.Text.Length;
                 ValueTextBox.SelectionLength = 0;
                 ValueTextBox.Refresh();
-                ValueInspectLabel.BackColor = (Numbers.Compare(value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-                ValueInspectLabel.Refresh();
 
                 DecimalValueTextBox.Text = value.ToString();
                 DecimalValueTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
@@ -43053,6 +43056,9 @@ public partial class MainForm : Form, ISubscriber
                             long unused_letters_value = m_client.NumerologySystem.LetterValuesSum - value;
                             UnusedLettersValueTextBox.Text = unused_letters_value.ToString();
                             UnusedLettersValueTextBox.ForeColor = Numbers.GetNumberTypeColor(unused_letters_value);
+                            UnusedLettersValueTextBox.BackColor = (Numbers.Compare(unused_letters_value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                            UnusedLettersValueTextBox.Refresh();
+
                             UnusedLettersValueTextBox.Refresh();
                         }
                     }
@@ -44797,8 +44803,10 @@ public partial class MainForm : Form, ISubscriber
             long value = long.Parse(ValueTextBox.Text);
             ValueTextBox.BackColor = (Numbers.Compare(value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
             ValueTextBox.Refresh();
-            ValueInspectLabel.BackColor = (Numbers.Compare(value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-            ValueInspectLabel.Refresh();
+
+            long unused_letters_value = long.Parse(UnusedLettersValueTextBox.Text);
+            UnusedLettersValueTextBox.BackColor = (Numbers.Compare(unused_letters_value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+            UnusedLettersValueTextBox.Refresh();
 
             int chapter_count = int.Parse(ChaptersTextBox.Text);
             ChaptersTextBox.BackColor = (Numbers.Compare(chapter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
