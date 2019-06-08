@@ -1430,7 +1430,7 @@ public class Server : IPublisher
         nVSum = 0L;
         nCSum = 0L;
     }
-    // used for user text
+    // used for user text or Quran highlighted text in CalculationMode.SumOfUniqueLetterValues
     public static long CalculateValue(char character)
     {
         if (character == '\0') return 0L;
@@ -1617,7 +1617,7 @@ public class Server : IPublisher
         }
         return result;
     }
-    // used for Quran text
+    // used for Quran text for non-CalculationMode.SumOfUniqueLetterValues
     public static long CalculateValue(Letter letter)
     {
         if (letter == null) return 0L;

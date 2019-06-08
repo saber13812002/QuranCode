@@ -257,7 +257,7 @@ public class Client : IPublisher, ISubscriber
         set { Server.CalculationMode = value; }
     }
     public bool Logging = false;
-    // used for user text
+    // used for user text or Quran highlighted text in CalculationMode.SumOfUniqueLetterValues
     public long CalculateValue(char character)
     {
         if (Logging)
@@ -282,7 +282,7 @@ public class Client : IPublisher, ISubscriber
             return Server.CalculateValue(text);
         }
     }
-    // used for Quran text
+    // used for Quran text for non-CalculationMode.SumOfUniqueLetterValues
     public long CalculateValue(Letter letter)
     {
         if (Logging)

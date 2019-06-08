@@ -797,7 +797,6 @@ public partial class MainForm : Form, ISubscriber
         this.WordsTextBox.MouseHover += new EventHandler(Control_MouseHover);
         this.LettersTextBox.MouseHover += new EventHandler(Control_MouseHover);
         //this.ValueTextBox.MouseHover += new EventHandler(Control_MouseHover);
-        this.UnusedLettersValueTextBox.MouseHover += new EventHandler(Control_MouseHover);
         this.DecimalChaptersTextBox.MouseHover += new EventHandler(Control_MouseHover);
         this.DecimalVersesTextBox.MouseHover += new EventHandler(Control_MouseHover);
         this.DecimalWordsTextBox.MouseHover += new EventHandler(Control_MouseHover);
@@ -42695,7 +42694,7 @@ public partial class MainForm : Form, ISubscriber
         //return text;
     }
 
-    // used for user text
+    // used for user text or Quran highlighted text in CalculationMode.SumOfUniqueLetterValues
     private void CalculateValueAndDisplayFactors(string user_text)
     {
         if (m_client != null)
@@ -42703,11 +42702,11 @@ public partial class MainForm : Form, ISubscriber
             if (!String.IsNullOrEmpty(user_text))
             {
                 long value = m_client.CalculateValue(user_text);
-                FactorizeValue(value, "User", true);
+                FactorizeValue(value, m_user_text_mode ? "User" : "Value", true);
             }
         }
     }
-    // used for Quran text
+    // used for Quran text for non-CalculationMode.SumOfUniqueLetterValues
     private void CalculateValueAndDisplayFactors()
     {
         if (m_client != null)
@@ -43043,17 +43042,17 @@ public partial class MainForm : Form, ISubscriber
                 DecimalValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
                 DecimalValueTextBox.Refresh();
 
-                bool is_value = (caption.EndsWith(L[l]["Value"]));
-                if ((is_value) && (m_calculation_mode == CalculationMode.SumOfUniqueLetterValues))
+                bool show_unused_letters_value = (caption.EndsWith(L[l]["Value"])) || (caption.EndsWith(L[l]["User"]));
+                if ((show_unused_letters_value) && (m_calculation_mode == CalculationMode.SumOfUniqueLetterValues))
                 {
                     UnusedLettersValueTextBox.Visible = true;
                     if (m_client != null)
                     {
                         if (m_client.NumerologySystem != null)
                         {
-                            long unused_letters_values_sum = m_client.NumerologySystem.LetterValuesSum - value;
-                            UnusedLettersValueTextBox.Text = unused_letters_values_sum.ToString();
-                            UnusedLettersValueTextBox.ForeColor = Numbers.GetNumberTypeColor(unused_letters_values_sum);
+                            long unused_letters_value = m_client.NumerologySystem.LetterValuesSum - value;
+                            UnusedLettersValueTextBox.Text = unused_letters_value.ToString();
+                            UnusedLettersValueTextBox.ForeColor = Numbers.GetNumberTypeColor(unused_letters_value);
                             UnusedLettersValueTextBox.Refresh();
                         }
                     }
@@ -47621,7 +47620,6 @@ public partial class MainForm : Form, ISubscriber
     private void StatisticsControls_Enter(object sender, EventArgs e)
     {
         SearchGroupBox_Leave(null, null);
-        this.AcceptButton = null;
     }
     private void TextBoxLabelControls_CtrlClick(object sender, EventArgs e)
     {
