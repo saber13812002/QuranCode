@@ -708,7 +708,7 @@ public partial class MainForm : Form, ISubscriber
         /* InitializationType.DoublyInitialized */    Color.FromArgb(c+96, c+64, 0),
         /* InitializationType.NonInitialized */       Color.FromArgb(64, 64, 64),
     };
-    private const int DEFAULT_WINDOW_WIDTH = 1308;
+    private const int DEFAULT_WINDOW_WIDTH = 1293;
     private const int DEFAULT_WINDOW_HEIGHT = 768;
     private const string DEFAULT_LANGUAGE = "English";
     private const int DEFAULT_INFORMATION_BOX_TOP = 449;
