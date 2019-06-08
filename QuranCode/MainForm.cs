@@ -718,7 +718,7 @@ public partial class MainForm : Form, ISubscriber
     private const string SUM_SYMBOL = "Ʃ";
     private const string SPACE_GAP = "     ";
     private const int MAX_SELECTON_SCOPE_LENGTH = 16;
-    private const string CAPTION_SEPARATOR = " ► ";
+    private const string CAPTION_SEPARATOR = " | ";
     private const string DEFAULT_QURAN_FONT_NAME = "me_quran";
     private const float DEFAULT_QURAN_FONT_SIZE = 14.0F;
     private const int DEFAULT_TRANSLATION_BOX_WIDTH = 409;
@@ -17637,7 +17637,6 @@ public partial class MainForm : Form, ISubscriber
 
             // in all cases
             this.Text = Application.ProductName + " | " + GetSelectionSummary();
-            UpdateFindMatchCaption();
 
             string word_info = null;
             if (ModifierKeys == Keys.Control)
@@ -39286,29 +39285,26 @@ public partial class MainForm : Form, ISubscriber
     private void UpdateFindMatchCaption()
     {
         string caption = this.Text;
-        int pos = caption.IndexOf(CAPTION_SEPARATOR);
-        if (pos > -1)
-        {
-            caption = caption.Substring(0, pos);
-        }
 
         if (m_found_verses_displayed)
         {
             if (m_find_matches != null)
             {
+                int pos = caption.IndexOf(CAPTION_SEPARATOR);
+                if (pos > -1)
+                {
+                    caption = caption.Substring(0, pos);
+                }
+
                 if (m_find_match_index == -1)
                 {
-                    caption += CAPTION_SEPARATOR + " " + "F3/Shift+F3";
+                    caption += CAPTION_SEPARATOR + "F3/Shift+F3";
                 }
                 else
                 {
-                    caption += CAPTION_SEPARATOR + " " + L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count);
+                    caption += CAPTION_SEPARATOR + L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count);
                 }
             }
-        }
-        else
-        {
-            //caption += CAPTION_SEPARATOR;
         }
 
         this.Text = caption;
@@ -39466,7 +39462,6 @@ public partial class MainForm : Form, ISubscriber
             GoldenRatioOrderLabel.Refresh();
 
             this.Text = Application.ProductName + " | " + GetSelectionSummary();
-            UpdateFindMatchCaption();
         }
     }
     private void SwitchToPictureBox()
@@ -39582,9 +39577,12 @@ public partial class MainForm : Form, ISubscriber
 
                     if (m_client.FoundPhrases != null)
                     {
-                        ColorizePhrases();
-                        BuildFindMatches();
-                        HighlightVerses();
+                        if (m_client.FoundPhrases.Count > 0)
+                        {
+                            ColorizePhrases();
+                            BuildFindMatches();
+                            HighlightVerses();
+                        }
                     }
 
                     m_current_found_verse_index = 0;
@@ -39631,21 +39629,21 @@ public partial class MainForm : Form, ISubscriber
         {
             if (m_client.FoundPhrases != null)
             {
-                StringBuilder phrase_str = new StringBuilder();
                 int word_count = 0;
                 int letter_count = 0;
-                long value = 0L;
+                StringBuilder phrase_str = new StringBuilder();
                 foreach (Phrase phrase in m_client.FoundPhrases)
                 {
                     if (phrase != null)
                     {
                         if (phrase.Text != null)
                         {
-                            phrase_str.AppendLine(phrase.Text);
                             word_count += phrase.Text.Split(' ').Length;
+
                             string phrase_nospaces = phrase.Text.SimplifyTo(m_client.NumerologySystem.TextMode).Replace(" ", "");
                             letter_count += phrase_nospaces.Length;
-                            value += m_client.CalculateValue(phrase.Text);
+
+                            phrase_str.AppendLine(phrase.Text);
                         }
                     }
                 }
@@ -39667,7 +39665,25 @@ public partial class MainForm : Form, ISubscriber
                 DecimalLettersTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
                 DecimalLettersTextBox.Refresh();
 
-                FactorizeValue(value, "Value", true);
+                if (m_calculation_mode == CalculationMode.SumOfLetterValues)
+                {
+                    long value = 0L;
+                    foreach (Phrase phrase in m_client.FoundPhrases)
+                    {
+                        if (phrase != null)
+                        {
+                            if (phrase.Text != null)
+                            {
+                                value += m_client.CalculateValue(phrase.Text);
+                            }
+                        }
+                    }
+                    FactorizeValue(value, "Value", true);
+                }
+                else
+                {
+                    CalculateValueAndDisplayFactors(phrase_str.ToString());
+                }
             }
         }
     }
@@ -43045,7 +43061,7 @@ public partial class MainForm : Form, ISubscriber
                 DecimalValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
                 DecimalValueTextBox.Refresh();
 
-                bool show_unused_letters_value = (caption.EndsWith(L[l]["Value"])) || (caption.EndsWith(L[l]["User"]));
+                bool show_unused_letters_value = (L[l][caption].EndsWith(L[l]["Value"])) || (L[l][caption].EndsWith(L[l]["User"]));
                 if ((show_unused_letters_value) && (m_calculation_mode == CalculationMode.SumOfUniqueLetterValues))
                 {
                     UnusedLettersValueTextBox.Visible = true;

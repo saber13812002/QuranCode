@@ -1633,7 +1633,7 @@ public partial class MainForm : Form
 
     private NumberKind m_number_kind = NumberKind.Deficient;
     private IndexType m_index_type = IndexType.Prime;
-    private bool m_plus1_index = false;
+    private bool m_plus1_index = true;
     private bool m_minus1_index = false;
     private void IndexTextBox_KeyDown(object sender, KeyEventArgs e)
     {
