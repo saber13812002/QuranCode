@@ -64,6 +64,11 @@ namespace Model
             get { return letter_value; }
         }
 
+        private long letter_values_sum = 0L;
+        public long LetterValuesSum
+        {
+            get { return letter_values_sum; }
+        }
         private Dictionary<char, long> letter_values = null;
         public Dictionary<char, long> LetterValues
         {
@@ -194,12 +199,15 @@ namespace Model
         {
             if (numerology_system != null)
             {
+                letter_values_sum = 0L;
                 this.letter_values.Clear();
                 if (letter_values != null)
                 {
                     foreach (char key in numerology_system.Keys)
                     {
-                        this.letter_values.Add(key, numerology_system[key]);
+                        long value = numerology_system[key];
+                        letter_values_sum += value;
+                        this.letter_values.Add(key, value);
                     }
                 }
             }

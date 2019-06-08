@@ -26,6 +26,7 @@
     /// </summary>
     private void InitializeComponent()
     {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.ElapsedTimeLabel = new System.Windows.Forms.Label();
             this.ProgressLabel = new System.Windows.Forms.Label();
@@ -33,18 +34,18 @@
             this.MilliSecondsLabel = new System.Windows.Forms.Label();
             this.ProgressValueLabel = new System.Windows.Forms.Label();
             this.OutputTextBox = new System.Windows.Forms.TextBox();
-            this.MainMenu = new System.Windows.Forms.MainMenu();
+            this.MainMenu = new System.Windows.Forms.MainMenu(this.components);
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.WebsiteLabel = new System.Windows.Forms.Label();
-            this.NotifyIconContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            this.NotifyIconContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.AboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ExitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.NotifyIcon = new System.Windows.Forms.NotifyIcon();
+            this.NotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.DigitsLabel = new System.Windows.Forms.Label();
             this.UndoValueLabel = new System.Windows.Forms.Button();
             this.RedoValueLabel = new System.Windows.Forms.Button();
             this.VersionLabel = new System.Windows.Forms.Label();
-            this.ToolTip = new System.Windows.Forms.ToolTip();
+            this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.MultithreadingCheckBox = new System.Windows.Forms.CheckBox();
             this.PerfectNumbersLabel = new System.Windows.Forms.Label();
             this.AbundantNumbersLabel = new System.Windows.Forms.Label();
@@ -186,7 +187,7 @@
             this.ElapsedTimeLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ElapsedTimeLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.ElapsedTimeLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.ElapsedTimeLabel.Location = new System.Drawing.Point(57, 614);
+            this.ElapsedTimeLabel.Location = new System.Drawing.Point(57, 320);
             this.ElapsedTimeLabel.Name = "ElapsedTimeLabel";
             this.ElapsedTimeLabel.Size = new System.Drawing.Size(180, 16);
             this.ElapsedTimeLabel.TabIndex = 26;
@@ -201,7 +202,7 @@
             this.ProgressLabel.BackColor = System.Drawing.SystemColors.Info;
             this.ProgressLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.ProgressLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.ProgressLabel.Location = new System.Drawing.Point(0, 614);
+            this.ProgressLabel.Location = new System.Drawing.Point(0, 320);
             this.ProgressLabel.Name = "ProgressLabel";
             this.ProgressLabel.Size = new System.Drawing.Size(56, 16);
             this.ProgressLabel.TabIndex = 25;
@@ -216,7 +217,7 @@
             this.ElapsedTimeValueLabel.BackColor = System.Drawing.SystemColors.ControlText;
             this.ElapsedTimeValueLabel.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.ElapsedTimeValueLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.ElapsedTimeValueLabel.Location = new System.Drawing.Point(57, 629);
+            this.ElapsedTimeValueLabel.Location = new System.Drawing.Point(57, 335);
             this.ElapsedTimeValueLabel.Name = "ElapsedTimeValueLabel";
             this.ElapsedTimeValueLabel.Size = new System.Drawing.Size(180, 17);
             this.ElapsedTimeValueLabel.TabIndex = 28;
@@ -230,7 +231,7 @@
             this.MilliSecondsLabel.BackColor = System.Drawing.SystemColors.ControlText;
             this.MilliSecondsLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.MilliSecondsLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.MilliSecondsLabel.Location = new System.Drawing.Point(180, 631);
+            this.MilliSecondsLabel.Location = new System.Drawing.Point(180, 337);
             this.MilliSecondsLabel.Name = "MilliSecondsLabel";
             this.MilliSecondsLabel.Size = new System.Drawing.Size(37, 12);
             this.MilliSecondsLabel.TabIndex = 29;
@@ -243,7 +244,7 @@
             this.ProgressValueLabel.BackColor = System.Drawing.SystemColors.ControlText;
             this.ProgressValueLabel.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.ProgressValueLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.ProgressValueLabel.Location = new System.Drawing.Point(0, 629);
+            this.ProgressValueLabel.Location = new System.Drawing.Point(0, 335);
             this.ProgressValueLabel.Name = "ProgressValueLabel";
             this.ProgressValueLabel.Size = new System.Drawing.Size(56, 17);
             this.ProgressValueLabel.TabIndex = 27;
@@ -262,7 +263,7 @@
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ReadOnly = true;
             this.OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.OutputTextBox.Size = new System.Drawing.Size(226, 481);
+            this.OutputTextBox.Size = new System.Drawing.Size(226, 187);
             this.OutputTextBox.TabIndex = 29;
             this.OutputTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.OutputTextBox, "Factorization result");
@@ -273,7 +274,7 @@
             // 
             this.ProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ProgressBar.Location = new System.Drawing.Point(0, 650);
+            this.ProgressBar.Location = new System.Drawing.Point(0, 356);
             this.ProgressBar.Name = "ProgressBar";
             this.ProgressBar.Size = new System.Drawing.Size(240, 6);
             this.ProgressBar.TabIndex = 0;
@@ -286,7 +287,7 @@
             this.WebsiteLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.WebsiteLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.WebsiteLabel.ForeColor = System.Drawing.Color.Purple;
-            this.WebsiteLabel.Location = new System.Drawing.Point(0, 659);
+            this.WebsiteLabel.Location = new System.Drawing.Point(0, 365);
             this.WebsiteLabel.Name = "WebsiteLabel";
             this.WebsiteLabel.Size = new System.Drawing.Size(240, 16);
             this.WebsiteLabel.TabIndex = 31;
@@ -381,7 +382,7 @@
             this.VersionLabel.BackColor = System.Drawing.SystemColors.Control;
             this.VersionLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.VersionLabel.ForeColor = System.Drawing.Color.Purple;
-            this.VersionLabel.Location = new System.Drawing.Point(177, 658);
+            this.VersionLabel.Location = new System.Drawing.Point(177, 364);
             this.VersionLabel.Name = "VersionLabel";
             this.VersionLabel.Size = new System.Drawing.Size(63, 17);
             this.VersionLabel.TabIndex = 32;
@@ -405,7 +406,7 @@
             this.MultithreadingCheckBox.Checked = true;
             this.MultithreadingCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.MultithreadingCheckBox.ForeColor = System.Drawing.Color.Purple;
-            this.MultithreadingCheckBox.Location = new System.Drawing.Point(4, 660);
+            this.MultithreadingCheckBox.Location = new System.Drawing.Point(4, 366);
             this.MultithreadingCheckBox.Name = "MultithreadingCheckBox";
             this.MultithreadingCheckBox.Size = new System.Drawing.Size(15, 14);
             this.MultithreadingCheckBox.TabIndex = 30;
@@ -1551,7 +1552,7 @@
             this.IndexPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.IndexPanel.Location = new System.Drawing.Point(3, 3);
             this.IndexPanel.Name = "IndexPanel";
-            this.IndexPanel.Size = new System.Drawing.Size(226, 460);
+            this.IndexPanel.Size = new System.Drawing.Size(226, 187);
             this.IndexPanel.TabIndex = 33;
             // 
             // EditionLabel
@@ -1697,7 +1698,7 @@
             this.MainTabControl.Location = new System.Drawing.Point(0, 146);
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(240, 513);
+            this.MainTabControl.Size = new System.Drawing.Size(240, 219);
             this.MainTabControl.TabIndex = 34;
             this.MainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
             // 
@@ -1708,7 +1709,7 @@
             this.FactorsTabPage.Location = new System.Drawing.Point(4, 22);
             this.FactorsTabPage.Name = "FactorsTabPage";
             this.FactorsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FactorsTabPage.Size = new System.Drawing.Size(232, 487);
+            this.FactorsTabPage.Size = new System.Drawing.Size(232, 193);
             this.FactorsTabPage.TabIndex = 0;
             this.FactorsTabPage.Text = "Factors";
             // 
@@ -1719,7 +1720,7 @@
             this.IndexTabPage.Location = new System.Drawing.Point(4, 22);
             this.IndexTabPage.Name = "IndexTabPage";
             this.IndexTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.IndexTabPage.Size = new System.Drawing.Size(232, 466);
+            this.IndexTabPage.Size = new System.Drawing.Size(232, 193);
             this.IndexTabPage.TabIndex = 1;
             this.IndexTabPage.Text = "Index";
             // 
@@ -1757,7 +1758,7 @@
             this.TriangleTabPage.Controls.Add(this.aTriangleTextBox);
             this.TriangleTabPage.Location = new System.Drawing.Point(4, 22);
             this.TriangleTabPage.Name = "TriangleTabPage";
-            this.TriangleTabPage.Size = new System.Drawing.Size(232, 466);
+            this.TriangleTabPage.Size = new System.Drawing.Size(232, 193);
             this.TriangleTabPage.TabIndex = 3;
             this.TriangleTabPage.Text = "Triangle";
             // 
@@ -1961,7 +1962,7 @@
             this.CircleTabPage.Controls.Add(this.rCircleTextBox);
             this.CircleTabPage.Location = new System.Drawing.Point(4, 22);
             this.CircleTabPage.Name = "CircleTabPage";
-            this.CircleTabPage.Size = new System.Drawing.Size(232, 466);
+            this.CircleTabPage.Size = new System.Drawing.Size(232, 193);
             this.CircleTabPage.TabIndex = 2;
             this.CircleTabPage.Text = "Circle";
             // 
@@ -2071,7 +2072,7 @@
             this.SphereTabPage.Controls.Add(this.vEqSphereLabel);
             this.SphereTabPage.Location = new System.Drawing.Point(4, 22);
             this.SphereTabPage.Name = "SphereTabPage";
-            this.SphereTabPage.Size = new System.Drawing.Size(232, 466);
+            this.SphereTabPage.Size = new System.Drawing.Size(232, 193);
             this.SphereTabPage.TabIndex = 4;
             this.SphereTabPage.Text = "Sphere";
             // 
@@ -2175,7 +2176,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(240, 675);
+            this.ClientSize = new System.Drawing.Size(240, 381);
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.ValuePanel);
             this.Controls.Add(this.MultithreadingCheckBox);
