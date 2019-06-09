@@ -188,7 +188,7 @@
             this.ElapsedTimeLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.ElapsedTimeLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.ElapsedTimeLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.ElapsedTimeLabel.Location = new System.Drawing.Point(57, 320);
+            this.ElapsedTimeLabel.Location = new System.Drawing.Point(57, 319);
             this.ElapsedTimeLabel.Name = "ElapsedTimeLabel";
             this.ElapsedTimeLabel.Size = new System.Drawing.Size(180, 16);
             this.ElapsedTimeLabel.TabIndex = 26;
@@ -203,7 +203,7 @@
             this.ProgressLabel.BackColor = System.Drawing.SystemColors.Info;
             this.ProgressLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.ProgressLabel.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.ProgressLabel.Location = new System.Drawing.Point(0, 320);
+            this.ProgressLabel.Location = new System.Drawing.Point(0, 319);
             this.ProgressLabel.Name = "ProgressLabel";
             this.ProgressLabel.Size = new System.Drawing.Size(56, 16);
             this.ProgressLabel.TabIndex = 25;
@@ -218,7 +218,7 @@
             this.ElapsedTimeValueLabel.BackColor = System.Drawing.SystemColors.ControlText;
             this.ElapsedTimeValueLabel.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.ElapsedTimeValueLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.ElapsedTimeValueLabel.Location = new System.Drawing.Point(57, 335);
+            this.ElapsedTimeValueLabel.Location = new System.Drawing.Point(57, 334);
             this.ElapsedTimeValueLabel.Name = "ElapsedTimeValueLabel";
             this.ElapsedTimeValueLabel.Size = new System.Drawing.Size(180, 17);
             this.ElapsedTimeValueLabel.TabIndex = 28;
@@ -232,7 +232,7 @@
             this.MilliSecondsLabel.BackColor = System.Drawing.SystemColors.ControlText;
             this.MilliSecondsLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.MilliSecondsLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.MilliSecondsLabel.Location = new System.Drawing.Point(180, 337);
+            this.MilliSecondsLabel.Location = new System.Drawing.Point(180, 336);
             this.MilliSecondsLabel.Name = "MilliSecondsLabel";
             this.MilliSecondsLabel.Size = new System.Drawing.Size(37, 12);
             this.MilliSecondsLabel.TabIndex = 29;
@@ -245,7 +245,7 @@
             this.ProgressValueLabel.BackColor = System.Drawing.SystemColors.ControlText;
             this.ProgressValueLabel.Font = new System.Drawing.Font("Tahoma", 10F, System.Drawing.FontStyle.Bold);
             this.ProgressValueLabel.ForeColor = System.Drawing.SystemColors.Control;
-            this.ProgressValueLabel.Location = new System.Drawing.Point(0, 335);
+            this.ProgressValueLabel.Location = new System.Drawing.Point(0, 334);
             this.ProgressValueLabel.Name = "ProgressValueLabel";
             this.ProgressValueLabel.Size = new System.Drawing.Size(56, 17);
             this.ProgressValueLabel.TabIndex = 27;
@@ -275,7 +275,7 @@
             // 
             this.ProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ProgressBar.Location = new System.Drawing.Point(0, 356);
+            this.ProgressBar.Location = new System.Drawing.Point(0, 355);
             this.ProgressBar.Name = "ProgressBar";
             this.ProgressBar.Size = new System.Drawing.Size(240, 6);
             this.ProgressBar.TabIndex = 0;
@@ -288,7 +288,7 @@
             this.WebsiteLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.WebsiteLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.WebsiteLabel.ForeColor = System.Drawing.Color.Purple;
-            this.WebsiteLabel.Location = new System.Drawing.Point(0, 365);
+            this.WebsiteLabel.Location = new System.Drawing.Point(0, 364);
             this.WebsiteLabel.Name = "WebsiteLabel";
             this.WebsiteLabel.Size = new System.Drawing.Size(240, 16);
             this.WebsiteLabel.TabIndex = 31;
@@ -383,7 +383,7 @@
             this.VersionLabel.BackColor = System.Drawing.SystemColors.Control;
             this.VersionLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.VersionLabel.ForeColor = System.Drawing.Color.Purple;
-            this.VersionLabel.Location = new System.Drawing.Point(177, 364);
+            this.VersionLabel.Location = new System.Drawing.Point(177, 363);
             this.VersionLabel.Name = "VersionLabel";
             this.VersionLabel.Size = new System.Drawing.Size(63, 17);
             this.VersionLabel.TabIndex = 32;
@@ -407,7 +407,7 @@
             this.MultithreadingCheckBox.Checked = true;
             this.MultithreadingCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.MultithreadingCheckBox.ForeColor = System.Drawing.Color.Purple;
-            this.MultithreadingCheckBox.Location = new System.Drawing.Point(4, 366);
+            this.MultithreadingCheckBox.Location = new System.Drawing.Point(4, 365);
             this.MultithreadingCheckBox.Name = "MultithreadingCheckBox";
             this.MultithreadingCheckBox.Size = new System.Drawing.Size(15, 14);
             this.MultithreadingCheckBox.TabIndex = 30;
@@ -888,7 +888,7 @@
             this.dCircleLabel.ForeColor = System.Drawing.SystemColors.WindowText;
             this.dCircleLabel.Location = new System.Drawing.Point(7, 71);
             this.dCircleLabel.Name = "dCircleLabel";
-            this.dCircleLabel.Size = new System.Drawing.Size(89, 19);
+            this.dCircleLabel.Size = new System.Drawing.Size(101, 19);
             this.dCircleLabel.TabIndex = 25;
             this.dCircleLabel.Text = "Diameter           d";
             this.dCircleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -900,7 +900,7 @@
             this.rCircleLabel.ForeColor = System.Drawing.SystemColors.WindowText;
             this.rCircleLabel.Location = new System.Drawing.Point(7, 44);
             this.rCircleLabel.Name = "rCircleLabel";
-            this.rCircleLabel.Size = new System.Drawing.Size(89, 19);
+            this.rCircleLabel.Size = new System.Drawing.Size(101, 19);
             this.rCircleLabel.TabIndex = 24;
             this.rCircleLabel.Text = "Radius               r";
             this.rCircleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -924,7 +924,7 @@
             this.cCircleLabel.ForeColor = System.Drawing.SystemColors.WindowText;
             this.cCircleLabel.Location = new System.Drawing.Point(7, 98);
             this.cCircleLabel.Name = "cCircleLabel";
-            this.cCircleLabel.Size = new System.Drawing.Size(89, 19);
+            this.cCircleLabel.Size = new System.Drawing.Size(101, 19);
             this.cCircleLabel.TabIndex = 27;
             this.cCircleLabel.Text = "Circumference  C";
             this.cCircleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -946,9 +946,9 @@
             this.dEqCircleLabel.BackColor = System.Drawing.SystemColors.Control;
             this.dEqCircleLabel.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dEqCircleLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.dEqCircleLabel.Location = new System.Drawing.Point(194, 71);
+            this.dEqCircleLabel.Location = new System.Drawing.Point(193, 71);
             this.dEqCircleLabel.Name = "dEqCircleLabel";
-            this.dEqCircleLabel.Size = new System.Drawing.Size(33, 19);
+            this.dEqCircleLabel.Size = new System.Drawing.Size(42, 19);
             this.dEqCircleLabel.TabIndex = 29;
             this.dEqCircleLabel.Text = "2 r";
             this.dEqCircleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -958,9 +958,9 @@
             this.cEqCircleLabel.BackColor = System.Drawing.SystemColors.Control;
             this.cEqCircleLabel.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cEqCircleLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.cEqCircleLabel.Location = new System.Drawing.Point(194, 98);
+            this.cEqCircleLabel.Location = new System.Drawing.Point(193, 98);
             this.cEqCircleLabel.Name = "cEqCircleLabel";
-            this.cEqCircleLabel.Size = new System.Drawing.Size(33, 19);
+            this.cEqCircleLabel.Size = new System.Drawing.Size(42, 19);
             this.cEqCircleLabel.TabIndex = 30;
             this.cEqCircleLabel.Text = "2 π r";
             this.cEqCircleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -970,9 +970,9 @@
             this.aEqCircleLabel.BackColor = System.Drawing.SystemColors.Control;
             this.aEqCircleLabel.Font = new System.Drawing.Font("Times New Roman", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.aEqCircleLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.aEqCircleLabel.Location = new System.Drawing.Point(194, 125);
+            this.aEqCircleLabel.Location = new System.Drawing.Point(193, 125);
             this.aEqCircleLabel.Name = "aEqCircleLabel";
-            this.aEqCircleLabel.Size = new System.Drawing.Size(33, 19);
+            this.aEqCircleLabel.Size = new System.Drawing.Size(42, 19);
             this.aEqCircleLabel.TabIndex = 33;
             this.aEqCircleLabel.Text = "π r";
             this.aEqCircleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -984,9 +984,9 @@
             this.aCircleLabel.ForeColor = System.Drawing.SystemColors.WindowText;
             this.aCircleLabel.Location = new System.Drawing.Point(7, 125);
             this.aCircleLabel.Name = "aCircleLabel";
-            this.aCircleLabel.Size = new System.Drawing.Size(89, 19);
+            this.aCircleLabel.Size = new System.Drawing.Size(101, 19);
             this.aCircleLabel.TabIndex = 32;
-            this.aCircleLabel.Text = "Area                  A";
+            this.aCircleLabel.Text = "Area                 A";
             this.aCircleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // a2EqCircleLabel
@@ -994,7 +994,7 @@
             this.a2EqCircleLabel.BackColor = System.Drawing.SystemColors.Control;
             this.a2EqCircleLabel.Font = new System.Drawing.Font("Times New Roman", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.a2EqCircleLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.a2EqCircleLabel.Location = new System.Drawing.Point(215, 122);
+            this.a2EqCircleLabel.Location = new System.Drawing.Point(213, 120);
             this.a2EqCircleLabel.Name = "a2EqCircleLabel";
             this.a2EqCircleLabel.Size = new System.Drawing.Size(10, 19);
             this.a2EqCircleLabel.TabIndex = 34;
@@ -1090,7 +1090,7 @@
             this.v3EqSphereLabel.BackColor = System.Drawing.SystemColors.Control;
             this.v3EqSphereLabel.Font = new System.Drawing.Font("Times New Roman", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.v3EqSphereLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.v3EqSphereLabel.Location = new System.Drawing.Point(217, 122);
+            this.v3EqSphereLabel.Location = new System.Drawing.Point(216, 121);
             this.v3EqSphereLabel.Name = "v3EqSphereLabel";
             this.v3EqSphereLabel.Size = new System.Drawing.Size(10, 19);
             this.v3EqSphereLabel.TabIndex = 49;
@@ -1116,9 +1116,9 @@
             this.vSphereLabel.ForeColor = System.Drawing.SystemColors.WindowText;
             this.vSphereLabel.Location = new System.Drawing.Point(7, 125);
             this.vSphereLabel.Name = "vSphereLabel";
-            this.vSphereLabel.Size = new System.Drawing.Size(89, 19);
+            this.vSphereLabel.Size = new System.Drawing.Size(74, 19);
             this.vSphereLabel.TabIndex = 47;
-            this.vSphereLabel.Text = "Volume              V";
+            this.vSphereLabel.Text = "Volume      V";
             this.vSphereLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // dEqSphereLabel
@@ -1152,9 +1152,9 @@
             this.sSphereLabel.ForeColor = System.Drawing.SystemColors.WindowText;
             this.sSphereLabel.Location = new System.Drawing.Point(7, 98);
             this.sSphereLabel.Name = "sSphereLabel";
-            this.sSphereLabel.Size = new System.Drawing.Size(89, 19);
+            this.sSphereLabel.Size = new System.Drawing.Size(74, 19);
             this.sSphereLabel.TabIndex = 43;
-            this.sSphereLabel.Text = "Surface Area     S";
+            this.sSphereLabel.Text = "Surface    S";
             this.sSphereLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // dSphereLabel
@@ -1164,9 +1164,9 @@
             this.dSphereLabel.ForeColor = System.Drawing.SystemColors.WindowText;
             this.dSphereLabel.Location = new System.Drawing.Point(7, 71);
             this.dSphereLabel.Name = "dSphereLabel";
-            this.dSphereLabel.Size = new System.Drawing.Size(89, 19);
+            this.dSphereLabel.Size = new System.Drawing.Size(74, 19);
             this.dSphereLabel.TabIndex = 42;
-            this.dSphereLabel.Text = "Diameter           d";
+            this.dSphereLabel.Text = "Diameter  d";
             this.dSphereLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // rSphereLabel
@@ -1176,9 +1176,9 @@
             this.rSphereLabel.ForeColor = System.Drawing.SystemColors.WindowText;
             this.rSphereLabel.Location = new System.Drawing.Point(7, 44);
             this.rSphereLabel.Name = "rSphereLabel";
-            this.rSphereLabel.Size = new System.Drawing.Size(89, 19);
+            this.rSphereLabel.Size = new System.Drawing.Size(74, 19);
             this.rSphereLabel.TabIndex = 41;
-            this.rSphereLabel.Text = "Radius               r";
+            this.rSphereLabel.Text = "Radius     r";
             this.rSphereLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // s2EqSphereLabel
@@ -1186,7 +1186,7 @@
             this.s2EqSphereLabel.BackColor = System.Drawing.SystemColors.Control;
             this.s2EqSphereLabel.Font = new System.Drawing.Font("Times New Roman", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.s2EqSphereLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.s2EqSphereLabel.Location = new System.Drawing.Point(206, 94);
+            this.s2EqSphereLabel.Location = new System.Drawing.Point(205, 94);
             this.s2EqSphereLabel.Name = "s2EqSphereLabel";
             this.s2EqSphereLabel.Size = new System.Drawing.Size(10, 19);
             this.s2EqSphereLabel.TabIndex = 51;
@@ -1575,7 +1575,7 @@
             this.IndexPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.IndexPanel.Location = new System.Drawing.Point(3, 3);
             this.IndexPanel.Name = "IndexPanel";
-            this.IndexPanel.Size = new System.Drawing.Size(226, 187);
+            this.IndexPanel.Size = new System.Drawing.Size(226, 186);
             this.IndexPanel.TabIndex = 33;
             // 
             // EditionLabel
@@ -1721,7 +1721,7 @@
             this.MainTabControl.Location = new System.Drawing.Point(0, 146);
             this.MainTabControl.Name = "MainTabControl";
             this.MainTabControl.SelectedIndex = 0;
-            this.MainTabControl.Size = new System.Drawing.Size(240, 219);
+            this.MainTabControl.Size = new System.Drawing.Size(240, 218);
             this.MainTabControl.TabIndex = 34;
             this.MainTabControl.SelectedIndexChanged += new System.EventHandler(this.MainTabControl_SelectedIndexChanged);
             // 
@@ -1743,7 +1743,7 @@
             this.IndexTabPage.Location = new System.Drawing.Point(4, 22);
             this.IndexTabPage.Name = "IndexTabPage";
             this.IndexTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.IndexTabPage.Size = new System.Drawing.Size(232, 193);
+            this.IndexTabPage.Size = new System.Drawing.Size(232, 192);
             this.IndexTabPage.TabIndex = 1;
             this.IndexTabPage.Text = "Index";
             // 
@@ -1781,7 +1781,7 @@
             this.TriangleTabPage.Controls.Add(this.aTriangleTextBox);
             this.TriangleTabPage.Location = new System.Drawing.Point(4, 22);
             this.TriangleTabPage.Name = "TriangleTabPage";
-            this.TriangleTabPage.Size = new System.Drawing.Size(232, 193);
+            this.TriangleTabPage.Size = new System.Drawing.Size(232, 192);
             this.TriangleTabPage.TabIndex = 3;
             this.TriangleTabPage.Text = "Triangle";
             // 
@@ -1967,25 +1967,25 @@
             // CircleTabPage
             // 
             this.CircleTabPage.BackColor = System.Drawing.SystemColors.Control;
+            this.CircleTabPage.Controls.Add(this.aCircleTextBox);
+            this.CircleTabPage.Controls.Add(this.cCircleTextBox);
+            this.CircleTabPage.Controls.Add(this.dCircleTextBox);
+            this.CircleTabPage.Controls.Add(this.rCircleTextBox);
             this.CircleTabPage.Controls.Add(this.pi1000CircleLabel);
             this.CircleTabPage.Controls.Add(this.piCircleLabel);
             this.CircleTabPage.Controls.Add(this.piCircleTextBox);
             this.CircleTabPage.Controls.Add(this.a2EqCircleLabel);
             this.CircleTabPage.Controls.Add(this.aEqCircleLabel);
             this.CircleTabPage.Controls.Add(this.aCircleLabel);
-            this.CircleTabPage.Controls.Add(this.aCircleTextBox);
             this.CircleTabPage.Controls.Add(this.cEqCircleLabel);
             this.CircleTabPage.Controls.Add(this.dEqCircleLabel);
             this.CircleTabPage.Controls.Add(this.piEqCircleLabel);
             this.CircleTabPage.Controls.Add(this.cCircleLabel);
-            this.CircleTabPage.Controls.Add(this.cCircleTextBox);
             this.CircleTabPage.Controls.Add(this.dCircleLabel);
-            this.CircleTabPage.Controls.Add(this.dCircleTextBox);
             this.CircleTabPage.Controls.Add(this.rCircleLabel);
-            this.CircleTabPage.Controls.Add(this.rCircleTextBox);
             this.CircleTabPage.Location = new System.Drawing.Point(4, 22);
             this.CircleTabPage.Name = "CircleTabPage";
-            this.CircleTabPage.Size = new System.Drawing.Size(232, 193);
+            this.CircleTabPage.Size = new System.Drawing.Size(232, 192);
             this.CircleTabPage.TabIndex = 2;
             this.CircleTabPage.Text = "Circle";
             // 
@@ -2095,7 +2095,7 @@
             this.SphereTabPage.Controls.Add(this.vEqSphereLabel);
             this.SphereTabPage.Location = new System.Drawing.Point(4, 22);
             this.SphereTabPage.Name = "SphereTabPage";
-            this.SphereTabPage.Size = new System.Drawing.Size(232, 193);
+            this.SphereTabPage.Size = new System.Drawing.Size(232, 192);
             this.SphereTabPage.TabIndex = 4;
             this.SphereTabPage.Text = "Sphere";
             // 
@@ -2143,10 +2143,10 @@
             // 
             this.vSphereTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.vSphereTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.vSphereTextBox.Location = new System.Drawing.Point(101, 122);
+            this.vSphereTextBox.Location = new System.Drawing.Point(80, 122);
             this.vSphereTextBox.Name = "vSphereTextBox";
             this.vSphereTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.vSphereTextBox.Size = new System.Drawing.Size(69, 26);
+            this.vSphereTextBox.Size = new System.Drawing.Size(90, 26);
             this.vSphereTextBox.TabIndex = 4;
             this.vSphereTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.vSphereTextBox.TextChanged += new System.EventHandler(this.SphereTextBox_TextChanged);
@@ -2157,10 +2157,10 @@
             // 
             this.sSphereTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.sSphereTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sSphereTextBox.Location = new System.Drawing.Point(101, 95);
+            this.sSphereTextBox.Location = new System.Drawing.Point(80, 95);
             this.sSphereTextBox.Name = "sSphereTextBox";
             this.sSphereTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.sSphereTextBox.Size = new System.Drawing.Size(69, 26);
+            this.sSphereTextBox.Size = new System.Drawing.Size(90, 26);
             this.sSphereTextBox.TabIndex = 3;
             this.sSphereTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.sSphereTextBox.TextChanged += new System.EventHandler(this.SphereTextBox_TextChanged);
@@ -2171,10 +2171,10 @@
             // 
             this.dSphereTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.dSphereTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dSphereTextBox.Location = new System.Drawing.Point(101, 68);
+            this.dSphereTextBox.Location = new System.Drawing.Point(80, 68);
             this.dSphereTextBox.Name = "dSphereTextBox";
             this.dSphereTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dSphereTextBox.Size = new System.Drawing.Size(69, 26);
+            this.dSphereTextBox.Size = new System.Drawing.Size(90, 26);
             this.dSphereTextBox.TabIndex = 2;
             this.dSphereTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.dSphereTextBox.TextChanged += new System.EventHandler(this.SphereTextBox_TextChanged);
@@ -2185,10 +2185,10 @@
             // 
             this.rSphereTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.rSphereTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rSphereTextBox.Location = new System.Drawing.Point(101, 41);
+            this.rSphereTextBox.Location = new System.Drawing.Point(80, 41);
             this.rSphereTextBox.Name = "rSphereTextBox";
             this.rSphereTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.rSphereTextBox.Size = new System.Drawing.Size(69, 26);
+            this.rSphereTextBox.Size = new System.Drawing.Size(90, 26);
             this.rSphereTextBox.TabIndex = 1;
             this.rSphereTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.rSphereTextBox.TextChanged += new System.EventHandler(this.SphereTextBox_TextChanged);
@@ -2199,7 +2199,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(240, 381);
+            this.ClientSize = new System.Drawing.Size(240, 380);
             this.Controls.Add(this.MainTabControl);
             this.Controls.Add(this.ValuePanel);
             this.Controls.Add(this.MultithreadingCheckBox);

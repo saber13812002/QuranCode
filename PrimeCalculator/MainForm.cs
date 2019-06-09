@@ -3146,9 +3146,9 @@ public partial class MainForm : Form
     }
     private void ClearTriangleButton_Click(object sender, EventArgs e)
     {
-        aTriangleTextBox.Text = "";
-        bTriangleTextBox.Text = "";
-        cTriangleTextBox.Text = "";
+        //aTriangleTextBox.Text = "";
+        //bTriangleTextBox.Text = "";
+        //cTriangleTextBox.Text = "";
 
         alphaTriangleTextBox.Text = "";
         betaTriangleTextBox.Text = "";
