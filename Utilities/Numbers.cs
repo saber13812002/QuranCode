@@ -1291,32 +1291,20 @@ public static class Numbers
         }
         return result;
     }
-    public static int DigitalRoot(long number)
-    {
-        return DigitalRoot(number.ToString());
-    }
-    public static int DigitalRoot(string value)
-    {
-        int result = DigitSum(value);
-        while (result.ToString().Length > 1)
-        {
-            result = DigitSum(result);
-        }
-        return result;
-    }
-    //https://ideone.com/ik8iE6
-    public static long SumOfNumbersDigits(string value)
+    public static long SumOfDigitSums(string value)
     {
         long number;
         if (long.TryParse(value, out number))
         {
-            return SumOfNumbersDigits(number);
+            return SumOfDigitSums(number);
         }
         return 0L;
     }
-    public static long SumOfNumbersDigits(long number)
+    public static long SumOfDigitSums(long number)
     {
-        // method works correctly for radix = 10 only, for now
+        // method works correctly for radix = 10 only
+        // http://ideone.com/ik8iE6
+
         int radix = 10;
         long result = 0L;
         long pos = 1L;
@@ -1336,7 +1324,7 @@ public static class Numbers
         }
         return result;
     }
-    public static string SumOfNumbersDigitsString(long number)
+    public static string SumOfDigitSumsString(long number)
     {
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
@@ -1352,38 +1340,45 @@ public static class Numbers
         }
         return str.ToString();
     }
-    public static long SumOfNumbersDigits(string value, int power)
+
+    public static int DigitalRoot(long number)
+    {
+        int radix = 10;
+        return (int)(number - ((radix - 1L) * ((number - 1L) / (radix - 1L))));
+    }
+    public static int DigitalRoot(string value)
     {
         long number;
         if (long.TryParse(value, out number))
         {
-            return SumOfNumbersDigits(number, power);
+            return DigitalRoot(number);
+        }
+        return 0;
+    }
+    public static long SumOfDigitalRoots(string value)
+    {
+        long number;
+        if (long.TryParse(value, out number))
+        {
+            return SumOfDigitalRoots(number);
         }
         return 0L;
     }
-    public static long SumOfNumbersDigits(long number, int power)
+    public static long SumOfDigitalRoots(long number)
     {
         long result = 0L;
         for (int i = 1; i <= number; i++)
         {
-            string text = Math.Pow(i, power).ToString();
-            foreach (char c in text)
-            {
-                result += long.Parse(c.ToString());
-            }
+            result += DigitalRoot(i);
         }
         return result;
     }
-    public static string SumOfNumbersDigitsString(long number, int power)
+    public static string SumOfDigitalRootsString(long number)
     {
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
         {
-            string text = Math.Pow(i, power).ToString();
-            foreach (char c in text)
-            {
-                str.Append(c.ToString() + "+");
-            }
+            str.Append((DigitalRoot(i)).ToString() + "+");
         }
         if (str.Length > 0)
         {

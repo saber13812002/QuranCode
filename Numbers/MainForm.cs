@@ -28,8 +28,86 @@ public partial class MainForm : Form
     }
 
     private static int ROWS = 30;
-    private static int COLS = 20;
+    private static int COLS = 19;
     private TextBox[,] controls = new TextBox[ROWS, COLS];
+
+    private string m_filename = null;
+    private void Initialize()
+    {
+        this.Top = Screen.PrimaryScreen.WorkingArea.Top;
+        this.Left = Screen.PrimaryScreen.WorkingArea.Left;
+        this.Width = (m_dpi == 96.0F) ? 1051 : 1181;
+        this.Height = (m_dpi == 96.0F) ? 681 : 752;
+    }
+    private void LoadSettings()
+    {
+        if (File.Exists(m_filename))
+        {
+            using (StreamReader reader = File.OpenText(m_filename))
+            {
+                try
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        string line = reader.ReadLine();
+                        string[] parts = line.Split('=');
+                        if (parts.Length == 2)
+                        {
+                            switch (parts[0])
+                            {
+                                case "Top":
+                                    {
+                                        this.Top = int.Parse(parts[1]);
+                                    }
+                                    break;
+                                case "Left":
+                                    {
+                                        this.Left = int.Parse(parts[1]);
+                                    }
+                                    break;
+                                case "Width":
+                                    {
+                                        this.Width = int.Parse(parts[1]);
+                                    }
+                                    break;
+                                case "Height":
+                                    {
+                                        this.Height = int.Parse(parts[1]);
+                                    }
+                                    break;
+                            }
+                        }
+                    }
+                }
+                catch
+                {
+                    Initialize();
+                }
+            }
+        }
+        else // first start
+        {
+            Initialize();
+        }
+    }
+    private void SaveSettings()
+    {
+        try
+        {
+            using (StreamWriter writer = File.CreateText(m_filename))
+            {
+                writer.WriteLine("[Window]");
+                writer.WriteLine("Top=" + this.Top);
+                writer.WriteLine("Left=" + this.Left);
+                writer.WriteLine("Width=" + this.Width);
+                writer.WriteLine("Height=" + this.Height);
+            }
+        }
+        catch
+        {
+            // silence IO error in case running from read-only media (CD/DVD)
+        }
+    }
 
     private float m_dpi = 0F;
     public MainForm()
@@ -132,13 +210,12 @@ public partial class MainForm : Form
                     case 10: { control.Text = "P=4n-1"; ToolTip.SetToolTip(control, "ith 4n-1 Prime"); break; }
                     case 11: { control.Text = "C=4n+1"; ToolTip.SetToolTip(control, "ith 4n+1 Composite"); break; }
                     case 12: { control.Text = "C=4n-1"; ToolTip.SetToolTip(control, "ith 4n-1 Composite"); break; }
-                    case 13: { control.Text = "Sum"; ToolTip.SetToolTip(control, "Sum(1..i) = (i*(i+1))/2"); break; }
+                    case 13: { control.Text = "∑"; ToolTip.SetToolTip(control, "Sum(1..i)"); break; }
                     case 14: { control.Text = "Half"; ToolTip.SetToolTip(control, "i/2"); break; }
-                    case 15: { control.Text = "Median"; ToolTip.SetToolTip(control, "Median(1..i/2) = ((i/2)+1)/2"); break; }
+                    case 15: { control.Text = "Median"; ToolTip.SetToolTip(control, "Median(1..i/2)"); break; }
                     case 16: { control.Text = "Product"; ToolTip.SetToolTip(control, "Half * Median"); break; }
-                    case 17: { control.Text = "∑Digits"; ToolTip.SetToolTip(control, "Sum(DigitSum(1..i))"); break; }
-                    case 18: { control.Text = "∑Digits^2"; ToolTip.SetToolTip(control, "Sum(DigitSum((1..i)^2))"); break; }
-                    case 19: { control.Text = "∑Digits^3"; ToolTip.SetToolTip(control, "Sum(DigitSum((1..i)^3))"); break; }
+                    case 17: { control.Text = "∑ds"; ToolTip.SetToolTip(control, "Sum(DigitSum(1..i))"); break; }
+                    case 18: { control.Text = "∑dr"; ToolTip.SetToolTip(control, "Sum(DigitRoot(1..i))"); break; }
                     default: break;
                 }
             }
@@ -209,7 +286,6 @@ public partial class MainForm : Form
                             break;
                         case 17:
                         case 18:
-                        case 19:
                             control.BackColor = Color.LightYellow;
                             break;
                         default:
@@ -460,84 +536,6 @@ public partial class MainForm : Form
         }
     }
 
-    private string m_filename = null;
-    private void LoadSettings()
-    {
-        if (File.Exists(m_filename))
-        {
-            using (StreamReader reader = File.OpenText(m_filename))
-            {
-                try
-                {
-                    while (!reader.EndOfStream)
-                    {
-                        string line = reader.ReadLine();
-                        string[] parts = line.Split('=');
-                        if (parts.Length == 2)
-                        {
-                            switch (parts[0])
-                            {
-                                case "Top":
-                                    {
-                                        this.Top = int.Parse(parts[1]);
-                                    }
-                                    break;
-                                case "Left":
-                                    {
-                                        this.Left = int.Parse(parts[1]);
-                                    }
-                                    break;
-                                case "Width":
-                                    {
-                                        this.Width = int.Parse(parts[1]);
-                                    }
-                                    break;
-                                case "Height":
-                                    {
-                                        this.Height = int.Parse(parts[1]);
-                                    }
-                                    break;
-                            }
-                        }
-                    }
-                }
-                catch
-                {
-                    StartupLocationAndSize();
-                }
-            }
-        }
-        else // first start
-        {
-            StartupLocationAndSize();
-        }
-    }
-    private void SaveSettings()
-    {
-        try
-        {
-            using (StreamWriter writer = File.CreateText(m_filename))
-            {
-                writer.WriteLine("[Window]");
-                writer.WriteLine("Top=" + this.Top);
-                writer.WriteLine("Left=" + this.Left);
-                writer.WriteLine("Width=" + this.Width);
-                writer.WriteLine("Height=" + this.Height);
-            }
-        }
-        catch
-        {
-            // silence IO error in case running from read-only media (CD/DVD)
-        }
-    }
-    private void StartupLocationAndSize()
-    {
-        this.Top = Screen.PrimaryScreen.WorkingArea.Top;
-        this.Left = Screen.PrimaryScreen.WorkingArea.Left;
-        this.Width = (m_dpi == 96.0F) ? 1103 : 1281;
-        this.Height = (m_dpi == 96.0F) ? 681 : 752;
-    }
-
     private void MainForm_Load(object sender, EventArgs e)
     {
         string version = typeof(MainForm).Assembly.GetName().Version.ToString();
@@ -549,7 +547,7 @@ public partial class MainForm : Form
 
         if (this.Top < 0)
         {
-            StartupLocationAndSize();
+            Initialize();
         }
     }
     private void MainForm_Shown(object sender, EventArgs e)
@@ -710,15 +708,12 @@ public partial class MainForm : Form
                         controls[point.X, 15].ForeColor = Numbers.GetNumberTypeColor(median);
                         controls[point.X, 16].ForeColor = Numbers.GetNumberTypeColor(product);
 
-                        long sum_of_numbers_digits = Numbers.SumOfNumbersDigits(number);
-                        long sum_of_numbers_digits_2 = Numbers.SumOfNumbersDigits(number, 2);
-                        long sum_of_numbers_digits_3 = Numbers.SumOfNumbersDigits(number, 3);
-                        controls[point.X, 17].Text = (sum_of_numbers_digits > 0) ? sum_of_numbers_digits.ToString() : "";
-                        controls[point.X, 18].Text = (sum_of_numbers_digits_2 > 0) ? sum_of_numbers_digits_2.ToString() : "";
-                        controls[point.X, 19].Text = (sum_of_numbers_digits_3 > 0) ? sum_of_numbers_digits_3.ToString() : "";
-                        controls[point.X, 17].ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers_digits);
-                        controls[point.X, 18].ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers_digits_2);
-                        controls[point.X, 19].ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers_digits_3);
+                        long sum_of_digit_sums = Numbers.SumOfDigitSums(number);
+                        long sum_of_digital_roots = Numbers.SumOfDigitalRoots(number);
+                        controls[point.X, 17].Text = (sum_of_digit_sums > 0) ? sum_of_digit_sums.ToString() : "";
+                        controls[point.X, 18].Text = (sum_of_digital_roots > 0) ? sum_of_digital_roots.ToString() : "";
+                        controls[point.X, 17].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
+                        controls[point.X, 18].ForeColor = Numbers.GetNumberTypeColor(sum_of_digital_roots);
                     }
                     catch
                     {
@@ -740,7 +735,6 @@ public partial class MainForm : Form
                         controls[point.X, 16].Text = "";
                         controls[point.X, 17].Text = "";
                         controls[point.X, 18].Text = "";
-                        controls[point.X, 19].Text = "";
                     }
                     finally
                     {
@@ -767,7 +761,6 @@ public partial class MainForm : Form
                     controls[point.X, 16].Text = "";
                     controls[point.X, 17].Text = "";
                     controls[point.X, 18].Text = "";
-                    controls[point.X, 19].Text = "";
                 }
             }
             else
@@ -790,7 +783,6 @@ public partial class MainForm : Form
                 controls[point.X, 16].Text = "";
                 controls[point.X, 17].Text = "";
                 controls[point.X, 18].Text = "";
-                controls[point.X, 19].Text = "";
             }
         }
     }
