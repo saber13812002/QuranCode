@@ -699,14 +699,14 @@ public partial class MainForm : Form, ISubscriber
     private const int MIN_DIVISOR = 2;
     private const int MAX_DIVISOR = 9999;
 
-    private static int c = 140;
+    private static int x = 139;
     private static Color[] CHAPTER_INITIALIZATION_COLORS =
     { 
         /* InitializationType.Key */                  Color.Black,
-        /* InitializationType.PartiallyInitialized */ Color.FromArgb(c+32, c+0, 0),
-        /* InitializationType.FullyInitialized */     Color.FromArgb(c+64, c+32, 0),
-        /* InitializationType.DoublyInitialized */    Color.FromArgb(c+96, c+64, 0),
-        /* InitializationType.NonInitialized */       Color.FromArgb(64, 64, 64),
+        /* InitializationType.PartiallyInitialized */ Color.FromArgb(x+32, x+ 0,  0),
+        /* InitializationType.FullyInitialized */     Color.FromArgb(x+64, x+32,  0),
+        /* InitializationType.DoublyInitialized */    Color.FromArgb(x+96, x+64,  0),
+        /* InitializationType.NonInitialized */       Color.FromArgb(  64,   64, 64),
     };
     private const int DEFAULT_WINDOW_WIDTH = 1293;
     private const int DEFAULT_WINDOW_HEIGHT = 768;
@@ -718,7 +718,7 @@ public partial class MainForm : Form, ISubscriber
     private const string SUM_SYMBOL = "Ʃ";
     private const string SPACE_GAP = "     ";
     private const int MAX_SELECTON_SCOPE_LENGTH = 16;
-    private const string CAPTION_SEPARATOR = " | ";
+    private const string MATCH_SEPARATOR = SPACE_GAP + " ► ";
     private const string DEFAULT_QURAN_FONT_NAME = "me_quran";
     private const float DEFAULT_QURAN_FONT_SIZE = 14.0F;
     private const int DEFAULT_TRANSLATION_BOX_WIDTH = 409;
@@ -6012,6 +6012,8 @@ public partial class MainForm : Form, ISubscriber
         this.ClientSplitContainer.Margin = new System.Windows.Forms.Padding(4);
         this.ClientSplitContainer.Name = "ClientSplitContainer";
         this.ClientSplitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
+        this.ClientSplitContainer.Panel1MinSize = 17;
+        this.ClientSplitContainer.Panel2MinSize = 0;
         // 
         // ClientSplitContainer.Panel1
         // 
@@ -6366,7 +6368,7 @@ public partial class MainForm : Form, ISubscriber
         this.WordWrapLabel.Size = new System.Drawing.Size(20, 20);
         this.WordWrapLabel.TabIndex = 99;
         this.WordWrapLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.WordWrapLabel, "Wrap text");
+        this.ToolTip.SetToolTip(this.WordWrapLabel, "Wrap");
         this.WordWrapLabel.Click += new System.EventHandler(this.WordWrapLabel_Click);
         // 
         // FontLabel
@@ -9957,7 +9959,6 @@ public partial class MainForm : Form, ISubscriber
         this.UserTextTextBox.HideSelection = false;
         this.UserTextTextBox.Location = new System.Drawing.Point(29, 1);
         this.UserTextTextBox.Margin = new System.Windows.Forms.Padding(4);
-        this.UserTextTextBox.MaxLength = 999999999;
         this.UserTextTextBox.Multiline = true;
         this.UserTextTextBox.Name = "UserTextTextBox";
         this.UserTextTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -10757,7 +10758,6 @@ public partial class MainForm : Form, ISubscriber
         this.FindByFrequencyPhraseTextBox.HideSelection = false;
         this.FindByFrequencyPhraseTextBox.Location = new System.Drawing.Point(3, 60);
         this.FindByFrequencyPhraseTextBox.Margin = new System.Windows.Forms.Padding(4);
-        this.FindByFrequencyPhraseTextBox.MaxLength = 9999999;
         this.FindByFrequencyPhraseTextBox.Multiline = true;
         this.FindByFrequencyPhraseTextBox.Name = "FindByFrequencyPhraseTextBox";
         this.FindByFrequencyPhraseTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -13711,11 +13711,9 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else
                 {
-                    TranslationTextBox.WordWrap = m_active_textbox.WordWrap;
                     TranslationTextBox.Text = null;
                     TranslationTextBox.Refresh();
 
-                    TranslationsTextBox.WordWrap = m_active_textbox.WordWrap;
                     TranslationsTextBox.Text = null;
                     TranslationsTextBox.Refresh();
 
@@ -14891,6 +14889,7 @@ public partial class MainForm : Form, ISubscriber
                                                     {
                                                         m_word_wrap_main_textbox = false;
                                                     }
+                                                    MainTextBox.WordWrap = m_word_wrap_main_textbox;
                                                 }
                                                 break;
                                             case "SearchResultWordWrap":
@@ -14903,6 +14902,20 @@ public partial class MainForm : Form, ISubscriber
                                                     {
                                                         m_word_wrap_search_textbox = false;
                                                     }
+                                                    SearchResultTextBox.WordWrap = m_word_wrap_search_textbox;
+                                                }
+                                                break;
+                                            case "TranslationWordWrap":
+                                                {
+                                                    try
+                                                    {
+                                                        m_word_wrap_translation_textbox = bool.Parse(parts[1].Trim());
+                                                    }
+                                                    catch
+                                                    {
+                                                        m_word_wrap_translation_textbox = false;
+                                                    }
+                                                    TranslationTextBox.WordWrap = m_word_wrap_translation_textbox;
                                                 }
                                                 break;
                                             case "SelectionScope":
@@ -15266,12 +15279,10 @@ public partial class MainForm : Form, ISubscriber
                     }
                     else // first Application launch
                     {
+                        // MainForm doesn't want to start at ScreenCenter :(
                         this.StartPosition = FormStartPosition.Manual;
                         this.Top = Screen.PrimaryScreen.WorkingArea.Top;
                         this.Left = Screen.PrimaryScreen.WorkingArea.Left;
-                        this.Width = DEFAULT_WINDOW_WIDTH;
-                        this.Height = DEFAULT_WINDOW_HEIGHT;
-                        //this.WindowState = FormWindowState.Maximized;
 
                         ApplyFont(DEFAULT_QURAN_FONT_NAME, DEFAULT_QURAN_FONT_SIZE);
                         m_translation_font = new Font(DEFAULT_TRANSALTION_FONT_NAME, DEFAULT_TRANSALTION_FONT_SIZE);
@@ -15473,6 +15484,7 @@ public partial class MainForm : Form, ISubscriber
                     writer.WriteLine("[Display]");
                     writer.WriteLine("MainTextWordWrap" + "=" + m_word_wrap_main_textbox);
                     writer.WriteLine("SearchResultWordWrap" + "=" + m_word_wrap_search_textbox);
+                    writer.WriteLine("TranslationWordWrap" + "=" + m_word_wrap_translation_textbox);
                     if (m_client != null)
                     {
                         if (m_client.Selection != null)
@@ -15830,62 +15842,6 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
-    private void DoFindSameHarakat(object sender)
-    {
-        if (sender is TextBoxBase)
-        {
-            string text = (sender as TextBoxBase).SelectedText.Trim();
-            if (text.Length == 0) // no selection, get word under mouse pointer
-            {
-                m_current_word = GetWordAtCursor();
-                if (m_current_word == null)
-                {
-                    return;
-                }
-                text = m_current_word.Text;
-            }
-
-            DoFindSameHarakat(text);
-        }
-    }
-    private void DoFindSameHarakat(string text)
-    {
-        this.Cursor = Cursors.WaitCursor;
-        try
-        {
-            if (m_client != null)
-            {
-                ClearFindMatches();
-
-                m_client.FindPhrases(TextSearchBlockSize.Verse, text, LanguageType.RightToLeft, null, TextLocationInChapter.Any, TextLocationInVerse.Any, TextLocationInWord.Any, TextWordness.Any, false, true, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
-                if (m_client.FoundPhrases != null)
-                {
-                    int phrase_count = GetPhraseCount(m_client.FoundPhrases);
-                    if (m_client.FoundVerses != null)
-                    {
-                        int verse_count = m_client.FoundVerses.Count;
-                        m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["anywhere"] + " " + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                        DisplayFoundVerses(true, true);
-
-                        //SearchResultTextBox.Focus();
-                        //SearchResultTextBox.Refresh();
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            while (ex != null)
-            {
-                MessageBox.Show(ex.Message, Application.ProductName);
-                ex = ex.InnerException;
-            }
-        }
-        finally
-        {
-            this.Cursor = Cursors.Default;
-        }
-    }
     private void DoFindRelatedWords(object sender)
     {
         if (m_emlaaei_text) return;
@@ -15896,13 +15852,11 @@ public partial class MainForm : Form, ISubscriber
             if (text.Length == 0) // no selection, get word under mouse pointer
             {
                 m_current_word = GetWordAtCursor();
-                if (m_current_word == null)
+                if (m_current_word != null)
                 {
-                    return;
+                    text = m_current_word.Text;
                 }
-                text = m_current_word.Text;
             }
-
             DoFindRelatedWords(text);
         }
     }
@@ -16013,13 +15967,11 @@ public partial class MainForm : Form, ISubscriber
             if (text.Length == 0) // no selection, get word under mouse pointer
             {
                 m_current_word = GetWordAtCursor();
-                if (m_current_word == null)
+                if (m_current_word != null)
                 {
-                    return;
+                    text = m_current_word.Text;
                 }
-                text = m_current_word.Text;
             }
-
             DoFindSameText(text);
         }
     }
@@ -16033,6 +15985,60 @@ public partial class MainForm : Form, ISubscriber
                 ClearFindMatches();
 
                 m_client.FindPhrases(TextSearchBlockSize.Verse, text, LanguageType.RightToLeft, null, TextLocationInChapter.Any, TextLocationInVerse.Any, TextLocationInWord.Any, TextWordness.WholeWord, false, false, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
+                if (m_client.FoundPhrases != null)
+                {
+                    int phrase_count = GetPhraseCount(m_client.FoundPhrases);
+                    if (m_client.FoundVerses != null)
+                    {
+                        int verse_count = m_client.FoundVerses.Count;
+                        m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["anywhere"] + " " + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                        DisplayFoundVerses(true, true);
+
+                        //SearchResultTextBox.Focus();
+                        //SearchResultTextBox.Refresh();
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
+    }
+    private void DoFindSameHarakat(object sender)
+    {
+        if (sender is TextBoxBase)
+        {
+            string text = (sender as TextBoxBase).SelectedText.Trim();
+            if (text.Length == 0) // no selection, get word under mouse pointer
+            {
+                m_current_word = GetWordAtCursor();
+                if (m_current_word != null)
+                {
+                    text = m_current_word.Text;
+                }
+            }
+            DoFindSameHarakat(text);
+        }
+    }
+    private void DoFindSameHarakat(string text)
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (m_client != null)
+            {
+                ClearFindMatches();
+
+                m_client.FindPhrases(TextSearchBlockSize.Verse, text, LanguageType.RightToLeft, null, TextLocationInChapter.Any, TextLocationInVerse.Any, TextLocationInWord.Any, TextWordness.Any, false, true, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
                 if (m_client.FoundPhrases != null)
                 {
                     int phrase_count = GetPhraseCount(m_client.FoundPhrases);
@@ -17633,34 +17639,8 @@ public partial class MainForm : Form, ISubscriber
         Word word = GetWordAtPointer(e);
         if (word != null)
         {
+            this.Text = GetCurrentWordDetails(word);
             m_current_word = word;
-
-            // in all cases
-            this.Text = Application.ProductName + " | " + GetSelectionSummary();
-
-            string word_info = null;
-            if (ModifierKeys == Keys.Control)
-            {
-                word_info = GetWordInformation(word);
-                word_info += "\r\n\r\n";
-                word_info += GetGrammarInformation(word);
-
-                word_info += "\r\n\r\n";
-                word_info += GetRelatedWordsInformation(word);
-            }
-            ToolTip.SetToolTip(m_active_textbox, word_info);
-
-            // diplay word info at application caption
-            this.Text += SPACE_GAP +
-            (
-                word.Verse.Chapter.Name + SPACE_GAP +
-                L[l]["verse"] + " " + word.Verse.NumberInChapter + "-" + word.Verse.Number + SPACE_GAP +
-                L[l]["word"] + " " + word.NumberInVerse + "-" + word.NumberInChapter + "-" + word.Number + SPACE_GAP +
-                word.Transliteration + SPACE_GAP +
-                word.Text + SPACE_GAP +
-                word.Meaning + SPACE_GAP +
-                word.Occurrence.ToString() + "/" + word.Frequency.ToString()
-            );
         }
     }
     private void MainTextBox_MouseUp(object sender, MouseEventArgs e)
@@ -17809,7 +17789,7 @@ public partial class MainForm : Form, ISubscriber
                         WordsListBox.Visible = false;
                         WordsListBox.SendToBack();
 
-                        this.Text = Application.ProductName + " | " + GetSelectionSummary();
+                        this.Text = Application.ProductName + " ║ " + GetSelectionSummary();
                         UpdateSearchScope();
 
                         DisplaySelectionText();
@@ -22279,7 +22259,7 @@ public partial class MainForm : Form, ISubscriber
             WordsListBox.Visible = false;
             WordsListBox.SendToBack();
 
-            this.Text = Application.ProductName + " | " + GetSelectionSummary();
+            this.Text = Application.ProductName + " ║ " + GetSelectionSummary();
             UpdateSearchScope();
 
             DisplaySelectionText();
@@ -22354,7 +22334,7 @@ public partial class MainForm : Form, ISubscriber
         {
             if (m_client.NumerologySystem != null)
             {
-                NotifyIcon.Text = Application.ProductName + " | " + m_client.NumerologySystem.TextMode + " | " + GetSelectionSummary();
+                NotifyIcon.Text = Application.ProductName + " ║ " + m_client.NumerologySystem.TextMode + " ║ " + GetSelectionSummary();
             }
         }
     }
@@ -24933,6 +24913,30 @@ public partial class MainForm : Form, ISubscriber
             ApplyTranslationFontAndColor();
         }
     }
+    private bool m_word_wrap_translation_textbox = false;
+    private void TranslationWordWrapLabel_Click(object sender, EventArgs e)
+    {
+        m_word_wrap_translation_textbox = !m_word_wrap_translation_textbox;
+        if (m_word_wrap_translation_textbox)
+        {
+            if (File.Exists(Globals.IMAGES_FOLDER + "/" + "text_wrap.png"))
+            {
+                TranslationWordWrapLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "text_wrap.png");
+            }
+            ToolTip.SetToolTip(TranslationWordWrapLabel, L[l]["Wrap"]);
+        }
+        else
+        {
+            if (File.Exists(Globals.IMAGES_FOLDER + "/" + "text_unwrap.png"))
+            {
+                TranslationWordWrapLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "text_unwrap.png");
+            }
+            ToolTip.SetToolTip(TranslationWordWrapLabel, L[l]["Unwrap"]);
+        }
+        TranslationWordWrapLabel.Refresh();
+
+        TranslationTextBox.WordWrap = m_word_wrap_translation_textbox;
+    }
     // translation
     private List<string> m_selected_translations = new List<string>();
     private void PopulateTranslatorsCheckedListBox()
@@ -25661,7 +25665,6 @@ public partial class MainForm : Form, ISubscriber
                                     }
                                 }
                             }
-                            TranslationTextBox.WordWrap = false;
                             TranslationTextBox.Text = str.ToString();
                             TranslationTextBox.Refresh();
 
@@ -25684,7 +25687,6 @@ public partial class MainForm : Form, ISubscriber
                                     }
                                 }
 
-                                TranslationsTextBox.WordWrap = false;
                                 TranslationsTextBox.Text = strs.ToString();
                                 TranslationsTextBox.Refresh();
                             }
@@ -25712,7 +25714,6 @@ public partial class MainForm : Form, ISubscriber
                                         }
                                     }
                                 }
-                                TranslationsTextBox.WordWrap = true;
                                 TranslationsTextBox.Text = strs.ToString();
                                 TranslationsTextBox.Refresh();
                             }
@@ -25733,13 +25734,8 @@ public partial class MainForm : Form, ISubscriber
                     }
                     else // no verse is selected
                     {
-                        TranslationTextBox.WordWrap = false;
                         TranslationTextBox.Text = null;
                         TranslationTextBox.Refresh();
-
-                        TranslationsTextBox.WordWrap = false;
-                        TranslationsTextBox.Text = null;
-                        TranslationsTextBox.Refresh();
 
                         m_translation_readonly = true;
                         UpdateTranslationReadOnly();
@@ -25780,7 +25776,6 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                     }
-                    TranslationTextBox.WordWrap = true;
                     TranslationTextBox.Text = str.ToString();
                     TranslationTextBox.Refresh();
 
@@ -25802,7 +25797,6 @@ public partial class MainForm : Form, ISubscriber
                                 strs.Remove(strs.Length - 2, 2);
                             }
                         }
-                        TranslationsTextBox.WordWrap = false;
                         TranslationsTextBox.Text = strs.ToString();
                         TranslationsTextBox.Refresh();
                     }
@@ -25823,7 +25817,6 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
-                        TranslationsTextBox.WordWrap = true;
                         TranslationsTextBox.Text = strs.ToString();
                         TranslationsTextBox.Refresh();
                     }
@@ -25860,7 +25853,7 @@ public partial class MainForm : Form, ISubscriber
                 {
                     foreach (string root in word.Roots)
                     {
-                        roots.Append(root + " | ");
+                        roots.Append(root + " ║ ");
                     }
                     roots.Remove(roots.Length - 3, 3);
                 }
@@ -25954,6 +25947,42 @@ public partial class MainForm : Form, ISubscriber
             }
         }
         return null;
+    }
+    private string GetCurrentWordDetails(Word word)
+    {
+        string result = "";
+
+        if (word != null)
+        {
+            // in all cases
+            result = Application.ProductName + " ║ " + GetSelectionSummary();
+
+            string word_info = null;
+            if (ModifierKeys == Keys.Control)
+            {
+                word_info = GetWordInformation(word);
+                word_info += "\r\n\r\n";
+                word_info += GetGrammarInformation(word);
+
+                word_info += "\r\n\r\n";
+                word_info += GetRelatedWordsInformation(word);
+            }
+            ToolTip.SetToolTip(m_active_textbox, word_info);
+
+            // diplay word info at application caption
+            result += SPACE_GAP +
+            (
+                word.Verse.Chapter.Name + SPACE_GAP +
+                L[l]["verse"] + " " + word.Verse.NumberInChapter + "-" + word.Verse.Number + SPACE_GAP +
+                L[l]["word"] + " " + word.NumberInVerse + "-" + word.NumberInChapter + "-" + word.Number + SPACE_GAP +
+                word.Transliteration + SPACE_GAP +
+                word.Text + SPACE_GAP +
+                word.Meaning + SPACE_GAP +
+                word.Occurrence.ToString() + "/" + word.Frequency.ToString()
+            );
+        }
+
+        return result;
     }
     private string GetRelatedVersesInformation(Word word)
     {
@@ -39284,30 +39313,33 @@ public partial class MainForm : Form, ISubscriber
     }
     private void UpdateFindMatchCaption()
     {
-        string caption = this.Text;
-
-        if (m_found_verses_displayed)
+        m_current_word = GetWordAtCursor();
+        if (m_current_word != null)
         {
-            if (m_find_matches != null)
-            {
-                int pos = caption.IndexOf(CAPTION_SEPARATOR);
-                if (pos > -1)
-                {
-                    caption = caption.Substring(0, pos);
-                }
+            string caption = GetCurrentWordDetails(m_current_word);
 
-                if (m_find_match_index == -1)
+            if (m_found_verses_displayed)
+            {
+                if (m_find_matches != null)
                 {
-                    caption += CAPTION_SEPARATOR + "F3/Shift+F3";
-                }
-                else
-                {
-                    caption += CAPTION_SEPARATOR + L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count);
+                    int pos = caption.IndexOf(MATCH_SEPARATOR);
+                    if (pos > -1)
+                    {
+                        caption = caption.Substring(0, pos);
+                    }
+
+                    if (m_find_match_index == -1)
+                    {
+                        caption += MATCH_SEPARATOR + "F3/Shift+F3";
+                    }
+                    else
+                    {
+                        caption += MATCH_SEPARATOR + L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count);
+                    }
                 }
             }
+            this.Text = caption;
         }
-
-        this.Text = caption;
     }
 
     private string m_find_result_header = null;
@@ -39413,9 +39445,6 @@ public partial class MainForm : Form, ISubscriber
             DisplayCurrentPositions();
 
             UpdateWordWrapLabel(m_active_textbox.WordWrap);
-            ValuesSequenceTextBox.WordWrap = m_active_textbox.WordWrap;
-            CVWLSequenceTextBox.WordWrap = m_active_textbox.WordWrap;
-            DNASequenceTextBox.WordWrap = m_active_textbox.WordWrap;
 
             DisplayChapterRevelationInfo();
 
@@ -39425,7 +39454,7 @@ public partial class MainForm : Form, ISubscriber
             GoldenRatioScopeLabel.Refresh();
             GoldenRatioOrderLabel.Refresh();
 
-            this.Text = Application.ProductName + " | " + GetSelectionSummary();
+            this.Text = Application.ProductName + " ║ " + GetSelectionSummary();
         }
     }
     private void SwitchToSearchResultTextBox()
@@ -39451,9 +39480,6 @@ public partial class MainForm : Form, ISubscriber
             DisplayCurrentPositions();
 
             UpdateWordWrapLabel(m_active_textbox.WordWrap);
-            ValuesSequenceTextBox.WordWrap = m_active_textbox.WordWrap;
-            CVWLSequenceTextBox.WordWrap = m_active_textbox.WordWrap;
-            DNASequenceTextBox.WordWrap = m_active_textbox.WordWrap;
 
             GoldenRatioScopeLabel.Visible = false;
             GoldenRatioTypeLabel.Visible = false;
@@ -39461,7 +39487,7 @@ public partial class MainForm : Form, ISubscriber
             GoldenRatioScopeLabel.Refresh();
             GoldenRatioOrderLabel.Refresh();
 
-            this.Text = Application.ProductName + " | " + GetSelectionSummary();
+            this.Text = Application.ProductName + " ║ " + GetSelectionSummary();
         }
     }
     private void SwitchToPictureBox()
@@ -45719,7 +45745,7 @@ public partial class MainForm : Form, ISubscriber
                                         Word word = m_current_letter.Word;
                                         if (word != null)
                                         {
-                                            this.Text = Application.ProductName + " | " + "Chapter " + word.Verse.Chapter.SortedNumber;
+                                            this.Text = Application.ProductName + " ║ " + "Chapter " + word.Verse.Chapter.SortedNumber;
                                             // diplay word info at application caption
                                             this.Text += SPACE_GAP +
                                             (
@@ -46428,9 +46454,9 @@ public partial class MainForm : Form, ISubscriber
                         }
 
                         StringBuilder str = new StringBuilder();
-                        str.Append("Allah words = " + Allah_word_count + " | ");
-                        str.Append("+Allah+ = " + with_Allah_word_count + " | ");
-                        str.Append("+Lillah+ = " + with_lillah_word_count + " | ");
+                        str.Append("Allah words = " + Allah_word_count + " ║ ");
+                        str.Append("+Allah+ = " + with_Allah_word_count + " ║ ");
+                        str.Append("+Lillah+ = " + with_lillah_word_count + " ║ ");
                         str.Append("Total = " + (Allah_word_count + with_Allah_word_count + with_lillah_word_count));
                         HeaderLabel.Text = str.ToString();
                         HeaderLabel.ForeColor = Numbers.GetNumberTypeColor((Allah_word_count + with_Allah_word_count + with_lillah_word_count));
