@@ -43623,111 +43623,127 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FactorizeNumber(Label control)
     {
-        if (control != null)
+        this.Cursor = Cursors.WaitCursor;
+        try
         {
-            long value = 0L;
-            string[] parts = control.Text.Split(' ');
-            for (int i = 0; i < parts.Length; i++)
+            if (control != null)
             {
-                if ((!m_found_verses_displayed) && (control == HeaderLabel))
+                long value = 0L;
+                string[] parts = control.Text.Split(' ');
+                for (int i = 0; i < parts.Length; i++)
                 {
-                    if (parts[i].Contains(L[l]["Verse"]))
+                    if ((!m_found_verses_displayed) && (control == HeaderLabel))
                     {
-                        int pos = parts[i].IndexOf(L[l]["Verse"]);
-                        if ((i + 1) < parts.Length)
+                        if (parts[i].Contains(L[l]["Verse"]))
                         {
-                            if (long.TryParse(parts[i + 1], out value))
+                            int pos = parts[i].IndexOf(L[l]["Verse"]);
+                            if ((i + 1) < parts.Length)
                             {
+                                if (long.TryParse(parts[i + 1], out value))
+                                {
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else if (control == WordsListBoxLabel)
+                    {
+                        if (long.TryParse(parts[0], out value))
+                        {
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if (long.TryParse(parts[i], out value))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            double d = 0D;
+                            if (double.TryParse(parts[i + 1], out d))
+                            {
+                                value = (long)d;
                                 break;
                             }
                         }
                     }
                 }
-                else if (control == WordsListBoxLabel)
-                {
-                    if (long.TryParse(parts[0], out value))
-                    {
-                        break;
-                    }
-                }
-                else
-                {
-                    if (long.TryParse(parts[i], out value))
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        double d = 0D;
-                        if (double.TryParse(parts[i + 1], out d))
-                        {
-                            value = (long)d;
-                            break;
-                        }
-                    }
-                }
+                FactorizeValue(value, "Number", true);
             }
-            FactorizeValue(value, "Number", true);
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
         }
     }
     private void FactorizeNumber(TextBox control)
     {
-        if (control != null)
+        this.Cursor = Cursors.WaitCursor;
+        try
         {
-            if (control != ValueTextBox)
+            if (control != null)
             {
-                long value = 0L;
-                try
+                if (control != ValueTextBox)
                 {
-                    string text = control.Text;
-                    if (!String.IsNullOrEmpty(text))
+                    long value = 0L;
+                    try
                     {
-                        if (control.Name.StartsWith("LetterFrequency"))
+                        string text = control.Text;
+                        if (!String.IsNullOrEmpty(text))
                         {
-                            value = Math.Abs((long)double.Parse(text));
-                        }
-                        else if (control.Name.StartsWith("Decimal"))
-                        {
-                            value = Radix.Decode(text, 10);
-                        }
-                        else if (text.StartsWith(SUM_SYMBOL))
-                        {
-                            text = text.Substring(SUM_SYMBOL.Length, text.Length - SUM_SYMBOL.Length);
-                            value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
-                        }
-                        else if (
-                                    (control == ChaptersTextBox) ||
-                                    (control == VersesTextBox) ||
-                                    (control == WordsTextBox) ||
-                                    (control == LettersTextBox)
-                                )
-                        {
-                            value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
-                        }
-                        else if (text.StartsWith("4×")) // 4n+1 or 4n-1
-                        {
-                            int start = "4×".Length;
-                            int end = text.IndexOf("+");
-                            if (end == -1) end = text.IndexOf("-");
-                            if ((start >= 0) && (end >= start))
+                            if (control.Name.StartsWith("LetterFrequency"))
                             {
-                                text = text.Substring(start, end - start);
+                                value = Math.Abs((long)double.Parse(text));
+                            }
+                            else if (control.Name.StartsWith("Decimal"))
+                            {
+                                value = Radix.Decode(text, 10);
+                            }
+                            else if (text.StartsWith(SUM_SYMBOL))
+                            {
+                                text = text.Substring(SUM_SYMBOL.Length, text.Length - SUM_SYMBOL.Length);
+                                value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                            }
+                            else if (
+                                        (control == ChaptersTextBox) ||
+                                        (control == VersesTextBox) ||
+                                        (control == WordsTextBox) ||
+                                        (control == LettersTextBox)
+                                    )
+                            {
+                                value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                            }
+                            else if (text.StartsWith("4×")) // 4n+1 or 4n-1
+                            {
+                                int start = "4×".Length;
+                                int end = text.IndexOf("+");
+                                if (end == -1) end = text.IndexOf("-");
+                                if ((start >= 0) && (end >= start))
+                                {
+                                    text = text.Substring(start, end - start);
+                                    value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                                }
+                            }
+                            else
+                            {
                                 value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                             }
                         }
-                        else
-                        {
-                            value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
-                        }
-                    }
 
-                    FactorizeValue(value, "Number", true);
-                }
-                catch
-                {
-                    //value = -1L; // error
+                        FactorizeValue(value, "Number", true);
+                    }
+                    catch
+                    {
+                        //value = -1L; // error
+                    }
                 }
             }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
         }
     }
     private void UpdateNumberKind(long value)
