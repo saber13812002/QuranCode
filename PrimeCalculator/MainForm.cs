@@ -218,6 +218,53 @@ public partial class MainForm : Form
     private void MainForm_Resize(object sender, EventArgs e)
     {
         ValueTextBox.SelectionStart = 0;
+
+        int left = 7;
+        int width = (int)((this.Width - 23) * 0.33333);
+        NthNumberTextBox.Left = left;
+        NthNumberTextBox.Width = width;
+        left += width;
+        NthAdditiveNumberTextBox.Left = left;
+        NthAdditiveNumberTextBox.Width = width;
+        left += width;
+        NthNonAdditiveNumberTextBox.Left = left;
+        NthNonAdditiveNumberTextBox.Width = width;
+
+        left = 1;
+        int small_width = (int)((this.Width - 16) * 0.18333);
+        int large_width = (int)((this.Width - 16) * 0.26666);
+        NumberKindIndexTextBox.Left = left;
+        NumberKindIndexTextBox.Width = small_width;
+        left += small_width;
+        SumOfProperDivisorsTextBox.Left = left;
+        SumOfProperDivisorsTextBox.Width = small_width;
+        left += small_width;
+        SumOfNumbersTextBox.Left = left;
+        SumOfNumbersTextBox.Width = large_width;
+        left += large_width;
+        SumOfDigitSumsTextBox.Left = left;
+        SumOfDigitSumsTextBox.Width = small_width;
+        left += small_width;
+        SumOfDigitalRootsTextBox.Left = left;
+        SumOfDigitalRootsTextBox.Width = small_width;
+
+        left = 7;
+        small_width = (int)((this.Width - 21) * 0.09787);
+        large_width = (int)((this.Width - 21) * 0.22553);
+        PCIndexChainL2RTextBox.Left = left;
+        PCIndexChainL2RTextBox.Width = large_width;
+        left += large_width;
+        PCIndexChainR2LTextBox.Left = left;
+        PCIndexChainR2LTextBox.Width = large_width;
+        left += large_width;
+        CPIndexChainL2RTextBox.Left = left;
+        CPIndexChainL2RTextBox.Width = large_width;
+        left += large_width;
+        CPIndexChainR2LTextBox.Left = left;
+        CPIndexChainR2LTextBox.Width = large_width;
+        left += large_width;
+        IndexChainLengthTextBox.Left = left;
+        IndexChainLengthTextBox.Width = small_width;
     }
     private void MainForm_KeyUp(object sender, KeyEventArgs e)
     {
@@ -2283,7 +2330,7 @@ public partial class MainForm : Form
     private void ClearNumberAnalyses()
     {
         Nth4n1NumberTextBox.Text = "";
-        Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
+        Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLightLight;
         Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
         Nth4nPlus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
         Nth4nMinus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
