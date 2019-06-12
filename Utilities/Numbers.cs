@@ -1344,7 +1344,7 @@ public static class Numbers
     public static int DigitalRoot(long number)
     {
         int radix = 10;
-        return (int)(number - ((radix - 1L) * ((number - 1L) / (radix - 1L))));
+        return (int)(1L + (number - 1L) % (radix - 1));
     }
     public static int DigitalRoot(string value)
     {
@@ -1366,12 +1366,9 @@ public static class Numbers
     }
     public static long SumOfDigitalRoots(long number)
     {
-        long result = 0L;
-        for (int i = 1; i <= number; i++)
-        {
-            result += DigitalRoot(i);
-        }
-        return result;
+        long d = number / 9L;
+        long r = number % 9L;
+        return (d * 45L + r * (r + 1L) / 2L);
     }
     public static string SumOfDigitalRootsString(long number)
     {
