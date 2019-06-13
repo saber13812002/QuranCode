@@ -211,11 +211,11 @@ public partial class MainForm : Form
                     case 11: { control.Text = "C=4n+1"; ToolTip.SetToolTip(control, "ith 4n+1 Composite"); break; }
                     case 12: { control.Text = "C=4n-1"; ToolTip.SetToolTip(control, "ith 4n-1 Composite"); break; }
                     case 13: { control.Text = "∑"; ToolTip.SetToolTip(control, "Sum(1..i)"); break; }
-                    case 14: { control.Text = "Half"; ToolTip.SetToolTip(control, "i/2"); break; }
-                    case 15: { control.Text = "Median"; ToolTip.SetToolTip(control, "Median(1..i/2)"); break; }
-                    case 16: { control.Text = "Product"; ToolTip.SetToolTip(control, "Half * Median"); break; }
-                    case 17: { control.Text = "∑ds"; ToolTip.SetToolTip(control, "Sum(DigitSum(1..i))"); break; }
-                    case 18: { control.Text = "∑dr"; ToolTip.SetToolTip(control, "Sum(DigitRoot(1..i))"); break; }
+                    case 14: { control.Text = "∑ds"; ToolTip.SetToolTip(control, "Sum(DigitSum(1..i))"); break; }
+                    case 15: { control.Text = "∑dr"; ToolTip.SetToolTip(control, "Sum(DigitalRoot(1..i))"); break; }
+                    case 16: { control.Text = "Half"; ToolTip.SetToolTip(control, "i/2"); break; }
+                    case 17: { control.Text = "Median"; ToolTip.SetToolTip(control, "Median(1..i/2)"); break; }
+                    case 18: { control.Text = "Product"; ToolTip.SetToolTip(control, "Half * Median"); break; }
                     default: break;
                 }
             }
@@ -281,12 +281,12 @@ public partial class MainForm : Form
                         case 13:
                         case 14:
                         case 15:
-                        case 16:
-                            control.BackColor = Color.Snow;
+                            control.BackColor = Color.LightYellow;
                             break;
+                        case 16:
                         case 17:
                         case 18:
-                            control.BackColor = Color.LightYellow;
+                            control.BackColor = Color.Snow;
                             break;
                         default:
                             control.BackColor = SystemColors.Window;
@@ -365,7 +365,7 @@ public partial class MainForm : Form
 
                 StringBuilder str = new StringBuilder();
                 str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
-                str.AppendLine("i" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "C" + "\t" + "AC" + "\t" + "XC" + "\t" + "DF" + "\t" + "AB" + "\t" + "P=4n+1" + "\t" + "P=4n-1" + "\t" + "C=4n+1" + "\t" + "C=4n-1" + "\t" + "Sum" + "\t" + "Half" + "\t" + "Median" + "\t" + "Product" + "\t" + "∑Digits" + "\t" + "∑Digits^2" + "\t" + "∑Digits^3");
+                str.AppendLine("i" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "C" + "\t" + "AC" + "\t" + "XC" + "\t" + "DF" + "\t" + "AB" + "\t" + "P=4n+1" + "\t" + "P=4n-1" + "\t" + "C=4n+1" + "\t" + "C=4n-1" + "\t" + "∑i" + "\t" + "∑ds(i)" + "\t" + "∑dr(i)" + "\t" + "Half" + "\t" + "Median" + "\t" + "Product");
                 str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 for (int i = 0; i < ROWS; i++)
                 {
@@ -696,24 +696,24 @@ public partial class MainForm : Form
                         controls[point.X, 12].ForeColor = Numbers.GetNumberTypeColor(c4nminus1);
 
                         int sum = (number * (number + 1)) / 2;
+                        long sum_of_digit_sums = Numbers.SumOfDigitSums(number);
+                        long sum_of_digital_roots = Numbers.SumOfDigitalRoots(number);
+                        controls[point.X, 13].Text = sum.ToString();
+                        controls[point.X, 14].Text = (sum_of_digit_sums > 0) ? sum_of_digit_sums.ToString() : "";
+                        controls[point.X, 15].Text = (sum_of_digital_roots > 0) ? sum_of_digital_roots.ToString() : "";
+                        controls[point.X, 13].ForeColor = Numbers.GetNumberTypeColor(sum);
+                        controls[point.X, 14].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
+                        controls[point.X, 15].ForeColor = Numbers.GetNumberTypeColor(sum_of_digital_roots);
+
                         int half = ((number % 2) == 0) ? number / 2 : 0;
                         int median = ((half % 2) == 1) ? (half + 1) / 2 : 0;
                         int product = half * median;
-                        controls[point.X, 13].Text = sum.ToString();
-                        controls[point.X, 14].Text = (half > 0) ? half.ToString() : "";
-                        controls[point.X, 15].Text = (median > 0) ? median.ToString() : "";
-                        controls[point.X, 16].Text = (product > 0) ? product.ToString() : "";
-                        controls[point.X, 13].ForeColor = Numbers.GetNumberTypeColor(sum);
-                        controls[point.X, 14].ForeColor = Numbers.GetNumberTypeColor(half);
-                        controls[point.X, 15].ForeColor = Numbers.GetNumberTypeColor(median);
-                        controls[point.X, 16].ForeColor = Numbers.GetNumberTypeColor(product);
-
-                        long sum_of_digit_sums = Numbers.SumOfDigitSums(number);
-                        long sum_of_digital_roots = Numbers.SumOfDigitalRoots(number);
-                        controls[point.X, 17].Text = (sum_of_digit_sums > 0) ? sum_of_digit_sums.ToString() : "";
-                        controls[point.X, 18].Text = (sum_of_digital_roots > 0) ? sum_of_digital_roots.ToString() : "";
-                        controls[point.X, 17].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
-                        controls[point.X, 18].ForeColor = Numbers.GetNumberTypeColor(sum_of_digital_roots);
+                        controls[point.X, 16].Text = (half > 0) ? half.ToString() : "";
+                        controls[point.X, 17].Text = (median > 0) ? median.ToString() : "";
+                        controls[point.X, 18].Text = (product > 0) ? product.ToString() : "";
+                        controls[point.X, 16].ForeColor = Numbers.GetNumberTypeColor(half);
+                        controls[point.X, 17].ForeColor = Numbers.GetNumberTypeColor(median);
+                        controls[point.X, 18].ForeColor = Numbers.GetNumberTypeColor(product);
                     }
                     catch
                     {
@@ -960,7 +960,7 @@ public partial class MainForm : Form
 
                 StringBuilder str = new StringBuilder();
                 str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
-                str.AppendLine("i" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "C" + "\t" + "AC" + "\t" + "XC" + "\t" + "DF" + "\t" + "AB" + "\t" + "P=4n+1" + "\t" + "P=4n-1" + "\t" + "C=4n+1" + "\t" + "C=4n-1" + "\t" + "Sum" + "\t" + "Half" + "\t" + "Median" + "\t" + "Product" + "\t" + "∑Digits" + "\t" + "∑Digits^2" + "\t" + "∑Digits^3");
+                str.AppendLine("i" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "C" + "\t" + "AC" + "\t" + "XC" + "\t" + "DF" + "\t" + "AB" + "\t" + "P=4n+1" + "\t" + "P=4n-1" + "\t" + "C=4n+1" + "\t" + "C=4n-1" + "\t" + "∑i" + "\t" + "∑ds(i)" + "\t" + "∑dr(i)" + "\t" + "Half" + "\t" + "Median" + "\t" + "Product");
                 str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
                 if (controls != null)

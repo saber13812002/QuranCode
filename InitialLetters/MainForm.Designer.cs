@@ -63,8 +63,7 @@ namespace InitialLetters
             this.HelpToolStripMenuItem});
             this.MenuStrip.Location = new System.Drawing.Point(0, 0);
             this.MenuStrip.Name = "MenuStrip";
-            this.MenuStrip.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.MenuStrip.Size = new System.Drawing.Size(323, 28);
+            this.MenuStrip.Size = new System.Drawing.Size(242, 24);
             this.MenuStrip.TabIndex = 0;
             this.MenuStrip.Text = "MenuStrip";
             // 
@@ -75,34 +74,34 @@ namespace InitialLetters
             this.UniqueWordsToolStripMenuItem,
             this.AllWordsToolStripMenuItem});
             this.InitialsToolStripMenuItem.Name = "InitialsToolStripMenuItem";
-            this.InitialsToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
+            this.InitialsToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.InitialsToolStripMenuItem.Text = "&Initials";
             // 
             // UniqueLettersToolStripMenuItem
             // 
             this.UniqueLettersToolStripMenuItem.Name = "UniqueLettersToolStripMenuItem";
-            this.UniqueLettersToolStripMenuItem.Size = new System.Drawing.Size(173, 24);
+            this.UniqueLettersToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.UniqueLettersToolStripMenuItem.Text = "Unique &Letters";
             this.UniqueLettersToolStripMenuItem.Click += new System.EventHandler(this.InitialsUniqueLettersToolStripMenuItem_Click);
             // 
             // UniqueWordsToolStripMenuItem
             // 
             this.UniqueWordsToolStripMenuItem.Name = "UniqueWordsToolStripMenuItem";
-            this.UniqueWordsToolStripMenuItem.Size = new System.Drawing.Size(173, 24);
+            this.UniqueWordsToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.UniqueWordsToolStripMenuItem.Text = "Unique &Words";
             this.UniqueWordsToolStripMenuItem.Click += new System.EventHandler(this.InitialsUniqueWordsToolStripMenuItem_Click);
             // 
             // AllWordsToolStripMenuItem
             // 
             this.AllWordsToolStripMenuItem.Name = "AllWordsToolStripMenuItem";
-            this.AllWordsToolStripMenuItem.Size = new System.Drawing.Size(173, 24);
+            this.AllWordsToolStripMenuItem.Size = new System.Drawing.Size(150, 22);
             this.AllWordsToolStripMenuItem.Text = "&All Words";
             this.AllWordsToolStripMenuItem.Click += new System.EventHandler(this.InitialsAllWordsToolStripMenuItem_Click);
             // 
             // RunToolStripMenuItem
             // 
             this.RunToolStripMenuItem.Name = "RunToolStripMenuItem";
-            this.RunToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.RunToolStripMenuItem.Size = new System.Drawing.Size(40, 20);
             this.RunToolStripMenuItem.Text = "&Run";
             this.RunToolStripMenuItem.ToolTipText = "Generate sentences";
             this.RunToolStripMenuItem.Click += new System.EventHandler(this.RunToolStripMenuItem_Click);
@@ -111,7 +110,7 @@ namespace InitialLetters
             // 
             this.OpenToolStripMenuItem.Enabled = false;
             this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
-            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(52, 24);
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
             this.OpenToolStripMenuItem.Text = "&Open";
             this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
@@ -122,25 +121,25 @@ namespace InitialLetters
             this.toolStripMenuItem1,
             this.AboutToolStripMenuItem});
             this.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem";
-            this.HelpToolStripMenuItem.Size = new System.Drawing.Size(53, 24);
+            this.HelpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.HelpToolStripMenuItem.Text = "&Help";
             // 
             // InitialLettersToolStripMenuItem
             // 
             this.InitialLettersToolStripMenuItem.Name = "InitialLettersToolStripMenuItem";
-            this.InitialLettersToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
+            this.InitialLettersToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.InitialLettersToolStripMenuItem.Text = "&Initial Letters";
             this.InitialLettersToolStripMenuItem.Click += new System.EventHandler(this.InitialLettersToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(172, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(138, 6);
             // 
             // AboutToolStripMenuItem
             // 
             this.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem";
-            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(175, 24);
+            this.AboutToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.AboutToolStripMenuItem.Text = "&About...";
             this.AboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -151,16 +150,15 @@ namespace InitialLetters
             // 
             // ListView
             // 
-            this.ListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.ListView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.ColumnHeader});
             this.ListView.Font = new System.Drawing.Font("Lucida Console", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ListView.Location = new System.Drawing.Point(0, 30);
-            this.ListView.Margin = new System.Windows.Forms.Padding(4);
+            this.ListView.Location = new System.Drawing.Point(0, 24);
             this.ListView.Name = "ListView";
-            this.ListView.Size = new System.Drawing.Size(321, 429);
+            this.ListView.Size = new System.Drawing.Size(242, 301);
             this.ListView.TabIndex = 1;
             this.ListView.TabStop = false;
             this.ListView.UseCompatibleStateImageBehavior = false;
@@ -177,10 +175,9 @@ namespace InitialLetters
             // ProgressBar
             // 
             this.ProgressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ProgressBar.Location = new System.Drawing.Point(0, 514);
-            this.ProgressBar.Margin = new System.Windows.Forms.Padding(4);
+            this.ProgressBar.Location = new System.Drawing.Point(0, 370);
             this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.Size = new System.Drawing.Size(323, 15);
+            this.ProgressBar.Size = new System.Drawing.Size(242, 12);
             this.ProgressBar.Step = 1;
             this.ProgressBar.TabIndex = 0;
             // 
@@ -188,25 +185,23 @@ namespace InitialLetters
             // 
             this.LettersTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.LettersTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LettersTextBox.Location = new System.Drawing.Point(0, 488);
-            this.LettersTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.LettersTextBox.Location = new System.Drawing.Point(0, 347);
             this.LettersTextBox.Name = "LettersTextBox";
-            this.LettersTextBox.Size = new System.Drawing.Size(323, 26);
+            this.LettersTextBox.Size = new System.Drawing.Size(242, 23);
             this.LettersTextBox.TabIndex = 3;
             this.LettersTextBox.TextChanged += new System.EventHandler(this.LettersTextBox_TextChanged);
             this.LettersTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.LettersTextBox_KeyPress);
             // 
             // ResultPanel
             // 
-            this.ResultPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)
+            this.ResultPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.ResultPanel.Controls.Add(this.DuplicateLettersCheckBox);
             this.ResultPanel.Controls.Add(this.ResultLabel);
             this.ResultPanel.Controls.Add(this.ElapsedTimeLabel);
-            this.ResultPanel.Location = new System.Drawing.Point(0, 459);
-            this.ResultPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.ResultPanel.Location = new System.Drawing.Point(0, 325);
             this.ResultPanel.Name = "ResultPanel";
-            this.ResultPanel.Size = new System.Drawing.Size(323, 26);
+            this.ResultPanel.Size = new System.Drawing.Size(242, 21);
             this.ResultPanel.TabIndex = 20;
             // 
             // DuplicateLettersCheckBox
@@ -215,9 +210,10 @@ namespace InitialLetters
             this.DuplicateLettersCheckBox.AutoSize = true;
             this.DuplicateLettersCheckBox.Checked = true;
             this.DuplicateLettersCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.DuplicateLettersCheckBox.Location = new System.Drawing.Point(163, 3);
+            this.DuplicateLettersCheckBox.Location = new System.Drawing.Point(119, 3);
+            this.DuplicateLettersCheckBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.DuplicateLettersCheckBox.Name = "DuplicateLettersCheckBox";
-            this.DuplicateLettersCheckBox.Size = new System.Drawing.Size(94, 21);
+            this.DuplicateLettersCheckBox.Size = new System.Drawing.Size(74, 17);
             this.DuplicateLettersCheckBox.TabIndex = 2;
             this.DuplicateLettersCheckBox.Text = "duplicates";
             this.DuplicateLettersCheckBox.UseVisualStyleBackColor = true;
@@ -227,10 +223,9 @@ namespace InitialLetters
             // 
             this.ResultLabel.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.ResultLabel.AutoSize = true;
-            this.ResultLabel.Location = new System.Drawing.Point(1, 5);
-            this.ResultLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.ResultLabel.Location = new System.Drawing.Point(1, 4);
             this.ResultLabel.Name = "ResultLabel";
-            this.ResultLabel.Size = new System.Drawing.Size(36, 17);
+            this.ResultLabel.Size = new System.Drawing.Size(30, 13);
             this.ResultLabel.TabIndex = 0;
             this.ResultLabel.Text = "0 / 0";
             // 
@@ -238,18 +233,17 @@ namespace InitialLetters
             // 
             this.ElapsedTimeLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.ElapsedTimeLabel.AutoSize = true;
-            this.ElapsedTimeLabel.Location = new System.Drawing.Point(256, 5);
-            this.ElapsedTimeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.ElapsedTimeLabel.Location = new System.Drawing.Point(192, 4);
             this.ElapsedTimeLabel.Name = "ElapsedTimeLabel";
-            this.ElapsedTimeLabel.Size = new System.Drawing.Size(64, 17);
+            this.ElapsedTimeLabel.Size = new System.Drawing.Size(49, 13);
             this.ElapsedTimeLabel.TabIndex = 0;
             this.ElapsedTimeLabel.Text = "00:00:00";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(323, 529);
+            this.ClientSize = new System.Drawing.Size(242, 382);
             this.Controls.Add(this.ResultPanel);
             this.Controls.Add(this.LettersTextBox);
             this.Controls.Add(this.ProgressBar);
@@ -258,7 +252,6 @@ namespace InitialLetters
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.MenuStrip;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Initial Letters";
