@@ -5581,7 +5581,7 @@ partial class MainForm
         this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 1);
         this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
         this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(794, 191);
+        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(794, 192);
         this.ScriptOutputGroupBox.TabIndex = 103;
         this.ScriptOutputGroupBox.TabStop = false;
         this.ScriptOutputGroupBox.Text = " Output ";
@@ -5597,7 +5597,7 @@ partial class MainForm
         this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
         this.ScriptOutputTextBox.ReadOnly = true;
         this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.ScriptOutputTextBox.Size = new System.Drawing.Size(774, 163);
+        this.ScriptOutputTextBox.Size = new System.Drawing.Size(774, 164);
         this.ScriptOutputTextBox.TabIndex = 0;
         this.ScriptOutputTextBox.WordWrap = false;
         this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -9988,10 +9988,10 @@ partial class MainForm
         // 
         // CalculationModeLabel
         // 
-        this.CalculationModeLabel.BackColor = System.Drawing.Color.MediumOrchid;
+        this.CalculationModeLabel.BackColor = System.Drawing.Color.White;
         this.CalculationModeLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.CalculationModeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.CalculationModeLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.CalculationModeLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.CalculationModeLabel.Location = new System.Drawing.Point(56, 21);
         this.CalculationModeLabel.Name = "CalculationModeLabel";
         this.CalculationModeLabel.Size = new System.Drawing.Size(5, 18);

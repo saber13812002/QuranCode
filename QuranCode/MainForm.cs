@@ -11125,7 +11125,7 @@ public partial class MainForm : Form, ISubscriber
         // 
         // CalculationModeLabel
         // 
-        this.CalculationModeLabel.BackColor = System.Drawing.Color.MediumOrchid;
+        this.CalculationModeLabel.BackColor = System.Drawing.Color.White;
         this.CalculationModeLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.CalculationModeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.CalculationModeLabel.ForeColor = System.Drawing.SystemColors.Window;
@@ -15399,6 +15399,9 @@ public partial class MainForm : Form, ISubscriber
 
                         m_show_add_controls = true;
                         ValueLabel_Click(null, null);
+
+                        m_calculation_mode = CalculationMode.SumOfLetterValues;
+                        SetCalculationMode(m_calculation_mode);
 
                         if (m_client.NumerologySystem != null)
                         {
@@ -42493,66 +42496,65 @@ public partial class MainForm : Form, ISubscriber
         {
             if (m_client != null)
             {
-                CalculateCurrentText();
-                if (!String.IsNullOrEmpty(m_current_text))
+                if (m_user_text_mode)
                 {
-                    if (m_user_text_mode)
+                    if (UserTextTextBox.Text.Length > 0)
                     {
-                        if (UserTextTextBox.Text.Length > 0)
+                        if (UserTextTextBox.SelectionLength == 0) // get text at current line
                         {
-                            if (UserTextTextBox.SelectionLength == 0) // get text at current line
-                            {
-                                CalculateUserTextValue(m_caret_position);
-                            }
-                            else // get current selected text
-                            {
-                                m_current_text = UserTextTextBox.SelectedText;
-                            }
-                            CalculateValueAndDisplayFactors(m_current_text);
+                            CalculateUserTextValue(m_caret_position);
                         }
+                        else // get current selected text
+                        {
+                            m_current_text = UserTextTextBox.SelectedText;
+                        }
+                        CalculateValueAndDisplayFactors(m_current_text);
                     }
-                    else
+                }
+                else
+                {
+                    if (m_selection_mode)
                     {
-                        if (m_selection_mode)
+                        CalculateAndDisplayCounts();
+                        CalculateValueAndDisplayFactors();
+                    }
+                    else // cursor inside line OR some text is highlighted
+                    {
+                        CalculateCurrentText();
+                        CalculateAndDisplayCounts(m_current_text);
+
+                        if (m_active_textbox.SelectionLength == 0) // cursor inside line
                         {
-                            CalculateAndDisplayCounts();
-                            CalculateValueAndDisplayFactors();
-                        }
-                        else // cursor inside line OR some text is highlighted
-                        {
-                            if (m_active_textbox.SelectionLength == 0) // cursor inside line
+                            if (m_translation_readonly)
                             {
-                                if (m_translation_readonly)
+                                Verse verse = GetCurrentVerse();
+                                if (verse != null)
                                 {
-                                    Verse verse = GetCurrentVerse();
-                                    if (verse != null)
+                                    if (m_total_chapter_counts)
                                     {
-                                        if (m_total_chapter_counts)
-                                        {
-                                            CalculateAndDisplayCounts();
-                                        }
-                                        else
-                                        {
-                                            CalculateAndDisplayCounts(verse);
-                                        }
-                                        CalculateValueAndDisplayFactors(verse);
+                                        CalculateAndDisplayCounts();
                                     }
-                                }
-                                else // edit mode so user can paste any text they like to calculate its value
-                                {
-                                    CalculateValueAndDisplayFactors(m_current_text);
+                                    else
+                                    {
+                                        CalculateAndDisplayCounts(verse);
+                                    }
+                                    CalculateValueAndDisplayFactors(verse);
                                 }
                             }
-                            else // some text is highlighted
+                            else // edit mode so user can paste any text they like to calculate its value
                             {
-                                if (m_calculation_mode == CalculationMode.SumOfLetterValues)
-                                {
-                                    CalculateSelectedTextValue();
-                                }
-                                else
-                                {
-                                    CalculateValueAndDisplayFactors(m_current_text);
-                                }
+                                CalculateValueAndDisplayFactors(m_current_text);
+                            }
+                        }
+                        else // some text is highlighted
+                        {
+                            if (m_calculation_mode == CalculationMode.SumOfLetterValues)
+                            {
+                                CalculateSelectedTextValue();
+                            }
+                            else
+                            {
+                                CalculateValueAndDisplayFactors(m_current_text);
                             }
                         }
                     }
