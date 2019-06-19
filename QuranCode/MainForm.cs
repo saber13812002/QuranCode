@@ -720,7 +720,7 @@ public partial class MainForm : Form, ISubscriber
     private const int DEFAULT_WINDOW_WIDTH = 1293;
     private const int DEFAULT_WINDOW_HEIGHT = 768;
     private const string DEFAULT_LANGUAGE = "English";
-    private const int DEFAULT_INFORMATION_BOX_TOP = 449;
+    private const int DEFAULT_INFORMATION_BOX_TOP = 464;
     private const int DEFAULT_AUDIO_VOLUME = 1000;
     private const string VERSE_ADDRESS_TRANSLATION_SEPARATOR = " ";
     private const string VERSE_ADDRESS_MAIN_SEPARATOR = "\t";
