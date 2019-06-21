@@ -22590,16 +22590,23 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (m_client.Selection != null)
                 {
+                    //Chapter chapter = null;
                     List<Verse> verses = m_client.Selection.Verses;
                     if (verses != null)
                     {
                         if (verses.Count > 0)
                         {
+                            //chapter = verses[0].Chapter;
                             StringBuilder str = new StringBuilder();
                             foreach (Verse verse in verses)
                             {
                                 if (verse != null)
                                 {
+                                    //if (chapter != verse.Chapter)
+                                    //{
+                                    //    chapter = verse.Chapter;
+                                    //    str.AppendLine();
+                                    //}
                                     str.Append(verse.Text + verse.Endmark);
                                 }
                             }
@@ -39214,7 +39221,7 @@ public partial class MainForm : Form, ISubscriber
     }
     ///////////////////////////////////////////////////////////////////////////////
     #endregion
-    #region Display Search Results
+    #region Search Results
     ///////////////////////////////////////////////////////////////////////////////
     private struct FindMatch
     {
@@ -42521,7 +42528,14 @@ public partial class MainForm : Form, ISubscriber
                     else // cursor inside line OR some text is highlighted
                     {
                         CalculateCurrentText();
-                        CalculateAndDisplayCounts(m_current_text);
+                        if (m_user_text_mode)
+                        {
+                            CalculateAndDisplayCounts(m_current_text);
+                        }
+                        else
+                        {
+                            CalculateSelectedTextValue();
+                        }
 
                         if (m_active_textbox.SelectionLength == 0) // cursor inside line
                         {
