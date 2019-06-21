@@ -267,9 +267,11 @@ public static class StringExtensions
 
         foreach (char character in source)
         {
-            if (character == ' ') continue;
-
             if (
+                  !(character == ' ') &&
+                  !(character == '\r') &&
+                  !(character == '\n') &&
+                  !(character == '\t') &&
                   !Constants.ARABIC_LETTERS.Contains(character) &&
                   !Constants.INDIAN_DIGITS.Contains(character) &&
                   !Constants.STOPMARKS.Contains(character) &&
@@ -308,11 +310,14 @@ public static class StringExtensions
 
         foreach (char character in source)
         {
-            if (character == ' ') continue;
-
             if (
-                !(character >= 'A') && (character <= 'Z') &&
-                !(character >= 'a') && (character <= 'z')
+                  !(character == ' ') &&
+                  !(character == '\r') &&
+                  !(character == '\n') &&
+                  !(character == '\t') &&
+                  !((character >= 'A') && (character <= 'Z')) &&
+                  !((character >= 'a') && (character <= 'z')) &&
+                  !Constants.SYMBOLS.Contains(character)
                )
             {
                 return false;

@@ -39043,11 +39043,11 @@ public partial class MainForm : Form, ISubscriber
         {
             if (m_find_by_phrase_letter_frequency)
             {
-                tooltip = tooltip.Replace("selected", "phrase");
+                tooltip = tooltip.Replace(L[l]["selected"], L[l]["phrase"]);
             }
             else
             {
-                tooltip = tooltip.Replace("phrase", "selected");
+                tooltip = tooltip.Replace(L[l]["phrase"], L[l]["selected"]);
             }
         }
         ToolTip.SetToolTip(FindByFrequencyButton, tooltip);
@@ -39139,6 +39139,7 @@ public partial class MainForm : Form, ISubscriber
             string phrase = "";
             if (FindByFrequencyPhraseTextBox.Text.Length > 0)
             {
+                phrase_search = true;
                 if (FindByFrequencyPhraseTextBox.SelectionLength > 0)
                 {
                     phrase = FindByFrequencyPhraseTextBox.SelectedText.Trim();
@@ -39147,71 +39148,71 @@ public partial class MainForm : Form, ISubscriber
                 {
                     phrase = FindByFrequencyPhraseTextBox.Text.Trim();
                 }
-                phrase_search = true;
             }
             else
             {
+                phrase_search = false;
                 if (LetterFrequencyListView.SelectedIndices.Count > 0)
                 {
                     foreach (ListViewItem item in LetterFrequencyListView.SelectedItems)
                     {
-                        phrase += item.SubItems[1].Text;
+                        phrase += item.SubItems[1].Text + " ";
                     }
                 }
-                phrase_search = false;
             }
 
             if (!String.IsNullOrEmpty(phrase))
             {
-                if (phrase.IsArabic())
-                {
-                    string text = null;
-                    text += phrase + " " + L[l]["letters"] + sum_comparison_operator_symbol + ((sum > 0) ? sum.ToString() : ((sum_number_type != NumberType.None) ? FindByFrequencySumNumberTypeLabel.Text : "*"))
-                        + (phrase_search ? ((m_frequency_search_type == FrequencySearchType.DuplicateLetters) ? " " + L[l]["with"] + " " : L[l]["without"] + " ") + L[l]["duplicates"] : "");
+                phrase = phrase.Replace("\r", "");
+                phrase = phrase.Replace("\n", " ");
+                phrase = phrase.Replace("\t", "");
 
-                    switch (m_frequency_result_type)
-                    {
-                        case FrequencyResultType.Words:
+                string text = null;
+                text += phrase + " " + L[l]["letters"] + sum_comparison_operator_symbol + ((sum > 0) ? sum.ToString() : ((sum_number_type != NumberType.None) ? FindByFrequencySumNumberTypeLabel.Text : "*"))
+                    + (phrase_search ? ((m_frequency_search_type == FrequencySearchType.DuplicateLetters) ? " " + L[l]["with"] + " " : L[l]["without"] + " ") + L[l]["duplicates"] : "");
+
+                switch (m_frequency_result_type)
+                {
+                    case FrequencyResultType.Words:
+                        {
+                            int match_count = m_client.FindWords(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_with_diacritics);
+                            if (m_client.FoundWords != null)
                             {
-                                int match_count = m_client.FindWords(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_with_diacritics);
-                                if (m_client.FoundWords != null)
-                                {
-                                    m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["word"] : " " + L[l]["words"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                    DisplayFoundVerses(true, true);
-                                }
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["word"] : " " + L[l]["words"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundVerses(true, true);
                             }
-                            break;
-                        case FrequencyResultType.Sentences:
+                        }
+                        break;
+                    case FrequencyResultType.Sentences:
+                        {
+                            int match_count = m_client.FindSentences(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_with_diacritics);
+                            if (m_client.FoundSentences != null)
                             {
-                                int match_count = m_client.FindSentences(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_with_diacritics);
-                                if (m_client.FoundSentences != null)
-                                {
-                                    m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["sentence"] : " " + L[l]["sentences"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                    DisplayFoundVerses(true, true);
-                                }
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["sentence"] : " " + L[l]["sentences"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundVerses(true, true);
                             }
-                            break;
-                        case FrequencyResultType.Verses:
+                        }
+                        break;
+                    case FrequencyResultType.Verses:
+                        {
+                            int match_count = m_client.FindVerses(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_with_diacritics);
+                            if (m_client.FoundVerses != null)
                             {
-                                int match_count = m_client.FindVerses(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_with_diacritics);
-                                if (m_client.FoundVerses != null)
-                                {
-                                    m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                    DisplayFoundVerses(true, true);
-                                }
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundVerses(true, true);
                             }
-                            break;
-                        case FrequencyResultType.Chapters:
+                        }
+                        break;
+                    case FrequencyResultType.Chapters:
+                        {
+                            int match_count = m_client.FindChapters(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_with_diacritics);
+                            if (m_client.FoundChapters != null)
                             {
-                                int match_count = m_client.FindChapters(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_with_diacritics);
-                                if (m_client.FoundChapters != null)
-                                {
-                                    m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["chapter"] : " " + L[l]["chapters"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                    DisplayFoundChapters(true, true);
-                                }
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["chapter"] : " " + L[l]["chapters"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundChapters(true, true);
                             }
-                            break;
-                    }
+                        }
+                        break;
                 }
             }
 
