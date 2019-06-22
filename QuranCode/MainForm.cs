@@ -403,11 +403,8 @@ public partial class MainForm : Form, ISubscriber
                 m_note_writing_instruction = L[l]["write a note for "];
                 DisplayNoteWritingInstruction();
 
-                long value = 0L;
-                if (long.TryParse(ValueTextBox.Text, out value))
-                {
-                    UpdateValueNavigator(value);
-                }
+                long value = Radix.Decode(ValueTextBox.Text, m_radix);
+                UpdateValueNavigator(value);
 
                 RegisterContextMenus();
                 SetToolTipPlayerVerseSilenceGapTrackBar();
@@ -42909,44 +42906,33 @@ public partial class MainForm : Form, ISubscriber
         CPIndexChainR2LTextBox.Text = "";
         IndexChainLengthTextBox.Text = "";
 
-        long value = 0L;
-        long.TryParse(ValueTextBox.Text, out value);
+        m_double_value = DoCalculateExpression(ValueTextBox.Text, m_radix);
+        long value = (long)Math.Round(m_double_value);
 
-        if (m_radix == Numbers.DEFAULT_RADIX)
-        {
-            int digit_sum = Numbers.DigitSum(value);
-            DigitSumTextBox.Text = (digit_sum == 0) ? "" : digit_sum.ToString();
-            DigitSumTextBox.ForeColor = Numbers.GetNumberTypeColor(digit_sum);
-            DigitSumTextBox.Refresh();
+        int digit_sum = Numbers.DigitSum(value);
+        DigitSumTextBox.Text = (digit_sum == 0) ? "" : digit_sum.ToString();
+        DigitSumTextBox.ForeColor = Numbers.GetNumberTypeColor(digit_sum);
+        DigitSumTextBox.Refresh();
 
-            int digital_root = Numbers.DigitalRoot(value);
-            DigitalRootTextBox.Text = (digital_root == 0) ? "" : digital_root.ToString();
-            DigitalRootTextBox.ForeColor = Numbers.GetNumberTypeColor(digital_root);
-            DigitalRootTextBox.Refresh();
+        int digital_root = Numbers.DigitalRoot(value);
+        DigitalRootTextBox.Text = (digital_root == 0) ? "" : digital_root.ToString();
+        DigitalRootTextBox.ForeColor = Numbers.GetNumberTypeColor(digital_root);
+        DigitalRootTextBox.Refresh();
 
-            long sum_of_numbers = Numbers.SumOfNumbers(value);
-            SumOfNumbersTextBox.Text = (sum_of_numbers == 0) ? "" : sum_of_numbers.ToString();
-            SumOfNumbersTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers);
-            SumOfNumbersTextBox.Refresh();
+        long sum_of_numbers = Numbers.SumOfNumbers(value);
+        SumOfNumbersTextBox.Text = (sum_of_numbers == 0) ? "" : sum_of_numbers.ToString();
+        SumOfNumbersTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers);
+        SumOfNumbersTextBox.Refresh();
 
-            long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
-            SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
-            SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
-            SumOfDigitSumsTextBox.Refresh();
+        long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
+        SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
+        SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
+        SumOfDigitSumsTextBox.Refresh();
 
-            long sum_of_digital_roots = Numbers.SumOfDigitalRoots(value);
-            SumOfDigitalRootsTextBox.Text = (sum_of_digital_roots == 0) ? "" : sum_of_digital_roots.ToString();
-            SumOfDigitalRootsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digital_roots);
-            SumOfDigitalRootsTextBox.Refresh();
-        }
-        else
-        {
-            DigitSumTextBox.Text = "";
-            DigitalRootTextBox.Text = "";
-            SumOfNumbersTextBox.Text = "";
-            SumOfDigitSumsTextBox.Text = "";
-            SumOfDigitalRootsTextBox.Text = "";
-        }
+        long sum_of_digital_roots = Numbers.SumOfDigitalRoots(value);
+        SumOfDigitalRootsTextBox.Text = (sum_of_digital_roots == 0) ? "" : sum_of_digital_roots.ToString();
+        SumOfDigitalRootsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digital_roots);
+        SumOfDigitalRootsTextBox.Refresh();
 
         UpdateNumberKind(value);
         UpdateSumOfProperDivisors(value);
@@ -43001,26 +42987,20 @@ public partial class MainForm : Form, ISubscriber
     }
     private void IncrementValue()
     {
-        long value = 0L;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
+        if (value < long.MaxValue)
         {
-            if (value < long.MaxValue)
-            {
-                value++;
-                FactorizeValue(value, "↑", true);
-            }
+            value++;
+            FactorizeValue(value, "↑", true);
         }
     }
     private void DecrementValue()
     {
-        long value = 0L;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
+        if (value > 0L)
         {
-            if (value > 0L)
-            {
-                value--;
-                FactorizeValue(value, "↓", true);
-            }
+            value--;
+            FactorizeValue(value, "↓", true);
         }
     }
     private double m_double_value = 0.0D;
@@ -43031,12 +43011,7 @@ public partial class MainForm : Form, ISubscriber
             string input = ValueTextBox.Text;
 
             long value = 0L;
-            if (long.TryParse(input, out value))
-            {
-                m_double_value = (double)value;
-                FactorizeValue(value, "Math", false);
-            }
-            else if (input.IsArabic() || ((m_radix <= 10) && input.IsEnglish()))
+            if (input.IsArabic() || ((m_radix <= 10) && input.IsEnglish()))
             {
                 m_double_value = m_client.CalculateValue(input);
                 value = (long)Math.Round(m_double_value);
@@ -43178,41 +43153,30 @@ public partial class MainForm : Form, ISubscriber
                     UnusedLettersValueTextBox.Visible = false;
                 }
 
-                if (m_radix == Numbers.DEFAULT_RADIX)
-                {
-                    int digit_sum = Numbers.DigitSum(value);
-                    DigitSumTextBox.Text = (digit_sum == 0) ? "" : digit_sum.ToString();
-                    DigitSumTextBox.ForeColor = Numbers.GetNumberTypeColor(digit_sum);
-                    DigitSumTextBox.Refresh();
+                int digit_sum = Numbers.DigitSum(value);
+                DigitSumTextBox.Text = (digit_sum == 0) ? "" : digit_sum.ToString();
+                DigitSumTextBox.ForeColor = Numbers.GetNumberTypeColor(digit_sum);
+                DigitSumTextBox.Refresh();
 
-                    int digital_root = Numbers.DigitalRoot(value);
-                    DigitalRootTextBox.Text = (digital_root == 0) ? "" : digital_root.ToString();
-                    DigitalRootTextBox.ForeColor = Numbers.GetNumberTypeColor(digital_root);
-                    DigitalRootTextBox.Refresh();
+                int digital_root = Numbers.DigitalRoot(value);
+                DigitalRootTextBox.Text = (digital_root == 0) ? "" : digital_root.ToString();
+                DigitalRootTextBox.ForeColor = Numbers.GetNumberTypeColor(digital_root);
+                DigitalRootTextBox.Refresh();
 
-                    long sum_of_numbers = Numbers.SumOfNumbers(value);
-                    SumOfNumbersTextBox.Text = (sum_of_numbers == 0) ? "" : sum_of_numbers.ToString();
-                    SumOfNumbersTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers);
-                    SumOfNumbersTextBox.Refresh();
+                long sum_of_numbers = Numbers.SumOfNumbers(value);
+                SumOfNumbersTextBox.Text = (sum_of_numbers == 0) ? "" : sum_of_numbers.ToString();
+                SumOfNumbersTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers);
+                SumOfNumbersTextBox.Refresh();
 
-                    long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
-                    SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
-                    SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
-                    SumOfDigitSumsTextBox.Refresh();
+                long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
+                SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
+                SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
+                SumOfDigitSumsTextBox.Refresh();
 
-                    long sum_of_digital_roots = Numbers.SumOfDigitalRoots(value);
-                    SumOfDigitalRootsTextBox.Text = (sum_of_digital_roots == 0) ? "" : sum_of_digital_roots.ToString();
-                    SumOfDigitalRootsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digital_roots);
-                    SumOfDigitalRootsTextBox.Refresh();
-                }
-                else
-                {
-                    DigitSumTextBox.Text = "";
-                    DigitalRootTextBox.Text = "";
-                    SumOfNumbersTextBox.Text = "";
-                    SumOfDigitSumsTextBox.Text = "";
-                    SumOfDigitalRootsTextBox.Text = "";
-                }
+                long sum_of_digital_roots = Numbers.SumOfDigitalRoots(value);
+                SumOfDigitalRootsTextBox.Text = (sum_of_digital_roots == 0) ? "" : sum_of_digital_roots.ToString();
+                SumOfDigitalRootsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digital_roots);
+                SumOfDigitalRootsTextBox.Refresh();
 
                 string factors_str = Numbers.FactorizeToString(value);
                 PrimeFactorsTextBox.Text = factors_str;
@@ -43358,71 +43322,69 @@ public partial class MainForm : Form, ISubscriber
     }
     private void UpdateToolTipNth4n1NumberTextBox()
     {
-        long value = 0L;
-        if (long.TryParse(ValueTextBox.Text, out value))
-        {
-            int plus1_index = -1;
-            int minus1_index = -1;
-            Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
-            Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
-            Nth4nPlus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
-            Nth4nMinus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
-            if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
-            {
-                plus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
-                minus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
-            }
-            else //if composite
-            {
-                plus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
-                minus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
-            }
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
 
-            m_plus1_index = (plus1_index > 0);
-            m_minus1_index = (minus1_index > 0);
-            if (m_plus1_index || m_minus1_index)
-            {
-                if (Numbers.IsPrime(value))
-                {
-                    if (m_plus1_index)
-                    {
-                        ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n+1 prime index"]);
-                        Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLightLight;
-                    }
-                    else if (m_minus1_index)
-                    {
-                        ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n-1 prime index"]);
-                        Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLightLight;
-                    }
-                    else
-                    {
-                        ToolTip.SetToolTip(Nth4n1NumberTextBox, null);
-                    }
-                }
-                else // any other index type will be treated as IndexNumberType.Composite
-                {
-                    if (m_plus1_index)
-                    {
-                        ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n+1 composite index"]);
-                        Nth4nPlus1CompositeNumberLabel.BackColor = SystemColors.ControlLightLight;
-                    }
-                    else if (m_minus1_index)
-                    {
-                        ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n-1 composite index"]);
-                        Nth4nMinus1CompositeNumberLabel.BackColor = SystemColors.ControlLightLight;
-                    }
-                    else
-                    {
-                        ToolTip.SetToolTip(Nth4n1NumberTextBox, null);
-                    }
-                }
-            }
-            else
-            {
-                ToolTip.SetToolTip(Nth4n1NumberTextBox, null);
-            }
-            Nth4n1NumberTextBox.Refresh();
+        int plus1_index = -1;
+        int minus1_index = -1;
+        Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
+        Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
+        Nth4nPlus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
+        Nth4nMinus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
+        if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
+        {
+            plus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
+            minus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
         }
+        else //if composite
+        {
+            plus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
+            minus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
+        }
+
+        m_plus1_index = (plus1_index > 0);
+        m_minus1_index = (minus1_index > 0);
+        if (m_plus1_index || m_minus1_index)
+        {
+            if (Numbers.IsPrime(value))
+            {
+                if (m_plus1_index)
+                {
+                    ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n+1 prime index"]);
+                    Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLightLight;
+                }
+                else if (m_minus1_index)
+                {
+                    ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n-1 prime index"]);
+                    Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLightLight;
+                }
+                else
+                {
+                    ToolTip.SetToolTip(Nth4n1NumberTextBox, null);
+                }
+            }
+            else // any other index type will be treated as IndexNumberType.Composite
+            {
+                if (m_plus1_index)
+                {
+                    ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n+1 composite index"]);
+                    Nth4nPlus1CompositeNumberLabel.BackColor = SystemColors.ControlLightLight;
+                }
+                else if (m_minus1_index)
+                {
+                    ToolTip.SetToolTip(Nth4n1NumberTextBox, L[l]["4n-1 composite index"]);
+                    Nth4nMinus1CompositeNumberLabel.BackColor = SystemColors.ControlLightLight;
+                }
+                else
+                {
+                    ToolTip.SetToolTip(Nth4n1NumberTextBox, null);
+                }
+            }
+        }
+        else
+        {
+            ToolTip.SetToolTip(Nth4n1NumberTextBox, null);
+        }
+        Nth4n1NumberTextBox.Refresh();
     }
     private void Nth4nPlus1PrimeNumberLabel_Click(object sender, EventArgs e)
     {
@@ -43663,27 +43625,11 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                     }
-                    else if (control == WordsListBoxLabel)
+                    else
                     {
                         if (long.TryParse(parts[0], out value))
                         {
                             break;
-                        }
-                    }
-                    else
-                    {
-                        if (long.TryParse(parts[i], out value))
-                        {
-                            break;
-                        }
-                        else
-                        {
-                            double d = 0D;
-                            if (double.TryParse(parts[i + 1], out d))
-                            {
-                                value = (long)d;
-                                break;
-                            }
                         }
                     }
                 }
@@ -43714,22 +43660,19 @@ public partial class MainForm : Form, ISubscriber
                             {
                                 value = Math.Abs((long)double.Parse(text));
                             }
-                            else if (control.Name.StartsWith("Decimal"))
-                            {
-                                value = Radix.Decode(text, 10);
-                            }
-                            else if (text.StartsWith(SUM_SYMBOL))
-                            {
-                                text = text.Substring(SUM_SYMBOL.Length, text.Length - SUM_SYMBOL.Length);
-                                value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
-                            }
                             else if (
                                         (control == ChaptersTextBox) ||
                                         (control == VersesTextBox) ||
                                         (control == WordsTextBox) ||
-                                        (control == LettersTextBox)
+                                        (control == LettersTextBox) ||
+                                        (control.Name.StartsWith("Decimal"))
                                     )
                             {
+                                value = Radix.Decode(text, m_radix);
+                            }
+                            else if (text.StartsWith(SUM_SYMBOL))
+                            {
+                                text = text.Substring(SUM_SYMBOL.Length, text.Length - SUM_SYMBOL.Length);
                                 value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                             }
                             else if (text.StartsWith("4×")) // 4n+1 or 4n-1
@@ -47546,9 +47489,9 @@ public partial class MainForm : Form, ISubscriber
                         CalculateCurrentValue();    // Calculate value with logging - SLOW but very informative
                     }
 
-                    long value = 0;
+                    long value = Radix.Decode(ValueTextBox.Text, m_radix);
                     StringBuilder str = new StringBuilder();
-                    if (long.TryParse(ValueTextBox.Text, out value))
+                    if (m_radix == Numbers.DEFAULT_RADIX)
                     {
                         if (is_value)
                         {
@@ -47609,27 +47552,16 @@ public partial class MainForm : Form, ISubscriber
                     }
 
                     str.AppendLine();
-                    if (m_radix == Numbers.DEFAULT_RADIX)
-                    {
-                        long digit_sum = Numbers.DigitSum(value);
-                        str.AppendLine("Digit Sum            " + "\t=\t" + digit_sum);
-                        long digital_root = Numbers.DigitalRoot(value);
-                        str.AppendLine("Digital Root         " + "\t=\t" + digital_root);
-                        long sum_of_numbers = Numbers.SumOfNumbers(value);
-                        str.AppendLine("Sum Of Numbers       " + "\t=\t" + sum_of_numbers + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.SumOfNumbersString(value)) : ""));
-                        long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
-                        str.AppendLine("Sum Of Digit Sums    " + "\t=\t" + sum_of_digit_sums + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.SumOfDigitSumsString(value)) : ""));
-                        long sum_of_digital_roots = Numbers.SumOfDigitalRoots(value);
-                        str.AppendLine("Sum Of Digital Roots " + "\t=\t" + sum_of_digital_roots + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.SumOfDigitalRootsString(value)) : ""));
-                    }
-                    else
-                    {
-                        str.AppendLine("Digit Sum            " + "\t=\t" + "");
-                        str.AppendLine("Digital Root         " + "\t=\t" + "");
-                        str.AppendLine("Sum Of Numbers       " + "\t=\t" + "");
-                        str.AppendLine("Sum Of Digit Sums    " + "\t=\t" + "");
-                        str.AppendLine("Sum Of Digital Roots " + "\t=\t" + "");
-                    }
+                    long digit_sum = Numbers.DigitSum(value);
+                    str.AppendLine("Digit Sum            " + "\t=\t" + digit_sum);
+                    long digital_root = Numbers.DigitalRoot(value);
+                    str.AppendLine("Digital Root         " + "\t=\t" + digital_root);
+                    long sum_of_numbers = Numbers.SumOfNumbers(value);
+                    str.AppendLine("Sum Of Numbers       " + "\t=\t" + sum_of_numbers + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.SumOfNumbersString(value)) : ""));
+                    long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
+                    str.AppendLine("Sum Of Digit Sums    " + "\t=\t" + sum_of_digit_sums + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.SumOfDigitSumsString(value)) : ""));
+                    long sum_of_digital_roots = Numbers.SumOfDigitalRoots(value);
+                    str.AppendLine("Sum Of Digital Roots " + "\t=\t" + sum_of_digital_roots + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.SumOfDigitalRootsString(value)) : ""));
 
                     str.AppendLine();
                     string proper_divisors = Numbers.GetProperDivisorsString(value);
@@ -47795,35 +47727,23 @@ public partial class MainForm : Form, ISubscriber
     }
     private void PCIndexChainL2RTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = 0;
-        if (long.TryParse(ValueTextBox.Text, out value))
-        {
-            this.ToolTip.SetToolTip(this.PCIndexChainL2RTextBox, "Left-to-right prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainL2R(value) + "  =  " + DecimalPCIndexChainL2R(value));
-        }
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
+        this.ToolTip.SetToolTip(this.PCIndexChainL2RTextBox, "Left-to-right prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainL2R(value) + "  =  " + DecimalPCIndexChainL2R(value));
     }
     private void PCIndexChainR2LTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = 0;
-        if (long.TryParse(ValueTextBox.Text, out value))
-        {
-            this.ToolTip.SetToolTip(this.PCIndexChainR2LTextBox, "Right-to-left prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainR2L(value) + "  =  " + DecimalPCIndexChainR2L(value));
-        }
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
+        this.ToolTip.SetToolTip(this.PCIndexChainR2LTextBox, "Right-to-left prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainR2L(value) + "  =  " + DecimalPCIndexChainR2L(value));
     }
     private void CPIndexChainL2RTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = 0;
-        if (long.TryParse(ValueTextBox.Text, out value))
-        {
-            this.ToolTip.SetToolTip(this.CPIndexChainL2RTextBox, "Left-to-right composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainL2R(value) + "  =  " + DecimalCPIndexChainL2R(value));
-        }
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
+        this.ToolTip.SetToolTip(this.CPIndexChainL2RTextBox, "Left-to-right composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainL2R(value) + "  =  " + DecimalCPIndexChainL2R(value));
     }
     private void CPIndexChainR2LTextBox_TextChanged(object sender, EventArgs e)
     {
-        long value = 0;
-        if (long.TryParse(ValueTextBox.Text, out value))
-        {
-            this.ToolTip.SetToolTip(this.CPIndexChainR2LTextBox, "Right-to-left composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainR2L(value) + "  =  " + DecimalCPIndexChainR2L(value));
-        }
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
+        this.ToolTip.SetToolTip(this.CPIndexChainR2LTextBox, "Right-to-left composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainR2L(value) + "  =  " + DecimalCPIndexChainR2L(value));
     }
     private void IndexChainLengthTextBox_Click(object sender, EventArgs e)
     {
