@@ -16033,7 +16033,7 @@ public partial class MainForm : Form, ISubscriber
             {
                 ClearFindMatches();
 
-                m_client.FindPhrases(TextSearchBlockSize.Verse, text, LanguageType.RightToLeft, null, TextLocationInChapter.Any, TextLocationInVerse.Any, TextLocationInWord.Any, TextWordness.WholeWord, false, false, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
+                m_client.FindPhrases(TextSearchBlockSize.Verse, text, LanguageType.RightToLeft, null, TextLocationInChapter.Any, TextLocationInVerse.Any, TextLocationInWord.Any, TextWordness.Any, false, false, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
                 if (m_client.FoundPhrases != null)
                 {
                     int phrase_count = GetPhraseCount(m_client.FoundPhrases);
