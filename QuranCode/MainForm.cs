@@ -6823,7 +6823,7 @@ public partial class MainForm : Form, ISubscriber
         this.GrammarTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
         this.GrammarTextBox.Size = new System.Drawing.Size(678, 203);
         this.GrammarTextBox.TabIndex = 1;
-        this.GrammarTextBox.Text = "Click a word to display its grammar information in Arabic and English";
+        this.GrammarTextBox.Text = "Click a word to display its grammar information in Arabic and English.";
         this.GrammarTextBox.WordWrap = false;
         this.GrammarTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
         // 
@@ -6978,8 +6978,7 @@ public partial class MainForm : Form, ISubscriber
         this.ValuesSequenceTabPage.Size = new System.Drawing.Size(678, 203);
         this.ValuesSequenceTabPage.TabIndex = 198;
         this.ValuesSequenceTabPage.Text = "Values";
-        this.ValuesSequenceTabPage.ToolTipText = "Values of letter/word/verse/chapter values in bases 2 to 36\r\nقيم الحروف والكلمات " +
-"والءايات والسُوَر بالأنظمة الرقمية لأساسات 2 الى 36";
+        this.ValuesSequenceTabPage.ToolTipText = "Values of letter/word/verse/chapter values in bases 2 to 36\r\nقيم الحروف والكلمات والءايات والسُوَر بالأنظمة الرقمية لأساسات 2 الى 36";
         this.ValuesSequenceTabPage.UseVisualStyleBackColor = true;
         // 
         // ValuesSequenceInspectLabel
@@ -7086,8 +7085,7 @@ public partial class MainForm : Form, ISubscriber
         this.ValuesSequenceTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
         this.ValuesSequenceTextBox.Size = new System.Drawing.Size(678, 203);
         this.ValuesSequenceTextBox.TabIndex = 1;
-        this.ValuesSequenceTextBox.Text = "Select text to convert its letter/word/verse/chapter values into a number sequenc" +
-"e in the specified base.";
+        this.ValuesSequenceTextBox.Text = "Select text to convert its letter/word/verse/chapter values into a number sequence in the specified base.";
         this.ValuesSequenceTextBox.WordWrap = false;
         this.ValuesSequenceTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
         // 
@@ -17430,13 +17428,10 @@ public partial class MainForm : Form, ISubscriber
                 Verse verse = GetVerseAtCursor();
                 if (verse != null)
                 {
-                    if (verse != previous_verse)
-                    {
-                        CurrentVerseIndex = GetVerseIndex(verse);
-                        UpdatePlayerButtons(verse);
-                        UpdateHeaderLabel();
-                    }
+                    CurrentVerseIndex = GetVerseIndex(verse);
+                    UpdatePlayerButtons(verse);
                 }
+                UpdateHeaderLabel();
 
                 CalculateCurrentValue();
 
@@ -26095,7 +26090,7 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else
                 {
-                    RelatedWordsTextBox.Text = L[l]["Click a word to display words from the same root and all verses."];
+                    RelatedWordsTextBox.Text = L[l]["Click a word to display words from the same root."];
                     RelatedWordsTextBox.Refresh();
 
                     m_info_word = null;
@@ -39409,21 +39404,7 @@ public partial class MainForm : Form, ISubscriber
 
             if (m_found_verses_displayed)
             {
-                if (!String.IsNullOrEmpty(m_find_result_header))
-                {
-                    text = m_find_result_header;
-
-                    string[] parts = text.Split();
-                    if (parts.Length > 0)
-                    {
-                        if (int.TryParse(parts[0], out number))
-                        {
-                            // do nothing
-                        }
-                    }
-                    m_find_result_header = null; // to signal to DisplaySearchResult to not diaply the total found result but the current verse info.
-                }
-                else
+                if (SearchResultTextBox.Focused)
                 {
                     Verse verse = GetCurrentVerse();
                     if (verse != null)
@@ -39432,6 +39413,18 @@ public partial class MainForm : Form, ISubscriber
                         {
                             text = GetVerseSummary(verse);
                             number = verse.NumberInChapter;
+                        }
+                    }
+                }
+                else
+                {
+                    text = m_find_result_header;
+                    string[] parts = text.Split();
+                    if (parts.Length > 0)
+                    {
+                        if (int.TryParse(parts[0], out number))
+                        {
+                            // do nothing
                         }
                     }
                 }
@@ -39521,10 +39514,13 @@ public partial class MainForm : Form, ISubscriber
         if (m_active_textbox != null)
         {
             // allow subsequent Finds to update chapter list, and browse history
-            m_found_verses_displayed = true;
             m_current_drawing_type = DrawingType.None; // so not to SwitchToPictureBox
 
-            PopulateChaptersListBox();
+            if (!m_found_verses_displayed)
+            {
+                m_found_verses_displayed = true;
+                PopulateChaptersListBox();
+            }
 
             // in all cases
             MainTextBox.Visible = false;
