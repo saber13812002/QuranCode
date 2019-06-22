@@ -348,8 +348,8 @@ public partial class MainForm : Form
         int length = ValueTextBox.Text.Replace(" ", "").Length;
         if (digits == length)
         {
-            UndoValueLabel.Enabled = (digits > 0);
-            RedoValueLabel.Enabled = (digits > 0);
+            PreviousPrimeLabel.Enabled = (digits > 0);
+            NextPrimeLabel.Enabled = (digits > 0);
         }
         DigitsLabel.Text = (digits == 0) ? "digits" : digits.ToString();
 
@@ -507,6 +507,14 @@ public partial class MainForm : Form
             this.Cursor = Cursors.Default;
         }
     }
+    private void NextPrimeLabel_Click(object sender, EventArgs e)
+    {
+        NextPrimeNumber();
+    }
+    private void PreviousPrimeLabel_Click(object sender, EventArgs e)
+    {
+        PreviousPrimeNumber();
+    }
 
     private List<string> m_history_items = new List<string>();
     private int m_history_index = -1;
@@ -529,14 +537,6 @@ public partial class MainForm : Form
             CallRun();
         }
         ValueTextBox.Focus();
-    }
-    private void RedoValueLabel_Click(object sender, EventArgs e)
-    {
-        NextHistoryItem();
-    }
-    private void UndoValueLabel_Click(object sender, EventArgs e)
-    {
-        PreviousHistoryItem();
     }
 
     private double m_double_value = 0.0D;
@@ -2488,7 +2488,7 @@ public partial class MainForm : Form
                 AnalyzeValue(value);
             }
         }
-        //ValueTextBox.Focus();
+        ValueTextBox.Focus();
     }
 
     private enum TimeDisplayMode { Elapsed, Remaining }
