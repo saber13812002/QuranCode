@@ -154,38 +154,38 @@ public static class Numbers
     {
         return GetNumberTypeColor(number.ToString(), Numbers.DEFAULT_RADIX);
     }
-    public static Color GetNumberTypeColor(string value, int radix)
+    public static Color GetNumberTypeColor(string text, int radix)
     {
         // if negative number, remove -ve sign
-        if (value.StartsWith("-")) value = value.Remove(0, 1);
+        if (text.StartsWith("-")) text = text.Remove(0, 1);
 
-        if (IsUnit(value, radix))
+        if (IsUnit(text, radix))
         {
             return NUMBER_TYPE_COLORS[(int)NumberType.Unit];
         }
 
-        else if (IsNonAdditivePrime(value, radix))
+        else if (IsNonAdditivePrime(text, radix))
         {
             return NUMBER_TYPE_COLORS[(int)NumberType.NonAdditivePrime];
         }
-        else if (IsAdditivePrime(value, radix))
+        else if (IsAdditivePrime(text, radix))
         {
             return NUMBER_TYPE_COLORS[(int)NumberType.AdditivePrime];
         }
-        else if (IsPrime(value, radix))
+        else if (IsPrime(text, radix))
         {
             return NUMBER_TYPE_COLORS[(int)NumberType.Prime];
         }
 
-        else if (IsNonAdditiveComposite(value, radix))
+        else if (IsNonAdditiveComposite(text, radix))
         {
             return NUMBER_TYPE_COLORS[(int)NumberType.NonAdditiveComposite];
         }
-        else if (IsAdditiveComposite(value, radix))
+        else if (IsAdditiveComposite(text, radix))
         {
             return NUMBER_TYPE_COLORS[(int)NumberType.AdditiveComposite];
         }
-        else if (IsComposite(value, radix))
+        else if (IsComposite(text, radix))
         {
             return NUMBER_TYPE_COLORS[(int)NumberType.Composite];
         }
@@ -649,10 +649,10 @@ public static class Numbers
         }
         return false;
     }
-    public static long SumOfNumbers(string value)
+    public static long SumOfNumbers(string text)
     {
         long number;
-        if (long.TryParse(value, out number))
+        if (long.TryParse(text, out number))
         {
             return SumOfNumbers(number);
         }
@@ -781,9 +781,9 @@ public static class Numbers
         if (number < 0L) number *= -1L;
         return (number == 1L);
     }
-    public static bool IsUnit(string value, int radix)
+    public static bool IsUnit(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return IsUnit(number);
     }
     public static bool IsOdd(long number)
@@ -791,9 +791,9 @@ public static class Numbers
         if (number < 0L) number *= -1L;
         return ((number % 2) == 1L);
     }
-    public static bool IsOdd(string value, int radix)
+    public static bool IsOdd(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return IsOdd(number);
     }
     public static bool IsEven(long number)
@@ -801,9 +801,9 @@ public static class Numbers
         if (number < 0L) number *= -1L;
         return ((number % 2) == 0L);
     }
-    public static bool IsEven(string value, int radix)
+    public static bool IsEven(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return IsEven(number);
     }
     // http://digitalbush.com/2010/02/26/sieve-of-eratosthenes-in-csharp/
@@ -996,9 +996,9 @@ public static class Numbers
         }
         return true;
     }
-    public static bool IsPrime(string value, int radix)
+    public static bool IsPrime(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return IsPrime(number);
     }
     public static bool IsAdditivePrime(long number)
@@ -1009,9 +1009,9 @@ public static class Numbers
         }
         return false;
     }
-    public static bool IsAdditivePrime(string value, int radix)
+    public static bool IsAdditivePrime(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return IsAdditivePrime(number);
     }
     public static bool IsNonAdditivePrime(long number)
@@ -1022,9 +1022,9 @@ public static class Numbers
         }
         return false;
     }
-    public static bool IsNonAdditivePrime(string value, int radix)
+    public static bool IsNonAdditivePrime(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return IsNonAdditivePrime(number);
     }
     public static bool IsComposite(long number)
@@ -1053,9 +1053,9 @@ public static class Numbers
         }
         return false;
     }
-    public static bool IsComposite(string value, int radix)
+    public static bool IsComposite(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return IsComposite(number);
     }
     public static bool IsAdditiveComposite(long number)
@@ -1066,9 +1066,9 @@ public static class Numbers
         }
         return false;
     }
-    public static bool IsAdditiveComposite(string value, int radix)
+    public static bool IsAdditiveComposite(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return IsAdditiveComposite(number);
     }
     public static bool IsNonAdditiveComposite(long number)
@@ -1079,9 +1079,9 @@ public static class Numbers
         }
         return false;
     }
-    public static bool IsNonAdditiveComposite(string value, int radix)
+    public static bool IsNonAdditiveComposite(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return IsNonAdditiveComposite(number);
     }
     /// <summary>
@@ -1095,11 +1095,11 @@ public static class Numbers
     /// <param name="n2"></param>
     /// <param name="n3"></param>
     /// <returns></returns>
-    public static bool ArePrimeTriplets(string value1, string value2, string value3, int radix)
+    public static bool ArePrimeTriplets(string text1, string text2, string text3, int radix)
     {
-        long number1 = Radix.Decode(value1, radix);
-        long number2 = Radix.Decode(value2, radix);
-        long number3 = Radix.Decode(value3, radix);
+        long number1 = Radix.Decode(text1, radix);
+        long number2 = Radix.Decode(text2, radix);
+        long number3 = Radix.Decode(text3, radix);
         return ArePrimeTriplets(number1, number2, number3);
     }
     public static bool ArePrimeTriplets(long number1, long number2, long number3)
@@ -1212,17 +1212,17 @@ public static class Numbers
         }
         return result;
     }
-    public static List<char> GetDigits(string value)
+    public static List<char> GetDigits(string text)
     {
         List<char> result = new List<char>();
-        if (value.Length > 0)
+        if (text.Length > 0)
         {
-            for (int i = 0; i < value.Length; i++)
+            for (int i = 0; i < text.Length; i++)
             {
-                char c = value[i];
+                char c = text[i];
                 if (Char.IsDigit(c))
                 {
-                    result.Add(value[i]);
+                    result.Add(text[i]);
                 }
             }
         }
@@ -1232,15 +1232,15 @@ public static class Numbers
     {
         return DigitCount(number.ToString());
     }
-    public static int DigitCount(string value)
+    public static int DigitCount(string text)
     {
-        return DigitCount(value, Numbers.DEFAULT_RADIX);
+        return DigitCount(text, Numbers.DEFAULT_RADIX);
         //int result = 0;
-        //if (value.Length > 0)
+        //if (text.Length > 0)
         //{
-        //    for (int i = 0; i < value.Length; i++)
+        //    for (int i = 0; i < text.Length; i++)
         //    {
-        //        char c = value[i];
+        //        char c = text[i];
         //        if (Char.IsDigit(c))
         //        {
         //            result++;
@@ -1253,14 +1253,14 @@ public static class Numbers
     {
         return DigitCount(number.ToString(), radix);
     }
-    public static int DigitCount(string value, int radix)
+    public static int DigitCount(string text, int radix)
     {
         int result = 0;
-        if (value.Length > 0)
+        if (text.Length > 0)
         {
-            for (int i = 0; i < value.Length; i++)
+            for (int i = 0; i < text.Length; i++)
             {
-                char c = value[i];
+                char c = text[i];
                 if (((c >= ('0')) && (c < ('9' - 9 + radix))) || ((c >= ('A')) && (c < ('A' - 10 + radix))))
                 {
                     result++;
@@ -1270,19 +1270,18 @@ public static class Numbers
         return result;
     }
 
-    //TODO versions with radix
     public static int DigitSum(long number)
     {
         return DigitSum(number.ToString());
     }
-    public static int DigitSum(string value)
+    public static int DigitSum(string text)
     {
         int result = 0;
-        if (value.Length > 0)
+        if (text.Length > 0)
         {
-            for (int i = 0; i < value.Length; i++)
+            for (int i = 0; i < text.Length; i++)
             {
-                char c = value[i];
+                char c = text[i];
                 if (Char.IsDigit(c))
                 {
                     result += GetDigitValue(c);
@@ -1291,10 +1290,26 @@ public static class Numbers
         }
         return result;
     }
-    public static long SumOfDigitSums(string value)
+    public static int DigitSum(string text, int radix)
+    {
+        int result = 0;
+        if (text.Length > 0)
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                char c = text[i];
+                //if (Char.IsDigit(c))
+                {
+                    result += (int)Radix.Decode(c.ToString(), radix);
+                }
+            }
+        }
+        return result;
+    }
+    public static long SumOfDigitSums(string text)
     {
         long number;
-        if (long.TryParse(value, out number))
+        if (long.TryParse(text, out number))
         {
             return SumOfDigitSums(number);
         }
@@ -1346,19 +1361,19 @@ public static class Numbers
         int radix = 10;
         return (int)(1L + (number - 1L) % (radix - 1));
     }
-    public static int DigitalRoot(string value)
+    public static int DigitalRoot(string text)
     {
         long number;
-        if (long.TryParse(value, out number))
+        if (long.TryParse(text, out number))
         {
             return DigitalRoot(number);
         }
         return 0;
     }
-    public static long SumOfDigitalRoots(string value)
+    public static long SumOfDigitalRoots(string text)
     {
         long number;
-        if (long.TryParse(value, out number))
+        if (long.TryParse(text, out number))
         {
             return SumOfDigitalRoots(number);
         }
@@ -1419,9 +1434,9 @@ public static class Numbers
     {
         return IsOddDigits(number.ToString());
     }
-    public static bool IsOddDigits(string value)
+    public static bool IsOddDigits(string text)
     {
-        foreach (char c in value)
+        foreach (char c in text)
         {
             if (Char.IsDigit(c))
             {
@@ -1437,9 +1452,9 @@ public static class Numbers
     {
         return IsEvenDigits(number.ToString());
     }
-    public static bool IsEvenDigits(string value)
+    public static bool IsEvenDigits(string text)
     {
-        foreach (char c in value)
+        foreach (char c in text)
         {
             if (Char.IsDigit(c))
             {
@@ -1455,9 +1470,9 @@ public static class Numbers
     {
         return IsPrimeDigits(number.ToString());
     }
-    public static bool IsPrimeDigits(string value)
+    public static bool IsPrimeDigits(string text)
     {
-        foreach (char c in value)
+        foreach (char c in text)
         {
             if (Char.IsDigit(c))
             {
@@ -1473,9 +1488,9 @@ public static class Numbers
     {
         return IsPrimeOr1Digits(number.ToString());
     }
-    public static bool IsPrimeOr1Digits(string value)
+    public static bool IsPrimeOr1Digits(string text)
     {
-        foreach (char c in value)
+        foreach (char c in text)
         {
             if (Char.IsDigit(c))
             {
@@ -1491,9 +1506,9 @@ public static class Numbers
     {
         return IsCompositeDigits(number.ToString());
     }
-    public static bool IsCompositeDigits(string value)
+    public static bool IsCompositeDigits(string text)
     {
-        foreach (char c in value)
+        foreach (char c in text)
         {
             if (Char.IsDigit(c))
             {
@@ -1509,9 +1524,9 @@ public static class Numbers
     {
         return IsCompositeOr0Digits(number.ToString());
     }
-    public static bool IsCompositeOr0Digits(string value)
+    public static bool IsCompositeOr0Digits(string text)
     {
-        foreach (char c in value)
+        foreach (char c in text)
         {
             if (Char.IsDigit(c))
             {
@@ -1632,19 +1647,19 @@ public static class Numbers
         }
         return -1;
     }
-    public static int PrimeIndexOf(string value, int radix)
+    public static int PrimeIndexOf(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return PrimeIndexOf(number);
     }
-    public static int AdditivePrimeIndexOf(string value, int radix)
+    public static int AdditivePrimeIndexOf(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return AdditivePrimeIndexOf(number);
     }
-    public static int NonAdditivePrimeIndexOf(string value, int radix)
+    public static int NonAdditivePrimeIndexOf(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return NonAdditivePrimeIndexOf(number);
     }
     private static void GeneratePrimes(int max)
@@ -1899,9 +1914,9 @@ public static class Numbers
         }
         return -1;
     }
-    public static int Prime4nPlus1IndexOf(string value, int radix)
+    public static int Prime4nPlus1IndexOf(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return Prime4nPlus1IndexOf(number);
     }
     private static string s_primes_4nplus1_filename = "4n+1_primes.txt";
@@ -1964,9 +1979,9 @@ public static class Numbers
         }
         return -1;
     }
-    public static int Prime4nMinus1IndexOf(string value, int radix)
+    public static int Prime4nMinus1IndexOf(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return Prime4nMinus1IndexOf(number);
     }
     private static string s_primes_4nminus1_filename = "4n-1_primes.txt";
@@ -2112,19 +2127,19 @@ public static class Numbers
         }
         return -1;
     }
-    public static int CompositeIndexOf(string value, int radix)
+    public static int CompositeIndexOf(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return CompositeIndexOf(number);
     }
-    public static int AdditiveCompositeIndexOf(string value, int radix)
+    public static int AdditiveCompositeIndexOf(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return AdditiveCompositeIndexOf(number);
     }
-    public static int NonAdditiveCompositeIndexOf(string value, int radix)
+    public static int NonAdditiveCompositeIndexOf(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return NonAdditiveCompositeIndexOf(number);
     }
     private static void GenerateComposites(int max)
@@ -2388,9 +2403,9 @@ public static class Numbers
         }
         return -1;
     }
-    public static int Composite4nPlus1IndexOf(string value, int radix)
+    public static int Composite4nPlus1IndexOf(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return Composite4nPlus1IndexOf(number);
     }
     private static string s_composites_4nplus1_filename = "4n+1_composites.txt";
@@ -2453,9 +2468,9 @@ public static class Numbers
         }
         return -1;
     }
-    public static int Composite4nMinus1IndexOf(string value, int radix)
+    public static int Composite4nMinus1IndexOf(string text, int radix)
     {
-        long number = Radix.Decode(value, radix);
+        long number = Radix.Decode(text, radix);
         return Composite4nMinus1IndexOf(number);
     }
     private static string s_composites_4nminus1_filename = "4n-1_composites.txt";

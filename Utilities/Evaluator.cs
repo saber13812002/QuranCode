@@ -123,33 +123,30 @@ public static class Evaluator
     private static string ProcessExpression(string expression, int radix)
     {
         char[] separators = { '(', ')', '+', '-', '*', '/', '%', '\\', '^', '!' };
-
-        ArrayList processed_parts = new ArrayList();
         string[] parts = expression.Split(separators, StringSplitOptions.RemoveEmptyEntries);
         foreach (string part in parts)
         {
             bool in_math_library = s_math_library[part.ToUpper()] != null;
-            if (!processed_parts.Contains(part))
+
+            // 1. consruct Math.Xxx() functions and Math.XXX constants
+            if (in_math_library)
             {
-                // 1. consruct Math.Xxx() functions and Math.XXX constants
-                if (in_math_library)
+                expression = expression.Replace(part, "Math." + s_math_library[part.ToUpper()]);
+            }
+            // 2. decode to base-10
+            else
+            {
+                try
                 {
-                    expression = expression.Replace(part, "Math." + s_math_library[part.ToUpper()]);
+                    int pos = expression.IndexOf(part);
+                    expression = expression.Remove(pos, part.Length).Insert(pos, Radix.Decode(part, radix).ToString());
+                    //expression = expression.Replace(part, Radix.Decode(part, radix).ToString());
                 }
-                // 2. decode to base-10
-                else
+                catch
                 {
-                    try
-                    {
-                        expression = expression.Replace(part, Radix.Decode(part, radix).ToString());
-                    }
-                    catch
-                    {
-                        continue; // leave part as is
-                    }
+                    continue; // leave part as is
                 }
             }
-            processed_parts.Add(part); // so we don't replace it again
         }
 
         // Only allow small letters as constant and reserve capital letters for higher base systems
