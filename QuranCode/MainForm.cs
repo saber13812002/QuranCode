@@ -24909,11 +24909,12 @@ public partial class MainForm : Form, ISubscriber
         if (TabControl.SelectedTab == UserTextTabPage)
         {
             m_user_text_mode = true;
-            UserTextTextBox.Focus();
-            CalculateCurrentValue();
 
+            CalculateCurrentValue();
             BuildLetterFrequencies();
             DisplayLetterFrequencies();
+
+            UserTextTextBox.Focus();
         }
     }
     private void TabControl_Enter(object sender, EventArgs e)
@@ -47724,9 +47725,13 @@ public partial class MainForm : Form, ISubscriber
                 if (sender == HeaderLabel)
                 {
                     m_user_text_mode = false;
+
                     CalculateCurrentValue();
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
+                    DisplayWordFrequencies();
+
+                    m_active_textbox.Focus();
                 }
             }
         }
