@@ -47729,9 +47729,16 @@ public partial class MainForm : Form, ISubscriber
                     CalculateCurrentValue();
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
-                    DisplayWordFrequencies();
-
-                    m_active_textbox.Focus();
+                    if (m_active_textbox.SelectionLength > 0)
+                    {
+                        DisplayWordFrequencies();
+                    }
+                    else
+                    {
+                        WordsListBoxLabel.Visible = false;
+                        WordsListBox.Visible = false;
+                        WordsListBox.SendToBack();
+                    }
                 }
             }
         }
