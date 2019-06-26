@@ -1740,10 +1740,12 @@ public class Server : IPublisher
                         break;
                     case CalculationMode.SumOfUniqueLetterValues:
                         {
-                            //foreach (char c in word.UniqueLetters)
-                            //{
-                            //    result += CalculateValue(c);
-                            //}
+                            string text = word.Text;
+                            text = text.RemoveDuplicates();
+                            foreach (char c in text)
+                            {
+                                result += CalculateValue(c);
+                            }
                         }
                         break;
                     case CalculationMode.SumOfWordValueDigitSums:
@@ -2431,10 +2433,12 @@ public class Server : IPublisher
                         break;
                     case CalculationMode.SumOfUniqueLetterValues:
                         {
-                            //foreach (char c in word.UniqueLetters)
-                            //{
-                            //    result += CalculateValueWithLogging(c);
-                            //}
+                            string text = word.Text;
+                            text = text.RemoveDuplicates();
+                            foreach (char c in text)
+                            {
+                                result += CalculateValueWithLogging(c);
+                            }
                         }
                         break;
                     case CalculationMode.SumOfWordValueDigitSums:
