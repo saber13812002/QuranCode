@@ -3652,9 +3652,9 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersSetsCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByNumbersSetsCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersSetsCheckBox.ForeColor = System.Drawing.Color.Navy;
-        this.FindByNumbersSetsCheckBox.Location = new System.Drawing.Point(71, 2);
+        this.FindByNumbersSetsCheckBox.Location = new System.Drawing.Point(96, 2);
         this.FindByNumbersSetsCheckBox.Name = "FindByNumbersSetsCheckBox";
-        this.FindByNumbersSetsCheckBox.Size = new System.Drawing.Size(40, 17);
+        this.FindByNumbersSetsCheckBox.Size = new System.Drawing.Size(54, 23);
         this.FindByNumbersSetsCheckBox.TabIndex = 72;
         this.FindByNumbersSetsCheckBox.Text = "{}";
         this.ToolTip.SetToolTip(this.FindByNumbersSetsCheckBox, "find any combinations (not just consecutive ranges)");
@@ -6072,7 +6072,7 @@ public partial class MainForm : Form, ISubscriber
         this.AppPrimeCalculatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.AppPrimeCalculatorLabel.ForeColor = System.Drawing.Color.Transparent;
         this.AppPrimeCalculatorLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppPrimeCalculatorLabel.Image")));
-        this.AppPrimeCalculatorLabel.Location = new System.Drawing.Point(3, 375);
+        this.AppPrimeCalculatorLabel.Location = new System.Drawing.Point(3, 378);
         this.AppPrimeCalculatorLabel.Name = "AppPrimeCalculatorLabel";
         this.AppPrimeCalculatorLabel.Size = new System.Drawing.Size(20, 20);
         this.AppPrimeCalculatorLabel.TabIndex = 0;
