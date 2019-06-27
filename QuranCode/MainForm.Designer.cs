@@ -924,7 +924,7 @@ partial class MainForm
         this.AppQuranLabLabel.TabIndex = 3;
         this.AppQuranLabLabel.Tag = "";
         this.AppQuranLabLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.AppQuranLabLabel, "Prime Calculator");
+        this.ToolTip.SetToolTip(this.AppQuranLabLabel, "Quran Lab");
         this.AppQuranLabLabel.AutoSizeChanged += new System.EventHandler(this.AppLauncherLabel_Click);
         this.AppQuranLabLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
         // 
@@ -960,7 +960,7 @@ partial class MainForm
         this.AppPrimeCalculatorLabel.TabIndex = 1;
         this.AppPrimeCalculatorLabel.Tag = "";
         this.AppPrimeCalculatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.AppPrimeCalculatorLabel, "Quran Lab");
+        this.ToolTip.SetToolTip(this.AppPrimeCalculatorLabel, "Prime Calculator");
         this.AppPrimeCalculatorLabel.AutoSizeChanged += new System.EventHandler(this.AppLauncherLabel_Click);
         this.AppPrimeCalculatorLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
         // 
