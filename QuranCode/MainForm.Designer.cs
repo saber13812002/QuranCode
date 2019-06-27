@@ -34,9 +34,9 @@ partial class MainForm
         this.AppWordGeneratorLabel = new System.Windows.Forms.Label();
         this.AppInitialLettersLabel = new System.Windows.Forms.Label();
         this.AppCompositesLabel = new System.Windows.Forms.Label();
-        this.AppPrimeCalculatorLabel = new System.Windows.Forms.Label();
-        this.AppNumbersLabel = new System.Windows.Forms.Label();
         this.AppQuranLabLabel = new System.Windows.Forms.Label();
+        this.AppNumbersLabel = new System.Windows.Forms.Label();
+        this.AppPrimeCalculatorLabel = new System.Windows.Forms.Label();
         this.ShowToolTipsCheckBox = new System.Windows.Forms.CheckBox();
         this.ChapterSortPanel = new System.Windows.Forms.Panel();
         this.ChapterSortLabel = new System.Windows.Forms.Label();
@@ -827,9 +827,9 @@ partial class MainForm
         this.AppPanel.Controls.Add(this.AppWordGeneratorLabel);
         this.AppPanel.Controls.Add(this.AppInitialLettersLabel);
         this.AppPanel.Controls.Add(this.AppCompositesLabel);
-        this.AppPanel.Controls.Add(this.AppPrimeCalculatorLabel);
-        this.AppPanel.Controls.Add(this.AppNumbersLabel);
         this.AppPanel.Controls.Add(this.AppQuranLabLabel);
+        this.AppPanel.Controls.Add(this.AppNumbersLabel);
+        this.AppPanel.Controls.Add(this.AppPrimeCalculatorLabel);
         this.AppPanel.Dock = System.Windows.Forms.DockStyle.Right;
         this.AppPanel.ForeColor = System.Drawing.Color.Navy;
         this.AppPanel.Location = new System.Drawing.Point(940, 0);
@@ -909,23 +909,24 @@ partial class MainForm
         this.AppCompositesLabel.AutoSizeChanged += new System.EventHandler(this.AppLauncherLabel_Click);
         this.AppCompositesLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
         // 
-        // AppPrimeCalculatorLabel
+        // AppQuranLabLabel
         // 
-        this.AppPrimeCalculatorLabel.BackColor = System.Drawing.Color.Transparent;
-        this.AppPrimeCalculatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.AppPrimeCalculatorLabel.Dock = System.Windows.Forms.DockStyle.Left;
-        this.AppPrimeCalculatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.AppPrimeCalculatorLabel.ForeColor = System.Drawing.Color.Transparent;
-        this.AppPrimeCalculatorLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppPrimeCalculatorLabel.Image")));
-        this.AppPrimeCalculatorLabel.Location = new System.Drawing.Point(40, 0);
-        this.AppPrimeCalculatorLabel.Name = "AppPrimeCalculatorLabel";
-        this.AppPrimeCalculatorLabel.Size = new System.Drawing.Size(20, 21);
-        this.AppPrimeCalculatorLabel.TabIndex = 3;
-        this.AppPrimeCalculatorLabel.Tag = "";
-        this.AppPrimeCalculatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.AppPrimeCalculatorLabel, "Prime Calculator");
-        this.AppPrimeCalculatorLabel.AutoSizeChanged += new System.EventHandler(this.AppLauncherLabel_Click);
-        this.AppPrimeCalculatorLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
+        this.AppQuranLabLabel.AccessibleDescription = "";
+        this.AppQuranLabLabel.BackColor = System.Drawing.Color.Transparent;
+        this.AppQuranLabLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.AppQuranLabLabel.Dock = System.Windows.Forms.DockStyle.Left;
+        this.AppQuranLabLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.AppQuranLabLabel.ForeColor = System.Drawing.Color.Transparent;
+        this.AppQuranLabLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppQuranLabLabel.Image")));
+        this.AppQuranLabLabel.Location = new System.Drawing.Point(40, 0);
+        this.AppQuranLabLabel.Name = "AppQuranLabLabel";
+        this.AppQuranLabLabel.Size = new System.Drawing.Size(20, 21);
+        this.AppQuranLabLabel.TabIndex = 3;
+        this.AppQuranLabLabel.Tag = "";
+        this.AppQuranLabLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.ToolTip.SetToolTip(this.AppQuranLabLabel, "Prime Calculator");
+        this.AppQuranLabLabel.AutoSizeChanged += new System.EventHandler(this.AppLauncherLabel_Click);
+        this.AppQuranLabLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
         // 
         // AppNumbersLabel
         // 
@@ -945,23 +946,23 @@ partial class MainForm
         this.AppNumbersLabel.AutoSizeChanged += new System.EventHandler(this.AppLauncherLabel_Click);
         this.AppNumbersLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
         // 
-        // AppQuranLabLabel
+        // AppPrimeCalculatorLabel
         // 
-        this.AppQuranLabLabel.BackColor = System.Drawing.Color.Transparent;
-        this.AppQuranLabLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.AppQuranLabLabel.Dock = System.Windows.Forms.DockStyle.Left;
-        this.AppQuranLabLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.AppQuranLabLabel.ForeColor = System.Drawing.Color.Transparent;
-        this.AppQuranLabLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppQuranLabLabel.Image")));
-        this.AppQuranLabLabel.Location = new System.Drawing.Point(0, 0);
-        this.AppQuranLabLabel.Name = "AppQuranLabLabel";
-        this.AppQuranLabLabel.Size = new System.Drawing.Size(20, 21);
-        this.AppQuranLabLabel.TabIndex = 1;
-        this.AppQuranLabLabel.Tag = "";
-        this.AppQuranLabLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.AppQuranLabLabel, "Quran Lab");
-        this.AppQuranLabLabel.AutoSizeChanged += new System.EventHandler(this.AppLauncherLabel_Click);
-        this.AppQuranLabLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
+        this.AppPrimeCalculatorLabel.BackColor = System.Drawing.Color.Transparent;
+        this.AppPrimeCalculatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.AppPrimeCalculatorLabel.Dock = System.Windows.Forms.DockStyle.Left;
+        this.AppPrimeCalculatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.AppPrimeCalculatorLabel.ForeColor = System.Drawing.Color.Transparent;
+        this.AppPrimeCalculatorLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppPrimeCalculatorLabel.Image")));
+        this.AppPrimeCalculatorLabel.Location = new System.Drawing.Point(0, 0);
+        this.AppPrimeCalculatorLabel.Name = "AppPrimeCalculatorLabel";
+        this.AppPrimeCalculatorLabel.Size = new System.Drawing.Size(20, 21);
+        this.AppPrimeCalculatorLabel.TabIndex = 1;
+        this.AppPrimeCalculatorLabel.Tag = "";
+        this.AppPrimeCalculatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.ToolTip.SetToolTip(this.AppPrimeCalculatorLabel, "Quran Lab");
+        this.AppPrimeCalculatorLabel.AutoSizeChanged += new System.EventHandler(this.AppLauncherLabel_Click);
+        this.AppPrimeCalculatorLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
         // 
         // ShowToolTipsCheckBox
         // 
@@ -5582,7 +5583,7 @@ partial class MainForm
         this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 1);
         this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
         this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 196);
+        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 197);
         this.ScriptOutputGroupBox.TabIndex = 103;
         this.ScriptOutputGroupBox.TabStop = false;
         this.ScriptOutputGroupBox.Text = " Output ";
@@ -5598,7 +5599,7 @@ partial class MainForm
         this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
         this.ScriptOutputTextBox.ReadOnly = true;
         this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 168);
+        this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 169);
         this.ScriptOutputTextBox.TabIndex = 0;
         this.ScriptOutputTextBox.WordWrap = false;
         this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -12315,12 +12316,12 @@ partial class MainForm
     private System.Windows.Forms.Label ScriptSaveAsLabel;
     private System.Windows.Forms.Label CalculationModeLabel;
     private System.Windows.Forms.Panel AppPanel;
-    private System.Windows.Forms.Label AppPrimeCalculatorLabel;
+    private System.Windows.Forms.Label AppQuranLabLabel;
     private System.Windows.Forms.Label AppAhlulBaytLabel;
     private System.Windows.Forms.Label AppWordGeneratorLabel;
     private System.Windows.Forms.Label AppInitialLettersLabel;
     private System.Windows.Forms.Label AppCompositesLabel;
-    private System.Windows.Forms.Label AppQuranLabLabel;
+    private System.Windows.Forms.Label AppPrimeCalculatorLabel;
     private System.Windows.Forms.Label AppNumbersLabel;
     private System.Windows.Forms.TextBox UnusedLettersValueTextBox;
     private System.Windows.Forms.Label TranslationWordWrapLabel;
