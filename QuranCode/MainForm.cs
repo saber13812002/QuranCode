@@ -17663,7 +17663,15 @@ public partial class MainForm : Form, ISubscriber
     }
     private void MainTextBox_MouseDown(object sender, MouseEventArgs e)
     {
-        if (e.Button == MouseButtons.Right)
+        if (e.Button == MouseButtons.Left)
+        {
+            if (ModifierKeys == Keys.Control)
+            {
+                // go to related words to word under mouse pointer
+                FindRelatedWords(m_current_word);
+            }
+        }
+        else if (e.Button == MouseButtons.Right)
         {
             // in case we come from UserTextTextBox
             if (m_active_textbox != null)
@@ -17708,60 +17716,49 @@ public partial class MainForm : Form, ISubscriber
     }
     private void MainTextBox_MouseUp(object sender, MouseEventArgs e)
     {
-        if (ModifierKeys == Keys.Control)
+        DisplayRelatedWordsInformation(m_current_word);
+        DisplayGrammarInformation(m_current_word);
+
+        // calculate the C V W L distances
+        int chapter_number = ChapterComboBox.SelectedIndex + 1;
+        int verse_number = (int)VerseNumericUpDown.Value;
+        int word_number = (int)WordNumericUpDown.Value;
+        int letter_number = (int)LetterNumericUpDown.Value;
+
+        m_clicked_chapter_distance = chapter_number - m_clicked_chapter_number;
+        m_clicked_verse_distance = verse_number - m_clicked_verse_number;
+        m_clicked_word_distance = word_number - m_clicked_word_number;
+        m_clicked_letter_distance = letter_number - m_clicked_letter_number;
+
+        ChapterDiffTextBox.Text = m_clicked_chapter_distance.ToString();
+        VerseDiffTextBox.Text = m_clicked_verse_distance.ToString();
+        WordDiffTextBox.Text = m_clicked_word_distance.ToString();
+        LetterDiffTextBox.Text = m_clicked_letter_distance.ToString();
+
+        ChapterDiffTextBox.ForeColor = Numbers.GetNumberTypeColor(m_clicked_chapter_distance);
+        VerseDiffTextBox.ForeColor = Numbers.GetNumberTypeColor(m_clicked_verse_distance);
+        WordDiffTextBox.ForeColor = Numbers.GetNumberTypeColor(m_clicked_word_distance);
+        LetterDiffTextBox.ForeColor = Numbers.GetNumberTypeColor(m_clicked_letter_distance);
+        ChapterDiffTextBox.BackColor = (Numbers.Compare((int)m_clicked_chapter_distance, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Control;
+        VerseDiffTextBox.BackColor = (Numbers.Compare((int)m_clicked_verse_distance, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Control;
+        WordDiffTextBox.BackColor = (Numbers.Compare((int)m_clicked_word_distance, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Control;
+        LetterDiffTextBox.BackColor = (Numbers.Compare((int)m_clicked_letter_distance, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Control;
+        ChapterDiffTextBox.Refresh();
+        VerseDiffTextBox.Refresh();
+        WordDiffTextBox.Refresh();
+        LetterDiffTextBox.Refresh();
+
+        m_clicked_chapter_number = chapter_number;
+        m_clicked_verse_number = verse_number;
+        m_clicked_word_number = word_number;
+        m_clicked_letter_number = letter_number;
+
+        Verse verse = GetCurrentVerse();
+        if (verse != null)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                // go to related words to word under mouse pointer
-                FindRelatedWords(m_current_word);
-            }
-        }
-        else
-        {
-            DisplayRelatedWordsInformation(m_current_word);
-            DisplayGrammarInformation(m_current_word);
+            m_player_looping_i = 0;
 
-            // calculate the C V W L distances
-            int chapter_number = ChapterComboBox.SelectedIndex + 1;
-            int verse_number = (int)VerseNumericUpDown.Value;
-            int word_number = (int)WordNumericUpDown.Value;
-            int letter_number = (int)LetterNumericUpDown.Value;
-
-            m_clicked_chapter_distance = chapter_number - m_clicked_chapter_number;
-            m_clicked_verse_distance = verse_number - m_clicked_verse_number;
-            m_clicked_word_distance = word_number - m_clicked_word_number;
-            m_clicked_letter_distance = letter_number - m_clicked_letter_number;
-
-            ChapterDiffTextBox.Text = m_clicked_chapter_distance.ToString();
-            VerseDiffTextBox.Text = m_clicked_verse_distance.ToString();
-            WordDiffTextBox.Text = m_clicked_word_distance.ToString();
-            LetterDiffTextBox.Text = m_clicked_letter_distance.ToString();
-
-            ChapterDiffTextBox.ForeColor = Numbers.GetNumberTypeColor(m_clicked_chapter_distance);
-            VerseDiffTextBox.ForeColor = Numbers.GetNumberTypeColor(m_clicked_verse_distance);
-            WordDiffTextBox.ForeColor = Numbers.GetNumberTypeColor(m_clicked_word_distance);
-            LetterDiffTextBox.ForeColor = Numbers.GetNumberTypeColor(m_clicked_letter_distance);
-            ChapterDiffTextBox.BackColor = (Numbers.Compare((int)m_clicked_chapter_distance, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Control;
-            VerseDiffTextBox.BackColor = (Numbers.Compare((int)m_clicked_verse_distance, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Control;
-            WordDiffTextBox.BackColor = (Numbers.Compare((int)m_clicked_word_distance, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Control;
-            LetterDiffTextBox.BackColor = (Numbers.Compare((int)m_clicked_letter_distance, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Control;
-            ChapterDiffTextBox.Refresh();
-            VerseDiffTextBox.Refresh();
-            WordDiffTextBox.Refresh();
-            LetterDiffTextBox.Refresh();
-
-            m_clicked_chapter_number = chapter_number;
-            m_clicked_verse_number = verse_number;
-            m_clicked_word_number = word_number;
-            m_clicked_letter_number = letter_number;
-
-            Verse verse = GetCurrentVerse();
-            if (verse != null)
-            {
-                m_player_looping_i = 0;
-
-                // selected verses are dealt with by CalculateAndDisplayCounts 
-            }
+            // selected verses are dealt with by CalculateAndDisplayCounts 
         }
     }
     private void MainTextBox_Click(object sender, EventArgs e)
@@ -39343,6 +39340,17 @@ public partial class MainForm : Form, ISubscriber
                             SearchResultTextBox.Focus();
                             SearchResultTextBox.Select(start, length);
                             SearchResultTextBox.SelectionColor = Color.Red;
+
+                            Verse verse = GetCurrentVerse();
+                            if (verse != null)
+                            {
+                                if (verse.Chapter != null)
+                                {
+                                    HeaderLabel.Text = GetVerseSummary(verse) + MATCH_SEPARATOR + L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count);
+                                    HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(verse.NumberInChapter);
+                                    HeaderLabel.Refresh();
+                                }
+                            }
                         }
                     }
                 }
@@ -39376,6 +39384,17 @@ public partial class MainForm : Form, ISubscriber
                             SearchResultTextBox.Focus();
                             SearchResultTextBox.Select(start, length);
                             SearchResultTextBox.SelectionColor = Color.Red;
+
+                            Verse verse = GetCurrentVerse();
+                            if (verse != null)
+                            {
+                                if (verse.Chapter != null)
+                                {
+                                    HeaderLabel.Text = GetVerseSummary(verse) + MATCH_SEPARATOR + L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count);
+                                    HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(verse.NumberInChapter);
+                                    HeaderLabel.Refresh();
+                                }
+                            }
                         }
                     }
                 }
@@ -39424,28 +39443,13 @@ public partial class MainForm : Form, ISubscriber
 
             if (m_found_verses_displayed)
             {
-                if (SearchResultTextBox.Focused)
+                text = m_find_result_header;
+                string[] parts = text.Split();
+                if (parts.Length > 0)
                 {
-                    Verse verse = GetCurrentVerse();
-                    if (verse != null)
+                    if (int.TryParse(parts[0], out number))
                     {
-                        if (verse.Chapter != null)
-                        {
-                            text = GetVerseSummary(verse);
-                            number = verse.NumberInChapter;
-                        }
-                    }
-                }
-                else
-                {
-                    text = m_find_result_header;
-                    string[] parts = text.Split();
-                    if (parts.Length > 0)
-                    {
-                        if (int.TryParse(parts[0], out number))
-                        {
-                            // do nothing
-                        }
+                        // do nothing
                     }
                 }
             }
