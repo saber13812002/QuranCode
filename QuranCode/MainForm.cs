@@ -38472,14 +38472,13 @@ public partial class MainForm : Form, ISubscriber
 
 
             string text = null;
-            text += L[l]["number"] + number_operator_symbol + ((number > 0) ? number.ToString() : ((number_number_type != NumberType.None) ? FindByNumbersNumberNumberTypeLabel.Text : "*")) + " ";
-
+            text += ((number > 0) ? (L[l]["number"] + number_operator_symbol + number.ToString()) : ((number_number_type != NumberType.None) ? (L[l]["number"] + number_operator_symbol + FindByNumbersNumberNumberTypeLabel.Text) : ""));
             if (
                 (m_numbers_result_type == NumbersResultType.ChapterRanges) ||
                 (m_numbers_result_type == NumbersResultType.ChapterSets)
                )
             {
-                text += L[l]["chapters"] + chapter_count_operator_symbol + ((chapter_count > 0) ? chapter_count.ToString() : ((chapter_count_number_type != NumberType.None) ? FindByNumbersChaptersNumberTypeLabel.Text : "*")) + " ";
+                text += (((text.Length > 0) && ((chapter_count > 0) || (chapter_count_number_type != NumberType.None))) ? " " : "") + ((chapter_count > 0) ? (L[l]["chapters"] + chapter_count_operator_symbol + chapter_count.ToString()) : ((chapter_count_number_type != NumberType.None) ? (L[l]["chapters"] + chapter_count_operator_symbol + FindByNumbersChaptersNumberTypeLabel.Text) : ""));
             }
 
             if (
@@ -38490,7 +38489,7 @@ public partial class MainForm : Form, ISubscriber
                 (m_numbers_result_type == NumbersResultType.VerseSets)
                )
             {
-                text += L[l]["verses"] + verse_count_operator_symbol + ((verse_count > 0) ? verse_count.ToString() : ((verse_count_number_type != NumberType.None) ? FindByNumbersVersesNumberTypeLabel.Text : "*")) + " ";
+                text += (((text.Length > 0) && ((verse_count > 0) || (verse_count_number_type != NumberType.None))) ? " " : "") + ((verse_count > 0) ? (L[l]["verses"] + verse_count_operator_symbol + verse_count.ToString()) : ((verse_count_number_type != NumberType.None) ? (L[l]["verses"] + verse_count_operator_symbol + FindByNumbersVersesNumberTypeLabel.Text) : ""));
             }
 
             if (
@@ -38505,14 +38504,14 @@ public partial class MainForm : Form, ISubscriber
                 (m_numbers_result_type == NumbersResultType.WordSets)
                )
             {
-                text += L[l]["words"] + word_count_operator_symbol + ((word_count > 0) ? word_count.ToString() : ((word_count_number_type != NumberType.None) ? FindByNumbersWordsNumberTypeLabel.Text : "*")) + " ";
+                text += (((text.Length > 0) && ((word_count > 0) || (word_count_number_type != NumberType.None))) ? " " : "") + ((word_count > 0) ? (L[l]["words"] + word_count_operator_symbol + word_count.ToString()) : ((word_count_number_type != NumberType.None) ? (L[l]["words"] + word_count_operator_symbol + FindByNumbersWordsNumberTypeLabel.Text) : ""));
             }
 
-            text += L[l]["letters"] + letter_count_operator_symbol + ((letter_count > 0) ? letter_count.ToString() : ((letter_count_number_type != NumberType.None) ? FindByNumbersLettersNumberTypeLabel.Text : "*")) + " ";
-            text += L[l]["unique"] + unique_letter_count_operator_symbol + ((unique_letter_count > 0) ? unique_letter_count.ToString() : ((unique_letter_count_number_type != NumberType.None) ? FindByNumbersUniqueLettersNumberTypeLabel.Text : "*")) + " ";
-            text += L[l]["value"] + value_operator_symbol + ((value > 0) ? value.ToString() : ((value_number_type != NumberType.None) ? FindByNumbersValueNumberTypeLabel.Text : "*")) + " ";
-            text += L[l]["digit sum"] + value_digit_sum_operator_symbol + ((value_digit_sum > 0) ? value_digit_sum.ToString() : ((value_digit_sum_number_type != NumberType.None) ? FindByNumbersValueDigitSumNumberTypeLabel.Text : "*")) + " ";
-            text += L[l]["digital root"] + value_digital_root_operator_symbol + ((value_digital_root > 0) ? value_digital_root.ToString() : ((value_digital_root_number_type != NumberType.None) ? FindByNumbersValueDigitalRootNumberTypeLabel.Text : "*")) + "";
+            text += (((text.Length > 0) && ((letter_count > 0) || (letter_count_number_type != NumberType.None))) ? " " : "") + ((letter_count > 0) ? (L[l]["letters"] + letter_count_operator_symbol + letter_count.ToString()) : ((letter_count_number_type != NumberType.None) ? (L[l]["letters"] + letter_count_operator_symbol + FindByNumbersLettersNumberTypeLabel.Text) : ""));
+            text += (((text.Length > 0) && ((unique_letter_count > 0) || (unique_letter_count_number_type != NumberType.None))) ? " " : "") + ((unique_letter_count > 0) ? (L[l]["unique"] + unique_letter_count_operator_symbol + unique_letter_count.ToString()) : ((unique_letter_count_number_type != NumberType.None) ? (L[l]["unique"] + unique_letter_count_operator_symbol + FindByNumbersUniqueLettersNumberTypeLabel.Text) : ""));
+            text += (((text.Length > 0) && ((value > 0) || (value_number_type != NumberType.None))) ? " " : "") + ((value > 0) ? (L[l]["value"] + value_operator_symbol + value.ToString()) : ((value_number_type != NumberType.None) ? (L[l]["value"] + value_operator_symbol + FindByNumbersValueNumberTypeLabel.Text) : ""));
+            text += (((text.Length > 0) && ((value_digit_sum > 0) || (value_digit_sum_number_type != NumberType.None))) ? " " : "") + ((value_digit_sum > 0) ? (L[l]["digit sum"] + value_digit_sum_operator_symbol + value_digit_sum.ToString()) : ((value_digit_sum_number_type != NumberType.None) ? (L[l]["digit sum"] + value_digit_sum_operator_symbol + FindByNumbersValueDigitSumNumberTypeLabel.Text) : ""));
+            text += (((text.Length > 0) && ((value_digital_root > 0) || (value_digital_root_number_type != NumberType.None))) ? " " : "") + ((value_digital_root > 0) ? (L[l]["digital root"] + value_digital_root_operator_symbol + value_digital_root.ToString()) : ((value_digital_root_number_type != NumberType.None) ? (L[l]["digital root"] + value_digital_root_operator_symbol + FindByNumbersValueDigitalRootNumberTypeLabel.Text) : ""));
 
             NumberQuery query = new NumberQuery();
 
@@ -39268,17 +39267,17 @@ public partial class MainForm : Form, ISubscriber
                 if ((selection_start == start) && (selection_length == length))
                 {
                     m_find_match_index = i - 1;
-                    return;
+                    break;
                 }
                 else if ((selection_start >= start) && (selection_start < (start + length - 1)))
                 {
                     m_find_match_index = i;
-                    return;
+                    break;
                 }
                 else if (selection_start < start)
                 {
                     m_find_match_index = i - 1;
-                    return;
+                    break;
                 }
             }
         }
@@ -39299,137 +39298,111 @@ public partial class MainForm : Form, ISubscriber
                 if ((selection_start == start) && (selection_length == length))
                 {
                     m_find_match_index = i + 1;
-                    return;
+                    break;
                 }
                 else if ((selection_start >= start) && (selection_start < (start + length - 1)))
                 {
                     m_find_match_index = i;
-                    return;
+                    break;
                 }
                 else if (selection_start > (start + length - 1))
                 {
                     m_find_match_index = i + 1;
-                    return;
+                    break;
                 }
             }
         }
     }
     private void SelectPreviousFindMatch()
     {
-        if (m_found_verses_displayed)
+        if (m_client != null)
         {
-            if (m_find_matches != null)
-            {
-                if (m_find_matches.Count > 0)
-                {
-                    GotoPreviousFindMatch();
-
-                    // round robin
-                    if (m_find_match_index < 0)
-                    {
-                        m_find_match_index = m_find_matches.Count - 1;
-                    }
-
-                    // find previous match
-                    if ((m_find_match_index >= 0) && (m_find_match_index < m_find_matches.Count))
-                    {
-                        int start = m_find_matches[m_find_match_index].Start;
-                        int length = m_find_matches[m_find_match_index].Length;
-                        if ((start >= 0) && (start < SearchResultTextBox.Text.Length))
-                        {
-                            SearchResultTextBox.Focus();
-                            SearchResultTextBox.Select(start, length);
-                            SearchResultTextBox.SelectionColor = Color.Red;
-
-                            Verse verse = GetCurrentVerse();
-                            if (verse != null)
-                            {
-                                if (verse.Chapter != null)
-                                {
-                                    HeaderLabel.Text = GetVerseSummary(verse) + MATCH_SEPARATOR + L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count);
-                                    HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(verse.NumberInChapter);
-                                    HeaderLabel.Refresh();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        UpdateFindMatchCaption();
-    }
-    private void SelectNextFindMatch()
-    {
-        if (m_found_verses_displayed)
-        {
-            if (m_find_matches != null)
-            {
-                if (m_find_matches.Count > 0)
-                {
-                    GotoNextFindMatch();
-
-                    // round robin
-                    if (m_find_match_index == m_find_matches.Count)
-                    {
-                        m_find_match_index = 0;
-                    }
-
-                    // find next match
-                    if ((m_find_match_index >= 0) && (m_find_match_index < m_find_matches.Count))
-                    {
-                        int start = m_find_matches[m_find_match_index].Start;
-                        int length = m_find_matches[m_find_match_index].Length;
-                        if ((start >= 0) && (start < SearchResultTextBox.Text.Length))
-                        {
-                            SearchResultTextBox.Focus();
-                            SearchResultTextBox.Select(start, length);
-                            SearchResultTextBox.SelectionColor = Color.Red;
-
-                            Verse verse = GetCurrentVerse();
-                            if (verse != null)
-                            {
-                                if (verse.Chapter != null)
-                                {
-                                    HeaderLabel.Text = GetVerseSummary(verse) + MATCH_SEPARATOR + L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count);
-                                    HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(verse.NumberInChapter);
-                                    HeaderLabel.Refresh();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        UpdateFindMatchCaption();
-    }
-    private void UpdateFindMatchCaption()
-    {
-        m_current_word = GetWordAtCursor();
-        if (m_current_word != null)
-        {
-            string caption = GetCurrentWordDetails(m_current_word);
-
             if (m_found_verses_displayed)
             {
                 if (m_find_matches != null)
                 {
-                    int pos = caption.IndexOf(MATCH_SEPARATOR);
-                    if (pos > -1)
+                    if (m_find_matches.Count > 0)
                     {
-                        caption = caption.Substring(0, pos);
-                    }
+                        GotoPreviousFindMatch();
 
-                    if (m_find_match_index == -1)
-                    {
-                        caption += MATCH_SEPARATOR + "F3/Shift+F3";
-                    }
-                    else
-                    {
-                        caption += MATCH_SEPARATOR + L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count);
+                        // round robin
+                        if (m_find_match_index < 0)
+                        {
+                            m_find_match_index = m_find_matches.Count - 1;
+                        }
+
+                        // find previous match
+                        if ((m_find_match_index >= 0) && (m_find_match_index < m_find_matches.Count))
+                        {
+                            int start = m_find_matches[m_find_match_index].Start;
+                            int length = m_find_matches[m_find_match_index].Length;
+                            if ((start >= 0) && (start < SearchResultTextBox.Text.Length))
+                            {
+                                SearchResultTextBox.Focus();
+                                SearchResultTextBox.Select(start, length);
+                                SearchResultTextBox.SelectionColor = Color.Red;
+
+                                Verse verse = GetCurrentVerse();
+                                if (verse != null)
+                                {
+                                    if (verse.Chapter != null)
+                                    {
+                                        HeaderLabel.Text = GetVerseSummary(verse) + MATCH_SEPARATOR + L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count) + "   " + "Verse " + (CurrentVerseIndex + 1);
+                                        HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(verse.NumberInChapter);
+                                        HeaderLabel.Refresh();
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
-            this.Text = caption;
+        }
+    }
+    private void SelectNextFindMatch()
+    {
+        if (m_client != null)
+        {
+            if (m_found_verses_displayed)
+            {
+                if (m_find_matches != null)
+                {
+                    if (m_find_matches.Count > 0)
+                    {
+                        GotoNextFindMatch();
+
+                        // round robin
+                        if (m_find_match_index == m_find_matches.Count)
+                        {
+                            m_find_match_index = 0;
+                        }
+
+                        // find next match
+                        if ((m_find_match_index >= 0) && (m_find_match_index < m_find_matches.Count))
+                        {
+                            int start = m_find_matches[m_find_match_index].Start;
+                            int length = m_find_matches[m_find_match_index].Length;
+                            if ((start >= 0) && (start < SearchResultTextBox.Text.Length))
+                            {
+                                SearchResultTextBox.Focus();
+                                SearchResultTextBox.Select(start, length);
+                                SearchResultTextBox.SelectionColor = Color.Red;
+
+                                Verse verse = GetCurrentVerse();
+                                if (verse != null)
+                                {
+                                    if (verse.Chapter != null)
+                                    {
+                                        HeaderLabel.Text = GetVerseSummary(verse) + MATCH_SEPARATOR + L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count) + "   " + "Verse " + (CurrentVerseIndex + 1);
+                                        HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(verse.NumberInChapter);
+                                        HeaderLabel.Refresh();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -39438,18 +39411,17 @@ public partial class MainForm : Form, ISubscriber
     {
         if (m_client != null)
         {
-            string text = "";
-            int number = 0;
-
             if (m_found_verses_displayed)
             {
-                text = m_find_result_header;
-                string[] parts = text.Split();
+                string[] parts = m_find_result_header.Split();
                 if (parts.Length > 0)
                 {
+                    int number = 0;
                     if (int.TryParse(parts[0], out number))
                     {
-                        // do nothing
+                        HeaderLabel.Text = m_find_result_header;
+                        HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(number);
+                        HeaderLabel.Refresh();
                     }
                 }
             }
@@ -39460,15 +39432,13 @@ public partial class MainForm : Form, ISubscriber
                 {
                     if (verse.Chapter != null)
                     {
-                        text = GetVerseSummary(verse);
-                        number = verse.NumberInChapter;
+                        HeaderLabel.Text = GetVerseSummary(verse);
+                        HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(verse.NumberInChapter);
+                        HeaderLabel.Refresh();
                     }
                 }
             }
 
-            HeaderLabel.Text = text;
-            HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(number);
-            HeaderLabel.Refresh();
         }
     }
     private string GetVerseSummary(Verse verse)
@@ -39487,7 +39457,6 @@ public partial class MainForm : Form, ISubscriber
                 //+ L[l]["Bowing"] + " " + ((verse.Bowing != null) ? verse.Bowing.Number : -1) + "   "
                  + "     "
                  + L[l]["Page"] + " " + ((verse.Page != null) ? verse.Page.Number : -1)
-                 + "     " + "#" + (CurrentVerseIndex + 1)
             ;
             return text;
         }
@@ -40301,7 +40270,6 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
-        UpdateFindMatchCaption();
     }
     private void ColorizePhrases()
     {
@@ -40336,8 +40304,6 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
-
-                UpdateFindMatchCaption();
             }
         }
     }
@@ -41011,7 +40977,7 @@ public partial class MainForm : Form, ISubscriber
     {
         try
         {
-            SearchResultTextBox.SelectionChanged -= MainTextBox_SelectionChanged;
+            for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= MainTextBox_SelectionChanged;
 
             if (m_client != null)
             {
