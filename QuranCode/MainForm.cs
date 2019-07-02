@@ -724,7 +724,6 @@ public partial class MainForm : Form, ISubscriber
     private const string SUM_SYMBOL = "Ʃ";
     private const string SPACE_GAP = "     ";
     private const int MAX_SELECTON_SCOPE_LENGTH = 16;
-    private const string MATCH_SEPARATOR = SPACE_GAP + " ► ";
     private const string DEFAULT_QURAN_FONT_NAME = "me_quran";
     private const float DEFAULT_QURAN_FONT_SIZE = 14.0F;
     private const int DEFAULT_TRANSLATION_BOX_WIDTH = 409;
@@ -20319,8 +20318,8 @@ public partial class MainForm : Form, ISubscriber
                 }
                 m_client.Selection = new Selection(m_client.Book, scope, indexes);
 
-                UpdateChaptersListBox();
-                UpdateSelection(); // needed again, otherwise hangs. Why?
+                UpdateChaptersListBoxSelectionIndexes();
+                UpdateClientSelection(); // needed again, otherwise hangs. Why?
 
                 DisplaySelection(true);
 
@@ -20372,37 +20371,7 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
-    private void UpdateSelection()
-    {
-        if (m_client != null)
-        {
-            if (m_client.Book != null)
-            {
-                if (ChaptersListBox.SelectedIndices.Count > 0)
-                {
-                    SelectionScope scope = SelectionScope.Chapter;
-                    List<int> indexes = new List<int>();
-                    for (int i = 0; i < ChaptersListBox.SelectedIndices.Count; i++)
-                    {
-                        int selected_index = ChaptersListBox.SelectedIndices[i];
-                        if (m_client.Book.Chapters != null)
-                        {
-                            if ((selected_index >= 0) && (selected_index < m_client.Book.Chapters.Count))
-                            {
-                                Chapter chapter = m_client.Book.Chapters[selected_index];
-                                if (chapter != null)
-                                {
-                                    indexes.Add(chapter.Number - 1);
-                                }
-                            }
-                        }
-                    }
-                    m_client.Selection = new Selection(m_client.Book, scope, indexes);
-                }
-            }
-        }
-    }
-    private void UpdateChaptersListBox()
+    private void UpdateChaptersListBoxSelectionIndexes()
     {
         if (m_client != null)
         {
@@ -20451,6 +20420,36 @@ public partial class MainForm : Form, ISubscriber
                     {
                         ChaptersListBox.SelectedIndexChanged += new EventHandler(ChaptersListBox_SelectedIndexChanged);
                     }
+                }
+            }
+        }
+    }
+    private void UpdateClientSelection()
+    {
+        if (m_client != null)
+        {
+            if (m_client.Book != null)
+            {
+                if (ChaptersListBox.SelectedIndices.Count > 0)
+                {
+                    SelectionScope scope = SelectionScope.Chapter;
+                    List<int> indexes = new List<int>();
+                    for (int i = 0; i < ChaptersListBox.SelectedIndices.Count; i++)
+                    {
+                        int selected_index = ChaptersListBox.SelectedIndices[i];
+                        if (m_client.Book.Chapters != null)
+                        {
+                            if ((selected_index >= 0) && (selected_index < m_client.Book.Chapters.Count))
+                            {
+                                Chapter chapter = m_client.Book.Chapters[selected_index];
+                                if (chapter != null)
+                                {
+                                    indexes.Add(chapter.Number - 1);
+                                }
+                            }
+                        }
+                    }
+                    m_client.Selection = new Selection(m_client.Book, scope, indexes);
                 }
             }
         }
@@ -21039,7 +21038,7 @@ public partial class MainForm : Form, ISubscriber
                          LetterNumericUpDown.Focused
                      )
                     {
-                        UpdateSelection();
+                        UpdateClientSelection();
                     }
                     else if ((sender == BookmarkBackwardButton) || (sender == BookmarkForwardButton))
                     {
@@ -21197,7 +21196,7 @@ public partial class MainForm : Form, ISubscriber
                     }
                     else
                     {
-                        UpdateSelection();
+                        UpdateClientSelection();
                         DisplaySelection(true);
                         if (ChapterSelectionComboBox.Items.Count > 0)
                         {
@@ -21523,15 +21522,12 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplaySortedChapters()
     {
-        // repopulate chapter lists with new order
+        // re-populate chapter lists with new order
         PopulateChapterComboBox();
         PopulateChaptersListBox();
 
-        // select selected chapters
-        UpdateChaptersListBox();
-
-        // save new order of selected chapters
-        UpdateSelection();
+        UpdateChaptersListBoxSelectionIndexes();
+        UpdateClientSelection(); // needed again, otherwise hangs. Why?
 
         DisplaySelection(false);
     }
@@ -22676,7 +22672,7 @@ public partial class MainForm : Form, ISubscriber
                                 // we cannot move backward/forward inside the ChaptersListBox using Backspace
                                 if (!ChaptersListBox.Focused)
                                 {
-                                    UpdateChaptersListBox();
+                                    UpdateChaptersListBoxSelectionIndexes();
                                 }
                             }
                             UpdateVersePositions(verse);
@@ -22739,7 +22735,7 @@ public partial class MainForm : Form, ISubscriber
                                 // we cannot move backward/forward inside the ChaptersListBox using Backspace
                                 if (!ChaptersListBox.Focused)
                                 {
-                                    UpdateChaptersListBox();
+                                    UpdateChaptersListBoxSelectionIndexes();
                                 }
                             }
                         }
@@ -39347,8 +39343,8 @@ public partial class MainForm : Form, ISubscriber
                                 {
                                     if (verse.Chapter != null)
                                     {
-                                        HeaderLabel.Text = GetVerseSummary(verse) + MATCH_SEPARATOR + L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count) + "   " + "Verse " + (CurrentVerseIndex + 1);
-                                        HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(verse.NumberInChapter);
+                                        HeaderLabel.Text = L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count) + " " + L[l]["Verse"] + " " + (CurrentVerseIndex + 1) + SPACE_GAP + GetVerseSummary(verse);
+                                        HeaderLabel.ForeColor = Numbers.GetNumberTypeColor((m_find_match_index + 1));
                                         HeaderLabel.Refresh();
                                     }
                                 }
@@ -39393,8 +39389,8 @@ public partial class MainForm : Form, ISubscriber
                                 {
                                     if (verse.Chapter != null)
                                     {
-                                        HeaderLabel.Text = GetVerseSummary(verse) + MATCH_SEPARATOR + L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count) + "   " + "Verse " + (CurrentVerseIndex + 1);
-                                        HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(verse.NumberInChapter);
+                                        HeaderLabel.Text = L[l]["Match"] + " " + ((m_find_match_index + 1) + "/" + m_find_matches.Count) + " " + L[l]["Verse"] + " " + (CurrentVerseIndex + 1) + SPACE_GAP + GetVerseSummary(verse);
+                                        HeaderLabel.ForeColor = Numbers.GetNumberTypeColor((m_find_match_index + 1));
                                         HeaderLabel.Refresh();
                                     }
                                 }
@@ -39471,11 +39467,8 @@ public partial class MainForm : Form, ISubscriber
 
         if (m_active_textbox != null)
         {
-            if (m_found_verses_displayed)
-            {
-                m_found_verses_displayed = false;
-                PopulateChaptersListBox();
-            }
+            m_found_verses_displayed = false;
+            PopulateChaptersListBox();
 
             // in all cases
             SearchResultTextBox.Visible = false;
@@ -39509,11 +39502,8 @@ public partial class MainForm : Form, ISubscriber
             // allow subsequent Finds to update chapter list, and browse history
             m_current_drawing_type = DrawingType.None; // so not to SwitchToPictureBox
 
-            if (!m_found_verses_displayed)
-            {
-                m_found_verses_displayed = true;
-                PopulateChaptersListBox();
-            }
+            m_found_verses_displayed = true;
+            PopulateChaptersListBox();
 
             // in all cases
             MainTextBox.Visible = false;
@@ -39792,7 +39782,6 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                     }
-
                     SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
@@ -39955,7 +39944,6 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                     }
-
                     SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) ChaptersListBox.SelectedIndexChanged -= new EventHandler(ChaptersListBox_SelectedIndexChanged);
@@ -39975,7 +39963,7 @@ public partial class MainForm : Form, ISubscriber
                         ChaptersListBox.SelectedIndices.Clear();
                     }
                     ChaptersListBox.SelectedIndexChanged += new EventHandler(ChaptersListBox_SelectedIndexChanged);
-                    UpdateSelection();
+                    UpdateClientSelection();
 
                     for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
                     for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
@@ -40086,7 +40074,6 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                     }
-
                     SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) ChaptersListBox.SelectedIndexChanged -= new EventHandler(ChaptersListBox_SelectedIndexChanged);
@@ -40109,7 +40096,7 @@ public partial class MainForm : Form, ISubscriber
                         ChaptersListBox.SelectedIndices.Clear();
                     }
                     ChaptersListBox.SelectedIndexChanged += new EventHandler(ChaptersListBox_SelectedIndexChanged);
-                    UpdateSelection();
+                    UpdateClientSelection();
 
                     for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
                     for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
@@ -41098,7 +41085,7 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else if (item is BrowseHistoryItem)
                 {
-                    UpdateChaptersListBox();
+                    UpdateChaptersListBoxSelectionIndexes();
                 }
 
                 DisplayBrowseHistoryItem(item);
@@ -41124,7 +41111,7 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else if (item is BrowseHistoryItem)
                 {
-                    UpdateChaptersListBox();
+                    UpdateChaptersListBoxSelectionIndexes();
                 }
 
                 DisplayBrowseHistoryItem(item);
@@ -41150,7 +41137,7 @@ public partial class MainForm : Form, ISubscriber
                 object item = m_client.CurrentHistoryItem;
                 if (item != null)
                 {
-                    UpdateChaptersListBox();
+                    UpdateChaptersListBoxSelectionIndexes();
 
                     DisplayBrowseHistoryItem(item);
                 }
@@ -41180,7 +41167,7 @@ public partial class MainForm : Form, ISubscriber
                 WordsListBoxLabel.Visible = false;
                 WordsListBox.Visible = false;
 
-                UpdateChaptersListBox();
+                UpdateChaptersListBoxSelectionIndexes();
 
                 UpdateBrowseHistoryButtons();
             }
@@ -42097,10 +42084,10 @@ public partial class MainForm : Form, ISubscriber
                             break;
                         case CalculationMode.SumOfWordValueDigitSums:
                             {
-                                SetCalculationMode(CalculationMode.ConcatenatedLetterValues);
+                                SetCalculationMode(CalculationMode.SumOfConcatenatedWordLetterValueDigitalRoots);
                             }
                             break;
-                        case CalculationMode.ConcatenatedLetterValues:
+                        case CalculationMode.SumOfConcatenatedWordLetterValueDigitalRoots:
                             {
                                 SetCalculationMode(CalculationMode.SumOfUniqueLetterValues);
                             }
@@ -42133,10 +42120,10 @@ public partial class MainForm : Form, ISubscriber
                             break;
                         case CalculationMode.SumOfUniqueLetterValues:
                             {
-                                SetCalculationMode(CalculationMode.ConcatenatedLetterValues);
+                                SetCalculationMode(CalculationMode.SumOfConcatenatedWordLetterValueDigitalRoots);
                             }
                             break;
-                        case CalculationMode.ConcatenatedLetterValues:
+                        case CalculationMode.SumOfConcatenatedWordLetterValueDigitalRoots:
                             {
                                 SetCalculationMode(CalculationMode.SumOfWordValueDigitSums);
                             }
@@ -42196,7 +42183,7 @@ public partial class MainForm : Form, ISubscriber
                         CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[1];
                     }
                     break;
-                case CalculationMode.ConcatenatedLetterValues:
+                case CalculationMode.SumOfConcatenatedWordLetterValueDigitalRoots:
                     {
                         CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[2];
                     }
@@ -43654,11 +43641,10 @@ public partial class MainForm : Form, ISubscriber
                 string[] parts = control.Text.Split(' ');
                 for (int i = 0; i < parts.Length; i++)
                 {
-                    if ((!m_found_verses_displayed) && (control == HeaderLabel))
+                    if ((control == HeaderLabel) && (!m_found_verses_displayed))
                     {
                         if (parts[i].Contains(L[l]["Verse"]))
                         {
-                            int pos = parts[i].IndexOf(L[l]["Verse"]);
                             if ((i + 1) < parts.Length)
                             {
                                 if (long.TryParse(parts[i + 1], out value))
@@ -43668,7 +43654,19 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                     }
-                    else
+                    else if ((control == HeaderLabel) && parts[i].Contains(L[l]["Match"]))
+                    {
+                        if ((i + 1) < parts.Length)
+                        {
+                            int pos = parts[i + 1].IndexOf("/");
+                            string text = parts[i + 1].Substring(0, pos);
+                            if (long.TryParse(text, out value))
+                            {
+                                break;
+                            }
+                        }
+                    }
+                    else //if ((control == HeaderLabel) && (m_found_verses_displayed)) PLUS all other cases
                     {
                         if (long.TryParse(parts[0], out value))
                         {
