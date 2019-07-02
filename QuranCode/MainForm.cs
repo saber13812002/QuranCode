@@ -42097,6 +42097,11 @@ public partial class MainForm : Form, ISubscriber
                             break;
                         case CalculationMode.SumOfWordValueDigitSums:
                             {
+                                SetCalculationMode(CalculationMode.ConcatenatedLetterValues);
+                            }
+                            break;
+                        case CalculationMode.ConcatenatedLetterValues:
+                            {
                                 SetCalculationMode(CalculationMode.SumOfUniqueLetterValues);
                             }
                             break;
@@ -42127,6 +42132,11 @@ public partial class MainForm : Form, ISubscriber
                             }
                             break;
                         case CalculationMode.SumOfUniqueLetterValues:
+                            {
+                                SetCalculationMode(CalculationMode.ConcatenatedLetterValues);
+                            }
+                            break;
+                        case CalculationMode.ConcatenatedLetterValues:
                             {
                                 SetCalculationMode(CalculationMode.SumOfWordValueDigitSums);
                             }
@@ -42186,14 +42196,19 @@ public partial class MainForm : Form, ISubscriber
                         CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[1];
                     }
                     break;
-                case CalculationMode.SumOfWordValueDigitSums:
+                case CalculationMode.ConcatenatedLetterValues:
                     {
                         CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[2];
                     }
                     break;
-                case CalculationMode.SumOfWordValueDigitalRoots:
+                case CalculationMode.SumOfWordValueDigitSums:
                     {
                         CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[3];
+                    }
+                    break;
+                case CalculationMode.SumOfWordValueDigitalRoots:
+                    {
+                        CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[4];
                     }
                     break;
                 default:

@@ -1467,7 +1467,7 @@ public class Server : IPublisher
                         {
                             foreach (char c in word_text)
                             {
-                                result += CalculateValue(c);
+                                result += s_numerology_system.CalculateValue(c);
                             }
                         }
                     }
@@ -1477,7 +1477,20 @@ public class Server : IPublisher
                         text = text.RemoveDuplicates();
                         foreach (char c in text)
                         {
-                            result += CalculateValue(c);
+                            result += s_numerology_system.CalculateValue(c);
+                        }
+                    }
+                    break;
+                case CalculationMode.ConcatenatedLetterValues:
+                    {
+                        foreach (string word_text in word_texts)
+                        {
+                            long word_value = 0L;
+                            for (int i = 0; i < word_text.Length; i++)
+                            {
+                                word_value += s_numerology_system.CalculateValue(word_text[i]) * (long)Math.Pow(10, i);
+                            }
+                            result += word_value;
                         }
                     }
                     break;
@@ -1488,7 +1501,7 @@ public class Server : IPublisher
                             long word_value = 0L;
                             foreach (char c in word_text)
                             {
-                                word_value += CalculateValue(c);
+                                word_value += s_numerology_system.CalculateValue(c);
                             }
                             result += Numbers.DigitSum(word_value);
                         }
@@ -1501,7 +1514,7 @@ public class Server : IPublisher
                             long word_value = 0L;
                             foreach (char c in word_text)
                             {
-                                word_value += CalculateValue(c);
+                                word_value += s_numerology_system.CalculateValue(c);
                             }
                             result += Numbers.DigitalRoot(word_value);
                         }
@@ -1578,7 +1591,26 @@ public class Server : IPublisher
                         text = text.RemoveDuplicates();
                         foreach (char c in text)
                         {
-                            result += CalculateValue(c);
+                            Log.Append(c.ToString());
+                            long value = s_numerology_system.CalculateValue(c);
+                            result += value; ValueSum += value;
+                            Log.AppendLine("\t" + value);
+                        }
+                    }
+                    break;
+                case CalculationMode.ConcatenatedLetterValues:
+                    {
+                        foreach (string word_text in word_texts)
+                        {
+                            long word_value = 0L;
+                            for (int i = 0; i < word_text.Length; i++)
+                            {
+                                Log.Append(word_text[i].ToString());
+                                long value = s_numerology_system.CalculateValue(word_text[i]) * (long)Math.Pow(10, i);
+                                word_value += value; ValueSum += value;
+                                Log.AppendLine("\t" + value);
+                            }
+                            result += word_value;
                         }
                     }
                     break;
@@ -1589,7 +1621,10 @@ public class Server : IPublisher
                             long word_value = 0L;
                             foreach (char c in word_text)
                             {
-                                word_value += CalculateValue(c);
+                                Log.Append(c.ToString());
+                                long value = s_numerology_system.CalculateValue(c);
+                                word_value += value; ValueSum += value;
+                                Log.AppendLine("\t" + value);
                             }
                             result += Numbers.DigitSum(word_value);
                         }
@@ -1602,7 +1637,10 @@ public class Server : IPublisher
                             long word_value = 0L;
                             foreach (char c in word_text)
                             {
-                                word_value += CalculateValue(c);
+                                Log.Append(c.ToString());
+                                long value = s_numerology_system.CalculateValue(c);
+                                word_value += value; ValueSum += value;
+                                Log.AppendLine("\t" + value);
                             }
                             result += Numbers.DigitalRoot(word_value);
                         }
@@ -1704,6 +1742,7 @@ public class Server : IPublisher
         if (word == null) return 0L;
 
         long result = 0L;
+        long value  = 0L;
         if (s_numerology_system != null)
         {
             if (s_numerology_system.LetterValue.StartsWith("Base"))
@@ -1744,8 +1783,21 @@ public class Server : IPublisher
                             text = text.RemoveDuplicates();
                             foreach (char c in text)
                             {
-                                result += CalculateValue(c);
+                                result += s_numerology_system.CalculateValue(c);
                             }
+                        }
+                        break;
+                    case CalculationMode.ConcatenatedLetterValues:
+                        {
+                            long word_value = 0L;
+                            for (int i = 0; i < word.Letters.Count; i++)
+                            {
+                                Log.Append(word.Letters[i].ToString());
+                                value = CalculateValue(word.Letters[i]) * (long)Math.Pow(10, i);
+                                word_value += value; ValueSum += value;
+                                Log.AppendLine("\t" + value);
+                            }
+                            result += word_value;
                         }
                         break;
                     case CalculationMode.SumOfWordValueDigitSums:
@@ -2439,6 +2491,19 @@ public class Server : IPublisher
                             {
                                 result += CalculateValueWithLogging(c);
                             }
+                        }
+                        break;
+                    case CalculationMode.ConcatenatedLetterValues:
+                        {
+                            long word_value = 0L;
+                            for (int i = 0; i < word.Letters.Count; i++)
+                            {
+                                Log.Append(word.Letters[i].ToString());
+                                value = CalculateValueWithLogging(word.Letters[i]) * (long)Math.Pow(10, i);
+                                word_value += value; ValueSum += value;
+                                Log.AppendLine("\t" + value);
+                            }
+                            result += word_value;
                         }
                         break;
                     case CalculationMode.SumOfWordValueDigitSums:

@@ -207,6 +207,7 @@ public static class Numbers
     { 
         /* CalculationMode.SumOfLetterValues */             Color.White,
         /* CalculationMode.SumOfUniqueLetterValues */       Color.Yellow,
+        /* CalculationMode.ConcatenatedLetterValues */      Color.PaleGreen,
         /* CalculationMode.SumOfWordValueDigitSums */       Color.MediumOrchid,
         /* CalculationMode.SumOfWordValueDigitalRoots */    Color.Black
     };
