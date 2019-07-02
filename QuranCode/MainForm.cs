@@ -39585,8 +39585,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
+
+                        SwitchToSearchResultTextBox();
                     }
-                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
                     for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
@@ -39781,8 +39782,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
+
+                        SwitchToSearchResultTextBox();
                     }
-                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
                     for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
@@ -39943,8 +39945,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
+
+                        SwitchToSearchResultTextBox();
                     }
-                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) ChaptersListBox.SelectedIndexChanged -= new EventHandler(ChaptersListBox_SelectedIndexChanged);
                     if (m_client.FoundChapters.Count > 0)
@@ -40073,8 +40076,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
+
+                        SwitchToSearchResultTextBox();
                     }
-                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) ChaptersListBox.SelectedIndexChanged -= new EventHandler(ChaptersListBox_SelectedIndexChanged);
                     if (m_client.FoundChapterRanges.Count > 0)

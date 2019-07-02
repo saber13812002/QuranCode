@@ -2763,33 +2763,33 @@ namespace Model
             List<Word> result = new List<Word>();
             if (word != null)
             {
-                string simplified_word_text = word.Text.Simplify31();
+                //string simplified_word_text = word.Text.Simplify31();
                 SortedDictionary<string, List<Word>> root_words_dictionary = this.RootWords;
                 if (root_words_dictionary != null)
                 {
-                    // try all roots in case word_text is a root
-                    if (root_words_dictionary.ContainsKey(simplified_word_text))
-                    {
-                        List<Word> root_words = root_words_dictionary[simplified_word_text];
-                        foreach (Word root_word in root_words)
-                        {
-                            int verse_index = root_word.Verse.Number - 1;
-                            if ((verse_index >= 0) && (verse_index < this.verses.Count))
-                            {
-                                Verse verse = this.verses[verse_index];
-                                int word_index = root_word.NumberInVerse - 1;
-                                if ((word_index >= 0) && (word_index < verse.Words.Count))
-                                {
-                                    Word verse_word = verse.Words[word_index];
-                                    if (!result.Contains(verse_word))
-                                    {
-                                        result.Add(verse_word);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    else // if no such root, search for the matching root_word by its verse position and get its root and then get all root_words
+                    //// try all roots in case word_text is a root
+                    //if (root_words_dictionary.ContainsKey(simplified_word_text))
+                    //{
+                    //    List<Word> root_words = root_words_dictionary[simplified_word_text];
+                    //    foreach (Word root_word in root_words)
+                    //    {
+                    //        int verse_index = root_word.Verse.Number - 1;
+                    //        if ((verse_index >= 0) && (verse_index < this.verses.Count))
+                    //        {
+                    //            Verse verse = this.verses[verse_index];
+                    //            int word_index = root_word.NumberInVerse - 1;
+                    //            if ((word_index >= 0) && (word_index < verse.Words.Count))
+                    //            {
+                    //                Word verse_word = verse.Words[word_index];
+                    //                if (!result.Contains(verse_word))
+                    //                {
+                    //                    result.Add(verse_word);
+                    //                }
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    //else // if no such root, search for the matching root_word by its verse position and get its root and then get all root_words
                     {
                         string root = word.BestRoot;
                         if (!String.IsNullOrEmpty(root))
@@ -2829,24 +2829,24 @@ namespace Model
                 SortedDictionary<string, List<Word>> root_words_dictionary = this.RootWords;
                 if (root_words_dictionary != null)
                 {
-                    // try all roots in case word_text is a root
-                    if (root_words_dictionary.ContainsKey(word.Text))
-                    {
-                        List<Word> root_words = root_words_dictionary[word.Text];
-                        foreach (Word root_word in root_words)
-                        {
-                            int verse_index = root_word.Verse.Number - 1;
-                            if ((verse_index >= 0) && (verse_index < this.verses.Count))
-                            {
-                                Verse verse = this.verses[verse_index];
-                                if (!result.Contains(verse))
-                                {
-                                    result.Add(verse);
-                                }
-                            }
-                        }
-                    }
-                    else // if no such root, search for the matching root_word by its verse position and get its root and then get all root_words
+                    //// try all roots in case word_text is a root
+                    //if (root_words_dictionary.ContainsKey(word.Text))
+                    //{
+                    //    List<Word> root_words = root_words_dictionary[word.Text];
+                    //    foreach (Word root_word in root_words)
+                    //    {
+                    //        int verse_index = root_word.Verse.Number - 1;
+                    //        if ((verse_index >= 0) && (verse_index < this.verses.Count))
+                    //        {
+                    //            Verse verse = this.verses[verse_index];
+                    //            if (!result.Contains(verse))
+                    //            {
+                    //                result.Add(verse);
+                    //            }
+                    //        }
+                    //    }
+                    //}
+                    //else // if no such root, search for the matching root_word by its verse position and get its root and then get all root_words
                     {
                         string root = word.BestRoot;
                         if (!String.IsNullOrEmpty(root))
