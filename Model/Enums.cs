@@ -2,7 +2,17 @@
 
 namespace Model
 {
-    public enum CalculationMode { SumOfLetterValues, SumOfUniqueLetterValues, SumOfConcatenatedWordLetterValueDigitalRoots, SumOfWordValueDigitSums, SumOfWordValueDigitalRoots };
+    public enum CalculationMode
+    {
+        SumOfLetterValues,
+        SumOfLetterValueDigitSums,
+        SumOfLetterValueDigitalRoots,
+        SumOfWordValueDigitSums,
+        SumOfWordValueDigitalRoots,
+        SumOfConcatenatedLetterValueDigitSums,
+        SumOfConcatenatedLetterValueDigitalRoots,
+        SumOfUniqueLetterValues
+    };
 
     public enum LanguageType { RightToLeft, LeftToRight };
 

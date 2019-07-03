@@ -205,11 +205,14 @@ public static class Numbers
 
     public static Color[] CALCULATION_MODE_COLORS =
     { 
-        /* CalculationMode.SumOfLetterValues */             Color.White,
-        /* CalculationMode.SumOfUniqueLetterValues */       Color.Yellow,
-        /* CalculationMode.ConcatenatedLetterValues */      Color.PaleGreen,
-        /* CalculationMode.SumOfWordValueDigitSums */       Color.MediumOrchid,
-        /* CalculationMode.SumOfWordValueDigitalRoots */    Color.Black
+        /* CalculationMode.SumOfLetterValues */                         Color.White,
+        /* CalculationMode.SumOfLetterValueDigitSums */                 Color.Pink,
+        /* CalculationMode.SumOfLetterValueDigitalRoots */              Color.Red,
+        /* CalculationMode.SumOfWordValueDigitSums */                   Color.Cyan,
+        /* CalculationMode.SumOfWordValueDigitalRoots */                Color.Blue,
+        /* CalculationMode.SumOfConcatenatedLetterValueDigitSums */     Color.Lime,
+        /* CalculationMode.SumOfConcatenatedLetterValueDigitalRoots */  Color.Green,
+        /* CalculationMode.SumOfUniqueLetterValues */                   Color.Yellow
     };
 
     //                             int.MaxValue = 2^32 - 1 = 2147483647;

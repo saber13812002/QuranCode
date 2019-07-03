@@ -39409,15 +39409,18 @@ public partial class MainForm : Form, ISubscriber
         {
             if (m_found_verses_displayed)
             {
-                string[] parts = m_find_result_header.Split();
-                if (parts.Length > 0)
+                if (!String.IsNullOrEmpty((m_find_result_header)))
                 {
-                    int number = 0;
-                    if (int.TryParse(parts[0], out number))
+                    string[] parts = m_find_result_header.Split();
+                    if (parts.Length > 0)
                     {
-                        HeaderLabel.Text = m_find_result_header;
-                        HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(number);
-                        HeaderLabel.Refresh();
+                        int number = 0;
+                        if (int.TryParse(parts[0], out number))
+                        {
+                            HeaderLabel.Text = m_find_result_header;
+                            HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(number);
+                            HeaderLabel.Refresh();
+                        }
                     }
                 }
             }
@@ -42081,6 +42084,22 @@ public partial class MainForm : Form, ISubscriber
                 {
                     switch (m_client.CalculationMode)
                     {
+                        case CalculationMode.SumOfUniqueLetterValues:
+                            {
+                                SetCalculationMode(CalculationMode.SumOfConcatenatedLetterValueDigitalRoots);
+                            }
+                            break;
+                        case CalculationMode.SumOfConcatenatedLetterValueDigitalRoots:
+                            {
+                                SetCalculationMode(CalculationMode.SumOfConcatenatedLetterValueDigitSums);
+                            }
+                            break;
+                        case CalculationMode.SumOfConcatenatedLetterValueDigitSums:
+                            {
+                                SetCalculationMode(CalculationMode.SumOfWordValueDigitalRoots);
+                            }
+                            break;
+
                         case CalculationMode.SumOfWordValueDigitalRoots:
                             {
                                 SetCalculationMode(CalculationMode.SumOfWordValueDigitSums);
@@ -42088,22 +42107,22 @@ public partial class MainForm : Form, ISubscriber
                             break;
                         case CalculationMode.SumOfWordValueDigitSums:
                             {
-                                SetCalculationMode(CalculationMode.SumOfConcatenatedWordLetterValueDigitalRoots);
+                                SetCalculationMode(CalculationMode.SumOfLetterValueDigitalRoots);
                             }
                             break;
-                        case CalculationMode.SumOfConcatenatedWordLetterValueDigitalRoots:
+                        case CalculationMode.SumOfLetterValueDigitalRoots:
                             {
-                                SetCalculationMode(CalculationMode.SumOfUniqueLetterValues);
+                                SetCalculationMode(CalculationMode.SumOfLetterValueDigitSums);
                             }
                             break;
-                        case CalculationMode.SumOfUniqueLetterValues:
+                        case CalculationMode.SumOfLetterValueDigitSums:
                             {
                                 SetCalculationMode(CalculationMode.SumOfLetterValues);
                             }
                             break;
                         case CalculationMode.SumOfLetterValues:
                             {
-                                SetCalculationMode(CalculationMode.SumOfWordValueDigitalRoots);
+                                SetCalculationMode(CalculationMode.SumOfUniqueLetterValues);
                             }
                             break;
                         default:
@@ -42119,15 +42138,15 @@ public partial class MainForm : Form, ISubscriber
                     {
                         case CalculationMode.SumOfLetterValues:
                             {
-                                SetCalculationMode(CalculationMode.SumOfUniqueLetterValues);
+                                SetCalculationMode(CalculationMode.SumOfLetterValueDigitSums);
                             }
                             break;
-                        case CalculationMode.SumOfUniqueLetterValues:
+                        case CalculationMode.SumOfLetterValueDigitSums:
                             {
-                                SetCalculationMode(CalculationMode.SumOfConcatenatedWordLetterValueDigitalRoots);
+                                SetCalculationMode(CalculationMode.SumOfLetterValueDigitalRoots);
                             }
                             break;
-                        case CalculationMode.SumOfConcatenatedWordLetterValueDigitalRoots:
+                        case CalculationMode.SumOfLetterValueDigitalRoots:
                             {
                                 SetCalculationMode(CalculationMode.SumOfWordValueDigitSums);
                             }
@@ -42138,6 +42157,21 @@ public partial class MainForm : Form, ISubscriber
                             }
                             break;
                         case CalculationMode.SumOfWordValueDigitalRoots:
+                            {
+                                SetCalculationMode(CalculationMode.SumOfConcatenatedLetterValueDigitSums);
+                            }
+                            break;
+                        case CalculationMode.SumOfConcatenatedLetterValueDigitSums:
+                            {
+                                SetCalculationMode(CalculationMode.SumOfConcatenatedLetterValueDigitalRoots);
+                            }
+                            break;
+                        case CalculationMode.SumOfConcatenatedLetterValueDigitalRoots:
+                            {
+                                SetCalculationMode(CalculationMode.SumOfUniqueLetterValues);
+                            }
+                            break;
+                        case CalculationMode.SumOfUniqueLetterValues:
                             {
                                 SetCalculationMode(CalculationMode.SumOfLetterValues);
                             }
@@ -42182,12 +42216,12 @@ public partial class MainForm : Form, ISubscriber
                         CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[0];
                     }
                     break;
-                case CalculationMode.SumOfUniqueLetterValues:
+                case CalculationMode.SumOfLetterValueDigitSums:
                     {
                         CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[1];
                     }
                     break;
-                case CalculationMode.SumOfConcatenatedWordLetterValueDigitalRoots:
+                case CalculationMode.SumOfLetterValueDigitalRoots:
                     {
                         CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[2];
                     }
@@ -42200,6 +42234,21 @@ public partial class MainForm : Form, ISubscriber
                 case CalculationMode.SumOfWordValueDigitalRoots:
                     {
                         CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[4];
+                    }
+                    break;
+                case CalculationMode.SumOfConcatenatedLetterValueDigitSums:
+                    {
+                        CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[5];
+                    }
+                    break;
+                case CalculationMode.SumOfConcatenatedLetterValueDigitalRoots:
+                    {
+                        CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[6];
+                    }
+                    break;
+                case CalculationMode.SumOfUniqueLetterValues:
+                    {
+                        CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[7];
                     }
                     break;
                 default:

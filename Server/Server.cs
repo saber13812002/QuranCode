@@ -1472,25 +1472,25 @@ public class Server : IPublisher
                         }
                     }
                     break;
-                case CalculationMode.SumOfUniqueLetterValues:
-                    {
-                        text = text.RemoveDuplicates();
-                        foreach (char c in text)
-                        {
-                            result += s_numerology_system.CalculateValue(c);
-                        }
-                    }
-                    break;
-                case CalculationMode.SumOfConcatenatedWordLetterValueDigitalRoots:
+                case CalculationMode.SumOfLetterValueDigitSums:
                     {
                         foreach (string word_text in word_texts)
                         {
-                            long word_value = 0L;
-                            for (int i = 0; i < word_text.Length; i++)
+                            foreach (char c in word_text)
                             {
-                                word_value += Numbers.DigitalRoot(s_numerology_system.CalculateValue(word_text[i])) * (long)Math.Pow(10, i);
+                                result += Numbers.DigitSum(s_numerology_system.CalculateValue(c));
                             }
-                            result += word_value;
+                        }
+                    }
+                    break;
+                case CalculationMode.SumOfLetterValueDigitalRoots:
+                    {
+                        foreach (string word_text in word_texts)
+                        {
+                            foreach (char c in word_text)
+                            {
+                                result += Numbers.DigitalRoot(s_numerology_system.CalculateValue(c));
+                            }
                         }
                     }
                     break;
@@ -1517,6 +1517,42 @@ public class Server : IPublisher
                                 word_value += s_numerology_system.CalculateValue(c);
                             }
                             result += Numbers.DigitalRoot(word_value);
+                        }
+                    }
+                    break;
+                case CalculationMode.SumOfConcatenatedLetterValueDigitSums:
+                    {
+                        foreach (string word_text in word_texts)
+                        {
+                            long word_value = 0L;
+                            for (int i = 0; i < word_text.Length; i++)
+                            {
+                                word_value += Numbers.DigitSum(s_numerology_system.CalculateValue(word_text[i])) * (long)Math.Pow(10, i);
+                            }
+                            result += word_value;
+                        }
+                    }
+                    break;
+                case CalculationMode.SumOfConcatenatedLetterValueDigitalRoots:
+                    {
+                        foreach (string word_text in word_texts)
+                        {
+                            long word_value = 0L;
+                            for (int i = 0; i < word_text.Length; i++)
+                            {
+                                word_value += Numbers.DigitalRoot(s_numerology_system.CalculateValue(word_text[i])) * (long)Math.Pow(10, i);
+                            }
+                            result += word_value;
+                        }
+                    }
+                    break;
+                case CalculationMode.SumOfUniqueLetterValues:
+                    {
+                        text = text.RemoveDuplicates();
+                        text = text.Replace(" ", "");
+                        foreach (char c in text)
+                        {
+                            result += s_numerology_system.CalculateValue(c);
                         }
                     }
                     break;
@@ -1586,31 +1622,49 @@ public class Server : IPublisher
                         }
                     }
                     break;
-                case CalculationMode.SumOfUniqueLetterValues:
+                case CalculationMode.SumOfLetterValueDigitSums:
                     {
-                        text = text.RemoveDuplicates();
                         foreach (char c in text)
                         {
-                            Log.Append(c.ToString());
-                            long value = s_numerology_system.CalculateValue(c);
-                            result += value; ValueSum += value;
-                            Log.AppendLine("\t" + value);
+                            if (c == '\n')
+                            {
+                                Log.AppendLine();
+                                Log.AppendLine();
+                            }
+                            else if (c == ' ')
+                            {
+                                Log.AppendLine();
+                            }
+                            else
+                            {
+                                Log.Append(c.ToString());
+                                long value = Numbers.DigitSum(s_numerology_system.CalculateValue(c));
+                                result += value; ValueSum += value;
+                                Log.AppendLine("\t" + value);
+                            }
                         }
                     }
                     break;
-                case CalculationMode.SumOfConcatenatedWordLetterValueDigitalRoots:
+                case CalculationMode.SumOfLetterValueDigitalRoots:
                     {
-                        foreach (string word_text in word_texts)
+                        foreach (char c in text)
                         {
-                            long word_value = 0L;
-                            for (int i = 0; i < word_text.Length; i++)
+                            if (c == '\n')
                             {
-                                Log.Append(word_text[i].ToString());
-                                long value = Numbers.DigitalRoot(s_numerology_system.CalculateValue(word_text[i])) * (long)Math.Pow(10, i);
-                                word_value += value; ValueSum += value;
+                                Log.AppendLine();
+                                Log.AppendLine();
+                            }
+                            else if (c == ' ')
+                            {
+                                Log.AppendLine();
+                            }
+                            else
+                            {
+                                Log.Append(c.ToString());
+                                long value = Numbers.DigitalRoot(s_numerology_system.CalculateValue(c));
+                                result += value; ValueSum += value;
                                 Log.AppendLine("\t" + value);
                             }
-                            result += word_value;
                         }
                     }
                     break;
@@ -1643,6 +1697,51 @@ public class Server : IPublisher
                                 Log.AppendLine("\t" + value);
                             }
                             result += Numbers.DigitalRoot(word_value);
+                        }
+                    }
+                    break;
+                case CalculationMode.SumOfConcatenatedLetterValueDigitSums:
+                    {
+                        foreach (string word_text in word_texts)
+                        {
+                            long word_value = 0L;
+                            for (int i = 0; i < word_text.Length; i++)
+                            {
+                                Log.Append(word_text[i].ToString());
+                                long value = Numbers.DigitSum(s_numerology_system.CalculateValue(word_text[i])) * (long)Math.Pow(10, i);
+                                word_value += value; ValueSum += value;
+                                Log.AppendLine("\t" + value);
+                            }
+                            result += word_value;
+                        }
+                    }
+                    break;
+                case CalculationMode.SumOfConcatenatedLetterValueDigitalRoots:
+                    {
+                        foreach (string word_text in word_texts)
+                        {
+                            long word_value = 0L;
+                            for (int i = 0; i < word_text.Length; i++)
+                            {
+                                Log.Append(word_text[i].ToString());
+                                long value = Numbers.DigitalRoot(s_numerology_system.CalculateValue(word_text[i])) * (long)Math.Pow(10, i);
+                                word_value += value; ValueSum += value;
+                                Log.AppendLine("\t" + value);
+                            }
+                            result += word_value;
+                        }
+                    }
+                    break;
+                case CalculationMode.SumOfUniqueLetterValues:
+                    {
+                        text = text.RemoveDuplicates();
+                        text = text.Replace(" ", "");
+                        foreach (char c in text)
+                        {
+                            Log.Append(c.ToString());
+                            long value = s_numerology_system.CalculateValue(c);
+                            result += value; ValueSum += value;
+                            Log.AppendLine("\t" + value);
                         }
                     }
                     break;
@@ -1777,27 +1876,20 @@ public class Server : IPublisher
                             }
                         }
                         break;
-                    case CalculationMode.SumOfUniqueLetterValues:
+                    case CalculationMode.SumOfLetterValueDigitSums:
                         {
-                            string text = word.Text;
-                            text = text.RemoveDuplicates();
-                            foreach (char c in text)
+                            foreach (Letter letter in word.Letters)
                             {
-                                result += s_numerology_system.CalculateValue(c);
+                                result += Numbers.DigitSum(CalculateValue(letter));
                             }
                         }
                         break;
-                    case CalculationMode.SumOfConcatenatedWordLetterValueDigitalRoots:
+                    case CalculationMode.SumOfLetterValueDigitalRoots:
                         {
-                            long word_value = 0L;
-                            for (int i = 0; i < word.Letters.Count; i++)
+                            foreach (Letter letter in word.Letters)
                             {
-                                Log.Append(word.Letters[i].ToString());
-                                value = Numbers.DigitalRoot(CalculateValue(word.Letters[i])) * (long)Math.Pow(10, i);
-                                word_value += value; ValueSum += value;
-                                Log.AppendLine("\t" + value);
+                                result += Numbers.DigitalRoot(CalculateValue(letter));
                             }
-                            result = word_value;
                         }
                         break;
                     case CalculationMode.SumOfWordValueDigitSums:
@@ -1818,6 +1910,43 @@ public class Server : IPublisher
                                 word_value += CalculateValue(letter);
                             }
                             result = Numbers.DigitalRoot(word_value);
+                        }
+                        break;
+                    case CalculationMode.SumOfConcatenatedLetterValueDigitSums:
+                        {
+                            long word_value = 0L;
+                            for (int i = 0; i < word.Letters.Count; i++)
+                            {
+                                Log.Append(word.Letters[i].ToString());
+                                value = Numbers.DigitSum(CalculateValue(word.Letters[i])) * (long)Math.Pow(10, i);
+                                word_value += value; ValueSum += value;
+                                Log.AppendLine("\t" + value);
+                            }
+                            result = word_value;
+                        }
+                        break;
+                    case CalculationMode.SumOfConcatenatedLetterValueDigitalRoots:
+                        {
+                            long word_value = 0L;
+                            for (int i = 0; i < word.Letters.Count; i++)
+                            {
+                                Log.Append(word.Letters[i].ToString());
+                                value = Numbers.DigitalRoot(CalculateValue(word.Letters[i])) * (long)Math.Pow(10, i);
+                                word_value += value; ValueSum += value;
+                                Log.AppendLine("\t" + value);
+                            }
+                            result = word_value;
+                        }
+                        break;
+                    case CalculationMode.SumOfUniqueLetterValues:
+                        {
+                            string text = word.Text;
+                            text = text.RemoveDuplicates();
+                            text = text.Replace(" ", "");
+                            foreach (char c in text)
+                            {
+                                result += s_numerology_system.CalculateValue(c);
+                            }
                         }
                         break;
                     default:
@@ -2483,27 +2612,20 @@ public class Server : IPublisher
                             }
                         }
                         break;
-                    case CalculationMode.SumOfUniqueLetterValues:
+                    case CalculationMode.SumOfLetterValueDigitSums:
                         {
-                            string text = word.Text;
-                            text = text.RemoveDuplicates();
-                            foreach (char c in text)
+                            foreach (Letter letter in word.Letters)
                             {
-                                result += CalculateValueWithLogging(c);
+                                result += Numbers.DigitSum(CalculateValueWithLogging(letter));
                             }
                         }
                         break;
-                    case CalculationMode.SumOfConcatenatedWordLetterValueDigitalRoots:
+                    case CalculationMode.SumOfLetterValueDigitalRoots:
                         {
-                            long word_value = 0L;
-                            for (int i = 0; i < word.Letters.Count; i++)
+                            foreach (Letter letter in word.Letters)
                             {
-                                Log.Append(word.Letters[i].ToString());
-                                value = Numbers.DigitalRoot(CalculateValueWithLogging(word.Letters[i])) * (long)Math.Pow(10, i);
-                                word_value += value; ValueSum += value;
-                                Log.AppendLine("\t" + value);
+                                result += Numbers.DigitalRoot(CalculateValueWithLogging(letter));
                             }
-                            result = word_value;
                         }
                         break;
                     case CalculationMode.SumOfWordValueDigitSums:
@@ -2524,6 +2646,42 @@ public class Server : IPublisher
                                 word_value += CalculateValueWithLogging(letter);
                             }
                             result = Numbers.DigitalRoot(word_value);
+                        }
+                        break;
+                    case CalculationMode.SumOfConcatenatedLetterValueDigitSums:
+                        {
+                            long word_value = 0L;
+                            for (int i = 0; i < word.Letters.Count; i++)
+                            {
+                                Log.Append(word.Letters[i].ToString());
+                                value = Numbers.DigitSum(CalculateValueWithLogging(word.Letters[i])) * (long)Math.Pow(10, i);
+                                word_value += value; ValueSum += value;
+                                Log.AppendLine("\t" + value);
+                            }
+                            result = word_value;
+                        }
+                        break;
+                    case CalculationMode.SumOfConcatenatedLetterValueDigitalRoots:
+                        {
+                            long word_value = 0L;
+                            for (int i = 0; i < word.Letters.Count; i++)
+                            {
+                                Log.Append(word.Letters[i].ToString());
+                                value = Numbers.DigitalRoot(CalculateValueWithLogging(word.Letters[i])) * (long)Math.Pow(10, i);
+                                word_value += value; ValueSum += value;
+                                Log.AppendLine("\t" + value);
+                            }
+                            result = word_value;
+                        }
+                        break;
+                    case CalculationMode.SumOfUniqueLetterValues:
+                        {
+                            string text = word.Text;
+                            text = text.RemoveDuplicates();
+                            foreach (char c in text)
+                            {
+                                result += CalculateValueWithLogging(c);
+                            }
                         }
                         break;
                     default:
