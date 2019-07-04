@@ -47592,7 +47592,7 @@ public partial class MainForm : Form, ISubscriber
                     if (is_value)
                     {
                         str.AppendLine(m_current_text);
-                        str.AppendLine("--------------------------------------------------------------------------------------------------");
+                        str.AppendLine("---------------------------------------------------------------------------------------------------------------------------");
                         str.AppendLine();
 
                         str.AppendLine("Chapters           (" + m_radix + ")\t=\t" + ChaptersTextBox.Text);
@@ -47746,7 +47746,7 @@ public partial class MainForm : Form, ISubscriber
                     str.AppendLine("Left-to-right composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainL2R(value) + "  =  " + DecimalCPIndexChainL2R(value));
                     str.AppendLine();
                     str.AppendLine("Right-to-left composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainR2L(value) + "  =  " + DecimalCPIndexChainR2L(value));
-                    str.AppendLine("--------------------------------------------------------------------------------------------------");
+                    str.AppendLine("---------------------------------------------------------------------------------------------------------------------------");
                     str.AppendLine();
 
                     m_client.SaveValueCalculations(filename, str.ToString(), is_value);
