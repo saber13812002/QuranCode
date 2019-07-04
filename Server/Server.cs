@@ -2113,7 +2113,9 @@ public class Server : IPublisher
             {
                 if (CalculationMode == CalculationMode.SumOfUniqueLetterValues)
                 {
-                    string text = verse.Text.SimplifyTo(s_numerology_system.TextMode).RemoveDuplicates();
+                    string text = verse.Text.SimplifyTo(s_numerology_system.TextMode);
+                    text = text.RemoveDuplicates();
+                    text = text.Replace(" ", "");
                     result += CalculateValue(text);
                 }
                 else
@@ -2122,10 +2124,10 @@ public class Server : IPublisher
                     {
                         result += CalculateValue(word);
                     }
-                }
 
-                // adjust value of verse
-                result += AdjustValue(verse);
+                    // adjust value of verse
+                    result += AdjustValue(verse);
+                }
             }
         }
         return result;
@@ -2244,7 +2246,9 @@ public class Server : IPublisher
                 {
                     text += verse.Text;
                 }
-                text = text.SimplifyTo(s_numerology_system.TextMode).RemoveDuplicates();
+                text = text.SimplifyTo(s_numerology_system.TextMode);
+                text = text.RemoveDuplicates();
+                text = text.Replace(" ", "");
                 result += CalculateValue(text);
             }
             else
@@ -2253,17 +2257,17 @@ public class Server : IPublisher
                 {
                     result += CalculateValue(verse);
                 }
-            }
 
-            List<Chapter> chapters = GetCompleteChapters(verses);
-            if (chapters != null)
-            {
-                foreach (Chapter chapter in chapters)
+                List<Chapter> chapters = GetCompleteChapters(verses);
+                if (chapters != null)
                 {
-                    if (chapter != null)
+                    foreach (Chapter chapter in chapters)
                     {
-                        // adjust value of chapter
-                        result += AdjustValue(chapter);
+                        if (chapter != null)
+                        {
+                            // adjust value of chapter
+                            result += AdjustValue(chapter);
+                        }
                     }
                 }
             }
@@ -2419,7 +2423,9 @@ public class Server : IPublisher
         {
             if (CalculationMode == CalculationMode.SumOfUniqueLetterValues)
             {
-                string text = chapter.Text.SimplifyTo(s_numerology_system.TextMode).RemoveDuplicates();
+                string text = chapter.Text.SimplifyTo(s_numerology_system.TextMode);
+                text = text.RemoveDuplicates();
+                text = text.Replace(" ", "");
                 result += CalculateValue(text);
             }
             else
@@ -2446,7 +2452,9 @@ public class Server : IPublisher
                 {
                     text += chapter.Text;
                 }
-                text = text.SimplifyTo(s_numerology_system.TextMode).RemoveDuplicates();
+                text = text.SimplifyTo(s_numerology_system.TextMode);
+                text = text.RemoveDuplicates();
+                text = text.Replace(" ", "");
                 result += CalculateValue(text);
             }
             else
@@ -2468,7 +2476,9 @@ public class Server : IPublisher
         {
             if (CalculationMode == CalculationMode.SumOfUniqueLetterValues)
             {
-                string text = book.Text.SimplifyTo(s_numerology_system.TextMode).RemoveDuplicates();
+                string text = book.Text.SimplifyTo(s_numerology_system.TextMode);
+                text = text.RemoveDuplicates();
+                text = text.Replace(" ", "");
                 result += CalculateValue(text);
             }
             else
@@ -2678,6 +2688,7 @@ public class Server : IPublisher
                         {
                             string text = word.Text;
                             text = text.RemoveDuplicates();
+                            text = text.Replace(" ", "");
                             foreach (char c in text)
                             {
                                 result += CalculateValueWithLogging(c);
@@ -2691,7 +2702,7 @@ public class Server : IPublisher
                         break;
                 }
 
-                //????? update the following code too to take into account CalculationMode
+                //????? need to update code to take into account CalculationMode
                 value = s_numerology_system.CalculateValue(word.Text);
                 Log.Append("\t" + "\t" + value);
                 // adjust value of word
@@ -2865,7 +2876,9 @@ public class Server : IPublisher
             {
                 if (CalculationMode == CalculationMode.SumOfUniqueLetterValues)
                 {
-                    string text = verse.Text.SimplifyTo(s_numerology_system.TextMode).RemoveDuplicates();
+                    string text = verse.Text.SimplifyTo(s_numerology_system.TextMode);
+                    text = text.RemoveDuplicates();
+                    text = text.Replace(" ", "");
                     result += CalculateValueWithLogging(text);
                 }
                 else
@@ -2874,12 +2887,12 @@ public class Server : IPublisher
                     {
                         result += CalculateValueWithLogging(word);
                     }
-                }
 
-                value = s_numerology_system.CalculateValue(verse.Text);
-                Log.Append("\t" + "\t" + "\t" + value);
-                // adjust value of verse
-                result += AdjustValueWithLogging(verse);
+                    value = s_numerology_system.CalculateValue(verse.Text);
+                    Log.Append("\t" + "\t" + "\t" + value);
+                    // adjust value of verse
+                    result += AdjustValueWithLogging(verse);
+                }
             }
         }
         return result;
@@ -3014,7 +3027,9 @@ public class Server : IPublisher
                 {
                     text += verse.Text;
                 }
-                text = text.SimplifyTo(s_numerology_system.TextMode).RemoveDuplicates();
+                text = text.SimplifyTo(s_numerology_system.TextMode);
+                text = text.RemoveDuplicates();
+                text = text.Replace(" ", "");
                 result += CalculateValueWithLogging(text);
             }
             else
@@ -3212,7 +3227,9 @@ public class Server : IPublisher
         {
             if (CalculationMode == CalculationMode.SumOfUniqueLetterValues)
             {
-                string text = chapter.Text.SimplifyTo(s_numerology_system.TextMode).RemoveDuplicates();
+                string text = chapter.Text.SimplifyTo(s_numerology_system.TextMode);
+                text = text.RemoveDuplicates();
+                text = text.Replace(" ", "");
                 result += CalculateValueWithLogging(text);
             }
             else
@@ -3239,7 +3256,9 @@ public class Server : IPublisher
                 {
                     text += chapter.Text;
                 }
-                text = text.SimplifyTo(s_numerology_system.TextMode).RemoveDuplicates();
+                text = text.SimplifyTo(s_numerology_system.TextMode);
+                text = text.RemoveDuplicates();
+                text = text.Replace(" ", "");
                 result += CalculateValueWithLogging(text);
             }
             else
@@ -3261,7 +3280,9 @@ public class Server : IPublisher
         {
             if (CalculationMode == CalculationMode.SumOfUniqueLetterValues)
             {
-                string text = book.Text.SimplifyTo(s_numerology_system.TextMode).RemoveDuplicates();
+                string text = book.Text.SimplifyTo(s_numerology_system.TextMode);
+                text = text.RemoveDuplicates();
+                text = text.Replace(" ", "");
                 result += CalculateValueWithLogging(text);
             }
             else
@@ -14268,7 +14289,9 @@ public class Server : IPublisher
 
                 if (frequency_search_type == FrequencySearchType.UniqueLetters)
                 {
-                    phrase = phrase.SimplifyTo(s_numerology_system.TextMode).RemoveDuplicates();
+                    phrase = phrase.SimplifyTo(s_numerology_system.TextMode);
+                    phrase = phrase.RemoveDuplicates();
+                    phrase = phrase.Replace(" ", "");
                 }
 
                 if (!String.IsNullOrEmpty(phrase))
