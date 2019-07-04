@@ -39470,8 +39470,11 @@ public partial class MainForm : Form, ISubscriber
 
         if (m_active_textbox != null)
         {
-            m_found_verses_displayed = false;
-            PopulateChaptersListBox();
+            if (m_found_verses_displayed)
+            {
+                m_found_verses_displayed = false;
+                PopulateChaptersListBox();
+            }
 
             // in all cases
             SearchResultTextBox.Visible = false;
