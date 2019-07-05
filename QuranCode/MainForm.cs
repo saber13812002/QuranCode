@@ -43084,15 +43084,38 @@ public partial class MainForm : Form, ISubscriber
                     value = (long)Math.Round(m_double_value);
                     FactorizeValue(value, "Text", true);
                 }
+                else if ((m_radix == 10) && (input.ToUpper().ContainsInside("P")))
+                {
+                    string[] parts = input.ToUpper().Split('P');
+                    if (parts.Length == 2)
+                    {
+                        int n = 0;
+                        if (int.TryParse(parts[0], out n))
+                        {
+                            int k = 0;
+                            if (int.TryParse(parts[1], out k))
+                            {
+                                BigInteger permutations = Numbers.nPk(n, k);
+                                FactorizeValue((long)permutations, "nPk", true);
+                            }
+                        }
+                    }
+                }
                 else if ((m_radix == 10) && (input.ToUpper().ContainsInside("C")))
                 {
                     string[] parts = input.ToUpper().Split('C');
                     if (parts.Length == 2)
                     {
-                        int n = 0; int.TryParse(parts[0], out n);
-                        int k = 0; int.TryParse(parts[1], out k);
-                        BigInteger combinations = Numbers.NChooseK(n, k);
-                        FactorizeValue((long)combinations, L[l]["nCk"], true);
+                        int n = 0;
+                        if (int.TryParse(parts[0], out n))
+                        {
+                            int k = 0;
+                            if (int.TryParse(parts[1], out k))
+                            {
+                                BigInteger combinations = Numbers.nCk(n, k);
+                                FactorizeValue((long)combinations, "nCk", true);
+                            }
+                        }
                     }
                 }
                 else

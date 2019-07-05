@@ -196,13 +196,16 @@ public static class Evaluator
         // process simple case for now.
         if (parts.Length == 2)
         {
-            long n = long.Parse(parts[0]);
-            long factorial = 1L;
-            for (long i = 1; i <= n; i++)
+            long n;
+            if (long.TryParse(parts[0], out n))
             {
-                factorial *= i;
+                long factorial = 1L;
+                for (long i = 1; i <= n; i++)
+                {
+                    factorial *= i;
+                }
+                expression = factorial.ToString();
             }
-            expression = factorial.ToString();
         }
         // SPECIAL CASE: double and int division
         expression = expression.Replace("/", "/(double)");

@@ -98,7 +98,7 @@ public partial class MainForm : Form
         if (m_chapter_count >= 0)
         {
             int count = (int)ChapterCountNumericUpDown.Value;
-            BigInteger combinations = Numbers.NChooseK(Book.CHAPTERS, count);
+            BigInteger combinations = Numbers.nCk(Book.CHAPTERS, count);
             MatchCountTextBox.Text = combinations.ToString();
         }
     }

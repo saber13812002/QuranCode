@@ -4267,22 +4267,21 @@ public static class Numbers
             QuickSort(list, lo, max);
     }
 
-    // nCk count method
+    // Permutations التباديل: P(n, k) = n! ⁄ (n−k)!
     //
-    //          n!       multiply last  k numbers
-    // nCk = --------- = ------------------------
-    //       k! (n-k)!   multiply first k numbers
+    //          n!       
+    // nPk = ---------
+    //        (n-k)!
     //
-    //       1 2 3         4 5 6 7 8 9
-    // 9C3 = --------------------------
-    //       1 2 3 * 1 2 3 4 5 6      
+    //       1 2 3 4 5 6 7 8 9
+    // 9P4 = -----------------
+    //       1 2 3 4 5    
     //
-    //                           7 8 9
-    // 9C3 = --------------------------
-    //               1 2 3             
+    //                         
+    // 9P4 =           6 7 8 9 = multiply last k numbers
     //
     //
-    public static BigInteger NChooseK(int n, int k)
+    public static BigInteger nPk(int n, int k)
     {
         BigInteger result = 0;
         if ((n > 0) && (k > 0))
@@ -4290,7 +4289,46 @@ public static class Numbers
             if (k <= n)
             {
                 // multiply last k numbers
-                BigInteger numerator = 1L;
+                BigInteger numerator = 1;
+                int r = n - k + 1;
+                for (int i = r; i <= n; i++)
+                {
+                    numerator *= i;
+                }
+
+                result = numerator;
+            }
+            else // k > n
+            {
+                result = 0;
+            }
+        }
+        return result;
+    }
+    // Combinations التوافيق: C(n, k) = n! ⁄ (k! (n−k)!)
+    //
+    //          n!
+    // nCk = ---------
+    //       k! (n-k)!
+    //
+    //       1 2 3 4 5 6 7 8 9
+    // 9C4 = ---------------------
+    //       1 2 3 4  *  1 2 3 4 5     
+    //
+    //                 6 7 8 9       multiply last k numbers
+    // 9C4 = --------------------- = ------------------------
+    //       1 2 3 4                 multiply first k numbers
+    //
+    //
+    public static BigInteger nCk(int n, int k)
+    {
+        BigInteger result = 0;
+        if ((n > 0) && (k > 0))
+        {
+            if (k <= n)
+            {
+                // multiply last k numbers
+                BigInteger numerator = 1;
                 int r = n - k + 1;
                 for (int i = r; i <= n; i++)
                 {
@@ -4298,7 +4336,7 @@ public static class Numbers
                 }
 
                 // multiply first k numbers
-                BigInteger denominator = 1L;
+                BigInteger denominator = 1;
                 for (int i = 1; i <= k; i++)
                 {
                     denominator *= i;
