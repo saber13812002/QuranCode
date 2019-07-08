@@ -42772,17 +42772,16 @@ public partial class MainForm : Form, ISubscriber
                                        )
                                     {
                                         SetCalculationMode(m_calculation_mode);
-
                                         CalculateValueAndDisplayFactors(verses);
                                     }
                                     else // partial text selection
                                     {
-                                        // calculate and display verse_number_sum, word_number_sum, letter_number_sum
-                                        CalculateAndDisplayCounts(m_current_verses, m_current_start_letter, m_current_last_letter);
-
                                         // calculate Letters value
                                         CalculateValueAndDisplayFactors(m_current_verses, m_current_start_letter, m_current_last_letter);
                                     }
+
+                                    // calculate and display verse_number_sum, word_number_sum, letter_number_sum
+                                    CalculateAndDisplayCounts(m_current_verses, m_current_start_letter, m_current_last_letter);
                                 }
                             }
                         }
