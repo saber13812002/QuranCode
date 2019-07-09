@@ -10018,7 +10018,7 @@ partial class MainForm
         this.CalculationModeLabel.TabIndex = 26;
         this.CalculationModeLabel.Tag = "";
         this.CalculationModeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-        this.ToolTip.SetToolTip(this.CalculationModeLabel, "CalculationMode = LetterValue");
+        this.ToolTip.SetToolTip(this.CalculationModeLabel, "Sum of letter values");
         this.CalculationModeLabel.Click += new System.EventHandler(this.CalculationModeLabel_Click);
         // 
         // SumOfDigitalRootsTextBox

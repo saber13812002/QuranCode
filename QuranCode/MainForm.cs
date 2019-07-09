@@ -11148,7 +11148,7 @@ public partial class MainForm : Form, ISubscriber
         this.CalculationModeLabel.Size = new System.Drawing.Size(7, 22);
         this.CalculationModeLabel.TabIndex = 26;
         this.CalculationModeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-        this.ToolTip.SetToolTip(this.CalculationModeLabel, "Prime numbers");
+        this.ToolTip.SetToolTip(this.CalculationModeLabel, "Sum of letter values");
         this.CalculationModeLabel.Click += new System.EventHandler(this.CalculationModeLabel_Click);
         // 
         // Nth4nMinus1CompositeNumberLabel
@@ -14567,13 +14567,12 @@ public partial class MainForm : Form, ISubscriber
                                                 {
                                                     try
                                                     {
-                                                        m_calculation_mode = (CalculationMode)Enum.Parse(typeof(CalculationMode), parts[1].Trim());
+                                                        SetCalculationMode((CalculationMode)Enum.Parse(typeof(CalculationMode), parts[1].Trim()));
                                                     }
                                                     catch
                                                     {
-                                                        m_calculation_mode = CalculationMode.SumOfLetterValues;
+                                                        SetCalculationMode(CalculationMode.SumOfLetterValues);
                                                     }
-                                                    SetCalculationMode(m_calculation_mode);
                                                 }
                                                 break;
                                             case "TotalChapterCounts":
@@ -15413,8 +15412,7 @@ public partial class MainForm : Form, ISubscriber
                         m_show_add_controls = true;
                         ValueLabel_Click(null, null);
 
-                        m_calculation_mode = CalculationMode.SumOfLetterValues;
-                        SetCalculationMode(m_calculation_mode);
+                        SetCalculationMode(CalculationMode.SumOfLetterValues);
 
                         if (m_client.NumerologySystem != null)
                         {
@@ -15490,7 +15488,7 @@ public partial class MainForm : Form, ISubscriber
                     writer.WriteLine("[Numbers]");
                     writer.WriteLine("Radix" + "=" + m_radix);
                     writer.WriteLine("Divisor" + "=" + m_divisor);
-                    writer.WriteLine("CalculationMode" + "=" + m_calculation_mode);
+                    writer.WriteLine("CalculationMode" + "=" + m_client.CalculationMode);
                     writer.WriteLine("TotalChapterCounts" + "=" + m_total_chapter_counts);
                     if (m_client.NumerologySystem != null)
                     {
@@ -39734,7 +39732,7 @@ public partial class MainForm : Form, ISubscriber
                 DecimalLettersTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
                 DecimalLettersTextBox.Refresh();
 
-                if (m_calculation_mode == CalculationMode.SumOfLetterValues)
+                if (m_client.CalculationMode == CalculationMode.SumOfLetterValues)
                 {
                     long value = 0L;
                     foreach (Phrase phrase in m_client.FoundPhrases)
@@ -42075,7 +42073,6 @@ public partial class MainForm : Form, ISubscriber
         TextModeComboBox.DropDownHeight = StatisticsGroupBox.Height - TextModeComboBox.Top - TextModeComboBox.Height - 1;
     }
 
-    CalculationMode m_calculation_mode = CalculationMode.SumOfLetterValues;
     private void CalculationModeLabel_Click(object sender, EventArgs e)
     {
         this.Cursor = Cursors.WaitCursor;
@@ -42099,10 +42096,19 @@ public partial class MainForm : Form, ISubscriber
                             break;
                         case CalculationMode.SumOfConcatenatedLetterValueDigitSums:
                             {
+                                SetCalculationMode(CalculationMode.SumOfVerseValueDigitalRoots);
+                            }
+                            break;
+                        case CalculationMode.SumOfVerseValueDigitalRoots:
+                            {
+                                SetCalculationMode(CalculationMode.SumOfVerseValueDigitSums);
+                            }
+                            break;
+                        case CalculationMode.SumOfVerseValueDigitSums:
+                            {
                                 SetCalculationMode(CalculationMode.SumOfWordValueDigitalRoots);
                             }
                             break;
-
                         case CalculationMode.SumOfWordValueDigitalRoots:
                             {
                                 SetCalculationMode(CalculationMode.SumOfWordValueDigitSums);
@@ -42161,6 +42167,16 @@ public partial class MainForm : Form, ISubscriber
                             break;
                         case CalculationMode.SumOfWordValueDigitalRoots:
                             {
+                                SetCalculationMode(CalculationMode.SumOfVerseValueDigitSums);
+                            }
+                            break;
+                        case CalculationMode.SumOfVerseValueDigitSums:
+                            {
+                                SetCalculationMode(CalculationMode.SumOfVerseValueDigitalRoots);
+                            }
+                            break;
+                        case CalculationMode.SumOfVerseValueDigitalRoots:
+                            {
                                 SetCalculationMode(CalculationMode.SumOfConcatenatedLetterValueDigitSums);
                             }
                             break;
@@ -42187,9 +42203,6 @@ public partial class MainForm : Form, ISubscriber
                     }
                 }
 
-                // backup first
-                m_calculation_mode = m_client.CalculationMode;
-                // then re-calculate value
                 CalculateCurrentValue();
             }
         }
@@ -42239,19 +42252,29 @@ public partial class MainForm : Form, ISubscriber
                         CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[4];
                     }
                     break;
-                case CalculationMode.SumOfConcatenatedLetterValueDigitSums:
+                case CalculationMode.SumOfVerseValueDigitSums:
                     {
                         CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[5];
                     }
                     break;
-                case CalculationMode.SumOfConcatenatedLetterValueDigitalRoots:
+                case CalculationMode.SumOfVerseValueDigitalRoots:
                     {
                         CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[6];
                     }
                     break;
-                case CalculationMode.SumOfUniqueLetterValues:
+                case CalculationMode.SumOfConcatenatedLetterValueDigitSums:
                     {
                         CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[7];
+                    }
+                    break;
+                case CalculationMode.SumOfConcatenatedLetterValueDigitalRoots:
+                    {
+                        CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[8];
+                    }
+                    break;
+                case CalculationMode.SumOfUniqueLetterValues:
+                    {
+                        CalculationModeLabel.BackColor = Numbers.CALCULATION_MODE_COLORS[9];
                     }
                     break;
                 default:
@@ -42576,12 +42599,16 @@ public partial class MainForm : Form, ISubscriber
                         }
                         else
                         {
-                            CalculateSelectedTextValue();
+                            CalculateSelectedTextValue(); // take into account all Adjusts
                         }
 
                         if (m_active_textbox.SelectionLength == 0) // cursor inside line
                         {
-                            if (m_translation_readonly)
+                            if (m_user_text_mode)
+                            {
+                                CalculateValueAndDisplayFactors(m_current_text);
+                            }
+                            else
                             {
                                 Verse verse = GetCurrentVerse();
                                 if (verse != null)
@@ -42593,20 +42620,24 @@ public partial class MainForm : Form, ISubscriber
                                     else
                                     {
                                         CalculateAndDisplayCounts(verse);
+
+                                        if (m_client.CalculationMode == CalculationMode.SumOfLetterValues)
+                                        {
+                                            CalculateValueAndDisplayFactors(verse);
+                                        }
+                                        else
+                                        {
+                                            CalculateValueAndDisplayFactors(m_current_text);
+                                        }
                                     }
-                                    CalculateValueAndDisplayFactors(verse);
                                 }
-                            }
-                            else // edit mode so user can paste any text they like to calculate its value
-                            {
-                                CalculateValueAndDisplayFactors(m_current_text);
                             }
                         }
                         else // some text is highlighted
                         {
-                            if (m_calculation_mode == CalculationMode.SumOfLetterValues)
+                            if (m_client.CalculationMode == CalculationMode.SumOfLetterValues)
                             {
-                                CalculateSelectedTextValue();
+                                CalculateSelectedTextValue(); // take into account all Adjusts
                             }
                             else
                             {
@@ -42641,7 +42672,6 @@ public partial class MainForm : Form, ISubscriber
                 if (m_selection_mode)
                 {
                     m_current_text = m_active_textbox.Text;
-                    SetCalculationMode(m_calculation_mode);
                 }
                 else
                 {
@@ -42656,7 +42686,6 @@ public partial class MainForm : Form, ISubscriber
                         {
                             m_current_text = "";
                         }
-                        SetCalculationMode(m_calculation_mode);
                     }
                     else // get current selected text
                     {
@@ -42771,7 +42800,6 @@ public partial class MainForm : Form, ISubscriber
                                         (m_active_textbox.SelectionLength == m_active_textbox.Text.Length)
                                        )
                                     {
-                                        SetCalculationMode(m_calculation_mode);
                                         CalculateValueAndDisplayFactors(verses);
                                     }
                                     else // partial text selection
@@ -43237,7 +43265,7 @@ public partial class MainForm : Form, ISubscriber
                 DecimalValueTextBox.Refresh();
 
                 bool show_unused_letters_value =
-                    (m_calculation_mode == CalculationMode.SumOfUniqueLetterValues)
+                    (m_client.CalculationMode == CalculationMode.SumOfUniqueLetterValues)
                     &&
                     ((ValueLabel.Text.EndsWith(L[l]["Value"])) || (ValueLabel.Text.EndsWith(L[l]["User"])));
 

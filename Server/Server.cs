@@ -1458,7 +1458,9 @@ public class Server : IPublisher
         {
             text = text.Replace("\r\n", "\n");
             text = text.SimplifyTo(s_numerology_system.TextMode);
+            string[] verse_texts = text.Split('\n');
             string[] word_texts = text.Split();
+
             switch (CalculationMode)
             {
                 case CalculationMode.SumOfLetterValues:
@@ -1517,6 +1519,32 @@ public class Server : IPublisher
                                 word_value += s_numerology_system.CalculateValue(c);
                             }
                             result += Numbers.DigitalRoot(word_value);
+                        }
+                    }
+                    break;
+                case CalculationMode.SumOfVerseValueDigitSums:
+                    {
+                        foreach (string verse_text in verse_texts)
+                        {
+                            long verse_value = 0L;
+                            foreach (char c in verse_text)
+                            {
+                                verse_value += s_numerology_system.CalculateValue(c);
+                            }
+                            result += Numbers.DigitSum(verse_value);
+                        }
+                    }
+                    break;
+                case CalculationMode.SumOfVerseValueDigitalRoots:
+                    {
+                        foreach (string verse_text in verse_texts)
+                        {
+                            long verse_value = 0L;
+                            foreach (char c in verse_text)
+                            {
+                                verse_value += s_numerology_system.CalculateValue(c);
+                            }
+                            result += Numbers.DigitalRoot(verse_value);
                         }
                     }
                     break;
@@ -1595,8 +1623,9 @@ public class Server : IPublisher
         {
             text = text.Replace("\r\n", "\n");
             text = text.SimplifyTo(s_numerology_system.TextMode);
-
+            string[] verse_texts = text.Split('\n');
             string[] word_texts = text.Split();
+
             switch (CalculationMode)
             {
                 case CalculationMode.SumOfLetterValues:
@@ -1697,6 +1726,38 @@ public class Server : IPublisher
                                 Log.AppendLine("\t" + value);
                             }
                             result += Numbers.DigitalRoot(word_value);
+                        }
+                    }
+                    break;
+                case CalculationMode.SumOfVerseValueDigitSums:
+                    {
+                        foreach (string verse_text in verse_texts)
+                        {
+                            long verse_value = 0L;
+                            foreach (char c in verse_text)
+                            {
+                                Log.Append(c.ToString());
+                                long value = s_numerology_system.CalculateValue(c);
+                                verse_value += value; ValueSum += value;
+                                Log.AppendLine("\t" + value);
+                            }
+                            result += Numbers.DigitSum(verse_value);
+                        }
+                    }
+                    break;
+                case CalculationMode.SumOfVerseValueDigitalRoots:
+                    {
+                        foreach (string verse_text in verse_texts)
+                        {
+                            long verse_value = 0L;
+                            foreach (char c in verse_text)
+                            {
+                                Log.Append(c.ToString());
+                                long value = s_numerology_system.CalculateValue(c);
+                                verse_value += value; ValueSum += value;
+                                Log.AppendLine("\t" + value);
+                            }
+                            result += Numbers.DigitalRoot(verse_value);
                         }
                     }
                     break;
@@ -2880,6 +2941,16 @@ public class Server : IPublisher
                     text = text.RemoveDuplicates();
                     text = text.Replace(" ", "");
                     result += CalculateValueWithLogging(text);
+                }
+                else if (CalculationMode == CalculationMode.SumOfVerseValueDigitSums)
+                {
+                    value = Numbers.DigitSum(s_numerology_system.CalculateValue(verse.Text));
+                    Log.Append("\t" + "\t" + "\t" + value);
+                }
+                else if (CalculationMode == CalculationMode.SumOfVerseValueDigitalRoots)
+                {
+                    value = Numbers.DigitalRoot(s_numerology_system.CalculateValue(verse.Text));
+                    Log.Append("\t" + "\t" + "\t" + value);
                 }
                 else
                 {

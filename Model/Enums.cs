@@ -9,6 +9,8 @@ namespace Model
         SumOfLetterValueDigitalRoots,
         SumOfWordValueDigitSums,
         SumOfWordValueDigitalRoots,
+        SumOfVerseValueDigitSums,
+        SumOfVerseValueDigitalRoots,
         SumOfConcatenatedLetterValueDigitSums,
         SumOfConcatenatedLetterValueDigitalRoots,
         SumOfUniqueLetterValues

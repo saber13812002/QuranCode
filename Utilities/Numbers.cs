@@ -205,14 +205,16 @@ public static class Numbers
 
     public static Color[] CALCULATION_MODE_COLORS =
     { 
-        /* CalculationMode.SumOfLetterValues */                         Color.White,
-        /* CalculationMode.SumOfLetterValueDigitSums */                 Color.Pink,
-        /* CalculationMode.SumOfLetterValueDigitalRoots */              Color.Red,
-        /* CalculationMode.SumOfWordValueDigitSums */                   Color.Cyan,
-        /* CalculationMode.SumOfWordValueDigitalRoots */                Color.Blue,
-        /* CalculationMode.SumOfConcatenatedLetterValueDigitSums */     Color.Lime,
-        /* CalculationMode.SumOfConcatenatedLetterValueDigitalRoots */  Color.Green,
-        /* CalculationMode.SumOfUniqueLetterValues */                   Color.Yellow
+        /* CalculationMode.SumOfLetterValues */                         Color.FromArgb(255, 255, 255),
+        /* CalculationMode.SumOfLetterValueDigitSums */                 Color.FromArgb(255, 192, 192),
+        /* CalculationMode.SumOfLetterValueDigitalRoots */              Color.FromArgb(255, 0, 0),
+        /* CalculationMode.SumOfWordValueDigitSums */                   Color.FromArgb(128, 128, 255),
+        /* CalculationMode.SumOfWordValueDigitalRoots */                Color.FromArgb(0, 0, 255),
+        /* CalculationMode.SumOfVerseValueDigitSums */                  Color.FromArgb(128, 192, 128),
+        /* CalculationMode.SumOfVerseValueDigitalRoots */               Color.FromArgb(0, 128, 0),
+        /* CalculationMode.SumOfConcatenatedLetterValueDigitSums */     Color.FromArgb(160, 160, 160),
+        /* CalculationMode.SumOfConcatenatedLetterValueDigitalRoots */  Color.FromArgb(0, 0, 0),
+        /* CalculationMode.SumOfUniqueLetterValues */                   Color.FromArgb(255, 255, 0)
     };
 
     //                             int.MaxValue = 2^32 - 1 = 2147483647;
