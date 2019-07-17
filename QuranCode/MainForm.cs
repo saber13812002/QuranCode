@@ -34315,57 +34315,54 @@ public partial class MainForm : Form, ISubscriber
                 // update m_text_location_in_verse and m_text_location_in_word
                 UpdateFindByTextOptions();
 
-                List<Phrase> total_phrases = new List<Phrase>();
-                List<Verse> total_verses = new List<Verse>();
                 if (word_texts.Count > 0)
                 {
+                    text += "(";
                     foreach (string word_text in word_texts)
                     {
                         if (startup_text.Length > 0)
                         {
-                            text = startup_text + " " + word_text;
+                            text += startup_text + " " + word_text + "|";
                         }
                         else
                         {
-                            text = word_text;
-                        }
-
-                        if (!String.IsNullOrEmpty(text))
-                        {
-                            switch (m_text_search_type)
-                            {
-                                case TextSearchType.Exact:
-                                    {
-                                        if (FindByTextTextBox.Text.EndsWith(" "))
-                                        {
-                                            m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_location_in_chapter, m_text_location_in_verse, m_text_location_in_word, TextWordness.Any, m_case_sensitive, m_with_diacritics, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
-                                        }
-                                        else
-                                        {
-                                            m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_location_in_chapter, m_text_location_in_verse, m_text_location_in_word, TextWordness.WholeWord, m_case_sensitive, m_with_diacritics, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
-                                        }
-                                    }
-                                    break;
-                                case TextSearchType.Root:
-                                    {
-                                        m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
-                                    }
-                                    break;
-                                case TextSearchType.Proximity:
-                                    {
-                                        m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_proximity_type, TextWordness.Any, m_case_sensitive, m_with_diacritics);
-                                    }
-                                    break;
-                            }
-
-                            total_phrases = total_phrases.Union(m_client.FoundPhrases);
-                            total_verses = total_verses.Union(m_client.FoundVerses);
+                            text += word_text + "|";
                         }
                     }
+                    if (text.Length > 0)
+                    {
+                        text = text.Remove(text.Length - 1, 1);
+                    }
+                    text += ")";
 
-                    // write final result to m_client
-                    m_client.FoundPhrases = total_phrases;
-                    m_client.FoundVerses = total_verses;
+                    if (!String.IsNullOrEmpty(text))
+                    {
+                        switch (m_text_search_type)
+                        {
+                            case TextSearchType.Exact:
+                                {
+                                    if (FindByTextTextBox.Text.EndsWith(" "))
+                                    {
+                                        m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_location_in_chapter, m_text_location_in_verse, m_text_location_in_word, TextWordness.Any, m_case_sensitive, m_with_diacritics, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
+                                    }
+                                    else
+                                    {
+                                        m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_location_in_chapter, m_text_location_in_verse, m_text_location_in_word, TextWordness.WholeWord, m_case_sensitive, m_with_diacritics, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
+                                    }
+                                }
+                                break;
+                            case TextSearchType.Root:
+                                {
+                                    m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
+                                }
+                                break;
+                            case TextSearchType.Proximity:
+                                {
+                                    m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_language_type, null, m_text_proximity_type, TextWordness.Any, m_case_sensitive, m_with_diacritics);
+                                }
+                                break;
+                        }
+                    }
                 }
 
                 // display results
