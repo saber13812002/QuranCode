@@ -1458,7 +1458,7 @@ public class Server : IPublisher
         {
             text = text.Replace("\r\n", "\n");
             text = text.SimplifyTo(s_numerology_system.TextMode);
-            string[] verse_texts = text.Split('\n');
+            string[] line_texts = text.Split('\n');
             string[] word_texts = text.Split();
 
             switch (CalculationMode)
@@ -1524,7 +1524,7 @@ public class Server : IPublisher
                     break;
                 case CalculationMode.SumOfVerseValueDigitSums:
                     {
-                        foreach (string verse_text in verse_texts)
+                        foreach (string verse_text in line_texts)
                         {
                             long verse_value = 0L;
                             foreach (char c in verse_text)
@@ -1537,7 +1537,7 @@ public class Server : IPublisher
                     break;
                 case CalculationMode.SumOfVerseValueDigitalRoots:
                     {
-                        foreach (string verse_text in verse_texts)
+                        foreach (string verse_text in line_texts)
                         {
                             long verse_value = 0L;
                             foreach (char c in verse_text)
@@ -1623,7 +1623,7 @@ public class Server : IPublisher
         {
             text = text.Replace("\r\n", "\n");
             text = text.SimplifyTo(s_numerology_system.TextMode);
-            string[] verse_texts = text.Split('\n');
+            string[] line_texts = text.Split('\n');
             string[] word_texts = text.Split();
 
             switch (CalculationMode)
@@ -1731,7 +1731,7 @@ public class Server : IPublisher
                     break;
                 case CalculationMode.SumOfVerseValueDigitSums:
                     {
-                        foreach (string verse_text in verse_texts)
+                        foreach (string verse_text in line_texts)
                         {
                             long verse_value = 0L;
                             foreach (char c in verse_text)
@@ -1747,7 +1747,7 @@ public class Server : IPublisher
                     break;
                 case CalculationMode.SumOfVerseValueDigitalRoots:
                     {
-                        foreach (string verse_text in verse_texts)
+                        foreach (string verse_text in line_texts)
                         {
                             long verse_value = 0L;
                             foreach (char c in verse_text)
@@ -1973,6 +1973,22 @@ public class Server : IPublisher
                             result = Numbers.DigitalRoot(word_value);
                         }
                         break;
+                    case CalculationMode.SumOfVerseValueDigitSums:
+                        {
+                            foreach (Letter letter in word.Letters)
+                            {
+                                result += CalculateValue(letter);
+                            }
+                        }
+                        break;
+                    case CalculationMode.SumOfVerseValueDigitalRoots:
+                        {
+                            foreach (Letter letter in word.Letters)
+                            {
+                                result += CalculateValue(letter);
+                            }
+                        }
+                        break;
                     case CalculationMode.SumOfConcatenatedLetterValueDigitSums:
                         {
                             long word_value = 0L;
@@ -2115,13 +2131,7 @@ public class Server : IPublisher
                 {
                     foreach (Word word in words)
                     {
-                        foreach (Letter letter in word.Letters)
-                        {
-                            result += CalculateValue(letter);
-                        }
-
-                        // adjust value of word
-                        result += AdjustValue(word);
+                        result += CalculateValue(word);
                     }
                 }
 
@@ -2186,6 +2196,19 @@ public class Server : IPublisher
                         result += CalculateValue(word);
                     }
 
+                    if (CalculationMode == CalculationMode.SumOfVerseValueDigitSums)
+                    {
+                        result = Numbers.DigitSum(result);
+                    }
+                    if (CalculationMode == CalculationMode.SumOfVerseValueDigitalRoots)
+                    {
+                        result = Numbers.DigitalRoot(result);
+                    }
+                    else
+                    {
+                        // do nothing
+                    }
+
                     // adjust value of verse
                     result += AdjustValue(verse);
                 }
@@ -2196,6 +2219,8 @@ public class Server : IPublisher
     public static long CalculateValue(Verse verse, Letter from_letter, Letter to_letter)
     {
         if (verse == null) return 0L;
+        if (from_letter == null) return 0L;
+        if (to_letter == null) return 0L;
 
         long result = 0L;
         if (s_numerology_system != null)
@@ -2339,6 +2364,8 @@ public class Server : IPublisher
     {
         if (verses == null) return 0L;
         if (verses.Count == 0) return 0L;
+        if (start_letter == null) return 0L;
+        if (end_letter == null) return 0L;
 
         long result = 0L;
         if (s_numerology_system != null)
@@ -2558,16 +2585,30 @@ public class Server : IPublisher
         {
             Log.Append(letter.ToString());
 
-            long value = s_numerology_system.CalculateValue(letter.Character);
-            result += value; ValueSum += value;
-            Log.Append("\t" + value);
-
             if (s_numerology_system.LetterValue.StartsWith("Base"))
             {
-                // do nothing special
+                long value = s_numerology_system.CalculateValue(letter.Character);
+                result = value; ValueSum += value;
+                Log.Append("\t" + value);
             }
             else
             {
+                long value = 0L;
+                if (CalculationMode == Model.CalculationMode.SumOfLetterValueDigitSums)
+                {
+                    value = Numbers.DigitSum(s_numerology_system.CalculateValue(letter.Character));
+                }
+                else if (CalculationMode == Model.CalculationMode.SumOfLetterValueDigitalRoots)
+                {
+                    value = Numbers.DigitSum(s_numerology_system.CalculateValue(letter.Character));
+                }
+                else
+                {
+                    value = s_numerology_system.CalculateValue(letter.Character);
+                }
+                result = value; ValueSum += value;
+                Log.Append("\t" + value);
+
                 // adjust value of letter
                 result += AdjustValueWithLogging(letter);
 
@@ -2673,35 +2714,22 @@ public class Server : IPublisher
             }
             else
             {
+                long word_value = 0L;
                 switch (CalculationMode)
                 {
                     case CalculationMode.SumOfLetterValues:
-                        {
-                            foreach (Letter letter in word.Letters)
-                            {
-                                result += CalculateValueWithLogging(letter);
-                            }
-                        }
-                        break;
                     case CalculationMode.SumOfLetterValueDigitSums:
-                        {
-                            foreach (Letter letter in word.Letters)
-                            {
-                                result += Numbers.DigitSum(CalculateValueWithLogging(letter));
-                            }
-                        }
-                        break;
                     case CalculationMode.SumOfLetterValueDigitalRoots:
                         {
                             foreach (Letter letter in word.Letters)
                             {
-                                result += Numbers.DigitalRoot(CalculateValueWithLogging(letter));
+                                word_value += CalculateValueWithLogging(letter);
                             }
+                            result = word_value;
                         }
                         break;
                     case CalculationMode.SumOfWordValueDigitSums:
                         {
-                            long word_value = 0L;
                             foreach (Letter letter in word.Letters)
                             {
                                 word_value += CalculateValueWithLogging(letter);
@@ -2711,7 +2739,6 @@ public class Server : IPublisher
                         break;
                     case CalculationMode.SumOfWordValueDigitalRoots:
                         {
-                            long word_value = 0L;
                             foreach (Letter letter in word.Letters)
                             {
                                 word_value += CalculateValueWithLogging(letter);
@@ -2721,26 +2748,22 @@ public class Server : IPublisher
                         break;
                     case CalculationMode.SumOfConcatenatedLetterValueDigitSums:
                         {
-                            long word_value = 0L;
                             for (int i = 0; i < word.Letters.Count; i++)
                             {
                                 Log.Append(word.Letters[i].ToString());
                                 value = Numbers.DigitSum(CalculateValueWithLogging(word.Letters[i])) * (long)Math.Pow(10, i);
                                 word_value += value; ValueSum += value;
-                                Log.AppendLine("\t" + value);
                             }
                             result = word_value;
                         }
                         break;
                     case CalculationMode.SumOfConcatenatedLetterValueDigitalRoots:
                         {
-                            long word_value = 0L;
                             for (int i = 0; i < word.Letters.Count; i++)
                             {
                                 Log.Append(word.Letters[i].ToString());
                                 value = Numbers.DigitalRoot(CalculateValueWithLogging(word.Letters[i])) * (long)Math.Pow(10, i);
                                 word_value += value; ValueSum += value;
-                                Log.AppendLine("\t" + value);
                             }
                             result = word_value;
                         }
@@ -2762,10 +2785,8 @@ public class Server : IPublisher
                         }
                         break;
                 }
+                Log.Append("\t" + "\t" + word_value);
 
-                //????? need to update code to take into account CalculationMode
-                value = s_numerology_system.CalculateValue(word.Text);
-                Log.Append("\t" + "\t" + value);
                 // adjust value of word
                 result += AdjustValueWithLogging(word);
 
@@ -2871,15 +2892,7 @@ public class Server : IPublisher
                 {
                     foreach (Word word in words)
                     {
-                        foreach (Letter letter in word.Letters)
-                        {
-                            result += CalculateValueWithLogging(letter);
-                        }
-
-                        value = s_numerology_system.CalculateValue(word.Text);
-                        Log.Append("\t" + "\t" + value);
-                        // adjust value of word
-                        result += AdjustValueWithLogging(word);
+                        result += CalculateValueWithLogging(word);
                     }
                 }
 
@@ -2940,17 +2953,7 @@ public class Server : IPublisher
                     string text = verse.Text.SimplifyTo(s_numerology_system.TextMode);
                     text = text.RemoveDuplicates();
                     text = text.Replace(" ", "");
-                    result += CalculateValueWithLogging(text);
-                }
-                else if (CalculationMode == CalculationMode.SumOfVerseValueDigitSums)
-                {
-                    value = Numbers.DigitSum(s_numerology_system.CalculateValue(verse.Text));
-                    Log.Append("\t" + "\t" + "\t" + value);
-                }
-                else if (CalculationMode == CalculationMode.SumOfVerseValueDigitalRoots)
-                {
-                    value = Numbers.DigitalRoot(s_numerology_system.CalculateValue(verse.Text));
-                    Log.Append("\t" + "\t" + "\t" + value);
+                    result = CalculateValueWithLogging(text);
                 }
                 else
                 {
@@ -2959,8 +2962,20 @@ public class Server : IPublisher
                         result += CalculateValueWithLogging(word);
                     }
 
-                    value = s_numerology_system.CalculateValue(verse.Text);
+                    if (CalculationMode == CalculationMode.SumOfVerseValueDigitSums)
+                    {
+                        value = Numbers.DigitSum(result);
+                    }
+                    else if (CalculationMode == CalculationMode.SumOfVerseValueDigitalRoots)
+                    {
+                        value = Numbers.DigitalRoot(result);
+                    }
+                    else
+                    {
+                        value = result;
+                    }
                     Log.Append("\t" + "\t" + "\t" + value);
+
                     // adjust value of verse
                     result += AdjustValueWithLogging(verse);
                 }
@@ -2971,6 +2986,8 @@ public class Server : IPublisher
     public static long CalculateValueWithLogging(Verse verse, Letter from_letter, Letter to_letter)
     {
         if (verse == null) return 0L;
+        if (from_letter == null) return 0L;
+        if (to_letter == null) return 0L;
 
         long result = 0L;
         long value = 0L;
@@ -3053,6 +3070,7 @@ public class Server : IPublisher
                             (to_letter.NumberInVerse >= word.Letters[word.Letters.Count - 1].NumberInVerse) // if selection ends   at or after  last  letter in word
                            )
                         {
+                            //????? must use last part of result instead of computing from word.Text 
                             value = s_numerology_system.CalculateValue(word.Text);
                             Log.Append("\t" + "\t" + value);
                             // adjust value of word
@@ -3069,6 +3087,7 @@ public class Server : IPublisher
 
                 if ((from_letter.NumberInVerse == 1) && (to_letter.NumberInVerse == verse.LetterCount))
                 {
+                    //????? must use last part of result instead of computing from word.Text 
                     value = s_numerology_system.CalculateValue(verse.Text);
                     Log.Append("\t" + "\t" + "\t" + value);
                     // adjust value of verse
@@ -3101,7 +3120,7 @@ public class Server : IPublisher
                 text = text.SimplifyTo(s_numerology_system.TextMode);
                 text = text.RemoveDuplicates();
                 text = text.Replace(" ", "");
-                result += CalculateValueWithLogging(text);
+                result = CalculateValueWithLogging(text);
             }
             else
             {
@@ -3119,7 +3138,7 @@ public class Server : IPublisher
                             {
                                 if (chapters.Contains(chapter))
                                 {
-                                    value = s_numerology_system.CalculateValue(chapter.Text);
+                                    value = CalculateValue(chapter);
                                     Log.Append("\t" + "\t" + "\t" + "\t" + value);
                                     // adjust value of chapter
                                     result += AdjustValueWithLogging(chapter);
@@ -3140,6 +3159,8 @@ public class Server : IPublisher
     {
         if (verses == null) return 0L;
         if (verses.Count == 0) return 0L;
+        if (start_letter == null) return 0L;
+        if (end_letter == null) return 0L;
 
         long result = 0L;
         long value = 0L;
@@ -3179,7 +3200,6 @@ public class Server : IPublisher
             }
             else //if (verses.Count > 2)
             {
-                // WARNING: no null check ???
                 bool first_verse_is_fully_selected = (start_letter.NumberInChapter == 1);
                 bool last_verse_is_fully_selected = (end_letter.NumberInChapter == end_letter.Word.Verse.Chapter.LetterCount);
                 Chapter first_chapter = start_letter.Word.Verse.Chapter;
@@ -3223,7 +3243,7 @@ public class Server : IPublisher
                                     {
                                         if (chapters.Contains(chapter))
                                         {
-                                            value = s_numerology_system.CalculateValue(chapter.Text);
+                                            value = CalculateValue(chapter);
                                             Log.Append("\t" + "\t" + "\t" + "\t" + value);
                                             // adjust value of chapter
                                             result += AdjustValueWithLogging(chapter);
@@ -3249,40 +3269,41 @@ public class Server : IPublisher
                         if (last_verse_start_letter != null)
                         {
                             result += CalculateValueWithLogging(verses[verses.Count - 1], last_verse_start_letter, end_letter);
-                            Verse verse = verses[verses.Count - 1];
-                            if (verse != null)
+                        }
+                    }
+                }
+
+                Verse last_verse = verses[verses.Count - 1];
+                if (last_verse != null)
+                {
+                    if (
+                         ((last_chapter == first_chapter) && first_verse_is_fully_selected && last_verse_is_fully_selected)
+                         ||
+                         ((last_chapter != first_chapter) && (last_verse.Chapter == last_chapter) && last_verse_is_fully_selected)
+                       )
+                    {
+                        Chapter chapter = last_verse.Chapter;
+                        if (chapter != null)
+                        {
+                            if (last_verse.NumberInChapter == last_verse.Chapter.Verses.Count)    // last verse in chapter
                             {
-                                if (
-                                     ((last_chapter == first_chapter) && first_verse_is_fully_selected && last_verse_is_fully_selected)
-                                     ||
-                                     ((last_chapter != first_chapter) && (verse.Chapter == last_chapter) && last_verse_is_fully_selected)
-                                   )
+                                List<Chapter> chapters = GetCompleteChapters(verses);
+                                if (chapters != null)
                                 {
-                                    Chapter chapter = verse.Chapter;
-                                    if (chapter != null)
+                                    if (chapters.Contains(chapter))
                                     {
-                                        if (verse.NumberInChapter == verse.Chapter.Verses.Count)    // last verse in chapter
-                                        {
-                                            List<Chapter> chapters = GetCompleteChapters(verses);
-                                            if (chapters != null)
-                                            {
-                                                if (chapters.Contains(chapter))
-                                                {
-                                                    value = s_numerology_system.CalculateValue(chapter.Text);
-                                                    Log.Append("\t" + "\t" + "\t" + "\t" + value);
-                                                    // adjust value of chapter
-                                                    result += AdjustValueWithLogging(chapter);
-                                                }
-                                            }
-                                        }
+                                        value = CalculateValue(chapter);
+                                        Log.Append("\t" + "\t" + "\t" + "\t" + value);
+                                        // adjust value of chapter
+                                        result += AdjustValueWithLogging(chapter);
                                     }
-                                }
-                                else
-                                {
-                                    Log.AppendLine("\t" + "\t" + "\t" + "\t" + "---");
                                 }
                             }
                         }
+                    }
+                    else
+                    {
+                        Log.AppendLine("\t" + "\t" + "\t" + "\t" + "---");
                     }
                 }
             }
@@ -3301,12 +3322,16 @@ public class Server : IPublisher
                 string text = chapter.Text.SimplifyTo(s_numerology_system.TextMode);
                 text = text.RemoveDuplicates();
                 text = text.Replace(" ", "");
-                result += CalculateValueWithLogging(text);
+                result = CalculateValueWithLogging(text);
             }
             else
             {
-                result += CalculateValueWithLogging(chapter.Verses);
+                result = CalculateValueWithLogging(chapter.Verses);
             }
+            Log.Append("\t" + "\t" + "\t" + "\t" + result);
+
+            // adjust value of chapter
+            result += AdjustValueWithLogging(chapter);
 
             chapter.Value = result; // update chapter values for ChapterSortMethod.ByValue
         }
@@ -3330,7 +3355,7 @@ public class Server : IPublisher
                 text = text.SimplifyTo(s_numerology_system.TextMode);
                 text = text.RemoveDuplicates();
                 text = text.Replace(" ", "");
-                result += CalculateValueWithLogging(text);
+                result = CalculateValueWithLogging(text);
             }
             else
             {
@@ -3354,11 +3379,11 @@ public class Server : IPublisher
                 string text = book.Text.SimplifyTo(s_numerology_system.TextMode);
                 text = text.RemoveDuplicates();
                 text = text.Replace(" ", "");
-                result += CalculateValueWithLogging(text);
+                result = CalculateValueWithLogging(text);
             }
             else
             {
-                result += CalculateValueWithLogging(book.Chapters);
+                result = CalculateValueWithLogging(book.Chapters);
             }
         }
         return result;
