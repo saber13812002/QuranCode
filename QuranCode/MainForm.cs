@@ -16958,7 +16958,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         int verse_count = m_client.FoundVerses.Count;
                         m_find_result_header = verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]);
-                        DisplayFoundVerses(false, false);
+                        DisplayFoundVerses(false, true);
 
                         //SearchResultTextBox.Focus();
                         //SearchResultTextBox.Refresh();
@@ -39586,9 +39586,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
-
-                        SwitchToSearchResultTextBox();
                     }
+
+                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
                     for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
@@ -39783,9 +39783,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
-
-                        SwitchToSearchResultTextBox();
                     }
+
+                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
                     for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
@@ -39946,9 +39946,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
-
-                        SwitchToSearchResultTextBox();
                     }
+
+                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) ChaptersListBox.SelectedIndexChanged -= new EventHandler(ChaptersListBox_SelectedIndexChanged);
                     if (m_client.FoundChapters.Count > 0)
@@ -40077,9 +40077,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
-
-                        SwitchToSearchResultTextBox();
                     }
+
+                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) ChaptersListBox.SelectedIndexChanged -= new EventHandler(ChaptersListBox_SelectedIndexChanged);
                     if (m_client.FoundChapterRanges.Count > 0)
