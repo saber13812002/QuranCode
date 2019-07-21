@@ -2549,7 +2549,8 @@ public class Client : IPublisher, ISubscriber
                             reverse_distancesum_sum += letter_statistic.ReverseDistanceSum;
                         }
                         writer.WriteLine("-------------------------------------------------------------------");
-                        writer.WriteLine(running_sum + "\t" + "Sum" + "\t" + frequence_sum.ToString() + "\t" + positionsum_sum.ToString() + "\t" + distancesum_sum.ToString() + "\t" + reverse_positionsum_sum.ToString() + "\t" + reverse_distancesum_sum.ToString());
+                        if (verbose) writer.WriteLine(running_sum + "\t" + "Sum" + "\t" + frequence_sum.ToString() + "\t" + positionsum_sum.ToString() + "\t" + "\t" + distancesum_sum.ToString() + "\t" + "\t" + reverse_positionsum_sum.ToString() + "\t" + "\t" + reverse_distancesum_sum.ToString() + "\t");
+                        else writer.WriteLine(running_sum + "\t" + "Sum" + "\t" + frequence_sum.ToString() + "\t" + positionsum_sum.ToString() + "\t" + distancesum_sum.ToString() + "\t" + reverse_positionsum_sum.ToString() + "\t" + reverse_distancesum_sum.ToString());
                         writer.WriteLine("-------------------------------------------------------------------");
                     }
                 }
