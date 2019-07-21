@@ -5541,12 +5541,11 @@ partial class MainForm
         | System.Windows.Forms.AnchorStyles.Left)
         | System.Windows.Forms.AnchorStyles.Right)));
         this.HeaderLabel.BackColor = System.Drawing.Color.Transparent;
-        this.HeaderLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.HeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.HeaderLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.HeaderLabel.Location = new System.Drawing.Point(89, -5);
+        this.HeaderLabel.Location = new System.Drawing.Point(69, -5);
         this.HeaderLabel.Name = "HeaderLabel";
-        this.HeaderLabel.Size = new System.Drawing.Size(654, 20);
+        this.HeaderLabel.Size = new System.Drawing.Size(694, 20);
         this.HeaderLabel.TabIndex = 1;
         this.HeaderLabel.Text = "Header Information";
         this.HeaderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;

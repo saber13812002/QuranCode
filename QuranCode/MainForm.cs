@@ -6480,10 +6480,10 @@ public partial class MainForm : Form, ISubscriber
         this.HeaderLabel.BackColor = System.Drawing.Color.Transparent;
         this.HeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.HeaderLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.HeaderLabel.Location = new System.Drawing.Point(4, -5);
+        this.HeaderLabel.Location = new System.Drawing.Point(24, -5);
         this.HeaderLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.HeaderLabel.Name = "HeaderLabel";
-        this.HeaderLabel.Size = new System.Drawing.Size(673, 20);
+        this.HeaderLabel.Size = new System.Drawing.Size(703, 20);
         this.HeaderLabel.TabIndex = 1;
         this.HeaderLabel.Text = "Header Information";
         this.HeaderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -13096,9 +13096,11 @@ public partial class MainForm : Form, ISubscriber
                         }
                         else
                         {
-                            ApplyFont("Courier New", 12.0F);
+                            ApplyFont("Courier New", 14.0F);
                             FontLabel.Enabled = false;
                         }
+
+                        ScriptLabel.Visible = Globals.EDITION == Edition.Ultimate;
 
                         this.Activate(); // bring to foreground
                     }
@@ -16958,7 +16960,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         int verse_count = m_client.FoundVerses.Count;
                         m_find_result_header = verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]);
-                        DisplayFoundVerses(false, true);
+                        DisplayFoundVerses(true, true);
 
                         //SearchResultTextBox.Focus();
                         //SearchResultTextBox.Refresh();
@@ -17856,6 +17858,7 @@ public partial class MainForm : Form, ISubscriber
                         HighlightVerse(verse);
                         UpdateHeaderLabel();
                         UpdateProgressBar(verse);
+                        UpdateNotifyIconText();
 
                         CalculateCurrentValue();
 
@@ -17875,7 +17878,7 @@ public partial class MainForm : Form, ISubscriber
                             AddSearchHistoryItem();
                         }
 
-                        // change focus to MainTextBox control insead of SearchResultTextBox
+                        //// change focus to MainTextBox control insead of SearchResultTextBox
                         //MainTextBox.Focus();
 
                         ToolTip.SetToolTip(InspectChaptersLabel, L[l]["Inspect chapters"]);
@@ -25915,7 +25918,7 @@ public partial class MainForm : Form, ISubscriber
                 {
                     foreach (string root in word.Roots)
                     {
-                        roots.Append(root + " ║ ");
+                        roots.Append(root + " | ");
                     }
                     roots.Remove(roots.Length - 3, 3);
                 }
@@ -25986,7 +25989,7 @@ public partial class MainForm : Form, ISubscriber
                     if (related_words != null)
                     {
                         StringBuilder str = new StringBuilder();
-                        str.AppendLine(word_count.ToString() + " (" + unique_word_count.ToString() + ")" + "  " + L[l]["related words"]);
+                        str.AppendLine(word_count.ToString() + " (" + unique_word_count.ToString() + ")" + "  " + L[l]["related words"] + ": " + word.BestRoot);
 
                         if (related_words.Count > 0)
                         {
@@ -26019,10 +26022,9 @@ public partial class MainForm : Form, ISubscriber
             // in all cases
             result = Application.ProductName + " ║ " + GetSelectionSummary();
 
-            string word_info = null;
+            string word_info = GetWordInformation(word);
             if (ModifierKeys == Keys.Control)
             {
-                word_info = GetWordInformation(word);
                 word_info += "\r\n\r\n";
                 word_info += GetGrammarInformation(word);
 
@@ -26061,7 +26063,7 @@ public partial class MainForm : Form, ISubscriber
                     if (related_verses != null)
                     {
                         StringBuilder str = new StringBuilder();
-                        str.AppendLine(related_verses.Count.ToString() + "  " + L[l]["related verses"]);
+                        str.AppendLine(related_verses.Count.ToString() + "  " + L[l]["related verses"] + ":");
 
                         foreach (Verse related_verse in related_verses)
                         {
@@ -42410,7 +42412,7 @@ public partial class MainForm : Form, ISubscriber
                             }
                             else
                             {
-                                ApplyFont("Courier New", 12.0F);
+                                ApplyFont("Courier New", 14.0F);
                                 FontLabel.Enabled = false;
                             }
                         }

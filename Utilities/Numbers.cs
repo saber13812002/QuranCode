@@ -218,7 +218,7 @@ public static class Numbers
     };
 
     //                             int.MaxValue = 2^32 - 1 = 2147483647;
-    public static int MAX_NUMBER = int.MaxValue / (Globals.EDITION == Edition.Standard ? 1024 : 64);
+    public static int MAX_NUMBER = int.MaxValue / (Globals.EDITION == Edition.Standard ? 1024 : 16);
 
     // pi = circumference / diameter ~= 355/113
     public const double PI = 3.141592653589793238462643383279D;
