@@ -35299,20 +35299,10 @@ public partial class MainForm : Form, ISubscriber
                 // update m_text_location_in_verse and m_text_location_in_word
                 UpdateFindByTextOptions();
 
-                List<Phrase> total_phrases = new List<Phrase>();
-                List<Verse> total_verses = new List<Verse>();
+                text = text.Trim();
                 if (!String.IsNullOrEmpty(text))
                 {
-                    text = text.Trim();
-
                     m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
-
-                    total_phrases = total_phrases.Union(m_client.FoundPhrases);
-                    total_verses = total_verses.Union(m_client.FoundVerses);
-
-                    // write final result to m_client
-                    m_client.FoundPhrases = total_phrases;
-                    m_client.FoundVerses = total_verses;
                 }
 
                 // display results
@@ -35926,20 +35916,10 @@ public partial class MainForm : Form, ISubscriber
                 // update m_text_location_in_verse and m_text_location_in_word
                 UpdateFindByTextOptions();
 
-                List<Phrase> total_phrases = new List<Phrase>();
-                List<Verse> total_verses = new List<Verse>();
+                text = text.Trim();
                 if (!String.IsNullOrEmpty(text))
                 {
-                    text = text.Trim();
-
                     m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
-
-                    total_phrases = total_phrases.Union(m_client.FoundPhrases);
-                    total_verses = total_verses.Union(m_client.FoundVerses);
-
-                    // write final result to m_client
-                    m_client.FoundPhrases = total_phrases;
-                    m_client.FoundVerses = total_verses;
                 }
 
                 List<Verse> result = new List<Verse>();
@@ -39586,9 +39566,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
-                    }
 
-                    SwitchToSearchResultTextBox();
+                        SwitchToSearchResultTextBox();
+                    }
 
                     for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
                     for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
@@ -39783,9 +39763,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
-                    }
 
-                    SwitchToSearchResultTextBox();
+                        SwitchToSearchResultTextBox();
+                    }
 
                     for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
                     for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
@@ -39946,9 +39926,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
-                    }
 
-                    SwitchToSearchResultTextBox();
+                        SwitchToSearchResultTextBox();
+                    }
 
                     for (int i = 0; i < 3; i++) ChaptersListBox.SelectedIndexChanged -= new EventHandler(ChaptersListBox_SelectedIndexChanged);
                     if (m_client.FoundChapters.Count > 0)
@@ -40077,9 +40057,9 @@ public partial class MainForm : Form, ISubscriber
                                 }
                             }
                         }
-                    }
 
-                    SwitchToSearchResultTextBox();
+                        SwitchToSearchResultTextBox();
+                    }
 
                     for (int i = 0; i < 3; i++) ChaptersListBox.SelectedIndexChanged -= new EventHandler(ChaptersListBox_SelectedIndexChanged);
                     if (m_client.FoundChapterRanges.Count > 0)
