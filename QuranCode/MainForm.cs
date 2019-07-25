@@ -25001,6 +25001,7 @@ public partial class MainForm : Form, ISubscriber
         TranslationWordWrapLabel.Refresh();
 
         TranslationTextBox.WordWrap = m_word_wrap_translation_textbox;
+        TranslationsTextBox.WordWrap = m_word_wrap_translation_textbox;
     }
     // translation
     private List<string> m_selected_translations = new List<string>();
