@@ -503,11 +503,9 @@ public class TextAnalyzer
 
             // read first line
             string line = reader.ReadLine();
-            // huge line throws exception
-
-            // skip file header
-            if (line != null)
+            if (!String.IsNullOrEmpty(line))
             {
+                // skip file header
                 if (line.Contains("PiFast"))
                 {
                     int start = -1;
@@ -717,7 +715,7 @@ public class TextAnalyzer
         {
             reader = File.OpenText(filename);
 
-            string line;
+            string line = null;
             while ((line = reader.ReadLine()) != null)
             {
                 str.AppendLine(line);

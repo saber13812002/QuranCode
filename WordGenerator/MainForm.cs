@@ -1030,19 +1030,22 @@ public partial class MainForm : Form
                             if (quran_word_texts.Contains(generated_word))
                             {
                                 Line line = new Line();
-                                line.Id = m_lines.Count + 1;
-                                line.Sentence = str.ToString();
-                                line.Value = sentence_word_value;
-                                line.Word = generated_word;
-                                m_lines.Add(line);
+                                if (line != null)
+                                {
+                                    line.Id = m_lines.Count + 1;
+                                    line.Sentence = str.ToString();
+                                    line.Value = sentence_word_value;
+                                    line.Word = generated_word;
+                                    m_lines.Add(line);
 
-                                if (m_generated_words.ContainsKey(generated_word))
-                                {
-                                    m_generated_words[generated_word]++;
-                                }
-                                else
-                                {
-                                    m_generated_words.Add(generated_word, 1);
+                                    if (m_generated_words.ContainsKey(generated_word))
+                                    {
+                                        m_generated_words[generated_word]++;
+                                    }
+                                    else
+                                    {
+                                        m_generated_words.Add(generated_word, 1);
+                                    }
                                 }
                             }
 

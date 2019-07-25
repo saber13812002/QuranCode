@@ -50,31 +50,34 @@ public partial class MainForm : Form
                     while (!reader.EndOfStream)
                     {
                         string line = reader.ReadLine();
-                        string[] parts = line.Split('=');
-                        if (parts.Length == 2)
+                        if (!String.IsNullOrEmpty(line))
                         {
-                            switch (parts[0])
+                            string[] parts = line.Split('=');
+                            if (parts.Length == 2)
                             {
-                                case "Top":
-                                    {
-                                        this.Top = int.Parse(parts[1]);
-                                    }
-                                    break;
-                                case "Left":
-                                    {
-                                        this.Left = int.Parse(parts[1]);
-                                    }
-                                    break;
-                                case "Width":
-                                    {
-                                        this.Width = int.Parse(parts[1]);
-                                    }
-                                    break;
-                                case "Height":
-                                    {
-                                        this.Height = int.Parse(parts[1]);
-                                    }
-                                    break;
+                                switch (parts[0])
+                                {
+                                    case "Top":
+                                        {
+                                            this.Top = int.Parse(parts[1]);
+                                        }
+                                        break;
+                                    case "Left":
+                                        {
+                                            this.Left = int.Parse(parts[1]);
+                                        }
+                                        break;
+                                    case "Width":
+                                        {
+                                            this.Width = int.Parse(parts[1]);
+                                        }
+                                        break;
+                                    case "Height":
+                                        {
+                                            this.Height = int.Parse(parts[1]);
+                                        }
+                                        break;
+                                }
                             }
                         }
                     }

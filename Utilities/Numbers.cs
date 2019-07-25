@@ -308,13 +308,16 @@ public static class Numbers
                 InterestingNumbers = new List<long>();
                 using (StreamReader reader = new StreamReader(filename))
                 {
-                    string line = "";
+                    string line = null;
                     while (!reader.EndOfStream)
                     {
                         try
                         {
                             line = reader.ReadLine();
-                            InterestingNumbers.Add(long.Parse(line));
+                            if (!String.IsNullOrEmpty(line))
+                            {
+                                InterestingNumbers.Add(long.Parse(line));
+                            }
                         }
                         catch
                         {
@@ -1774,13 +1777,16 @@ public static class Numbers
                 s_primes = new List<long>();
                 using (StreamReader reader = new StreamReader(filename))
                 {
-                    string line = "";
+                    string line = null;
                     while (!reader.EndOfStream)
                     {
                         try
                         {
                             line = reader.ReadLine();
-                            s_primes.Add(long.Parse(line));
+                            if (!String.IsNullOrEmpty(line))
+                            {
+                                s_primes.Add(long.Parse(line));
+                            }
                         }
                         catch
                         {
@@ -1807,13 +1813,16 @@ public static class Numbers
                 s_additive_primes = new List<long>();
                 using (StreamReader reader = new StreamReader(filename))
                 {
-                    string line = "";
+                    string line = null;
                     while (!reader.EndOfStream)
                     {
                         try
                         {
                             line = reader.ReadLine();
-                            s_additive_primes.Add(long.Parse(line));
+                            if (!String.IsNullOrEmpty(line))
+                            {
+                                s_additive_primes.Add(long.Parse(line));
+                            }
                         }
                         catch
                         {
@@ -1840,13 +1849,16 @@ public static class Numbers
                 s_non_additive_primes = new List<long>();
                 using (StreamReader reader = new StreamReader(filename))
                 {
-                    string line = "";
+                    string line = null;
                     while (!reader.EndOfStream)
                     {
                         try
                         {
                             line = reader.ReadLine();
-                            s_non_additive_primes.Add(long.Parse(line));
+                            if (!String.IsNullOrEmpty(line))
+                            {
+                                s_non_additive_primes.Add(long.Parse(line));
+                            }
                         }
                         catch
                         {
@@ -1938,13 +1950,16 @@ public static class Numbers
                 s_primes_4nplus1 = new List<long>();
                 using (StreamReader reader = new StreamReader(filename))
                 {
-                    string line = "";
+                    string line = null;
                     while (!reader.EndOfStream)
                     {
                         try
                         {
                             line = reader.ReadLine();
-                            s_primes_4nplus1.Add(long.Parse(line));
+                            if (!String.IsNullOrEmpty(line))
+                            {
+                                s_primes_4nplus1.Add(long.Parse(line));
+                            }
                         }
                         catch
                         {
@@ -2003,13 +2018,16 @@ public static class Numbers
                 s_primes_4nminus1 = new List<long>();
                 using (StreamReader reader = new StreamReader(filename))
                 {
-                    string line = "";
+                    string line = null;
                     while (!reader.EndOfStream)
                     {
                         try
                         {
                             line = reader.ReadLine();
-                            s_primes_4nminus1.Add(long.Parse(line));
+                            if (!String.IsNullOrEmpty(line))
+                            {
+                                s_primes_4nminus1.Add(long.Parse(line));
+                            }
                         }
                         catch
                         {
@@ -2263,13 +2281,16 @@ public static class Numbers
                 s_composites = new List<long>();
                 using (StreamReader reader = new StreamReader(filename))
                 {
-                    string line = "";
+                    string line = null;
                     while (!reader.EndOfStream)
                     {
                         try
                         {
                             line = reader.ReadLine();
-                            s_composites.Add(long.Parse(line));
+                            if (!String.IsNullOrEmpty(line))
+                            {
+                                s_composites.Add(long.Parse(line));
+                            }
                         }
                         catch
                         {
@@ -2296,13 +2317,16 @@ public static class Numbers
                 s_additive_composites = new List<long>();
                 using (StreamReader reader = new StreamReader(filename))
                 {
-                    string line = "";
+                    string line = null;
                     while (!reader.EndOfStream)
                     {
                         try
                         {
                             line = reader.ReadLine();
-                            s_additive_composites.Add(long.Parse(line));
+                            if (!String.IsNullOrEmpty(line))
+                            {
+                                s_additive_composites.Add(long.Parse(line));
+                            }
                         }
                         catch
                         {
@@ -2329,13 +2353,16 @@ public static class Numbers
                 s_non_additive_composites = new List<long>();
                 using (StreamReader reader = new StreamReader(filename))
                 {
-                    string line = "";
+                    string line = null;
                     while (!reader.EndOfStream)
                     {
                         try
                         {
                             line = reader.ReadLine();
-                            s_non_additive_composites.Add(long.Parse(line));
+                            if (!String.IsNullOrEmpty(line))
+                            {
+                                s_non_additive_composites.Add(long.Parse(line));
+                            }
                         }
                         catch
                         {
@@ -2427,13 +2454,16 @@ public static class Numbers
                 s_composites_4nplus1 = new List<long>();
                 using (StreamReader reader = new StreamReader(filename))
                 {
-                    string line = "";
+                    string line = null;
                     while (!reader.EndOfStream)
                     {
                         try
                         {
                             line = reader.ReadLine();
-                            s_composites_4nplus1.Add(long.Parse(line));
+                            if (!String.IsNullOrEmpty(line))
+                            {
+                                s_composites_4nplus1.Add(long.Parse(line));
+                            }
                         }
                         catch
                         {
@@ -2492,13 +2522,16 @@ public static class Numbers
                 s_composites_4nminus1 = new List<long>();
                 using (StreamReader reader = new StreamReader(filename))
                 {
-                    string line = "";
+                    string line = null;
                     while (!reader.EndOfStream)
                     {
                         try
                         {
                             line = reader.ReadLine();
-                            s_composites_4nminus1.Add(long.Parse(line));
+                            if (!String.IsNullOrEmpty(line))
+                            {
+                                s_composites_4nminus1.Add(long.Parse(line));
+                            }
                         }
                         catch
                         {
@@ -2534,16 +2567,19 @@ public static class Numbers
                 PrimeRepunits = new List<long>();
                 using (StreamReader reader = new StreamReader(filename))
                 {
-                    string line = "";
+                    string line = null;
                     while (!reader.EndOfStream)
                     {
                         line = reader.ReadLine();
-                        if (line.Length == 0) break;
-
-                        long number;
-                        if (long.TryParse(line, out number))
+                        if (!String.IsNullOrEmpty(line))
                         {
-                            PrimeRepunits.Add(number);
+                            if (line.Length == 0) break;
+
+                            long number;
+                            if (long.TryParse(line, out number))
+                            {
+                                PrimeRepunits.Add(number);
+                            }
                         }
                     }
                 }
@@ -2626,13 +2662,16 @@ public static class Numbers
             s_deficients = new List<long>();
             using (StreamReader reader = new StreamReader(filename))
             {
-                string line = "";
+                string line = null;
                 while (!reader.EndOfStream)
                 {
                     try
                     {
                         line = reader.ReadLine();
-                        s_deficients.Add(long.Parse(line));
+                        if (!String.IsNullOrEmpty(line))
+                        {
+                            s_deficients.Add(long.Parse(line));
+                        }
                     }
                     catch
                     {
@@ -2683,16 +2722,19 @@ public static class Numbers
             PerfectNumbers = new List<long>();
             using (StreamReader reader = new StreamReader(filename))
             {
-                string line = "";
+                string line = null;
                 while (!reader.EndOfStream)
                 {
                     line = reader.ReadLine();
-                    if (line.Length == 0) break;
-
-                    long number;
-                    if (long.TryParse(line, out number))
+                    if (!String.IsNullOrEmpty(line))
                     {
-                        PerfectNumbers.Add(number);
+                        if (line.Length == 0) break;
+
+                        long number;
+                        if (long.TryParse(line, out number))
+                        {
+                            PerfectNumbers.Add(number);
+                        }
                     }
                 }
             }
@@ -2751,13 +2793,16 @@ public static class Numbers
             s_abundants = new List<long>();
             using (StreamReader reader = new StreamReader(filename))
             {
-                string line = "";
+                string line = null;
                 while (!reader.EndOfStream)
                 {
                     try
                     {
                         line = reader.ReadLine();
-                        s_abundants.Add(long.Parse(line));
+                        if (!String.IsNullOrEmpty(line))
+                        {
+                            s_abundants.Add(long.Parse(line));
+                        }
                     }
                     catch
                     {

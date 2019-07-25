@@ -66,50 +66,53 @@ public partial class MainForm : Form
                     while (!reader.EndOfStream)
                     {
                         string line = reader.ReadLine();
-                        string[] parts = line.Split('=');
-                        if (parts.Length == 2)
+                        if (!String.IsNullOrEmpty(line))
                         {
-                            switch (parts[0])
+                            string[] parts = line.Split('=');
+                            if (parts.Length == 2)
                             {
-                                case "Top":
-                                    {
-                                        this.Top = int.Parse(parts[1]);
-                                    }
-                                    break;
-                                case "Left":
-                                    {
-                                        this.Left = int.Parse(parts[1]);
-                                    }
-                                    break;
-                                case "Width":
-                                    {
-                                        this.Width = int.Parse(parts[1]);
-                                    }
-                                    break;
-                                case "Height":
-                                    {
-                                        this.Height = int.Parse(parts[1]);
-                                    }
-                                    break;
-                                case "Count":
-                                    {
-                                        string[] sub_parts = parts[1].Split('\t');
-                                        if (sub_parts.Length == 2)
+                                switch (parts[0])
+                                {
+                                    case "Top":
                                         {
-                                            int count = int.Parse(sub_parts[0]);
-                                            string[] sub_sub_parts = sub_parts[1].Split(',');
-                                            if (sub_sub_parts.Length == count)
+                                            this.Top = int.Parse(parts[1]);
+                                        }
+                                        break;
+                                    case "Left":
+                                        {
+                                            this.Left = int.Parse(parts[1]);
+                                        }
+                                        break;
+                                    case "Width":
+                                        {
+                                            this.Width = int.Parse(parts[1]);
+                                        }
+                                        break;
+                                    case "Height":
+                                        {
+                                            this.Height = int.Parse(parts[1]);
+                                        }
+                                        break;
+                                    case "Count":
+                                        {
+                                            string[] sub_parts = parts[1].Split('\t');
+                                            if (sub_parts.Length == 2)
                                             {
-                                                foreach (string item in sub_sub_parts)
+                                                int count = int.Parse(sub_parts[0]);
+                                                string[] sub_sub_parts = sub_parts[1].Split(',');
+                                                if (sub_sub_parts.Length == count)
                                                 {
-                                                    m_history_items.Add(item);
-                                                    m_history_index++;
+                                                    foreach (string item in sub_sub_parts)
+                                                    {
+                                                        m_history_items.Add(item);
+                                                        m_history_index++;
+                                                    }
+                                                    ValueTextBox.Text = m_history_items[m_history_index];
                                                 }
-                                                ValueTextBox.Text = m_history_items[m_history_index];
                                             }
                                         }
-                                    }
-                                    break;
+                                        break;
+                                }
                             }
                         }
                     }

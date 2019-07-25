@@ -80,7 +80,7 @@ public static class DataAccess
                 while (!reader.EndOfStream)
                 {
                     string line = reader.ReadLine();
-                    if (line != null)
+                    if (!String.IsNullOrEmpty(line))
                     {
                         result.Add(StopmarkHelper.GetStopmark(line));
                     }
@@ -344,50 +344,53 @@ public static class DataAccess
                                 foreach (Verse verse in book.Verses)
                                 {
                                     string line = reader.ReadLine();
-                                    string[] parts = line.Split('\t');
-
-                                    int word_count = 0;
-                                    if (verse.Words != null)
+                                    if (!String.IsNullOrEmpty(line))
                                     {
-                                        if (verse.Book.WawAsWord)
+                                        string[] parts = line.Split('\t');
+
+                                        int word_count = 0;
+                                        if (verse.Words != null)
                                         {
+                                            if (verse.Book.WawAsWord)
+                                            {
+                                                foreach (Word word in verse.Words)
+                                                {
+                                                    if (word.Text != "و") // WawAsWord
+                                                    {
+                                                        word_count++;
+                                                    }
+                                                }
+                                            }
+
+                                            int i = 0;
+                                            if (!verse.Book.WithBismAllah)
+                                            {
+                                                if (verse.NumberInChapter == 1)
+                                                {
+                                                    if ((verse.Chapter.Number != 1) && (verse.Chapter.Number != 9))
+                                                    {
+                                                        i += 4;
+                                                    }
+                                                }
+                                            }
+                                            if (parts.Length != word_count + i)
+                                            {
+                                                //throw new Exception("File format error.");
+                                            }
+
                                             foreach (Word word in verse.Words)
                                             {
-                                                if (word.Text != "و") // WawAsWord
+                                                if (word.Text == "و") // WawAsWord
                                                 {
-                                                    word_count++;
+                                                    word.Meaning = "and";
                                                 }
-                                            }
-                                        }
-
-                                        int i = 0;
-                                        if (!verse.Book.WithBismAllah)
-                                        {
-                                            if (verse.NumberInChapter == 1)
-                                            {
-                                                if ((verse.Chapter.Number != 1) && (verse.Chapter.Number != 9))
+                                                else
                                                 {
-                                                    i += 4;
-                                                }
-                                            }
-                                        }
-                                        if (parts.Length != word_count + i)
-                                        {
-                                            //throw new Exception("File format error.");
-                                        }
-
-                                        foreach (Word word in verse.Words)
-                                        {
-                                            if (word.Text == "و") // WawAsWord
-                                            {
-                                                word.Meaning = "and";
-                                            }
-                                            else
-                                            {
-                                                if ((i >= 0) && (i < parts.Length))
-                                                {
-                                                    word.Meaning = parts[i];
-                                                    i++;
+                                                    if ((i >= 0) && (i < parts.Length))
+                                                    {
+                                                        word.Meaning = parts[i];
+                                                        i++;
+                                                    }
                                                 }
                                             }
                                         }
@@ -539,162 +542,165 @@ public static class DataAccess
                         while (!reader.EndOfStream)
                         {
                             string line = reader.ReadLine();
-                            if ((line.Length == 0) || line.StartsWith("#") || line.StartsWith("LOCATION") || line.StartsWith("ADDRESS"))
+                            if (!String.IsNullOrEmpty(line))
                             {
-                                continue; // skip header info
-                            }
-                            else
-                            {
-                                string[] parts = line.Split('\t');
-                                if (parts.Length >= 4)
+                                if (line.StartsWith("#") || line.StartsWith("LOCATION") || line.StartsWith("ADDRESS"))
                                 {
-                                    string address = parts[0];
-                                    if (address.StartsWith("(") && address.EndsWith(")"))
+                                    continue; // skip header info
+                                }
+                                else
+                                {
+                                    string[] parts = line.Split('\t');
+                                    if (parts.Length >= 4)
                                     {
-                                        address = parts[0].Substring(1, parts[0].Length - 2);
-                                    }
-                                    string[] address_parts = address.Split(':');
-                                    if (address_parts.Length == 4)
-                                    {
-                                        int chapter_number = int.Parse(address_parts[0]);
-                                        int verse_number = int.Parse(address_parts[1]);
-                                        if (previous_verse_number != verse_number)
+                                        string address = parts[0];
+                                        if (address.StartsWith("(") && address.EndsWith(")"))
                                         {
-                                            waw_count = 0;
-                                            previous_verse_number = verse_number;
+                                            address = parts[0].Substring(1, parts[0].Length - 2);
                                         }
-                                        int word_number = int.Parse(address_parts[2]) + waw_count;
-                                        int word_part_number = int.Parse(address_parts[3]);
-
-                                        string buckwalter = parts[1];
-                                        string tag = parts[2];
-
-                                        if (book.Chapters != null)
+                                        string[] address_parts = address.Split(':');
+                                        if (address_parts.Length == 4)
                                         {
-                                            Chapter chapter = book.Chapters[chapter_number - 1];
-                                            if (chapter != null)
+                                            int chapter_number = int.Parse(address_parts[0]);
+                                            int verse_number = int.Parse(address_parts[1]);
+                                            if (previous_verse_number != verse_number)
                                             {
-                                                Verse verse = chapter.Verses[verse_number - 1];
-                                                if (verse != null)
+                                                waw_count = 0;
+                                                previous_verse_number = verse_number;
+                                            }
+                                            int word_number = int.Parse(address_parts[2]) + waw_count;
+                                            int word_part_number = int.Parse(address_parts[3]);
+
+                                            string buckwalter = parts[1];
+                                            string tag = parts[2];
+
+                                            if (book.Chapters != null)
+                                            {
+                                                Chapter chapter = book.Chapters[chapter_number - 1];
+                                                if (chapter != null)
                                                 {
-                                                    if (book.WithBismAllah)
+                                                    Verse verse = chapter.Verses[verse_number - 1];
+                                                    if (verse != null)
                                                     {
-                                                        // add bismAllah manually to each chapter except 1 and 9
-                                                        if (
-                                                            ((chapter_number != 1) && (chapter_number != 9))
-                                                            &&
-                                                            ((verse_number == 1) && (word_number == 1) && (word_part_number == 1))
-                                                           )
+                                                        if (book.WithBismAllah)
                                                         {
-                                                            Verse bismAllah_verse = book.Verses[0];
-
-                                                            // if there is no bismAllah, add one
-                                                            if (parts[1] != bismAllah_verse.Words[0].Parts[0].Buckwalter)
+                                                            // add bismAllah manually to each chapter except 1 and 9
+                                                            if (
+                                                                ((chapter_number != 1) && (chapter_number != 9))
+                                                                &&
+                                                                ((verse_number == 1) && (word_number == 1) && (word_part_number == 1))
+                                                               )
                                                             {
-                                                                // insert 4 new words
-                                                                verse.Words.InsertRange(0, new List<Word>(4));
+                                                                Verse bismAllah_verse = book.Verses[0];
 
-                                                                //(1:1:1:1)	bi	PP	PREFIX|bi+
-                                                                WordPart word_part = new WordPart(verse.Words[0],
-                                                                      bismAllah_verse.Words[0].Parts[0].NumberInWord,
-                                                                      bismAllah_verse.Words[0].Parts[0].Buckwalter,
-                                                                      bismAllah_verse.Words[0].Parts[0].Tag,
-                                                                      new WordPartGrammar(bismAllah_verse.Words[0].Parts[0].Grammar)
-                                                                );
-                                                                if ((chapter_number == 95) || (chapter_number == 97))
+                                                                // if there is no bismAllah, add one
+                                                                if (parts[1] != bismAllah_verse.Words[0].Parts[0].Buckwalter)
                                                                 {
-                                                                    // add shadda  { '~', 'ّ' } on B or bism
-                                                                    word_part.Buckwalter = word_part.Buckwalter.Insert(1, "~");
+                                                                    // insert 4 new words
+                                                                    verse.Words.InsertRange(0, new List<Word>(4));
+
+                                                                    //(1:1:1:1)	bi	PP	PREFIX|bi+
+                                                                    WordPart word_part = new WordPart(verse.Words[0],
+                                                                          bismAllah_verse.Words[0].Parts[0].NumberInWord,
+                                                                          bismAllah_verse.Words[0].Parts[0].Buckwalter,
+                                                                          bismAllah_verse.Words[0].Parts[0].Tag,
+                                                                          new WordPartGrammar(bismAllah_verse.Words[0].Parts[0].Grammar)
+                                                                    );
+                                                                    if ((chapter_number == 95) || (chapter_number == 97))
+                                                                    {
+                                                                        // add shadda  { '~', 'ّ' } on B or bism
+                                                                        word_part.Buckwalter = word_part.Buckwalter.Insert(1, "~");
+                                                                    }
+
+                                                                    //(1:1:1:2)	somi	N	STEM|POS:N|LEM:{som|ROOT:smw|M|GEN
+                                                                    new WordPart(verse.Words[0],
+                                                                      bismAllah_verse.Words[0].Parts[1].NumberInWord,
+                                                                      bismAllah_verse.Words[0].Parts[1].Buckwalter,
+                                                                      bismAllah_verse.Words[0].Parts[1].Tag,
+                                                                      new WordPartGrammar(bismAllah_verse.Words[0].Parts[1].Grammar)
+                                                                    );
+
+                                                                    //(1:1:2:1)	{ll~ahi	PN	STEM|POS:PN|LEM:{ll~ah|ROOT:Alh|GEN
+                                                                    new WordPart(verse.Words[1],
+                                                                      bismAllah_verse.Words[1].Parts[0].NumberInWord,
+                                                                      bismAllah_verse.Words[1].Parts[0].Buckwalter,
+                                                                      bismAllah_verse.Words[1].Parts[0].Tag,
+                                                                      new WordPartGrammar(bismAllah_verse.Words[1].Parts[0].Grammar)
+                                                                    );
+
+                                                                    //(1:1:3:1)	{l	DET	PREFIX|Al+
+                                                                    new WordPart(verse.Words[2],
+                                                                      bismAllah_verse.Words[2].Parts[0].NumberInWord,
+                                                                      bismAllah_verse.Words[2].Parts[0].Buckwalter,
+                                                                      bismAllah_verse.Words[2].Parts[0].Tag,
+                                                                      new WordPartGrammar(bismAllah_verse.Words[2].Parts[0].Grammar)
+                                                                    );
+
+                                                                    //(1:1:3:2)	r~aHoma`ni	ADJ	STEM|POS:ADJ|LEM:r~aHoma`n|ROOT:rHm|MS|GEN
+                                                                    new WordPart(verse.Words[2],
+                                                                      bismAllah_verse.Words[2].Parts[1].NumberInWord,
+                                                                      bismAllah_verse.Words[2].Parts[1].Buckwalter,
+                                                                      bismAllah_verse.Words[2].Parts[1].Tag,
+                                                                      new WordPartGrammar(bismAllah_verse.Words[2].Parts[1].Grammar)
+                                                                    );
+
+                                                                    //(1:1:4:1)	{l	DET	PREFIX|Al+
+                                                                    new WordPart(verse.Words[3],
+                                                                      bismAllah_verse.Words[3].Parts[0].NumberInWord,
+                                                                      bismAllah_verse.Words[3].Parts[0].Buckwalter,
+                                                                      bismAllah_verse.Words[3].Parts[0].Tag,
+                                                                      new WordPartGrammar(bismAllah_verse.Words[3].Parts[0].Grammar)
+                                                                    );
+
+                                                                    //(1:1:4:2)	r~aHiymi	ADJ	STEM|POS:ADJ|LEM:r~aHiym|ROOT:rHm|MS|GEN
+                                                                    new WordPart(verse.Words[3],
+                                                                      bismAllah_verse.Words[3].Parts[1].NumberInWord,
+                                                                      bismAllah_verse.Words[3].Parts[1].Buckwalter,
+                                                                      bismAllah_verse.Words[3].Parts[1].Tag,
+                                                                      new WordPartGrammar(bismAllah_verse.Words[3].Parts[1].Grammar)
+                                                                    );
                                                                 }
-
-                                                                //(1:1:1:2)	somi	N	STEM|POS:N|LEM:{som|ROOT:smw|M|GEN
-                                                                new WordPart(verse.Words[0],
-                                                                  bismAllah_verse.Words[0].Parts[1].NumberInWord,
-                                                                  bismAllah_verse.Words[0].Parts[1].Buckwalter,
-                                                                  bismAllah_verse.Words[0].Parts[1].Tag,
-                                                                  new WordPartGrammar(bismAllah_verse.Words[0].Parts[1].Grammar)
-                                                                );
-
-                                                                //(1:1:2:1)	{ll~ahi	PN	STEM|POS:PN|LEM:{ll~ah|ROOT:Alh|GEN
-                                                                new WordPart(verse.Words[1],
-                                                                  bismAllah_verse.Words[1].Parts[0].NumberInWord,
-                                                                  bismAllah_verse.Words[1].Parts[0].Buckwalter,
-                                                                  bismAllah_verse.Words[1].Parts[0].Tag,
-                                                                  new WordPartGrammar(bismAllah_verse.Words[1].Parts[0].Grammar)
-                                                                );
-
-                                                                //(1:1:3:1)	{l	DET	PREFIX|Al+
-                                                                new WordPart(verse.Words[2],
-                                                                  bismAllah_verse.Words[2].Parts[0].NumberInWord,
-                                                                  bismAllah_verse.Words[2].Parts[0].Buckwalter,
-                                                                  bismAllah_verse.Words[2].Parts[0].Tag,
-                                                                  new WordPartGrammar(bismAllah_verse.Words[2].Parts[0].Grammar)
-                                                                );
-
-                                                                //(1:1:3:2)	r~aHoma`ni	ADJ	STEM|POS:ADJ|LEM:r~aHoma`n|ROOT:rHm|MS|GEN
-                                                                new WordPart(verse.Words[2],
-                                                                  bismAllah_verse.Words[2].Parts[1].NumberInWord,
-                                                                  bismAllah_verse.Words[2].Parts[1].Buckwalter,
-                                                                  bismAllah_verse.Words[2].Parts[1].Tag,
-                                                                  new WordPartGrammar(bismAllah_verse.Words[2].Parts[1].Grammar)
-                                                                );
-
-                                                                //(1:1:4:1)	{l	DET	PREFIX|Al+
-                                                                new WordPart(verse.Words[3],
-                                                                  bismAllah_verse.Words[3].Parts[0].NumberInWord,
-                                                                  bismAllah_verse.Words[3].Parts[0].Buckwalter,
-                                                                  bismAllah_verse.Words[3].Parts[0].Tag,
-                                                                  new WordPartGrammar(bismAllah_verse.Words[3].Parts[0].Grammar)
-                                                                );
-
-                                                                //(1:1:4:2)	r~aHiymi	ADJ	STEM|POS:ADJ|LEM:r~aHiym|ROOT:rHm|MS|GEN
-                                                                new WordPart(verse.Words[3],
-                                                                  bismAllah_verse.Words[3].Parts[1].NumberInWord,
-                                                                  bismAllah_verse.Words[3].Parts[1].Buckwalter,
-                                                                  bismAllah_verse.Words[3].Parts[1].Tag,
-                                                                  new WordPartGrammar(bismAllah_verse.Words[3].Parts[1].Grammar)
-                                                                );
                                                             }
-                                                        }
-                                                        // correct word_number (if needed) for all subsequenct chapter word_parts
-                                                        if (
-                                                            ((chapter_number != 1) && (chapter_number != 9)) && (verse_number == 1)
-                                                           )
-                                                        {
-                                                            word_number += 4;
-                                                        }
-                                                    }
-
-                                                    Word word = verse.Words[word_number - 1];
-                                                    if (word != null)
-                                                    {
-                                                        List<string> grammar = new List<string>(parts[3].Split('|'));
-                                                        if (grammar.Count > 0)
-                                                        {
-                                                            //(1:5:3:1)	wa	CONJ	PREFIX|w_CONJ+
-                                                            //(1:5:3:2)	<iy~aAka	PRON	STEM|POS:PRON|LEM:<iy~aA|2MS
-                                                            if (word.Text == "و")
+                                                            // correct word_number (if needed) for all subsequenct chapter word_parts
+                                                            if (
+                                                                ((chapter_number != 1) && (chapter_number != 9)) && (verse_number == 1)
+                                                               )
                                                             {
-                                                                waw_count++;
+                                                                word_number += 4;
                                                             }
-                                                            new WordPart(word, word_part_number, buckwalter, tag, grammar);
                                                         }
-                                                        else
+
+                                                        Word word = verse.Words[word_number - 1];
+                                                        if (word != null)
                                                         {
-                                                            //throw new Exception("Grammar field is missing.\r\n" + filename);
+                                                            List<string> grammar = new List<string>(parts[3].Split('|'));
+                                                            if (grammar.Count > 0)
+                                                            {
+                                                                //(1:5:3:1)	wa	CONJ	PREFIX|w_CONJ+
+                                                                //(1:5:3:2)	<iy~aAka	PRON	STEM|POS:PRON|LEM:<iy~aA|2MS
+                                                                if (word.Text == "و")
+                                                                {
+                                                                    waw_count++;
+                                                                }
+                                                                new WordPart(word, word_part_number, buckwalter, tag, grammar);
+                                                            }
+                                                            else
+                                                            {
+                                                                //throw new Exception("Grammar field is missing.\r\n" + filename);
+                                                            }
                                                         }
                                                     }
                                                 }
-                                            }
-                                            else
-                                            {
-                                                //throw new Exception("Invalid Location Format.\r\n" + filename);
+                                                else
+                                                {
+                                                    //throw new Exception("Invalid Location Format.\r\n" + filename);
+                                                }
                                             }
                                         }
-                                    }
-                                    else
-                                    {
-                                        //throw new Exception("Invalid File Format.\r\n" + filename);
+                                        else
+                                        {
+                                            //throw new Exception("Invalid File Format.\r\n" + filename);
+                                        }
                                     }
                                 }
                             }

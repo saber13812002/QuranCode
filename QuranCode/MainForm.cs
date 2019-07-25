@@ -14598,168 +14598,237 @@ public partial class MainForm : Form, ISubscriber
                                                     if (m_client.NumerologySystem != null)
                                                     {
                                                         line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
+                                                        if (!String.IsNullOrEmpty(line))
                                                         {
-                                                            m_client.NumerologySystem.AddToLetterLNumber = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToLetterWNumber = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToLetterVNumber = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToLetterCNumber = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToLetterLDistance = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToLetterWDistance = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToLetterVDistance = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToLetterCDistance = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToWordWNumber = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToWordVNumber = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToWordCNumber = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToWordWDistance = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToWordVDistance = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToWordCDistance = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToVerseVNumber = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToVerseCNumber = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToVerseVDistance = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToVerseCDistance = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddToChapterCNumber = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddPositions = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddDistancesToPrevious = bool.Parse(parts[1].Trim());
-                                                            AddDistancesToPreviousCheckBox.Checked = m_client.NumerologySystem.AddDistancesToPrevious;
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddDistancesToNext = bool.Parse(parts[1].Trim());
-                                                        }
-
-                                                        line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
-                                                        {
-                                                            m_client.NumerologySystem.AddDistancesWithinChapters = bool.Parse(parts[1].Trim());
-                                                            if (m_client.Book != null)
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
                                                             {
-                                                                m_client.Book.SetupDistances(m_client.NumerologySystem.AddDistancesWithinChapters);
+                                                                m_client.NumerologySystem.AddToLetterLNumber = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToLetterWNumber = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToLetterVNumber = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToLetterCNumber = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToLetterLDistance = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToLetterWDistance = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToLetterVDistance = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToLetterCDistance = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToWordWNumber = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToWordVNumber = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToWordCNumber = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToWordWDistance = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToWordVDistance = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToWordCDistance = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToVerseVNumber = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToVerseCNumber = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToVerseVDistance = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToVerseCDistance = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddToChapterCNumber = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddPositions = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddDistancesToPrevious = bool.Parse(parts[1].Trim());
+                                                                AddDistancesToPreviousCheckBox.Checked = m_client.NumerologySystem.AddDistancesToPrevious;
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddDistancesToNext = bool.Parse(parts[1].Trim());
+                                                            }
+                                                        }
+
+                                                        line = reader.ReadLine();
+                                                        if (!String.IsNullOrEmpty(line))
+                                                        {
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_client.NumerologySystem.AddDistancesWithinChapters = bool.Parse(parts[1].Trim());
+                                                                if (m_client.Book != null)
+                                                                {
+                                                                    m_client.Book.SetupDistances(m_client.NumerologySystem.AddDistancesWithinChapters);
+                                                                }
                                                             }
                                                         }
 
@@ -14767,15 +14836,18 @@ public partial class MainForm : Form, ISubscriber
                                                         UpdateNumerologySystemControls();
 
                                                         line = reader.ReadLine();
-                                                        parts = line.Split('=');
-                                                        if (parts.Length >= 2)
+                                                        if (!String.IsNullOrEmpty(line))
                                                         {
-                                                            m_show_add_controls = bool.Parse(parts[1].Trim());
-                                                        }
-                                                        if (!m_show_add_controls)
-                                                        {
-                                                            m_show_add_controls = !m_show_add_controls;
-                                                            ValueLabel_Click(null, null);
+                                                            parts = line.Split('=');
+                                                            if (parts.Length >= 2)
+                                                            {
+                                                                m_show_add_controls = bool.Parse(parts[1].Trim());
+                                                            }
+                                                            if (!m_show_add_controls)
+                                                            {
+                                                                m_show_add_controls = !m_show_add_controls;
+                                                                ValueLabel_Click(null, null);
+                                                            }
                                                         }
                                                     }
                                                 }

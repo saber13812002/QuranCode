@@ -2184,126 +2184,156 @@ public class Client : IPublisher, ISubscriber
                         while (!reader.EndOfStream)
                         {
                             string line = reader.ReadLine();
-                            string[] parts = null;
-
-                            if (line == "")
+                            if (!String.IsNullOrEmpty(line))
                             {
-                                continue;
-                            }
-                            else if (line == "BrowseHistoryItem")
-                            {
-                                line = reader.ReadLine();
-                                SelectionScope scope = (SelectionScope)Enum.Parse(typeof(SelectionScope), line);
-                                List<int> indexes = new List<int>();
+                                string[] parts = null;
 
-                                line = reader.ReadLine();
-                                parts = line.Split(',');
-                                foreach (string part in parts)
+                                if (line == "")
                                 {
-                                    int index = -1;
-                                    if (int.TryParse(part, out index))
-                                    {
-                                        indexes.Add(index);
-                                    }
+                                    continue;
                                 }
-
-                                BrowseHistoryItem item = new BrowseHistoryItem(Book, scope, indexes);
-                                AddHistoryItem(item);
-                            }
-                            else if (line == "SearchHistoryItem")
-                            {
-                                SearchHistoryItem item = new SearchHistoryItem();
-
-                                line = reader.ReadLine();
-                                parts = line.Split('\t');
-                                if ((parts.Length == 2) && (parts[0].Trim() == "SearchType"))
-                                {
-                                    item.SearchType = (SearchType)Enum.Parse(typeof(SearchType), parts[1].Trim());
-                                }
-
-                                line = reader.ReadLine();
-                                parts = line.Split('\t');
-                                if ((parts.Length == 2) && (parts[0].Trim() == "NumbersResultType"))
-                                {
-                                    item.NumbersResultType = (NumbersResultType)Enum.Parse(typeof(NumbersResultType), parts[1].Trim());
-                                }
-
-                                line = reader.ReadLine();
-                                parts = line.Split('\t');
-                                if ((parts.Length == 2) && (parts[0].Trim() == "Text"))
-                                {
-                                    item.Text = parts[1].Trim();
-                                }
-
-                                line = reader.ReadLine();
-                                parts = line.Split('\t');
-                                if ((parts.Length == 2) && (parts[0].Trim() == "Header"))
-                                {
-                                    item.Header = parts[1].Trim();
-                                }
-
-                                line = reader.ReadLine();
-                                parts = line.Split('\t');
-                                if ((parts.Length == 2) && (parts[0].Trim() == "Language"))
-                                {
-                                    item.LanguageType = (LanguageType)Enum.Parse(typeof(LanguageType), parts[1].Trim());
-                                }
-
-                                line = reader.ReadLine();
-                                parts = line.Split('\t');
-                                if ((parts.Length == 2) && (parts[0].Trim() == "Translation"))
-                                {
-                                    item.Translation = parts[1].Trim();
-                                }
-
-                                // CSV: Phrase.Verse.Number, Phrase.Text, Phrase.Position
-                                while (true)
+                                else if (line == "BrowseHistoryItem")
                                 {
                                     line = reader.ReadLine();
-                                    if (line == END_OF_HISTORY_ITME_MARKER)
+                                    if (!String.IsNullOrEmpty(line))
                                     {
-                                        break;
-                                    }
-                                    parts = line.Split(',');
-                                    if (parts.Length == 1) // verse.Number
-                                    {
-                                        //TODO: Load NumberQuery with each search result
+                                        SelectionScope scope = (SelectionScope)Enum.Parse(typeof(SelectionScope), line);
+                                        List<int> indexes = new List<int>();
 
-                                        int verse_index = int.Parse(parts[0].Trim()) - 1;
-                                        if ((verse_index >= 0) && (verse_index < Book.Verses.Count))
+                                        line = reader.ReadLine();
+                                        if (!String.IsNullOrEmpty(line))
                                         {
-                                            Verse verse = Book.Verses[verse_index];
-                                            if (!item.Verses.Contains(verse))
+                                            parts = line.Split(',');
+                                            foreach (string part in parts)
                                             {
-                                                item.Verses.Add(verse);
+                                                int index = -1;
+                                                if (int.TryParse(part, out index))
+                                                {
+                                                    indexes.Add(index);
+                                                }
                                             }
+
+                                            BrowseHistoryItem item = new BrowseHistoryItem(Book, scope, indexes);
+                                            AddHistoryItem(item);
                                         }
-                                    }
-                                    else if (parts.Length == 3) // phrase.Verse.Number,phrase.Text,phrase.Position
-                                    {
-                                        int verse_index = int.Parse(parts[0].Trim()) - 1;
-                                        if ((verse_index >= 0) && (verse_index < Book.Verses.Count))
+                                        else if (line == "SearchHistoryItem")
                                         {
-                                            Verse verse = Book.Verses[verse_index];
-                                            if (!item.Verses.Contains(verse))
+                                            SearchHistoryItem item = new SearchHistoryItem();
+
+                                            line = reader.ReadLine();
+                                            if (!String.IsNullOrEmpty(line))
                                             {
-                                                item.Verses.Add(verse);
+                                                parts = line.Split('\t');
+                                                if ((parts.Length == 2) && (parts[0].Trim() == "SearchType"))
+                                                {
+                                                    item.SearchType = (SearchType)Enum.Parse(typeof(SearchType), parts[1].Trim());
+                                                }
                                             }
 
-                                            string phrase_text = parts[1].Trim();
-                                            if (phrase_text.Length > 0)
+                                            line = reader.ReadLine();
+                                            if (!String.IsNullOrEmpty(line))
                                             {
-                                                int phrase_position = int.Parse(parts[2].Trim());
-                                                Phrase phrase = new Phrase(verse, phrase_position, phrase_text);
-                                                item.Phrases.Add(phrase);
+                                                parts = line.Split('\t');
+                                                if ((parts.Length == 2) && (parts[0].Trim() == "NumbersResultType"))
+                                                {
+                                                    item.NumbersResultType = (NumbersResultType)Enum.Parse(typeof(NumbersResultType), parts[1].Trim());
+                                                }
                                             }
+
+                                            line = reader.ReadLine();
+                                            if (!String.IsNullOrEmpty(line))
+                                            {
+                                                parts = line.Split('\t');
+                                                if ((parts.Length == 2) && (parts[0].Trim() == "Text"))
+                                                {
+                                                    item.Text = parts[1].Trim();
+                                                }
+                                            }
+
+                                            line = reader.ReadLine();
+                                            if (!String.IsNullOrEmpty(line))
+                                            {
+                                                parts = line.Split('\t');
+                                                if ((parts.Length == 2) && (parts[0].Trim() == "Header"))
+                                                {
+                                                    item.Header = parts[1].Trim();
+                                                }
+                                            }
+
+                                            line = reader.ReadLine();
+                                            if (!String.IsNullOrEmpty(line))
+                                            {
+                                                parts = line.Split('\t');
+                                                if ((parts.Length == 2) && (parts[0].Trim() == "Language"))
+                                                {
+                                                    item.LanguageType = (LanguageType)Enum.Parse(typeof(LanguageType), parts[1].Trim());
+                                                }
+                                            }
+
+                                            line = reader.ReadLine();
+                                            if (!String.IsNullOrEmpty(line))
+                                            {
+                                                parts = line.Split('\t');
+                                                if ((parts.Length == 2) && (parts[0].Trim() == "Translation"))
+                                                {
+                                                    item.Translation = parts[1].Trim();
+                                                }
+                                            }
+
+                                            // CSV: Phrase.Verse.Number, Phrase.Text, Phrase.Position
+                                            while (true)
+                                            {
+                                                line = reader.ReadLine();
+                                                if (!String.IsNullOrEmpty(line))
+                                                {
+                                                    if (line == END_OF_HISTORY_ITME_MARKER)
+                                                    {
+                                                        break;
+                                                    }
+                                                    parts = line.Split(',');
+                                                    if (parts.Length == 1) // verse.Number
+                                                    {
+                                                        //TODO: Load NumberQuery with each search result
+
+                                                        int verse_index = int.Parse(parts[0].Trim()) - 1;
+                                                        if ((verse_index >= 0) && (verse_index < Book.Verses.Count))
+                                                        {
+                                                            Verse verse = Book.Verses[verse_index];
+                                                            if (!item.Verses.Contains(verse))
+                                                            {
+                                                                item.Verses.Add(verse);
+                                                            }
+                                                        }
+                                                    }
+                                                    else if (parts.Length == 3) // phrase.Verse.Number,phrase.Text,phrase.Position
+                                                    {
+                                                        int verse_index = int.Parse(parts[0].Trim()) - 1;
+                                                        if ((verse_index >= 0) && (verse_index < Book.Verses.Count))
+                                                        {
+                                                            Verse verse = Book.Verses[verse_index];
+                                                            if (!item.Verses.Contains(verse))
+                                                            {
+                                                                item.Verses.Add(verse);
+                                                            }
+
+                                                            string phrase_text = parts[1].Trim();
+                                                            if (phrase_text.Length > 0)
+                                                            {
+                                                                int phrase_position = int.Parse(parts[2].Trim());
+                                                                Phrase phrase = new Phrase(verse, phrase_position, phrase_text);
+                                                                item.Phrases.Add(phrase);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            } // while
+
+                                            AddHistoryItem(item);
                                         }
-                                    }
-                                } // while
-
-                                AddHistoryItem(item);
+                                    } // while
+                                }
                             }
-                        } // while
+                        }
                     }
                     catch
                     {
@@ -3198,31 +3228,34 @@ public class Client : IPublisher, ISubscriber
                     while (!reader.EndOfStream)
                     {
                         string line = reader.ReadLine();
-                        string[] parts = line.Split(',');
-                        if (parts.Length == 5)
+                        if (!String.IsNullOrEmpty(line))
                         {
-                            try
+                            string[] parts = line.Split(',');
+                            if (parts.Length == 5)
                             {
-                                SelectionScope scope = (SelectionScope)Enum.Parse(typeof(SelectionScope), parts[0]);
-
-                                string part = parts[1].Trim();
-                                string[] sub_parts = part.Split('+');
-                                List<int> indexes = new List<int>();
-                                foreach (string sub_part in sub_parts)
+                                try
                                 {
-                                    indexes.Add(int.Parse(sub_part.Trim()) - 1);
+                                    SelectionScope scope = (SelectionScope)Enum.Parse(typeof(SelectionScope), parts[0]);
+
+                                    string part = parts[1].Trim();
+                                    string[] sub_parts = part.Split('+');
+                                    List<int> indexes = new List<int>();
+                                    foreach (string sub_part in sub_parts)
+                                    {
+                                        indexes.Add(int.Parse(sub_part.Trim()) - 1);
+                                    }
+                                    Selection selection = new Selection(Book, scope, indexes);
+
+                                    DateTime created_time = DateTime.ParseExact(parts[2], "yyyy-MM-dd HH:mm:ss", null);
+                                    DateTime last_modified_time = DateTime.ParseExact(parts[3], "yyyy-MM-dd HH:mm:ss", null);
+                                    string note = parts[4];
+
+                                    AddBookmark(selection, note, created_time, last_modified_time);
                                 }
-                                Selection selection = new Selection(Book, scope, indexes);
-
-                                DateTime created_time = DateTime.ParseExact(parts[2], "yyyy-MM-dd HH:mm:ss", null);
-                                DateTime last_modified_time = DateTime.ParseExact(parts[3], "yyyy-MM-dd HH:mm:ss", null);
-                                string note = parts[4];
-
-                                AddBookmark(selection, note, created_time, last_modified_time);
-                            }
-                            catch
-                            {
-                                throw new Exception("Invalid data format in " + filename);
+                                catch
+                                {
+                                    throw new Exception("Invalid data format in " + filename);
+                                }
                             }
                         }
                     }

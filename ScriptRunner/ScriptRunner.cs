@@ -32,7 +32,7 @@ public static class ScriptRunner
         {
             using (StreamReader reader = File.OpenText(path))
             {
-                string line = "";
+                string line = null;
                 while ((line = reader.ReadLine()) != null)
                 {
                     str.AppendLine(line);
