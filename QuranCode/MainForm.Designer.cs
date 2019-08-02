@@ -5582,7 +5582,7 @@ partial class MainForm
             this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 1);
             this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
             this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-            this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 198);
+            this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 200);
             this.ScriptOutputGroupBox.TabIndex = 103;
             this.ScriptOutputGroupBox.TabStop = false;
             this.ScriptOutputGroupBox.Text = " Output ";
@@ -5598,7 +5598,7 @@ partial class MainForm
             this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
             this.ScriptOutputTextBox.ReadOnly = true;
             this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 170);
+            this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 172);
             this.ScriptOutputTextBox.TabIndex = 0;
             this.ScriptOutputTextBox.WordWrap = false;
             this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -5623,7 +5623,7 @@ partial class MainForm
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
             this.TabControl.ShowToolTips = true;
-            this.TabControl.Size = new System.Drawing.Size(825, 190);
+            this.TabControl.Size = new System.Drawing.Size(825, 189);
             this.TabControl.TabIndex = 102;
             this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             this.TabControl.Click += new System.EventHandler(this.TabControl_Click);
@@ -9365,9 +9365,9 @@ partial class MainForm
             this.LetterFrequencyWithDiacriticsCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.LetterFrequencyWithDiacriticsCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LetterFrequencyWithDiacriticsCheckBox.ForeColor = System.Drawing.Color.Navy;
-            this.LetterFrequencyWithDiacriticsCheckBox.Location = new System.Drawing.Point(161, 218);
+            this.LetterFrequencyWithDiacriticsCheckBox.Location = new System.Drawing.Point(5, 211);
             this.LetterFrequencyWithDiacriticsCheckBox.Name = "LetterFrequencyWithDiacriticsCheckBox";
-            this.LetterFrequencyWithDiacriticsCheckBox.Size = new System.Drawing.Size(9, 9);
+            this.LetterFrequencyWithDiacriticsCheckBox.Size = new System.Drawing.Size(12, 12);
             this.LetterFrequencyWithDiacriticsCheckBox.TabIndex = 16;
             this.LetterFrequencyWithDiacriticsCheckBox.UseVisualStyleBackColor = false;
             this.LetterFrequencyWithDiacriticsCheckBox.CheckedChanged += new System.EventHandler(this.LetterFrequencyWithDiacriticsCheckBox_CheckedChanged);
@@ -9393,7 +9393,7 @@ partial class MainForm
             this.LetterFrequencyInspectLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LetterFrequencyInspectLabel.ForeColor = System.Drawing.SystemColors.WindowText;
             this.LetterFrequencyInspectLabel.Image = ((System.Drawing.Image)(resources.GetObject("LetterFrequencyInspectLabel.Image")));
-            this.LetterFrequencyInspectLabel.Location = new System.Drawing.Point(165, 208);
+            this.LetterFrequencyInspectLabel.Location = new System.Drawing.Point(164, 208);
             this.LetterFrequencyInspectLabel.Name = "LetterFrequencyInspectLabel";
             this.LetterFrequencyInspectLabel.Size = new System.Drawing.Size(16, 18);
             this.LetterFrequencyInspectLabel.TabIndex = 0;
@@ -9504,7 +9504,7 @@ partial class MainForm
             this.LetterFrequencySumLabel.Name = "LetterFrequencySumLabel";
             this.LetterFrequencySumLabel.Size = new System.Drawing.Size(50, 18);
             this.LetterFrequencySumLabel.TabIndex = 15;
-            this.LetterFrequencySumLabel.Text = "0";
+            this.LetterFrequencySumLabel.Text = "00000";
             this.LetterFrequencySumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ToolTip.SetToolTip(this.LetterFrequencySumLabel, "Letter frequency sum");
             this.LetterFrequencySumLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
@@ -9516,11 +9516,11 @@ partial class MainForm
             this.LetterFrequencyCountLabel.BackColor = System.Drawing.Color.Transparent;
             this.LetterFrequencyCountLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LetterFrequencyCountLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.LetterFrequencyCountLabel.Location = new System.Drawing.Point(23, 207);
+            this.LetterFrequencyCountLabel.Location = new System.Drawing.Point(21, 207);
             this.LetterFrequencyCountLabel.Name = "LetterFrequencyCountLabel";
-            this.LetterFrequencyCountLabel.Size = new System.Drawing.Size(24, 18);
+            this.LetterFrequencyCountLabel.Size = new System.Drawing.Size(28, 18);
             this.LetterFrequencyCountLabel.TabIndex = 14;
-            this.LetterFrequencyCountLabel.Text = "0";
+            this.LetterFrequencyCountLabel.Text = "000";
             this.LetterFrequencyCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ToolTip.SetToolTip(this.LetterFrequencyCountLabel, "Letters");
             this.LetterFrequencyCountLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
@@ -9750,7 +9750,7 @@ partial class MainForm
             this.LetterFrequencyPositionSumSumLabel.Name = "LetterFrequencyPositionSumSumLabel";
             this.LetterFrequencyPositionSumSumLabel.Size = new System.Drawing.Size(70, 10);
             this.LetterFrequencyPositionSumSumLabel.TabIndex = 245;
-            this.LetterFrequencyPositionSumSumLabel.Text = "0";
+            this.LetterFrequencyPositionSumSumLabel.Text = "000000000000";
             this.LetterFrequencyPositionSumSumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ToolTip.SetToolTip(this.LetterFrequencyPositionSumSumLabel, "Sum of letter position sums");
             this.LetterFrequencyPositionSumSumLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
@@ -9766,7 +9766,7 @@ partial class MainForm
             this.LetterFrequencyDistanceSumSumLabel.Name = "LetterFrequencyDistanceSumSumLabel";
             this.LetterFrequencyDistanceSumSumLabel.Size = new System.Drawing.Size(70, 10);
             this.LetterFrequencyDistanceSumSumLabel.TabIndex = 247;
-            this.LetterFrequencyDistanceSumSumLabel.Text = "0";
+            this.LetterFrequencyDistanceSumSumLabel.Text = "000000000000";
             this.LetterFrequencyDistanceSumSumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ToolTip.SetToolTip(this.LetterFrequencyDistanceSumSumLabel, "Sum of letter distance sums");
             this.LetterFrequencyDistanceSumSumLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
