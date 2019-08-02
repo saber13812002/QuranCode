@@ -216,7 +216,7 @@ namespace InitialLetters
         private void LettersTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
-                GenerateAnagrams();
+                e.Handled = true; // stop annoying beep due to parent not having an AcceptButton
 
             // Control-A
             if (e.KeyChar == (char)1)

@@ -13250,7 +13250,7 @@ public partial class MainForm : Form, ISubscriber
                            )
                         {
                             BrowseHistoryBackwardButton_Click(null, null);
-                            e.Handled = true; // stop annoying beep
+                            e.Handled = true; // stop annoying beep due to parent not having an AcceptButton
                         }
                     }
                 }
@@ -13266,7 +13266,7 @@ public partial class MainForm : Form, ISubscriber
                            )
                         {
                             BrowseHistoryForwardButton_Click(null, null);
-                            e.Handled = true; // stop annoying beep
+                            e.Handled = true; // stop annoying beep due to parent not having an AcceptButton
                         }
                     }
                 }
@@ -13388,7 +13388,7 @@ public partial class MainForm : Form, ISubscriber
                            )
                         {
                             BrowseHistoryForwardButton_Click(null, null);
-                            e.Handled = true; // stop annoying beep
+                            e.Handled = true; // stop annoying beep due to parent not having an AcceptButton
                         }
                     }
                 }
@@ -13404,7 +13404,7 @@ public partial class MainForm : Form, ISubscriber
                            )
                         {
                             BrowseHistoryBackwardButton_Click(null, null);
-                            e.Handled = true; // stop annoying beep
+                            e.Handled = true; // stop annoying beep due to parent not having an AcceptButton
                         }
                     }
                 }
@@ -17703,7 +17703,7 @@ public partial class MainForm : Form, ISubscriber
             }
         }
 
-        e.Handled = true; // stop annoying beep
+        e.Handled = true; // stop annoying beep due to parent not having an AcceptButton
     }
     private void MainTextBox_Enter(object sender, EventArgs e)
     {
@@ -21078,7 +21078,7 @@ public partial class MainForm : Form, ISubscriber
         // reject all other keys
         if (!(SeparatorKeys || NumericKeys || EditKeys || NavigationKeys))
         {
-            e.SuppressKeyPress = true; // stop beep
+            e.SuppressKeyPress = true; // stop annoying beep due to parent not having an AcceptButton
             e.Handled = true;
         }
     }
@@ -22061,7 +22061,7 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
 
-                        e.SuppressKeyPress = true; // stop beep
+                        e.SuppressKeyPress = true; // stop annoying beep due to parent not having an AcceptButton
                     }
                     catch (Exception ex)
                     {
@@ -25550,7 +25550,7 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
 
-                        e.Handled = true; // stop annoying beep for no default button defined
+                        e.Handled = true; // stop annoying beep due to parent not having an AcceptButton for no default button defined
                     }
                 }
             }
@@ -33252,7 +33252,7 @@ public partial class MainForm : Form, ISubscriber
             }
         }
 
-        e.SuppressKeyPress = true; // stop beep
+        e.SuppressKeyPress = true; // stop annoying beep due to parent not having an AcceptButton
         e.Handled = true;
     }
     private void UserTextTextBox_MouseDown(object sender, MouseEventArgs e)
@@ -33298,7 +33298,7 @@ public partial class MainForm : Form, ISubscriber
         if (e.KeyCode == Keys.Enter)
         {
             UserTextValueButton_Click(null, null);
-            e.Handled = true; // stop annoying beep
+            e.Handled = true; // stop annoying beep due to parent not having an AcceptButton
         }
     }
     private void UserTextValueNumericUpDown_ValueChanged(object sender, EventArgs e)

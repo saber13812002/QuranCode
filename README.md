@@ -1,4 +1,5 @@
 ﻿<pre>
+
                          بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
 
 QuranCode جفر القرءان is a numerical research tool for the Final Book of God, Al-Quran (القرءان).
@@ -14,20 +15,13 @@ Initial Letter Sentences (جمل الحروف المقطعة)
 Perfect text with a decisive secret.		نص حكيم له سر قاطع
 Ali is a path to the Truth we hold fast to.	علي صراط حق نمسكه
 ------------------------------------------------------------------------------
-</pre>
-![QuranCode: Ctrl+Click the word "Allah"](https://raw.githubusercontent.com/heliwave/QuranCode/master/Common/Images/1.png?raw=true "Search Results as Text")
-![QuranCode: Search by Text as Graph    ](https://raw.githubusercontent.com/heliwave/QuranCode/master/Common/Images/2.png?raw=true "Search Results as Graph")
-<pre>
-QuranCode supports any letter-value system, any translation, and any reciter.
 
-QuranCode supports search by text, numbers, similarity or letter frequency sum.
+QuranCode supports:
+	- any letter-value system, any translation, and any reciter.
+	- search by text, numbers, similarity or letter frequency sum.
+	- live statistics, word grammar, and Ctrl+Click a word to display verses with related words.
+	- text-to-binary and text-to-DNA converters, and text front-back symmetry.
 
-QuranCode supports live statistics, word grammar, and Ctrl+Click a word to display its related words.
-
-QuranCode supports text-to-binary and text-to-DNA converters, and text front-back symmetry.
-</pre>
-![QuranCode: Similarity Search          ](https://raw.githubusercontent.com/heliwave/QuranCode/master/Common/Images/3.png?raw=true "Letters of Similar Verses = Sum of chapter numbers")
-<pre>
 The Quran is a Readable Ciphertext and is therefore named Al-Quran (قرءان) and its first chapter
 is The Key (الفاتحة) to unlocking the inner ever-revealing Quran (القرءان الكريم) as per Quran 56:75-80
 
@@ -38,10 +32,6 @@ is The Key (الفاتحة) to unlocking the inner ever-revealing Quran (الق�
 56:78	within a guarded Book,						فِى كِتَٰبٍۢ مَّكْنُونٍۢ
 56:79	none can access it except the purified,				لَّا يَمَسُّهُۥٓ إِلَّا ٱلْمُطَهَّرُونَ
 56:80	sent down gradually from the Lord of the worlds.		تَنزِيلٌۭ مِّن رَّبِّ ٱلْعَٰلَمِينَ
-
-</pre>
-![114 Amazing Numbers                   ](https://raw.githubusercontent.com/heliwave/QuranCode/master/Common/Images/4.png?raw=true "Quran's 114 Amazing Numbers")
-<pre>
 
 Primalogy is a new numerology system that assigns prime values to the Arabic alphabet.
 It is derived from surat Al-Fatiha which is built upon prime numbers (7 verses, 29 words, 139 letters)
@@ -137,7 +127,7 @@ Chapter 57 has 29 verses
  C506      = 621
 ------------------------------------------------------------------------------
 
-Most Frequent Words: FROM ALLAH (من الله)			
+Most Freequenct Words: FROM ALLAH (من الله)			
 -------------------------------				
 Word	Frequency	Meaning		
 -------------------------------				
