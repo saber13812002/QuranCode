@@ -4483,6 +4483,632 @@ public class Server : IPublisher
     }
 
     // find by text - Exact
+    //private static string BuildPattern(string text, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness)
+    //{
+    //    if (String.IsNullOrEmpty(text)) return text;
+    //    text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
+
+    //    // search for Quran markers, stopmarks, numbers, etc.
+    //    if (text.Length == 1)
+    //    {
+    //        if (!Constants.ARABIC_LETTERS.Contains(text[0]))
+    //        {
+    //            return text;
+    //        }
+    //    }
+
+    //    /*
+    //    =====================================================================
+    //    Regular Expressions (RegEx)
+    //    =====================================================================
+    //    Best Reference: http://www.regular-expressions.info/
+    //    =====================================================================
+    //    Matches	Characters 
+    //    x	character x 
+    //    \\	backslash character 
+    //    \0n	character with octal value 0n (0 <= n <= 7) 
+    //    \0nn	character with octal value 0nn (0 <= n <= 7) 
+    //    \0mnn	character with octal value 0mnn (0 <= m <= 3, 0 <= n <= 7) 
+    //    \xhh	character with hexadecimal value 0xhh 
+    //    \uhhhh	character with hexadecimal value 0xhhhh 
+    //    \t	tab character ('\u0009') 
+    //    \n	newline (line feed) character ('\u000A') 
+    //    \r	carriage-return character ('\u000D') 
+    //    \f	form-feed character ('\u000C') 
+    //    \a	alert (bell) character ('\u0007') 
+    //    \e	escape character ('\u001B') 
+    //    \cx	control character corresponding to x 
+
+    //    Character Classes 
+    //    [abc]		    a, b, or c				                    (simple class) 
+    //    [^abc]		    any character except a, b, or c		        (negation) 
+    //    [a-zA-Z]	    a through z or A through Z, inclusive	    (range) 
+    //    [a-d[m-p]]	    a through d, or m through p: [a-dm-p]	    (union) 
+    //    [a-z&&[def]]	d, e, or f				                    (intersection) 
+    //    [a-z&&[^bc]]	a through z, except for b and c: [ad-z]	    (subtraction) 
+    //    [a-z&&[^m-p]]	a through z, and not m through p: [a-lq-z]  (subtraction) 
+
+    //    Predefined 
+    //    .	any character (inc line terminators) except newline 
+    //    \d	digit				            [0-9] 
+    //    \D	non-digit			            [^0-9] 
+    //    \s	whitespace character		    [ \t\n\x0B\f\r] 
+    //    \S	non-whitespace character	    [^\s] 
+    //    \w	word character (alphanumeric)	[a-zA-Z_0-9] 
+    //    \W	non-word character		        [^\w] 
+
+    //    Boundary Matchers 
+    //    ^	beginning of a line	(in Multiline)
+    //    $	end of a line  		(in Multiline)
+    //    \b	word boundary, including line start and line end
+    //    \B	non-word boundary 
+    //    \A	beginning of the input 
+    //    \G	end of the previous match 
+    //    \Z	end of the input but for the final terminator, if any 
+    //    \z	end of the input
+
+    //    Greedy quantifiers 
+    //    X?	X, once or not at all 
+    //    X*	X, zero or more times 
+    //    X+	X, one or more times 
+    //    X{n}	X, exactly n times 
+    //    X{n,}	X, at least n times 
+    //    X{n,m}	X, at least n but not more than m times 
+
+    //    Reluctant quantifiers 
+    //    X??	X, once or not at all 
+    //    X*?	X, zero or more times 
+    //    X+?	X, one or more times 
+    //    X{n}?	X, exactly n times 
+    //    X{n,}?	X, at least n times 
+    //    X{n,m}?	X, at least n but not more than m times 
+
+    //    Possessive quantifiers 
+    //    X?+	X, once or not at all 
+    //    X*+	X, zero or more times 
+    //    X++	X, one or more times 
+    //    X{n}+	X, exactly n times 
+    //    X{n,}+	X, at least n times 
+    //    X{n,m}+	X, at least n but not more than m times 
+
+    //    positive lookahead	(?=text)
+    //    negative lookahead	(?!text)
+    //    // eg: not at end of line 	    (?!$)
+    //    positive lookbehind	(?<=text)
+    //    negative lookbehind	(?<!text)
+    //    // eg: not at start of line 	(?<!^)
+    //    =====================================================================
+    //    */
+
+    //    // helper patterns
+    //    string whole_line = @"(" + @"^" + text.Trim() + @"$" + @")";
+    //    string whole_word = @"(" + @"\b" + text.Trim() + @"\b" + @")";
+    //    string word_with_prefix = @"(" + @"\b" + @"\S+?" + text.TrimEnd() + @"\b" + @")";
+    //    string word_with_suffix = @"(" + @"\b" + text.TrimStart() + @"\S+?" + @"\b" + @")";
+    //    string word_with_prefix_and_suffix = @"(" + @"\b" + @"\S+?" + text + @"\S+?" + @"\b" + @")";
+    //    string word_with_fix_or_fixes = @"(" + word_with_prefix + "|" + word_with_suffix + "|" + word_with_prefix_and_suffix + @")";
+
+    //    /////////////////////////////////////////////////
+    //    ////// wordness_wordlocation_verselocation //////
+    //    /////////////////////////////////////////////////
+    //    string whole____start____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
+    //    string whole____start___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
+    //    string whole____start______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
+    //    string whole____start_anywhere = whole_line + "|" + @"(" + whole_word + @")";
+    //    string whole___middle____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
+    //    string whole___middle___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
+    //    string whole___middle______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
+    //    string whole___middle_anywhere = whole_line + "|" + @"(" + whole_word + @")";
+    //    string whole______end____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
+    //    string whole______end___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
+    //    string whole______end______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
+    //    string whole______end_anywhere = whole_line + "|" + @"(" + whole_word + @")";
+    //    string whole_anywhere____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
+    //    string whole_anywhere___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
+    //    string whole_anywhere______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
+    //    string whole_anywhere_anywhere = whole_line + "|" + @"(" + whole_word + @")";
+
+    //    string part_____start____start = @"(" + @"^" + word_with_suffix + @")";
+    //    string part_____start___middle = @"(" + @"\s" + word_with_suffix + @"\s" + @")";
+    //    string part_____start______end = @"(" + word_with_suffix + @"$" + @")";
+    //    string part_____start_anywhere = @"(" + word_with_suffix + @")";
+    //    string part____middle____start = @"(" + @"^" + word_with_prefix_and_suffix + @")";
+    //    string part____middle___middle = @"(" + @"\s" + word_with_prefix_and_suffix + @"\s" + @")";
+    //    string part____middle______end = @"(" + word_with_prefix_and_suffix + @"$" + @")";
+    //    string part____middle_anywhere = @"(" + word_with_prefix_and_suffix + @")";
+    //    string part_______end____start = @"(" + @"^" + word_with_prefix + @")";
+    //    string part_______end___middle = @"(" + @"\s" + word_with_prefix + @"\s" + @")";
+    //    string part_______end______end = @"(" + word_with_prefix + @"$" + @")";
+    //    string part_______end_anywhere = @"(" + word_with_prefix + @")";
+    //    string part__anywhere____start = @"(" + @"^" + word_with_fix_or_fixes + @")";
+    //    string part__anywhere___middle = @"(" + @"\s" + word_with_fix_or_fixes + @"\s" + @")";
+    //    string part__anywhere______end = @"(" + word_with_fix_or_fixes + @"$" + @")";
+    //    string part__anywhere_anywhere = @"(" + word_with_fix_or_fixes + @")";
+
+    //    string any______start____start = whole____start____start + "|" + part_____start____start;
+    //    string any______start___middle = whole____start___middle + "|" + part_____start___middle;
+    //    string any______start______end = whole____start______end + "|" + part_____start______end;
+    //    string any______start_anywhere = whole____start_anywhere + "|" + part_____start_anywhere;
+    //    string any_____middle____start = whole___middle____start + "|" + part____middle____start;
+    //    string any_____middle___middle = whole___middle___middle + "|" + part____middle___middle;
+    //    string any_____middle______end = whole___middle______end + "|" + part____middle______end;
+    //    string any_____middle_anywhere = whole___middle_anywhere + "|" + part____middle_anywhere;
+    //    string any________end____start = whole______end____start + "|" + part_______end____start;
+    //    string any________end___middle = whole______end___middle + "|" + part_______end___middle;
+    //    string any________end______end = whole______end______end + "|" + part_______end______end;
+    //    string any________end_anywhere = whole______end_anywhere + "|" + part_______end_anywhere;
+    //    string any___anywhere____start = whole_anywhere____start + "|" + part__anywhere____start;
+    //    string any___anywhere___middle = whole_anywhere___middle + "|" + part__anywhere___middle;
+    //    string any___anywhere______end = whole_anywhere______end + "|" + part__anywhere______end;
+    //    string any___anywhere_anywhere = whole_anywhere_anywhere + "|" + part__anywhere_anywhere;
+
+
+    //    string pattern = null;
+    //    switch (text_wordness)
+    //    {
+    //        case TextWordness.WholeWord:
+    //            switch (text_location_in_word)
+    //            {
+    //                case TextLocationInWord.AtStart:
+    //                    switch (text_location_in_verse)
+    //                    {
+    //                        case TextLocationInVerse.AtStart:
+    //                            pattern = whole____start____start;
+    //                            break;
+    //                        case TextLocationInVerse.AtMiddle:
+    //                            pattern = whole____start___middle;
+    //                            break;
+    //                        case TextLocationInVerse.AtEnd:
+    //                            pattern = whole____start______end;
+    //                            break;
+    //                        case TextLocationInVerse.Any:
+    //                            pattern = whole____start_anywhere;
+    //                            break;
+    //                    }
+    //                    break;
+    //                case TextLocationInWord.AtMiddle:
+    //                    switch (text_location_in_verse)
+    //                    {
+    //                        case TextLocationInVerse.AtStart:
+    //                            pattern = whole___middle____start;
+    //                            break;
+    //                        case TextLocationInVerse.AtMiddle:
+    //                            pattern = whole___middle___middle;
+    //                            break;
+    //                        case TextLocationInVerse.AtEnd:
+    //                            pattern = whole___middle______end;
+    //                            break;
+    //                        case TextLocationInVerse.Any:
+    //                            pattern = whole___middle_anywhere;
+    //                            break;
+    //                    }
+    //                    break;
+    //                case TextLocationInWord.AtEnd:
+    //                    switch (text_location_in_verse)
+    //                    {
+    //                        case TextLocationInVerse.AtStart:
+    //                            pattern = whole______end____start;
+    //                            break;
+    //                        case TextLocationInVerse.AtMiddle:
+    //                            pattern = whole______end___middle;
+    //                            break;
+    //                        case TextLocationInVerse.AtEnd:
+    //                            pattern = whole______end______end;
+    //                            break;
+    //                        case TextLocationInVerse.Any:
+    //                            pattern = whole______end_anywhere;
+    //                            break;
+    //                    }
+    //                    break;
+    //                case TextLocationInWord.Any:
+    //                    switch (text_location_in_verse)
+    //                    {
+    //                        case TextLocationInVerse.AtStart:
+    //                            pattern = whole_anywhere____start;
+    //                            break;
+    //                        case TextLocationInVerse.AtMiddle:
+    //                            pattern = whole_anywhere___middle;
+    //                            break;
+    //                        case TextLocationInVerse.AtEnd:
+    //                            pattern = whole_anywhere______end;
+    //                            break;
+    //                        case TextLocationInVerse.Any:
+    //                            pattern = whole_anywhere_anywhere;
+    //                            break;
+    //                    }
+    //                    break;
+    //            }
+    //            break;
+    //        case TextWordness.PartOfWord:
+    //            switch (text_location_in_word)
+    //            {
+    //                case TextLocationInWord.AtStart:
+    //                    switch (text_location_in_verse)
+    //                    {
+    //                        case TextLocationInVerse.AtStart:
+    //                            pattern = part_____start____start;
+    //                            break;
+    //                        case TextLocationInVerse.AtMiddle:
+    //                            pattern = part_____start___middle;
+    //                            break;
+    //                        case TextLocationInVerse.AtEnd:
+    //                            pattern = part_____start______end;
+    //                            break;
+    //                        case TextLocationInVerse.Any:
+    //                            pattern = part_____start_anywhere;
+    //                            break;
+    //                    }
+    //                    break;
+    //                case TextLocationInWord.AtMiddle:
+    //                    switch (text_location_in_verse)
+    //                    {
+    //                        case TextLocationInVerse.AtStart:
+    //                            pattern = part____middle____start;
+    //                            break;
+    //                        case TextLocationInVerse.AtMiddle:
+    //                            pattern = part____middle___middle;
+    //                            break;
+    //                        case TextLocationInVerse.AtEnd:
+    //                            pattern = part____middle______end;
+    //                            break;
+    //                        case TextLocationInVerse.Any:
+    //                            pattern = part____middle_anywhere;
+    //                            break;
+    //                    }
+    //                    break;
+    //                case TextLocationInWord.AtEnd:
+    //                    switch (text_location_in_verse)
+    //                    {
+    //                        case TextLocationInVerse.AtStart:
+    //                            pattern = part_______end____start;
+    //                            break;
+    //                        case TextLocationInVerse.AtMiddle:
+    //                            pattern = part_______end___middle;
+    //                            break;
+    //                        case TextLocationInVerse.AtEnd:
+    //                            pattern = part_______end______end;
+    //                            break;
+    //                        case TextLocationInVerse.Any:
+    //                            pattern = part_______end_anywhere;
+    //                            break;
+    //                    }
+    //                    break;
+    //                case TextLocationInWord.Any:
+    //                    switch (text_location_in_verse)
+    //                    {
+    //                        case TextLocationInVerse.AtStart:
+    //                            pattern = part__anywhere____start;
+    //                            break;
+    //                        case TextLocationInVerse.AtMiddle:
+    //                            pattern = part__anywhere___middle;
+    //                            break;
+    //                        case TextLocationInVerse.AtEnd:
+    //                            pattern = part__anywhere______end;
+    //                            break;
+    //                        case TextLocationInVerse.Any:
+    //                            pattern = part__anywhere_anywhere;
+    //                            break;
+    //                    }
+    //                    break;
+    //            }
+    //            break;
+    //        case TextWordness.Any:
+    //            switch (text_location_in_word)
+    //            {
+    //                case TextLocationInWord.AtStart:
+    //                    switch (text_location_in_verse)
+    //                    {
+    //                        case TextLocationInVerse.AtStart:
+    //                            pattern = any______start____start;
+    //                            break;
+    //                        case TextLocationInVerse.AtMiddle:
+    //                            pattern = any______start___middle;
+    //                            break;
+    //                        case TextLocationInVerse.AtEnd:
+    //                            pattern = any______start______end;
+    //                            break;
+    //                        case TextLocationInVerse.Any:
+    //                            pattern = any______start_anywhere;
+    //                            break;
+    //                    }
+    //                    break;
+    //                case TextLocationInWord.AtMiddle:
+    //                    switch (text_location_in_verse)
+    //                    {
+    //                        case TextLocationInVerse.AtStart:
+    //                            pattern = any_____middle____start;
+    //                            break;
+    //                        case TextLocationInVerse.AtMiddle:
+    //                            pattern = any_____middle___middle;
+    //                            break;
+    //                        case TextLocationInVerse.AtEnd:
+    //                            pattern = any_____middle______end;
+    //                            break;
+    //                        case TextLocationInVerse.Any:
+    //                            pattern = any_____middle_anywhere;
+    //                            break;
+    //                    }
+    //                    break;
+    //                case TextLocationInWord.AtEnd:
+    //                    switch (text_location_in_verse)
+    //                    {
+    //                        case TextLocationInVerse.AtStart:
+    //                            pattern = any________end____start;
+    //                            break;
+    //                        case TextLocationInVerse.AtMiddle:
+    //                            pattern = any________end___middle;
+    //                            break;
+    //                        case TextLocationInVerse.AtEnd:
+    //                            pattern = any________end______end;
+    //                            break;
+    //                        case TextLocationInVerse.Any:
+    //                            pattern = any________end_anywhere;
+    //                            break;
+    //                    }
+    //                    break;
+    //                case TextLocationInWord.Any:
+    //                    switch (text_location_in_verse)
+    //                    {
+    //                        case TextLocationInVerse.AtStart:
+    //                            pattern = any___anywhere____start;
+    //                            break;
+    //                        case TextLocationInVerse.AtMiddle:
+    //                            pattern = any___anywhere___middle;
+    //                            break;
+    //                        case TextLocationInVerse.AtEnd:
+    //                            pattern = any___anywhere______end;
+    //                            break;
+    //                        case TextLocationInVerse.Any:
+    //                            pattern = any___anywhere_anywhere;
+    //                            break;
+    //                    }
+    //                    break;
+    //            }
+    //            break;
+    //    }
+
+    //    return pattern;
+    //}
+    private static string BuildPattern(string text, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness)
+    {
+        string pattern = null;
+
+        if (String.IsNullOrEmpty(text)) return text;
+
+        text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
+
+        // search for Quran markers, stopmarks, numbers, etc.
+        if (text.Length == 1)
+        {
+            if (!Constants.ARABIC_LETTERS.Contains(text[0]))
+            {
+                return text;
+            }
+        }
+
+        /*
+        =====================================================================
+        Regular Expressions (RegEx)
+        =====================================================================
+        Best Reference: http://www.regular-expressions.info/
+        =====================================================================
+        Matches	Characters 
+        x	character x 
+        \\	backslash character 
+        \0n	character with octal value 0n (0 <= n <= 7) 
+        \0nn	character with octal value 0nn (0 <= n <= 7) 
+        \0mnn	character with octal value 0mnn (0 <= m <= 3, 0 <= n <= 7) 
+        \xhh	character with hexadecimal value 0xhh 
+        \uhhhh	character with hexadecimal value 0xhhhh 
+        \t	tab character ('\u0009') 
+        \n	newline (line feed) character ('\u000A') 
+        \r	carriage-return character ('\u000D') 
+        \f	form-feed character ('\u000C') 
+        \a	alert (bell) character ('\u0007') 
+        \e	escape character ('\u001B') 
+        \cx	control character corresponding to x 
+                                  
+        Character Classes 
+        [abc]		    a, b, or c				                    (simple class) 
+        [^abc]		    any character except a, b, or c		        (negation) 
+        [a-zA-Z]	    a through z or A through Z, inclusive	    (range) 
+        [a-d[m-p]]	    a through d, or m through p: [a-dm-p]	    (union) 
+        [a-z&&[def]]	d, e, or f				                    (intersection) 
+        [a-z&&[^bc]]	a through z, except for b and c: [ad-z]	    (subtraction) 
+        [a-z&&[^m-p]]	a through z, and not m through p: [a-lq-z]  (subtraction) 
+                                  
+        Predefined 
+        .	any character (inc line terminators) except newline 
+        \d	digit				            [0-9] 
+        \D	non-digit			            [^0-9] 
+        \s	whitespace character		    [ \t\n\x0B\f\r] 
+        \S	non-whitespace character	    [^\s] 
+        \w	word character (alphanumeric)	[a-zA-Z_0-9] 
+        \W	non-word character		        [^\w] 
+
+        Boundary Matchers 
+        ^	beginning of a line	(in Multiline)
+        $	end of a line  		(in Multiline)
+        \b	word boundary, including line start and line end
+        \B	non-word boundary 
+        \A	beginning of the input 
+        \G	end of the previous match 
+        \Z	end of the input but for the final terminator, if any 
+        \z	end of the input
+
+        Greedy quantifiers 
+        X?	X, once or not at all 
+        X*	X, zero or more times 
+        X+	X, one or more times 
+        X{n}	X, exactly n times 
+        X{n,}	X, at least n times 
+        X{n,m}	X, at least n but not more than m times 
+                                  
+        Reluctant quantifiers 
+        X??	X, once or not at all 
+        X*?	X, zero or more times 
+        X+?	X, one or more times 
+        X{n}?	X, exactly n times 
+        X{n,}?	X, at least n times 
+        X{n,m}?	X, at least n but not more than m times 
+                                  
+        Possessive quantifiers 
+        X?+	X, once or not at all 
+        X*+	X, zero or more times 
+        X++	X, one or more times 
+        X{n}+	X, exactly n times 
+        X{n,}+	X, at least n times 
+        X{n,m}+	X, at least n but not more than m times 
+
+        positive lookahead	(?=text)
+        negative lookahead	(?!text)
+        // eg: not at end of line 	    (?!$)
+        positive lookbehind	(?<=text)
+        negative lookbehind	(?<!text)
+        // eg: not at start of line 	(?<!^)
+        =====================================================================
+        */
+
+        string pattern_empty_line = @"^$";
+        string pattern_whole_line = "(" + @"^" + text + @"$" + ")";
+
+        string pattern_any_with_prefix = "(" + @"\S+?" + text + ")";
+        string pattern_any_with_prefix_and_suffix = "(" + @"\S+?" + text + @"\S+?" + ")";
+        string pattern_any_with_suffix = "(" + text + @"\S+?" + ")";
+
+        string pattern_word_with_prefix = "(" + pattern_any_with_prefix + @"\b" + ")";
+        string pattern_word_with_prefix_and_suffix = "(" + pattern_any_with_prefix_and_suffix + ")";
+        string pattern_word_with_suffix = "(" + @"\b" + pattern_any_with_suffix + ")";
+        string pattern_word_with_any_fixes = "(" + pattern_word_with_prefix + "|" + pattern_word_with_prefix_and_suffix + "|" + pattern_any_with_suffix + ")";
+
+        // Any == Whole word | Part of word
+        string pattern_any_at_start = "(" + pattern_whole_line + "|" + @"^" + text + ")";
+        string pattern_any_at_middle = "(" + pattern_whole_line + "|" + @"(?<!^)" + text + @"(?!$)" + ")";
+        string pattern_any_at_end = "(" + pattern_whole_line + "|" + text + @"$" + ")";
+        string pattern_any_anywhere = text;
+
+        // Part of word
+        string pattern_part_word_at_start = "(" + @"^" + pattern_word_with_any_fixes + ")";
+        string pattern_part_word_at_middle = "(" + @"(?<!^)" + pattern_word_with_any_fixes + @"(?!$)" + ")";
+        string pattern_part_word_at_end = "(" + pattern_word_with_any_fixes + @"$" + ")";
+        string pattern_part_word_anywhere = "(" + pattern_part_word_at_start + "|" + pattern_part_word_at_middle + "|" + pattern_part_word_at_end + ")";
+
+        // Whole word
+        string pattern_whole_word_at_start = "(" + pattern_whole_line + "|" + @"^" + text + @"\b" + ")";
+        string pattern_whole_word_at_middle = "(" + pattern_whole_line + "|" + @"(?<!^)" + @"\b" + text + @"\b" + @"(?!$)" + ")";
+        string pattern_whole_word_at_end = "(" + pattern_whole_line + "|" + @"\b" + text + @"$" + ")";
+        string pattern_whole_word_anywhere = "(" + pattern_whole_line + "|" + @"\b" + text + @"\b" + ")";
+
+        switch (text_location_in_verse)
+        {
+            case TextLocationInVerse.Any:
+                {
+                    if (text_wordness == TextWordness.Any)
+                    {
+                        pattern += pattern_any_anywhere;
+                    }
+                    else if (text_wordness == TextWordness.PartOfWord)
+                    {
+                        pattern += pattern_part_word_anywhere;
+                    }
+                    else if (text_wordness == TextWordness.WholeWord)
+                    {
+                        pattern += pattern_whole_word_anywhere;
+                    }
+                    else
+                    {
+                        pattern += pattern_empty_line;
+                    }
+                }
+                break;
+            case TextLocationInVerse.AtStart:
+                {
+                    if (text_wordness == TextWordness.Any)
+                    {
+                        pattern += pattern_any_at_start;
+                    }
+                    else if (text_wordness == TextWordness.PartOfWord)
+                    {
+                        pattern += pattern_part_word_at_start;
+                    }
+                    else if (text_wordness == TextWordness.WholeWord)
+                    {
+                        pattern += pattern_whole_word_at_start;
+                    }
+                    else
+                    {
+                        pattern += pattern_empty_line;
+                    }
+                }
+                break;
+            case TextLocationInVerse.AtMiddle:
+                {
+                    if (text_wordness == TextWordness.Any)
+                    {
+                        pattern += pattern_any_at_middle;
+                    }
+                    else if (text_wordness == TextWordness.PartOfWord)
+                    {
+                        pattern += pattern_part_word_at_middle;
+                    }
+                    else if (text_wordness == TextWordness.WholeWord)
+                    {
+                        pattern += pattern_whole_word_at_middle;
+                    }
+                    else
+                    {
+                        pattern += pattern_empty_line;
+                    }
+                }
+                break;
+            case TextLocationInVerse.AtEnd:
+                {
+                    if (text_wordness == TextWordness.Any)
+                    {
+                        pattern += pattern_any_at_end;
+                    }
+                    else if (text_wordness == TextWordness.PartOfWord)
+                    {
+                        pattern += pattern_part_word_at_end;
+                    }
+                    else if (text_wordness == TextWordness.WholeWord)
+                    {
+                        pattern += pattern_whole_word_at_end;
+                    }
+                    else
+                    {
+                        pattern += pattern_empty_line;
+                    }
+                }
+                break;
+        }
+
+        switch (text_location_in_word)
+        {
+            case TextLocationInWord.Any:
+                {
+                    // do noting
+                }
+                break;
+            case TextLocationInWord.AtStart:
+                {
+                    pattern = @"(" + @"(?<=\b)" + pattern + @")"; // positive lookbehind
+                }
+                break;
+            case TextLocationInWord.AtMiddle:
+                {
+                    pattern = @"(" + @"(?<!\s)" + pattern + @"(?!\s)" + @")"; // positive lookbehind and lookahead
+                }
+                break;
+            case TextLocationInWord.AtEnd:
+                {
+                    pattern = @"(" + pattern + @"(?=\b)" + @")"; // positive lookahead
+                }
+                break;
+        }
+
+        return pattern;
+    }
     public static List<Phrase> FindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string text, LanguageType language_type, string translation, TextLocationInChapter text_location_in_chapter, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness, bool case_sensitive, bool with_diacritics, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Phrase> result = new List<Phrase>();
@@ -6154,633 +6780,42 @@ public class Server : IPublisher
 
         return result;
     }
-    //private static string BuildPattern(string text, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness)
-    //{
-    //    if (String.IsNullOrEmpty(text)) return text;
-    //    text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
-
-    //    // search for Quran markers, stopmarks, numbers, etc.
-    //    if (text.Length == 1)
-    //    {
-    //        if (!Constants.ARABIC_LETTERS.Contains(text[0]))
-    //        {
-    //            return text;
-    //        }
-    //    }
-
-    //    /*
-    //    =====================================================================
-    //    Regular Expressions (RegEx)
-    //    =====================================================================
-    //    Best Reference: http://www.regular-expressions.info/
-    //    =====================================================================
-    //    Matches	Characters 
-    //    x	character x 
-    //    \\	backslash character 
-    //    \0n	character with octal value 0n (0 <= n <= 7) 
-    //    \0nn	character with octal value 0nn (0 <= n <= 7) 
-    //    \0mnn	character with octal value 0mnn (0 <= m <= 3, 0 <= n <= 7) 
-    //    \xhh	character with hexadecimal value 0xhh 
-    //    \uhhhh	character with hexadecimal value 0xhhhh 
-    //    \t	tab character ('\u0009') 
-    //    \n	newline (line feed) character ('\u000A') 
-    //    \r	carriage-return character ('\u000D') 
-    //    \f	form-feed character ('\u000C') 
-    //    \a	alert (bell) character ('\u0007') 
-    //    \e	escape character ('\u001B') 
-    //    \cx	control character corresponding to x 
-
-    //    Character Classes 
-    //    [abc]		    a, b, or c				                    (simple class) 
-    //    [^abc]		    any character except a, b, or c		        (negation) 
-    //    [a-zA-Z]	    a through z or A through Z, inclusive	    (range) 
-    //    [a-d[m-p]]	    a through d, or m through p: [a-dm-p]	    (union) 
-    //    [a-z&&[def]]	d, e, or f				                    (intersection) 
-    //    [a-z&&[^bc]]	a through z, except for b and c: [ad-z]	    (subtraction) 
-    //    [a-z&&[^m-p]]	a through z, and not m through p: [a-lq-z]  (subtraction) 
-
-    //    Predefined 
-    //    .	any character (inc line terminators) except newline 
-    //    \d	digit				            [0-9] 
-    //    \D	non-digit			            [^0-9] 
-    //    \s	whitespace character		    [ \t\n\x0B\f\r] 
-    //    \S	non-whitespace character	    [^\s] 
-    //    \w	word character (alphanumeric)	[a-zA-Z_0-9] 
-    //    \W	non-word character		        [^\w] 
-
-    //    Boundary Matchers 
-    //    ^	beginning of a line	(in Multiline)
-    //    $	end of a line  		(in Multiline)
-    //    \b	word boundary, including line start and line end
-    //    \B	non-word boundary 
-    //    \A	beginning of the input 
-    //    \G	end of the previous match 
-    //    \Z	end of the input but for the final terminator, if any 
-    //    \z	end of the input
-
-    //    Greedy quantifiers 
-    //    X?	X, once or not at all 
-    //    X*	X, zero or more times 
-    //    X+	X, one or more times 
-    //    X{n}	X, exactly n times 
-    //    X{n,}	X, at least n times 
-    //    X{n,m}	X, at least n but not more than m times 
-
-    //    Reluctant quantifiers 
-    //    X??	X, once or not at all 
-    //    X*?	X, zero or more times 
-    //    X+?	X, one or more times 
-    //    X{n}?	X, exactly n times 
-    //    X{n,}?	X, at least n times 
-    //    X{n,m}?	X, at least n but not more than m times 
-
-    //    Possessive quantifiers 
-    //    X?+	X, once or not at all 
-    //    X*+	X, zero or more times 
-    //    X++	X, one or more times 
-    //    X{n}+	X, exactly n times 
-    //    X{n,}+	X, at least n times 
-    //    X{n,m}+	X, at least n but not more than m times 
-
-    //    positive lookahead	(?=text)
-    //    negative lookahead	(?!text)
-    //    // eg: not at end of line 	    (?!$)
-    //    positive lookbehind	(?<=text)
-    //    negative lookbehind	(?<!text)
-    //    // eg: not at start of line 	(?<!^)
-    //    =====================================================================
-    //    */
-
-    //    // helper patterns
-    //    string whole_line = @"(" + @"^" + text.Trim() + @"$" + @")";
-    //    string whole_word = @"(" + @"\b" + text.Trim() + @"\b" + @")";
-    //    string word_with_prefix = @"(" + @"\b" + @"\S+?" + text.TrimEnd() + @"\b" + @")";
-    //    string word_with_suffix = @"(" + @"\b" + text.TrimStart() + @"\S+?" + @"\b" + @")";
-    //    string word_with_prefix_and_suffix = @"(" + @"\b" + @"\S+?" + text + @"\S+?" + @"\b" + @")";
-    //    string word_with_fix_or_fixes = @"(" + word_with_prefix + "|" + word_with_suffix + "|" + word_with_prefix_and_suffix + @")";
-
-    //    /////////////////////////////////////////////////
-    //    ////// wordness_wordlocation_verselocation //////
-    //    /////////////////////////////////////////////////
-    //    string whole____start____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
-    //    string whole____start___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
-    //    string whole____start______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
-    //    string whole____start_anywhere = whole_line + "|" + @"(" + whole_word + @")";
-    //    string whole___middle____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
-    //    string whole___middle___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
-    //    string whole___middle______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
-    //    string whole___middle_anywhere = whole_line + "|" + @"(" + whole_word + @")";
-    //    string whole______end____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
-    //    string whole______end___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
-    //    string whole______end______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
-    //    string whole______end_anywhere = whole_line + "|" + @"(" + whole_word + @")";
-    //    string whole_anywhere____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
-    //    string whole_anywhere___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
-    //    string whole_anywhere______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
-    //    string whole_anywhere_anywhere = whole_line + "|" + @"(" + whole_word + @")";
-
-    //    string part_____start____start = @"(" + @"^" + word_with_suffix + @")";
-    //    string part_____start___middle = @"(" + @"\s" + word_with_suffix + @"\s" + @")";
-    //    string part_____start______end = @"(" + word_with_suffix + @"$" + @")";
-    //    string part_____start_anywhere = @"(" + word_with_suffix + @")";
-    //    string part____middle____start = @"(" + @"^" + word_with_prefix_and_suffix + @")";
-    //    string part____middle___middle = @"(" + @"\s" + word_with_prefix_and_suffix + @"\s" + @")";
-    //    string part____middle______end = @"(" + word_with_prefix_and_suffix + @"$" + @")";
-    //    string part____middle_anywhere = @"(" + word_with_prefix_and_suffix + @")";
-    //    string part_______end____start = @"(" + @"^" + word_with_prefix + @")";
-    //    string part_______end___middle = @"(" + @"\s" + word_with_prefix + @"\s" + @")";
-    //    string part_______end______end = @"(" + word_with_prefix + @"$" + @")";
-    //    string part_______end_anywhere = @"(" + word_with_prefix + @")";
-    //    string part__anywhere____start = @"(" + @"^" + word_with_fix_or_fixes + @")";
-    //    string part__anywhere___middle = @"(" + @"\s" + word_with_fix_or_fixes + @"\s" + @")";
-    //    string part__anywhere______end = @"(" + word_with_fix_or_fixes + @"$" + @")";
-    //    string part__anywhere_anywhere = @"(" + word_with_fix_or_fixes + @")";
-
-    //    string any______start____start = whole____start____start + "|" + part_____start____start;
-    //    string any______start___middle = whole____start___middle + "|" + part_____start___middle;
-    //    string any______start______end = whole____start______end + "|" + part_____start______end;
-    //    string any______start_anywhere = whole____start_anywhere + "|" + part_____start_anywhere;
-    //    string any_____middle____start = whole___middle____start + "|" + part____middle____start;
-    //    string any_____middle___middle = whole___middle___middle + "|" + part____middle___middle;
-    //    string any_____middle______end = whole___middle______end + "|" + part____middle______end;
-    //    string any_____middle_anywhere = whole___middle_anywhere + "|" + part____middle_anywhere;
-    //    string any________end____start = whole______end____start + "|" + part_______end____start;
-    //    string any________end___middle = whole______end___middle + "|" + part_______end___middle;
-    //    string any________end______end = whole______end______end + "|" + part_______end______end;
-    //    string any________end_anywhere = whole______end_anywhere + "|" + part_______end_anywhere;
-    //    string any___anywhere____start = whole_anywhere____start + "|" + part__anywhere____start;
-    //    string any___anywhere___middle = whole_anywhere___middle + "|" + part__anywhere___middle;
-    //    string any___anywhere______end = whole_anywhere______end + "|" + part__anywhere______end;
-    //    string any___anywhere_anywhere = whole_anywhere_anywhere + "|" + part__anywhere_anywhere;
-
-
-    //    string pattern = null;
-    //    switch (text_wordness)
-    //    {
-    //        case TextWordness.WholeWord:
-    //            switch (text_location_in_word)
-    //            {
-    //                case TextLocationInWord.AtStart:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = whole____start____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = whole____start___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = whole____start______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = whole____start_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.AtMiddle:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = whole___middle____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = whole___middle___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = whole___middle______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = whole___middle_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.AtEnd:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = whole______end____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = whole______end___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = whole______end______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = whole______end_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.Any:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = whole_anywhere____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = whole_anywhere___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = whole_anywhere______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = whole_anywhere_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //            }
-    //            break;
-    //        case TextWordness.PartOfWord:
-    //            switch (text_location_in_word)
-    //            {
-    //                case TextLocationInWord.AtStart:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = part_____start____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = part_____start___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = part_____start______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = part_____start_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.AtMiddle:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = part____middle____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = part____middle___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = part____middle______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = part____middle_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.AtEnd:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = part_______end____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = part_______end___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = part_______end______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = part_______end_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.Any:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = part__anywhere____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = part__anywhere___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = part__anywhere______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = part__anywhere_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //            }
-    //            break;
-    //        case TextWordness.Any:
-    //            switch (text_location_in_word)
-    //            {
-    //                case TextLocationInWord.AtStart:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = any______start____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = any______start___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = any______start______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = any______start_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.AtMiddle:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = any_____middle____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = any_____middle___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = any_____middle______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = any_____middle_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.AtEnd:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = any________end____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = any________end___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = any________end______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = any________end_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.Any:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = any___anywhere____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = any___anywhere___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = any___anywhere______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = any___anywhere_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //            }
-    //            break;
-    //    }
-
-    //    return pattern;
-    //}
-    private static string BuildPattern(string text, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness)
+    // find by text - Proximity
+    private static void BuildWordLists(string text, out List<string> unsigned_words, out List<string> positive_words, out List<string> negative_words)
     {
-        string pattern = null;
+        unsigned_words = new List<string>();
+        positive_words = new List<string>();
+        negative_words = new List<string>();
 
-        if (String.IsNullOrEmpty(text)) return text;
-
+        if (String.IsNullOrEmpty(text)) return;
         text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
+        text = text.Trim();
 
-        // search for Quran markers, stopmarks, numbers, etc.
-        if (text.Length == 1)
+        string[] text_words = text.Split(text.Contains("|") ? '|' : ' ');
+        foreach (string text_word in text_words)
         {
-            if (!Constants.ARABIC_LETTERS.Contains(text[0]))
+            if (text_word.StartsWith("-"))
             {
-                return text;
+                negative_words.Add(text_word.Substring(1));
+            }
+            else if (text_word.EndsWith("-"))
+            {
+                negative_words.Add(text_word.Substring(0, text_word.Length - 1));
+            }
+            else if (text_word.StartsWith("+"))
+            {
+                positive_words.Add(text_word.Substring(1));
+            }
+            else if (text_word.EndsWith("+"))
+            {
+                positive_words.Add(text_word.Substring(0, text_word.Length - 1));
+            }
+            else
+            {
+                unsigned_words.Add(text_word);
             }
         }
-
-        /*
-        =====================================================================
-        Regular Expressions (RegEx)
-        =====================================================================
-        Best Reference: http://www.regular-expressions.info/
-        =====================================================================
-        Matches	Characters 
-        x	character x 
-        \\	backslash character 
-        \0n	character with octal value 0n (0 <= n <= 7) 
-        \0nn	character with octal value 0nn (0 <= n <= 7) 
-        \0mnn	character with octal value 0mnn (0 <= m <= 3, 0 <= n <= 7) 
-        \xhh	character with hexadecimal value 0xhh 
-        \uhhhh	character with hexadecimal value 0xhhhh 
-        \t	tab character ('\u0009') 
-        \n	newline (line feed) character ('\u000A') 
-        \r	carriage-return character ('\u000D') 
-        \f	form-feed character ('\u000C') 
-        \a	alert (bell) character ('\u0007') 
-        \e	escape character ('\u001B') 
-        \cx	control character corresponding to x 
-                                  
-        Character Classes 
-        [abc]		    a, b, or c				                    (simple class) 
-        [^abc]		    any character except a, b, or c		        (negation) 
-        [a-zA-Z]	    a through z or A through Z, inclusive	    (range) 
-        [a-d[m-p]]	    a through d, or m through p: [a-dm-p]	    (union) 
-        [a-z&&[def]]	d, e, or f				                    (intersection) 
-        [a-z&&[^bc]]	a through z, except for b and c: [ad-z]	    (subtraction) 
-        [a-z&&[^m-p]]	a through z, and not m through p: [a-lq-z]  (subtraction) 
-                                  
-        Predefined 
-        .	any character (inc line terminators) except newline 
-        \d	digit				            [0-9] 
-        \D	non-digit			            [^0-9] 
-        \s	whitespace character		    [ \t\n\x0B\f\r] 
-        \S	non-whitespace character	    [^\s] 
-        \w	word character (alphanumeric)	[a-zA-Z_0-9] 
-        \W	non-word character		        [^\w] 
-
-        Boundary Matchers 
-        ^	beginning of a line	(in Multiline)
-        $	end of a line  		(in Multiline)
-        \b	word boundary, including line start and line end
-        \B	non-word boundary 
-        \A	beginning of the input 
-        \G	end of the previous match 
-        \Z	end of the input but for the final terminator, if any 
-        \z	end of the input
-
-        Greedy quantifiers 
-        X?	X, once or not at all 
-        X*	X, zero or more times 
-        X+	X, one or more times 
-        X{n}	X, exactly n times 
-        X{n,}	X, at least n times 
-        X{n,m}	X, at least n but not more than m times 
-                                  
-        Reluctant quantifiers 
-        X??	X, once or not at all 
-        X*?	X, zero or more times 
-        X+?	X, one or more times 
-        X{n}?	X, exactly n times 
-        X{n,}?	X, at least n times 
-        X{n,m}?	X, at least n but not more than m times 
-                                  
-        Possessive quantifiers 
-        X?+	X, once or not at all 
-        X*+	X, zero or more times 
-        X++	X, one or more times 
-        X{n}+	X, exactly n times 
-        X{n,}+	X, at least n times 
-        X{n,m}+	X, at least n but not more than m times 
-
-        positive lookahead	(?=text)
-        negative lookahead	(?!text)
-        // eg: not at end of line 	    (?!$)
-        positive lookbehind	(?<=text)
-        negative lookbehind	(?<!text)
-        // eg: not at start of line 	(?<!^)
-        =====================================================================
-        */
-
-        string pattern_empty_line = @"^$";
-        string pattern_whole_line = "(" + @"^" + text + @"$" + ")";
-
-        string pattern_any_with_prefix = "(" + @"\S+?" + text + ")";
-        string pattern_any_with_prefix_and_suffix = "(" + @"\S+?" + text + @"\S+?" + ")";
-        string pattern_any_with_suffix = "(" + text + @"\S+?" + ")";
-
-        string pattern_word_with_prefix = "(" + pattern_any_with_prefix + @"\b" + ")";
-        string pattern_word_with_prefix_and_suffix = "(" + pattern_any_with_prefix_and_suffix + ")";
-        string pattern_word_with_suffix = "(" + @"\b" + pattern_any_with_suffix + ")";
-        string pattern_word_with_any_fixes = "(" + pattern_word_with_prefix + "|" + pattern_word_with_prefix_and_suffix + "|" + pattern_any_with_suffix + ")";
-
-        // Any == Whole word | Part of word
-        string pattern_any_at_start = "(" + pattern_whole_line + "|" + @"^" + text + ")";
-        string pattern_any_at_middle = "(" + pattern_whole_line + "|" + @"(?<!^)" + text + @"(?!$)" + ")";
-        string pattern_any_at_end = "(" + pattern_whole_line + "|" + text + @"$" + ")";
-        string pattern_any_anywhere = text;
-
-        // Part of word
-        string pattern_part_word_at_start = "(" + @"^" + pattern_word_with_any_fixes + ")";
-        string pattern_part_word_at_middle = "(" + @"(?<!^)" + pattern_word_with_any_fixes + @"(?!$)" + ")";
-        string pattern_part_word_at_end = "(" + pattern_word_with_any_fixes + @"$" + ")";
-        string pattern_part_word_anywhere = "(" + pattern_part_word_at_start + "|" + pattern_part_word_at_middle + "|" + pattern_part_word_at_end + ")";
-
-        // Whole word
-        string pattern_whole_word_at_start = "(" + pattern_whole_line + "|" + @"^" + text + @"\b" + ")";
-        string pattern_whole_word_at_middle = "(" + pattern_whole_line + "|" + @"(?<!^)" + @"\b" + text + @"\b" + @"(?!$)" + ")";
-        string pattern_whole_word_at_end = "(" + pattern_whole_line + "|" + @"\b" + text + @"$" + ")";
-        string pattern_whole_word_anywhere = "(" + pattern_whole_line + "|" + @"\b" + text + @"\b" + ")";
-
-        switch (text_location_in_verse)
-        {
-            case TextLocationInVerse.Any:
-                {
-                    if (text_wordness == TextWordness.Any)
-                    {
-                        pattern += pattern_any_anywhere;
-                    }
-                    else if (text_wordness == TextWordness.PartOfWord)
-                    {
-                        pattern += pattern_part_word_anywhere;
-                    }
-                    else if (text_wordness == TextWordness.WholeWord)
-                    {
-                        pattern += pattern_whole_word_anywhere;
-                    }
-                    else
-                    {
-                        pattern += pattern_empty_line;
-                    }
-                }
-                break;
-            case TextLocationInVerse.AtStart:
-                {
-                    if (text_wordness == TextWordness.Any)
-                    {
-                        pattern += pattern_any_at_start;
-                    }
-                    else if (text_wordness == TextWordness.PartOfWord)
-                    {
-                        pattern += pattern_part_word_at_start;
-                    }
-                    else if (text_wordness == TextWordness.WholeWord)
-                    {
-                        pattern += pattern_whole_word_at_start;
-                    }
-                    else
-                    {
-                        pattern += pattern_empty_line;
-                    }
-                }
-                break;
-            case TextLocationInVerse.AtMiddle:
-                {
-                    if (text_wordness == TextWordness.Any)
-                    {
-                        pattern += pattern_any_at_middle;
-                    }
-                    else if (text_wordness == TextWordness.PartOfWord)
-                    {
-                        pattern += pattern_part_word_at_middle;
-                    }
-                    else if (text_wordness == TextWordness.WholeWord)
-                    {
-                        pattern += pattern_whole_word_at_middle;
-                    }
-                    else
-                    {
-                        pattern += pattern_empty_line;
-                    }
-                }
-                break;
-            case TextLocationInVerse.AtEnd:
-                {
-                    if (text_wordness == TextWordness.Any)
-                    {
-                        pattern += pattern_any_at_end;
-                    }
-                    else if (text_wordness == TextWordness.PartOfWord)
-                    {
-                        pattern += pattern_part_word_at_end;
-                    }
-                    else if (text_wordness == TextWordness.WholeWord)
-                    {
-                        pattern += pattern_whole_word_at_end;
-                    }
-                    else
-                    {
-                        pattern += pattern_empty_line;
-                    }
-                }
-                break;
-        }
-
-        switch (text_location_in_word)
-        {
-            case TextLocationInWord.Any:
-                {
-                    // do noting
-                }
-                break;
-            case TextLocationInWord.AtStart:
-                {
-                    pattern = @"(" + @"(?<=\b)" + pattern + @")"; // positive lookbehind
-                }
-                break;
-            case TextLocationInWord.AtMiddle:
-                {
-                    pattern = @"(" + @"(?<!\s)" + pattern + @"(?!\s)" + @")"; // positive lookbehind and lookahead
-                }
-                break;
-            case TextLocationInWord.AtEnd:
-                {
-                    pattern = @"(" + pattern + @"(?=\b)" + @")"; // positive lookahead
-                }
-                break;
-        }
-
-        return pattern;
     }
-    // find by text - Proximity
     public static List<Phrase> FindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string text, LanguageType language_type, string translation, TextProximityType text_proximity_type, TextWordness text_wordness, bool case_sensitive, bool with_diacritics)
     {
         List<Phrase> result = new List<Phrase>();
@@ -7084,11 +7119,11 @@ public class Server : IPublisher
                                 // process unsigned_words
                                 /////////////////////////
                                 //////////////////////////////////////////////////////////
-                                // FindByText WORDS All
+                                // FindByText WORDS Any
                                 //////////////////////////////////////////////////////////
-                                if (text_proximity_type == TextProximityType.AllWords)
+                                if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
                                 {
-                                    int match_count = 0;
+                                    bool found = false;
                                     foreach (string unsigned_word in unsigned_words)
                                     {
                                         foreach (Word word in verse.Words)
@@ -7098,7 +7133,7 @@ public class Server : IPublisher
                                             {
                                                 if (word_text.Contains(unsigned_word))
                                                 {
-                                                    match_count++;
+                                                    found = true;
                                                     break; // no need to continue even if there are more matches
                                                 }
                                             }
@@ -7106,7 +7141,7 @@ public class Server : IPublisher
                                             {
                                                 if ((word_text.Contains(unsigned_word)) && (word_text.Length > unsigned_word.Length))
                                                 {
-                                                    match_count++;
+                                                    found = true;
                                                     break; // no need to continue even if there are more matches
                                                 }
                                             }
@@ -7114,14 +7149,18 @@ public class Server : IPublisher
                                             {
                                                 if (word_text == unsigned_word)
                                                 {
-                                                    match_count++;
+                                                    found = true;
                                                     break; // no need to continue even if there are more matches
                                                 }
                                             }
                                         }
+                                        if (found)
+                                        {
+                                            break;
+                                        }
                                     }
 
-                                    if (match_count == unsigned_words.Count)
+                                    if (found) // found 1 unsigned word in verse, which is enough
                                     {
                                         ///////////////////////////////////////////////////////////////
                                         // all negative, positive and unsigned conditions have been met
@@ -7199,11 +7238,11 @@ public class Server : IPublisher
                                     }
                                 }
                                 //////////////////////////////////////////////////////////
-                                // FindByText WORDS Any
+                                // FindByText WORDS All
                                 //////////////////////////////////////////////////////////
-                                else if (text_proximity_type == TextProximityType.AnyWord)
+                                else if (text_proximity_type == TextProximityType.AllWords)
                                 {
-                                    bool found = false;
+                                    int match_count = 0;
                                     foreach (string unsigned_word in unsigned_words)
                                     {
                                         foreach (Word word in verse.Words)
@@ -7213,7 +7252,7 @@ public class Server : IPublisher
                                             {
                                                 if (word_text.Contains(unsigned_word))
                                                 {
-                                                    found = true;
+                                                    match_count++;
                                                     break; // no need to continue even if there are more matches
                                                 }
                                             }
@@ -7221,7 +7260,7 @@ public class Server : IPublisher
                                             {
                                                 if ((word_text.Contains(unsigned_word)) && (word_text.Length > unsigned_word.Length))
                                                 {
-                                                    found = true;
+                                                    match_count++;
                                                     break; // no need to continue even if there are more matches
                                                 }
                                             }
@@ -7229,18 +7268,14 @@ public class Server : IPublisher
                                             {
                                                 if (word_text == unsigned_word)
                                                 {
-                                                    found = true;
+                                                    match_count++;
                                                     break; // no need to continue even if there are more matches
                                                 }
                                             }
                                         }
-                                        if (found)
-                                        {
-                                            break;
-                                        }
                                     }
 
-                                    if (found) // found 1 unsigned word in verse, which is enough
+                                    if (match_count == unsigned_words.Count)
                                     {
                                         ///////////////////////////////////////////////////////////////
                                         // all negative, positive and unsigned conditions have been met
@@ -7430,127 +7465,9 @@ public class Server : IPublisher
                                         // process unsigned_words
                                         /////////////////////////
                                         //////////////////////////////////////////////////////////
-                                        // FindByText WORDS All
-                                        //////////////////////////////////////////////////////////
-                                        if (text_proximity_type == TextProximityType.AllWords)
-                                        {
-                                            int match_count = 0;
-                                            foreach (string unsigned_word in unsigned_words)
-                                            {
-                                                foreach (Word word in verse.Words)
-                                                {
-                                                    // simplify all text_modes
-                                                    string word_text = word.Text.SimplifyTo(s_numerology_system.TextMode);
-                                                    if (text_wordness == TextWordness.Any)
-                                                    {
-                                                        if (word_text.Contains(unsigned_word))
-                                                        {
-                                                            match_count++;
-                                                            break; // no need to continue even if there are more matches
-                                                        }
-                                                    }
-                                                    else if (text_wordness == TextWordness.PartOfWord)
-                                                    {
-                                                        if ((word_text.Contains(unsigned_word)) && (word_text.Length > unsigned_word.Length))
-                                                        {
-                                                            match_count++;
-                                                            break; // no need to continue even if there are more matches
-                                                        }
-                                                    }
-                                                    else if (text_wordness == TextWordness.WholeWord)
-                                                    {
-                                                        if (word_text == unsigned_word)
-                                                        {
-                                                            match_count++;
-                                                            break; // no need to continue even if there are more matches
-                                                        }
-                                                    }
-                                                }
-                                            }
-
-                                            if (match_count == unsigned_words.Count)
-                                            {
-                                                ///////////////////////////////////////////////////////////////
-                                                // all negative, positive and unsigned conditions have been met
-                                                ///////////////////////////////////////////////////////////////
-
-                                                // add positive matches
-                                                foreach (string positive_word in positive_words)
-                                                {
-                                                    foreach (Word word in verse.Words)
-                                                    {
-                                                        // simplify all text_modes
-                                                        string word_text = word.Text.SimplifyTo(s_numerology_system.TextMode);
-                                                        if (text_wordness == TextWordness.Any)
-                                                        {
-                                                            if (word_text.Contains(positive_word))
-                                                            {
-                                                                result.Add(new Phrase(verse, word.Position, word.Text));
-                                                                //break; // no break in case there are more matches
-                                                            }
-                                                        }
-                                                        else if (text_wordness == TextWordness.PartOfWord)
-                                                        {
-                                                            if ((word_text.Contains(positive_word)) && (word_text.Length > positive_word.Length))
-                                                            {
-                                                                result.Add(new Phrase(verse, word.Position, word.Text));
-                                                                //break; // no break in case there are more matches
-                                                            }
-                                                        }
-                                                        else if (text_wordness == TextWordness.WholeWord)
-                                                        {
-                                                            if (word_text == positive_word)
-                                                            {
-                                                                result.Add(new Phrase(verse, word.Position, word.Text));
-                                                                //break; // no break in case there are more matches
-                                                            }
-                                                        }
-                                                    }
-                                                }
-
-                                                // add unsigned matches
-                                                foreach (string unsigned_word in unsigned_words)
-                                                {
-                                                    foreach (Word word in verse.Words)
-                                                    {
-                                                        // simplify all text_modes
-                                                        string word_text = word.Text.SimplifyTo(s_numerology_system.TextMode);
-                                                        if (text_wordness == TextWordness.Any)
-                                                        {
-                                                            if (word_text.Contains(unsigned_word))
-                                                            {
-                                                                result.Add(new Phrase(verse, word.Position, word.Text));
-                                                                //break; // no break in case there are more matches
-                                                            }
-                                                        }
-                                                        else if (text_wordness == TextWordness.PartOfWord)
-                                                        {
-                                                            if ((word_text.Contains(unsigned_word)) && (word_text.Length > unsigned_word.Length))
-                                                            {
-                                                                result.Add(new Phrase(verse, word.Position, word.Text));
-                                                                //break; // no break in case there are more matches
-                                                            }
-                                                        }
-                                                        else if (text_wordness == TextWordness.WholeWord)
-                                                        {
-                                                            if (word_text == unsigned_word)
-                                                            {
-                                                                result.Add(new Phrase(verse, word.Position, word.Text));
-                                                                //break; // no break in case there are more matches
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                            else // verse failed test, so skip it
-                                            {
-                                                continue; // next verse
-                                            }
-                                        }
-                                        //////////////////////////////////////////////////////////
                                         // FindByText WORDS Any
                                         //////////////////////////////////////////////////////////
-                                        else if (text_proximity_type == TextProximityType.AnyWord)
+                                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
                                         {
                                             bool found = false;
                                             foreach (string unsigned_word in unsigned_words)
@@ -7669,6 +7586,124 @@ public class Server : IPublisher
                                                 continue; // next verse
                                             }
                                         }
+                                        //////////////////////////////////////////////////////////
+                                        // FindByText WORDS All
+                                        //////////////////////////////////////////////////////////
+                                        else if (text_proximity_type == TextProximityType.AllWords)
+                                        {
+                                            int match_count = 0;
+                                            foreach (string unsigned_word in unsigned_words)
+                                            {
+                                                foreach (Word word in verse.Words)
+                                                {
+                                                    // simplify all text_modes
+                                                    string word_text = word.Text.SimplifyTo(s_numerology_system.TextMode);
+                                                    if (text_wordness == TextWordness.Any)
+                                                    {
+                                                        if (word_text.Contains(unsigned_word))
+                                                        {
+                                                            match_count++;
+                                                            break; // no need to continue even if there are more matches
+                                                        }
+                                                    }
+                                                    else if (text_wordness == TextWordness.PartOfWord)
+                                                    {
+                                                        if ((word_text.Contains(unsigned_word)) && (word_text.Length > unsigned_word.Length))
+                                                        {
+                                                            match_count++;
+                                                            break; // no need to continue even if there are more matches
+                                                        }
+                                                    }
+                                                    else if (text_wordness == TextWordness.WholeWord)
+                                                    {
+                                                        if (word_text == unsigned_word)
+                                                        {
+                                                            match_count++;
+                                                            break; // no need to continue even if there are more matches
+                                                        }
+                                                    }
+                                                }
+                                            }
+
+                                            if (match_count == unsigned_words.Count)
+                                            {
+                                                ///////////////////////////////////////////////////////////////
+                                                // all negative, positive and unsigned conditions have been met
+                                                ///////////////////////////////////////////////////////////////
+
+                                                // add positive matches
+                                                foreach (string positive_word in positive_words)
+                                                {
+                                                    foreach (Word word in verse.Words)
+                                                    {
+                                                        // simplify all text_modes
+                                                        string word_text = word.Text.SimplifyTo(s_numerology_system.TextMode);
+                                                        if (text_wordness == TextWordness.Any)
+                                                        {
+                                                            if (word_text.Contains(positive_word))
+                                                            {
+                                                                result.Add(new Phrase(verse, word.Position, word.Text));
+                                                                //break; // no break in case there are more matches
+                                                            }
+                                                        }
+                                                        else if (text_wordness == TextWordness.PartOfWord)
+                                                        {
+                                                            if ((word_text.Contains(positive_word)) && (word_text.Length > positive_word.Length))
+                                                            {
+                                                                result.Add(new Phrase(verse, word.Position, word.Text));
+                                                                //break; // no break in case there are more matches
+                                                            }
+                                                        }
+                                                        else if (text_wordness == TextWordness.WholeWord)
+                                                        {
+                                                            if (word_text == positive_word)
+                                                            {
+                                                                result.Add(new Phrase(verse, word.Position, word.Text));
+                                                                //break; // no break in case there are more matches
+                                                            }
+                                                        }
+                                                    }
+                                                }
+
+                                                // add unsigned matches
+                                                foreach (string unsigned_word in unsigned_words)
+                                                {
+                                                    foreach (Word word in verse.Words)
+                                                    {
+                                                        // simplify all text_modes
+                                                        string word_text = word.Text.SimplifyTo(s_numerology_system.TextMode);
+                                                        if (text_wordness == TextWordness.Any)
+                                                        {
+                                                            if (word_text.Contains(unsigned_word))
+                                                            {
+                                                                result.Add(new Phrase(verse, word.Position, word.Text));
+                                                                //break; // no break in case there are more matches
+                                                            }
+                                                        }
+                                                        else if (text_wordness == TextWordness.PartOfWord)
+                                                        {
+                                                            if ((word_text.Contains(unsigned_word)) && (word_text.Length > unsigned_word.Length))
+                                                            {
+                                                                result.Add(new Phrase(verse, word.Position, word.Text));
+                                                                //break; // no break in case there are more matches
+                                                            }
+                                                        }
+                                                        else if (text_wordness == TextWordness.WholeWord)
+                                                        {
+                                                            if (word_text == unsigned_word)
+                                                            {
+                                                                result.Add(new Phrase(verse, word.Position, word.Text));
+                                                                //break; // no break in case there are more matches
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            else // verse failed test, so skip it
+                                            {
+                                                continue; // next verse
+                                            }
+                                        }
                                     } // end for
                                 }
                             }
@@ -7686,79 +7721,8 @@ public class Server : IPublisher
                                     {
                                         foreach (Verse verse in source)
                                         {
-                                            //foreach (Word word in verse.Words)
-                                            //{
                                             string verse_emlaaei_text = verse.Translations[DEFAULT_EMLAAEI_TEXT].SimplifyTo(s_numerology_system.TextMode);
-                                            if (text_proximity_type == TextProximityType.AllWords)
-                                            {
-                                                bool found = false;
-                                                foreach (string negative_word in negative_words)
-                                                {
-                                                    if (text_wordness == TextWordness.Any)
-                                                    {
-                                                        if (verse_emlaaei_text.Contains(negative_word))
-                                                        {
-                                                            found = true;
-                                                            //break; // no break in case there are more matches
-                                                        }
-                                                    }
-                                                    else if (text_wordness == TextWordness.PartOfWord)
-                                                    {
-                                                        if ((verse_emlaaei_text.Contains(negative_word)) && (verse_emlaaei_text.Length > negative_word.Length))
-                                                        {
-                                                            found = true;
-                                                            //break; // no break in case there are more matches
-                                                        }
-                                                    }
-                                                    else if (text_wordness == TextWordness.WholeWord)
-                                                    {
-                                                        if (verse_emlaaei_text == negative_word) //??? we need word_emlaaei_text not verse_emlaaei_text
-                                                        {
-                                                            found = true;
-                                                            //break; // no break in case there are more matches
-                                                        }
-                                                    }
-                                                }
-                                                if (found) continue;
-
-                                                foreach (string positive_word in positive_words)
-                                                {
-                                                    if (text_wordness == TextWordness.Any)
-                                                    {
-                                                        if (!verse_emlaaei_text.Contains(positive_word))
-                                                        {
-                                                            found = true;
-                                                            //break; // no break in case there are more matches
-                                                        }
-                                                    }
-                                                    else if (text_wordness == TextWordness.PartOfWord)
-                                                    {
-                                                        if (!(verse_emlaaei_text.Contains(positive_word)) || !(verse_emlaaei_text.Length > positive_word.Length))
-                                                        {
-                                                            found = true;
-                                                            //break; // no break in case there are more matches
-                                                        }
-                                                    }
-                                                    else if (text_wordness == TextWordness.WholeWord)
-                                                    {
-                                                        if (verse_emlaaei_text != positive_word) //??? we need word_emlaaei_text not verse_emlaaei_text
-                                                        {
-                                                            found = true;
-                                                            //break; // no break in case there are more matches
-                                                        }
-                                                    }
-                                                }
-                                                if (found) continue;
-
-                                                if (
-                                                     (unsigned_words.Count == 0) ||
-                                                     (verse_emlaaei_text.ContainsWords(unsigned_words))
-                                                   )
-                                                {
-                                                    result.Add(new Phrase(verse, 0, ""));
-                                                }
-                                            }
-                                            else if (text_proximity_type == TextProximityType.AnyWord)
+                                            if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
                                             {
                                                 bool found = false;
                                                 foreach (string negative_word in negative_words)
@@ -7831,8 +7795,76 @@ public class Server : IPublisher
                                                     result.Add(new Phrase(verse, 0, ""));
                                                 }
                                             }
+                                            else if (text_proximity_type == TextProximityType.AllWords)
+                                            {
+                                                bool found = false;
+                                                foreach (string negative_word in negative_words)
+                                                {
+                                                    if (text_wordness == TextWordness.Any)
+                                                    {
+                                                        if (verse_emlaaei_text.Contains(negative_word))
+                                                        {
+                                                            found = true;
+                                                            //break; // no break in case there are more matches
+                                                        }
+                                                    }
+                                                    else if (text_wordness == TextWordness.PartOfWord)
+                                                    {
+                                                        if ((verse_emlaaei_text.Contains(negative_word)) && (verse_emlaaei_text.Length > negative_word.Length))
+                                                        {
+                                                            found = true;
+                                                            //break; // no break in case there are more matches
+                                                        }
+                                                    }
+                                                    else if (text_wordness == TextWordness.WholeWord)
+                                                    {
+                                                        if (verse_emlaaei_text == negative_word) //??? we need word_emlaaei_text not verse_emlaaei_text
+                                                        {
+                                                            found = true;
+                                                            //break; // no break in case there are more matches
+                                                        }
+                                                    }
+                                                }
+                                                if (found) continue;
+
+                                                foreach (string positive_word in positive_words)
+                                                {
+                                                    if (text_wordness == TextWordness.Any)
+                                                    {
+                                                        if (!verse_emlaaei_text.Contains(positive_word))
+                                                        {
+                                                            found = true;
+                                                            //break; // no break in case there are more matches
+                                                        }
+                                                    }
+                                                    else if (text_wordness == TextWordness.PartOfWord)
+                                                    {
+                                                        if (!(verse_emlaaei_text.Contains(positive_word)) || !(verse_emlaaei_text.Length > positive_word.Length))
+                                                        {
+                                                            found = true;
+                                                            //break; // no break in case there are more matches
+                                                        }
+                                                    }
+                                                    else if (text_wordness == TextWordness.WholeWord)
+                                                    {
+                                                        if (verse_emlaaei_text != positive_word) //??? we need word_emlaaei_text not verse_emlaaei_text
+                                                        {
+                                                            found = true;
+                                                            //break; // no break in case there are more matches
+                                                        }
+                                                    }
+                                                }
+                                                if (found) continue;
+
+                                                if (
+                                                     (unsigned_words.Count == 0) ||
+                                                     (verse_emlaaei_text.ContainsWords(unsigned_words))
+                                                   )
+                                                {
+                                                    result.Add(new Phrase(verse, 0, ""));
+                                                }
+                                            }
                                         } // end for
-                                        //}
                                     }
                                 }
                             }
@@ -7871,76 +7903,7 @@ public class Server : IPublisher
 
                         foreach (Verse verse in source)
                         {
-                            if (text_proximity_type == TextProximityType.AllWords)
-                            {
-                                bool found = false;
-                                foreach (string negative_word in negative_words)
-                                {
-                                    if (text_wordness == TextWordness.Any)
-                                    {
-                                        if (verse.Translations[translation].Contains(negative_word))
-                                        {
-                                            found = true; // next verse
-                                            break;
-                                        }
-                                    }
-                                    else if (text_wordness == TextWordness.PartOfWord)
-                                    {
-                                        if ((verse.Translations[translation].Contains(negative_word)) && (verse.Translations[translation].Length > negative_word.Length))
-                                        {
-                                            found = true; // next verse
-                                            break;
-                                        }
-                                    }
-                                    else if (text_wordness == TextWordness.WholeWord)
-                                    {
-                                        if (verse.Translations[translation] == negative_word)
-                                        {
-                                            found = true; // next verse
-                                            break;
-                                        }
-                                    }
-                                }
-                                if (found) continue;
-
-                                foreach (string positive_word in positive_words)
-                                {
-                                    if (text_wordness == TextWordness.Any)
-                                    {
-                                        if (!verse.Translations[translation].Contains(positive_word))
-                                        {
-                                            found = true; // next verse
-                                            break;
-                                        }
-                                    }
-                                    else if (text_wordness == TextWordness.PartOfWord)
-                                    {
-                                        if (!(verse.Translations[translation].Contains(positive_word)) || !(verse.Translations[translation].Length > positive_word.Length))
-                                        {
-                                            found = true; // next verse
-                                            break;
-                                        }
-                                    }
-                                    else if (text_wordness != TextWordness.WholeWord)
-                                    {
-                                        if (verse.Translations[translation] == positive_word)
-                                        {
-                                            found = true; // next verse
-                                            break;
-                                        }
-                                    }
-                                }
-                                if (found) continue;
-
-                                if (
-                                     (unsigned_words.Count == 0) ||
-                                     (verse.Translations[translation].ContainsWords(unsigned_words))
-                                   )
-                                {
-                                    result.Add(new Phrase(verse, 0, ""));
-                                }
-                            }
-                            else if (text_proximity_type == TextProximityType.AnyWord)
+                            if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
                             {
                                 bool found = false;
                                 foreach (string negative_word in negative_words)
@@ -8013,6 +7976,75 @@ public class Server : IPublisher
                                     result.Add(new Phrase(verse, 0, ""));
                                 }
                             }
+                            else if (text_proximity_type == TextProximityType.AllWords)
+                            {
+                                bool found = false;
+                                foreach (string negative_word in negative_words)
+                                {
+                                    if (text_wordness == TextWordness.Any)
+                                    {
+                                        if (verse.Translations[translation].Contains(negative_word))
+                                        {
+                                            found = true; // next verse
+                                            break;
+                                        }
+                                    }
+                                    else if (text_wordness == TextWordness.PartOfWord)
+                                    {
+                                        if ((verse.Translations[translation].Contains(negative_word)) && (verse.Translations[translation].Length > negative_word.Length))
+                                        {
+                                            found = true; // next verse
+                                            break;
+                                        }
+                                    }
+                                    else if (text_wordness == TextWordness.WholeWord)
+                                    {
+                                        if (verse.Translations[translation] == negative_word)
+                                        {
+                                            found = true; // next verse
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (found) continue;
+
+                                foreach (string positive_word in positive_words)
+                                {
+                                    if (text_wordness == TextWordness.Any)
+                                    {
+                                        if (!verse.Translations[translation].Contains(positive_word))
+                                        {
+                                            found = true; // next verse
+                                            break;
+                                        }
+                                    }
+                                    else if (text_wordness == TextWordness.PartOfWord)
+                                    {
+                                        if (!(verse.Translations[translation].Contains(positive_word)) || !(verse.Translations[translation].Length > positive_word.Length))
+                                        {
+                                            found = true; // next verse
+                                            break;
+                                        }
+                                    }
+                                    else if (text_wordness != TextWordness.WholeWord)
+                                    {
+                                        if (verse.Translations[translation] == positive_word)
+                                        {
+                                            found = true; // next verse
+                                            break;
+                                        }
+                                    }
+                                }
+                                if (found) continue;
+
+                                if (
+                                     (unsigned_words.Count == 0) ||
+                                     (verse.Translations[translation].ContainsWords(unsigned_words))
+                                   )
+                                {
+                                    result.Add(new Phrase(verse, 0, ""));
+                                }
+                            }
                         } // end for
                     }
                     catch
@@ -8051,41 +8083,7 @@ public class Server : IPublisher
                         chapter_text = chapter_text.SimplifyTo(s_numerology_system.TextMode);
                         chapter_text = chapter_text.Trim();
 
-                        if (text_proximity_type == TextProximityType.AllWords)
-                        {
-                            bool found = false;
-                            foreach (string word in negative_words)
-                            {
-                                if (chapter_text.Contains(word))
-                                {
-                                    found = true; // next chapter
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            foreach (string word in positive_words)
-                            {
-                                if (!chapter_text.Contains(word))
-                                {
-                                    found = true; // next chapter
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            if (
-                                 (unsigned_words.Count == 0) ||
-                                 (chapter_text.ContainsWords(unsigned_words))
-                               )
-                            {
-                                if (!result.Contains(chapter))
-                                {
-                                    result.Add(chapter);
-                                }
-                            }
-                        }
-                        else if (text_proximity_type == TextProximityType.AnyWord)
+                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8115,6 +8113,40 @@ public class Server : IPublisher
                                    (unsigned_words.Count == 0) ||
                                    (chapter_text.ContainsWord(unsigned_words))
                                  )
+                               )
+                            {
+                                if (!result.Contains(chapter))
+                                {
+                                    result.Add(chapter);
+                                }
+                            }
+                        }
+                        else if (text_proximity_type == TextProximityType.AllWords)
+                        {
+                            bool found = false;
+                            foreach (string word in negative_words)
+                            {
+                                if (chapter_text.Contains(word))
+                                {
+                                    found = true; // next chapter
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            foreach (string word in positive_words)
+                            {
+                                if (!chapter_text.Contains(word))
+                                {
+                                    found = true; // next chapter
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            if (
+                                 (unsigned_words.Count == 0) ||
+                                 (chapter_text.ContainsWords(unsigned_words))
                                )
                             {
                                 if (!result.Contains(chapter))
@@ -8161,41 +8193,7 @@ public class Server : IPublisher
                         page_text = page_text.SimplifyTo(s_numerology_system.TextMode);
                         page_text = page_text.Trim();
 
-                        if (text_proximity_type == TextProximityType.AllWords)
-                        {
-                            bool found = false;
-                            foreach (string word in negative_words)
-                            {
-                                if (page_text.Contains(word))
-                                {
-                                    found = true; // next page
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            foreach (string word in positive_words)
-                            {
-                                if (!page_text.Contains(word))
-                                {
-                                    found = true; // next page
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            if (
-                                 (unsigned_words.Count == 0) ||
-                                 (page_text.ContainsWords(unsigned_words))
-                               )
-                            {
-                                if (!result.Contains(page))
-                                {
-                                    result.Add(page);
-                                }
-                            }
-                        }
-                        else if (text_proximity_type == TextProximityType.AnyWord)
+                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8225,6 +8223,40 @@ public class Server : IPublisher
                                    (unsigned_words.Count == 0) ||
                                    (page_text.ContainsWord(unsigned_words))
                                  )
+                               )
+                            {
+                                if (!result.Contains(page))
+                                {
+                                    result.Add(page);
+                                }
+                            }
+                        }
+                        else if (text_proximity_type == TextProximityType.AllWords)
+                        {
+                            bool found = false;
+                            foreach (string word in negative_words)
+                            {
+                                if (page_text.Contains(word))
+                                {
+                                    found = true; // next page
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            foreach (string word in positive_words)
+                            {
+                                if (!page_text.Contains(word))
+                                {
+                                    found = true; // next page
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            if (
+                                 (unsigned_words.Count == 0) ||
+                                 (page_text.ContainsWords(unsigned_words))
                                )
                             {
                                 if (!result.Contains(page))
@@ -8271,41 +8303,7 @@ public class Server : IPublisher
                         station_text = station_text.SimplifyTo(s_numerology_system.TextMode);
                         station_text = station_text.Trim();
 
-                        if (text_proximity_type == TextProximityType.AllWords)
-                        {
-                            bool found = false;
-                            foreach (string word in negative_words)
-                            {
-                                if (station_text.Contains(word))
-                                {
-                                    found = true; // next station
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            foreach (string word in positive_words)
-                            {
-                                if (!station_text.Contains(word))
-                                {
-                                    found = true; // next station
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            if (
-                                 (unsigned_words.Count == 0) ||
-                                 (station_text.ContainsWords(unsigned_words))
-                               )
-                            {
-                                if (!result.Contains(station))
-                                {
-                                    result.Add(station);
-                                }
-                            }
-                        }
-                        else if (text_proximity_type == TextProximityType.AnyWord)
+                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8335,6 +8333,40 @@ public class Server : IPublisher
                                    (unsigned_words.Count == 0) ||
                                    (station_text.ContainsWord(unsigned_words))
                                  )
+                               )
+                            {
+                                if (!result.Contains(station))
+                                {
+                                    result.Add(station);
+                                }
+                            }
+                        }
+                        else if (text_proximity_type == TextProximityType.AllWords)
+                        {
+                            bool found = false;
+                            foreach (string word in negative_words)
+                            {
+                                if (station_text.Contains(word))
+                                {
+                                    found = true; // next station
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            foreach (string word in positive_words)
+                            {
+                                if (!station_text.Contains(word))
+                                {
+                                    found = true; // next station
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            if (
+                                 (unsigned_words.Count == 0) ||
+                                 (station_text.ContainsWords(unsigned_words))
                                )
                             {
                                 if (!result.Contains(station))
@@ -8381,41 +8413,7 @@ public class Server : IPublisher
                         part_text = part_text.SimplifyTo(s_numerology_system.TextMode);
                         part_text = part_text.Trim();
 
-                        if (text_proximity_type == TextProximityType.AllWords)
-                        {
-                            bool found = false;
-                            foreach (string word in negative_words)
-                            {
-                                if (part_text.Contains(word))
-                                {
-                                    found = true; // next part
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            foreach (string word in positive_words)
-                            {
-                                if (!part_text.Contains(word))
-                                {
-                                    found = true; // next part
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            if (
-                                 (unsigned_words.Count == 0) ||
-                                 (part_text.ContainsWords(unsigned_words))
-                               )
-                            {
-                                if (!result.Contains(part))
-                                {
-                                    result.Add(part);
-                                }
-                            }
-                        }
-                        else if (text_proximity_type == TextProximityType.AnyWord)
+                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8445,6 +8443,40 @@ public class Server : IPublisher
                                    (unsigned_words.Count == 0) ||
                                    (part_text.ContainsWord(unsigned_words))
                                  )
+                               )
+                            {
+                                if (!result.Contains(part))
+                                {
+                                    result.Add(part);
+                                }
+                            }
+                        }
+                        else if (text_proximity_type == TextProximityType.AllWords)
+                        {
+                            bool found = false;
+                            foreach (string word in negative_words)
+                            {
+                                if (part_text.Contains(word))
+                                {
+                                    found = true; // next part
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            foreach (string word in positive_words)
+                            {
+                                if (!part_text.Contains(word))
+                                {
+                                    found = true; // next part
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            if (
+                                 (unsigned_words.Count == 0) ||
+                                 (part_text.ContainsWords(unsigned_words))
                                )
                             {
                                 if (!result.Contains(part))
@@ -8491,41 +8523,7 @@ public class Server : IPublisher
                         group_text = group_text.SimplifyTo(s_numerology_system.TextMode);
                         group_text = group_text.Trim();
 
-                        if (text_proximity_type == TextProximityType.AllWords)
-                        {
-                            bool found = false;
-                            foreach (string word in negative_words)
-                            {
-                                if (group_text.Contains(word))
-                                {
-                                    found = true; // next group
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            foreach (string word in positive_words)
-                            {
-                                if (!group_text.Contains(word))
-                                {
-                                    found = true; // next group
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            if (
-                                 (unsigned_words.Count == 0) ||
-                                 (group_text.ContainsWords(unsigned_words))
-                               )
-                            {
-                                if (!result.Contains(group))
-                                {
-                                    result.Add(group);
-                                }
-                            }
-                        }
-                        else if (text_proximity_type == TextProximityType.AnyWord)
+                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8555,6 +8553,40 @@ public class Server : IPublisher
                                    (unsigned_words.Count == 0) ||
                                    (group_text.ContainsWord(unsigned_words))
                                  )
+                               )
+                            {
+                                if (!result.Contains(group))
+                                {
+                                    result.Add(group);
+                                }
+                            }
+                        }
+                        else if (text_proximity_type == TextProximityType.AllWords)
+                        {
+                            bool found = false;
+                            foreach (string word in negative_words)
+                            {
+                                if (group_text.Contains(word))
+                                {
+                                    found = true; // next group
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            foreach (string word in positive_words)
+                            {
+                                if (!group_text.Contains(word))
+                                {
+                                    found = true; // next group
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            if (
+                                 (unsigned_words.Count == 0) ||
+                                 (group_text.ContainsWords(unsigned_words))
                                )
                             {
                                 if (!result.Contains(group))
@@ -8601,41 +8633,7 @@ public class Server : IPublisher
                         half_text = half_text.SimplifyTo(s_numerology_system.TextMode);
                         half_text = half_text.Trim();
 
-                        if (text_proximity_type == TextProximityType.AllWords)
-                        {
-                            bool found = false;
-                            foreach (string word in negative_words)
-                            {
-                                if (half_text.Contains(word))
-                                {
-                                    found = true; // next half
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            foreach (string word in positive_words)
-                            {
-                                if (!half_text.Contains(word))
-                                {
-                                    found = true; // next half
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            if (
-                                 (unsigned_words.Count == 0) ||
-                                 (half_text.ContainsWords(unsigned_words))
-                               )
-                            {
-                                if (!result.Contains(half))
-                                {
-                                    result.Add(half);
-                                }
-                            }
-                        }
-                        else if (text_proximity_type == TextProximityType.AnyWord)
+                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8665,6 +8663,40 @@ public class Server : IPublisher
                                    (unsigned_words.Count == 0) ||
                                    (half_text.ContainsWord(unsigned_words))
                                  )
+                               )
+                            {
+                                if (!result.Contains(half))
+                                {
+                                    result.Add(half);
+                                }
+                            }
+                        }
+                        else if (text_proximity_type == TextProximityType.AllWords)
+                        {
+                            bool found = false;
+                            foreach (string word in negative_words)
+                            {
+                                if (half_text.Contains(word))
+                                {
+                                    found = true; // next half
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            foreach (string word in positive_words)
+                            {
+                                if (!half_text.Contains(word))
+                                {
+                                    found = true; // next half
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            if (
+                                 (unsigned_words.Count == 0) ||
+                                 (half_text.ContainsWords(unsigned_words))
                                )
                             {
                                 if (!result.Contains(half))
@@ -8711,41 +8743,7 @@ public class Server : IPublisher
                         quarter_text = quarter_text.SimplifyTo(s_numerology_system.TextMode);
                         quarter_text = quarter_text.Trim();
 
-                        if (text_proximity_type == TextProximityType.AllWords)
-                        {
-                            bool found = false;
-                            foreach (string word in negative_words)
-                            {
-                                if (quarter_text.Contains(word))
-                                {
-                                    found = true; // next quarter
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            foreach (string word in positive_words)
-                            {
-                                if (!quarter_text.Contains(word))
-                                {
-                                    found = true; // next quarter
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            if (
-                                 (unsigned_words.Count == 0) ||
-                                 (quarter_text.ContainsWords(unsigned_words))
-                               )
-                            {
-                                if (!result.Contains(quarter))
-                                {
-                                    result.Add(quarter);
-                                }
-                            }
-                        }
-                        else if (text_proximity_type == TextProximityType.AnyWord)
+                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8775,6 +8773,40 @@ public class Server : IPublisher
                                    (unsigned_words.Count == 0) ||
                                    (quarter_text.ContainsWord(unsigned_words))
                                  )
+                               )
+                            {
+                                if (!result.Contains(quarter))
+                                {
+                                    result.Add(quarter);
+                                }
+                            }
+                        }
+                        else if (text_proximity_type == TextProximityType.AllWords)
+                        {
+                            bool found = false;
+                            foreach (string word in negative_words)
+                            {
+                                if (quarter_text.Contains(word))
+                                {
+                                    found = true; // next quarter
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            foreach (string word in positive_words)
+                            {
+                                if (!quarter_text.Contains(word))
+                                {
+                                    found = true; // next quarter
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            if (
+                                 (unsigned_words.Count == 0) ||
+                                 (quarter_text.ContainsWords(unsigned_words))
                                )
                             {
                                 if (!result.Contains(quarter))
@@ -8821,41 +8853,7 @@ public class Server : IPublisher
                         bowing_text = bowing_text.SimplifyTo(s_numerology_system.TextMode);
                         bowing_text = bowing_text.Trim();
 
-                        if (text_proximity_type == TextProximityType.AllWords)
-                        {
-                            bool found = false;
-                            foreach (string word in negative_words)
-                            {
-                                if (bowing_text.Contains(word))
-                                {
-                                    found = true; // next bowing
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            foreach (string word in positive_words)
-                            {
-                                if (!bowing_text.Contains(word))
-                                {
-                                    found = true; // next bowing
-                                    break;
-                                }
-                            }
-                            if (found) continue;
-
-                            if (
-                                 (unsigned_words.Count == 0) ||
-                                 (bowing_text.ContainsWords(unsigned_words))
-                               )
-                            {
-                                if (!result.Contains(bowing))
-                                {
-                                    result.Add(bowing);
-                                }
-                            }
-                        }
-                        else if (text_proximity_type == TextProximityType.AnyWord)
+                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8893,6 +8891,40 @@ public class Server : IPublisher
                                 }
                             }
                         }
+                        else if (text_proximity_type == TextProximityType.AllWords)
+                        {
+                            bool found = false;
+                            foreach (string word in negative_words)
+                            {
+                                if (bowing_text.Contains(word))
+                                {
+                                    found = true; // next bowing
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            foreach (string word in positive_words)
+                            {
+                                if (!bowing_text.Contains(word))
+                                {
+                                    found = true; // next bowing
+                                    break;
+                                }
+                            }
+                            if (found) continue;
+
+                            if (
+                                 (unsigned_words.Count == 0) ||
+                                 (bowing_text.ContainsWords(unsigned_words))
+                               )
+                            {
+                                if (!result.Contains(bowing))
+                                {
+                                    result.Add(bowing);
+                                }
+                            }
+                        }
                     } // end for
                 }
             }
@@ -8904,42 +8936,44 @@ public class Server : IPublisher
 
         return result;
     }
-    private static void BuildWordLists(string text, out List<string> unsigned_words, out List<string> positive_words, out List<string> negative_words)
+    // find by text - Root
+    private static void MergePhrases(List<Phrase> current_phrases, ref List<Verse> previous_verses, ref List<Phrase> previous_phrases)
     {
-        unsigned_words = new List<string>();
-        positive_words = new List<string>();
-        negative_words = new List<string>();
-
-        if (String.IsNullOrEmpty(text)) return;
-        text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
-        text = text.Trim();
-
-        string[] text_words = text.Split();
-        foreach (string text_word in text_words)
+        if (current_phrases != null)
         {
-            if (text_word.StartsWith("-"))
+            if (previous_phrases != null)
             {
-                negative_words.Add(text_word.Substring(1));
-            }
-            else if (text_word.EndsWith("-"))
-            {
-                negative_words.Add(text_word.Substring(0, text_word.Length - 1));
-            }
-            else if (text_word.StartsWith("+"))
-            {
-                positive_words.Add(text_word.Substring(1));
-            }
-            else if (text_word.EndsWith("+"))
-            {
-                positive_words.Add(text_word.Substring(0, text_word.Length - 1));
-            }
-            else
-            {
-                unsigned_words.Add(text_word);
+                // extract verses from current phrases
+                previous_verses = new List<Verse>(GetVerses(current_phrases));
+
+                if (previous_verses != null)
+                {
+                    if (previous_phrases.Count == 0)
+                    {
+                        previous_phrases = current_phrases;
+                    }
+                    else
+                    {
+                        // add current phrases
+                        List<Phrase> total = new List<Phrase>(current_phrases);
+
+                        // add previous phrases if their verses exist in current phrases
+                        foreach (Phrase previous_phrase in previous_phrases)
+                        {
+                            if (previous_phrase != null)
+                            {
+                                if (previous_verses.Contains(previous_phrase.Verse))
+                                {
+                                    total.Add(previous_phrase);
+                                }
+                            }
+                        }
+                        previous_phrases = total;
+                    }
+                }
             }
         }
     }
-    // find by text - Root
     public static List<Phrase> FindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Phrase> result = new List<Phrase>();
@@ -8950,33 +8984,52 @@ public class Server : IPublisher
             text = text.Replace("  ", " ");
         }
 
-        string[] parts = text.Split();
-        if (parts.Length > 0) // enable nested searches
+        List<Phrase> current_result = null;
+        List<string> negative_words = new List<string>();
+        List<string> positive_words = new List<string>();
+        List<string> unsigned_words = new List<string>();
+        BuildWordLists(text, out unsigned_words, out positive_words, out negative_words);
+
+        foreach (string negative_word in negative_words)
         {
-            List<Phrase> current_result = null;
-
-            List<string> negative_words = new List<string>();
-            List<string> positive_words = new List<string>();
-            List<string> unsigned_words = new List<string>();
-            BuildWordLists(text, out unsigned_words, out positive_words, out negative_words);
-
-            foreach (string negative_word in negative_words)
+            current_result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, negative_word, 0, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder); // multiplicity = 0 for exclude
+            if (text.Contains("|"))
             {
-                current_result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, negative_word, 0, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder); // multiplicity = 0 for exclude
+                result.AddRange(current_result);
+                previous_verses.Union(GetVerses(current_result));
+            }
+            else
+            {
                 MergePhrases(current_result, ref previous_verses, ref result);
                 search_scope = SearchScope.Result;
             }
+        }
 
-            foreach (string positive_word in positive_words)
+        foreach (string positive_word in positive_words)
+        {
+            current_result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, positive_word, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+            if (text.Contains("|"))
             {
-                current_result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, positive_word, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+                result.AddRange(current_result);
+                previous_verses.Union(GetVerses(current_result));
+            }
+            else
+            {
                 MergePhrases(current_result, ref previous_verses, ref result);
                 search_scope = SearchScope.Result;
             }
+        }
 
-            foreach (string unsigned_word in unsigned_words)
+        foreach (string unsigned_word in unsigned_words)
+        {
+            current_result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, unsigned_word, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+            if (text.Contains("|"))
             {
-                current_result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, unsigned_word, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+                result.AddRange(current_result);
+                previous_verses.Union(GetVerses(current_result));
+            }
+            else
+            {
                 MergePhrases(current_result, ref previous_verses, ref result);
                 search_scope = SearchScope.Result;
             }
@@ -10636,43 +10689,6 @@ public class Server : IPublisher
             }
         }
         return result;
-    }
-    private static void MergePhrases(List<Phrase> current_phrases, ref List<Verse> previous_verses, ref List<Phrase> previous_phrases)
-    {
-        if (current_phrases != null)
-        {
-            if (previous_phrases != null)
-            {
-                // extract verses from current phrases
-                previous_verses = new List<Verse>(GetVerses(current_phrases));
-
-                if (previous_verses != null)
-                {
-                    if (previous_phrases.Count == 0)
-                    {
-                        previous_phrases = current_phrases;
-                    }
-                    else
-                    {
-                        // add current phrases
-                        List<Phrase> total = new List<Phrase>(current_phrases);
-
-                        // add previous phrases if their verses exist in current phrases
-                        foreach (Phrase previous_phrase in previous_phrases)
-                        {
-                            if (previous_phrase != null)
-                            {
-                                if (previous_verses.Contains(previous_phrase.Verse))
-                                {
-                                    total.Add(previous_phrase);
-                                }
-                            }
-                        }
-                        previous_phrases = total;
-                    }
-                }
-            }
-        }
     }
     // find by root - verses with related words
     public static List<Verse> FindRelatedVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, Verse verse)
