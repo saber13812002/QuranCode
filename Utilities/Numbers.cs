@@ -684,6 +684,68 @@ public static class Numbers
         }
         return str.ToString();
     }
+    public static long SumOfSquareNumbers(string text)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return SumOfSquareNumbers(number);
+        }
+        return 0L;
+    }
+    public static long SumOfSquareNumbers(long number)
+    {
+        long result = 0L;
+        for (int i = 1; i <= number; i++)
+        {
+            result += i * i;
+        }
+        return result;
+    }
+    public static string SumOfSquareNumbersString(long number)
+    {
+        StringBuilder str = new StringBuilder();
+        for (int i = 1; i <= number; i++)
+        {
+            str.Append((i * i).ToString() + "+");
+        }
+        if (str.Length > 0)
+        {
+            str.Remove(str.Length - 1, 1);
+        }
+        return str.ToString();
+    }
+    public static long SumOfCubicNumbers(string text)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return SumOfCubicNumbers(number);
+        }
+        return 0L;
+    }
+    public static long SumOfCubicNumbers(long number)
+    {
+        long result = 0L;
+        for (int i = 1; i <= number; i++)
+        {
+            result += i * i * i;
+        }
+        return result;
+    }
+    public static string SumOfCubicNumbersString(long number)
+    {
+        StringBuilder str = new StringBuilder();
+        for (int i = 1; i <= number; i++)
+        {
+            str.Append((i * i * i).ToString() + "+");
+        }
+        if (str.Length > 0)
+        {
+            str.Remove(str.Length - 1, 1);
+        }
+        return str.ToString();
+    }
 
 
     // pi = circumference / diameter ~= 355/113
@@ -1299,6 +1361,27 @@ public static class Numbers
         }
         return result;
     }
+    public static long SumOfDigitSums(long number)
+    {
+        return SumOfDigitSums(number, DEFAULT_RADIX);
+    }
+    public static long SumOfDigitSums(string text)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return SumOfDigitSums(number, DEFAULT_RADIX);
+        }
+        return 0L;
+    }
+    public static string SumOfDigitSumsString(long number)
+    {
+        return SumOfDigitSumsString(number, DEFAULT_RADIX);
+    }
+    public static int DigitSum(long number, int radix)
+    {
+        return DigitSum(number.ToString(), radix);
+    }
     public static int DigitSum(string text, int radix)
     {
         int result = 0;
@@ -1306,30 +1389,16 @@ public static class Numbers
         {
             for (int i = 0; i < text.Length; i++)
             {
-                char c = text[i];
-                //if (Char.IsDigit(c))
-                {
-                    result += (int)Radix.Decode(c.ToString(), radix);
-                }
+                result += (int)Radix.Decode(text[i].ToString(), radix);
             }
         }
         return result;
     }
-    public static long SumOfDigitSums(string text)
+    public static long SumOfDigitSums(long number, int radix)
     {
-        long number;
-        if (long.TryParse(text, out number))
-        {
-            return SumOfDigitSums(number);
-        }
-        return 0L;
-    }
-    public static long SumOfDigitSums(long number)
-    {
-        // method works correctly for radix = 10 only
+        //????? method works correctly for radix = 10 only
         // http://ideone.com/ik8iE6
 
-        int radix = 10;
         long result = 0L;
         long pos = 1L;
         long previous = 0L;
@@ -1348,15 +1417,117 @@ public static class Numbers
         }
         return result;
     }
-    public static string SumOfDigitSumsString(long number)
+    public static long SumOfDigitSums(string text, int radix)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return SumOfDigitSums(number, radix);
+        }
+        return 0L;
+    }
+    public static string SumOfDigitSumsString(long number, int radix)
     {
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
         {
-            foreach (char c in i.ToString())
-            {
-                str.Append(c.ToString() + "+");
-            }
+            str.Append((DigitSum(i, radix)).ToString() + "+");
+        }
+        if (str.Length > 0)
+        {
+            str.Remove(str.Length - 1, 1);
+        }
+        return str.ToString();
+    }
+    public static long SumOfSquareDigitSums(long number)
+    {
+        return SumOfSquareDigitSums(number, DEFAULT_RADIX);
+    }
+    public static long SumOfSquareDigitSums(string text)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return SumOfSquareDigitSums(number, DEFAULT_RADIX);
+        }
+        return 0L;
+    }
+    public static string SumOfSquareDigitSumsString(long number)
+    {
+        return SumOfSquareDigitSumsString(number, DEFAULT_RADIX);
+    }
+    public static long SumOfSquareDigitSums(long number, int radix)
+    {
+        long result = 0L;
+        for (int i = 1; i <= number; i++)
+        {
+            result += (DigitSum(i, radix) * DigitSum(i, radix));
+        }
+        return result;
+    }
+    public static long SumOfSquareDigitSums(string text, int radix)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return SumOfSquareDigitSums(number, radix);
+        }
+        return 0L;
+    }
+    public static string SumOfSquareDigitSumsString(long number, int radix)
+    {
+        StringBuilder str = new StringBuilder();
+        for (int i = 1; i <= number; i++)
+        {
+            str.Append((DigitSum(i, radix) * DigitSum(i, radix)).ToString() + "+");
+        }
+        if (str.Length > 0)
+        {
+            str.Remove(str.Length - 1, 1);
+        }
+        return str.ToString();
+    }
+    public static long SumOfCubicDigitSums(long number)
+    {
+        return SumOfCubicDigitSums(number, DEFAULT_RADIX);
+    }
+    public static long SumOfCubicDigitSums(string text)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return SumOfCubicDigitSums(number, DEFAULT_RADIX);
+        }
+        return 0L;
+    }
+    public static string SumOfCubicDigitSumsString(long number)
+    {
+        return SumOfCubicDigitSumsString(number, DEFAULT_RADIX);
+    }
+    public static long SumOfCubicDigitSums(long number, int radix)
+    {
+        long result = 0L;
+        for (int i = 1; i <= number; i++)
+        {
+            result += (DigitSum(i, radix) * DigitSum(i, radix) * DigitSum(i, radix));
+        }
+        return result;
+    }
+    public static long SumOfCubicDigitSums(string text, int radix)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return SumOfCubicDigitSums(number, radix);
+        }
+        return 0L;
+    }
+    public static string SumOfCubicDigitSumsString(long number, int radix)
+    {
+        StringBuilder str = new StringBuilder();
+        for (int i = 1; i <= number; i++)
+        {
+            str.Append((DigitSum(i, radix) * DigitSum(i, radix) * DigitSum(i, radix)).ToString() + "+");
         }
         if (str.Length > 0)
         {
@@ -1367,8 +1538,7 @@ public static class Numbers
 
     public static int DigitalRoot(long number)
     {
-        int radix = 10;
-        return (int)(1L + (number - 1L) % (radix - 1));
+        return DigitalRoot(number, DEFAULT_RADIX);
     }
     public static int DigitalRoot(string text)
     {
@@ -1379,6 +1549,10 @@ public static class Numbers
         }
         return 0;
     }
+    public static long SumOfDigitalRoots(long number)
+    {
+        return SumOfDigitalRoots(number, DEFAULT_RADIX);
+    }
     public static long SumOfDigitalRoots(string text)
     {
         long number;
@@ -1388,18 +1562,141 @@ public static class Numbers
         }
         return 0L;
     }
-    public static long SumOfDigitalRoots(long number)
-    {
-        long d = number / 9L;
-        long r = number % 9L;
-        return (d * 45L + r * (r + 1L) / 2L);
-    }
     public static string SumOfDigitalRootsString(long number)
+    {
+        return SumOfDigitalRootsString(number, DEFAULT_RADIX);
+    }
+    public static int DigitalRoot(long number, int radix)
+    {
+        return (int)(1L + (number - 1L) % (radix - 1));
+    }
+    public static int DigitalRoot(string text, int radix)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return DigitalRoot(number, radix);
+        }
+        return 0;
+    }
+    public static long SumOfDigitalRoots(long number, int radix)
+    {
+        long d = number / (radix - 1L);
+        long r = number % (radix - 1L);
+        long sum_1_to_radix_minus_1 = (radix - 1L) * (radix) / 2;
+        return (d * sum_1_to_radix_minus_1 + r * (r + 1L) / 2L);
+    }
+    public static long SumOfDigitalRoots(string text, int radix)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return SumOfDigitalRoots(number, radix);
+        }
+        return 0L;
+    }
+    public static string SumOfDigitalRootsString(long number, int radix)
     {
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
         {
-            str.Append((DigitalRoot(i)).ToString() + "+");
+            str.Append((DigitalRoot(i, radix)).ToString() + "+");
+        }
+        if (str.Length > 0)
+        {
+            str.Remove(str.Length - 1, 1);
+        }
+        return str.ToString();
+    }
+    public static long SumOfSquareDigitalRoots(long number)
+    {
+        return SumOfSquareDigitalRoots(number, DEFAULT_RADIX);
+    }
+    public static long SumOfSquareDigitalRoots(string text)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return SumOfSquareDigitalRoots(number);
+        }
+        return 0L;
+    }
+    public static string SumOfSquareDigitalRootsString(long number)
+    {
+        return SumOfSquareDigitalRootsString(number, DEFAULT_RADIX);
+    }
+    public static long SumOfSquareDigitalRoots(long number, int radix)
+    {
+        long result = 0L;
+        for (int i = 1; i <= number; i++)
+        {
+            result += (DigitalRoot(i, radix) * DigitalRoot(i, radix));
+        }
+        return result;
+    }
+    public static long SumOfSquareDigitalRoots(string text, int radix)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return SumOfSquareDigitalRoots(number, radix);
+        }
+        return 0L;
+    }
+    public static string SumOfSquareDigitalRootsString(long number, int radix)
+    {
+        StringBuilder str = new StringBuilder();
+        for (int i = 1; i <= number; i++)
+        {
+            str.Append((DigitalRoot(i, radix) * DigitalRoot(i, radix)).ToString() + "+");
+        }
+        if (str.Length > 0)
+        {
+            str.Remove(str.Length - 1, 1);
+        }
+        return str.ToString();
+    }
+    public static long SumOfCubicDigitalRoots(long number)
+    {
+        return SumOfCubicDigitalRoots(number, DEFAULT_RADIX);
+    }
+    public static long SumOfCubicDigitalRoots(string text)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return SumOfCubicDigitalRoots(number);
+        }
+        return 0L;
+    }
+    public static string SumOfCubicDigitalRootsString(long number)
+    {
+        return SumOfCubicDigitalRootsString(number, DEFAULT_RADIX);
+    }
+    public static long SumOfCubicDigitalRoots(long number, int radix)
+    {
+        long result = 0L;
+        for (int i = 1; i <= number; i++)
+        {
+            result += (DigitalRoot(i, radix) * DigitalRoot(i, radix) * DigitalRoot(i, radix));
+        }
+        return result;
+    }
+    public static long SumOfCubicDigitalRoots(string text, int radix)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return SumOfCubicDigitalRoots(number, radix);
+        }
+        return 0L;
+    }
+    public static string SumOfCubicDigitalRootsString(long number, int radix)
+    {
+        StringBuilder str = new StringBuilder();
+        for (int i = 1; i <= number; i++)
+        {
+            str.Append((DigitalRoot(i, radix) * DigitalRoot(i, radix) * DigitalRoot(i, radix)).ToString() + "+");
         }
         if (str.Length > 0)
         {
