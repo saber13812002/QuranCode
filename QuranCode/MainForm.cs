@@ -33263,7 +33263,11 @@ public partial class MainForm : Form, ISubscriber
     {
         if (m_mouse_down)
         {
-            CalculateUserTextValue(e.Location);
+            if (UserTextTextBox.SelectionLength != m_user_text_selection_length)
+            {
+                m_user_text_selection_length = UserTextTextBox.SelectionLength;
+                CalculateUserTextValue(e.Location);
+            }
         }
     }
     private void UserTextTextBox_MouseUp(object sender, MouseEventArgs e)
