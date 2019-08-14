@@ -1,3 +1,6 @@
+COPY Readme.txt Build\Release\
+COPY Features.txt Build\Release\
+
 IF not exist "NET2" NET2.bat
 Tools\Replace\bin\Release\Replace.exe NET2 Version.bat 000 1283
 Tools\Version\bin\Release\Version.exe .               6.19.1283.4 6.19.1283.4 -Tools
