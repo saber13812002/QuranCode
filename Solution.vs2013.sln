@@ -36,6 +36,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AhlulBayt", "AhlulBayt\Ahlu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScriptRunner", "ScriptRunner\ScriptRunner.csproj", "{61438304-4125-4174-AF1C-49E81800DAA6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{197A3F4C-1E15-432B-AFA9-3BF6921124D9}"
+	ProjectSection(SolutionItems) = preProject
+		Clean.bat = Clean.bat
+		Features.txt = Features.txt
+		LICENSE = LICENSE
+		NET2.bat = NET2.bat
+		README.md = README.md
+		Readme.txt = Readme.txt
+		Release.bat = Release.bat
+		Setup.bat = Setup.bat
+		Version.bat = Version.bat
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

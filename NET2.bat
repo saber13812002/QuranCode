@@ -17,6 +17,7 @@ XCOPY /O /X /E /H /K /Y Numbers\*.* NET2\Numbers\
 XCOPY /O /X /E /H /K /Y WordGenerator\*.* NET2\WordGenerator\
 XCOPY /O /X /E /H /K /Y AhlulBayt\*.* NET2\AhlulBayt\
 XCOPY /O /X /E /H /K /Y Tools\NET2\*.* NET2\
+COPY *.txt NET2\
 
 Tools\Replace\bin\Release\Replace.exe NET2 *.cs ((System.ComponentModel.ISupportInitialize) //((System.ComponentModel.ISupportInitialize)
 
