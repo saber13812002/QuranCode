@@ -44328,7 +44328,7 @@ public partial class MainForm : Form, ISubscriber
 
     private long DecimalPCIndexChainL2R(long number)
     {
-        if (number < 0L) number = -1L * number;
+        if (number < 0L) number *= -1L;
         if (number <= 1L) return -1L;
 
         StringBuilder str = new StringBuilder();
@@ -44361,7 +44361,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private long DecimalPCIndexChainR2L(long number)
     {
-        if (number < 0L) number = -1L * number;
+        if (number < 0L) number *= -1L;
         if (number <= 1L) return -1L;
 
         StringBuilder str = new StringBuilder();
@@ -44394,7 +44394,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private long DecimalCPIndexChainL2R(long number)
     {
-        if (number < 0L) number = -1L * number;
+        if (number < 0L) number *= -1L;
         if (number <= 1L) return -1L;
 
         StringBuilder str = new StringBuilder();
@@ -44427,7 +44427,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private long DecimalCPIndexChainR2L(long number)
     {
-        if (number < 0L) number = -1L * number;
+        if (number < 0L) number *= -1L;
         if (number <= 1L) return -1L;
 
         StringBuilder str = new StringBuilder();
@@ -44460,7 +44460,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private int IndexChainLength(long number)
     {
-        if (number <= 1L) return 0;
+        if (number < 0L) number *= -1L;
+        if (number == 0L) return 0;
 
         int length = 0;
         while (number > 1L)
@@ -44484,7 +44485,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private string BinaryPCIndexChainL2R(long number)
     {
-        if (number < 0L) number = -1L * number;
+        if (number < 0L) number *= -1L;
         if (number <= 1L) return "0";
 
         StringBuilder str = new StringBuilder();
@@ -44509,7 +44510,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private string BinaryPCIndexChainR2L(long number)
     {
-        if (number < 0L) number = -1L * number;
+        if (number < 0L) number *= -1L;
         if (number <= 1L) return "0";
 
         StringBuilder str = new StringBuilder();
@@ -44534,7 +44535,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private string BinaryCPIndexChainL2R(long number)
     {
-        if (number < 0L) number = -1L * number;
+        if (number < 0L) number *= -1L;
         if (number <= 1L) return "0";
 
         StringBuilder str = new StringBuilder();
@@ -44559,7 +44560,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private string BinaryCPIndexChainR2L(long number)
     {
-        if (number < 0L) number = -1L * number;
+        if (number < 0L) number *= -1L;
         if (number <= 1L) return "0";
 
         StringBuilder str = new StringBuilder();
@@ -44584,7 +44585,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private string GetPCIndexChainL2R(long number)
     {
-        if (number < 0L) number = -1L * number;
+        if (number < 0L) number *= -1L;
         if (number <= 1L) return "0";
 
         StringBuilder str = new StringBuilder();
@@ -44614,7 +44615,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private string GetPCIndexChainR2L(long number)
     {
-        if (number < 0L) number = -1L * number;
+        if (number < 0L) number *= -1L;
         if (number <= 1L) return "0";
 
         StringBuilder str = new StringBuilder();
@@ -44644,7 +44645,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private string GetCPIndexChainL2R(long number)
     {
-        if (number < 0L) number = -1L * number;
+        if (number < 0L) number *= -1L;
         if (number <= 1L) return "0";
 
         StringBuilder str = new StringBuilder();
@@ -44674,7 +44675,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private string GetCPIndexChainR2L(long number)
     {
-        if (number < 0L) number = -1L * number;
+        if (number < 0L) number *= -1L;
         if (number <= 1L) return "0";
 
         StringBuilder str = new StringBuilder();

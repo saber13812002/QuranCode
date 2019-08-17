@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -152,6 +153,7 @@ public static class Numbers
     };
     public static Color GetNumberTypeColor(long number)
     {
+        if (number < 0L) number *= -1L;
         return GetNumberTypeColor(number.ToString(), Numbers.DEFAULT_RADIX);
     }
     public static Color GetNumberTypeColor(string text, int radix)
@@ -370,6 +372,8 @@ public static class Numbers
 
     public static bool IsNumberType(long number, NumberType number_type)
     {
+        if (number < 0L) number *= -1L;
+
         switch (number_type)
         {
             case NumberType.Natural:
@@ -669,10 +673,13 @@ public static class Numbers
     }
     public static long SumOfNumbers(long number)
     {
+        if (number < 0L) number *= -1L;
         return ((number * (number + 1)) / 2);
     }
     public static string SumOfNumbersString(long number)
     {
+        if (number < 0L) number *= -1L;
+
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
         {
@@ -695,6 +702,8 @@ public static class Numbers
     }
     public static long SumOfSquareNumbers(long number)
     {
+        if (number < 0L) number *= -1L;
+
         long result = 0L;
         for (int i = 1; i <= number; i++)
         {
@@ -704,6 +713,8 @@ public static class Numbers
     }
     public static string SumOfSquareNumbersString(long number)
     {
+        if (number < 0L) number *= -1L;
+
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
         {
@@ -726,6 +737,8 @@ public static class Numbers
     }
     public static long SumOfCubicNumbers(long number)
     {
+        if (number < 0L) number *= -1L;
+
         long result = 0L;
         for (int i = 1; i <= number; i++)
         {
@@ -735,6 +748,8 @@ public static class Numbers
     }
     public static string SumOfCubicNumbersString(long number)
     {
+        if (number < 0L) number *= -1L;
+
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
         {
@@ -1275,6 +1290,8 @@ public static class Numbers
     }
     public static List<int> GetDigits(long number)
     {
+        if (number < 0L) number *= -1L;
+
         List<int> result = new List<int>();
         string str = number.ToString();
         for (int i = 0; i < str.Length; i++)
@@ -1301,6 +1318,7 @@ public static class Numbers
     }
     public static int DigitCount(long number)
     {
+        if (number < 0L) number *= -1L;
         return DigitCount(number.ToString());
     }
     public static int DigitCount(string text)
@@ -1322,6 +1340,7 @@ public static class Numbers
     }
     public static int DigitCount(long number, int radix)
     {
+        if (number < 0L) number *= -1L;
         return DigitCount(number.ToString(), radix);
     }
     public static int DigitCount(string text, int radix)
@@ -1343,6 +1362,7 @@ public static class Numbers
 
     public static int DigitSum(long number)
     {
+        if (number < 0L) number *= -1L;
         return DigitSum(number.ToString());
     }
     public static int DigitSum(string text)
@@ -1363,6 +1383,7 @@ public static class Numbers
     }
     public static long SumOfDigitSums(long number)
     {
+        if (number < 0L) number *= -1L;
         return SumOfDigitSums(number, DEFAULT_RADIX);
     }
     public static long SumOfDigitSums(string text)
@@ -1376,10 +1397,12 @@ public static class Numbers
     }
     public static string SumOfDigitSumsString(long number)
     {
+        if (number < 0L) number *= -1L;
         return SumOfDigitSumsString(number, DEFAULT_RADIX);
     }
     public static int DigitSum(long number, int radix)
     {
+        if (number < 0L) number *= -1L;
         return DigitSum(number.ToString(), radix);
     }
     public static int DigitSum(string text, int radix)
@@ -1396,6 +1419,8 @@ public static class Numbers
     }
     public static long SumOfDigitSums(long number, int radix)
     {
+        if (number < 0L) number *= -1L;
+
         //????? method works correctly for radix = 10 only
         // http://ideone.com/ik8iE6
 
@@ -1428,6 +1453,8 @@ public static class Numbers
     }
     public static string SumOfDigitSumsString(long number, int radix)
     {
+        if (number < 0L) number *= -1L;
+
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
         {
@@ -1441,6 +1468,7 @@ public static class Numbers
     }
     public static long SumOfSquareDigitSums(long number)
     {
+        if (number < 0L) number *= -1L;
         return SumOfSquareDigitSums(number, DEFAULT_RADIX);
     }
     public static long SumOfSquareDigitSums(string text)
@@ -1454,10 +1482,13 @@ public static class Numbers
     }
     public static string SumOfSquareDigitSumsString(long number)
     {
+        if (number < 0L) number *= -1L;
         return SumOfSquareDigitSumsString(number, DEFAULT_RADIX);
     }
     public static long SumOfSquareDigitSums(long number, int radix)
     {
+        if (number < 0L) number *= -1L;
+
         long result = 0L;
         for (int i = 1; i <= number; i++)
         {
@@ -1476,6 +1507,8 @@ public static class Numbers
     }
     public static string SumOfSquareDigitSumsString(long number, int radix)
     {
+        if (number < 0L) number *= -1L;
+
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
         {
@@ -1489,6 +1522,7 @@ public static class Numbers
     }
     public static long SumOfCubicDigitSums(long number)
     {
+        if (number < 0L) number *= -1L;
         return SumOfCubicDigitSums(number, DEFAULT_RADIX);
     }
     public static long SumOfCubicDigitSums(string text)
@@ -1502,10 +1536,13 @@ public static class Numbers
     }
     public static string SumOfCubicDigitSumsString(long number)
     {
+        if (number < 0L) number *= -1L;
         return SumOfCubicDigitSumsString(number, DEFAULT_RADIX);
     }
     public static long SumOfCubicDigitSums(long number, int radix)
     {
+        if (number < 0L) number *= -1L;
+
         long result = 0L;
         for (int i = 1; i <= number; i++)
         {
@@ -1524,6 +1561,8 @@ public static class Numbers
     }
     public static string SumOfCubicDigitSumsString(long number, int radix)
     {
+        if (number < 0L) number *= -1L;
+
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
         {
@@ -1538,6 +1577,7 @@ public static class Numbers
 
     public static int DigitalRoot(long number)
     {
+        if (number < 0L) number *= -1L;
         return DigitalRoot(number, DEFAULT_RADIX);
     }
     public static int DigitalRoot(string text)
@@ -1551,6 +1591,7 @@ public static class Numbers
     }
     public static long SumOfDigitalRoots(long number)
     {
+        if (number < 0L) number *= -1L;
         return SumOfDigitalRoots(number, DEFAULT_RADIX);
     }
     public static long SumOfDigitalRoots(string text)
@@ -1564,10 +1605,12 @@ public static class Numbers
     }
     public static string SumOfDigitalRootsString(long number)
     {
+        if (number < 0L) number *= -1L;
         return SumOfDigitalRootsString(number, DEFAULT_RADIX);
     }
     public static int DigitalRoot(long number, int radix)
     {
+        if (number < 0L) number *= -1L;
         return (int)(1L + (number - 1L) % (radix - 1));
     }
     public static int DigitalRoot(string text, int radix)
@@ -1581,6 +1624,8 @@ public static class Numbers
     }
     public static long SumOfDigitalRoots(long number, int radix)
     {
+        if (number < 0L) number *= -1L;
+
         long d = number / (radix - 1L);
         long r = number % (radix - 1L);
         long sum_1_to_radix_minus_1 = (radix - 1L) * (radix) / 2;
@@ -1597,6 +1642,8 @@ public static class Numbers
     }
     public static string SumOfDigitalRootsString(long number, int radix)
     {
+        if (number < 0L) number *= -1L;
+
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
         {
@@ -1610,6 +1657,7 @@ public static class Numbers
     }
     public static long SumOfSquareDigitalRoots(long number)
     {
+        if (number < 0L) number *= -1L;
         return SumOfSquareDigitalRoots(number, DEFAULT_RADIX);
     }
     public static long SumOfSquareDigitalRoots(string text)
@@ -1623,10 +1671,13 @@ public static class Numbers
     }
     public static string SumOfSquareDigitalRootsString(long number)
     {
+        if (number < 0L) number *= -1L;
         return SumOfSquareDigitalRootsString(number, DEFAULT_RADIX);
     }
     public static long SumOfSquareDigitalRoots(long number, int radix)
     {
+        if (number < 0L) number *= -1L;
+
         long result = 0L;
         for (int i = 1; i <= number; i++)
         {
@@ -1645,6 +1696,8 @@ public static class Numbers
     }
     public static string SumOfSquareDigitalRootsString(long number, int radix)
     {
+        if (number < 0L) number *= -1L;
+
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
         {
@@ -1658,6 +1711,7 @@ public static class Numbers
     }
     public static long SumOfCubicDigitalRoots(long number)
     {
+        if (number < 0L) number *= -1L;
         return SumOfCubicDigitalRoots(number, DEFAULT_RADIX);
     }
     public static long SumOfCubicDigitalRoots(string text)
@@ -1671,10 +1725,13 @@ public static class Numbers
     }
     public static string SumOfCubicDigitalRootsString(long number)
     {
+        if (number < 0L) number *= -1L;
         return SumOfCubicDigitalRootsString(number, DEFAULT_RADIX);
     }
     public static long SumOfCubicDigitalRoots(long number, int radix)
     {
+        if (number < 0L) number *= -1L;
+
         long result = 0L;
         for (int i = 1; i <= number; i++)
         {
@@ -1693,6 +1750,8 @@ public static class Numbers
     }
     public static string SumOfCubicDigitalRootsString(long number, int radix)
     {
+        if (number < 0L) number *= -1L;
+
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
         {
@@ -1738,6 +1797,7 @@ public static class Numbers
     }
     public static bool IsOddDigits(long number)
     {
+        if (number < 0L) number *= -1L;
         return IsOddDigits(number.ToString());
     }
     public static bool IsOddDigits(string text)
@@ -1756,6 +1816,7 @@ public static class Numbers
     }
     public static bool IsEvenDigits(long number)
     {
+        if (number < 0L) number *= -1L;
         return IsEvenDigits(number.ToString());
     }
     public static bool IsEvenDigits(string text)
@@ -1774,6 +1835,7 @@ public static class Numbers
     }
     public static bool IsPrimeDigits(long number)
     {
+        if (number < 0L) number *= -1L;
         return IsPrimeDigits(number.ToString());
     }
     public static bool IsPrimeDigits(string text)
@@ -1792,6 +1854,7 @@ public static class Numbers
     }
     public static bool IsPrimeOr1Digits(long number)
     {
+        if (number < 0L) number *= -1L;
         return IsPrimeOr1Digits(number.ToString());
     }
     public static bool IsPrimeOr1Digits(string text)
@@ -1810,6 +1873,7 @@ public static class Numbers
     }
     public static bool IsCompositeDigits(long number)
     {
+        if (number < 0L) number *= -1L;
         return IsCompositeDigits(number.ToString());
     }
     public static bool IsCompositeDigits(string text)
@@ -1828,6 +1892,7 @@ public static class Numbers
     }
     public static bool IsCompositeOr0Digits(long number)
     {
+        if (number < 0L) number *= -1L;
         return IsCompositeOr0Digits(number.ToString());
     }
     public static bool IsCompositeOr0Digits(string text)
@@ -2849,6 +2914,7 @@ public static class Numbers
     public static List<long> PrimeRepunits;
     public static bool IsPrimeRepunit(long number)
     {
+        if (number < 0L) number *= -1L;
         return PrimeRepunits.Contains(number);
     }
     private static string s_prime_repunits_filename = "prime_repunits.txt";
@@ -2890,6 +2956,7 @@ public static class Numbers
 
     public static NumberKind GetNumberKind(long number)
     {
+        if (number < 0L) number *= -1L;
         if (number == 1L) return NumberKind.Deficient;
 
         long sum_of_proper_divisors = SumOfProperDivisors(number);
@@ -2921,6 +2988,7 @@ public static class Numbers
     }
     public static int DeficientIndexOf(long number)
     {
+        if (number < 0L) number *= -1L;
         if (s_deficients == null)
         {
             GenerateDeficients(MAX_NUMBER / 16);
@@ -2946,6 +3014,7 @@ public static class Numbers
     /// <returns>bool</returns>
     public static bool IsDeficient(long number)
     {
+        if (number < 0L) number *= -1L;
         return Deficients.Contains(number);
     }
     private static string s_deficients_filename = "deficient_numbers.txt";
@@ -2997,6 +3066,7 @@ public static class Numbers
     }
     public static int PerfectIndexOf(long number)
     {
+        if (number < 0L) number *= -1L;
         return BinarySearch(PerfectNumbers, number);
     }
     /// <summary>
@@ -3006,6 +3076,7 @@ public static class Numbers
     /// <returns>bool</returns>
     public static bool IsPerfect(long number)
     {
+        if (number < 0L) number *= -1L;
         return Perfects.Contains(number);
     }
     private static string s_perfect_numbers_filename = "perfect_numbers.txt";
@@ -3052,6 +3123,7 @@ public static class Numbers
     }
     public static int AbundantIndexOf(long number)
     {
+        if (number < 0L) number *= -1L;
         if (s_abundants == null)
         {
             GenerateAbundants(MAX_NUMBER / 16);
@@ -3077,6 +3149,7 @@ public static class Numbers
     /// <returns>bool</returns>
     public static bool IsAbundant(long number)
     {
+        if (number < 0L) number *= -1L;
         return Abundants.Contains(number);
     }
     private static string s_abundants_filename = "abundants_numbers.txt";
@@ -3179,6 +3252,8 @@ public static class Numbers
     }
     public static bool IsPolygonNumber(int sides, long number)
     {
+        if (number < 0L) number *= -1L;
+
         if (s_polygon_numbers_dictionary.ContainsKey(sides))
         {
             return (s_polygon_numbers_dictionary[sides].Contains(number));
@@ -3344,90 +3419,112 @@ public static class Numbers
     }
     public static bool IsTriangular(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(3).Contains(number));
     }
     public static bool IsSquare(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(4).Contains(number));
     }
     public static bool IsPentagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(5).Contains(number));
     }
     public static bool IsHexagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(6).Contains(number));
     }
     public static bool IsHeptagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(7).Contains(number));
     }
     public static bool IsOctagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(8).Contains(number));
     }
     public static bool IsNonagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(9).Contains(number));
     }
     public static bool IsDecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(10).Contains(number));
     }
     public static bool IsHendecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(11).Contains(number));
     }
     public static bool IsDodecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(12).Contains(number));
     }
     public static bool IsTridecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(13).Contains(number));
     }
     public static bool IsTetradecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(14).Contains(number));
     }
     public static bool IsPentadecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(15).Contains(number));
     }
     public static bool IsHexadecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(16).Contains(number));
     }
     public static bool IsHeptadecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(17).Contains(number));
     }
     public static bool IsOctadecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(18).Contains(number));
     }
     public static bool IsNonadecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(19).Contains(number));
     }
     public static bool IsIcosagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(20).Contains(number));
     }
     public static bool IsIcosihenagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(21).Contains(number));
     }
     public static bool IsIcosidigonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(22).Contains(number));
     }
     public static bool IsIcositrigonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(23).Contains(number));
     }
     public static bool IsIcositetragonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolygonNumbers(24).Contains(number));
     }
 
@@ -3463,6 +3560,8 @@ public static class Numbers
     }
     public static bool IsCenteredPolygonNumber(int sides, long number)
     {
+        if (number < 0L) number *= -1L;
+
         if (s_centered_polygon_numbers_dictionary.ContainsKey(sides))
         {
             return (s_centered_polygon_numbers_dictionary[sides].Contains(number));
@@ -3628,90 +3727,112 @@ public static class Numbers
     }
     public static bool IsCenteredTriangular(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(3).Contains(number));
     }
     public static bool IsCenteredSquare(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(4).Contains(number));
     }
     public static bool IsCenteredPentagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(5).Contains(number));
     }
     public static bool IsCenteredHexagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(6).Contains(number));
     }
     public static bool IsCenteredHeptagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(7).Contains(number));
     }
     public static bool IsCenteredOctagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(8).Contains(number));
     }
     public static bool IsCenteredNonagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(9).Contains(number));
     }
     public static bool IsCenteredDecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(10).Contains(number));
     }
     public static bool IsCenteredHendecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(11).Contains(number));
     }
     public static bool IsCenteredDodecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(12).Contains(number));
     }
     public static bool IsCenteredTridecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(13).Contains(number));
     }
     public static bool IsCenteredTetradecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(14).Contains(number));
     }
     public static bool IsCenteredPentadecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(15).Contains(number));
     }
     public static bool IsCenteredHexadecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(16).Contains(number));
     }
     public static bool IsCenteredHeptadecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(17).Contains(number));
     }
     public static bool IsCenteredOctadecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(18).Contains(number));
     }
     public static bool IsCenteredNonadecagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(19).Contains(number));
     }
     public static bool IsCenteredIcosagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(20).Contains(number));
     }
     public static bool IsCenteredIcosihenagonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(21).Contains(number));
     }
     public static bool IsCenteredIcosidigonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(22).Contains(number));
     }
     public static bool IsCenteredIcositrigonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(23).Contains(number));
     }
     public static bool IsCenteredIcositetragonal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredPolygonNumbers(24).Contains(number));
     }
 
@@ -3846,26 +3967,32 @@ public static class Numbers
     }
     public static bool IsCenteredTetrahedralNumber(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredTetrahedralNumbers.Contains(number));
     }
     public static bool IsCenteredCubeNumber(long number)
     {
+        if (number < 0L) number *= -1L;
         return IsCenteredHexahedronNumber(number);
     }
     public static bool IsCenteredHexahedronNumber(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredHexahedronNumbers.Contains(number));
     }
     public static bool IsCenteredOctahedralNumber(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredOctahedralNumbers.Contains(number));
     }
     public static bool IsCenteredDodecahedralNumber(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredDodecahedralNumbers.Contains(number));
     }
     public static bool IsCenteredIcosahedralNumber(long number)
     {
+        if (number < 0L) number *= -1L;
         return (CenteredIcosahedralNumbers.Contains(number));
     }
 
@@ -3918,6 +4045,8 @@ public static class Numbers
     }
     public static bool IsPolyhexNumber(int hexagons, long number)
     {
+        if (number < 0L) number *= -1L;
+
         if (s_polyhex_numbers_dictionary.ContainsKey(hexagons))
         {
             return (s_polyhex_numbers_dictionary[hexagons].Contains(number));
@@ -3943,10 +4072,12 @@ public static class Numbers
     }
     public static bool IsC2hPolyhexHydrocarbon(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolyhexNumbers(1).Contains(number));
     }
     public static bool IsC2vPolyhexHydrocarbon(long number)
     {
+        if (number < 0L) number *= -1L;
         return (PolyhexNumbers(2).Contains(number));
     }
 
@@ -3976,6 +4107,7 @@ public static class Numbers
     }
     public static bool IsTetrahedral(long number)
     {
+        if (number < 0L) number *= -1L;
         return (Tetrahedrals.Contains(number));
     }
 
@@ -4005,6 +4137,7 @@ public static class Numbers
     }
     public static bool IsPyramidal(long number)
     {
+        if (number < 0L) number *= -1L;
         return (Pyramidals.Contains(number));
     }
 
@@ -4014,38 +4147,48 @@ public static class Numbers
     //}
     public static bool IsCubic(long number)
     {
+        if (number < 0L) number *= -1L;
         return (IsNthPower(number, 3));
     }
     public static bool IsQuartic(long number)
     {
+        if (number < 0L) number *= -1L;
         return (IsNthPower(number, 4));
     }
     public static bool IsQuintic(long number)
     {
+        if (number < 0L) number *= -1L;
         return (IsNthPower(number, 5));
     }
     public static bool IsSextic(long number)
     {
+        if (number < 0L) number *= -1L;
         return (IsNthPower(number, 6));
     }
     public static bool IsSeptic(long number)
     {
+        if (number < 0L) number *= -1L;
         return (IsNthPower(number, 7));
     }
     public static bool IsOctic(long number)
     {
+        if (number < 0L) number *= -1L;
         return (IsNthPower(number, 8));
     }
     public static bool IsNonic(long number)
     {
+        if (number < 0L) number *= -1L;
         return (IsNthPower(number, 9));
     }
     public static bool IsDecic(long number)
     {
+        if (number < 0L) number *= -1L;
         return (IsNthPower(number, 10));
     }
     public static bool IsNthPower(long number, int power)
     {
+        if (number < 0L) number *= -1L;
+
         long root = (long)Math.Round(Math.Pow(number, (1.0D / power)));
         long total = 1L;
         for (int i = 0; i < power; i++)
@@ -4091,6 +4234,7 @@ public static class Numbers
     /// <returns>bool</returns>
     public static bool IsCollatz(long number)
     {
+        if (number < 0L) number *= -1L;
         return (Collatzs.Contains(number));
     }
 
@@ -4131,6 +4275,7 @@ public static class Numbers
     /// <returns>bool</returns>
     public static bool IsGematria(long number)
     {
+        if (number < 0L) number *= -1L;
         return Gematria.Contains(number);
     }
 
@@ -4163,6 +4308,7 @@ public static class Numbers
     /// <returns>bool</returns>
     public static bool IsQuranNumber(long number)
     {
+        if (number < 0L) number *= -1L;
         return QuranNumbers.Contains(number);
     }
 
@@ -4201,6 +4347,7 @@ public static class Numbers
     /// <returns>bool</returns>
     public static bool IsMersennePrime(long number)
     {
+        if (number < 0L) number *= -1L;
         return MersennePrimes.Contains(number);
     }
 
@@ -4219,6 +4366,8 @@ public static class Numbers
     }
     public static int FibonacciIndexOf(long number)
     {
+        if (number < 0L) number *= -1L;
+
         if (s_fibonaccis == null)
         {
             GenerateFibonaccis();
@@ -4245,6 +4394,7 @@ public static class Numbers
     /// <returns>bool</returns>
     public static bool IsFibonacci(long number)
     {
+        if (number < 0L) number *= -1L;
         return Fibonaccis.Contains(number);
     }
 
@@ -4337,11 +4487,38 @@ public static class Numbers
         s_factor_powers = result;
         return result;
     }
+    /// <summary>
+    /// Get a multiplication string of a number's prime factors.
+    /// </summary>
+    /// <param name="number">A number to factorize.</param>
+    /// <returns></returns>
+    public static string FactorizeToString(long number)
+    {
+        StringBuilder str = new StringBuilder();
+        List<long> factors = Factorize(number);
+        if (factors != null)
+        {
+            if (factors.Count > 0)
+            {
+                foreach (long factor in factors)
+                {
+                    str.Append(factor.ToString() + "×");
+                }
+                if (str.Length > 1)
+                {
+                    str.Remove(str.Length - 1, 1);
+                }
+            }
+        }
+        return str.ToString();
+    }
 
     private static List<long> s_factors = null;
     private static Dictionary<long, int> s_factor_powers = null;
     public static List<long> GetDivisors(long number)
     {
+        if (number < 0L) number *= -1L;
+
         //if (s_factor_powers == null) 
         s_factor_powers = FactorizeByPowers(number);
         int factors_count = GetDivisorCount(number);
@@ -4369,6 +4546,9 @@ public static class Numbers
     }
     public static long SumOfDivisors(long number)
     {
+        if (number < 0L) number *= -1L;
+        if (number == 0) return 0L;
+
         long result = 1L;
         s_factor_powers = FactorizeByPowers(number);
         foreach (long key in s_factor_powers.Keys)
@@ -4384,6 +4564,8 @@ public static class Numbers
     }
     public static int GetDivisorCount(long number)
     {
+        if (number < 0L) number *= -1L;
+
         int result = 1;
         //if (s_factor_powers == null) 
         s_factor_powers = FactorizeByPowers(number);
@@ -4395,6 +4577,8 @@ public static class Numbers
     }
     public static string GetDivisorsString(long number)
     {
+        if (number < 0L) number *= -1L;
+
         StringBuilder str = new StringBuilder();
         List<long> divisors = GetDivisors(number);
         foreach (long divisor in divisors)
@@ -4415,20 +4599,26 @@ public static class Numbers
     /// <returns></returns>
     public static List<long> GetProperDivisors(long number)
     {
+        if (number < 0L) number *= -1L;
+
         List<long> result = GetDivisors(number);
         result.RemoveAt(result.Count - 1);
         return result;
     }
     public static long SumOfProperDivisors(long number)
     {
+        if (number < 0L) number *= -1L;
         return SumOfDivisors(number) - number;
     }
     public static int GetProperDivisorCount(long number)
     {
+        if (number < 0L) number *= -1L;
         return GetDivisorCount(number) - 1;
     }
     public static string GetProperDivisorsString(long number)
     {
+        if (number < 0L) number *= -1L;
+
         StringBuilder str = new StringBuilder();
         List<long> divisors = GetProperDivisors(number);
         foreach (long divisor in divisors)
@@ -4442,34 +4632,10 @@ public static class Numbers
         return str.ToString();
     }
 
-    /// <summary>
-    /// Get a multiplication string of a number's prime factors.
-    /// </summary>
-    /// <param name="number">A number to factorize.</param>
-    /// <returns></returns>
-    public static string FactorizeToString(long number)
-    {
-        StringBuilder str = new StringBuilder();
-        List<long> factors = Factorize(number);
-        if (factors != null)
-        {
-            if (factors.Count > 0)
-            {
-                foreach (long factor in factors)
-                {
-                    str.Append(factor.ToString() + "×");
-                }
-                if (str.Length > 1)
-                {
-                    str.Remove(str.Length - 1, 1);
-                }
-            }
-        }
-        return str.ToString();
-    }
-
     private static void GetSquaresOf4nPlus1EqualsSumOfTwoSquares(long number, out long square1, out long square2)
     {
+        if (number < 0L) number *= -1L;
+
         square1 = 0L;
         square2 = 0L;
         long max = (long)Math.Sqrt(number);
@@ -4486,6 +4652,8 @@ public static class Numbers
     }
     private static void GetSquaresOf4nPlus1EqualsDiffOfTwoSquares(long number, out long square1, out long square2)
     {
+        if (number < 0L) number *= -1L;
+
         square1 = 0L;
         square2 = 0L;
 
@@ -4503,6 +4671,8 @@ public static class Numbers
     }
     public static string Get4nPlus1EqualsSumOfTwoSquares(long number)
     {
+        if (number < 0L) number *= -1L;
+
         string result = "";
         long square1 = 0L;
         long square2 = 0L;
@@ -4516,6 +4686,8 @@ public static class Numbers
     }
     public static string Get4nPlus1EqualsDiffOfTwoSquares(long number)
     {
+        if (number < 0L) number *= -1L;
+
         string result = "";
         long square1 = 0L;
         long square2 = 0L;
@@ -4529,6 +4701,8 @@ public static class Numbers
     }
     public static string Get4nPlus1EqualsDiffOfTwoTrivialSquares(long number)
     {
+        if (number < 0L) number *= -1L;
+
         string result = "";
         long square1 = 0L;
         long square2 = 0L;
@@ -4543,6 +4717,8 @@ public static class Numbers
     }
     public static string Get4nMinus1EqualsSumOfTwoSquares(long number)
     {
+        if (number < 0L) number *= -1L;
+
         string result = "";
         long n = (number + 1L) / 4L;
         if (number == ((n * 4L) - 1L))

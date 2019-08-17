@@ -580,6 +580,8 @@ public partial class MainForm : Form
     }
     private void FactorizeValue(long value)
     {
+        if (value < 0L) value *= -1L;
+
         ValueTextBox.Text = Radix.Encode(value, Numbers.DEFAULT_RADIX);
         ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
         ValueTextBox.Refresh();
@@ -588,6 +590,8 @@ public partial class MainForm : Form
     }
     private void AnalyzeValue(long value)
     {
+        if (value < 0L) value *= -1L;
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -595,7 +599,6 @@ public partial class MainForm : Form
             ValueTextBox.SelectionLength = 0;
             ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
             ValueTextBox.Refresh();
-
 
             int plus1_index = -1;
             int minus1_index = -1;
@@ -811,6 +814,8 @@ public partial class MainForm : Form
     }
     private void UpdateDigitSumRootPCChains(long value)
     {
+        if (value < 0L) value *= -1L;
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -870,6 +875,8 @@ public partial class MainForm : Form
     }
     private void UpdateNumberKind(long value)
     {
+        if (value < 0L) value *= -1L;
+
         m_number_kind = Numbers.GetNumberKind(value);
         int number_kind_index = 0;
         switch (m_number_kind)
@@ -1026,6 +1033,8 @@ public partial class MainForm : Form
     }
     private void UpdateSumOfDivisors(long value)
     {
+        if (value < 0L) value *= -1L;
+
         long sum_of_proper_divisors = Numbers.SumOfProperDivisors(value);
         string proper_divisors = Numbers.GetProperDivisorsString(value);
         SumOfProperDivisorsTextBox.Text = sum_of_proper_divisors.ToString();
@@ -1176,8 +1185,8 @@ public partial class MainForm : Form
 
     private long DecimalPCIndexChainL2R(long value)
     {
-        if (value < 0L) value = -1L * value;
-        if (value <= 1L) return -1L;
+        if (value < 0L) value *= -1L;
+        if (value == 0L) return 0L;
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1201,8 +1210,8 @@ public partial class MainForm : Form
     }
     private long DecimalPCIndexChainR2L(long value)
     {
-        if (value < 0L) value = -1L * value;
-        if (value <= 1L) return -1L;
+        if (value < 0L) value *= -1L;
+        if (value == 0L) return 0L;
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1226,8 +1235,8 @@ public partial class MainForm : Form
     }
     private long DecimalCPIndexChainL2R(long value)
     {
-        if (value < 0L) value = -1L * value;
-        if (value <= 1L) return -1L;
+        if (value < 0L) value *= -1L;
+        if (value == 0L) return 0L;
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1251,8 +1260,8 @@ public partial class MainForm : Form
     }
     private long DecimalCPIndexChainR2L(long value)
     {
-        if (value < 0L) value = -1L * value;
-        if (value <= 1L) return -1L;
+        if (value < 0L) value *= -1L;
+        if (value == 0L) return 0L;
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1274,34 +1283,35 @@ public partial class MainForm : Form
         }
         return Convert.ToInt64(str.ToString(), 2);
     }
-    private int IndexChainLength(long value)
+    private int IndexChainLength(long number)
     {
-        if (value <= 1L) return 0;
+        if (number < 0L) number *= -1L;
+        if (number == 0L) return 0;
 
         int length = 0;
-        while (value > 1L)
+        while (number > 1L)
         {
             int index = 0;
-            if ((index = (Numbers.PrimeIndexOf(value) + 1)) > 0)
+            if ((index = (Numbers.PrimeIndexOf(number) + 1)) > 0)
             {
                 length++;
             }
-            else if ((index = (Numbers.CompositeIndexOf(value) + 1)) > 0)
+            else if ((index = (Numbers.CompositeIndexOf(number) + 1)) > 0)
             {
                 length++;
             }
-            else // value is too large
+            else // number is too large
             {
                 return 0;
             }
-            value = index;
+            number = index;
         }
         return length;
     }
     private string BinaryPCIndexChainL2R(long value)
     {
-        if (value < 0L) value = -1L * value;
-        if (value <= 1L) return "0";
+        if (value < 0L) value *= -1L;
+        if (value == 0L) return "0";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1325,8 +1335,8 @@ public partial class MainForm : Form
     }
     private string BinaryPCIndexChainR2L(long value)
     {
-        if (value < 0L) value = -1L * value;
-        if (value <= 1L) return "0";
+        if (value < 0L) value *= -1L;
+        if (value == 0L) return "0";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1350,8 +1360,8 @@ public partial class MainForm : Form
     }
     private string BinaryCPIndexChainL2R(long value)
     {
-        if (value < 0L) value = -1L * value;
-        if (value <= 1L) return "0";
+        if (value < 0L) value *= -1L;
+        if (value == 0L) return "0";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1375,8 +1385,8 @@ public partial class MainForm : Form
     }
     private string BinaryCPIndexChainR2L(long value)
     {
-        if (value < 0L) value = -1L * value;
-        if (value <= 1L) return "0";
+        if (value < 0L) value *= -1L;
+        if (value == 0L) return "0";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1400,8 +1410,8 @@ public partial class MainForm : Form
     }
     private string GetPCIndexChainL2R(long value)
     {
-        if (value < 0L) value = -1L * value;
-        if (value <= 1L) return "0";
+        if (value < 0L) value *= -1L;
+        if (value == 0L) return "0";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1430,8 +1440,8 @@ public partial class MainForm : Form
     }
     private string GetPCIndexChainR2L(long value)
     {
-        if (value < 0L) value = -1L * value;
-        if (value <= 1L) return "0";
+        if (value < 0L) value *= -1L;
+        if (value == 0L) return "0";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1460,8 +1470,8 @@ public partial class MainForm : Form
     }
     private string GetCPIndexChainL2R(long value)
     {
-        if (value < 0L) value = -1L * value;
-        if (value <= 1L) return "0";
+        if (value < 0L) value *= -1L;
+        if (value == 0L) return "0";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1490,8 +1500,8 @@ public partial class MainForm : Form
     }
     private string GetCPIndexChainR2L(long value)
     {
-        if (value < 0L) value = -1L * value;
-        if (value <= 1L) return "0";
+        if (value < 0L) value *= -1L;
+        if (value == 0L) return "0";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1520,6 +1530,8 @@ public partial class MainForm : Form
     }
     private void NumberIndexChain(long value)
     {
+        if (value < 0L) value *= -1L;
+
         string filename = "NumberIndexChain" + "_" + value + ".txt";
         StringBuilder str = new StringBuilder();
         int length = IndexChainLength(value);
@@ -1635,6 +1647,8 @@ public partial class MainForm : Form
     }
     public void SaveNumberIndexChain(string filename, long value, int chain_length, string text)
     {
+        if (value < 0L) value *= -1L;
+
         if (Directory.Exists(Globals.NUMBERS_FOLDER))
         {
             filename = Globals.NUMBERS_FOLDER + "/" + filename;
