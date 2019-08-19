@@ -17933,11 +17933,13 @@ public partial class MainForm : Form, ISubscriber
                         UpdateNotifyIconText();
 
                         CalculateCurrentValue();
-
-                        UpdateVersePositions(verse);
-
                         BuildLetterFrequencies();
                         DisplayLetterFrequencies();
+                        DisplayCurrentPositions();
+
+                        UpdateWordWrapLabel(m_active_textbox.WordWrap);
+
+                        DisplayChapterRevelationInfo();
 
                         DisplayTranslations(verse);
                         DisplaySymmetry();
