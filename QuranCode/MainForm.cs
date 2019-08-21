@@ -26097,9 +26097,11 @@ public partial class MainForm : Form, ISubscriber
             // in all cases
             result = Application.ProductName + " ║ " + GetSelectionSummary();
 
-            string word_info = GetWordInformation(word);
+            string word_info = null; //GetWordInformation(word);
             if (ModifierKeys == Keys.Control)
             {
+                word_info = GetWordInformation(word);
+
                 word_info += "\r\n\r\n";
                 word_info += GetGrammarInformation(word);
 
@@ -38858,7 +38860,7 @@ public partial class MainForm : Form, ISubscriber
         UpdateFindByFrequencyButtonToolTip();
         FindByFrequencyButton.Enabled = ((m_find_by_phrase_letter_frequency) && (m_phrase_text.Length > 0));
 
-        RebuildLetterFrequencies();
+        CalculateCurrentValue();
     }
     private void ResetFindByFrequencyResultTypeLabels()
     {
@@ -39045,20 +39047,9 @@ public partial class MainForm : Form, ISubscriber
 
     // simulate FindByFrequencyPhraseTextBox_SelectionChanged
     private string m_current_phrase = "";
-    private void RebuildLetterFrequencies()
-    {
-        if (FindByFrequencyPhraseTextBox.SelectionLength == 0)
-        {
-            // factorize MainText value, not LetterFrequencySum
-            CalculateCurrentValue();
-        }
-
-        BuildLetterFrequencies();
-        DisplayLetterFrequencies();
-    }
     private void FindByFrequencyPhraseTextBox_KeyUp(object sender, KeyEventArgs e)
     {
-        RebuildLetterFrequencies();
+        CalculateCurrentValue();
     }
     private int m_selected_text_length = 0;
     private void FindByFrequencyPhraseTextBox_MouseMove(object sender, MouseEventArgs e)
@@ -39066,12 +39057,12 @@ public partial class MainForm : Form, ISubscriber
         if (FindByFrequencyPhraseTextBox.SelectionLength != m_selected_text_length)
         {
             m_selected_text_length = FindByFrequencyPhraseTextBox.SelectionLength;
-            RebuildLetterFrequencies();
+            CalculateCurrentValue();
         }
     }
     private void FindByFrequencyPhraseTextBox_MouseUp(object sender, MouseEventArgs e)
     {
-        RebuildLetterFrequencies();
+        CalculateCurrentValue();
     }
 
     private void FindByFrequencySumNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -42705,6 +42696,13 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                     }
+                }
+
+                if (m_find_by_phrase_letter_frequency)// && (FindByFrequencyPhraseTextBox.SelectionLength > 0))
+                {
+                    BuildLetterFrequencies();
+                    DisplayLetterFrequencies();
+                    FactorizeValue(m_letter_frequency_sum, "Freq", true);
                 }
             }
         }
@@ -47486,29 +47484,33 @@ public partial class MainForm : Form, ISubscriber
             LetterFrequencyListView.SelectedIndexChanged += new EventHandler(LetterFrequencyListView_SelectedIndexChanged);
         }
     }
+    private int m_letter_count = 0;
+    private long m_letter_frequency_sum = 0L;
+    private long m_letter_position_sum = 0L;
+    private long m_letter_distance_sum = 0L;
     private void DisplayLetterFrequenciesTotals()
     {
         try
         {
-            int count = 0;
-            long frequency_sum = 0L;
-            long position_sum = 0L;
-            long distance_sum = 0L;
+            m_letter_count = 0;
+            m_letter_frequency_sum = 0L;
+            m_letter_position_sum = 0L;
+            m_letter_distance_sum = 0L;
 
             if (LetterFrequencyListView.SelectedIndices.Count > 0)
             {
-                count = LetterFrequencyListView.SelectedIndices.Count;
+                m_letter_count = LetterFrequencyListView.SelectedIndices.Count;
                 foreach (ListViewItem item in LetterFrequencyListView.SelectedItems)
                 {
-                    frequency_sum += long.Parse(item.SubItems[2].Text);
+                    m_letter_frequency_sum += long.Parse(item.SubItems[2].Text);
                 }
             }
             else
             {
-                count = LetterFrequencyListView.Items.Count;
+                m_letter_count = LetterFrequencyListView.Items.Count;
                 foreach (ListViewItem item in LetterFrequencyListView.Items)
                 {
-                    frequency_sum += long.Parse(item.SubItems[2].Text);
+                    m_letter_frequency_sum += long.Parse(item.SubItems[2].Text);
                 }
             }
 
@@ -47563,7 +47565,7 @@ public partial class MainForm : Form, ISubscriber
                     long value = 0L;
                     if (long.TryParse(texts[i], out value))
                     {
-                        position_sum += value * base_multiplier;
+                        m_letter_position_sum += value * base_multiplier;
                         base_multiplier *= m_radix;
                     }
                 }
@@ -47574,7 +47576,7 @@ public partial class MainForm : Form, ISubscriber
                     long value = 0L;
                     if (long.TryParse(texts[i], out value))
                     {
-                        distance_sum += value * base_multiplier;
+                        m_letter_distance_sum += value * base_multiplier;
                         base_multiplier *= m_radix;
                     }
                 }
@@ -47585,34 +47587,34 @@ public partial class MainForm : Form, ISubscriber
                 {
                     foreach (ListViewItem item in LetterFrequencyListView.SelectedItems)
                     {
-                        position_sum += long.Parse(item.SubItems[3].Text);
-                        distance_sum += long.Parse(item.SubItems[4].Text);
+                        m_letter_position_sum += long.Parse(item.SubItems[3].Text);
+                        m_letter_distance_sum += long.Parse(item.SubItems[4].Text);
                     }
                 }
                 else
                 {
                     foreach (ListViewItem item in LetterFrequencyListView.Items)
                     {
-                        position_sum += long.Parse(item.SubItems[3].Text);
-                        distance_sum += long.Parse(item.SubItems[4].Text);
+                        m_letter_position_sum += long.Parse(item.SubItems[3].Text);
+                        m_letter_distance_sum += long.Parse(item.SubItems[4].Text);
                     }
                 }
             }
 
-            LetterFrequencyCountLabel.Text = count.ToString();
-            LetterFrequencyCountLabel.ForeColor = Numbers.GetNumberTypeColor(count);
+            LetterFrequencyCountLabel.Text = m_letter_count.ToString();
+            LetterFrequencyCountLabel.ForeColor = Numbers.GetNumberTypeColor(m_letter_count);
             LetterFrequencyCountLabel.Refresh();
 
-            LetterFrequencySumLabel.Text = frequency_sum.ToString();
-            LetterFrequencySumLabel.ForeColor = Numbers.GetNumberTypeColor(frequency_sum);
+            LetterFrequencySumLabel.Text = m_letter_frequency_sum.ToString();
+            LetterFrequencySumLabel.ForeColor = Numbers.GetNumberTypeColor(m_letter_frequency_sum);
             LetterFrequencySumLabel.Refresh();
 
-            LetterFrequencyPositionSumSumLabel.Text = position_sum.ToString();
-            LetterFrequencyPositionSumSumLabel.ForeColor = (Math.Abs(position_sum) < 1000000000000L) ? Numbers.GetNumberTypeColor(position_sum) : Color.Black;
+            LetterFrequencyPositionSumSumLabel.Text = m_letter_position_sum.ToString();
+            LetterFrequencyPositionSumSumLabel.ForeColor = (Math.Abs(m_letter_position_sum) < 1000000000000L) ? Numbers.GetNumberTypeColor(m_letter_position_sum) : Color.Black;
             LetterFrequencyPositionSumSumLabel.Refresh();
 
-            LetterFrequencyDistanceSumSumLabel.Text = distance_sum.ToString();
-            LetterFrequencyDistanceSumSumLabel.ForeColor = (Math.Abs(distance_sum) < 1000000000000L) ? Numbers.GetNumberTypeColor(distance_sum) : Color.Black;
+            LetterFrequencyDistanceSumSumLabel.Text = m_letter_distance_sum.ToString();
+            LetterFrequencyDistanceSumSumLabel.ForeColor = (Math.Abs(m_letter_distance_sum) < 1000000000000L) ? Numbers.GetNumberTypeColor(m_letter_distance_sum) : Color.Black;
             LetterFrequencyDistanceSumSumLabel.Refresh();
 
             if (m_find_by_phrase_letter_frequency)
