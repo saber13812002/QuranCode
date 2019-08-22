@@ -42631,6 +42631,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             m_current_text = UserTextTextBox.SelectedText;
                         }
+
                         CalculateValueAndDisplayFactors(m_current_text);
                     }
                 }
@@ -42698,11 +42699,15 @@ public partial class MainForm : Form, ISubscriber
                     }
                 }
 
-                if (m_find_by_phrase_letter_frequency)// && (FindByFrequencyPhraseTextBox.SelectionLength > 0))
+                // live letter freq sum calculations
+                if (m_find_by_phrase_letter_frequency)
                 {
-                    BuildLetterFrequencies();
-                    DisplayLetterFrequencies();
-                    FactorizeValue(m_letter_frequency_sum, "Freq", true);
+                    if ((FindByFrequencyPhraseTextBox.Focused) || (FindByFrequencyPhraseTextBox.SelectionLength > 0))
+                    {
+                        BuildLetterFrequencies();
+                        DisplayLetterFrequencies();
+                        FactorizeValue(m_letter_frequency_sum, "Freq", true);
+                    }
                 }
             }
         }
@@ -42932,6 +42937,15 @@ public partial class MainForm : Form, ISubscriber
     // used for user text or Quran highlighted text in CalculationMode.SumOfUniqueLetterValues
     private void CalculateValueAndDisplayFactors(string user_text)
     {
+        // guard
+        if (m_find_by_phrase_letter_frequency)
+        {
+            if ((FindByFrequencyPhraseTextBox.Focused) || (FindByFrequencyPhraseTextBox.SelectionLength > 0))
+            {
+                return;
+            }
+        }
+
         if (m_client != null)
         {
             if (!String.IsNullOrEmpty(user_text))
@@ -42944,6 +42958,15 @@ public partial class MainForm : Form, ISubscriber
     // used for Quran text for non-CalculationMode.SumOfUniqueLetterValues
     private void CalculateValueAndDisplayFactors()
     {
+        // guard
+        if (m_find_by_phrase_letter_frequency)
+        {
+            if ((FindByFrequencyPhraseTextBox.Focused) || (FindByFrequencyPhraseTextBox.SelectionLength > 0))
+            {
+                return;
+            }
+        }
+
         if (m_client != null)
         {
             List<Verse> verses = null;
@@ -42969,6 +42992,15 @@ public partial class MainForm : Form, ISubscriber
     }
     private void CalculateValueAndDisplayFactors(Verse verse)
     {
+        // guard
+        if (m_find_by_phrase_letter_frequency)
+        {
+            if ((FindByFrequencyPhraseTextBox.Focused) || (FindByFrequencyPhraseTextBox.SelectionLength > 0))
+            {
+                return;
+            }
+        }
+
         if (m_client != null)
         {
             if (verse != null)
@@ -42980,6 +43012,15 @@ public partial class MainForm : Form, ISubscriber
     }
     private void CalculateValueAndDisplayFactors(List<Verse> verses)
     {
+        // guard
+        if (m_find_by_phrase_letter_frequency)
+        {
+            if ((FindByFrequencyPhraseTextBox.Focused) || (FindByFrequencyPhraseTextBox.SelectionLength > 0))
+            {
+                return;
+            }
+        }
+
         if (m_client != null)
         {
             if (verses != null)
@@ -42991,6 +43032,15 @@ public partial class MainForm : Form, ISubscriber
     }
     private void CalculateValueAndDisplayFactors(Chapter chapter)
     {
+        // guard
+        if (m_find_by_phrase_letter_frequency)
+        {
+            if ((FindByFrequencyPhraseTextBox.Focused) || (FindByFrequencyPhraseTextBox.SelectionLength > 0))
+            {
+                return;
+            }
+        }
+
         if (m_client != null)
         {
             if (chapter != null)
@@ -43002,6 +43052,15 @@ public partial class MainForm : Form, ISubscriber
     }
     private void CalculateValueAndDisplayFactors(List<Verse> verses, Letter start_letter, Letter end_letter)
     {
+        // guard
+        if (m_find_by_phrase_letter_frequency)
+        {
+            if ((FindByFrequencyPhraseTextBox.Focused) || (FindByFrequencyPhraseTextBox.SelectionLength > 0))
+            {
+                return;
+            }
+        }
+
         if (m_client != null)
         {
             if (verses != null)
