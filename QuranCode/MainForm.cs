@@ -17935,6 +17935,7 @@ public partial class MainForm : Form, ISubscriber
                         CalculateCurrentValue();
                         BuildLetterFrequencies();
                         DisplayLetterFrequencies();
+
                         DisplayCurrentPositions();
 
                         UpdateWordWrapLabel(m_active_textbox.WordWrap);
@@ -22396,11 +22397,10 @@ public partial class MainForm : Form, ISubscriber
             DisplaySelectionText();
 
             CalculateCurrentValue();
-
-            DisplaySelectionPositions();
-
             BuildLetterFrequencies();
             DisplayLetterFrequencies();
+
+            DisplaySelectionPositions();
 
             MainTextBox.ClearHighlight();
             MainTextBox.AlignToStart();
@@ -34810,6 +34810,7 @@ public partial class MainForm : Form, ISubscriber
                 PopulateWordsListBox();
 
                 LetterFrequencyWithDiacriticsCheckBox.Checked = FindByTextWithDiacriticsCheckBox.Checked;
+
                 BuildLetterFrequencies();
                 DisplayLetterFrequencies();
             }
@@ -39050,6 +39051,8 @@ public partial class MainForm : Form, ISubscriber
     private void FindByFrequencyPhraseTextBox_KeyUp(object sender, KeyEventArgs e)
     {
         CalculateCurrentValue();
+        BuildLetterFrequencies();
+        DisplayLetterFrequencies();
     }
     private int m_selected_text_length = 0;
     private void FindByFrequencyPhraseTextBox_MouseMove(object sender, MouseEventArgs e)
@@ -39057,12 +39060,17 @@ public partial class MainForm : Form, ISubscriber
         if (FindByFrequencyPhraseTextBox.SelectionLength != m_selected_text_length)
         {
             m_selected_text_length = FindByFrequencyPhraseTextBox.SelectionLength;
+
             CalculateCurrentValue();
+            BuildLetterFrequencies();
+            DisplayLetterFrequencies();
         }
     }
     private void FindByFrequencyPhraseTextBox_MouseUp(object sender, MouseEventArgs e)
     {
         CalculateCurrentValue();
+        BuildLetterFrequencies();
+        DisplayLetterFrequencies();
     }
 
     private void FindByFrequencySumNumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -39533,6 +39541,7 @@ public partial class MainForm : Form, ISubscriber
             CalculateCurrentValue();
             BuildLetterFrequencies();
             DisplayLetterFrequencies();
+
             DisplayCurrentPositions();
 
             UpdateWordWrapLabel(m_active_textbox.WordWrap);
@@ -39568,6 +39577,7 @@ public partial class MainForm : Form, ISubscriber
             CalculateCurrentValue();
             BuildLetterFrequencies();
             DisplayLetterFrequencies();
+
             DisplayCurrentPositions();
 
             UpdateWordWrapLabel(m_active_textbox.WordWrap);
@@ -39874,7 +39884,6 @@ public partial class MainForm : Form, ISubscriber
                     DuplicateLettersCheckBox.Visible = false;
 
                     CalculateCurrentValue();
-
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
 
@@ -40053,7 +40062,6 @@ public partial class MainForm : Form, ISubscriber
                     DuplicateLettersCheckBox.Visible = false;
 
                     CalculateCurrentValue();
-
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
 
@@ -40189,7 +40197,6 @@ public partial class MainForm : Form, ISubscriber
                     DuplicateLettersCheckBox.Visible = false;
 
                     CalculateCurrentValue();
-
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
 
@@ -42696,17 +42703,6 @@ public partial class MainForm : Form, ISubscriber
                                 CalculateValueAndDisplayFactors(m_current_text);
                             }
                         }
-                    }
-                }
-
-                // live letter freq sum calculations
-                if (m_find_by_phrase_letter_frequency)
-                {
-                    if ((FindByFrequencyPhraseTextBox.Focused) || (FindByFrequencyPhraseTextBox.SelectionLength > 0))
-                    {
-                        BuildLetterFrequencies();
-                        DisplayLetterFrequencies();
-                        FactorizeValue(m_letter_frequency_sum, "Freq", true);
                     }
                 }
             }
@@ -47528,6 +47524,14 @@ public partial class MainForm : Form, ISubscriber
                     LetterFrequencyListView.Columns[0].Text = LetterFrequencyListView.Columns[0].Text.Replace("  ", " ▲");
                     LetterFrequencyListView.Refresh();
                 }
+
+                if (m_find_by_phrase_letter_frequency)
+                {
+                    if ((FindByFrequencyPhraseTextBox.Focused) || (FindByFrequencyPhraseTextBox.SelectionLength > 0))
+                    {
+                        FactorizeValue(m_letter_frequency_sum, "∑", true);
+                    }
+                }
             }
         }
         catch (Exception ex)
@@ -47963,6 +47967,7 @@ public partial class MainForm : Form, ISubscriber
                     CalculateCurrentValue();
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
+
                     if (m_active_textbox.SelectionLength > 0)
                     {
                         DisplayWordFrequencies();
