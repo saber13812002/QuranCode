@@ -43860,16 +43860,13 @@ public partial class MainForm : Form, ISubscriber
                 string[] parts = control.Text.Split(' ');
                 for (int i = 0; i < parts.Length; i++)
                 {
-                    if ((control == HeaderLabel) && (!m_found_verses_displayed))
+                    if ((control == HeaderLabel) && parts[i].Contains(L[l]["Verse"]))
                     {
-                        if (parts[i].Contains(L[l]["Verse"]))
+                        if ((i + 1) < parts.Length)
                         {
-                            if ((i + 1) < parts.Length)
+                            if (long.TryParse(parts[i + 1], out value))
                             {
-                                if (long.TryParse(parts[i + 1], out value))
-                                {
-                                    break;
-                                }
+                                break;
                             }
                         }
                     }
@@ -43885,9 +43882,9 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                     }
-                    else //if ((control == HeaderLabel) && (m_found_verses_displayed)) PLUS all other cases
+                    else // all other cases
                     {
-                        if (long.TryParse(parts[0], out value))
+                        if (long.TryParse(parts[i], out value))
                         {
                             break;
                         }
@@ -46295,9 +46292,29 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else
                 {
-                    if (m_client.Selection != null)
+                    switch (m_client.SearchScope)
                     {
-                        verses = m_client.Selection.Verses;
+                        case SearchScope.Book:
+                            {
+                                if (m_client.Book != null)
+                                {
+                                    verses = m_client.Book.Verses;
+                                }
+                            }
+                            break;
+                        case SearchScope.Selection:
+                            {
+                                if (m_client.Selection != null)
+                                {
+                                    verses = m_client.Selection.Verses;
+                                }
+                            }
+                            break;
+                        case SearchScope.Result:
+                            {
+                                verses = m_client.FoundVerses;
+                            }
+                            break;
                     }
                 }
 
@@ -46368,9 +46385,29 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else
                 {
-                    if (m_client.Selection != null)
+                    switch (m_client.SearchScope)
                     {
-                        verses = m_client.Selection.Verses;
+                        case SearchScope.Book:
+                            {
+                                if (m_client.Book != null)
+                                {
+                                    verses = m_client.Book.Verses;
+                                }
+                            }
+                            break;
+                        case SearchScope.Selection:
+                            {
+                                if (m_client.Selection != null)
+                                {
+                                    verses = m_client.Selection.Verses;
+                                }
+                            }
+                            break;
+                        case SearchScope.Result:
+                            {
+                                verses = m_client.FoundVerses;
+                            }
+                            break;
                     }
                 }
 
@@ -46435,9 +46472,29 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else
                 {
-                    if (m_client.Selection != null)
+                    switch (m_client.SearchScope)
                     {
-                        verses = m_client.Selection.Verses;
+                        case SearchScope.Book:
+                            {
+                                if (m_client.Book != null)
+                                {
+                                    verses = m_client.Book.Verses;
+                                }
+                            }
+                            break;
+                        case SearchScope.Selection:
+                            {
+                                if (m_client.Selection != null)
+                                {
+                                    verses = m_client.Selection.Verses;
+                                }
+                            }
+                            break;
+                        case SearchScope.Result:
+                            {
+                                verses = m_client.FoundVerses;
+                            }
+                            break;
                     }
                 }
 
@@ -46591,9 +46648,29 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else
                 {
-                    if (m_client.Selection != null)
+                    switch (m_client.SearchScope)
                     {
-                        verses = m_client.Selection.Verses;
+                        case SearchScope.Book:
+                            {
+                                if (m_client.Book != null)
+                                {
+                                    verses = m_client.Book.Verses;
+                                }
+                            }
+                            break;
+                        case SearchScope.Selection:
+                            {
+                                if (m_client.Selection != null)
+                                {
+                                    verses = m_client.Selection.Verses;
+                                }
+                            }
+                            break;
+                        case SearchScope.Result:
+                            {
+                                verses = m_client.FoundVerses;
+                            }
+                            break;
                     }
                 }
 
@@ -46681,9 +46758,29 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else
                 {
-                    if (m_client.Selection != null)
+                    switch (m_client.SearchScope)
                     {
-                        verses = m_client.Selection.Verses;
+                        case SearchScope.Book:
+                            {
+                                if (m_client.Book != null)
+                                {
+                                    verses = m_client.Book.Verses;
+                                }
+                            }
+                            break;
+                        case SearchScope.Selection:
+                            {
+                                if (m_client.Selection != null)
+                                {
+                                    verses = m_client.Selection.Verses;
+                                }
+                            }
+                            break;
+                        case SearchScope.Result:
+                            {
+                                verses = m_client.FoundVerses;
+                            }
+                            break;
                     }
                 }
 
