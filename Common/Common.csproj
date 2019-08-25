@@ -752,7 +752,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Help\114.doc">
+    <Content Include="Help\114.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -762,7 +762,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Help\114_AR.doc">
+    <Content Include="Help\114_AR.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
