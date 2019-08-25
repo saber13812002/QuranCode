@@ -724,7 +724,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Help\GoldenRatio.doc">
+    <Content Include="Help\GoldenRatio.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
@@ -767,7 +767,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Help\506.doc">
+    <Content Include="Help\506.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
