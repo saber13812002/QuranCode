@@ -25,6 +25,405 @@ namespace Model
 
     public enum TextSearchType { Exact, Proximity, Root };
     public enum TextSearchBlockSize { Verse, Chapter, Page, Station, Part, Group, Half, Quarter, Bowing };
+    //switch (m_text_location_in_chapter)
+    //{
+    //    case TextLocationInChapter.Any:
+    //        {
+    //            switch (m_text_location_in_verse)
+    //            {
+    //                case TextLocationInVerse.Any:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //                case TextLocationInVerse.AtStart:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //                case TextLocationInVerse.AtMiddle:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //                case TextLocationInVerse.AtEnd:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //            }
+    //        }
+    //        break;
+    //    case TextLocationInChapter.AtStart:
+    //        {
+    //            switch (m_text_location_in_verse)
+    //            {
+    //                case TextLocationInVerse.Any:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //                case TextLocationInVerse.AtStart:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //                case TextLocationInVerse.AtMiddle:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //                case TextLocationInVerse.AtEnd:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //            }
+    //        }
+    //        break;
+    //    case TextLocationInChapter.AtMiddle:
+    //        {
+    //            switch (m_text_location_in_verse)
+    //            {
+    //                case TextLocationInVerse.Any:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //                case TextLocationInVerse.AtStart:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //                case TextLocationInVerse.AtMiddle:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //                case TextLocationInVerse.AtEnd:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //            }
+    //        }
+    //        break;
+    //    case TextLocationInChapter.AtEnd:
+    //        {
+    //            switch (m_text_location_in_verse)
+    //            {
+    //                case TextLocationInVerse.Any:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //                case TextLocationInVerse.AtStart:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //                case TextLocationInVerse.AtMiddle:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //                case TextLocationInVerse.AtEnd:
+    //                    {
+    //                        switch (m_text_location_in_word)
+    //                        {
+    //                            case TextLocationInWord.Any:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtStart:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtMiddle:
+    //                                {
+    //                                }
+    //                                break;
+    //                            case TextLocationInWord.AtEnd:
+    //                                {
+    //                                }
+    //                                break;
+    //                        }
+    //                    }
+    //                    break;
+    //            }
+    //        }
+    //        break;
+    //}
     public enum TextLocationInChapter { Any, AtStart, AtMiddle, AtEnd };
     public enum TextLocationInVerse { Any, AtStart, AtMiddle, AtEnd };
     public enum TextLocationInWord { Any, AtStart, AtMiddle, AtEnd };

@@ -13862,6 +13862,14 @@ public partial class MainForm : Form, ISubscriber
                 m_text_display_mode = TextDisplayMode.Both;
             }
         }
+
+        if (PictureBox.Visible)
+        {
+            if (m_current_drawing_type == DrawingType.SearchTerms)
+            {
+                RedrawImage();
+            }
+        }
     }
     ///////////////////////////////////////////////////////////////////////////////
     #endregion
@@ -34728,6 +34736,14 @@ public partial class MainForm : Form, ISubscriber
         EnableFindByTextControls();
         UpdateKeyboard(m_client.NumerologySystem.TextMode);
         FindByTextControls_Enter(null, null);
+
+        if (PictureBox.Visible)
+        {
+            if (m_current_drawing_type == DrawingType.SearchTerms)
+            {
+                RedrawImage();
+            }
+        }
     }
     private void FindByTextProximitySearchTypeLabel_Click(object sender, EventArgs e)
     {
@@ -34738,6 +34754,14 @@ public partial class MainForm : Form, ISubscriber
         EnableFindByTextControls();
         UpdateKeyboard(m_client.NumerologySystem.TextMode);
         FindByTextControls_Enter(null, null);
+
+        if (PictureBox.Visible)
+        {
+            if (m_current_drawing_type == DrawingType.SearchTerms)
+            {
+                RedrawImage();
+            }
+        }
     }
     private void FindByTextRootSearchTypeLabel_Click(object sender, EventArgs e)
     {
@@ -34747,6 +34771,14 @@ public partial class MainForm : Form, ISubscriber
         EnableFindByTextControls();
         UpdateKeyboard("Original");
         FindByTextControls_Enter(null, null);
+
+        if (PictureBox.Visible)
+        {
+            if (m_current_drawing_type == DrawingType.SearchTerms)
+            {
+                RedrawImage();
+            }
+        }
     }
     private void FindByTextSearchBlockSizeVerseLabel_Click(object sender, EventArgs e)
     {
@@ -34797,6 +34829,14 @@ public partial class MainForm : Form, ISubscriber
     {
         UpdateFindByTextOptions();
         PopulateWordsListBox();
+
+        if (PictureBox.Visible)
+        {
+            if (m_current_drawing_type == DrawingType.SearchTerms)
+            {
+                RedrawImage();
+            }
+        }
     }
     private void FindByTextWithDiacriticsCheckBox_CheckedChanged(object sender, EventArgs e)
     {
@@ -34813,6 +34853,14 @@ public partial class MainForm : Form, ISubscriber
 
                 BuildLetterFrequencies();
                 DisplayLetterFrequencies();
+
+                if (PictureBox.Visible)
+                {
+                    if (m_current_drawing_type == DrawingType.SearchTerms)
+                    {
+                        RedrawImage();
+                    }
+                }
             }
         }
     }
@@ -34835,6 +34883,14 @@ public partial class MainForm : Form, ISubscriber
         EnableFindByTextControls();
         UpdateFindByTextOptions();
         PopulateWordsListBox();
+
+        if (PictureBox.Visible)
+        {
+            if (m_current_drawing_type == DrawingType.SearchTerms)
+            {
+                RedrawImage();
+            }
+        }
     }
     private void FindByTextMultiplicityCheckBox_CheckedChanged(object sender, EventArgs e)
     {
@@ -34846,6 +34902,14 @@ public partial class MainForm : Form, ISubscriber
         PopulateWordsListBox();
 
         UpdateMultiplicityParameters();
+
+        if (PictureBox.Visible)
+        {
+            if (m_current_drawing_type == DrawingType.SearchTerms)
+            {
+                RedrawImage();
+            }
+        }
     }
     private void UpdateMultiplicityParameters()
     {
@@ -34913,6 +34977,14 @@ public partial class MainForm : Form, ISubscriber
         else
         {
             FindRepeatedPhrases();
+        }
+
+        if (PictureBox.Visible)
+        {
+            if (m_current_drawing_type == DrawingType.SearchTerms)
+            {
+                RedrawImage();
+            }
         }
     }
     private void FindByTextControls_Enter(object sender, EventArgs e)
@@ -46061,15 +46133,23 @@ public partial class MainForm : Form, ISubscriber
                                         ToolTip.SetToolTip(PictureBox, null);
                                     }
                                 }
+                                else
+                                {
+                                    ToolTip.SetToolTip(PictureBox, null);
+                                }
                             }
+                            else
+                            {
+                                ToolTip.SetToolTip(PictureBox, null);
+                            }
+                        }
+                        else
+                        {
+                            ToolTip.SetToolTip(PictureBox, null);
                         }
                     }
                 }
             }
-        }
-        else
-        {
-            ToolTip.SetToolTip(PictureBox, null);
         }
     }
     private void PictureBox_DoubleClick(object sender, EventArgs e)
@@ -46466,36 +46546,29 @@ public partial class MainForm : Form, ISubscriber
             if (m_client != null)
             {
                 List<Verse> verses = null;
-                if (m_found_verses_displayed)
+                switch (m_client.SearchScope)
                 {
-                    verses = m_client.FoundVerses;
-                }
-                else
-                {
-                    switch (m_client.SearchScope)
-                    {
-                        case SearchScope.Book:
+                    case SearchScope.Book:
+                        {
+                            if (m_client.Book != null)
                             {
-                                if (m_client.Book != null)
-                                {
-                                    verses = m_client.Book.Verses;
-                                }
+                                verses = m_client.Book.Verses;
                             }
-                            break;
-                        case SearchScope.Selection:
+                        }
+                        break;
+                    case SearchScope.Selection:
+                        {
+                            if (m_client.Selection != null)
                             {
-                                if (m_client.Selection != null)
-                                {
-                                    verses = m_client.Selection.Verses;
-                                }
+                                verses = m_client.Selection.Verses;
                             }
-                            break;
-                        case SearchScope.Result:
-                            {
-                                verses = m_client.FoundVerses;
-                            }
-                            break;
-                    }
+                        }
+                        break;
+                    case SearchScope.Result:
+                        {
+                            verses = m_client.FoundVerses;
+                        }
+                        break;
                 }
 
                 if (verses != null)
@@ -46535,39 +46608,126 @@ public partial class MainForm : Form, ISubscriber
                                 }
 
                                 List<long> values = new List<long>();
-                                foreach (Word word in words)
+
+                                if (m_word_frequency_dictionary != null)
                                 {
-                                    bool found = false;
-                                    for (int i = 0; i < terms.Length; i++)
+                                    switch (m_text_search_type)
                                     {
-                                        if (m_text_wordness == TextWordness.WholeWord)
-                                        {
-                                            if (word.Text.Simplify29() == terms[i])
+                                        case TextSearchType.Exact:
+                                        case TextSearchType.Proximity:
                                             {
-                                                values.Add(i + 1L);
-                                                given_word_count++;
-                                                found = true;
-                                                break;
+                                                foreach (Word word in words)
+                                                {
+                                                    bool found = false;
+                                                    for (int i = 0; i < terms.Length; i++)
+                                                    {
+                                                        switch (m_text_wordness)
+                                                        {
+                                                            case TextWordness.Any:
+                                                                {
+                                                                    if (word.Text.Simplify29().Contains(terms[i]))
+                                                                    {
+                                                                        values.Add(i + 1L);
+                                                                        given_word_count++;
+                                                                        found = true;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                break;
+                                                            case TextWordness.WholeWord:
+                                                                {
+                                                                    if (word.Text.Simplify29() == terms[i])
+                                                                    {
+                                                                        values.Add(i + 1L);
+                                                                        given_word_count++;
+                                                                        found = true;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                break;
+                                                            case TextWordness.PartOfWord:
+                                                                {
+                                                                    if ((word.Text.Simplify29().Contains(terms[i])) && (word.Text.Simplify29() != terms[i]))
+                                                                    {
+                                                                        values.Add(i + 1L);
+                                                                        given_word_count++;
+                                                                        found = true;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                break;
+                                                        }
+                                                    }
+
+                                                    if (!found)
+                                                    {
+                                                        values.Add(0L);
+                                                    }
+                                                    count++;
+                                                }
                                             }
-                                        }
-                                        else
-                                        {
-                                            if (word.Text.Simplify29().Contains(terms[i]))
+                                            break;
+                                        case TextSearchType.Root:
                                             {
-                                                values.Add(i + 1L);
-                                                given_word_count++;
-                                                found = true;
-                                                break;
+                                                foreach (Word word in words)
+                                                {
+                                                    bool found = false;
+                                                    for (int i = 0; i < terms.Length; i++)
+                                                    {
+                                                        switch (m_text_wordness)
+                                                        {
+                                                            case TextWordness.Any:
+                                                                {
+                                                                    if (word.Roots.Contains(terms[i])) // List.Contains(string) same as ==
+                                                                    {
+                                                                        values.Add(i + 1L);
+                                                                        given_word_count++;
+                                                                        found = true;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                break;
+                                                            case TextWordness.WholeWord:
+                                                                {
+                                                                    if (word.Roots.Contains(terms[i]))
+                                                                    {
+                                                                        values.Add(i + 1L);
+                                                                        given_word_count++;
+                                                                        found = true;
+                                                                        break;
+                                                                    }
+                                                                }
+                                                                break;
+                                                            case TextWordness.PartOfWord:
+                                                                {
+                                                                    foreach (string root in word.Roots)
+                                                                    {
+                                                                        if ((root.Contains(terms[i])) && (root != terms[i]))
+                                                                        {
+                                                                            values.Add(i + 1L);
+                                                                            given_word_count++;
+                                                                            found = true;
+                                                                            break;
+                                                                        }
+                                                                    }
+                                                                    if (found) break;
+                                                                }
+                                                                break;
+                                                        }
+                                                    }
+
+                                                    if (!found)
+                                                    {
+                                                        values.Add(0L);
+                                                    }
+                                                    count++;
+                                                }
                                             }
-                                        }
+                                            break;
                                     }
-                                    if (!found)
-                                    {
-                                        values.Add(0L);
-                                    }
-                                    count++;
+
+                                    valuess.Add(values);
                                 }
-                                valuess.Add(values);
                             }
 
                             List<List<long>> lengthss = new List<List<long>>();
@@ -46588,7 +46748,7 @@ public partial class MainForm : Form, ISubscriber
                             }
 
                             Dictionary<long, Color> colors = new Dictionary<long, Color>();
-                            colors.Add(0L, Color.FromArgb(32, 32, 32));
+                            colors.Add(0L, Color.FromArgb(48, 48, 48));
                             colors.Add(1L, Color.Pink);
                             colors.Add(2L, Color.LightBlue);
                             colors.Add(3L, Color.Lime);

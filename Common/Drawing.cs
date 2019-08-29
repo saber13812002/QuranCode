@@ -433,6 +433,9 @@ public static class Drawing
     }
     public static void DrawPageLines(Bitmap bitmap, List<List<long>> lengthss, List<List<long>> valuess, Dictionary<long, Color> colors)
     {
+        if ((lengthss == null) || lengthss.Count == 0) return;
+        if ((valuess == null) || valuess.Count == 0) return;
+
         using (Graphics graphics = Graphics.FromImage(bitmap))
         {
             if (graphics != null)
