@@ -4483,398 +4483,9 @@ public class Server : IPublisher
     }
 
     // find by text - Exact
-    //private static string BuildPattern(string text, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness)
-    //{
-    //    if (String.IsNullOrEmpty(text)) return text;
-    //    text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
-
-    //    // search for Quran markers, stopmarks, numbers, etc.
-    //    if (text.Length == 1)
-    //    {
-    //        if (!Constants.ARABIC_LETTERS.Contains(text[0]))
-    //        {
-    //            return text;
-    //        }
-    //    }
-
-    //    /*
-    //    =====================================================================
-    //    Regular Expressions (RegEx)
-    //    =====================================================================
-    //    Best Reference: http://www.regular-expressions.info/
-    //    =====================================================================
-    //    Matches	Characters 
-    //    x	character x 
-    //    \\	backslash character 
-    //    \0n	character with octal value 0n (0 <= n <= 7) 
-    //    \0nn	character with octal value 0nn (0 <= n <= 7) 
-    //    \0mnn	character with octal value 0mnn (0 <= m <= 3, 0 <= n <= 7) 
-    //    \xhh	character with hexadecimal value 0xhh 
-    //    \uhhhh	character with hexadecimal value 0xhhhh 
-    //    \t	tab character ('\u0009') 
-    //    \n	newline (line feed) character ('\u000A') 
-    //    \r	carriage-return character ('\u000D') 
-    //    \f	form-feed character ('\u000C') 
-    //    \a	alert (bell) character ('\u0007') 
-    //    \e	escape character ('\u001B') 
-    //    \cx	control character corresponding to x 
-
-    //    Character Classes 
-    //    [abc]		    a, b, or c				                    (simple class) 
-    //    [^abc]		    any character except a, b, or c		        (negation) 
-    //    [a-zA-Z]	    a through z or A through Z, inclusive	    (range) 
-    //    [a-d[m-p]]	    a through d, or m through p: [a-dm-p]	    (union) 
-    //    [a-z&&[def]]	d, e, or f				                    (intersection) 
-    //    [a-z&&[^bc]]	a through z, except for b and c: [ad-z]	    (subtraction) 
-    //    [a-z&&[^m-p]]	a through z, and not m through p: [a-lq-z]  (subtraction) 
-
-    //    Predefined 
-    //    .	any character (inc line terminators) except newline 
-    //    \d	digit				            [0-9] 
-    //    \D	non-digit			            [^0-9] 
-    //    \s	whitespace character		    [ \t\n\x0B\f\r] 
-    //    \S	non-whitespace character	    [^\s] 
-    //    \w	word character (alphanumeric)	[a-zA-Z_0-9] 
-    //    \W	non-word character		        [^\w] 
-
-    //    Boundary Matchers 
-    //    ^	beginning of a line	(in Multiline)
-    //    $	end of a line  		(in Multiline)
-    //    \b	word boundary, including line start and line end
-    //    \B	non-word boundary 
-    //    \A	beginning of the input 
-    //    \G	end of the previous match 
-    //    \Z	end of the input but for the final terminator, if any 
-    //    \z	end of the input
-
-    //    Greedy quantifiers 
-    //    X?	X, once or not at all 
-    //    X*	X, zero or more times 
-    //    X+	X, one or more times 
-    //    X{n}	X, exactly n times 
-    //    X{n,}	X, at least n times 
-    //    X{n,m}	X, at least n but not more than m times 
-
-    //    Reluctant quantifiers 
-    //    X??	X, once or not at all 
-    //    X*?	X, zero or more times 
-    //    X+?	X, one or more times 
-    //    X{n}?	X, exactly n times 
-    //    X{n,}?	X, at least n times 
-    //    X{n,m}?	X, at least n but not more than m times 
-
-    //    Possessive quantifiers 
-    //    X?+	X, once or not at all 
-    //    X*+	X, zero or more times 
-    //    X++	X, one or more times 
-    //    X{n}+	X, exactly n times 
-    //    X{n,}+	X, at least n times 
-    //    X{n,m}+	X, at least n but not more than m times 
-
-    //    positive lookahead	(?=text)
-    //    negative lookahead	(?!text)
-    //    // eg: not at end of line 	    (?!$)
-    //    positive lookbehind	(?<=text)
-    //    negative lookbehind	(?<!text)
-    //    // eg: not at start of line 	(?<!^)
-    //    =====================================================================
-    //    */
-
-    //    // helper patterns
-    //    string whole_line = @"(" + @"^" + text.Trim() + @"$" + @")";
-    //    string whole_word = @"(" + @"\b" + text.Trim() + @"\b" + @")";
-    //    string word_with_prefix = @"(" + @"\b" + @"\S+?" + text.TrimEnd() + @"\b" + @")";
-    //    string word_with_suffix = @"(" + @"\b" + text.TrimStart() + @"\S+?" + @"\b" + @")";
-    //    string word_with_prefix_and_suffix = @"(" + @"\b" + @"\S+?" + text + @"\S+?" + @"\b" + @")";
-    //    string word_with_fix_or_fixes = @"(" + word_with_prefix + "|" + word_with_suffix + "|" + word_with_prefix_and_suffix + @")";
-
-    //    /////////////////////////////////////////////////
-    //    ////// wordness_wordlocation_verselocation //////
-    //    /////////////////////////////////////////////////
-    //    string whole____start____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
-    //    string whole____start___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
-    //    string whole____start______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
-    //    string whole____start_anywhere = whole_line + "|" + @"(" + whole_word + @")";
-    //    string whole___middle____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
-    //    string whole___middle___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
-    //    string whole___middle______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
-    //    string whole___middle_anywhere = whole_line + "|" + @"(" + whole_word + @")";
-    //    string whole______end____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
-    //    string whole______end___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
-    //    string whole______end______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
-    //    string whole______end_anywhere = whole_line + "|" + @"(" + whole_word + @")";
-    //    string whole_anywhere____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
-    //    string whole_anywhere___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
-    //    string whole_anywhere______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
-    //    string whole_anywhere_anywhere = whole_line + "|" + @"(" + whole_word + @")";
-
-    //    string part_____start____start = @"(" + @"^" + word_with_suffix + @")";
-    //    string part_____start___middle = @"(" + @"\s" + word_with_suffix + @"\s" + @")";
-    //    string part_____start______end = @"(" + word_with_suffix + @"$" + @")";
-    //    string part_____start_anywhere = @"(" + word_with_suffix + @")";
-    //    string part____middle____start = @"(" + @"^" + word_with_prefix_and_suffix + @")";
-    //    string part____middle___middle = @"(" + @"\s" + word_with_prefix_and_suffix + @"\s" + @")";
-    //    string part____middle______end = @"(" + word_with_prefix_and_suffix + @"$" + @")";
-    //    string part____middle_anywhere = @"(" + word_with_prefix_and_suffix + @")";
-    //    string part_______end____start = @"(" + @"^" + word_with_prefix + @")";
-    //    string part_______end___middle = @"(" + @"\s" + word_with_prefix + @"\s" + @")";
-    //    string part_______end______end = @"(" + word_with_prefix + @"$" + @")";
-    //    string part_______end_anywhere = @"(" + word_with_prefix + @")";
-    //    string part__anywhere____start = @"(" + @"^" + word_with_fix_or_fixes + @")";
-    //    string part__anywhere___middle = @"(" + @"\s" + word_with_fix_or_fixes + @"\s" + @")";
-    //    string part__anywhere______end = @"(" + word_with_fix_or_fixes + @"$" + @")";
-    //    string part__anywhere_anywhere = @"(" + word_with_fix_or_fixes + @")";
-
-    //    string any______start____start = whole____start____start + "|" + part_____start____start;
-    //    string any______start___middle = whole____start___middle + "|" + part_____start___middle;
-    //    string any______start______end = whole____start______end + "|" + part_____start______end;
-    //    string any______start_anywhere = whole____start_anywhere + "|" + part_____start_anywhere;
-    //    string any_____middle____start = whole___middle____start + "|" + part____middle____start;
-    //    string any_____middle___middle = whole___middle___middle + "|" + part____middle___middle;
-    //    string any_____middle______end = whole___middle______end + "|" + part____middle______end;
-    //    string any_____middle_anywhere = whole___middle_anywhere + "|" + part____middle_anywhere;
-    //    string any________end____start = whole______end____start + "|" + part_______end____start;
-    //    string any________end___middle = whole______end___middle + "|" + part_______end___middle;
-    //    string any________end______end = whole______end______end + "|" + part_______end______end;
-    //    string any________end_anywhere = whole______end_anywhere + "|" + part_______end_anywhere;
-    //    string any___anywhere____start = whole_anywhere____start + "|" + part__anywhere____start;
-    //    string any___anywhere___middle = whole_anywhere___middle + "|" + part__anywhere___middle;
-    //    string any___anywhere______end = whole_anywhere______end + "|" + part__anywhere______end;
-    //    string any___anywhere_anywhere = whole_anywhere_anywhere + "|" + part__anywhere_anywhere;
-
-
-    //    string pattern = null;
-    //    switch (text_wordness)
-    //    {
-    //        case TextWordness.WholeWord:
-    //            switch (text_location_in_word)
-    //            {
-    //                case TextLocationInWord.AtStart:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = whole____start____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = whole____start___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = whole____start______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = whole____start_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.AtMiddle:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = whole___middle____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = whole___middle___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = whole___middle______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = whole___middle_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.AtEnd:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = whole______end____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = whole______end___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = whole______end______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = whole______end_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.Any:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = whole_anywhere____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = whole_anywhere___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = whole_anywhere______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = whole_anywhere_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //            }
-    //            break;
-    //        case TextWordness.PartOfWord:
-    //            switch (text_location_in_word)
-    //            {
-    //                case TextLocationInWord.AtStart:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = part_____start____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = part_____start___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = part_____start______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = part_____start_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.AtMiddle:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = part____middle____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = part____middle___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = part____middle______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = part____middle_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.AtEnd:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = part_______end____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = part_______end___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = part_______end______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = part_______end_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.Any:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = part__anywhere____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = part__anywhere___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = part__anywhere______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = part__anywhere_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //            }
-    //            break;
-    //        case TextWordness.Any:
-    //            switch (text_location_in_word)
-    //            {
-    //                case TextLocationInWord.AtStart:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = any______start____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = any______start___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = any______start______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = any______start_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.AtMiddle:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = any_____middle____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = any_____middle___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = any_____middle______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = any_____middle_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.AtEnd:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = any________end____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = any________end___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = any________end______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = any________end_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //                case TextLocationInWord.Any:
-    //                    switch (text_location_in_verse)
-    //                    {
-    //                        case TextLocationInVerse.AtStart:
-    //                            pattern = any___anywhere____start;
-    //                            break;
-    //                        case TextLocationInVerse.AtMiddle:
-    //                            pattern = any___anywhere___middle;
-    //                            break;
-    //                        case TextLocationInVerse.AtEnd:
-    //                            pattern = any___anywhere______end;
-    //                            break;
-    //                        case TextLocationInVerse.Any:
-    //                            pattern = any___anywhere_anywhere;
-    //                            break;
-    //                    }
-    //                    break;
-    //            }
-    //            break;
-    //    }
-
-    //    return pattern;
-    //}
     private static string BuildPattern(string text, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness)
     {
-        string pattern = null;
-
         if (String.IsNullOrEmpty(text)) return text;
-
         text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
 
         // search for Quran markers, stopmarks, numbers, etc.
@@ -4907,7 +4518,7 @@ public class Server : IPublisher
         \a	alert (bell) character ('\u0007') 
         \e	escape character ('\u001B') 
         \cx	control character corresponding to x 
-                                  
+
         Character Classes 
         [abc]		    a, b, or c				                    (simple class) 
         [^abc]		    any character except a, b, or c		        (negation) 
@@ -4916,7 +4527,7 @@ public class Server : IPublisher
         [a-z&&[def]]	d, e, or f				                    (intersection) 
         [a-z&&[^bc]]	a through z, except for b and c: [ad-z]	    (subtraction) 
         [a-z&&[^m-p]]	a through z, and not m through p: [a-lq-z]  (subtraction) 
-                                  
+
         Predefined 
         .	any character (inc line terminators) except newline 
         \d	digit				            [0-9] 
@@ -4943,7 +4554,7 @@ public class Server : IPublisher
         X{n}	X, exactly n times 
         X{n,}	X, at least n times 
         X{n,m}	X, at least n but not more than m times 
-                                  
+
         Reluctant quantifiers 
         X??	X, once or not at all 
         X*?	X, zero or more times 
@@ -4951,7 +4562,7 @@ public class Server : IPublisher
         X{n}?	X, exactly n times 
         X{n,}?	X, at least n times 
         X{n,m}?	X, at least n but not more than m times 
-                                  
+
         Possessive quantifiers 
         X?+	X, once or not at all 
         X*+	X, zero or more times 
@@ -4969,140 +4580,289 @@ public class Server : IPublisher
         =====================================================================
         */
 
-        string pattern_empty_line = @"^$";
-        string pattern_whole_line = "(" + @"^" + text + @"$" + ")";
+        // helper patterns
+        string whole_line = @"(" + @"^" + text.Trim() + @"$" + @")";
+        string whole_word = @"(" + @"\b" + text.Trim() + @"\b" + @")";
+        string word_with_prefix = @"(" + @"\b" + @"\S+?" + text.TrimEnd() + @"\b" + @")";
+        string word_with_suffix = @"(" + @"\b" + text.TrimStart() + @"\S+?" + @"\b" + @")";
+        string word_with_prefix_and_suffix = @"(" + @"\b" + @"\S+?" + text + @"\S+?" + @"\b" + @")";
+        string word_with_fix_or_fixes = @"(" + word_with_prefix + "|" + word_with_suffix + "|" + word_with_prefix_and_suffix + @")";
 
-        string pattern_any_with_prefix = "(" + @"\S+?" + text + ")";
-        string pattern_any_with_prefix_and_suffix = "(" + @"\S+?" + text + @"\S+?" + ")";
-        string pattern_any_with_suffix = "(" + text + @"\S+?" + ")";
+        /////////////////////////////////////////////////
+        ////// wordness_wordlocation_verselocation //////
+        /////////////////////////////////////////////////
+        string whole____start____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
+        string whole____start___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
+        string whole____start______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
+        string whole____start_anywhere = whole_line + "|" + @"(" + whole_word + @")";
+        string whole___middle____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
+        string whole___middle___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
+        string whole___middle______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
+        string whole___middle_anywhere = whole_line + "|" + @"(" + whole_word + @")";
+        string whole______end____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
+        string whole______end___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
+        string whole______end______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
+        string whole______end_anywhere = whole_line + "|" + @"(" + whole_word + @")";
+        string whole_anywhere____start = whole_line + "|" + @"(" + @"^" + whole_word + @"\s" + @")";
+        string whole_anywhere___middle = whole_line + "|" + @"(" + @"\s" + whole_word + @"\s" + @")";
+        string whole_anywhere______end = whole_line + "|" + @"(" + @"\s" + whole_word + @"$" + @")";
+        string whole_anywhere_anywhere = whole_line + "|" + @"(" + whole_word + @")";
 
-        string pattern_word_with_prefix = "(" + pattern_any_with_prefix + @"\b" + ")";
-        string pattern_word_with_prefix_and_suffix = "(" + pattern_any_with_prefix_and_suffix + ")";
-        string pattern_word_with_suffix = "(" + @"\b" + pattern_any_with_suffix + ")";
-        string pattern_word_with_any_fixes = "(" + pattern_word_with_prefix + "|" + pattern_word_with_prefix_and_suffix + "|" + pattern_any_with_suffix + ")";
+        string part_____start____start = @"(" + @"^" + word_with_suffix + @")";
+        string part_____start___middle = @"(" + @"\s" + word_with_suffix + @"\s" + @")";
+        string part_____start______end = @"(" + word_with_suffix + @"$" + @")";
+        string part_____start_anywhere = @"(" + word_with_suffix + @")";
+        string part____middle____start = @"(" + @"^" + word_with_prefix_and_suffix + @")";
+        string part____middle___middle = @"(" + @"\s" + word_with_prefix_and_suffix + @"\s" + @")";
+        string part____middle______end = @"(" + word_with_prefix_and_suffix + @"$" + @")";
+        string part____middle_anywhere = @"(" + word_with_prefix_and_suffix + @")";
+        string part_______end____start = @"(" + @"^" + word_with_prefix + @")";
+        string part_______end___middle = @"(" + @"\s" + word_with_prefix + @"\s" + @")";
+        string part_______end______end = @"(" + word_with_prefix + @"$" + @")";
+        string part_______end_anywhere = @"(" + word_with_prefix + @")";
+        string part__anywhere____start = @"(" + @"^" + word_with_fix_or_fixes + @")";
+        string part__anywhere___middle = @"(" + @"\s" + word_with_fix_or_fixes + @"\s" + @")";
+        string part__anywhere______end = @"(" + word_with_fix_or_fixes + @"$" + @")";
+        string part__anywhere_anywhere = @"(" + word_with_fix_or_fixes + @")";
 
-        // Any == Whole word | Part of word
-        string pattern_any_at_start = "(" + pattern_whole_line + "|" + @"^" + text + ")";
-        string pattern_any_at_middle = "(" + pattern_whole_line + "|" + @"(?<!^)" + text + @"(?!$)" + ")";
-        string pattern_any_at_end = "(" + pattern_whole_line + "|" + text + @"$" + ")";
-        string pattern_any_anywhere = text;
+        string any______start____start = whole____start____start + "|" + part_____start____start;
+        string any______start___middle = whole____start___middle + "|" + part_____start___middle;
+        string any______start______end = whole____start______end + "|" + part_____start______end;
+        string any______start_anywhere = whole____start_anywhere + "|" + part_____start_anywhere;
+        string any_____middle____start = whole___middle____start + "|" + part____middle____start;
+        string any_____middle___middle = whole___middle___middle + "|" + part____middle___middle;
+        string any_____middle______end = whole___middle______end + "|" + part____middle______end;
+        string any_____middle_anywhere = whole___middle_anywhere + "|" + part____middle_anywhere;
+        string any________end____start = whole______end____start + "|" + part_______end____start;
+        string any________end___middle = whole______end___middle + "|" + part_______end___middle;
+        string any________end______end = whole______end______end + "|" + part_______end______end;
+        string any________end_anywhere = whole______end_anywhere + "|" + part_______end_anywhere;
+        string any___anywhere____start = whole_anywhere____start + "|" + part__anywhere____start;
+        string any___anywhere___middle = whole_anywhere___middle + "|" + part__anywhere___middle;
+        string any___anywhere______end = whole_anywhere______end + "|" + part__anywhere______end;
+        string any___anywhere_anywhere = whole_anywhere_anywhere + "|" + part__anywhere_anywhere;
 
-        // Part of word
-        string pattern_part_word_at_start = "(" + @"^" + pattern_word_with_any_fixes + ")";
-        string pattern_part_word_at_middle = "(" + @"(?<!^)" + pattern_word_with_any_fixes + @"(?!$)" + ")";
-        string pattern_part_word_at_end = "(" + pattern_word_with_any_fixes + @"$" + ")";
-        string pattern_part_word_anywhere = "(" + pattern_part_word_at_start + "|" + pattern_part_word_at_middle + "|" + pattern_part_word_at_end + ")";
 
-        // Whole word
-        string pattern_whole_word_at_start = "(" + pattern_whole_line + "|" + @"^" + text + @"\b" + ")";
-        string pattern_whole_word_at_middle = "(" + pattern_whole_line + "|" + @"(?<!^)" + @"\b" + text + @"\b" + @"(?!$)" + ")";
-        string pattern_whole_word_at_end = "(" + pattern_whole_line + "|" + @"\b" + text + @"$" + ")";
-        string pattern_whole_word_anywhere = "(" + pattern_whole_line + "|" + @"\b" + text + @"\b" + ")";
-
-        switch (text_location_in_verse)
+        string pattern = null;
+        switch (text_wordness)
         {
-            case TextLocationInVerse.Any:
+            case TextWordness.WholeWord:
+                switch (text_location_in_word)
                 {
-                    if (text_wordness == TextWordness.Any)
-                    {
-                        pattern += pattern_any_anywhere;
-                    }
-                    else if (text_wordness == TextWordness.PartOfWord)
-                    {
-                        pattern += pattern_part_word_anywhere;
-                    }
-                    else if (text_wordness == TextWordness.WholeWord)
-                    {
-                        pattern += pattern_whole_word_anywhere;
-                    }
-                    else
-                    {
-                        pattern += pattern_empty_line;
-                    }
+                    case TextLocationInWord.AtStart:
+                        switch (text_location_in_verse)
+                        {
+                            case TextLocationInVerse.AtStart:
+                                pattern = whole____start____start;
+                                break;
+                            case TextLocationInVerse.AtMiddle:
+                                pattern = whole____start___middle;
+                                break;
+                            case TextLocationInVerse.AtEnd:
+                                pattern = whole____start______end;
+                                break;
+                            case TextLocationInVerse.Any:
+                                pattern = whole____start_anywhere;
+                                break;
+                        }
+                        break;
+                    case TextLocationInWord.AtMiddle:
+                        switch (text_location_in_verse)
+                        {
+                            case TextLocationInVerse.AtStart:
+                                pattern = whole___middle____start;
+                                break;
+                            case TextLocationInVerse.AtMiddle:
+                                pattern = whole___middle___middle;
+                                break;
+                            case TextLocationInVerse.AtEnd:
+                                pattern = whole___middle______end;
+                                break;
+                            case TextLocationInVerse.Any:
+                                pattern = whole___middle_anywhere;
+                                break;
+                        }
+                        break;
+                    case TextLocationInWord.AtEnd:
+                        switch (text_location_in_verse)
+                        {
+                            case TextLocationInVerse.AtStart:
+                                pattern = whole______end____start;
+                                break;
+                            case TextLocationInVerse.AtMiddle:
+                                pattern = whole______end___middle;
+                                break;
+                            case TextLocationInVerse.AtEnd:
+                                pattern = whole______end______end;
+                                break;
+                            case TextLocationInVerse.Any:
+                                pattern = whole______end_anywhere;
+                                break;
+                        }
+                        break;
+                    case TextLocationInWord.Any:
+                        switch (text_location_in_verse)
+                        {
+                            case TextLocationInVerse.AtStart:
+                                pattern = whole_anywhere____start;
+                                break;
+                            case TextLocationInVerse.AtMiddle:
+                                pattern = whole_anywhere___middle;
+                                break;
+                            case TextLocationInVerse.AtEnd:
+                                pattern = whole_anywhere______end;
+                                break;
+                            case TextLocationInVerse.Any:
+                                pattern = whole_anywhere_anywhere;
+                                break;
+                        }
+                        break;
                 }
                 break;
-            case TextLocationInVerse.AtStart:
+            case TextWordness.PartOfWord:
+                switch (text_location_in_word)
                 {
-                    if (text_wordness == TextWordness.Any)
-                    {
-                        pattern += pattern_any_at_start;
-                    }
-                    else if (text_wordness == TextWordness.PartOfWord)
-                    {
-                        pattern += pattern_part_word_at_start;
-                    }
-                    else if (text_wordness == TextWordness.WholeWord)
-                    {
-                        pattern += pattern_whole_word_at_start;
-                    }
-                    else
-                    {
-                        pattern += pattern_empty_line;
-                    }
+                    case TextLocationInWord.AtStart:
+                        switch (text_location_in_verse)
+                        {
+                            case TextLocationInVerse.AtStart:
+                                pattern = part_____start____start;
+                                break;
+                            case TextLocationInVerse.AtMiddle:
+                                pattern = part_____start___middle;
+                                break;
+                            case TextLocationInVerse.AtEnd:
+                                pattern = part_____start______end;
+                                break;
+                            case TextLocationInVerse.Any:
+                                pattern = part_____start_anywhere;
+                                break;
+                        }
+                        break;
+                    case TextLocationInWord.AtMiddle:
+                        switch (text_location_in_verse)
+                        {
+                            case TextLocationInVerse.AtStart:
+                                pattern = part____middle____start;
+                                break;
+                            case TextLocationInVerse.AtMiddle:
+                                pattern = part____middle___middle;
+                                break;
+                            case TextLocationInVerse.AtEnd:
+                                pattern = part____middle______end;
+                                break;
+                            case TextLocationInVerse.Any:
+                                pattern = part____middle_anywhere;
+                                break;
+                        }
+                        break;
+                    case TextLocationInWord.AtEnd:
+                        switch (text_location_in_verse)
+                        {
+                            case TextLocationInVerse.AtStart:
+                                pattern = part_______end____start;
+                                break;
+                            case TextLocationInVerse.AtMiddle:
+                                pattern = part_______end___middle;
+                                break;
+                            case TextLocationInVerse.AtEnd:
+                                pattern = part_______end______end;
+                                break;
+                            case TextLocationInVerse.Any:
+                                pattern = part_______end_anywhere;
+                                break;
+                        }
+                        break;
+                    case TextLocationInWord.Any:
+                        switch (text_location_in_verse)
+                        {
+                            case TextLocationInVerse.AtStart:
+                                pattern = part__anywhere____start;
+                                break;
+                            case TextLocationInVerse.AtMiddle:
+                                pattern = part__anywhere___middle;
+                                break;
+                            case TextLocationInVerse.AtEnd:
+                                pattern = part__anywhere______end;
+                                break;
+                            case TextLocationInVerse.Any:
+                                pattern = part__anywhere_anywhere;
+                                break;
+                        }
+                        break;
                 }
                 break;
-            case TextLocationInVerse.AtMiddle:
+            case TextWordness.Any:
+                switch (text_location_in_word)
                 {
-                    if (text_wordness == TextWordness.Any)
-                    {
-                        pattern += pattern_any_at_middle;
-                    }
-                    else if (text_wordness == TextWordness.PartOfWord)
-                    {
-                        pattern += pattern_part_word_at_middle;
-                    }
-                    else if (text_wordness == TextWordness.WholeWord)
-                    {
-                        pattern += pattern_whole_word_at_middle;
-                    }
-                    else
-                    {
-                        pattern += pattern_empty_line;
-                    }
-                }
-                break;
-            case TextLocationInVerse.AtEnd:
-                {
-                    if (text_wordness == TextWordness.Any)
-                    {
-                        pattern += pattern_any_at_end;
-                    }
-                    else if (text_wordness == TextWordness.PartOfWord)
-                    {
-                        pattern += pattern_part_word_at_end;
-                    }
-                    else if (text_wordness == TextWordness.WholeWord)
-                    {
-                        pattern += pattern_whole_word_at_end;
-                    }
-                    else
-                    {
-                        pattern += pattern_empty_line;
-                    }
-                }
-                break;
-        }
-
-        switch (text_location_in_word)
-        {
-            case TextLocationInWord.Any:
-                {
-                    // do noting
-                }
-                break;
-            case TextLocationInWord.AtStart:
-                {
-                    pattern = @"(" + @"(?<=\b)" + pattern + @")"; // positive lookbehind
-                }
-                break;
-            case TextLocationInWord.AtMiddle:
-                {
-                    pattern = @"(" + @"(?<!\s)" + pattern + @"(?!\s)" + @")"; // positive lookbehind and lookahead
-                }
-                break;
-            case TextLocationInWord.AtEnd:
-                {
-                    pattern = @"(" + pattern + @"(?=\b)" + @")"; // positive lookahead
+                    case TextLocationInWord.AtStart:
+                        switch (text_location_in_verse)
+                        {
+                            case TextLocationInVerse.AtStart:
+                                pattern = any______start____start;
+                                break;
+                            case TextLocationInVerse.AtMiddle:
+                                pattern = any______start___middle;
+                                break;
+                            case TextLocationInVerse.AtEnd:
+                                pattern = any______start______end;
+                                break;
+                            case TextLocationInVerse.Any:
+                                pattern = any______start_anywhere;
+                                break;
+                        }
+                        break;
+                    case TextLocationInWord.AtMiddle:
+                        switch (text_location_in_verse)
+                        {
+                            case TextLocationInVerse.AtStart:
+                                pattern = any_____middle____start;
+                                break;
+                            case TextLocationInVerse.AtMiddle:
+                                pattern = any_____middle___middle;
+                                break;
+                            case TextLocationInVerse.AtEnd:
+                                pattern = any_____middle______end;
+                                break;
+                            case TextLocationInVerse.Any:
+                                pattern = any_____middle_anywhere;
+                                break;
+                        }
+                        break;
+                    case TextLocationInWord.AtEnd:
+                        switch (text_location_in_verse)
+                        {
+                            case TextLocationInVerse.AtStart:
+                                pattern = any________end____start;
+                                break;
+                            case TextLocationInVerse.AtMiddle:
+                                pattern = any________end___middle;
+                                break;
+                            case TextLocationInVerse.AtEnd:
+                                pattern = any________end______end;
+                                break;
+                            case TextLocationInVerse.Any:
+                                pattern = any________end_anywhere;
+                                break;
+                        }
+                        break;
+                    case TextLocationInWord.Any:
+                        switch (text_location_in_verse)
+                        {
+                            case TextLocationInVerse.AtStart:
+                                pattern = any___anywhere____start;
+                                break;
+                            case TextLocationInVerse.AtMiddle:
+                                pattern = any___anywhere___middle;
+                                break;
+                            case TextLocationInVerse.AtEnd:
+                                pattern = any___anywhere______end;
+                                break;
+                            case TextLocationInVerse.Any:
+                                pattern = any___anywhere_anywhere;
+                                break;
+                        }
+                        break;
                 }
                 break;
         }
@@ -5382,10 +5142,11 @@ public class Server : IPublisher
                             string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
                             if (!String.IsNullOrEmpty(pattern))
                             {
+                                RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                 foreach (Verse verse in source)
                                 {
                                     string verse_text = verse.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(verse_text, pattern);
+                                    MatchCollection matches = Regex.Matches(verse_text, pattern, regex_options);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -5422,12 +5183,12 @@ public class Server : IPublisher
                                     string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
                                     if (!String.IsNullOrEmpty(pattern))
                                     {
+                                        RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                         foreach (Verse verse in source)
                                         {
                                             string verse_text = verse.Text.SimplifyTo(s_numerology_system.TextMode);
                                             verse_text = verse_text.Trim();
-                                            //MatchCollection matches = Regex.Matches(verse_text, pattern);
-                                            MatchCollection matches = Regex.Matches(verse_text, pattern);
+                                            MatchCollection matches = Regex.Matches(verse_text, pattern, regex_options);
                                             if (multiplicity == -1) // without multiplicity
                                             {
                                                 if (matches.Count > 0)
@@ -5471,6 +5232,7 @@ public class Server : IPublisher
                                         string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
                                         if (!String.IsNullOrEmpty(pattern))
                                         {
+                                            RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                             if ((source != null) && (source.Count > 0))
                                             {
                                                 foreach (Verse verse in source)
@@ -5483,7 +5245,7 @@ public class Server : IPublisher
                                                         emlaaei_text = emlaaei_text.Replace("  ", " ");
                                                     }
 
-                                                    MatchCollection matches = Regex.Matches(emlaaei_text, pattern);
+                                                    MatchCollection matches = Regex.Matches(emlaaei_text, pattern, regex_options);
                                                     if (multiplicity == -1) // without multiplicity
                                                     {
                                                         if (matches.Count > 0)
@@ -5529,32 +5291,35 @@ public class Server : IPublisher
                 if (!String.IsNullOrEmpty(text))
                 {
                     text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
-                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;
 
                     string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                    foreach (Verse verse in source)
+                    if (!String.IsNullOrEmpty(pattern))
                     {
-                        MatchCollection matches = Regex.Matches(verse.Translations[translation], pattern, regex_options);
-                        if (multiplicity == -1) // without multiplicity
+                        RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                        foreach (Verse verse in source)
                         {
-                            if (matches.Count > 0)
-                            {
-                                //result.AddRange(BuildPhrasesAndOriginify(verse, matches));
-                                result.Add(new Phrase(verse, 0, ""));
-                            }
-                        }
-                        else // with multiplicity
-                        {
-                            if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
+                            MatchCollection matches = Regex.Matches(verse.Translations[translation], pattern, regex_options);
+                            if (multiplicity == -1) // without multiplicity
                             {
                                 if (matches.Count > 0)
                                 {
                                     //result.AddRange(BuildPhrasesAndOriginify(verse, matches));
                                     result.Add(new Phrase(verse, 0, ""));
                                 }
-                                else
+                            }
+                            else // with multiplicity
+                            {
+                                if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
                                 {
-                                    result.Add(new Phrase(verse, 0, ""));
+                                    if (matches.Count > 0)
+                                    {
+                                        //result.AddRange(BuildPhrasesAndOriginify(verse, matches));
+                                        result.Add(new Phrase(verse, 0, ""));
+                                    }
+                                    else
+                                    {
+                                        result.Add(new Phrase(verse, 0, ""));
+                                    }
                                 }
                             }
                         }
@@ -5580,13 +5345,14 @@ public class Server : IPublisher
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
-                            text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                            if (!String.IsNullOrEmpty(text))
+                            string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                            if (!String.IsNullOrEmpty(pattern))
                             {
+                                RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                 foreach (Chapter chapter in s_book.Chapters)
                                 {
                                     string chapter_text = chapter.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(chapter_text, text);
+                                    MatchCollection matches = Regex.Matches(chapter_text, pattern, regex_options);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -5620,15 +5386,16 @@ public class Server : IPublisher
                             text = text.SimplifyTo(s_numerology_system.TextMode);
                             if (!String.IsNullOrEmpty(text))
                             {
-                                text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                                if (!String.IsNullOrEmpty(text))
+                                string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                                if (!String.IsNullOrEmpty(pattern))
                                 {
+                                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                     foreach (Chapter chapter in s_book.Chapters)
                                     {
                                         string chapter_text = chapter.Text.Trim();
                                         chapter_text = chapter_text.SimplifyTo(s_numerology_system.TextMode);
                                         chapter_text = chapter_text.Trim();
-                                        MatchCollection matches = Regex.Matches(chapter_text, text);
+                                        MatchCollection matches = Regex.Matches(chapter_text, pattern, regex_options);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -5680,7 +5447,8 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
+                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -5732,13 +5500,14 @@ public class Server : IPublisher
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
-                            text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                            if (!String.IsNullOrEmpty(text))
+                            string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                            if (!String.IsNullOrEmpty(pattern))
                             {
+                                RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                 foreach (Page page in s_book.Pages)
                                 {
                                     string page_text = page.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(page_text, text);
+                                    MatchCollection matches = Regex.Matches(page_text, pattern, regex_options);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -5772,15 +5541,16 @@ public class Server : IPublisher
                             text = text.SimplifyTo(s_numerology_system.TextMode);
                             if (!String.IsNullOrEmpty(text))
                             {
-                                text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                                if (!String.IsNullOrEmpty(text))
+                                string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                                if (!String.IsNullOrEmpty(pattern))
                                 {
+                                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                     foreach (Page page in s_book.Pages)
                                     {
                                         string page_text = page.Text.Trim();
                                         page_text = page_text.SimplifyTo(s_numerology_system.TextMode);
                                         page_text = page_text.Trim();
-                                        MatchCollection matches = Regex.Matches(page_text, text);
+                                        MatchCollection matches = Regex.Matches(page_text, pattern, regex_options);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -5832,7 +5602,8 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
+                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -5884,13 +5655,14 @@ public class Server : IPublisher
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
-                            text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                            if (!String.IsNullOrEmpty(text))
+                            string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                            if (!String.IsNullOrEmpty(pattern))
                             {
+                                RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                 foreach (Station station in s_book.Stations)
                                 {
                                     string station_text = station.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(station_text, text);
+                                    MatchCollection matches = Regex.Matches(station_text, pattern, regex_options);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -5924,15 +5696,16 @@ public class Server : IPublisher
                             text = text.SimplifyTo(s_numerology_system.TextMode);
                             if (!String.IsNullOrEmpty(text))
                             {
-                                text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                                if (!String.IsNullOrEmpty(text))
+                                string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                                if (!String.IsNullOrEmpty(pattern))
                                 {
+                                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                     foreach (Station station in s_book.Stations)
                                     {
                                         string station_text = station.Text.Trim();
                                         station_text = station_text.SimplifyTo(s_numerology_system.TextMode);
                                         station_text = station_text.Trim();
-                                        MatchCollection matches = Regex.Matches(station_text, text);
+                                        MatchCollection matches = Regex.Matches(station_text, pattern, regex_options);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -5984,7 +5757,8 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
+                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -6036,13 +5810,14 @@ public class Server : IPublisher
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
-                            text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                            if (!String.IsNullOrEmpty(text))
+                            string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                            if (!String.IsNullOrEmpty(pattern))
                             {
+                                RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                 foreach (Part part in s_book.Parts)
                                 {
                                     string part_text = part.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(part_text, text);
+                                    MatchCollection matches = Regex.Matches(part_text, pattern, regex_options);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -6076,15 +5851,16 @@ public class Server : IPublisher
                             text = text.SimplifyTo(s_numerology_system.TextMode);
                             if (!String.IsNullOrEmpty(text))
                             {
-                                text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                                if (!String.IsNullOrEmpty(text))
+                                string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                                if (!String.IsNullOrEmpty(pattern))
                                 {
+                                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                     foreach (Part part in s_book.Parts)
                                     {
                                         string part_text = part.Text.Trim();
                                         part_text = part_text.SimplifyTo(s_numerology_system.TextMode);
                                         part_text = part_text.Trim();
-                                        MatchCollection matches = Regex.Matches(part_text, text);
+                                        MatchCollection matches = Regex.Matches(part_text, pattern, regex_options);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -6136,7 +5912,8 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
+                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -6188,13 +5965,14 @@ public class Server : IPublisher
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
-                            text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                            if (!String.IsNullOrEmpty(text))
+                            string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                            if (!String.IsNullOrEmpty(pattern))
                             {
+                                RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                 foreach (Model.Group group in s_book.Groups)
                                 {
                                     string group_text = group.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(group_text, text);
+                                    MatchCollection matches = Regex.Matches(group_text, pattern, regex_options);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -6228,15 +6006,16 @@ public class Server : IPublisher
                             text = text.SimplifyTo(s_numerology_system.TextMode);
                             if (!String.IsNullOrEmpty(text))
                             {
-                                text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                                if (!String.IsNullOrEmpty(text))
+                                string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                                if (!String.IsNullOrEmpty(pattern))
                                 {
+                                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                     foreach (Model.Group group in s_book.Groups)
                                     {
                                         string group_text = group.Text.Trim();
                                         group_text = group_text.SimplifyTo(s_numerology_system.TextMode);
                                         group_text = group_text.Trim();
-                                        MatchCollection matches = Regex.Matches(group_text, text);
+                                        MatchCollection matches = Regex.Matches(group_text, pattern, regex_options);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -6288,7 +6067,8 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
+                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -6340,13 +6120,14 @@ public class Server : IPublisher
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
-                            text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                            if (!String.IsNullOrEmpty(text))
+                            string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                            if (!String.IsNullOrEmpty(pattern))
                             {
+                                RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                 foreach (Half half in s_book.Halfs)
                                 {
                                     string half_text = half.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(half_text, text);
+                                    MatchCollection matches = Regex.Matches(half_text, pattern, regex_options);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -6380,15 +6161,16 @@ public class Server : IPublisher
                             text = text.SimplifyTo(s_numerology_system.TextMode);
                             if (!String.IsNullOrEmpty(text))
                             {
-                                text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                                if (!String.IsNullOrEmpty(text))
+                                string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                                if (!String.IsNullOrEmpty(pattern))
                                 {
+                                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                     foreach (Half half in s_book.Halfs)
                                     {
                                         string half_text = half.Text.Trim();
                                         half_text = half_text.SimplifyTo(s_numerology_system.TextMode);
                                         half_text = half_text.Trim();
-                                        MatchCollection matches = Regex.Matches(half_text, text);
+                                        MatchCollection matches = Regex.Matches(half_text, pattern, regex_options);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -6440,7 +6222,8 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
+                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -6492,13 +6275,14 @@ public class Server : IPublisher
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
-                            text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                            if (!String.IsNullOrEmpty(text))
+                            string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                            if (!String.IsNullOrEmpty(pattern))
                             {
+                                RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                 foreach (Quarter quarter in s_book.Quarters)
                                 {
                                     string quarter_text = quarter.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(quarter_text, text);
+                                    MatchCollection matches = Regex.Matches(quarter_text, pattern, regex_options);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -6532,15 +6316,16 @@ public class Server : IPublisher
                             text = text.SimplifyTo(s_numerology_system.TextMode);
                             if (!String.IsNullOrEmpty(text))
                             {
-                                text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                                if (!String.IsNullOrEmpty(text))
+                                string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                                if (!String.IsNullOrEmpty(pattern))
                                 {
+                                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                     foreach (Quarter quarter in s_book.Quarters)
                                     {
                                         string quarter_text = quarter.Text.Trim();
                                         quarter_text = quarter_text.SimplifyTo(s_numerology_system.TextMode);
                                         quarter_text = quarter_text.Trim();
-                                        MatchCollection matches = Regex.Matches(quarter_text, text);
+                                        MatchCollection matches = Regex.Matches(quarter_text, pattern, regex_options);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -6592,7 +6377,8 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
+                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -6644,13 +6430,14 @@ public class Server : IPublisher
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
-                            text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                            if (!String.IsNullOrEmpty(text))
+                            string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                            if (!String.IsNullOrEmpty(pattern))
                             {
+                                RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                 foreach (Bowing bowing in s_book.Bowings)
                                 {
                                     string bowing_text = bowing.Text.Trim();
-                                    MatchCollection matches = Regex.Matches(bowing_text, text);
+                                    MatchCollection matches = Regex.Matches(bowing_text, pattern, regex_options);
                                     if (multiplicity == -1) // without multiplicity
                                     {
                                         if (matches.Count > 0)
@@ -6684,15 +6471,16 @@ public class Server : IPublisher
                             text = text.SimplifyTo(s_numerology_system.TextMode);
                             if (!String.IsNullOrEmpty(text))
                             {
-                                text = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
-                                if (!String.IsNullOrEmpty(text))
+                                string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
+                                if (!String.IsNullOrEmpty(pattern))
                                 {
+                                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                                     foreach (Bowing bowing in s_book.Bowings)
                                     {
                                         string bowing_text = bowing.Text.Trim();
                                         bowing_text = bowing_text.SimplifyTo(s_numerology_system.TextMode);
                                         bowing_text = bowing_text.Trim();
-                                        MatchCollection matches = Regex.Matches(bowing_text, text);
+                                        MatchCollection matches = Regex.Matches(bowing_text, pattern, regex_options);
                                         if (multiplicity == -1) // without multiplicity
                                         {
                                             if (matches.Count > 0)
@@ -6744,7 +6532,8 @@ public class Server : IPublisher
                     //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
                     //                    }
 
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text);
+                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
                     //                    if (multiplicity == -1) // without multiplicity
                     //                    {
                     //                        if (matches.Count > 0)
@@ -7890,7 +7679,7 @@ public class Server : IPublisher
                 {
                     text = text.SimplifyTo(s_numerology_system.TextMode);
 
-                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;
+                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
                     text = Regex.Replace(text, @"\s+", " ", regex_options); // remove double space or higher if any
 
                     try

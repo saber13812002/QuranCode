@@ -13789,7 +13789,6 @@ public partial class MainForm : Form, ISubscriber
                 ToolTip.SetToolTip(InspectChaptersLabel, L[l]["Inspect chapters"]);
                 WordsListBoxLabel.Visible = false;
                 WordsListBox.Visible = false;
-                WordsListBox.SendToBack();
 
                 GenerateSentencesLabel.Visible = false;
                 DuplicateLettersCheckBox.Visible = false;
@@ -17552,7 +17551,6 @@ public partial class MainForm : Form, ISubscriber
                     ToolTip.SetToolTip(InspectChaptersLabel, L[l]["Inspect chapters"]);
                     WordsListBoxLabel.Visible = false;
                     WordsListBox.Visible = false;
-                    WordsListBox.SendToBack();
 
                     GenerateSentencesLabel.Visible = false;
                     DuplicateLettersCheckBox.Visible = false;
@@ -17926,7 +17924,6 @@ public partial class MainForm : Form, ISubscriber
                         ToolTip.SetToolTip(InspectChaptersLabel, L[l]["Inspect chapters"]);
                         WordsListBoxLabel.Visible = false;
                         WordsListBox.Visible = false;
-                        WordsListBox.SendToBack();
 
                         this.Text = Application.ProductName + " ║ " + GetSelectionSummary();
                         UpdateSearchScope();
@@ -17967,7 +17964,6 @@ public partial class MainForm : Form, ISubscriber
                         ToolTip.SetToolTip(InspectChaptersLabel, L[l]["Inspect chapters"]);
                         WordsListBoxLabel.Visible = false;
                         WordsListBox.Visible = false;
-                        WordsListBox.SendToBack();
 
                         GenerateSentencesLabel.Visible = false;
                         DuplicateLettersCheckBox.Visible = false;
@@ -22397,7 +22393,6 @@ public partial class MainForm : Form, ISubscriber
             ToolTip.SetToolTip(InspectChaptersLabel, L[l]["Inspect chapters"]);
             WordsListBoxLabel.Visible = false;
             WordsListBox.Visible = false;
-            WordsListBox.SendToBack();
 
             this.Text = Application.ProductName + " ║ " + GetSelectionSummary();
             UpdateSearchScope();
@@ -22461,6 +22456,11 @@ public partial class MainForm : Form, ISubscriber
         }
         finally
         {
+            if (PictureBox.Visible)
+            {
+                PictureBox.Visible = false;
+            }
+
             MainTextBox.EndUpdate();
             MainTextBox.SelectionChanged += new EventHandler(MainTextBox_SelectionChanged);
             MainTextBox.TextChanged += new EventHandler(MainTextBox_TextChanged);
@@ -33242,7 +33242,6 @@ public partial class MainForm : Form, ISubscriber
                 {
                     WordsListBoxLabel.Visible = false;
                     WordsListBox.Visible = false;
-                    WordsListBox.SendToBack();
                 }
             }
         }
@@ -33753,18 +33752,26 @@ public partial class MainForm : Form, ISubscriber
     }
     private void PopulateWordsListBox()
     {
-        if (m_text_search_type == TextSearchType.Exact)
+        switch (m_text_search_type)
         {
-            PopulateWordsListBoxWithCurrentOrNextWords();
+            case TextSearchType.Exact:
+                {
+                    PopulateWordsListBoxWithCurrentOrNextWords();
+                }
+                break;
+            case TextSearchType.Proximity:
+                {
+                    PopulateWordsListBoxWithCurrentWords();
+                }
+                break;
+            case TextSearchType.Root:
+                {
+                    PopulateWordsListBoxWithRoots();
+                }
+                break;
         }
-        else if (m_text_search_type == TextSearchType.Proximity)
-        {
-            PopulateWordsListBoxWithCurrentWords();
-        }
-        else if (m_text_search_type == TextSearchType.Root)
-        {
-            PopulateWordsListBoxWithRoots();
-        }
+
+        FindByTextControls_Enter(null, null);
     }
     private void PopulateWordsListBoxWithCurrentOrNextWords()
     {
@@ -33776,10 +33783,9 @@ public partial class MainForm : Form, ISubscriber
             {
                 //SearchGroupBox.Text = " Search by Exact words      ";
                 //SearchGroupBox.Refresh();
-                WordsListBoxLabel.Text = "000 (00)";
-                WordsListBoxLabel.ForeColor = Numbers.GetNumberTypeColor(0);
-                //ToolTip.SetToolTip(WordsListBoxLabel, "total (unique)");
-                WordsListBoxLabel.Refresh();
+                //WordsListBoxLabel.Text = "000 (00)";
+                //WordsListBoxLabel.ForeColor = Numbers.GetNumberTypeColor(0);
+                //WordsListBoxLabel.Refresh();
 
                 WordsListBox.BeginUpdate();
                 WordsListBox.Items.Clear();
@@ -33899,10 +33905,9 @@ public partial class MainForm : Form, ISubscriber
             {
                 //SearchGroupBox.Text = " Search by Proximity        ";
                 //SearchGroupBox.Refresh();
-                WordsListBoxLabel.Text = "000 (00)";
-                WordsListBoxLabel.ForeColor = Numbers.GetNumberTypeColor(0);
-                //ToolTip.SetToolTip(WordsListBoxLabel, "total (unique)");
-                WordsListBoxLabel.Refresh();
+                //WordsListBoxLabel.Text = "000 (00)";
+                //WordsListBoxLabel.ForeColor = Numbers.GetNumberTypeColor(0);
+                //WordsListBoxLabel.Refresh();
 
                 WordsListBox.BeginUpdate();
                 WordsListBox.Items.Clear();
@@ -33996,10 +34001,9 @@ public partial class MainForm : Form, ISubscriber
                 {
                     //SearchGroupBox.Text = " Search by Roots            ";
                     //SearchGroupBox.Refresh();
-                    WordsListBoxLabel.Text = "000 (00)";
-                    WordsListBoxLabel.ForeColor = Numbers.GetNumberTypeColor(0);
-                    //ToolTip.SetToolTip(WordsListBoxLabel, "total (unique)");
-                    WordsListBoxLabel.Refresh();
+                    //WordsListBoxLabel.Text = "000 (00)";
+                    //WordsListBoxLabel.ForeColor = Numbers.GetNumberTypeColor(0);
+                    //WordsListBoxLabel.Refresh();
 
                     WordsListBox.BeginUpdate();
                     WordsListBox.Items.Clear();
@@ -34287,7 +34291,7 @@ public partial class MainForm : Form, ISubscriber
                     //string translation = Client.DEFAULT_TRANSLATION;
 
                     // update m_text_location_in_verse and m_text_location_in_word
-                    UpdateFindByTextOptions();
+                    //UpdateFindByTextOptions();
 
                     List<Verse> total_verses = new List<Verse>();
                     if (word_texts.Count > 0)
@@ -34404,7 +34408,7 @@ public partial class MainForm : Form, ISubscriber
                 //string translation = Client.DEFAULT_TRANSLATION;
 
                 // update m_text_location_in_verse and m_text_location_in_word
-                UpdateFindByTextOptions();
+                //UpdateFindByTextOptions();
 
                 if (word_texts.Count > 0)
                 {
@@ -34827,14 +34831,18 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FindByTextRadioButton_CheckedChanged(object sender, EventArgs e)
     {
-        UpdateFindByTextOptions();
-        PopulateWordsListBox();
-
-        if (PictureBox.Visible)
+        RadioButton radio_button = (sender as RadioButton);
+        if ((radio_button != null) && (radio_button.Checked))
         {
-            if (m_current_drawing_type == DrawingType.SearchTerms)
+            UpdateFindByTextOptions();
+            PopulateWordsListBox();
+
+            if (PictureBox.Visible)
             {
-                RedrawImage();
+                if (m_current_drawing_type == DrawingType.SearchTerms)
+                {
+                    RedrawImage();
+                }
             }
         }
     }
@@ -34866,7 +34874,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FindByTextWordnessCheckBox_CheckStateChanged(object sender, EventArgs e)
     {
-        EnableFindByTextControls();
         UpdateFindByTextOptions();
         PopulateWordsListBox();
 
@@ -34880,7 +34887,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FindByTextCaseSensitiveCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-        EnableFindByTextControls();
         UpdateFindByTextOptions();
         PopulateWordsListBox();
 
@@ -35006,8 +35012,6 @@ public partial class MainForm : Form, ISubscriber
         }
         WordsListBoxLabel.Visible = true;
         WordsListBox.Visible = true;
-        WordsListBoxLabel.BringToFront();
-        WordsListBox.BringToFront();
 
         ResetFindByTextSearchTypeLabels();
         ResetFindByTextSearchBlockSizeLabels();
@@ -35290,7 +35294,7 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
 
-                    UpdateFindByTextOptions();
+                    //UpdateFindByTextOptions();
 
                     //FindByExact(text, m_language_type, translation);
                     FindByExact(text, m_language_type, null); // find in all installed translations if not Arabic
@@ -35452,7 +35456,7 @@ public partial class MainForm : Form, ISubscriber
                 }
 
                 // update m_text_location_in_verse and m_text_location_in_word
-                UpdateFindByTextOptions();
+                //UpdateFindByTextOptions();
 
                 text = text.Trim();
                 if (!String.IsNullOrEmpty(text))
@@ -36069,7 +36073,7 @@ public partial class MainForm : Form, ISubscriber
                 }
 
                 // update m_text_location_in_verse and m_text_location_in_word
-                UpdateFindByTextOptions();
+                //UpdateFindByTextOptions();
 
                 text = text.Trim();
                 if (!String.IsNullOrEmpty(text))
@@ -36155,10 +36159,14 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FindBySimilarityRadioButton_CheckedChanged(object sender, EventArgs e)
     {
-        //if (m_similarity_search_source == SimilaritySearchSource.CurrentVerse)
-        //{
-        //    FindBySimilarityButton_Click(null, null);
-        //}
+        RadioButton radio_button = (sender as RadioButton);
+        if ((radio_button != null) && (radio_button.Checked))
+        {
+            //if (m_similarity_search_source == SimilaritySearchSource.CurrentVerse)
+            //{
+            //    FindBySimilarityButton_Click(null, null);
+            //}
+        }
     }
     private void FindBySimilarityPercentageTrackBar_ValueChanged(object sender, EventArgs e)
     {
@@ -48233,7 +48241,6 @@ public partial class MainForm : Form, ISubscriber
                     {
                         WordsListBoxLabel.Visible = false;
                         WordsListBox.Visible = false;
-                        WordsListBox.SendToBack();
                     }
                 }
             }
@@ -48446,6 +48453,7 @@ public partial class MainForm : Form, ISubscriber
     private void AppLauncherLabel_Click(object sender, EventArgs e)
     {
         this.Cursor = Cursors.WaitCursor;
+        string process_name = "";
         try
         {
             if (sender is Label)
@@ -48457,7 +48465,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         int start = "App".Length;
                         int pos = label_name.IndexOf("Label");
-                        string process_name = label_name.Substring(start, pos - start);
+                        process_name = label_name.Substring(start, pos - start);
                         if (!String.IsNullOrEmpty(process_name))
                         {
                             System.Diagnostics.Process.Start(process_name + ".exe");
@@ -48468,11 +48476,12 @@ public partial class MainForm : Form, ISubscriber
         }
         catch (Exception ex)
         {
-            while (ex != null)
-            {
-                MessageBox.Show(ex.Message, Application.ProductName);
-                ex = ex.InnerException;
-            }
+            MessageBox.Show("Cannot find " + process_name + ".exe", Application.ProductName);
+            //while (ex != null)
+            //{
+            //    MessageBox.Show(ex.Message, Application.ProductName);
+            //    ex = ex.InnerException;
+            //}
         }
         finally
         {
