@@ -68,7 +68,7 @@
   XP non-additive prime = prime with non-prime digit sum                 GREEN
 
   C  composite              = divisible number by self and others
-  AC additive composite     = composite with composite digit sum         RED
+  AC additive composite     = composite with composite digit sum           RED
   XC non-additive composite = composite with non-composite digit sum     BROWN
   ------------------------------------------------------------------------------
 

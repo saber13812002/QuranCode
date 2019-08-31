@@ -93,10 +93,16 @@
     <Content Include="Values\Original_Initials_Frequency.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified28_Abjad_4n+1.txt">
+    <Content Include="Values\Simplified28_Abjad_4n+1Composites.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified28_Abjad_4n-1.txt">
+    <Content Include="Values\Simplified28_Abjad_4n+1Primes.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified28_Abjad_4n-1Composites.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified28_Abjad_4n-1Primes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Values\Simplified28_Abjad_Composites.txt">
@@ -120,10 +126,16 @@
     <Content Include="Values\Simplified28_Abjad_SmithNumbers.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified28_Alphabet_4n+1.txt">
+    <Content Include="Values\Simplified28_Alphabet_4n+1Composites.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified28_Alphabet_4n-1.txt">
+    <Content Include="Values\Simplified28_Alphabet_4n+1Primes.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified28_Alphabet_4n-1Composites.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified28_Alphabet_4n-1Primes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Values\Simplified28_Alphabet_AdditiveComposites.txt">
@@ -159,10 +171,16 @@
     <Content Include="Values\Simplified28_Alphabet_SmithNumbers.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified28_Appearance_4n+1.txt">
+    <Content Include="Values\Simplified28_Appearance_4n+1Composites.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified28_Appearance_4n-1.txt">
+    <Content Include="Values\Simplified28_Appearance_4n+1Primes.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified28_Appearance_4n-1Composites.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified28_Appearance_4n-1Primes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Values\Simplified28_Appearance_AdditiveComposites.txt">
@@ -201,10 +219,16 @@
     <Content Include="Values\Simplified28_FirstLetter_Frequency.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified28_Frequency_4n+1.txt">
+    <Content Include="Values\Simplified28_Frequency_4n+1Composites.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified28_Frequency_4n-1.txt">
+    <Content Include="Values\Simplified28_Frequency_4n+1Primes.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified28_Frequency_4n-1Composites.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified28_Frequency_4n-1Primes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Values\Simplified28_Frequency_AdditiveComposites.txt">
@@ -252,10 +276,16 @@
     <Content Include="Values\Simplified29_A29T29C19G23_DNA.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified29_Abjad_4n+1.txt">
+    <Content Include="Values\Simplified29_Abjad_4n+1Composites.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified29_Abjad_4n-1.txt">
+    <Content Include="Values\Simplified29_Abjad_4n+1Primes.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified29_Abjad_4n-1Composites.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified29_Abjad_4n-1Primes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Values\Simplified29_Abjad_Composites.txt">
@@ -279,10 +309,16 @@
     <Content Include="Values\Simplified29_Abjad_SmithNumbers.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified29_Alphabet_4n+1.txt">
+    <Content Include="Values\Simplified29_Alphabet_4n+1Composites.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified29_Alphabet_4n-1.txt">
+    <Content Include="Values\Simplified29_Alphabet_4n+1Primes.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified29_Alphabet_4n-1Composites.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified29_Alphabet_4n-1Primes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Values\Simplified29_Alphabet_AdditiveComposites.txt">
@@ -327,10 +363,16 @@
     <Content Include="Values\Simplified29_Alphabet_Zeros.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified29_Appearance_4n+1.txt">
+    <Content Include="Values\Simplified29_Appearance_4n+1Composites.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified29_Appearance_4n-1.txt">
+    <Content Include="Values\Simplified29_Appearance_4n+1Primes.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified29_Appearance_4n-1Composites.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified29_Appearance_4n-1Primes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Values\Simplified29_Appearance_AdditiveComposites.txt">
@@ -372,10 +414,16 @@
     <Content Include="Values\Simplified29_FirstLetter_Frequency.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified29_Frequency_4n+1.txt">
+    <Content Include="Values\Simplified29_Frequency_4n+1Composites.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified29_Frequency_4n-1.txt">
+    <Content Include="Values\Simplified29_Frequency_4n+1Primes.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified29_Frequency_4n-1Composites.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Values\Simplified29_Frequency_4n-1Primes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Values\Simplified29_Frequency_AdditiveComposites.txt">
