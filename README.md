@@ -59,9 +59,10 @@
   Definitions:
   ------------------------------------------------------------------------------
   U  unit               = indivisible number                              PINK
-  repunit            = repeated unit number [11111111111...] = (10^n - 1)/9
+  repunit               = repeated unit number [11111111111...] = (10^n - 1)/9
   where n = 2, 19, 23, 317, 1031, 49081, 86453, 109297, 270343
   http://oeis.org/A004023
+
   P  prime              = divisible number by self only
   AP additive prime     = prime with prime digit sum                      BLUE
   XP non-additive prime = prime with non-prime digit sum                 GREEN
@@ -72,13 +73,13 @@
   ------------------------------------------------------------------------------
 
   ------------------------------------------------------------------------------
-  Book         = Key + Message                        Key = chapter 1 = الفاتحة
-  114 chapters =  1  +   113                          unit and additive prime
-  6236 verses  =  7  +   6229                                  additive primes
+  Book         = Key + Message                         Key = chapter 1 = الفاتحة
+  114 chapters =  1  +   113                             unit and additive prime
+  6236 verses  =  7  +   6229                                     additive prime
 
-  Key = 7 verses = 29 words = 139 letters                      additive primes
-  729139 left-to-right concatenation                     additive prime
-  139297 right-to-left concatenation                     additive prime
+  Key = 7 verses = 29 words = 139 letters                         additive prime
+  729139 left-to-right concatenation                              additive prime
+  139297 right-to-left concatenation                              additive prime
   ------------------------------------------------------------------------------
 
   ------------------------------------------------------------------------------
@@ -132,7 +133,7 @@
   mid(1...253) = 127
   253  × 127 = 32131
   P32 = 131
-  There are  32 non-additive     primes up to 506 (excluding primes with digit sum = 10)
+  There are  42 non-additive     primes up to 506 (10 primes with digit sum = 10)
   There are 131 non-additive composites up to 506
 
   P114      = 619
