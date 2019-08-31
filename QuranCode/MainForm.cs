@@ -2082,9 +2082,9 @@ public partial class MainForm : Form, ISubscriber
         this.VersionLabel.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
         this.VersionLabel.Size = new System.Drawing.Size(107, 26);
         this.VersionLabel.TabIndex = 111;
-        this.VersionLabel.Text = "v6.19.114";
+        this.VersionLabel.Text = "6.19.114";
         this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-        this.ToolTip.SetToolTip(this.VersionLabel, "About");
+        this.ToolTip.SetToolTip(this.VersionLabel, "Version");
         this.VersionLabel.Click += new System.EventHandler(this.VersionLabel_Click);
         this.VersionLabel.Enter += new System.EventHandler(this.StatusControls_Enter);
         // 
@@ -13100,7 +13100,7 @@ public partial class MainForm : Form, ISubscriber
                             FontLabel.Enabled = false;
                         }
 
-                        ScriptLabel.Visible = Globals.EDITION == Edition.Ultimate;
+                        ScriptLabel.Visible = Globals.EDITION == Edition.Research;
 
                         this.Activate(); // bring to foreground
                     }
@@ -13757,8 +13757,8 @@ public partial class MainForm : Form, ISubscriber
 
                 DisplayWordFrequencies();
 
-                GenerateSentencesLabel.Visible = (Globals.EDITION == Edition.Ultimate);
-                DuplicateLettersCheckBox.Visible = (Globals.EDITION == Edition.Ultimate);
+                GenerateSentencesLabel.Visible = (Globals.EDITION == Edition.Research);
+                DuplicateLettersCheckBox.Visible = (Globals.EDITION == Edition.Research);
                 GenerateSentencesLabel.Refresh();
                 DuplicateLettersCheckBox.Refresh();
             }
@@ -16364,7 +16364,7 @@ public partial class MainForm : Form, ISubscriber
 
                 MenuItem EditGenerateSentencesMenuItem = new MenuItem(L[l]["Generate Sentences"] + "\t\tCtrl+G");
                 EditGenerateSentencesMenuItem.Click += new EventHandler(MenuItem_GenerateSentences);
-                if (Globals.EDITION == Edition.Ultimate) ContextMenu.MenuItems.Add(EditGenerateSentencesMenuItem);
+                if (Globals.EDITION == Edition.Research) ContextMenu.MenuItems.Add(EditGenerateSentencesMenuItem);
 
                 MenuItem MenuItemSeparator1 = new MenuItem("-");
                 ContextMenu.MenuItems.Add(MenuItemSeparator1);
@@ -17080,8 +17080,8 @@ public partial class MainForm : Form, ISubscriber
             GoldenRatioScopeLabel.Visible = (m_active_textbox == MainTextBox);
             GoldenRatioTypeLabel.Visible = (m_active_textbox == MainTextBox);
             GoldenRatioOrderLabel.Visible = (m_active_textbox == MainTextBox);
-            DuplicateLettersCheckBox.Visible = (m_active_textbox != null) && (m_active_textbox.SelectionLength > 0) && (Globals.EDITION == Edition.Ultimate);
-            GenerateSentencesLabel.Visible = (m_active_textbox != null) && (m_active_textbox.SelectionLength > 0) && (Globals.EDITION == Edition.Ultimate);
+            DuplicateLettersCheckBox.Visible = (m_active_textbox != null) && (m_active_textbox.SelectionLength > 0) && (Globals.EDITION == Edition.Research);
+            GenerateSentencesLabel.Visible = (m_active_textbox != null) && (m_active_textbox.SelectionLength > 0) && (Globals.EDITION == Edition.Research);
         }
     }
     /////////////////////////////////////////////////////////////////////////////
@@ -17541,8 +17541,8 @@ public partial class MainForm : Form, ISubscriber
                 {
                     DisplayWordFrequencies();
 
-                    GenerateSentencesLabel.Visible = (Globals.EDITION == Edition.Ultimate);
-                    DuplicateLettersCheckBox.Visible = (Globals.EDITION == Edition.Ultimate);
+                    GenerateSentencesLabel.Visible = (Globals.EDITION == Edition.Research);
+                    DuplicateLettersCheckBox.Visible = (Globals.EDITION == Edition.Research);
                     GenerateSentencesLabel.Refresh();
                     DuplicateLettersCheckBox.Refresh();
                 }
@@ -34239,7 +34239,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayWordVerses(string item_text)
     {
-        if (Globals.EDITION == Edition.Ultimate)
+        if (Globals.EDITION == Edition.Research)
         {
             if (!String.IsNullOrEmpty(item_text))
             {
@@ -43151,7 +43151,7 @@ public partial class MainForm : Form, ISubscriber
     {
         try
         {
-            if (Globals.EDITION == Edition.Ultimate)
+            if (Globals.EDITION == Edition.Research)
             {
                 int digits = Numbers.DigitCount(ValueTextBox.Text, m_radix);
                 ValueInspectLabel.Text = digits.ToString();

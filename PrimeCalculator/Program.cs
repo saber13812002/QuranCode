@@ -15,13 +15,13 @@ static class Program
     {
         if ((args != null) && (args.Length > 0))
         {
-            if (args[0].ToUpper() == "")
+            if (args[0] == "")
             {
                 Globals.EDITION = Edition.Standard;
             }
-            else if (args[0].ToUpper() == "U")
+            else if (args[0] == "R")
             {
-                Globals.EDITION = Edition.Ultimate;
+                Globals.EDITION = Edition.Research;
             }
             else
             {
@@ -32,11 +32,11 @@ static class Program
         {
             if (Control.ModifierKeys == Keys.Control)
             {
-                Globals.EDITION = Edition.Ultimate;
+                Globals.EDITION = Edition.Research;
             }
             else if (Control.ModifierKeys == Keys.Shift)
             {
-                Globals.EDITION = Edition.Ultimate;
+                Globals.EDITION = Edition.Research;
             }
             else // default
             {

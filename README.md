@@ -7,7 +7,7 @@
   ------------------------------------------------------------------------------
   QuranCode Editions:
   Standard Edition	Editable value systems with 19 add options.	[Start normally]
-  Ultimate Edition	Private research methods and big numbers.	[Start with Shift]
+  Research Edition	Research methods, big numbers, C# script.	[Start with Shift]
   ------------------------------------------------------------------------------
 
   Initial Letter Sentences (جمل الحروف المقطعة)

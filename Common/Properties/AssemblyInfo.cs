@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
     "QuranCode is a free and open-source similarity and numerical research tool for the ever-revealing Quran (القرءان الكريم)." + "\r\n" +
     "\r\n" +
     "Standard Edition\tEditable value systems with 19 add options." + "\r\n" +
-    "Ultimate Edition\tPrivate research methods and big numbers." + "\r\n" +
+    "Research Edition\tResearch methods, big numbers, C# script." + "\r\n" +
     "\r\n" +
     "CREDITS:" + "\r\n" +
     "http://tanzil.net for the Quran text and translations." + "\r\n" +

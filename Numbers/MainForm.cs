@@ -545,7 +545,7 @@ public partial class MainForm : Form
         int pos = version.LastIndexOf(".");
         if (pos > -1)
         {
-            VersionLabel.Text = "v" + version.Substring(0, pos);
+            VersionLabel.Text = version.Substring(0, pos);
         }
 
         if (this.Top < 0)

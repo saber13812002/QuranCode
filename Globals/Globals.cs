@@ -1,4 +1,4 @@
-public enum Edition { Standard, Ultimate }
+public enum Edition { Standard, Research }
 
 public static class Globals
 {
@@ -21,15 +21,15 @@ public static class Globals
 
             if (EDITION == Edition.Standard)
             {
-                return ("v" + version + "");
+                return (version + "");
             }
-            else if (EDITION == Edition.Ultimate)
+            else if (EDITION == Edition.Research)
             {
-                return ("v" + version + "U");
+                return (version + "R");
             }
             else
             {
-                return ("v" + version + "!"); // Invalid Edition
+                return (version + "!"); // Invalid Edition
             }
         }
     }
