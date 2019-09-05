@@ -4616,7 +4616,7 @@ public class Server : IPublisher
         string pattern_anywordness_vanywhere_wanywhere = @"(" + pattern_anywordness_vstart_wanywhere + "|" + pattern_anywordness_vmiddle_wanywhere + "|" + pattern_anywordness_vend_wanywhere + @")";
 
         // Part of word
-        string pattern_partword_vstart_wanywhere = @"(" 
+        string pattern_partword_vstart_wanywhere = @"("
                                           + @"(" + @"^" + pattern_prefix_and_suffix + @")" + "|"
                                           + @"(" + @"^" + pattern_suffix + @")" + "|"
                                           + @"(" + @"^" + pattern_prefix + @")"

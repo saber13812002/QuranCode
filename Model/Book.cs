@@ -2315,7 +2315,6 @@ namespace Model
                                     }
                                     else if (text_words.Length > 1) // multiple words search term
                                     {
-
                                         switch (text_location_in_word)
                                         {
                                             case TextLocationInWord.AtStart:
@@ -2500,24 +2499,32 @@ namespace Model
                                     }
                                     if (break_loop) break;
 
-                                    bool start_found = false;
-                                    switch (text_location_in_word)
-                                    {
-                                        case TextLocationInWord.AtStart:
-                                            {
-                                                start_found = verse_words[i].Equals(text_words[0]);
-                                            }
-                                            break;
-                                        case TextLocationInWord.AtMiddle:
-                                        case TextLocationInWord.AtEnd:
-                                        case TextLocationInWord.Any:
-                                            {
-                                                start_found = verse_words[i].EndsWith(text_words[0]);
-                                            }
-                                            break;
-                                    }
+                                    //bool start_found = false;
+                                    //switch (text_location_in_word)
+                                    //{
+                                    //    case TextLocationInWord.AtStart:
+                                    //        {
+                                    //            start_found = verse_words[i].Equals(text_words[0]);
+                                    //        }
+                                    //        break;
+                                    //    case TextLocationInWord.AtMiddle:
+                                    //        {
+                                    //            start_found = verse_words[i].EndsWith(text_words[0]);
+                                    //        }
+                                    //        break;
+                                    //    case TextLocationInWord.AtEnd:
+                                    //        {
+                                    //            start_found = verse_words[i].EndsWith(text_words[0]);
+                                    //        }
+                                    //        break;
+                                    //    case TextLocationInWord.Any:
+                                    //        {
+                                    //            start_found = verse_words[i].EndsWith(text_words[0]);
+                                    //        }
+                                    //        break;
+                                    //}
 
-                                    if (start_found)
+                                    if (verse_words[i].EndsWith(text_words[0]))
                                     {
                                         if (verse_words.Length >= (i + text_words.Length))
                                         {
@@ -2525,7 +2532,7 @@ namespace Model
                                             bool match_found = true;
                                             for (int j = 1; j < text_words.Length; j++)
                                             {
-                                                if (verse_words[j + i] != text_words[j])
+                                                if (!verse_words[j + i].StartsWith(text_words[j]))
                                                 {
                                                     match_found = false;
                                                     break;
