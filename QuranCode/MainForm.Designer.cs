@@ -5016,12 +5016,12 @@ partial class MainForm
             this.WordsListBoxContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FindSelectedWordsMenuItem});
             this.WordsListBoxContextMenuStrip.Name = "WordsListBoxContextMenuStrip";
-            this.WordsListBoxContextMenuStrip.Size = new System.Drawing.Size(98, 26);
+            this.WordsListBoxContextMenuStrip.Size = new System.Drawing.Size(153, 48);
             // 
             // FindSelectedWordsMenuItem
             // 
             this.FindSelectedWordsMenuItem.Name = "FindSelectedWordsMenuItem";
-            this.FindSelectedWordsMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.FindSelectedWordsMenuItem.Size = new System.Drawing.Size(152, 22);
             this.FindSelectedWordsMenuItem.Text = "Find";
             this.FindSelectedWordsMenuItem.Click += new System.EventHandler(this.FindSelectedWordsMenuItem_Click);
             // 
@@ -5582,7 +5582,7 @@ partial class MainForm
             this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 1);
             this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
             this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-            this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 208);
+            this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 209);
             this.ScriptOutputGroupBox.TabIndex = 103;
             this.ScriptOutputGroupBox.TabStop = false;
             this.ScriptOutputGroupBox.Text = " Output ";
@@ -5598,7 +5598,7 @@ partial class MainForm
             this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
             this.ScriptOutputTextBox.ReadOnly = true;
             this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 180);
+            this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 181);
             this.ScriptOutputTextBox.TabIndex = 0;
             this.ScriptOutputTextBox.WordWrap = false;
             this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);

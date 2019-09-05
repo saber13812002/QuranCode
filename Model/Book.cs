@@ -1946,172 +1946,172 @@ namespace Model
             return result;
         }
         // get words
-        public Dictionary<string, int> GetWordsWith(List<Verse> verses, string text, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness)
-        {
-            Dictionary<string, int> result = new Dictionary<string, int>();
-            if (verses != null)
-            {
-                if (!String.IsNullOrEmpty(text))
-                {
-                    text = text.Trim();
-                    if (!text.Contains(" "))
-                    {
-                        if (!with_diacritics)
-                        {
-                            text = text.SimplifyTo(this.text_mode).Trim();
-                        }
+        //public Dictionary<string, int> GetWordsWith(List<Verse> verses, string text, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness)
+        //{
+        //    Dictionary<string, int> result = new Dictionary<string, int>();
+        //    if (verses != null)
+        //    {
+        //        if (!String.IsNullOrEmpty(text))
+        //        {
+        //            text = text.Trim();
+        //            if (!text.Contains(" "))
+        //            {
+        //                if (!with_diacritics)
+        //                {
+        //                    text = text.SimplifyTo(this.text_mode).Trim();
+        //                }
 
-                        foreach (Verse verse in verses)
-                        {
-                            string verse_text = verse.Text;
-                            if (!with_diacritics)
-                            {
-                                verse_text = verse_text.SimplifyTo(this.text_mode).Trim();
-                            }
+        //                foreach (Verse verse in verses)
+        //                {
+        //                    string verse_text = verse.Text;
+        //                    if (!with_diacritics)
+        //                    {
+        //                        verse_text = verse_text.SimplifyTo(this.text_mode).Trim();
+        //                    }
 
-                            verse_text = verse_text.Trim();
-                            while (verse_text.Contains("  "))
-                            {
-                                verse_text = verse_text.Replace("  ", " ");
-                            }
-                            string[] verse_words = verse_text.Split();
+        //                    verse_text = verse_text.Trim();
+        //                    while (verse_text.Contains("  "))
+        //                    {
+        //                        verse_text = verse_text.Replace("  ", " ");
+        //                    }
+        //                    string[] verse_words = verse_text.Split();
 
-                            for (int i = 0; i < verse_words.Length; i++)
-                            {
-                                bool break_loop = false;
-                                switch (text_location_in_verse)
-                                {
-                                    case TextLocationInVerse.Any:
-                                        {
-                                            // do nothing
-                                        }
-                                        break;
-                                    case TextLocationInVerse.AtStart:
-                                        {
-                                            if (i > 0) break_loop = true;
-                                        }
-                                        break;
-                                    case TextLocationInVerse.AtMiddle:
-                                        {
-                                            if (i == 0) continue;
-                                            if (i == verse_words.Length - 1) continue;
-                                        }
-                                        break;
-                                    case TextLocationInVerse.AtEnd:
-                                        {
-                                            if (i < verse_words.Length - 1) continue;
-                                        }
-                                        break;
-                                }
-                                if (break_loop) break;
+        //                    for (int i = 0; i < verse_words.Length; i++)
+        //                    {
+        //                        bool break_loop = false;
+        //                        switch (text_location_in_verse)
+        //                        {
+        //                            case TextLocationInVerse.Any:
+        //                                {
+        //                                    // do nothing
+        //                                }
+        //                                break;
+        //                            case TextLocationInVerse.AtStart:
+        //                                {
+        //                                    if (i > 0) break_loop = true;
+        //                                }
+        //                                break;
+        //                            case TextLocationInVerse.AtMiddle:
+        //                                {
+        //                                    if (i == 0) continue;
+        //                                    if (i == verse_words.Length - 1) continue;
+        //                                }
+        //                                break;
+        //                            case TextLocationInVerse.AtEnd:
+        //                                {
+        //                                    if (i < verse_words.Length - 1) continue;
+        //                                }
+        //                                break;
+        //                        }
+        //                        if (break_loop) break;
 
-                                switch (text_wordness)
-                                {
-                                    case TextWordness.WholeWord:
-                                        {
-                                            if (verse_words[i] == text)
-                                            {
-                                                if (!result.ContainsKey(verse_words[i]))
-                                                {
-                                                    result.Add(verse_words[i], 1);
-                                                }
-                                                else
-                                                {
-                                                    result[verse_words[i]]++;
-                                                }
-                                            }
-                                        }
-                                        break;
-                                    case TextWordness.PartOfWord:
-                                        {
-                                            if ((verse_words[i] != text) && (verse_words[i].Contains(text)))
-                                            {
-                                                if (!result.ContainsKey(verse_words[i]))
-                                                {
-                                                    result.Add(verse_words[i], 1);
-                                                }
-                                                else
-                                                {
-                                                    result[verse_words[i]]++;
-                                                }
-                                            }
-                                        }
-                                        break;
-                                    case TextWordness.Any:
-                                        {
-                                            switch (text_location_in_word)
-                                            {
-                                                case TextLocationInWord.AtStart:
-                                                    {
-                                                        if (verse_words[i].StartsWith(text))
-                                                        {
-                                                            if (!result.ContainsKey(verse_words[i]))
-                                                            {
-                                                                result.Add(verse_words[i], 1);
-                                                            }
-                                                            else
-                                                            {
-                                                                result[verse_words[i]]++;
-                                                            }
-                                                        }
-                                                    }
-                                                    break;
-                                                case TextLocationInWord.AtMiddle:
-                                                    {
-                                                        if ((verse_words[i].ContainsInside(text)) || (verse_words[i] == text))
-                                                        {
-                                                            if (!result.ContainsKey(verse_words[i]))
-                                                            {
-                                                                result.Add(verse_words[i], 1);
-                                                            }
-                                                            else
-                                                            {
-                                                                result[verse_words[i]]++;
-                                                            }
-                                                        }
-                                                    }
-                                                    break;
-                                                case TextLocationInWord.AtEnd:
-                                                    {
-                                                        if (verse_words[i].EndsWith(text))
-                                                        {
-                                                            if (!result.ContainsKey(verse_words[i]))
-                                                            {
-                                                                result.Add(verse_words[i], 1);
-                                                            }
-                                                            else
-                                                            {
-                                                                result[verse_words[i]]++;
-                                                            }
-                                                        }
-                                                    }
-                                                    break;
-                                                case TextLocationInWord.Any:
-                                                    {
-                                                        if (verse_words[i].Contains(text))
-                                                        {
-                                                            if (!result.ContainsKey(verse_words[i]))
-                                                            {
-                                                                result.Add(verse_words[i], 1);
-                                                            }
-                                                            else
-                                                            {
-                                                                result[verse_words[i]]++;
-                                                            }
-                                                        }
-                                                    }
-                                                    break;
-                                            }
-                                        }
-                                        break;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return result;
-        }
+        //                        switch (text_wordness)
+        //                        {
+        //                            case TextWordness.WholeWord:
+        //                                {
+        //                                    if (verse_words[i] == text)
+        //                                    {
+        //                                        if (!result.ContainsKey(verse_words[i]))
+        //                                        {
+        //                                            result.Add(verse_words[i], 1);
+        //                                        }
+        //                                        else
+        //                                        {
+        //                                            result[verse_words[i]]++;
+        //                                        }
+        //                                    }
+        //                                }
+        //                                break;
+        //                            case TextWordness.PartOfWord:
+        //                                {
+        //                                    if ((verse_words[i] != text) && (verse_words[i].Contains(text)))
+        //                                    {
+        //                                        if (!result.ContainsKey(verse_words[i]))
+        //                                        {
+        //                                            result.Add(verse_words[i], 1);
+        //                                        }
+        //                                        else
+        //                                        {
+        //                                            result[verse_words[i]]++;
+        //                                        }
+        //                                    }
+        //                                }
+        //                                break;
+        //                            case TextWordness.Any:
+        //                                {
+        //                                    switch (text_location_in_word)
+        //                                    {
+        //                                        case TextLocationInWord.AtStart:
+        //                                            {
+        //                                                if (verse_words[i].StartsWith(text))
+        //                                                {
+        //                                                    if (!result.ContainsKey(verse_words[i]))
+        //                                                    {
+        //                                                        result.Add(verse_words[i], 1);
+        //                                                    }
+        //                                                    else
+        //                                                    {
+        //                                                        result[verse_words[i]]++;
+        //                                                    }
+        //                                                }
+        //                                            }
+        //                                            break;
+        //                                        case TextLocationInWord.AtMiddle:
+        //                                            {
+        //                                                if (verse_words[i].ContainsInside(text))
+        //                                                {
+        //                                                    if (!result.ContainsKey(verse_words[i]))
+        //                                                    {
+        //                                                        result.Add(verse_words[i], 1);
+        //                                                    }
+        //                                                    else
+        //                                                    {
+        //                                                        result[verse_words[i]]++;
+        //                                                    }
+        //                                                }
+        //                                            }
+        //                                            break;
+        //                                        case TextLocationInWord.AtEnd:
+        //                                            {
+        //                                                if (verse_words[i].EndsWith(text))
+        //                                                {
+        //                                                    if (!result.ContainsKey(verse_words[i]))
+        //                                                    {
+        //                                                        result.Add(verse_words[i], 1);
+        //                                                    }
+        //                                                    else
+        //                                                    {
+        //                                                        result[verse_words[i]]++;
+        //                                                    }
+        //                                                }
+        //                                            }
+        //                                            break;
+        //                                        case TextLocationInWord.Any:
+        //                                            {
+        //                                                if (verse_words[i].Contains(text))
+        //                                                {
+        //                                                    if (!result.ContainsKey(verse_words[i]))
+        //                                                    {
+        //                                                        result.Add(verse_words[i], 1);
+        //                                                    }
+        //                                                    else
+        //                                                    {
+        //                                                        result[verse_words[i]]++;
+        //                                                    }
+        //                                                }
+        //                                            }
+        //                                            break;
+        //                                    }
+        //                                }
+        //                                break;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    return result;
+        //}
         public Dictionary<string, int> GetCurrentWords(List<Verse> verses, string text, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness)
         {
             Dictionary<string, int> result = new Dictionary<string, int>();
@@ -2208,7 +2208,7 @@ namespace Model
                                                         {
                                                             case TextLocationInWord.AtStart:
                                                                 {
-                                                                    if ((verse_words[i].StartsWith(text_words[0])) && (verse_words[i].Length > text_words[0].Length))
+                                                                    if (verse_words[i].StartsWith(text_words[0]))
                                                                     {
                                                                         match_count = 1;
                                                                     }
@@ -2220,12 +2220,25 @@ namespace Model
                                                                     {
                                                                         MatchCollection matches = Regex.Matches(verse_words[i], text_words[0]);
                                                                         match_count = matches.Count;
+
+                                                                        if (match_count > 0)
+                                                                        {
+                                                                            if (verse_words[i].StartsWith(text_words[0]))
+                                                                            {
+                                                                                match_count--;
+                                                                            }
+
+                                                                            if (verse_words[i].EndsWith(text_words[0]))
+                                                                            {
+                                                                                match_count--;
+                                                                            }
+                                                                        }
                                                                     }
                                                                 }
                                                                 break;
                                                             case TextLocationInWord.AtEnd:
                                                                 {
-                                                                    if ((verse_words[i].EndsWith(text_words[0])) && (verse_words[i].Length > text_words[0].Length))
+                                                                    if (verse_words[i].EndsWith(text_words[0]))
                                                                     {
                                                                         match_count = 1;
                                                                     }
@@ -2233,7 +2246,7 @@ namespace Model
                                                                 break;
                                                             case TextLocationInWord.Any:
                                                                 {
-                                                                    if ((verse_words[i].Contains(text_words[0])) && (verse_words[i].Length > text_words[0].Length))
+                                                                    if (verse_words[i].Contains(text_words[0]))
                                                                     {
                                                                         MatchCollection matches = Regex.Matches(verse_words[i], text_words[0]);
                                                                         match_count = matches.Count;
@@ -2258,10 +2271,23 @@ namespace Model
                                                             break;
                                                         case TextLocationInWord.AtMiddle:
                                                             {
-                                                                if ((verse_words[i].ContainsInside(text_words[0])) || (verse_words[i] == text_words[0]))
+                                                                if (verse_words[i].ContainsInside(text_words[0]))
                                                                 {
                                                                     MatchCollection matches = Regex.Matches(verse_words[i], text_words[0]);
                                                                     match_count = matches.Count;
+
+                                                                    if (match_count > 0)
+                                                                    {
+                                                                        if (verse_words[i].StartsWith(text_words[0]))
+                                                                        {
+                                                                            match_count--;
+                                                                        }
+
+                                                                        if (verse_words[i].EndsWith(text_words[0]))
+                                                                        {
+                                                                            match_count--;
+                                                                        }
+                                                                    }
                                                                 }
                                                             }
                                                             break;
@@ -2289,11 +2315,12 @@ namespace Model
                                     }
                                     else if (text_words.Length > 1) // multiple words search term
                                     {
-                                        switch (text_wordness)
+
+                                        switch (text_location_in_word)
                                         {
-                                            case TextWordness.WholeWord:
+                                            case TextLocationInWord.AtStart:
                                                 {
-                                                    if (verse_words[i] == text_words[0])
+                                                    if (verse_words[i].StartsWith(text_words[0]))
                                                     {
                                                         if (verse_text.Contains(text))
                                                         {
@@ -2302,138 +2329,69 @@ namespace Model
                                                     }
                                                 }
                                                 break;
-                                            case TextWordness.PartOfWord:
+                                            case TextLocationInWord.AtMiddle:
                                                 {
-                                                    if ((verse_words[i] != text_words[0]) && (verse_words[i].Contains(text_words[0])))
+                                                    if (verse_words[i].ContainsInside(text_words[0]))
                                                     {
-                                                        switch (text_location_in_word)
+                                                        if (verse_text.Contains(text))
                                                         {
-                                                            case TextLocationInWord.AtStart:
+                                                            MatchCollection matches = Regex.Matches(verse_words[i], text_words[0]);
+                                                            match_count = matches.Count;
+
+                                                            if (match_count > 0)
+                                                            {
+                                                                if (verse_words[i].StartsWith(text_words[0]))
                                                                 {
-                                                                    if ((verse_words[i].StartsWith(text_words[0])) && (verse_words[i].Length > text_words[0].Length))
-                                                                    {
-                                                                        if (verse_text.Contains(text))
-                                                                        {
-                                                                            match_count = 1;
-                                                                        }
-                                                                    }
+                                                                    match_count--;
                                                                 }
-                                                                break;
-                                                            case TextLocationInWord.AtMiddle:
+
+                                                                if (verse_words[i].EndsWith(text_words[0]))
                                                                 {
-                                                                    if (verse_words[i].ContainsInside(text_words[0]))
-                                                                    {
-                                                                        if (verse_text.Contains(text))
-                                                                        {
-                                                                            MatchCollection matches = Regex.Matches(verse_words[i], text_words[0]);
-                                                                            match_count = matches.Count;
-                                                                        }
-                                                                    }
+                                                                    match_count--;
                                                                 }
-                                                                break;
-                                                            case TextLocationInWord.AtEnd:
-                                                                {
-                                                                    if ((verse_words[i].EndsWith(text_words[0])) && (verse_words[i].Length > text_words[0].Length))
-                                                                    {
-                                                                        if (verse_text.Contains(text))
-                                                                        {
-                                                                            match_count = 1;
-                                                                        }
-                                                                    }
-                                                                }
-                                                                break;
-                                                            case TextLocationInWord.Any:
-                                                                {
-                                                                    if ((verse_words[i].Contains(text_words[0])) && (verse_words[i].Length > text_words[0].Length))
-                                                                    {
-                                                                        if (verse_text.Contains(text))
-                                                                        {
-                                                                            MatchCollection matches = Regex.Matches(verse_words[i], text_words[0]);
-                                                                            match_count = matches.Count;
-                                                                        }
-                                                                    }
-                                                                }
-                                                                break;
+                                                            }
                                                         }
                                                     }
                                                 }
                                                 break;
-                                            case TextWordness.Any:
+                                            case TextLocationInWord.AtEnd:
                                                 {
-                                                    switch (text_location_in_word)
+                                                    if (verse_words[i].EndsWith(text_words[0]))
                                                     {
-                                                        case TextLocationInWord.AtStart:
+                                                        if (verse_text.Contains(text))
+                                                        {
+                                                            match_count = 1;
+                                                        }
+                                                    }
+                                                }
+                                                break;
+                                            case TextLocationInWord.Any:
+                                                {
+                                                    if (verse_words[i].EndsWith(text_words[0]))
+                                                    {
+                                                        if (verse_words.Length >= (i + text_words.Length))
+                                                        {
+                                                            // match text minus last word
+                                                            bool match_found_minus_last_word = true;
+                                                            for (int j = 1; j < text_words.Length - 1; j++)
                                                             {
-                                                                if (verse_words[i].StartsWith(text_words[0]))
+                                                                if (verse_words[j + i] != text_words[j])
                                                                 {
-                                                                    if (verse_text.Contains(text))
-                                                                    {
-                                                                        match_count = 1;
-                                                                    }
+                                                                    match_found_minus_last_word = false;
+                                                                    break;
                                                                 }
                                                             }
-                                                            break;
-                                                        case TextLocationInWord.AtMiddle:
-                                                            {
-                                                                if ((verse_words[i].ContainsInside(text_words[0])) || (verse_words[i] == text_words[0]))
-                                                                {
-                                                                    if (verse_text.Contains(text))
-                                                                    {
-                                                                        MatchCollection matches = Regex.Matches(verse_words[i], text_words[0]);
-                                                                        match_count = matches.Count;
-                                                                    }
-                                                                }
-                                                            }
-                                                            break;
-                                                        case TextLocationInWord.AtEnd:
-                                                            {
-                                                                if (verse_words[i].EndsWith(text_words[0]))
-                                                                {
-                                                                    if (verse_text.Contains(text))
-                                                                    {
-                                                                        match_count = 1;
-                                                                    }
-                                                                }
-                                                            }
-                                                            break;
-                                                        case TextLocationInWord.Any:
-                                                            {
-                                                                if (verse_words[i].Contains(text_words[0]))
-                                                                {
-                                                                    if (verse_text.Contains(text))
-                                                                    {
-                                                                        MatchCollection matches = Regex.Matches(verse_words[i], text_words[0]);
-                                                                        match_count = matches.Count;
-                                                                    }
-                                                                }
-                                                                //if (verse_words[i].Contains(text_words[0]))
-                                                                //{
-                                                                //    if (verse_words.Length >= (i + text_words.Length))
-                                                                //    {
-                                                                //        // match text minus last word
-                                                                //        bool match_found_minus_last_word = true;
-                                                                //        for (int j = 1; j < text_words.Length - 1; j++)
-                                                                //        {
-                                                                //            if (verse_words[j + i] != text_words[j])
-                                                                //            {
-                                                                //                match_found_minus_last_word = false;
-                                                                //                break;
-                                                                //            }
-                                                                //        }
 
-                                                                //        // is still true, check the last word
-                                                                //        if (match_found_minus_last_word)
-                                                                //        {
-                                                                //            int last_j = text_words.Length - 1;
-                                                                //            if (verse_words[last_j + i].StartsWith(text_words[last_j])) // last text_word
-                                                                //            {
-                                                                //                match_count = 1;
-                                                                //            }
-                                                                //        }
-                                                                //    }
-                                                                //}
+                                                            // is still true, check the last word
+                                                            if (match_found_minus_last_word)
+                                                            {
+                                                                int last_j = text_words.Length - 1;
+                                                                if (verse_words[last_j + i].StartsWith(text_words[last_j])) // last text_word
+                                                                {
+                                                                    match_count = 1;
+                                                                }
                                                             }
-                                                            break;
+                                                        }
                                                     }
                                                 }
                                                 break;

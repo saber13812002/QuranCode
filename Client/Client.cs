@@ -1083,17 +1083,6 @@ public class Client : IPublisher, ISubscriber
     }
 
     // helper methods with GetSourceVerses (not entire book verses)
-    public Dictionary<string, int> GetWordsWith(string text, TextLocationInChapter text_location_in_chapter, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness, bool case_sensitive, bool with_diacritics)
-    {
-        Dictionary<string, int> result = new Dictionary<string, int>();
-        List<Verse> source = Server.GetSourceVerses(m_search_scope, m_selection, m_found_verses, text_location_in_chapter);
-        if (Book != null)
-        {
-            Book.WithDiacritics = with_diacritics;
-            result = Book.GetWordsWith(source, text, text_location_in_verse, text_location_in_word, text_wordness);
-        }
-        return result;
-    }
     public Dictionary<string, int> GetCurrentWords(string text, TextLocationInChapter text_location_in_chapter, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness, bool case_sensitive, bool with_diacritics)
     {
         Dictionary<string, int> result = new Dictionary<string, int>();
