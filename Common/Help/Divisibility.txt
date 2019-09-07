@@ -1,6 +1,47 @@
 -----------------------------
 Divisibility by Prime Numbers
 -----------------------------
+Divisibility by 7	x = -2
+Divisibility by 11	x = -1
+Divisibility by 13	x =  4
+Divisibility by 17	x = -5
+Divisibility by 19	x =  2
+Divisibility by 23	x =  7
+Divisibility by 29	x =  3
+Divisibility by 31	x = -3
+Divisibility by 37	x = -11
+Divisibility by 41	x = -4
+Divisibility by 43	x =  13
+Divisibility by 47	x = -14
+
+
+Is N divisible by P?
+-------------------------------------------------------------
+Algorithm for finding if a number N is divisible by a prime P
+©2003-2004 Stu Savory
+http://www.savory.de/maths1.htm
+-------------------------------------------------------------
+# Numbers have two parts, front and rare (fr).
+1. Find the smallest multiple m of P to produce a number (fr) with r=1 or r=9:
+	fr = m * P
+	If r=1, then	x = -f
+	If r=9, then	x = f+1
+
+# N = Front and Rare parts (FR):
+2. 	Let N = FR
+	Loop
+	    N = F + R*x
+	Until F is divisible by P or not.
+  If F is divisible by P, then N is divisible by P too, else not.
+
+Example:
+Divisibility by 13
+The smallest multiple of 13 that ends in 1 or 9 is 39 thus x = 3+1 = 4
+403
+40 +4*3 = 52
+          5 +4*2 = 13 Yes
+-------------------------------------------------------------
+
 
 Divisibility by 2
 A number is divisible by 2 if it ends in 0, 2, 4, 6 or 8. 
@@ -59,28 +100,6 @@ The smallest multiple of 29 that ends in 1 or 9 is 29 thus x = 2+1	(+3)
 1568 +3*9 = 1595
             159 +3*5 = 174
                        17 +3*4 = 29  Yes
-
-
-
-
-
-------------------------------------------------------------------------------
-Method for any prime P
-------------------------------------------------------------------------------
-Is N divisble by P?
-# fr = P * m		(m = the smallest number to produce r=1 or r=9)
-# If r=1, let x = -f
-# If r=9, let x = f+1
-# Let N = FR
-  Loop
-    N = F + R*x
-  Until F is divisible by P or not
-# If F is divisible by P, then N is divisible by P.
-------------------------------------------------------------------------------
-
-©2003-2004 Stu Savory
-http://www.savory.de/maths1.htm
-
 
 
 
