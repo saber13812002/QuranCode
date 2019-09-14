@@ -704,6 +704,13 @@ partial class MainForm
             this.FontDialog = new System.Windows.Forms.FontDialog();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.FindByNumbersResultTypePagesLabel = new System.Windows.Forms.Label();
+            this.FindByNumbersResultTypeBowingsLabel = new System.Windows.Forms.Label();
+            this.FindByNumbersResultTypeGroupsLabel = new System.Windows.Forms.Label();
+            this.FindByNumbersResultTypeQuartersLabel = new System.Windows.Forms.Label();
+            this.FindByNumbersResultTypeHalfsLabel = new System.Windows.Forms.Label();
+            this.FindByNumbersResultTypePartsLabel = new System.Windows.Forms.Label();
+            this.FindByNumbersResultTypeStationsLabel = new System.Windows.Forms.Label();
             this.StatusPanel.SuspendLayout();
             this.AppPanel.SuspendLayout();
             this.ChapterSortPanel.SuspendLayout();
@@ -1719,7 +1726,7 @@ partial class MainForm
             // 
             this.FindByNumbersUniqueLettersLabel.BackColor = System.Drawing.Color.Transparent;
             this.FindByNumbersUniqueLettersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersUniqueLettersLabel.Location = new System.Drawing.Point(1, 134);
+            this.FindByNumbersUniqueLettersLabel.Location = new System.Drawing.Point(1, 150);
             this.FindByNumbersUniqueLettersLabel.Name = "FindByNumbersUniqueLettersLabel";
             this.FindByNumbersUniqueLettersLabel.Size = new System.Drawing.Size(58, 13);
             this.FindByNumbersUniqueLettersLabel.TabIndex = 0;
@@ -1732,7 +1739,7 @@ partial class MainForm
             // 
             this.FindByNumbersValueLabel.BackColor = System.Drawing.Color.Transparent;
             this.FindByNumbersValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersValueLabel.Location = new System.Drawing.Point(1, 153);
+            this.FindByNumbersValueLabel.Location = new System.Drawing.Point(1, 169);
             this.FindByNumbersValueLabel.Name = "FindByNumbersValueLabel";
             this.FindByNumbersValueLabel.Size = new System.Drawing.Size(58, 13);
             this.FindByNumbersValueLabel.TabIndex = 0;
@@ -1857,9 +1864,9 @@ partial class MainForm
             this.FindByNumbersResultTypeWordsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FindByNumbersResultTypeWordsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersResultTypeWordsLabel.ForeColor = System.Drawing.SystemColors.Window;
-            this.FindByNumbersResultTypeWordsLabel.Location = new System.Drawing.Point(31, 21);
+            this.FindByNumbersResultTypeWordsLabel.Location = new System.Drawing.Point(26, 21);
             this.FindByNumbersResultTypeWordsLabel.Name = "FindByNumbersResultTypeWordsLabel";
-            this.FindByNumbersResultTypeWordsLabel.Size = new System.Drawing.Size(29, 14);
+            this.FindByNumbersResultTypeWordsLabel.Size = new System.Drawing.Size(24, 14);
             this.FindByNumbersResultTypeWordsLabel.TabIndex = 31;
             this.FindByNumbersResultTypeWordsLabel.Text = "W";
             this.FindByNumbersResultTypeWordsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1874,7 +1881,7 @@ partial class MainForm
             this.FindByNumbersResultTypeLettersLabel.ForeColor = System.Drawing.SystemColors.Window;
             this.FindByNumbersResultTypeLettersLabel.Location = new System.Drawing.Point(1, 21);
             this.FindByNumbersResultTypeLettersLabel.Name = "FindByNumbersResultTypeLettersLabel";
-            this.FindByNumbersResultTypeLettersLabel.Size = new System.Drawing.Size(29, 14);
+            this.FindByNumbersResultTypeLettersLabel.Size = new System.Drawing.Size(24, 14);
             this.FindByNumbersResultTypeLettersLabel.TabIndex = 30;
             this.FindByNumbersResultTypeLettersLabel.Text = "L";
             this.FindByNumbersResultTypeLettersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2088,7 +2095,7 @@ partial class MainForm
             this.FindByNumbersWordsNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.FindByNumbersWordsNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersWordsNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersWordsNumberTypeLabel.Location = new System.Drawing.Point(124, 93);
+            this.FindByNumbersWordsNumberTypeLabel.Location = new System.Drawing.Point(124, 109);
             this.FindByNumbersWordsNumberTypeLabel.Name = "FindByNumbersWordsNumberTypeLabel";
             this.FindByNumbersWordsNumberTypeLabel.Size = new System.Drawing.Size(24, 19);
             this.FindByNumbersWordsNumberTypeLabel.TabIndex = 46;
@@ -2104,7 +2111,7 @@ partial class MainForm
             this.FindByNumbersLettersNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.FindByNumbersLettersNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersLettersNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersLettersNumberTypeLabel.Location = new System.Drawing.Point(124, 112);
+            this.FindByNumbersLettersNumberTypeLabel.Location = new System.Drawing.Point(124, 128);
             this.FindByNumbersLettersNumberTypeLabel.Name = "FindByNumbersLettersNumberTypeLabel";
             this.FindByNumbersLettersNumberTypeLabel.Size = new System.Drawing.Size(24, 19);
             this.FindByNumbersLettersNumberTypeLabel.TabIndex = 49;
@@ -2120,7 +2127,7 @@ partial class MainForm
             this.FindByNumbersValueNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.FindByNumbersValueNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersValueNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersValueNumberTypeLabel.Location = new System.Drawing.Point(124, 150);
+            this.FindByNumbersValueNumberTypeLabel.Location = new System.Drawing.Point(124, 166);
             this.FindByNumbersValueNumberTypeLabel.Name = "FindByNumbersValueNumberTypeLabel";
             this.FindByNumbersValueNumberTypeLabel.Size = new System.Drawing.Size(24, 19);
             this.FindByNumbersValueNumberTypeLabel.TabIndex = 55;
@@ -2208,6 +2215,13 @@ partial class MainForm
             this.FindByNumbersPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.FindByNumbersPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeBowingsLabel);
+            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeGroupsLabel);
+            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeQuartersLabel);
+            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeHalfsLabel);
+            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypePartsLabel);
+            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeStationsLabel);
+            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypePagesLabel);
             this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitalRootComparisonOperatorLabel);
             this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitalRootNumberTypeLabel);
             this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitalRootNumericUpDown);
@@ -2254,7 +2268,7 @@ partial class MainForm
             this.FindByNumbersPanel.Controls.Add(this.FindByNumbersLabel);
             this.FindByNumbersPanel.Location = new System.Drawing.Point(4, 329);
             this.FindByNumbersPanel.Name = "FindByNumbersPanel";
-            this.FindByNumbersPanel.Size = new System.Drawing.Size(156, 212);
+            this.FindByNumbersPanel.Size = new System.Drawing.Size(156, 228);
             this.FindByNumbersPanel.TabIndex = 2;
             this.FindByNumbersPanel.TabStop = true;
             this.FindByNumbersPanel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
@@ -2266,7 +2280,7 @@ partial class MainForm
             this.FindByNumbersValueDigitalRootComparisonOperatorLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersValueDigitalRootComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Location = new System.Drawing.Point(51, 188);
+            this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Location = new System.Drawing.Point(51, 204);
             this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Name = "FindByNumbersValueDigitalRootComparisonOperatorLabel";
             this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Size = new System.Drawing.Size(18, 19);
             this.FindByNumbersValueDigitalRootComparisonOperatorLabel.TabIndex = 69;
@@ -2284,7 +2298,7 @@ partial class MainForm
             this.FindByNumbersValueDigitalRootNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.FindByNumbersValueDigitalRootNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersValueDigitalRootNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersValueDigitalRootNumberTypeLabel.Location = new System.Drawing.Point(124, 188);
+            this.FindByNumbersValueDigitalRootNumberTypeLabel.Location = new System.Drawing.Point(124, 204);
             this.FindByNumbersValueDigitalRootNumberTypeLabel.Name = "FindByNumbersValueDigitalRootNumberTypeLabel";
             this.FindByNumbersValueDigitalRootNumberTypeLabel.Size = new System.Drawing.Size(24, 19);
             this.FindByNumbersValueDigitalRootNumberTypeLabel.TabIndex = 71;
@@ -2297,7 +2311,7 @@ partial class MainForm
             // 
             this.FindByNumbersValueDigitalRootNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
             this.FindByNumbersValueDigitalRootNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersValueDigitalRootNumericUpDown.Location = new System.Drawing.Point(69, 188);
+            this.FindByNumbersValueDigitalRootNumericUpDown.Location = new System.Drawing.Point(69, 204);
             this.FindByNumbersValueDigitalRootNumericUpDown.Maximum = new decimal(new int[] {
             9,
             0,
@@ -2316,7 +2330,7 @@ partial class MainForm
             // 
             this.FindByNumbersValueDigitalRootLabel.BackColor = System.Drawing.Color.Transparent;
             this.FindByNumbersValueDigitalRootLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersValueDigitalRootLabel.Location = new System.Drawing.Point(-1, 191);
+            this.FindByNumbersValueDigitalRootLabel.Location = new System.Drawing.Point(-1, 207);
             this.FindByNumbersValueDigitalRootLabel.Name = "FindByNumbersValueDigitalRootLabel";
             this.FindByNumbersValueDigitalRootLabel.Size = new System.Drawing.Size(58, 13);
             this.FindByNumbersValueDigitalRootLabel.TabIndex = 64;
@@ -2330,7 +2344,7 @@ partial class MainForm
             this.FindByNumbersValueDigitSumComparisonOperatorLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.FindByNumbersValueDigitSumComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersValueDigitSumComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersValueDigitSumComparisonOperatorLabel.Location = new System.Drawing.Point(51, 169);
+            this.FindByNumbersValueDigitSumComparisonOperatorLabel.Location = new System.Drawing.Point(51, 185);
             this.FindByNumbersValueDigitSumComparisonOperatorLabel.Name = "FindByNumbersValueDigitSumComparisonOperatorLabel";
             this.FindByNumbersValueDigitSumComparisonOperatorLabel.Size = new System.Drawing.Size(18, 19);
             this.FindByNumbersValueDigitSumComparisonOperatorLabel.TabIndex = 66;
@@ -2348,7 +2362,7 @@ partial class MainForm
             this.FindByNumbersValueDigitSumNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.FindByNumbersValueDigitSumNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersValueDigitSumNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersValueDigitSumNumberTypeLabel.Location = new System.Drawing.Point(124, 169);
+            this.FindByNumbersValueDigitSumNumberTypeLabel.Location = new System.Drawing.Point(124, 185);
             this.FindByNumbersValueDigitSumNumberTypeLabel.Name = "FindByNumbersValueDigitSumNumberTypeLabel";
             this.FindByNumbersValueDigitSumNumberTypeLabel.Size = new System.Drawing.Size(24, 19);
             this.FindByNumbersValueDigitSumNumberTypeLabel.TabIndex = 68;
@@ -2361,7 +2375,7 @@ partial class MainForm
             // 
             this.FindByNumbersValueDigitSumNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
             this.FindByNumbersValueDigitSumNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersValueDigitSumNumericUpDown.Location = new System.Drawing.Point(69, 169);
+            this.FindByNumbersValueDigitSumNumericUpDown.Location = new System.Drawing.Point(69, 185);
             this.FindByNumbersValueDigitSumNumericUpDown.Maximum = new decimal(new int[] {
             999,
             0,
@@ -2380,7 +2394,7 @@ partial class MainForm
             // 
             this.FindByNumbersValueDigitSumLabel.BackColor = System.Drawing.Color.Transparent;
             this.FindByNumbersValueDigitSumLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersValueDigitSumLabel.Location = new System.Drawing.Point(-1, 172);
+            this.FindByNumbersValueDigitSumLabel.Location = new System.Drawing.Point(-1, 188);
             this.FindByNumbersValueDigitSumLabel.Name = "FindByNumbersValueDigitSumLabel";
             this.FindByNumbersValueDigitSumLabel.Size = new System.Drawing.Size(58, 13);
             this.FindByNumbersValueDigitSumLabel.TabIndex = 65;
@@ -2408,9 +2422,9 @@ partial class MainForm
             this.FindByNumbersResultTypeSentencesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FindByNumbersResultTypeSentencesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersResultTypeSentencesLabel.ForeColor = System.Drawing.SystemColors.Window;
-            this.FindByNumbersResultTypeSentencesLabel.Location = new System.Drawing.Point(61, 21);
+            this.FindByNumbersResultTypeSentencesLabel.Location = new System.Drawing.Point(51, 21);
             this.FindByNumbersResultTypeSentencesLabel.Name = "FindByNumbersResultTypeSentencesLabel";
-            this.FindByNumbersResultTypeSentencesLabel.Size = new System.Drawing.Size(29, 14);
+            this.FindByNumbersResultTypeSentencesLabel.Size = new System.Drawing.Size(24, 14);
             this.FindByNumbersResultTypeSentencesLabel.TabIndex = 32;
             this.FindByNumbersResultTypeSentencesLabel.Text = "S";
             this.FindByNumbersResultTypeSentencesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2422,9 +2436,9 @@ partial class MainForm
             this.FindByNumbersResultTypeChaptersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FindByNumbersResultTypeChaptersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersResultTypeChaptersLabel.ForeColor = System.Drawing.SystemColors.Window;
-            this.FindByNumbersResultTypeChaptersLabel.Location = new System.Drawing.Point(121, 21);
+            this.FindByNumbersResultTypeChaptersLabel.Location = new System.Drawing.Point(101, 21);
             this.FindByNumbersResultTypeChaptersLabel.Name = "FindByNumbersResultTypeChaptersLabel";
-            this.FindByNumbersResultTypeChaptersLabel.Size = new System.Drawing.Size(28, 14);
+            this.FindByNumbersResultTypeChaptersLabel.Size = new System.Drawing.Size(24, 14);
             this.FindByNumbersResultTypeChaptersLabel.TabIndex = 34;
             this.FindByNumbersResultTypeChaptersLabel.Text = "C";
             this.FindByNumbersResultTypeChaptersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2437,9 +2451,9 @@ partial class MainForm
             this.FindByNumbersResultTypeVersesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FindByNumbersResultTypeVersesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersResultTypeVersesLabel.ForeColor = System.Drawing.SystemColors.Window;
-            this.FindByNumbersResultTypeVersesLabel.Location = new System.Drawing.Point(91, 21);
+            this.FindByNumbersResultTypeVersesLabel.Location = new System.Drawing.Point(76, 21);
             this.FindByNumbersResultTypeVersesLabel.Name = "FindByNumbersResultTypeVersesLabel";
-            this.FindByNumbersResultTypeVersesLabel.Size = new System.Drawing.Size(29, 14);
+            this.FindByNumbersResultTypeVersesLabel.Size = new System.Drawing.Size(24, 14);
             this.FindByNumbersResultTypeVersesLabel.TabIndex = 33;
             this.FindByNumbersResultTypeVersesLabel.Text = "V";
             this.FindByNumbersResultTypeVersesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2455,7 +2469,7 @@ partial class MainForm
             this.FindByNumbersChaptersComparisonOperatorLabel.Enabled = false;
             this.FindByNumbersChaptersComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersChaptersComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersChaptersComparisonOperatorLabel.Location = new System.Drawing.Point(51, 55);
+            this.FindByNumbersChaptersComparisonOperatorLabel.Location = new System.Drawing.Point(51, 71);
             this.FindByNumbersChaptersComparisonOperatorLabel.Name = "FindByNumbersChaptersComparisonOperatorLabel";
             this.FindByNumbersChaptersComparisonOperatorLabel.Size = new System.Drawing.Size(18, 19);
             this.FindByNumbersChaptersComparisonOperatorLabel.TabIndex = 38;
@@ -2474,7 +2488,7 @@ partial class MainForm
             this.FindByNumbersChaptersNumberTypeLabel.Enabled = false;
             this.FindByNumbersChaptersNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersChaptersNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersChaptersNumberTypeLabel.Location = new System.Drawing.Point(124, 55);
+            this.FindByNumbersChaptersNumberTypeLabel.Location = new System.Drawing.Point(124, 71);
             this.FindByNumbersChaptersNumberTypeLabel.Name = "FindByNumbersChaptersNumberTypeLabel";
             this.FindByNumbersChaptersNumberTypeLabel.Size = new System.Drawing.Size(24, 19);
             this.FindByNumbersChaptersNumberTypeLabel.TabIndex = 40;
@@ -2489,7 +2503,7 @@ partial class MainForm
             this.FindByNumbersChaptersNumericUpDown.BackColor = System.Drawing.Color.LightGray;
             this.FindByNumbersChaptersNumericUpDown.Enabled = false;
             this.FindByNumbersChaptersNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersChaptersNumericUpDown.Location = new System.Drawing.Point(69, 55);
+            this.FindByNumbersChaptersNumericUpDown.Location = new System.Drawing.Point(69, 71);
             this.FindByNumbersChaptersNumericUpDown.Maximum = new decimal(new int[] {
             999,
             0,
@@ -2509,7 +2523,7 @@ partial class MainForm
             this.FindByNumbersChaptersLabel.BackColor = System.Drawing.Color.Transparent;
             this.FindByNumbersChaptersLabel.Enabled = false;
             this.FindByNumbersChaptersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersChaptersLabel.Location = new System.Drawing.Point(1, 58);
+            this.FindByNumbersChaptersLabel.Location = new System.Drawing.Point(1, 74);
             this.FindByNumbersChaptersLabel.Name = "FindByNumbersChaptersLabel";
             this.FindByNumbersChaptersLabel.Size = new System.Drawing.Size(58, 13);
             this.FindByNumbersChaptersLabel.TabIndex = 0;
@@ -2526,7 +2540,7 @@ partial class MainForm
             this.FindByNumbersNumberComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FindByNumbersNumberComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersNumberComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersNumberComparisonOperatorLabel.Location = new System.Drawing.Point(51, 36);
+            this.FindByNumbersNumberComparisonOperatorLabel.Location = new System.Drawing.Point(51, 52);
             this.FindByNumbersNumberComparisonOperatorLabel.Name = "FindByNumbersNumberComparisonOperatorLabel";
             this.FindByNumbersNumberComparisonOperatorLabel.Size = new System.Drawing.Size(18, 19);
             this.FindByNumbersNumberComparisonOperatorLabel.TabIndex = 35;
@@ -2544,7 +2558,7 @@ partial class MainForm
             this.FindByNumbersNumberNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.FindByNumbersNumberNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersNumberNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersNumberNumberTypeLabel.Location = new System.Drawing.Point(124, 36);
+            this.FindByNumbersNumberNumberTypeLabel.Location = new System.Drawing.Point(124, 52);
             this.FindByNumbersNumberNumberTypeLabel.Name = "FindByNumbersNumberNumberTypeLabel";
             this.FindByNumbersNumberNumberTypeLabel.Size = new System.Drawing.Size(24, 19);
             this.FindByNumbersNumberNumberTypeLabel.TabIndex = 37;
@@ -2558,7 +2572,7 @@ partial class MainForm
             this.FindByNumbersNumberNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FindByNumbersNumberNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
             this.FindByNumbersNumberNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersNumberNumericUpDown.Location = new System.Drawing.Point(69, 36);
+            this.FindByNumbersNumberNumericUpDown.Location = new System.Drawing.Point(69, 52);
             this.FindByNumbersNumberNumericUpDown.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -2583,7 +2597,7 @@ partial class MainForm
             this.FindByNumbersNumberLabel.BackColor = System.Drawing.Color.Transparent;
             this.FindByNumbersNumberLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FindByNumbersNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersNumberLabel.Location = new System.Drawing.Point(1, 39);
+            this.FindByNumbersNumberLabel.Location = new System.Drawing.Point(1, 55);
             this.FindByNumbersNumberLabel.Name = "FindByNumbersNumberLabel";
             this.FindByNumbersNumberLabel.Size = new System.Drawing.Size(58, 13);
             this.FindByNumbersNumberLabel.TabIndex = 0;
@@ -2599,7 +2613,7 @@ partial class MainForm
             this.FindByNumbersUniqueLettersNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.FindByNumbersUniqueLettersNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersUniqueLettersNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersUniqueLettersNumberTypeLabel.Location = new System.Drawing.Point(124, 131);
+            this.FindByNumbersUniqueLettersNumberTypeLabel.Location = new System.Drawing.Point(124, 147);
             this.FindByNumbersUniqueLettersNumberTypeLabel.Name = "FindByNumbersUniqueLettersNumberTypeLabel";
             this.FindByNumbersUniqueLettersNumberTypeLabel.Size = new System.Drawing.Size(24, 19);
             this.FindByNumbersUniqueLettersNumberTypeLabel.TabIndex = 52;
@@ -2616,7 +2630,7 @@ partial class MainForm
             this.FindByNumbersUniqueLettersComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FindByNumbersUniqueLettersComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersUniqueLettersComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersUniqueLettersComparisonOperatorLabel.Location = new System.Drawing.Point(51, 131);
+            this.FindByNumbersUniqueLettersComparisonOperatorLabel.Location = new System.Drawing.Point(51, 147);
             this.FindByNumbersUniqueLettersComparisonOperatorLabel.Name = "FindByNumbersUniqueLettersComparisonOperatorLabel";
             this.FindByNumbersUniqueLettersComparisonOperatorLabel.Size = new System.Drawing.Size(18, 19);
             this.FindByNumbersUniqueLettersComparisonOperatorLabel.TabIndex = 50;
@@ -2636,7 +2650,7 @@ partial class MainForm
             this.FindByNumbersVersesComparisonOperatorLabel.Enabled = false;
             this.FindByNumbersVersesComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersVersesComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersVersesComparisonOperatorLabel.Location = new System.Drawing.Point(51, 74);
+            this.FindByNumbersVersesComparisonOperatorLabel.Location = new System.Drawing.Point(51, 90);
             this.FindByNumbersVersesComparisonOperatorLabel.Name = "FindByNumbersVersesComparisonOperatorLabel";
             this.FindByNumbersVersesComparisonOperatorLabel.Size = new System.Drawing.Size(18, 19);
             this.FindByNumbersVersesComparisonOperatorLabel.TabIndex = 41;
@@ -2655,7 +2669,7 @@ partial class MainForm
             this.FindByNumbersValueComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FindByNumbersValueComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersValueComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersValueComparisonOperatorLabel.Location = new System.Drawing.Point(51, 150);
+            this.FindByNumbersValueComparisonOperatorLabel.Location = new System.Drawing.Point(51, 166);
             this.FindByNumbersValueComparisonOperatorLabel.Name = "FindByNumbersValueComparisonOperatorLabel";
             this.FindByNumbersValueComparisonOperatorLabel.Size = new System.Drawing.Size(18, 19);
             this.FindByNumbersValueComparisonOperatorLabel.TabIndex = 53;
@@ -2670,7 +2684,7 @@ partial class MainForm
             // 
             this.FindByNumbersUniqueLettersNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FindByNumbersUniqueLettersNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersUniqueLettersNumericUpDown.Location = new System.Drawing.Point(69, 131);
+            this.FindByNumbersUniqueLettersNumericUpDown.Location = new System.Drawing.Point(69, 147);
             this.FindByNumbersUniqueLettersNumericUpDown.Maximum = new decimal(new int[] {
             99,
             0,
@@ -2693,7 +2707,7 @@ partial class MainForm
             this.FindByNumbersLettersComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FindByNumbersLettersComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersLettersComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersLettersComparisonOperatorLabel.Location = new System.Drawing.Point(51, 112);
+            this.FindByNumbersLettersComparisonOperatorLabel.Location = new System.Drawing.Point(51, 128);
             this.FindByNumbersLettersComparisonOperatorLabel.Name = "FindByNumbersLettersComparisonOperatorLabel";
             this.FindByNumbersLettersComparisonOperatorLabel.Size = new System.Drawing.Size(18, 19);
             this.FindByNumbersLettersComparisonOperatorLabel.TabIndex = 47;
@@ -2712,7 +2726,7 @@ partial class MainForm
             this.FindByNumbersWordsComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.FindByNumbersWordsComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersWordsComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersWordsComparisonOperatorLabel.Location = new System.Drawing.Point(51, 93);
+            this.FindByNumbersWordsComparisonOperatorLabel.Location = new System.Drawing.Point(51, 109);
             this.FindByNumbersWordsComparisonOperatorLabel.Name = "FindByNumbersWordsComparisonOperatorLabel";
             this.FindByNumbersWordsComparisonOperatorLabel.Size = new System.Drawing.Size(18, 19);
             this.FindByNumbersWordsComparisonOperatorLabel.TabIndex = 44;
@@ -2731,7 +2745,7 @@ partial class MainForm
             this.FindByNumbersVersesNumberTypeLabel.Enabled = false;
             this.FindByNumbersVersesNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByNumbersVersesNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersVersesNumberTypeLabel.Location = new System.Drawing.Point(124, 74);
+            this.FindByNumbersVersesNumberTypeLabel.Location = new System.Drawing.Point(124, 90);
             this.FindByNumbersVersesNumberTypeLabel.Name = "FindByNumbersVersesNumberTypeLabel";
             this.FindByNumbersVersesNumberTypeLabel.Size = new System.Drawing.Size(24, 19);
             this.FindByNumbersVersesNumberTypeLabel.TabIndex = 43;
@@ -2745,7 +2759,7 @@ partial class MainForm
             this.FindByNumbersVersesNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FindByNumbersVersesNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
             this.FindByNumbersVersesNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersVersesNumericUpDown.Location = new System.Drawing.Point(69, 74);
+            this.FindByNumbersVersesNumericUpDown.Location = new System.Drawing.Point(69, 90);
             this.FindByNumbersVersesNumericUpDown.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -2770,7 +2784,7 @@ partial class MainForm
             this.FindByNumbersValueNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FindByNumbersValueNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
             this.FindByNumbersValueNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersValueNumericUpDown.Location = new System.Drawing.Point(69, 150);
+            this.FindByNumbersValueNumericUpDown.Location = new System.Drawing.Point(69, 166);
             this.FindByNumbersValueNumericUpDown.Maximum = new decimal(new int[] {
             999999999,
             0,
@@ -2790,7 +2804,7 @@ partial class MainForm
             this.FindByNumbersLettersNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FindByNumbersLettersNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
             this.FindByNumbersLettersNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersLettersNumericUpDown.Location = new System.Drawing.Point(69, 112);
+            this.FindByNumbersLettersNumericUpDown.Location = new System.Drawing.Point(69, 128);
             this.FindByNumbersLettersNumericUpDown.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -2810,7 +2824,7 @@ partial class MainForm
             this.FindByNumbersWordsNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.FindByNumbersWordsNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
             this.FindByNumbersWordsNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersWordsNumericUpDown.Location = new System.Drawing.Point(69, 93);
+            this.FindByNumbersWordsNumericUpDown.Location = new System.Drawing.Point(69, 109);
             this.FindByNumbersWordsNumericUpDown.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -2829,7 +2843,7 @@ partial class MainForm
             // 
             this.FindByNumbersVersesLabel.BackColor = System.Drawing.Color.Transparent;
             this.FindByNumbersVersesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersVersesLabel.Location = new System.Drawing.Point(1, 77);
+            this.FindByNumbersVersesLabel.Location = new System.Drawing.Point(1, 93);
             this.FindByNumbersVersesLabel.Name = "FindByNumbersVersesLabel";
             this.FindByNumbersVersesLabel.Size = new System.Drawing.Size(58, 13);
             this.FindByNumbersVersesLabel.TabIndex = 0;
@@ -2842,7 +2856,7 @@ partial class MainForm
             // 
             this.FindByNumbersLettersLabel.BackColor = System.Drawing.Color.Transparent;
             this.FindByNumbersLettersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersLettersLabel.Location = new System.Drawing.Point(1, 116);
+            this.FindByNumbersLettersLabel.Location = new System.Drawing.Point(1, 132);
             this.FindByNumbersLettersLabel.Name = "FindByNumbersLettersLabel";
             this.FindByNumbersLettersLabel.Size = new System.Drawing.Size(58, 13);
             this.FindByNumbersLettersLabel.TabIndex = 0;
@@ -2855,7 +2869,7 @@ partial class MainForm
             // 
             this.FindByNumbersWordsLabel.BackColor = System.Drawing.Color.Transparent;
             this.FindByNumbersWordsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersWordsLabel.Location = new System.Drawing.Point(1, 97);
+            this.FindByNumbersWordsLabel.Location = new System.Drawing.Point(1, 113);
             this.FindByNumbersWordsLabel.Name = "FindByNumbersWordsLabel";
             this.FindByNumbersWordsLabel.Size = new System.Drawing.Size(58, 13);
             this.FindByNumbersWordsLabel.TabIndex = 0;
@@ -2944,9 +2958,9 @@ partial class MainForm
             this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityLabel);
             this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityTextRadioButton);
             this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityPercentageTrackBar);
-            this.FindBySimilarityPanel.Location = new System.Drawing.Point(4, 541);
+            this.FindBySimilarityPanel.Location = new System.Drawing.Point(4, 557);
             this.FindBySimilarityPanel.Name = "FindBySimilarityPanel";
-            this.FindBySimilarityPanel.Size = new System.Drawing.Size(156, 117);
+            this.FindBySimilarityPanel.Size = new System.Drawing.Size(156, 101);
             this.FindBySimilarityPanel.TabIndex = 3;
             this.FindBySimilarityPanel.TabStop = true;
             this.FindBySimilarityPanel.Enter += new System.EventHandler(this.FindBySimilarityControls_Enter);
@@ -2957,7 +2971,7 @@ partial class MainForm
             this.AuthorLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.AuthorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AuthorLabel.ForeColor = System.Drawing.Color.Transparent;
-            this.AuthorLabel.Location = new System.Drawing.Point(0, 97);
+            this.AuthorLabel.Location = new System.Drawing.Point(0, 81);
             this.AuthorLabel.Name = "AuthorLabel";
             this.AuthorLabel.Size = new System.Drawing.Size(152, 16);
             this.AuthorLabel.TabIndex = 85;
@@ -5016,12 +5030,12 @@ partial class MainForm
             this.WordsListBoxContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.FindSelectedWordsMenuItem});
             this.WordsListBoxContextMenuStrip.Name = "WordsListBoxContextMenuStrip";
-            this.WordsListBoxContextMenuStrip.Size = new System.Drawing.Size(153, 48);
+            this.WordsListBoxContextMenuStrip.Size = new System.Drawing.Size(98, 26);
             // 
             // FindSelectedWordsMenuItem
             // 
             this.FindSelectedWordsMenuItem.Name = "FindSelectedWordsMenuItem";
-            this.FindSelectedWordsMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.FindSelectedWordsMenuItem.Size = new System.Drawing.Size(97, 22);
             this.FindSelectedWordsMenuItem.Text = "Find";
             this.FindSelectedWordsMenuItem.Click += new System.EventHandler(this.FindSelectedWordsMenuItem_Click);
             // 
@@ -5582,7 +5596,7 @@ partial class MainForm
             this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 1);
             this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
             this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-            this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 209);
+            this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 210);
             this.ScriptOutputGroupBox.TabIndex = 103;
             this.ScriptOutputGroupBox.TabStop = false;
             this.ScriptOutputGroupBox.Text = " Output ";
@@ -5598,7 +5612,7 @@ partial class MainForm
             this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
             this.ScriptOutputTextBox.ReadOnly = true;
             this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 181);
+            this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 182);
             this.ScriptOutputTextBox.TabIndex = 0;
             this.ScriptOutputTextBox.WordWrap = false;
             this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -5623,7 +5637,7 @@ partial class MainForm
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
             this.TabControl.ShowToolTips = true;
-            this.TabControl.Size = new System.Drawing.Size(825, 189);
+            this.TabControl.Size = new System.Drawing.Size(825, 190);
             this.TabControl.TabIndex = 102;
             this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             this.TabControl.Click += new System.EventHandler(this.TabControl_Click);
@@ -11507,6 +11521,104 @@ partial class MainForm
             // 
             this.FontDialog.Apply += new System.EventHandler(this.FontDialog_Apply);
             // 
+            // FindByNumbersResultTypePagesLabel
+            // 
+            this.FindByNumbersResultTypePagesLabel.BackColor = System.Drawing.Color.DarkGray;
+            this.FindByNumbersResultTypePagesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FindByNumbersResultTypePagesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByNumbersResultTypePagesLabel.ForeColor = System.Drawing.SystemColors.Window;
+            this.FindByNumbersResultTypePagesLabel.Location = new System.Drawing.Point(126, 21);
+            this.FindByNumbersResultTypePagesLabel.Name = "FindByNumbersResultTypePagesLabel";
+            this.FindByNumbersResultTypePagesLabel.Size = new System.Drawing.Size(24, 14);
+            this.FindByNumbersResultTypePagesLabel.TabIndex = 73;
+            this.FindByNumbersResultTypePagesLabel.Text = "#";
+            this.FindByNumbersResultTypePagesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.FindByNumbersResultTypePagesLabel.Click += new System.EventHandler(this.FindByNumbersResultTypePagesLabel_Click);
+            // 
+            // FindByNumbersResultTypeBowingsLabel
+            // 
+            this.FindByNumbersResultTypeBowingsLabel.BackColor = System.Drawing.Color.DarkGray;
+            this.FindByNumbersResultTypeBowingsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FindByNumbersResultTypeBowingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByNumbersResultTypeBowingsLabel.ForeColor = System.Drawing.SystemColors.Window;
+            this.FindByNumbersResultTypeBowingsLabel.Location = new System.Drawing.Point(126, 36);
+            this.FindByNumbersResultTypeBowingsLabel.Name = "FindByNumbersResultTypeBowingsLabel";
+            this.FindByNumbersResultTypeBowingsLabel.Size = new System.Drawing.Size(24, 14);
+            this.FindByNumbersResultTypeBowingsLabel.TabIndex = 79;
+            this.FindByNumbersResultTypeBowingsLabel.Text = "B";
+            this.FindByNumbersResultTypeBowingsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.FindByNumbersResultTypeBowingsLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeBowingsLabel_Click);
+            // 
+            // FindByNumbersResultTypeGroupsLabel
+            // 
+            this.FindByNumbersResultTypeGroupsLabel.BackColor = System.Drawing.Color.DarkGray;
+            this.FindByNumbersResultTypeGroupsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FindByNumbersResultTypeGroupsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByNumbersResultTypeGroupsLabel.ForeColor = System.Drawing.SystemColors.Window;
+            this.FindByNumbersResultTypeGroupsLabel.Location = new System.Drawing.Point(51, 36);
+            this.FindByNumbersResultTypeGroupsLabel.Name = "FindByNumbersResultTypeGroupsLabel";
+            this.FindByNumbersResultTypeGroupsLabel.Size = new System.Drawing.Size(24, 14);
+            this.FindByNumbersResultTypeGroupsLabel.TabIndex = 76;
+            this.FindByNumbersResultTypeGroupsLabel.Text = "G";
+            this.FindByNumbersResultTypeGroupsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.FindByNumbersResultTypeGroupsLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeGroupsLabel_Click);
+            // 
+            // FindByNumbersResultTypeQuartersLabel
+            // 
+            this.FindByNumbersResultTypeQuartersLabel.BackColor = System.Drawing.Color.DarkGray;
+            this.FindByNumbersResultTypeQuartersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FindByNumbersResultTypeQuartersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByNumbersResultTypeQuartersLabel.ForeColor = System.Drawing.SystemColors.Window;
+            this.FindByNumbersResultTypeQuartersLabel.Location = new System.Drawing.Point(101, 36);
+            this.FindByNumbersResultTypeQuartersLabel.Name = "FindByNumbersResultTypeQuartersLabel";
+            this.FindByNumbersResultTypeQuartersLabel.Size = new System.Drawing.Size(24, 14);
+            this.FindByNumbersResultTypeQuartersLabel.TabIndex = 78;
+            this.FindByNumbersResultTypeQuartersLabel.Text = "Q";
+            this.FindByNumbersResultTypeQuartersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.FindByNumbersResultTypeQuartersLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeQuartersLabel_Click);
+            // 
+            // FindByNumbersResultTypeHalfsLabel
+            // 
+            this.FindByNumbersResultTypeHalfsLabel.BackColor = System.Drawing.Color.DarkGray;
+            this.FindByNumbersResultTypeHalfsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FindByNumbersResultTypeHalfsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByNumbersResultTypeHalfsLabel.ForeColor = System.Drawing.SystemColors.Window;
+            this.FindByNumbersResultTypeHalfsLabel.Location = new System.Drawing.Point(76, 36);
+            this.FindByNumbersResultTypeHalfsLabel.Name = "FindByNumbersResultTypeHalfsLabel";
+            this.FindByNumbersResultTypeHalfsLabel.Size = new System.Drawing.Size(24, 14);
+            this.FindByNumbersResultTypeHalfsLabel.TabIndex = 77;
+            this.FindByNumbersResultTypeHalfsLabel.Text = "H";
+            this.FindByNumbersResultTypeHalfsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.FindByNumbersResultTypeHalfsLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeHalfsLabel_Click);
+            // 
+            // FindByNumbersResultTypePartsLabel
+            // 
+            this.FindByNumbersResultTypePartsLabel.BackColor = System.Drawing.Color.DarkGray;
+            this.FindByNumbersResultTypePartsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FindByNumbersResultTypePartsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByNumbersResultTypePartsLabel.ForeColor = System.Drawing.SystemColors.Window;
+            this.FindByNumbersResultTypePartsLabel.Location = new System.Drawing.Point(26, 36);
+            this.FindByNumbersResultTypePartsLabel.Name = "FindByNumbersResultTypePartsLabel";
+            this.FindByNumbersResultTypePartsLabel.Size = new System.Drawing.Size(24, 14);
+            this.FindByNumbersResultTypePartsLabel.TabIndex = 75;
+            this.FindByNumbersResultTypePartsLabel.Text = "P";
+            this.FindByNumbersResultTypePartsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.FindByNumbersResultTypePartsLabel.Click += new System.EventHandler(this.FindByNumbersResultTypePartsLabel_Click);
+            // 
+            // FindByNumbersResultTypeStationsLabel
+            // 
+            this.FindByNumbersResultTypeStationsLabel.BackColor = System.Drawing.Color.DarkGray;
+            this.FindByNumbersResultTypeStationsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FindByNumbersResultTypeStationsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByNumbersResultTypeStationsLabel.ForeColor = System.Drawing.SystemColors.Window;
+            this.FindByNumbersResultTypeStationsLabel.Location = new System.Drawing.Point(1, 36);
+            this.FindByNumbersResultTypeStationsLabel.Name = "FindByNumbersResultTypeStationsLabel";
+            this.FindByNumbersResultTypeStationsLabel.Size = new System.Drawing.Size(24, 14);
+            this.FindByNumbersResultTypeStationsLabel.TabIndex = 74;
+            this.FindByNumbersResultTypeStationsLabel.Text = "S";
+            this.FindByNumbersResultTypeStationsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.FindByNumbersResultTypeStationsLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeStationsLabel_Click);
+            // 
             // MainForm
             // 
             this.AcceptButton = this.FindByTextButton;
@@ -12326,4 +12438,11 @@ partial class MainForm
     private System.Windows.Forms.Label TranslationWordWrapLabel;
     private System.Windows.Forms.TextBox SumOfDigitalRootsTextBox;
     private System.Windows.Forms.TextBox DecimalUnusedLettersValueTextBox;
+    private System.Windows.Forms.Label FindByNumbersResultTypeBowingsLabel;
+    private System.Windows.Forms.Label FindByNumbersResultTypeGroupsLabel;
+    private System.Windows.Forms.Label FindByNumbersResultTypeQuartersLabel;
+    private System.Windows.Forms.Label FindByNumbersResultTypeHalfsLabel;
+    private System.Windows.Forms.Label FindByNumbersResultTypePartsLabel;
+    private System.Windows.Forms.Label FindByNumbersResultTypeStationsLabel;
+    private System.Windows.Forms.Label FindByNumbersResultTypePagesLabel;
 }

@@ -1718,6 +1718,104 @@ namespace Model
             }
             return result;
         }
+        public List<Page> GetPages(List<Verse> verses)
+        {
+            if (verses == null) return null;
+
+            List<Page> result = new List<Page>();
+            foreach (Verse verse in verses)
+            {
+                if (!result.Contains(verse.Page))
+                {
+                    result.Add(verse.Page);
+                }
+            }
+            return result;
+        }
+        public List<Station> GetStations(List<Verse> verses)
+        {
+            if (verses == null) return null;
+
+            List<Station> result = new List<Station>();
+            foreach (Verse verse in verses)
+            {
+                if (!result.Contains(verse.Station))
+                {
+                    result.Add(verse.Station);
+                }
+            }
+            return result;
+        }
+        public List<Part> GetParts(List<Verse> verses)
+        {
+            if (verses == null) return null;
+
+            List<Part> result = new List<Part>();
+            foreach (Verse verse in verses)
+            {
+                if (!result.Contains(verse.Part))
+                {
+                    result.Add(verse.Part);
+                }
+            }
+            return result;
+        }
+        public List<Group> GetGroups(List<Verse> verses)
+        {
+            if (verses == null) return null;
+
+            List<Group> result = new List<Group>();
+            foreach (Verse verse in verses)
+            {
+                if (!result.Contains(verse.Group))
+                {
+                    result.Add(verse.Group);
+                }
+            }
+            return result;
+        }
+        public List<Half> GetHalfs(List<Verse> verses)
+        {
+            if (verses == null) return null;
+
+            List<Half> result = new List<Half>();
+            foreach (Verse verse in verses)
+            {
+                if (!result.Contains(verse.Half))
+                {
+                    result.Add(verse.Half);
+                }
+            }
+            return result;
+        }
+        public List<Quarter> GetQuarters(List<Verse> verses)
+        {
+            if (verses == null) return null;
+
+            List<Quarter> result = new List<Quarter>();
+            foreach (Verse verse in verses)
+            {
+                if (!result.Contains(verse.Quarter))
+                {
+                    result.Add(verse.Quarter);
+                }
+            }
+            return result;
+        }
+        public List<Bowing> GetBowings(List<Verse> verses)
+        {
+            if (verses == null) return null;
+
+            List<Bowing> result = new List<Bowing>();
+            foreach (Verse verse in verses)
+            {
+                if (!result.Contains(verse.Bowing))
+                {
+                    result.Add(verse.Bowing);
+                }
+            }
+            return result;
+        }
         //public List<Chapter> GetCompleteChapters(List<Verse> verses)
         //{
         //    if (verses == null) return null;

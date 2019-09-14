@@ -224,24 +224,6 @@ namespace Model
             get { return bowing_count; }
         }
 
-        public Word GetWord(int index)
-        {
-            if (this.verses != null)
-            {
-                foreach (Verse verse in this.verses)
-                {
-                    if (index >= verse.Words.Count)
-                    {
-                        index -= verse.Words.Count;
-                    }
-                    else
-                    {
-                        return verse.Words[index];
-                    }
-                }
-            }
-            return null;
-        }
         private int word_count = 0;
         public int WordCount
         {
@@ -264,27 +246,6 @@ namespace Model
             }
         }
 
-        public Letter GetLetter(int index)
-        {
-            if (this.verses != null)
-            {
-                foreach (Verse verse in this.verses)
-                {
-                    foreach (Word word in verse.Words)
-                    {
-                        if (index >= word.Letters.Count)
-                        {
-                            index -= word.Letters.Count;
-                        }
-                        else
-                        {
-                            return word.Letters[index];
-                        }
-                    }
-                }
-            }
-            return null;
-        }
         private int letter_count = 0;
         public int LetterCount
         {

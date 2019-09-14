@@ -1055,6 +1055,139 @@ public class Client : IPublisher, ISubscriber
         }
     }
 
+    private List<Page> m_found_pages = null;
+    public List<Page> FoundPages
+    {
+        set { m_found_pages = value; }
+        get { return m_found_pages; }
+    }
+    private List<List<Page>> m_found_page_ranges = null;
+    public List<List<Page>> FoundPageRanges
+    {
+        set { m_found_page_ranges = value; }
+        get { return m_found_page_ranges; }
+    }
+    private List<List<Page>> m_found_page_sets = null;
+    public List<List<Page>> FoundPageSets
+    {
+        set { m_found_page_sets = value; }
+        get { return m_found_page_sets; }
+    }
+
+    private List<Station> m_found_stations = null;
+    public List<Station> FoundStations
+    {
+        set { m_found_stations = value; }
+        get { return m_found_stations; }
+    }
+    private List<List<Station>> m_found_station_ranges = null;
+    public List<List<Station>> FoundStationRanges
+    {
+        set { m_found_station_ranges = value; }
+        get { return m_found_station_ranges; }
+    }
+    private List<List<Station>> m_found_station_sets = null;
+    public List<List<Station>> FoundStationSets
+    {
+        set { m_found_station_sets = value; }
+        get { return m_found_station_sets; }
+    }
+
+    private List<Part> m_found_parts = null;
+    public List<Part> FoundParts
+    {
+        set { m_found_parts = value; }
+        get { return m_found_parts; }
+    }
+    private List<List<Part>> m_found_part_ranges = null;
+    public List<List<Part>> FoundPartRanges
+    {
+        set { m_found_part_ranges = value; }
+        get { return m_found_part_ranges; }
+    }
+    private List<List<Part>> m_found_part_sets = null;
+    public List<List<Part>> FoundPartSets
+    {
+        set { m_found_part_sets = value; }
+        get { return m_found_part_sets; }
+    }
+
+    private List<Group> m_found_groups = null;
+    public List<Group> FoundGroups
+    {
+        set { m_found_groups = value; }
+        get { return m_found_groups; }
+    }
+    private List<List<Group>> m_found_group_ranges = null;
+    public List<List<Group>> FoundGroupRanges
+    {
+        set { m_found_group_ranges = value; }
+        get { return m_found_group_ranges; }
+    }
+    private List<List<Group>> m_found_group_sets = null;
+    public List<List<Group>> FoundGroupSets
+    {
+        set { m_found_group_sets = value; }
+        get { return m_found_group_sets; }
+    }
+
+    private List<Half> m_found_halfs = null;
+    public List<Half> FoundHalfs
+    {
+        set { m_found_halfs = value; }
+        get { return m_found_halfs; }
+    }
+    private List<List<Half>> m_found_half_ranges = null;
+    public List<List<Half>> FoundHalfRanges
+    {
+        set { m_found_half_ranges = value; }
+        get { return m_found_half_ranges; }
+    }
+    private List<List<Half>> m_found_half_sets = null;
+    public List<List<Half>> FoundHalfSets
+    {
+        set { m_found_half_sets = value; }
+        get { return m_found_half_sets; }
+    }
+
+    private List<Quarter> m_found_quarters = null;
+    public List<Quarter> FoundQuarters
+    {
+        set { m_found_quarters = value; }
+        get { return m_found_quarters; }
+    }
+    private List<List<Quarter>> m_found_quarter_ranges = null;
+    public List<List<Quarter>> FoundQuarterRanges
+    {
+        set { m_found_quarter_ranges = value; }
+        get { return m_found_quarter_ranges; }
+    }
+    private List<List<Quarter>> m_found_quarter_sets = null;
+    public List<List<Quarter>> FoundQuarterSets
+    {
+        set { m_found_quarter_sets = value; }
+        get { return m_found_quarter_sets; }
+    }
+
+    private List<Bowing> m_found_bowings = null;
+    public List<Bowing> FoundBowings
+    {
+        set { m_found_bowings = value; }
+        get { return m_found_bowings; }
+    }
+    private List<List<Bowing>> m_found_bowing_ranges = null;
+    public List<List<Bowing>> FoundBowingRanges
+    {
+        set { m_found_bowing_ranges = value; }
+        get { return m_found_bowing_ranges; }
+    }
+    private List<List<Bowing>> m_found_bowing_sets = null;
+    public List<List<Bowing>> FoundBowingSets
+    {
+        set { m_found_bowing_sets = value; }
+        get { return m_found_bowing_sets; }
+    }
+
     public void ClearSearchResults()
     {
         m_filter_chapters = null;
@@ -1410,6 +1543,7 @@ public class Client : IPublisher, ISubscriber
         return 0;
     }
 
+
     // find by numbers - Letters
     /// <summary>
     /// Find letters that meet query criteria.
@@ -1446,6 +1580,7 @@ public class Client : IPublisher, ISubscriber
         }
         return 0;
     }
+
     // find by numbers - Words
     /// <summary>
     /// Find words that meet query criteria.
@@ -1591,6 +1726,7 @@ public class Client : IPublisher, ISubscriber
         }
         return 0;
     }
+
     // find by numbers - Sentences
     /// <summary>
     /// Find sentences across verses that meet query criteria.
@@ -1609,6 +1745,7 @@ public class Client : IPublisher, ISubscriber
         }
         return 0;
     }
+
     // find by numbers - Verses
     /// <summary>
     /// Find verses that meet query criteria.
@@ -1669,6 +1806,7 @@ public class Client : IPublisher, ISubscriber
         }
         return 0;
     }
+
     // find by numbers - Chapters
     /// <summary>
     /// Find chapters that meet query criteria.
@@ -1750,6 +1888,581 @@ public class Client : IPublisher, ISubscriber
         }
         return 0;
     }
+
+    // find by numbers - Pages
+    /// <summary>
+    /// Find pages that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found pages. Result is stored in FoundPages.</returns>
+    public int FindPages(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_pages = Server.FindPages(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_pages != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (Page page in m_found_pages)
+            {
+                if (page != null)
+                {
+                    m_found_verses.AddRange(page.Verses);
+                }
+            }
+
+            return m_found_pages.Count;
+        }
+        return 0;
+    }
+    // find by numbers - PageRanges
+    /// <summary>
+    /// Find page ranges that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found page ranges. Result is stored in FoundPageRanges.</returns>
+    public int FindPageRanges(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_page_ranges = Server.FindPageRanges(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_page_ranges != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (List<Page> range in m_found_page_ranges)
+            {
+                foreach (Page page in range)
+                {
+                    if (page != null)
+                    {
+                        m_found_verses.AddRange(page.Verses);
+                    }
+                }
+            }
+
+            return m_found_page_ranges.Count;
+        }
+        return 0;
+    }
+    // find by numbers - PageSets
+    /// <summary>
+    /// Find page sets that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found page sets. Result is stored in FoundPageSets.</returns>
+    public int FindPageSets(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_page_sets = Server.FindPageSets(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_page_sets != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (List<Page> set in m_found_page_sets)
+            {
+                foreach (Page page in set)
+                {
+                    if (page != null)
+                    {
+                        m_found_verses.AddRange(page.Verses);
+                    }
+                }
+            }
+
+            return m_found_page_sets.Count;
+        }
+        return 0;
+    }
+
+    // find by numbers - Stations
+    /// <summary>
+    /// Find stations that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found stations. Result is stored in FoundStations.</returns>
+    public int FindStations(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_stations = Server.FindStations(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_stations != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (Station station in m_found_stations)
+            {
+                if (station != null)
+                {
+                    m_found_verses.AddRange(station.Verses);
+                }
+            }
+
+            return m_found_stations.Count;
+        }
+        return 0;
+    }
+    // find by numbers - StationRanges
+    /// <summary>
+    /// Find station ranges that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found station ranges. Result is stored in FoundStationRanges.</returns>
+    public int FindStationRanges(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_station_ranges = Server.FindStationRanges(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_station_ranges != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (List<Station> range in m_found_station_ranges)
+            {
+                foreach (Station station in range)
+                {
+                    if (station != null)
+                    {
+                        m_found_verses.AddRange(station.Verses);
+                    }
+                }
+            }
+
+            return m_found_station_ranges.Count;
+        }
+        return 0;
+    }
+    // find by numbers - StationSets
+    /// <summary>
+    /// Find station sets that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found station sets. Result is stored in FoundStationSets.</returns>
+    public int FindStationSets(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_station_sets = Server.FindStationSets(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_station_sets != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (List<Station> set in m_found_station_sets)
+            {
+                foreach (Station station in set)
+                {
+                    if (station != null)
+                    {
+                        m_found_verses.AddRange(station.Verses);
+                    }
+                }
+            }
+
+            return m_found_station_sets.Count;
+        }
+        return 0;
+    }
+
+    // find by numbers - Parts
+    /// <summary>
+    /// Find parts that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found parts. Result is stored in FoundParts.</returns>
+    public int FindParts(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_parts = Server.FindParts(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_parts != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (Part part in m_found_parts)
+            {
+                if (part != null)
+                {
+                    m_found_verses.AddRange(part.Verses);
+                }
+            }
+
+            return m_found_parts.Count;
+        }
+        return 0;
+    }
+    // find by numbers - PartRanges
+    /// <summary>
+    /// Find part ranges that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found part ranges. Result is stored in FoundPartRanges.</returns>
+    public int FindPartRanges(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_part_ranges = Server.FindPartRanges(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_part_ranges != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (List<Part> range in m_found_part_ranges)
+            {
+                foreach (Part part in range)
+                {
+                    if (part != null)
+                    {
+                        m_found_verses.AddRange(part.Verses);
+                    }
+                }
+            }
+
+            return m_found_part_ranges.Count;
+        }
+        return 0;
+    }
+    // find by numbers - PartSets
+    /// <summary>
+    /// Find part sets that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found part sets. Result is stored in FoundPartSets.</returns>
+    public int FindPartSets(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_part_sets = Server.FindPartSets(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_part_sets != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (List<Part> set in m_found_part_sets)
+            {
+                foreach (Part part in set)
+                {
+                    if (part != null)
+                    {
+                        m_found_verses.AddRange(part.Verses);
+                    }
+                }
+            }
+
+            return m_found_part_sets.Count;
+        }
+        return 0;
+    }
+
+    // find by numbers - Groups
+    /// <summary>
+    /// Find groups that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found groups. Result is stored in FoundGroups.</returns>
+    public int FindGroups(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_groups = Server.FindGroups(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_groups != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (Group group in m_found_groups)
+            {
+                if (group != null)
+                {
+                    m_found_verses.AddRange(group.Verses);
+                }
+            }
+
+            return m_found_groups.Count;
+        }
+        return 0;
+    }
+    // find by numbers - GroupRanges
+    /// <summary>
+    /// Find group ranges that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found group ranges. Result is stored in FoundGroupRanges.</returns>
+    public int FindGroupRanges(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_group_ranges = Server.FindGroupRanges(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_group_ranges != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (List<Group> range in m_found_group_ranges)
+            {
+                foreach (Group group in range)
+                {
+                    if (group != null)
+                    {
+                        m_found_verses.AddRange(group.Verses);
+                    }
+                }
+            }
+
+            return m_found_group_ranges.Count;
+        }
+        return 0;
+    }
+    // find by numbers - GroupSets
+    /// <summary>
+    /// Find group sets that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found group sets. Result is stored in FoundGroupSets.</returns>
+    public int FindGroupSets(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_group_sets = Server.FindGroupSets(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_group_sets != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (List<Group> set in m_found_group_sets)
+            {
+                foreach (Group group in set)
+                {
+                    if (group != null)
+                    {
+                        m_found_verses.AddRange(group.Verses);
+                    }
+                }
+            }
+
+            return m_found_group_sets.Count;
+        }
+        return 0;
+    }
+
+    // find by numbers - Halfs
+    /// <summary>
+    /// Find halfs that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found halfs. Result is stored in FoundHalfs.</returns>
+    public int FindHalfs(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_halfs = Server.FindHalfs(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_halfs != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (Half half in m_found_halfs)
+            {
+                if (half != null)
+                {
+                    m_found_verses.AddRange(half.Verses);
+                }
+            }
+
+            return m_found_halfs.Count;
+        }
+        return 0;
+    }
+    // find by numbers - HalfRanges
+    /// <summary>
+    /// Find half ranges that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found half ranges. Result is stored in FoundHalfRanges.</returns>
+    public int FindHalfRanges(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_half_ranges = Server.FindHalfRanges(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_half_ranges != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (List<Half> range in m_found_half_ranges)
+            {
+                foreach (Half half in range)
+                {
+                    if (half != null)
+                    {
+                        m_found_verses.AddRange(half.Verses);
+                    }
+                }
+            }
+
+            return m_found_half_ranges.Count;
+        }
+        return 0;
+    }
+    // find by numbers - HalfSets
+    /// <summary>
+    /// Find half sets that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found half sets. Result is stored in FoundHalfSets.</returns>
+    public int FindHalfSets(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_half_sets = Server.FindHalfSets(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_half_sets != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (List<Half> set in m_found_half_sets)
+            {
+                foreach (Half half in set)
+                {
+                    if (half != null)
+                    {
+                        m_found_verses.AddRange(half.Verses);
+                    }
+                }
+            }
+
+            return m_found_half_sets.Count;
+        }
+        return 0;
+    }
+
+    // find by numbers - Quarters
+    /// <summary>
+    /// Find quarters that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found quarters. Result is stored in FoundQuarters.</returns>
+    public int FindQuarters(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_quarters = Server.FindQuarters(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_quarters != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (Quarter quarter in m_found_quarters)
+            {
+                if (quarter != null)
+                {
+                    m_found_verses.AddRange(quarter.Verses);
+                }
+            }
+
+            return m_found_quarters.Count;
+        }
+        return 0;
+    }
+    // find by numbers - QuarterRanges
+    /// <summary>
+    /// Find quarter ranges that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found quarter ranges. Result is stored in FoundQuarterRanges.</returns>
+    public int FindQuarterRanges(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_quarter_ranges = Server.FindQuarterRanges(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_quarter_ranges != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (List<Quarter> range in m_found_quarter_ranges)
+            {
+                foreach (Quarter quarter in range)
+                {
+                    if (quarter != null)
+                    {
+                        m_found_verses.AddRange(quarter.Verses);
+                    }
+                }
+            }
+
+            return m_found_quarter_ranges.Count;
+        }
+        return 0;
+    }
+    // find by numbers - QuarterSets
+    /// <summary>
+    /// Find quarter sets that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found quarter sets. Result is stored in FoundQuarterSets.</returns>
+    public int FindQuarterSets(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_quarter_sets = Server.FindQuarterSets(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_quarter_sets != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (List<Quarter> set in m_found_quarter_sets)
+            {
+                foreach (Quarter quarter in set)
+                {
+                    if (quarter != null)
+                    {
+                        m_found_verses.AddRange(quarter.Verses);
+                    }
+                }
+            }
+
+            return m_found_quarter_sets.Count;
+        }
+        return 0;
+    }
+
+    // find by numbers - Bowings
+    /// <summary>
+    /// Find bowings that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found bowings. Result is stored in FoundBowings.</returns>
+    public int FindBowings(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_bowings = Server.FindBowings(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_bowings != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (Bowing bowing in m_found_bowings)
+            {
+                if (bowing != null)
+                {
+                    m_found_verses.AddRange(bowing.Verses);
+                }
+            }
+
+            return m_found_bowings.Count;
+        }
+        return 0;
+    }
+    // find by numbers - BowingRanges
+    /// <summary>
+    /// Find bowing ranges that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found bowing ranges. Result is stored in FoundBowingRanges.</returns>
+    public int FindBowingRanges(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_bowing_ranges = Server.FindBowingRanges(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_bowing_ranges != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (List<Bowing> range in m_found_bowing_ranges)
+            {
+                foreach (Bowing bowing in range)
+                {
+                    if (bowing != null)
+                    {
+                        m_found_verses.AddRange(bowing.Verses);
+                    }
+                }
+            }
+
+            return m_found_bowing_ranges.Count;
+        }
+        return 0;
+    }
+    // find by numbers - BowingSets
+    /// <summary>
+    /// Find bowing sets that meet query criteria.
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns>Number of found bowing sets. Result is stored in FoundBowingSets.</returns>
+    public int FindBowingSets(NumberQuery query)
+    {
+        ClearSearchResults();
+        m_found_bowing_sets = Server.FindBowingSets(m_search_scope, m_selection, m_found_verses, query);
+        if (m_found_bowing_sets != null)
+        {
+            m_found_verses = new List<Verse>();
+            foreach (List<Bowing> set in m_found_bowing_sets)
+            {
+                foreach (Bowing bowing in set)
+                {
+                    if (bowing != null)
+                    {
+                        m_found_verses.AddRange(bowing.Verses);
+                    }
+                }
+            }
+
+            return m_found_bowing_sets.Count;
+        }
+        return 0;
+    }
+
 
     // find by prostration type
     /// <summary>

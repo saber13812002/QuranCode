@@ -11313,6 +11313,202 @@ public class Server : IPublisher
             }
         }
     }
+    private static void CalculateSums(Page page, out int verse_sum, out int word_sum, out int letter_sum)
+    {
+        verse_sum = 0;
+        word_sum = 0;
+        letter_sum = 0;
+        if (page != null)
+        {
+            foreach (Verse verse in page.Verses)
+            {
+                verse_sum += verse.NumberInChapter;
+                if (verse.Words != null)
+                {
+                    foreach (Word word in verse.Words)
+                    {
+                        word_sum += word.NumberInVerse;
+
+                        if ((word.Letters != null) && (word.Letters.Count > 0))
+                        {
+                            foreach (Letter letter in word.Letters)
+                            {
+                                letter_sum += letter.NumberInWord;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private static void CalculateSums(Station station, out int verse_sum, out int word_sum, out int letter_sum)
+    {
+        verse_sum = 0;
+        word_sum = 0;
+        letter_sum = 0;
+        if (station != null)
+        {
+            foreach (Verse verse in station.Verses)
+            {
+                verse_sum += verse.NumberInChapter;
+                if (verse.Words != null)
+                {
+                    foreach (Word word in verse.Words)
+                    {
+                        word_sum += word.NumberInVerse;
+
+                        if ((word.Letters != null) && (word.Letters.Count > 0))
+                        {
+                            foreach (Letter letter in word.Letters)
+                            {
+                                letter_sum += letter.NumberInWord;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private static void CalculateSums(Part part, out int verse_sum, out int word_sum, out int letter_sum)
+    {
+        verse_sum = 0;
+        word_sum = 0;
+        letter_sum = 0;
+        if (part != null)
+        {
+            foreach (Verse verse in part.Verses)
+            {
+                verse_sum += verse.NumberInChapter;
+                if (verse.Words != null)
+                {
+                    foreach (Word word in verse.Words)
+                    {
+                        word_sum += word.NumberInVerse;
+
+                        if ((word.Letters != null) && (word.Letters.Count > 0))
+                        {
+                            foreach (Letter letter in word.Letters)
+                            {
+                                letter_sum += letter.NumberInWord;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private static void CalculateSums(Model.Group group, out int verse_sum, out int word_sum, out int letter_sum)
+    {
+        verse_sum = 0;
+        word_sum = 0;
+        letter_sum = 0;
+        if (group != null)
+        {
+            foreach (Verse verse in group.Verses)
+            {
+                verse_sum += verse.NumberInChapter;
+                if (verse.Words != null)
+                {
+                    foreach (Word word in verse.Words)
+                    {
+                        word_sum += word.NumberInVerse;
+
+                        if ((word.Letters != null) && (word.Letters.Count > 0))
+                        {
+                            foreach (Letter letter in word.Letters)
+                            {
+                                letter_sum += letter.NumberInWord;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private static void CalculateSums(Half half, out int verse_sum, out int word_sum, out int letter_sum)
+    {
+        verse_sum = 0;
+        word_sum = 0;
+        letter_sum = 0;
+        if (half != null)
+        {
+            foreach (Verse verse in half.Verses)
+            {
+                verse_sum += verse.NumberInChapter;
+                if (verse.Words != null)
+                {
+                    foreach (Word word in verse.Words)
+                    {
+                        word_sum += word.NumberInVerse;
+
+                        if ((word.Letters != null) && (word.Letters.Count > 0))
+                        {
+                            foreach (Letter letter in word.Letters)
+                            {
+                                letter_sum += letter.NumberInWord;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private static void CalculateSums(Quarter quarter, out int verse_sum, out int word_sum, out int letter_sum)
+    {
+        verse_sum = 0;
+        word_sum = 0;
+        letter_sum = 0;
+        if (quarter != null)
+        {
+            foreach (Verse verse in quarter.Verses)
+            {
+                verse_sum += verse.NumberInChapter;
+                if (verse.Words != null)
+                {
+                    foreach (Word word in verse.Words)
+                    {
+                        word_sum += word.NumberInVerse;
+
+                        if ((word.Letters != null) && (word.Letters.Count > 0))
+                        {
+                            foreach (Letter letter in word.Letters)
+                            {
+                                letter_sum += letter.NumberInWord;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private static void CalculateSums(Bowing bowing, out int verse_sum, out int word_sum, out int letter_sum)
+    {
+        verse_sum = 0;
+        word_sum = 0;
+        letter_sum = 0;
+        if (bowing != null)
+        {
+            foreach (Verse verse in bowing.Verses)
+            {
+                verse_sum += verse.NumberInChapter;
+                if (verse.Words != null)
+                {
+                    foreach (Word word in verse.Words)
+                    {
+                        word_sum += word.NumberInVerse;
+
+                        if ((word.Letters != null) && (word.Letters.Count > 0))
+                        {
+                            foreach (Letter letter in word.Letters)
+                            {
+                                letter_sum += letter.NumberInWord;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     private static void CalculateSums(List<Chapter> chapters, out int chapter_sum, out int verse_sum, out int word_sum, out int letter_sum)
     {
         chapter_sum = 0;
@@ -11328,6 +11524,265 @@ public class Server : IPublisher
                     chapter_sum += chapter.SortedNumber;
 
                     foreach (Verse verse in chapter.Verses)
+                    {
+                        verse_sum += verse.NumberInChapter;
+                        if (verse.Words != null)
+                        {
+                            foreach (Word word in verse.Words)
+                            {
+                                word_sum += word.NumberInVerse;
+
+                                if ((word.Letters != null) && (word.Letters.Count > 0))
+                                {
+                                    foreach (Letter letter in word.Letters)
+                                    {
+                                        letter_sum += letter.NumberInWord;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private static void CalculateSums(List<Page> pages, out int page_sum, out int verse_sum, out int word_sum, out int letter_sum)
+    {
+        page_sum = 0;
+        verse_sum = 0;
+        word_sum = 0;
+        letter_sum = 0;
+        if (pages != null)
+        {
+            foreach (Page page in pages)
+            {
+                if (page != null)
+                {
+                    page_sum += page.Number;
+
+                    foreach (Verse verse in page.Verses)
+                    {
+                        verse_sum += verse.NumberInChapter;
+                        if (verse.Words != null)
+                        {
+                            foreach (Word word in verse.Words)
+                            {
+                                word_sum += word.NumberInVerse;
+
+                                if ((word.Letters != null) && (word.Letters.Count > 0))
+                                {
+                                    foreach (Letter letter in word.Letters)
+                                    {
+                                        letter_sum += letter.NumberInWord;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private static void CalculateSums(List<Station> stations, out int station_sum, out int verse_sum, out int word_sum, out int letter_sum)
+    {
+        station_sum = 0;
+        verse_sum = 0;
+        word_sum = 0;
+        letter_sum = 0;
+        if (stations != null)
+        {
+            foreach (Station station in stations)
+            {
+                if (station != null)
+                {
+                    station_sum += station.Number;
+
+                    foreach (Verse verse in station.Verses)
+                    {
+                        verse_sum += verse.NumberInChapter;
+                        if (verse.Words != null)
+                        {
+                            foreach (Word word in verse.Words)
+                            {
+                                word_sum += word.NumberInVerse;
+
+                                if ((word.Letters != null) && (word.Letters.Count > 0))
+                                {
+                                    foreach (Letter letter in word.Letters)
+                                    {
+                                        letter_sum += letter.NumberInWord;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private static void CalculateSums(List<Part> parts, out int part_sum, out int verse_sum, out int word_sum, out int letter_sum)
+    {
+        part_sum = 0;
+        verse_sum = 0;
+        word_sum = 0;
+        letter_sum = 0;
+        if (parts != null)
+        {
+            foreach (Part part in parts)
+            {
+                if (part != null)
+                {
+                    part_sum += part.Number;
+
+                    foreach (Verse verse in part.Verses)
+                    {
+                        verse_sum += verse.NumberInChapter;
+                        if (verse.Words != null)
+                        {
+                            foreach (Word word in verse.Words)
+                            {
+                                word_sum += word.NumberInVerse;
+
+                                if ((word.Letters != null) && (word.Letters.Count > 0))
+                                {
+                                    foreach (Letter letter in word.Letters)
+                                    {
+                                        letter_sum += letter.NumberInWord;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private static void CalculateSums(List<Model.Group> groups, out int group_sum, out int verse_sum, out int word_sum, out int letter_sum)
+    {
+        group_sum = 0;
+        verse_sum = 0;
+        word_sum = 0;
+        letter_sum = 0;
+        if (groups != null)
+        {
+            foreach (Model.Group group in groups)
+            {
+                if (group != null)
+                {
+                    group_sum += group.Number;
+
+                    foreach (Verse verse in group.Verses)
+                    {
+                        verse_sum += verse.NumberInChapter;
+                        if (verse.Words != null)
+                        {
+                            foreach (Word word in verse.Words)
+                            {
+                                word_sum += word.NumberInVerse;
+
+                                if ((word.Letters != null) && (word.Letters.Count > 0))
+                                {
+                                    foreach (Letter letter in word.Letters)
+                                    {
+                                        letter_sum += letter.NumberInWord;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private static void CalculateSums(List<Half> halfs, out int half_sum, out int verse_sum, out int word_sum, out int letter_sum)
+    {
+        half_sum = 0;
+        verse_sum = 0;
+        word_sum = 0;
+        letter_sum = 0;
+        if (halfs != null)
+        {
+            foreach (Half half in halfs)
+            {
+                if (half != null)
+                {
+                    half_sum += half.Number;
+
+                    foreach (Verse verse in half.Verses)
+                    {
+                        verse_sum += verse.NumberInChapter;
+                        if (verse.Words != null)
+                        {
+                            foreach (Word word in verse.Words)
+                            {
+                                word_sum += word.NumberInVerse;
+
+                                if ((word.Letters != null) && (word.Letters.Count > 0))
+                                {
+                                    foreach (Letter letter in word.Letters)
+                                    {
+                                        letter_sum += letter.NumberInWord;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private static void CalculateSums(List<Quarter> quarters, out int quarter_sum, out int verse_sum, out int word_sum, out int letter_sum)
+    {
+        quarter_sum = 0;
+        verse_sum = 0;
+        word_sum = 0;
+        letter_sum = 0;
+        if (quarters != null)
+        {
+            foreach (Quarter quarter in quarters)
+            {
+                if (quarter != null)
+                {
+                    quarter_sum += quarter.Number;
+
+                    foreach (Verse verse in quarter.Verses)
+                    {
+                        verse_sum += verse.NumberInChapter;
+                        if (verse.Words != null)
+                        {
+                            foreach (Word word in verse.Words)
+                            {
+                                word_sum += word.NumberInVerse;
+
+                                if ((word.Letters != null) && (word.Letters.Count > 0))
+                                {
+                                    foreach (Letter letter in word.Letters)
+                                    {
+                                        letter_sum += letter.NumberInWord;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private static void CalculateSums(List<Bowing> bowings, out int bowing_sum, out int verse_sum, out int word_sum, out int letter_sum)
+    {
+        bowing_sum = 0;
+        verse_sum = 0;
+        word_sum = 0;
+        letter_sum = 0;
+        if (bowings != null)
+        {
+            foreach (Bowing bowing in bowings)
+            {
+                if (bowing != null)
+                {
+                    bowing_sum += bowing.Number;
+
+                    foreach (Verse verse in bowing.Verses)
                     {
                         verse_sum += verse.NumberInChapter;
                         if (verse.Words != null)
@@ -12994,6 +13449,2169 @@ public class Server : IPublisher
         // passed all tests successfully
         return true;
     }
+    private static bool Compare(Page page, NumberQuery query)
+    {
+        if (page != null)
+        {
+            int number = page.Number;
+            if (query.NumberNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(number, number, query.NumberComparisonOperator, query.NumberRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.NumberNumberType == NumberType.None)
+            {
+                if (query.Number != 0)
+                {
+                    if (query.Number < 0)
+                    {
+                        switch (query.NumberScope)
+                        {
+                            case NumberScope.Number:
+                                query.Number = Book.Pages.Count + query.Number + 1;
+                                break;
+                            default:
+                                query.Number = Book.Pages.Count + query.Number + 1;
+                                break;
+                        }
+                    }
+
+                    if (query.Number < 0)
+                    {
+                        query.Number = number + query.Number + 1;
+                    }
+
+                    if (query.Number > 0)
+                    {
+                        if (!Numbers.Compare(number, query.Number, query.NumberComparisonOperator, query.NumberRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false; // number_out_of_range
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(number, query.NumberNumberType))
+                {
+                    return false;
+                }
+            }
+
+            if (query.VerseCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(page.Verses.Count, number, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.VerseCountNumberType == NumberType.None)
+            {
+                if (query.VerseCount > 0)
+                {
+                    if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(page, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(verse_sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(page.Verses.Count, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(page, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(verse_sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(page.Verses.Count, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.WordCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(page.WordCount, number, query.WordCountComparisonOperator, query.WordCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.WordCountNumberType == NumberType.None)
+            {
+                if (query.WordCount > 0)
+                {
+                    if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(page, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(word_sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(page.WordCount, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(page, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(word_sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(page.WordCount, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.LetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(page.LetterCount, number, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.LetterCountNumberType == NumberType.None)
+            {
+                if (query.LetterCount > 0)
+                {
+                    if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(page, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(letter_sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(page.LetterCount, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(page, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(letter_sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(page.LetterCount, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.UniqueLetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(page.UniqueLetters.Count, number, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.UniqueLetterCountNumberType == NumberType.None)
+            {
+                if (query.UniqueLetterCount > 0)
+                {
+                    if (!Numbers.Compare(page.UniqueLetters.Count, query.UniqueLetterCount, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(page.UniqueLetters.Count, query.UniqueLetterCountNumberType))
+                {
+                    return false;
+                }
+            }
+
+            long value = CalculateValue(page.Verses);
+            if (query.ValueNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value, number, query.ValueComparisonOperator, query.ValueRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueNumberType == NumberType.None)
+            {
+                if (query.Value > 0)
+                {
+                    if (!Numbers.Compare(value, query.Value, query.ValueComparisonOperator, query.ValueRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value, query.ValueNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digit_sum = Numbers.DigitSum(value);
+            if (query.ValueDigitSumNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digit_sum, number, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitSumNumberType == NumberType.None)
+            {
+                if (query.ValueDigitSum > 0)
+                {
+                    if (!Numbers.Compare(value_digit_sum, query.ValueDigitSum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digit_sum, query.ValueDigitSumNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digital_root = Numbers.DigitalRoot(value);
+            if (query.ValueDigitalRootNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digital_root, number, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitalRootNumberType == NumberType.None)
+            {
+                if (query.ValueDigitalRoot > 0)
+                {
+                    if (!Numbers.Compare(value_digital_root, query.ValueDigitalRoot, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digital_root, query.ValueDigitalRootNumberType))
+                {
+                    return false;
+                }
+            }
+        }
+
+        // passed all tests successfully
+        return true;
+    }
+    private static bool Compare(Station station, NumberQuery query)
+    {
+        if (station != null)
+        {
+            int number = station.Number;
+            if (query.NumberNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(number, number, query.NumberComparisonOperator, query.NumberRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.NumberNumberType == NumberType.None)
+            {
+                if (query.Number != 0)
+                {
+                    if (query.Number < 0)
+                    {
+                        switch (query.NumberScope)
+                        {
+                            case NumberScope.Number:
+                                query.Number = Book.Stations.Count + query.Number + 1;
+                                break;
+                            default:
+                                query.Number = Book.Stations.Count + query.Number + 1;
+                                break;
+                        }
+                    }
+
+                    if (query.Number < 0)
+                    {
+                        query.Number = number + query.Number + 1;
+                    }
+
+                    if (query.Number > 0)
+                    {
+                        if (!Numbers.Compare(number, query.Number, query.NumberComparisonOperator, query.NumberRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false; // number_out_of_range
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(number, query.NumberNumberType))
+                {
+                    return false;
+                }
+            }
+
+            if (query.VerseCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(station.Verses.Count, number, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.VerseCountNumberType == NumberType.None)
+            {
+                if (query.VerseCount > 0)
+                {
+                    if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(station, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(verse_sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(station.Verses.Count, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(station, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(verse_sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(station.Verses.Count, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.WordCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(station.WordCount, number, query.WordCountComparisonOperator, query.WordCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.WordCountNumberType == NumberType.None)
+            {
+                if (query.WordCount > 0)
+                {
+                    if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(station, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(word_sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(station.WordCount, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(station, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(word_sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(station.WordCount, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.LetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(station.LetterCount, number, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.LetterCountNumberType == NumberType.None)
+            {
+                if (query.LetterCount > 0)
+                {
+                    if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(station, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(letter_sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(station.LetterCount, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(station, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(letter_sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(station.LetterCount, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.UniqueLetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(station.UniqueLetters.Count, number, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.UniqueLetterCountNumberType == NumberType.None)
+            {
+                if (query.UniqueLetterCount > 0)
+                {
+                    if (!Numbers.Compare(station.UniqueLetters.Count, query.UniqueLetterCount, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(station.UniqueLetters.Count, query.UniqueLetterCountNumberType))
+                {
+                    return false;
+                }
+            }
+
+            long value = CalculateValue(station.Verses);
+            if (query.ValueNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value, number, query.ValueComparisonOperator, query.ValueRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueNumberType == NumberType.None)
+            {
+                if (query.Value > 0)
+                {
+                    if (!Numbers.Compare(value, query.Value, query.ValueComparisonOperator, query.ValueRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value, query.ValueNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digit_sum = Numbers.DigitSum(value);
+            if (query.ValueDigitSumNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digit_sum, number, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitSumNumberType == NumberType.None)
+            {
+                if (query.ValueDigitSum > 0)
+                {
+                    if (!Numbers.Compare(value_digit_sum, query.ValueDigitSum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digit_sum, query.ValueDigitSumNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digital_root = Numbers.DigitalRoot(value);
+            if (query.ValueDigitalRootNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digital_root, number, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitalRootNumberType == NumberType.None)
+            {
+                if (query.ValueDigitalRoot > 0)
+                {
+                    if (!Numbers.Compare(value_digital_root, query.ValueDigitalRoot, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digital_root, query.ValueDigitalRootNumberType))
+                {
+                    return false;
+                }
+            }
+        }
+
+        // passed all tests successfully
+        return true;
+    }
+    private static bool Compare(Part part, NumberQuery query)
+    {
+        if (part != null)
+        {
+            int number = part.Number;
+            if (query.NumberNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(number, number, query.NumberComparisonOperator, query.NumberRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.NumberNumberType == NumberType.None)
+            {
+                if (query.Number != 0)
+                {
+                    if (query.Number < 0)
+                    {
+                        switch (query.NumberScope)
+                        {
+                            case NumberScope.Number:
+                                query.Number = Book.Parts.Count + query.Number + 1;
+                                break;
+                            default:
+                                query.Number = Book.Parts.Count + query.Number + 1;
+                                break;
+                        }
+                    }
+
+                    if (query.Number < 0)
+                    {
+                        query.Number = number + query.Number + 1;
+                    }
+
+                    if (query.Number > 0)
+                    {
+                        if (!Numbers.Compare(number, query.Number, query.NumberComparisonOperator, query.NumberRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false; // number_out_of_range
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(number, query.NumberNumberType))
+                {
+                    return false;
+                }
+            }
+
+            if (query.VerseCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(part.Verses.Count, number, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.VerseCountNumberType == NumberType.None)
+            {
+                if (query.VerseCount > 0)
+                {
+                    if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(part, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(verse_sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(part.Verses.Count, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(part, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(verse_sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(part.Verses.Count, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.WordCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(part.WordCount, number, query.WordCountComparisonOperator, query.WordCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.WordCountNumberType == NumberType.None)
+            {
+                if (query.WordCount > 0)
+                {
+                    if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(part, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(word_sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(part.WordCount, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(part, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(word_sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(part.WordCount, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.LetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(part.LetterCount, number, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.LetterCountNumberType == NumberType.None)
+            {
+                if (query.LetterCount > 0)
+                {
+                    if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(part, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(letter_sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(part.LetterCount, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(part, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(letter_sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(part.LetterCount, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.UniqueLetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(part.UniqueLetters.Count, number, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.UniqueLetterCountNumberType == NumberType.None)
+            {
+                if (query.UniqueLetterCount > 0)
+                {
+                    if (!Numbers.Compare(part.UniqueLetters.Count, query.UniqueLetterCount, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(part.UniqueLetters.Count, query.UniqueLetterCountNumberType))
+                {
+                    return false;
+                }
+            }
+
+            long value = CalculateValue(part.Verses);
+            if (query.ValueNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value, number, query.ValueComparisonOperator, query.ValueRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueNumberType == NumberType.None)
+            {
+                if (query.Value > 0)
+                {
+                    if (!Numbers.Compare(value, query.Value, query.ValueComparisonOperator, query.ValueRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value, query.ValueNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digit_sum = Numbers.DigitSum(value);
+            if (query.ValueDigitSumNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digit_sum, number, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitSumNumberType == NumberType.None)
+            {
+                if (query.ValueDigitSum > 0)
+                {
+                    if (!Numbers.Compare(value_digit_sum, query.ValueDigitSum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digit_sum, query.ValueDigitSumNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digital_root = Numbers.DigitalRoot(value);
+            if (query.ValueDigitalRootNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digital_root, number, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitalRootNumberType == NumberType.None)
+            {
+                if (query.ValueDigitalRoot > 0)
+                {
+                    if (!Numbers.Compare(value_digital_root, query.ValueDigitalRoot, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digital_root, query.ValueDigitalRootNumberType))
+                {
+                    return false;
+                }
+            }
+        }
+
+        // passed all tests successfully
+        return true;
+    }
+    private static bool Compare(Model.Group group, NumberQuery query)
+    {
+        if (group != null)
+        {
+            int number = group.Number;
+            if (query.NumberNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(number, number, query.NumberComparisonOperator, query.NumberRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.NumberNumberType == NumberType.None)
+            {
+                if (query.Number != 0)
+                {
+                    if (query.Number < 0)
+                    {
+                        switch (query.NumberScope)
+                        {
+                            case NumberScope.Number:
+                                query.Number = Book.Groups.Count + query.Number + 1;
+                                break;
+                            default:
+                                query.Number = Book.Groups.Count + query.Number + 1;
+                                break;
+                        }
+                    }
+
+                    if (query.Number < 0)
+                    {
+                        query.Number = number + query.Number + 1;
+                    }
+
+                    if (query.Number > 0)
+                    {
+                        if (!Numbers.Compare(number, query.Number, query.NumberComparisonOperator, query.NumberRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false; // number_out_of_range
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(number, query.NumberNumberType))
+                {
+                    return false;
+                }
+            }
+
+            if (query.VerseCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(group.Verses.Count, number, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.VerseCountNumberType == NumberType.None)
+            {
+                if (query.VerseCount > 0)
+                {
+                    if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(group, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(verse_sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(group.Verses.Count, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(group, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(verse_sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(group.Verses.Count, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.WordCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(group.WordCount, number, query.WordCountComparisonOperator, query.WordCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.WordCountNumberType == NumberType.None)
+            {
+                if (query.WordCount > 0)
+                {
+                    if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(group, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(word_sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(group.WordCount, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(group, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(word_sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(group.WordCount, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.LetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(group.LetterCount, number, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.LetterCountNumberType == NumberType.None)
+            {
+                if (query.LetterCount > 0)
+                {
+                    if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(group, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(letter_sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(group.LetterCount, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(group, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(letter_sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(group.LetterCount, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.UniqueLetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(group.UniqueLetters.Count, number, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.UniqueLetterCountNumberType == NumberType.None)
+            {
+                if (query.UniqueLetterCount > 0)
+                {
+                    if (!Numbers.Compare(group.UniqueLetters.Count, query.UniqueLetterCount, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(group.UniqueLetters.Count, query.UniqueLetterCountNumberType))
+                {
+                    return false;
+                }
+            }
+
+            long value = CalculateValue(group.Verses);
+            if (query.ValueNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value, number, query.ValueComparisonOperator, query.ValueRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueNumberType == NumberType.None)
+            {
+                if (query.Value > 0)
+                {
+                    if (!Numbers.Compare(value, query.Value, query.ValueComparisonOperator, query.ValueRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value, query.ValueNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digit_sum = Numbers.DigitSum(value);
+            if (query.ValueDigitSumNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digit_sum, number, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitSumNumberType == NumberType.None)
+            {
+                if (query.ValueDigitSum > 0)
+                {
+                    if (!Numbers.Compare(value_digit_sum, query.ValueDigitSum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digit_sum, query.ValueDigitSumNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digital_root = Numbers.DigitalRoot(value);
+            if (query.ValueDigitalRootNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digital_root, number, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitalRootNumberType == NumberType.None)
+            {
+                if (query.ValueDigitalRoot > 0)
+                {
+                    if (!Numbers.Compare(value_digital_root, query.ValueDigitalRoot, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digital_root, query.ValueDigitalRootNumberType))
+                {
+                    return false;
+                }
+            }
+        }
+
+        // passed all tests successfully
+        return true;
+    }
+    private static bool Compare(Half half, NumberQuery query)
+    {
+        if (half != null)
+        {
+            int number = half.Number;
+            if (query.NumberNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(number, number, query.NumberComparisonOperator, query.NumberRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.NumberNumberType == NumberType.None)
+            {
+                if (query.Number != 0)
+                {
+                    if (query.Number < 0)
+                    {
+                        switch (query.NumberScope)
+                        {
+                            case NumberScope.Number:
+                                query.Number = Book.Halfs.Count + query.Number + 1;
+                                break;
+                            default:
+                                query.Number = Book.Halfs.Count + query.Number + 1;
+                                break;
+                        }
+                    }
+
+                    if (query.Number < 0)
+                    {
+                        query.Number = number + query.Number + 1;
+                    }
+
+                    if (query.Number > 0)
+                    {
+                        if (!Numbers.Compare(number, query.Number, query.NumberComparisonOperator, query.NumberRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false; // number_out_of_range
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(number, query.NumberNumberType))
+                {
+                    return false;
+                }
+            }
+
+            if (query.VerseCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(half.Verses.Count, number, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.VerseCountNumberType == NumberType.None)
+            {
+                if (query.VerseCount > 0)
+                {
+                    if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(half, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(verse_sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(half.Verses.Count, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(half, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(verse_sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(half.Verses.Count, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.WordCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(half.WordCount, number, query.WordCountComparisonOperator, query.WordCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.WordCountNumberType == NumberType.None)
+            {
+                if (query.WordCount > 0)
+                {
+                    if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(half, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(word_sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(half.WordCount, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(half, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(word_sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(half.WordCount, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.LetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(half.LetterCount, number, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.LetterCountNumberType == NumberType.None)
+            {
+                if (query.LetterCount > 0)
+                {
+                    if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(half, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(letter_sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(half.LetterCount, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(half, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(letter_sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(half.LetterCount, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.UniqueLetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(half.UniqueLetters.Count, number, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.UniqueLetterCountNumberType == NumberType.None)
+            {
+                if (query.UniqueLetterCount > 0)
+                {
+                    if (!Numbers.Compare(half.UniqueLetters.Count, query.UniqueLetterCount, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(half.UniqueLetters.Count, query.UniqueLetterCountNumberType))
+                {
+                    return false;
+                }
+            }
+
+            long value = CalculateValue(half.Verses);
+            if (query.ValueNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value, number, query.ValueComparisonOperator, query.ValueRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueNumberType == NumberType.None)
+            {
+                if (query.Value > 0)
+                {
+                    if (!Numbers.Compare(value, query.Value, query.ValueComparisonOperator, query.ValueRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value, query.ValueNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digit_sum = Numbers.DigitSum(value);
+            if (query.ValueDigitSumNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digit_sum, number, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitSumNumberType == NumberType.None)
+            {
+                if (query.ValueDigitSum > 0)
+                {
+                    if (!Numbers.Compare(value_digit_sum, query.ValueDigitSum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digit_sum, query.ValueDigitSumNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digital_root = Numbers.DigitalRoot(value);
+            if (query.ValueDigitalRootNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digital_root, number, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitalRootNumberType == NumberType.None)
+            {
+                if (query.ValueDigitalRoot > 0)
+                {
+                    if (!Numbers.Compare(value_digital_root, query.ValueDigitalRoot, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digital_root, query.ValueDigitalRootNumberType))
+                {
+                    return false;
+                }
+            }
+        }
+
+        // passed all tests successfully
+        return true;
+    }
+    private static bool Compare(Quarter quarter, NumberQuery query)
+    {
+        if (quarter != null)
+        {
+            int number = quarter.Number;
+            if (query.NumberNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(number, number, query.NumberComparisonOperator, query.NumberRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.NumberNumberType == NumberType.None)
+            {
+                if (query.Number != 0)
+                {
+                    if (query.Number < 0)
+                    {
+                        switch (query.NumberScope)
+                        {
+                            case NumberScope.Number:
+                                query.Number = Book.Quarters.Count + query.Number + 1;
+                                break;
+                            default:
+                                query.Number = Book.Quarters.Count + query.Number + 1;
+                                break;
+                        }
+                    }
+
+                    if (query.Number < 0)
+                    {
+                        query.Number = number + query.Number + 1;
+                    }
+
+                    if (query.Number > 0)
+                    {
+                        if (!Numbers.Compare(number, query.Number, query.NumberComparisonOperator, query.NumberRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false; // number_out_of_range
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(number, query.NumberNumberType))
+                {
+                    return false;
+                }
+            }
+
+            if (query.VerseCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(quarter.Verses.Count, number, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.VerseCountNumberType == NumberType.None)
+            {
+                if (query.VerseCount > 0)
+                {
+                    if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(quarter, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(verse_sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(quarter.Verses.Count, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(quarter, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(verse_sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(quarter.Verses.Count, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.WordCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(quarter.WordCount, number, query.WordCountComparisonOperator, query.WordCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.WordCountNumberType == NumberType.None)
+            {
+                if (query.WordCount > 0)
+                {
+                    if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(quarter, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(word_sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(quarter.WordCount, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(quarter, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(word_sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(quarter.WordCount, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.LetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(quarter.LetterCount, number, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.LetterCountNumberType == NumberType.None)
+            {
+                if (query.LetterCount > 0)
+                {
+                    if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(quarter, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(letter_sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(quarter.LetterCount, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(quarter, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(letter_sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(quarter.LetterCount, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.UniqueLetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(quarter.UniqueLetters.Count, number, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.UniqueLetterCountNumberType == NumberType.None)
+            {
+                if (query.UniqueLetterCount > 0)
+                {
+                    if (!Numbers.Compare(quarter.UniqueLetters.Count, query.UniqueLetterCount, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(quarter.UniqueLetters.Count, query.UniqueLetterCountNumberType))
+                {
+                    return false;
+                }
+            }
+
+            long value = CalculateValue(quarter.Verses);
+            if (query.ValueNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value, number, query.ValueComparisonOperator, query.ValueRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueNumberType == NumberType.None)
+            {
+                if (query.Value > 0)
+                {
+                    if (!Numbers.Compare(value, query.Value, query.ValueComparisonOperator, query.ValueRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value, query.ValueNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digit_sum = Numbers.DigitSum(value);
+            if (query.ValueDigitSumNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digit_sum, number, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitSumNumberType == NumberType.None)
+            {
+                if (query.ValueDigitSum > 0)
+                {
+                    if (!Numbers.Compare(value_digit_sum, query.ValueDigitSum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digit_sum, query.ValueDigitSumNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digital_root = Numbers.DigitalRoot(value);
+            if (query.ValueDigitalRootNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digital_root, number, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitalRootNumberType == NumberType.None)
+            {
+                if (query.ValueDigitalRoot > 0)
+                {
+                    if (!Numbers.Compare(value_digital_root, query.ValueDigitalRoot, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digital_root, query.ValueDigitalRootNumberType))
+                {
+                    return false;
+                }
+            }
+        }
+
+        // passed all tests successfully
+        return true;
+    }
+    private static bool Compare(Bowing bowing, NumberQuery query)
+    {
+        if (bowing != null)
+        {
+            int number = bowing.Number;
+            if (query.NumberNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(number, number, query.NumberComparisonOperator, query.NumberRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.NumberNumberType == NumberType.None)
+            {
+                if (query.Number != 0)
+                {
+                    if (query.Number < 0)
+                    {
+                        switch (query.NumberScope)
+                        {
+                            case NumberScope.Number:
+                                query.Number = Book.Bowings.Count + query.Number + 1;
+                                break;
+                            default:
+                                query.Number = Book.Bowings.Count + query.Number + 1;
+                                break;
+                        }
+                    }
+
+                    if (query.Number < 0)
+                    {
+                        query.Number = number + query.Number + 1;
+                    }
+
+                    if (query.Number > 0)
+                    {
+                        if (!Numbers.Compare(number, query.Number, query.NumberComparisonOperator, query.NumberRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        return false; // number_out_of_range
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(number, query.NumberNumberType))
+                {
+                    return false;
+                }
+            }
+
+            if (query.VerseCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(bowing.Verses.Count, number, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.VerseCountNumberType == NumberType.None)
+            {
+                if (query.VerseCount > 0)
+                {
+                    if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(bowing, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(verse_sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(bowing.Verses.Count, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(bowing, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(verse_sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(bowing.Verses.Count, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.WordCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(bowing.WordCount, number, query.WordCountComparisonOperator, query.WordCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.WordCountNumberType == NumberType.None)
+            {
+                if (query.WordCount > 0)
+                {
+                    if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(bowing, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(word_sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(bowing.WordCount, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(bowing, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(word_sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(bowing.WordCount, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.LetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(bowing.LetterCount, number, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.LetterCountNumberType == NumberType.None)
+            {
+                if (query.LetterCount > 0)
+                {
+                    if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        int verse_sum; int word_sum; int letter_sum;
+                        CalculateSums(bowing, out verse_sum, out word_sum, out letter_sum);
+                        if (!Numbers.Compare(letter_sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(bowing.LetterCount, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    int verse_sum; int word_sum; int letter_sum;
+                    CalculateSums(bowing, out verse_sum, out word_sum, out letter_sum);
+                    if (!Numbers.IsNumberType(letter_sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(bowing.LetterCount, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.UniqueLetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(bowing.UniqueLetters.Count, number, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.UniqueLetterCountNumberType == NumberType.None)
+            {
+                if (query.UniqueLetterCount > 0)
+                {
+                    if (!Numbers.Compare(bowing.UniqueLetters.Count, query.UniqueLetterCount, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(bowing.UniqueLetters.Count, query.UniqueLetterCountNumberType))
+                {
+                    return false;
+                }
+            }
+
+            long value = CalculateValue(bowing.Verses);
+            if (query.ValueNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value, number, query.ValueComparisonOperator, query.ValueRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueNumberType == NumberType.None)
+            {
+                if (query.Value > 0)
+                {
+                    if (!Numbers.Compare(value, query.Value, query.ValueComparisonOperator, query.ValueRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value, query.ValueNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digit_sum = Numbers.DigitSum(value);
+            if (query.ValueDigitSumNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digit_sum, number, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitSumNumberType == NumberType.None)
+            {
+                if (query.ValueDigitSum > 0)
+                {
+                    if (!Numbers.Compare(value_digit_sum, query.ValueDigitSum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digit_sum, query.ValueDigitSumNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digital_root = Numbers.DigitalRoot(value);
+            if (query.ValueDigitalRootNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digital_root, number, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitalRootNumberType == NumberType.None)
+            {
+                if (query.ValueDigitalRoot > 0)
+                {
+                    if (!Numbers.Compare(value_digital_root, query.ValueDigitalRoot, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digital_root, query.ValueDigitalRootNumberType))
+                {
+                    return false;
+                }
+            }
+        }
+
+        // passed all tests successfully
+        return true;
+    }
     private static bool Compare(List<Chapter> chapters, NumberQuery query)
     {
         if (chapters != null)
@@ -13296,6 +15914,2121 @@ public class Server : IPublisher
         // passed all tests successfully
         return true;
     }
+    private static bool Compare(List<Page> pages, NumberQuery query)
+    {
+        if (pages != null)
+        {
+            long value = 0L;
+            int sum = 0;
+            foreach (Page page in pages)
+            {
+                sum += page.Number;
+            }
+            if (query.NumberNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(sum, sum, query.NumberComparisonOperator, query.NumberRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.NumberNumberType == NumberType.None)
+            {
+                if (query.Number > 0)
+                {
+                    if (!Numbers.Compare(sum, query.Number, query.NumberComparisonOperator, query.NumberRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(sum, query.NumberNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int page_sum; int verse_sum; int word_sum; int letter_sum;
+            CalculateSums(pages, out page_sum, out verse_sum, out word_sum, out letter_sum);
+            sum = 0;
+            foreach (Page page in pages)
+            {
+                sum += page.Verses.Count;
+            }
+            if (query.VerseCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(verse_sum, sum, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.VerseCountNumberType == NumberType.None)
+            {
+                if (query.VerseCount > 0)
+                {
+                    if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(verse_sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(verse_sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.WordCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(word_sum, sum, query.WordCountComparisonOperator, query.WordCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.WordCountNumberType == NumberType.None)
+            {
+                if (query.WordCount > 0)
+                {
+                    if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(word_sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(word_sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.LetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(letter_sum, sum, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.LetterCountNumberType == NumberType.None)
+            {
+                if (query.LetterCount > 0)
+                {
+                    if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(letter_sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(letter_sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            List<char> unique_letters = new List<char>();
+            foreach (Page page in pages)
+            {
+                foreach (char character in page.UniqueLetters)
+                {
+                    if (!unique_letters.Contains(character))
+                    {
+                        unique_letters.Add(character);
+                    }
+                }
+            }
+            if (query.UniqueLetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(unique_letters.Count, sum, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.UniqueLetterCountNumberType == NumberType.None)
+            {
+                if (query.UniqueLetterCount > 0)
+                {
+                    if (!Numbers.Compare(unique_letters.Count, query.UniqueLetterCount, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(unique_letters.Count, query.UniqueLetterCountNumberType))
+                {
+                    return false;
+                }
+            }
+
+            if (value == 0L)
+            {
+                foreach (Page page in pages)
+                {
+                    value += CalculateValue(page.Verses);
+                }
+            }
+            if (query.ValueNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value, sum, query.ValueComparisonOperator, query.ValueRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueNumberType == NumberType.None)
+            {
+                if (query.Value > 0)
+                {
+                    if (!Numbers.Compare(value, query.Value, query.ValueComparisonOperator, query.ValueRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value, query.ValueNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digit_sum = Numbers.DigitSum(value);
+            if (query.ValueDigitSumNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digit_sum, sum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitSumNumberType == NumberType.None)
+            {
+                if (query.ValueDigitSum > 0)
+                {
+                    if (!Numbers.Compare(value_digit_sum, query.ValueDigitSum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digit_sum, query.ValueDigitSumNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digital_root = Numbers.DigitalRoot(value);
+            if (query.ValueDigitalRootNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digital_root, sum, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitalRootNumberType == NumberType.None)
+            {
+                if (query.ValueDigitalRoot > 0)
+                {
+                    if (!Numbers.Compare(value_digital_root, query.ValueDigitalRoot, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digital_root, query.ValueDigitalRootNumberType))
+                {
+                    return false;
+                }
+            }
+
+        }
+
+        // passed all tests successfully
+        return true;
+    }
+    private static bool Compare(List<Station> stations, NumberQuery query)
+    {
+        if (stations != null)
+        {
+            long value = 0L;
+            int sum = 0;
+            foreach (Station station in stations)
+            {
+                sum += station.Number;
+            }
+            if (query.NumberNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(sum, sum, query.NumberComparisonOperator, query.NumberRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.NumberNumberType == NumberType.None)
+            {
+                if (query.Number > 0)
+                {
+                    if (!Numbers.Compare(sum, query.Number, query.NumberComparisonOperator, query.NumberRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(sum, query.NumberNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int station_sum; int verse_sum; int word_sum; int letter_sum;
+            CalculateSums(stations, out station_sum, out verse_sum, out word_sum, out letter_sum);
+            sum = 0;
+            foreach (Station station in stations)
+            {
+                sum += station.Verses.Count;
+            }
+            if (query.VerseCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(verse_sum, sum, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.VerseCountNumberType == NumberType.None)
+            {
+                if (query.VerseCount > 0)
+                {
+                    if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(verse_sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(verse_sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.WordCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(word_sum, sum, query.WordCountComparisonOperator, query.WordCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.WordCountNumberType == NumberType.None)
+            {
+                if (query.WordCount > 0)
+                {
+                    if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(word_sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(word_sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.LetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(letter_sum, sum, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.LetterCountNumberType == NumberType.None)
+            {
+                if (query.LetterCount > 0)
+                {
+                    if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(letter_sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(letter_sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            List<char> unique_letters = new List<char>();
+            foreach (Station station in stations)
+            {
+                foreach (char character in station.UniqueLetters)
+                {
+                    if (!unique_letters.Contains(character))
+                    {
+                        unique_letters.Add(character);
+                    }
+                }
+            }
+            if (query.UniqueLetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(unique_letters.Count, sum, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.UniqueLetterCountNumberType == NumberType.None)
+            {
+                if (query.UniqueLetterCount > 0)
+                {
+                    if (!Numbers.Compare(unique_letters.Count, query.UniqueLetterCount, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(unique_letters.Count, query.UniqueLetterCountNumberType))
+                {
+                    return false;
+                }
+            }
+
+            if (value == 0L)
+            {
+                foreach (Station station in stations)
+                {
+                    value += CalculateValue(station.Verses);
+                }
+            }
+            if (query.ValueNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value, sum, query.ValueComparisonOperator, query.ValueRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueNumberType == NumberType.None)
+            {
+                if (query.Value > 0)
+                {
+                    if (!Numbers.Compare(value, query.Value, query.ValueComparisonOperator, query.ValueRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value, query.ValueNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digit_sum = Numbers.DigitSum(value);
+            if (query.ValueDigitSumNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digit_sum, sum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitSumNumberType == NumberType.None)
+            {
+                if (query.ValueDigitSum > 0)
+                {
+                    if (!Numbers.Compare(value_digit_sum, query.ValueDigitSum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digit_sum, query.ValueDigitSumNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digital_root = Numbers.DigitalRoot(value);
+            if (query.ValueDigitalRootNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digital_root, sum, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitalRootNumberType == NumberType.None)
+            {
+                if (query.ValueDigitalRoot > 0)
+                {
+                    if (!Numbers.Compare(value_digital_root, query.ValueDigitalRoot, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digital_root, query.ValueDigitalRootNumberType))
+                {
+                    return false;
+                }
+            }
+
+        }
+
+        // passed all tests successfully
+        return true;
+    }
+    private static bool Compare(List<Part> parts, NumberQuery query)
+    {
+        if (parts != null)
+        {
+            long value = 0L;
+            int sum = 0;
+            foreach (Part part in parts)
+            {
+                sum += part.Number;
+            }
+            if (query.NumberNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(sum, sum, query.NumberComparisonOperator, query.NumberRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.NumberNumberType == NumberType.None)
+            {
+                if (query.Number > 0)
+                {
+                    if (!Numbers.Compare(sum, query.Number, query.NumberComparisonOperator, query.NumberRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(sum, query.NumberNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int part_sum; int verse_sum; int word_sum; int letter_sum;
+            CalculateSums(parts, out part_sum, out verse_sum, out word_sum, out letter_sum);
+            sum = 0;
+            foreach (Part part in parts)
+            {
+                sum += part.Verses.Count;
+            }
+            if (query.VerseCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(verse_sum, sum, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.VerseCountNumberType == NumberType.None)
+            {
+                if (query.VerseCount > 0)
+                {
+                    if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(verse_sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(verse_sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.WordCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(word_sum, sum, query.WordCountComparisonOperator, query.WordCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.WordCountNumberType == NumberType.None)
+            {
+                if (query.WordCount > 0)
+                {
+                    if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(word_sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(word_sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.LetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(letter_sum, sum, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.LetterCountNumberType == NumberType.None)
+            {
+                if (query.LetterCount > 0)
+                {
+                    if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(letter_sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(letter_sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            List<char> unique_letters = new List<char>();
+            foreach (Part part in parts)
+            {
+                foreach (char character in part.UniqueLetters)
+                {
+                    if (!unique_letters.Contains(character))
+                    {
+                        unique_letters.Add(character);
+                    }
+                }
+            }
+            if (query.UniqueLetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(unique_letters.Count, sum, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.UniqueLetterCountNumberType == NumberType.None)
+            {
+                if (query.UniqueLetterCount > 0)
+                {
+                    if (!Numbers.Compare(unique_letters.Count, query.UniqueLetterCount, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(unique_letters.Count, query.UniqueLetterCountNumberType))
+                {
+                    return false;
+                }
+            }
+
+            if (value == 0L)
+            {
+                foreach (Part part in parts)
+                {
+                    value += CalculateValue(part.Verses);
+                }
+            }
+            if (query.ValueNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value, sum, query.ValueComparisonOperator, query.ValueRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueNumberType == NumberType.None)
+            {
+                if (query.Value > 0)
+                {
+                    if (!Numbers.Compare(value, query.Value, query.ValueComparisonOperator, query.ValueRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value, query.ValueNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digit_sum = Numbers.DigitSum(value);
+            if (query.ValueDigitSumNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digit_sum, sum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitSumNumberType == NumberType.None)
+            {
+                if (query.ValueDigitSum > 0)
+                {
+                    if (!Numbers.Compare(value_digit_sum, query.ValueDigitSum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digit_sum, query.ValueDigitSumNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digital_root = Numbers.DigitalRoot(value);
+            if (query.ValueDigitalRootNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digital_root, sum, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitalRootNumberType == NumberType.None)
+            {
+                if (query.ValueDigitalRoot > 0)
+                {
+                    if (!Numbers.Compare(value_digital_root, query.ValueDigitalRoot, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digital_root, query.ValueDigitalRootNumberType))
+                {
+                    return false;
+                }
+            }
+
+        }
+
+        // passed all tests successfully
+        return true;
+    }
+    private static bool Compare(List<Model.Group> groups, NumberQuery query)
+    {
+        if (groups != null)
+        {
+            long value = 0L;
+            int sum = 0;
+            foreach (Model.Group group in groups)
+            {
+                sum += group.Number;
+            }
+            if (query.NumberNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(sum, sum, query.NumberComparisonOperator, query.NumberRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.NumberNumberType == NumberType.None)
+            {
+                if (query.Number > 0)
+                {
+                    if (!Numbers.Compare(sum, query.Number, query.NumberComparisonOperator, query.NumberRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(sum, query.NumberNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int group_sum; int verse_sum; int word_sum; int letter_sum;
+            CalculateSums(groups, out group_sum, out verse_sum, out word_sum, out letter_sum);
+            sum = 0;
+            foreach (Model.Group group in groups)
+            {
+                sum += group.Verses.Count;
+            }
+            if (query.VerseCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(verse_sum, sum, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.VerseCountNumberType == NumberType.None)
+            {
+                if (query.VerseCount > 0)
+                {
+                    if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(verse_sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(verse_sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.WordCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(word_sum, sum, query.WordCountComparisonOperator, query.WordCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.WordCountNumberType == NumberType.None)
+            {
+                if (query.WordCount > 0)
+                {
+                    if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(word_sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(word_sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.LetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(letter_sum, sum, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.LetterCountNumberType == NumberType.None)
+            {
+                if (query.LetterCount > 0)
+                {
+                    if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(letter_sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(letter_sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            List<char> unique_letters = new List<char>();
+            foreach (Model.Group group in groups)
+            {
+                foreach (char character in group.UniqueLetters)
+                {
+                    if (!unique_letters.Contains(character))
+                    {
+                        unique_letters.Add(character);
+                    }
+                }
+            }
+            if (query.UniqueLetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(unique_letters.Count, sum, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.UniqueLetterCountNumberType == NumberType.None)
+            {
+                if (query.UniqueLetterCount > 0)
+                {
+                    if (!Numbers.Compare(unique_letters.Count, query.UniqueLetterCount, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(unique_letters.Count, query.UniqueLetterCountNumberType))
+                {
+                    return false;
+                }
+            }
+
+            if (value == 0L)
+            {
+                foreach (Model.Group group in groups)
+                {
+                    value += CalculateValue(group.Verses);
+                }
+            }
+            if (query.ValueNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value, sum, query.ValueComparisonOperator, query.ValueRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueNumberType == NumberType.None)
+            {
+                if (query.Value > 0)
+                {
+                    if (!Numbers.Compare(value, query.Value, query.ValueComparisonOperator, query.ValueRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value, query.ValueNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digit_sum = Numbers.DigitSum(value);
+            if (query.ValueDigitSumNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digit_sum, sum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitSumNumberType == NumberType.None)
+            {
+                if (query.ValueDigitSum > 0)
+                {
+                    if (!Numbers.Compare(value_digit_sum, query.ValueDigitSum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digit_sum, query.ValueDigitSumNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digital_root = Numbers.DigitalRoot(value);
+            if (query.ValueDigitalRootNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digital_root, sum, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitalRootNumberType == NumberType.None)
+            {
+                if (query.ValueDigitalRoot > 0)
+                {
+                    if (!Numbers.Compare(value_digital_root, query.ValueDigitalRoot, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digital_root, query.ValueDigitalRootNumberType))
+                {
+                    return false;
+                }
+            }
+
+        }
+
+        // passed all tests successfully
+        return true;
+    }
+    private static bool Compare(List<Half> halfs, NumberQuery query)
+    {
+        if (halfs != null)
+        {
+            long value = 0L;
+            int sum = 0;
+            foreach (Half half in halfs)
+            {
+                sum += half.Number;
+            }
+            if (query.NumberNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(sum, sum, query.NumberComparisonOperator, query.NumberRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.NumberNumberType == NumberType.None)
+            {
+                if (query.Number > 0)
+                {
+                    if (!Numbers.Compare(sum, query.Number, query.NumberComparisonOperator, query.NumberRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(sum, query.NumberNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int half_sum; int verse_sum; int word_sum; int letter_sum;
+            CalculateSums(halfs, out half_sum, out verse_sum, out word_sum, out letter_sum);
+            sum = 0;
+            foreach (Half half in halfs)
+            {
+                sum += half.Verses.Count;
+            }
+            if (query.VerseCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(verse_sum, sum, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.VerseCountNumberType == NumberType.None)
+            {
+                if (query.VerseCount > 0)
+                {
+                    if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(verse_sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(verse_sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.WordCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(word_sum, sum, query.WordCountComparisonOperator, query.WordCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.WordCountNumberType == NumberType.None)
+            {
+                if (query.WordCount > 0)
+                {
+                    if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(word_sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(word_sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.LetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(letter_sum, sum, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.LetterCountNumberType == NumberType.None)
+            {
+                if (query.LetterCount > 0)
+                {
+                    if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(letter_sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(letter_sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            List<char> unique_letters = new List<char>();
+            foreach (Half half in halfs)
+            {
+                foreach (char character in half.UniqueLetters)
+                {
+                    if (!unique_letters.Contains(character))
+                    {
+                        unique_letters.Add(character);
+                    }
+                }
+            }
+            if (query.UniqueLetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(unique_letters.Count, sum, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.UniqueLetterCountNumberType == NumberType.None)
+            {
+                if (query.UniqueLetterCount > 0)
+                {
+                    if (!Numbers.Compare(unique_letters.Count, query.UniqueLetterCount, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(unique_letters.Count, query.UniqueLetterCountNumberType))
+                {
+                    return false;
+                }
+            }
+
+            if (value == 0L)
+            {
+                foreach (Half half in halfs)
+                {
+                    value += CalculateValue(half.Verses);
+                }
+            }
+            if (query.ValueNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value, sum, query.ValueComparisonOperator, query.ValueRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueNumberType == NumberType.None)
+            {
+                if (query.Value > 0)
+                {
+                    if (!Numbers.Compare(value, query.Value, query.ValueComparisonOperator, query.ValueRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value, query.ValueNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digit_sum = Numbers.DigitSum(value);
+            if (query.ValueDigitSumNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digit_sum, sum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitSumNumberType == NumberType.None)
+            {
+                if (query.ValueDigitSum > 0)
+                {
+                    if (!Numbers.Compare(value_digit_sum, query.ValueDigitSum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digit_sum, query.ValueDigitSumNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digital_root = Numbers.DigitalRoot(value);
+            if (query.ValueDigitalRootNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digital_root, sum, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitalRootNumberType == NumberType.None)
+            {
+                if (query.ValueDigitalRoot > 0)
+                {
+                    if (!Numbers.Compare(value_digital_root, query.ValueDigitalRoot, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digital_root, query.ValueDigitalRootNumberType))
+                {
+                    return false;
+                }
+            }
+
+        }
+
+        // passed all tests successfully
+        return true;
+    }
+    private static bool Compare(List<Quarter> quarters, NumberQuery query)
+    {
+        if (quarters != null)
+        {
+            long value = 0L;
+            int sum = 0;
+            foreach (Quarter quarter in quarters)
+            {
+                sum += quarter.Number;
+            }
+            if (query.NumberNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(sum, sum, query.NumberComparisonOperator, query.NumberRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.NumberNumberType == NumberType.None)
+            {
+                if (query.Number > 0)
+                {
+                    if (!Numbers.Compare(sum, query.Number, query.NumberComparisonOperator, query.NumberRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(sum, query.NumberNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int quarter_sum; int verse_sum; int word_sum; int letter_sum;
+            CalculateSums(quarters, out quarter_sum, out verse_sum, out word_sum, out letter_sum);
+            sum = 0;
+            foreach (Quarter quarter in quarters)
+            {
+                sum += quarter.Verses.Count;
+            }
+            if (query.VerseCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(verse_sum, sum, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.VerseCountNumberType == NumberType.None)
+            {
+                if (query.VerseCount > 0)
+                {
+                    if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(verse_sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(verse_sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.WordCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(word_sum, sum, query.WordCountComparisonOperator, query.WordCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.WordCountNumberType == NumberType.None)
+            {
+                if (query.WordCount > 0)
+                {
+                    if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(word_sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(word_sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.LetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(letter_sum, sum, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.LetterCountNumberType == NumberType.None)
+            {
+                if (query.LetterCount > 0)
+                {
+                    if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(letter_sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(letter_sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            List<char> unique_letters = new List<char>();
+            foreach (Quarter quarter in quarters)
+            {
+                foreach (char character in quarter.UniqueLetters)
+                {
+                    if (!unique_letters.Contains(character))
+                    {
+                        unique_letters.Add(character);
+                    }
+                }
+            }
+            if (query.UniqueLetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(unique_letters.Count, sum, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.UniqueLetterCountNumberType == NumberType.None)
+            {
+                if (query.UniqueLetterCount > 0)
+                {
+                    if (!Numbers.Compare(unique_letters.Count, query.UniqueLetterCount, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(unique_letters.Count, query.UniqueLetterCountNumberType))
+                {
+                    return false;
+                }
+            }
+
+            if (value == 0L)
+            {
+                foreach (Quarter quarter in quarters)
+                {
+                    value += CalculateValue(quarter.Verses);
+                }
+            }
+            if (query.ValueNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value, sum, query.ValueComparisonOperator, query.ValueRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueNumberType == NumberType.None)
+            {
+                if (query.Value > 0)
+                {
+                    if (!Numbers.Compare(value, query.Value, query.ValueComparisonOperator, query.ValueRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value, query.ValueNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digit_sum = Numbers.DigitSum(value);
+            if (query.ValueDigitSumNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digit_sum, sum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitSumNumberType == NumberType.None)
+            {
+                if (query.ValueDigitSum > 0)
+                {
+                    if (!Numbers.Compare(value_digit_sum, query.ValueDigitSum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digit_sum, query.ValueDigitSumNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digital_root = Numbers.DigitalRoot(value);
+            if (query.ValueDigitalRootNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digital_root, sum, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitalRootNumberType == NumberType.None)
+            {
+                if (query.ValueDigitalRoot > 0)
+                {
+                    if (!Numbers.Compare(value_digital_root, query.ValueDigitalRoot, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digital_root, query.ValueDigitalRootNumberType))
+                {
+                    return false;
+                }
+            }
+
+        }
+
+        // passed all tests successfully
+        return true;
+    }
+    private static bool Compare(List<Bowing> bowings, NumberQuery query)
+    {
+        if (bowings != null)
+        {
+            long value = 0L;
+            int sum = 0;
+            foreach (Bowing bowing in bowings)
+            {
+                sum += bowing.Number;
+            }
+            if (query.NumberNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(sum, sum, query.NumberComparisonOperator, query.NumberRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.NumberNumberType == NumberType.None)
+            {
+                if (query.Number > 0)
+                {
+                    if (!Numbers.Compare(sum, query.Number, query.NumberComparisonOperator, query.NumberRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(sum, query.NumberNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int bowing_sum; int verse_sum; int word_sum; int letter_sum;
+            CalculateSums(bowings, out bowing_sum, out verse_sum, out word_sum, out letter_sum);
+            sum = 0;
+            foreach (Bowing bowing in bowings)
+            {
+                sum += bowing.Verses.Count;
+            }
+            if (query.VerseCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(verse_sum, sum, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.VerseCountNumberType == NumberType.None)
+            {
+                if (query.VerseCount > 0)
+                {
+                    if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(verse_sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.VerseCount, query.VerseCountComparisonOperator, query.VerseCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.VerseCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(verse_sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.VerseCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.WordCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(word_sum, sum, query.WordCountComparisonOperator, query.WordCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.WordCountNumberType == NumberType.None)
+            {
+                if (query.WordCount > 0)
+                {
+                    if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(word_sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.WordCount, query.WordCountComparisonOperator, query.WordCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.WordCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(word_sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.WordCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            if (query.LetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(letter_sum, sum, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.LetterCountNumberType == NumberType.None)
+            {
+                if (query.LetterCount > 0)
+                {
+                    if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                    {
+                        if (!Numbers.Compare(letter_sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if (!Numbers.Compare(sum, query.LetterCount, query.LetterCountComparisonOperator, query.LetterCountRemainder))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (query.LetterCountComparisonOperator == ComparisonOperator.EqualSum)
+                {
+                    if (!Numbers.IsNumberType(letter_sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (!Numbers.IsNumberType(sum, query.LetterCountNumberType))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            List<char> unique_letters = new List<char>();
+            foreach (Bowing bowing in bowings)
+            {
+                foreach (char character in bowing.UniqueLetters)
+                {
+                    if (!unique_letters.Contains(character))
+                    {
+                        unique_letters.Add(character);
+                    }
+                }
+            }
+            if (query.UniqueLetterCountNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(unique_letters.Count, sum, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.UniqueLetterCountNumberType == NumberType.None)
+            {
+                if (query.UniqueLetterCount > 0)
+                {
+                    if (!Numbers.Compare(unique_letters.Count, query.UniqueLetterCount, query.UniqueLetterCountComparisonOperator, query.UniqueLetterCountRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(unique_letters.Count, query.UniqueLetterCountNumberType))
+                {
+                    return false;
+                }
+            }
+
+            if (value == 0L)
+            {
+                foreach (Bowing bowing in bowings)
+                {
+                    value += CalculateValue(bowing.Verses);
+                }
+            }
+            if (query.ValueNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value, sum, query.ValueComparisonOperator, query.ValueRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueNumberType == NumberType.None)
+            {
+                if (query.Value > 0)
+                {
+                    if (!Numbers.Compare(value, query.Value, query.ValueComparisonOperator, query.ValueRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value, query.ValueNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digit_sum = Numbers.DigitSum(value);
+            if (query.ValueDigitSumNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digit_sum, sum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitSumNumberType == NumberType.None)
+            {
+                if (query.ValueDigitSum > 0)
+                {
+                    if (!Numbers.Compare(value_digit_sum, query.ValueDigitSum, query.ValueDigitSumComparisonOperator, query.ValueDigitSumRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digit_sum, query.ValueDigitSumNumberType))
+                {
+                    return false;
+                }
+            }
+
+            int value_digital_root = Numbers.DigitalRoot(value);
+            if (query.ValueDigitalRootNumberType == NumberType.Natural)
+            {
+                if (!Numbers.Compare(value_digital_root, sum, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                {
+                    return false;
+                }
+            }
+            else if (query.ValueDigitalRootNumberType == NumberType.None)
+            {
+                if (query.ValueDigitalRoot > 0)
+                {
+                    if (!Numbers.Compare(value_digital_root, query.ValueDigitalRoot, query.ValueDigitalRootComparisonOperator, query.ValueDigitalRootRemainder))
+                    {
+                        return false;
+                    }
+                }
+            }
+            else
+            {
+                if (!Numbers.IsNumberType(value_digital_root, query.ValueDigitalRootNumberType))
+                {
+                    return false;
+                }
+            }
+
+        }
+
+        // passed all tests successfully
+        return true;
+    }
+
     // find by numbers - Letters
     public static List<Letter> FindLetters(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
     {
@@ -13327,6 +18060,7 @@ public class Server : IPublisher
         }
         return result;
     }
+
     // find by numbers - Words
     public static List<Word> FindWords(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
     {
@@ -13529,6 +18263,7 @@ public class Server : IPublisher
         }
         return result;
     }
+
     // find by numbers - Sentences
     public static List<Sentence> FindSentences(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
     {
@@ -13884,6 +18619,7 @@ public class Server : IPublisher
         }
         return result;
     }
+
     // find by numbers - Verses
     public static List<Verse> FindVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
     {
@@ -14074,6 +18810,7 @@ public class Server : IPublisher
         }
         return result;
     }
+
     // find by numbers - Chapters
     public static List<Chapter> FindChapters(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
     {
@@ -14131,7 +18868,7 @@ public class Server : IPublisher
                     List<Chapter> chapters = s_book.GetChapters(source);
                     if (chapters != null)
                     {
-                        int range_length = query.ChapterCount;
+                        int range_length = query.PartitionCount;
                         if (range_length == 1)
                         {
                             result.Add(DoFindChapters(source, query));
@@ -14226,7 +18963,7 @@ public class Server : IPublisher
                     List<Chapter> chapters = s_book.GetChapters(source);
                     if (chapters != null)
                     {
-                        int set_size = query.ChapterCount;
+                        int set_size = query.PartitionCount;
                         if (set_size == 1)
                         {
                             result.Add(DoFindChapters(source, query));
@@ -14286,6 +19023,1498 @@ public class Server : IPublisher
         }
         return result;
     }
+
+    // find by numbers - Pages
+    public static List<Page> FindPages(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindPages(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<Page> DoFindPages(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindPages(source, query);
+    }
+    private static List<Page> DoFindPages(List<Verse> source, NumberQuery query)
+    {
+        List<Page> result = new List<Page>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Page> pages = s_book.GetPages(source);
+                    if (pages != null)
+                    {
+                        foreach (Page page in pages)
+                        {
+                            if (Compare(page, query))
+                            {
+                                result.Add(page);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    // find by numbers - PageRanges
+    public static List<List<Page>> FindPageRanges(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindPageRanges(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Page>> DoFindPageRanges(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindPageRanges(source, query);
+    }
+    private static List<List<Page>> DoFindPageRanges(List<Verse> source, NumberQuery query)
+    {
+        List<List<Page>> result = new List<List<Page>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Page> pages = s_book.GetPages(source);
+                    if (pages != null)
+                    {
+                        int range_length = query.PartitionCount;
+                        if (range_length == 1)
+                        {
+                            result.Add(DoFindPages(source, query));
+                            return result;
+                        }
+
+                        if (range_length == 0) // non-specified range length
+                        {
+                            // limit range length to minimum
+                            int limit = pages.Count;
+                            //if (query.VerseCount > 0)
+                            //{
+                            //    limit = query.VerseCount;
+                            //}
+                            //if (query.WordCount > 0)
+                            //{
+                            //    limit = query.WordCount;
+                            //}
+                            //if (query.LetterCount > 0)
+                            //{
+                            //    limit = query.LetterCount;
+                            //}
+                            //if (query.Value > 0L)
+                            //{
+                            //    limit = (int)(query.Value / 506L);
+                            //}
+                            //if (limit == 0) limit = 1;
+
+                            for (int r = 1; r <= limit; r++) // try all possible range lengths
+                            {
+                                for (int i = 0; i < pages.Count - r + 1; i++)
+                                {
+                                    // build required range
+                                    List<Page> range = new List<Page>();
+                                    for (int j = i; j < i + r; j++)
+                                    {
+                                        range.Add(pages[j]);
+                                    }
+
+                                    // check range
+                                    if (Compare(range, query))
+                                    {
+                                        result.Add(range);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified range length
+                        {
+                            int r = range_length;
+                            for (int i = 0; i < pages.Count - r + 1; i++)
+                            {
+                                // build required range
+                                List<Page> range = new List<Page>();
+                                for (int j = i; j < i + r; j++)
+                                {
+                                    range.Add(pages[j]);
+                                }
+
+                                // check range
+                                if (Compare(range, query))
+                                {
+                                    result.Add(range);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    // find by numbers - PageSets
+    public static List<List<Page>> FindPageSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindPageSets(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Page>> DoFindPageSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindPageSets(source, query);
+    }
+    private static List<List<Page>> DoFindPageSets(List<Verse> source, NumberQuery query)
+    {
+        List<List<Page>> result = new List<List<Page>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Page> pages = s_book.GetPages(source);
+                    if (pages != null)
+                    {
+                        int set_size = query.PartitionCount;
+                        if (set_size == 1)
+                        {
+                            result.Add(DoFindPages(source, query));
+                            return result;
+                        }
+
+                        if (set_size == 0) // non-specified set size
+                        {
+                            // limit range length to minimum
+                            int limit = pages.Count;
+                            //if (query.VerseCount > 0)
+                            //{
+                            //    limit = query.VerseCount;
+                            //}
+                            //if (query.WordCount > 0)
+                            //{
+                            //    limit = query.WordCount;
+                            //}
+                            //if (query.LetterCount > 0)
+                            //{
+                            //    limit = query.LetterCount;
+                            //}
+                            //if (query.Value > 0L)
+                            //{
+                            //    limit = (int)(query.Value / 10L);
+                            //}
+
+                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            {
+                                int size = i + 1;
+                                Combinations<Page> sets = new Combinations<Page>(pages, size, GenerateOption.WithoutRepetition);
+                                foreach (List<Page> set in sets)
+                                {
+                                    // check set against query
+                                    if (Compare(set, query))
+                                    {
+                                        result.Add(set);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified set size
+                        {
+                            Combinations<Page> sets = new Combinations<Page>(pages, set_size, GenerateOption.WithoutRepetition);
+                            foreach (List<Page> set in sets)
+                            {
+                                // check set against query
+                                if (Compare(set, query))
+                                {
+                                    result.Add(set);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    // find by numbers - Stations
+    public static List<Station> FindStations(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindStations(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<Station> DoFindStations(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindStations(source, query);
+    }
+    private static List<Station> DoFindStations(List<Verse> source, NumberQuery query)
+    {
+        List<Station> result = new List<Station>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Station> stations = s_book.GetStations(source);
+                    if (stations != null)
+                    {
+                        foreach (Station station in stations)
+                        {
+                            if (Compare(station, query))
+                            {
+                                result.Add(station);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    // find by numbers - StationRanges
+    public static List<List<Station>> FindStationRanges(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindStationRanges(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Station>> DoFindStationRanges(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindStationRanges(source, query);
+    }
+    private static List<List<Station>> DoFindStationRanges(List<Verse> source, NumberQuery query)
+    {
+        List<List<Station>> result = new List<List<Station>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Station> stations = s_book.GetStations(source);
+                    if (stations != null)
+                    {
+                        int range_length = query.PartitionCount;
+                        if (range_length == 1)
+                        {
+                            result.Add(DoFindStations(source, query));
+                            return result;
+                        }
+
+                        if (range_length == 0) // non-specified range length
+                        {
+                            // limit range length to minimum
+                            int limit = stations.Count;
+                            //if (query.VerseCount > 0)
+                            //{
+                            //    limit = query.VerseCount;
+                            //}
+                            //if (query.WordCount > 0)
+                            //{
+                            //    limit = query.WordCount;
+                            //}
+                            //if (query.LetterCount > 0)
+                            //{
+                            //    limit = query.LetterCount;
+                            //}
+                            //if (query.Value > 0L)
+                            //{
+                            //    limit = (int)(query.Value / 506L);
+                            //}
+                            //if (limit == 0) limit = 1;
+
+                            for (int r = 1; r <= limit; r++) // try all possible range lengths
+                            {
+                                for (int i = 0; i < stations.Count - r + 1; i++)
+                                {
+                                    // build required range
+                                    List<Station> range = new List<Station>();
+                                    for (int j = i; j < i + r; j++)
+                                    {
+                                        range.Add(stations[j]);
+                                    }
+
+                                    // check range
+                                    if (Compare(range, query))
+                                    {
+                                        result.Add(range);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified range length
+                        {
+                            int r = range_length;
+                            for (int i = 0; i < stations.Count - r + 1; i++)
+                            {
+                                // build required range
+                                List<Station> range = new List<Station>();
+                                for (int j = i; j < i + r; j++)
+                                {
+                                    range.Add(stations[j]);
+                                }
+
+                                // check range
+                                if (Compare(range, query))
+                                {
+                                    result.Add(range);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    // find by numbers - StationSets
+    public static List<List<Station>> FindStationSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindStationSets(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Station>> DoFindStationSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindStationSets(source, query);
+    }
+    private static List<List<Station>> DoFindStationSets(List<Verse> source, NumberQuery query)
+    {
+        List<List<Station>> result = new List<List<Station>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Station> stations = s_book.GetStations(source);
+                    if (stations != null)
+                    {
+                        int set_size = query.PartitionCount;
+                        if (set_size == 1)
+                        {
+                            result.Add(DoFindStations(source, query));
+                            return result;
+                        }
+
+                        if (set_size == 0) // non-specified set size
+                        {
+                            // limit range length to minimum
+                            int limit = stations.Count;
+                            //if (query.VerseCount > 0)
+                            //{
+                            //    limit = query.VerseCount;
+                            //}
+                            //if (query.WordCount > 0)
+                            //{
+                            //    limit = query.WordCount;
+                            //}
+                            //if (query.LetterCount > 0)
+                            //{
+                            //    limit = query.LetterCount;
+                            //}
+                            //if (query.Value > 0L)
+                            //{
+                            //    limit = (int)(query.Value / 10L);
+                            //}
+
+                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            {
+                                int size = i + 1;
+                                Combinations<Station> sets = new Combinations<Station>(stations, size, GenerateOption.WithoutRepetition);
+                                foreach (List<Station> set in sets)
+                                {
+                                    // check set against query
+                                    if (Compare(set, query))
+                                    {
+                                        result.Add(set);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified set size
+                        {
+                            Combinations<Station> sets = new Combinations<Station>(stations, set_size, GenerateOption.WithoutRepetition);
+                            foreach (List<Station> set in sets)
+                            {
+                                // check set against query
+                                if (Compare(set, query))
+                                {
+                                    result.Add(set);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    // find by numbers - Parts
+    public static List<Part> FindParts(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindParts(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<Part> DoFindParts(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindParts(source, query);
+    }
+    private static List<Part> DoFindParts(List<Verse> source, NumberQuery query)
+    {
+        List<Part> result = new List<Part>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Part> parts = s_book.GetParts(source);
+                    if (parts != null)
+                    {
+                        foreach (Part part in parts)
+                        {
+                            if (Compare(part, query))
+                            {
+                                result.Add(part);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    // find by numbers - PartRanges
+    public static List<List<Part>> FindPartRanges(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindPartRanges(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Part>> DoFindPartRanges(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindPartRanges(source, query);
+    }
+    private static List<List<Part>> DoFindPartRanges(List<Verse> source, NumberQuery query)
+    {
+        List<List<Part>> result = new List<List<Part>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Part> parts = s_book.GetParts(source);
+                    if (parts != null)
+                    {
+                        int range_length = query.PartitionCount;
+                        if (range_length == 1)
+                        {
+                            result.Add(DoFindParts(source, query));
+                            return result;
+                        }
+
+                        if (range_length == 0) // non-specified range length
+                        {
+                            // limit range length to minimum
+                            int limit = parts.Count;
+                            //if (query.VerseCount > 0)
+                            //{
+                            //    limit = query.VerseCount;
+                            //}
+                            //if (query.WordCount > 0)
+                            //{
+                            //    limit = query.WordCount;
+                            //}
+                            //if (query.LetterCount > 0)
+                            //{
+                            //    limit = query.LetterCount;
+                            //}
+                            //if (query.Value > 0L)
+                            //{
+                            //    limit = (int)(query.Value / 506L);
+                            //}
+                            //if (limit == 0) limit = 1;
+
+                            for (int r = 1; r <= limit; r++) // try all possible range lengths
+                            {
+                                for (int i = 0; i < parts.Count - r + 1; i++)
+                                {
+                                    // build required range
+                                    List<Part> range = new List<Part>();
+                                    for (int j = i; j < i + r; j++)
+                                    {
+                                        range.Add(parts[j]);
+                                    }
+
+                                    // check range
+                                    if (Compare(range, query))
+                                    {
+                                        result.Add(range);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified range length
+                        {
+                            int r = range_length;
+                            for (int i = 0; i < parts.Count - r + 1; i++)
+                            {
+                                // build required range
+                                List<Part> range = new List<Part>();
+                                for (int j = i; j < i + r; j++)
+                                {
+                                    range.Add(parts[j]);
+                                }
+
+                                // check range
+                                if (Compare(range, query))
+                                {
+                                    result.Add(range);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    // find by numbers - PartSets
+    public static List<List<Part>> FindPartSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindPartSets(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Part>> DoFindPartSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindPartSets(source, query);
+    }
+    private static List<List<Part>> DoFindPartSets(List<Verse> source, NumberQuery query)
+    {
+        List<List<Part>> result = new List<List<Part>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Part> parts = s_book.GetParts(source);
+                    if (parts != null)
+                    {
+                        int set_size = query.PartitionCount;
+                        if (set_size == 1)
+                        {
+                            result.Add(DoFindParts(source, query));
+                            return result;
+                        }
+
+                        if (set_size == 0) // non-specified set size
+                        {
+                            // limit range length to minimum
+                            int limit = parts.Count;
+                            //if (query.VerseCount > 0)
+                            //{
+                            //    limit = query.VerseCount;
+                            //}
+                            //if (query.WordCount > 0)
+                            //{
+                            //    limit = query.WordCount;
+                            //}
+                            //if (query.LetterCount > 0)
+                            //{
+                            //    limit = query.LetterCount;
+                            //}
+                            //if (query.Value > 0L)
+                            //{
+                            //    limit = (int)(query.Value / 10L);
+                            //}
+
+                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            {
+                                int size = i + 1;
+                                Combinations<Part> sets = new Combinations<Part>(parts, size, GenerateOption.WithoutRepetition);
+                                foreach (List<Part> set in sets)
+                                {
+                                    // check set against query
+                                    if (Compare(set, query))
+                                    {
+                                        result.Add(set);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified set size
+                        {
+                            Combinations<Part> sets = new Combinations<Part>(parts, set_size, GenerateOption.WithoutRepetition);
+                            foreach (List<Part> set in sets)
+                            {
+                                // check set against query
+                                if (Compare(set, query))
+                                {
+                                    result.Add(set);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    // find by numbers - Groups
+    public static List<Model.Group> FindGroups(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindGroups(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<Model.Group> DoFindGroups(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindGroups(source, query);
+    }
+    private static List<Model.Group> DoFindGroups(List<Verse> source, NumberQuery query)
+    {
+        List<Model.Group> result = new List<Model.Group>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Model.Group> chapters = s_book.GetGroups(source);
+                    if (chapters != null)
+                    {
+                        foreach (Model.Group chapter in chapters)
+                        {
+                            if (Compare(chapter, query))
+                            {
+                                result.Add(chapter);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    // find by numbers - GroupRanges
+    public static List<List<Model.Group>> FindGroupRanges(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindGroupRanges(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Model.Group>> DoFindGroupRanges(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindGroupRanges(source, query);
+    }
+    private static List<List<Model.Group>> DoFindGroupRanges(List<Verse> source, NumberQuery query)
+    {
+        List<List<Model.Group>> result = new List<List<Model.Group>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Model.Group> chapters = s_book.GetGroups(source);
+                    if (chapters != null)
+                    {
+                        int range_length = query.PartitionCount;
+                        if (range_length == 1)
+                        {
+                            result.Add(DoFindGroups(source, query));
+                            return result;
+                        }
+
+                        if (range_length == 0) // non-specified range length
+                        {
+                            // limit range length to minimum
+                            int limit = chapters.Count;
+                            //if (query.VerseCount > 0)
+                            //{
+                            //    limit = query.VerseCount;
+                            //}
+                            //if (query.WordCount > 0)
+                            //{
+                            //    limit = query.WordCount;
+                            //}
+                            //if (query.LetterCount > 0)
+                            //{
+                            //    limit = query.LetterCount;
+                            //}
+                            //if (query.Value > 0L)
+                            //{
+                            //    limit = (int)(query.Value / 506L);
+                            //}
+                            //if (limit == 0) limit = 1;
+
+                            for (int r = 1; r <= limit; r++) // try all possible range lengths
+                            {
+                                for (int i = 0; i < chapters.Count - r + 1; i++)
+                                {
+                                    // build required range
+                                    List<Model.Group> range = new List<Model.Group>();
+                                    for (int j = i; j < i + r; j++)
+                                    {
+                                        range.Add(chapters[j]);
+                                    }
+
+                                    // check range
+                                    if (Compare(range, query))
+                                    {
+                                        result.Add(range);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified range length
+                        {
+                            int r = range_length;
+                            for (int i = 0; i < chapters.Count - r + 1; i++)
+                            {
+                                // build required range
+                                List<Model.Group> range = new List<Model.Group>();
+                                for (int j = i; j < i + r; j++)
+                                {
+                                    range.Add(chapters[j]);
+                                }
+
+                                // check range
+                                if (Compare(range, query))
+                                {
+                                    result.Add(range);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    // find by numbers - GroupSets
+    public static List<List<Model.Group>> FindGroupSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindGroupSets(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Model.Group>> DoFindGroupSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindGroupSets(source, query);
+    }
+    private static List<List<Model.Group>> DoFindGroupSets(List<Verse> source, NumberQuery query)
+    {
+        List<List<Model.Group>> result = new List<List<Model.Group>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Model.Group> chapters = s_book.GetGroups(source);
+                    if (chapters != null)
+                    {
+                        int set_size = query.PartitionCount;
+                        if (set_size == 1)
+                        {
+                            result.Add(DoFindGroups(source, query));
+                            return result;
+                        }
+
+                        if (set_size == 0) // non-specified set size
+                        {
+                            // limit range length to minimum
+                            int limit = chapters.Count;
+                            //if (query.VerseCount > 0)
+                            //{
+                            //    limit = query.VerseCount;
+                            //}
+                            //if (query.WordCount > 0)
+                            //{
+                            //    limit = query.WordCount;
+                            //}
+                            //if (query.LetterCount > 0)
+                            //{
+                            //    limit = query.LetterCount;
+                            //}
+                            //if (query.Value > 0L)
+                            //{
+                            //    limit = (int)(query.Value / 10L);
+                            //}
+
+                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            {
+                                int size = i + 1;
+                                Combinations<Model.Group> sets = new Combinations<Model.Group>(chapters, size, GenerateOption.WithoutRepetition);
+                                foreach (List<Model.Group> set in sets)
+                                {
+                                    // check set against query
+                                    if (Compare(set, query))
+                                    {
+                                        result.Add(set);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified set size
+                        {
+                            Combinations<Model.Group> sets = new Combinations<Model.Group>(chapters, set_size, GenerateOption.WithoutRepetition);
+                            foreach (List<Model.Group> set in sets)
+                            {
+                                // check set against query
+                                if (Compare(set, query))
+                                {
+                                    result.Add(set);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    // find by numbers - Halfs
+    public static List<Half> FindHalfs(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindHalfs(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<Half> DoFindHalfs(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindHalfs(source, query);
+    }
+    private static List<Half> DoFindHalfs(List<Verse> source, NumberQuery query)
+    {
+        List<Half> result = new List<Half>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Half> chapters = s_book.GetHalfs(source);
+                    if (chapters != null)
+                    {
+                        foreach (Half chapter in chapters)
+                        {
+                            if (Compare(chapter, query))
+                            {
+                                result.Add(chapter);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    // find by numbers - HalfRanges
+    public static List<List<Half>> FindHalfRanges(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindHalfRanges(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Half>> DoFindHalfRanges(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindHalfRanges(source, query);
+    }
+    private static List<List<Half>> DoFindHalfRanges(List<Verse> source, NumberQuery query)
+    {
+        List<List<Half>> result = new List<List<Half>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Half> chapters = s_book.GetHalfs(source);
+                    if (chapters != null)
+                    {
+                        int range_length = query.PartitionCount;
+                        if (range_length == 1)
+                        {
+                            result.Add(DoFindHalfs(source, query));
+                            return result;
+                        }
+
+                        if (range_length == 0) // non-specified range length
+                        {
+                            // limit range length to minimum
+                            int limit = chapters.Count;
+                            //if (query.VerseCount > 0)
+                            //{
+                            //    limit = query.VerseCount;
+                            //}
+                            //if (query.WordCount > 0)
+                            //{
+                            //    limit = query.WordCount;
+                            //}
+                            //if (query.LetterCount > 0)
+                            //{
+                            //    limit = query.LetterCount;
+                            //}
+                            //if (query.Value > 0L)
+                            //{
+                            //    limit = (int)(query.Value / 506L);
+                            //}
+                            //if (limit == 0) limit = 1;
+
+                            for (int r = 1; r <= limit; r++) // try all possible range lengths
+                            {
+                                for (int i = 0; i < chapters.Count - r + 1; i++)
+                                {
+                                    // build required range
+                                    List<Half> range = new List<Half>();
+                                    for (int j = i; j < i + r; j++)
+                                    {
+                                        range.Add(chapters[j]);
+                                    }
+
+                                    // check range
+                                    if (Compare(range, query))
+                                    {
+                                        result.Add(range);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified range length
+                        {
+                            int r = range_length;
+                            for (int i = 0; i < chapters.Count - r + 1; i++)
+                            {
+                                // build required range
+                                List<Half> range = new List<Half>();
+                                for (int j = i; j < i + r; j++)
+                                {
+                                    range.Add(chapters[j]);
+                                }
+
+                                // check range
+                                if (Compare(range, query))
+                                {
+                                    result.Add(range);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    // find by numbers - HalfSets
+    public static List<List<Half>> FindHalfSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindHalfSets(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Half>> DoFindHalfSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindHalfSets(source, query);
+    }
+    private static List<List<Half>> DoFindHalfSets(List<Verse> source, NumberQuery query)
+    {
+        List<List<Half>> result = new List<List<Half>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Half> chapters = s_book.GetHalfs(source);
+                    if (chapters != null)
+                    {
+                        int set_size = query.PartitionCount;
+                        if (set_size == 1)
+                        {
+                            result.Add(DoFindHalfs(source, query));
+                            return result;
+                        }
+
+                        if (set_size == 0) // non-specified set size
+                        {
+                            // limit range length to minimum
+                            int limit = chapters.Count;
+                            //if (query.VerseCount > 0)
+                            //{
+                            //    limit = query.VerseCount;
+                            //}
+                            //if (query.WordCount > 0)
+                            //{
+                            //    limit = query.WordCount;
+                            //}
+                            //if (query.LetterCount > 0)
+                            //{
+                            //    limit = query.LetterCount;
+                            //}
+                            //if (query.Value > 0L)
+                            //{
+                            //    limit = (int)(query.Value / 10L);
+                            //}
+
+                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            {
+                                int size = i + 1;
+                                Combinations<Half> sets = new Combinations<Half>(chapters, size, GenerateOption.WithoutRepetition);
+                                foreach (List<Half> set in sets)
+                                {
+                                    // check set against query
+                                    if (Compare(set, query))
+                                    {
+                                        result.Add(set);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified set size
+                        {
+                            Combinations<Half> sets = new Combinations<Half>(chapters, set_size, GenerateOption.WithoutRepetition);
+                            foreach (List<Half> set in sets)
+                            {
+                                // check set against query
+                                if (Compare(set, query))
+                                {
+                                    result.Add(set);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    // find by numbers - Quarters
+    public static List<Quarter> FindQuarters(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindQuarters(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<Quarter> DoFindQuarters(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindQuarters(source, query);
+    }
+    private static List<Quarter> DoFindQuarters(List<Verse> source, NumberQuery query)
+    {
+        List<Quarter> result = new List<Quarter>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Quarter> chapters = s_book.GetQuarters(source);
+                    if (chapters != null)
+                    {
+                        foreach (Quarter chapter in chapters)
+                        {
+                            if (Compare(chapter, query))
+                            {
+                                result.Add(chapter);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    // find by numbers - QuarterRanges
+    public static List<List<Quarter>> FindQuarterRanges(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindQuarterRanges(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Quarter>> DoFindQuarterRanges(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindQuarterRanges(source, query);
+    }
+    private static List<List<Quarter>> DoFindQuarterRanges(List<Verse> source, NumberQuery query)
+    {
+        List<List<Quarter>> result = new List<List<Quarter>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Quarter> chapters = s_book.GetQuarters(source);
+                    if (chapters != null)
+                    {
+                        int range_length = query.PartitionCount;
+                        if (range_length == 1)
+                        {
+                            result.Add(DoFindQuarters(source, query));
+                            return result;
+                        }
+
+                        if (range_length == 0) // non-specified range length
+                        {
+                            // limit range length to minimum
+                            int limit = chapters.Count;
+                            //if (query.VerseCount > 0)
+                            //{
+                            //    limit = query.VerseCount;
+                            //}
+                            //if (query.WordCount > 0)
+                            //{
+                            //    limit = query.WordCount;
+                            //}
+                            //if (query.LetterCount > 0)
+                            //{
+                            //    limit = query.LetterCount;
+                            //}
+                            //if (query.Value > 0L)
+                            //{
+                            //    limit = (int)(query.Value / 506L);
+                            //}
+                            //if (limit == 0) limit = 1;
+
+                            for (int r = 1; r <= limit; r++) // try all possible range lengths
+                            {
+                                for (int i = 0; i < chapters.Count - r + 1; i++)
+                                {
+                                    // build required range
+                                    List<Quarter> range = new List<Quarter>();
+                                    for (int j = i; j < i + r; j++)
+                                    {
+                                        range.Add(chapters[j]);
+                                    }
+
+                                    // check range
+                                    if (Compare(range, query))
+                                    {
+                                        result.Add(range);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified range length
+                        {
+                            int r = range_length;
+                            for (int i = 0; i < chapters.Count - r + 1; i++)
+                            {
+                                // build required range
+                                List<Quarter> range = new List<Quarter>();
+                                for (int j = i; j < i + r; j++)
+                                {
+                                    range.Add(chapters[j]);
+                                }
+
+                                // check range
+                                if (Compare(range, query))
+                                {
+                                    result.Add(range);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    // find by numbers - QuarterSets
+    public static List<List<Quarter>> FindQuarterSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindQuarterSets(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Quarter>> DoFindQuarterSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindQuarterSets(source, query);
+    }
+    private static List<List<Quarter>> DoFindQuarterSets(List<Verse> source, NumberQuery query)
+    {
+        List<List<Quarter>> result = new List<List<Quarter>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Quarter> chapters = s_book.GetQuarters(source);
+                    if (chapters != null)
+                    {
+                        int set_size = query.PartitionCount;
+                        if (set_size == 1)
+                        {
+                            result.Add(DoFindQuarters(source, query));
+                            return result;
+                        }
+
+                        if (set_size == 0) // non-specified set size
+                        {
+                            // limit range length to minimum
+                            int limit = chapters.Count;
+                            //if (query.VerseCount > 0)
+                            //{
+                            //    limit = query.VerseCount;
+                            //}
+                            //if (query.WordCount > 0)
+                            //{
+                            //    limit = query.WordCount;
+                            //}
+                            //if (query.LetterCount > 0)
+                            //{
+                            //    limit = query.LetterCount;
+                            //}
+                            //if (query.Value > 0L)
+                            //{
+                            //    limit = (int)(query.Value / 10L);
+                            //}
+
+                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            {
+                                int size = i + 1;
+                                Combinations<Quarter> sets = new Combinations<Quarter>(chapters, size, GenerateOption.WithoutRepetition);
+                                foreach (List<Quarter> set in sets)
+                                {
+                                    // check set against query
+                                    if (Compare(set, query))
+                                    {
+                                        result.Add(set);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified set size
+                        {
+                            Combinations<Quarter> sets = new Combinations<Quarter>(chapters, set_size, GenerateOption.WithoutRepetition);
+                            foreach (List<Quarter> set in sets)
+                            {
+                                // check set against query
+                                if (Compare(set, query))
+                                {
+                                    result.Add(set);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    // find by numbers - Bowings
+    public static List<Bowing> FindBowings(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindBowings(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<Bowing> DoFindBowings(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindBowings(source, query);
+    }
+    private static List<Bowing> DoFindBowings(List<Verse> source, NumberQuery query)
+    {
+        List<Bowing> result = new List<Bowing>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Bowing> chapters = s_book.GetBowings(source);
+                    if (chapters != null)
+                    {
+                        foreach (Bowing chapter in chapters)
+                        {
+                            if (Compare(chapter, query))
+                            {
+                                result.Add(chapter);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    // find by numbers - BowingRanges
+    public static List<List<Bowing>> FindBowingRanges(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindBowingRanges(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Bowing>> DoFindBowingRanges(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindBowingRanges(source, query);
+    }
+    private static List<List<Bowing>> DoFindBowingRanges(List<Verse> source, NumberQuery query)
+    {
+        List<List<Bowing>> result = new List<List<Bowing>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Bowing> chapters = s_book.GetBowings(source);
+                    if (chapters != null)
+                    {
+                        int range_length = query.PartitionCount;
+                        if (range_length == 1)
+                        {
+                            result.Add(DoFindBowings(source, query));
+                            return result;
+                        }
+
+                        if (range_length == 0) // non-specified range length
+                        {
+                            // limit range length to minimum
+                            int limit = chapters.Count;
+                            //if (query.VerseCount > 0)
+                            //{
+                            //    limit = query.VerseCount;
+                            //}
+                            //if (query.WordCount > 0)
+                            //{
+                            //    limit = query.WordCount;
+                            //}
+                            //if (query.LetterCount > 0)
+                            //{
+                            //    limit = query.LetterCount;
+                            //}
+                            //if (query.Value > 0L)
+                            //{
+                            //    limit = (int)(query.Value / 506L);
+                            //}
+                            //if (limit == 0) limit = 1;
+
+                            for (int r = 1; r <= limit; r++) // try all possible range lengths
+                            {
+                                for (int i = 0; i < chapters.Count - r + 1; i++)
+                                {
+                                    // build required range
+                                    List<Bowing> range = new List<Bowing>();
+                                    for (int j = i; j < i + r; j++)
+                                    {
+                                        range.Add(chapters[j]);
+                                    }
+
+                                    // check range
+                                    if (Compare(range, query))
+                                    {
+                                        result.Add(range);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified range length
+                        {
+                            int r = range_length;
+                            for (int i = 0; i < chapters.Count - r + 1; i++)
+                            {
+                                // build required range
+                                List<Bowing> range = new List<Bowing>();
+                                for (int j = i; j < i + r; j++)
+                                {
+                                    range.Add(chapters[j]);
+                                }
+
+                                // check range
+                                if (Compare(range, query))
+                                {
+                                    result.Add(range);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+    // find by numbers - BowingSets
+    public static List<List<Bowing>> FindBowingSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        return DoFindBowingSets(search_scope, current_selection, previous_verses, query);
+    }
+    private static List<List<Bowing>> DoFindBowingSets(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, NumberQuery query)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindBowingSets(source, query);
+    }
+    private static List<List<Bowing>> DoFindBowingSets(List<Verse> source, NumberQuery query)
+    {
+        List<List<Bowing>> result = new List<List<Bowing>>();
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (s_book != null)
+                {
+                    List<Bowing> chapters = s_book.GetBowings(source);
+                    if (chapters != null)
+                    {
+                        int set_size = query.PartitionCount;
+                        if (set_size == 1)
+                        {
+                            result.Add(DoFindBowings(source, query));
+                            return result;
+                        }
+
+                        if (set_size == 0) // non-specified set size
+                        {
+                            // limit range length to minimum
+                            int limit = chapters.Count;
+                            //if (query.VerseCount > 0)
+                            //{
+                            //    limit = query.VerseCount;
+                            //}
+                            //if (query.WordCount > 0)
+                            //{
+                            //    limit = query.WordCount;
+                            //}
+                            //if (query.LetterCount > 0)
+                            //{
+                            //    limit = query.LetterCount;
+                            //}
+                            //if (query.Value > 0L)
+                            //{
+                            //    limit = (int)(query.Value / 10L);
+                            //}
+
+                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            {
+                                int size = i + 1;
+                                Combinations<Bowing> sets = new Combinations<Bowing>(chapters, size, GenerateOption.WithoutRepetition);
+                                foreach (List<Bowing> set in sets)
+                                {
+                                    // check set against query
+                                    if (Compare(set, query))
+                                    {
+                                        result.Add(set);
+                                    }
+                                }
+                            }
+                        }
+                        else // specified set size
+                        {
+                            Combinations<Bowing> sets = new Combinations<Bowing>(chapters, set_size, GenerateOption.WithoutRepetition);
+                            foreach (List<Bowing> set in sets)
+                            {
+                                // check set against query
+                                if (Compare(set, query))
+                                {
+                                    result.Add(set);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
 
     // find by prostration type
     public static List<Verse> FindVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, ProstrationType prostration_type)

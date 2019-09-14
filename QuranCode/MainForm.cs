@@ -514,6 +514,13 @@ public partial class MainForm : Form, ISubscriber
             this.ToolTip.SetToolTip(this.FindByNumbersResultTypeSentencesLabel, L[l]["find sentences"]);
             this.ToolTip.SetToolTip(this.FindByNumbersResultTypeVersesLabel, L[l]["find verses"]);
             this.ToolTip.SetToolTip(this.FindByNumbersResultTypeChaptersLabel, L[l]["find chapters"]);
+            this.ToolTip.SetToolTip(this.FindByNumbersResultTypePagesLabel, L[l]["find pages"]);
+            this.ToolTip.SetToolTip(this.FindByNumbersResultTypeStationsLabel, L[l]["find stations"]);
+            this.ToolTip.SetToolTip(this.FindByNumbersResultTypePartsLabel, L[l]["find parts"]);
+            this.ToolTip.SetToolTip(this.FindByNumbersResultTypeGroupsLabel, L[l]["find groups"]);
+            this.ToolTip.SetToolTip(this.FindByNumbersResultTypeHalfsLabel, L[l]["find halfs"]);
+            this.ToolTip.SetToolTip(this.FindByNumbersResultTypeQuartersLabel, L[l]["find quarters"]);
+            this.ToolTip.SetToolTip(this.FindByNumbersResultTypeBowingsLabel, L[l]["find bowings"]);
             this.ToolTip.SetToolTip(this.FindByFrequencyResultTypeWordsLabel, L[l]["find words"]);
             this.ToolTip.SetToolTip(this.FindByFrequencyResultTypeSentencesLabel, L[l]["find sentences"]);
             this.ToolTip.SetToolTip(this.FindByFrequencyResultTypeVersesLabel, L[l]["find verses"]);
@@ -732,7 +739,7 @@ public partial class MainForm : Form, ISubscriber
     private static Color DEFAULT_TRANSALTION_FONT_COLOR = Color.Navy;
     private const float DEFAULT_TEXT_ZOOM_FACTOR = 1.0F;
     private const float DEFAULT_GRAPHICS_ZOOM_FACTOR = 1.0F;
-    private const int SELECTON_SCOPE_TEXT_MAX_LENGTH = 32;  // for longer text, use elipses (...)
+    private const int SELECTON_SCOPE_TEXT_MAX_LENGTH = 29;  // for longer text, use elipses (...)
     private const float DEFAULT_DPI_X = 96.0F;              // 100% = 96.0F,   125% = 120.0F,   150% = 144.0F
     ///////////////////////////////////////////////////////////////////////////////
     #endregion
@@ -907,18 +914,25 @@ public partial class MainForm : Form, ISubscriber
         this.MainSplitContainer = new System.Windows.Forms.SplitContainer();
         this.SearchGroupBox = new System.Windows.Forms.GroupBox();
         this.FindByNumbersPanel = new System.Windows.Forms.Panel();
+        this.FindByNumbersResultTypeBowingsLabel = new System.Windows.Forms.Label();
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel = new System.Windows.Forms.Label();
+        this.FindByNumbersResultTypeGroupsLabel = new System.Windows.Forms.Label();
         this.FindByNumbersValueDigitalRootNumberTypeLabel = new System.Windows.Forms.Label();
-        this.FindByNumbersValueDigitalRootNumericUpDown = new System.Windows.Forms.NumericUpDown();
-        this.FindByNumbersValueDigitalRootLabel = new System.Windows.Forms.Label();
-        this.FindByNumbersValueDigitSumComparisonOperatorLabel = new System.Windows.Forms.Label();
-        this.FindByNumbersValueDigitSumNumberTypeLabel = new System.Windows.Forms.Label();
-        this.FindByNumbersValueDigitSumNumericUpDown = new System.Windows.Forms.NumericUpDown();
-        this.FindByNumbersValueDigitSumLabel = new System.Windows.Forms.Label();
-        this.FindByNumbersButton = new System.Windows.Forms.Button();
-        this.FindByNumbersResultTypeSentencesLabel = new System.Windows.Forms.Label();
-        this.FindByNumbersResultTypeChaptersLabel = new System.Windows.Forms.Label();
         this.FindByNumbersResultTypeVersesLabel = new System.Windows.Forms.Label();
+        this.FindByNumbersValueDigitalRootNumericUpDown = new System.Windows.Forms.NumericUpDown();
+        this.FindByNumbersResultTypeQuartersLabel = new System.Windows.Forms.Label();
+        this.FindByNumbersValueDigitalRootLabel = new System.Windows.Forms.Label();
+        this.FindByNumbersResultTypePagesLabel = new System.Windows.Forms.Label();
+        this.FindByNumbersValueDigitSumComparisonOperatorLabel = new System.Windows.Forms.Label();
+        this.FindByNumbersResultTypeHalfsLabel = new System.Windows.Forms.Label();
+        this.FindByNumbersValueDigitSumNumberTypeLabel = new System.Windows.Forms.Label();
+        this.FindByNumbersResultTypeSentencesLabel = new System.Windows.Forms.Label();
+        this.FindByNumbersValueDigitSumNumericUpDown = new System.Windows.Forms.NumericUpDown();
+        this.FindByNumbersResultTypePartsLabel = new System.Windows.Forms.Label();
+        this.FindByNumbersValueDigitSumLabel = new System.Windows.Forms.Label();
+        this.FindByNumbersResultTypeChaptersLabel = new System.Windows.Forms.Label();
+        this.FindByNumbersButton = new System.Windows.Forms.Button();
+        this.FindByNumbersResultTypeStationsLabel = new System.Windows.Forms.Label();
         this.FindByNumbersChaptersComparisonOperatorLabel = new System.Windows.Forms.Label();
         this.FindByNumbersChaptersNumberTypeLabel = new System.Windows.Forms.Label();
         this.FindByNumbersChaptersNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -2416,10 +2430,10 @@ public partial class MainForm : Form, ISubscriber
         this.SearchScopeBookLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.SearchScopeBookLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.SearchScopeBookLabel.ForeColor = System.Drawing.Color.White;
-        this.SearchScopeBookLabel.Location = new System.Drawing.Point(5, 18);
+        this.SearchScopeBookLabel.Location = new System.Drawing.Point(5, 1);
         this.SearchScopeBookLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.SearchScopeBookLabel.Name = "SearchScopeBookLabel";
-        this.SearchScopeBookLabel.Size = new System.Drawing.Size(56, 25);
+        this.SearchScopeBookLabel.Size = new System.Drawing.Size(57, 21);
         this.SearchScopeBookLabel.TabIndex = 23;
         this.SearchScopeBookLabel.Text = "Book";
         this.SearchScopeBookLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2430,7 +2444,7 @@ public partial class MainForm : Form, ISubscriber
         // 
         this.FindByNumbersUniqueLettersLabel.BackColor = System.Drawing.Color.Transparent;
         this.FindByNumbersUniqueLettersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersUniqueLettersLabel.Location = new System.Drawing.Point(1, 165);
+        this.FindByNumbersUniqueLettersLabel.Location = new System.Drawing.Point(1, 183);
         this.FindByNumbersUniqueLettersLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersUniqueLettersLabel.Name = "FindByNumbersUniqueLettersLabel";
         this.FindByNumbersUniqueLettersLabel.Size = new System.Drawing.Size(77, 16);
@@ -2444,7 +2458,7 @@ public partial class MainForm : Form, ISubscriber
         // 
         this.FindByNumbersValueLabel.BackColor = System.Drawing.Color.Transparent;
         this.FindByNumbersValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersValueLabel.Location = new System.Drawing.Point(1, 188);
+        this.FindByNumbersValueLabel.Location = new System.Drawing.Point(1, 206);
         this.FindByNumbersValueLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersValueLabel.Name = "FindByNumbersValueLabel";
         this.FindByNumbersValueLabel.Size = new System.Drawing.Size(77, 16);
@@ -2577,10 +2591,10 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersResultTypeWordsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByNumbersResultTypeWordsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersResultTypeWordsLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.FindByNumbersResultTypeWordsLabel.Location = new System.Drawing.Point(41, 26);
+        this.FindByNumbersResultTypeWordsLabel.Location = new System.Drawing.Point(35, 25);
         this.FindByNumbersResultTypeWordsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersResultTypeWordsLabel.Name = "FindByNumbersResultTypeWordsLabel";
-        this.FindByNumbersResultTypeWordsLabel.Size = new System.Drawing.Size(38, 17);
+        this.FindByNumbersResultTypeWordsLabel.Size = new System.Drawing.Size(32, 17);
         this.FindByNumbersResultTypeWordsLabel.TabIndex = 31;
         this.FindByNumbersResultTypeWordsLabel.Text = "W";
         this.FindByNumbersResultTypeWordsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2593,9 +2607,9 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersResultTypeLettersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByNumbersResultTypeLettersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersResultTypeLettersLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.FindByNumbersResultTypeLettersLabel.Location = new System.Drawing.Point(2, 26);
+        this.FindByNumbersResultTypeLettersLabel.Location = new System.Drawing.Point(2, 25);
         this.FindByNumbersResultTypeLettersLabel.Name = "FindByNumbersResultTypeLettersLabel";
-        this.FindByNumbersResultTypeLettersLabel.Size = new System.Drawing.Size(38, 17);
+        this.FindByNumbersResultTypeLettersLabel.Size = new System.Drawing.Size(32, 17);
         this.FindByNumbersResultTypeLettersLabel.TabIndex = 30;
         this.FindByNumbersResultTypeLettersLabel.Text = "L";
         this.FindByNumbersResultTypeLettersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2822,11 +2836,11 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersWordsNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
         this.FindByNumbersWordsNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersWordsNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersWordsNumberTypeLabel.Location = new System.Drawing.Point(165, 114);
+        this.FindByNumbersWordsNumberTypeLabel.Location = new System.Drawing.Point(165, 132);
         this.FindByNumbersWordsNumberTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersWordsNumberTypeLabel.Name = "FindByNumbersWordsNumberTypeLabel";
         this.FindByNumbersWordsNumberTypeLabel.Size = new System.Drawing.Size(32, 22);
-        this.FindByNumbersWordsNumberTypeLabel.TabIndex = 46;
+        this.FindByNumbersWordsNumberTypeLabel.TabIndex = 53;
         this.FindByNumbersWordsNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByNumbersWordsNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
         this.FindByNumbersWordsNumberTypeLabel.Click += new System.EventHandler(this.FindByNumbersNumberTypeLabel_Click);
@@ -2839,11 +2853,11 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersLettersNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
         this.FindByNumbersLettersNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersLettersNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersLettersNumberTypeLabel.Location = new System.Drawing.Point(165, 138);
+        this.FindByNumbersLettersNumberTypeLabel.Location = new System.Drawing.Point(165, 156);
         this.FindByNumbersLettersNumberTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersLettersNumberTypeLabel.Name = "FindByNumbersLettersNumberTypeLabel";
         this.FindByNumbersLettersNumberTypeLabel.Size = new System.Drawing.Size(32, 22);
-        this.FindByNumbersLettersNumberTypeLabel.TabIndex = 49;
+        this.FindByNumbersLettersNumberTypeLabel.TabIndex = 56;
         this.FindByNumbersLettersNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByNumbersLettersNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
         this.FindByNumbersLettersNumberTypeLabel.Click += new System.EventHandler(this.FindByNumbersNumberTypeLabel_Click);
@@ -2856,11 +2870,11 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersValueNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
         this.FindByNumbersValueNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersValueNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersValueNumberTypeLabel.Location = new System.Drawing.Point(165, 185);
+        this.FindByNumbersValueNumberTypeLabel.Location = new System.Drawing.Point(165, 203);
         this.FindByNumbersValueNumberTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersValueNumberTypeLabel.Name = "FindByNumbersValueNumberTypeLabel";
         this.FindByNumbersValueNumberTypeLabel.Size = new System.Drawing.Size(32, 22);
-        this.FindByNumbersValueNumberTypeLabel.TabIndex = 55;
+        this.FindByNumbersValueNumberTypeLabel.TabIndex = 62;
         this.FindByNumbersValueNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByNumbersValueNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
         this.FindByNumbersValueNumberTypeLabel.Click += new System.EventHandler(this.FindByNumbersNumberTypeLabel_Click);
@@ -2949,22 +2963,29 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
         | System.Windows.Forms.AnchorStyles.Right)));
         this.FindByNumbersPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeBowingsLabel);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitalRootComparisonOperatorLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeGroupsLabel);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitalRootNumberTypeLabel);
-        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitalRootNumericUpDown);
-        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitalRootLabel);
-        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitSumComparisonOperatorLabel);
-        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitSumNumberTypeLabel);
-        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitSumNumericUpDown);
-        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitSumLabel);
-        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersButton);
-        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeSentencesLabel);
-        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeChaptersLabel);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeVersesLabel);
-        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeWordsLabel);
-        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeLettersLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitalRootNumericUpDown);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeQuartersLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitalRootLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypePagesLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitSumComparisonOperatorLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeHalfsLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitSumNumberTypeLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeSentencesLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitSumNumericUpDown);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypePartsLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersValueDigitSumLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeChaptersLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersButton);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeStationsLabel);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersChaptersComparisonOperatorLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeWordsLabel);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersChaptersNumberTypeLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeLettersLabel);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersChaptersNumericUpDown);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersChaptersLabel);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersNumberComparisonOperatorLabel);
@@ -2993,12 +3014,26 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersWordsLabel);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersSetsCheckBox);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersLabel);
-        this.FindByNumbersPanel.Location = new System.Drawing.Point(4, 402);
+        this.FindByNumbersPanel.Location = new System.Drawing.Point(4, 381);
         this.FindByNumbersPanel.Margin = new System.Windows.Forms.Padding(4);
         this.FindByNumbersPanel.Name = "FindByNumbersPanel";
-        this.FindByNumbersPanel.Size = new System.Drawing.Size(207, 260);
+        this.FindByNumbersPanel.Size = new System.Drawing.Size(207, 281);
         this.FindByNumbersPanel.TabIndex = 169;
         this.FindByNumbersPanel.TabStop = true;
+        // 
+        // FindByNumbersResultTypeBowingsLabel
+        // 
+        this.FindByNumbersResultTypeBowingsLabel.BackColor = System.Drawing.Color.DarkGray;
+        this.FindByNumbersResultTypeBowingsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.FindByNumbersResultTypeBowingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByNumbersResultTypeBowingsLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.FindByNumbersResultTypeBowingsLabel.Location = new System.Drawing.Point(167, 43);
+        this.FindByNumbersResultTypeBowingsLabel.Name = "FindByNumbersResultTypeBowingsLabel";
+        this.FindByNumbersResultTypeBowingsLabel.Size = new System.Drawing.Size(32, 17);
+        this.FindByNumbersResultTypeBowingsLabel.TabIndex = 41;
+        this.FindByNumbersResultTypeBowingsLabel.Text = "B";
+        this.FindByNumbersResultTypeBowingsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.FindByNumbersResultTypeBowingsLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeBowingsLabel_Click);
         // 
         // FindByNumbersValueDigitalRootComparisonOperatorLabel
         // 
@@ -3007,17 +3042,31 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Location = new System.Drawing.Point(68, 231);
+        this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Location = new System.Drawing.Point(68, 249);
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Name = "FindByNumbersValueDigitalRootComparisonOperatorLabel";
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Size = new System.Drawing.Size(24, 22);
-        this.FindByNumbersValueDigitalRootComparisonOperatorLabel.TabIndex = 69;
+        this.FindByNumbersValueDigitalRootComparisonOperatorLabel.TabIndex = 66;
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Text = "=";
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.ToolTip.SetToolTip(this.FindByNumbersValueDigitalRootComparisonOperatorLabel, "equals to");
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Click += new System.EventHandler(this.FindByNumbersComparisonOperatorLabel_Click);
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+        // 
+        // FindByNumbersResultTypeGroupsLabel
+        // 
+        this.FindByNumbersResultTypeGroupsLabel.BackColor = System.Drawing.Color.DarkGray;
+        this.FindByNumbersResultTypeGroupsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.FindByNumbersResultTypeGroupsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByNumbersResultTypeGroupsLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.FindByNumbersResultTypeGroupsLabel.Location = new System.Drawing.Point(68, 43);
+        this.FindByNumbersResultTypeGroupsLabel.Name = "FindByNumbersResultTypeGroupsLabel";
+        this.FindByNumbersResultTypeGroupsLabel.Size = new System.Drawing.Size(32, 17);
+        this.FindByNumbersResultTypeGroupsLabel.TabIndex = 38;
+        this.FindByNumbersResultTypeGroupsLabel.Text = "G";
+        this.FindByNumbersResultTypeGroupsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.FindByNumbersResultTypeGroupsLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeGroupsLabel_Click);
         // 
         // FindByNumbersValueDigitalRootNumberTypeLabel
         // 
@@ -3026,21 +3075,37 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersValueDigitalRootNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
         this.FindByNumbersValueDigitalRootNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersValueDigitalRootNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersValueDigitalRootNumberTypeLabel.Location = new System.Drawing.Point(165, 231);
+        this.FindByNumbersValueDigitalRootNumberTypeLabel.Location = new System.Drawing.Point(165, 249);
         this.FindByNumbersValueDigitalRootNumberTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersValueDigitalRootNumberTypeLabel.Name = "FindByNumbersValueDigitalRootNumberTypeLabel";
         this.FindByNumbersValueDigitalRootNumberTypeLabel.Size = new System.Drawing.Size(32, 22);
-        this.FindByNumbersValueDigitalRootNumberTypeLabel.TabIndex = 71;
+        this.FindByNumbersValueDigitalRootNumberTypeLabel.TabIndex = 68;
         this.FindByNumbersValueDigitalRootNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByNumbersValueDigitalRootNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
         this.FindByNumbersValueDigitalRootNumberTypeLabel.Click += new System.EventHandler(this.FindByNumbersNumberTypeLabel_Click);
         this.FindByNumbersValueDigitalRootNumberTypeLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
         // 
+        // FindByNumbersResultTypeVersesLabel
+        // 
+        this.FindByNumbersResultTypeVersesLabel.BackColor = System.Drawing.Color.DarkGray;
+        this.FindByNumbersResultTypeVersesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.FindByNumbersResultTypeVersesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByNumbersResultTypeVersesLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.FindByNumbersResultTypeVersesLabel.Location = new System.Drawing.Point(101, 25);
+        this.FindByNumbersResultTypeVersesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+        this.FindByNumbersResultTypeVersesLabel.Name = "FindByNumbersResultTypeVersesLabel";
+        this.FindByNumbersResultTypeVersesLabel.Size = new System.Drawing.Size(32, 17);
+        this.FindByNumbersResultTypeVersesLabel.TabIndex = 33;
+        this.FindByNumbersResultTypeVersesLabel.Text = "V";
+        this.FindByNumbersResultTypeVersesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.FindByNumbersResultTypeVersesLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeVersesLabel_Click);
+        this.FindByNumbersResultTypeVersesLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+        // 
         // FindByNumbersValueDigitalRootNumericUpDown
         // 
         this.FindByNumbersValueDigitalRootNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
         this.FindByNumbersValueDigitalRootNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersValueDigitalRootNumericUpDown.Location = new System.Drawing.Point(92, 231);
+        this.FindByNumbersValueDigitalRootNumericUpDown.Location = new System.Drawing.Point(92, 249);
         this.FindByNumbersValueDigitalRootNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
         this.FindByNumbersValueDigitalRootNumericUpDown.Maximum = new decimal(new int[] {
             9,
@@ -3049,26 +3114,54 @@ public partial class MainForm : Form, ISubscriber
             0});
         this.FindByNumbersValueDigitalRootNumericUpDown.Name = "FindByNumbersValueDigitalRootNumericUpDown";
         this.FindByNumbersValueDigitalRootNumericUpDown.Size = new System.Drawing.Size(75, 23);
-        this.FindByNumbersValueDigitalRootNumericUpDown.TabIndex = 70;
+        this.FindByNumbersValueDigitalRootNumericUpDown.TabIndex = 67;
         this.FindByNumbersValueDigitalRootNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.FindByNumbersValueDigitalRootNumericUpDown.ValueChanged += new System.EventHandler(this.FindByNumbersNumericUpDown_ValueChanged);
         this.FindByNumbersValueDigitalRootNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
         this.FindByNumbersValueDigitalRootNumericUpDown.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
         this.FindByNumbersValueDigitalRootNumericUpDown.Leave += new System.EventHandler(this.FindByNumbersNumericUpDown_Leave);
         // 
+        // FindByNumbersResultTypeQuartersLabel
+        // 
+        this.FindByNumbersResultTypeQuartersLabel.BackColor = System.Drawing.Color.DarkGray;
+        this.FindByNumbersResultTypeQuartersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.FindByNumbersResultTypeQuartersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByNumbersResultTypeQuartersLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.FindByNumbersResultTypeQuartersLabel.Location = new System.Drawing.Point(134, 43);
+        this.FindByNumbersResultTypeQuartersLabel.Name = "FindByNumbersResultTypeQuartersLabel";
+        this.FindByNumbersResultTypeQuartersLabel.Size = new System.Drawing.Size(32, 17);
+        this.FindByNumbersResultTypeQuartersLabel.TabIndex = 40;
+        this.FindByNumbersResultTypeQuartersLabel.Text = "Q";
+        this.FindByNumbersResultTypeQuartersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.FindByNumbersResultTypeQuartersLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeQuartersLabel_Click);
+        // 
         // FindByNumbersValueDigitalRootLabel
         // 
         this.FindByNumbersValueDigitalRootLabel.BackColor = System.Drawing.Color.Transparent;
         this.FindByNumbersValueDigitalRootLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersValueDigitalRootLabel.Location = new System.Drawing.Point(-1, 235);
+        this.FindByNumbersValueDigitalRootLabel.Location = new System.Drawing.Point(-1, 253);
         this.FindByNumbersValueDigitalRootLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersValueDigitalRootLabel.Name = "FindByNumbersValueDigitalRootLabel";
         this.FindByNumbersValueDigitalRootLabel.Size = new System.Drawing.Size(77, 16);
-        this.FindByNumbersValueDigitalRootLabel.TabIndex = 64;
+        this.FindByNumbersValueDigitalRootLabel.TabIndex = 0;
         this.FindByNumbersValueDigitalRootLabel.Text = "digital root";
         this.ToolTip.SetToolTip(this.FindByNumbersValueDigitalRootLabel, "value digital root");
         this.FindByNumbersValueDigitalRootLabel.Click += new System.EventHandler(this.FindByNumbersLabel_Click);
         this.FindByNumbersValueDigitalRootLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+        // 
+        // FindByNumbersResultTypePagesLabel
+        // 
+        this.FindByNumbersResultTypePagesLabel.BackColor = System.Drawing.Color.DarkGray;
+        this.FindByNumbersResultTypePagesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.FindByNumbersResultTypePagesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByNumbersResultTypePagesLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.FindByNumbersResultTypePagesLabel.Location = new System.Drawing.Point(167, 25);
+        this.FindByNumbersResultTypePagesLabel.Name = "FindByNumbersResultTypePagesLabel";
+        this.FindByNumbersResultTypePagesLabel.Size = new System.Drawing.Size(32, 17);
+        this.FindByNumbersResultTypePagesLabel.TabIndex = 35;
+        this.FindByNumbersResultTypePagesLabel.Text = "#";
+        this.FindByNumbersResultTypePagesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.FindByNumbersResultTypePagesLabel.Click += new System.EventHandler(this.FindByNumbersResultTypePagesLabel_Click);
         // 
         // FindByNumbersValueDigitSumComparisonOperatorLabel
         // 
@@ -3077,17 +3170,31 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersValueDigitSumComparisonOperatorLabel.Location = new System.Drawing.Point(68, 208);
+        this.FindByNumbersValueDigitSumComparisonOperatorLabel.Location = new System.Drawing.Point(68, 226);
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.Name = "FindByNumbersValueDigitSumComparisonOperatorLabel";
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.Size = new System.Drawing.Size(24, 22);
-        this.FindByNumbersValueDigitSumComparisonOperatorLabel.TabIndex = 66;
+        this.FindByNumbersValueDigitSumComparisonOperatorLabel.TabIndex = 63;
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.Text = "=";
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.ToolTip.SetToolTip(this.FindByNumbersValueDigitSumComparisonOperatorLabel, "equals to");
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.Click += new System.EventHandler(this.FindByNumbersComparisonOperatorLabel_Click);
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+        // 
+        // FindByNumbersResultTypeHalfsLabel
+        // 
+        this.FindByNumbersResultTypeHalfsLabel.BackColor = System.Drawing.Color.DarkGray;
+        this.FindByNumbersResultTypeHalfsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.FindByNumbersResultTypeHalfsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByNumbersResultTypeHalfsLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.FindByNumbersResultTypeHalfsLabel.Location = new System.Drawing.Point(101, 43);
+        this.FindByNumbersResultTypeHalfsLabel.Name = "FindByNumbersResultTypeHalfsLabel";
+        this.FindByNumbersResultTypeHalfsLabel.Size = new System.Drawing.Size(32, 17);
+        this.FindByNumbersResultTypeHalfsLabel.TabIndex = 39;
+        this.FindByNumbersResultTypeHalfsLabel.Text = "H";
+        this.FindByNumbersResultTypeHalfsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.FindByNumbersResultTypeHalfsLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeHalfsLabel_Click);
         // 
         // FindByNumbersValueDigitSumNumberTypeLabel
         // 
@@ -3096,21 +3203,37 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersValueDigitSumNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
         this.FindByNumbersValueDigitSumNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersValueDigitSumNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersValueDigitSumNumberTypeLabel.Location = new System.Drawing.Point(165, 208);
+        this.FindByNumbersValueDigitSumNumberTypeLabel.Location = new System.Drawing.Point(165, 226);
         this.FindByNumbersValueDigitSumNumberTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersValueDigitSumNumberTypeLabel.Name = "FindByNumbersValueDigitSumNumberTypeLabel";
         this.FindByNumbersValueDigitSumNumberTypeLabel.Size = new System.Drawing.Size(32, 22);
-        this.FindByNumbersValueDigitSumNumberTypeLabel.TabIndex = 68;
+        this.FindByNumbersValueDigitSumNumberTypeLabel.TabIndex = 65;
         this.FindByNumbersValueDigitSumNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByNumbersValueDigitSumNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
         this.FindByNumbersValueDigitSumNumberTypeLabel.Click += new System.EventHandler(this.FindByNumbersNumberTypeLabel_Click);
         this.FindByNumbersValueDigitSumNumberTypeLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
         // 
+        // FindByNumbersResultTypeSentencesLabel
+        // 
+        this.FindByNumbersResultTypeSentencesLabel.BackColor = System.Drawing.Color.DarkGray;
+        this.FindByNumbersResultTypeSentencesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.FindByNumbersResultTypeSentencesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByNumbersResultTypeSentencesLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.FindByNumbersResultTypeSentencesLabel.Location = new System.Drawing.Point(68, 25);
+        this.FindByNumbersResultTypeSentencesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+        this.FindByNumbersResultTypeSentencesLabel.Name = "FindByNumbersResultTypeSentencesLabel";
+        this.FindByNumbersResultTypeSentencesLabel.Size = new System.Drawing.Size(32, 17);
+        this.FindByNumbersResultTypeSentencesLabel.TabIndex = 32;
+        this.FindByNumbersResultTypeSentencesLabel.Text = "S";
+        this.FindByNumbersResultTypeSentencesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.FindByNumbersResultTypeSentencesLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeSentencesLabel_Click);
+        this.FindByNumbersResultTypeSentencesLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+        // 
         // FindByNumbersValueDigitSumNumericUpDown
         // 
         this.FindByNumbersValueDigitSumNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
         this.FindByNumbersValueDigitSumNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersValueDigitSumNumericUpDown.Location = new System.Drawing.Point(92, 208);
+        this.FindByNumbersValueDigitSumNumericUpDown.Location = new System.Drawing.Point(92, 226);
         this.FindByNumbersValueDigitSumNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
         this.FindByNumbersValueDigitSumNumericUpDown.Maximum = new decimal(new int[] {
             999,
@@ -3119,26 +3242,56 @@ public partial class MainForm : Form, ISubscriber
             0});
         this.FindByNumbersValueDigitSumNumericUpDown.Name = "FindByNumbersValueDigitSumNumericUpDown";
         this.FindByNumbersValueDigitSumNumericUpDown.Size = new System.Drawing.Size(75, 23);
-        this.FindByNumbersValueDigitSumNumericUpDown.TabIndex = 67;
+        this.FindByNumbersValueDigitSumNumericUpDown.TabIndex = 64;
         this.FindByNumbersValueDigitSumNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.FindByNumbersValueDigitSumNumericUpDown.ValueChanged += new System.EventHandler(this.FindByNumbersNumericUpDown_ValueChanged);
         this.FindByNumbersValueDigitSumNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
         this.FindByNumbersValueDigitSumNumericUpDown.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
         this.FindByNumbersValueDigitSumNumericUpDown.Leave += new System.EventHandler(this.FindByNumbersNumericUpDown_Leave);
         // 
+        // FindByNumbersResultTypePartsLabel
+        // 
+        this.FindByNumbersResultTypePartsLabel.BackColor = System.Drawing.Color.DarkGray;
+        this.FindByNumbersResultTypePartsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.FindByNumbersResultTypePartsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByNumbersResultTypePartsLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.FindByNumbersResultTypePartsLabel.Location = new System.Drawing.Point(35, 43);
+        this.FindByNumbersResultTypePartsLabel.Name = "FindByNumbersResultTypePartsLabel";
+        this.FindByNumbersResultTypePartsLabel.Size = new System.Drawing.Size(32, 17);
+        this.FindByNumbersResultTypePartsLabel.TabIndex = 37;
+        this.FindByNumbersResultTypePartsLabel.Text = "P";
+        this.FindByNumbersResultTypePartsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.FindByNumbersResultTypePartsLabel.Click += new System.EventHandler(this.FindByNumbersResultTypePartsLabel_Click);
+        // 
         // FindByNumbersValueDigitSumLabel
         // 
         this.FindByNumbersValueDigitSumLabel.BackColor = System.Drawing.Color.Transparent;
         this.FindByNumbersValueDigitSumLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersValueDigitSumLabel.Location = new System.Drawing.Point(-1, 212);
+        this.FindByNumbersValueDigitSumLabel.Location = new System.Drawing.Point(-1, 230);
         this.FindByNumbersValueDigitSumLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersValueDigitSumLabel.Name = "FindByNumbersValueDigitSumLabel";
         this.FindByNumbersValueDigitSumLabel.Size = new System.Drawing.Size(77, 16);
-        this.FindByNumbersValueDigitSumLabel.TabIndex = 65;
+        this.FindByNumbersValueDigitSumLabel.TabIndex = 0;
         this.FindByNumbersValueDigitSumLabel.Text = "digit sum";
         this.ToolTip.SetToolTip(this.FindByNumbersValueDigitSumLabel, "value digit sum");
         this.FindByNumbersValueDigitSumLabel.Click += new System.EventHandler(this.FindByNumbersLabel_Click);
         this.FindByNumbersValueDigitSumLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+        // 
+        // FindByNumbersResultTypeChaptersLabel
+        // 
+        this.FindByNumbersResultTypeChaptersLabel.BackColor = System.Drawing.Color.DarkGray;
+        this.FindByNumbersResultTypeChaptersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.FindByNumbersResultTypeChaptersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByNumbersResultTypeChaptersLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.FindByNumbersResultTypeChaptersLabel.Location = new System.Drawing.Point(134, 25);
+        this.FindByNumbersResultTypeChaptersLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+        this.FindByNumbersResultTypeChaptersLabel.Name = "FindByNumbersResultTypeChaptersLabel";
+        this.FindByNumbersResultTypeChaptersLabel.Size = new System.Drawing.Size(32, 17);
+        this.FindByNumbersResultTypeChaptersLabel.TabIndex = 34;
+        this.FindByNumbersResultTypeChaptersLabel.Text = "C";
+        this.FindByNumbersResultTypeChaptersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.FindByNumbersResultTypeChaptersLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeChaptersLabel_Click);
+        this.FindByNumbersResultTypeChaptersLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
         // 
         // FindByNumbersButton
         // 
@@ -3151,58 +3304,25 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersButton.Margin = new System.Windows.Forms.Padding(4);
         this.FindByNumbersButton.Name = "FindByNumbersButton";
         this.FindByNumbersButton.Size = new System.Drawing.Size(69, 25);
-        this.FindByNumbersButton.TabIndex = 62;
+        this.FindByNumbersButton.TabIndex = 73;
         this.FindByNumbersButton.Text = "Find";
         this.FindByNumbersButton.UseVisualStyleBackColor = true;
         this.FindByNumbersButton.Click += new System.EventHandler(this.FindByNumbersButton_Click);
         // 
-        // FindByNumbersResultTypeSentencesLabel
+        // FindByNumbersResultTypeStationsLabel
         // 
-        this.FindByNumbersResultTypeSentencesLabel.BackColor = System.Drawing.Color.DarkGray;
-        this.FindByNumbersResultTypeSentencesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.FindByNumbersResultTypeSentencesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersResultTypeSentencesLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.FindByNumbersResultTypeSentencesLabel.Location = new System.Drawing.Point(80, 26);
-        this.FindByNumbersResultTypeSentencesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.FindByNumbersResultTypeSentencesLabel.Name = "FindByNumbersResultTypeSentencesLabel";
-        this.FindByNumbersResultTypeSentencesLabel.Size = new System.Drawing.Size(38, 17);
-        this.FindByNumbersResultTypeSentencesLabel.TabIndex = 32;
-        this.FindByNumbersResultTypeSentencesLabel.Text = "S";
-        this.FindByNumbersResultTypeSentencesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.FindByNumbersResultTypeSentencesLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeSentencesLabel_Click);
-        this.FindByNumbersResultTypeSentencesLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
-        // 
-        // FindByNumbersResultTypeChaptersLabel
-        // 
-        this.FindByNumbersResultTypeChaptersLabel.BackColor = System.Drawing.Color.DarkGray;
-        this.FindByNumbersResultTypeChaptersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.FindByNumbersResultTypeChaptersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersResultTypeChaptersLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.FindByNumbersResultTypeChaptersLabel.Location = new System.Drawing.Point(158, 26);
-        this.FindByNumbersResultTypeChaptersLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.FindByNumbersResultTypeChaptersLabel.Name = "FindByNumbersResultTypeChaptersLabel";
-        this.FindByNumbersResultTypeChaptersLabel.Size = new System.Drawing.Size(38, 17);
-        this.FindByNumbersResultTypeChaptersLabel.TabIndex = 34;
-        this.FindByNumbersResultTypeChaptersLabel.Text = "C";
-        this.FindByNumbersResultTypeChaptersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.FindByNumbersResultTypeChaptersLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeChaptersLabel_Click);
-        this.FindByNumbersResultTypeChaptersLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
-        // 
-        // FindByNumbersResultTypeVersesLabel
-        // 
-        this.FindByNumbersResultTypeVersesLabel.BackColor = System.Drawing.Color.DarkGray;
-        this.FindByNumbersResultTypeVersesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.FindByNumbersResultTypeVersesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersResultTypeVersesLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.FindByNumbersResultTypeVersesLabel.Location = new System.Drawing.Point(119, 26);
-        this.FindByNumbersResultTypeVersesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.FindByNumbersResultTypeVersesLabel.Name = "FindByNumbersResultTypeVersesLabel";
-        this.FindByNumbersResultTypeVersesLabel.Size = new System.Drawing.Size(38, 17);
-        this.FindByNumbersResultTypeVersesLabel.TabIndex = 33;
-        this.FindByNumbersResultTypeVersesLabel.Text = "V";
-        this.FindByNumbersResultTypeVersesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.FindByNumbersResultTypeVersesLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeVersesLabel_Click);
-        this.FindByNumbersResultTypeVersesLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+        this.FindByNumbersResultTypeStationsLabel.BackColor = System.Drawing.Color.DarkGray;
+        this.FindByNumbersResultTypeStationsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.FindByNumbersResultTypeStationsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByNumbersResultTypeStationsLabel.ForeColor = System.Drawing.SystemColors.Window;
+        this.FindByNumbersResultTypeStationsLabel.Location = new System.Drawing.Point(2, 43);
+        this.FindByNumbersResultTypeStationsLabel.Name = "FindByNumbersResultTypeStationsLabel";
+        this.FindByNumbersResultTypeStationsLabel.Size = new System.Drawing.Size(32, 17);
+        this.FindByNumbersResultTypeStationsLabel.TabIndex = 36;
+        this.FindByNumbersResultTypeStationsLabel.Tag = "";
+        this.FindByNumbersResultTypeStationsLabel.Text = "S";
+        this.FindByNumbersResultTypeStationsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.FindByNumbersResultTypeStationsLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeStationsLabel_Click);
         // 
         // FindByNumbersChaptersComparisonOperatorLabel
         // 
@@ -3213,11 +3333,11 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersChaptersComparisonOperatorLabel.Enabled = false;
         this.FindByNumbersChaptersComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersChaptersComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersChaptersComparisonOperatorLabel.Location = new System.Drawing.Point(68, 68);
+        this.FindByNumbersChaptersComparisonOperatorLabel.Location = new System.Drawing.Point(68, 86);
         this.FindByNumbersChaptersComparisonOperatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersChaptersComparisonOperatorLabel.Name = "FindByNumbersChaptersComparisonOperatorLabel";
         this.FindByNumbersChaptersComparisonOperatorLabel.Size = new System.Drawing.Size(24, 22);
-        this.FindByNumbersChaptersComparisonOperatorLabel.TabIndex = 38;
+        this.FindByNumbersChaptersComparisonOperatorLabel.TabIndex = 45;
         this.FindByNumbersChaptersComparisonOperatorLabel.Text = "=";
         this.FindByNumbersChaptersComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.ToolTip.SetToolTip(this.FindByNumbersChaptersComparisonOperatorLabel, "equals to");
@@ -3233,11 +3353,11 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersChaptersNumberTypeLabel.Enabled = false;
         this.FindByNumbersChaptersNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersChaptersNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersChaptersNumberTypeLabel.Location = new System.Drawing.Point(165, 68);
+        this.FindByNumbersChaptersNumberTypeLabel.Location = new System.Drawing.Point(165, 86);
         this.FindByNumbersChaptersNumberTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersChaptersNumberTypeLabel.Name = "FindByNumbersChaptersNumberTypeLabel";
         this.FindByNumbersChaptersNumberTypeLabel.Size = new System.Drawing.Size(32, 22);
-        this.FindByNumbersChaptersNumberTypeLabel.TabIndex = 40;
+        this.FindByNumbersChaptersNumberTypeLabel.TabIndex = 47;
         this.FindByNumbersChaptersNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByNumbersChaptersNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
         this.FindByNumbersChaptersNumberTypeLabel.Click += new System.EventHandler(this.FindByNumbersNumberTypeLabel_Click);
@@ -3249,7 +3369,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersChaptersNumericUpDown.BackColor = System.Drawing.Color.LightGray;
         this.FindByNumbersChaptersNumericUpDown.Enabled = false;
         this.FindByNumbersChaptersNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersChaptersNumericUpDown.Location = new System.Drawing.Point(92, 68);
+        this.FindByNumbersChaptersNumericUpDown.Location = new System.Drawing.Point(92, 86);
         this.FindByNumbersChaptersNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
         this.FindByNumbersChaptersNumericUpDown.Maximum = new decimal(new int[] {
             999,
@@ -3258,7 +3378,7 @@ public partial class MainForm : Form, ISubscriber
             0});
         this.FindByNumbersChaptersNumericUpDown.Name = "FindByNumbersChaptersNumericUpDown";
         this.FindByNumbersChaptersNumericUpDown.Size = new System.Drawing.Size(75, 23);
-        this.FindByNumbersChaptersNumericUpDown.TabIndex = 39;
+        this.FindByNumbersChaptersNumericUpDown.TabIndex = 46;
         this.FindByNumbersChaptersNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.FindByNumbersChaptersNumericUpDown.ValueChanged += new System.EventHandler(this.FindByNumbersNumericUpDown_ValueChanged);
         this.FindByNumbersChaptersNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
@@ -3270,7 +3390,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersChaptersLabel.BackColor = System.Drawing.Color.Transparent;
         this.FindByNumbersChaptersLabel.Enabled = false;
         this.FindByNumbersChaptersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersChaptersLabel.Location = new System.Drawing.Point(1, 71);
+        this.FindByNumbersChaptersLabel.Location = new System.Drawing.Point(1, 89);
         this.FindByNumbersChaptersLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersChaptersLabel.Name = "FindByNumbersChaptersLabel";
         this.FindByNumbersChaptersLabel.Size = new System.Drawing.Size(77, 16);
@@ -3288,11 +3408,11 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersNumberComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByNumbersNumberComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersNumberComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersNumberComparisonOperatorLabel.Location = new System.Drawing.Point(68, 44);
+        this.FindByNumbersNumberComparisonOperatorLabel.Location = new System.Drawing.Point(68, 62);
         this.FindByNumbersNumberComparisonOperatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersNumberComparisonOperatorLabel.Name = "FindByNumbersNumberComparisonOperatorLabel";
         this.FindByNumbersNumberComparisonOperatorLabel.Size = new System.Drawing.Size(24, 22);
-        this.FindByNumbersNumberComparisonOperatorLabel.TabIndex = 35;
+        this.FindByNumbersNumberComparisonOperatorLabel.TabIndex = 42;
         this.FindByNumbersNumberComparisonOperatorLabel.Text = "=";
         this.FindByNumbersNumberComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.ToolTip.SetToolTip(this.FindByNumbersNumberComparisonOperatorLabel, "equals to");
@@ -3307,11 +3427,11 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersNumberNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
         this.FindByNumbersNumberNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersNumberNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersNumberNumberTypeLabel.Location = new System.Drawing.Point(165, 44);
+        this.FindByNumbersNumberNumberTypeLabel.Location = new System.Drawing.Point(165, 62);
         this.FindByNumbersNumberNumberTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersNumberNumberTypeLabel.Name = "FindByNumbersNumberNumberTypeLabel";
         this.FindByNumbersNumberNumberTypeLabel.Size = new System.Drawing.Size(32, 22);
-        this.FindByNumbersNumberNumberTypeLabel.TabIndex = 37;
+        this.FindByNumbersNumberNumberTypeLabel.TabIndex = 44;
         this.FindByNumbersNumberNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByNumbersNumberNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
         this.FindByNumbersNumberNumberTypeLabel.Click += new System.EventHandler(this.FindByNumbersNumberTypeLabel_Click);
@@ -3322,7 +3442,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersNumberNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.FindByNumbersNumberNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
         this.FindByNumbersNumberNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersNumberNumericUpDown.Location = new System.Drawing.Point(92, 44);
+        this.FindByNumbersNumberNumericUpDown.Location = new System.Drawing.Point(92, 62);
         this.FindByNumbersNumberNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
         this.FindByNumbersNumberNumericUpDown.Maximum = new decimal(new int[] {
             99999,
@@ -3336,7 +3456,7 @@ public partial class MainForm : Form, ISubscriber
             -2147483648});
         this.FindByNumbersNumberNumericUpDown.Name = "FindByNumbersNumberNumericUpDown";
         this.FindByNumbersNumberNumericUpDown.Size = new System.Drawing.Size(75, 23);
-        this.FindByNumbersNumberNumericUpDown.TabIndex = 36;
+        this.FindByNumbersNumberNumericUpDown.TabIndex = 43;
         this.FindByNumbersNumberNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.FindByNumbersNumberNumericUpDown.ValueChanged += new System.EventHandler(this.FindByNumbersNumericUpDown_ValueChanged);
         this.FindByNumbersNumberNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
@@ -3348,7 +3468,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersNumberLabel.BackColor = System.Drawing.Color.Transparent;
         this.FindByNumbersNumberLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByNumbersNumberLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersNumberLabel.Location = new System.Drawing.Point(1, 48);
+        this.FindByNumbersNumberLabel.Location = new System.Drawing.Point(1, 66);
         this.FindByNumbersNumberLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersNumberLabel.Name = "FindByNumbersNumberLabel";
         this.FindByNumbersNumberLabel.Size = new System.Drawing.Size(77, 16);
@@ -3365,11 +3485,11 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersUniqueLettersNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
         this.FindByNumbersUniqueLettersNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersUniqueLettersNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersUniqueLettersNumberTypeLabel.Location = new System.Drawing.Point(165, 161);
+        this.FindByNumbersUniqueLettersNumberTypeLabel.Location = new System.Drawing.Point(165, 179);
         this.FindByNumbersUniqueLettersNumberTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersUniqueLettersNumberTypeLabel.Name = "FindByNumbersUniqueLettersNumberTypeLabel";
         this.FindByNumbersUniqueLettersNumberTypeLabel.Size = new System.Drawing.Size(32, 22);
-        this.FindByNumbersUniqueLettersNumberTypeLabel.TabIndex = 52;
+        this.FindByNumbersUniqueLettersNumberTypeLabel.TabIndex = 59;
         this.FindByNumbersUniqueLettersNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByNumbersUniqueLettersNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
         this.FindByNumbersUniqueLettersNumberTypeLabel.Click += new System.EventHandler(this.FindByNumbersNumberTypeLabel_Click);
@@ -3383,11 +3503,11 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersUniqueLettersComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByNumbersUniqueLettersComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersUniqueLettersComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersUniqueLettersComparisonOperatorLabel.Location = new System.Drawing.Point(68, 161);
+        this.FindByNumbersUniqueLettersComparisonOperatorLabel.Location = new System.Drawing.Point(68, 179);
         this.FindByNumbersUniqueLettersComparisonOperatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersUniqueLettersComparisonOperatorLabel.Name = "FindByNumbersUniqueLettersComparisonOperatorLabel";
         this.FindByNumbersUniqueLettersComparisonOperatorLabel.Size = new System.Drawing.Size(24, 22);
-        this.FindByNumbersUniqueLettersComparisonOperatorLabel.TabIndex = 50;
+        this.FindByNumbersUniqueLettersComparisonOperatorLabel.TabIndex = 57;
         this.FindByNumbersUniqueLettersComparisonOperatorLabel.Text = "=";
         this.FindByNumbersUniqueLettersComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.ToolTip.SetToolTip(this.FindByNumbersUniqueLettersComparisonOperatorLabel, "equals to");
@@ -3404,11 +3524,11 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersVersesComparisonOperatorLabel.Enabled = false;
         this.FindByNumbersVersesComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersVersesComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersVersesComparisonOperatorLabel.Location = new System.Drawing.Point(68, 91);
+        this.FindByNumbersVersesComparisonOperatorLabel.Location = new System.Drawing.Point(68, 109);
         this.FindByNumbersVersesComparisonOperatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersVersesComparisonOperatorLabel.Name = "FindByNumbersVersesComparisonOperatorLabel";
         this.FindByNumbersVersesComparisonOperatorLabel.Size = new System.Drawing.Size(24, 22);
-        this.FindByNumbersVersesComparisonOperatorLabel.TabIndex = 41;
+        this.FindByNumbersVersesComparisonOperatorLabel.TabIndex = 48;
         this.FindByNumbersVersesComparisonOperatorLabel.Text = "=";
         this.FindByNumbersVersesComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.ToolTip.SetToolTip(this.FindByNumbersVersesComparisonOperatorLabel, "equals to");
@@ -3424,11 +3544,11 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersValueComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByNumbersValueComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersValueComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersValueComparisonOperatorLabel.Location = new System.Drawing.Point(68, 185);
+        this.FindByNumbersValueComparisonOperatorLabel.Location = new System.Drawing.Point(68, 203);
         this.FindByNumbersValueComparisonOperatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersValueComparisonOperatorLabel.Name = "FindByNumbersValueComparisonOperatorLabel";
         this.FindByNumbersValueComparisonOperatorLabel.Size = new System.Drawing.Size(24, 22);
-        this.FindByNumbersValueComparisonOperatorLabel.TabIndex = 53;
+        this.FindByNumbersValueComparisonOperatorLabel.TabIndex = 60;
         this.FindByNumbersValueComparisonOperatorLabel.Text = "=";
         this.FindByNumbersValueComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.ToolTip.SetToolTip(this.FindByNumbersValueComparisonOperatorLabel, "equals to");
@@ -3440,7 +3560,7 @@ public partial class MainForm : Form, ISubscriber
         // 
         this.FindByNumbersUniqueLettersNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.FindByNumbersUniqueLettersNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersUniqueLettersNumericUpDown.Location = new System.Drawing.Point(92, 161);
+        this.FindByNumbersUniqueLettersNumericUpDown.Location = new System.Drawing.Point(92, 179);
         this.FindByNumbersUniqueLettersNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
         this.FindByNumbersUniqueLettersNumericUpDown.Maximum = new decimal(new int[] {
             99,
@@ -3449,7 +3569,7 @@ public partial class MainForm : Form, ISubscriber
             0});
         this.FindByNumbersUniqueLettersNumericUpDown.Name = "FindByNumbersUniqueLettersNumericUpDown";
         this.FindByNumbersUniqueLettersNumericUpDown.Size = new System.Drawing.Size(75, 23);
-        this.FindByNumbersUniqueLettersNumericUpDown.TabIndex = 51;
+        this.FindByNumbersUniqueLettersNumericUpDown.TabIndex = 58;
         this.FindByNumbersUniqueLettersNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.FindByNumbersUniqueLettersNumericUpDown.ValueChanged += new System.EventHandler(this.FindByNumbersNumericUpDown_ValueChanged);
         this.FindByNumbersUniqueLettersNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
@@ -3464,11 +3584,11 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersLettersComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByNumbersLettersComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersLettersComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersLettersComparisonOperatorLabel.Location = new System.Drawing.Point(68, 138);
+        this.FindByNumbersLettersComparisonOperatorLabel.Location = new System.Drawing.Point(68, 156);
         this.FindByNumbersLettersComparisonOperatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersLettersComparisonOperatorLabel.Name = "FindByNumbersLettersComparisonOperatorLabel";
         this.FindByNumbersLettersComparisonOperatorLabel.Size = new System.Drawing.Size(24, 22);
-        this.FindByNumbersLettersComparisonOperatorLabel.TabIndex = 47;
+        this.FindByNumbersLettersComparisonOperatorLabel.TabIndex = 54;
         this.FindByNumbersLettersComparisonOperatorLabel.Text = "=";
         this.FindByNumbersLettersComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.ToolTip.SetToolTip(this.FindByNumbersLettersComparisonOperatorLabel, "equals to");
@@ -3484,11 +3604,11 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersWordsComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByNumbersWordsComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersWordsComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersWordsComparisonOperatorLabel.Location = new System.Drawing.Point(68, 114);
+        this.FindByNumbersWordsComparisonOperatorLabel.Location = new System.Drawing.Point(68, 132);
         this.FindByNumbersWordsComparisonOperatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersWordsComparisonOperatorLabel.Name = "FindByNumbersWordsComparisonOperatorLabel";
         this.FindByNumbersWordsComparisonOperatorLabel.Size = new System.Drawing.Size(24, 22);
-        this.FindByNumbersWordsComparisonOperatorLabel.TabIndex = 44;
+        this.FindByNumbersWordsComparisonOperatorLabel.TabIndex = 51;
         this.FindByNumbersWordsComparisonOperatorLabel.Text = "=";
         this.FindByNumbersWordsComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.ToolTip.SetToolTip(this.FindByNumbersWordsComparisonOperatorLabel, "equals to");
@@ -3504,11 +3624,11 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersVersesNumberTypeLabel.Enabled = false;
         this.FindByNumbersVersesNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByNumbersVersesNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersVersesNumberTypeLabel.Location = new System.Drawing.Point(165, 91);
+        this.FindByNumbersVersesNumberTypeLabel.Location = new System.Drawing.Point(165, 109);
         this.FindByNumbersVersesNumberTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersVersesNumberTypeLabel.Name = "FindByNumbersVersesNumberTypeLabel";
         this.FindByNumbersVersesNumberTypeLabel.Size = new System.Drawing.Size(32, 22);
-        this.FindByNumbersVersesNumberTypeLabel.TabIndex = 43;
+        this.FindByNumbersVersesNumberTypeLabel.TabIndex = 50;
         this.FindByNumbersVersesNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByNumbersVersesNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
         this.FindByNumbersVersesNumberTypeLabel.Click += new System.EventHandler(this.FindByNumbersNumberTypeLabel_Click);
@@ -3519,7 +3639,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersVersesNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.FindByNumbersVersesNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
         this.FindByNumbersVersesNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersVersesNumericUpDown.Location = new System.Drawing.Point(92, 91);
+        this.FindByNumbersVersesNumericUpDown.Location = new System.Drawing.Point(92, 109);
         this.FindByNumbersVersesNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
         this.FindByNumbersVersesNumericUpDown.Maximum = new decimal(new int[] {
             9999,
@@ -3528,7 +3648,7 @@ public partial class MainForm : Form, ISubscriber
             0});
         this.FindByNumbersVersesNumericUpDown.Name = "FindByNumbersVersesNumericUpDown";
         this.FindByNumbersVersesNumericUpDown.Size = new System.Drawing.Size(75, 23);
-        this.FindByNumbersVersesNumericUpDown.TabIndex = 42;
+        this.FindByNumbersVersesNumericUpDown.TabIndex = 49;
         this.FindByNumbersVersesNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.FindByNumbersVersesNumericUpDown.Value = new decimal(new int[] {
             1,
@@ -3545,7 +3665,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersValueNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.FindByNumbersValueNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
         this.FindByNumbersValueNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersValueNumericUpDown.Location = new System.Drawing.Point(92, 185);
+        this.FindByNumbersValueNumericUpDown.Location = new System.Drawing.Point(92, 203);
         this.FindByNumbersValueNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
         this.FindByNumbersValueNumericUpDown.Maximum = new decimal(new int[] {
             999999999,
@@ -3554,7 +3674,7 @@ public partial class MainForm : Form, ISubscriber
             0});
         this.FindByNumbersValueNumericUpDown.Name = "FindByNumbersValueNumericUpDown";
         this.FindByNumbersValueNumericUpDown.Size = new System.Drawing.Size(75, 23);
-        this.FindByNumbersValueNumericUpDown.TabIndex = 54;
+        this.FindByNumbersValueNumericUpDown.TabIndex = 61;
         this.FindByNumbersValueNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.FindByNumbersValueNumericUpDown.ValueChanged += new System.EventHandler(this.FindByNumbersNumericUpDown_ValueChanged);
         this.FindByNumbersValueNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
@@ -3566,7 +3686,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersLettersNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.FindByNumbersLettersNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
         this.FindByNumbersLettersNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersLettersNumericUpDown.Location = new System.Drawing.Point(92, 138);
+        this.FindByNumbersLettersNumericUpDown.Location = new System.Drawing.Point(92, 156);
         this.FindByNumbersLettersNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
         this.FindByNumbersLettersNumericUpDown.Maximum = new decimal(new int[] {
             999999,
@@ -3575,7 +3695,7 @@ public partial class MainForm : Form, ISubscriber
             0});
         this.FindByNumbersLettersNumericUpDown.Name = "FindByNumbersLettersNumericUpDown";
         this.FindByNumbersLettersNumericUpDown.Size = new System.Drawing.Size(75, 23);
-        this.FindByNumbersLettersNumericUpDown.TabIndex = 48;
+        this.FindByNumbersLettersNumericUpDown.TabIndex = 55;
         this.FindByNumbersLettersNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.FindByNumbersLettersNumericUpDown.ValueChanged += new System.EventHandler(this.FindByNumbersNumericUpDown_ValueChanged);
         this.FindByNumbersLettersNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
@@ -3587,7 +3707,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersWordsNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.FindByNumbersWordsNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
         this.FindByNumbersWordsNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersWordsNumericUpDown.Location = new System.Drawing.Point(92, 114);
+        this.FindByNumbersWordsNumericUpDown.Location = new System.Drawing.Point(92, 132);
         this.FindByNumbersWordsNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
         this.FindByNumbersWordsNumericUpDown.Maximum = new decimal(new int[] {
             99999,
@@ -3596,7 +3716,7 @@ public partial class MainForm : Form, ISubscriber
             0});
         this.FindByNumbersWordsNumericUpDown.Name = "FindByNumbersWordsNumericUpDown";
         this.FindByNumbersWordsNumericUpDown.Size = new System.Drawing.Size(75, 23);
-        this.FindByNumbersWordsNumericUpDown.TabIndex = 45;
+        this.FindByNumbersWordsNumericUpDown.TabIndex = 52;
         this.FindByNumbersWordsNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.FindByNumbersWordsNumericUpDown.ValueChanged += new System.EventHandler(this.FindByNumbersNumericUpDown_ValueChanged);
         this.FindByNumbersWordsNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
@@ -3607,7 +3727,7 @@ public partial class MainForm : Form, ISubscriber
         // 
         this.FindByNumbersVersesLabel.BackColor = System.Drawing.Color.Transparent;
         this.FindByNumbersVersesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersVersesLabel.Location = new System.Drawing.Point(1, 95);
+        this.FindByNumbersVersesLabel.Location = new System.Drawing.Point(1, 113);
         this.FindByNumbersVersesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersVersesLabel.Name = "FindByNumbersVersesLabel";
         this.FindByNumbersVersesLabel.Size = new System.Drawing.Size(77, 16);
@@ -3621,7 +3741,7 @@ public partial class MainForm : Form, ISubscriber
         // 
         this.FindByNumbersLettersLabel.BackColor = System.Drawing.Color.Transparent;
         this.FindByNumbersLettersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersLettersLabel.Location = new System.Drawing.Point(1, 143);
+        this.FindByNumbersLettersLabel.Location = new System.Drawing.Point(1, 161);
         this.FindByNumbersLettersLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersLettersLabel.Name = "FindByNumbersLettersLabel";
         this.FindByNumbersLettersLabel.Size = new System.Drawing.Size(77, 16);
@@ -3635,7 +3755,7 @@ public partial class MainForm : Form, ISubscriber
         // 
         this.FindByNumbersWordsLabel.BackColor = System.Drawing.Color.Transparent;
         this.FindByNumbersWordsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersWordsLabel.Location = new System.Drawing.Point(1, 119);
+        this.FindByNumbersWordsLabel.Location = new System.Drawing.Point(1, 137);
         this.FindByNumbersWordsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.FindByNumbersWordsLabel.Name = "FindByNumbersWordsLabel";
         this.FindByNumbersWordsLabel.Size = new System.Drawing.Size(77, 16);
@@ -3653,7 +3773,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersSetsCheckBox.ForeColor = System.Drawing.Color.Navy;
         this.FindByNumbersSetsCheckBox.Location = new System.Drawing.Point(96, 2);
         this.FindByNumbersSetsCheckBox.Name = "FindByNumbersSetsCheckBox";
-        this.FindByNumbersSetsCheckBox.Size = new System.Drawing.Size(54, 23);
+        this.FindByNumbersSetsCheckBox.Size = new System.Drawing.Size(47, 23);
         this.FindByNumbersSetsCheckBox.TabIndex = 72;
         this.FindByNumbersSetsCheckBox.Text = "{}";
         this.ToolTip.SetToolTip(this.FindByNumbersSetsCheckBox, "find any combinations (not just consecutive ranges)");
@@ -3681,10 +3801,10 @@ public partial class MainForm : Form, ISubscriber
         this.SearchScopeResultLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.SearchScopeResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.SearchScopeResultLabel.ForeColor = System.Drawing.Color.White;
-        this.SearchScopeResultLabel.Location = new System.Drawing.Point(149, 18);
+        this.SearchScopeResultLabel.Location = new System.Drawing.Point(149, 1);
         this.SearchScopeResultLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.SearchScopeResultLabel.Name = "SearchScopeResultLabel";
-        this.SearchScopeResultLabel.Size = new System.Drawing.Size(61, 25);
+        this.SearchScopeResultLabel.Size = new System.Drawing.Size(63, 21);
         this.SearchScopeResultLabel.TabIndex = 158;
         this.SearchScopeResultLabel.Text = "Result";
         this.SearchScopeResultLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3699,10 +3819,10 @@ public partial class MainForm : Form, ISubscriber
         this.SearchScopeSelectionLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.SearchScopeSelectionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.SearchScopeSelectionLabel.ForeColor = System.Drawing.Color.White;
-        this.SearchScopeSelectionLabel.Location = new System.Drawing.Point(63, 18);
+        this.SearchScopeSelectionLabel.Location = new System.Drawing.Point(63, 1);
         this.SearchScopeSelectionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.SearchScopeSelectionLabel.Name = "SearchScopeSelectionLabel";
-        this.SearchScopeSelectionLabel.Size = new System.Drawing.Size(85, 25);
+        this.SearchScopeSelectionLabel.Size = new System.Drawing.Size(85, 21);
         this.SearchScopeSelectionLabel.TabIndex = 157;
         this.SearchScopeSelectionLabel.Text = "Selection";
         this.SearchScopeSelectionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -3972,7 +4092,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByTextPanel.Controls.Add(this.FindByTextMultiplicityNumericUpDown);
         this.FindByTextPanel.Controls.Add(this.FindByTextCaseSensitiveCheckBox);
         this.FindByTextPanel.Controls.Add(this.FindByTextLabel);
-        this.FindByTextPanel.Location = new System.Drawing.Point(5, 44);
+        this.FindByTextPanel.Location = new System.Drawing.Point(5, 23);
         this.FindByTextPanel.Margin = new System.Windows.Forms.Padding(4);
         this.FindByTextPanel.Name = "FindByTextPanel";
         this.FindByTextPanel.Size = new System.Drawing.Size(207, 358);
@@ -6039,7 +6159,7 @@ public partial class MainForm : Form, ISubscriber
         this.ClientSplitContainer.Panel2.Controls.Add(this.ScriptOutputGroupBox);
         this.ClientSplitContainer.Panel2.Controls.Add(this.TabControl);
         this.ClientSplitContainer.Panel2MinSize = 0;
-        this.ClientSplitContainer.Size = new System.Drawing.Size(680, 636);
+        this.ClientSplitContainer.Size = new System.Drawing.Size(685, 636);
         this.ClientSplitContainer.SplitterDistance = 399;
         this.ClientSplitContainer.TabIndex = 6;
         this.ClientSplitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.ClientSplitContainer_SplitterMoved);
@@ -6054,7 +6174,7 @@ public partial class MainForm : Form, ISubscriber
         this.ScriptTextBox.Location = new System.Drawing.Point(0, 17);
         this.ScriptTextBox.Name = "ScriptTextBox";
         this.ScriptTextBox.SelectionAlignment = RichTextBoxEx.TextAlign.Left;
-        this.ScriptTextBox.Size = new System.Drawing.Size(680, 382);
+        this.ScriptTextBox.Size = new System.Drawing.Size(685, 382);
         this.ScriptTextBox.TabIndex = 110;
         this.ScriptTextBox.Text = "";
         this.ScriptTextBox.Visible = false;
@@ -6095,7 +6215,7 @@ public partial class MainForm : Form, ISubscriber
         this.MainTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         this.MainTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
         this.MainTextBox.SelectionAlignment = RichTextBoxEx.TextAlign.Right;
-        this.MainTextBox.Size = new System.Drawing.Size(679, 384);
+        this.MainTextBox.Size = new System.Drawing.Size(684, 384);
         this.MainTextBox.TabIndex = 69;
         this.MainTextBox.Text = "";
         this.MainTextBox.WordWrap = false;
@@ -6128,7 +6248,7 @@ public partial class MainForm : Form, ISubscriber
         this.SearchResultTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         this.SearchResultTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
         this.SearchResultTextBox.SelectionAlignment = RichTextBoxEx.TextAlign.Right;
-        this.SearchResultTextBox.Size = new System.Drawing.Size(679, 384);
+        this.SearchResultTextBox.Size = new System.Drawing.Size(684, 384);
         this.SearchResultTextBox.TabIndex = 70;
         this.SearchResultTextBox.Text = "";
         this.SearchResultTextBox.WordWrap = false;
@@ -6173,7 +6293,7 @@ public partial class MainForm : Form, ISubscriber
         this.HeaderPanel.Location = new System.Drawing.Point(0, 0);
         this.HeaderPanel.Margin = new System.Windows.Forms.Padding(4);
         this.HeaderPanel.Name = "HeaderPanel";
-        this.HeaderPanel.Size = new System.Drawing.Size(680, 17);
+        this.HeaderPanel.Size = new System.Drawing.Size(685, 17);
         this.HeaderPanel.TabIndex = 88;
         // 
         // ScriptSaveAsLabel
@@ -6268,7 +6388,7 @@ public partial class MainForm : Form, ISubscriber
         this.GoldenRatioScopeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.GoldenRatioScopeLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.GoldenRatioScopeLabel.Image = ((System.Drawing.Image)(resources.GetObject("GoldenRatioScopeLabel.Image")));
-        this.GoldenRatioScopeLabel.Location = new System.Drawing.Point(600, -1);
+        this.GoldenRatioScopeLabel.Location = new System.Drawing.Point(605, -1);
         this.GoldenRatioScopeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.GoldenRatioScopeLabel.Name = "GoldenRatioScopeLabel";
         this.GoldenRatioScopeLabel.Size = new System.Drawing.Size(24, 4);
@@ -6285,7 +6405,7 @@ public partial class MainForm : Form, ISubscriber
         this.GoldenRatioTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.GoldenRatioTypeLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.GoldenRatioTypeLabel.Image = ((System.Drawing.Image)(resources.GetObject("GoldenRatioTypeLabel.Image")));
-        this.GoldenRatioTypeLabel.Location = new System.Drawing.Point(600, 5);
+        this.GoldenRatioTypeLabel.Location = new System.Drawing.Point(605, 5);
         this.GoldenRatioTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.GoldenRatioTypeLabel.Name = "GoldenRatioTypeLabel";
         this.GoldenRatioTypeLabel.Size = new System.Drawing.Size(24, 4);
@@ -6303,7 +6423,7 @@ public partial class MainForm : Form, ISubscriber
         this.GoldenRatioOrderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.GoldenRatioOrderLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.GoldenRatioOrderLabel.Image = ((System.Drawing.Image)(resources.GetObject("GoldenRatioOrderLabel.Image")));
-        this.GoldenRatioOrderLabel.Location = new System.Drawing.Point(600, 11);
+        this.GoldenRatioOrderLabel.Location = new System.Drawing.Point(605, 11);
         this.GoldenRatioOrderLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.GoldenRatioOrderLabel.Name = "GoldenRatioOrderLabel";
         this.GoldenRatioOrderLabel.Size = new System.Drawing.Size(24, 4);
@@ -6319,7 +6439,7 @@ public partial class MainForm : Form, ISubscriber
         this.DisplayProstrationVersesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.DisplayProstrationVersesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DisplayProstrationVersesLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.DisplayProstrationVersesLabel.Location = new System.Drawing.Point(646, -2);
+        this.DisplayProstrationVersesLabel.Location = new System.Drawing.Point(651, -2);
         this.DisplayProstrationVersesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.DisplayProstrationVersesLabel.Name = "DisplayProstrationVersesLabel";
         this.DisplayProstrationVersesLabel.Size = new System.Drawing.Size(20, 20);
@@ -6337,7 +6457,7 @@ public partial class MainForm : Form, ISubscriber
         this.GenerateSentencesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.GenerateSentencesLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.GenerateSentencesLabel.Image = ((System.Drawing.Image)(resources.GetObject("GenerateSentencesLabel.Image")));
-        this.GenerateSentencesLabel.Location = new System.Drawing.Point(565, -2);
+        this.GenerateSentencesLabel.Location = new System.Drawing.Point(570, -2);
         this.GenerateSentencesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.GenerateSentencesLabel.Name = "GenerateSentencesLabel";
         this.GenerateSentencesLabel.Size = new System.Drawing.Size(20, 20);
@@ -6353,7 +6473,7 @@ public partial class MainForm : Form, ISubscriber
         this.DuplicateLettersCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.DuplicateLettersCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DuplicateLettersCheckBox.ForeColor = System.Drawing.Color.Navy;
-        this.DuplicateLettersCheckBox.Location = new System.Drawing.Point(577, -2);
+        this.DuplicateLettersCheckBox.Location = new System.Drawing.Point(582, -2);
         this.DuplicateLettersCheckBox.Margin = new System.Windows.Forms.Padding(4);
         this.DuplicateLettersCheckBox.Name = "DuplicateLettersCheckBox";
         this.DuplicateLettersCheckBox.Size = new System.Drawing.Size(20, 20);
@@ -6370,7 +6490,7 @@ public partial class MainForm : Form, ISubscriber
         this.WordWrapLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.WordWrapLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.WordWrapLabel.Image = ((System.Drawing.Image)(resources.GetObject("WordWrapLabel.Image")));
-        this.WordWrapLabel.Location = new System.Drawing.Point(660, -2);
+        this.WordWrapLabel.Location = new System.Drawing.Point(665, -2);
         this.WordWrapLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.WordWrapLabel.Name = "WordWrapLabel";
         this.WordWrapLabel.Size = new System.Drawing.Size(20, 20);
@@ -6432,7 +6552,7 @@ public partial class MainForm : Form, ISubscriber
         this.InspectVersesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.InspectVersesLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.InspectVersesLabel.Image = ((System.Drawing.Image)(resources.GetObject("InspectVersesLabel.Image")));
-        this.InspectVersesLabel.Location = new System.Drawing.Point(625, -3);
+        this.InspectVersesLabel.Location = new System.Drawing.Point(630, -3);
         this.InspectVersesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.InspectVersesLabel.Name = "InspectVersesLabel";
         this.InspectVersesLabel.Size = new System.Drawing.Size(20, 20);
@@ -6483,7 +6603,7 @@ public partial class MainForm : Form, ISubscriber
         this.HeaderLabel.Location = new System.Drawing.Point(24, -5);
         this.HeaderLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.HeaderLabel.Name = "HeaderLabel";
-        this.HeaderLabel.Size = new System.Drawing.Size(702, 20);
+        this.HeaderLabel.Size = new System.Drawing.Size(707, 20);
         this.HeaderLabel.TabIndex = 1;
         this.HeaderLabel.Text = "Header Information";
         this.HeaderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6518,7 +6638,7 @@ public partial class MainForm : Form, ISubscriber
         this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 0);
         this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
         this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(684, 233);
+        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(689, 233);
         this.ScriptOutputGroupBox.TabIndex = 103;
         this.ScriptOutputGroupBox.TabStop = false;
         this.ScriptOutputGroupBox.Text = " Output ";
@@ -6534,7 +6654,7 @@ public partial class MainForm : Form, ISubscriber
         this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
         this.ScriptOutputTextBox.ReadOnly = true;
         this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.ScriptOutputTextBox.Size = new System.Drawing.Size(664, 203);
+        this.ScriptOutputTextBox.Size = new System.Drawing.Size(669, 203);
         this.ScriptOutputTextBox.TabIndex = 0;
         this.ScriptOutputTextBox.WordWrap = false;
         this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -6555,12 +6675,12 @@ public partial class MainForm : Form, ISubscriber
         this.TabControl.Controls.Add(this.DistancesTabPage);
         this.TabControl.Controls.Add(this.UserTextTabPage);
         this.TabControl.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.TabControl.Location = new System.Drawing.Point(-1, -1);
+        this.TabControl.Location = new System.Drawing.Point(-1, 3);
         this.TabControl.Margin = new System.Windows.Forms.Padding(4);
         this.TabControl.Name = "TabControl";
         this.TabControl.SelectedIndex = 0;
         this.TabControl.ShowToolTips = true;
-        this.TabControl.Size = new System.Drawing.Size(684, 233);
+        this.TabControl.Size = new System.Drawing.Size(689, 233);
         this.TabControl.TabIndex = 102;
         this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
         this.TabControl.Click += new System.EventHandler(this.TabControl_Click);
@@ -6574,7 +6694,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslationTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.TranslationTabPage.Name = "TranslationTabPage";
         this.TranslationTabPage.Padding = new System.Windows.Forms.Padding(4);
-        this.TranslationTabPage.Size = new System.Drawing.Size(676, 203);
+        this.TranslationTabPage.Size = new System.Drawing.Size(681, 203);
         this.TranslationTabPage.TabIndex = 190;
         this.TranslationTabPage.Text = "Translation";
         this.TranslationTabPage.ToolTipText = "Translations for current selection/verse\r\nترجمة الءاية أو الءايات المظللة";
@@ -6605,8 +6725,8 @@ public partial class MainForm : Form, ISubscriber
         this.TranslationSplitContainer.Panel2.Controls.Add(this.AllTranslatorsCheckBox);
         this.TranslationSplitContainer.Panel2.Controls.Add(this.TranslatorsComboBox);
         this.TranslationSplitContainer.Panel2.Controls.Add(this.TranslationsTextBox);
-        this.TranslationSplitContainer.Size = new System.Drawing.Size(805, 205);
-        this.TranslationSplitContainer.SplitterDistance = 420;
+        this.TranslationSplitContainer.Size = new System.Drawing.Size(813, 205);
+        this.TranslationSplitContainer.SplitterDistance = 424;
         this.TranslationSplitContainer.SplitterWidth = 5;
         this.TranslationSplitContainer.TabIndex = 0;
         this.TranslationSplitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.TranslationSplitContainer_SplitterMoved);
@@ -6619,7 +6739,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslationWordWrapLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.TranslationWordWrapLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.TranslationWordWrapLabel.Image = ((System.Drawing.Image)(resources.GetObject("TranslationWordWrapLabel.Image")));
-        this.TranslationWordWrapLabel.Location = new System.Drawing.Point(398, 21);
+        this.TranslationWordWrapLabel.Location = new System.Drawing.Point(402, 21);
         this.TranslationWordWrapLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.TranslationWordWrapLabel.Name = "TranslationWordWrapLabel";
         this.TranslationWordWrapLabel.Size = new System.Drawing.Size(20, 20);
@@ -6636,7 +6756,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslationFontLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.TranslationFontLabel.ForeColor = System.Drawing.SystemColors.Window;
         this.TranslationFontLabel.Image = ((System.Drawing.Image)(resources.GetObject("TranslationFontLabel.Image")));
-        this.TranslationFontLabel.Location = new System.Drawing.Point(399, 3);
+        this.TranslationFontLabel.Location = new System.Drawing.Point(403, 3);
         this.TranslationFontLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.TranslationFontLabel.Name = "TranslationFontLabel";
         this.TranslationFontLabel.Size = new System.Drawing.Size(19, 18);
@@ -6653,7 +6773,7 @@ public partial class MainForm : Form, ISubscriber
         this.EditSaveTranslationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.EditSaveTranslationLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.EditSaveTranslationLabel.Image = ((System.Drawing.Image)(resources.GetObject("EditSaveTranslationLabel.Image")));
-        this.EditSaveTranslationLabel.Location = new System.Drawing.Point(399, 179);
+        this.EditSaveTranslationLabel.Location = new System.Drawing.Point(403, 179);
         this.EditSaveTranslationLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.EditSaveTranslationLabel.Name = "EditSaveTranslationLabel";
         this.EditSaveTranslationLabel.Size = new System.Drawing.Size(21, 22);
@@ -6669,7 +6789,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslatorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         this.TranslatorComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.TranslatorComboBox.FormattingEnabled = true;
-        this.TranslatorComboBox.Location = new System.Drawing.Point(153, 180);
+        this.TranslatorComboBox.Location = new System.Drawing.Point(157, 180);
         this.TranslatorComboBox.Margin = new System.Windows.Forms.Padding(4);
         this.TranslatorComboBox.Name = "TranslatorComboBox";
         this.TranslatorComboBox.Size = new System.Drawing.Size(243, 23);
@@ -6691,7 +6811,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslationTextBox.Name = "TranslationTextBox";
         this.TranslationTextBox.ReadOnly = true;
         this.TranslationTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.TranslationTextBox.Size = new System.Drawing.Size(420, 205);
+        this.TranslationTextBox.Size = new System.Drawing.Size(424, 205);
         this.TranslationTextBox.TabIndex = 2;
         this.TranslationTextBox.WordWrap = false;
         this.TranslationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
@@ -6704,7 +6824,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslatorsCheckedListBox.BackColor = System.Drawing.SystemColors.ControlLight;
         this.TranslatorsCheckedListBox.CheckOnClick = true;
         this.TranslatorsCheckedListBox.FormattingEnabled = true;
-        this.TranslatorsCheckedListBox.Location = new System.Drawing.Point(-4, 2);
+        this.TranslatorsCheckedListBox.Location = new System.Drawing.Point(-3, 2);
         this.TranslatorsCheckedListBox.Margin = new System.Windows.Forms.Padding(4);
         this.TranslatorsCheckedListBox.Name = "TranslatorsCheckedListBox";
         this.TranslatorsCheckedListBox.Size = new System.Drawing.Size(233, 202);
@@ -6719,7 +6839,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslationsApplySettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.TranslationsApplySettingsLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.TranslationsApplySettingsLabel.Image = ((System.Drawing.Image)(resources.GetObject("TranslationsApplySettingsLabel.Image")));
-        this.TranslationsApplySettingsLabel.Location = new System.Drawing.Point(230, 180);
+        this.TranslationsApplySettingsLabel.Location = new System.Drawing.Point(231, 180);
         this.TranslationsApplySettingsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.TranslationsApplySettingsLabel.Name = "TranslationsApplySettingsLabel";
         this.TranslationsApplySettingsLabel.Size = new System.Drawing.Size(24, 22);
@@ -6736,7 +6856,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslationsCancelSettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.TranslationsCancelSettingsLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.TranslationsCancelSettingsLabel.Image = ((System.Drawing.Image)(resources.GetObject("TranslationsCancelSettingsLabel.Image")));
-        this.TranslationsCancelSettingsLabel.Location = new System.Drawing.Point(230, 161);
+        this.TranslationsCancelSettingsLabel.Location = new System.Drawing.Point(231, 161);
         this.TranslationsCancelSettingsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.TranslationsCancelSettingsLabel.Name = "TranslationsCancelSettingsLabel";
         this.TranslationsCancelSettingsLabel.Size = new System.Drawing.Size(25, 22);
@@ -6751,7 +6871,7 @@ public partial class MainForm : Form, ISubscriber
         this.AllTranslatorsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
         this.AllTranslatorsCheckBox.AutoSize = true;
         this.AllTranslatorsCheckBox.BackColor = System.Drawing.SystemColors.ControlLight;
-        this.AllTranslatorsCheckBox.Location = new System.Drawing.Point(189, 183);
+        this.AllTranslatorsCheckBox.Location = new System.Drawing.Point(190, 183);
         this.AllTranslatorsCheckBox.Margin = new System.Windows.Forms.Padding(4);
         this.AllTranslatorsCheckBox.Name = "AllTranslatorsCheckBox";
         this.AllTranslatorsCheckBox.Size = new System.Drawing.Size(18, 17);
@@ -6767,7 +6887,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslatorsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         this.TranslatorsComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.TranslatorsComboBox.FormattingEnabled = true;
-        this.TranslatorsComboBox.Location = new System.Drawing.Point(-16, 180);
+        this.TranslatorsComboBox.Location = new System.Drawing.Point(-15, 180);
         this.TranslatorsComboBox.Margin = new System.Windows.Forms.Padding(4);
         this.TranslatorsComboBox.Name = "TranslatorsComboBox";
         this.TranslatorsComboBox.Size = new System.Drawing.Size(243, 23);
@@ -6789,7 +6909,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslationsTextBox.Name = "TranslationsTextBox";
         this.TranslationsTextBox.ReadOnly = true;
         this.TranslationsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.TranslationsTextBox.Size = new System.Drawing.Size(251, 203);
+        this.TranslationsTextBox.Size = new System.Drawing.Size(252, 203);
         this.TranslationsTextBox.TabIndex = 106;
         this.TranslationsTextBox.WordWrap = false;
         this.TranslationsTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
@@ -6801,7 +6921,7 @@ public partial class MainForm : Form, ISubscriber
         this.GrammarTabPage.Location = new System.Drawing.Point(4, 26);
         this.GrammarTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.GrammarTabPage.Name = "GrammarTabPage";
-        this.GrammarTabPage.Size = new System.Drawing.Size(676, 203);
+        this.GrammarTabPage.Size = new System.Drawing.Size(681, 203);
         this.GrammarTabPage.TabIndex = 193;
         this.GrammarTabPage.Text = " Grammar";
         this.GrammarTabPage.ToolTipText = "Grammar details of the current word in Arabic and English\r\nإعراب الكلمة بالعربي و" +
@@ -6821,7 +6941,7 @@ public partial class MainForm : Form, ISubscriber
         this.GrammarTextBox.Name = "GrammarTextBox";
         this.GrammarTextBox.ReadOnly = true;
         this.GrammarTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.GrammarTextBox.Size = new System.Drawing.Size(676, 203);
+        this.GrammarTextBox.Size = new System.Drawing.Size(681, 203);
         this.GrammarTextBox.TabIndex = 1;
         this.GrammarTextBox.Text = "Click a word to display its grammar information in Arabic and English.";
         this.GrammarTextBox.WordWrap = false;
@@ -6835,7 +6955,7 @@ public partial class MainForm : Form, ISubscriber
         this.RelatedWordsTabPage.Location = new System.Drawing.Point(4, 26);
         this.RelatedWordsTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.RelatedWordsTabPage.Name = "RelatedWordsTabPage";
-        this.RelatedWordsTabPage.Size = new System.Drawing.Size(676, 203);
+        this.RelatedWordsTabPage.Size = new System.Drawing.Size(681, 203);
         this.RelatedWordsTabPage.TabIndex = 192;
         this.RelatedWordsTabPage.Text = "Related Words";
         this.RelatedWordsTabPage.ToolTipText = "Related words from the same root as the current word\r\nالكلمات المشتقة من نفس جذر " +
@@ -6852,7 +6972,7 @@ public partial class MainForm : Form, ISubscriber
         this.RelatedWordsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.RelatedWordsButton.ForeColor = System.Drawing.SystemColors.ControlLight;
         this.RelatedWordsButton.Image = ((System.Drawing.Image)(resources.GetObject("RelatedWordsButton.Image")));
-        this.RelatedWordsButton.Location = new System.Drawing.Point(652, 179);
+        this.RelatedWordsButton.Location = new System.Drawing.Point(660, 179);
         this.RelatedWordsButton.Margin = new System.Windows.Forms.Padding(4);
         this.RelatedWordsButton.Name = "RelatedWordsButton";
         this.RelatedWordsButton.Size = new System.Drawing.Size(24, 22);
@@ -6874,7 +6994,7 @@ public partial class MainForm : Form, ISubscriber
         this.RelatedWordsTextBox.Name = "RelatedWordsTextBox";
         this.RelatedWordsTextBox.ReadOnly = true;
         this.RelatedWordsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.RelatedWordsTextBox.Size = new System.Drawing.Size(676, 203);
+        this.RelatedWordsTextBox.Size = new System.Drawing.Size(681, 203);
         this.RelatedWordsTextBox.TabIndex = 1;
         this.RelatedWordsTextBox.Text = "Click a word to display words from the same root and all verses.";
         this.RelatedWordsTextBox.WordWrap = false;
@@ -6891,7 +7011,7 @@ public partial class MainForm : Form, ISubscriber
         this.SymmetryTabPage.Location = new System.Drawing.Point(4, 26);
         this.SymmetryTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.SymmetryTabPage.Name = "SymmetryTabPage";
-        this.SymmetryTabPage.Size = new System.Drawing.Size(676, 203);
+        this.SymmetryTabPage.Size = new System.Drawing.Size(681, 203);
         this.SymmetryTabPage.TabIndex = 201;
         this.SymmetryTabPage.Text = "Symmetry";
         this.SymmetryTabPage.ToolTipText = "Text symmetries starting from both ends [Dr Waleed S. Mohammed]\r\nتناظر النص من ال" +
@@ -6905,7 +7025,7 @@ public partial class MainForm : Form, ISubscriber
         this.SymmetryIncludeBoundaryCasesCheckBox.BackColor = System.Drawing.Color.Transparent;
         this.SymmetryIncludeBoundaryCasesCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.SymmetryIncludeBoundaryCasesCheckBox.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.SymmetryIncludeBoundaryCasesCheckBox.Location = new System.Drawing.Point(387, 184);
+        this.SymmetryIncludeBoundaryCasesCheckBox.Location = new System.Drawing.Point(395, 184);
         this.SymmetryIncludeBoundaryCasesCheckBox.Margin = new System.Windows.Forms.Padding(4);
         this.SymmetryIncludeBoundaryCasesCheckBox.Name = "SymmetryIncludeBoundaryCasesCheckBox";
         this.SymmetryIncludeBoundaryCasesCheckBox.Size = new System.Drawing.Size(18, 17);
@@ -6921,7 +7041,7 @@ public partial class MainForm : Form, ISubscriber
         this.SymmetryTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         this.SymmetryTypeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.SymmetryTypeComboBox.FormattingEnabled = true;
-        this.SymmetryTypeComboBox.Location = new System.Drawing.Point(411, 181);
+        this.SymmetryTypeComboBox.Location = new System.Drawing.Point(419, 181);
         this.SymmetryTypeComboBox.Margin = new System.Windows.Forms.Padding(4);
         this.SymmetryTypeComboBox.Name = "SymmetryTypeComboBox";
         this.SymmetryTypeComboBox.Size = new System.Drawing.Size(243, 23);
@@ -6936,7 +7056,7 @@ public partial class MainForm : Form, ISubscriber
         this.SymmetryInspectLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.SymmetryInspectLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.SymmetryInspectLabel.Image = ((System.Drawing.Image)(resources.GetObject("SymmetryInspectLabel.Image")));
-        this.SymmetryInspectLabel.Location = new System.Drawing.Point(654, 182);
+        this.SymmetryInspectLabel.Location = new System.Drawing.Point(662, 182);
         this.SymmetryInspectLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.SymmetryInspectLabel.Name = "SymmetryInspectLabel";
         this.SymmetryInspectLabel.Size = new System.Drawing.Size(24, 22);
@@ -6957,7 +7077,7 @@ public partial class MainForm : Form, ISubscriber
         this.SymmetryTextBox.Name = "SymmetryTextBox";
         this.SymmetryTextBox.ReadOnly = true;
         this.SymmetryTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.SymmetryTextBox.Size = new System.Drawing.Size(676, 203);
+        this.SymmetryTextBox.Size = new System.Drawing.Size(681, 203);
         this.SymmetryTextBox.TabIndex = 7;
         this.SymmetryTextBox.Text = "Select text to display its front/back symmetry.";
         this.SymmetryTextBox.WordWrap = false;
@@ -6975,7 +7095,7 @@ public partial class MainForm : Form, ISubscriber
         this.ValuesSequenceTabPage.Location = new System.Drawing.Point(4, 26);
         this.ValuesSequenceTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.ValuesSequenceTabPage.Name = "ValuesSequenceTabPage";
-        this.ValuesSequenceTabPage.Size = new System.Drawing.Size(676, 203);
+        this.ValuesSequenceTabPage.Size = new System.Drawing.Size(681, 203);
         this.ValuesSequenceTabPage.TabIndex = 198;
         this.ValuesSequenceTabPage.Text = "Values";
         this.ValuesSequenceTabPage.ToolTipText = "Values of letter/word/verse/chapter values in bases 2 to 36\r\nقيم الحروف والكلمات " +
@@ -6990,7 +7110,7 @@ public partial class MainForm : Form, ISubscriber
         this.ValuesSequenceInspectLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.ValuesSequenceInspectLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.ValuesSequenceInspectLabel.Image = ((System.Drawing.Image)(resources.GetObject("ValuesSequenceInspectLabel.Image")));
-        this.ValuesSequenceInspectLabel.Location = new System.Drawing.Point(654, 182);
+        this.ValuesSequenceInspectLabel.Location = new System.Drawing.Point(662, 182);
         this.ValuesSequenceInspectLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.ValuesSequenceInspectLabel.Name = "ValuesSequenceInspectLabel";
         this.ValuesSequenceInspectLabel.Size = new System.Drawing.Size(24, 22);
@@ -7005,7 +7125,7 @@ public partial class MainForm : Form, ISubscriber
         this.ValuesSequenceScopeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         this.ValuesSequenceScopeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.ValuesSequenceScopeComboBox.FormattingEnabled = true;
-        this.ValuesSequenceScopeComboBox.Location = new System.Drawing.Point(411, 181);
+        this.ValuesSequenceScopeComboBox.Location = new System.Drawing.Point(419, 181);
         this.ValuesSequenceScopeComboBox.Margin = new System.Windows.Forms.Padding(4);
         this.ValuesSequenceScopeComboBox.Name = "ValuesSequenceScopeComboBox";
         this.ValuesSequenceScopeComboBox.Size = new System.Drawing.Size(243, 23);
@@ -7017,7 +7137,7 @@ public partial class MainForm : Form, ISubscriber
         this.ValuesSequenceRadixNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
         this.ValuesSequenceRadixNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
         this.ValuesSequenceRadixNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.ValuesSequenceRadixNumericUpDown.Location = new System.Drawing.Point(357, 183);
+        this.ValuesSequenceRadixNumericUpDown.Location = new System.Drawing.Point(365, 183);
         this.ValuesSequenceRadixNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
         this.ValuesSequenceRadixNumericUpDown.Maximum = new decimal(new int[] {
             36,
@@ -7046,7 +7166,7 @@ public partial class MainForm : Form, ISubscriber
         this.ValuesSequenceRadixLabel.BackColor = System.Drawing.SystemColors.Control;
         this.ValuesSequenceRadixLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.ValuesSequenceRadixLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.ValuesSequenceRadixLabel.Location = new System.Drawing.Point(271, 186);
+        this.ValuesSequenceRadixLabel.Location = new System.Drawing.Point(279, 186);
         this.ValuesSequenceRadixLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.ValuesSequenceRadixLabel.Name = "ValuesSequenceRadixLabel";
         this.ValuesSequenceRadixLabel.Size = new System.Drawing.Size(85, 15);
@@ -7062,7 +7182,7 @@ public partial class MainForm : Form, ISubscriber
         this.ValuesSequenceDirectionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.ValuesSequenceDirectionLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.ValuesSequenceDirectionLabel.Image = ((System.Drawing.Image)(resources.GetObject("ValuesSequenceDirectionLabel.Image")));
-        this.ValuesSequenceDirectionLabel.Location = new System.Drawing.Point(655, 2);
+        this.ValuesSequenceDirectionLabel.Location = new System.Drawing.Point(663, 2);
         this.ValuesSequenceDirectionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.ValuesSequenceDirectionLabel.Name = "ValuesSequenceDirectionLabel";
         this.ValuesSequenceDirectionLabel.Size = new System.Drawing.Size(21, 22);
@@ -7084,7 +7204,7 @@ public partial class MainForm : Form, ISubscriber
         this.ValuesSequenceTextBox.Name = "ValuesSequenceTextBox";
         this.ValuesSequenceTextBox.ReadOnly = true;
         this.ValuesSequenceTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.ValuesSequenceTextBox.Size = new System.Drawing.Size(676, 203);
+        this.ValuesSequenceTextBox.Size = new System.Drawing.Size(681, 203);
         this.ValuesSequenceTextBox.TabIndex = 1;
         this.ValuesSequenceTextBox.Text = "Select text to convert its letter/word/verse/chapter values into a number sequenc" +
 "e in the specified base.";
@@ -7102,7 +7222,7 @@ public partial class MainForm : Form, ISubscriber
         this.CVWLSequenceTabPage.Location = new System.Drawing.Point(4, 26);
         this.CVWLSequenceTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.CVWLSequenceTabPage.Name = "CVWLSequenceTabPage";
-        this.CVWLSequenceTabPage.Size = new System.Drawing.Size(676, 203);
+        this.CVWLSequenceTabPage.Size = new System.Drawing.Size(681, 203);
         this.CVWLSequenceTabPage.TabIndex = 200;
         this.CVWLSequenceTabPage.Text = "CVWL";
         this.CVWLSequenceTabPage.ToolTipText = "Concatenated chapter/verse/word/letter numbers and counts\r\nرصف أرقام وأعداد الحرو" +
@@ -7116,7 +7236,7 @@ public partial class MainForm : Form, ISubscriber
         this.CVWLSequenceShowFactorsCheckBox.BackColor = System.Drawing.Color.Transparent;
         this.CVWLSequenceShowFactorsCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.CVWLSequenceShowFactorsCheckBox.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.CVWLSequenceShowFactorsCheckBox.Location = new System.Drawing.Point(387, 184);
+        this.CVWLSequenceShowFactorsCheckBox.Location = new System.Drawing.Point(395, 184);
         this.CVWLSequenceShowFactorsCheckBox.Margin = new System.Windows.Forms.Padding(4);
         this.CVWLSequenceShowFactorsCheckBox.Name = "CVWLSequenceShowFactorsCheckBox";
         this.CVWLSequenceShowFactorsCheckBox.Size = new System.Drawing.Size(18, 17);
@@ -7132,7 +7252,7 @@ public partial class MainForm : Form, ISubscriber
         this.CVWLSequenceTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         this.CVWLSequenceTypeComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.CVWLSequenceTypeComboBox.FormattingEnabled = true;
-        this.CVWLSequenceTypeComboBox.Location = new System.Drawing.Point(411, 181);
+        this.CVWLSequenceTypeComboBox.Location = new System.Drawing.Point(419, 181);
         this.CVWLSequenceTypeComboBox.Margin = new System.Windows.Forms.Padding(4);
         this.CVWLSequenceTypeComboBox.Name = "CVWLSequenceTypeComboBox";
         this.CVWLSequenceTypeComboBox.Size = new System.Drawing.Size(243, 23);
@@ -7147,7 +7267,7 @@ public partial class MainForm : Form, ISubscriber
         this.CVWLSequenceInspectLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.CVWLSequenceInspectLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.CVWLSequenceInspectLabel.Image = ((System.Drawing.Image)(resources.GetObject("CVWLSequenceInspectLabel.Image")));
-        this.CVWLSequenceInspectLabel.Location = new System.Drawing.Point(654, 182);
+        this.CVWLSequenceInspectLabel.Location = new System.Drawing.Point(662, 182);
         this.CVWLSequenceInspectLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.CVWLSequenceInspectLabel.Name = "CVWLSequenceInspectLabel";
         this.CVWLSequenceInspectLabel.Size = new System.Drawing.Size(24, 22);
@@ -7163,7 +7283,7 @@ public partial class MainForm : Form, ISubscriber
         this.CVWLSequenceDirectionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.CVWLSequenceDirectionLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.CVWLSequenceDirectionLabel.Image = ((System.Drawing.Image)(resources.GetObject("CVWLSequenceDirectionLabel.Image")));
-        this.CVWLSequenceDirectionLabel.Location = new System.Drawing.Point(655, 2);
+        this.CVWLSequenceDirectionLabel.Location = new System.Drawing.Point(663, 2);
         this.CVWLSequenceDirectionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.CVWLSequenceDirectionLabel.Name = "CVWLSequenceDirectionLabel";
         this.CVWLSequenceDirectionLabel.Size = new System.Drawing.Size(21, 22);
@@ -7185,7 +7305,7 @@ public partial class MainForm : Form, ISubscriber
         this.CVWLSequenceTextBox.Name = "CVWLSequenceTextBox";
         this.CVWLSequenceTextBox.ReadOnly = true;
         this.CVWLSequenceTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.CVWLSequenceTextBox.Size = new System.Drawing.Size(676, 203);
+        this.CVWLSequenceTextBox.Size = new System.Drawing.Size(681, 203);
         this.CVWLSequenceTextBox.TabIndex = 1;
         this.CVWLSequenceTextBox.Text = "Select text to display concatenated chapter/verse/word/letter numbers and counts." +
 "";
@@ -7202,7 +7322,7 @@ public partial class MainForm : Form, ISubscriber
         this.DNASequenceTabPage.Location = new System.Drawing.Point(4, 26);
         this.DNASequenceTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.DNASequenceTabPage.Name = "DNASequenceTabPage";
-        this.DNASequenceTabPage.Size = new System.Drawing.Size(676, 203);
+        this.DNASequenceTabPage.Size = new System.Drawing.Size(681, 203);
         this.DNASequenceTabPage.TabIndex = 195;
         this.DNASequenceTabPage.Text = "DNA";
         this.DNASequenceTabPage.ToolTipText = "Convert text into a DNA sequence to compare with the human genome [Belkacem Meghz" +
@@ -7218,7 +7338,7 @@ public partial class MainForm : Form, ISubscriber
         this.DNASequenceDirectionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DNASequenceDirectionLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.DNASequenceDirectionLabel.Image = ((System.Drawing.Image)(resources.GetObject("DNASequenceDirectionLabel.Image")));
-        this.DNASequenceDirectionLabel.Location = new System.Drawing.Point(655, 2);
+        this.DNASequenceDirectionLabel.Location = new System.Drawing.Point(663, 2);
         this.DNASequenceDirectionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.DNASequenceDirectionLabel.Name = "DNASequenceDirectionLabel";
         this.DNASequenceDirectionLabel.Size = new System.Drawing.Size(21, 22);
@@ -7235,7 +7355,7 @@ public partial class MainForm : Form, ISubscriber
         this.DNASequenceSystemEditLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DNASequenceSystemEditLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.DNASequenceSystemEditLabel.Image = ((System.Drawing.Image)(resources.GetObject("DNASequenceSystemEditLabel.Image")));
-        this.DNASequenceSystemEditLabel.Location = new System.Drawing.Point(654, 182);
+        this.DNASequenceSystemEditLabel.Location = new System.Drawing.Point(662, 182);
         this.DNASequenceSystemEditLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.DNASequenceSystemEditLabel.Name = "DNASequenceSystemEditLabel";
         this.DNASequenceSystemEditLabel.Size = new System.Drawing.Size(24, 22);
@@ -7250,7 +7370,7 @@ public partial class MainForm : Form, ISubscriber
         this.DNASequenceSystemComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         this.DNASequenceSystemComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DNASequenceSystemComboBox.FormattingEnabled = true;
-        this.DNASequenceSystemComboBox.Location = new System.Drawing.Point(411, 181);
+        this.DNASequenceSystemComboBox.Location = new System.Drawing.Point(419, 181);
         this.DNASequenceSystemComboBox.Margin = new System.Windows.Forms.Padding(4);
         this.DNASequenceSystemComboBox.Name = "DNASequenceSystemComboBox";
         this.DNASequenceSystemComboBox.Size = new System.Drawing.Size(243, 23);
@@ -7270,7 +7390,7 @@ public partial class MainForm : Form, ISubscriber
         this.DNASequenceTextBox.Name = "DNASequenceTextBox";
         this.DNASequenceTextBox.ReadOnly = true;
         this.DNASequenceTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.DNASequenceTextBox.Size = new System.Drawing.Size(676, 203);
+        this.DNASequenceTextBox.Size = new System.Drawing.Size(681, 203);
         this.DNASequenceTextBox.TabIndex = 1;
         this.DNASequenceTextBox.Text = "Select text to convert into a DNA sequence.";
         this.DNASequenceTextBox.WordWrap = false;
@@ -7283,7 +7403,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsTabPage.Location = new System.Drawing.Point(4, 26);
         this.MathsTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.MathsTabPage.Name = "MathsTabPage";
-        this.MathsTabPage.Size = new System.Drawing.Size(676, 203);
+        this.MathsTabPage.Size = new System.Drawing.Size(681, 203);
         this.MathsTabPage.TabIndex = 197;
         this.MathsTabPage.Text = "C+V";
         this.MathsTabPage.ToolTipText = "Chapter +/- Verse calculations\r\nحسابات مجاميع وفروق الءايات والسُوَر";
@@ -7399,7 +7519,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsPanel.Location = new System.Drawing.Point(0, 0);
         this.MathsPanel.Margin = new System.Windows.Forms.Padding(4);
         this.MathsPanel.Name = "MathsPanel";
-        this.MathsPanel.Size = new System.Drawing.Size(676, 203);
+        this.MathsPanel.Size = new System.Drawing.Size(681, 203);
         this.MathsPanel.TabIndex = 0;
         // 
         // MathsInterestingNumbersEditLabel
@@ -8790,7 +8910,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesTabPage.Location = new System.Drawing.Point(4, 26);
         this.DistancesTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.DistancesTabPage.Name = "DistancesTabPage";
-        this.DistancesTabPage.Size = new System.Drawing.Size(676, 203);
+        this.DistancesTabPage.Size = new System.Drawing.Size(681, 203);
         this.DistancesTabPage.TabIndex = 199;
         this.DistancesTabPage.Text = "Distances";
         this.DistancesTabPage.ToolTipText = "Distances to the start and end of Book, current chapter/verse/word\r\nالمسافات الى " +
@@ -8869,7 +8989,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesPanel.Location = new System.Drawing.Point(0, 0);
         this.DistancesPanel.Margin = new System.Windows.Forms.Padding(4);
         this.DistancesPanel.Name = "DistancesPanel";
-        this.DistancesPanel.Size = new System.Drawing.Size(676, 203);
+        this.DistancesPanel.Size = new System.Drawing.Size(681, 203);
         this.DistancesPanel.TabIndex = 1;
         // 
         // DistancesInterestingNumbersEditLabel
@@ -9793,7 +9913,7 @@ public partial class MainForm : Form, ISubscriber
         this.UserTextTabPage.Location = new System.Drawing.Point(4, 26);
         this.UserTextTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.UserTextTabPage.Name = "UserTextTabPage";
-        this.UserTextTabPage.Size = new System.Drawing.Size(676, 203);
+        this.UserTextTabPage.Size = new System.Drawing.Size(681, 203);
         this.UserTextTabPage.TabIndex = 194;
         this.UserTextTabPage.Text = " User Text ";
         this.UserTextTabPage.ToolTipText = "Calculate the value of any given text or find all words with a given value\r\nحساب " +
@@ -9917,7 +10037,7 @@ public partial class MainForm : Form, ISubscriber
         this.UserTextInspectLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.UserTextInspectLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.UserTextInspectLabel.Image = ((System.Drawing.Image)(resources.GetObject("UserTextInspectLabel.Image")));
-        this.UserTextInspectLabel.Location = new System.Drawing.Point(654, 182);
+        this.UserTextInspectLabel.Location = new System.Drawing.Point(662, 182);
         this.UserTextInspectLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.UserTextInspectLabel.Name = "UserTextInspectLabel";
         this.UserTextInspectLabel.Size = new System.Drawing.Size(24, 22);
@@ -9931,7 +10051,7 @@ public partial class MainForm : Form, ISubscriber
         this.UserTextValueButton.Cursor = System.Windows.Forms.Cursors.Hand;
         this.UserTextValueButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.UserTextValueButton.ForeColor = System.Drawing.Color.RoyalBlue;
-        this.UserTextValueButton.Location = new System.Drawing.Point(578, 180);
+        this.UserTextValueButton.Location = new System.Drawing.Point(586, 180);
         this.UserTextValueButton.Margin = new System.Windows.Forms.Padding(4);
         this.UserTextValueButton.Name = "UserTextValueButton";
         this.UserTextValueButton.Size = new System.Drawing.Size(76, 24);
@@ -9945,7 +10065,7 @@ public partial class MainForm : Form, ISubscriber
         this.UserTextValueNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
         this.UserTextValueNumericUpDown.BackColor = System.Drawing.SystemColors.Window;
         this.UserTextValueNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.UserTextValueNumericUpDown.Location = new System.Drawing.Point(501, 181);
+        this.UserTextValueNumericUpDown.Location = new System.Drawing.Point(509, 181);
         this.UserTextValueNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
         this.UserTextValueNumericUpDown.Maximum = new decimal(new int[] {
             -727379969,
@@ -9966,13 +10086,13 @@ public partial class MainForm : Form, ISubscriber
         this.UserTextValueLabel.BackColor = System.Drawing.SystemColors.ControlLight;
         this.UserTextValueLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.UserTextValueLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.UserTextValueLabel.Location = new System.Drawing.Point(421, 185);
+        this.UserTextValueLabel.Location = new System.Drawing.Point(418, 185);
         this.UserTextValueLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.UserTextValueLabel.Name = "UserTextValueLabel";
-        this.UserTextValueLabel.Size = new System.Drawing.Size(85, 15);
+        this.UserTextValueLabel.Size = new System.Drawing.Size(89, 15);
         this.UserTextValueLabel.TabIndex = 5;
         this.UserTextValueLabel.Text = "Find By Value";
-        this.UserTextValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+        this.UserTextValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
         // 
         // UserTextTextBox
         // 
@@ -9991,7 +10111,7 @@ public partial class MainForm : Form, ISubscriber
         this.UserTextTextBox.Name = "UserTextTextBox";
         this.UserTextTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         this.UserTextTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.UserTextTextBox.Size = new System.Drawing.Size(644, 202);
+        this.UserTextTextBox.Size = new System.Drawing.Size(652, 202);
         this.UserTextTextBox.TabIndex = 1;
         this.UserTextTextBox.WordWrap = false;
         this.UserTextTextBox.TextChanged += new System.EventHandler(this.UserTextTextBox_TextChanged);
@@ -13698,12 +13818,16 @@ public partial class MainForm : Form, ISubscriber
             {
                 switch (m_numbers_result_type)
                 {
+                    case NumbersResultType.Verses:
+                        DisplayFoundVerses(false, false);
+                        break;
                     case NumbersResultType.VerseRanges:
                         DisplayFoundVerseRanges(false, false);
                         break;
                     case NumbersResultType.VerseSets:
                         DisplayFoundVerseSets(false, false);
                         break;
+
                     case NumbersResultType.Chapters:
                         DisplayFoundChapters(false, false);
                         break;
@@ -13713,6 +13837,77 @@ public partial class MainForm : Form, ISubscriber
                     case NumbersResultType.ChapterSets:
                         DisplayFoundChapterSets(false, false);
                         break;
+
+                    case NumbersResultType.Pages:
+                        DisplayFoundPages(false, false);
+                        break;
+                    case NumbersResultType.PageRanges:
+                        DisplayFoundPageRanges(false, false);
+                        break;
+                    case NumbersResultType.PageSets:
+                        DisplayFoundPageSets(false, false);
+                        break;
+
+                    case NumbersResultType.Stations:
+                        DisplayFoundStations(false, false);
+                        break;
+                    case NumbersResultType.StationRanges:
+                        DisplayFoundStationRanges(false, false);
+                        break;
+                    case NumbersResultType.StationSets:
+                        DisplayFoundStationSets(false, false);
+                        break;
+
+                    case NumbersResultType.Parts:
+                        DisplayFoundParts(false, false);
+                        break;
+                    case NumbersResultType.PartRanges:
+                        DisplayFoundPartRanges(false, false);
+                        break;
+                    case NumbersResultType.PartSets:
+                        DisplayFoundPartSets(false, false);
+                        break;
+
+                    case NumbersResultType.Groups:
+                        DisplayFoundGroups(false, false);
+                        break;
+                    case NumbersResultType.GroupRanges:
+                        DisplayFoundGroupRanges(false, false);
+                        break;
+                    case NumbersResultType.GroupSets:
+                        DisplayFoundGroupSets(false, false);
+                        break;
+
+                    case NumbersResultType.Halfs:
+                        DisplayFoundHalfs(false, false);
+                        break;
+                    case NumbersResultType.HalfRanges:
+                        DisplayFoundHalfRanges(false, false);
+                        break;
+                    case NumbersResultType.HalfSets:
+                        DisplayFoundHalfSets(false, false);
+                        break;
+
+                    case NumbersResultType.Quarters:
+                        DisplayFoundQuarters(false, false);
+                        break;
+                    case NumbersResultType.QuarterRanges:
+                        DisplayFoundQuarterRanges(false, false);
+                        break;
+                    case NumbersResultType.QuarterSets:
+                        DisplayFoundQuarterSets(false, false);
+                        break;
+
+                    case NumbersResultType.Bowings:
+                        DisplayFoundBowings(false, false);
+                        break;
+                    case NumbersResultType.BowingRanges:
+                        DisplayFoundBowingRanges(false, false);
+                        break;
+                    case NumbersResultType.BowingSets:
+                        DisplayFoundBowingSets(false, false);
+                        break;
+
                     default:
                         DisplayFoundVerses(false, false);
                         break;
@@ -21246,12 +21441,16 @@ public partial class MainForm : Form, ISubscriber
                         {
                             switch (m_numbers_result_type)
                             {
+                                case NumbersResultType.Verses:
+                                    DisplayFoundVerses(false, false);
+                                    break;
                                 case NumbersResultType.VerseRanges:
                                     DisplayFoundVerseRanges(false, false);
                                     break;
                                 case NumbersResultType.VerseSets:
                                     DisplayFoundVerseSets(false, false);
                                     break;
+
                                 case NumbersResultType.Chapters:
                                     DisplayFoundChapters(false, false);
                                     break;
@@ -21261,6 +21460,77 @@ public partial class MainForm : Form, ISubscriber
                                 case NumbersResultType.ChapterSets:
                                     DisplayFoundChapterSets(false, false);
                                     break;
+
+                                case NumbersResultType.Pages:
+                                    DisplayFoundPages(false, false);
+                                    break;
+                                case NumbersResultType.PageRanges:
+                                    DisplayFoundPageRanges(false, false);
+                                    break;
+                                case NumbersResultType.PageSets:
+                                    DisplayFoundPageSets(false, false);
+                                    break;
+
+                                case NumbersResultType.Stations:
+                                    DisplayFoundStations(false, false);
+                                    break;
+                                case NumbersResultType.StationRanges:
+                                    DisplayFoundStationRanges(false, false);
+                                    break;
+                                case NumbersResultType.StationSets:
+                                    DisplayFoundStationSets(false, false);
+                                    break;
+
+                                case NumbersResultType.Parts:
+                                    DisplayFoundParts(false, false);
+                                    break;
+                                case NumbersResultType.PartRanges:
+                                    DisplayFoundPartRanges(false, false);
+                                    break;
+                                case NumbersResultType.PartSets:
+                                    DisplayFoundPartSets(false, false);
+                                    break;
+
+                                case NumbersResultType.Groups:
+                                    DisplayFoundGroups(false, false);
+                                    break;
+                                case NumbersResultType.GroupRanges:
+                                    DisplayFoundGroupRanges(false, false);
+                                    break;
+                                case NumbersResultType.GroupSets:
+                                    DisplayFoundGroupSets(false, false);
+                                    break;
+
+                                case NumbersResultType.Halfs:
+                                    DisplayFoundHalfs(false, false);
+                                    break;
+                                case NumbersResultType.HalfRanges:
+                                    DisplayFoundHalfRanges(false, false);
+                                    break;
+                                case NumbersResultType.HalfSets:
+                                    DisplayFoundHalfSets(false, false);
+                                    break;
+
+                                case NumbersResultType.Quarters:
+                                    DisplayFoundQuarters(false, false);
+                                    break;
+                                case NumbersResultType.QuarterRanges:
+                                    DisplayFoundQuarterRanges(false, false);
+                                    break;
+                                case NumbersResultType.QuarterSets:
+                                    DisplayFoundQuarterSets(false, false);
+                                    break;
+
+                                case NumbersResultType.Bowings:
+                                    DisplayFoundBowings(false, false);
+                                    break;
+                                case NumbersResultType.BowingRanges:
+                                    DisplayFoundBowingRanges(false, false);
+                                    break;
+                                case NumbersResultType.BowingSets:
+                                    DisplayFoundBowingSets(false, false);
+                                    break;
+
                                 default:
                                     DisplayFoundVerses(false, false);
                                     break;
@@ -26103,7 +26373,7 @@ public partial class MainForm : Form, ISubscriber
         if (word != null)
         {
             // in all cases
-            result = Application.ProductName + " ║ " + GetSelectionSummary();
+            result = Application.ProductName;// +" ║ " + GetSelectionSummary();
 
             string word_info = null; //GetWordInformation(word);
             if (ModifierKeys == Keys.Control)
@@ -36412,6 +36682,13 @@ public partial class MainForm : Form, ISubscriber
                 }
                 break;
             case NumbersResultType.Chapters:
+            case NumbersResultType.Pages:
+            case NumbersResultType.Stations:
+            case NumbersResultType.Parts:
+            case NumbersResultType.Groups:
+            case NumbersResultType.Halfs:
+            case NumbersResultType.Quarters:
+            case NumbersResultType.Bowings:
                 {
                     if (m_chapter_number_scope == NumberScope.Number)
                     {
@@ -36420,7 +36697,21 @@ public partial class MainForm : Form, ISubscriber
                 }
                 break;
             case NumbersResultType.ChapterRanges:
+            case NumbersResultType.PageRanges:
+            case NumbersResultType.StationRanges:
+            case NumbersResultType.PartRanges:
+            case NumbersResultType.GroupRanges:
+            case NumbersResultType.HalfRanges:
+            case NumbersResultType.QuarterRanges:
+            case NumbersResultType.BowingRanges:
             case NumbersResultType.ChapterSets:
+            case NumbersResultType.PageSets:
+            case NumbersResultType.StationSets:
+            case NumbersResultType.PartSets:
+            case NumbersResultType.GroupSets:
+            case NumbersResultType.HalfSets:
+            case NumbersResultType.QuarterSets:
+            case NumbersResultType.BowingSets:
                 {
                 }
                 break;
@@ -36439,6 +36730,13 @@ public partial class MainForm : Form, ISubscriber
             case NumbersResultType.Words: { text = L[l]["word number"]; break; }
             case NumbersResultType.Verses: { text = L[l]["verse number"]; break; }
             case NumbersResultType.Chapters: { text = L[l]["chapter number"]; break; }
+            case NumbersResultType.Pages: { text = L[l]["page number"]; break; }
+            case NumbersResultType.Stations: { text = L[l]["station number"]; break; }
+            case NumbersResultType.Parts: { text = L[l]["part number"]; break; }
+            case NumbersResultType.Groups: { text = L[l]["group number"]; break; }
+            case NumbersResultType.Halfs: { text = L[l]["half number"]; break; }
+            case NumbersResultType.Quarters: { text = L[l]["quarter number"]; break; }
+            case NumbersResultType.Bowings: { text = L[l]["bowing number"]; break; }
             default: { text = L[l]["number"]; break; }
         }
         List<Control> controls = GetDescendentControls(this);
@@ -36713,6 +37011,45 @@ public partial class MainForm : Form, ISubscriber
     private void FindByNumbersResultTypeChaptersLabel_Click(object sender, EventArgs e)
     {
         m_numbers_result_type = NumbersResultType.Chapters;
+        DoResultTypeC_SPGHQB();
+    }
+    private void FindByNumbersResultTypePagesLabel_Click(object sender, EventArgs e)
+    {
+        m_numbers_result_type = NumbersResultType.Pages;
+        DoResultTypeC_SPGHQB();
+    }
+    private void FindByNumbersResultTypeStationsLabel_Click(object sender, EventArgs e)
+    {
+        m_numbers_result_type = NumbersResultType.Stations;
+        DoResultTypeC_SPGHQB();
+    }
+    private void FindByNumbersResultTypePartsLabel_Click(object sender, EventArgs e)
+    {
+        m_numbers_result_type = NumbersResultType.Parts;
+        DoResultTypeC_SPGHQB();
+    }
+    private void FindByNumbersResultTypeGroupsLabel_Click(object sender, EventArgs e)
+    {
+        m_numbers_result_type = NumbersResultType.Groups;
+        DoResultTypeC_SPGHQB();
+    }
+    private void FindByNumbersResultTypeHalfsLabel_Click(object sender, EventArgs e)
+    {
+        m_numbers_result_type = NumbersResultType.Halfs;
+        DoResultTypeC_SPGHQB();
+    }
+    private void FindByNumbersResultTypeQuartersLabel_Click(object sender, EventArgs e)
+    {
+        m_numbers_result_type = NumbersResultType.Quarters;
+        DoResultTypeC_SPGHQB();
+    }
+    private void FindByNumbersResultTypeBowingsLabel_Click(object sender, EventArgs e)
+    {
+        m_numbers_result_type = NumbersResultType.Bowings;
+        DoResultTypeC_SPGHQB();
+    }
+    private void DoResultTypeC_SPGHQB()
+    {
         UpdateNumberTypeLabelTooltips();
 
         //                           num   Cs    Vs    Ws    Ls    uLs   value dsum  droot
@@ -36972,6 +37309,34 @@ public partial class MainForm : Form, ISubscriber
         FindByNumbersResultTypeChaptersLabel.Text = "C";
         FindByNumbersResultTypeChaptersLabel.BackColor = Color.DarkGray;
         FindByNumbersResultTypeChaptersLabel.BorderStyle = BorderStyle.None;
+
+        FindByNumbersResultTypePagesLabel.Text = "#";
+        FindByNumbersResultTypePagesLabel.BackColor = Color.DarkGray;
+        FindByNumbersResultTypePagesLabel.BorderStyle = BorderStyle.None;
+
+        FindByNumbersResultTypeStationsLabel.Text = "S";
+        FindByNumbersResultTypeStationsLabel.BackColor = Color.DarkGray;
+        FindByNumbersResultTypeStationsLabel.BorderStyle = BorderStyle.None;
+
+        FindByNumbersResultTypePartsLabel.Text = "P";
+        FindByNumbersResultTypePartsLabel.BackColor = Color.DarkGray;
+        FindByNumbersResultTypePartsLabel.BorderStyle = BorderStyle.None;
+
+        FindByNumbersResultTypeGroupsLabel.Text = "G";
+        FindByNumbersResultTypeGroupsLabel.BackColor = Color.DarkGray;
+        FindByNumbersResultTypeGroupsLabel.BorderStyle = BorderStyle.None;
+
+        FindByNumbersResultTypeHalfsLabel.Text = "H";
+        FindByNumbersResultTypeHalfsLabel.BackColor = Color.DarkGray;
+        FindByNumbersResultTypeHalfsLabel.BorderStyle = BorderStyle.None;
+
+        FindByNumbersResultTypeQuartersLabel.Text = "Q";
+        FindByNumbersResultTypeQuartersLabel.BackColor = Color.DarkGray;
+        FindByNumbersResultTypeQuartersLabel.BorderStyle = BorderStyle.None;
+
+        FindByNumbersResultTypeBowingsLabel.Text = "B";
+        FindByNumbersResultTypeBowingsLabel.BackColor = Color.DarkGray;
+        FindByNumbersResultTypeBowingsLabel.BorderStyle = BorderStyle.None;
     }
     private void ResetFindByNumbersComparisonOperatorLabels()
     {
@@ -37037,6 +37402,7 @@ public partial class MainForm : Form, ISubscriber
                     }
                 }
                 break;
+
             case NumbersResultType.Chapters:
             case NumbersResultType.ChapterRanges:
             case NumbersResultType.ChapterSets:
@@ -37058,6 +37424,161 @@ public partial class MainForm : Form, ISubscriber
                     }
                 }
                 break;
+
+            case NumbersResultType.Pages:
+            case NumbersResultType.PageRanges:
+            case NumbersResultType.PageSets:
+                {
+                    if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
+                    {
+                        m_numbers_result_type = NumbersResultType.Pages;
+                    }
+                    else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
+                    {
+                        if (!m_find_by_numbers_sets)
+                        {
+                            m_numbers_result_type = NumbersResultType.PageRanges;
+                        }
+                        else
+                        {
+                            m_numbers_result_type = NumbersResultType.PageSets;
+                        }
+                    }
+                }
+                break;
+
+            case NumbersResultType.Stations:
+            case NumbersResultType.StationRanges:
+            case NumbersResultType.StationSets:
+                {
+                    if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
+                    {
+                        m_numbers_result_type = NumbersResultType.Stations;
+                    }
+                    else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
+                    {
+                        if (!m_find_by_numbers_sets)
+                        {
+                            m_numbers_result_type = NumbersResultType.StationRanges;
+                        }
+                        else
+                        {
+                            m_numbers_result_type = NumbersResultType.StationSets;
+                        }
+                    }
+                }
+                break;
+
+            case NumbersResultType.Parts:
+            case NumbersResultType.PartRanges:
+            case NumbersResultType.PartSets:
+                {
+                    if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
+                    {
+                        m_numbers_result_type = NumbersResultType.Parts;
+                    }
+                    else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
+                    {
+                        if (!m_find_by_numbers_sets)
+                        {
+                            m_numbers_result_type = NumbersResultType.PartRanges;
+                        }
+                        else
+                        {
+                            m_numbers_result_type = NumbersResultType.PartSets;
+                        }
+                    }
+                }
+                break;
+
+            case NumbersResultType.Groups:
+            case NumbersResultType.GroupRanges:
+            case NumbersResultType.GroupSets:
+                {
+                    if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
+                    {
+                        m_numbers_result_type = NumbersResultType.Groups;
+                    }
+                    else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
+                    {
+                        if (!m_find_by_numbers_sets)
+                        {
+                            m_numbers_result_type = NumbersResultType.GroupRanges;
+                        }
+                        else
+                        {
+                            m_numbers_result_type = NumbersResultType.GroupSets;
+                        }
+                    }
+                }
+                break;
+
+            case NumbersResultType.Halfs:
+            case NumbersResultType.HalfRanges:
+            case NumbersResultType.HalfSets:
+                {
+                    if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
+                    {
+                        m_numbers_result_type = NumbersResultType.Halfs;
+                    }
+                    else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
+                    {
+                        if (!m_find_by_numbers_sets)
+                        {
+                            m_numbers_result_type = NumbersResultType.HalfRanges;
+                        }
+                        else
+                        {
+                            m_numbers_result_type = NumbersResultType.HalfSets;
+                        }
+                    }
+                }
+                break;
+
+            case NumbersResultType.Quarters:
+            case NumbersResultType.QuarterRanges:
+            case NumbersResultType.QuarterSets:
+                {
+                    if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
+                    {
+                        m_numbers_result_type = NumbersResultType.Quarters;
+                    }
+                    else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
+                    {
+                        if (!m_find_by_numbers_sets)
+                        {
+                            m_numbers_result_type = NumbersResultType.QuarterRanges;
+                        }
+                        else
+                        {
+                            m_numbers_result_type = NumbersResultType.QuarterSets;
+                        }
+                    }
+                }
+                break;
+
+            case NumbersResultType.Bowings:
+            case NumbersResultType.BowingRanges:
+            case NumbersResultType.BowingSets:
+                {
+                    if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
+                    {
+                        m_numbers_result_type = NumbersResultType.Bowings;
+                    }
+                    else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
+                    {
+                        if (!m_find_by_numbers_sets)
+                        {
+                            m_numbers_result_type = NumbersResultType.BowingRanges;
+                        }
+                        else
+                        {
+                            m_numbers_result_type = NumbersResultType.BowingSets;
+                        }
+                    }
+                }
+                break;
+
             default:
                 break;
         }
@@ -37113,22 +37634,6 @@ public partial class MainForm : Form, ISubscriber
                             ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["word number"]);
                         }
                         break;
-                    case NumbersResultType.WordRanges:
-                        {
-                            FindByNumbersResultTypeWordsLabel.Text = "-W-";
-                            ToolTip.SetToolTip(FindByNumbersResultTypeWordsLabel, L[l]["find word ranges"]);
-                            FindByNumbersNumberLabel.Text = L[l]["sum"];
-                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of word numbers"]);
-                        }
-                        break;
-                    case NumbersResultType.WordSets:
-                        {
-                            FindByNumbersResultTypeWordsLabel.Text = "Ws";
-                            ToolTip.SetToolTip(FindByNumbersResultTypeWordsLabel, L[l]["find word sets"]);
-                            FindByNumbersNumberLabel.Text = L[l]["sum"];
-                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of word numbers"]);
-                        }
-                        break;
                     case NumbersResultType.Sentences:
                         {
                             FindByNumbersResultTypeSentencesLabel.Text = "S";
@@ -37155,22 +37660,6 @@ public partial class MainForm : Form, ISubscriber
                             ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["verse number"]);
                         }
                         break;
-                    case NumbersResultType.VerseRanges:
-                        {
-                            FindByNumbersResultTypeVersesLabel.Text = "-V-";
-                            ToolTip.SetToolTip(FindByNumbersResultTypeVersesLabel, L[l]["find verse ranges"]);
-                            FindByNumbersNumberLabel.Text = L[l]["sum"];
-                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of verse numbers"]);
-                        }
-                        break;
-                    case NumbersResultType.VerseSets:
-                        {
-                            FindByNumbersResultTypeVersesLabel.Text = "Vs";
-                            ToolTip.SetToolTip(FindByNumbersResultTypeVersesLabel, L[l]["find verse sets"]);
-                            FindByNumbersNumberLabel.Text = L[l]["sum"];
-                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of verse numbers"]);
-                        }
-                        break;
                     case NumbersResultType.Chapters:
                         {
                             FindByNumbersResultTypeChaptersLabel.Text = "C";
@@ -37186,12 +37675,207 @@ public partial class MainForm : Form, ISubscriber
                             ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["chapter number"]);
                         }
                         break;
+                    case NumbersResultType.Pages:
+                        {
+                            FindByNumbersResultTypePagesLabel.Text = "#";
+                            ToolTip.SetToolTip(FindByNumbersResultTypePagesLabel, L[l]["find pages"]);
+                            switch (m_chapter_number_scope)
+                            {
+                                case NumberScope.Number:
+                                    FindByNumbersNumberLabel.Text = L[l]["number"];
+                                    break;
+                                default:
+                                    break;
+                            }
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["page number"]);
+                        }
+                        break;
+                    case NumbersResultType.Stations:
+                        {
+                            FindByNumbersResultTypeStationsLabel.Text = "S";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeStationsLabel, L[l]["find stations"]);
+                            switch (m_chapter_number_scope)
+                            {
+                                case NumberScope.Number:
+                                    FindByNumbersNumberLabel.Text = L[l]["number"];
+                                    break;
+                                default:
+                                    break;
+                            }
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["station number"]);
+                        }
+                        break;
+                    case NumbersResultType.Parts:
+                        {
+                            FindByNumbersResultTypePartsLabel.Text = "P";
+                            ToolTip.SetToolTip(FindByNumbersResultTypePartsLabel, L[l]["find parts"]);
+                            switch (m_chapter_number_scope)
+                            {
+                                case NumberScope.Number:
+                                    FindByNumbersNumberLabel.Text = L[l]["number"];
+                                    break;
+                                default:
+                                    break;
+                            }
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["part number"]);
+                        }
+                        break;
+                    case NumbersResultType.Groups:
+                        {
+                            FindByNumbersResultTypeGroupsLabel.Text = "G";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeGroupsLabel, L[l]["find groups"]);
+                            switch (m_chapter_number_scope)
+                            {
+                                case NumberScope.Number:
+                                    FindByNumbersNumberLabel.Text = L[l]["number"];
+                                    break;
+                                default:
+                                    break;
+                            }
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["group number"]);
+                        }
+                        break;
+                    case NumbersResultType.Halfs:
+                        {
+                            FindByNumbersResultTypeHalfsLabel.Text = "H";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeHalfsLabel, L[l]["find halfs"]);
+                            switch (m_chapter_number_scope)
+                            {
+                                case NumberScope.Number:
+                                    FindByNumbersNumberLabel.Text = L[l]["number"];
+                                    break;
+                                default:
+                                    break;
+                            }
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["half number"]);
+                        }
+                        break;
+                    case NumbersResultType.Quarters:
+                        {
+                            FindByNumbersResultTypeQuartersLabel.Text = "Q";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeQuartersLabel, L[l]["find quarters"]);
+                            switch (m_chapter_number_scope)
+                            {
+                                case NumberScope.Number:
+                                    FindByNumbersNumberLabel.Text = L[l]["number"];
+                                    break;
+                                default:
+                                    break;
+                            }
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["quarter number"]);
+                        }
+                        break;
+                    case NumbersResultType.Bowings:
+                        {
+                            FindByNumbersResultTypeBowingsLabel.Text = "B";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeBowingsLabel, L[l]["find bowings"]);
+                            switch (m_chapter_number_scope)
+                            {
+                                case NumberScope.Number:
+                                    FindByNumbersNumberLabel.Text = L[l]["number"];
+                                    break;
+                                default:
+                                    break;
+                            }
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["bowing number"]);
+                        }
+                        break;
+
+                    case NumbersResultType.WordRanges:
+                        {
+                            FindByNumbersResultTypeWordsLabel.Text = "-W-";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeWordsLabel, L[l]["find word ranges"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of word numbers"]);
+                        }
+                        break;
+                    case NumbersResultType.VerseRanges:
+                        {
+                            FindByNumbersResultTypeVersesLabel.Text = "-V-";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeVersesLabel, L[l]["find verse ranges"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of verse numbers"]);
+                        }
+                        break;
                     case NumbersResultType.ChapterRanges:
                         {
                             FindByNumbersResultTypeChaptersLabel.Text = "-C-";
                             ToolTip.SetToolTip(FindByNumbersResultTypeChaptersLabel, L[l]["find chapter ranges"]);
                             FindByNumbersNumberLabel.Text = L[l]["sum"];
                             ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of chapter numbers"]);
+                        }
+                        break;
+                    case NumbersResultType.PageRanges:
+                        {
+                            FindByNumbersResultTypePagesLabel.Text = "-#-";
+                            ToolTip.SetToolTip(FindByNumbersResultTypePagesLabel, L[l]["find page ranges"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of page numbers"]);
+                        }
+                        break;
+                    case NumbersResultType.StationRanges:
+                        {
+                            FindByNumbersResultTypeStationsLabel.Text = "-S-";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeStationsLabel, L[l]["find station ranges"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of station numbers"]);
+                        }
+                        break;
+                    case NumbersResultType.PartRanges:
+                        {
+                            FindByNumbersResultTypePartsLabel.Text = "-P-";
+                            ToolTip.SetToolTip(FindByNumbersResultTypePartsLabel, L[l]["find part ranges"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of part numbers"]);
+                        }
+                        break;
+                    case NumbersResultType.GroupRanges:
+                        {
+                            FindByNumbersResultTypeGroupsLabel.Text = "-G-";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeGroupsLabel, L[l]["find group ranges"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of group numbers"]);
+                        }
+                        break;
+                    case NumbersResultType.HalfRanges:
+                        {
+                            FindByNumbersResultTypeHalfsLabel.Text = "-H-";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeHalfsLabel, L[l]["find half ranges"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of half numbers"]);
+                        }
+                        break;
+                    case NumbersResultType.QuarterRanges:
+                        {
+                            FindByNumbersResultTypeQuartersLabel.Text = "-Q-";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeQuartersLabel, L[l]["find quarter ranges"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of quarter numbers"]);
+                        }
+                        break;
+                    case NumbersResultType.BowingRanges:
+                        {
+                            FindByNumbersResultTypeBowingsLabel.Text = "-B-";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeBowingsLabel, L[l]["find bowing ranges"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of bowing numbers"]);
+                        }
+                        break;
+
+                    case NumbersResultType.WordSets:
+                        {
+                            FindByNumbersResultTypeWordsLabel.Text = "Ws";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeWordsLabel, L[l]["find word sets"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of word numbers"]);
+                        }
+                        break;
+                    case NumbersResultType.VerseSets:
+                        {
+                            FindByNumbersResultTypeVersesLabel.Text = "Vs";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeVersesLabel, L[l]["find verse sets"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of verse numbers"]);
                         }
                         break;
                     case NumbersResultType.ChapterSets:
@@ -37202,6 +37886,63 @@ public partial class MainForm : Form, ISubscriber
                             ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of chapter numbers"]);
                         }
                         break;
+                    case NumbersResultType.PageSets:
+                        {
+                            FindByNumbersResultTypePagesLabel.Text = "#s";
+                            ToolTip.SetToolTip(FindByNumbersResultTypePagesLabel, L[l]["find page sets"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of page numbers"]);
+                        }
+                        break;
+                    case NumbersResultType.StationSets:
+                        {
+                            FindByNumbersResultTypeStationsLabel.Text = "Ss";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeStationsLabel, L[l]["find station sets"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of station numbers"]);
+                        }
+                        break;
+                    case NumbersResultType.PartSets:
+                        {
+                            FindByNumbersResultTypePartsLabel.Text = "Ps";
+                            ToolTip.SetToolTip(FindByNumbersResultTypePartsLabel, L[l]["find part sets"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of part numbers"]);
+                        }
+                        break;
+                    case NumbersResultType.GroupSets:
+                        {
+                            FindByNumbersResultTypeGroupsLabel.Text = "Gs";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeGroupsLabel, L[l]["find group sets"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of group numbers"]);
+                        }
+                        break;
+                    case NumbersResultType.HalfSets:
+                        {
+                            FindByNumbersResultTypeHalfsLabel.Text = "Hs";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeHalfsLabel, L[l]["find half sets"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of half numbers"]);
+                        }
+                        break;
+                    case NumbersResultType.QuarterSets:
+                        {
+                            FindByNumbersResultTypeQuartersLabel.Text = "Qs";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeQuartersLabel, L[l]["find quarter sets"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of quarter numbers"]);
+                        }
+                        break;
+                    case NumbersResultType.BowingSets:
+                        {
+                            FindByNumbersResultTypeBowingsLabel.Text = "Bs";
+                            ToolTip.SetToolTip(FindByNumbersResultTypeBowingsLabel, L[l]["find bowing sets"]);
+                            FindByNumbersNumberLabel.Text = L[l]["sum"];
+                            ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of bowing numbers"]);
+                        }
+                        break;
+                    
                     default:
                         {
                         }
@@ -37424,6 +38165,13 @@ public partial class MainForm : Form, ISubscriber
                                 case NumbersResultType.Words: { text = L[l]["word number"]; break; }
                                 case NumbersResultType.Verses: { text = L[l]["verse number"]; break; }
                                 case NumbersResultType.Chapters: { text = L[l]["chapter number"]; break; }
+                                case NumbersResultType.Pages: { text = L[l]["page number"]; break; }
+                                case NumbersResultType.Stations: { text = L[l]["station number"]; break; }
+                                case NumbersResultType.Parts: { text = L[l]["part number"]; break; }
+                                case NumbersResultType.Groups: { text = L[l]["group number"]; break; }
+                                case NumbersResultType.Halfs: { text = L[l]["half number"]; break; }
+                                case NumbersResultType.Quarters: { text = L[l]["quarter number"]; break; }
+                                case NumbersResultType.Bowings: { text = L[l]["bowing number"]; break; }
                                 default: { text = L[l]["number"]; break; }
                             }
                             ToolTip.SetToolTip(control, text);
@@ -37616,6 +38364,13 @@ public partial class MainForm : Form, ISubscriber
                                 case NumbersResultType.Words: { text = L[l]["word number"]; break; }
                                 case NumbersResultType.Verses: { text = L[l]["verse number"]; break; }
                                 case NumbersResultType.Chapters: { text = L[l]["chapter number"]; break; }
+                                case NumbersResultType.Pages: { text = L[l]["page number"]; break; }
+                                case NumbersResultType.Stations: { text = L[l]["station number"]; break; }
+                                case NumbersResultType.Parts: { text = L[l]["part number"]; break; }
+                                case NumbersResultType.Groups: { text = L[l]["group number"]; break; }
+                                case NumbersResultType.Halfs: { text = L[l]["half number"]; break; }
+                                case NumbersResultType.Quarters: { text = L[l]["quarter number"]; break; }
+                                case NumbersResultType.Bowings: { text = L[l]["bowing number"]; break; }
                                 default: { text = L[l]["number"]; break; }
                             }
                             ToolTip.SetToolTip(control, text);
@@ -38051,6 +38806,64 @@ public partial class MainForm : Form, ISubscriber
                     FindByNumbersResultTypeChaptersLabel.BorderStyle = BorderStyle.Fixed3D;
                 }
                 break;
+
+            case NumbersResultType.Pages:
+            case NumbersResultType.PageRanges:
+            case NumbersResultType.PageSets:
+                {
+                    FindByNumbersResultTypePagesLabel.BackColor = Color.SteelBlue;
+                    FindByNumbersResultTypePagesLabel.BorderStyle = BorderStyle.Fixed3D;
+                }
+                break;
+            case NumbersResultType.Stations:
+            case NumbersResultType.StationRanges:
+            case NumbersResultType.StationSets:
+                {
+                    FindByNumbersResultTypeStationsLabel.BackColor = Color.SteelBlue;
+                    FindByNumbersResultTypeStationsLabel.BorderStyle = BorderStyle.Fixed3D;
+                }
+                break;
+            case NumbersResultType.Parts:
+            case NumbersResultType.PartRanges:
+            case NumbersResultType.PartSets:
+                {
+                    FindByNumbersResultTypePartsLabel.BackColor = Color.SteelBlue;
+                    FindByNumbersResultTypePartsLabel.BorderStyle = BorderStyle.Fixed3D;
+                }
+                break;
+            case NumbersResultType.Groups:
+            case NumbersResultType.GroupRanges:
+            case NumbersResultType.GroupSets:
+                {
+                    FindByNumbersResultTypeGroupsLabel.BackColor = Color.SteelBlue;
+                    FindByNumbersResultTypeGroupsLabel.BorderStyle = BorderStyle.Fixed3D;
+                }
+                break;
+            case NumbersResultType.Halfs:
+            case NumbersResultType.HalfRanges:
+            case NumbersResultType.HalfSets:
+                {
+                    FindByNumbersResultTypeHalfsLabel.BackColor = Color.SteelBlue;
+                    FindByNumbersResultTypeHalfsLabel.BorderStyle = BorderStyle.Fixed3D;
+                }
+                break;
+            case NumbersResultType.Quarters:
+            case NumbersResultType.QuarterRanges:
+            case NumbersResultType.QuarterSets:
+                {
+                    FindByNumbersResultTypeQuartersLabel.BackColor = Color.SteelBlue;
+                    FindByNumbersResultTypeQuartersLabel.BorderStyle = BorderStyle.Fixed3D;
+                }
+                break;
+            case NumbersResultType.Bowings:
+            case NumbersResultType.BowingRanges:
+            case NumbersResultType.BowingSets:
+                {
+                    FindByNumbersResultTypeBowingsLabel.BackColor = Color.SteelBlue;
+                    FindByNumbersResultTypeBowingsLabel.BorderStyle = BorderStyle.Fixed3D;
+                }
+                break;
+
             default:
                 break;
         }
@@ -38609,7 +39422,21 @@ public partial class MainForm : Form, ISubscriber
             text += ((number > 0) ? (L[l]["number"] + number_operator_symbol + number.ToString()) : ((number_number_type != NumberType.None) ? (L[l]["number"] + number_operator_symbol + FindByNumbersNumberNumberTypeLabel.Text) : ""));
             if (
                 (m_numbers_result_type == NumbersResultType.ChapterRanges) ||
-                (m_numbers_result_type == NumbersResultType.ChapterSets)
+                (m_numbers_result_type == NumbersResultType.PageRanges) ||
+                (m_numbers_result_type == NumbersResultType.StationRanges) ||
+                (m_numbers_result_type == NumbersResultType.PartRanges) ||
+                (m_numbers_result_type == NumbersResultType.GroupRanges) ||
+                (m_numbers_result_type == NumbersResultType.HalfRanges) ||
+                (m_numbers_result_type == NumbersResultType.QuarterRanges) ||
+                (m_numbers_result_type == NumbersResultType.BowingRanges) ||
+                (m_numbers_result_type == NumbersResultType.ChapterSets) ||
+                (m_numbers_result_type == NumbersResultType.PageSets) ||
+                (m_numbers_result_type == NumbersResultType.StationSets) ||
+                (m_numbers_result_type == NumbersResultType.PartSets) ||
+                (m_numbers_result_type == NumbersResultType.GroupSets) ||
+                (m_numbers_result_type == NumbersResultType.HalfSets) ||
+                (m_numbers_result_type == NumbersResultType.QuarterSets) ||
+                (m_numbers_result_type == NumbersResultType.BowingSets)
                )
             {
                 text += (((text.Length > 0) && ((chapter_count > 0) || (chapter_count_number_type != NumberType.None))) ? " " : "") + ((chapter_count > 0) ? (L[l]["chapters"] + chapter_count_operator_symbol + chapter_count.ToString()) : ((chapter_count_number_type != NumberType.None) ? (L[l]["chapters"] + chapter_count_operator_symbol + FindByNumbersChaptersNumberTypeLabel.Text) : ""));
@@ -38617,25 +39444,67 @@ public partial class MainForm : Form, ISubscriber
 
             if (
                 (m_numbers_result_type == NumbersResultType.Chapters) ||
-                (m_numbers_result_type == NumbersResultType.ChapterRanges) ||
-                (m_numbers_result_type == NumbersResultType.ChapterSets) ||
+                (m_numbers_result_type == NumbersResultType.Pages) ||
+                (m_numbers_result_type == NumbersResultType.Stations) ||
+                (m_numbers_result_type == NumbersResultType.Parts) ||
+                (m_numbers_result_type == NumbersResultType.Groups) ||
+                (m_numbers_result_type == NumbersResultType.Halfs) ||
+                (m_numbers_result_type == NumbersResultType.Quarters) ||
+                (m_numbers_result_type == NumbersResultType.Bowings) ||
                 (m_numbers_result_type == NumbersResultType.VerseRanges) ||
-                (m_numbers_result_type == NumbersResultType.VerseSets)
+                (m_numbers_result_type == NumbersResultType.ChapterRanges) ||
+                (m_numbers_result_type == NumbersResultType.PageRanges) ||
+                (m_numbers_result_type == NumbersResultType.StationRanges) ||
+                (m_numbers_result_type == NumbersResultType.PartRanges) ||
+                (m_numbers_result_type == NumbersResultType.GroupRanges) ||
+                (m_numbers_result_type == NumbersResultType.HalfRanges) ||
+                (m_numbers_result_type == NumbersResultType.QuarterRanges) ||
+                (m_numbers_result_type == NumbersResultType.BowingRanges) ||
+                (m_numbers_result_type == NumbersResultType.VerseSets) ||
+                (m_numbers_result_type == NumbersResultType.ChapterSets) ||
+                (m_numbers_result_type == NumbersResultType.PageSets) ||
+                (m_numbers_result_type == NumbersResultType.StationSets) ||
+                (m_numbers_result_type == NumbersResultType.PartSets) ||
+                (m_numbers_result_type == NumbersResultType.GroupSets) ||
+                (m_numbers_result_type == NumbersResultType.HalfSets) ||
+                (m_numbers_result_type == NumbersResultType.QuarterSets) ||
+                (m_numbers_result_type == NumbersResultType.BowingSets)
                )
             {
                 text += (((text.Length > 0) && ((verse_count > 0) || (verse_count_number_type != NumberType.None))) ? " " : "") + ((verse_count > 0) ? (L[l]["verses"] + verse_count_operator_symbol + verse_count.ToString()) : ((verse_count_number_type != NumberType.None) ? (L[l]["verses"] + verse_count_operator_symbol + FindByNumbersVersesNumberTypeLabel.Text) : ""));
             }
 
             if (
-                (m_numbers_result_type == NumbersResultType.Chapters) ||
-                (m_numbers_result_type == NumbersResultType.ChapterRanges) ||
-                (m_numbers_result_type == NumbersResultType.ChapterSets) ||
-                (m_numbers_result_type == NumbersResultType.Verses) ||
-                (m_numbers_result_type == NumbersResultType.VerseRanges) ||
-                (m_numbers_result_type == NumbersResultType.VerseSets) ||
                 (m_numbers_result_type == NumbersResultType.Sentences) ||
+                (m_numbers_result_type == NumbersResultType.Verses) ||
+                (m_numbers_result_type == NumbersResultType.Chapters) ||
+                (m_numbers_result_type == NumbersResultType.Pages) ||
+                (m_numbers_result_type == NumbersResultType.Stations) ||
+                (m_numbers_result_type == NumbersResultType.Parts) ||
+                (m_numbers_result_type == NumbersResultType.Groups) ||
+                (m_numbers_result_type == NumbersResultType.Halfs) ||
+                (m_numbers_result_type == NumbersResultType.Quarters) ||
+                (m_numbers_result_type == NumbersResultType.Bowings) ||
                 (m_numbers_result_type == NumbersResultType.WordRanges) ||
-                (m_numbers_result_type == NumbersResultType.WordSets)
+                (m_numbers_result_type == NumbersResultType.VerseRanges) ||
+                (m_numbers_result_type == NumbersResultType.ChapterRanges) ||
+                (m_numbers_result_type == NumbersResultType.PageRanges) ||
+                (m_numbers_result_type == NumbersResultType.StationRanges) ||
+                (m_numbers_result_type == NumbersResultType.PartRanges) ||
+                (m_numbers_result_type == NumbersResultType.GroupRanges) ||
+                (m_numbers_result_type == NumbersResultType.HalfRanges) ||
+                (m_numbers_result_type == NumbersResultType.QuarterRanges) ||
+                (m_numbers_result_type == NumbersResultType.BowingRanges) ||
+                (m_numbers_result_type == NumbersResultType.WordSets) ||
+                (m_numbers_result_type == NumbersResultType.VerseSets) ||
+                (m_numbers_result_type == NumbersResultType.ChapterSets) ||
+                (m_numbers_result_type == NumbersResultType.PageSets) ||
+                (m_numbers_result_type == NumbersResultType.StationSets) ||
+                (m_numbers_result_type == NumbersResultType.PartSets) ||
+                (m_numbers_result_type == NumbersResultType.GroupSets) ||
+                (m_numbers_result_type == NumbersResultType.HalfSets) ||
+                (m_numbers_result_type == NumbersResultType.QuarterSets) ||
+                (m_numbers_result_type == NumbersResultType.BowingSets)
                )
             {
                 text += (((text.Length > 0) && ((word_count > 0) || (word_count_number_type != NumberType.None))) ? " " : "") + ((word_count > 0) ? (L[l]["words"] + word_count_operator_symbol + word_count.ToString()) : ((word_count_number_type != NumberType.None) ? (L[l]["words"] + word_count_operator_symbol + FindByNumbersWordsNumberTypeLabel.Text) : ""));
@@ -38650,7 +39519,7 @@ public partial class MainForm : Form, ISubscriber
             NumberQuery query = new NumberQuery();
 
             query.Number = number;
-            query.ChapterCount = chapter_count;
+            query.PartitionCount = chapter_count;
             query.VerseCount = verse_count;
             query.WordCount = word_count;
             query.LetterCount = letter_count;
@@ -38660,7 +39529,7 @@ public partial class MainForm : Form, ISubscriber
             query.ValueDigitalRoot = value_digital_root;
 
             query.NumberNumberType = number_number_type;
-            query.ChapterCountNumberType = chapter_count_number_type;
+            query.PartitionCountNumberType = chapter_count_number_type;
             query.VerseCountNumberType = verse_count_number_type;
             query.WordCountNumberType = word_count_number_type;
             query.LetterCountNumberType = letter_count_number_type;
@@ -38670,7 +39539,7 @@ public partial class MainForm : Form, ISubscriber
             query.ValueDigitalRootNumberType = value_digital_root_number_type;
 
             query.NumberComparisonOperator = number_comparison_operator;
-            query.ChapterCountComparisonOperator = chapter_count_comparison_operator;
+            query.PartitionCountComparisonOperator = chapter_count_comparison_operator;
             query.VerseCountComparisonOperator = verse_count_comparison_operator;
             query.WordCountComparisonOperator = word_count_comparison_operator;
             query.LetterCountComparisonOperator = letter_count_comparison_operator;
@@ -38680,7 +39549,7 @@ public partial class MainForm : Form, ISubscriber
             query.ValueDigitalRootComparisonOperator = value_digital_root_comparison_operator;
 
             query.NumberRemainder = number_remainder;
-            query.ChapterCountRemainder = chapter_count_remainder;
+            query.PartitionCountRemainder = chapter_count_remainder;
             query.VerseCountRemainder = verse_count_remainder;
             query.WordCountRemainder = word_count_remainder;
             query.LetterCountRemainder = letter_count_remainder;
@@ -38794,6 +39663,7 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                         break;
+
                     case NumbersResultType.Chapters:
                         {
                             query.NumberScope = m_chapter_number_scope;
@@ -38827,6 +39697,246 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                         break;
+
+
+                    case NumbersResultType.Pages:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindPages(query);
+                            if (m_client.FoundPages != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["page"] : " " + L[l]["pages"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundPages(true, true);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.PageRanges:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindPageRanges(query);
+                            if (m_client.FoundPageRanges != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["page range"] : " " + L[l]["page ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundPageRanges(true, true);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.PageSets:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindPageSets(query);
+                            if (m_client.FoundPageSets != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["page set"] : " " + L[l]["page sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundPageSets(true, true);
+                            }
+                        }
+                        break;
+
+                    case NumbersResultType.Stations:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindStations(query);
+                            if (m_client.FoundStations != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["station"] : " " + L[l]["stations"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundStations(true, true);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.StationRanges:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindStationRanges(query);
+                            if (m_client.FoundStationRanges != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["station range"] : " " + L[l]["station ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundStationRanges(true, true);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.StationSets:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindStationSets(query);
+                            if (m_client.FoundStationSets != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["station set"] : " " + L[l]["station sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundStationSets(true, true);
+                            }
+                        }
+                        break;
+
+                    case NumbersResultType.Parts:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindParts(query);
+                            if (m_client.FoundParts != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["part"] : " " + L[l]["parts"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundParts(true, true);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.PartRanges:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindPartRanges(query);
+                            if (m_client.FoundPartRanges != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["part range"] : " " + L[l]["part ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundPartRanges(true, true);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.PartSets:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindPartSets(query);
+                            if (m_client.FoundPartSets != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["part set"] : " " + L[l]["part sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundPartSets(true, true);
+                            }
+                        }
+                        break;
+
+                    case NumbersResultType.Groups:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindGroups(query);
+                            if (m_client.FoundGroups != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["group"] : " " + L[l]["groups"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundGroups(true, true);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.GroupRanges:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindGroupRanges(query);
+                            if (m_client.FoundGroupRanges != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["group range"] : " " + L[l]["group ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundGroupRanges(true, true);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.GroupSets:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindGroupSets(query);
+                            if (m_client.FoundGroupSets != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["group set"] : " " + L[l]["group sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundGroupSets(true, true);
+                            }
+                        }
+                        break;
+
+                    case NumbersResultType.Halfs:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindHalfs(query);
+                            if (m_client.FoundHalfs != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["half"] : " " + L[l]["halfs"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundHalfs(true, true);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.HalfRanges:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindHalfRanges(query);
+                            if (m_client.FoundHalfRanges != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["half range"] : " " + L[l]["half ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundHalfRanges(true, true);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.HalfSets:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindHalfSets(query);
+                            if (m_client.FoundHalfSets != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["half set"] : " " + L[l]["half sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundHalfSets(true, true);
+                            }
+                        }
+                        break;
+
+                    case NumbersResultType.Quarters:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindQuarters(query);
+                            if (m_client.FoundQuarters != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["quarter"] : " " + L[l]["quarters"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundQuarters(true, true);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.QuarterRanges:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindQuarterRanges(query);
+                            if (m_client.FoundQuarterRanges != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["quarter range"] : " " + L[l]["quarter ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundQuarterRanges(true, true);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.QuarterSets:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindQuarterSets(query);
+                            if (m_client.FoundQuarterSets != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["quarter set"] : " " + L[l]["quarter sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundQuarterSets(true, true);
+                            }
+                        }
+                        break;
+
+                    case NumbersResultType.Bowings:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindBowings(query);
+                            if (m_client.FoundBowings != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["bowing"] : " " + L[l]["bowings"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundBowings(true, true);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.BowingRanges:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindBowingRanges(query);
+                            if (m_client.FoundBowingRanges != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["bowing range"] : " " + L[l]["bowing ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundBowingRanges(true, true);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.BowingSets:
+                        {
+                            query.NumberScope = m_chapter_number_scope;
+                            match_count = m_client.FindBowingSets(query);
+                            if (m_client.FoundBowingSets != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["bowing set"] : " " + L[l]["bowing sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundBowingSets(true, true);
+                            }
+                        }
+                        break;
+                    
                     default:
                         break;
                 }
@@ -39831,70 +40941,6 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void CalculateFoundPhrasesStatistics()
-    {
-        if (m_client != null)
-        {
-            if (m_client.FoundPhrases != null)
-            {
-                int word_count = 0;
-                int letter_count = 0;
-                StringBuilder phrase_str = new StringBuilder();
-                foreach (Phrase phrase in m_client.FoundPhrases)
-                {
-                    if (phrase != null)
-                    {
-                        if (phrase.Text != null)
-                        {
-                            word_count += phrase.Text.Split(' ').Length;
-
-                            string phrase_nospaces = phrase.Text.SimplifyTo(m_client.NumerologySystem.TextMode).Replace(" ", "");
-                            letter_count += phrase_nospaces.Length;
-
-                            phrase_str.AppendLine(phrase.Text);
-                        }
-                    }
-                }
-
-                WordsTextBox.Text = Radix.Encode(word_count, m_radix);
-                WordsTextBox.ForeColor = Numbers.GetNumberTypeColor(WordsTextBox.Text, m_radix);
-                WordsTextBox.BackColor = (Numbers.Compare(word_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
-                WordsTextBox.Refresh();
-                DecimalWordsTextBox.Text = word_count.ToString();
-                DecimalWordsTextBox.ForeColor = Numbers.GetNumberTypeColor(word_count);
-                DecimalWordsTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
-                DecimalWordsTextBox.Refresh();
-                LettersTextBox.Text = Radix.Encode(letter_count, m_radix);
-                LettersTextBox.ForeColor = Numbers.GetNumberTypeColor(LettersTextBox.Text, m_radix);
-                LettersTextBox.BackColor = (Numbers.Compare(letter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
-                LettersTextBox.Refresh();
-                DecimalLettersTextBox.Text = letter_count.ToString();
-                DecimalLettersTextBox.ForeColor = Numbers.GetNumberTypeColor(letter_count);
-                DecimalLettersTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
-                DecimalLettersTextBox.Refresh();
-
-                if (m_client.CalculationMode == CalculationMode.SumOfLetterValues)
-                {
-                    long value = 0L;
-                    foreach (Phrase phrase in m_client.FoundPhrases)
-                    {
-                        if (phrase != null)
-                        {
-                            if (phrase.Text != null)
-                            {
-                                value += m_client.CalculateValue(phrase.Text);
-                            }
-                        }
-                    }
-                    FactorizeValue(value, "Value", true);
-                }
-                else
-                {
-                    CalculateValueAndDisplayFactors(phrase_str.ToString());
-                }
-            }
-        }
-    }
     private void DisplayFoundVerseRanges(bool add_to_history, bool colorize_chapters_by_matches)
     {
         this.Cursor = Cursors.WaitCursor;
@@ -40374,6 +41420,136 @@ public partial class MainForm : Form, ISubscriber
                 PictureBox.Visible = false;
             }
             this.Cursor = Cursors.Default;
+        }
+    }
+    private void DisplayFoundPages(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+        DisplayFoundVerses(add_to_history, colorize_chapters_by_matches);
+    }
+    private void DisplayFoundPageRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+        DisplayFoundVerseRanges(add_to_history, colorize_chapters_by_matches);
+    }
+    private void DisplayFoundPageSets(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+        DisplayFoundVerseSets(add_to_history, colorize_chapters_by_matches);
+    }
+    private void DisplayFoundStations(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundStationRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundStationSets(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundParts(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundPartRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundPartSets(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundGroups(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundGroupRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundGroupSets(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundHalfs(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundHalfRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundHalfSets(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundQuarters(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundQuarterRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundQuarterSets(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundBowings(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundBowingRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void DisplayFoundBowingSets(bool add_to_history, bool colorize_chapters_by_matches)
+    {
+    }
+    private void CalculateFoundPhrasesStatistics()
+    {
+        if (m_client != null)
+        {
+            if (m_client.FoundPhrases != null)
+            {
+                int word_count = 0;
+                int letter_count = 0;
+                StringBuilder phrase_str = new StringBuilder();
+                foreach (Phrase phrase in m_client.FoundPhrases)
+                {
+                    if (phrase != null)
+                    {
+                        if (phrase.Text != null)
+                        {
+                            word_count += phrase.Text.Split(' ').Length;
+
+                            string phrase_nospaces = phrase.Text.SimplifyTo(m_client.NumerologySystem.TextMode).Replace(" ", "");
+                            letter_count += phrase_nospaces.Length;
+
+                            phrase_str.AppendLine(phrase.Text);
+                        }
+                    }
+                }
+
+                WordsTextBox.Text = Radix.Encode(word_count, m_radix);
+                WordsTextBox.ForeColor = Numbers.GetNumberTypeColor(WordsTextBox.Text, m_radix);
+                WordsTextBox.BackColor = (Numbers.Compare(word_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
+                WordsTextBox.Refresh();
+                DecimalWordsTextBox.Text = word_count.ToString();
+                DecimalWordsTextBox.ForeColor = Numbers.GetNumberTypeColor(word_count);
+                DecimalWordsTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
+                DecimalWordsTextBox.Refresh();
+                LettersTextBox.Text = Radix.Encode(letter_count, m_radix);
+                LettersTextBox.ForeColor = Numbers.GetNumberTypeColor(LettersTextBox.Text, m_radix);
+                LettersTextBox.BackColor = (Numbers.Compare(letter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
+                LettersTextBox.Refresh();
+                DecimalLettersTextBox.Text = letter_count.ToString();
+                DecimalLettersTextBox.ForeColor = Numbers.GetNumberTypeColor(letter_count);
+                DecimalLettersTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
+                DecimalLettersTextBox.Refresh();
+
+                if (m_client.CalculationMode == CalculationMode.SumOfLetterValues)
+                {
+                    long value = 0L;
+                    foreach (Phrase phrase in m_client.FoundPhrases)
+                    {
+                        if (phrase != null)
+                        {
+                            if (phrase.Text != null)
+                            {
+                                value += m_client.CalculateValue(phrase.Text);
+                            }
+                        }
+                    }
+                    FactorizeValue(value, "Value", true);
+                }
+                else
+                {
+                    CalculateValueAndDisplayFactors(phrase_str.ToString());
+                }
+            }
         }
     }
 

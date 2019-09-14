@@ -10,7 +10,7 @@ namespace Model
         /// </summary>
         public int Number;
         public NumberScope NumberScope;
-        public int ChapterCount;
+        public int PartitionCount;
         public int VerseCount;
         public int WordCount;
         public int LetterCount;
@@ -20,7 +20,7 @@ namespace Model
         public int ValueDigitalRoot;
 
         public NumberType NumberNumberType;
-        public NumberType ChapterCountNumberType;
+        public NumberType PartitionCountNumberType;
         public NumberType VerseCountNumberType;
         public NumberType WordCountNumberType;
         public NumberType LetterCountNumberType;
@@ -30,7 +30,7 @@ namespace Model
         public NumberType ValueDigitalRootNumberType;
 
         public ComparisonOperator NumberComparisonOperator;
-        public ComparisonOperator ChapterCountComparisonOperator;
+        public ComparisonOperator PartitionCountComparisonOperator;
         public ComparisonOperator VerseCountComparisonOperator;
         public ComparisonOperator WordCountComparisonOperator;
         public ComparisonOperator LetterCountComparisonOperator;
@@ -39,7 +39,7 @@ namespace Model
         public ComparisonOperator ValueDigitSumComparisonOperator;
         public ComparisonOperator ValueDigitalRootComparisonOperator;
         public int NumberRemainder;
-        public int ChapterCountRemainder;
+        public int PartitionCountRemainder;
         public int VerseCountRemainder;
         public int WordCountRemainder;
         public int LetterCountRemainder;
@@ -107,22 +107,43 @@ namespace Model
                         );
                     }
                 case NumbersResultType.Chapters:
+                case NumbersResultType.Pages:
+                case NumbersResultType.Stations:
+                case NumbersResultType.Parts:
+                case NumbersResultType.Groups:
+                case NumbersResultType.Halfs:
+                case NumbersResultType.Quarters:
+                case NumbersResultType.Bowings:
                     {
                         return
                         (
                             IsValidNumberSearch()
                             ||
-                            IsValidChapterSearch()
+                            IsValidPartitionSearch()
                         );
                     }
                 case NumbersResultType.ChapterRanges:
+                case NumbersResultType.PageRanges:
+                case NumbersResultType.StationRanges:
+                case NumbersResultType.PartRanges:
+                case NumbersResultType.GroupRanges:
+                case NumbersResultType.HalfRanges:
+                case NumbersResultType.QuarterRanges:
+                case NumbersResultType.BowingRanges:
                 case NumbersResultType.ChapterSets:
+                case NumbersResultType.PageSets:
+                case NumbersResultType.StationSets:
+                case NumbersResultType.PartSets:
+                case NumbersResultType.GroupSets:
+                case NumbersResultType.HalfSets:
+                case NumbersResultType.QuarterSets:
+                case NumbersResultType.BowingSets:
                     {
                         return
                         (
-                            (ChapterCount != 1)
+                            (PartitionCount != 1)
                             &&
-                            IsValidChapterSearch()
+                            IsValidPartitionSearch()
                         );
                     }
                 default:
@@ -139,7 +160,7 @@ namespace Model
                     (NumberNumberType != NumberType.None)
                    );
         }
-        private bool IsValidChapterSearch()
+        private bool IsValidPartitionSearch()
         {
             return (
                     (VerseCount > 0) ||
