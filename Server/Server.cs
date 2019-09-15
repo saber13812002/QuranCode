@@ -15616,6 +15616,9 @@ public class Server : IPublisher
     {
         if (chapters != null)
         {
+            int chapter_sum; int verse_sum; int word_sum; int letter_sum;
+            CalculateSums(chapters, out chapter_sum, out verse_sum, out word_sum, out letter_sum);
+
             long value = 0L;
             int sum = 0;
             foreach (Chapter chapter in chapters)
@@ -15647,8 +15650,6 @@ public class Server : IPublisher
                 }
             }
 
-            int chapter_sum; int verse_sum; int word_sum; int letter_sum;
-            CalculateSums(chapters, out chapter_sum, out verse_sum, out word_sum, out letter_sum);
             sum = 0;
             foreach (Chapter chapter in chapters)
             {
@@ -15699,6 +15700,11 @@ public class Server : IPublisher
                 }
             }
 
+            sum = 0;
+            foreach (Chapter chapter in chapters)
+            {
+                sum += chapter.WordCount;
+            }
             if (query.WordCountNumberType == NumberType.Natural)
             {
                 if (!Numbers.Compare(word_sum, sum, query.WordCountComparisonOperator, query.WordCountRemainder))
@@ -15918,6 +15924,9 @@ public class Server : IPublisher
     {
         if (pages != null)
         {
+            int page_sum; int verse_sum; int word_sum; int letter_sum;
+            CalculateSums(pages, out page_sum, out verse_sum, out word_sum, out letter_sum);
+
             long value = 0L;
             int sum = 0;
             foreach (Page page in pages)
@@ -15949,8 +15958,6 @@ public class Server : IPublisher
                 }
             }
 
-            int page_sum; int verse_sum; int word_sum; int letter_sum;
-            CalculateSums(pages, out page_sum, out verse_sum, out word_sum, out letter_sum);
             sum = 0;
             foreach (Page page in pages)
             {

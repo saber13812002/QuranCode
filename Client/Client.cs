@@ -1059,19 +1059,97 @@ public class Client : IPublisher, ISubscriber
     public List<Page> FoundPages
     {
         set { m_found_pages = value; }
-        get { return m_found_pages; }
+        get
+        {
+            if (m_found_pages == null) return null;
+            if (m_filter_chapters == null) return m_found_pages;
+
+            List<Page> filtered_found_pages = new List<Page>();
+            foreach (Page page in m_found_pages)
+            {
+                if (page != null)
+                {
+                    if (page.Verses[0].Chapter != null)
+                    {
+                        if (m_filter_chapters.Contains(page.Verses[0].Chapter))
+                        {
+                            filtered_found_pages.Add(page);
+                        }
+                    }
+                }
+            }
+            return filtered_found_pages;
+        }
     }
     private List<List<Page>> m_found_page_ranges = null;
     public List<List<Page>> FoundPageRanges
     {
         set { m_found_page_ranges = value; }
-        get { return m_found_page_ranges; }
+        get
+        {
+            if (m_found_page_ranges == null) return null;
+            if (m_filter_chapters == null) return m_found_page_ranges;
+
+            List<List<Page>> filtered_found_page_ranges = new List<List<Page>>();
+            foreach (List<Page> range in m_found_page_ranges)
+            {
+                bool valid_range = true;
+                foreach (Page page in range)
+                {
+                    if (page != null)
+                    {
+                        if (page.Verses[0].Chapter != null)
+                        {
+                            if (!m_filter_chapters.Contains(page.Verses[0].Chapter))
+                            {
+                                valid_range = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (valid_range)
+                {
+                    filtered_found_page_ranges.Add(range);
+                }
+            }
+            return filtered_found_page_ranges;
+        }
     }
     private List<List<Page>> m_found_page_sets = null;
     public List<List<Page>> FoundPageSets
     {
         set { m_found_page_sets = value; }
-        get { return m_found_page_sets; }
+        get
+        {
+            if (m_found_page_sets == null) return null;
+            if (m_filter_chapters == null) return m_found_page_sets;
+
+            List<List<Page>> filtered_found_page_sets = new List<List<Page>>();
+            foreach (List<Page> set in m_found_page_sets)
+            {
+                bool valid_set = true;
+                foreach (Page page in set)
+                {
+                    if (page != null)
+                    {
+                        if (page.Verses[0].Chapter != null)
+                        {
+                            if (!m_filter_chapters.Contains(page.Verses[0].Chapter))
+                            {
+                                valid_set = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (valid_set)
+                {
+                    filtered_found_page_sets.Add(set);
+                }
+            }
+            return filtered_found_page_sets;
+        }
     }
 
     private List<Station> m_found_stations = null;
@@ -1926,13 +2004,14 @@ public class Client : IPublisher, ISubscriber
         m_found_page_ranges = Server.FindPageRanges(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_page_ranges != null)
         {
-            m_found_verses = new List<Verse>();
+            m_found_verse_ranges = new List<List<Verse>>();
             foreach (List<Page> range in m_found_page_ranges)
             {
                 foreach (Page page in range)
                 {
                     if (page != null)
                     {
+                        m_found_verse_ranges.Add(page.Verses);
                         m_found_verses.AddRange(page.Verses);
                     }
                 }

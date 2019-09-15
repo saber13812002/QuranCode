@@ -1816,38 +1816,6 @@ namespace Model
             }
             return result;
         }
-        //public List<Chapter> GetCompleteChapters(List<Verse> verses)
-        //{
-        //    if (verses == null) return null;
-
-        //    List<Chapter> result = new List<Chapter>();
-        //    Chapter chapter = null;
-        //    foreach (Verse verse in verses)
-        //    {
-        //        if (chapter != verse.Chapter)
-        //        {
-        //            chapter = verse.Chapter;
-        //            if (!result.Contains(chapter))
-        //            {
-        //                bool include_chapter = true;
-        //                foreach (Verse chapter_verse in chapter.Verses)
-        //                {
-        //                    if (!verses.Contains(chapter_verse))
-        //                    {
-        //                        include_chapter = false;
-        //                        break;
-        //                    }
-        //                }
-
-        //                if (include_chapter)
-        //                {
-        //                    result.Add(chapter);
-        //                }
-        //            }
-        //        }
-        //    }
-        //    return result;
-        //}
 
         public void SortChapters(ChapterSortMethod sort_method, ChapterSortOrder sort_order, bool pin_chapter1)
         {

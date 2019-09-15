@@ -13819,103 +13819,103 @@ public partial class MainForm : Form, ISubscriber
                 switch (m_numbers_result_type)
                 {
                     case NumbersResultType.Verses:
-                        DisplayFoundVerses(false, false);
+                        DisplayFoundVerses(false, true);
                         break;
                     case NumbersResultType.VerseRanges:
-                        DisplayFoundVerseRanges(false, false);
+                        DisplayFoundVerseRanges(false, true);
                         break;
                     case NumbersResultType.VerseSets:
-                        DisplayFoundVerseSets(false, false);
+                        DisplayFoundVerseSets(false, true);
                         break;
 
                     case NumbersResultType.Chapters:
-                        DisplayFoundChapters(false, false);
+                        DisplayFoundChapters(false, true);
                         break;
                     case NumbersResultType.ChapterRanges:
-                        DisplayFoundChapterRanges(false, false);
+                        DisplayFoundChapterRanges(false, true);
                         break;
                     case NumbersResultType.ChapterSets:
-                        DisplayFoundChapterSets(false, false);
+                        DisplayFoundChapterSets(false, true);
                         break;
 
                     case NumbersResultType.Pages:
-                        DisplayFoundPages(false, false);
+                        DisplayFoundPages(false, true);
                         break;
                     case NumbersResultType.PageRanges:
-                        DisplayFoundPageRanges(false, false);
+                        DisplayFoundPageRanges(false, true);
                         break;
                     case NumbersResultType.PageSets:
-                        DisplayFoundPageSets(false, false);
+                        DisplayFoundPageSets(false, true);
                         break;
 
                     case NumbersResultType.Stations:
-                        DisplayFoundStations(false, false);
+                        DisplayFoundStations(false, true);
                         break;
                     case NumbersResultType.StationRanges:
-                        DisplayFoundStationRanges(false, false);
+                        DisplayFoundStationRanges(false, true);
                         break;
                     case NumbersResultType.StationSets:
-                        DisplayFoundStationSets(false, false);
+                        DisplayFoundStationSets(false, true);
                         break;
 
                     case NumbersResultType.Parts:
-                        DisplayFoundParts(false, false);
+                        DisplayFoundParts(false, true);
                         break;
                     case NumbersResultType.PartRanges:
-                        DisplayFoundPartRanges(false, false);
+                        DisplayFoundPartRanges(false, true);
                         break;
                     case NumbersResultType.PartSets:
-                        DisplayFoundPartSets(false, false);
+                        DisplayFoundPartSets(false, true);
                         break;
 
                     case NumbersResultType.Groups:
-                        DisplayFoundGroups(false, false);
+                        DisplayFoundGroups(false, true);
                         break;
                     case NumbersResultType.GroupRanges:
-                        DisplayFoundGroupRanges(false, false);
+                        DisplayFoundGroupRanges(false, true);
                         break;
                     case NumbersResultType.GroupSets:
-                        DisplayFoundGroupSets(false, false);
+                        DisplayFoundGroupSets(false, true);
                         break;
 
                     case NumbersResultType.Halfs:
-                        DisplayFoundHalfs(false, false);
+                        DisplayFoundHalfs(false, true);
                         break;
                     case NumbersResultType.HalfRanges:
-                        DisplayFoundHalfRanges(false, false);
+                        DisplayFoundHalfRanges(false, true);
                         break;
                     case NumbersResultType.HalfSets:
-                        DisplayFoundHalfSets(false, false);
+                        DisplayFoundHalfSets(false, true);
                         break;
 
                     case NumbersResultType.Quarters:
-                        DisplayFoundQuarters(false, false);
+                        DisplayFoundQuarters(false, true);
                         break;
                     case NumbersResultType.QuarterRanges:
-                        DisplayFoundQuarterRanges(false, false);
+                        DisplayFoundQuarterRanges(false, true);
                         break;
                     case NumbersResultType.QuarterSets:
-                        DisplayFoundQuarterSets(false, false);
+                        DisplayFoundQuarterSets(false, true);
                         break;
 
                     case NumbersResultType.Bowings:
-                        DisplayFoundBowings(false, false);
+                        DisplayFoundBowings(false, true);
                         break;
                     case NumbersResultType.BowingRanges:
-                        DisplayFoundBowingRanges(false, false);
+                        DisplayFoundBowingRanges(false, true);
                         break;
                     case NumbersResultType.BowingSets:
-                        DisplayFoundBowingSets(false, false);
+                        DisplayFoundBowingSets(false, true);
                         break;
 
                     default:
-                        DisplayFoundVerses(false, false);
+                        DisplayFoundVerses(false, true);
                         break;
                 }
             }
             else
             {
-                DisplayFoundVerses(false, false);
+                DisplayFoundVerses(false, true);
             }
 
             //SearchResultTextBox.Focus();
@@ -21442,103 +21442,103 @@ public partial class MainForm : Form, ISubscriber
                             switch (m_numbers_result_type)
                             {
                                 case NumbersResultType.Verses:
-                                    DisplayFoundVerses(false, false);
+                                    DisplayFoundVerses(false, true);
                                     break;
                                 case NumbersResultType.VerseRanges:
-                                    DisplayFoundVerseRanges(false, false);
+                                    DisplayFoundVerseRanges(false, true);
                                     break;
                                 case NumbersResultType.VerseSets:
-                                    DisplayFoundVerseSets(false, false);
+                                    DisplayFoundVerseSets(false, true);
                                     break;
 
                                 case NumbersResultType.Chapters:
-                                    DisplayFoundChapters(false, false);
+                                    DisplayFoundChapters(false, true);
                                     break;
                                 case NumbersResultType.ChapterRanges:
-                                    DisplayFoundChapterRanges(false, false);
+                                    DisplayFoundChapterRanges(false, true);
                                     break;
                                 case NumbersResultType.ChapterSets:
-                                    DisplayFoundChapterSets(false, false);
+                                    DisplayFoundChapterSets(false, true);
                                     break;
 
                                 case NumbersResultType.Pages:
-                                    DisplayFoundPages(false, false);
+                                    DisplayFoundPages(false, true);
                                     break;
                                 case NumbersResultType.PageRanges:
-                                    DisplayFoundPageRanges(false, false);
+                                    DisplayFoundPageRanges(false, true);
                                     break;
                                 case NumbersResultType.PageSets:
-                                    DisplayFoundPageSets(false, false);
+                                    DisplayFoundPageSets(false, true);
                                     break;
 
                                 case NumbersResultType.Stations:
-                                    DisplayFoundStations(false, false);
+                                    DisplayFoundStations(false, true);
                                     break;
                                 case NumbersResultType.StationRanges:
-                                    DisplayFoundStationRanges(false, false);
+                                    DisplayFoundStationRanges(false, true);
                                     break;
                                 case NumbersResultType.StationSets:
-                                    DisplayFoundStationSets(false, false);
+                                    DisplayFoundStationSets(false, true);
                                     break;
 
                                 case NumbersResultType.Parts:
-                                    DisplayFoundParts(false, false);
+                                    DisplayFoundParts(false, true);
                                     break;
                                 case NumbersResultType.PartRanges:
-                                    DisplayFoundPartRanges(false, false);
+                                    DisplayFoundPartRanges(false, true);
                                     break;
                                 case NumbersResultType.PartSets:
-                                    DisplayFoundPartSets(false, false);
+                                    DisplayFoundPartSets(false, true);
                                     break;
 
                                 case NumbersResultType.Groups:
-                                    DisplayFoundGroups(false, false);
+                                    DisplayFoundGroups(false, true);
                                     break;
                                 case NumbersResultType.GroupRanges:
-                                    DisplayFoundGroupRanges(false, false);
+                                    DisplayFoundGroupRanges(false, true);
                                     break;
                                 case NumbersResultType.GroupSets:
-                                    DisplayFoundGroupSets(false, false);
+                                    DisplayFoundGroupSets(false, true);
                                     break;
 
                                 case NumbersResultType.Halfs:
-                                    DisplayFoundHalfs(false, false);
+                                    DisplayFoundHalfs(false, true);
                                     break;
                                 case NumbersResultType.HalfRanges:
-                                    DisplayFoundHalfRanges(false, false);
+                                    DisplayFoundHalfRanges(false, true);
                                     break;
                                 case NumbersResultType.HalfSets:
-                                    DisplayFoundHalfSets(false, false);
+                                    DisplayFoundHalfSets(false, true);
                                     break;
 
                                 case NumbersResultType.Quarters:
-                                    DisplayFoundQuarters(false, false);
+                                    DisplayFoundQuarters(false, true);
                                     break;
                                 case NumbersResultType.QuarterRanges:
-                                    DisplayFoundQuarterRanges(false, false);
+                                    DisplayFoundQuarterRanges(false, true);
                                     break;
                                 case NumbersResultType.QuarterSets:
-                                    DisplayFoundQuarterSets(false, false);
+                                    DisplayFoundQuarterSets(false, true);
                                     break;
 
                                 case NumbersResultType.Bowings:
-                                    DisplayFoundBowings(false, false);
+                                    DisplayFoundBowings(false, true);
                                     break;
                                 case NumbersResultType.BowingRanges:
-                                    DisplayFoundBowingRanges(false, false);
+                                    DisplayFoundBowingRanges(false, true);
                                     break;
                                 case NumbersResultType.BowingSets:
-                                    DisplayFoundBowingSets(false, false);
+                                    DisplayFoundBowingSets(false, true);
                                     break;
 
                                 default:
-                                    DisplayFoundVerses(false, false);
+                                    DisplayFoundVerses(false, true);
                                     break;
                             }
                         }
                         else
                         {
-                            DisplayFoundVerses(false, false);
+                            DisplayFoundVerses(false, true);
 
                             //SearchResultTextBox.Focus();
                             //SearchResultTextBox.Refresh();
@@ -36723,22 +36723,57 @@ public partial class MainForm : Form, ISubscriber
     }
     private void UpdateNumberTypeLabelTooltips()
     {
-        string text = "";
+        UpdateNumberTypeLabelTexts();
+
+        string text = null;
         switch (m_numbers_result_type)
         {
-            case NumbersResultType.Letters: { text = L[l]["letter number"]; break; }
-            case NumbersResultType.Words: { text = L[l]["word number"]; break; }
-            case NumbersResultType.Verses: { text = L[l]["verse number"]; break; }
-            case NumbersResultType.Chapters: { text = L[l]["chapter number"]; break; }
-            case NumbersResultType.Pages: { text = L[l]["page number"]; break; }
-            case NumbersResultType.Stations: { text = L[l]["station number"]; break; }
-            case NumbersResultType.Parts: { text = L[l]["part number"]; break; }
-            case NumbersResultType.Groups: { text = L[l]["group number"]; break; }
-            case NumbersResultType.Halfs: { text = L[l]["half number"]; break; }
-            case NumbersResultType.Quarters: { text = L[l]["quarter number"]; break; }
-            case NumbersResultType.Bowings: { text = L[l]["bowing number"]; break; }
-            default: { text = L[l]["number"]; break; }
+            case NumbersResultType.Letters:
+                { text = L[l]["letter number"]; break; }
+            case NumbersResultType.Words:
+            case NumbersResultType.WordRanges:
+            case NumbersResultType.WordSets:
+                { text = L[l]["word number"]; break; }
+            case NumbersResultType.Verses:
+            case NumbersResultType.VerseRanges:
+            case NumbersResultType.VerseSets:
+                { text = L[l]["verse number"]; break; }
+            case NumbersResultType.Chapters:
+            case NumbersResultType.ChapterRanges:
+            case NumbersResultType.ChapterSets:
+                { text = L[l]["chapter number"]; break; }
+            case NumbersResultType.Pages:
+            case NumbersResultType.PageRanges:
+            case NumbersResultType.PageSets:
+                { text = L[l]["page number"]; break; }
+            case NumbersResultType.Stations:
+            case NumbersResultType.StationRanges:
+            case NumbersResultType.StationSets:
+                { text = L[l]["station number"]; break; }
+            case NumbersResultType.Parts:
+            case NumbersResultType.PartRanges:
+            case NumbersResultType.PartSets:
+                { text = L[l]["part number"]; break; }
+            case NumbersResultType.Groups:
+            case NumbersResultType.GroupRanges:
+            case NumbersResultType.GroupSets:
+                { text = L[l]["group number"]; break; }
+            case NumbersResultType.Halfs:
+            case NumbersResultType.HalfRanges:
+            case NumbersResultType.HalfSets:
+                { text = L[l]["half number"]; break; }
+            case NumbersResultType.Quarters:
+            case NumbersResultType.QuarterRanges:
+            case NumbersResultType.QuarterSets:
+                { text = L[l]["quarter number"]; break; }
+            case NumbersResultType.Bowings:
+            case NumbersResultType.BowingRanges:
+            case NumbersResultType.BowingSets:
+                { text = L[l]["bowing number"]; break; }
+            default:
+                { text = L[l]["number"]; break; }
         }
+
         List<Control> controls = GetDescendentControls(this);
         foreach (Control control in controls)
         {
@@ -36747,6 +36782,59 @@ public partial class MainForm : Form, ISubscriber
                 ToolTip.SetToolTip(control, text);
             }
         }
+    }
+    private void UpdateNumberTypeLabelTexts()
+    {
+        string text = null;
+        switch (m_numbers_result_type)
+        {
+            case NumbersResultType.Letters:
+                { text = L[l]["letters"]; break; }
+            case NumbersResultType.Words:
+            case NumbersResultType.WordRanges:
+            case NumbersResultType.WordSets:
+                { text = L[l]["words"]; break; }
+            case NumbersResultType.Verses:
+            case NumbersResultType.VerseRanges:
+            case NumbersResultType.VerseSets:
+                { text = L[l]["verses"]; break; }
+            case NumbersResultType.Chapters:
+            case NumbersResultType.ChapterRanges:
+            case NumbersResultType.ChapterSets:
+                { text = L[l]["chapters"]; break; }
+            case NumbersResultType.Pages:
+            case NumbersResultType.PageRanges:
+            case NumbersResultType.PageSets:
+                { text = L[l]["pages"]; break; }
+            case NumbersResultType.Stations:
+            case NumbersResultType.StationRanges:
+            case NumbersResultType.StationSets:
+                { text = L[l]["stations"]; break; }
+            case NumbersResultType.Parts:
+            case NumbersResultType.PartRanges:
+            case NumbersResultType.PartSets:
+                { text = L[l]["parts"]; break; }
+            case NumbersResultType.Groups:
+            case NumbersResultType.GroupRanges:
+            case NumbersResultType.GroupSets:
+                { text = L[l]["groups"]; break; }
+            case NumbersResultType.Halfs:
+            case NumbersResultType.HalfRanges:
+            case NumbersResultType.HalfSets:
+                { text = L[l]["halfs"]; break; }
+            case NumbersResultType.Quarters:
+            case NumbersResultType.QuarterRanges:
+            case NumbersResultType.QuarterSets:
+                { text = L[l]["quarters"]; break; }
+            case NumbersResultType.Bowings:
+            case NumbersResultType.BowingRanges:
+            case NumbersResultType.BowingSets:
+                { text = L[l]["bowings"]; break; }
+            default:
+                { text = null; break; }
+        }
+        FindByNumbersChaptersLabel.Text = text;
+        ToolTip.SetToolTip(FindByNumbersChaptersLabel, (text != null) ? L[l]["number of "] + text : null);
     }
     private void FindByNumbersResultTypeLettersLabel_Click(object sender, EventArgs e)
     {
@@ -37942,7 +38030,7 @@ public partial class MainForm : Form, ISubscriber
                             ToolTip.SetToolTip(FindByNumbersNumberLabel, L[l]["sum of bowing numbers"]);
                         }
                         break;
-                    
+
                     default:
                         {
                         }
@@ -38152,28 +38240,61 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (L.ContainsKey(l))
                 {
+                    string text = null;
+                    switch (m_numbers_result_type)
+                    {
+                        case NumbersResultType.Letters:
+                            { text = L[l]["letter number"]; break; }
+                        case NumbersResultType.Words:
+                        case NumbersResultType.WordRanges:
+                        case NumbersResultType.WordSets:
+                            { text = L[l]["word number"]; break; }
+                        case NumbersResultType.Verses:
+                        case NumbersResultType.VerseRanges:
+                        case NumbersResultType.VerseSets:
+                            { text = L[l]["verse number"]; break; }
+                        case NumbersResultType.Chapters:
+                        case NumbersResultType.ChapterRanges:
+                        case NumbersResultType.ChapterSets:
+                            { text = L[l]["chapter number"]; break; }
+                        case NumbersResultType.Pages:
+                        case NumbersResultType.PageRanges:
+                        case NumbersResultType.PageSets:
+                            { text = L[l]["page number"]; break; }
+                        case NumbersResultType.Stations:
+                        case NumbersResultType.StationRanges:
+                        case NumbersResultType.StationSets:
+                            { text = L[l]["station number"]; break; }
+                        case NumbersResultType.Parts:
+                        case NumbersResultType.PartRanges:
+                        case NumbersResultType.PartSets:
+                            { text = L[l]["part number"]; break; }
+                        case NumbersResultType.Groups:
+                        case NumbersResultType.GroupRanges:
+                        case NumbersResultType.GroupSets:
+                            { text = L[l]["group number"]; break; }
+                        case NumbersResultType.Halfs:
+                        case NumbersResultType.HalfRanges:
+                        case NumbersResultType.HalfSets:
+                            { text = L[l]["half number"]; break; }
+                        case NumbersResultType.Quarters:
+                        case NumbersResultType.QuarterRanges:
+                        case NumbersResultType.QuarterSets:
+                            { text = L[l]["quarter number"]; break; }
+                        case NumbersResultType.Bowings:
+                        case NumbersResultType.BowingRanges:
+                        case NumbersResultType.BowingSets:
+                            { text = L[l]["bowing number"]; break; }
+                        default:
+                            { text = L[l]["number"]; break; }
+                    }
+
                     if (ModifierKeys != Keys.Shift)
                     {
                         if (control.Text == "")
                         {
                             control.Text = "#";
                             control.ForeColor = Numbers.GetNumberTypeColor(0L);
-                            string text = null;
-                            switch (m_numbers_result_type)
-                            {
-                                case NumbersResultType.Letters: { text = L[l]["letter number"]; break; }
-                                case NumbersResultType.Words: { text = L[l]["word number"]; break; }
-                                case NumbersResultType.Verses: { text = L[l]["verse number"]; break; }
-                                case NumbersResultType.Chapters: { text = L[l]["chapter number"]; break; }
-                                case NumbersResultType.Pages: { text = L[l]["page number"]; break; }
-                                case NumbersResultType.Stations: { text = L[l]["station number"]; break; }
-                                case NumbersResultType.Parts: { text = L[l]["part number"]; break; }
-                                case NumbersResultType.Groups: { text = L[l]["group number"]; break; }
-                                case NumbersResultType.Halfs: { text = L[l]["half number"]; break; }
-                                case NumbersResultType.Quarters: { text = L[l]["quarter number"]; break; }
-                                case NumbersResultType.Bowings: { text = L[l]["bowing number"]; break; }
-                                default: { text = L[l]["number"]; break; }
-                            }
                             ToolTip.SetToolTip(control, text);
                         }
                         else if (control.Text == "#")
@@ -38264,7 +38385,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             control.Text = "";
                             control.ForeColor = control.BackColor;
-                            ToolTip.SetToolTip(control, "");
+                            ToolTip.SetToolTip(control, L[l]["remainder"]);
                         }
                     }
                     else // if (ModifierKeys == Keys.Shift)
@@ -38357,29 +38478,13 @@ public partial class MainForm : Form, ISubscriber
                         {
                             control.Text = "#";
                             control.ForeColor = Numbers.GetNumberTypeColor(0L);
-                            string text = null;
-                            switch (m_numbers_result_type)
-                            {
-                                case NumbersResultType.Letters: { text = L[l]["letter number"]; break; }
-                                case NumbersResultType.Words: { text = L[l]["word number"]; break; }
-                                case NumbersResultType.Verses: { text = L[l]["verse number"]; break; }
-                                case NumbersResultType.Chapters: { text = L[l]["chapter number"]; break; }
-                                case NumbersResultType.Pages: { text = L[l]["page number"]; break; }
-                                case NumbersResultType.Stations: { text = L[l]["station number"]; break; }
-                                case NumbersResultType.Parts: { text = L[l]["part number"]; break; }
-                                case NumbersResultType.Groups: { text = L[l]["group number"]; break; }
-                                case NumbersResultType.Halfs: { text = L[l]["half number"]; break; }
-                                case NumbersResultType.Quarters: { text = L[l]["quarter number"]; break; }
-                                case NumbersResultType.Bowings: { text = L[l]["bowing number"]; break; }
-                                default: { text = L[l]["number"]; break; }
-                            }
                             ToolTip.SetToolTip(control, text);
                         }
                         else if (control.Text == "#")
                         {
                             control.Text = "";
                             control.ForeColor = control.BackColor;
-                            ToolTip.SetToolTip(control, "");
+                            ToolTip.SetToolTip(control, L[l]["remainder"]);
                         }
                     }
                 }
@@ -39936,7 +40041,7 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                         break;
-                    
+
                     default:
                         break;
                 }
@@ -41013,7 +41118,7 @@ public partial class MainForm : Form, ISubscriber
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
 
-                    ColorizeVerseRanges(); // too slow
+                    //ColorizeVerseRanges(); // too slow
 
                     m_current_found_verse_index = 0;
                     DisplayCurrentPositions();
@@ -41436,57 +41541,75 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayFoundStations(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerses(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundStationRanges(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerseRanges(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundStationSets(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerseSets(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundParts(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerses(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundPartRanges(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerseRanges(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundPartSets(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerseSets(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundGroups(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerses(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundGroupRanges(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerseRanges(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundGroupSets(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerseSets(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundHalfs(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerses(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundHalfRanges(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerseRanges(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundHalfSets(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerseSets(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundQuarters(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerses(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundQuarterRanges(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerseRanges(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundQuarterSets(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerseSets(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundBowings(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerses(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundBowingRanges(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerseRanges(add_to_history, colorize_chapters_by_matches);
     }
     private void DisplayFoundBowingSets(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerseSets(add_to_history, colorize_chapters_by_matches);
     }
     private void CalculateFoundPhrasesStatistics()
     {
@@ -41710,196 +41833,196 @@ public partial class MainForm : Form, ISubscriber
             SearchResultTextBox.TextChanged += new EventHandler(MainTextBox_TextChanged);
         }
     }
-    private void ColorizeVerseRanges()
-    {
-        if (m_client != null)
-        {
-            if (m_client.FoundVerseRanges != null)
-            {
-                if (m_client.FoundVerseRanges.Count > 0)
-                {
-                    bool colorize = true; // colorize ranges alternatively
+    //private void ColorizeVerseRanges()
+    //{
+    //    if (m_client != null)
+    //    {
+    //        if (m_client.FoundVerseRanges != null)
+    //        {
+    //            if (m_client.FoundVerseRanges.Count > 0)
+    //            {
+    //                bool colorize = true; // colorize ranges alternatively
 
-                    int line_index = 0;
-                    foreach (List<Verse> range in m_client.FoundVerseRanges)
-                    {
-                        colorize = !colorize; // alternate colorization of ranges
+    //                int line_index = 0;
+    //                foreach (List<Verse> range in m_client.FoundVerseRanges)
+    //                {
+    //                    colorize = !colorize; // alternate colorization of ranges
 
-                        int start = SearchResultTextBox.GetLinePosition(line_index);
-                        int length = 0;
-                        foreach (Verse verse in range)
-                        {
-                            length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
-                            line_index++;
-                        }
-                        SearchResultTextBox.Select(start, length);
-                        SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
-                    }
-                }
-            }
-        }
+    //                    int start = SearchResultTextBox.GetLinePosition(line_index);
+    //                    int length = 0;
+    //                    foreach (Verse verse in range)
+    //                    {
+    //                        length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
+    //                        line_index++;
+    //                    }
+    //                    SearchResultTextBox.Select(start, length);
+    //                    SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
+    //                }
+    //            }
+    //        }
+    //    }
 
-        //FIX to reset SelectionColor
-        SearchResultTextBox.Select(0, 1);
-        SearchResultTextBox.SelectionColor = Color.Navy;
-        SearchResultTextBox.Select(0, 0);
-        SearchResultTextBox.SelectionColor = Color.Navy;
-    }
-    private void ColorizeVerseSets()
-    {
-        if (m_client != null)
-        {
-            if (m_client.FoundVerseSets != null)
-            {
-                if (m_client.FoundVerseSets.Count > 0)
-                {
-                    bool colorize = true; // colorize sets alternatively
+    //    //FIX to reset SelectionColor
+    //    SearchResultTextBox.Select(0, 1);
+    //    SearchResultTextBox.SelectionColor = Color.Navy;
+    //    SearchResultTextBox.Select(0, 0);
+    //    SearchResultTextBox.SelectionColor = Color.Navy;
+    //}
+    //private void ColorizeVerseSets()
+    //{
+    //    if (m_client != null)
+    //    {
+    //        if (m_client.FoundVerseSets != null)
+    //        {
+    //            if (m_client.FoundVerseSets.Count > 0)
+    //            {
+    //                bool colorize = true; // colorize sets alternatively
 
-                    int line_index = 0;
-                    foreach (List<Verse> set in m_client.FoundVerseSets)
-                    {
-                        colorize = !colorize; // alternate colorization of sets
+    //                int line_index = 0;
+    //                foreach (List<Verse> set in m_client.FoundVerseSets)
+    //                {
+    //                    colorize = !colorize; // alternate colorization of sets
 
-                        int start = SearchResultTextBox.GetLinePosition(line_index);
-                        int length = 0;
-                        foreach (Verse verse in set)
-                        {
-                            length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
-                            line_index++;
-                        }
-                        SearchResultTextBox.Select(start, length);
-                        SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
-                    }
-                }
-            }
-        }
+    //                    int start = SearchResultTextBox.GetLinePosition(line_index);
+    //                    int length = 0;
+    //                    foreach (Verse verse in set)
+    //                    {
+    //                        length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
+    //                        line_index++;
+    //                    }
+    //                    SearchResultTextBox.Select(start, length);
+    //                    SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
+    //                }
+    //            }
+    //        }
+    //    }
 
-        //FIX to reset SelectionColor
-        SearchResultTextBox.Select(0, 1);
-        SearchResultTextBox.SelectionColor = Color.Navy;
-        SearchResultTextBox.Select(0, 0);
-        SearchResultTextBox.SelectionColor = Color.Navy;
-    }
-    private void ColorizeChapters()
-    {
-        if (m_client != null)
-        {
-            if (m_client.FoundChapters != null)
-            {
-                if (m_client.FoundChapters.Count > 0)
-                {
-                    bool colorize = true; // colorize chapters alternatively
+    //    //FIX to reset SelectionColor
+    //    SearchResultTextBox.Select(0, 1);
+    //    SearchResultTextBox.SelectionColor = Color.Navy;
+    //    SearchResultTextBox.Select(0, 0);
+    //    SearchResultTextBox.SelectionColor = Color.Navy;
+    //}
+    //private void ColorizeChapters()
+    //{
+    //    if (m_client != null)
+    //    {
+    //        if (m_client.FoundChapters != null)
+    //        {
+    //            if (m_client.FoundChapters.Count > 0)
+    //            {
+    //                bool colorize = true; // colorize chapters alternatively
 
-                    int line_index = 0;
-                    foreach (Chapter chapter in m_client.FoundChapters)
-                    {
-                        if (chapter != null)
-                        {
-                            colorize = !colorize; // alternate colorization of chapters
+    //                int line_index = 0;
+    //                foreach (Chapter chapter in m_client.FoundChapters)
+    //                {
+    //                    if (chapter != null)
+    //                    {
+    //                        colorize = !colorize; // alternate colorization of chapters
 
-                            int start = SearchResultTextBox.GetLinePosition(line_index);
-                            int length = 0;
-                            foreach (Verse verse in chapter.Verses)
-                            {
-                                length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
-                                line_index++;
-                            }
-                            SearchResultTextBox.Select(start, length);
-                            SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
-                        }
-                    }
-                }
-            }
-        }
+    //                        int start = SearchResultTextBox.GetLinePosition(line_index);
+    //                        int length = 0;
+    //                        foreach (Verse verse in chapter.Verses)
+    //                        {
+    //                            length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
+    //                            line_index++;
+    //                        }
+    //                        SearchResultTextBox.Select(start, length);
+    //                        SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
 
-        //FIX to reset SelectionColor
-        SearchResultTextBox.Select(0, 1);
-        SearchResultTextBox.SelectionColor = Color.Navy;
-        SearchResultTextBox.Select(0, 0);
-        SearchResultTextBox.SelectionColor = Color.Navy;
-    }
-    private void ColorizeChapterRanges()
-    {
-        if (m_client != null)
-        {
-            if (m_client.FoundChapterRanges != null)
-            {
-                if (m_client.FoundChapterRanges.Count > 0)
-                {
-                    bool colorize = true; // colorize ranges alternatively
+    //    //FIX to reset SelectionColor
+    //    SearchResultTextBox.Select(0, 1);
+    //    SearchResultTextBox.SelectionColor = Color.Navy;
+    //    SearchResultTextBox.Select(0, 0);
+    //    SearchResultTextBox.SelectionColor = Color.Navy;
+    //}
+    //private void ColorizeChapterRanges()
+    //{
+    //    if (m_client != null)
+    //    {
+    //        if (m_client.FoundChapterRanges != null)
+    //        {
+    //            if (m_client.FoundChapterRanges.Count > 0)
+    //            {
+    //                bool colorize = true; // colorize ranges alternatively
 
-                    int line_index = 0;
-                    foreach (List<Chapter> range in m_client.FoundChapterRanges)
-                    {
-                        if (range != null)
-                        {
-                            colorize = !colorize; // alternate colorization of ranges
+    //                int line_index = 0;
+    //                foreach (List<Chapter> range in m_client.FoundChapterRanges)
+    //                {
+    //                    if (range != null)
+    //                    {
+    //                        colorize = !colorize; // alternate colorization of ranges
 
-                            int start = SearchResultTextBox.GetLinePosition(line_index);
-                            int length = 0;
-                            foreach (Chapter chapter in range)
-                            {
-                                foreach (Verse verse in chapter.Verses)
-                                {
-                                    length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
-                                    line_index++;
-                                }
-                            }
-                            SearchResultTextBox.Select(start, length);
-                            SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
-                        }
-                    }
-                }
-            }
-        }
+    //                        int start = SearchResultTextBox.GetLinePosition(line_index);
+    //                        int length = 0;
+    //                        foreach (Chapter chapter in range)
+    //                        {
+    //                            foreach (Verse verse in chapter.Verses)
+    //                            {
+    //                                length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
+    //                                line_index++;
+    //                            }
+    //                        }
+    //                        SearchResultTextBox.Select(start, length);
+    //                        SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
 
-        //FIX to reset SelectionColor
-        SearchResultTextBox.Select(0, 1);
-        SearchResultTextBox.SelectionColor = Color.Navy;
-        SearchResultTextBox.Select(0, 0);
-        SearchResultTextBox.SelectionColor = Color.Navy;
-    }
-    private void ColorizeChapterSets()
-    {
-        if (m_client != null)
-        {
-            if (m_client.FoundChapterSets != null)
-            {
-                if (m_client.FoundChapterSets.Count > 0)
-                {
-                    bool colorize = true; // colorize sets alternatively
+    //    //FIX to reset SelectionColor
+    //    SearchResultTextBox.Select(0, 1);
+    //    SearchResultTextBox.SelectionColor = Color.Navy;
+    //    SearchResultTextBox.Select(0, 0);
+    //    SearchResultTextBox.SelectionColor = Color.Navy;
+    //}
+    //private void ColorizeChapterSets()
+    //{
+    //    if (m_client != null)
+    //    {
+    //        if (m_client.FoundChapterSets != null)
+    //        {
+    //            if (m_client.FoundChapterSets.Count > 0)
+    //            {
+    //                bool colorize = true; // colorize sets alternatively
 
-                    int line_index = 0;
-                    foreach (List<Chapter> set in m_client.FoundChapterSets)
-                    {
-                        if (set != null)
-                        {
-                            colorize = !colorize; // alternate colorization of sets
+    //                int line_index = 0;
+    //                foreach (List<Chapter> set in m_client.FoundChapterSets)
+    //                {
+    //                    if (set != null)
+    //                    {
+    //                        colorize = !colorize; // alternate colorization of sets
 
-                            int start = SearchResultTextBox.GetLinePosition(line_index);
-                            int length = 0;
-                            foreach (Chapter chapter in set)
-                            {
-                                foreach (Verse verse in chapter.Verses)
-                                {
-                                    length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
-                                    line_index++;
-                                }
-                            }
-                            SearchResultTextBox.Select(start, length);
-                            SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
-                        }
-                    }
-                }
-            }
-        }
+    //                        int start = SearchResultTextBox.GetLinePosition(line_index);
+    //                        int length = 0;
+    //                        foreach (Chapter chapter in set)
+    //                        {
+    //                            foreach (Verse verse in chapter.Verses)
+    //                            {
+    //                                length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
+    //                                line_index++;
+    //                            }
+    //                        }
+    //                        SearchResultTextBox.Select(start, length);
+    //                        SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
+    //                    }
+    //                }
+    //            }
+    //        }
+    //    }
 
-        //FIX to reset SelectionColor
-        SearchResultTextBox.Select(0, 1);
-        SearchResultTextBox.SelectionColor = Color.Navy;
-        SearchResultTextBox.Select(0, 0);
-        SearchResultTextBox.SelectionColor = Color.Navy;
-    }
+    //    //FIX to reset SelectionColor
+    //    SearchResultTextBox.Select(0, 1);
+    //    SearchResultTextBox.SelectionColor = Color.Navy;
+    //    SearchResultTextBox.Select(0, 0);
+    //    SearchResultTextBox.SelectionColor = Color.Navy;
+    //}
 
     private void InspectVersesLabel_Click(object sender, EventArgs e)
     {
@@ -42542,19 +42665,19 @@ public partial class MainForm : Form, ISubscriber
                         //        DisplayFoundVerses(false, true);
                         //        break;
                         //    case NumbersResultType.VerseRanges:
-                        //        DisplayFoundVerseRanges(false, false);
+                        //        DisplayFoundVerseRanges(false, true);
                         //        break;
                         //    case NumbersResultType.VerseSets:
-                        //        DisplayFoundVerseSets(false, false);
+                        //        DisplayFoundVerseSets(false, true);
                         //        break;
                         //    case NumbersResultType.Chapters:
-                        //        DisplayFoundChapters(false, false);
+                        //        DisplayFoundChapters(false, true);
                         //        break;
                         //    case NumbersResultType.ChapterRanges:
-                        //        DisplayFoundChapterRanges(false, false);
+                        //        DisplayFoundChapterRanges(false, true);
                         //        break;
                         //    case NumbersResultType.ChapterSets:
-                        //        DisplayFoundChapterSets(false, false);
+                        //        DisplayFoundChapterSets(false, true);
                         //        break;
                         //}
 
