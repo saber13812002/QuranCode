@@ -1156,114 +1156,582 @@ public class Client : IPublisher, ISubscriber
     public List<Station> FoundStations
     {
         set { m_found_stations = value; }
-        get { return m_found_stations; }
+        get
+        {
+            if (m_found_stations == null) return null;
+            if (m_filter_chapters == null) return m_found_stations;
+
+            List<Station> filtered_found_stations = new List<Station>();
+            foreach (Station station in m_found_stations)
+            {
+                if (station != null)
+                {
+                    if (station.Verses[0].Chapter != null)
+                    {
+                        if (m_filter_chapters.Contains(station.Verses[0].Chapter))
+                        {
+                            filtered_found_stations.Add(station);
+                        }
+                    }
+                }
+            }
+            return filtered_found_stations;
+        }
     }
     private List<List<Station>> m_found_station_ranges = null;
     public List<List<Station>> FoundStationRanges
     {
         set { m_found_station_ranges = value; }
-        get { return m_found_station_ranges; }
+        get
+        {
+            if (m_found_station_ranges == null) return null;
+            if (m_filter_chapters == null) return m_found_station_ranges;
+
+            List<List<Station>> filtered_found_station_ranges = new List<List<Station>>();
+            foreach (List<Station> range in m_found_station_ranges)
+            {
+                bool valid_range = true;
+                foreach (Station station in range)
+                {
+                    if (station != null)
+                    {
+                        if (station.Verses[0].Chapter != null)
+                        {
+                            if (!m_filter_chapters.Contains(station.Verses[0].Chapter))
+                            {
+                                valid_range = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (valid_range)
+                {
+                    filtered_found_station_ranges.Add(range);
+                }
+            }
+            return filtered_found_station_ranges;
+        }
     }
     private List<List<Station>> m_found_station_sets = null;
     public List<List<Station>> FoundStationSets
     {
         set { m_found_station_sets = value; }
-        get { return m_found_station_sets; }
+        get
+        {
+            if (m_found_station_sets == null) return null;
+            if (m_filter_chapters == null) return m_found_station_sets;
+
+            List<List<Station>> filtered_found_station_sets = new List<List<Station>>();
+            foreach (List<Station> set in m_found_station_sets)
+            {
+                bool valid_set = true;
+                foreach (Station station in set)
+                {
+                    if (station != null)
+                    {
+                        if (station.Verses[0].Chapter != null)
+                        {
+                            if (!m_filter_chapters.Contains(station.Verses[0].Chapter))
+                            {
+                                valid_set = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (valid_set)
+                {
+                    filtered_found_station_sets.Add(set);
+                }
+            }
+            return filtered_found_station_sets;
+        }
     }
 
     private List<Part> m_found_parts = null;
     public List<Part> FoundParts
     {
         set { m_found_parts = value; }
-        get { return m_found_parts; }
+        get
+        {
+            if (m_found_parts == null) return null;
+            if (m_filter_chapters == null) return m_found_parts;
+
+            List<Part> filtered_found_parts = new List<Part>();
+            foreach (Part part in m_found_parts)
+            {
+                if (part != null)
+                {
+                    if (part.Verses[0].Chapter != null)
+                    {
+                        if (m_filter_chapters.Contains(part.Verses[0].Chapter))
+                        {
+                            filtered_found_parts.Add(part);
+                        }
+                    }
+                }
+            }
+            return filtered_found_parts;
+        }
     }
     private List<List<Part>> m_found_part_ranges = null;
     public List<List<Part>> FoundPartRanges
     {
         set { m_found_part_ranges = value; }
-        get { return m_found_part_ranges; }
+        get
+        {
+            if (m_found_part_ranges == null) return null;
+            if (m_filter_chapters == null) return m_found_part_ranges;
+
+            List<List<Part>> filtered_found_part_ranges = new List<List<Part>>();
+            foreach (List<Part> range in m_found_part_ranges)
+            {
+                bool valid_range = true;
+                foreach (Part part in range)
+                {
+                    if (part != null)
+                    {
+                        if (part.Verses[0].Chapter != null)
+                        {
+                            if (!m_filter_chapters.Contains(part.Verses[0].Chapter))
+                            {
+                                valid_range = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (valid_range)
+                {
+                    filtered_found_part_ranges.Add(range);
+                }
+            }
+            return filtered_found_part_ranges;
+        }
     }
     private List<List<Part>> m_found_part_sets = null;
     public List<List<Part>> FoundPartSets
     {
         set { m_found_part_sets = value; }
-        get { return m_found_part_sets; }
+        get
+        {
+            if (m_found_part_sets == null) return null;
+            if (m_filter_chapters == null) return m_found_part_sets;
+
+            List<List<Part>> filtered_found_part_sets = new List<List<Part>>();
+            foreach (List<Part> set in m_found_part_sets)
+            {
+                bool valid_set = true;
+                foreach (Part part in set)
+                {
+                    if (part != null)
+                    {
+                        if (part.Verses[0].Chapter != null)
+                        {
+                            if (!m_filter_chapters.Contains(part.Verses[0].Chapter))
+                            {
+                                valid_set = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (valid_set)
+                {
+                    filtered_found_part_sets.Add(set);
+                }
+            }
+            return filtered_found_part_sets;
+        }
     }
 
     private List<Group> m_found_groups = null;
     public List<Group> FoundGroups
     {
         set { m_found_groups = value; }
-        get { return m_found_groups; }
+        get
+        {
+            if (m_found_groups == null) return null;
+            if (m_filter_chapters == null) return m_found_groups;
+
+            List<Group> filtered_found_groups = new List<Group>();
+            foreach (Group group in m_found_groups)
+            {
+                if (group != null)
+                {
+                    if (group.Verses[0].Chapter != null)
+                    {
+                        if (m_filter_chapters.Contains(group.Verses[0].Chapter))
+                        {
+                            filtered_found_groups.Add(group);
+                        }
+                    }
+                }
+            }
+            return filtered_found_groups;
+        }
     }
     private List<List<Group>> m_found_group_ranges = null;
     public List<List<Group>> FoundGroupRanges
     {
         set { m_found_group_ranges = value; }
-        get { return m_found_group_ranges; }
+        get
+        {
+            if (m_found_group_ranges == null) return null;
+            if (m_filter_chapters == null) return m_found_group_ranges;
+
+            List<List<Group>> filtered_found_group_ranges = new List<List<Group>>();
+            foreach (List<Group> range in m_found_group_ranges)
+            {
+                bool valid_range = true;
+                foreach (Group group in range)
+                {
+                    if (group != null)
+                    {
+                        if (group.Verses[0].Chapter != null)
+                        {
+                            if (!m_filter_chapters.Contains(group.Verses[0].Chapter))
+                            {
+                                valid_range = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (valid_range)
+                {
+                    filtered_found_group_ranges.Add(range);
+                }
+            }
+            return filtered_found_group_ranges;
+        }
     }
     private List<List<Group>> m_found_group_sets = null;
     public List<List<Group>> FoundGroupSets
     {
         set { m_found_group_sets = value; }
-        get { return m_found_group_sets; }
+        get
+        {
+            if (m_found_group_sets == null) return null;
+            if (m_filter_chapters == null) return m_found_group_sets;
+
+            List<List<Group>> filtered_found_group_sets = new List<List<Group>>();
+            foreach (List<Group> set in m_found_group_sets)
+            {
+                bool valid_set = true;
+                foreach (Group group in set)
+                {
+                    if (group != null)
+                    {
+                        if (group.Verses[0].Chapter != null)
+                        {
+                            if (!m_filter_chapters.Contains(group.Verses[0].Chapter))
+                            {
+                                valid_set = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (valid_set)
+                {
+                    filtered_found_group_sets.Add(set);
+                }
+            }
+            return filtered_found_group_sets;
+        }
     }
 
     private List<Half> m_found_halfs = null;
     public List<Half> FoundHalfs
     {
         set { m_found_halfs = value; }
-        get { return m_found_halfs; }
+        get
+        {
+            if (m_found_halfs == null) return null;
+            if (m_filter_chapters == null) return m_found_halfs;
+
+            List<Half> filtered_found_halfs = new List<Half>();
+            foreach (Half half in m_found_halfs)
+            {
+                if (half != null)
+                {
+                    if (half.Verses[0].Chapter != null)
+                    {
+                        if (m_filter_chapters.Contains(half.Verses[0].Chapter))
+                        {
+                            filtered_found_halfs.Add(half);
+                        }
+                    }
+                }
+            }
+            return filtered_found_halfs;
+        }
     }
     private List<List<Half>> m_found_half_ranges = null;
     public List<List<Half>> FoundHalfRanges
     {
         set { m_found_half_ranges = value; }
-        get { return m_found_half_ranges; }
+        get
+        {
+            if (m_found_half_ranges == null) return null;
+            if (m_filter_chapters == null) return m_found_half_ranges;
+
+            List<List<Half>> filtered_found_half_ranges = new List<List<Half>>();
+            foreach (List<Half> range in m_found_half_ranges)
+            {
+                bool valid_range = true;
+                foreach (Half half in range)
+                {
+                    if (half != null)
+                    {
+                        if (half.Verses[0].Chapter != null)
+                        {
+                            if (!m_filter_chapters.Contains(half.Verses[0].Chapter))
+                            {
+                                valid_range = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (valid_range)
+                {
+                    filtered_found_half_ranges.Add(range);
+                }
+            }
+            return filtered_found_half_ranges;
+        }
     }
     private List<List<Half>> m_found_half_sets = null;
     public List<List<Half>> FoundHalfSets
     {
         set { m_found_half_sets = value; }
-        get { return m_found_half_sets; }
+        get
+        {
+            if (m_found_half_sets == null) return null;
+            if (m_filter_chapters == null) return m_found_half_sets;
+
+            List<List<Half>> filtered_found_half_sets = new List<List<Half>>();
+            foreach (List<Half> set in m_found_half_sets)
+            {
+                bool valid_set = true;
+                foreach (Half half in set)
+                {
+                    if (half != null)
+                    {
+                        if (half.Verses[0].Chapter != null)
+                        {
+                            if (!m_filter_chapters.Contains(half.Verses[0].Chapter))
+                            {
+                                valid_set = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (valid_set)
+                {
+                    filtered_found_half_sets.Add(set);
+                }
+            }
+            return filtered_found_half_sets;
+        }
     }
 
     private List<Quarter> m_found_quarters = null;
     public List<Quarter> FoundQuarters
     {
         set { m_found_quarters = value; }
-        get { return m_found_quarters; }
+        get
+        {
+            if (m_found_quarters == null) return null;
+            if (m_filter_chapters == null) return m_found_quarters;
+
+            List<Quarter> filtered_found_quarters = new List<Quarter>();
+            foreach (Quarter quarter in m_found_quarters)
+            {
+                if (quarter != null)
+                {
+                    if (quarter.Verses[0].Chapter != null)
+                    {
+                        if (m_filter_chapters.Contains(quarter.Verses[0].Chapter))
+                        {
+                            filtered_found_quarters.Add(quarter);
+                        }
+                    }
+                }
+            }
+            return filtered_found_quarters;
+        }
     }
     private List<List<Quarter>> m_found_quarter_ranges = null;
     public List<List<Quarter>> FoundQuarterRanges
     {
         set { m_found_quarter_ranges = value; }
-        get { return m_found_quarter_ranges; }
+        get
+        {
+            if (m_found_quarter_ranges == null) return null;
+            if (m_filter_chapters == null) return m_found_quarter_ranges;
+
+            List<List<Quarter>> filtered_found_quarter_ranges = new List<List<Quarter>>();
+            foreach (List<Quarter> range in m_found_quarter_ranges)
+            {
+                bool valid_range = true;
+                foreach (Quarter quarter in range)
+                {
+                    if (quarter != null)
+                    {
+                        if (quarter.Verses[0].Chapter != null)
+                        {
+                            if (!m_filter_chapters.Contains(quarter.Verses[0].Chapter))
+                            {
+                                valid_range = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (valid_range)
+                {
+                    filtered_found_quarter_ranges.Add(range);
+                }
+            }
+            return filtered_found_quarter_ranges;
+        }
     }
     private List<List<Quarter>> m_found_quarter_sets = null;
     public List<List<Quarter>> FoundQuarterSets
     {
         set { m_found_quarter_sets = value; }
-        get { return m_found_quarter_sets; }
+        get
+        {
+            if (m_found_quarter_sets == null) return null;
+            if (m_filter_chapters == null) return m_found_quarter_sets;
+
+            List<List<Quarter>> filtered_found_quarter_sets = new List<List<Quarter>>();
+            foreach (List<Quarter> set in m_found_quarter_sets)
+            {
+                bool valid_set = true;
+                foreach (Quarter quarter in set)
+                {
+                    if (quarter != null)
+                    {
+                        if (quarter.Verses[0].Chapter != null)
+                        {
+                            if (!m_filter_chapters.Contains(quarter.Verses[0].Chapter))
+                            {
+                                valid_set = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (valid_set)
+                {
+                    filtered_found_quarter_sets.Add(set);
+                }
+            }
+            return filtered_found_quarter_sets;
+        }
     }
 
     private List<Bowing> m_found_bowings = null;
     public List<Bowing> FoundBowings
     {
         set { m_found_bowings = value; }
-        get { return m_found_bowings; }
+        get
+        {
+            if (m_found_bowings == null) return null;
+            if (m_filter_chapters == null) return m_found_bowings;
+
+            List<Bowing> filtered_found_bowings = new List<Bowing>();
+            foreach (Bowing bowing in m_found_bowings)
+            {
+                if (bowing != null)
+                {
+                    if (bowing.Verses[0].Chapter != null)
+                    {
+                        if (m_filter_chapters.Contains(bowing.Verses[0].Chapter))
+                        {
+                            filtered_found_bowings.Add(bowing);
+                        }
+                    }
+                }
+            }
+            return filtered_found_bowings;
+        }
     }
     private List<List<Bowing>> m_found_bowing_ranges = null;
     public List<List<Bowing>> FoundBowingRanges
     {
         set { m_found_bowing_ranges = value; }
-        get { return m_found_bowing_ranges; }
+        get
+        {
+            if (m_found_bowing_ranges == null) return null;
+            if (m_filter_chapters == null) return m_found_bowing_ranges;
+
+            List<List<Bowing>> filtered_found_bowing_ranges = new List<List<Bowing>>();
+            foreach (List<Bowing> range in m_found_bowing_ranges)
+            {
+                bool valid_range = true;
+                foreach (Bowing bowing in range)
+                {
+                    if (bowing != null)
+                    {
+                        if (bowing.Verses[0].Chapter != null)
+                        {
+                            if (!m_filter_chapters.Contains(bowing.Verses[0].Chapter))
+                            {
+                                valid_range = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (valid_range)
+                {
+                    filtered_found_bowing_ranges.Add(range);
+                }
+            }
+            return filtered_found_bowing_ranges;
+        }
     }
     private List<List<Bowing>> m_found_bowing_sets = null;
     public List<List<Bowing>> FoundBowingSets
     {
         set { m_found_bowing_sets = value; }
-        get { return m_found_bowing_sets; }
+        get
+        {
+            if (m_found_bowing_sets == null) return null;
+            if (m_filter_chapters == null) return m_found_bowing_sets;
+
+            List<List<Bowing>> filtered_found_bowing_sets = new List<List<Bowing>>();
+            foreach (List<Bowing> set in m_found_bowing_sets)
+            {
+                bool valid_set = true;
+                foreach (Bowing bowing in set)
+                {
+                    if (bowing != null)
+                    {
+                        if (bowing.Verses[0].Chapter != null)
+                        {
+                            if (!m_filter_chapters.Contains(bowing.Verses[0].Chapter))
+                            {
+                                valid_set = false;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (valid_set)
+                {
+                    filtered_found_bowing_sets.Add(set);
+                }
+            }
+            return filtered_found_bowing_sets;
+        }
     }
 
     public void ClearSearchResults()

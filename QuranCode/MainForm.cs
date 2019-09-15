@@ -39523,6 +39523,43 @@ public partial class MainForm : Form, ISubscriber
             }
 
 
+            string partitions = null;
+            switch (m_numbers_result_type)
+            {
+                case NumbersResultType.WordRanges:
+                case NumbersResultType.WordSets:
+                    { partitions = L[l]["words"]; break; }
+                case NumbersResultType.VerseRanges:
+                case NumbersResultType.VerseSets:
+                    { partitions = L[l]["verses"]; break; }
+                case NumbersResultType.ChapterRanges:
+                case NumbersResultType.ChapterSets:
+                    { partitions = L[l]["chapters"]; break; }
+                case NumbersResultType.PageRanges:
+                case NumbersResultType.PageSets:
+                    { partitions = L[l]["pages"]; break; }
+                case NumbersResultType.StationRanges:
+                case NumbersResultType.StationSets:
+                    { partitions = L[l]["stations"]; break; }
+                case NumbersResultType.PartRanges:
+                case NumbersResultType.PartSets:
+                    { partitions = L[l]["parts"]; break; }
+                case NumbersResultType.GroupRanges:
+                case NumbersResultType.GroupSets:
+                    { partitions = L[l]["groups"]; break; }
+                case NumbersResultType.HalfRanges:
+                case NumbersResultType.HalfSets:
+                    { partitions = L[l]["halfs"]; break; }
+                case NumbersResultType.QuarterRanges:
+                case NumbersResultType.QuarterSets:
+                    { partitions = L[l]["quarters"]; break; }
+                case NumbersResultType.BowingRanges:
+                case NumbersResultType.BowingSets:
+                    { partitions = L[l]["bowings"]; break; }
+                default:
+                    { partitions = "chapters"; break; }
+            }
+
             string text = null;
             text += ((number > 0) ? (L[l]["number"] + number_operator_symbol + number.ToString()) : ((number_number_type != NumberType.None) ? (L[l]["number"] + number_operator_symbol + FindByNumbersNumberNumberTypeLabel.Text) : ""));
             if (
@@ -39544,7 +39581,7 @@ public partial class MainForm : Form, ISubscriber
                 (m_numbers_result_type == NumbersResultType.BowingSets)
                )
             {
-                text += (((text.Length > 0) && ((chapter_count > 0) || (chapter_count_number_type != NumberType.None))) ? " " : "") + ((chapter_count > 0) ? (L[l]["chapters"] + chapter_count_operator_symbol + chapter_count.ToString()) : ((chapter_count_number_type != NumberType.None) ? (L[l]["chapters"] + chapter_count_operator_symbol + FindByNumbersChaptersNumberTypeLabel.Text) : ""));
+                text += (((text.Length > 0) && ((chapter_count > 0) || (chapter_count_number_type != NumberType.None))) ? " " : "") + ((chapter_count > 0) ? (partitions + chapter_count_operator_symbol + chapter_count.ToString()) : ((chapter_count_number_type != NumberType.None) ? (L[l]["chapters"] + chapter_count_operator_symbol + FindByNumbersChaptersNumberTypeLabel.Text) : ""));
             }
 
             if (
