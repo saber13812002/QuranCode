@@ -933,10 +933,10 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersResultTypeChaptersLabel = new System.Windows.Forms.Label();
         this.FindByNumbersButton = new System.Windows.Forms.Button();
         this.FindByNumbersResultTypeStationsLabel = new System.Windows.Forms.Label();
-        this.FindByNumbersChaptersComparisonOperatorLabel = new System.Windows.Forms.Label();
-        this.FindByNumbersChaptersNumberTypeLabel = new System.Windows.Forms.Label();
-        this.FindByNumbersChaptersNumericUpDown = new System.Windows.Forms.NumericUpDown();
-        this.FindByNumbersChaptersLabel = new System.Windows.Forms.Label();
+        this.FindByNumbersPartitionsComparisonOperatorLabel = new System.Windows.Forms.Label();
+        this.FindByNumbersPartitionsNumberTypeLabel = new System.Windows.Forms.Label();
+        this.FindByNumbersPartitionsNumericUpDown = new System.Windows.Forms.NumericUpDown();
+        this.FindByNumbersPartitionsLabel = new System.Windows.Forms.Label();
         this.FindByNumbersNumberComparisonOperatorLabel = new System.Windows.Forms.Label();
         this.FindByNumbersNumberNumberTypeLabel = new System.Windows.Forms.Label();
         this.FindByNumbersNumberNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -1526,7 +1526,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersPanel.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitalRootNumericUpDown)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitSumNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersChaptersNumericUpDown)).BeginInit();
+        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersPartitionsNumericUpDown)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersNumberNumericUpDown)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersUniqueLettersNumericUpDown)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersVersesNumericUpDown)).BeginInit();
@@ -2982,12 +2982,12 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeChaptersLabel);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersButton);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeStationsLabel);
-        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersChaptersComparisonOperatorLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersPartitionsComparisonOperatorLabel);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeWordsLabel);
-        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersChaptersNumberTypeLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersPartitionsNumberTypeLabel);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeLettersLabel);
-        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersChaptersNumericUpDown);
-        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersChaptersLabel);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersPartitionsNumericUpDown);
+        this.FindByNumbersPanel.Controls.Add(this.FindByNumbersPartitionsLabel);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersNumberComparisonOperatorLabel);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersNumberNumberTypeLabel);
         this.FindByNumbersPanel.Controls.Add(this.FindByNumbersNumberNumericUpDown);
@@ -3324,81 +3324,81 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersResultTypeStationsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByNumbersResultTypeStationsLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeStationsLabel_Click);
         // 
-        // FindByNumbersChaptersComparisonOperatorLabel
+        // FindByNumbersPartitionsComparisonOperatorLabel
         // 
-        this.FindByNumbersChaptersComparisonOperatorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.FindByNumbersChaptersComparisonOperatorLabel.BackColor = System.Drawing.Color.LightGray;
-        this.FindByNumbersChaptersComparisonOperatorLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-        this.FindByNumbersChaptersComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.FindByNumbersChaptersComparisonOperatorLabel.Enabled = false;
-        this.FindByNumbersChaptersComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersChaptersComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersChaptersComparisonOperatorLabel.Location = new System.Drawing.Point(68, 86);
-        this.FindByNumbersChaptersComparisonOperatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.FindByNumbersChaptersComparisonOperatorLabel.Name = "FindByNumbersChaptersComparisonOperatorLabel";
-        this.FindByNumbersChaptersComparisonOperatorLabel.Size = new System.Drawing.Size(24, 22);
-        this.FindByNumbersChaptersComparisonOperatorLabel.TabIndex = 45;
-        this.FindByNumbersChaptersComparisonOperatorLabel.Text = "=";
-        this.FindByNumbersChaptersComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.FindByNumbersChaptersComparisonOperatorLabel, "equals to");
-        this.FindByNumbersChaptersComparisonOperatorLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
-        this.FindByNumbersChaptersComparisonOperatorLabel.Click += new System.EventHandler(this.FindByNumbersComparisonOperatorLabel_Click);
-        this.FindByNumbersChaptersComparisonOperatorLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+        this.FindByNumbersPartitionsComparisonOperatorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+        this.FindByNumbersPartitionsComparisonOperatorLabel.BackColor = System.Drawing.Color.LightGray;
+        this.FindByNumbersPartitionsComparisonOperatorLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+        this.FindByNumbersPartitionsComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.FindByNumbersPartitionsComparisonOperatorLabel.Enabled = false;
+        this.FindByNumbersPartitionsComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByNumbersPartitionsComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
+        this.FindByNumbersPartitionsComparisonOperatorLabel.Location = new System.Drawing.Point(68, 86);
+        this.FindByNumbersPartitionsComparisonOperatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+        this.FindByNumbersPartitionsComparisonOperatorLabel.Name = "FindByNumbersPartitionsComparisonOperatorLabel";
+        this.FindByNumbersPartitionsComparisonOperatorLabel.Size = new System.Drawing.Size(24, 22);
+        this.FindByNumbersPartitionsComparisonOperatorLabel.TabIndex = 45;
+        this.FindByNumbersPartitionsComparisonOperatorLabel.Text = "=";
+        this.FindByNumbersPartitionsComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.ToolTip.SetToolTip(this.FindByNumbersPartitionsComparisonOperatorLabel, "equals to");
+        this.FindByNumbersPartitionsComparisonOperatorLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
+        this.FindByNumbersPartitionsComparisonOperatorLabel.Click += new System.EventHandler(this.FindByNumbersComparisonOperatorLabel_Click);
+        this.FindByNumbersPartitionsComparisonOperatorLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
         // 
-        // FindByNumbersChaptersNumberTypeLabel
+        // FindByNumbersPartitionsNumberTypeLabel
         // 
-        this.FindByNumbersChaptersNumberTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.FindByNumbersChaptersNumberTypeLabel.BackColor = System.Drawing.Color.LightGray;
-        this.FindByNumbersChaptersNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-        this.FindByNumbersChaptersNumberTypeLabel.Enabled = false;
-        this.FindByNumbersChaptersNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersChaptersNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByNumbersChaptersNumberTypeLabel.Location = new System.Drawing.Point(165, 86);
-        this.FindByNumbersChaptersNumberTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.FindByNumbersChaptersNumberTypeLabel.Name = "FindByNumbersChaptersNumberTypeLabel";
-        this.FindByNumbersChaptersNumberTypeLabel.Size = new System.Drawing.Size(32, 22);
-        this.FindByNumbersChaptersNumberTypeLabel.TabIndex = 47;
-        this.FindByNumbersChaptersNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.FindByNumbersChaptersNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
-        this.FindByNumbersChaptersNumberTypeLabel.Click += new System.EventHandler(this.FindByNumbersNumberTypeLabel_Click);
-        this.FindByNumbersChaptersNumberTypeLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+        this.FindByNumbersPartitionsNumberTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+        this.FindByNumbersPartitionsNumberTypeLabel.BackColor = System.Drawing.Color.LightGray;
+        this.FindByNumbersPartitionsNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+        this.FindByNumbersPartitionsNumberTypeLabel.Enabled = false;
+        this.FindByNumbersPartitionsNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByNumbersPartitionsNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
+        this.FindByNumbersPartitionsNumberTypeLabel.Location = new System.Drawing.Point(165, 86);
+        this.FindByNumbersPartitionsNumberTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+        this.FindByNumbersPartitionsNumberTypeLabel.Name = "FindByNumbersPartitionsNumberTypeLabel";
+        this.FindByNumbersPartitionsNumberTypeLabel.Size = new System.Drawing.Size(32, 22);
+        this.FindByNumbersPartitionsNumberTypeLabel.TabIndex = 47;
+        this.FindByNumbersPartitionsNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.FindByNumbersPartitionsNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
+        this.FindByNumbersPartitionsNumberTypeLabel.Click += new System.EventHandler(this.FindByNumbersNumberTypeLabel_Click);
+        this.FindByNumbersPartitionsNumberTypeLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
         // 
-        // FindByNumbersChaptersNumericUpDown
+        // FindByNumbersPartitionsNumericUpDown
         // 
-        this.FindByNumbersChaptersNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.FindByNumbersChaptersNumericUpDown.BackColor = System.Drawing.Color.LightGray;
-        this.FindByNumbersChaptersNumericUpDown.Enabled = false;
-        this.FindByNumbersChaptersNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersChaptersNumericUpDown.Location = new System.Drawing.Point(92, 86);
-        this.FindByNumbersChaptersNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
-        this.FindByNumbersChaptersNumericUpDown.Maximum = new decimal(new int[] {
+        this.FindByNumbersPartitionsNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+        this.FindByNumbersPartitionsNumericUpDown.BackColor = System.Drawing.Color.LightGray;
+        this.FindByNumbersPartitionsNumericUpDown.Enabled = false;
+        this.FindByNumbersPartitionsNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByNumbersPartitionsNumericUpDown.Location = new System.Drawing.Point(92, 86);
+        this.FindByNumbersPartitionsNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
+        this.FindByNumbersPartitionsNumericUpDown.Maximum = new decimal(new int[] {
             999,
             0,
             0,
             0});
-        this.FindByNumbersChaptersNumericUpDown.Name = "FindByNumbersChaptersNumericUpDown";
-        this.FindByNumbersChaptersNumericUpDown.Size = new System.Drawing.Size(75, 23);
-        this.FindByNumbersChaptersNumericUpDown.TabIndex = 46;
-        this.FindByNumbersChaptersNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.FindByNumbersChaptersNumericUpDown.ValueChanged += new System.EventHandler(this.FindByNumbersNumericUpDown_ValueChanged);
-        this.FindByNumbersChaptersNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
-        this.FindByNumbersChaptersNumericUpDown.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
-        this.FindByNumbersChaptersNumericUpDown.Leave += new System.EventHandler(this.FindByNumbersNumericUpDown_Leave);
+        this.FindByNumbersPartitionsNumericUpDown.Name = "FindByNumbersPartitionsNumericUpDown";
+        this.FindByNumbersPartitionsNumericUpDown.Size = new System.Drawing.Size(75, 23);
+        this.FindByNumbersPartitionsNumericUpDown.TabIndex = 46;
+        this.FindByNumbersPartitionsNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+        this.FindByNumbersPartitionsNumericUpDown.ValueChanged += new System.EventHandler(this.FindByNumbersNumericUpDown_ValueChanged);
+        this.FindByNumbersPartitionsNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
+        this.FindByNumbersPartitionsNumericUpDown.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+        this.FindByNumbersPartitionsNumericUpDown.Leave += new System.EventHandler(this.FindByNumbersNumericUpDown_Leave);
         // 
-        // FindByNumbersChaptersLabel
+        // FindByNumbersPartitionsLabel
         // 
-        this.FindByNumbersChaptersLabel.BackColor = System.Drawing.Color.Transparent;
-        this.FindByNumbersChaptersLabel.Enabled = false;
-        this.FindByNumbersChaptersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByNumbersChaptersLabel.Location = new System.Drawing.Point(1, 89);
-        this.FindByNumbersChaptersLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.FindByNumbersChaptersLabel.Name = "FindByNumbersChaptersLabel";
-        this.FindByNumbersChaptersLabel.Size = new System.Drawing.Size(77, 16);
-        this.FindByNumbersChaptersLabel.TabIndex = 0;
-        this.FindByNumbersChaptersLabel.Text = "chapters";
-        this.ToolTip.SetToolTip(this.FindByNumbersChaptersLabel, "number of chapters");
-        this.FindByNumbersChaptersLabel.Click += new System.EventHandler(this.FindByNumbersLabel_Click);
-        this.FindByNumbersChaptersLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+        this.FindByNumbersPartitionsLabel.BackColor = System.Drawing.Color.Transparent;
+        this.FindByNumbersPartitionsLabel.Enabled = false;
+        this.FindByNumbersPartitionsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByNumbersPartitionsLabel.Location = new System.Drawing.Point(1, 89);
+        this.FindByNumbersPartitionsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+        this.FindByNumbersPartitionsLabel.Name = "FindByNumbersPartitionsLabel";
+        this.FindByNumbersPartitionsLabel.Size = new System.Drawing.Size(77, 16);
+        this.FindByNumbersPartitionsLabel.TabIndex = 0;
+        this.FindByNumbersPartitionsLabel.Text = "chapters";
+        this.ToolTip.SetToolTip(this.FindByNumbersPartitionsLabel, "number of chapters");
+        this.FindByNumbersPartitionsLabel.Click += new System.EventHandler(this.FindByNumbersLabel_Click);
+        this.FindByNumbersPartitionsLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
         // 
         // FindByNumbersNumberComparisonOperatorLabel
         // 
@@ -12906,7 +12906,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersPanel.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitalRootNumericUpDown)).EndInit();
         ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitSumNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersChaptersNumericUpDown)).EndInit();
+        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersPartitionsNumericUpDown)).EndInit();
         ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersNumberNumericUpDown)).EndInit();
         ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersUniqueLettersNumericUpDown)).EndInit();
         ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersVersesNumericUpDown)).EndInit();
@@ -14783,13 +14783,13 @@ public partial class MainForm : Form, ISubscriber
                                                 {
                                                     try
                                                     {
-                                                        m_total_chapter_counts = bool.Parse(parts[1].Trim());
+                                                        m_display_total_chapter_counts = bool.Parse(parts[1].Trim());
                                                     }
                                                     catch
                                                     {
-                                                        m_total_chapter_counts = false;
+                                                        m_display_total_chapter_counts = false;
                                                     }
-                                                    TotalChapterCountsCheckBox.Checked = m_total_chapter_counts;
+                                                    TotalChapterCountsCheckBox.Checked = m_display_total_chapter_counts;
                                                 }
                                                 break;
                                             case "NumerologySystem":
@@ -15104,19 +15104,19 @@ public partial class MainForm : Form, ISubscriber
                                                     }
                                                 }
                                                 break;
-                                            case "ChapterNumberScope":
+                                            case "PartitionNumberScope":
                                                 {
                                                     try
                                                     {
-                                                        m_chapter_number_scope = (NumberScope)Enum.Parse(typeof(NumberScope), parts[1].Trim());
+                                                        m_partition_number_scope = (NumberScope)Enum.Parse(typeof(NumberScope), parts[1].Trim());
                                                     }
                                                     catch
                                                     {
-                                                        m_chapter_number_scope = NumberScope.Number;
+                                                        m_partition_number_scope = NumberScope.Number;
                                                     }
                                                 }
                                                 break;
-                                            case "DistancesRunningChapterNumberScope":
+                                            case "DistancesRunningPartitionNumberScope":
                                                 {
                                                     try
                                                     {
@@ -15765,7 +15765,7 @@ public partial class MainForm : Form, ISubscriber
                     writer.WriteLine("Radix" + "=" + m_radix);
                     writer.WriteLine("Divisor" + "=" + m_divisor);
                     writer.WriteLine("CalculationMode" + "=" + m_client.CalculationMode);
-                    writer.WriteLine("TotalChapterCounts" + "=" + m_total_chapter_counts);
+                    writer.WriteLine("TotalChapterCounts" + "=" + m_display_total_chapter_counts);
                     if (m_client.NumerologySystem != null)
                     {
                         writer.WriteLine("NumerologySystem" + "=" + m_client.NumerologySystem.Name);
@@ -15796,10 +15796,10 @@ public partial class MainForm : Form, ISubscriber
                     }
                     writer.WriteLine("MathsDivisor" + "=" + m_maths_divisor);
                     writer.WriteLine("MathsUpdateGlobalDivisor" + "=" + m_maths_update_global_divisor);
-                    writer.WriteLine("ChapterNumberScope" + "=" + m_chapter_number_scope);
+                    writer.WriteLine("PartitionNumberScope" + "=" + m_partition_number_scope);
                     writer.WriteLine("VerseNumberScope" + "=" + m_verse_number_scope);
                     writer.WriteLine("WordNumberScope" + "=" + m_word_number_scope);
-                    writer.WriteLine("DistancesRunningChapterNumberScope" + "=" + m_distances_running_chapter_number_scope);
+                    writer.WriteLine("DistancesRunningPartitionNumberScope" + "=" + m_distances_running_chapter_number_scope);
                     writer.WriteLine("DistancesRunningVerseNumberScope" + "=" + m_distances_running_verse_number_scope);
                     writer.WriteLine("DistancesRunningWordNumberScope" + "=" + m_distances_running_word_number_scope);
                     writer.WriteLine("DistancesDivisor" + "=" + m_distances_divisor);
@@ -29432,7 +29432,7 @@ public partial class MainForm : Form, ISubscriber
     private NumberScope m_distances_running_chapter_number_scope = NumberScope.Number;
     private NumberScope m_distances_running_verse_number_scope = NumberScope.Number;
     private NumberScope m_distances_running_word_number_scope = NumberScope.Number;
-    private void DistancesRunningChapterNumberScopeLabel_Click(object sender, EventArgs e)
+    private void DistancesRunningPartitionNumberScopeLabel_Click(object sender, EventArgs e)
     {
         Verse verse = GetVerseAtCursor();
         if (verse != null)
@@ -29443,8 +29443,8 @@ public partial class MainForm : Form, ISubscriber
                 default:
                     {
                         m_distances_running_chapter_number_scope = NumberScope.Number;
-                        //DistancesRunningChapterNumberScopeLabel.Text = L[l]["Chapter numbers in Book"];
-                        //DistancesRunningChapterNumberScopeLabel.Refresh();
+                        //DistancesRunningPartitionNumberScopeLabel.Text = L[l]["Chapter numbers in Book"];
+                        //DistancesRunningPartitionNumberScopeLabel.Refresh();
                     }
                     break;
             }
@@ -36612,7 +36612,7 @@ public partial class MainForm : Form, ISubscriber
     private NumberScope m_letter_number_scope = NumberScope.NumberInWord;
     private NumberScope m_word_number_scope = NumberScope.NumberInVerse;
     private NumberScope m_verse_number_scope = NumberScope.NumberInChapter;
-    private NumberScope m_chapter_number_scope = NumberScope.Number;
+    private NumberScope m_partition_number_scope = NumberScope.Number;
     private void FindByNumbersNumberLabel_Click(object sender, EventArgs e)
     {
         FindByNumbersControls_Enter(null, null);
@@ -36690,9 +36690,9 @@ public partial class MainForm : Form, ISubscriber
             case NumbersResultType.Quarters:
             case NumbersResultType.Bowings:
                 {
-                    if (m_chapter_number_scope == NumberScope.Number)
+                    if (m_partition_number_scope == NumberScope.Number)
                     {
-                        m_chapter_number_scope = NumberScope.Number;
+                        m_partition_number_scope = NumberScope.Number;
                     }
                 }
                 break;
@@ -36833,8 +36833,8 @@ public partial class MainForm : Form, ISubscriber
             default:
                 { text = null; break; }
         }
-        FindByNumbersChaptersLabel.Text = text;
-        ToolTip.SetToolTip(FindByNumbersChaptersLabel, (text != null) ? L[l]["number of "] + text : null);
+        FindByNumbersPartitionsLabel.Text = text;
+        ToolTip.SetToolTip(FindByNumbersPartitionsLabel, (text != null) ? L[l]["number of "] + text : null);
     }
     private void FindByNumbersResultTypeLettersLabel_Click(object sender, EventArgs e)
     {
@@ -36847,7 +36847,7 @@ public partial class MainForm : Form, ISubscriber
         ////ResetFindByNumbersResultTypeLabels(); // already called on FindByNumbersControls_Enter
         //ResetFindByNumbersComparisonOperatorLabels();
         //ResetFindByNumbersNumberTypeControl(FindByNumbersNumberNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersChaptersNumberTypeLabel);
+        //ResetFindByNumbersNumberTypeControl(FindByNumbersPartitionsNumberTypeLabel);
         //ResetFindByNumbersNumberTypeControl(FindByNumbersVersesNumberTypeLabel);
         //ResetFindByNumbersNumberTypeControl(FindByNumbersWordsNumberTypeLabel);
         //ResetFindByNumbersNumberTypeControl(FindByNumbersLettersNumberTypeLabel);
@@ -36859,7 +36859,7 @@ public partial class MainForm : Form, ISubscriber
         try
         {
             for (int i = 0; i < 3; i++) FindByNumbersNumberNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
-            for (int i = 0; i < 3; i++) FindByNumbersChaptersNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
+            for (int i = 0; i < 3; i++) FindByNumbersPartitionsNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             for (int i = 0; i < 3; i++) FindByNumbersVersesNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             for (int i = 0; i < 3; i++) FindByNumbersWordsNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             for (int i = 0; i < 3; i++) FindByNumbersLettersNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -36869,7 +36869,7 @@ public partial class MainForm : Form, ISubscriber
             for (int i = 0; i < 3; i++) FindByNumbersValueDigitalRootNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
 
             FindByNumbersNumberNumericUpDown.Value = 0;
-            FindByNumbersChaptersNumericUpDown.Value = 0;
+            FindByNumbersPartitionsNumericUpDown.Value = 0;
             FindByNumbersVersesNumericUpDown.Value = 0;
             FindByNumbersWordsNumericUpDown.Value = 0;
             FindByNumbersLettersNumericUpDown.Value = 1;
@@ -36889,7 +36889,7 @@ public partial class MainForm : Form, ISubscriber
         finally
         {
             FindByNumbersNumberNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
-            FindByNumbersChaptersNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
+            FindByNumbersPartitionsNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             FindByNumbersVersesNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             FindByNumbersWordsNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             FindByNumbersLettersNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -36912,7 +36912,7 @@ public partial class MainForm : Form, ISubscriber
         ////ResetFindByNumbersResultTypeLabels(); // already called on FindByNumbersControls_Enter
         //ResetFindByNumbersComparisonOperatorLabels();
         //ResetFindByNumbersNumberTypeControl(FindByNumbersNumberNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersChaptersNumberTypeLabel);
+        //ResetFindByNumbersNumberTypeControl(FindByNumbersPartitionsNumberTypeLabel);
         //ResetFindByNumbersNumberTypeControl(FindByNumbersVersesNumberTypeLabel);
         //ResetFindByNumbersNumberTypeControl(FindByNumbersWordsNumberTypeLabel);
         //ResetFindByNumbersNumberTypeControl(FindByNumbersLettersNumberTypeLabel);
@@ -36924,7 +36924,7 @@ public partial class MainForm : Form, ISubscriber
         try
         {
             for (int i = 0; i < 3; i++) FindByNumbersNumberNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
-            for (int i = 0; i < 3; i++) FindByNumbersChaptersNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
+            for (int i = 0; i < 3; i++) FindByNumbersPartitionsNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             for (int i = 0; i < 3; i++) FindByNumbersVersesNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             for (int i = 0; i < 3; i++) FindByNumbersWordsNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             for (int i = 0; i < 3; i++) FindByNumbersLettersNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -36934,7 +36934,7 @@ public partial class MainForm : Form, ISubscriber
             for (int i = 0; i < 3; i++) FindByNumbersValueDigitalRootNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
 
             FindByNumbersNumberNumericUpDown.Value = 0;
-            FindByNumbersChaptersNumericUpDown.Value = 0;
+            FindByNumbersPartitionsNumericUpDown.Value = 0;
             FindByNumbersVersesNumericUpDown.Value = 0;
             FindByNumbersWordsNumericUpDown.Value = 1;
             FindByNumbersLettersNumericUpDown.Value = 0;
@@ -36954,7 +36954,7 @@ public partial class MainForm : Form, ISubscriber
         finally
         {
             FindByNumbersNumberNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
-            FindByNumbersChaptersNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
+            FindByNumbersPartitionsNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             FindByNumbersVersesNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             FindByNumbersWordsNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             FindByNumbersLettersNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -36977,7 +36977,7 @@ public partial class MainForm : Form, ISubscriber
         ////ResetFindByNumbersResultTypeLabels(); // already called on FindByNumbersControls_Enter
         //ResetFindByNumbersComparisonOperatorLabels();
         //ResetFindByNumbersNumberTypeControl(FindByNumbersNumberNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersChaptersNumberTypeLabel);
+        //ResetFindByNumbersNumberTypeControl(FindByNumbersPartitionsNumberTypeLabel);
         //ResetFindByNumbersNumberTypeControl(FindByNumbersVersesNumberTypeLabel);
         //ResetFindByNumbersNumberTypeControl(FindByNumbersWordsNumberTypeLabel);
         //ResetFindByNumbersNumberTypeControl(FindByNumbersLettersNumberTypeLabel);
@@ -36989,7 +36989,7 @@ public partial class MainForm : Form, ISubscriber
         try
         {
             for (int i = 0; i < 3; i++) FindByNumbersNumberNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
-            for (int i = 0; i < 3; i++) FindByNumbersChaptersNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
+            for (int i = 0; i < 3; i++) FindByNumbersPartitionsNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             for (int i = 0; i < 3; i++) FindByNumbersVersesNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             for (int i = 0; i < 3; i++) FindByNumbersWordsNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             for (int i = 0; i < 3; i++) FindByNumbersLettersNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -36999,7 +36999,7 @@ public partial class MainForm : Form, ISubscriber
             for (int i = 0; i < 3; i++) FindByNumbersValueDigitalRootNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
 
             FindByNumbersNumberNumericUpDown.Value = 0;
-            FindByNumbersChaptersNumericUpDown.Value = 0;
+            FindByNumbersPartitionsNumericUpDown.Value = 0;
             FindByNumbersVersesNumericUpDown.Value = 0;
             FindByNumbersWordsNumericUpDown.Value = 0; // 0 not 1 for any number of words in sentence
             FindByNumbersLettersNumericUpDown.Value = 0;
@@ -37019,7 +37019,7 @@ public partial class MainForm : Form, ISubscriber
         finally
         {
             FindByNumbersNumberNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
-            FindByNumbersChaptersNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
+            FindByNumbersPartitionsNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             FindByNumbersVersesNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             FindByNumbersWordsNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             FindByNumbersLettersNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -37042,7 +37042,7 @@ public partial class MainForm : Form, ISubscriber
         ////ResetFindByNumbersResultTypeLabels(); // already called on FindByNumbersControls_Enter
         //ResetFindByNumbersComparisonOperatorLabels();
         //ResetFindByNumbersNumberTypeControl(FindByNumbersNumberNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersChaptersNumberTypeLabel);
+        //ResetFindByNumbersNumberTypeControl(FindByNumbersPartitionsNumberTypeLabel);
         //ResetFindByNumbersNumberTypeControl(FindByNumbersVersesNumberTypeLabel);
         //ResetFindByNumbersNumberTypeControl(FindByNumbersWordsNumberTypeLabel);
         //ResetFindByNumbersNumberTypeControl(FindByNumbersLettersNumberTypeLabel);
@@ -37054,7 +37054,7 @@ public partial class MainForm : Form, ISubscriber
         try
         {
             for (int i = 0; i < 3; i++) FindByNumbersNumberNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
-            for (int i = 0; i < 3; i++) FindByNumbersChaptersNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
+            for (int i = 0; i < 3; i++) FindByNumbersPartitionsNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             for (int i = 0; i < 3; i++) FindByNumbersVersesNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             for (int i = 0; i < 3; i++) FindByNumbersWordsNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             for (int i = 0; i < 3; i++) FindByNumbersLettersNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -37064,7 +37064,7 @@ public partial class MainForm : Form, ISubscriber
             for (int i = 0; i < 3; i++) FindByNumbersValueDigitalRootNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
 
             FindByNumbersNumberNumericUpDown.Value = 0;
-            FindByNumbersChaptersNumericUpDown.Value = 0;
+            FindByNumbersPartitionsNumericUpDown.Value = 0;
             FindByNumbersVersesNumericUpDown.Value = 1;
             FindByNumbersWordsNumericUpDown.Value = 0;
             FindByNumbersLettersNumericUpDown.Value = 0;
@@ -37084,7 +37084,7 @@ public partial class MainForm : Form, ISubscriber
         finally
         {
             FindByNumbersNumberNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
-            FindByNumbersChaptersNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
+            FindByNumbersPartitionsNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             FindByNumbersVersesNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             FindByNumbersWordsNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             FindByNumbersLettersNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -37146,7 +37146,7 @@ public partial class MainForm : Form, ISubscriber
         ////ResetFindByNumbersResultTypeLabels(); // already called on FindByNumbersControls_Enter
         //ResetFindByNumbersComparisonOperatorLabels();
         //ResetFindByNumbersNumberTypeControl(FindByNumbersNumberNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersChaptersNumberTypeLabel);
+        //ResetFindByNumbersNumberTypeControl(FindByNumbersPartitionsNumberTypeLabel);
         //ResetFindByNumbersNumberTypeControl(FindByNumbersVersesNumberTypeLabel);
         //ResetFindByNumbersNumberTypeControl(FindByNumbersWordsNumberTypeLabel);
         //ResetFindByNumbersNumberTypeControl(FindByNumbersLettersNumberTypeLabel);
@@ -37158,7 +37158,7 @@ public partial class MainForm : Form, ISubscriber
         try
         {
             for (int i = 0; i < 3; i++) FindByNumbersNumberNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
-            for (int i = 0; i < 3; i++) FindByNumbersChaptersNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
+            for (int i = 0; i < 3; i++) FindByNumbersPartitionsNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             for (int i = 0; i < 3; i++) FindByNumbersVersesNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             for (int i = 0; i < 3; i++) FindByNumbersWordsNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             for (int i = 0; i < 3; i++) FindByNumbersLettersNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -37168,7 +37168,7 @@ public partial class MainForm : Form, ISubscriber
             for (int i = 0; i < 3; i++) FindByNumbersValueDigitalRootNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
 
             FindByNumbersNumberNumericUpDown.Value = 0;
-            FindByNumbersChaptersNumericUpDown.Value = 1;
+            FindByNumbersPartitionsNumericUpDown.Value = 1;
             FindByNumbersVersesNumericUpDown.Value = 0;
             FindByNumbersWordsNumericUpDown.Value = 0;
             FindByNumbersLettersNumericUpDown.Value = 0;
@@ -37188,7 +37188,7 @@ public partial class MainForm : Form, ISubscriber
         finally
         {
             FindByNumbersNumberNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
-            FindByNumbersChaptersNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
+            FindByNumbersPartitionsNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             FindByNumbersVersesNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             FindByNumbersWordsNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
             FindByNumbersLettersNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -37202,7 +37202,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void EnableFindByNumbersControls(
                     bool enable_number,
-                    bool enable_chapters,
+                    bool enable_partitions,
                     bool enable_verses,
                     bool enable_words,
                     bool enable_letters,
@@ -37225,17 +37225,17 @@ public partial class MainForm : Form, ISubscriber
         //    FindByNumbersNumberNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
         //}
 
-        no_number_type_comparison = ((FindByNumbersChaptersNumberTypeLabel.Text.Length == 0) || ((FindByNumbersChaptersNumberTypeLabel.Text.Length > 0) && Char.IsDigit(FindByNumbersChaptersNumberTypeLabel.Text[0])));
-        FindByNumbersChaptersLabel.Enabled = enable_chapters;
-        FindByNumbersChaptersComparisonOperatorLabel.Enabled = enable_chapters && no_number_type_comparison;
-        FindByNumbersChaptersNumericUpDown.Enabled = enable_chapters && no_number_type_comparison;
-        FindByNumbersChaptersNumberTypeLabel.Enabled = enable_chapters;
-        //if (enable_chapters == false)
+        no_number_type_comparison = ((FindByNumbersPartitionsNumberTypeLabel.Text.Length == 0) || ((FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0) && Char.IsDigit(FindByNumbersPartitionsNumberTypeLabel.Text[0])));
+        FindByNumbersPartitionsLabel.Enabled = enable_partitions;
+        FindByNumbersPartitionsComparisonOperatorLabel.Enabled = enable_partitions && no_number_type_comparison;
+        FindByNumbersPartitionsNumericUpDown.Enabled = enable_partitions && no_number_type_comparison;
+        FindByNumbersPartitionsNumberTypeLabel.Enabled = enable_partitions;
+        //if (enable_partitions == false)
         //{
-        //    FindByNumbersChaptersComparisonOperatorLabel.Text = "=";
-        //    FindByNumbersChaptersNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
-        //    FindByNumbersChaptersNumericUpDown.Value = 0;
-        //    FindByNumbersChaptersNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
+        //    FindByNumbersPartitionsComparisonOperatorLabel.Text = "=";
+        //    FindByNumbersPartitionsNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
+        //    FindByNumbersPartitionsNumericUpDown.Value = 0;
+        //    FindByNumbersPartitionsNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
         //}
 
         no_number_type_comparison = ((FindByNumbersVersesNumberTypeLabel.Text.Length == 0) || ((FindByNumbersVersesNumberTypeLabel.Text.Length > 0) && Char.IsDigit(FindByNumbersVersesNumberTypeLabel.Text[0])));
@@ -37335,9 +37335,9 @@ public partial class MainForm : Form, ISubscriber
         FindByNumbersNumberNumericUpDown.Value = 0;
         FindByNumbersNumberNumberTypeLabel.Text = null;
 
-        FindByNumbersChaptersComparisonOperatorLabel.Text = "=";
-        FindByNumbersChaptersNumericUpDown.Value = 0;
-        FindByNumbersChaptersNumberTypeLabel.Text = null;
+        FindByNumbersPartitionsComparisonOperatorLabel.Text = "=";
+        FindByNumbersPartitionsNumericUpDown.Value = 0;
+        FindByNumbersPartitionsNumberTypeLabel.Text = null;
 
         FindByNumbersVersesComparisonOperatorLabel.Text = "=";
         FindByNumbersVersesNumericUpDown.Value = 0;
@@ -37429,7 +37429,7 @@ public partial class MainForm : Form, ISubscriber
     private void ResetFindByNumbersComparisonOperatorLabels()
     {
         FindByNumbersNumberComparisonOperatorLabel.Text = "=";
-        FindByNumbersChaptersComparisonOperatorLabel.Text = "=";
+        FindByNumbersPartitionsComparisonOperatorLabel.Text = "=";
         FindByNumbersVersesComparisonOperatorLabel.Text = "=";
         FindByNumbersWordsComparisonOperatorLabel.Text = "=";
         FindByNumbersLettersComparisonOperatorLabel.Text = "=";
@@ -37495,11 +37495,11 @@ public partial class MainForm : Form, ISubscriber
             case NumbersResultType.ChapterRanges:
             case NumbersResultType.ChapterSets:
                 {
-                    if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
+                    if ((FindByNumbersPartitionsNumericUpDown.Value == 1) && (FindByNumbersPartitionsNumberTypeLabel.Text.Length == 0))
                     {
                         m_numbers_result_type = NumbersResultType.Chapters;
                     }
-                    else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
+                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37517,11 +37517,11 @@ public partial class MainForm : Form, ISubscriber
             case NumbersResultType.PageRanges:
             case NumbersResultType.PageSets:
                 {
-                    if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
+                    if ((FindByNumbersPartitionsNumericUpDown.Value == 1) && (FindByNumbersPartitionsNumberTypeLabel.Text.Length == 0))
                     {
                         m_numbers_result_type = NumbersResultType.Pages;
                     }
-                    else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
+                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37539,11 +37539,11 @@ public partial class MainForm : Form, ISubscriber
             case NumbersResultType.StationRanges:
             case NumbersResultType.StationSets:
                 {
-                    if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
+                    if ((FindByNumbersPartitionsNumericUpDown.Value == 1) && (FindByNumbersPartitionsNumberTypeLabel.Text.Length == 0))
                     {
                         m_numbers_result_type = NumbersResultType.Stations;
                     }
-                    else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
+                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37561,11 +37561,11 @@ public partial class MainForm : Form, ISubscriber
             case NumbersResultType.PartRanges:
             case NumbersResultType.PartSets:
                 {
-                    if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
+                    if ((FindByNumbersPartitionsNumericUpDown.Value == 1) && (FindByNumbersPartitionsNumberTypeLabel.Text.Length == 0))
                     {
                         m_numbers_result_type = NumbersResultType.Parts;
                     }
-                    else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
+                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37583,11 +37583,11 @@ public partial class MainForm : Form, ISubscriber
             case NumbersResultType.GroupRanges:
             case NumbersResultType.GroupSets:
                 {
-                    if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
+                    if ((FindByNumbersPartitionsNumericUpDown.Value == 1) && (FindByNumbersPartitionsNumberTypeLabel.Text.Length == 0))
                     {
                         m_numbers_result_type = NumbersResultType.Groups;
                     }
-                    else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
+                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37605,11 +37605,11 @@ public partial class MainForm : Form, ISubscriber
             case NumbersResultType.HalfRanges:
             case NumbersResultType.HalfSets:
                 {
-                    if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
+                    if ((FindByNumbersPartitionsNumericUpDown.Value == 1) && (FindByNumbersPartitionsNumberTypeLabel.Text.Length == 0))
                     {
                         m_numbers_result_type = NumbersResultType.Halfs;
                     }
-                    else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
+                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37627,11 +37627,11 @@ public partial class MainForm : Form, ISubscriber
             case NumbersResultType.QuarterRanges:
             case NumbersResultType.QuarterSets:
                 {
-                    if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
+                    if ((FindByNumbersPartitionsNumericUpDown.Value == 1) && (FindByNumbersPartitionsNumberTypeLabel.Text.Length == 0))
                     {
                         m_numbers_result_type = NumbersResultType.Quarters;
                     }
-                    else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
+                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37649,11 +37649,11 @@ public partial class MainForm : Form, ISubscriber
             case NumbersResultType.BowingRanges:
             case NumbersResultType.BowingSets:
                 {
-                    if ((FindByNumbersChaptersNumericUpDown.Value == 1) && (FindByNumbersChaptersNumberTypeLabel.Text.Length == 0))
+                    if ((FindByNumbersPartitionsNumericUpDown.Value == 1) && (FindByNumbersPartitionsNumberTypeLabel.Text.Length == 0))
                     {
                         m_numbers_result_type = NumbersResultType.Bowings;
                     }
-                    else if ((FindByNumbersChaptersNumericUpDown.Value > 1) || (FindByNumbersChaptersNumberTypeLabel.Text.Length > 0))
+                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37752,7 +37752,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             FindByNumbersResultTypeChaptersLabel.Text = "C";
                             ToolTip.SetToolTip(FindByNumbersResultTypeChaptersLabel, L[l]["find chapters"]);
-                            switch (m_chapter_number_scope)
+                            switch (m_partition_number_scope)
                             {
                                 case NumberScope.Number:
                                     FindByNumbersNumberLabel.Text = L[l]["number"];
@@ -37767,7 +37767,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             FindByNumbersResultTypePagesLabel.Text = "#";
                             ToolTip.SetToolTip(FindByNumbersResultTypePagesLabel, L[l]["find pages"]);
-                            switch (m_chapter_number_scope)
+                            switch (m_partition_number_scope)
                             {
                                 case NumberScope.Number:
                                     FindByNumbersNumberLabel.Text = L[l]["number"];
@@ -37782,7 +37782,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             FindByNumbersResultTypeStationsLabel.Text = "S";
                             ToolTip.SetToolTip(FindByNumbersResultTypeStationsLabel, L[l]["find stations"]);
-                            switch (m_chapter_number_scope)
+                            switch (m_partition_number_scope)
                             {
                                 case NumberScope.Number:
                                     FindByNumbersNumberLabel.Text = L[l]["number"];
@@ -37797,7 +37797,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             FindByNumbersResultTypePartsLabel.Text = "P";
                             ToolTip.SetToolTip(FindByNumbersResultTypePartsLabel, L[l]["find parts"]);
-                            switch (m_chapter_number_scope)
+                            switch (m_partition_number_scope)
                             {
                                 case NumberScope.Number:
                                     FindByNumbersNumberLabel.Text = L[l]["number"];
@@ -37812,7 +37812,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             FindByNumbersResultTypeGroupsLabel.Text = "G";
                             ToolTip.SetToolTip(FindByNumbersResultTypeGroupsLabel, L[l]["find groups"]);
-                            switch (m_chapter_number_scope)
+                            switch (m_partition_number_scope)
                             {
                                 case NumberScope.Number:
                                     FindByNumbersNumberLabel.Text = L[l]["number"];
@@ -37827,7 +37827,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             FindByNumbersResultTypeHalfsLabel.Text = "H";
                             ToolTip.SetToolTip(FindByNumbersResultTypeHalfsLabel, L[l]["find halfs"]);
-                            switch (m_chapter_number_scope)
+                            switch (m_partition_number_scope)
                             {
                                 case NumberScope.Number:
                                     FindByNumbersNumberLabel.Text = L[l]["number"];
@@ -37842,7 +37842,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             FindByNumbersResultTypeQuartersLabel.Text = "Q";
                             ToolTip.SetToolTip(FindByNumbersResultTypeQuartersLabel, L[l]["find quarters"]);
-                            switch (m_chapter_number_scope)
+                            switch (m_partition_number_scope)
                             {
                                 case NumberScope.Number:
                                     FindByNumbersNumberLabel.Text = L[l]["number"];
@@ -37857,7 +37857,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             FindByNumbersResultTypeBowingsLabel.Text = "B";
                             ToolTip.SetToolTip(FindByNumbersResultTypeBowingsLabel, L[l]["find bowings"]);
-                            switch (m_chapter_number_scope)
+                            switch (m_partition_number_scope)
                             {
                                 case NumberScope.Number:
                                     FindByNumbersNumberLabel.Text = L[l]["number"];
@@ -38076,10 +38076,10 @@ public partial class MainForm : Form, ISubscriber
         //    case NumbersResultType.ChapterRanges:
         //    case NumbersResultType.ChapterSets:
         //        {
-        //            FindByNumbersChaptersComparisonOperatorLabel.Text = "=";
-        //            FindByNumbersChaptersComparisonOperatorLabel.Enabled = false;
-        //            FindByNumbersChaptersNumberTypeLabel.Text = "";
-        //            FindByNumbersChaptersNumberTypeLabel.Enabled = false;
+        //            FindByNumbersPartitionsComparisonOperatorLabel.Text = "=";
+        //            FindByNumbersPartitionsComparisonOperatorLabel.Enabled = false;
+        //            FindByNumbersPartitionsNumberTypeLabel.Text = "";
+        //            FindByNumbersPartitionsNumberTypeLabel.Enabled = false;
         //        }
         //        break;
         //    default:
@@ -38522,21 +38522,21 @@ public partial class MainForm : Form, ISubscriber
                                 ToolTip.SetToolTip(FindByNumbersNumberNumberTypeLabel, null);
                             }
                         }
-                        else if (control == FindByNumbersChaptersComparisonOperatorLabel)
+                        else if (control == FindByNumbersPartitionsComparisonOperatorLabel)
                         {
-                            if (FindByNumbersChaptersComparisonOperatorLabel.Text == "÷")
+                            if (FindByNumbersPartitionsComparisonOperatorLabel.Text == "÷")
                             {
                                 int remainder = 0;
-                                FindByNumbersChaptersNumberTypeLabel.Tag = remainder;
-                                FindByNumbersChaptersNumberTypeLabel.Text = remainder.ToString();
-                                FindByNumbersChaptersNumberTypeLabel.ForeColor = Color.Black;
-                                FindByNumbersChaptersNumberTypeLabel.Enabled = true;
-                                ToolTip.SetToolTip(FindByNumbersChaptersNumberTypeLabel, L[l]["remainder"]);
+                                FindByNumbersPartitionsNumberTypeLabel.Tag = remainder;
+                                FindByNumbersPartitionsNumberTypeLabel.Text = remainder.ToString();
+                                FindByNumbersPartitionsNumberTypeLabel.ForeColor = Color.Black;
+                                FindByNumbersPartitionsNumberTypeLabel.Enabled = true;
+                                ToolTip.SetToolTip(FindByNumbersPartitionsNumberTypeLabel, L[l]["remainder"]);
                             }
                             else
                             {
-                                FindByNumbersChaptersNumberTypeLabel.Text = "";
-                                ToolTip.SetToolTip(FindByNumbersChaptersNumberTypeLabel, null);
+                                FindByNumbersPartitionsNumberTypeLabel.Text = "";
+                                ToolTip.SetToolTip(FindByNumbersPartitionsNumberTypeLabel, null);
                             }
                         }
                         else if (control == FindByNumbersVersesComparisonOperatorLabel)
@@ -38706,18 +38706,18 @@ public partial class MainForm : Form, ISubscriber
                         FindByNumbersNumberNumericUpDown.Focus();
                     }
                 }
-                else if (control == FindByNumbersChaptersNumberTypeLabel)
+                else if (control == FindByNumbersPartitionsNumberTypeLabel)
                 {
-                    FindByNumbersChaptersComparisonOperatorLabel.Enabled = (control.Text.Length == 0);
-                    FindByNumbersChaptersNumericUpDown.Enabled = (control.Text == "");
+                    FindByNumbersPartitionsComparisonOperatorLabel.Enabled = (control.Text.Length == 0);
+                    FindByNumbersPartitionsNumericUpDown.Enabled = (control.Text == "");
                     if (control.Text.Length > 0)
                     {
-                        FindByNumbersChaptersComparisonOperatorLabel.Text = "=";
-                        FindByNumbersChaptersNumericUpDown.Value = 0;
+                        FindByNumbersPartitionsComparisonOperatorLabel.Text = "=";
+                        FindByNumbersPartitionsNumericUpDown.Value = 0;
                     }
                     else
                     {
-                        FindByNumbersChaptersNumericUpDown.Focus();
+                        FindByNumbersPartitionsNumericUpDown.Focus();
                     }
                 }
                 else if (control == FindByNumbersVersesNumberTypeLabel)
@@ -39011,7 +39011,7 @@ public partial class MainForm : Form, ISubscriber
     private void UpdateNumberTypeLabelTags()
     {
         FindByNumbersNumberNumberTypeLabel.Tag = (int)FindByNumbersNumberNumericUpDown.Value;
-        FindByNumbersChaptersNumberTypeLabel.Tag = (int)FindByNumbersChaptersNumericUpDown.Value;
+        FindByNumbersPartitionsNumberTypeLabel.Tag = (int)FindByNumbersPartitionsNumericUpDown.Value;
         FindByNumbersVersesNumberTypeLabel.Tag = (int)FindByNumbersVersesNumericUpDown.Value;
         FindByNumbersWordsNumberTypeLabel.Tag = (int)FindByNumbersWordsNumericUpDown.Value;
         FindByNumbersLettersNumberTypeLabel.Tag = (int)FindByNumbersLettersNumericUpDown.Value;
@@ -39029,13 +39029,13 @@ public partial class MainForm : Form, ISubscriber
             }
         }
 
-        if (int.TryParse(FindByNumbersChaptersNumberTypeLabel.Text, out number))
+        if (int.TryParse(FindByNumbersPartitionsNumberTypeLabel.Text, out number))
         {
-            if (number >= (int)FindByNumbersChaptersNumericUpDown.Value)
+            if (number >= (int)FindByNumbersPartitionsNumericUpDown.Value)
             {
-                number = (int)FindByNumbersChaptersNumericUpDown.Value - 1;
+                number = (int)FindByNumbersPartitionsNumericUpDown.Value - 1;
                 if (number < 0) number = 0;
-                FindByNumbersChaptersNumberTypeLabel.Text = number.ToString();
+                FindByNumbersPartitionsNumberTypeLabel.Text = number.ToString();
             }
         }
 
@@ -39137,24 +39137,24 @@ public partial class MainForm : Form, ISubscriber
                 (number_symbol == "#") ? NumberType.Natural :
                 (number_symbol == "") ? NumberType.None :
                                         NumberType.None;
-            string chapter_count_symbol = FindByNumbersChaptersNumberTypeLabel.Enabled ? FindByNumbersChaptersNumberTypeLabel.Text : "";
-            NumberType chapter_count_number_type =
-                (chapter_count_symbol == "P") ? NumberType.Prime :
-                (chapter_count_symbol == "AP") ? NumberType.AdditivePrime :
-                (chapter_count_symbol == "XP") ? NumberType.NonAdditivePrime :
-                (chapter_count_symbol == "C") ? NumberType.Composite :
-                (chapter_count_symbol == "AC") ? NumberType.AdditiveComposite :
-                (chapter_count_symbol == "XC") ? NumberType.NonAdditiveComposite :
-                (chapter_count_symbol == "O") ? NumberType.Odd :
-                (chapter_count_symbol == "E") ? NumberType.Even :
-                (chapter_count_symbol == "^2") ? NumberType.Square :
-                (chapter_count_symbol == "^3") ? NumberType.Cubic :
-                (chapter_count_symbol == "^4") ? NumberType.Quartic :
-                (chapter_count_symbol == "^5") ? NumberType.Quintic :
-                (chapter_count_symbol == "^6") ? NumberType.Sextic :
-                (chapter_count_symbol == "^7") ? NumberType.Septic :
-                (chapter_count_symbol == "#") ? NumberType.Natural :
-                (chapter_count_symbol == "") ? NumberType.None :
+            string partition_count_symbol = FindByNumbersPartitionsNumberTypeLabel.Enabled ? FindByNumbersPartitionsNumberTypeLabel.Text : "";
+            NumberType partition_count_number_type =
+                (partition_count_symbol == "P") ? NumberType.Prime :
+                (partition_count_symbol == "AP") ? NumberType.AdditivePrime :
+                (partition_count_symbol == "XP") ? NumberType.NonAdditivePrime :
+                (partition_count_symbol == "C") ? NumberType.Composite :
+                (partition_count_symbol == "AC") ? NumberType.AdditiveComposite :
+                (partition_count_symbol == "XC") ? NumberType.NonAdditiveComposite :
+                (partition_count_symbol == "O") ? NumberType.Odd :
+                (partition_count_symbol == "E") ? NumberType.Even :
+                (partition_count_symbol == "^2") ? NumberType.Square :
+                (partition_count_symbol == "^3") ? NumberType.Cubic :
+                (partition_count_symbol == "^4") ? NumberType.Quartic :
+                (partition_count_symbol == "^5") ? NumberType.Quintic :
+                (partition_count_symbol == "^6") ? NumberType.Sextic :
+                (partition_count_symbol == "^7") ? NumberType.Septic :
+                (partition_count_symbol == "#") ? NumberType.Natural :
+                (partition_count_symbol == "") ? NumberType.None :
                                                NumberType.None;
             string verse_count_symbol = FindByNumbersVersesNumberTypeLabel.Enabled ? FindByNumbersVersesNumberTypeLabel.Text : "";
             NumberType verse_count_number_type =
@@ -39293,7 +39293,7 @@ public partial class MainForm : Form, ISubscriber
 
             // 2. numbers
             int number = FindByNumbersNumberNumericUpDown.Enabled ? (int)FindByNumbersNumberNumericUpDown.Value : 0;
-            int chapter_count = FindByNumbersChaptersNumericUpDown.Enabled ? (int)FindByNumbersChaptersNumericUpDown.Value : 0;
+            int partition_count = FindByNumbersPartitionsNumericUpDown.Enabled ? (int)FindByNumbersPartitionsNumericUpDown.Value : 0;
             int verse_count = FindByNumbersVersesNumericUpDown.Enabled ? (int)FindByNumbersVersesNumericUpDown.Value : 0;
             int word_count = FindByNumbersWordsNumericUpDown.Enabled ? (int)FindByNumbersWordsNumericUpDown.Value : 0;
             int letter_count = FindByNumbersLettersNumericUpDown.Enabled ? (int)FindByNumbersLettersNumericUpDown.Value : 0;
@@ -39315,17 +39315,17 @@ public partial class MainForm : Form, ISubscriber
                 (number_operator_symbol == "!÷") ? ComparisonOperator.IndivisibleBy :
                 (number_operator_symbol == "Ʃ") ? ComparisonOperator.EqualSum :
                                                   ComparisonOperator.Reserved;
-            string chapter_count_operator_symbol = FindByNumbersChaptersComparisonOperatorLabel.Text;
-            ComparisonOperator chapter_count_comparison_operator =
-                (chapter_count_operator_symbol == "=") ? ComparisonOperator.Equal :
-                (chapter_count_operator_symbol == "≠") ? ComparisonOperator.NotEqual :
-                (chapter_count_operator_symbol == "<") ? ComparisonOperator.LessThan :
-                (chapter_count_operator_symbol == "≤") ? ComparisonOperator.LessOrEqual :
-                (chapter_count_operator_symbol == ">") ? ComparisonOperator.GreaterThan :
-                (chapter_count_operator_symbol == "≥") ? ComparisonOperator.GreaterOrEqual :
-                (chapter_count_operator_symbol == "÷") ? ComparisonOperator.DivisibleBy :
-                (chapter_count_operator_symbol == "!÷") ? ComparisonOperator.IndivisibleBy :
-                (chapter_count_operator_symbol == "Ʃ") ? ComparisonOperator.EqualSum :
+            string partition_count_operator_symbol = FindByNumbersPartitionsComparisonOperatorLabel.Text;
+            ComparisonOperator partition_count_comparison_operator =
+                (partition_count_operator_symbol == "=") ? ComparisonOperator.Equal :
+                (partition_count_operator_symbol == "≠") ? ComparisonOperator.NotEqual :
+                (partition_count_operator_symbol == "<") ? ComparisonOperator.LessThan :
+                (partition_count_operator_symbol == "≤") ? ComparisonOperator.LessOrEqual :
+                (partition_count_operator_symbol == ">") ? ComparisonOperator.GreaterThan :
+                (partition_count_operator_symbol == "≥") ? ComparisonOperator.GreaterOrEqual :
+                (partition_count_operator_symbol == "÷") ? ComparisonOperator.DivisibleBy :
+                (partition_count_operator_symbol == "!÷") ? ComparisonOperator.IndivisibleBy :
+                (partition_count_operator_symbol == "Ʃ") ? ComparisonOperator.EqualSum :
                                                          ComparisonOperator.Reserved;
             string verse_count_operator_symbol = FindByNumbersVersesComparisonOperatorLabel.Text;
             ComparisonOperator verse_count_comparison_operator =
@@ -39425,12 +39425,12 @@ public partial class MainForm : Form, ISubscriber
                     // keep as -1
                 }
             }
-            int chapter_count_remainder = -1;
-            if (chapter_count_comparison_operator == ComparisonOperator.DivisibleBy)
+            int partition_count_remainder = -1;
+            if (partition_count_comparison_operator == ComparisonOperator.DivisibleBy)
             {
                 try
                 {
-                    chapter_count_remainder = int.Parse(FindByNumbersChaptersNumberTypeLabel.Text);
+                    partition_count_remainder = int.Parse(FindByNumbersPartitionsNumberTypeLabel.Text);
                 }
                 catch
                 {
@@ -39523,41 +39523,41 @@ public partial class MainForm : Form, ISubscriber
             }
 
 
-            string partitions = null;
+            string xxxs = null;
             switch (m_numbers_result_type)
             {
                 case NumbersResultType.WordRanges:
                 case NumbersResultType.WordSets:
-                    { partitions = L[l]["words"]; break; }
+                    { xxxs = L[l]["words"]; break; }
                 case NumbersResultType.VerseRanges:
                 case NumbersResultType.VerseSets:
-                    { partitions = L[l]["verses"]; break; }
+                    { xxxs = L[l]["verses"]; break; }
                 case NumbersResultType.ChapterRanges:
                 case NumbersResultType.ChapterSets:
-                    { partitions = L[l]["chapters"]; break; }
+                    { xxxs = L[l]["chapters"]; break; }
                 case NumbersResultType.PageRanges:
                 case NumbersResultType.PageSets:
-                    { partitions = L[l]["pages"]; break; }
+                    { xxxs = L[l]["pages"]; break; }
                 case NumbersResultType.StationRanges:
                 case NumbersResultType.StationSets:
-                    { partitions = L[l]["stations"]; break; }
+                    { xxxs = L[l]["stations"]; break; }
                 case NumbersResultType.PartRanges:
                 case NumbersResultType.PartSets:
-                    { partitions = L[l]["parts"]; break; }
+                    { xxxs = L[l]["parts"]; break; }
                 case NumbersResultType.GroupRanges:
                 case NumbersResultType.GroupSets:
-                    { partitions = L[l]["groups"]; break; }
+                    { xxxs = L[l]["groups"]; break; }
                 case NumbersResultType.HalfRanges:
                 case NumbersResultType.HalfSets:
-                    { partitions = L[l]["halfs"]; break; }
+                    { xxxs = L[l]["halfs"]; break; }
                 case NumbersResultType.QuarterRanges:
                 case NumbersResultType.QuarterSets:
-                    { partitions = L[l]["quarters"]; break; }
+                    { xxxs = L[l]["quarters"]; break; }
                 case NumbersResultType.BowingRanges:
                 case NumbersResultType.BowingSets:
-                    { partitions = L[l]["bowings"]; break; }
+                    { xxxs = L[l]["bowings"]; break; }
                 default:
-                    { partitions = "chapters"; break; }
+                    { xxxs = "chapters"; break; }
             }
 
             string text = null;
@@ -39581,7 +39581,7 @@ public partial class MainForm : Form, ISubscriber
                 (m_numbers_result_type == NumbersResultType.BowingSets)
                )
             {
-                text += (((text.Length > 0) && ((chapter_count > 0) || (chapter_count_number_type != NumberType.None))) ? " " : "") + ((chapter_count > 0) ? (partitions + chapter_count_operator_symbol + chapter_count.ToString()) : ((chapter_count_number_type != NumberType.None) ? (L[l]["chapters"] + chapter_count_operator_symbol + FindByNumbersChaptersNumberTypeLabel.Text) : ""));
+                text += (((text.Length > 0) && ((partition_count > 0) || (partition_count_number_type != NumberType.None))) ? " " : "") + ((partition_count > 0) ? (xxxs + partition_count_operator_symbol + partition_count.ToString()) : ((partition_count_number_type != NumberType.None) ? (L[l]["chapters"] + partition_count_operator_symbol + FindByNumbersPartitionsNumberTypeLabel.Text) : ""));
             }
 
             if (
@@ -39661,7 +39661,7 @@ public partial class MainForm : Form, ISubscriber
             NumberQuery query = new NumberQuery();
 
             query.Number = number;
-            query.PartitionCount = chapter_count;
+            query.PartitionCount = partition_count;
             query.VerseCount = verse_count;
             query.WordCount = word_count;
             query.LetterCount = letter_count;
@@ -39671,7 +39671,7 @@ public partial class MainForm : Form, ISubscriber
             query.ValueDigitalRoot = value_digital_root;
 
             query.NumberNumberType = number_number_type;
-            query.PartitionCountNumberType = chapter_count_number_type;
+            query.PartitionCountNumberType = partition_count_number_type;
             query.VerseCountNumberType = verse_count_number_type;
             query.WordCountNumberType = word_count_number_type;
             query.LetterCountNumberType = letter_count_number_type;
@@ -39681,7 +39681,7 @@ public partial class MainForm : Form, ISubscriber
             query.ValueDigitalRootNumberType = value_digital_root_number_type;
 
             query.NumberComparisonOperator = number_comparison_operator;
-            query.PartitionCountComparisonOperator = chapter_count_comparison_operator;
+            query.PartitionCountComparisonOperator = partition_count_comparison_operator;
             query.VerseCountComparisonOperator = verse_count_comparison_operator;
             query.WordCountComparisonOperator = word_count_comparison_operator;
             query.LetterCountComparisonOperator = letter_count_comparison_operator;
@@ -39691,7 +39691,7 @@ public partial class MainForm : Form, ISubscriber
             query.ValueDigitalRootComparisonOperator = value_digital_root_comparison_operator;
 
             query.NumberRemainder = number_remainder;
-            query.PartitionCountRemainder = chapter_count_remainder;
+            query.PartitionCountRemainder = partition_count_remainder;
             query.VerseCountRemainder = verse_count_remainder;
             query.WordCountRemainder = word_count_remainder;
             query.LetterCountRemainder = letter_count_remainder;
@@ -39808,7 +39808,7 @@ public partial class MainForm : Form, ISubscriber
 
                     case NumbersResultType.Chapters:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindChapters(query);
                             if (m_client.FoundChapters != null)
                             {
@@ -39819,7 +39819,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.ChapterRanges:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindChapterRanges(query);
                             if (m_client.FoundChapterRanges != null)
                             {
@@ -39830,7 +39830,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.ChapterSets:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindChapterSets(query);
                             if (m_client.FoundChapterSets != null)
                             {
@@ -39843,7 +39843,7 @@ public partial class MainForm : Form, ISubscriber
 
                     case NumbersResultType.Pages:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindPages(query);
                             if (m_client.FoundPages != null)
                             {
@@ -39854,7 +39854,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.PageRanges:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindPageRanges(query);
                             if (m_client.FoundPageRanges != null)
                             {
@@ -39865,7 +39865,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.PageSets:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindPageSets(query);
                             if (m_client.FoundPageSets != null)
                             {
@@ -39877,7 +39877,7 @@ public partial class MainForm : Form, ISubscriber
 
                     case NumbersResultType.Stations:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindStations(query);
                             if (m_client.FoundStations != null)
                             {
@@ -39888,7 +39888,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.StationRanges:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindStationRanges(query);
                             if (m_client.FoundStationRanges != null)
                             {
@@ -39899,7 +39899,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.StationSets:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindStationSets(query);
                             if (m_client.FoundStationSets != null)
                             {
@@ -39911,7 +39911,7 @@ public partial class MainForm : Form, ISubscriber
 
                     case NumbersResultType.Parts:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindParts(query);
                             if (m_client.FoundParts != null)
                             {
@@ -39922,7 +39922,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.PartRanges:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindPartRanges(query);
                             if (m_client.FoundPartRanges != null)
                             {
@@ -39933,7 +39933,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.PartSets:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindPartSets(query);
                             if (m_client.FoundPartSets != null)
                             {
@@ -39945,7 +39945,7 @@ public partial class MainForm : Form, ISubscriber
 
                     case NumbersResultType.Groups:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindGroups(query);
                             if (m_client.FoundGroups != null)
                             {
@@ -39956,7 +39956,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.GroupRanges:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindGroupRanges(query);
                             if (m_client.FoundGroupRanges != null)
                             {
@@ -39967,7 +39967,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.GroupSets:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindGroupSets(query);
                             if (m_client.FoundGroupSets != null)
                             {
@@ -39979,7 +39979,7 @@ public partial class MainForm : Form, ISubscriber
 
                     case NumbersResultType.Halfs:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindHalfs(query);
                             if (m_client.FoundHalfs != null)
                             {
@@ -39990,7 +39990,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.HalfRanges:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindHalfRanges(query);
                             if (m_client.FoundHalfRanges != null)
                             {
@@ -40001,7 +40001,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.HalfSets:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindHalfSets(query);
                             if (m_client.FoundHalfSets != null)
                             {
@@ -40013,7 +40013,7 @@ public partial class MainForm : Form, ISubscriber
 
                     case NumbersResultType.Quarters:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindQuarters(query);
                             if (m_client.FoundQuarters != null)
                             {
@@ -40024,7 +40024,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.QuarterRanges:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindQuarterRanges(query);
                             if (m_client.FoundQuarterRanges != null)
                             {
@@ -40035,7 +40035,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.QuarterSets:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindQuarterSets(query);
                             if (m_client.FoundQuarterSets != null)
                             {
@@ -40047,7 +40047,7 @@ public partial class MainForm : Form, ISubscriber
 
                     case NumbersResultType.Bowings:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindBowings(query);
                             if (m_client.FoundBowings != null)
                             {
@@ -40058,7 +40058,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.BowingRanges:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindBowingRanges(query);
                             if (m_client.FoundBowingRanges != null)
                             {
@@ -40069,7 +40069,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case NumbersResultType.BowingSets:
                         {
-                            query.NumberScope = m_chapter_number_scope;
+                            query.NumberScope = m_partition_number_scope;
                             match_count = m_client.FindBowingSets(query);
                             if (m_client.FoundBowingSets != null)
                             {
@@ -42345,7 +42345,7 @@ public partial class MainForm : Form, ISubscriber
 
         StringBuilder str = new StringBuilder();
 
-        str.Append("#" + "\t" + "Number" + "\t" + "Page" + "\t" + "Name" + "\t" + "Chapter" + "\t" + "Verse" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
+        str.Append("#" + "\t" + "Number" + "\t" + "Chapter" + "\t" + "Verse" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
 
         NumerologySystem numerology_system = m_client.NumerologySystem;
         if (numerology_system != null)
@@ -42359,7 +42359,6 @@ public partial class MainForm : Form, ISubscriber
 
             int count = 0;
             int sum = 0;
-            int page_sum = 0;
             int verse_sum = 0;
             int chapter_sum = 0;
             int chapter_verse_sum = 0;
@@ -42370,7 +42369,6 @@ public partial class MainForm : Form, ISubscriber
             {
                 count++;
                 sum += count;
-                page_sum += verse.Page.Number;
                 verse_sum += verse.Number;
                 chapter_sum += verse.Chapter.SortedNumber;
                 chapter_verse_sum += verse.NumberInChapter;
@@ -42381,8 +42379,6 @@ public partial class MainForm : Form, ISubscriber
 
                 str.Append(count.ToString() + "\t");
                 str.Append(verse.Number.ToString() + "\t");
-                str.Append(verse.Page.Number.ToString() + "\t");
-                str.Append(verse.Chapter.Name.ToString() + "\t");
                 str.Append(verse.Chapter.SortedNumber.ToString() + "\t");
                 str.Append(verse.NumberInChapter.ToString() + "\t");
                 str.Append(verse.Words.Count.ToString() + "\t");
@@ -42409,7 +42405,7 @@ public partial class MainForm : Form, ISubscriber
             }
 
             str.AppendLine();
-            str.AppendLine(sum + "\t" + verse_sum + "\t" + page_sum + "\t" + "Sum" + "\t" + chapter_sum + "\t" + chapter_verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
+            str.AppendLine(sum + "\t" + verse_sum + "\t" + chapter_sum + "\t" + chapter_verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
         }
         return str.ToString();
     }
@@ -42420,7 +42416,7 @@ public partial class MainForm : Form, ISubscriber
 
         StringBuilder str = new StringBuilder();
 
-        str.Append("#" + "\t" + "Page" + "\t" + "Name" + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
+        str.Append("#" + "\t" + "Name" + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
         NumerologySystem numerology_system = m_client.NumerologySystem;
         if (numerology_system != null)
         {
@@ -42439,7 +42435,6 @@ public partial class MainForm : Form, ISubscriber
 
             int count = 0;
             int sum = 0;
-            int page_sum = 0;
             int chapter_sum = 0;
             int verse_sum = 0;
             int word_sum = 0;
@@ -42449,7 +42444,6 @@ public partial class MainForm : Form, ISubscriber
             {
                 count++;
                 sum += count;
-                page_sum += chapter.Verses[0].Page.Number;
                 chapter_sum += chapter.SortedNumber;
                 verse_sum += chapter.Verses.Count;
                 word_sum += chapter.WordCount;
@@ -42458,7 +42452,6 @@ public partial class MainForm : Form, ISubscriber
                 value_sum += value;
 
                 str.Append(count + "\t");
-                str.Append(chapter.Verses[0].Page.Number.ToString() + "\t");
                 str.Append(chapter.Name + "\t");
                 str.Append(chapter.SortedNumber.ToString() + "\t");
                 str.Append(chapter.Verses.Count.ToString() + "\t");
@@ -42484,7 +42477,7 @@ public partial class MainForm : Form, ISubscriber
             }
 
             str.AppendLine();
-            str.AppendLine(sum + "\t" + page_sum + "\t" + "Sum" + "\t" + chapter_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
+            str.AppendLine(sum + "\t" + "Sum" + "\t" + chapter_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
         }
         return str.ToString();
     }
@@ -42495,7 +42488,7 @@ public partial class MainForm : Form, ISubscriber
 
         StringBuilder str = new StringBuilder();
 
-        str.Append("#" + "\t" + "Page" + "\t" + "Name" + "\t" + "Matches" + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
+        str.Append("#" + "\t" + "Name" + (m_found_verses_displayed ? "\t" + "Matches" : "") + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
         NumerologySystem numerology_system = m_client.NumerologySystem;
         if (numerology_system != null)
         {
@@ -42514,7 +42507,6 @@ public partial class MainForm : Form, ISubscriber
 
             int count = 0;
             int sum = 0;
-            int page_sum = 0;
             int match_sum = 0;
             int chapter_sum = 0;
             int verse_sum = 0;
@@ -42525,7 +42517,6 @@ public partial class MainForm : Form, ISubscriber
             {
                 count++;
                 sum += count;
-                page_sum += chapter.Verses[0].Page.Number;
                 chapter_sum += chapter.SortedNumber;
                 verse_sum += chapter.Verses.Count;
                 word_sum += chapter.WordCount;
@@ -42534,7 +42525,6 @@ public partial class MainForm : Form, ISubscriber
                 value_sum += value;
 
                 str.Append(count + "\t");
-                str.Append(chapter.Verses[0].Page.Number.ToString() + "\t");
                 str.Append(chapter.Name + "\t");
                 if (m_found_verses_displayed)
                 {
@@ -42549,10 +42539,6 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
-                else
-                {
-                    str.Append("0" + "\t");
-                }
                 str.Append(chapter.SortedNumber.ToString() + "\t");
                 str.Append(chapter.Verses.Count.ToString() + "\t");
                 str.Append(chapter.WordCount.ToString() + "\t");
@@ -42577,7 +42563,7 @@ public partial class MainForm : Form, ISubscriber
             }
 
             str.AppendLine();
-            str.AppendLine(sum + "\t" + page_sum + "\t" + "Sum" + "\t" + match_sum + "\t" + chapter_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
+            str.AppendLine(sum + "\t" + "Sum" + (m_found_verses_displayed ? "\t" + match_sum : "") + "\t" + chapter_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
         }
         return str.ToString();
     }
@@ -44749,7 +44735,7 @@ public partial class MainForm : Form, ISubscriber
                                 Verse verse = GetCurrentVerse();
                                 if (verse != null)
                                 {
-                                    if (m_total_chapter_counts)
+                                    if (m_display_total_chapter_counts)
                                     {
                                         CalculateAndDisplayCounts();
                                     }
@@ -47262,10 +47248,10 @@ public partial class MainForm : Form, ISubscriber
             // ignore
         }
     }
-    private bool m_total_chapter_counts = false;
+    private bool m_display_total_chapter_counts = false;
     private void TotalChapterCountsCheckBox_CheckedChanged(object sender, EventArgs e)
     {
-        m_total_chapter_counts = TotalChapterCountsCheckBox.Checked;
+        m_display_total_chapter_counts = TotalChapterCountsCheckBox.Checked;
         CalculateCurrentValue();
     }
     private void CalculateAndDisplayCounts(string user_text)
@@ -47355,7 +47341,7 @@ public partial class MainForm : Form, ISubscriber
             }
         }
 
-        if (m_total_chapter_counts)
+        if (m_display_total_chapter_counts)
         {
             CalculateAndDisplayCountsTotal(verses);
         }
@@ -47493,7 +47479,7 @@ public partial class MainForm : Form, ISubscriber
         if (verse != null)
         {
             List<Verse> verses = new List<Verse>() { verse };
-            if (m_total_chapter_counts)
+            if (m_display_total_chapter_counts)
             {
                 CalculateAndDisplayCountsTotal(verses);
             }

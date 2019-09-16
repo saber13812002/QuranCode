@@ -2,13 +2,13 @@ COPY Readme.txt Build\Release\
 COPY Features.txt Build\Release\
 
 IF not exist "NET2" NET2.bat
-Tools\Replace\bin\Release\Replace.exe NET2 Version.bat 000 1321
-Tools\Version\bin\Release\Version.exe .               6.19.1321.4 6.19.1321.4 -Tools
+Tools\Replace\bin\Release\Replace.exe NET2 Version.bat 000 1327
+Tools\Version\bin\Release\Version.exe .               6.19.1327.4 6.19.1327.4 -Tools
 Tools\Touch\bin\Release\Touch.exe Build               6:19                    -Tools
 Tools\Touch\bin\Release\Touch.exe Tools    2009-07-29 7:29
 
 Tools\Touch\bin\Release\Touch.exe .                   6:19                    -Tools
-COPY QuranCode1433.zip        ..\Backup\QuranCode1433_6.19.1321.zip
-COPY QuranCode1433.Source.zip ..\Backup\QuranCode1433_6.19.1321.Source.zip
+COPY QuranCode1433.zip        ..\Backup\QuranCode1433_6.19.1327.zip
+COPY QuranCode1433.Source.zip ..\Backup\QuranCode1433_6.19.1327.Source.zip
 COPY QuranCode1433.zip        ..\Backup\
 COPY QuranCode1433.Source.zip ..\Backup\

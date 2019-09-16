@@ -126,10 +126,10 @@ partial class MainForm
             this.FindByNumbersResultTypeSentencesLabel = new System.Windows.Forms.Label();
             this.FindByNumbersResultTypeChaptersLabel = new System.Windows.Forms.Label();
             this.FindByNumbersResultTypeVersesLabel = new System.Windows.Forms.Label();
-            this.FindByNumbersChaptersComparisonOperatorLabel = new System.Windows.Forms.Label();
-            this.FindByNumbersChaptersNumberTypeLabel = new System.Windows.Forms.Label();
-            this.FindByNumbersChaptersNumericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.FindByNumbersChaptersLabel = new System.Windows.Forms.Label();
+            this.FindByNumbersPartitionsComparisonOperatorLabel = new System.Windows.Forms.Label();
+            this.FindByNumbersPartitionsNumberTypeLabel = new System.Windows.Forms.Label();
+            this.FindByNumbersPartitionsNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.FindByNumbersPartitionsLabel = new System.Windows.Forms.Label();
             this.FindByNumbersNumberComparisonOperatorLabel = new System.Windows.Forms.Label();
             this.FindByNumbersNumberNumberTypeLabel = new System.Windows.Forms.Label();
             this.FindByNumbersNumberNumericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -727,7 +727,7 @@ partial class MainForm
             this.FindByNumbersPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitalRootNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitSumNumericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersChaptersNumericUpDown)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersPartitionsNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersNumberNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersUniqueLettersNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersVersesNumericUpDown)).BeginInit();
@@ -2236,10 +2236,10 @@ partial class MainForm
             this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeVersesLabel);
             this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeWordsLabel);
             this.FindByNumbersPanel.Controls.Add(this.FindByNumbersResultTypeLettersLabel);
-            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersChaptersComparisonOperatorLabel);
-            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersChaptersNumberTypeLabel);
-            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersChaptersNumericUpDown);
-            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersChaptersLabel);
+            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersPartitionsComparisonOperatorLabel);
+            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersPartitionsNumberTypeLabel);
+            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersPartitionsNumericUpDown);
+            this.FindByNumbersPanel.Controls.Add(this.FindByNumbersPartitionsLabel);
             this.FindByNumbersPanel.Controls.Add(this.FindByNumbersNumberComparisonOperatorLabel);
             this.FindByNumbersPanel.Controls.Add(this.FindByNumbersNumberNumberTypeLabel);
             this.FindByNumbersPanel.Controls.Add(this.FindByNumbersNumberNumericUpDown);
@@ -2460,77 +2460,77 @@ partial class MainForm
             this.FindByNumbersResultTypeVersesLabel.Click += new System.EventHandler(this.FindByNumbersResultTypeVersesLabel_Click);
             this.FindByNumbersResultTypeVersesLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
             // 
-            // FindByNumbersChaptersComparisonOperatorLabel
+            // FindByNumbersPartitionsComparisonOperatorLabel
             // 
-            this.FindByNumbersChaptersComparisonOperatorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.FindByNumbersChaptersComparisonOperatorLabel.BackColor = System.Drawing.Color.LightGray;
-            this.FindByNumbersChaptersComparisonOperatorLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.FindByNumbersChaptersComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FindByNumbersChaptersComparisonOperatorLabel.Enabled = false;
-            this.FindByNumbersChaptersComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersChaptersComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersChaptersComparisonOperatorLabel.Location = new System.Drawing.Point(51, 71);
-            this.FindByNumbersChaptersComparisonOperatorLabel.Name = "FindByNumbersChaptersComparisonOperatorLabel";
-            this.FindByNumbersChaptersComparisonOperatorLabel.Size = new System.Drawing.Size(18, 19);
-            this.FindByNumbersChaptersComparisonOperatorLabel.TabIndex = 38;
-            this.FindByNumbersChaptersComparisonOperatorLabel.Text = "=";
-            this.FindByNumbersChaptersComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTip.SetToolTip(this.FindByNumbersChaptersComparisonOperatorLabel, "equals to");
-            this.FindByNumbersChaptersComparisonOperatorLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
-            this.FindByNumbersChaptersComparisonOperatorLabel.Click += new System.EventHandler(this.FindByNumbersComparisonOperatorLabel_Click);
-            this.FindByNumbersChaptersComparisonOperatorLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+            this.FindByNumbersPartitionsComparisonOperatorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.FindByNumbersPartitionsComparisonOperatorLabel.BackColor = System.Drawing.Color.LightGray;
+            this.FindByNumbersPartitionsComparisonOperatorLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.FindByNumbersPartitionsComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FindByNumbersPartitionsComparisonOperatorLabel.Enabled = false;
+            this.FindByNumbersPartitionsComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByNumbersPartitionsComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
+            this.FindByNumbersPartitionsComparisonOperatorLabel.Location = new System.Drawing.Point(51, 71);
+            this.FindByNumbersPartitionsComparisonOperatorLabel.Name = "FindByNumbersPartitionsComparisonOperatorLabel";
+            this.FindByNumbersPartitionsComparisonOperatorLabel.Size = new System.Drawing.Size(18, 19);
+            this.FindByNumbersPartitionsComparisonOperatorLabel.TabIndex = 38;
+            this.FindByNumbersPartitionsComparisonOperatorLabel.Text = "=";
+            this.FindByNumbersPartitionsComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.FindByNumbersPartitionsComparisonOperatorLabel, "equals to");
+            this.FindByNumbersPartitionsComparisonOperatorLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
+            this.FindByNumbersPartitionsComparisonOperatorLabel.Click += new System.EventHandler(this.FindByNumbersComparisonOperatorLabel_Click);
+            this.FindByNumbersPartitionsComparisonOperatorLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
             // 
-            // FindByNumbersChaptersNumberTypeLabel
+            // FindByNumbersPartitionsNumberTypeLabel
             // 
-            this.FindByNumbersChaptersNumberTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.FindByNumbersChaptersNumberTypeLabel.BackColor = System.Drawing.Color.LightGray;
-            this.FindByNumbersChaptersNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.FindByNumbersChaptersNumberTypeLabel.Enabled = false;
-            this.FindByNumbersChaptersNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersChaptersNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByNumbersChaptersNumberTypeLabel.Location = new System.Drawing.Point(124, 71);
-            this.FindByNumbersChaptersNumberTypeLabel.Name = "FindByNumbersChaptersNumberTypeLabel";
-            this.FindByNumbersChaptersNumberTypeLabel.Size = new System.Drawing.Size(24, 19);
-            this.FindByNumbersChaptersNumberTypeLabel.TabIndex = 40;
-            this.FindByNumbersChaptersNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.FindByNumbersChaptersNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
-            this.FindByNumbersChaptersNumberTypeLabel.Click += new System.EventHandler(this.FindByNumbersNumberTypeLabel_Click);
-            this.FindByNumbersChaptersNumberTypeLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+            this.FindByNumbersPartitionsNumberTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.FindByNumbersPartitionsNumberTypeLabel.BackColor = System.Drawing.Color.LightGray;
+            this.FindByNumbersPartitionsNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.FindByNumbersPartitionsNumberTypeLabel.Enabled = false;
+            this.FindByNumbersPartitionsNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByNumbersPartitionsNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
+            this.FindByNumbersPartitionsNumberTypeLabel.Location = new System.Drawing.Point(124, 71);
+            this.FindByNumbersPartitionsNumberTypeLabel.Name = "FindByNumbersPartitionsNumberTypeLabel";
+            this.FindByNumbersPartitionsNumberTypeLabel.Size = new System.Drawing.Size(24, 19);
+            this.FindByNumbersPartitionsNumberTypeLabel.TabIndex = 40;
+            this.FindByNumbersPartitionsNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.FindByNumbersPartitionsNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
+            this.FindByNumbersPartitionsNumberTypeLabel.Click += new System.EventHandler(this.FindByNumbersNumberTypeLabel_Click);
+            this.FindByNumbersPartitionsNumberTypeLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
             // 
-            // FindByNumbersChaptersNumericUpDown
+            // FindByNumbersPartitionsNumericUpDown
             // 
-            this.FindByNumbersChaptersNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.FindByNumbersChaptersNumericUpDown.BackColor = System.Drawing.Color.LightGray;
-            this.FindByNumbersChaptersNumericUpDown.Enabled = false;
-            this.FindByNumbersChaptersNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersChaptersNumericUpDown.Location = new System.Drawing.Point(69, 71);
-            this.FindByNumbersChaptersNumericUpDown.Maximum = new decimal(new int[] {
+            this.FindByNumbersPartitionsNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.FindByNumbersPartitionsNumericUpDown.BackColor = System.Drawing.Color.LightGray;
+            this.FindByNumbersPartitionsNumericUpDown.Enabled = false;
+            this.FindByNumbersPartitionsNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByNumbersPartitionsNumericUpDown.Location = new System.Drawing.Point(69, 71);
+            this.FindByNumbersPartitionsNumericUpDown.Maximum = new decimal(new int[] {
             999,
             0,
             0,
             0});
-            this.FindByNumbersChaptersNumericUpDown.Name = "FindByNumbersChaptersNumericUpDown";
-            this.FindByNumbersChaptersNumericUpDown.Size = new System.Drawing.Size(56, 20);
-            this.FindByNumbersChaptersNumericUpDown.TabIndex = 39;
-            this.FindByNumbersChaptersNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.FindByNumbersChaptersNumericUpDown.ValueChanged += new System.EventHandler(this.FindByNumbersNumericUpDown_ValueChanged);
-            this.FindByNumbersChaptersNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
-            this.FindByNumbersChaptersNumericUpDown.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
-            this.FindByNumbersChaptersNumericUpDown.Leave += new System.EventHandler(this.FindByNumbersNumericUpDown_Leave);
+            this.FindByNumbersPartitionsNumericUpDown.Name = "FindByNumbersPartitionsNumericUpDown";
+            this.FindByNumbersPartitionsNumericUpDown.Size = new System.Drawing.Size(56, 20);
+            this.FindByNumbersPartitionsNumericUpDown.TabIndex = 39;
+            this.FindByNumbersPartitionsNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.FindByNumbersPartitionsNumericUpDown.ValueChanged += new System.EventHandler(this.FindByNumbersNumericUpDown_ValueChanged);
+            this.FindByNumbersPartitionsNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
+            this.FindByNumbersPartitionsNumericUpDown.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+            this.FindByNumbersPartitionsNumericUpDown.Leave += new System.EventHandler(this.FindByNumbersNumericUpDown_Leave);
             // 
-            // FindByNumbersChaptersLabel
+            // FindByNumbersPartitionsLabel
             // 
-            this.FindByNumbersChaptersLabel.BackColor = System.Drawing.Color.Transparent;
-            this.FindByNumbersChaptersLabel.Enabled = false;
-            this.FindByNumbersChaptersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByNumbersChaptersLabel.Location = new System.Drawing.Point(1, 74);
-            this.FindByNumbersChaptersLabel.Name = "FindByNumbersChaptersLabel";
-            this.FindByNumbersChaptersLabel.Size = new System.Drawing.Size(58, 13);
-            this.FindByNumbersChaptersLabel.TabIndex = 0;
-            this.FindByNumbersChaptersLabel.Text = "chapters";
-            this.ToolTip.SetToolTip(this.FindByNumbersChaptersLabel, "number of chapters");
-            this.FindByNumbersChaptersLabel.Click += new System.EventHandler(this.FindByNumbersLabel_Click);
-            this.FindByNumbersChaptersLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
+            this.FindByNumbersPartitionsLabel.BackColor = System.Drawing.Color.Transparent;
+            this.FindByNumbersPartitionsLabel.Enabled = false;
+            this.FindByNumbersPartitionsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByNumbersPartitionsLabel.Location = new System.Drawing.Point(1, 74);
+            this.FindByNumbersPartitionsLabel.Name = "FindByNumbersPartitionsLabel";
+            this.FindByNumbersPartitionsLabel.Size = new System.Drawing.Size(58, 13);
+            this.FindByNumbersPartitionsLabel.TabIndex = 0;
+            this.FindByNumbersPartitionsLabel.Text = "chapters";
+            this.ToolTip.SetToolTip(this.FindByNumbersPartitionsLabel, "number of chapters");
+            this.FindByNumbersPartitionsLabel.Click += new System.EventHandler(this.FindByNumbersLabel_Click);
+            this.FindByNumbersPartitionsLabel.Enter += new System.EventHandler(this.FindByNumbersControls_Enter);
             // 
             // FindByNumbersNumberComparisonOperatorLabel
             // 
@@ -11662,7 +11662,7 @@ partial class MainForm
             this.FindByNumbersPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitalRootNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitSumNumericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersChaptersNumericUpDown)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersPartitionsNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersNumberNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersUniqueLettersNumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersVersesNumericUpDown)).EndInit();
@@ -11897,10 +11897,10 @@ partial class MainForm
     private System.Windows.Forms.Label FindByNumbersResultTypeVersesLabel;
     private System.Windows.Forms.Label WordWrapLabel;
     private System.Windows.Forms.Label DifferencesLabel;
-    private System.Windows.Forms.Label FindByNumbersChaptersComparisonOperatorLabel;
-    private System.Windows.Forms.Label FindByNumbersChaptersNumberTypeLabel;
-    private System.Windows.Forms.NumericUpDown FindByNumbersChaptersNumericUpDown;
-    private System.Windows.Forms.Label FindByNumbersChaptersLabel;
+    private System.Windows.Forms.Label FindByNumbersPartitionsComparisonOperatorLabel;
+    private System.Windows.Forms.Label FindByNumbersPartitionsNumberTypeLabel;
+    private System.Windows.Forms.NumericUpDown FindByNumbersPartitionsNumericUpDown;
+    private System.Windows.Forms.Label FindByNumbersPartitionsLabel;
     private System.Windows.Forms.Panel BookmarkPanel;
     private System.Windows.Forms.Label DeleteBookmarkLabel;
     private System.Windows.Forms.Label ClearBookmarksLabel;
