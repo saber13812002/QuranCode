@@ -1902,7 +1902,6 @@ public class Client : IPublisher, ISubscriber
         m_found_phrases = Server.FindPhrases(m_search_scope, m_selection, m_found_verses, text_search_block_size, text, language_type, translation, text_location_in_chapter, text_location_in_verse, text_location_in_word, text_wordness, case_sensitive, with_diacritics, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
         if (m_found_phrases != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (Phrase phrase in m_found_phrases)
             {
                 if (phrase != null)
@@ -1937,7 +1936,6 @@ public class Client : IPublisher, ISubscriber
         m_found_phrases = Server.FindPhrases(m_search_scope, m_selection, m_found_verses, text_search_block_size, text, language_type, translation, text_proximity_type, text_wordness, case_sensitive, with_diacritics);
         if (m_found_phrases != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (Phrase phrase in m_found_phrases)
             {
                 if (phrase != null)
@@ -1965,7 +1963,6 @@ public class Client : IPublisher, ISubscriber
         m_found_phrases = Server.FindPhrases(m_search_scope, m_selection, m_found_verses, text_search_block_size, text, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
         if (m_found_phrases != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (Phrase phrase in m_found_phrases)
             {
                 if (phrase != null)
@@ -2002,7 +1999,6 @@ public class Client : IPublisher, ISubscriber
         m_found_phrases = Server.FindRepeatedPhrases(phrase_word_count, with_diacritics);
         if (m_found_phrases != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (Phrase phrase in m_found_phrases)
             {
                 if (phrase != null)
@@ -2031,7 +2027,6 @@ public class Client : IPublisher, ISubscriber
         m_found_phrases = Server.FindPhrases(m_search_scope, m_selection, m_found_verses, text, similarity_percentage);
         if (m_found_phrases != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (Phrase phrase in m_found_phrases)
             {
                 if (phrase != null)
@@ -2078,7 +2073,6 @@ public class Client : IPublisher, ISubscriber
         m_found_verse_ranges = Server.FindVersess(m_search_scope, m_selection, m_found_verses, similarity_method, similarity_percentage);
         if (m_found_verse_ranges != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Verse> verse_range in m_found_verse_ranges)
             {
                 m_found_verses.AddRange(verse_range);
@@ -2102,8 +2096,6 @@ public class Client : IPublisher, ISubscriber
         m_found_letters = Server.FindLetters(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_letters != null)
         {
-            m_found_verses = new List<Verse>();
-            m_found_phrases = new List<Phrase>();
             foreach (Letter letter in m_found_letters)
             {
                 if (letter != null)
@@ -2139,8 +2131,6 @@ public class Client : IPublisher, ISubscriber
         m_found_words = Server.FindWords(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_words != null)
         {
-            m_found_verses = new List<Verse>();
-            m_found_phrases = new List<Phrase>();
             foreach (Word word in m_found_words)
             {
                 if (word != null)
@@ -2172,8 +2162,6 @@ public class Client : IPublisher, ISubscriber
         m_found_word_ranges = Server.FindWordRanges(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_word_ranges != null)
         {
-            m_found_verses = new List<Verse>();
-            m_found_phrases = new List<Phrase>();
             foreach (List<Word> range in m_found_word_ranges)
             {
                 if (range != null)
@@ -2233,8 +2221,6 @@ public class Client : IPublisher, ISubscriber
         m_found_word_sets = Server.FindWordSets(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_word_sets != null)
         {
-            m_found_verses = new List<Verse>();
-            m_found_phrases = new List<Phrase>();
             foreach (List<Word> set in m_found_word_sets)
             {
                 if (set != null)
@@ -2320,7 +2306,6 @@ public class Client : IPublisher, ISubscriber
         m_found_verse_ranges = Server.FindVerseRanges(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_verse_ranges != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Verse> range in m_found_verse_ranges)
             {
                 m_found_verses.AddRange(range);
@@ -2342,7 +2327,6 @@ public class Client : IPublisher, ISubscriber
         m_found_verse_sets = Server.FindVerseSets(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_verse_sets != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Verse> set in m_found_verse_sets)
             {
                 m_found_verses.AddRange(set);
@@ -2365,7 +2349,6 @@ public class Client : IPublisher, ISubscriber
         m_found_chapters = Server.FindChapters(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_chapters != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (Chapter chapter in m_found_chapters)
             {
                 if (chapter != null)
@@ -2390,7 +2373,6 @@ public class Client : IPublisher, ISubscriber
         m_found_chapter_ranges = Server.FindChapterRanges(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_chapter_ranges != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Chapter> range in m_found_chapter_ranges)
             {
                 foreach (Chapter chapter in range)
@@ -2418,7 +2400,6 @@ public class Client : IPublisher, ISubscriber
         m_found_chapter_sets = Server.FindChapterSets(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_chapter_sets != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Chapter> set in m_found_chapter_sets)
             {
                 foreach (Chapter chapter in set)
@@ -2447,7 +2428,6 @@ public class Client : IPublisher, ISubscriber
         m_found_pages = Server.FindPages(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_pages != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (Page page in m_found_pages)
             {
                 if (page != null)
@@ -2472,15 +2452,14 @@ public class Client : IPublisher, ISubscriber
         m_found_page_ranges = Server.FindPageRanges(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_page_ranges != null)
         {
-            m_found_verse_ranges = new List<List<Verse>>();
             foreach (List<Page> range in m_found_page_ranges)
             {
                 foreach (Page page in range)
                 {
                     if (page != null)
                     {
-                        m_found_verse_ranges.Add(page.Verses);
                         m_found_verses.AddRange(page.Verses);
+                        m_found_verse_ranges.Add(page.Verses);
                     }
                 }
             }
@@ -2501,7 +2480,6 @@ public class Client : IPublisher, ISubscriber
         m_found_page_sets = Server.FindPageSets(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_page_sets != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Page> set in m_found_page_sets)
             {
                 foreach (Page page in set)
@@ -2509,6 +2487,7 @@ public class Client : IPublisher, ISubscriber
                     if (page != null)
                     {
                         m_found_verses.AddRange(page.Verses);
+                        m_found_verse_sets.Add(page.Verses);
                     }
                 }
             }
@@ -2530,7 +2509,6 @@ public class Client : IPublisher, ISubscriber
         m_found_stations = Server.FindStations(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_stations != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (Station station in m_found_stations)
             {
                 if (station != null)
@@ -2555,7 +2533,6 @@ public class Client : IPublisher, ISubscriber
         m_found_station_ranges = Server.FindStationRanges(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_station_ranges != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Station> range in m_found_station_ranges)
             {
                 foreach (Station station in range)
@@ -2563,6 +2540,7 @@ public class Client : IPublisher, ISubscriber
                     if (station != null)
                     {
                         m_found_verses.AddRange(station.Verses);
+                        m_found_verse_ranges.Add(station.Verses);
                     }
                 }
             }
@@ -2583,7 +2561,6 @@ public class Client : IPublisher, ISubscriber
         m_found_station_sets = Server.FindStationSets(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_station_sets != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Station> set in m_found_station_sets)
             {
                 foreach (Station station in set)
@@ -2591,6 +2568,7 @@ public class Client : IPublisher, ISubscriber
                     if (station != null)
                     {
                         m_found_verses.AddRange(station.Verses);
+                        m_found_verse_sets.Add(station.Verses);
                     }
                 }
             }
@@ -2612,7 +2590,6 @@ public class Client : IPublisher, ISubscriber
         m_found_parts = Server.FindParts(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_parts != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (Part part in m_found_parts)
             {
                 if (part != null)
@@ -2637,7 +2614,6 @@ public class Client : IPublisher, ISubscriber
         m_found_part_ranges = Server.FindPartRanges(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_part_ranges != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Part> range in m_found_part_ranges)
             {
                 foreach (Part part in range)
@@ -2645,6 +2621,7 @@ public class Client : IPublisher, ISubscriber
                     if (part != null)
                     {
                         m_found_verses.AddRange(part.Verses);
+                        m_found_verse_ranges.Add(part.Verses);
                     }
                 }
             }
@@ -2665,7 +2642,6 @@ public class Client : IPublisher, ISubscriber
         m_found_part_sets = Server.FindPartSets(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_part_sets != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Part> set in m_found_part_sets)
             {
                 foreach (Part part in set)
@@ -2673,6 +2649,7 @@ public class Client : IPublisher, ISubscriber
                     if (part != null)
                     {
                         m_found_verses.AddRange(part.Verses);
+                        m_found_verse_sets.Add(part.Verses);
                     }
                 }
             }
@@ -2694,7 +2671,6 @@ public class Client : IPublisher, ISubscriber
         m_found_groups = Server.FindGroups(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_groups != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (Group group in m_found_groups)
             {
                 if (group != null)
@@ -2719,7 +2695,6 @@ public class Client : IPublisher, ISubscriber
         m_found_group_ranges = Server.FindGroupRanges(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_group_ranges != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Group> range in m_found_group_ranges)
             {
                 foreach (Group group in range)
@@ -2727,6 +2702,7 @@ public class Client : IPublisher, ISubscriber
                     if (group != null)
                     {
                         m_found_verses.AddRange(group.Verses);
+                        m_found_verse_ranges.Add(group.Verses);
                     }
                 }
             }
@@ -2747,7 +2723,6 @@ public class Client : IPublisher, ISubscriber
         m_found_group_sets = Server.FindGroupSets(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_group_sets != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Group> set in m_found_group_sets)
             {
                 foreach (Group group in set)
@@ -2755,6 +2730,7 @@ public class Client : IPublisher, ISubscriber
                     if (group != null)
                     {
                         m_found_verses.AddRange(group.Verses);
+                        m_found_verse_sets.Add(group.Verses);
                     }
                 }
             }
@@ -2776,7 +2752,6 @@ public class Client : IPublisher, ISubscriber
         m_found_halfs = Server.FindHalfs(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_halfs != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (Half half in m_found_halfs)
             {
                 if (half != null)
@@ -2801,7 +2776,6 @@ public class Client : IPublisher, ISubscriber
         m_found_half_ranges = Server.FindHalfRanges(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_half_ranges != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Half> range in m_found_half_ranges)
             {
                 foreach (Half half in range)
@@ -2809,6 +2783,7 @@ public class Client : IPublisher, ISubscriber
                     if (half != null)
                     {
                         m_found_verses.AddRange(half.Verses);
+                        m_found_verse_ranges.Add(half.Verses);
                     }
                 }
             }
@@ -2829,7 +2804,6 @@ public class Client : IPublisher, ISubscriber
         m_found_half_sets = Server.FindHalfSets(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_half_sets != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Half> set in m_found_half_sets)
             {
                 foreach (Half half in set)
@@ -2837,6 +2811,7 @@ public class Client : IPublisher, ISubscriber
                     if (half != null)
                     {
                         m_found_verses.AddRange(half.Verses);
+                        m_found_verse_sets.Add(half.Verses);
                     }
                 }
             }
@@ -2858,7 +2833,6 @@ public class Client : IPublisher, ISubscriber
         m_found_quarters = Server.FindQuarters(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_quarters != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (Quarter quarter in m_found_quarters)
             {
                 if (quarter != null)
@@ -2883,7 +2857,6 @@ public class Client : IPublisher, ISubscriber
         m_found_quarter_ranges = Server.FindQuarterRanges(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_quarter_ranges != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Quarter> range in m_found_quarter_ranges)
             {
                 foreach (Quarter quarter in range)
@@ -2891,6 +2864,7 @@ public class Client : IPublisher, ISubscriber
                     if (quarter != null)
                     {
                         m_found_verses.AddRange(quarter.Verses);
+                        m_found_verse_ranges.Add(quarter.Verses);
                     }
                 }
             }
@@ -2911,7 +2885,6 @@ public class Client : IPublisher, ISubscriber
         m_found_quarter_sets = Server.FindQuarterSets(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_quarter_sets != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Quarter> set in m_found_quarter_sets)
             {
                 foreach (Quarter quarter in set)
@@ -2919,6 +2892,7 @@ public class Client : IPublisher, ISubscriber
                     if (quarter != null)
                     {
                         m_found_verses.AddRange(quarter.Verses);
+                        m_found_verse_sets.Add(quarter.Verses);
                     }
                 }
             }
@@ -2940,7 +2914,6 @@ public class Client : IPublisher, ISubscriber
         m_found_bowings = Server.FindBowings(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_bowings != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (Bowing bowing in m_found_bowings)
             {
                 if (bowing != null)
@@ -2965,7 +2938,6 @@ public class Client : IPublisher, ISubscriber
         m_found_bowing_ranges = Server.FindBowingRanges(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_bowing_ranges != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Bowing> range in m_found_bowing_ranges)
             {
                 foreach (Bowing bowing in range)
@@ -2973,6 +2945,7 @@ public class Client : IPublisher, ISubscriber
                     if (bowing != null)
                     {
                         m_found_verses.AddRange(bowing.Verses);
+                        m_found_verse_ranges.Add(bowing.Verses);
                     }
                 }
             }
@@ -2993,7 +2966,6 @@ public class Client : IPublisher, ISubscriber
         m_found_bowing_sets = Server.FindBowingSets(m_search_scope, m_selection, m_found_verses, query);
         if (m_found_bowing_sets != null)
         {
-            m_found_verses = new List<Verse>();
             foreach (List<Bowing> set in m_found_bowing_sets)
             {
                 foreach (Bowing bowing in set)
@@ -3001,6 +2973,7 @@ public class Client : IPublisher, ISubscriber
                     if (bowing != null)
                     {
                         m_found_verses.AddRange(bowing.Verses);
+                        m_found_verse_sets.Add(bowing.Verses);
                     }
                 }
             }
@@ -3042,7 +3015,6 @@ public class Client : IPublisher, ISubscriber
         {
             if (m_found_chapters != null)
             {
-                m_found_verses = new List<Verse>();
                 foreach (Chapter chapter in m_found_chapters)
                 {
                     if (chapter != null)
@@ -3088,8 +3060,6 @@ public class Client : IPublisher, ISubscriber
         m_found_words = Server.FindWords(m_search_scope, m_selection, m_found_verses, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, with_diacritics);
         if (m_found_words != null)
         {
-            m_found_verses = new List<Verse>();
-            m_found_phrases = new List<Phrase>();
             foreach (Word word in m_found_words)
             {
                 if (word != null)
@@ -3132,8 +3102,6 @@ public class Client : IPublisher, ISubscriber
     {
         if (m_found_sentences != null)
         {
-            m_found_verses = new List<Verse>();
-            m_found_phrases = new List<Phrase>();
             foreach (Sentence sentence in m_found_sentences)
             {
                 if (sentence != null)
@@ -3222,7 +3190,6 @@ public class Client : IPublisher, ISubscriber
         {
             if (m_found_chapters != null)
             {
-                m_found_verses = new List<Verse>();
                 foreach (Chapter chapter in m_found_chapters)
                 {
                     if (chapter != null)

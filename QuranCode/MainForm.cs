@@ -41085,6 +41085,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayFoundVerseRanges(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerseRangesTextFile();
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -41197,6 +41199,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayFoundVerseSets(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundVerseSetsTextFile();
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -41204,33 +41208,89 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (m_client.FoundVerseSets != null)
                 {
-                    if (m_client.FoundVerseSets.Count > 0)
+                    TranslationTextBox.Text = null;
+                    ZoomInLabel.Enabled = (m_text_zoom_factor <= (m_max_zoom_factor - m_zoom_factor_increment + m_error_margin));
+                    ZoomOutLabel.Enabled = (m_text_zoom_factor >= (m_min_zoom_factor + m_zoom_factor_increment - m_error_margin));
+
+                    if (colorize_chapters_by_matches)
                     {
-                        StringBuilder str = new StringBuilder();
-                        foreach (List<Verse> set in m_client.FoundVerseSets)
+                        if (m_client.Book != null)
                         {
-                            foreach (Verse verse in set)
+                            m_matches_per_chapter = new int[m_client.Book.Chapters.Count];
+                            foreach (List<Verse> set in m_client.FoundVerseSets)
                             {
-                                if (verse != null)
+                                foreach (Verse verse in set)
                                 {
-                                    str.Append(verse.Address + ", ");
+                                    if (verse != null)
+                                    {
+                                        if (verse.Chapter != null)
+                                        {
+                                            m_matches_per_chapter[verse.Chapter.SortedNumber - 1]++;
+                                        }
+                                    }
                                 }
                             }
-                            if (set.Count > 0)
-                            {
-                                str.Remove(str.Length - 2, 2);
-                            }
-                            str.AppendLine();
                         }
 
-                        string filename = "FoundVerseSets" + ".txt";
-                        if (Directory.Exists(Globals.STATISTICS_FOLDER))
+                        SwitchToSearchResultTextBox();
+                    }
+
+                    for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
+                    for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
+                    SearchResultTextBox.BeginUpdate();
+
+                    List<Verse> verses = new List<Verse>();
+                    foreach (List<Verse> set in m_client.FoundVerseSets)
+                    {
+                        verses.AddRange(set);
+                    }
+
+                    StringBuilder str = new StringBuilder();
+                    foreach (Verse verse in verses)
+                    {
+                        if (verse != null)
                         {
-                            string path = Globals.STATISTICS_FOLDER + "/" + filename;
-                            FileHelper.SaveText(path, str.ToString());
-                            FileHelper.DisplayFile(path);
+                            str.Append(verse.ArabicAddress + "\t" + verse.Text + "\n");
                         }
                     }
+                    if (str.Length > 1)
+                    {
+                        str.Remove(str.Length - 1, 1);
+                    }
+                    m_current_text = str.ToString();
+
+                    m_user_text_mode = false;
+                    m_selection_mode = true;
+                    UpdateHeaderLabel();
+                    SearchResultTextBox.Text = m_current_text;
+                    SearchResultTextBox.Refresh();
+                    GenerateSentencesLabel.Visible = false;
+                    DuplicateLettersCheckBox.Visible = false;
+
+                    CalculateCurrentValue();
+                    BuildLetterFrequencies();
+                    DisplayLetterFrequencies();
+
+                    //ColorizeVerseSets(); // too slow
+
+                    m_current_found_verse_index = 0;
+                    DisplayCurrentPositions();
+
+                    DisplayTranslations(verses);
+                    DisplaySymmetry();
+                    DisplayCVWLSequence();
+                    DisplayValuesSequence();
+                    DisplayDNASequence();
+
+                    if (add_to_history)
+                    {
+                        AddSearchHistoryItem();
+                    }
+
+                    m_current_found_verse_index = 0;
+                    RealignFoundMatchedToStart();
+
+                    BookmarkTextBox.Enabled = false;
                 }
             }
         }
@@ -41244,10 +41304,10 @@ public partial class MainForm : Form, ISubscriber
         }
         finally
         {
-            if (PictureBox.Visible)
-            {
-                PictureBox.Visible = false;
-            }
+            HidePictureBox();
+            SearchResultTextBox.EndUpdate();
+            SearchResultTextBox.SelectionChanged += new EventHandler(MainTextBox_SelectionChanged);
+            SearchResultTextBox.TextChanged += new EventHandler(MainTextBox_TextChanged);
             this.Cursor = Cursors.Default;
         }
     }
@@ -41380,6 +41440,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayFoundChapterRanges(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundChapterRangesTextFile();
+        
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -41510,6 +41572,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayFoundChapterSets(bool add_to_history, bool colorize_chapters_by_matches)
     {
+        DisplayFoundChapterSetsTextFile();
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -41517,33 +41581,107 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (m_client.FoundChapterSets != null)
                 {
+                    TranslationTextBox.Text = null;
+                    ZoomInLabel.Enabled = (m_text_zoom_factor <= (m_max_zoom_factor - m_zoom_factor_increment + m_error_margin));
+                    ZoomOutLabel.Enabled = (m_text_zoom_factor >= (m_min_zoom_factor + m_zoom_factor_increment - m_error_margin));
+
+                    if (colorize_chapters_by_matches)
+                    {
+                        if (m_client.Book != null)
+                        {
+                            m_matches_per_chapter = new int[m_client.Book.Chapters.Count];
+                            foreach (List<Chapter> set in m_client.FoundChapterSets)
+                            {
+                                foreach (Chapter chapter in set)
+                                {
+                                    if (chapter != null)
+                                    {
+                                        m_matches_per_chapter[chapter.SortedNumber - 1]++;
+                                    }
+                                }
+                            }
+                        }
+
+                        SwitchToSearchResultTextBox();
+                    }
+
+                    for (int i = 0; i < 3; i++) ChaptersListBox.SelectedIndexChanged -= new EventHandler(ChaptersListBox_SelectedIndexChanged);
                     if (m_client.FoundChapterSets.Count > 0)
                     {
-                        StringBuilder str = new StringBuilder();
+                        ChaptersListBox.SelectedIndices.Clear();
                         foreach (List<Chapter> set in m_client.FoundChapterSets)
                         {
                             foreach (Chapter chapter in set)
                             {
-                                if (chapter != null)
+                                if (((chapter.SortedNumber - 1) >= 0) && ((chapter.SortedNumber - 1) < ChaptersListBox.Items.Count))
                                 {
-                                    str.Append(chapter.SortedNumber + "." + chapter.Verses.Count + ", ");
+                                    ChaptersListBox.SelectedIndices.Add(chapter.SortedNumber - 1);
                                 }
                             }
-                            if (set.Count > 0)
-                            {
-                                str.Remove(str.Length - 2, 2);
-                            }
-                            str.AppendLine();
-                        }
-
-                        string filename = "FoundChapterSets" + ".txt";
-                        if (Directory.Exists(Globals.STATISTICS_FOLDER))
-                        {
-                            string path = Globals.STATISTICS_FOLDER + "/" + filename;
-                            FileHelper.SaveText(path, str.ToString());
-                            FileHelper.DisplayFile(path);
                         }
                     }
+                    else
+                    {
+                        ChaptersListBox.SelectedIndices.Clear();
+                    }
+                    ChaptersListBox.SelectedIndexChanged += new EventHandler(ChaptersListBox_SelectedIndexChanged);
+                    UpdateClientSelection();
+
+                    for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
+                    for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
+                    SearchResultTextBox.BeginUpdate();
+
+                    List<Verse> verses = new List<Verse>();
+                    foreach (List<Chapter> set in m_client.FoundChapterSets)
+                    {
+                        foreach (Chapter chapter in set)
+                        {
+                            verses.AddRange(chapter.Verses);
+                        }
+                    }
+
+                    StringBuilder str = new StringBuilder();
+                    foreach (Verse verse in verses)
+                    {
+                        if (verse != null)
+                        {
+                            str.Append(verse.ArabicAddress + "\t" + verse.Text + "\n");
+                        }
+                    }
+                    m_current_text = str.ToString();
+
+                    m_user_text_mode = false;
+                    m_selection_mode = true;
+                    UpdateHeaderLabel();
+                    SearchResultTextBox.Text = m_current_text;
+                    SearchResultTextBox.Refresh();
+                    GenerateSentencesLabel.Visible = false;
+                    DuplicateLettersCheckBox.Visible = false;
+
+                    CalculateCurrentValue();
+                    BuildLetterFrequencies();
+                    DisplayLetterFrequencies();
+
+                    //ColorizeChapterSets(); // too too slow
+
+                    m_current_found_verse_index = 0;
+                    DisplayCurrentPositions();
+
+                    DisplayTranslations(verses);
+                    DisplaySymmetry();
+                    DisplayCVWLSequence();
+                    DisplayValuesSequence();
+                    DisplayDNASequence();
+
+                    if (add_to_history)
+                    {
+                        AddSearchHistoryItem();
+                    }
+
+                    m_current_found_verse_index = 0;
+                    RealignFoundMatchedToStart();
+
+                    BookmarkTextBox.Enabled = false;
                 }
             }
         }
@@ -41557,10 +41695,10 @@ public partial class MainForm : Form, ISubscriber
         }
         finally
         {
-            if (PictureBox.Visible)
-            {
-                PictureBox.Visible = false;
-            }
+            HidePictureBox();
+            SearchResultTextBox.EndUpdate();
+            SearchResultTextBox.SelectionChanged += new EventHandler(MainTextBox_SelectionChanged);
+            SearchResultTextBox.TextChanged += new EventHandler(MainTextBox_TextChanged);
             this.Cursor = Cursors.Default;
         }
     }
@@ -41710,6 +41848,230 @@ public partial class MainForm : Form, ISubscriber
                     CalculateValueAndDisplayFactors(phrase_str.ToString());
                 }
             }
+        }
+    }
+    private void DisplayFoundVerseRangesTextFile()
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (m_client != null)
+            {
+                if (m_client.FoundVerseRanges != null)
+                {
+                    if (m_client.FoundVerseRanges.Count > 0)
+                    {
+                        StringBuilder str = new StringBuilder();
+                        foreach (List<Verse> range in m_client.FoundVerseRanges)
+                        {
+                            foreach (Verse verse in range)
+                            {
+                                if (verse != null)
+                                {
+                                    str.Append(verse.Address + ", ");
+                                }
+                            }
+                            if (range.Count > 0)
+                            {
+                                str.Remove(str.Length - 2, 2);
+                            }
+                            str.AppendLine();
+                        }
+
+                        string filename = "Found" + ((m_search_type == SearchType.Numbers) ? m_numbers_result_type.ToString() : "VerseRanges") + ".txt";
+                        if (Directory.Exists(Globals.STATISTICS_FOLDER))
+                        {
+                            string path = Globals.STATISTICS_FOLDER + "/" + filename;
+                            FileHelper.SaveText(path, str.ToString());
+                            FileHelper.DisplayFile(path);
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            if (PictureBox.Visible)
+            {
+                PictureBox.Visible = false;
+            }
+            this.Cursor = Cursors.Default;
+        }
+    }
+    private void DisplayFoundVerseSetsTextFile()
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (m_client != null)
+            {
+                if (m_client.FoundVerseSets != null)
+                {
+                    if (m_client.FoundVerseSets.Count > 0)
+                    {
+                        StringBuilder str = new StringBuilder();
+                        foreach (List<Verse> set in m_client.FoundVerseSets)
+                        {
+                            foreach (Verse verse in set)
+                            {
+                                if (verse != null)
+                                {
+                                    str.Append(verse.Address + ", ");
+                                }
+                            }
+                            if (set.Count > 0)
+                            {
+                                str.Remove(str.Length - 2, 2);
+                            }
+                            str.AppendLine();
+                        }
+
+                        string filename = "Found" + ((m_search_type == SearchType.Numbers) ? m_numbers_result_type.ToString() : "VerseSets") + ".txt";
+                        if (Directory.Exists(Globals.STATISTICS_FOLDER))
+                        {
+                            string path = Globals.STATISTICS_FOLDER + "/" + filename;
+                            FileHelper.SaveText(path, str.ToString());
+                            FileHelper.DisplayFile(path);
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            if (PictureBox.Visible)
+            {
+                PictureBox.Visible = false;
+            }
+            this.Cursor = Cursors.Default;
+        }
+    }
+    private void DisplayFoundChapterRangesTextFile()
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (m_client != null)
+            {
+                if (m_client.FoundChapterRanges != null)
+                {
+                    if (m_client.FoundChapterRanges.Count > 0)
+                    {
+                        StringBuilder str = new StringBuilder();
+                        foreach (List<Chapter> range in m_client.FoundChapterRanges)
+                        {
+                            foreach (Chapter chapter in range)
+                            {
+                                if (chapter != null)
+                                {
+                                    str.Append(chapter.SortedNumber + "." + chapter.Verses.Count + ", ");
+                                }
+                            }
+                            if (range.Count > 0)
+                            {
+                                str.Remove(str.Length - 2, 2);
+                            }
+                            str.AppendLine();
+                        }
+
+                        string filename = "Found" + ((m_search_type == SearchType.Numbers) ? m_numbers_result_type.ToString() : "ChapterRanges") + ".txt";
+                        if (Directory.Exists(Globals.STATISTICS_FOLDER))
+                        {
+                            string path = Globals.STATISTICS_FOLDER + "/" + filename;
+                            FileHelper.SaveText(path, str.ToString());
+                            FileHelper.DisplayFile(path);
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            if (PictureBox.Visible)
+            {
+                PictureBox.Visible = false;
+            }
+            this.Cursor = Cursors.Default;
+        }
+    }
+    private void DisplayFoundChapterSetsTextFile()
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (m_client != null)
+            {
+                if (m_client.FoundChapterSets != null)
+                {
+                    if (m_client.FoundChapterSets.Count > 0)
+                    {
+                        StringBuilder str = new StringBuilder();
+                        foreach (List<Chapter> set in m_client.FoundChapterSets)
+                        {
+                            foreach (Chapter chapter in set)
+                            {
+                                if (chapter != null)
+                                {
+                                    str.Append(chapter.SortedNumber + "." + chapter.Verses.Count + ", ");
+                                }
+                            }
+                            if (set.Count > 0)
+                            {
+                                str.Remove(str.Length - 2, 2);
+                            }
+                            str.AppendLine();
+                        }
+
+                        string filename = "Found" + ((m_search_type == SearchType.Numbers) ? m_numbers_result_type.ToString() : "ChapterSets") + ".txt";
+                        if (Directory.Exists(Globals.STATISTICS_FOLDER))
+                        {
+                            string path = Globals.STATISTICS_FOLDER + "/" + filename;
+                            FileHelper.SaveText(path, str.ToString());
+                            FileHelper.DisplayFile(path);
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            if (PictureBox.Visible)
+            {
+                PictureBox.Visible = false;
+            }
+            this.Cursor = Cursors.Default;
         }
     }
 
@@ -50457,7 +50819,7 @@ public partial class MainForm : Form, ISubscriber
                 }
             }
         }
-        catch (Exception ex)
+        catch //(Exception ex)
         {
             MessageBox.Show("Cannot find " + process_name + ".exe", Application.ProductName);
             //while (ex != null)
