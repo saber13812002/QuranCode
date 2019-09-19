@@ -4543,24 +4543,6 @@ public static class Numbers
         }
         return result;
     }
-    public static long SumOfDivisors(long number)
-    {
-        if (number < 0L) number *= -1L;
-        if (number == 0) return 0L;
-
-        long result = 1L;
-        s_factor_powers = FactorizeByPowers(number);
-        foreach (long key in s_factor_powers.Keys)
-        {
-            long sum = 0;
-            for (int i = 0; i <= s_factor_powers[key]; i++)
-            {
-                sum += (long)Math.Pow(key, i);
-            }
-            result *= sum;
-        }
-        return result;
-    }
     public static int GetDivisorCount(long number)
     {
         if (number < 0L) number *= -1L;
@@ -4574,6 +4556,60 @@ public static class Numbers
         }
         return result;
     }
+    public static long SumOfDivisors(long number)
+    {
+        if (number < 0L) number *= -1L;
+        if (number == 0) return 0L;
+
+        long result = 0L;
+        List<long> divisors = GetDivisors(number);
+        foreach (long divisor in divisors)
+        {
+            result += divisor;
+        }
+        return result;
+        //if (number < 0L) number *= -1L;
+        //if (number == 0) return 0L;
+
+        //long result = 1L;
+        //s_factor_powers = FactorizeByPowers(number);
+        //foreach (long key in s_factor_powers.Keys)
+        //{
+        //    long sum = 0;
+        //    for (int i = 0; i <= s_factor_powers[key]; i++)
+        //    {
+        //        sum += (long)Math.Pow(key, i);
+        //    }
+        //    result *= sum;
+        //}
+        //return result;
+    }
+    public static long SumOfDivisorDigitSums(long number)
+    {
+        if (number < 0L) number *= -1L;
+        if (number == 0) return 0L;
+
+        long result = 0L;
+        List<long> divisors = GetDivisors(number);
+        foreach (long divisor in divisors)
+        {
+            result += DigitSum(divisor);
+        }
+        return result;
+    }
+    public static long SumOfDivisorDigitalRoots(long number)
+    {
+        if (number < 0L) number *= -1L;
+        if (number == 0) return 0L;
+
+        long result = 0L;
+        List<long> divisors = GetDivisors(number);
+        foreach (long divisor in divisors)
+        {
+            result += DigitalRoot(divisor);
+        }
+        return result;
+    }
     public static string GetDivisorsString(long number)
     {
         if (number < 0L) number *= -1L;
@@ -4583,6 +4619,38 @@ public static class Numbers
         foreach (long divisor in divisors)
         {
             str.Append(divisor.ToString() + "+");
+        }
+        if (str.Length > 0)
+        {
+            str.Remove(str.Length - 1, 1);
+        }
+        return str.ToString();
+    }
+    public static string GetDivisorDigitSumsString(long number)
+    {
+        if (number < 0L) number *= -1L;
+
+        StringBuilder str = new StringBuilder();
+        List<long> divisors = GetDivisors(number);
+        foreach (long divisor in divisors)
+        {
+            str.Append(DigitSum(divisor).ToString() + "+");
+        }
+        if (str.Length > 0)
+        {
+            str.Remove(str.Length - 1, 1);
+        }
+        return str.ToString();
+    }
+    public static string GetDivisorDigitalRootsString(long number)
+    {
+        if (number < 0L) number *= -1L;
+
+        StringBuilder str = new StringBuilder();
+        List<long> divisors = GetDivisors(number);
+        foreach (long divisor in divisors)
+        {
+            str.Append(DigitalRoot(divisor).ToString() + "+");
         }
         if (str.Length > 0)
         {
