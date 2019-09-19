@@ -22,10 +22,9 @@ using System.Runtime.InteropServices;
     "http://qurandev.appspot.com for the word meanings." + "\r\n" +
     "http://corpus.quran.com for the word grammar." + "\r\n" +
     "http://everyayah.com for live audio streaming." + "\r\n" +
-    "Authors of any used open-source projects or code fragments." + "\r\n" +
+    "Authors of used open-source projects or code fragments." + "\r\n" +
     "\r\n" +
     "If you have found QuranCode useful, then please recite chapters الفاتِحة and الإخلآص for the spirits (أرواح) and the souls (أنفُس) of its developers, sincere users, and their parents too. Thank you." + "\r\n" +
-    //"\r\n" +
     "May Allah bless us all with guidance in this life and forgiveness and generous reward in the hereafter (مَغْفِرَةٍۢ وَأَجْرٍۢ كَرِيمٍ)." + "\r\n" +
     "\r\n" +
     "ٱللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَءَالِ مُحَمَّدٍ" + "\r\n" +
@@ -58,5 +57,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.0.*")]
-[assembly: AssemblyVersion("6.19.1361.4")]
-[assembly: AssemblyFileVersion("6.19.1361.4")]
+[assembly: AssemblyVersion("7.29.139.8317")]
+[assembly: AssemblyFileVersion("7.29.139.8317")]

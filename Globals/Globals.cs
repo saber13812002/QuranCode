@@ -3,21 +3,21 @@ public enum Edition { Standard, Research }
 public static class Globals
 {
     public static Edition EDITION = Edition.Standard;
-    public static string VERSION = "6.19.1361.4"; // updated by Version.bat (with AssemblyInfo.cs of all projects)
+    public static string VERSION = "7.29.139.8317"; // updated by Version.bat (with AssemblyInfo.cs of all projects)
     public static string SHORT_VERSION
     {
         get
         {
             string version = VERSION;
-            string[] parts = version.Split('.');
-            if (parts.Length == 4)
-            {
-                int pos = version.LastIndexOf('.');
-                if (pos > -1)
-                {
-                    version = version.Substring(0, pos);
-                }
-            }
+            //string[] parts = version.Split('.');
+            //if (parts.Length == 4)
+            //{
+            //    int pos = version.LastIndexOf('.');
+            //    if (pos > -1)
+            //    {
+            //        version = version.Substring(0, pos);
+            //    }
+            //}
 
             if (EDITION == Edition.Standard)
             {

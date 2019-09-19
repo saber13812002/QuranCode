@@ -15,7 +15,7 @@ public partial class MainForm : Form
 
     private void MainForm_Load(object sender, EventArgs e)
     {
-        ShowVersion(false);
+        ShowVersion(true);
 
         QueryParameterNumericUpDown_ValueChanged(null, null);
         CountOnlyCheckBox_CheckedChanged(null, null);
@@ -38,12 +38,12 @@ public partial class MainForm : Form
         int revision = Assembly.GetEntryAssembly().GetName().Version.Revision;
         //int major_revision = Assembly.GetEntryAssembly().GetName().Version.MajorRevision;
         //int minor_revision = Assembly.GetEntryAssembly().GetName().Version.MinorRevision;
-        this.Text = Application.ProductName + " v" + major + "." + minor + "." + build + (m_with_revision ? ("." + revision) : "");
+        this.Text = Application.ProductName + " - " + major + "." + minor + "." + build + (m_with_revision ? ("." + revision) : "");
 
-        //string version = typeof(MainForm).Assembly.GetName().Version.ToString();
-        //int pos = version.LastIndexOf(".");
-        //VersionLabel.Text = "v " + version.Substring(0, pos);
-
+        ////string version = typeof(MainForm).Assembly.GetName().Version.ToString();
+        ////int pos = version.LastIndexOf(".");
+        ////VersionLabel.Text = version.Substring(0, pos);
+        //VersionLabel.Text = Globals.SHORT_VERSION;
     }
     private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
     {

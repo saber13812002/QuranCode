@@ -12,8 +12,8 @@
 
   Initial Letter Sentences (جمل الحروف المقطعة)
   ------------------------------------------------------------------------------
-  Perfect text with a decisive secret.		نص حكيم له سر قاطع
-  Ali is a path to the Truth we hold fast to.	علي صراط حق نمسكه
+  A perfect text with a decisive secret.	نص حكيم له سر قاطع
+  The path of Ali is a truth we hold fast to.	صراط علي حق نمسكه
   ------------------------------------------------------------------------------
 
 </pre>

@@ -386,12 +386,12 @@
             this.VersionLabel.BackColor = System.Drawing.SystemColors.Control;
             this.VersionLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.VersionLabel.ForeColor = System.Drawing.Color.Purple;
-            this.VersionLabel.Location = new System.Drawing.Point(177, 365);
+            this.VersionLabel.Location = new System.Drawing.Point(161, 365);
             this.VersionLabel.Name = "VersionLabel";
-            this.VersionLabel.Size = new System.Drawing.Size(63, 17);
+            this.VersionLabel.Size = new System.Drawing.Size(79, 17);
             this.VersionLabel.TabIndex = 32;
             this.VersionLabel.Tag = "http://qurancode.com";
-            this.VersionLabel.Text = "v6.19.114";
+            this.VersionLabel.Text = "7.29.139.8317";
             this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ToolTip.SetToolTip(this.VersionLabel, "qurancode.com");
             this.VersionLabel.Click += new System.EventHandler(this.LinkLabel_Click);

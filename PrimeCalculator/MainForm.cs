@@ -170,12 +170,13 @@ public partial class MainForm : Form
         m_factorizer = null;
         m_worker_thread = null;
 
-        string version = typeof(MainForm).Assembly.GetName().Version.ToString();
-        int pos = version.LastIndexOf(".");
-        if (pos > -1)
-        {
-            VersionLabel.Text = version.Substring(0, pos);
-        }
+        //string version = typeof(MainForm).Assembly.GetName().Version.ToString();
+        //int pos = version.LastIndexOf(".");
+        //if (pos > -1)
+        //{
+        //    VersionLabel.Text = version.Substring(0, pos);
+        //}
+        VersionLabel.Text = Globals.SHORT_VERSION;
 
         if (this.Top < 0)
         {
@@ -2407,8 +2408,6 @@ public partial class MainForm : Form
         {
             PrimeFactorsTextBox.Text = m_double_value.ToString();
         }
-
-        MainTabControl.SelectedIndex = 0;
 
         Run();
     }

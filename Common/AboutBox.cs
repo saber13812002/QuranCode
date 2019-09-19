@@ -16,7 +16,7 @@ public partial class AboutBox : Form
         //  - Project->Properties->Application->Assembly Information
         //  - AssemblyInfo.cs
         this.Text = String.Format("About {0}", ProductName);
-        this.ProductNameLabel.Text = ProductName + " v" + Globals.LONG_VERSION;
+        this.ProductNameLabel.Text = ProductName + " - " + Globals.LONG_VERSION;
         this.CopyrightLabel.Text = AssemblyCopyright;
         //this.CompanyNameLabel.Text = AssemblyCompany;
         this.DescriptionTextBox.Text = AssemblyDescription;

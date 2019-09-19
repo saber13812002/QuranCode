@@ -541,12 +541,13 @@ public partial class MainForm : Form
 
     private void MainForm_Load(object sender, EventArgs e)
     {
-        string version = typeof(MainForm).Assembly.GetName().Version.ToString();
-        int pos = version.LastIndexOf(".");
-        if (pos > -1)
-        {
-            VersionLabel.Text = version.Substring(0, pos);
-        }
+        //string version = typeof(MainForm).Assembly.GetName().Version.ToString();
+        //int pos = version.LastIndexOf(".");
+        //if (pos > -1)
+        //{
+        //    VersionLabel.Text = version.Substring(0, pos);
+        //}
+        VersionLabel.Text = Globals.SHORT_VERSION;
 
         if (this.Top < 0)
         {
