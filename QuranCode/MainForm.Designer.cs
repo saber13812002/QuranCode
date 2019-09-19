@@ -5697,7 +5697,7 @@ partial class MainForm
         this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 1);
         this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
         this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 192);
+        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 194);
         this.ScriptOutputGroupBox.TabIndex = 103;
         this.ScriptOutputGroupBox.TabStop = false;
         this.ScriptOutputGroupBox.Text = " Output ";
@@ -5713,7 +5713,7 @@ partial class MainForm
         this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
         this.ScriptOutputTextBox.ReadOnly = true;
         this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 164);
+        this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 166);
         this.ScriptOutputTextBox.TabIndex = 0;
         this.ScriptOutputTextBox.WordWrap = false;
         this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -10132,7 +10132,7 @@ partial class MainForm
         // 
         // SumOfDivisorDigitalRootsTextBox
         // 
-        this.SumOfDivisorDigitalRootsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+        this.SumOfDivisorDigitalRootsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
         this.SumOfDivisorDigitalRootsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.SumOfDivisorDigitalRootsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
         this.SumOfDivisorDigitalRootsTextBox.Location = new System.Drawing.Point(154, 120);
@@ -10144,10 +10144,13 @@ partial class MainForm
         this.SumOfDivisorDigitalRootsTextBox.TabIndex = 46;
         this.SumOfDivisorDigitalRootsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.SumOfDivisorDigitalRootsTextBox, "Sum of divisor digital roots");
+        this.SumOfDivisorDigitalRootsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfDivisorDigitalRootsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
+        this.SumOfDivisorDigitalRootsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
         // SumOfDivisorDigitSumsTextBox
         // 
-        this.SumOfDivisorDigitSumsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+        this.SumOfDivisorDigitSumsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
         this.SumOfDivisorDigitSumsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.SumOfDivisorDigitSumsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
         this.SumOfDivisorDigitSumsTextBox.Location = new System.Drawing.Point(126, 120);
@@ -10159,10 +10162,13 @@ partial class MainForm
         this.SumOfDivisorDigitSumsTextBox.TabIndex = 45;
         this.SumOfDivisorDigitSumsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.SumOfDivisorDigitSumsTextBox, "Sum of divisor digit sums");
+        this.SumOfDivisorDigitSumsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfDivisorDigitSumsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
+        this.SumOfDivisorDigitSumsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
         // SumOfDivisorsTextBox
         // 
-        this.SumOfDivisorsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+        this.SumOfDivisorsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
         this.SumOfDivisorsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.SumOfDivisorsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
         this.SumOfDivisorsTextBox.Location = new System.Drawing.Point(83, 120);
@@ -10174,6 +10180,9 @@ partial class MainForm
         this.SumOfDivisorsTextBox.TabIndex = 44;
         this.SumOfDivisorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.SumOfDivisorsTextBox, "Sum of divisors");
+        this.SumOfDivisorsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfDivisorsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
+        this.SumOfDivisorsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
         // DecimalUnusedLettersValueTextBox
         // 
@@ -10424,7 +10433,7 @@ partial class MainForm
         // 
         // DeficientNumbersLabel
         // 
-        this.DeficientNumbersLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+        this.DeficientNumbersLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
         this.DeficientNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.DeficientNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DeficientNumbersLabel.ForeColor = System.Drawing.SystemColors.Window;
@@ -10471,7 +10480,7 @@ partial class MainForm
         // 
         // NumberKindIndexTextBox
         // 
-        this.NumberKindIndexTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+        this.NumberKindIndexTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
         this.NumberKindIndexTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.NumberKindIndexTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
         this.NumberKindIndexTextBox.Location = new System.Drawing.Point(7, 120);
@@ -10488,7 +10497,7 @@ partial class MainForm
         // 
         // SumOfProperDivisorsTextBox
         // 
-        this.SumOfProperDivisorsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
+        this.SumOfProperDivisorsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
         this.SumOfProperDivisorsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.SumOfProperDivisorsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
         this.SumOfProperDivisorsTextBox.Location = new System.Drawing.Point(44, 120);

@@ -200,7 +200,7 @@ public static class Numbers
     public static Color[] NUMBER_KIND_COLORS =
     { 
         /* NumberKind.Deficient */          Color.FromArgb(255, 224, 255),
-        /* NumberKind.Perfect */            Color.FromArgb(255, 128, 255),
+        /* NumberKind.Perfect */            Color.FromArgb(255, 160, 255),
         /* NumberKind.Abundant */           Color.FromArgb(255, 192, 255)
     };
 

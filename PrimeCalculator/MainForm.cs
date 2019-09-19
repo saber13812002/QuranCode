@@ -224,7 +224,7 @@ public partial class MainForm : Form
         ValueTextBox.SelectionStart = 0;
 
         int left = 7;
-        int width = (int)((this.Width - 25) * 0.33333);
+        int width = (int)((this.Width - 25) * 0.3357);
         NthNumberTextBox.Left = left;
         NthNumberTextBox.Width = width;
         left += width - 1;
@@ -235,14 +235,8 @@ public partial class MainForm : Form
         NthNonAdditiveNumberTextBox.Width = width;
 
         left = 7;
-        int small_width = (int)((this.Width - 25) * 0.18333);
-        int large_width = (int)((this.Width - 25) * 0.26666);
-        NumberKindIndexTextBox.Left = left;
-        NumberKindIndexTextBox.Width = small_width;
-        left += small_width - 1;
-        SumOfProperDivisorsTextBox.Left = left;
-        SumOfProperDivisorsTextBox.Width = small_width;
-        left += small_width - 1;
+        int small_width = (int)((this.Width - 25) * 0.303);
+        int large_width = (int)((this.Width - 25) * 0.403);
         SumOfNumbersTextBox.Left = left;
         SumOfNumbersTextBox.Width = large_width;
         left += large_width - 1;
@@ -253,8 +247,26 @@ public partial class MainForm : Form
         SumOfDigitalRootsTextBox.Width = small_width;
 
         left = 7;
-        small_width = (int)((this.Width - 25) * 0.09787);
-        large_width = (int)((this.Width - 25) * 0.22553);
+        small_width = (int)((this.Width - 25) * 0.187);
+        large_width = (int)((this.Width - 25) * 0.267);
+        NumberKindIndexTextBox.Left = left;
+        NumberKindIndexTextBox.Width = small_width;
+        left += small_width - 1;
+        SumOfProperDivisorsTextBox.Left = left;
+        SumOfProperDivisorsTextBox.Width = small_width;
+        left += small_width - 1;
+        SumOfDivisorsTextBox.Left = left;
+        SumOfDivisorsTextBox.Width = large_width;
+        left += large_width - 1;
+        SumOfDivisorDigitSumsTextBox.Left = left;
+        SumOfDivisorDigitSumsTextBox.Width = small_width;
+        left += small_width - 1;
+        SumOfDivisorDigitalRootsTextBox.Left = left;
+        SumOfDivisorDigitalRootsTextBox.Width = small_width;
+
+        left = 7;
+        large_width = (int)((this.Width - 25) * 0.225);
+        small_width = (int)((this.Width - 25) * 0.113);
         PCIndexChainL2RTextBox.Left = left;
         PCIndexChainL2RTextBox.Width = large_width;
         left += large_width - 1;
@@ -359,6 +371,22 @@ public partial class MainForm : Form
 
         long value = 0L;
         long.TryParse(ValueTextBox.Text, out value);
+
+        long sum_of_numbers = Numbers.SumOfNumbers(value);
+        SumOfNumbersTextBox.Text = (sum_of_numbers == 0) ? "" : sum_of_numbers.ToString();
+        SumOfNumbersTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers);
+        SumOfNumbersTextBox.Refresh();
+
+        long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
+        SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
+        SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
+        SumOfDigitSumsTextBox.Refresh();
+
+        long sum_of_digital_roots = Numbers.SumOfDigitalRoots(value);
+        SumOfDigitalRootsTextBox.Text = (sum_of_digital_roots == 0) ? "" : sum_of_digital_roots.ToString();
+        SumOfDigitalRootsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digital_roots);
+        SumOfDigitalRootsTextBox.Refresh();
+
         UpdateNumberKind(value);
         UpdateSumOfDivisors(value);
         UpdateDigitSumRootPCChains(value);
@@ -630,7 +658,6 @@ public partial class MainForm : Form
             }
 
             SquareSumTextBox.Text = (plus1_index > 0) ? plus1_str : (minus1_index > 0) ? minus1_str : "";
-            SquareDiffTextBox.Text = (plus1_index > 0) ? plus2_str : (minus1_index > 0) ? minus2_str : "";
             long n = 0L;
             if (plus1_str.StartsWith("4×")) // 4n+1
             {
@@ -656,9 +683,7 @@ public partial class MainForm : Form
             //double scale = 0.8d;
             //n_color = Color.FromArgb((int)(n_color.R * scale), (int)(n_color.G * scale), (int)(n_color.B * scale));
             SquareSumTextBox.ForeColor = n_color;
-            SquareDiffTextBox.ForeColor = n_color;
             SquareSumTextBox.Refresh();
-            SquareDiffTextBox.Refresh();
 
             int _4n1_index = (plus1_index > 0) ? plus1_index : (minus1_index > 0) ? minus1_index : 0;
             Nth4n1NumberTextBox.Text = (_4n1_index > 0) ? _4n1_index.ToString() : "";
@@ -908,10 +933,13 @@ public partial class MainForm : Form
                 break;
         }
         SumOfProperDivisorsTextBox.BackColor = NumberKindIndexTextBox.BackColor;
+        SumOfDivisorsTextBox.BackColor = NumberKindIndexTextBox.BackColor;
+        SumOfDivisorDigitSumsTextBox.BackColor = NumberKindIndexTextBox.BackColor;
+        SumOfDivisorDigitalRootsTextBox.BackColor = NumberKindIndexTextBox.BackColor;
 
         NumberKindIndexTextBox.Text = number_kind_index.ToString();
         NumberKindIndexTextBox.ForeColor = Numbers.GetNumberTypeColor(number_kind_index);
-        ToolTip.SetToolTip(NumberKindIndexTextBox, m_number_kind.ToString() + " value index");
+        ToolTip.SetToolTip(NumberKindIndexTextBox, m_number_kind.ToString() + " number index");
         NumberKindIndexTextBox.Refresh();
     }
     private void UpdateNumberKind(int index)
@@ -1036,12 +1064,34 @@ public partial class MainForm : Form
     {
         if (value < 0L) value *= -1L;
 
+        long sum_of_divisors = Numbers.SumOfDivisors(value);
+        long sum_of_divisor_digit_sums = Numbers.SumOfDivisorDigitSums(value);
+        long sum_of_divisor_digital_roots = Numbers.SumOfDivisorDigitalRoots(value);
+        string divisors = Numbers.GetDivisorsString(value);
+        string divisor_digit_sums = Numbers.GetDivisorDigitSumsString(value);
+        string divisor_digital_roots = Numbers.GetDivisorDigitalRootsString(value);
+
+        SumOfDivisorsTextBox.Text = sum_of_divisors.ToString();
+        SumOfDivisorsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_divisors);
+        SumOfDivisorsTextBox.Refresh();
+        ToolTip.SetToolTip(SumOfDivisorsTextBox, "Sum of divisors" + "\r\n" + divisors + " = " + sum_of_divisors);
+
+        SumOfDivisorDigitSumsTextBox.Text = sum_of_divisor_digit_sums.ToString();
+        SumOfDivisorDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_divisor_digit_sums);
+        SumOfDivisorDigitSumsTextBox.Refresh();
+        ToolTip.SetToolTip(SumOfDivisorDigitSumsTextBox, "Sum of divisor digit sums" + "\r\n" + divisor_digit_sums + " = " + sum_of_divisor_digit_sums);
+
+        SumOfDivisorDigitalRootsTextBox.Text = sum_of_divisor_digital_roots.ToString();
+        SumOfDivisorDigitalRootsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_divisor_digital_roots);
+        SumOfDivisorDigitalRootsTextBox.Refresh();
+        ToolTip.SetToolTip(SumOfDivisorDigitalRootsTextBox, "Sum of divisor digital roots" + "\r\n" + divisor_digital_roots + " = " + sum_of_divisor_digital_roots);
+
         long sum_of_proper_divisors = Numbers.SumOfProperDivisors(value);
         string proper_divisors = Numbers.GetProperDivisorsString(value);
         SumOfProperDivisorsTextBox.Text = sum_of_proper_divisors.ToString();
         SumOfProperDivisorsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_proper_divisors);
         SumOfProperDivisorsTextBox.Refresh();
-        ToolTip.SetToolTip(SumOfProperDivisorsTextBox, "Sum of proper divisors\r\n" + proper_divisors + " = " + sum_of_proper_divisors);
+        ToolTip.SetToolTip(SumOfProperDivisorsTextBox, "Sum of proper divisors" + "\r\n" + proper_divisors + " = " + sum_of_proper_divisors);
     }
 
     private void ValueInspectLabel_Click(object sender, EventArgs e)
@@ -1901,6 +1951,7 @@ public partial class MainForm : Form
                 {
                     value++;
                     control.Text = value.ToString();
+                    FactorizeValue(control);
                 }
             }
         }
@@ -1916,6 +1967,7 @@ public partial class MainForm : Form
                 {
                     value--;
                     control.Text = value.ToString();
+                    FactorizeValue(control);
                 }
             }
         }
@@ -2348,7 +2400,7 @@ public partial class MainForm : Form
     private void ClearNumberAnalyses()
     {
         Nth4n1NumberTextBox.Text = "";
-        Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLightLight;
+        Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
         Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
         Nth4nPlus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
         Nth4nMinus1CompositeNumberLabel.BackColor = SystemColors.ControlLight;
@@ -2359,8 +2411,6 @@ public partial class MainForm : Form
 
         SquareSumTextBox.Text = "";
         SquareSumTextBox.Refresh();
-        SquareDiffTextBox.Text = "";
-        SquareDiffTextBox.Refresh();
 
         ClearFactors();
     }
@@ -2481,7 +2531,7 @@ public partial class MainForm : Form
     {
         EnableEntryControls();
         ClearProgress();
-        ValueTextBox.Focus();
+        //ValueTextBox.Focus();
     }
     private void AfterProcessing()
     {
@@ -2504,7 +2554,7 @@ public partial class MainForm : Form
                 AnalyzeValue(value);
             }
         }
-        ValueTextBox.Focus();
+        //ValueTextBox.Focus();
     }
 
     private enum TimeDisplayMode { Elapsed, Remaining }

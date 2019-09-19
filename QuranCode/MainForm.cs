@@ -11265,6 +11265,9 @@ public partial class MainForm : Form, ISubscriber
         this.SumOfDivisorDigitalRootsTextBox.TabIndex = 46;
         this.SumOfDivisorDigitalRootsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.SumOfDivisorDigitalRootsTextBox, "Sum of divisor digital roots");
+        this.SumOfDivisorDigitalRootsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfDivisorDigitalRootsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
+        this.SumOfDivisorDigitalRootsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
         // SumOfDivisorDigitSumsTextBox
         // 
@@ -11280,6 +11283,9 @@ public partial class MainForm : Form, ISubscriber
         this.SumOfDivisorDigitSumsTextBox.TabIndex = 45;
         this.SumOfDivisorDigitSumsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.SumOfDivisorDigitSumsTextBox, "Sum of divisor digit sums");
+        this.SumOfDivisorDigitSumsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfDivisorDigitSumsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
+        this.SumOfDivisorDigitSumsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
         // SumOfDivisorsTextBox
         // 
@@ -11295,6 +11301,9 @@ public partial class MainForm : Form, ISubscriber
         this.SumOfDivisorsTextBox.TabIndex = 44;
         this.SumOfDivisorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.SumOfDivisorsTextBox, "Sum of divisors");
+        this.SumOfDivisorsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfDivisorsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
+        this.SumOfDivisorsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
         // DecimalUnusedLettersValueTextBox
         // 
@@ -46477,18 +46486,7 @@ public partial class MainForm : Form, ISubscriber
 
         NumberKindIndexTextBox.Text = number_kind_index.ToString();
         NumberKindIndexTextBox.ForeColor = Numbers.GetNumberTypeColor(number_kind_index);
-        switch (m_number_kind)
-        {
-            case NumberKind.Abundant:
-                ToolTip.SetToolTip(NumberKindIndexTextBox, L[l]["Abundant number index"]);
-                break;
-            case NumberKind.Perfect:
-                ToolTip.SetToolTip(NumberKindIndexTextBox, L[l]["Perfect number index"]);
-                break;
-            case NumberKind.Deficient:
-                ToolTip.SetToolTip(NumberKindIndexTextBox, L[l]["Deficient number index"]);
-                break;
-        }
+        ToolTip.SetToolTip(NumberKindIndexTextBox, L[l][m_number_kind.ToString() + " number index"]);
         NumberKindIndexTextBox.Refresh();
     }
     private void UpdateNumberKind(int index)

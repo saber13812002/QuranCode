@@ -79,6 +79,9 @@
             this.SumOfNumbersTextBox = new System.Windows.Forms.TextBox();
             this.SumOfDigitSumsTextBox = new System.Windows.Forms.TextBox();
             this.SumOfDigitalRootsTextBox = new System.Windows.Forms.TextBox();
+            this.SumOfDivisorDigitalRootsTextBox = new System.Windows.Forms.TextBox();
+            this.SumOfDivisorDigitSumsTextBox = new System.Windows.Forms.TextBox();
+            this.SumOfDivisorsTextBox = new System.Windows.Forms.TextBox();
             this.dCircleLabel = new System.Windows.Forms.Label();
             this.rCircleLabel = new System.Windows.Forms.Label();
             this.piCircleLabel = new System.Windows.Forms.Label();
@@ -112,7 +115,7 @@
             this.IndexLabel = new System.Windows.Forms.Label();
             this.IndexTextBox = new System.Windows.Forms.TextBox();
             this.ValuePanel = new System.Windows.Forms.Panel();
-            this.SquareDiffTextBox = new System.Windows.Forms.TextBox();
+            this.SumOfNumbersLabel = new System.Windows.Forms.Label();
             this.SquareSumTextBox = new System.Windows.Forms.TextBox();
             this.IndexChainLengthTextBox = new System.Windows.Forms.TextBox();
             this.NthNonAdditiveNumberTextBox = new System.Windows.Forms.TextBox();
@@ -267,7 +270,7 @@
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ReadOnly = true;
             this.OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.OutputTextBox.Size = new System.Drawing.Size(226, 188);
+            this.OutputTextBox.Size = new System.Drawing.Size(226, 230);
             this.OutputTextBox.TabIndex = 29;
             this.OutputTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.OutputTextBox, "Factorization result");
@@ -467,14 +470,14 @@
             // 
             this.NumberKindIndexTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumberKindIndexTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.NumberKindIndexTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
             this.NumberKindIndexTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NumberKindIndexTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.NumberKindIndexTextBox.Location = new System.Drawing.Point(7, 102);
             this.NumberKindIndexTextBox.Name = "NumberKindIndexTextBox";
             this.NumberKindIndexTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.NumberKindIndexTextBox.Size = new System.Drawing.Size(44, 20);
-            this.NumberKindIndexTextBox.TabIndex = 15;
+            this.NumberKindIndexTextBox.Size = new System.Drawing.Size(53, 20);
+            this.NumberKindIndexTextBox.TabIndex = 17;
             this.NumberKindIndexTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.NumberKindIndexTextBox, "Deficient number index");
             this.NumberKindIndexTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
@@ -484,15 +487,15 @@
             // SumOfProperDivisorsTextBox
             // 
             this.SumOfProperDivisorsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SumOfProperDivisorsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.SumOfProperDivisorsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
             this.SumOfProperDivisorsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SumOfProperDivisorsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.SumOfProperDivisorsTextBox.Location = new System.Drawing.Point(49, 102);
+            this.SumOfProperDivisorsTextBox.Location = new System.Drawing.Point(59, 102);
             this.SumOfProperDivisorsTextBox.Name = "SumOfProperDivisorsTextBox";
             this.SumOfProperDivisorsTextBox.ReadOnly = true;
             this.SumOfProperDivisorsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.SumOfProperDivisorsTextBox.Size = new System.Drawing.Size(44, 20);
-            this.SumOfProperDivisorsTextBox.TabIndex = 16;
+            this.SumOfProperDivisorsTextBox.Size = new System.Drawing.Size(53, 20);
+            this.SumOfProperDivisorsTextBox.TabIndex = 18;
             this.SumOfProperDivisorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.SumOfProperDivisorsTextBox, "Sum of proper divisors");
             this.SumOfProperDivisorsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
@@ -731,7 +734,7 @@
             // Nth4n1NumberTextBox
             // 
             this.Nth4n1NumberTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Nth4n1NumberTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.Nth4n1NumberTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.Nth4n1NumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Nth4n1NumberTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.Nth4n1NumberTextBox.Location = new System.Drawing.Point(176, 42);
@@ -811,7 +814,7 @@
             this.CompositeNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.CompositeNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CompositeNumbersLabel.ForeColor = System.Drawing.SystemColors.Window;
-            this.CompositeNumbersLabel.Location = new System.Drawing.Point(2, 92);
+            this.CompositeNumbersLabel.Location = new System.Drawing.Point(2, 72);
             this.CompositeNumbersLabel.Name = "CompositeNumbersLabel";
             this.CompositeNumbersLabel.Size = new System.Drawing.Size(5, 9);
             this.CompositeNumbersLabel.TabIndex = 35;
@@ -825,7 +828,7 @@
             this.PrimeNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PrimeNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PrimeNumbersLabel.ForeColor = System.Drawing.SystemColors.Window;
-            this.PrimeNumbersLabel.Location = new System.Drawing.Point(2, 83);
+            this.PrimeNumbersLabel.Location = new System.Drawing.Point(2, 63);
             this.PrimeNumbersLabel.Name = "PrimeNumbersLabel";
             this.PrimeNumbersLabel.Size = new System.Drawing.Size(5, 9);
             this.PrimeNumbersLabel.TabIndex = 36;
@@ -836,15 +839,15 @@
             // SumOfNumbersTextBox
             // 
             this.SumOfNumbersTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SumOfNumbersTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.SumOfNumbersTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.SumOfNumbersTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SumOfNumbersTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.SumOfNumbersTextBox.Location = new System.Drawing.Point(90, 102);
+            this.SumOfNumbersTextBox.Location = new System.Drawing.Point(8, 82);
             this.SumOfNumbersTextBox.Name = "SumOfNumbersTextBox";
             this.SumOfNumbersTextBox.ReadOnly = true;
             this.SumOfNumbersTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.SumOfNumbersTextBox.Size = new System.Drawing.Size(64, 20);
-            this.SumOfNumbersTextBox.TabIndex = 17;
+            this.SumOfNumbersTextBox.Size = new System.Drawing.Size(97, 20);
+            this.SumOfNumbersTextBox.TabIndex = 14;
             this.SumOfNumbersTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.SumOfNumbersTextBox, "Sum of numbers from 1 to N");
             this.SumOfNumbersTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
@@ -853,15 +856,15 @@
             // SumOfDigitSumsTextBox
             // 
             this.SumOfDigitSumsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SumOfDigitSumsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.SumOfDigitSumsTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.SumOfDigitSumsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SumOfDigitSumsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.SumOfDigitSumsTextBox.Location = new System.Drawing.Point(152, 102);
+            this.SumOfDigitSumsTextBox.Location = new System.Drawing.Point(103, 82);
             this.SumOfDigitSumsTextBox.Name = "SumOfDigitSumsTextBox";
             this.SumOfDigitSumsTextBox.ReadOnly = true;
             this.SumOfDigitSumsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.SumOfDigitSumsTextBox.Size = new System.Drawing.Size(44, 20);
-            this.SumOfDigitSumsTextBox.TabIndex = 18;
+            this.SumOfDigitSumsTextBox.Size = new System.Drawing.Size(81, 20);
+            this.SumOfDigitSumsTextBox.TabIndex = 15;
             this.SumOfDigitSumsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.SumOfDigitSumsTextBox, "Sum of digit sums of numbers from 1 to N");
             this.SumOfDigitSumsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
@@ -870,19 +873,70 @@
             // SumOfDigitalRootsTextBox
             // 
             this.SumOfDigitalRootsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SumOfDigitalRootsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.SumOfDigitalRootsTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.SumOfDigitalRootsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SumOfDigitalRootsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.SumOfDigitalRootsTextBox.Location = new System.Drawing.Point(194, 102);
+            this.SumOfDigitalRootsTextBox.Location = new System.Drawing.Point(182, 82);
             this.SumOfDigitalRootsTextBox.Name = "SumOfDigitalRootsTextBox";
             this.SumOfDigitalRootsTextBox.ReadOnly = true;
             this.SumOfDigitalRootsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.SumOfDigitalRootsTextBox.Size = new System.Drawing.Size(44, 20);
-            this.SumOfDigitalRootsTextBox.TabIndex = 19;
+            this.SumOfDigitalRootsTextBox.Size = new System.Drawing.Size(56, 20);
+            this.SumOfDigitalRootsTextBox.TabIndex = 16;
             this.SumOfDigitalRootsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.SumOfDigitalRootsTextBox, "Sum of digital roots of numbers from 1 to N");
             this.SumOfDigitalRootsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             this.SumOfDigitalRootsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
+            // 
+            // SumOfDivisorDigitalRootsTextBox
+            // 
+            this.SumOfDivisorDigitalRootsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.SumOfDivisorDigitalRootsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SumOfDivisorDigitalRootsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.SumOfDivisorDigitalRootsTextBox.Location = new System.Drawing.Point(212, 102);
+            this.SumOfDivisorDigitalRootsTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.SumOfDivisorDigitalRootsTextBox.Name = "SumOfDivisorDigitalRootsTextBox";
+            this.SumOfDivisorDigitalRootsTextBox.ReadOnly = true;
+            this.SumOfDivisorDigitalRootsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.SumOfDivisorDigitalRootsTextBox.Size = new System.Drawing.Size(25, 20);
+            this.SumOfDivisorDigitalRootsTextBox.TabIndex = 21;
+            this.SumOfDivisorDigitalRootsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip.SetToolTip(this.SumOfDivisorDigitalRootsTextBox, "Sum of divisor digital roots");
+            this.SumOfDivisorDigitalRootsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.SumOfDivisorDigitalRootsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
+            // 
+            // SumOfDivisorDigitSumsTextBox
+            // 
+            this.SumOfDivisorDigitSumsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.SumOfDivisorDigitSumsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SumOfDivisorDigitSumsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.SumOfDivisorDigitSumsTextBox.Location = new System.Drawing.Point(176, 102);
+            this.SumOfDivisorDigitSumsTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.SumOfDivisorDigitSumsTextBox.Name = "SumOfDivisorDigitSumsTextBox";
+            this.SumOfDivisorDigitSumsTextBox.ReadOnly = true;
+            this.SumOfDivisorDigitSumsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.SumOfDivisorDigitSumsTextBox.Size = new System.Drawing.Size(36, 20);
+            this.SumOfDivisorDigitSumsTextBox.TabIndex = 20;
+            this.SumOfDivisorDigitSumsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip.SetToolTip(this.SumOfDivisorDigitSumsTextBox, "Sum of divisor digit sums");
+            this.SumOfDivisorDigitSumsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.SumOfDivisorDigitSumsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
+            // 
+            // SumOfDivisorsTextBox
+            // 
+            this.SumOfDivisorsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.SumOfDivisorsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SumOfDivisorsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.SumOfDivisorsTextBox.Location = new System.Drawing.Point(112, 102);
+            this.SumOfDivisorsTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.SumOfDivisorsTextBox.Name = "SumOfDivisorsTextBox";
+            this.SumOfDivisorsTextBox.ReadOnly = true;
+            this.SumOfDivisorsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.SumOfDivisorsTextBox.Size = new System.Drawing.Size(64, 20);
+            this.SumOfDivisorsTextBox.TabIndex = 19;
+            this.SumOfDivisorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip.SetToolTip(this.SumOfDivisorsTextBox, "Sum of divisors");
+            this.SumOfDivisorsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.SumOfDivisorsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // dCircleLabel
             // 
@@ -1275,8 +1329,13 @@
             // 
             // ValuePanel
             // 
+            this.ValuePanel.Controls.Add(this.SumOfDivisorDigitalRootsTextBox);
+            this.ValuePanel.Controls.Add(this.SumOfDivisorDigitSumsTextBox);
+            this.ValuePanel.Controls.Add(this.SumOfDivisorsTextBox);
             this.ValuePanel.Controls.Add(this.SumOfDigitalRootsTextBox);
             this.ValuePanel.Controls.Add(this.SumOfDigitSumsTextBox);
+            this.ValuePanel.Controls.Add(this.SumOfNumbersTextBox);
+            this.ValuePanel.Controls.Add(this.SumOfNumbersLabel);
             this.ValuePanel.Controls.Add(this.CompositeNumbersLabel);
             this.ValuePanel.Controls.Add(this.Nth4nMinus1CompositeNumberLabel);
             this.ValuePanel.Controls.Add(this.PrimeNumbersLabel);
@@ -1287,8 +1346,6 @@
             this.ValuePanel.Controls.Add(this.AbundantNumbersLabel);
             this.ValuePanel.Controls.Add(this.ValueInspectLabel);
             this.ValuePanel.Controls.Add(this.PCIndexChainLabel);
-            this.ValuePanel.Controls.Add(this.SumOfNumbersTextBox);
-            this.ValuePanel.Controls.Add(this.SquareDiffTextBox);
             this.ValuePanel.Controls.Add(this.SquareSumTextBox);
             this.ValuePanel.Controls.Add(this.IndexChainLengthTextBox);
             this.ValuePanel.Controls.Add(this.NthNonAdditiveNumberTextBox);
@@ -1316,26 +1373,25 @@
             this.ValuePanel.Size = new System.Drawing.Size(240, 146);
             this.ValuePanel.TabIndex = 12;
             // 
-            // SquareDiffTextBox
+            // SumOfNumbersLabel
             // 
-            this.SquareDiffTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.SquareDiffTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.SquareDiffTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SquareDiffTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.SquareDiffTextBox.Location = new System.Drawing.Point(1, 62);
-            this.SquareDiffTextBox.Name = "SquareDiffTextBox";
-            this.SquareDiffTextBox.ReadOnly = true;
-            this.SquareDiffTextBox.Size = new System.Drawing.Size(237, 20);
-            this.SquareDiffTextBox.TabIndex = 11;
-            this.SquareDiffTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
-            this.SquareDiffTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
+            this.SumOfNumbersLabel.BackColor = System.Drawing.Color.Transparent;
+            this.SumOfNumbersLabel.Cursor = System.Windows.Forms.Cursors.Default;
+            this.SumOfNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SumOfNumbersLabel.ForeColor = System.Drawing.Color.Black;
+            this.SumOfNumbersLabel.Location = new System.Drawing.Point(-1, 81);
+            this.SumOfNumbersLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.SumOfNumbersLabel.Name = "SumOfNumbersLabel";
+            this.SumOfNumbersLabel.Size = new System.Drawing.Size(13, 18);
+            this.SumOfNumbersLabel.TabIndex = 228;
+            this.SumOfNumbersLabel.Text = "∑";
+            this.SumOfNumbersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // SquareSumTextBox
             // 
             this.SquareSumTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.SquareSumTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.SquareSumTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.SquareSumTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SquareSumTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.SquareSumTextBox.Location = new System.Drawing.Point(1, 42);
@@ -1368,11 +1424,11 @@
             this.NthNonAdditiveNumberTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.NthNonAdditiveNumberTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.NthNonAdditiveNumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NthNonAdditiveNumberTextBox.Location = new System.Drawing.Point(161, 82);
+            this.NthNonAdditiveNumberTextBox.Location = new System.Drawing.Point(161, 62);
             this.NthNonAdditiveNumberTextBox.Name = "NthNonAdditiveNumberTextBox";
             this.NthNonAdditiveNumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.NthNonAdditiveNumberTextBox.Size = new System.Drawing.Size(77, 20);
-            this.NthNonAdditiveNumberTextBox.TabIndex = 14;
+            this.NthNonAdditiveNumberTextBox.TabIndex = 13;
             this.NthNonAdditiveNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NthNonAdditiveNumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             this.NthNonAdditiveNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IndexTextBox_KeyDown);
@@ -1454,7 +1510,7 @@
             this.ValueTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.ValueTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ValueTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.ValueTextBox.Location = new System.Drawing.Point(15, 3);
+            this.ValueTextBox.Location = new System.Drawing.Point(15, 2);
             this.ValueTextBox.Name = "ValueTextBox";
             this.ValueTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ValueTextBox.Size = new System.Drawing.Size(162, 20);
@@ -1467,7 +1523,7 @@
             // DigitalRootTextBox
             // 
             this.DigitalRootTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DigitalRootTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.DigitalRootTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.DigitalRootTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DigitalRootTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
             this.DigitalRootTextBox.Location = new System.Drawing.Point(214, 22);
@@ -1483,7 +1539,7 @@
             // DigitSumTextBox
             // 
             this.DigitSumTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.DigitSumTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.DigitSumTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.DigitSumTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DigitSumTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
             this.DigitSumTextBox.Location = new System.Drawing.Point(176, 22);
@@ -1501,11 +1557,11 @@
             this.NthAdditiveNumberTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.NthAdditiveNumberTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.NthAdditiveNumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NthAdditiveNumberTextBox.Location = new System.Drawing.Point(84, 82);
+            this.NthAdditiveNumberTextBox.Location = new System.Drawing.Point(84, 62);
             this.NthAdditiveNumberTextBox.Name = "NthAdditiveNumberTextBox";
             this.NthAdditiveNumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.NthAdditiveNumberTextBox.Size = new System.Drawing.Size(77, 20);
-            this.NthAdditiveNumberTextBox.TabIndex = 13;
+            this.NthAdditiveNumberTextBox.TabIndex = 12;
             this.NthAdditiveNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NthAdditiveNumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             this.NthAdditiveNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IndexTextBox_KeyDown);
@@ -1517,11 +1573,11 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.NthNumberTextBox.BackColor = System.Drawing.SystemColors.Window;
             this.NthNumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NthNumberTextBox.Location = new System.Drawing.Point(7, 82);
+            this.NthNumberTextBox.Location = new System.Drawing.Point(7, 62);
             this.NthNumberTextBox.Name = "NthNumberTextBox";
             this.NthNumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.NthNumberTextBox.Size = new System.Drawing.Size(77, 20);
-            this.NthNumberTextBox.TabIndex = 12;
+            this.NthNumberTextBox.TabIndex = 11;
             this.NthNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.NthNumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
             this.NthNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IndexTextBox_KeyDown);
@@ -1541,7 +1597,7 @@
             // 
             this.PrimeFactorsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.PrimeFactorsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.PrimeFactorsTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.PrimeFactorsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PrimeFactorsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.PrimeFactorsTextBox.Location = new System.Drawing.Point(1, 22);
@@ -1735,7 +1791,7 @@
             this.FactorsTabPage.Location = new System.Drawing.Point(4, 22);
             this.FactorsTabPage.Name = "FactorsTabPage";
             this.FactorsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FactorsTabPage.Size = new System.Drawing.Size(232, 194);
+            this.FactorsTabPage.Size = new System.Drawing.Size(232, 236);
             this.FactorsTabPage.TabIndex = 0;
             this.FactorsTabPage.Text = "Factors";
             // 
@@ -1784,7 +1840,7 @@
             this.TriangleTabPage.Controls.Add(this.aTriangleTextBox);
             this.TriangleTabPage.Location = new System.Drawing.Point(4, 22);
             this.TriangleTabPage.Name = "TriangleTabPage";
-            this.TriangleTabPage.Size = new System.Drawing.Size(232, 194);
+            this.TriangleTabPage.Size = new System.Drawing.Size(232, 215);
             this.TriangleTabPage.TabIndex = 3;
             this.TriangleTabPage.Text = "Triangle";
             // 
@@ -1988,7 +2044,7 @@
             this.CircleTabPage.Controls.Add(this.rCircleLabel);
             this.CircleTabPage.Location = new System.Drawing.Point(4, 22);
             this.CircleTabPage.Name = "CircleTabPage";
-            this.CircleTabPage.Size = new System.Drawing.Size(232, 194);
+            this.CircleTabPage.Size = new System.Drawing.Size(232, 215);
             this.CircleTabPage.TabIndex = 2;
             this.CircleTabPage.Text = "Circle";
             // 
@@ -2101,7 +2157,7 @@
             this.SphereTabPage.Controls.Add(this.vEqSphereLabel);
             this.SphereTabPage.Location = new System.Drawing.Point(4, 22);
             this.SphereTabPage.Name = "SphereTabPage";
-            this.SphereTabPage.Size = new System.Drawing.Size(232, 194);
+            this.SphereTabPage.Size = new System.Drawing.Size(232, 215);
             this.SphereTabPage.TabIndex = 4;
             this.SphereTabPage.Text = "Sphere";
             // 
@@ -2305,7 +2361,6 @@
     private System.Windows.Forms.CheckBox MultithreadingCheckBox;
     private System.Windows.Forms.Panel ValuePanel;
     private System.Windows.Forms.TextBox SumOfNumbersTextBox;
-    private System.Windows.Forms.TextBox SquareDiffTextBox;
     private System.Windows.Forms.TextBox SquareSumTextBox;
     private System.Windows.Forms.TextBox NthNonAdditiveNumberTextBox;
     private System.Windows.Forms.Label PerfectNumbersLabel;
@@ -2428,4 +2483,8 @@
     private System.Windows.Forms.Panel panel1;
     private System.Windows.Forms.Label label1;
     private System.Windows.Forms.Label label2;
+    private System.Windows.Forms.Label SumOfNumbersLabel;
+    private System.Windows.Forms.TextBox SumOfDivisorDigitalRootsTextBox;
+    private System.Windows.Forms.TextBox SumOfDivisorDigitSumsTextBox;
+    private System.Windows.Forms.TextBox SumOfDivisorsTextBox;
 }
