@@ -549,6 +549,7 @@ public class Client : IPublisher, ISubscriber
                         writer.WriteLine("---------------------------------------------------------------------------------------------------------------------------");
                         writer.WriteLine(NumerologySystem.Name);
                         writer.WriteLine("Selection = " + Selection.Scope.ToString() + " " + numbers.ToString());
+                        writer.WriteLine("CalculationMode = " + CalculationMode);
                         writer.WriteLine("---------------------------------------------------------------------------------------------------------------------------");
                         writer.WriteLine(NumerologySystem.ToOverview());
                         writer.WriteLine();
@@ -556,29 +557,16 @@ public class Client : IPublisher, ISubscriber
                         writer.WriteLine("---------------------------------------------------------------------------------------------------------------------------");
                         writer.WriteLine(text);
 
-                        if (Logging)
-                        {
-                            writer.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
-                            writer.WriteLine("Letter" + "\t" + "Value" + "\t" + "\t" + "\t" + "\t" + "L" + "\t" + "W" + "\t" + "V" + "\t" + "C" + "\t" + "←∆L" + "\t" + "←∆W" + "\t" + "←∆V" + "\t" + "←∆C" + "\t" + "∆L→" + "\t" + "∆W→" + "\t" + "∆V→" + "\t" + "∆C→");
-                            writer.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
-                            writer.WriteLine(Server.Log.ToString());
-                            writer.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
-                            writer.WriteLine("Sum" + "\t" + Server.ValueSum + "\t" + "\t" + "\t" + "\t" + Server.LSum + "\t" + Server.WSum + "\t" + Server.VSum + "\t" + Server.CSum + "\t" + Server.pLSum + "\t" + Server.pWSum + "\t" + Server.pVSum + "\t" + Server.pCSum + "\t" + Server.nLSum + "\t" + Server.nWSum + "\t" + Server.nVSum + "\t" + Server.nCSum);
-                            writer.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
-                            long total = Server.ValueSum + Server.LSum + Server.WSum + Server.VSum + Server.CSum + Server.pLSum + Server.pWSum + Server.pVSum + Server.pCSum + Server.nLSum + Server.nWSum + Server.nVSum + Server.nCSum;
-                            writer.WriteLine("Total" + "\t" + total);
-                            writer.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
-                        }
-                        else
-                        {
-                            writer.WriteLine("--------------------------");
-                            writer.WriteLine("Letter" + "\t" + "Value");
-                            writer.WriteLine("--------------------------");
-                            writer.WriteLine(Server.Log.ToString());
-                            writer.WriteLine("--------------------------");
-                            writer.WriteLine("Sum" + "\t" + Server.ValueSum);
-                            writer.WriteLine("--------------------------");
-                        }
+                        writer.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
+                        writer.WriteLine("Letter" + "\t" + "Value" + "\t" + "\t" + "\t" + "\t" + "L" + "\t" + "W" + "\t" + "V" + "\t" + "C" + "\t" + "←∆L" + "\t" + "←∆W" + "\t" + "←∆V" + "\t" + "←∆C" + "\t" + "∆L→" + "\t" + "∆W→" + "\t" + "∆V→" + "\t" + "∆C→");
+                        writer.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
+                        writer.WriteLine(Server.Log.ToString());
+                        writer.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
+                        writer.WriteLine("Sum" + "\t" + Server.ValueSum + "\t" + "\t" + "\t" + "\t" + Server.LSum + "\t" + Server.WSum + "\t" + Server.VSum + "\t" + Server.CSum + "\t" + Server.pLSum + "\t" + Server.pWSum + "\t" + Server.pVSum + "\t" + Server.pCSum + "\t" + Server.nLSum + "\t" + Server.nWSum + "\t" + Server.nVSum + "\t" + Server.nCSum);
+                        writer.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
+                        long total = Server.ValueSum + Server.LSum + Server.WSum + Server.VSum + Server.CSum + Server.pLSum + Server.pWSum + Server.pVSum + Server.pCSum + Server.nLSum + Server.nWSum + Server.nVSum + Server.nCSum;
+                        writer.WriteLine("Total" + "\t" + total);
+                        writer.WriteLine("------------------------------------------------------------------------------------------------------------------------------------");
                     }
                 }
             }

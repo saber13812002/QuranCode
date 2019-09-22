@@ -675,7 +675,7 @@ public static class Numbers
         if (number < 0L) number *= -1L;
         return ((number * (number + 1)) / 2);
     }
-    public static string SumOfNumbersString(long number)
+    public static string GetNumbersString(long number)
     {
         if (number < 0L) number *= -1L;
 
@@ -1380,7 +1380,7 @@ public static class Numbers
         }
         return result;
     }
-    public static long SumOfDigitSums(long number)
+    public static long SumOfNumberDigitSums(long number)
     {
         if (number < 0L) number *= -1L;
         return SumOfDigitSums(number, DEFAULT_RADIX);
@@ -1394,7 +1394,7 @@ public static class Numbers
         }
         return 0L;
     }
-    public static string SumOfDigitSumsString(long number)
+    public static string GetNumberDigitSumsString(long number)
     {
         if (number < 0L) number *= -1L;
         return SumOfDigitSumsString(number, DEFAULT_RADIX);
@@ -1588,7 +1588,7 @@ public static class Numbers
         }
         return 0;
     }
-    public static long SumOfDigitalRoots(long number)
+    public static long SumNumberDigitalRoots(long number)
     {
         if (number < 0L) number *= -1L;
         return SumOfDigitalRoots(number, DEFAULT_RADIX);
@@ -1598,11 +1598,11 @@ public static class Numbers
         long number;
         if (long.TryParse(text, out number))
         {
-            return SumOfDigitalRoots(number);
+            return SumNumberDigitalRoots(number);
         }
         return 0L;
     }
-    public static string SumOfDigitalRootsString(long number)
+    public static string GetNumberDigitalRootsString(long number)
     {
         if (number < 0L) number *= -1L;
         return SumOfDigitalRootsString(number, DEFAULT_RADIX);
@@ -4672,15 +4672,15 @@ public static class Numbers
         result.RemoveAt(result.Count - 1);
         return result;
     }
-    public static long SumOfProperDivisors(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return SumOfDivisors(number) - number;
-    }
     public static int GetProperDivisorCount(long number)
     {
         if (number < 0L) number *= -1L;
         return GetDivisorCount(number) - 1;
+    }
+    public static long SumOfProperDivisors(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return SumOfDivisors(number) - number;
     }
     public static string GetProperDivisorsString(long number)
     {
@@ -4766,22 +4766,22 @@ public static class Numbers
         }
         return result;
     }
-    public static string Get4nPlus1EqualsDiffOfTwoTrivialSquares(long number)
-    {
-        if (number < 0L) number *= -1L;
+    //public static string Get4nPlus1EqualsDiffOfTwoTrivialSquares(long number)
+    //{
+    //    if (number < 0L) number *= -1L;
 
-        string result = "";
-        long square1 = 0L;
-        long square2 = 0L;
-        long n = (number - 1L) / 4L;
-        if (number == ((n * 4L) + 1L))
-        {
-            square1 = (2 * n + 1) * (2 * n + 1);
-            square2 = (2 * n) * (2 * n);
-            result = "4×" + n.ToString() + "+1 = " + (long)Math.Sqrt(square1) + "^2 - " + (long)Math.Sqrt(square2) + "^2";
-        }
-        return result;
-    }
+    //    string result = "";
+    //    long square1 = 0L;
+    //    long square2 = 0L;
+    //    long n = (number - 1L) / 4L;
+    //    if (number == ((n * 4L) + 1L))
+    //    {
+    //        square1 = (2 * n + 1) * (2 * n + 1);
+    //        square2 = (2 * n) * (2 * n);
+    //        result = "4×" + n.ToString() + "+1 = " + (long)Math.Sqrt(square1) + "^2 - " + (long)Math.Sqrt(square2) + "^2";
+    //    }
+    //    return result;
+    //}
     public static string Get4nMinus1EqualsSumOfTwoSquares(long number)
     {
         if (number < 0L) number *= -1L;

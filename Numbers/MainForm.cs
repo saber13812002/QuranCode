@@ -700,8 +700,8 @@ public partial class MainForm : Form
                         controls[point.X, 12].ForeColor = Numbers.GetNumberTypeColor(c4nminus1);
 
                         int sum = (number * (number + 1)) / 2;
-                        long sum_of_digit_sums = Numbers.SumOfDigitSums(number);
-                        long sum_of_digital_roots = Numbers.SumOfDigitalRoots(number);
+                        long sum_of_digit_sums = Numbers.SumOfNumberDigitSums(number);
+                        long sum_of_digital_roots = Numbers.SumNumberDigitalRoots(number);
                         controls[point.X, 13].Text = sum.ToString();
                         controls[point.X, 14].Text = (sum_of_digit_sums > 0) ? sum_of_digit_sums.ToString() : "";
                         controls[point.X, 15].Text = (sum_of_digital_roots > 0) ? sum_of_digital_roots.ToString() : "";

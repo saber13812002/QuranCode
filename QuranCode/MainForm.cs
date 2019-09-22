@@ -45600,12 +45600,12 @@ public partial class MainForm : Form, ISubscriber
             SumOfNumbersTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers);
             SumOfNumbersTextBox.Refresh();
 
-            long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
+            long sum_of_digit_sums = Numbers.SumOfNumberDigitSums(value);
             SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
             SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
             SumOfDigitSumsTextBox.Refresh();
 
-            long sum_of_digital_roots = Numbers.SumOfDigitalRoots(value);
+            long sum_of_digital_roots = Numbers.SumNumberDigitalRoots(value);
             SumOfDigitalRootsTextBox.Text = (sum_of_digital_roots == 0) ? "" : sum_of_digital_roots.ToString();
             SumOfDigitalRootsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digital_roots);
             SumOfDigitalRootsTextBox.Refresh();
@@ -45914,12 +45914,12 @@ public partial class MainForm : Form, ISubscriber
                 SumOfNumbersTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers);
                 SumOfNumbersTextBox.Refresh();
 
-                long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
+                long sum_of_digit_sums = Numbers.SumOfNumberDigitSums(value);
                 SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
                 SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
                 SumOfDigitSumsTextBox.Refresh();
 
-                long sum_of_digital_roots = Numbers.SumOfDigitalRoots(value);
+                long sum_of_digital_roots = Numbers.SumNumberDigitalRoots(value);
                 SumOfDigitalRootsTextBox.Text = (sum_of_digital_roots == 0) ? "" : sum_of_digital_roots.ToString();
                 SumOfDigitalRootsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digital_roots);
                 SumOfDigitalRootsTextBox.Refresh();
@@ -45969,28 +45969,22 @@ public partial class MainForm : Form, ISubscriber
                 int plus1_index = -1;
                 int minus1_index = -1;
                 string plus1_str = "";
-                string plus2_str = "";
                 string minus1_str = "";
-                string minus2_str = "";
                 if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
                 {
                     plus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
                     plus1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(value);
-                    plus2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
 
                     minus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
                     minus1_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
-                    minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
                 }
                 else //if composite
                 {
                     plus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
                     plus1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(value);
-                    plus2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
 
                     minus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
                     minus1_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
-                    minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
                 }
 
                 SquareSumTextBox.Text = (plus1_index > 0) ? plus1_str : (minus1_index > 0) ? minus1_str : "";
@@ -50485,17 +50479,13 @@ public partial class MainForm : Form, ISubscriber
 
                     str.AppendLine();
                     long sum_of_numbers = Numbers.SumOfNumbers(value);
-                    str.AppendLine("Sum Of Numbers       " + "\t=\t" + sum_of_numbers + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.SumOfNumbersString(value)) : ""));
-                    long sum_of_digit_sums = Numbers.SumOfDigitSums(value);
-                    str.AppendLine("Sum Of Digit Sums    " + "\t=\t" + sum_of_digit_sums + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.SumOfDigitSumsString(value)) : ""));
-                    long sum_of_digital_roots = Numbers.SumOfDigitalRoots(value);
-                    str.AppendLine("Sum Of Digital Roots " + "\t=\t" + sum_of_digital_roots + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.SumOfDigitalRootsString(value)) : ""));
+                    str.AppendLine("Sum Of Numbers       " + "\t=\t" + sum_of_numbers + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetNumbersString(value)) : ""));
+                    long sum_of_number_digit_sums = Numbers.SumOfNumberDigitSums(value);
+                    str.AppendLine("Sum Of Number DSums  " + "\t=\t" + sum_of_number_digit_sums + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetNumberDigitSumsString(value)) : ""));
+                    long sum_of_number_digital_roots = Numbers.SumNumberDigitalRoots(value);
+                    str.AppendLine("Sum Of Number DRoots " + "\t=\t" + sum_of_number_digital_roots + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetNumberDigitalRootsString(value)) : ""));
 
                     str.AppendLine();
-                    string proper_divisors = Numbers.GetProperDivisorsString(value);
-                    long sum_of_proper_divisors = Numbers.SumOfProperDivisors(value);
-                    str.AppendLine("Sum Of Proper Divisors" + "\t=\t" + sum_of_proper_divisors + " = " + proper_divisors);
-
                     m_number_kind = Numbers.GetNumberKind(value);
                     int number_kind_index = 0;
                     switch (m_number_kind)
@@ -50522,34 +50512,35 @@ public partial class MainForm : Form, ISubscriber
                             break;
                     }
                     str.AppendLine(m_number_kind.ToString() + " Index\t\t=\t" + number_kind_index);
+                    long sum_of_proper_divisors = Numbers.SumOfProperDivisors(value);
+                    str.AppendLine("Sum Of Proper Divisors" + "\t=\t" + sum_of_proper_divisors + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetProperDivisorsString(value)) : ""));
+                    long sum_of_divisors = Numbers.SumOfDivisors(value);
+                    str.AppendLine("Sum Of Divisors       " + "\t=\t" + sum_of_divisors + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetDivisorsString(value)) : ""));
+                    long sum_of_divisor_digit_sums = Numbers.SumOfDivisorDigitSums(value);
+                    str.AppendLine("Sum Of Divisor DSums  " + "\t=\t" + sum_of_divisor_digit_sums + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetDivisorDigitSumsString(value)) : ""));
+                    long sum_of_divisor_digital_roots = Numbers.SumOfDivisorDigitalRoots(value);
+                    str.AppendLine("Sum Of Divisor DRoots " + "\t=\t" + sum_of_divisor_digital_roots + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetDivisorDigitalRootsString(value)) : ""));
 
                     str.AppendLine();
                     int plus1_index = -1;
                     int minus1_index = -1;
                     string plus1_str = "";
-                    string plus2_str = "";
                     string minus1_str = "";
-                    string minus2_str = "";
                     if (Numbers.IsUnit(value) || Numbers.IsPrime(value))
                     {
                         plus1_index = Numbers.Prime4nPlus1IndexOf(value) + 1;
                         plus1_str = Numbers.Get4nPlus1EqualsSumOfTwoSquares(value);
-                        plus2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
                         minus1_index = Numbers.Prime4nMinus1IndexOf(value) + 1;
                         minus1_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
-                        minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
                     }
                     else //if composite
                     {
                         plus1_index = Numbers.Composite4nPlus1IndexOf(value) + 1;
                         plus1_str = Numbers.Get4nPlus1EqualsDiffOfTwoSquares(value);
-                        plus2_str = Numbers.Get4nPlus1EqualsDiffOfTwoTrivialSquares(value);
                         minus1_index = Numbers.Composite4nMinus1IndexOf(value) + 1;
                         minus1_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
-                        minus2_str = Numbers.Get4nMinus1EqualsSumOfTwoSquares(value);
                     }
                     str.AppendLine((plus1_index > 0) ? ("4n+1 Squares1\t\t=\t" + plus1_str) : (minus1_index > 0) ? ("4n-1 Squares1\t\t=\t" + minus1_str) : "");
-                    str.AppendLine((plus1_index > 0) ? ("4n+1 Squares2\t\t=\t" + plus2_str) : (minus1_index > 0) ? ("4n-1 Squares2\t\t=\t" + minus2_str) : "");
                     str.AppendLine((plus1_index > 0) ? ("4n+1 " + (Numbers.IsComposite(value) ? "Composite" : "Prime") + " Index\t=\t" + plus1_index.ToString()) :
                                   (minus1_index > 0) ? ("4n-1 " + (Numbers.IsComposite(value) ? "Composite" : "Prime") + " Index\t=\t" + minus1_index.ToString()) : "");
 
