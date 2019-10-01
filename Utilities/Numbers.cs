@@ -153,10 +153,13 @@ public static class Numbers
     public static Color GetNumberTypeColor(long number)
     {
         if (number < 0L) number *= -1L;
+        if (number > 1000000000000000L) return Color.Black;
         return GetNumberTypeColor(number.ToString(), Numbers.DEFAULT_RADIX);
     }
     public static Color GetNumberTypeColor(string text, int radix)
     {
+        if (text.Length > 16) return Color.Black;
+
         // if negative number, remove -ve sign
         if (text.StartsWith("-")) text = text.Remove(0, 1);
 
@@ -199,9 +202,9 @@ public static class Numbers
 
     public static Color[] NUMBER_KIND_COLORS =
     { 
-        /* NumberKind.Deficient */          Color.FromArgb(255, 224, 255),
+        /* NumberKind.Deficient */          Color.FromArgb(255, 240, 255),
         /* NumberKind.Perfect */            Color.FromArgb(255, 160, 255),
-        /* NumberKind.Abundant */           Color.FromArgb(255, 192, 255)
+        /* NumberKind.Abundant */           Color.FromArgb(255, 208, 255)
     };
 
     public static Color[] CALCULATION_MODE_COLORS =
@@ -1380,25 +1383,6 @@ public static class Numbers
         }
         return result;
     }
-    public static long SumOfNumberDigitSums(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return SumOfDigitSums(number, DEFAULT_RADIX);
-    }
-    public static long SumOfDigitSums(string text)
-    {
-        long number;
-        if (long.TryParse(text, out number))
-        {
-            return SumOfDigitSums(number, DEFAULT_RADIX);
-        }
-        return 0L;
-    }
-    public static string GetNumberDigitSumsString(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return SumOfDigitSumsString(number, DEFAULT_RADIX);
-    }
     public static int DigitSum(long number, int radix)
     {
         if (number < 0L) number *= -1L;
@@ -1416,7 +1400,22 @@ public static class Numbers
         }
         return result;
     }
-    public static long SumOfDigitSums(long number, int radix)
+    
+    public static long SumOfNumberDigitSums(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return SumOfNumberDigitSums(number, DEFAULT_RADIX);
+    }
+    public static long SumOfNumberDigitSums(string text)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return SumOfNumberDigitSums(number, DEFAULT_RADIX);
+        }
+        return 0L;
+    }
+    public static long SumOfNumberDigitSums(long number, int radix)
     {
         if (number < 0L) number *= -1L;
 
@@ -1441,18 +1440,19 @@ public static class Numbers
         }
         return result;
     }
-    public static long SumOfDigitSums(string text, int radix)
+    public static long SumOfNumberDigitSums(string text, int radix)
     {
         long number;
         if (long.TryParse(text, out number))
         {
-            return SumOfDigitSums(number, radix);
+            return SumOfNumberDigitSums(number, radix);
         }
         return 0L;
     }
     public static string SumOfDigitSumsString(long number, int radix)
     {
         if (number < 0L) number *= -1L;
+        if (number > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         for (int i = 1; i <= number; i++)
@@ -1464,6 +1464,11 @@ public static class Numbers
             str.Remove(str.Length - 1, 1);
         }
         return str.ToString();
+    }
+    public static string GetNumberDigitSumsString(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return SumOfDigitSumsString(number, DEFAULT_RADIX);
     }
     public static long SumOfSquareDigitSums(long number)
     {
@@ -1588,25 +1593,6 @@ public static class Numbers
         }
         return 0;
     }
-    public static long SumNumberDigitalRoots(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return SumOfDigitalRoots(number, DEFAULT_RADIX);
-    }
-    public static long SumOfDigitalRoots(string text)
-    {
-        long number;
-        if (long.TryParse(text, out number))
-        {
-            return SumNumberDigitalRoots(number);
-        }
-        return 0L;
-    }
-    public static string GetNumberDigitalRootsString(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return SumOfDigitalRootsString(number, DEFAULT_RADIX);
-    }
     public static int DigitalRoot(long number, int radix)
     {
         if (number < 0L) number *= -1L;
@@ -1621,7 +1607,21 @@ public static class Numbers
         }
         return 0;
     }
-    public static long SumOfDigitalRoots(long number, int radix)
+    public static long SumNumberDigitalRoots(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return SumNumberDigitalRoots(number, DEFAULT_RADIX);
+    }
+    public static long SumNumberDigitalRoots(string text)
+    {
+        long number;
+        if (long.TryParse(text, out number))
+        {
+            return SumNumberDigitalRoots(number);
+        }
+        return 0L;
+    }
+    public static long SumNumberDigitalRoots(long number, int radix)
     {
         if (number < 0L) number *= -1L;
 
@@ -1630,12 +1630,12 @@ public static class Numbers
         long sum_1_to_radix_minus_1 = (radix - 1L) * (radix) / 2;
         return (d * sum_1_to_radix_minus_1 + r * (r + 1L) / 2L);
     }
-    public static long SumOfDigitalRoots(string text, int radix)
+    public static long SumNumberDigitalRoots(string text, int radix)
     {
         long number;
         if (long.TryParse(text, out number))
         {
-            return SumOfDigitalRoots(number, radix);
+            return SumNumberDigitalRoots(number, radix);
         }
         return 0L;
     }
@@ -1653,6 +1653,11 @@ public static class Numbers
             str.Remove(str.Length - 1, 1);
         }
         return str.ToString();
+    }
+    public static string GetNumberDigitalRootsString(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return SumOfDigitalRootsString(number, DEFAULT_RADIX);
     }
     public static long SumOfSquareDigitalRoots(long number)
     {
@@ -2957,6 +2962,7 @@ public static class Numbers
     {
         if (number < 0L) number *= -1L;
         if (number == 1L) return NumberKind.Deficient;
+        if (number > 1000000000000000L) return NumberKind.Deficient;
 
         long sum_of_proper_divisors = SumOfProperDivisors(number);
         if (sum_of_proper_divisors < number)
@@ -4613,6 +4619,7 @@ public static class Numbers
     public static string GetDivisorsString(long number)
     {
         if (number < 0L) number *= -1L;
+        if (number > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         List<long> divisors = GetDivisors(number);
@@ -4685,6 +4692,7 @@ public static class Numbers
     public static string GetProperDivisorsString(long number)
     {
         if (number < 0L) number *= -1L;
+        if (number > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         List<long> divisors = GetProperDivisors(number);

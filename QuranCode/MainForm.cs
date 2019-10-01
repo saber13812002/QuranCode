@@ -2177,7 +2177,7 @@ public partial class MainForm : Form, ISubscriber
         this.VerseDiffTextBox.Text = "-/+";
         this.VerseDiffTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.VerseDiffTextBox, "Verses between mouse clicks");
-        this.VerseDiffTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.VerseDiffTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.VerseDiffTextBox.Enter += new System.EventHandler(this.NumericUpDown_Enter);
         this.VerseDiffTextBox.Leave += new System.EventHandler(this.NumericUpDown_Leave);
         // 
@@ -2194,7 +2194,7 @@ public partial class MainForm : Form, ISubscriber
         this.LetterDiffTextBox.Text = "-/+";
         this.LetterDiffTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.LetterDiffTextBox, "Letters between mouse clicks");
-        this.LetterDiffTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.LetterDiffTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.LetterDiffTextBox.Enter += new System.EventHandler(this.NumericUpDown_Enter);
         this.LetterDiffTextBox.Leave += new System.EventHandler(this.NumericUpDown_Leave);
         // 
@@ -2211,7 +2211,7 @@ public partial class MainForm : Form, ISubscriber
         this.WordDiffTextBox.Text = "-/+";
         this.WordDiffTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.WordDiffTextBox, "Words between mouse clicks");
-        this.WordDiffTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.WordDiffTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.WordDiffTextBox.Enter += new System.EventHandler(this.NumericUpDown_Enter);
         this.WordDiffTextBox.Leave += new System.EventHandler(this.NumericUpDown_Leave);
         // 
@@ -2307,7 +2307,7 @@ public partial class MainForm : Form, ISubscriber
         this.ValueTextBox.Size = new System.Drawing.Size(156, 23);
         this.ValueTextBox.TabIndex = 29;
         this.ValueTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-        this.ValueTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.ValueTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.ValueTextBox.TextChanged += new System.EventHandler(this.ValueTextBox_TextChanged);
         this.ValueTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.ValueTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ValueTextBox_KeyDown);
@@ -2327,7 +2327,7 @@ public partial class MainForm : Form, ISubscriber
         this.UnusedLettersValueTextBox.TabIndex = 28;
         this.UnusedLettersValueTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
         this.UnusedLettersValueTextBox.Visible = false;
-        this.UnusedLettersValueTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.UnusedLettersValueTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.UnusedLettersValueTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.UnusedLettersValueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -5705,7 +5705,7 @@ public partial class MainForm : Form, ISubscriber
         this.ChapterDiffTextBox.Text = "-/+";
         this.ChapterDiffTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.ChapterDiffTextBox, "Chapters between mouse clicks");
-        this.ChapterDiffTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.ChapterDiffTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.ChapterDiffTextBox.Enter += new System.EventHandler(this.NumericUpDown_Enter);
         this.ChapterDiffTextBox.Leave += new System.EventHandler(this.NumericUpDown_Leave);
         // 
@@ -5989,7 +5989,7 @@ public partial class MainForm : Form, ISubscriber
         this.ChapterComboBox.Size = new System.Drawing.Size(120, 24);
         this.ChapterComboBox.TabIndex = 5;
         this.ChapterComboBox.SelectedIndexChanged += new System.EventHandler(this.ChapterComboBox_SelectedIndexChanged);
-        this.ChapterComboBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.ChapterComboBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.ChapterComboBox.Enter += new System.EventHandler(this.NumericUpDown_Enter);
         this.ChapterComboBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ChapterComboBox_KeyDown);
         this.ChapterComboBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -6614,7 +6614,7 @@ public partial class MainForm : Form, ISubscriber
         this.HeaderLabel.TabIndex = 1;
         this.HeaderLabel.Text = "Header Information";
         this.HeaderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.HeaderLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.HeaderLabel.Click += new System.EventHandler(this.Control_CtrlClick);
         // 
         // PictureBox
         // 
@@ -7609,7 +7609,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCDivideVDUSumTextBox.Size = new System.Drawing.Size(89, 23);
         this.MathsVersesCDivideVDUSumTextBox.TabIndex = 104;
         this.MathsVersesCDivideVDUSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCDivideVDUSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCDivideVDUSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCDivideVDUSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCDivideVDUSumTextBox
@@ -7623,7 +7623,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCDivideVDUSumTextBox.Size = new System.Drawing.Size(89, 23);
         this.MathsChaptersCDivideVDUSumTextBox.TabIndex = 98;
         this.MathsChaptersCDivideVDUSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCDivideVDUSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCDivideVDUSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCDivideVDUSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCDivideVCompositeSumTextBox
@@ -7637,7 +7637,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCDivideVCompositeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCDivideVCompositeSumTextBox.TabIndex = 97;
         this.MathsChaptersCDivideVCompositeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCDivideVCompositeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCDivideVCompositeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCDivideVCompositeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCDivideVPrimeSumTextBox
@@ -7651,7 +7651,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCDivideVPrimeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCDivideVPrimeSumTextBox.TabIndex = 96;
         this.MathsChaptersCDivideVPrimeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCDivideVPrimeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCDivideVPrimeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCDivideVPrimeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCDivideVEvenSumTextBox
@@ -7665,7 +7665,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCDivideVEvenSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCDivideVEvenSumTextBox.TabIndex = 95;
         this.MathsChaptersCDivideVEvenSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCDivideVEvenSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCDivideVEvenSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCDivideVEvenSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCDivideVOddSumTextBox
@@ -7679,7 +7679,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCDivideVOddSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCDivideVOddSumTextBox.TabIndex = 94;
         this.MathsChaptersCDivideVOddSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCDivideVOddSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCDivideVOddSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCDivideVOddSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCDivideVSumTextBox
@@ -7693,7 +7693,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCDivideVSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCDivideVSumTextBox.TabIndex = 93;
         this.MathsChaptersCDivideVSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCDivideVSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCDivideVSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCDivideVSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCDivideVSumLabel
@@ -7719,7 +7719,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCDivideVCompositeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCDivideVCompositeSumTextBox.TabIndex = 103;
         this.MathsVersesCDivideVCompositeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCDivideVCompositeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCDivideVCompositeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCDivideVCompositeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCDivideVPrimeSumTextBox
@@ -7733,7 +7733,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCDivideVPrimeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCDivideVPrimeSumTextBox.TabIndex = 102;
         this.MathsVersesCDivideVPrimeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCDivideVPrimeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCDivideVPrimeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCDivideVPrimeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCDivideVEvenSumTextBox
@@ -7747,7 +7747,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCDivideVEvenSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCDivideVEvenSumTextBox.TabIndex = 101;
         this.MathsVersesCDivideVEvenSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCDivideVEvenSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCDivideVEvenSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCDivideVEvenSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCDivideVOddSumTextBox
@@ -7761,7 +7761,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCDivideVOddSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCDivideVOddSumTextBox.TabIndex = 100;
         this.MathsVersesCDivideVOddSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCDivideVOddSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCDivideVOddSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCDivideVOddSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCDivideVSumTextBox
@@ -7775,7 +7775,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCDivideVSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCDivideVSumTextBox.TabIndex = 99;
         this.MathsVersesCDivideVSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCDivideVSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCDivideVSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCDivideVSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCDivideVLabel
@@ -7788,7 +7788,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCDivideVLabel.TabIndex = 92;
         this.MathsVersesCDivideVLabel.Text = "C + V";
         this.MathsVersesCDivideVLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-        this.MathsVersesCDivideVLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCDivideVLabel.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCDivideVLabel.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCMultiplyVDUSumTextBox
@@ -7802,7 +7802,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCMultiplyVDUSumTextBox.Size = new System.Drawing.Size(89, 23);
         this.MathsVersesCMultiplyVDUSumTextBox.TabIndex = 90;
         this.MathsVersesCMultiplyVDUSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCMultiplyVDUSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCMultiplyVDUSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCMultiplyVDUSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCMultiplyVDUSumTextBox
@@ -7816,7 +7816,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCMultiplyVDUSumTextBox.Size = new System.Drawing.Size(89, 23);
         this.MathsChaptersCMultiplyVDUSumTextBox.TabIndex = 84;
         this.MathsChaptersCMultiplyVDUSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCMultiplyVDUSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCMultiplyVDUSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCMultiplyVDUSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCMultiplyVCompositeSumTextBox
@@ -7830,7 +7830,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCMultiplyVCompositeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCMultiplyVCompositeSumTextBox.TabIndex = 83;
         this.MathsChaptersCMultiplyVCompositeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCMultiplyVCompositeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCMultiplyVCompositeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCMultiplyVCompositeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCMultiplyVPrimeSumTextBox
@@ -7844,7 +7844,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCMultiplyVPrimeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCMultiplyVPrimeSumTextBox.TabIndex = 82;
         this.MathsChaptersCMultiplyVPrimeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCMultiplyVPrimeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCMultiplyVPrimeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCMultiplyVPrimeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCMultiplyVEvenSumTextBox
@@ -7858,7 +7858,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCMultiplyVEvenSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCMultiplyVEvenSumTextBox.TabIndex = 81;
         this.MathsChaptersCMultiplyVEvenSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCMultiplyVEvenSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCMultiplyVEvenSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCMultiplyVEvenSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCMultiplyVOddSumTextBox
@@ -7872,7 +7872,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCMultiplyVOddSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCMultiplyVOddSumTextBox.TabIndex = 80;
         this.MathsChaptersCMultiplyVOddSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCMultiplyVOddSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCMultiplyVOddSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCMultiplyVOddSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCMultiplyVSumTextBox
@@ -7886,7 +7886,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCMultiplyVSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCMultiplyVSumTextBox.TabIndex = 79;
         this.MathsChaptersCMultiplyVSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCMultiplyVSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCMultiplyVSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCMultiplyVSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCMultiplyVSumLabel
@@ -7910,7 +7910,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCMultiplyVCompositeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCMultiplyVCompositeSumTextBox.TabIndex = 89;
         this.MathsVersesCMultiplyVCompositeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCMultiplyVCompositeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCMultiplyVCompositeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCMultiplyVCompositeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCMultiplyVPrimeSumTextBox
@@ -7924,7 +7924,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCMultiplyVPrimeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCMultiplyVPrimeSumTextBox.TabIndex = 88;
         this.MathsVersesCMultiplyVPrimeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCMultiplyVPrimeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCMultiplyVPrimeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCMultiplyVPrimeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCMultiplyVEvenSumTextBox
@@ -7938,7 +7938,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCMultiplyVEvenSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCMultiplyVEvenSumTextBox.TabIndex = 87;
         this.MathsVersesCMultiplyVEvenSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCMultiplyVEvenSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCMultiplyVEvenSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCMultiplyVEvenSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCMultiplyVOddSumTextBox
@@ -7952,7 +7952,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCMultiplyVOddSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCMultiplyVOddSumTextBox.TabIndex = 86;
         this.MathsVersesCMultiplyVOddSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCMultiplyVOddSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCMultiplyVOddSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCMultiplyVOddSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCMultiplyVSumTextBox
@@ -7966,7 +7966,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCMultiplyVSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCMultiplyVSumTextBox.TabIndex = 85;
         this.MathsVersesCMultiplyVSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCMultiplyVSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCMultiplyVSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCMultiplyVSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCMultiplyVLabel
@@ -7979,7 +7979,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCMultiplyVLabel.TabIndex = 78;
         this.MathsVersesCMultiplyVLabel.Text = "C + V";
         this.MathsVersesCMultiplyVLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-        this.MathsVersesCMultiplyVLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCMultiplyVLabel.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCMultiplyVLabel.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCSumTextBox
@@ -7993,7 +7993,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCSumTextBox.TabIndex = 41;
         this.MathsVersesCSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesSumInspectLabel
@@ -8022,7 +8022,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCMinusVDUSumTextBox.Size = new System.Drawing.Size(89, 23);
         this.MathsVersesCMinusVDUSumTextBox.TabIndex = 64;
         this.MathsVersesCMinusVDUSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCMinusVDUSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCMinusVDUSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCMinusVDUSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCPlusVDUSumTextBox
@@ -8036,7 +8036,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCPlusVDUSumTextBox.Size = new System.Drawing.Size(89, 23);
         this.MathsVersesCPlusVDUSumTextBox.TabIndex = 58;
         this.MathsVersesCPlusVDUSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCPlusVDUSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCPlusVDUSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCPlusVDUSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesVDUSumTextBox
@@ -8050,7 +8050,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesVDUSumTextBox.Size = new System.Drawing.Size(89, 23);
         this.MathsVersesVDUSumTextBox.TabIndex = 52;
         this.MathsVersesVDUSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesVDUSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesVDUSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesVDUSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCDUSumTextBox
@@ -8064,7 +8064,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCDUSumTextBox.Size = new System.Drawing.Size(89, 23);
         this.MathsVersesCDUSumTextBox.TabIndex = 46;
         this.MathsVersesCDUSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCDUSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCDUSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCDUSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCMinusVDUSumTextBox
@@ -8078,7 +8078,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCMinusVDUSumTextBox.Size = new System.Drawing.Size(89, 23);
         this.MathsChaptersCMinusVDUSumTextBox.TabIndex = 24;
         this.MathsChaptersCMinusVDUSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCMinusVDUSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCMinusVDUSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCMinusVDUSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCPlusVDUSumTextBox
@@ -8092,7 +8092,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCPlusVDUSumTextBox.Size = new System.Drawing.Size(89, 23);
         this.MathsChaptersCPlusVDUSumTextBox.TabIndex = 18;
         this.MathsChaptersCPlusVDUSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCPlusVDUSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCPlusVDUSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCPlusVDUSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersVDUSumTextBox
@@ -8106,7 +8106,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersVDUSumTextBox.Size = new System.Drawing.Size(89, 23);
         this.MathsChaptersVDUSumTextBox.TabIndex = 12;
         this.MathsChaptersVDUSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersVDUSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersVDUSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersVDUSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCDUSumTextBox
@@ -8120,7 +8120,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCDUSumTextBox.Size = new System.Drawing.Size(89, 23);
         this.MathsChaptersCDUSumTextBox.TabIndex = 6;
         this.MathsChaptersCDUSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCDUSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCDUSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCDUSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCMinusVCompositeSumTextBox
@@ -8134,7 +8134,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCMinusVCompositeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCMinusVCompositeSumTextBox.TabIndex = 23;
         this.MathsChaptersCMinusVCompositeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCMinusVCompositeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCMinusVCompositeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCMinusVCompositeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCPlusVCompositeSumTextBox
@@ -8148,7 +8148,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCPlusVCompositeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCPlusVCompositeSumTextBox.TabIndex = 17;
         this.MathsChaptersCPlusVCompositeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCPlusVCompositeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCPlusVCompositeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCPlusVCompositeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersVCompositeSumTextBox
@@ -8162,7 +8162,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersVCompositeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersVCompositeSumTextBox.TabIndex = 11;
         this.MathsChaptersVCompositeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersVCompositeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersVCompositeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersVCompositeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCCompositeSumTextBox
@@ -8176,7 +8176,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCCompositeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCCompositeSumTextBox.TabIndex = 5;
         this.MathsChaptersCCompositeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCCompositeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCCompositeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCCompositeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCMinusVPrimeSumTextBox
@@ -8190,7 +8190,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCMinusVPrimeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCMinusVPrimeSumTextBox.TabIndex = 22;
         this.MathsChaptersCMinusVPrimeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCMinusVPrimeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCMinusVPrimeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCMinusVPrimeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCPlusVPrimeSumTextBox
@@ -8204,7 +8204,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCPlusVPrimeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCPlusVPrimeSumTextBox.TabIndex = 16;
         this.MathsChaptersCPlusVPrimeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCPlusVPrimeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCPlusVPrimeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCPlusVPrimeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersVPrimeSumTextBox
@@ -8218,7 +8218,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersVPrimeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersVPrimeSumTextBox.TabIndex = 10;
         this.MathsChaptersVPrimeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersVPrimeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersVPrimeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersVPrimeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCPrimeSumTextBox
@@ -8232,7 +8232,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCPrimeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCPrimeSumTextBox.TabIndex = 4;
         this.MathsChaptersCPrimeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCPrimeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCPrimeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCPrimeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCMinusVEvenSumTextBox
@@ -8246,7 +8246,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCMinusVEvenSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCMinusVEvenSumTextBox.TabIndex = 21;
         this.MathsChaptersCMinusVEvenSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCMinusVEvenSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCMinusVEvenSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCMinusVEvenSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCPlusVEvenSumTextBox
@@ -8260,7 +8260,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCPlusVEvenSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCPlusVEvenSumTextBox.TabIndex = 15;
         this.MathsChaptersCPlusVEvenSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCPlusVEvenSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCPlusVEvenSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCPlusVEvenSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersVEvenSumTextBox
@@ -8274,7 +8274,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersVEvenSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersVEvenSumTextBox.TabIndex = 9;
         this.MathsChaptersVEvenSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersVEvenSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersVEvenSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersVEvenSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCEvenSumTextBox
@@ -8288,7 +8288,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCEvenSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCEvenSumTextBox.TabIndex = 3;
         this.MathsChaptersCEvenSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCEvenSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCEvenSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCEvenSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCMinusVOddSumTextBox
@@ -8302,7 +8302,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCMinusVOddSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCMinusVOddSumTextBox.TabIndex = 20;
         this.MathsChaptersCMinusVOddSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCMinusVOddSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCMinusVOddSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCMinusVOddSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCPlusVOddSumTextBox
@@ -8316,7 +8316,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCPlusVOddSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCPlusVOddSumTextBox.TabIndex = 14;
         this.MathsChaptersCPlusVOddSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCPlusVOddSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCPlusVOddSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCPlusVOddSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersVOddSumTextBox
@@ -8330,7 +8330,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersVOddSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersVOddSumTextBox.TabIndex = 8;
         this.MathsChaptersVOddSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersVOddSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersVOddSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersVOddSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCOddSumTextBox
@@ -8344,7 +8344,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCOddSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCOddSumTextBox.TabIndex = 2;
         this.MathsChaptersCOddSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCOddSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCOddSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCOddSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCMinusVSumTextBox
@@ -8358,7 +8358,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCMinusVSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCMinusVSumTextBox.TabIndex = 19;
         this.MathsChaptersCMinusVSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCMinusVSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCMinusVSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCMinusVSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCMinusVSumLabel
@@ -8384,7 +8384,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCPlusVSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCPlusVSumTextBox.TabIndex = 13;
         this.MathsChaptersCPlusVSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCPlusVSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCPlusVSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCPlusVSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersCPlusVSumLabel
@@ -8408,7 +8408,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersVSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersVSumTextBox.TabIndex = 7;
         this.MathsChaptersVSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersVSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersVSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersVSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsChaptersVSumLabel
@@ -8442,7 +8442,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCMinusVCompositeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCMinusVCompositeSumTextBox.TabIndex = 63;
         this.MathsVersesCMinusVCompositeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCMinusVCompositeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCMinusVCompositeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCMinusVCompositeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCPlusVCompositeSumTextBox
@@ -8456,7 +8456,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCPlusVCompositeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCPlusVCompositeSumTextBox.TabIndex = 57;
         this.MathsVersesCPlusVCompositeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCPlusVCompositeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCPlusVCompositeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCPlusVCompositeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesVCompositeSumTextBox
@@ -8470,7 +8470,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesVCompositeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesVCompositeSumTextBox.TabIndex = 51;
         this.MathsVersesVCompositeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesVCompositeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesVCompositeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesVCompositeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCCompositeSumTextBox
@@ -8484,7 +8484,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCCompositeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCCompositeSumTextBox.TabIndex = 45;
         this.MathsVersesCCompositeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCCompositeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCCompositeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCCompositeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCMinusVPrimeSumTextBox
@@ -8498,7 +8498,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCMinusVPrimeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCMinusVPrimeSumTextBox.TabIndex = 62;
         this.MathsVersesCMinusVPrimeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCMinusVPrimeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCMinusVPrimeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCMinusVPrimeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCPlusVPrimeSumTextBox
@@ -8512,7 +8512,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCPlusVPrimeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCPlusVPrimeSumTextBox.TabIndex = 56;
         this.MathsVersesCPlusVPrimeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCPlusVPrimeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCPlusVPrimeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCPlusVPrimeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesVPrimeSumTextBox
@@ -8526,7 +8526,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesVPrimeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesVPrimeSumTextBox.TabIndex = 50;
         this.MathsVersesVPrimeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesVPrimeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesVPrimeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesVPrimeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCPrimeSumTextBox
@@ -8540,7 +8540,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCPrimeSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCPrimeSumTextBox.TabIndex = 44;
         this.MathsVersesCPrimeSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCPrimeSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCPrimeSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCPrimeSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCMinusVEvenSumTextBox
@@ -8554,7 +8554,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCMinusVEvenSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCMinusVEvenSumTextBox.TabIndex = 61;
         this.MathsVersesCMinusVEvenSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCMinusVEvenSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCMinusVEvenSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCMinusVEvenSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCPlusVEvenSumTextBox
@@ -8568,7 +8568,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCPlusVEvenSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCPlusVEvenSumTextBox.TabIndex = 55;
         this.MathsVersesCPlusVEvenSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCPlusVEvenSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCPlusVEvenSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCPlusVEvenSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesVEvenSumTextBox
@@ -8582,7 +8582,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesVEvenSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesVEvenSumTextBox.TabIndex = 49;
         this.MathsVersesVEvenSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesVEvenSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesVEvenSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesVEvenSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCEvenSumTextBox
@@ -8596,7 +8596,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCEvenSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCEvenSumTextBox.TabIndex = 43;
         this.MathsVersesCEvenSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCEvenSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCEvenSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCEvenSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCMinusVOddSumTextBox
@@ -8610,7 +8610,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCMinusVOddSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCMinusVOddSumTextBox.TabIndex = 60;
         this.MathsVersesCMinusVOddSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCMinusVOddSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCMinusVOddSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCMinusVOddSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCPlusVOddSumTextBox
@@ -8624,7 +8624,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCPlusVOddSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCPlusVOddSumTextBox.TabIndex = 54;
         this.MathsVersesCPlusVOddSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCPlusVOddSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCPlusVOddSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCPlusVOddSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesVOddSumTextBox
@@ -8638,7 +8638,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesVOddSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesVOddSumTextBox.TabIndex = 48;
         this.MathsVersesVOddSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesVOddSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesVOddSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesVOddSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCOddSumTextBox
@@ -8652,7 +8652,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCOddSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCOddSumTextBox.TabIndex = 42;
         this.MathsVersesCOddSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCOddSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCOddSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCOddSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCMinusVSumTextBox
@@ -8666,7 +8666,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCMinusVSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCMinusVSumTextBox.TabIndex = 59;
         this.MathsVersesCMinusVSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCMinusVSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCMinusVSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCMinusVSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCMinusVLabel
@@ -8679,7 +8679,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCMinusVLabel.TabIndex = 0;
         this.MathsVersesCMinusVLabel.Text = "C -  V";
         this.MathsVersesCMinusVLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-        this.MathsVersesCMinusVLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCMinusVLabel.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCMinusVLabel.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCPlusVSumTextBox
@@ -8693,7 +8693,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCPlusVSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesCPlusVSumTextBox.TabIndex = 53;
         this.MathsVersesCPlusVSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesCPlusVSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCPlusVSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCPlusVSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCPlusVLabel
@@ -8706,7 +8706,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCPlusVLabel.TabIndex = 0;
         this.MathsVersesCPlusVLabel.Text = "C + V";
         this.MathsVersesCPlusVLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-        this.MathsVersesCPlusVLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCPlusVLabel.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCPlusVLabel.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesVSumTextBox
@@ -8720,7 +8720,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesVSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsVersesVSumTextBox.TabIndex = 47;
         this.MathsVersesVSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsVersesVSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesVSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesVSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesVLabel
@@ -8733,7 +8733,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesVLabel.TabIndex = 0;
         this.MathsVersesVLabel.Text = "Number";
         this.MathsVersesVLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-        this.MathsVersesVLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesVLabel.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesVLabel.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesCLabel
@@ -8746,7 +8746,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsVersesCLabel.TabIndex = 0;
         this.MathsVersesCLabel.Text = "Chapter";
         this.MathsVersesCLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-        this.MathsVersesCLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsVersesCLabel.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsVersesCLabel.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // MathsVersesDUSumLabel
@@ -8907,7 +8907,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsChaptersCSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.MathsChaptersCSumTextBox.TabIndex = 1;
         this.MathsChaptersCSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.MathsChaptersCSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.MathsChaptersCSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.MathsChaptersCSumTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesTabPage
@@ -9111,7 +9111,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordBeforeWithinVerseRunningTotalTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordBeforeWithinVerseRunningTotalTextBox.TabIndex = 71;
         this.DistancesWordBeforeWithinVerseRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordBeforeWithinVerseRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordBeforeWithinVerseRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordBeforeWithinVerseRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordDifferenceWithinVerseRunningTotalTextBox
@@ -9125,7 +9125,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordDifferenceWithinVerseRunningTotalTextBox.Size = new System.Drawing.Size(116, 23);
         this.DistancesWordDifferenceWithinVerseRunningTotalTextBox.TabIndex = 74;
         this.DistancesWordDifferenceWithinVerseRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordDifferenceWithinVerseRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordDifferenceWithinVerseRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordDifferenceWithinVerseRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordAfterWithinVerseRunningTotalTextBox
@@ -9139,7 +9139,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordAfterWithinVerseRunningTotalTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordAfterWithinVerseRunningTotalTextBox.TabIndex = 73;
         this.DistancesWordAfterWithinVerseRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordAfterWithinVerseRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordAfterWithinVerseRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordAfterWithinVerseRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordWithinVerseRunningTotalTextBox
@@ -9153,7 +9153,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordWithinVerseRunningTotalTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordWithinVerseRunningTotalTextBox.TabIndex = 72;
         this.DistancesWordWithinVerseRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordWithinVerseRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordWithinVerseRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordWithinVerseRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordBeforeWithinChapterRunningTotalTextBox
@@ -9167,7 +9167,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordBeforeWithinChapterRunningTotalTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordBeforeWithinChapterRunningTotalTextBox.TabIndex = 67;
         this.DistancesWordBeforeWithinChapterRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordBeforeWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordBeforeWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordBeforeWithinChapterRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordDifferenceWithinChapterRunningTotalTextBox
@@ -9181,7 +9181,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordDifferenceWithinChapterRunningTotalTextBox.Size = new System.Drawing.Size(116, 23);
         this.DistancesWordDifferenceWithinChapterRunningTotalTextBox.TabIndex = 70;
         this.DistancesWordDifferenceWithinChapterRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordDifferenceWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordDifferenceWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordDifferenceWithinChapterRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordAfterWithinChapterRunningTotalTextBox
@@ -9195,7 +9195,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordAfterWithinChapterRunningTotalTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordAfterWithinChapterRunningTotalTextBox.TabIndex = 69;
         this.DistancesWordAfterWithinChapterRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordAfterWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordAfterWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordAfterWithinChapterRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordWithinChapterRunningTotalTextBox
@@ -9209,7 +9209,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordWithinChapterRunningTotalTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordWithinChapterRunningTotalTextBox.TabIndex = 68;
         this.DistancesWordWithinChapterRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordWithinChapterRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseBeforeWithinChapterRunningTotalTextBox
@@ -9223,7 +9223,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseBeforeWithinChapterRunningTotalTextBox.Size = new System.Drawing.Size(84, 23);
         this.DistancesVerseBeforeWithinChapterRunningTotalTextBox.TabIndex = 59;
         this.DistancesVerseBeforeWithinChapterRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseBeforeWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseBeforeWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseBeforeWithinChapterRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseDifferenceWithinChapterRunningTotalTextBox
@@ -9237,7 +9237,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseDifferenceWithinChapterRunningTotalTextBox.Size = new System.Drawing.Size(89, 23);
         this.DistancesVerseDifferenceWithinChapterRunningTotalTextBox.TabIndex = 62;
         this.DistancesVerseDifferenceWithinChapterRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseDifferenceWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseDifferenceWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseDifferenceWithinChapterRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseAfterWithinChapterRunningTotalTextBox
@@ -9251,7 +9251,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseAfterWithinChapterRunningTotalTextBox.Size = new System.Drawing.Size(84, 23);
         this.DistancesVerseAfterWithinChapterRunningTotalTextBox.TabIndex = 61;
         this.DistancesVerseAfterWithinChapterRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseAfterWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseAfterWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseAfterWithinChapterRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseWithinChapterRunningTotalTextBox
@@ -9265,7 +9265,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseWithinChapterRunningTotalTextBox.Size = new System.Drawing.Size(84, 23);
         this.DistancesVerseWithinChapterRunningTotalTextBox.TabIndex = 60;
         this.DistancesVerseWithinChapterRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseWithinChapterRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseWithinChapterRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordBeforeWithinBookRunningTotalTextBox
@@ -9279,7 +9279,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordBeforeWithinBookRunningTotalTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordBeforeWithinBookRunningTotalTextBox.TabIndex = 63;
         this.DistancesWordBeforeWithinBookRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordBeforeWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordBeforeWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordBeforeWithinBookRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordDifferenceWithinBookRunningTotalTextBox
@@ -9293,7 +9293,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordDifferenceWithinBookRunningTotalTextBox.Size = new System.Drawing.Size(116, 23);
         this.DistancesWordDifferenceWithinBookRunningTotalTextBox.TabIndex = 66;
         this.DistancesWordDifferenceWithinBookRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordDifferenceWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordDifferenceWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordDifferenceWithinBookRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordAfterWithinBookRunningTotalTextBox
@@ -9307,7 +9307,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordAfterWithinBookRunningTotalTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordAfterWithinBookRunningTotalTextBox.TabIndex = 65;
         this.DistancesWordAfterWithinBookRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordAfterWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordAfterWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordAfterWithinBookRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordWithinBookRunningTotalTextBox
@@ -9321,7 +9321,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordWithinBookRunningTotalTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordWithinBookRunningTotalTextBox.TabIndex = 64;
         this.DistancesWordWithinBookRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordWithinBookRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseBeforeWithinBookRunningTotalTextBox
@@ -9335,7 +9335,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseBeforeWithinBookRunningTotalTextBox.Size = new System.Drawing.Size(84, 23);
         this.DistancesVerseBeforeWithinBookRunningTotalTextBox.TabIndex = 55;
         this.DistancesVerseBeforeWithinBookRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseBeforeWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseBeforeWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseBeforeWithinBookRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseDifferenceWithinBookRunningTotalTextBox
@@ -9349,7 +9349,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseDifferenceWithinBookRunningTotalTextBox.Size = new System.Drawing.Size(89, 23);
         this.DistancesVerseDifferenceWithinBookRunningTotalTextBox.TabIndex = 58;
         this.DistancesVerseDifferenceWithinBookRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseDifferenceWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseDifferenceWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseDifferenceWithinBookRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseAfterWithinBookRunningTotalTextBox
@@ -9363,7 +9363,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseAfterWithinBookRunningTotalTextBox.Size = new System.Drawing.Size(84, 23);
         this.DistancesVerseAfterWithinBookRunningTotalTextBox.TabIndex = 57;
         this.DistancesVerseAfterWithinBookRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseAfterWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseAfterWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseAfterWithinBookRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseWithinBookRunningTotalTextBox
@@ -9377,7 +9377,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseWithinBookRunningTotalTextBox.Size = new System.Drawing.Size(84, 23);
         this.DistancesVerseWithinBookRunningTotalTextBox.TabIndex = 56;
         this.DistancesVerseWithinBookRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseWithinBookRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesChapterBeforeWithinBookRunningTotalTextBox
@@ -9391,7 +9391,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesChapterBeforeWithinBookRunningTotalTextBox.Size = new System.Drawing.Size(52, 23);
         this.DistancesChapterBeforeWithinBookRunningTotalTextBox.TabIndex = 51;
         this.DistancesChapterBeforeWithinBookRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesChapterBeforeWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesChapterBeforeWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesChapterBeforeWithinBookRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesChapterDifferenceWithinBookRunningTotalTextBox
@@ -9405,7 +9405,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesChapterDifferenceWithinBookRunningTotalTextBox.Size = new System.Drawing.Size(65, 23);
         this.DistancesChapterDifferenceWithinBookRunningTotalTextBox.TabIndex = 54;
         this.DistancesChapterDifferenceWithinBookRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesChapterDifferenceWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesChapterDifferenceWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesChapterDifferenceWithinBookRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesChapterAfterWithinBookRunningTotalTextBox
@@ -9419,7 +9419,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesChapterAfterWithinBookRunningTotalTextBox.Size = new System.Drawing.Size(52, 23);
         this.DistancesChapterAfterWithinBookRunningTotalTextBox.TabIndex = 53;
         this.DistancesChapterAfterWithinBookRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesChapterAfterWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesChapterAfterWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesChapterAfterWithinBookRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesChapterWithinBookRunningTotalTextBox
@@ -9433,7 +9433,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesChapterWithinBookRunningTotalTextBox.Size = new System.Drawing.Size(52, 23);
         this.DistancesChapterWithinBookRunningTotalTextBox.TabIndex = 52;
         this.DistancesChapterWithinBookRunningTotalTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesChapterWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesChapterWithinBookRunningTotalTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesChapterWithinBookRunningTotalTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordBeforeWithinVerseTextBox
@@ -9447,7 +9447,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordBeforeWithinVerseTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordBeforeWithinVerseTextBox.TabIndex = 21;
         this.DistancesWordBeforeWithinVerseTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordBeforeWithinVerseTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordBeforeWithinVerseTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordBeforeWithinVerseTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordDifferenceWithinVerseTextBox
@@ -9461,7 +9461,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordDifferenceWithinVerseTextBox.Size = new System.Drawing.Size(116, 23);
         this.DistancesWordDifferenceWithinVerseTextBox.TabIndex = 24;
         this.DistancesWordDifferenceWithinVerseTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordDifferenceWithinVerseTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordDifferenceWithinVerseTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordDifferenceWithinVerseTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordAfterWithinVerseTextBox
@@ -9475,7 +9475,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordAfterWithinVerseTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordAfterWithinVerseTextBox.TabIndex = 23;
         this.DistancesWordAfterWithinVerseTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordAfterWithinVerseTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordAfterWithinVerseTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordAfterWithinVerseTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordWithinVerseTextBox
@@ -9489,7 +9489,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordWithinVerseTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordWithinVerseTextBox.TabIndex = 22;
         this.DistancesWordWithinVerseTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordWithinVerseTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordWithinVerseTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordWithinVerseTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordBeforeWithinChapterTextBox
@@ -9503,7 +9503,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordBeforeWithinChapterTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordBeforeWithinChapterTextBox.TabIndex = 17;
         this.DistancesWordBeforeWithinChapterTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordBeforeWithinChapterTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordBeforeWithinChapterTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordBeforeWithinChapterTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordDifferenceWithinChapterTextBox
@@ -9517,7 +9517,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordDifferenceWithinChapterTextBox.Size = new System.Drawing.Size(116, 23);
         this.DistancesWordDifferenceWithinChapterTextBox.TabIndex = 20;
         this.DistancesWordDifferenceWithinChapterTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordDifferenceWithinChapterTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordDifferenceWithinChapterTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordDifferenceWithinChapterTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordAfterWithinChapterTextBox
@@ -9531,7 +9531,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordAfterWithinChapterTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordAfterWithinChapterTextBox.TabIndex = 19;
         this.DistancesWordAfterWithinChapterTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordAfterWithinChapterTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordAfterWithinChapterTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordAfterWithinChapterTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordWithinChapterTextBox
@@ -9545,7 +9545,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordWithinChapterTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordWithinChapterTextBox.TabIndex = 18;
         this.DistancesWordWithinChapterTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordWithinChapterTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordWithinChapterTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordWithinChapterTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseBeforeWithinChapterTextBox
@@ -9559,7 +9559,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseBeforeWithinChapterTextBox.Size = new System.Drawing.Size(84, 23);
         this.DistancesVerseBeforeWithinChapterTextBox.TabIndex = 9;
         this.DistancesVerseBeforeWithinChapterTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseBeforeWithinChapterTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseBeforeWithinChapterTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseBeforeWithinChapterTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseDifferenceWithinChapterTextBox
@@ -9573,7 +9573,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseDifferenceWithinChapterTextBox.Size = new System.Drawing.Size(89, 23);
         this.DistancesVerseDifferenceWithinChapterTextBox.TabIndex = 12;
         this.DistancesVerseDifferenceWithinChapterTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseDifferenceWithinChapterTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseDifferenceWithinChapterTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseDifferenceWithinChapterTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseAfterWithinChapterTextBox
@@ -9587,7 +9587,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseAfterWithinChapterTextBox.Size = new System.Drawing.Size(84, 23);
         this.DistancesVerseAfterWithinChapterTextBox.TabIndex = 11;
         this.DistancesVerseAfterWithinChapterTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseAfterWithinChapterTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseAfterWithinChapterTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseAfterWithinChapterTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseWithinChapterTextBox
@@ -9601,7 +9601,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseWithinChapterTextBox.Size = new System.Drawing.Size(84, 23);
         this.DistancesVerseWithinChapterTextBox.TabIndex = 10;
         this.DistancesVerseWithinChapterTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseWithinChapterTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseWithinChapterTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseWithinChapterTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordBeforeWithinBookTextBox
@@ -9615,7 +9615,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordBeforeWithinBookTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordBeforeWithinBookTextBox.TabIndex = 13;
         this.DistancesWordBeforeWithinBookTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordBeforeWithinBookTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordBeforeWithinBookTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordBeforeWithinBookTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordDifferenceWithinBookTextBox
@@ -9629,7 +9629,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordDifferenceWithinBookTextBox.Size = new System.Drawing.Size(116, 23);
         this.DistancesWordDifferenceWithinBookTextBox.TabIndex = 16;
         this.DistancesWordDifferenceWithinBookTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordDifferenceWithinBookTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordDifferenceWithinBookTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordDifferenceWithinBookTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordAfterWithinBookTextBox
@@ -9643,7 +9643,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordAfterWithinBookTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordAfterWithinBookTextBox.TabIndex = 15;
         this.DistancesWordAfterWithinBookTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordAfterWithinBookTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordAfterWithinBookTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordAfterWithinBookTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordWithinBookTextBox
@@ -9657,7 +9657,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesWordWithinBookTextBox.Size = new System.Drawing.Size(105, 23);
         this.DistancesWordWithinBookTextBox.TabIndex = 14;
         this.DistancesWordWithinBookTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesWordWithinBookTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesWordWithinBookTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesWordWithinBookTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesWordLabel
@@ -9684,7 +9684,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseBeforeWithinBookTextBox.Size = new System.Drawing.Size(84, 23);
         this.DistancesVerseBeforeWithinBookTextBox.TabIndex = 5;
         this.DistancesVerseBeforeWithinBookTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseBeforeWithinBookTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseBeforeWithinBookTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseBeforeWithinBookTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseDifferenceWithinBookTextBox
@@ -9698,7 +9698,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseDifferenceWithinBookTextBox.Size = new System.Drawing.Size(89, 23);
         this.DistancesVerseDifferenceWithinBookTextBox.TabIndex = 8;
         this.DistancesVerseDifferenceWithinBookTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseDifferenceWithinBookTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseDifferenceWithinBookTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseDifferenceWithinBookTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseAfterWithinBookTextBox
@@ -9712,7 +9712,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseAfterWithinBookTextBox.Size = new System.Drawing.Size(84, 23);
         this.DistancesVerseAfterWithinBookTextBox.TabIndex = 7;
         this.DistancesVerseAfterWithinBookTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseAfterWithinBookTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseAfterWithinBookTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseAfterWithinBookTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseWithinBookTextBox
@@ -9726,7 +9726,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesVerseWithinBookTextBox.Size = new System.Drawing.Size(84, 23);
         this.DistancesVerseWithinBookTextBox.TabIndex = 6;
         this.DistancesVerseWithinBookTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesVerseWithinBookTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesVerseWithinBookTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesVerseWithinBookTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesVerseLabel
@@ -9752,7 +9752,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesChapterBeforeWithinBookTextBox.Size = new System.Drawing.Size(52, 23);
         this.DistancesChapterBeforeWithinBookTextBox.TabIndex = 1;
         this.DistancesChapterBeforeWithinBookTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesChapterBeforeWithinBookTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesChapterBeforeWithinBookTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesChapterBeforeWithinBookTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesChapterDifferenceWithinBookTextBox
@@ -9766,7 +9766,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesChapterDifferenceWithinBookTextBox.Size = new System.Drawing.Size(65, 23);
         this.DistancesChapterDifferenceWithinBookTextBox.TabIndex = 4;
         this.DistancesChapterDifferenceWithinBookTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesChapterDifferenceWithinBookTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesChapterDifferenceWithinBookTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesChapterDifferenceWithinBookTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesChapterAfterWithinBookTextBox
@@ -9780,7 +9780,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesChapterAfterWithinBookTextBox.Size = new System.Drawing.Size(52, 23);
         this.DistancesChapterAfterWithinBookTextBox.TabIndex = 3;
         this.DistancesChapterAfterWithinBookTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesChapterAfterWithinBookTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesChapterAfterWithinBookTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesChapterAfterWithinBookTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesChapterWithinBookTextBox
@@ -9794,7 +9794,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesChapterWithinBookTextBox.Size = new System.Drawing.Size(52, 23);
         this.DistancesChapterWithinBookTextBox.TabIndex = 2;
         this.DistancesChapterWithinBookTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DistancesChapterWithinBookTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DistancesChapterWithinBookTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DistancesChapterWithinBookTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
         // 
         // DistancesChapterLabel
@@ -10553,7 +10553,7 @@ public partial class MainForm : Form, ISubscriber
         this.ChapterNumberSumTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.ChapterNumberSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.ChapterNumberSumTextBox.TabIndex = 12;
-        this.ChapterNumberSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.ChapterNumberSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.ChapterNumberSumTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.ChapterNumberSumTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -10569,7 +10569,7 @@ public partial class MainForm : Form, ISubscriber
         this.DecimalChaptersTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.DecimalChaptersTextBox.Size = new System.Drawing.Size(72, 23);
         this.DecimalChaptersTextBox.TabIndex = 11;
-        this.DecimalChaptersTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DecimalChaptersTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DecimalChaptersTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.DecimalChaptersTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -10588,7 +10588,7 @@ public partial class MainForm : Form, ISubscriber
         this.ChaptersTextBox.Size = new System.Drawing.Size(95, 23);
         this.ChaptersTextBox.TabIndex = 13;
         this.ChaptersTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-        this.ChaptersTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.ChaptersTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.ChaptersTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.ChaptersTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -10656,7 +10656,7 @@ public partial class MainForm : Form, ISubscriber
         this.LetterFrequencyDistanceSumSumLabel.TabIndex = 17;
         this.LetterFrequencyDistanceSumSumLabel.Text = "0";
         this.LetterFrequencyDistanceSumSumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.LetterFrequencyDistanceSumSumLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.LetterFrequencyDistanceSumSumLabel.Click += new System.EventHandler(this.Control_CtrlClick);
         this.LetterFrequencyDistanceSumSumLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
         // 
         // FindByFrequencyTotalLabel
@@ -10687,7 +10687,7 @@ public partial class MainForm : Form, ISubscriber
         this.LetterFrequencyPositionSumSumLabel.TabIndex = 16;
         this.LetterFrequencyPositionSumSumLabel.Text = "0";
         this.LetterFrequencyPositionSumSumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.LetterFrequencyPositionSumSumLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.LetterFrequencyPositionSumSumLabel.Click += new System.EventHandler(this.Control_CtrlClick);
         this.LetterFrequencyPositionSumSumLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
         // 
         // LetterFrequencySumLabel
@@ -10704,7 +10704,7 @@ public partial class MainForm : Form, ISubscriber
         this.LetterFrequencySumLabel.Text = "0";
         this.LetterFrequencySumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.ToolTip.SetToolTip(this.LetterFrequencySumLabel, "Letter frequency sum");
-        this.LetterFrequencySumLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.LetterFrequencySumLabel.Click += new System.EventHandler(this.Control_CtrlClick);
         this.LetterFrequencySumLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
         // 
         // LetterFrequencyCountLabel
@@ -10721,7 +10721,7 @@ public partial class MainForm : Form, ISubscriber
         this.LetterFrequencyCountLabel.Text = "0";
         this.LetterFrequencyCountLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.ToolTip.SetToolTip(this.LetterFrequencyCountLabel, "Letters");
-        this.LetterFrequencyCountLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.LetterFrequencyCountLabel.Click += new System.EventHandler(this.Control_CtrlClick);
         this.LetterFrequencyCountLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
         // 
         // LetterFrequencyInspectLabel
@@ -11049,7 +11049,7 @@ public partial class MainForm : Form, ISubscriber
         this.LetterNumberSumTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.LetterNumberSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.LetterNumberSumTextBox.TabIndex = 21;
-        this.LetterNumberSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.LetterNumberSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.LetterNumberSumTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.LetterNumberSumTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11065,7 +11065,7 @@ public partial class MainForm : Form, ISubscriber
         this.WordNumberSumTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.WordNumberSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.WordNumberSumTextBox.TabIndex = 18;
-        this.WordNumberSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.WordNumberSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.WordNumberSumTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.WordNumberSumTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11081,7 +11081,7 @@ public partial class MainForm : Form, ISubscriber
         this.VerseNumberSumTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.VerseNumberSumTextBox.Size = new System.Drawing.Size(72, 23);
         this.VerseNumberSumTextBox.TabIndex = 15;
-        this.VerseNumberSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.VerseNumberSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.VerseNumberSumTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.VerseNumberSumTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11099,7 +11099,7 @@ public partial class MainForm : Form, ISubscriber
         this.DecimalLettersTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.DecimalLettersTextBox.Size = new System.Drawing.Size(72, 23);
         this.DecimalLettersTextBox.TabIndex = 20;
-        this.DecimalLettersTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DecimalLettersTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DecimalLettersTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.DecimalLettersTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11115,7 +11115,7 @@ public partial class MainForm : Form, ISubscriber
         this.DecimalWordsTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.DecimalWordsTextBox.Size = new System.Drawing.Size(72, 23);
         this.DecimalWordsTextBox.TabIndex = 17;
-        this.DecimalWordsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DecimalWordsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DecimalWordsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.DecimalWordsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11131,7 +11131,7 @@ public partial class MainForm : Form, ISubscriber
         this.DecimalVersesTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.DecimalVersesTextBox.Size = new System.Drawing.Size(72, 23);
         this.DecimalVersesTextBox.TabIndex = 14;
-        this.DecimalVersesTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DecimalVersesTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DecimalVersesTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.DecimalVersesTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11265,7 +11265,7 @@ public partial class MainForm : Form, ISubscriber
         this.SumOfDivisorDigitalRootsTextBox.TabIndex = 46;
         this.SumOfDivisorDigitalRootsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.SumOfDivisorDigitalRootsTextBox, "Sum of divisor digital roots");
-        this.SumOfDivisorDigitalRootsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfDivisorDigitalRootsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.SumOfDivisorDigitalRootsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.SumOfDivisorDigitalRootsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11283,7 +11283,7 @@ public partial class MainForm : Form, ISubscriber
         this.SumOfDivisorDigitSumsTextBox.TabIndex = 45;
         this.SumOfDivisorDigitSumsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.SumOfDivisorDigitSumsTextBox, "Sum of divisor digit sums");
-        this.SumOfDivisorDigitSumsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfDivisorDigitSumsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.SumOfDivisorDigitSumsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.SumOfDivisorDigitSumsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11301,7 +11301,7 @@ public partial class MainForm : Form, ISubscriber
         this.SumOfDivisorsTextBox.TabIndex = 44;
         this.SumOfDivisorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.SumOfDivisorsTextBox, "Sum of divisors");
-        this.SumOfDivisorsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfDivisorsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.SumOfDivisorsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.SumOfDivisorsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11316,7 +11316,7 @@ public partial class MainForm : Form, ISubscriber
         this.DecimalUnusedLettersValueTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.DecimalUnusedLettersValueTextBox.Size = new System.Drawing.Size(40, 23);
         this.DecimalUnusedLettersValueTextBox.TabIndex = 27;
-        this.DecimalUnusedLettersValueTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DecimalUnusedLettersValueTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DecimalUnusedLettersValueTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.DecimalUnusedLettersValueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11326,10 +11326,10 @@ public partial class MainForm : Form, ISubscriber
         this.CalculationModeLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.CalculationModeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.CalculationModeLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.CalculationModeLabel.Location = new System.Drawing.Point(74, 24);
+        this.CalculationModeLabel.Location = new System.Drawing.Point(73, 24);
         this.CalculationModeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.CalculationModeLabel.Name = "CalculationModeLabel";
-        this.CalculationModeLabel.Size = new System.Drawing.Size(7, 22);
+        this.CalculationModeLabel.Size = new System.Drawing.Size(9, 22);
         this.CalculationModeLabel.TabIndex = 26;
         this.CalculationModeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         this.ToolTip.SetToolTip(this.CalculationModeLabel, "Sum of letter values");
@@ -11407,7 +11407,7 @@ public partial class MainForm : Form, ISubscriber
         this.Nth4n1NumberTextBox.TabIndex = 34;
         this.Nth4n1NumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.Nth4n1NumberTextBox, "4n+1 prime index");
-        this.Nth4n1NumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.Nth4n1NumberTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.Nth4n1NumberTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.Nth4n1NumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IndexTextBox_KeyDown);
         this.Nth4n1NumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -11426,7 +11426,7 @@ public partial class MainForm : Form, ISubscriber
         this.SumOfDigitalRootsTextBox.TabIndex = 41;
         this.SumOfDigitalRootsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.SumOfDigitalRootsTextBox, "Sum of number digital roots from 1 to N");
-        this.SumOfDigitalRootsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfDigitalRootsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.SumOfDigitalRootsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.SumOfDigitalRootsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11444,7 +11444,7 @@ public partial class MainForm : Form, ISubscriber
         this.SumOfDigitSumsTextBox.TabIndex = 40;
         this.SumOfDigitSumsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.SumOfDigitSumsTextBox, "Sum of number digit sums from 1 to N");
-        this.SumOfDigitSumsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfDigitSumsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.SumOfDigitSumsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.SumOfDigitSumsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11462,7 +11462,7 @@ public partial class MainForm : Form, ISubscriber
         this.SumOfNumbersTextBox.TabIndex = 39;
         this.SumOfNumbersTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.SumOfNumbersTextBox, "Sum of numbers from 1 to N");
-        this.SumOfNumbersTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfNumbersTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.SumOfNumbersTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.SumOfNumbersTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11479,7 +11479,7 @@ public partial class MainForm : Form, ISubscriber
         this.SquareSumTextBox.ReadOnly = true;
         this.SquareSumTextBox.Size = new System.Drawing.Size(160, 23);
         this.SquareSumTextBox.TabIndex = 33;
-        this.SquareSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SquareSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.SquareSumTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.SquareSumTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11512,7 +11512,7 @@ public partial class MainForm : Form, ISubscriber
         this.NthNonAdditiveNumberTextBox.Size = new System.Drawing.Size(80, 23);
         this.NthNonAdditiveNumberTextBox.TabIndex = 38;
         this.NthNonAdditiveNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.NthNonAdditiveNumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.NthNonAdditiveNumberTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.NthNonAdditiveNumberTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.NthNonAdditiveNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IndexTextBox_KeyDown);
         this.NthNonAdditiveNumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -11577,7 +11577,7 @@ public partial class MainForm : Form, ISubscriber
         this.DecimalValueTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.DecimalValueTextBox.Size = new System.Drawing.Size(72, 23);
         this.DecimalValueTextBox.TabIndex = 25;
-        this.DecimalValueTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DecimalValueTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DecimalValueTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.DecimalValueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11612,7 +11612,7 @@ public partial class MainForm : Form, ISubscriber
         this.NumberKindIndexTextBox.TabIndex = 42;
         this.NumberKindIndexTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.NumberKindIndexTextBox, "Deficient number index");
-        this.NumberKindIndexTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.NumberKindIndexTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.NumberKindIndexTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.NumberKindIndexTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IndexTextBox_KeyDown);
         this.NumberKindIndexTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -11631,7 +11631,7 @@ public partial class MainForm : Form, ISubscriber
         this.SumOfProperDivisorsTextBox.TabIndex = 43;
         this.SumOfProperDivisorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.SumOfProperDivisorsTextBox, "Sum of proper divisors");
-        this.SumOfProperDivisorsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.SumOfProperDivisorsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.SumOfProperDivisorsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.SumOfProperDivisorsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -11701,7 +11701,7 @@ public partial class MainForm : Form, ISubscriber
         this.CPIndexChainL2RTextBox.Size = new System.Drawing.Size(53, 23);
         this.CPIndexChainL2RTextBox.TabIndex = 49;
         this.CPIndexChainL2RTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.CPIndexChainL2RTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.CPIndexChainL2RTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.CPIndexChainL2RTextBox.TextChanged += new System.EventHandler(this.CPIndexChainL2RTextBox_TextChanged);
         this.CPIndexChainL2RTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.CPIndexChainL2RTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -11719,7 +11719,7 @@ public partial class MainForm : Form, ISubscriber
         this.PCIndexChainR2LTextBox.Size = new System.Drawing.Size(53, 23);
         this.PCIndexChainR2LTextBox.TabIndex = 48;
         this.PCIndexChainR2LTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.PCIndexChainR2LTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.PCIndexChainR2LTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.PCIndexChainR2LTextBox.TextChanged += new System.EventHandler(this.PCIndexChainR2LTextBox_TextChanged);
         this.PCIndexChainR2LTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.PCIndexChainR2LTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -11737,7 +11737,7 @@ public partial class MainForm : Form, ISubscriber
         this.CPIndexChainR2LTextBox.Size = new System.Drawing.Size(53, 23);
         this.CPIndexChainR2LTextBox.TabIndex = 50;
         this.CPIndexChainR2LTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.CPIndexChainR2LTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.CPIndexChainR2LTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.CPIndexChainR2LTextBox.TextChanged += new System.EventHandler(this.CPIndexChainR2LTextBox_TextChanged);
         this.CPIndexChainR2LTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.CPIndexChainR2LTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -11755,7 +11755,7 @@ public partial class MainForm : Form, ISubscriber
         this.PCIndexChainL2RTextBox.Size = new System.Drawing.Size(53, 23);
         this.PCIndexChainL2RTextBox.TabIndex = 47;
         this.PCIndexChainL2RTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.PCIndexChainL2RTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.PCIndexChainL2RTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.PCIndexChainL2RTextBox.TextChanged += new System.EventHandler(this.PCIndexChainL2RTextBox_TextChanged);
         this.PCIndexChainL2RTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.PCIndexChainL2RTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -11776,7 +11776,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToChapterCNumberCheckBox.UseVisualStyleBackColor = false;
         this.AddToChapterCNumberCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToChapterCNumberCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToChapterCNumberCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToChapterCNumberCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToChapterCNumberCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToVerseCDistanceCheckBox
@@ -11795,7 +11795,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToVerseCDistanceCheckBox.UseVisualStyleBackColor = false;
         this.AddToVerseCDistanceCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToVerseCDistanceCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToVerseCDistanceCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToVerseCDistanceCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToVerseCDistanceCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToVerseCNumberCheckBox
@@ -11814,7 +11814,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToVerseCNumberCheckBox.UseVisualStyleBackColor = false;
         this.AddToVerseCNumberCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToVerseCNumberCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToVerseCNumberCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToVerseCNumberCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToVerseCNumberCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToWordCDistanceCheckBox
@@ -11833,7 +11833,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToWordCDistanceCheckBox.UseVisualStyleBackColor = false;
         this.AddToWordCDistanceCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToWordCDistanceCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToWordCDistanceCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToWordCDistanceCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToWordCDistanceCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToWordCNumberCheckBox
@@ -11852,7 +11852,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToWordCNumberCheckBox.UseVisualStyleBackColor = false;
         this.AddToWordCNumberCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToWordCNumberCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToWordCNumberCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToWordCNumberCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToWordCNumberCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToVerseVDistanceCheckBox
@@ -11871,7 +11871,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToVerseVDistanceCheckBox.UseVisualStyleBackColor = false;
         this.AddToVerseVDistanceCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToVerseVDistanceCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToVerseVDistanceCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToVerseVDistanceCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToVerseVDistanceCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // NumerologySystemComboBox
@@ -11905,7 +11905,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToVerseVNumberCheckBox.UseVisualStyleBackColor = false;
         this.AddToVerseVNumberCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToVerseVNumberCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToVerseVNumberCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToVerseVNumberCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToVerseVNumberCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToWordVDistanceCheckBox
@@ -11924,7 +11924,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToWordVDistanceCheckBox.UseVisualStyleBackColor = false;
         this.AddToWordVDistanceCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToWordVDistanceCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToWordVDistanceCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToWordVDistanceCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToWordVDistanceCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToWordWDistanceCheckBox
@@ -11943,7 +11943,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToWordWDistanceCheckBox.UseVisualStyleBackColor = false;
         this.AddToWordWDistanceCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToWordWDistanceCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToWordWDistanceCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToWordWDistanceCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToWordWDistanceCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToWordVNumberCheckBox
@@ -11962,7 +11962,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToWordVNumberCheckBox.UseVisualStyleBackColor = false;
         this.AddToWordVNumberCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToWordVNumberCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToWordVNumberCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToWordVNumberCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToWordVNumberCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToWordWNumberCheckBox
@@ -11981,7 +11981,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToWordWNumberCheckBox.UseVisualStyleBackColor = false;
         this.AddToWordWNumberCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToWordWNumberCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToWordWNumberCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToWordWNumberCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToWordWNumberCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // DigitalRootTextBox
@@ -11998,7 +11998,7 @@ public partial class MainForm : Form, ISubscriber
         this.DigitalRootTextBox.Size = new System.Drawing.Size(27, 23);
         this.DigitalRootTextBox.TabIndex = 32;
         this.DigitalRootTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DigitalRootTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DigitalRootTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DigitalRootTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.DigitalRootTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -12016,7 +12016,7 @@ public partial class MainForm : Form, ISubscriber
         this.DigitSumTextBox.Size = new System.Drawing.Size(51, 23);
         this.DigitSumTextBox.TabIndex = 31;
         this.DigitSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.DigitSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.DigitSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DigitSumTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.DigitSumTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -12033,7 +12033,7 @@ public partial class MainForm : Form, ISubscriber
         this.NthAdditiveNumberTextBox.Size = new System.Drawing.Size(80, 23);
         this.NthAdditiveNumberTextBox.TabIndex = 37;
         this.NthAdditiveNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.NthAdditiveNumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.NthAdditiveNumberTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.NthAdditiveNumberTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.NthAdditiveNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IndexTextBox_KeyDown);
         this.NthAdditiveNumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -12049,7 +12049,7 @@ public partial class MainForm : Form, ISubscriber
         this.NthNumberTextBox.Size = new System.Drawing.Size(70, 23);
         this.NthNumberTextBox.TabIndex = 36;
         this.NthNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.NthNumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.NthNumberTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.NthNumberTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.NthNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IndexTextBox_KeyDown);
         this.NthNumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -12070,7 +12070,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToLetterCDistanceCheckBox.UseVisualStyleBackColor = false;
         this.AddToLetterCDistanceCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToLetterCDistanceCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToLetterCDistanceCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToLetterCDistanceCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToLetterCDistanceCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToLetterCNumberCheckBox
@@ -12089,7 +12089,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToLetterCNumberCheckBox.UseVisualStyleBackColor = false;
         this.AddToLetterCNumberCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToLetterCNumberCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToLetterCNumberCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToLetterCNumberCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToLetterCNumberCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToLetterVDistanceCheckBox
@@ -12108,7 +12108,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToLetterVDistanceCheckBox.UseVisualStyleBackColor = false;
         this.AddToLetterVDistanceCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToLetterVDistanceCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToLetterVDistanceCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToLetterVDistanceCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToLetterVDistanceCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToLetterWDistanceCheckBox
@@ -12127,7 +12127,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToLetterWDistanceCheckBox.UseVisualStyleBackColor = false;
         this.AddToLetterWDistanceCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToLetterWDistanceCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToLetterWDistanceCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToLetterWDistanceCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToLetterWDistanceCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToLetterLDistanceCheckBox
@@ -12146,7 +12146,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToLetterLDistanceCheckBox.UseVisualStyleBackColor = false;
         this.AddToLetterLDistanceCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToLetterLDistanceCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToLetterLDistanceCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToLetterLDistanceCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToLetterLDistanceCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToLetterVNumberCheckBox
@@ -12165,7 +12165,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToLetterVNumberCheckBox.UseVisualStyleBackColor = false;
         this.AddToLetterVNumberCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToLetterVNumberCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToLetterVNumberCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToLetterVNumberCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToLetterVNumberCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToLetterWNumberCheckBox
@@ -12184,7 +12184,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToLetterWNumberCheckBox.UseVisualStyleBackColor = false;
         this.AddToLetterWNumberCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToLetterWNumberCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToLetterWNumberCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToLetterWNumberCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToLetterWNumberCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddToLetterLNumberCheckBox
@@ -12203,7 +12203,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddToLetterLNumberCheckBox.UseVisualStyleBackColor = false;
         this.AddToLetterLNumberCheckBox.CheckedChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
         this.AddToLetterLNumberCheckBox.EnabledChanged += new System.EventHandler(this.AddToControlCheckBox_CheckedChanged);
-        this.AddToLetterLNumberCheckBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddToLetterLNumberCheckBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddToLetterLNumberCheckBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // AddPositionsAndDistancesToValueLabel
@@ -12218,7 +12218,7 @@ public partial class MainForm : Form, ISubscriber
         this.AddPositionsAndDistancesToValueLabel.Size = new System.Drawing.Size(239, 17);
         this.AddPositionsAndDistancesToValueLabel.TabIndex = 0;
         this.AddPositionsAndDistancesToValueLabel.Text = "Add positions and distances to value";
-        this.AddPositionsAndDistancesToValueLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.AddPositionsAndDistancesToValueLabel.Click += new System.EventHandler(this.Control_CtrlClick);
         this.AddPositionsAndDistancesToValueLabel.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         // 
         // PrimeFactorsTextBox
@@ -12234,7 +12234,7 @@ public partial class MainForm : Form, ISubscriber
         this.PrimeFactorsTextBox.ReadOnly = true;
         this.PrimeFactorsTextBox.Size = new System.Drawing.Size(160, 23);
         this.PrimeFactorsTextBox.TabIndex = 30;
-        this.PrimeFactorsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.PrimeFactorsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.PrimeFactorsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.PrimeFactorsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -12320,7 +12320,7 @@ public partial class MainForm : Form, ISubscriber
         this.VersesTextBox.Size = new System.Drawing.Size(95, 23);
         this.VersesTextBox.TabIndex = 16;
         this.VersesTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-        this.VersesTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.VersesTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.VersesTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.VersesTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -12338,7 +12338,7 @@ public partial class MainForm : Form, ISubscriber
         this.LettersTextBox.Size = new System.Drawing.Size(95, 23);
         this.LettersTextBox.TabIndex = 22;
         this.LettersTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-        this.LettersTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.LettersTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.LettersTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.LettersTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -12356,7 +12356,7 @@ public partial class MainForm : Form, ISubscriber
         this.WordsTextBox.Size = new System.Drawing.Size(95, 23);
         this.WordsTextBox.TabIndex = 19;
         this.WordsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-        this.WordsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+        this.WordsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.WordsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.WordsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
@@ -46422,6 +46422,16 @@ public partial class MainForm : Form, ISubscriber
                                     value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                                 }
                             }
+                            else if (text.Contains("×"))
+                            {
+                                text = text.Replace("×", "");
+                                value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                            }
+                            else if (text.Contains("*"))
+                            {
+                                text = text.Replace("*", "");
+                                value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                            }
                             else
                             {
                                 value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
@@ -46444,6 +46454,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void UpdateNumberKind(long value)
     {
+        if (value > 1000000000000000L) return;
+
         m_number_kind = Numbers.GetNumberKind(value);
         int number_kind_index = 0;
         switch (m_number_kind)
@@ -46625,6 +46637,9 @@ public partial class MainForm : Form, ISubscriber
     }
     private void UpdateSumOfDivisors(long value)
     {
+        if (value < 0L) value *= -1L;
+        if (value > 1000000000000000L) return;
+
         long sum_of_divisors = Numbers.SumOfDivisors(value);
         long sum_of_divisor_digit_sums = Numbers.SumOfDivisorDigitSums(value);
         long sum_of_divisor_digital_roots = Numbers.SumOfDivisorDigitalRoots(value);
@@ -46875,6 +46890,7 @@ public partial class MainForm : Form, ISubscriber
     {
         if (number < 0L) number *= -1L;
         if (number <= 1L) return -1L;
+        if (number > 1000000000000000L) return -1L;
 
         StringBuilder str = new StringBuilder();
         while (number > 1L)
@@ -46908,6 +46924,7 @@ public partial class MainForm : Form, ISubscriber
     {
         if (number < 0L) number *= -1L;
         if (number <= 1L) return -1L;
+        if (number > 1000000000000000L) return -1L;
 
         StringBuilder str = new StringBuilder();
         while (number > 1L)
@@ -46941,6 +46958,7 @@ public partial class MainForm : Form, ISubscriber
     {
         if (number < 0L) number *= -1L;
         if (number <= 1L) return -1L;
+        if (number > 1000000000000000L) return -1L;
 
         StringBuilder str = new StringBuilder();
         while (number > 1L)
@@ -46974,6 +46992,7 @@ public partial class MainForm : Form, ISubscriber
     {
         if (number < 0L) number *= -1L;
         if (number <= 1L) return -1L;
+        if (number > 1000000000000000L) return -1L;
 
         StringBuilder str = new StringBuilder();
         while (number > 1L)
@@ -47007,6 +47026,7 @@ public partial class MainForm : Form, ISubscriber
     {
         if (number < 0L) number *= -1L;
         if (number == 0L) return 0;
+        if (number > 1000000000000000L) return 0;
 
         int length = 0;
         while (number > 1L)
@@ -47031,7 +47051,8 @@ public partial class MainForm : Form, ISubscriber
     private string BinaryPCIndexChainL2R(long number)
     {
         if (number < 0L) number *= -1L;
-        if (number <= 1L) return "0";
+        if (number <= 1L) return "";
+        if (number > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (number > 1L)
@@ -47056,7 +47077,8 @@ public partial class MainForm : Form, ISubscriber
     private string BinaryPCIndexChainR2L(long number)
     {
         if (number < 0L) number *= -1L;
-        if (number <= 1L) return "0";
+        if (number <= 1L) return "";
+        if (number > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (number > 1L)
@@ -47081,7 +47103,8 @@ public partial class MainForm : Form, ISubscriber
     private string BinaryCPIndexChainL2R(long number)
     {
         if (number < 0L) number *= -1L;
-        if (number <= 1L) return "0";
+        if (number <= 1L) return "";
+        if (number > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (number > 1L)
@@ -47106,7 +47129,8 @@ public partial class MainForm : Form, ISubscriber
     private string BinaryCPIndexChainR2L(long number)
     {
         if (number < 0L) number *= -1L;
-        if (number <= 1L) return "0";
+        if (number <= 1L) return "";
+        if (number > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (number > 1L)
@@ -47131,7 +47155,8 @@ public partial class MainForm : Form, ISubscriber
     private string GetPCIndexChainL2R(long number)
     {
         if (number < 0L) number *= -1L;
-        if (number <= 1L) return "0";
+        if (number <= 1L) return "";
+        if (number > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (number > 1L)
@@ -47161,7 +47186,8 @@ public partial class MainForm : Form, ISubscriber
     private string GetPCIndexChainR2L(long number)
     {
         if (number < 0L) number *= -1L;
-        if (number <= 1L) return "0";
+        if (number <= 1L) return "";
+        if (number > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (number > 1L)
@@ -47191,7 +47217,8 @@ public partial class MainForm : Form, ISubscriber
     private string GetCPIndexChainL2R(long number)
     {
         if (number < 0L) number *= -1L;
-        if (number <= 1L) return "0";
+        if (number <= 1L) return "";
+        if (number > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (number > 1L)
@@ -47221,7 +47248,8 @@ public partial class MainForm : Form, ISubscriber
     private string GetCPIndexChainR2L(long number)
     {
         if (number < 0L) number *= -1L;
-        if (number <= 1L) return "0";
+        if (number <= 1L) return "";
+        if (number > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (number > 1L)
@@ -50617,7 +50645,7 @@ public partial class MainForm : Form, ISubscriber
     {
         SearchGroupBox_Leave(null, null);
     }
-    private void TextBoxLabelControls_CtrlClick(object sender, EventArgs e)
+    private void Control_CtrlClick(object sender, EventArgs e)
     {
         // Ctrl+Click factorizes number
         if (ModifierKeys == Keys.Control)
@@ -50680,7 +50708,7 @@ public partial class MainForm : Form, ISubscriber
     {
         if (ModifierKeys == Keys.Control)
         {
-            TextBoxLabelControls_CtrlClick(sender, e);
+            Control_CtrlClick(sender, e);
         }
         else
         {

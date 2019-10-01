@@ -348,7 +348,7 @@
             this.DigitsLabel.Text = "digits";
             this.DigitsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ToolTip.SetToolTip(this.DigitsLabel, "digits");
-            this.DigitsLabel.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.DigitsLabel.Click += new System.EventHandler(this.Control_CtrlClick);
             // 
             // PreviousPrimeLabel
             // 
@@ -438,7 +438,7 @@
             // 
             // AbundantNumbersLabel
             // 
-            this.AbundantNumbersLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.AbundantNumbersLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(208)))), ((int)(((byte)(255)))));
             this.AbundantNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.AbundantNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AbundantNumbersLabel.ForeColor = System.Drawing.SystemColors.Window;
@@ -453,7 +453,7 @@
             // 
             // DeficientNumbersLabel
             // 
-            this.DeficientNumbersLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.DeficientNumbersLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
             this.DeficientNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DeficientNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DeficientNumbersLabel.ForeColor = System.Drawing.SystemColors.Window;
@@ -470,7 +470,7 @@
             // 
             this.NumberKindIndexTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumberKindIndexTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.NumberKindIndexTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
             this.NumberKindIndexTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NumberKindIndexTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.NumberKindIndexTextBox.Location = new System.Drawing.Point(7, 102);
@@ -480,14 +480,14 @@
             this.NumberKindIndexTextBox.TabIndex = 17;
             this.NumberKindIndexTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.NumberKindIndexTextBox, "Deficient number index");
-            this.NumberKindIndexTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.NumberKindIndexTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.NumberKindIndexTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IndexTextBox_KeyDown);
             this.NumberKindIndexTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // SumOfProperDivisorsTextBox
             // 
             this.SumOfProperDivisorsTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.SumOfProperDivisorsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.SumOfProperDivisorsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
             this.SumOfProperDivisorsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SumOfProperDivisorsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.SumOfProperDivisorsTextBox.Location = new System.Drawing.Point(59, 102);
@@ -498,7 +498,7 @@
             this.SumOfProperDivisorsTextBox.TabIndex = 18;
             this.SumOfProperDivisorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.SumOfProperDivisorsTextBox, "Sum of proper divisors");
-            this.SumOfProperDivisorsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.SumOfProperDivisorsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.SumOfProperDivisorsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // PCIndexChainLabel
@@ -744,7 +744,7 @@
             this.Nth4n1NumberTextBox.TabIndex = 10;
             this.Nth4n1NumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.Nth4n1NumberTextBox, "4n+1 prime index");
-            this.Nth4n1NumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.Nth4n1NumberTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.Nth4n1NumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IndexTextBox_KeyDown);
             this.Nth4n1NumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
@@ -850,7 +850,7 @@
             this.SumOfNumbersTextBox.TabIndex = 14;
             this.SumOfNumbersTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.SumOfNumbersTextBox, "Sum of numbers from 1 to N");
-            this.SumOfNumbersTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.SumOfNumbersTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.SumOfNumbersTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // SumOfDigitSumsTextBox
@@ -867,7 +867,7 @@
             this.SumOfDigitSumsTextBox.TabIndex = 15;
             this.SumOfDigitSumsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.SumOfDigitSumsTextBox, "Sum of digit sums of numbers from 1 to N");
-            this.SumOfDigitSumsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.SumOfDigitSumsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.SumOfDigitSumsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // SumOfDigitalRootsTextBox
@@ -884,12 +884,12 @@
             this.SumOfDigitalRootsTextBox.TabIndex = 16;
             this.SumOfDigitalRootsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.SumOfDigitalRootsTextBox, "Sum of digital roots of numbers from 1 to N");
-            this.SumOfDigitalRootsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.SumOfDigitalRootsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.SumOfDigitalRootsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // SumOfDivisorDigitalRootsTextBox
             // 
-            this.SumOfDivisorDigitalRootsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.SumOfDivisorDigitalRootsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
             this.SumOfDivisorDigitalRootsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SumOfDivisorDigitalRootsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.SumOfDivisorDigitalRootsTextBox.Location = new System.Drawing.Point(212, 102);
@@ -901,12 +901,12 @@
             this.SumOfDivisorDigitalRootsTextBox.TabIndex = 21;
             this.SumOfDivisorDigitalRootsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.SumOfDivisorDigitalRootsTextBox, "Sum of divisor digital roots");
-            this.SumOfDivisorDigitalRootsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.SumOfDivisorDigitalRootsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.SumOfDivisorDigitalRootsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // SumOfDivisorDigitSumsTextBox
             // 
-            this.SumOfDivisorDigitSumsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.SumOfDivisorDigitSumsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
             this.SumOfDivisorDigitSumsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SumOfDivisorDigitSumsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.SumOfDivisorDigitSumsTextBox.Location = new System.Drawing.Point(176, 102);
@@ -918,12 +918,12 @@
             this.SumOfDivisorDigitSumsTextBox.TabIndex = 20;
             this.SumOfDivisorDigitSumsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.SumOfDivisorDigitSumsTextBox, "Sum of divisor digit sums");
-            this.SumOfDivisorDigitSumsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.SumOfDivisorDigitSumsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.SumOfDivisorDigitSumsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // SumOfDivisorsTextBox
             // 
-            this.SumOfDivisorsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(255)))));
+            this.SumOfDivisorsTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(255)))));
             this.SumOfDivisorsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SumOfDivisorsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.SumOfDivisorsTextBox.Location = new System.Drawing.Point(112, 102);
@@ -935,7 +935,7 @@
             this.SumOfDivisorsTextBox.TabIndex = 19;
             this.SumOfDivisorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.SumOfDivisorsTextBox, "Sum of divisors");
-            this.SumOfDivisorsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.SumOfDivisorsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.SumOfDivisorsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // dCircleLabel
@@ -1321,7 +1321,7 @@
             this.IndexTextBox.Size = new System.Drawing.Size(79, 29);
             this.IndexTextBox.TabIndex = 1;
             this.IndexTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.IndexTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.IndexTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.IndexTextBox.TextChanged += new System.EventHandler(this.IndexTextBox_TextChanged);
             this.IndexTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IndexTextBox_KeyDown);
             this.IndexTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -1399,7 +1399,7 @@
             this.SquareSumTextBox.ReadOnly = true;
             this.SquareSumTextBox.Size = new System.Drawing.Size(176, 20);
             this.SquareSumTextBox.TabIndex = 9;
-            this.SquareSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.SquareSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.SquareSumTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // IndexChainLengthTextBox
@@ -1430,7 +1430,7 @@
             this.NthNonAdditiveNumberTextBox.Size = new System.Drawing.Size(77, 20);
             this.NthNonAdditiveNumberTextBox.TabIndex = 13;
             this.NthNonAdditiveNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NthNonAdditiveNumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.NthNonAdditiveNumberTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.NthNonAdditiveNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IndexTextBox_KeyDown);
             this.NthNonAdditiveNumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
@@ -1447,7 +1447,7 @@
             this.CPIndexChainL2RTextBox.Size = new System.Drawing.Size(53, 20);
             this.CPIndexChainL2RTextBox.TabIndex = 22;
             this.CPIndexChainL2RTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.CPIndexChainL2RTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.CPIndexChainL2RTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.CPIndexChainL2RTextBox.TextChanged += new System.EventHandler(this.CPIndexChainL2RTextBox_TextChanged);
             this.CPIndexChainL2RTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
@@ -1464,7 +1464,7 @@
             this.PCIndexChainR2LTextBox.Size = new System.Drawing.Size(53, 20);
             this.PCIndexChainR2LTextBox.TabIndex = 21;
             this.PCIndexChainR2LTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.PCIndexChainR2LTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.PCIndexChainR2LTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.PCIndexChainR2LTextBox.TextChanged += new System.EventHandler(this.PCIndexChainR2LTextBox_TextChanged);
             this.PCIndexChainR2LTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
@@ -1481,7 +1481,7 @@
             this.CPIndexChainR2LTextBox.Size = new System.Drawing.Size(53, 20);
             this.CPIndexChainR2LTextBox.TabIndex = 23;
             this.CPIndexChainR2LTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.CPIndexChainR2LTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.CPIndexChainR2LTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.CPIndexChainR2LTextBox.TextChanged += new System.EventHandler(this.CPIndexChainR2LTextBox_TextChanged);
             this.CPIndexChainR2LTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
@@ -1499,7 +1499,7 @@
             this.PCIndexChainL2RTextBox.Size = new System.Drawing.Size(53, 20);
             this.PCIndexChainL2RTextBox.TabIndex = 20;
             this.PCIndexChainL2RTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.PCIndexChainL2RTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.PCIndexChainL2RTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.PCIndexChainL2RTextBox.TextChanged += new System.EventHandler(this.PCIndexChainL2RTextBox_TextChanged);
             this.PCIndexChainL2RTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
@@ -1515,7 +1515,7 @@
             this.ValueTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.ValueTextBox.Size = new System.Drawing.Size(162, 20);
             this.ValueTextBox.TabIndex = 2;
-            this.ValueTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.ValueTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.ValueTextBox.TextChanged += new System.EventHandler(this.ValueTextBox_TextChanged);
             this.ValueTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ValueTextBox_KeyDown);
             this.ValueTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -1533,7 +1533,7 @@
             this.DigitalRootTextBox.Size = new System.Drawing.Size(24, 20);
             this.DigitalRootTextBox.TabIndex = 8;
             this.DigitalRootTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.DigitalRootTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.DigitalRootTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.DigitalRootTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // DigitSumTextBox
@@ -1549,7 +1549,7 @@
             this.DigitSumTextBox.Size = new System.Drawing.Size(39, 20);
             this.DigitSumTextBox.TabIndex = 7;
             this.DigitSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.DigitSumTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.DigitSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.DigitSumTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // NthAdditiveNumberTextBox
@@ -1563,7 +1563,7 @@
             this.NthAdditiveNumberTextBox.Size = new System.Drawing.Size(77, 20);
             this.NthAdditiveNumberTextBox.TabIndex = 12;
             this.NthAdditiveNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NthAdditiveNumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.NthAdditiveNumberTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.NthAdditiveNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IndexTextBox_KeyDown);
             this.NthAdditiveNumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
@@ -1579,7 +1579,7 @@
             this.NthNumberTextBox.Size = new System.Drawing.Size(77, 20);
             this.NthNumberTextBox.TabIndex = 11;
             this.NthNumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.NthNumberTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.NthNumberTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.NthNumberTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.IndexTextBox_KeyDown);
             this.NthNumberTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
@@ -1605,7 +1605,7 @@
             this.PrimeFactorsTextBox.ReadOnly = true;
             this.PrimeFactorsTextBox.Size = new System.Drawing.Size(176, 20);
             this.PrimeFactorsTextBox.TabIndex = 6;
-            this.PrimeFactorsTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.PrimeFactorsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.PrimeFactorsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // IndexPanel
@@ -1659,7 +1659,7 @@
             this.ABTextBox.Size = new System.Drawing.Size(82, 26);
             this.ABTextBox.TabIndex = 9;
             this.ABTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ABTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.ABTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.ABTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ABTextBox_KeyDown);
             this.ABTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             this.ABTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
@@ -1674,7 +1674,7 @@
             this.DFTextBox.Size = new System.Drawing.Size(82, 26);
             this.DFTextBox.TabIndex = 8;
             this.DFTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.DFTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.DFTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.DFTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DFTextBox_KeyDown);
             this.DFTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             this.DFTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
@@ -1689,7 +1689,7 @@
             this.XCTextBox.Size = new System.Drawing.Size(82, 26);
             this.XCTextBox.TabIndex = 7;
             this.XCTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.XCTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.XCTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.XCTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.XCTextBox_KeyDown);
             this.XCTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             this.XCTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
@@ -1704,7 +1704,7 @@
             this.ACTextBox.Size = new System.Drawing.Size(82, 26);
             this.ACTextBox.TabIndex = 6;
             this.ACTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ACTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.ACTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.ACTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ACTextBox_KeyDown);
             this.ACTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             this.ACTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
@@ -1719,7 +1719,7 @@
             this.CTextBox.Size = new System.Drawing.Size(82, 26);
             this.CTextBox.TabIndex = 5;
             this.CTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.CTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.CTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.CTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CTextBox_KeyDown);
             this.CTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             this.CTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
@@ -1734,7 +1734,7 @@
             this.XPTextBox.Size = new System.Drawing.Size(82, 26);
             this.XPTextBox.TabIndex = 4;
             this.XPTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.XPTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.XPTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.XPTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.XPTextBox_KeyDown);
             this.XPTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             this.XPTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
@@ -1749,7 +1749,7 @@
             this.APTextBox.Size = new System.Drawing.Size(82, 26);
             this.APTextBox.TabIndex = 3;
             this.APTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.APTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.APTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.APTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.APTextBox_KeyDown);
             this.APTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             this.APTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);
@@ -1764,7 +1764,7 @@
             this.PTextBox.Size = new System.Drawing.Size(82, 26);
             this.PTextBox.TabIndex = 2;
             this.PTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.PTextBox.Click += new System.EventHandler(this.TextBoxLabelControls_CtrlClick);
+            this.PTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.PTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.PTextBox_KeyDown);
             this.PTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             this.PTextBox.MouseHover += new System.EventHandler(this.Control_MouseHover);

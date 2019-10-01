@@ -834,6 +834,7 @@ public partial class MainForm : Form
     private void UpdateDigitSumRootPCChains(long value)
     {
         if (value < 0L) value *= -1L;
+        if (value > 1000000000000000L) return;
 
         this.Cursor = Cursors.WaitCursor;
         try
@@ -1056,6 +1057,7 @@ public partial class MainForm : Form
     private void UpdateSumOfDivisors(long value)
     {
         if (value < 0L) value *= -1L;
+        if (value > 1000000000000000L) return;
 
         long sum_of_divisors = Numbers.SumOfDivisors(value);
         long sum_of_divisor_digit_sums = Numbers.SumOfDivisorDigitSums(value);
@@ -1228,7 +1230,8 @@ public partial class MainForm : Form
     private long DecimalPCIndexChainL2R(long value)
     {
         if (value < 0L) value *= -1L;
-        if (value == 0L) return 0L;
+        if (value == 0L) return -1L;
+        if (value > 1000000000000000L) return -1L;
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1253,7 +1256,8 @@ public partial class MainForm : Form
     private long DecimalPCIndexChainR2L(long value)
     {
         if (value < 0L) value *= -1L;
-        if (value == 0L) return 0L;
+        if (value == 0L) return -1L;
+        if (value > 1000000000000000L) return -1L;
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1278,7 +1282,8 @@ public partial class MainForm : Form
     private long DecimalCPIndexChainL2R(long value)
     {
         if (value < 0L) value *= -1L;
-        if (value == 0L) return 0L;
+        if (value == 0L) return -1L;
+        if (value > 1000000000000000L) return -1L;
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1303,7 +1308,8 @@ public partial class MainForm : Form
     private long DecimalCPIndexChainR2L(long value)
     {
         if (value < 0L) value *= -1L;
-        if (value == 0L) return 0L;
+        if (value == 0L) return -1L;
+        if (value > 1000000000000000L) return -1L;
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1329,6 +1335,7 @@ public partial class MainForm : Form
     {
         if (number < 0L) number *= -1L;
         if (number == 0L) return 0;
+        if (number > 1000000000000000L) return 0;
 
         int length = 0;
         while (number > 1L)
@@ -1353,7 +1360,8 @@ public partial class MainForm : Form
     private string BinaryPCIndexChainL2R(long value)
     {
         if (value < 0L) value *= -1L;
-        if (value == 0L) return "0";
+        if (value <= 1L) return "";
+        if (value > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1378,7 +1386,8 @@ public partial class MainForm : Form
     private string BinaryPCIndexChainR2L(long value)
     {
         if (value < 0L) value *= -1L;
-        if (value == 0L) return "0";
+        if (value <= 1L) return "";
+        if (value > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1403,7 +1412,8 @@ public partial class MainForm : Form
     private string BinaryCPIndexChainL2R(long value)
     {
         if (value < 0L) value *= -1L;
-        if (value == 0L) return "0";
+        if (value <= 1L) return "";
+        if (value > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1428,7 +1438,8 @@ public partial class MainForm : Form
     private string BinaryCPIndexChainR2L(long value)
     {
         if (value < 0L) value *= -1L;
-        if (value == 0L) return "0";
+        if (value <= 1L) return "";
+        if (value > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1453,7 +1464,8 @@ public partial class MainForm : Form
     private string GetPCIndexChainL2R(long value)
     {
         if (value < 0L) value *= -1L;
-        if (value == 0L) return "0";
+        if (value <= 1L) return "";
+        if (value > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1483,7 +1495,8 @@ public partial class MainForm : Form
     private string GetPCIndexChainR2L(long value)
     {
         if (value < 0L) value *= -1L;
-        if (value == 0L) return "0";
+        if (value <= 1L) return "";
+        if (value > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1513,7 +1526,8 @@ public partial class MainForm : Form
     private string GetCPIndexChainL2R(long value)
     {
         if (value < 0L) value *= -1L;
-        if (value == 0L) return "0";
+        if (value <= 1L) return "";
+        if (value > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1543,7 +1557,8 @@ public partial class MainForm : Form
     private string GetCPIndexChainR2L(long value)
     {
         if (value < 0L) value *= -1L;
-        if (value == 0L) return "0";
+        if (value <= 1L) return "";
+        if (value > 1000000000000000L) return "";
 
         StringBuilder str = new StringBuilder();
         while (value > 1L)
@@ -1573,6 +1588,8 @@ public partial class MainForm : Form
     private void NumberIndexChain(long value)
     {
         if (value < 0L) value *= -1L;
+        if (value <= 1L) return;
+        if (value > 1000000000000000L) return;
 
         string filename = "NumberIndexChain" + "_" + value + ".txt";
         StringBuilder str = new StringBuilder();
@@ -2227,7 +2244,7 @@ public partial class MainForm : Form
         }
     }
 
-    private void TextBoxLabelControls_CtrlClick(object sender, EventArgs e)
+    private void Control_CtrlClick(object sender, EventArgs e)
     {
         // Ctrl+Click factorizes value
         if (ModifierKeys == Keys.Control)
@@ -2278,7 +2295,7 @@ public partial class MainForm : Form
     {
         if (ModifierKeys == Keys.Control)
         {
-            TextBoxLabelControls_CtrlClick(sender, e);
+            Control_CtrlClick(sender, e);
         }
         else
         {
@@ -2348,6 +2365,16 @@ public partial class MainForm : Form
                                 text = text.Substring(start, end - start);
                                 value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                             }
+                        }
+                        else if (text.Contains("×"))
+                        {
+                            text = text.Replace("×", "");
+                            value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                        }
+                        else if (text.Contains("*"))
+                        {
+                            text = text.Replace("*", "");
+                            value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                         }
                         else
                         {
@@ -2663,7 +2690,7 @@ public partial class MainForm : Form
                         pos = result.IndexOf("=");
                         if (pos > -1)
                         {
-                            PrimeFactorsTextBox.Text = result.Substring(pos + 1);
+                            PrimeFactorsTextBox.Text = result.Substring(pos + 2);
                             PrimeFactorsTextBox.Refresh();
                         }
                     }
