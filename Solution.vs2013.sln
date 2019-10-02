@@ -39,11 +39,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{197A3F4C-1E15-432B-AFA9-3BF6921124D9}"
 	ProjectSection(SolutionItems) = preProject
 		Clean.bat = Clean.bat
-		Features.txt = Features.txt
-		LICENSE = LICENSE
 		NET2.bat = NET2.bat
 		README.md = README.md
-		Readme.txt = Readme.txt
 		Release.bat = Release.bat
 		Setup.bat = Setup.bat
 		Version.bat = Version.bat

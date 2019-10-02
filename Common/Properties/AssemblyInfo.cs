@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Quran and Prime Numbers - heliwave.com")]
+[assembly: AssemblyTitle("heliwave.com")]
 [assembly: AssemblyDescription(
     "\t\t" + "بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ" + "\r\n" +
     "\r\n" +
@@ -13,8 +13,9 @@ using System.Runtime.InteropServices;
     "\r\n" +
     "QuranCode is a free and open-source similarity and numerical research tool for the ever-revealing Quran (القرءان الكريم)." + "\r\n" +
     "\r\n" +
-    "Standard Edition\tEditable value systems with 19 add options." + "\r\n" +
-    "Research Edition\tResearch methods, big numbers, C# script." + "\r\n" +
+    "Standard Edition	Letter-value systems with 19 options." + "\r\n" +
+    "Research Edition	Research methods and C# scripting." + "\r\n" +
+    "Ultimate Edition	Big prime and composite numbers." + "\r\n" +
     "\r\n" +
     "CREDITS:" + "\r\n" +
     "http://tanzil.net for the Quran text and translations." + "\r\n" +
@@ -28,7 +29,6 @@ using System.Runtime.InteropServices;
     "May Allah bless us all with guidance in this life and forgiveness and generous reward in the hereafter (مَغْفِرَةٍۢ وَأَجْرٍۢ كَرِيمٍ)." + "\r\n" +
     "\r\n" +
     "ٱللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَءَالِ مُحَمَّدٍ" + "\r\n" +
-    "\r\n" +
     "الله أكبر" + "\t" + "God >"
     )
 ]

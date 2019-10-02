@@ -6,10 +6,9 @@
 
   ------------------------------------------------------------------------------
   QuranCode Editions:
-    Standard Edition	Editable value systems with 19 add options.	[Start normally]
-    Lite     Edition	Fast launch with essential features only.	[Start with Shift]
-    Research Edition	Research methods and C# scripting.      	[Start with Control]
-    Ultimate Edition	Very slow launch to support big numbers.	[Start with Shift+Control]
+    Standard Edition	Letter-value systems with 19 options.	[Start normally]
+    Research Edition	Research methods and C# scripting.      [Start with Control]
+    Ultimate Edition	Big prime and composite numbers.	[Start with Shift+Control]
   ------------------------------------------------------------------------------
 
   Initial Letter Sentences (جمل الحروف المقطعة)
