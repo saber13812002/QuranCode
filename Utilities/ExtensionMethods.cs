@@ -444,6 +444,21 @@ public static class StringExtensions
         }
         return result;
     }
+    public static string GetDiacriticsOnly(this string source)
+    {
+        if (String.IsNullOrEmpty(source)) return source;
+
+        StringBuilder str = new StringBuilder();
+        foreach (char character in source)
+        {
+            if (Constants.DIACRITICS.Contains(character))
+            {
+                str.Append(character);
+            }
+        }
+
+        return str.ToString();
+    }
 
     public static bool Contains(this string source, string value, StringComparison string_comparison)
     {

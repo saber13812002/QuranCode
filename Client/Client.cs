@@ -3580,7 +3580,7 @@ public class Client : IPublisher, ISubscriber
     /// <param name="phrase"></param>
     /// <param name="frequency_search_type"></param>
     /// <returns>Result is stored in LetterStatistics.</returns>
-    public void BuildLetterStatistics(string text, bool with_diacritics)
+    public void BuildLetterStatistics(string text, bool? m_count_diacritics)
     {
         if (String.IsNullOrEmpty(text)) return;
 
@@ -3588,7 +3588,10 @@ public class Client : IPublisher, ISubscriber
         {
             if (m_letter_statistics != null)
             {
-                if (!with_diacritics) text = text.SimplifyTo(NumerologySystem.TextMode);
+                if (m_count_diacritics == true) { /* do nothing */ }
+                else if (m_count_diacritics == null) { text = text.GetDiacriticsOnly(); }
+                else if (m_count_diacritics == false) { text = text.SimplifyTo(NumerologySystem.TextMode); }
+
                 text = text.Replace("\r", "");
                 text = text.Replace("\n", "");
                 text = text.Replace("\t", "");
@@ -3601,9 +3604,9 @@ public class Client : IPublisher, ISubscriber
                     text = text.Replace(character.ToString(), "");
                 }
 
+                m_letter_statistics.Clear();
                 if (!String.IsNullOrEmpty(text))
                 {
-                    m_letter_statistics.Clear();
                     for (int i = 0; i < text.Length; i++)
                     {
                         bool is_found = false;
@@ -3809,7 +3812,7 @@ public class Client : IPublisher, ISubscriber
     /// <param name="phrase"></param>
     /// <param name="frequency_search_type"></param>
     /// <returns>Letter frequency sum. Result is stored in LetterStatistics.</returns>
-    public void BuildLetterStatistics(string text, string phrase, FrequencySearchType frequency_search_type, bool with_diacritics)
+    public void BuildLetterStatistics(string text, string phrase, FrequencySearchType frequency_search_type, bool? m_count_diacritics)
     {
         if (String.IsNullOrEmpty(text)) return;
         if (String.IsNullOrEmpty(phrase)) return;
@@ -3818,7 +3821,10 @@ public class Client : IPublisher, ISubscriber
         {
             if (m_letter_statistics != null)
             {
-                if (!with_diacritics) text = text.SimplifyTo(NumerologySystem.TextMode);
+                if (m_count_diacritics == true) { /* do nothing */ }
+                else if (m_count_diacritics == null) { text = text.GetDiacriticsOnly(); }
+                else if (m_count_diacritics == false) { text = text.SimplifyTo(NumerologySystem.TextMode); }
+
                 text = text.Replace("\r", "");
                 text = text.Replace("\n", "");
                 text = text.Replace("\t", "");
@@ -3831,48 +3837,48 @@ public class Client : IPublisher, ISubscriber
                     text = text.Replace(character.ToString(), "");
                 }
 
-                if (!String.IsNullOrEmpty(text))
+                if (m_count_diacritics == true) { /* do nothing */ }
+                else if (m_count_diacritics == null) { phrase = phrase.GetDiacriticsOnly(); }
+                else if (m_count_diacritics == false) { phrase = phrase.SimplifyTo(NumerologySystem.TextMode); }
+
+                phrase = phrase.Replace("\r", "");
+                phrase = phrase.Replace("\n", "");
+                phrase = phrase.Replace("\t", "");
+                phrase = phrase.Replace("_", "");
+                phrase = phrase.Replace(" ", "");
+                phrase = phrase.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+                phrase = phrase.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
+                foreach (char character in Constants.INDIAN_DIGITS)
                 {
-                    if (!with_diacritics) phrase = phrase.SimplifyTo(NumerologySystem.TextMode);
-                    phrase = phrase.Replace("\r", "");
-                    phrase = phrase.Replace("\n", "");
-                    phrase = phrase.Replace("\t", "");
-                    phrase = phrase.Replace("_", "");
-                    phrase = phrase.Replace(" ", "");
-                    phrase = phrase.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
-                    phrase = phrase.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
-                    foreach (char character in Constants.INDIAN_DIGITS)
-                    {
-                        phrase = phrase.Replace(character.ToString(), "");
-                    }
+                    phrase = phrase.Replace(character.ToString(), "");
+                }
 
-                    if (frequency_search_type == FrequencySearchType.UniqueLetters)
-                    {
-                        phrase = phrase.SimplifyTo(NumerologySystem.TextMode).RemoveDuplicates();
-                    }
+                if (frequency_search_type == FrequencySearchType.UniqueLetters)
+                {
+                    phrase = phrase.SimplifyTo(NumerologySystem.TextMode).RemoveDuplicates();
+                }
 
-                    if (!String.IsNullOrEmpty(phrase))
+                m_letter_statistics.Clear();
+                if (!String.IsNullOrEmpty(phrase))
+                {
+                    for (int i = 0; i < phrase.Length; i++)
                     {
-                        m_letter_statistics.Clear();
-                        for (int i = 0; i < phrase.Length; i++)
+                        int frequency = 0;
+                        for (int j = 0; j < text.Length; j++)
                         {
-                            int frequency = 0;
-                            for (int j = 0; j < text.Length; j++)
+                            if (phrase[i] == text[j])
                             {
-                                if (phrase[i] == text[j])
-                                {
-                                    frequency++;
-                                }
+                                frequency++;
                             }
+                        }
 
-                            if (frequency > 0)
-                            {
-                                LetterStatistic phrase_letter_statistic = new LetterStatistic();
-                                phrase_letter_statistic.Order = m_letter_statistics.Count + 1;
-                                phrase_letter_statistic.Letter = phrase[i];
-                                phrase_letter_statistic.Frequency = frequency;
-                                m_letter_statistics.Add(phrase_letter_statistic);
-                            }
+                        if (frequency > 0)
+                        {
+                            LetterStatistic phrase_letter_statistic = new LetterStatistic();
+                            phrase_letter_statistic.Order = m_letter_statistics.Count + 1;
+                            phrase_letter_statistic.Letter = phrase[i];
+                            phrase_letter_statistic.Frequency = frequency;
+                            m_letter_statistics.Add(phrase_letter_statistic);
                         }
                     }
                 }

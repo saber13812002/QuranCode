@@ -222,7 +222,12 @@ public static class Numbers
     };
 
     //                             int.MaxValue = 2^32 - 1 = 2147483647;
-    public static int MAX_NUMBER = int.MaxValue / (Globals.EDITION == Edition.Standard ? 1024 : 16);
+    public static int MAX_NUMBER = int.MaxValue / (
+                                                    (Globals.EDITION == Edition.Lite) ? 4096 :
+                                                    (Globals.EDITION == Edition.Standard) ? 1024 :
+                                                    (Globals.EDITION == Edition.Research) ? 256 : 16
+        //(Globals.EDITION == Edition.Ultimate) ? 16
+                                                  );
 
     // pi = circumference / diameter ~= 355/113
     public const double PI = 3.141592653589793238462643383279D;
@@ -344,18 +349,7 @@ public static class Numbers
             Directory.CreateDirectory(Globals.NUMBERS_FOLDER);
         }
 
-        if (Globals.EDITION == Edition.Standard)
-        {
-            LoadPrimes();
-            LoadAdditivePrimes();
-            LoadNonAdditivePrimes();
-            LoadComposites();
-            LoadAdditiveComposites();
-            LoadNonAdditiveComposites();
-            LoadDeficients();
-            LoadAbundants();
-        }
-        else
+        if (Globals.EDITION == Edition.Ultimate)
         {
             GeneratePrimes(MAX_NUMBER);
             GenerateAdditivePrimes(MAX_NUMBER);
@@ -365,6 +359,17 @@ public static class Numbers
             GenerateNonAdditiveComposites(MAX_NUMBER / 2);
             GenerateDeficients(MAX_NUMBER / 16);
             GenerateAbundants(MAX_NUMBER / 16);
+        }
+        else
+        {
+            LoadPrimes();
+            LoadAdditivePrimes();
+            LoadNonAdditivePrimes();
+            LoadComposites();
+            LoadAdditiveComposites();
+            LoadNonAdditiveComposites();
+            LoadDeficients();
+            LoadAbundants();
         }
 
         LoadPerfectNumbers();
@@ -1400,7 +1405,7 @@ public static class Numbers
         }
         return result;
     }
-    
+
     public static long SumOfNumberDigitSums(long number)
     {
         if (number < 0L) number *= -1L;

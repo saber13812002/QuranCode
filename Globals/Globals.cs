@@ -1,4 +1,4 @@
-public enum Edition { Standard, Research }
+public enum Edition { Standard, Lite, Research, Ultimate }
 
 public static class Globals
 {
@@ -9,23 +9,31 @@ public static class Globals
         get
         {
             string version = VERSION;
-            //string[] parts = version.Split('.');
-            //if (parts.Length == 4)
-            //{
-            //    int pos = version.LastIndexOf('.');
-            //    if (pos > -1)
-            //    {
-            //        version = version.Substring(0, pos);
-            //    }
-            //}
+            string[] parts = version.Split('.');
+            if (parts.Length == 4)
+            {
+                int pos = version.LastIndexOf('.');
+                if (pos > -1)
+                {
+                    version = version.Substring(0, pos);
+                }
+            }
 
             if (EDITION == Edition.Standard)
             {
                 return (version + "");
             }
+            else if (EDITION == Edition.Lite)
+            {
+                return (version + "L");
+            }
             else if (EDITION == Edition.Research)
             {
                 return (version + "R");
+            }
+            else if (EDITION == Edition.Ultimate)
+            {
+                return (version + "U");
             }
             else
             {

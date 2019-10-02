@@ -365,6 +365,10 @@ public partial class MainForm : Form, ISubscriber
                     ToolTip.SetToolTip(LetterFrequencyDistanceSumSumLabel, L[l]["Sum of letter distance sums"]);
                 }
 
+                if (m_count_diacritics == true) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["with diacritics"]); }
+                else if (m_count_diacritics == null) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["diacritics only"]); }
+                else if (m_count_diacritics == false) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["no diacritics"]); }
+
                 int pos = ValueLabel.Text.IndexOf(" ");
                 string text = ValueLabel.Text.Substring(pos + 1).Trim();
                 if (L[l].ContainsKey(text))
@@ -1377,7 +1381,6 @@ public partial class MainForm : Form, ISubscriber
         this.LetterFrequencyPanel = new System.Windows.Forms.Panel();
         this.LetterFrequencyWithDiacriticsCheckBox = new System.Windows.Forms.CheckBox();
         this.LetterFrequencyDistanceSumSumLabel = new System.Windows.Forms.Label();
-        this.FindByFrequencyTotalLabel = new System.Windows.Forms.Label();
         this.LetterFrequencyPositionSumSumLabel = new System.Windows.Forms.Label();
         this.LetterFrequencySumLabel = new System.Windows.Forms.Label();
         this.LetterFrequencyCountLabel = new System.Windows.Forms.Label();
@@ -4138,7 +4141,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByTextWithDiacriticsCheckBox.TabIndex = 21;
         this.ToolTip.SetToolTip(this.FindByTextWithDiacriticsCheckBox, "with diacritics  مع الحركات");
         this.FindByTextWithDiacriticsCheckBox.UseVisualStyleBackColor = false;
-        this.FindByTextWithDiacriticsCheckBox.CheckedChanged += new System.EventHandler(this.FindByTextWithDiacriticsCheckBox_CheckedChanged);
+        this.FindByTextWithDiacriticsCheckBox.CheckStateChanged += new System.EventHandler(this.FindByTextWithDiacriticsCheckBox_CheckStateChanged);
         this.FindByTextWithDiacriticsCheckBox.Enter += new System.EventHandler(this.FindByTextControls_Enter);
         // 
         // FindByTextSearchBlockSizeBowingLabel
@@ -10613,7 +10616,6 @@ public partial class MainForm : Form, ISubscriber
         this.LetterFrequencyPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
         this.LetterFrequencyPanel.Controls.Add(this.LetterFrequencyWithDiacriticsCheckBox);
         this.LetterFrequencyPanel.Controls.Add(this.LetterFrequencyDistanceSumSumLabel);
-        this.LetterFrequencyPanel.Controls.Add(this.FindByFrequencyTotalLabel);
         this.LetterFrequencyPanel.Controls.Add(this.LetterFrequencyPositionSumSumLabel);
         this.LetterFrequencyPanel.Controls.Add(this.LetterFrequencySumLabel);
         this.LetterFrequencyPanel.Controls.Add(this.LetterFrequencyCountLabel);
@@ -10641,7 +10643,7 @@ public partial class MainForm : Form, ISubscriber
         this.LetterFrequencyWithDiacriticsCheckBox.TabIndex = 19;
         this.ToolTip.SetToolTip(this.LetterFrequencyWithDiacriticsCheckBox, "with diacritics  مع الحركات");
         this.LetterFrequencyWithDiacriticsCheckBox.UseVisualStyleBackColor = false;
-        this.LetterFrequencyWithDiacriticsCheckBox.CheckedChanged += new System.EventHandler(this.LetterFrequencyWithDiacriticsCheckBox_CheckedChanged);
+        this.LetterFrequencyWithDiacriticsCheckBox.CheckStateChanged += new System.EventHandler(this.LetterFrequencyWithDiacriticsCheckBox_CheckStateChanged);
         // 
         // LetterFrequencyDistanceSumSumLabel
         // 
@@ -10658,21 +10660,6 @@ public partial class MainForm : Form, ISubscriber
         this.LetterFrequencyDistanceSumSumLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.LetterFrequencyDistanceSumSumLabel.Click += new System.EventHandler(this.Control_CtrlClick);
         this.LetterFrequencyDistanceSumSumLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
-        // 
-        // FindByFrequencyTotalLabel
-        // 
-        this.FindByFrequencyTotalLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-        this.FindByFrequencyTotalLabel.BackColor = System.Drawing.Color.Transparent;
-        this.FindByFrequencyTotalLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByFrequencyTotalLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.FindByFrequencyTotalLabel.Location = new System.Drawing.Point(0, 121);
-        this.FindByFrequencyTotalLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.FindByFrequencyTotalLabel.Name = "FindByFrequencyTotalLabel";
-        this.FindByFrequencyTotalLabel.Size = new System.Drawing.Size(20, 19);
-        this.FindByFrequencyTotalLabel.TabIndex = 0;
-        this.FindByFrequencyTotalLabel.Text = "∑";
-        this.FindByFrequencyTotalLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.FindByFrequencyTotalLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
         // 
         // LetterFrequencyPositionSumSumLabel
         // 
@@ -13176,18 +13163,21 @@ public partial class MainForm : Form, ISubscriber
                             splash_form.Progress = 90;
                             Thread.Sleep(100);
 
-                            if (Globals.EDITION == Edition.Standard)
-                            {
-                                splash_form.Information = "Loading user history ...";
-                                splash_form.Information = "Generating numbers ...";
-                            }
-                            else
+                            splash_form.Information = "Loading user history ...";
+                            m_client.LoadHistoryItems();
+                            UpdateBrowseHistoryButtons();
+                            splash_form.Progress = 92;
+                            Thread.Sleep(100);
+
+                            if (Globals.EDITION == Edition.Ultimate)
                             {
                                 splash_form.Information = "Generating big numbers ...";
                             }
-                            m_client.LoadHistoryItems();
-                            UpdateBrowseHistoryButtons();
-                            splash_form.Progress = 95;
+                            else
+                            {
+                                splash_form.Information = "Generating numbers ...";
+                            }
+                            splash_form.Progress = 97;
                             Thread.Sleep(100);
 
                             splash_form.Information = "Loading help messages ...";
@@ -13283,7 +13273,7 @@ public partial class MainForm : Form, ISubscriber
                             FontLabel.Enabled = false;
                         }
 
-                        ScriptLabel.Visible = Globals.EDITION == Edition.Research;
+                        ScriptLabel.Visible = ((Globals.EDITION == Edition.Research) || (Globals.EDITION == Edition.Ultimate));
 
                         this.Activate(); // bring to foreground
                     }
@@ -14015,8 +14005,8 @@ public partial class MainForm : Form, ISubscriber
 
                 DisplayWordFrequencies();
 
-                GenerateSentencesLabel.Visible = (Globals.EDITION == Edition.Research);
-                DuplicateLettersCheckBox.Visible = (Globals.EDITION == Edition.Research);
+                GenerateSentencesLabel.Visible = ((Globals.EDITION == Edition.Research) || (Globals.EDITION == Edition.Ultimate));
+                DuplicateLettersCheckBox.Visible = ((Globals.EDITION == Edition.Research) || (Globals.EDITION == Edition.Ultimate));
                 GenerateSentencesLabel.Refresh();
                 DuplicateLettersCheckBox.Refresh();
             }
@@ -16622,7 +16612,7 @@ public partial class MainForm : Form, ISubscriber
 
                 MenuItem EditGenerateSentencesMenuItem = new MenuItem(L[l]["Generate Sentences"] + "\t\tCtrl+G");
                 EditGenerateSentencesMenuItem.Click += new EventHandler(MenuItem_GenerateSentences);
-                if (Globals.EDITION == Edition.Research) ContextMenu.MenuItems.Add(EditGenerateSentencesMenuItem);
+                if ((Globals.EDITION == Edition.Research) || (Globals.EDITION == Edition.Ultimate)) ContextMenu.MenuItems.Add(EditGenerateSentencesMenuItem);
 
                 MenuItem MenuItemSeparator1 = new MenuItem("-");
                 ContextMenu.MenuItems.Add(MenuItemSeparator1);
@@ -16745,7 +16735,7 @@ public partial class MainForm : Form, ISubscriber
                     if (class_type != null)
                     {
                         MethodInfo[] method_infos = null;
-                        if (Globals.EDITION == Edition.Standard)
+                        if ((Globals.EDITION == Edition.Lite) || (Globals.EDITION == Edition.Standard))
                         {
                             method_infos = class_type.GetMethods(BindingFlags.Static | BindingFlags.Public);
                         }
@@ -17338,8 +17328,8 @@ public partial class MainForm : Form, ISubscriber
             GoldenRatioScopeLabel.Visible = (m_active_textbox == MainTextBox);
             GoldenRatioTypeLabel.Visible = (m_active_textbox == MainTextBox);
             GoldenRatioOrderLabel.Visible = (m_active_textbox == MainTextBox);
-            DuplicateLettersCheckBox.Visible = (m_active_textbox != null) && (m_active_textbox.SelectionLength > 0) && (Globals.EDITION == Edition.Research);
-            GenerateSentencesLabel.Visible = (m_active_textbox != null) && (m_active_textbox.SelectionLength > 0) && (Globals.EDITION == Edition.Research);
+            DuplicateLettersCheckBox.Visible = (m_active_textbox != null) && (m_active_textbox.SelectionLength > 0) && ((Globals.EDITION == Edition.Research) || (Globals.EDITION == Edition.Ultimate));
+            GenerateSentencesLabel.Visible = (m_active_textbox != null) && (m_active_textbox.SelectionLength > 0) && ((Globals.EDITION == Edition.Research) || (Globals.EDITION == Edition.Ultimate));
         }
     }
     /////////////////////////////////////////////////////////////////////////////
@@ -17799,8 +17789,8 @@ public partial class MainForm : Form, ISubscriber
                 {
                     DisplayWordFrequencies();
 
-                    GenerateSentencesLabel.Visible = (Globals.EDITION == Edition.Research);
-                    DuplicateLettersCheckBox.Visible = (Globals.EDITION == Edition.Research);
+                    GenerateSentencesLabel.Visible = ((Globals.EDITION == Edition.Research) || (Globals.EDITION == Edition.Ultimate));
+                    DuplicateLettersCheckBox.Visible = ((Globals.EDITION == Edition.Research) || (Globals.EDITION == Edition.Ultimate));
                     GenerateSentencesLabel.Refresh();
                     DuplicateLettersCheckBox.Refresh();
                 }
@@ -34572,7 +34562,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayWordVerses(string item_text)
     {
-        if (Globals.EDITION == Edition.Research)
+        if ((Globals.EDITION == Edition.Research) || (Globals.EDITION == Edition.Ultimate))
         {
             if (!String.IsNullOrEmpty(item_text))
             {
@@ -35179,7 +35169,7 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
-    private void FindByTextWithDiacriticsCheckBox_CheckedChanged(object sender, EventArgs e)
+    private void FindByTextWithDiacriticsCheckBox_CheckStateChanged(object sender, EventArgs e)
     {
         if (m_client != null)
         {
@@ -35189,11 +35179,6 @@ public partial class MainForm : Form, ISubscriber
                 m_client.Book.WithDiacritics = m_with_diacritics;
 
                 PopulateWordsListBox();
-
-                LetterFrequencyWithDiacriticsCheckBox.Checked = FindByTextWithDiacriticsCheckBox.Checked;
-
-                BuildLetterFrequencies();
-                DisplayLetterFrequencies();
 
                 if (PictureBox.Visible)
                 {
@@ -36235,7 +36220,6 @@ public partial class MainForm : Form, ISubscriber
         FindByTextHamzaAboveWawLabel.Visible = false;
         FindByTextHamzaAboveYaaLabel.Visible = false;
         FindByTextWithDiacriticsCheckBox.Visible = false;
-        LetterFrequencyWithDiacriticsCheckBox.Visible = m_find_by_phrase_letter_frequency;
 
         if (text_mode == "Simplified28")
         {
@@ -36282,7 +36266,6 @@ public partial class MainForm : Form, ISubscriber
             FindByTextHamzaAboveWawLabel.Visible = true;
             FindByTextHamzaAboveYaaLabel.Visible = true;
             FindByTextWithDiacriticsCheckBox.Visible = true;
-            LetterFrequencyWithDiacriticsCheckBox.Visible = true;
         }
         else
         {
@@ -40257,6 +40240,8 @@ public partial class MainForm : Form, ISubscriber
         FindByFrequencyButton.Enabled = ((m_find_by_phrase_letter_frequency) && (m_phrase_text.Length > 0));
 
         CalculateCurrentValue();
+        BuildLetterFrequencies();
+        DisplayLetterFrequencies();
     }
     private void ResetFindByFrequencyResultTypeLabels()
     {
@@ -44503,22 +44488,27 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (m_client.NumerologySystem != null)
                 {
+                    string backup_valuation_system = null;
+                    if (NumerologySystemComboBox.SelectedItem != null)
+                    {
+                        backup_valuation_system = NumerologySystemComboBox.SelectedItem.ToString();
+                    }
+
                     BuildSimplifiedBookAndDisplaySelection();
 
                     PopulateNumerologySystemComboBox();
                     if (NumerologySystemComboBox.Items.Count > 0)
                     {
-                        if (TextModeComboBox.SelectedItem.ToString() == "Original")
+                        if (backup_valuation_system != null)
                         {
-                            NumerologySystemComboBox.SelectedItem = "Alphabet_Primes1";
-                        }
-                        else if (TextModeComboBox.SelectedItem.ToString() == "Simplified28")
-                        {
-                            NumerologySystemComboBox.SelectedItem = "Abjad_Gematria";
-                        }
-                        else if (TextModeComboBox.SelectedItem.ToString() == "Simplified29")
-                        {
-                            NumerologySystemComboBox.SelectedItem = "Alphabet_Primes1";
+                            if (NumerologySystemComboBox.Items.Contains(backup_valuation_system))
+                            {
+                                NumerologySystemComboBox.SelectedItem = backup_valuation_system;
+                            }
+                            else
+                            {
+                                NumerologySystemComboBox.SelectedIndex = 0;
+                            }
                         }
                         else
                         {
@@ -44530,14 +44520,6 @@ public partial class MainForm : Form, ISubscriber
                         NumerologySystemComboBox.SelectedIndex = -1;
                     }
                 }
-            }
-        }
-        catch (Exception ex)
-        {
-            while (ex != null)
-            {
-                MessageBox.Show(ex.Message, Application.ProductName);
-                ex = ex.InnerException;
             }
         }
         finally
@@ -45559,7 +45541,7 @@ public partial class MainForm : Form, ISubscriber
     {
         try
         {
-            if (Globals.EDITION == Edition.Research)
+            if ((Globals.EDITION == Edition.Research) || (Globals.EDITION == Edition.Ultimate))
             {
                 int digits = Numbers.DigitCount(ValueTextBox.Text, m_radix);
                 ValueInspectLabel.Text = digits.ToString();
@@ -49777,6 +49759,7 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Statistics
     ///////////////////////////////////////////////////////////////////////////////
+    private bool? m_count_diacritics = false;
     private List<char> m_selected_letters = new List<char>();
     private void LetterFrequencyListView_ColumnClick(object sender, ColumnClickEventArgs e)
     {
@@ -50149,7 +50132,7 @@ public partial class MainForm : Form, ISubscriber
                     }
                     if (m_current_phrase.Length > 0)
                     {
-                        m_client.BuildLetterStatistics(m_current_text, m_current_phrase, m_frequency_search_type, m_with_diacritics);
+                        m_client.BuildLetterStatistics(m_current_text, m_current_phrase, m_frequency_search_type, m_count_diacritics);
                     }
                     else
                     {
@@ -50158,7 +50141,7 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else
                 {
-                    m_client.BuildLetterStatistics(m_current_text, m_with_diacritics);
+                    m_client.BuildLetterStatistics(m_current_text, m_count_diacritics);
                 }
             }
             else
@@ -50636,9 +50619,35 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void LetterFrequencyWithDiacriticsCheckBox_CheckedChanged(object sender, EventArgs e)
+    private void LetterFrequencyWithDiacriticsCheckBox_CheckStateChanged(object sender, EventArgs e)
     {
-        FindByTextWithDiacriticsCheckBox.Checked = LetterFrequencyWithDiacriticsCheckBox.Checked;
+        if (m_client != null)
+        {
+            if (m_client.Book != null)
+            {
+                switch (LetterFrequencyWithDiacriticsCheckBox.CheckState)
+                {
+                    case CheckState.Checked: m_count_diacritics = true; break;
+                    case CheckState.Indeterminate: m_count_diacritics = null; break;
+                    case CheckState.Unchecked: m_count_diacritics = false; break;
+                }
+
+                if (m_count_diacritics == true) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["with diacritics"]); }
+                else if (m_count_diacritics == null) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["diacritics only"]); }
+                else if (m_count_diacritics == false) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["no diacritics"]); }
+
+                BuildLetterFrequencies();
+                DisplayLetterFrequencies();
+
+                if (PictureBox.Visible)
+                {
+                    if (m_current_drawing_type == DrawingType.SearchTerms)
+                    {
+                        RedrawImage();
+                    }
+                }
+            }
+        }
     }
 
     private void StatisticsControls_Enter(object sender, EventArgs e)

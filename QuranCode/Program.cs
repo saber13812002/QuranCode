@@ -140,24 +140,36 @@ static class Program
             {
                 Globals.EDITION = Edition.Standard;
             }
+            else if (args[0] == "L")
+            {
+                Globals.EDITION = Edition.Lite;
+            }
             else if (args[0] == "R")
             {
                 Globals.EDITION = Edition.Research;
             }
-            else
+            else if (args[0] == "U")
+            {
+                Globals.EDITION = Edition.Ultimate;
+            }
+            else // default
             {
                 Globals.EDITION = Edition.Standard;
             }
         }
         else
         {
-            if (Control.ModifierKeys == Keys.Control)
+            if (Control.ModifierKeys == (Keys.Shift | Keys.Control))
+            {
+                Globals.EDITION = Edition.Ultimate;
+            }
+            else if (Control.ModifierKeys == Keys.Control)
             {
                 Globals.EDITION = Edition.Research;
             }
             else if (Control.ModifierKeys == Keys.Shift)
             {
-                Globals.EDITION = Edition.Research;
+                Globals.EDITION = Edition.Lite;
             }
             else // default
             {

@@ -6,8 +6,10 @@
 
   ------------------------------------------------------------------------------
   QuranCode Editions:
-  Standard Edition	Editable value systems with 19 add options.	[Start normally]
-  Research Edition	Research methods, big numbers, C# script.	[Start with Shift]
+    Standard Edition	Editable value systems with 19 add options.	[Start normally]
+    Lite     Edition	Fast launch with essential features only.	[Start with Shift]
+    Research Edition	Research methods and C# scripting.      	[Start with Control]
+    Ultimate Edition	Very slow launch to support big numbers.	[Start with Shift+Control]
   ------------------------------------------------------------------------------
 
   Initial Letter Sentences (جمل الحروف المقطعة)
@@ -141,10 +143,10 @@
   C506      = 621
   ------------------------------------------------------------------------------
 
-  Most Freequenct Words: FROM ALLAH (من الله)
-  -------------------------------
+  Most Frequent Words in the Quran
+  --------------------------------
   Word	Frequency	Meaning
-  -------------------------------
+  --------------------------------
   من	2763		from
   الله	2265		Allah
   ان	1604		know that
@@ -201,7 +203,7 @@
   عليكم	164		upon you (plural)
   الكتب	163		the Book
   ...	...		...
-  -------------------------------
+  --------------------------------
 
 
   If you find QuranCode useful, please recite Quran 27:62 a prime number of times (preferably 313)
@@ -236,4 +238,5 @@
   Ali Adams
   heliwave.com
   God >
+  
 </pre>
