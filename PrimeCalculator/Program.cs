@@ -38,11 +38,12 @@ static class Program
         }
         else
         {
-            if (Control.ModifierKeys == (Keys.Shift | Keys.Control))
-            {
-                Globals.EDITION = Edition.Ultimate;
-            }
-            else if (Control.ModifierKeys == Keys.Control)
+            //if (Control.ModifierKeys == (Keys.Shift | Keys.Control))
+            //{
+            //    Globals.EDITION = Edition.Ultimate;
+            //}
+            //else 
+            if (Control.ModifierKeys == Keys.Control)
             {
                 Globals.EDITION = Edition.Research;
             }

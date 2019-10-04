@@ -872,27 +872,6 @@ public partial class MainForm : Form
             this.Activate();
         }
     }
-    private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-        //if (e.Button == MouseButtons.Left)
-        //{
-        //    // make visible (in case it is hidden)
-        //    this.Visible = true;
-
-        //    // toggle maximized
-        //    if (this.WindowState == FormWindowState.Maximized)
-        //    {
-        //        this.WindowState = FormWindowState.Normal;
-        //    }
-        //    else
-        //    {
-        //        this.WindowState = FormWindowState.Maximized;
-        //    }
-
-        //    // and bring to foreground
-        //    this.Activate();
-        //}
-    }
     private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
     {
         MessageBox.Show

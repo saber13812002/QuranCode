@@ -1419,9 +1419,10 @@ partial class MainForm
         this.VersionLabel.TabIndex = 111;
         this.VersionLabel.Text = "7.29.139";
         this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-        this.ToolTip.SetToolTip(this.VersionLabel, "Version");
+        this.ToolTip.SetToolTip(this.VersionLabel, "7.29.139.8317");
         this.VersionLabel.Click += new System.EventHandler(this.VersionLabel_Click);
         this.VersionLabel.Enter += new System.EventHandler(this.StatusControls_Enter);
+        this.VersionLabel.MouseHover += new System.EventHandler(this.VersionLabel_MouseHover);
         // 
         // HelpFolderLabel
         // 
@@ -3328,7 +3329,7 @@ partial class MainForm
         this.FindByTextWithDiacriticsCheckBox.TabIndex = 21;
         this.ToolTip.SetToolTip(this.FindByTextWithDiacriticsCheckBox, "with diacritics  مع الحركات");
         this.FindByTextWithDiacriticsCheckBox.UseVisualStyleBackColor = false;
-        this.FindByTextWithDiacriticsCheckBox.CheckStateChanged += new System.EventHandler(this.FindByTextWithDiacriticsCheckBox_CheckStateChanged);
+        this.FindByTextWithDiacriticsCheckBox.CheckedChanged += new System.EventHandler(this.FindByTextWithDiacriticsCheckBox_CheckedChanged);
         this.FindByTextWithDiacriticsCheckBox.Enter += new System.EventHandler(this.FindByTextControls_Enter);
         // 
         // FindByTextSearchBlockSizeBowingLabel
@@ -5696,7 +5697,7 @@ partial class MainForm
         this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 1);
         this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
         this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 200);
+        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 202);
         this.ScriptOutputGroupBox.TabIndex = 103;
         this.ScriptOutputGroupBox.TabStop = false;
         this.ScriptOutputGroupBox.Text = " Output ";
@@ -5712,7 +5713,7 @@ partial class MainForm
         this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
         this.ScriptOutputTextBox.ReadOnly = true;
         this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 172);
+        this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 174);
         this.ScriptOutputTextBox.TabIndex = 0;
         this.ScriptOutputTextBox.WordWrap = false;
         this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -5957,6 +5958,7 @@ partial class MainForm
         this.TranslationsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
         this.TranslationsTextBox.Size = new System.Drawing.Size(265, 165);
         this.TranslationsTextBox.TabIndex = 11;
+        this.TranslationsTextBox.WordWrap = false;
         this.TranslationsTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
         // 
         // GrammarTabPage
@@ -11636,7 +11638,6 @@ partial class MainForm
         this.NotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon.Icon")));
         this.NotifyIcon.Text = "QuranCode";
         this.NotifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseClick);
-        this.NotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseDoubleClick);
         // 
         // NotifyIconContextMenuStrip
         // 

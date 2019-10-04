@@ -270,7 +270,7 @@
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ReadOnly = true;
             this.OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.OutputTextBox.Size = new System.Drawing.Size(226, 230);
+            this.OutputTextBox.Size = new System.Drawing.Size(226, 188);
             this.OutputTextBox.TabIndex = 29;
             this.OutputTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.OutputTextBox, "Factorization result");
@@ -333,7 +333,6 @@
             this.NotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon.Icon")));
             this.NotifyIcon.Text = "Prime Calculator";
             this.NotifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseClick);
-            this.NotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseDoubleClick);
             // 
             // DigitsLabel
             // 
@@ -387,17 +386,18 @@
             // 
             this.VersionLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.VersionLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.VersionLabel.Cursor = System.Windows.Forms.Cursors.Default;
             this.VersionLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.VersionLabel.ForeColor = System.Drawing.Color.Purple;
-            this.VersionLabel.Location = new System.Drawing.Point(161, 365);
+            this.VersionLabel.Location = new System.Drawing.Point(177, 365);
             this.VersionLabel.Name = "VersionLabel";
-            this.VersionLabel.Size = new System.Drawing.Size(79, 17);
+            this.VersionLabel.Size = new System.Drawing.Size(63, 17);
             this.VersionLabel.TabIndex = 32;
-            this.VersionLabel.Tag = "http://qurancode.com";
-            this.VersionLabel.Text = "7.29.139.8317";
+            this.VersionLabel.Tag = "";
+            this.VersionLabel.Text = "7.29.139 R";
             this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTip.SetToolTip(this.VersionLabel, "qurancode.com");
-            this.VersionLabel.Click += new System.EventHandler(this.LinkLabel_Click);
+            this.ToolTip.SetToolTip(this.VersionLabel, "7.29.139.8317");
+            this.VersionLabel.MouseHover += new System.EventHandler(this.VersionLabel_MouseHover);
             // 
             // ToolTip
             // 
@@ -1646,7 +1646,7 @@
             this.EditionLabel.Name = "EditionLabel";
             this.EditionLabel.Size = new System.Drawing.Size(222, 13);
             this.EditionLabel.TabIndex = 32;
-            this.EditionLabel.Text = "Start with CTRL or SHIFT for larger indices";
+            this.EditionLabel.Text = "Start with CTRL for larger indices";
             this.EditionLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ABTextBox
@@ -1791,7 +1791,7 @@
             this.FactorsTabPage.Location = new System.Drawing.Point(4, 22);
             this.FactorsTabPage.Name = "FactorsTabPage";
             this.FactorsTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.FactorsTabPage.Size = new System.Drawing.Size(232, 236);
+            this.FactorsTabPage.Size = new System.Drawing.Size(232, 194);
             this.FactorsTabPage.TabIndex = 0;
             this.FactorsTabPage.Text = "Factors";
             // 
@@ -1840,7 +1840,7 @@
             this.TriangleTabPage.Controls.Add(this.aTriangleTextBox);
             this.TriangleTabPage.Location = new System.Drawing.Point(4, 22);
             this.TriangleTabPage.Name = "TriangleTabPage";
-            this.TriangleTabPage.Size = new System.Drawing.Size(232, 215);
+            this.TriangleTabPage.Size = new System.Drawing.Size(232, 194);
             this.TriangleTabPage.TabIndex = 3;
             this.TriangleTabPage.Text = "Triangle";
             // 
@@ -2044,7 +2044,7 @@
             this.CircleTabPage.Controls.Add(this.rCircleLabel);
             this.CircleTabPage.Location = new System.Drawing.Point(4, 22);
             this.CircleTabPage.Name = "CircleTabPage";
-            this.CircleTabPage.Size = new System.Drawing.Size(232, 215);
+            this.CircleTabPage.Size = new System.Drawing.Size(232, 194);
             this.CircleTabPage.TabIndex = 2;
             this.CircleTabPage.Text = "Circle";
             // 
@@ -2157,7 +2157,7 @@
             this.SphereTabPage.Controls.Add(this.vEqSphereLabel);
             this.SphereTabPage.Location = new System.Drawing.Point(4, 22);
             this.SphereTabPage.Name = "SphereTabPage";
-            this.SphereTabPage.Size = new System.Drawing.Size(232, 215);
+            this.SphereTabPage.Size = new System.Drawing.Size(232, 194);
             this.SphereTabPage.TabIndex = 4;
             this.SphereTabPage.Text = "Sphere";
             // 

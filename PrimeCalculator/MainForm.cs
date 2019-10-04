@@ -160,9 +160,9 @@ public partial class MainForm : Form
         this.Top = Screen.PrimaryScreen.WorkingArea.Top;
         this.Left = Screen.PrimaryScreen.WorkingArea.Left;
         this.Width = (m_dpi == 96.0F) ? 256 : 338;
-        this.Height = (m_dpi == 96.0F) ? 416 : 507;
-        MultithreadingCheckBox.Top = (m_dpi == 96.0F) ? 363 : 444;
-        VersionLabel.Top = (m_dpi == 96.0F) ? 360 : 442;
+        this.Height = (m_dpi == 96.0F) ? 420 : 506;
+        MultithreadingCheckBox.Top = (m_dpi == 96.0F) ? 367 : 443;
+        VersionLabel.Top = (m_dpi == 96.0F) ? 365 : 442;
     }
 
     private void MainForm_Load(object sender, EventArgs e)
@@ -3731,27 +3731,6 @@ public partial class MainForm : Form
             this.Activate();
         }
     }
-    private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-        //if (e.Button == MouseButtons.Left)
-        //{
-        //    // make visible (in case it is hidden)
-        //    this.Visible = true;
-
-        //    // toggle maximized
-        //    if (this.WindowState == FormWindowState.Maximized)
-        //    {
-        //        this.WindowState = FormWindowState.Normal;
-        //    }
-        //    else
-        //    {
-        //        this.WindowState = FormWindowState.Maximized;
-        //    }
-
-        //    // and bring to foreground
-        //    this.Activate();
-        //}
-    }
     private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
     {
         MessageBox.Show
@@ -3805,5 +3784,9 @@ public partial class MainForm : Form
         {
             this.Cursor = Cursors.Default;
         }
+    }
+    private void VersionLabel_MouseHover(object sender, EventArgs e)
+    {
+        this.ToolTip.SetToolTip(VersionLabel, Globals.LONG_VERSION);
     }
 }

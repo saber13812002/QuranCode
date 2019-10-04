@@ -1646,9 +1646,9 @@ public partial class MainForm : Form, ISubscriber
         this.ShowToolTipsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
         this.ShowToolTipsCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.ShowToolTipsCheckBox.ForeColor = System.Drawing.Color.Navy;
-        this.ShowToolTipsCheckBox.Location = new System.Drawing.Point(1019, 8);
+        this.ShowToolTipsCheckBox.Location = new System.Drawing.Point(1024, 16);
         this.ShowToolTipsCheckBox.Name = "ShowToolTipsCheckBox";
-        this.ShowToolTipsCheckBox.Size = new System.Drawing.Size(8, 8);
+        this.ShowToolTipsCheckBox.Size = new System.Drawing.Size(6, 6);
         this.ShowToolTipsCheckBox.TabIndex = 10000;
         this.ToolTip.SetToolTip(this.ShowToolTipsCheckBox, "Show tooltips");
         this.ShowToolTipsCheckBox.UseVisualStyleBackColor = false;
@@ -2063,7 +2063,6 @@ public partial class MainForm : Form, ISubscriber
         this.ResearchMethodParameterTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.ResearchMethodParameterTextBox, "Parameter");
         this.ResearchMethodParameterTextBox.Visible = false;
-        this.ResearchMethodParameterTextBox.WordWrap = false;
         this.ResearchMethodParameterTextBox.Enter += new System.EventHandler(this.StatusControls_Enter);
         this.ResearchMethodParameterTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.ResearchMethodParameterTextBox_KeyDown);
         this.ResearchMethodParameterTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -2106,9 +2105,9 @@ public partial class MainForm : Form, ISubscriber
         this.VersionLabel.Padding = new System.Windows.Forms.Padding(0, 1, 0, 0);
         this.VersionLabel.Size = new System.Drawing.Size(121, 26);
         this.VersionLabel.TabIndex = 111;
-        this.VersionLabel.Text = "7.29.139.8317";
+        this.VersionLabel.Text = "7.29.139";
         this.VersionLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-        this.ToolTip.SetToolTip(this.VersionLabel, "Version");
+        this.ToolTip.SetToolTip(this.VersionLabel, "7.29.139.8317");
         this.VersionLabel.Click += new System.EventHandler(this.VersionLabel_Click);
         this.VersionLabel.Enter += new System.EventHandler(this.StatusControls_Enter);
         // 
@@ -4141,7 +4140,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByTextWithDiacriticsCheckBox.TabIndex = 21;
         this.ToolTip.SetToolTip(this.FindByTextWithDiacriticsCheckBox, "with diacritics  مع الحركات");
         this.FindByTextWithDiacriticsCheckBox.UseVisualStyleBackColor = false;
-        this.FindByTextWithDiacriticsCheckBox.CheckStateChanged += new System.EventHandler(this.FindByTextWithDiacriticsCheckBox_CheckStateChanged);
+        this.FindByTextWithDiacriticsCheckBox.CheckedChanged += new System.EventHandler(this.FindByTextWithDiacriticsCheckBox_CheckedChanged);
         this.FindByTextWithDiacriticsCheckBox.Enter += new System.EventHandler(this.FindByTextControls_Enter);
         // 
         // FindByTextSearchBlockSizeBowingLabel
@@ -6822,8 +6821,8 @@ public partial class MainForm : Form, ISubscriber
         this.TranslationTextBox.ReadOnly = true;
         this.TranslationTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
         this.TranslationTextBox.Size = new System.Drawing.Size(462, 205);
+        this.TranslationTextBox.WordWrap = true;
         this.TranslationTextBox.TabIndex = 2;
-        this.TranslationTextBox.WordWrap = false;
         this.TranslationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
         this.TranslationTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TranslationTextBox_KeyPress);
         // 
@@ -6920,8 +6919,8 @@ public partial class MainForm : Form, ISubscriber
         this.TranslationsTextBox.ReadOnly = true;
         this.TranslationsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
         this.TranslationsTextBox.Size = new System.Drawing.Size(220, 203);
-        this.TranslationsTextBox.TabIndex = 106;
         this.TranslationsTextBox.WordWrap = false;
+        this.TranslationsTextBox.TabIndex = 106;
         this.TranslationsTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
         // 
         // GrammarTabPage
@@ -10641,6 +10640,7 @@ public partial class MainForm : Form, ISubscriber
         this.LetterFrequencyWithDiacriticsCheckBox.Name = "LetterFrequencyWithDiacriticsCheckBox";
         this.LetterFrequencyWithDiacriticsCheckBox.Size = new System.Drawing.Size(16, 16);
         this.LetterFrequencyWithDiacriticsCheckBox.TabIndex = 19;
+        this.LetterFrequencyWithDiacriticsCheckBox.ThreeState = true;
         this.ToolTip.SetToolTip(this.LetterFrequencyWithDiacriticsCheckBox, "with diacritics  مع الحركات");
         this.LetterFrequencyWithDiacriticsCheckBox.UseVisualStyleBackColor = false;
         this.LetterFrequencyWithDiacriticsCheckBox.CheckStateChanged += new System.EventHandler(this.LetterFrequencyWithDiacriticsCheckBox_CheckStateChanged);
@@ -12871,7 +12871,6 @@ public partial class MainForm : Form, ISubscriber
         this.NotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("NotifyIcon.Icon")));
         this.NotifyIcon.Text = "QuranCode";
         this.NotifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseClick);
-        this.NotifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.NotifyIcon_MouseDoubleClick);
         // 
         // NotifyIconContextMenuStrip
         // 
@@ -13757,11 +13756,6 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
-    private void NotifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
-    {
-        this.Visible = false;
-        //VersionLabel_Click(null, null); //??? runtime error
-    }
     private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
     {
         VersionLabel_Click(null, null);
@@ -13830,9 +13824,9 @@ public partial class MainForm : Form, ISubscriber
         {
             if (m_found_verses_displayed)
             {
-                if (ChaptersListBox.SelectedIndices.Count > 0)
+                if (m_client.FilterChapters != null)
                 {
-                    DisplaySearchResults();
+                    DisplayAllSearchResults();
                 }
                 else
                 {
@@ -13849,126 +13843,126 @@ public partial class MainForm : Form, ISubscriber
     {
         HandleEscapeKeyPress(null, null);
     }
-    private void DisplaySearchResults()
+    private void DisplayAllSearchResults()
     {
-        // must clear to go back to main results not main text
-        ChaptersListBox.SelectedIndices.Clear();
-
-        if (!String.IsNullOrEmpty(m_find_result_header))
-        {
-            int pos = m_find_result_header.IndexOf(" of ");
-            if (pos > -1)
-            {
-                m_find_result_header = m_find_result_header.Substring(pos + 4);
-            }
-        }
-
         if (m_client != null)
         {
+            // clear to go back to main results
             m_client.FilterChapters = null;
+            ChaptersListBox.SelectedIndices.Clear();
+
+            if (!String.IsNullOrEmpty(m_find_result_header))
+            {
+                int pos = m_find_result_header.IndexOf(" of ");
+                if (pos > -1)
+                {
+                    m_find_result_header = m_find_result_header.Substring(pos + 4);
+                }
+            }
+
             ClearFindMatches(); // clear m_find_matches for F3 to work correctly in filtered result
             if (m_search_type == SearchType.Numbers)
             {
                 switch (m_numbers_result_type)
                 {
                     case NumbersResultType.Verses:
-                        DisplayFoundVerses(false, true);
+                        DisplayFoundVerses(false);
                         break;
                     case NumbersResultType.VerseRanges:
-                        DisplayFoundVerseRanges(false, true);
+                        DisplayFoundVerseRanges(false);
                         break;
                     case NumbersResultType.VerseSets:
-                        DisplayFoundVerseSets(false, true);
+                        DisplayFoundVerseSets(false);
                         break;
 
                     case NumbersResultType.Chapters:
-                        DisplayFoundChapters(false, true);
+                        DisplayFoundChapters(false);
                         break;
                     case NumbersResultType.ChapterRanges:
-                        DisplayFoundChapterRanges(false, true);
+                        DisplayFoundChapterRanges(false);
                         break;
                     case NumbersResultType.ChapterSets:
-                        DisplayFoundChapterSets(false, true);
+                        DisplayFoundChapterSets(false);
                         break;
 
                     case NumbersResultType.Pages:
-                        DisplayFoundPages(false, true);
+                        DisplayFoundPages(false);
                         break;
                     case NumbersResultType.PageRanges:
-                        DisplayFoundPageRanges(false, true);
+                        DisplayFoundPageRanges(false);
                         break;
                     case NumbersResultType.PageSets:
-                        DisplayFoundPageSets(false, true);
+                        DisplayFoundPageSets(false);
                         break;
 
                     case NumbersResultType.Stations:
-                        DisplayFoundStations(false, true);
+                        DisplayFoundStations(false);
                         break;
                     case NumbersResultType.StationRanges:
-                        DisplayFoundStationRanges(false, true);
+                        DisplayFoundStationRanges(false);
                         break;
                     case NumbersResultType.StationSets:
-                        DisplayFoundStationSets(false, true);
+                        DisplayFoundStationSets(false);
                         break;
 
                     case NumbersResultType.Parts:
-                        DisplayFoundParts(false, true);
+                        DisplayFoundParts(false);
                         break;
                     case NumbersResultType.PartRanges:
-                        DisplayFoundPartRanges(false, true);
+                        DisplayFoundPartRanges(false);
                         break;
                     case NumbersResultType.PartSets:
-                        DisplayFoundPartSets(false, true);
+                        DisplayFoundPartSets(false);
                         break;
 
                     case NumbersResultType.Groups:
-                        DisplayFoundGroups(false, true);
+                        DisplayFoundGroups(false);
                         break;
                     case NumbersResultType.GroupRanges:
-                        DisplayFoundGroupRanges(false, true);
+                        DisplayFoundGroupRanges(false);
                         break;
                     case NumbersResultType.GroupSets:
-                        DisplayFoundGroupSets(false, true);
+                        DisplayFoundGroupSets(false);
                         break;
 
                     case NumbersResultType.Halfs:
-                        DisplayFoundHalfs(false, true);
+                        DisplayFoundHalfs(false);
                         break;
                     case NumbersResultType.HalfRanges:
-                        DisplayFoundHalfRanges(false, true);
+                        DisplayFoundHalfRanges(false);
                         break;
                     case NumbersResultType.HalfSets:
-                        DisplayFoundHalfSets(false, true);
+                        DisplayFoundHalfSets(false);
                         break;
 
                     case NumbersResultType.Quarters:
-                        DisplayFoundQuarters(false, true);
+                        DisplayFoundQuarters(false);
                         break;
                     case NumbersResultType.QuarterRanges:
-                        DisplayFoundQuarterRanges(false, true);
+                        DisplayFoundQuarterRanges(false);
                         break;
                     case NumbersResultType.QuarterSets:
-                        DisplayFoundQuarterSets(false, true);
+                        DisplayFoundQuarterSets(false);
                         break;
 
                     case NumbersResultType.Bowings:
-                        DisplayFoundBowings(false, true);
+                        DisplayFoundBowings(false);
                         break;
                     case NumbersResultType.BowingRanges:
-                        DisplayFoundBowingRanges(false, true);
+                        DisplayFoundBowingRanges(false);
                         break;
                     case NumbersResultType.BowingSets:
-                        DisplayFoundBowingSets(false, true);
+                        DisplayFoundBowingSets(false);
                         break;
 
                     default:
-                        DisplayFoundVerses(false, true);
+                        DisplayFoundVerses(false);
                         break;
                 }
             }
             else
             {
-                DisplayFoundVerses(false, true);
+                DisplayFoundVerses(false);
             }
 
             //SearchResultTextBox.Focus();
@@ -16261,11 +16255,6 @@ public partial class MainForm : Form, ISubscriber
         {
             if (m_client != null)
             {
-                ClearFindMatches();
-
-                FindByTextTextBox.Text = text;
-                FindByTextTextBox.Refresh();
-
                 FindByRoot(text);
             }
         }
@@ -16307,7 +16296,7 @@ public partial class MainForm : Form, ISubscriber
                             int verse_count = m_client.FoundVerses.Count;
                             m_find_result_header = verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + L[l]["similar words"] + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
 
-                            DisplayFoundVerses(true, true);
+                            DisplayFoundVerses(true);
 
                             //SearchResultTextBox.Focus();
                             //SearchResultTextBox.Refresh();
@@ -16384,7 +16373,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         int verse_count = m_client.FoundVerses.Count;
                         m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["anywhere"] + " " + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                        DisplayFoundVerses(true, true);
+                        DisplayFoundVerses(true);
 
                         //SearchResultTextBox.Focus();
                         //SearchResultTextBox.Refresh();
@@ -16438,7 +16427,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         int verse_count = m_client.FoundVerses.Count;
                         m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["anywhere"] + " " + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                        DisplayFoundVerses(true, true);
+                        DisplayFoundVerses(true);
 
                         //SearchResultTextBox.Focus();
                         //SearchResultTextBox.Refresh();
@@ -16533,7 +16522,7 @@ public partial class MainForm : Form, ISubscriber
                 {
                     m_client.FoundPhrases = phrases;
                     m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["match"] : " " + L[l]["matches"]) + " " + L[l]["in"] + " " + m_client.FoundVerses.Count + ((m_client.FoundVerses.Count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                    DisplayFoundVerses(true, true);
+                    DisplayFoundVerses(true);
 
                     //SearchResultTextBox.Focus();
                     //SearchResultTextBox.Refresh();
@@ -17287,7 +17276,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         int verse_count = m_client.FoundVerses.Count;
                         m_find_result_header = verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]);
-                        DisplayFoundVerses(true, true);
+                        DisplayFoundVerses(true);
 
                         //SearchResultTextBox.Focus();
                         //SearchResultTextBox.Refresh();
@@ -21495,103 +21484,103 @@ public partial class MainForm : Form, ISubscriber
                             switch (m_numbers_result_type)
                             {
                                 case NumbersResultType.Verses:
-                                    DisplayFoundVerses(false, true);
+                                    DisplayFoundVerses(false);
                                     break;
                                 case NumbersResultType.VerseRanges:
-                                    DisplayFoundVerseRanges(false, true);
+                                    DisplayFoundVerseRanges(false);
                                     break;
                                 case NumbersResultType.VerseSets:
-                                    DisplayFoundVerseSets(false, true);
+                                    DisplayFoundVerseSets(false);
                                     break;
 
                                 case NumbersResultType.Chapters:
-                                    DisplayFoundChapters(false, true);
+                                    DisplayFoundChapters(false);
                                     break;
                                 case NumbersResultType.ChapterRanges:
-                                    DisplayFoundChapterRanges(false, true);
+                                    DisplayFoundChapterRanges(false);
                                     break;
                                 case NumbersResultType.ChapterSets:
-                                    DisplayFoundChapterSets(false, true);
+                                    DisplayFoundChapterSets(false);
                                     break;
 
                                 case NumbersResultType.Pages:
-                                    DisplayFoundPages(false, true);
+                                    DisplayFoundPages(false);
                                     break;
                                 case NumbersResultType.PageRanges:
-                                    DisplayFoundPageRanges(false, true);
+                                    DisplayFoundPageRanges(false);
                                     break;
                                 case NumbersResultType.PageSets:
-                                    DisplayFoundPageSets(false, true);
+                                    DisplayFoundPageSets(false);
                                     break;
 
                                 case NumbersResultType.Stations:
-                                    DisplayFoundStations(false, true);
+                                    DisplayFoundStations(false);
                                     break;
                                 case NumbersResultType.StationRanges:
-                                    DisplayFoundStationRanges(false, true);
+                                    DisplayFoundStationRanges(false);
                                     break;
                                 case NumbersResultType.StationSets:
-                                    DisplayFoundStationSets(false, true);
+                                    DisplayFoundStationSets(false);
                                     break;
 
                                 case NumbersResultType.Parts:
-                                    DisplayFoundParts(false, true);
+                                    DisplayFoundParts(false);
                                     break;
                                 case NumbersResultType.PartRanges:
-                                    DisplayFoundPartRanges(false, true);
+                                    DisplayFoundPartRanges(false);
                                     break;
                                 case NumbersResultType.PartSets:
-                                    DisplayFoundPartSets(false, true);
+                                    DisplayFoundPartSets(false);
                                     break;
 
                                 case NumbersResultType.Groups:
-                                    DisplayFoundGroups(false, true);
+                                    DisplayFoundGroups(false);
                                     break;
                                 case NumbersResultType.GroupRanges:
-                                    DisplayFoundGroupRanges(false, true);
+                                    DisplayFoundGroupRanges(false);
                                     break;
                                 case NumbersResultType.GroupSets:
-                                    DisplayFoundGroupSets(false, true);
+                                    DisplayFoundGroupSets(false);
                                     break;
 
                                 case NumbersResultType.Halfs:
-                                    DisplayFoundHalfs(false, true);
+                                    DisplayFoundHalfs(false);
                                     break;
                                 case NumbersResultType.HalfRanges:
-                                    DisplayFoundHalfRanges(false, true);
+                                    DisplayFoundHalfRanges(false);
                                     break;
                                 case NumbersResultType.HalfSets:
-                                    DisplayFoundHalfSets(false, true);
+                                    DisplayFoundHalfSets(false);
                                     break;
 
                                 case NumbersResultType.Quarters:
-                                    DisplayFoundQuarters(false, true);
+                                    DisplayFoundQuarters(false);
                                     break;
                                 case NumbersResultType.QuarterRanges:
-                                    DisplayFoundQuarterRanges(false, true);
+                                    DisplayFoundQuarterRanges(false);
                                     break;
                                 case NumbersResultType.QuarterSets:
-                                    DisplayFoundQuarterSets(false, true);
+                                    DisplayFoundQuarterSets(false);
                                     break;
 
                                 case NumbersResultType.Bowings:
-                                    DisplayFoundBowings(false, true);
+                                    DisplayFoundBowings(false);
                                     break;
                                 case NumbersResultType.BowingRanges:
-                                    DisplayFoundBowingRanges(false, true);
+                                    DisplayFoundBowingRanges(false);
                                     break;
                                 case NumbersResultType.BowingSets:
-                                    DisplayFoundBowingSets(false, true);
+                                    DisplayFoundBowingSets(false);
                                     break;
 
                                 default:
-                                    DisplayFoundVerses(false, true);
+                                    DisplayFoundVerses(false);
                                     break;
                             }
                         }
                         else
                         {
-                            DisplayFoundVerses(false, true);
+                            DisplayFoundVerses(false);
 
                             //SearchResultTextBox.Focus();
                             //SearchResultTextBox.Refresh();
@@ -21996,7 +21985,7 @@ public partial class MainForm : Form, ISubscriber
     }
     ///////////////////////////////////////////////////////////////////////////////
     #endregion
-    #region Selection
+    #region Display Selection
     ///////////////////////////////////////////////////////////////////////////////
     private bool m_selection_mode = false;
     private int m_word_number_in_verse = -1;
@@ -25406,7 +25395,7 @@ public partial class MainForm : Form, ISubscriber
         TranslationWordWrapLabel.Refresh();
 
         TranslationTextBox.WordWrap = m_word_wrap_translation_textbox;
-        TranslationsTextBox.WordWrap = m_word_wrap_translation_textbox;
+        TranslationsTextBox.WordWrap = m_word_wrap_translation_textbox && !m_show_all_translations;
     }
     // translation
     private List<string> m_selected_translations = new List<string>();
@@ -25750,6 +25739,8 @@ public partial class MainForm : Form, ISubscriber
     private void AllTranslatorsCheckBox_CheckedChanged(object sender, EventArgs e)
     {
         m_show_all_translations = AllTranslatorsCheckBox.Checked;
+
+        TranslationsTextBox.WordWrap = m_word_wrap_translation_textbox && !m_show_all_translations;
         TranslatorsComboBox.Enabled = !m_show_all_translations;
         TranslatorComboBox_SelectedIndexChanged(null, null);
         ApplyTranslationFontAndColor();
@@ -26578,21 +26569,28 @@ public partial class MainForm : Form, ISubscriber
     {
         if (m_emlaaei_text) return;
 
-        if (word != null)
+        this.Cursor = Cursors.WaitCursor;
+        try
         {
             if (m_client != null)
             {
-                if (m_client.Book != null)
+                if (word != null)
                 {
-                    string text = word.Text;
-                    text = RemovePunctuationMarks(text);
-
-                    FindByTextTextBox.Text = text;
-                    FindByTextTextBox.Refresh();
-                    text = word.BestRoot;
-                    FindByRoot(text);
+                    FindByRoot(word.Text);
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
         }
     }
     private void UpdateMouseCursor()
@@ -33870,7 +33868,7 @@ public partial class MainForm : Form, ISubscriber
                 {
                     int verse_count = m_client.FoundVerses.Count;
                     m_find_result_header = verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + m_find_by_prostration_type.ToString() + " " + L[l]["prostrations"] + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                    DisplayFoundVerses(true, true);
+                    DisplayFoundVerses(true);
                 }
 
                 //SearchResultTextBox.Focus();
@@ -34790,7 +34788,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         int verse_count = m_client.FoundVerses.Count;
                         m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " C_" + m_text_location_in_chapter.ToString() + " V_" + m_text_location_in_verse.ToString() + " W_" + m_text_location_in_word.ToString() + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                        DisplayFoundVerses(true, true);
+                        DisplayFoundVerses(true);
 
                         //SearchResultTextBox.Focus();
                         //SearchResultTextBox.Refresh();
@@ -35169,7 +35167,7 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
-    private void FindByTextWithDiacriticsCheckBox_CheckStateChanged(object sender, EventArgs e)
+    private void FindByTextWithDiacriticsCheckBox_CheckedChanged(object sender, EventArgs e)
     {
         if (m_client != null)
         {
@@ -35671,7 +35669,7 @@ public partial class MainForm : Form, ISubscriber
                             int block_count = ((m_multiplicity_comparison_operator == ComparisonOperator.Equal) && (m_text_search_block_size != TextSearchBlockSize.Verse)) ? phrase_count / Math.Abs(m_multiplicity) : m_client.FoundVerses.Count;
                             m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + block_count + " " + ((block_count == 1) ? L[l][block_name] : (L[l][block_name + "s"])) + " " + L[l]["with"] + " " + multiplicity_text + " " + text + " C_" + m_text_location_in_chapter.ToString() + " V_" + m_text_location_in_verse.ToString() + " W_" + m_text_location_in_word.ToString() + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
                         }
-                        DisplayFoundVerses(true, true);
+                        DisplayFoundVerses(true);
 
                         //SearchResultTextBox.Focus();
                         //SearchResultTextBox.Refresh();
@@ -35737,7 +35735,7 @@ public partial class MainForm : Form, ISubscriber
                         //string block_name = ((m_multiplicity_comparison_operator == ComparisonOperator.Equal) && (m_text_search_block_size != TextSearchBlockSize.Verse)) ? m_text_search_block_size.ToString() : "verse";
                         int block_count = ((m_multiplicity_comparison_operator == ComparisonOperator.Equal) && (m_text_search_block_size != TextSearchBlockSize.Verse)) ? phrase_count / Math.Abs(m_multiplicity) : m_client.FoundVerses.Count;
                         m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + block_count + " " + ((block_count == 1) ? L[l][block_name] : (L[l][block_name + "s"])) + " " + L[l]["with"] + " " + text_proximity_type.ToString() + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                        DisplayFoundVerses(true, true);
+                        DisplayFoundVerses(true);
 
                         //SearchResultTextBox.Focus();
                         //SearchResultTextBox.Refresh();
@@ -35790,7 +35788,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         int verse_count = m_client.FoundVerses.Count;
                         m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " C_" + m_text_location_in_chapter.ToString() + " V_" + m_text_location_in_verse.ToString() + " W_" + m_text_location_in_word.ToString() + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                        DisplayFoundVerses(true, true);
+                        DisplayFoundVerses(true);
 
                         //SearchResultTextBox.Focus();
                         //SearchResultTextBox.Refresh();
@@ -35815,6 +35813,10 @@ public partial class MainForm : Form, ISubscriber
             if (!String.IsNullOrEmpty(text))
             {
                 text = text.Trim();
+
+                FindByTextTextBox.TextChanged -= FindByTextTextBox_TextChanged;
+                FindByTextTextBox.Text = text;
+                FindByTextTextBox.TextChanged += FindByTextTextBox_TextChanged;
 
                 m_client.FindPhrases(m_text_search_block_size, text, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
                 if (m_client.FoundPhrases != null)
@@ -35857,7 +35859,7 @@ public partial class MainForm : Form, ISubscriber
                         int block_count = ((m_multiplicity_comparison_operator == ComparisonOperator.Equal) && (m_text_search_block_size != TextSearchBlockSize.Verse)) ? phrase_count / Math.Abs(m_multiplicity) : m_client.FoundVerses.Count;
                         m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + block_count + " " + ((block_count == 1) ? L[l][block_name] : (L[l][block_name + "s"])) + " " + L[l]["with"] + " " + multiplicity_text + " " + L[l]["root"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
                     }
-                    DisplayFoundVerses(true, true);
+                    DisplayFoundVerses(true);
 
                     //SearchResultTextBox.Focus();
                     //SearchResultTextBox.Refresh();
@@ -36354,7 +36356,7 @@ public partial class MainForm : Form, ISubscriber
 
                         m_find_result_header = phrase_count + " " + L[l]["repeated phrases"] + " " + L[l]["in"] + " " + verse_count + " " + ((verse_count == 1) ? L[l]["verse"] : (L[l]["verses"])) + " " + L[l]["with diacritics"];
 
-                        DisplayFoundVerses(true, true);
+                        DisplayFoundVerses(true);
 
                         //SearchResultTextBox.Focus();
                         //SearchResultTextBox.Refresh();
@@ -36445,7 +36447,7 @@ public partial class MainForm : Form, ISubscriber
                 {
                     int verse_count = m_client.FoundVerses.Count;
                     m_find_result_header = verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " C_" + m_text_location_in_chapter.ToString() + " V_" + m_text_location_in_verse.ToString() + " W_" + m_text_location_in_word.ToString() + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                    DisplayFoundVerses(false, true);
+                    DisplayFoundVerses(false);
 
                     //SearchResultTextBox.Focus();
                     //SearchResultTextBox.Refresh();
@@ -36614,7 +36616,7 @@ public partial class MainForm : Form, ISubscriber
                         int verse_count = m_client.FoundVerses.Count;
                         m_find_result_header = verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + find_by_similarity_method.ToString() + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
 
-                        DisplayFoundVerses(true, true);
+                        DisplayFoundVerses(true);
                     }
                 }
             }
@@ -36628,7 +36630,7 @@ public partial class MainForm : Form, ISubscriber
                     int verse_count = m_client.FoundVerses.Count;
                     m_find_result_header = verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + find_by_similarity_method.ToString() + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
 
-                    DisplayFoundVerseRanges(true, true);
+                    DisplayFoundVerseRanges(true);
                 }
             }
             else
@@ -39760,7 +39762,7 @@ public partial class MainForm : Form, ISubscriber
                                 if (m_client.FoundVerses != null)
                                 {
                                     m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["letter"] : " " + L[l]["words"]) + " " + L[l]["in"] + " " + m_client.FoundVerses.Count + ((m_client.FoundVerses.Count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                    DisplayFoundVerses(true, true);
+                                    DisplayFoundVerses(true);
                                 }
                             }
                         }
@@ -39774,7 +39776,7 @@ public partial class MainForm : Form, ISubscriber
                                 if (m_client.FoundVerses != null)
                                 {
                                     m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["word"] : " " + L[l]["words"]) + " " + L[l]["in"] + " " + m_client.FoundVerses.Count + ((m_client.FoundVerses.Count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                    DisplayFoundVerses(true, true);
+                                    DisplayFoundVerses(true);
                                 }
                             }
                         }
@@ -39788,7 +39790,7 @@ public partial class MainForm : Form, ISubscriber
                                 if (m_client.FoundVerses != null)
                                 {
                                     m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["word range"] : " " + L[l]["word ranges"]) + " " + L[l]["in"] + " " + m_client.FoundVerses.Count + ((m_client.FoundVerses.Count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                    DisplayFoundVerses(true, true);
+                                    DisplayFoundVerses(true);
                                 }
                             }
                         }
@@ -39802,7 +39804,7 @@ public partial class MainForm : Form, ISubscriber
                                 if (m_client.FoundVerses != null)
                                 {
                                     m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["word set"] : " " + L[l]["word sets"]) + " " + L[l]["in"] + " " + m_client.FoundVerses.Count + ((m_client.FoundVerses.Count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                    DisplayFoundVerses(true, true);
+                                    DisplayFoundVerses(true);
                                 }
                             }
                         }
@@ -39814,7 +39816,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundSentences != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["sentence"] : " " + L[l]["sentences"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundVerses(true, true);
+                                DisplayFoundVerses(true);
                             }
                         }
                         break;
@@ -39825,7 +39827,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundVerses != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundVerses(true, true);
+                                DisplayFoundVerses(true);
                             }
                         }
                         break;
@@ -39836,7 +39838,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundVerseRanges != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["verse range"] : " " + L[l]["verse ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundVerseRanges(true, true);
+                                DisplayFoundVerseRanges(true);
                             }
                         }
                         break;
@@ -39847,7 +39849,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundVerseSets != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["verse set"] : " " + L[l]["verse sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundVerseSets(true, true);
+                                DisplayFoundVerseSets(true);
                             }
                         }
                         break;
@@ -39859,7 +39861,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundChapters != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["chapter"] : " " + L[l]["chapters"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundChapters(true, true);
+                                DisplayFoundChapters(true);
                             }
                         }
                         break;
@@ -39870,7 +39872,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundChapterRanges != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["chapter range"] : " " + L[l]["chapter ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundChapterRanges(true, true);
+                                DisplayFoundChapterRanges(true);
                             }
                         }
                         break;
@@ -39881,7 +39883,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundChapterSets != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["chapter set"] : " " + L[l]["chapter sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundChapterSets(true, true);
+                                DisplayFoundChapterSets(true);
                             }
                         }
                         break;
@@ -39894,7 +39896,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundPages != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["page"] : " " + L[l]["pages"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundPages(true, true);
+                                DisplayFoundPages(true);
                             }
                         }
                         break;
@@ -39905,7 +39907,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundPageRanges != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["page range"] : " " + L[l]["page ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundPageRanges(true, true);
+                                DisplayFoundPageRanges(true);
                             }
                         }
                         break;
@@ -39916,7 +39918,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundPageSets != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["page set"] : " " + L[l]["page sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundPageSets(true, true);
+                                DisplayFoundPageSets(true);
                             }
                         }
                         break;
@@ -39928,7 +39930,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundStations != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["station"] : " " + L[l]["stations"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundStations(true, true);
+                                DisplayFoundStations(true);
                             }
                         }
                         break;
@@ -39939,7 +39941,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundStationRanges != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["station range"] : " " + L[l]["station ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundStationRanges(true, true);
+                                DisplayFoundStationRanges(true);
                             }
                         }
                         break;
@@ -39950,7 +39952,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundStationSets != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["station set"] : " " + L[l]["station sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundStationSets(true, true);
+                                DisplayFoundStationSets(true);
                             }
                         }
                         break;
@@ -39962,7 +39964,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundParts != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["part"] : " " + L[l]["parts"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundParts(true, true);
+                                DisplayFoundParts(true);
                             }
                         }
                         break;
@@ -39973,7 +39975,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundPartRanges != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["part range"] : " " + L[l]["part ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundPartRanges(true, true);
+                                DisplayFoundPartRanges(true);
                             }
                         }
                         break;
@@ -39984,7 +39986,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundPartSets != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["part set"] : " " + L[l]["part sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundPartSets(true, true);
+                                DisplayFoundPartSets(true);
                             }
                         }
                         break;
@@ -39996,7 +39998,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundGroups != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["group"] : " " + L[l]["groups"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundGroups(true, true);
+                                DisplayFoundGroups(true);
                             }
                         }
                         break;
@@ -40007,7 +40009,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundGroupRanges != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["group range"] : " " + L[l]["group ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundGroupRanges(true, true);
+                                DisplayFoundGroupRanges(true);
                             }
                         }
                         break;
@@ -40018,7 +40020,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundGroupSets != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["group set"] : " " + L[l]["group sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundGroupSets(true, true);
+                                DisplayFoundGroupSets(true);
                             }
                         }
                         break;
@@ -40030,7 +40032,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundHalfs != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["half"] : " " + L[l]["halfs"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundHalfs(true, true);
+                                DisplayFoundHalfs(true);
                             }
                         }
                         break;
@@ -40041,7 +40043,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundHalfRanges != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["half range"] : " " + L[l]["half ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundHalfRanges(true, true);
+                                DisplayFoundHalfRanges(true);
                             }
                         }
                         break;
@@ -40052,7 +40054,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundHalfSets != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["half set"] : " " + L[l]["half sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundHalfSets(true, true);
+                                DisplayFoundHalfSets(true);
                             }
                         }
                         break;
@@ -40064,7 +40066,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundQuarters != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["quarter"] : " " + L[l]["quarters"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundQuarters(true, true);
+                                DisplayFoundQuarters(true);
                             }
                         }
                         break;
@@ -40075,7 +40077,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundQuarterRanges != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["quarter range"] : " " + L[l]["quarter ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundQuarterRanges(true, true);
+                                DisplayFoundQuarterRanges(true);
                             }
                         }
                         break;
@@ -40086,7 +40088,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundQuarterSets != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["quarter set"] : " " + L[l]["quarter sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundQuarterSets(true, true);
+                                DisplayFoundQuarterSets(true);
                             }
                         }
                         break;
@@ -40098,7 +40100,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundBowings != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["bowing"] : " " + L[l]["bowings"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundBowings(true, true);
+                                DisplayFoundBowings(true);
                             }
                         }
                         break;
@@ -40109,7 +40111,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundBowingRanges != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["bowing range"] : " " + L[l]["bowing ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundBowingRanges(true, true);
+                                DisplayFoundBowingRanges(true);
                             }
                         }
                         break;
@@ -40120,7 +40122,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundBowingSets != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["bowing set"] : " " + L[l]["bowing sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundBowingSets(true, true);
+                                DisplayFoundBowingSets(true);
                             }
                         }
                         break;
@@ -40620,7 +40622,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundWords != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["word"] : " " + L[l]["words"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundVerses(true, true);
+                                DisplayFoundVerses(true);
                             }
                         }
                         break;
@@ -40630,7 +40632,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundSentences != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["sentence"] : " " + L[l]["sentences"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundVerses(true, true);
+                                DisplayFoundVerses(true);
                             }
                         }
                         break;
@@ -40640,7 +40642,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundVerses != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundVerses(true, true);
+                                DisplayFoundVerses(true);
                             }
                         }
                         break;
@@ -40650,7 +40652,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundChapters != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["chapter"] : " " + L[l]["chapters"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundChapters(true, true);
+                                DisplayFoundChapters(true);
                             }
                         }
                         break;
@@ -40663,7 +40665,7 @@ public partial class MainForm : Form, ISubscriber
     }
     ///////////////////////////////////////////////////////////////////////////////
     #endregion
-    #region Search Results
+    #region Display Search Results
     ///////////////////////////////////////////////////////////////////////////////
     private struct FindMatch
     {
@@ -40979,7 +40981,7 @@ public partial class MainForm : Form, ISubscriber
     }
 
     private int[] m_matches_per_chapter = null;
-    private void DisplayFoundVerses(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundVerses(bool add_to_history)
     {
         this.Cursor = Cursors.WaitCursor;
         try
@@ -40993,46 +40995,43 @@ public partial class MainForm : Form, ISubscriber
                     ZoomOutLabel.Enabled = (m_text_zoom_factor >= (m_min_zoom_factor + m_zoom_factor_increment - m_error_margin));
 
                     StringBuilder phrase_texts = new StringBuilder();
-                    if (colorize_chapters_by_matches)
+                    if (m_client.Book != null)
                     {
-                        if (m_client.Book != null)
+                        m_matches_per_chapter = new int[m_client.Book.Chapters.Count];
+                        if ((m_client.FoundPhrases != null) && (m_client.FoundPhrases.Count > 0))
                         {
-                            m_matches_per_chapter = new int[m_client.Book.Chapters.Count];
-                            if ((m_client.FoundPhrases != null) && (m_client.FoundPhrases.Count > 0))
+                            foreach (Phrase phrase in m_client.FoundPhrases)
                             {
-                                foreach (Phrase phrase in m_client.FoundPhrases)
+                                if (phrase != null)
                                 {
-                                    if (phrase != null)
-                                    {
-                                        phrase_texts.AppendLine(phrase.Text);
+                                    phrase_texts.AppendLine(phrase.Text);
 
-                                        if (phrase.Verse != null)
-                                        {
-                                            if (phrase.Verse.Chapter != null)
-                                            {
-                                                m_matches_per_chapter[phrase.Verse.Chapter.SortedNumber - 1]++;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                foreach (Verse verse in m_client.FoundVerses)
-                                {
-                                    if (verse != null)
+                                    if (phrase.Verse != null)
                                     {
-                                        if (verse.Chapter != null)
+                                        if (phrase.Verse.Chapter != null)
                                         {
-                                            m_matches_per_chapter[verse.Chapter.SortedNumber - 1]++;
+                                            m_matches_per_chapter[phrase.Verse.Chapter.SortedNumber - 1]++;
                                         }
                                     }
                                 }
                             }
                         }
-
-                        SwitchToSearchResultTextBox();
+                        else
+                        {
+                            foreach (Verse verse in m_client.FoundVerses)
+                            {
+                                if (verse != null)
+                                {
+                                    if (verse.Chapter != null)
+                                    {
+                                        m_matches_per_chapter[verse.Chapter.SortedNumber - 1]++;
+                                    }
+                                }
+                            }
+                        }
                     }
+
+                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
                     for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
@@ -41131,7 +41130,7 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void DisplayFoundVerseRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundVerseRanges(bool add_to_history)
     {
         DisplayFoundVerseRangesTextFile();
 
@@ -41146,28 +41145,25 @@ public partial class MainForm : Form, ISubscriber
                     ZoomInLabel.Enabled = (m_text_zoom_factor <= (m_max_zoom_factor - m_zoom_factor_increment + m_error_margin));
                     ZoomOutLabel.Enabled = (m_text_zoom_factor >= (m_min_zoom_factor + m_zoom_factor_increment - m_error_margin));
 
-                    if (colorize_chapters_by_matches)
+                    if (m_client.Book != null)
                     {
-                        if (m_client.Book != null)
+                        m_matches_per_chapter = new int[m_client.Book.Chapters.Count];
+                        foreach (List<Verse> range in m_client.FoundVerseRanges)
                         {
-                            m_matches_per_chapter = new int[m_client.Book.Chapters.Count];
-                            foreach (List<Verse> range in m_client.FoundVerseRanges)
+                            foreach (Verse verse in range)
                             {
-                                foreach (Verse verse in range)
+                                if (verse != null)
                                 {
-                                    if (verse != null)
+                                    if (verse.Chapter != null)
                                     {
-                                        if (verse.Chapter != null)
-                                        {
-                                            m_matches_per_chapter[verse.Chapter.SortedNumber - 1]++;
-                                        }
+                                        m_matches_per_chapter[verse.Chapter.SortedNumber - 1]++;
                                     }
                                 }
                             }
                         }
-
-                        SwitchToSearchResultTextBox();
                     }
+
+                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
                     for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
@@ -41245,7 +41241,7 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void DisplayFoundVerseSets(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundVerseSets(bool add_to_history)
     {
         DisplayFoundVerseSetsTextFile();
 
@@ -41260,28 +41256,25 @@ public partial class MainForm : Form, ISubscriber
                     ZoomInLabel.Enabled = (m_text_zoom_factor <= (m_max_zoom_factor - m_zoom_factor_increment + m_error_margin));
                     ZoomOutLabel.Enabled = (m_text_zoom_factor >= (m_min_zoom_factor + m_zoom_factor_increment - m_error_margin));
 
-                    if (colorize_chapters_by_matches)
+                    if (m_client.Book != null)
                     {
-                        if (m_client.Book != null)
+                        m_matches_per_chapter = new int[m_client.Book.Chapters.Count];
+                        foreach (List<Verse> set in m_client.FoundVerseSets)
                         {
-                            m_matches_per_chapter = new int[m_client.Book.Chapters.Count];
-                            foreach (List<Verse> set in m_client.FoundVerseSets)
+                            foreach (Verse verse in set)
                             {
-                                foreach (Verse verse in set)
+                                if (verse != null)
                                 {
-                                    if (verse != null)
+                                    if (verse.Chapter != null)
                                     {
-                                        if (verse.Chapter != null)
-                                        {
-                                            m_matches_per_chapter[verse.Chapter.SortedNumber - 1]++;
-                                        }
+                                        m_matches_per_chapter[verse.Chapter.SortedNumber - 1]++;
                                     }
                                 }
                             }
                         }
-
-                        SwitchToSearchResultTextBox();
                     }
+
+                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) SearchResultTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
                     for (int i = 0; i < 3; i++) SearchResultTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
@@ -41359,7 +41352,7 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void DisplayFoundChapters(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundChapters(bool add_to_history)
     {
         this.Cursor = Cursors.WaitCursor;
         try
@@ -41372,22 +41365,19 @@ public partial class MainForm : Form, ISubscriber
                     ZoomInLabel.Enabled = (m_text_zoom_factor <= (m_max_zoom_factor - m_zoom_factor_increment + m_error_margin));
                     ZoomOutLabel.Enabled = (m_text_zoom_factor >= (m_min_zoom_factor + m_zoom_factor_increment - m_error_margin));
 
-                    if (colorize_chapters_by_matches)
+                    if (m_client.Book != null)
                     {
-                        if (m_client.Book != null)
+                        m_matches_per_chapter = new int[m_client.Book.Chapters.Count];
+                        foreach (Chapter chapter in m_client.FoundChapters)
                         {
-                            m_matches_per_chapter = new int[m_client.Book.Chapters.Count];
-                            foreach (Chapter chapter in m_client.FoundChapters)
+                            if (chapter != null)
                             {
-                                if (chapter != null)
-                                {
-                                    m_matches_per_chapter[chapter.SortedNumber - 1]++;
-                                }
+                                m_matches_per_chapter[chapter.SortedNumber - 1]++;
                             }
                         }
-
-                        SwitchToSearchResultTextBox();
                     }
+
+                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) ChaptersListBox.SelectedIndexChanged -= new EventHandler(ChaptersListBox_SelectedIndexChanged);
                     if (m_client.FoundChapters.Count > 0)
@@ -41486,7 +41476,7 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void DisplayFoundChapterRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundChapterRanges(bool add_to_history)
     {
         DisplayFoundChapterRangesTextFile();
 
@@ -41501,25 +41491,22 @@ public partial class MainForm : Form, ISubscriber
                     ZoomInLabel.Enabled = (m_text_zoom_factor <= (m_max_zoom_factor - m_zoom_factor_increment + m_error_margin));
                     ZoomOutLabel.Enabled = (m_text_zoom_factor >= (m_min_zoom_factor + m_zoom_factor_increment - m_error_margin));
 
-                    if (colorize_chapters_by_matches)
+                    if (m_client.Book != null)
                     {
-                        if (m_client.Book != null)
+                        m_matches_per_chapter = new int[m_client.Book.Chapters.Count];
+                        foreach (List<Chapter> range in m_client.FoundChapterRanges)
                         {
-                            m_matches_per_chapter = new int[m_client.Book.Chapters.Count];
-                            foreach (List<Chapter> range in m_client.FoundChapterRanges)
+                            foreach (Chapter chapter in range)
                             {
-                                foreach (Chapter chapter in range)
+                                if (chapter != null)
                                 {
-                                    if (chapter != null)
-                                    {
-                                        m_matches_per_chapter[chapter.SortedNumber - 1]++;
-                                    }
+                                    m_matches_per_chapter[chapter.SortedNumber - 1]++;
                                 }
                             }
                         }
-
-                        SwitchToSearchResultTextBox();
                     }
+
+                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) ChaptersListBox.SelectedIndexChanged -= new EventHandler(ChaptersListBox_SelectedIndexChanged);
                     if (m_client.FoundChapterRanges.Count > 0)
@@ -41618,7 +41605,7 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void DisplayFoundChapterSets(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundChapterSets(bool add_to_history)
     {
         DisplayFoundChapterSetsTextFile();
 
@@ -41633,25 +41620,22 @@ public partial class MainForm : Form, ISubscriber
                     ZoomInLabel.Enabled = (m_text_zoom_factor <= (m_max_zoom_factor - m_zoom_factor_increment + m_error_margin));
                     ZoomOutLabel.Enabled = (m_text_zoom_factor >= (m_min_zoom_factor + m_zoom_factor_increment - m_error_margin));
 
-                    if (colorize_chapters_by_matches)
+                    if (m_client.Book != null)
                     {
-                        if (m_client.Book != null)
+                        m_matches_per_chapter = new int[m_client.Book.Chapters.Count];
+                        foreach (List<Chapter> set in m_client.FoundChapterSets)
                         {
-                            m_matches_per_chapter = new int[m_client.Book.Chapters.Count];
-                            foreach (List<Chapter> set in m_client.FoundChapterSets)
+                            foreach (Chapter chapter in set)
                             {
-                                foreach (Chapter chapter in set)
+                                if (chapter != null)
                                 {
-                                    if (chapter != null)
-                                    {
-                                        m_matches_per_chapter[chapter.SortedNumber - 1]++;
-                                    }
+                                    m_matches_per_chapter[chapter.SortedNumber - 1]++;
                                 }
                             }
                         }
-
-                        SwitchToSearchResultTextBox();
                     }
+
+                    SwitchToSearchResultTextBox();
 
                     for (int i = 0; i < 3; i++) ChaptersListBox.SelectedIndexChanged -= new EventHandler(ChaptersListBox_SelectedIndexChanged);
                     if (m_client.FoundChapterSets.Count > 0)
@@ -41750,89 +41734,89 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void DisplayFoundPages(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundPages(bool add_to_history)
     {
-        DisplayFoundVerses(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerses(add_to_history);
     }
-    private void DisplayFoundPageRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundPageRanges(bool add_to_history)
     {
-        DisplayFoundVerseRanges(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerseRanges(add_to_history);
     }
-    private void DisplayFoundPageSets(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundPageSets(bool add_to_history)
     {
-        DisplayFoundVerseSets(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerseSets(add_to_history);
     }
-    private void DisplayFoundStations(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundStations(bool add_to_history)
     {
-        DisplayFoundVerses(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerses(add_to_history);
     }
-    private void DisplayFoundStationRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundStationRanges(bool add_to_history)
     {
-        DisplayFoundVerseRanges(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerseRanges(add_to_history);
     }
-    private void DisplayFoundStationSets(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundStationSets(bool add_to_history)
     {
-        DisplayFoundVerseSets(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerseSets(add_to_history);
     }
-    private void DisplayFoundParts(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundParts(bool add_to_history)
     {
-        DisplayFoundVerses(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerses(add_to_history);
     }
-    private void DisplayFoundPartRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundPartRanges(bool add_to_history)
     {
-        DisplayFoundVerseRanges(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerseRanges(add_to_history);
     }
-    private void DisplayFoundPartSets(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundPartSets(bool add_to_history)
     {
-        DisplayFoundVerseSets(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerseSets(add_to_history);
     }
-    private void DisplayFoundGroups(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundGroups(bool add_to_history)
     {
-        DisplayFoundVerses(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerses(add_to_history);
     }
-    private void DisplayFoundGroupRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundGroupRanges(bool add_to_history)
     {
-        DisplayFoundVerseRanges(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerseRanges(add_to_history);
     }
-    private void DisplayFoundGroupSets(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundGroupSets(bool add_to_history)
     {
-        DisplayFoundVerseSets(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerseSets(add_to_history);
     }
-    private void DisplayFoundHalfs(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundHalfs(bool add_to_history)
     {
-        DisplayFoundVerses(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerses(add_to_history);
     }
-    private void DisplayFoundHalfRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundHalfRanges(bool add_to_history)
     {
-        DisplayFoundVerseRanges(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerseRanges(add_to_history);
     }
-    private void DisplayFoundHalfSets(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundHalfSets(bool add_to_history)
     {
-        DisplayFoundVerseSets(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerseSets(add_to_history);
     }
-    private void DisplayFoundQuarters(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundQuarters(bool add_to_history)
     {
-        DisplayFoundVerses(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerses(add_to_history);
     }
-    private void DisplayFoundQuarterRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundQuarterRanges(bool add_to_history)
     {
-        DisplayFoundVerseRanges(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerseRanges(add_to_history);
     }
-    private void DisplayFoundQuarterSets(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundQuarterSets(bool add_to_history)
     {
-        DisplayFoundVerseSets(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerseSets(add_to_history);
     }
-    private void DisplayFoundBowings(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundBowings(bool add_to_history)
     {
-        DisplayFoundVerses(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerses(add_to_history);
     }
-    private void DisplayFoundBowingRanges(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundBowingRanges(bool add_to_history)
     {
-        DisplayFoundVerseRanges(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerseRanges(add_to_history);
     }
-    private void DisplayFoundBowingSets(bool add_to_history, bool colorize_chapters_by_matches)
+    private void DisplayFoundBowingSets(bool add_to_history)
     {
-        DisplayFoundVerseSets(add_to_history, colorize_chapters_by_matches);
+        DisplayFoundVerseSets(add_to_history);
     }
     private void CalculateFoundPhrasesStatistics()
     {
@@ -41840,6 +41824,8 @@ public partial class MainForm : Form, ISubscriber
         {
             if (m_client.FoundPhrases != null)
             {
+                //int chapter_count = 0;
+                //int verse_count = 0;
                 int word_count = 0;
                 int letter_count = 0;
                 StringBuilder phrase_str = new StringBuilder();
@@ -41859,6 +41845,24 @@ public partial class MainForm : Form, ISubscriber
                     }
                 }
 
+                //ChaptersTextBox.Text = Radix.Encode(chapter_count, m_radix);
+                //ChaptersTextBox.ForeColor = Numbers.GetNumberTypeColor(ChaptersTextBox.Text, m_radix);
+                //ChaptersTextBox.BackColor = (Numbers.Compare(chapter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
+                //ChaptersTextBox.Refresh();
+                //DecimalChaptersTextBox.Text = chapter_count.ToString();
+                //DecimalChaptersTextBox.ForeColor = Numbers.GetNumberTypeColor(chapter_count);
+                //DecimalChaptersTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
+                //DecimalChaptersTextBox.Refresh();
+
+                //VersesTextBox.Text = Radix.Encode(verse_count, m_radix);
+                //VersesTextBox.ForeColor = Numbers.GetNumberTypeColor(VersesTextBox.Text, m_radix);
+                //VersesTextBox.BackColor = (Numbers.Compare(verse_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
+                //VersesTextBox.Refresh();
+                //DecimalVersesTextBox.Text = verse_count.ToString();
+                //DecimalVersesTextBox.ForeColor = Numbers.GetNumberTypeColor(verse_count);
+                //DecimalVersesTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
+                //DecimalVersesTextBox.Refresh();
+
                 WordsTextBox.Text = Radix.Encode(word_count, m_radix);
                 WordsTextBox.ForeColor = Numbers.GetNumberTypeColor(WordsTextBox.Text, m_radix);
                 WordsTextBox.BackColor = (Numbers.Compare(word_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
@@ -41867,6 +41871,7 @@ public partial class MainForm : Form, ISubscriber
                 DecimalWordsTextBox.ForeColor = Numbers.GetNumberTypeColor(word_count);
                 DecimalWordsTextBox.Visible = (m_radix != Numbers.DEFAULT_RADIX);
                 DecimalWordsTextBox.Refresh();
+
                 LettersTextBox.Text = Radix.Encode(letter_count, m_radix);
                 LettersTextBox.ForeColor = Numbers.GetNumberTypeColor(LettersTextBox.Text, m_radix);
                 LettersTextBox.BackColor = (Numbers.Compare(letter_count, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.ControlLight;
@@ -43743,7 +43748,7 @@ public partial class MainForm : Form, ISubscriber
                     if (!String.IsNullOrEmpty(search_history_item.Text))
                     {
                         FindByTextTextBox.SelectionStart = search_history_item.Text.Length;
-                        DisplayFoundVerses(false, true);
+                        DisplayFoundVerses(false);
                     }
                     else
                     {
@@ -43756,7 +43761,7 @@ public partial class MainForm : Form, ISubscriber
                         //    case NumbersResultType.WordRanges:
                         //    case NumbersResultType.WordSets:
                         //    case NumbersResultType.Verses:
-                        //        DisplayFoundVerses(false, true);
+                        //        DisplayFoundVerses(false);
                         //        break;
                         //    case NumbersResultType.VerseRanges:
                         //        DisplayFoundVerseRanges(false, true);
@@ -43776,7 +43781,7 @@ public partial class MainForm : Form, ISubscriber
                         //}
 
                         // ????? or just use this for now :)
-                        DisplayFoundVerses(false, true);
+                        DisplayFoundVerses(false);
                     }
                 }
                 else
@@ -44902,7 +44907,7 @@ public partial class MainForm : Form, ISubscriber
                     if (m_client.Book != null)
                     {
                         //// ALWAYS rebuild book to support dynamic editing of SimplificationRules
-                        //// uncomment to ONLY rebuild on changes to these variables
+                        //// uncomment to ONLY rebuild ON CHANGE to these variables
                         ////if ((m_client.Book.TextMode != text_mode) ||
                         ////    (m_client.Book.WithBismAllah != m_with_bism_Allah) ||
                         ////    (m_client.Book.WawAsWord != m_waw_as_word) ||
@@ -44927,7 +44932,6 @@ public partial class MainForm : Form, ISubscriber
                             m_client.BuildSimplifiedBook(text_mode, m_with_bism_Allah, m_waw_as_word, m_shadda_as_letter, m_hamza_above_horizontal_line_as_letter, m_elf_above_horizontal_line_as_letter, m_yaa_above_horizontal_line_as_letter, m_noon_above_horizontal_line_as_letter, m_emlaaei_text);
 
                             bool backup_found_verses_displayed = m_found_verses_displayed;
-
                             if ((Chapter.SortMethod == ChapterSortMethod.ByCompilation) && (Chapter.SortOrder == ChapterSortOrder.Ascending))
                             {
                                 DisplaySelection(false);
@@ -44948,7 +44952,7 @@ public partial class MainForm : Form, ISubscriber
                             // re-display search result if that was shown when text_mode was changed
                             if (backup_found_verses_displayed)
                             {
-                                DisplayFoundVerses(false, false);
+                                DisplayFoundVerses(false);
 
                                 //SearchResultTextBox.Focus();
                                 //SearchResultTextBox.Refresh();
@@ -45122,6 +45126,7 @@ public partial class MainForm : Form, ISubscriber
                     else // cursor inside line OR some text is highlighted
                     {
                         CalculateCurrentText();
+
                         if (m_user_text_mode)
                         {
                             CalculateAndDisplayCounts(m_current_text);
@@ -45221,16 +45226,10 @@ public partial class MainForm : Form, ISubscriber
                         m_current_text = m_active_textbox.SelectedText;
                     }
                 }
-
-                if (!String.IsNullOrEmpty(m_current_text))
-                {
-                    m_current_text = RemoveVerseAddresses(m_current_text);
-                    m_current_text = RemoveVerseEndMarks(m_current_text);
-                    m_current_text = m_current_text.Trim();
-                    m_current_text = m_current_text.Replace("\n", "\r\n");
-                }
             }
         }
+
+        CleanCurrentText();
     }
     private void CalculateSelectedTextValue()
     {
@@ -45348,6 +45347,16 @@ public partial class MainForm : Form, ISubscriber
         }
     }
 
+    private void CleanCurrentText()
+    {
+        if (!String.IsNullOrEmpty(m_current_text))
+        {
+            m_current_text = RemoveVerseAddresses(m_current_text);
+            m_current_text = RemoveVerseEndMarks(m_current_text);
+            m_current_text = m_current_text.Trim();
+            m_current_text = m_current_text.Replace("\n", "\r\n");
+        }
+    }
     private string RemoveVerseAddresses(string text)
     {
         if (string.IsNullOrEmpty(text)) return null;
@@ -50392,6 +50401,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void InspectLetterStatistics()
     {
+        CleanCurrentText();
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -50435,6 +50446,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void InspectValueCalculations()
     {
+        CleanCurrentText();
+
         this.Cursor = Cursors.WaitCursor;
         try
         {
@@ -50892,6 +50905,10 @@ public partial class MainForm : Form, ISubscriber
                 m_about_box.ShowDialog();
             }
         }
+    }
+    private void VersionLabel_MouseHover(object sender, EventArgs e)
+    {
+        this.ToolTip.SetToolTip(VersionLabel, Globals.LONG_VERSION);
     }
     /////////////////////////////////////////////////////////////////////////////
     #endregion
