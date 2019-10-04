@@ -19243,12 +19243,6 @@ public partial class MainForm : Form, ISubscriber
 
                                         MainTextBox.Colorize(start, golden_length, Color.Navy);
                                         MainTextBox.Colorize(start + golden_length, verse.Text.Length - golden_length, Color.Red);
-
-                                        // reset color back to Navy for subsequent display
-                                        //if (MainTextBox.Text.Length > 0)
-                                        //{
-                                        //    MainTextBox.Colorize(0, 1, Color.Navy);
-                                        //}
                                     }
                                 }
                             }
@@ -19456,12 +19450,6 @@ public partial class MainForm : Form, ISubscriber
 
                                     MainTextBox.Colorize(start, golden_length, Color.Navy);
                                     MainTextBox.Colorize(start + golden_length, verse.Text.Length - golden_length, Color.Red);
-
-                                    // reset color back to Navy for subsequent display
-                                    if (MainTextBox.Text.Length > 0)
-                                    {
-                                        MainTextBox.Colorize(0, 1, Color.Navy);
-                                    }
                                 }
                             }
                         }
