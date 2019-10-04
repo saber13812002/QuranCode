@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("MP3Player")]
-[assembly: AssemblyDescription("MP3 Player")]
+[assembly: AssemblyTitle("QuranCode - MP3 Player")]
+[assembly: AssemblyDescription("MP3Player")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Krasimir Kalinov")]
 [assembly: AssemblyProduct("MP3Player")]

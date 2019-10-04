@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Replace")]
-[assembly: AssemblyDescription("Replace In Files")]
+[assembly: AssemblyTitle("QuranCode - Replace In Files")]
+[assembly: AssemblyDescription("Replace")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("اللهُمَّ صَلِّ على مُحَمَّدٍ وءالِ مُحَمَّدٍ")]
+[assembly: AssemblyCompany("ٱللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَءَالِ مُحَمَّدٍ")]
 [assembly: AssemblyProduct("QuranCode")]
 [assembly: AssemblyCopyright("©2012 Ali Adams - علي عبد الرزاق عبد الكريم القره غولي")]
 [assembly: AssemblyTrademark("http://qurancode.com/")]

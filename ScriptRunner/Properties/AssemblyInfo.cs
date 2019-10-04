@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("heliwave.com")]
-[assembly: AssemblyDescription("C# Script Compiler and Executer")]
+[assembly: AssemblyTitle("QuranCode - C# Script Runner Library")]
+[assembly: AssemblyDescription("ScriptRunner")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Ali Adams علي القره غولي")]
+[assembly: AssemblyCompany("ٱللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَءَالِ مُحَمَّدٍ")]
 [assembly: AssemblyProduct("QuranCode")]
 [assembly: AssemblyCopyright("©2009-2019 Ali Adams - علي عبد الرزاق عبد الكريم القره غولي")]
 [assembly: AssemblyTrademark("http://qurancode.com/")]

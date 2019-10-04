@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Evaluator")]
-[assembly: AssemblyDescription("Tiny Expression Evaluator")]
+[assembly: AssemblyTitle("QuranCode - Tiny Expression Evaluator")]
+[assembly: AssemblyDescription("Evaluator")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Herre Kuijpers")]
 [assembly: AssemblyProduct("Evaluator")]

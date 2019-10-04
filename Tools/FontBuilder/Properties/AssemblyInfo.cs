@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("FontBuilder")]
+[assembly: AssemblyTitle("QuranCode - Font Builder")]
 [assembly: AssemblyDescription("FontBuilder")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("اللهُمَّ صَلِّ على مُحَمَّدٍ وءالِ مُحَمَّدٍ")]
+[assembly: AssemblyCompany("ٱللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَءَالِ مُحَمَّدٍ")]
 [assembly: AssemblyProduct("QuranCode")]
-[assembly: AssemblyCopyright("©2012 Ali Adams - علي عبد الرزاق عبد الكريم القره غولي")]
+[assembly: AssemblyCopyright("©2012 http://www.siao2.com/2005/11/20/494829.aspx")]
 [assembly: AssemblyTrademark("http://qurancode.com")]
 [assembly: AssemblyCulture("")]
 

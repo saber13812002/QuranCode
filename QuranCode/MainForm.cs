@@ -436,7 +436,6 @@ public partial class MainForm : Form, ISubscriber
     {
         try
         {
-            //this.ToolTip.SetToolTip(this.HelpFolderLabel, "ٱللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَءَالِ مُحَمَّدٍ");
             this.ToolTip.SetToolTip(this.FontLabel, L[l]["Font"]);
             this.ToolTip.SetToolTip(this.ResearchMethodsRunButton, L[l]["Run"]);
             this.ToolTip.SetToolTip(this.InspectChaptersLabel, L[l]["Inspect chapters"]);

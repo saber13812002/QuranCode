@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Touch")]
-[assembly: AssemblyDescription("Touch folders and files recursively")]
+[assembly: AssemblyTitle("QuranCode - Touch folders and files")]
+[assembly: AssemblyDescription("Touch")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("اللهُمَّ صَلِّ على مُحَمَّدٍ وءالِ مُحَمَّدٍ")]
+[assembly: AssemblyCompany("ٱللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَءَالِ مُحَمَّدٍ")]
 [assembly: AssemblyProduct("QuranCode")]
 [assembly: AssemblyCopyright("©2012 Ali Adams - علي عبد الرزاق عبد الكريم القره غولي")]
 [assembly: AssemblyTrademark("http://qurancode.com/")]

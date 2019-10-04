@@ -5,10 +5,10 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("heliwave.com")]
-[assembly: AssemblyDescription("Interlined Numbers by Index")]
+[assembly: AssemblyTitle("QuranCode - Number Indexer")]
+[assembly: AssemblyDescription("Numbers")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("اللهُمَّ صَلِّ على مُحَمَّدٍ وءالِ مُحَمَّدٍ")]
+[assembly: AssemblyCompany("ٱللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَءَالِ مُحَمَّدٍ")]
 [assembly: AssemblyProduct("Numbers")]
 [assembly: AssemblyCopyright("©2009-2019 Ali Adams - علي عبد الرزاق عبد الكريم القره غولي")]
 [assembly: AssemblyTrademark("http://qurancode.com/")]

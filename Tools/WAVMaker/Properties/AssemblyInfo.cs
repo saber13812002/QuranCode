@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WAVMaker")]
-[assembly: AssemblyDescription("Make WAV Files from Integer Array")]
+[assembly: AssemblyTitle("QuranCode - Make WAV Files from Integer Array")]
+[assembly: AssemblyDescription("WAVMaker")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Eric Oulashin")]
 [assembly: AssemblyProduct("WAVMaker")]
