@@ -982,7 +982,7 @@ partial class MainForm
         this.ShowToolTipsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
         this.ShowToolTipsCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.ShowToolTipsCheckBox.ForeColor = System.Drawing.Color.Navy;
-        this.ShowToolTipsCheckBox.Location = new System.Drawing.Point(1268, 15);
+        this.ShowToolTipsCheckBox.Location = new System.Drawing.Point(1262, 10);
         this.ShowToolTipsCheckBox.Name = "ShowToolTipsCheckBox";
         this.ShowToolTipsCheckBox.Size = new System.Drawing.Size(14, 14);
         this.ShowToolTipsCheckBox.TabIndex = 114;
@@ -5697,7 +5697,7 @@ partial class MainForm
         this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 1);
         this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
         this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 202);
+        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 203);
         this.ScriptOutputGroupBox.TabIndex = 103;
         this.ScriptOutputGroupBox.TabStop = false;
         this.ScriptOutputGroupBox.Text = " Output ";
@@ -5713,7 +5713,7 @@ partial class MainForm
         this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
         this.ScriptOutputTextBox.ReadOnly = true;
         this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 174);
+        this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 175);
         this.ScriptOutputTextBox.TabIndex = 0;
         this.ScriptOutputTextBox.WordWrap = false;
         this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);

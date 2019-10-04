@@ -19452,7 +19452,9 @@ public partial class MainForm : Form, ISubscriber
                                     MainTextBox.Colorize(start + golden_length, verse.Text.Length - golden_length, Color.Red);
                                 }
                             }
-                        }
+                        } // forech verse
+
+                        MainTextBox.AlignToStart();
                     }
                 }
             }
