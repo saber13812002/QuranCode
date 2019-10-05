@@ -611,6 +611,7 @@ partial class MainForm
         this.RadixValueDownLabel = new System.Windows.Forms.Label();
         this.RadixLabel = new System.Windows.Forms.Label();
         this.ValuePanel = new System.Windows.Forms.Panel();
+        this.NumberClassTextBox = new System.Windows.Forms.TextBox();
         this.AddPositionsCheckBox = new System.Windows.Forms.CheckBox();
         this.AddDistancesToPreviousCheckBox = new System.Windows.Forms.CheckBox();
         this.AddDistancesToNextCheckBox = new System.Windows.Forms.CheckBox();
@@ -2384,7 +2385,7 @@ partial class MainForm
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Location = new System.Drawing.Point(51, 204);
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Name = "FindByNumbersValueDigitalRootComparisonOperatorLabel";
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Size = new System.Drawing.Size(18, 19);
-        this.FindByNumbersValueDigitalRootComparisonOperatorLabel.TabIndex = 69;
+        this.FindByNumbersValueDigitalRootComparisonOperatorLabel.TabIndex = 59;
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.Text = "=";
         this.FindByNumbersValueDigitalRootComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.ToolTip.SetToolTip(this.FindByNumbersValueDigitalRootComparisonOperatorLabel, "equals to");
@@ -2402,7 +2403,7 @@ partial class MainForm
         this.FindByNumbersValueDigitalRootNumberTypeLabel.Location = new System.Drawing.Point(124, 204);
         this.FindByNumbersValueDigitalRootNumberTypeLabel.Name = "FindByNumbersValueDigitalRootNumberTypeLabel";
         this.FindByNumbersValueDigitalRootNumberTypeLabel.Size = new System.Drawing.Size(24, 19);
-        this.FindByNumbersValueDigitalRootNumberTypeLabel.TabIndex = 71;
+        this.FindByNumbersValueDigitalRootNumberTypeLabel.TabIndex = 61;
         this.FindByNumbersValueDigitalRootNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByNumbersValueDigitalRootNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
         this.FindByNumbersValueDigitalRootNumberTypeLabel.Click += new System.EventHandler(this.FindByNumbersNumberTypeLabel_Click);
@@ -2420,7 +2421,7 @@ partial class MainForm
             0});
         this.FindByNumbersValueDigitalRootNumericUpDown.Name = "FindByNumbersValueDigitalRootNumericUpDown";
         this.FindByNumbersValueDigitalRootNumericUpDown.Size = new System.Drawing.Size(56, 20);
-        this.FindByNumbersValueDigitalRootNumericUpDown.TabIndex = 70;
+        this.FindByNumbersValueDigitalRootNumericUpDown.TabIndex = 60;
         this.FindByNumbersValueDigitalRootNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.FindByNumbersValueDigitalRootNumericUpDown.ValueChanged += new System.EventHandler(this.FindByNumbersNumericUpDown_ValueChanged);
         this.FindByNumbersValueDigitalRootNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
@@ -2448,7 +2449,7 @@ partial class MainForm
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.Location = new System.Drawing.Point(51, 185);
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.Name = "FindByNumbersValueDigitSumComparisonOperatorLabel";
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.Size = new System.Drawing.Size(18, 19);
-        this.FindByNumbersValueDigitSumComparisonOperatorLabel.TabIndex = 66;
+        this.FindByNumbersValueDigitSumComparisonOperatorLabel.TabIndex = 56;
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.Text = "=";
         this.FindByNumbersValueDigitSumComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.ToolTip.SetToolTip(this.FindByNumbersValueDigitSumComparisonOperatorLabel, "equals to");
@@ -2466,7 +2467,7 @@ partial class MainForm
         this.FindByNumbersValueDigitSumNumberTypeLabel.Location = new System.Drawing.Point(124, 185);
         this.FindByNumbersValueDigitSumNumberTypeLabel.Name = "FindByNumbersValueDigitSumNumberTypeLabel";
         this.FindByNumbersValueDigitSumNumberTypeLabel.Size = new System.Drawing.Size(24, 19);
-        this.FindByNumbersValueDigitSumNumberTypeLabel.TabIndex = 68;
+        this.FindByNumbersValueDigitSumNumberTypeLabel.TabIndex = 58;
         this.FindByNumbersValueDigitSumNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByNumbersValueDigitSumNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
         this.FindByNumbersValueDigitSumNumberTypeLabel.Click += new System.EventHandler(this.FindByNumbersNumberTypeLabel_Click);
@@ -2484,7 +2485,7 @@ partial class MainForm
             0});
         this.FindByNumbersValueDigitSumNumericUpDown.Name = "FindByNumbersValueDigitSumNumericUpDown";
         this.FindByNumbersValueDigitSumNumericUpDown.Size = new System.Drawing.Size(56, 20);
-        this.FindByNumbersValueDigitSumNumericUpDown.TabIndex = 67;
+        this.FindByNumbersValueDigitSumNumericUpDown.TabIndex = 57;
         this.FindByNumbersValueDigitSumNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.FindByNumbersValueDigitSumNumericUpDown.ValueChanged += new System.EventHandler(this.FindByNumbersNumericUpDown_ValueChanged);
         this.FindByNumbersValueDigitSumNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByNumbersControl_EnabledChanged);
@@ -2512,7 +2513,7 @@ partial class MainForm
         this.FindByNumbersButton.Location = new System.Drawing.Point(98, 0);
         this.FindByNumbersButton.Name = "FindByNumbersButton";
         this.FindByNumbersButton.Size = new System.Drawing.Size(52, 20);
-        this.FindByNumbersButton.TabIndex = 62;
+        this.FindByNumbersButton.TabIndex = 63;
         this.FindByNumbersButton.Text = "Find";
         this.FindByNumbersButton.UseVisualStyleBackColor = true;
         this.FindByNumbersButton.Click += new System.EventHandler(this.FindByNumbersButton_Click);
@@ -2988,7 +2989,7 @@ partial class MainForm
         this.FindByNumbersSetsCheckBox.Location = new System.Drawing.Point(71, 2);
         this.FindByNumbersSetsCheckBox.Name = "FindByNumbersSetsCheckBox";
         this.FindByNumbersSetsCheckBox.Size = new System.Drawing.Size(40, 17);
-        this.FindByNumbersSetsCheckBox.TabIndex = 72;
+        this.FindByNumbersSetsCheckBox.TabIndex = 62;
         this.FindByNumbersSetsCheckBox.Text = "{}";
         this.ToolTip.SetToolTip(this.FindByNumbersSetsCheckBox, "find any combinations (not just consecutive ranges)");
         this.FindByNumbersSetsCheckBox.UseVisualStyleBackColor = false;
@@ -3160,7 +3161,7 @@ partial class MainForm
         this.FindBySimilarityWordsRadioButton.Location = new System.Drawing.Point(66, 32);
         this.FindBySimilarityWordsRadioButton.Name = "FindBySimilarityWordsRadioButton";
         this.FindBySimilarityWordsRadioButton.Size = new System.Drawing.Size(71, 17);
-        this.FindBySimilarityWordsRadioButton.TabIndex = 74;
+        this.FindBySimilarityWordsRadioButton.TabIndex = 76;
         this.FindBySimilarityWordsRadioButton.TabStop = true;
         this.FindBySimilarityWordsRadioButton.Text = "words";
         this.FindBySimilarityWordsRadioButton.UseVisualStyleBackColor = false;
@@ -3188,7 +3189,7 @@ partial class MainForm
         this.FindBySimilarityLastHalfRadioButton.Location = new System.Drawing.Point(4, 62);
         this.FindBySimilarityLastHalfRadioButton.Name = "FindBySimilarityLastHalfRadioButton";
         this.FindBySimilarityLastHalfRadioButton.Size = new System.Drawing.Size(71, 17);
-        this.FindBySimilarityLastHalfRadioButton.TabIndex = 76;
+        this.FindBySimilarityLastHalfRadioButton.TabIndex = 75;
         this.FindBySimilarityLastHalfRadioButton.TabStop = true;
         this.FindBySimilarityLastHalfRadioButton.Text = "last half";
         this.FindBySimilarityLastHalfRadioButton.UseVisualStyleBackColor = false;
@@ -3202,7 +3203,7 @@ partial class MainForm
         this.FindBySimilarityFirstHalfRadioButton.Location = new System.Drawing.Point(4, 47);
         this.FindBySimilarityFirstHalfRadioButton.Name = "FindBySimilarityFirstHalfRadioButton";
         this.FindBySimilarityFirstHalfRadioButton.Size = new System.Drawing.Size(71, 17);
-        this.FindBySimilarityFirstHalfRadioButton.TabIndex = 75;
+        this.FindBySimilarityFirstHalfRadioButton.TabIndex = 74;
         this.FindBySimilarityFirstHalfRadioButton.TabStop = true;
         this.FindBySimilarityFirstHalfRadioButton.Text = "first half";
         this.FindBySimilarityFirstHalfRadioButton.UseVisualStyleBackColor = false;
@@ -5697,7 +5698,7 @@ partial class MainForm
         this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 1);
         this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
         this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 203);
+        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 207);
         this.ScriptOutputGroupBox.TabIndex = 103;
         this.ScriptOutputGroupBox.TabStop = false;
         this.ScriptOutputGroupBox.Text = " Output ";
@@ -5713,7 +5714,7 @@ partial class MainForm
         this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
         this.ScriptOutputTextBox.ReadOnly = true;
         this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 175);
+        this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 179);
         this.ScriptOutputTextBox.TabIndex = 0;
         this.ScriptOutputTextBox.WordWrap = false;
         this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -10015,6 +10016,7 @@ partial class MainForm
         // 
         this.ValuePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
         | System.Windows.Forms.AnchorStyles.Right)));
+        this.ValuePanel.Controls.Add(this.NumberClassTextBox);
         this.ValuePanel.Controls.Add(this.AddPositionsCheckBox);
         this.ValuePanel.Controls.Add(this.AddDistancesToPreviousCheckBox);
         this.ValuePanel.Controls.Add(this.AddDistancesToNextCheckBox);
@@ -10079,6 +10081,23 @@ partial class MainForm
         this.ValuePanel.Name = "ValuePanel";
         this.ValuePanel.Size = new System.Drawing.Size(181, 276);
         this.ValuePanel.TabIndex = 5;
+        // 
+        // NumberClassTextBox
+        // 
+        this.NumberClassTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+        this.NumberClassTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+        this.NumberClassTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.NumberClassTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+        this.NumberClassTextBox.Location = new System.Drawing.Point(1, 40);
+        this.NumberClassTextBox.Name = "NumberClassTextBox";
+        this.NumberClassTextBox.ReadOnly = true;
+        this.NumberClassTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+        this.NumberClassTextBox.Size = new System.Drawing.Size(27, 20);
+        this.NumberClassTextBox.TabIndex = 30;
+        this.NumberClassTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+        this.NumberClassTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
+        this.NumberClassTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
+        this.NumberClassTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
         // AddPositionsCheckBox
         // 
@@ -10343,11 +10362,11 @@ partial class MainForm
         this.Nth4n1NumberTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
         this.Nth4n1NumberTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.Nth4n1NumberTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-        this.Nth4n1NumberTextBox.Location = new System.Drawing.Point(127, 60);
+        this.Nth4n1NumberTextBox.Location = new System.Drawing.Point(126, 60);
         this.Nth4n1NumberTextBox.Name = "Nth4n1NumberTextBox";
         this.Nth4n1NumberTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-        this.Nth4n1NumberTextBox.Size = new System.Drawing.Size(45, 20);
-        this.Nth4n1NumberTextBox.TabIndex = 34;
+        this.Nth4n1NumberTextBox.Size = new System.Drawing.Size(46, 20);
+        this.Nth4n1NumberTextBox.TabIndex = 35;
         this.Nth4n1NumberTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.ToolTip.SetToolTip(this.Nth4n1NumberTextBox, "4n+1 prime index");
         this.Nth4n1NumberTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
@@ -10366,7 +10385,7 @@ partial class MainForm
         this.SquareSumTextBox.Name = "SquareSumTextBox";
         this.SquareSumTextBox.ReadOnly = true;
         this.SquareSumTextBox.Size = new System.Drawing.Size(127, 20);
-        this.SquareSumTextBox.TabIndex = 33;
+        this.SquareSumTextBox.TabIndex = 34;
         this.SquareSumTextBox.Tag = "";
         this.SquareSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.SquareSumTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
@@ -10848,12 +10867,12 @@ partial class MainForm
         this.DigitalRootTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
         this.DigitalRootTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DigitalRootTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.DigitalRootTextBox.Location = new System.Drawing.Point(161, 40);
+        this.DigitalRootTextBox.Location = new System.Drawing.Point(159, 40);
         this.DigitalRootTextBox.Name = "DigitalRootTextBox";
         this.DigitalRootTextBox.ReadOnly = true;
         this.DigitalRootTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-        this.DigitalRootTextBox.Size = new System.Drawing.Size(18, 20);
-        this.DigitalRootTextBox.TabIndex = 32;
+        this.DigitalRootTextBox.Size = new System.Drawing.Size(20, 20);
+        this.DigitalRootTextBox.TabIndex = 33;
         this.DigitalRootTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.DigitalRootTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DigitalRootTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
@@ -10865,12 +10884,12 @@ partial class MainForm
         this.DigitSumTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
         this.DigitSumTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DigitSumTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.DigitSumTextBox.Location = new System.Drawing.Point(127, 40);
+        this.DigitSumTextBox.Location = new System.Drawing.Point(126, 40);
         this.DigitSumTextBox.Name = "DigitSumTextBox";
         this.DigitSumTextBox.ReadOnly = true;
         this.DigitSumTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
         this.DigitSumTextBox.Size = new System.Drawing.Size(35, 20);
-        this.DigitSumTextBox.TabIndex = 31;
+        this.DigitSumTextBox.TabIndex = 32;
         this.DigitSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.DigitSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.DigitSumTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
@@ -11081,11 +11100,12 @@ partial class MainForm
         this.PrimeFactorsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
         this.PrimeFactorsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.PrimeFactorsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-        this.PrimeFactorsTextBox.Location = new System.Drawing.Point(1, 40);
+        this.PrimeFactorsTextBox.Location = new System.Drawing.Point(26, 40);
         this.PrimeFactorsTextBox.Name = "PrimeFactorsTextBox";
         this.PrimeFactorsTextBox.ReadOnly = true;
-        this.PrimeFactorsTextBox.Size = new System.Drawing.Size(127, 20);
-        this.PrimeFactorsTextBox.TabIndex = 30;
+        this.PrimeFactorsTextBox.Size = new System.Drawing.Size(102, 20);
+        this.PrimeFactorsTextBox.TabIndex = 31;
+        this.PrimeFactorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.PrimeFactorsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.PrimeFactorsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.PrimeFactorsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -12493,4 +12513,5 @@ partial class MainForm
     private System.Windows.Forms.Label FindByNumbersResultTypePartsLabel;
     private System.Windows.Forms.Label FindByNumbersResultTypeStationsLabel;
     private System.Windows.Forms.Label FindByNumbersResultTypePagesLabel;
+    private System.Windows.Forms.TextBox NumberClassTextBox;
 }

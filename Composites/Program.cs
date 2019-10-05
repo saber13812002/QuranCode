@@ -21,7 +21,7 @@ namespace Composites
                 writer = System.IO.File.CreateText(filename);
 
                 Console.WriteLine("-------------------------------------------------------");
-                Console.WriteLine("Prime-composite Number Indices - (c)2009-2019 Ali Adams");
+                Console.WriteLine("Prime/Composite Number Indices - (c)2009-2019 Ali Adams");
                 Console.WriteLine("-------------------------------------------------------");
 
                 ConsoleKeyInfo exit;

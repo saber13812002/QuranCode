@@ -160,9 +160,9 @@ public partial class MainForm : Form
         this.Top = Screen.PrimaryScreen.WorkingArea.Top;
         this.Left = Screen.PrimaryScreen.WorkingArea.Left;
         this.Width = (m_dpi == 96.0F) ? 256 : 338;
-        this.Height = (m_dpi == 96.0F) ? 420 : 506;
-        MultithreadingCheckBox.Top = (m_dpi == 96.0F) ? 367 : 443;
-        VersionLabel.Top = (m_dpi == 96.0F) ? 365 : 442;
+        this.Height = (m_dpi == 96.0F) ? 420 : 512;
+        MultithreadingCheckBox.Top = (m_dpi == 96.0F) ? 367 : 448;
+        VersionLabel.Top = (m_dpi == 96.0F) ? 365 : 445;
     }
 
     private void MainForm_Load(object sender, EventArgs e)
@@ -202,22 +202,8 @@ public partial class MainForm : Form
         NotifyIcon.Visible = true;
 
         EnableEntryControls();
-        SetupToolTips();
 
         ValueTextBox.Focus();
-    }
-    private void SetupToolTips()
-    {
-        this.ToolTip.SetToolTip(this.PCIndexChainL2RTextBox, "Prime-composite index chain --> P=0 C=1");
-        this.ToolTip.SetToolTip(this.PCIndexChainR2LTextBox, "Prime-composite index chain <-- P=0 C=1");
-        this.ToolTip.SetToolTip(this.CPIndexChainL2RTextBox, "Prime-composite index chain --> P=1 C=0");
-        this.ToolTip.SetToolTip(this.CPIndexChainR2LTextBox, "Prime-composite index chain <-- P=1 C=0");
-        this.ToolTip.SetToolTip(this.IndexChainLengthTextBox, "Prime-composite index chain length");
-        this.ToolTip.SetToolTip(this.DigitSumTextBox, "Digit sum");
-        this.ToolTip.SetToolTip(this.DigitalRootTextBox, "Digital root");
-        this.ToolTip.SetToolTip(this.NthNumberTextBox, "Prime index");
-        this.ToolTip.SetToolTip(this.NthAdditiveNumberTextBox, "Additive prime index");
-        this.ToolTip.SetToolTip(this.NthNonAdditiveNumberTextBox, "Non-additive prime index");
     }
     private void MainForm_Resize(object sender, EventArgs e)
     {
@@ -2376,6 +2362,11 @@ public partial class MainForm : Form
                             text = text.Replace("*", "");
                             value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                         }
+                        else if (text.EndsWith("D"))
+                        {
+                            text = text.Replace("D", "");
+                            value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                        }
                         else
                         {
                             value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
@@ -2692,6 +2683,14 @@ public partial class MainForm : Form
                         {
                             PrimeFactorsTextBox.Text = result.Substring(pos + 2);
                             PrimeFactorsTextBox.Refresh();
+
+                            int factors = 1;
+                            foreach (char c in result)
+                            {
+                                if (c == '*') factors++;
+                            }
+                            NumberClassTextBox.Text = factors.ToString() + "D";
+                            NumberClassTextBox.Refresh();
                         }
                     }
                 }
