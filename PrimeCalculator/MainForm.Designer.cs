@@ -90,7 +90,7 @@
             this.DigitalRootTextBox = new System.Windows.Forms.TextBox();
             this.DigitSumTextBox = new System.Windows.Forms.TextBox();
             this.PrimeFactorsTextBox = new System.Windows.Forms.TextBox();
-            this.NumberClassTextBox = new System.Windows.Forms.TextBox();
+            this.NthNumberDimensionTextBox = new System.Windows.Forms.TextBox();
             this.dCircleLabel = new System.Windows.Forms.Label();
             this.rCircleLabel = new System.Windows.Forms.Label();
             this.piCircleLabel = new System.Windows.Forms.Label();
@@ -277,7 +277,7 @@
             this.OutputTextBox.Name = "OutputTextBox";
             this.OutputTextBox.ReadOnly = true;
             this.OutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.OutputTextBox.Size = new System.Drawing.Size(304, 230);
+            this.OutputTextBox.Size = new System.Drawing.Size(304, 291);
             this.OutputTextBox.TabIndex = 29;
             this.OutputTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.OutputTextBox, "Factorization result");
@@ -288,7 +288,7 @@
             // 
             this.ProgressBar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ProgressBar.Location = new System.Drawing.Point(0, 430);
+            this.ProgressBar.Location = new System.Drawing.Point(0, 429);
             this.ProgressBar.Margin = new System.Windows.Forms.Padding(4);
             this.ProgressBar.Name = "ProgressBar";
             this.ProgressBar.Size = new System.Drawing.Size(320, 7);
@@ -401,7 +401,7 @@
             this.VersionLabel.Cursor = System.Windows.Forms.Cursors.Default;
             this.VersionLabel.Font = new System.Drawing.Font("Tahoma", 8F);
             this.VersionLabel.ForeColor = System.Drawing.Color.Purple;
-            this.VersionLabel.Location = new System.Drawing.Point(236, 445);
+            this.VersionLabel.Location = new System.Drawing.Point(236, 446);
             this.VersionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.VersionLabel.Name = "VersionLabel";
             this.VersionLabel.Size = new System.Drawing.Size(84, 21);
@@ -426,7 +426,7 @@
             this.MultithreadingCheckBox.Checked = true;
             this.MultithreadingCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.MultithreadingCheckBox.ForeColor = System.Drawing.Color.Purple;
-            this.MultithreadingCheckBox.Location = new System.Drawing.Point(5, 448);
+            this.MultithreadingCheckBox.Location = new System.Drawing.Point(5, 449);
             this.MultithreadingCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.MultithreadingCheckBox.Name = "MultithreadingCheckBox";
             this.MultithreadingCheckBox.Size = new System.Drawing.Size(18, 17);
@@ -1104,7 +1104,7 @@
             this.DigitSumTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.DigitSumTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DigitSumTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.DigitSumTextBox.Location = new System.Drawing.Point(234, 27);
+            this.DigitSumTextBox.Location = new System.Drawing.Point(235, 27);
             this.DigitSumTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.DigitSumTextBox.Name = "DigitSumTextBox";
             this.DigitSumTextBox.ReadOnly = true;
@@ -1123,34 +1123,34 @@
             this.PrimeFactorsTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.PrimeFactorsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PrimeFactorsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.PrimeFactorsTextBox.Location = new System.Drawing.Point(43, 27);
+            this.PrimeFactorsTextBox.Location = new System.Drawing.Point(1, 27);
             this.PrimeFactorsTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.PrimeFactorsTextBox.Name = "PrimeFactorsTextBox";
             this.PrimeFactorsTextBox.ReadOnly = true;
-            this.PrimeFactorsTextBox.Size = new System.Drawing.Size(191, 23);
+            this.PrimeFactorsTextBox.Size = new System.Drawing.Size(164, 23);
             this.PrimeFactorsTextBox.TabIndex = 6;
-            this.PrimeFactorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.ToolTip.SetToolTip(this.PrimeFactorsTextBox, "Prime factors");
             this.PrimeFactorsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
             this.PrimeFactorsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
-            // NumberClassTextBox
+            // NthNumberDimensionTextBox
             // 
-            this.NumberClassTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.NumberClassTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.NumberClassTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.NumberClassTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.NumberClassTextBox.Location = new System.Drawing.Point(1, 27);
-            this.NumberClassTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.NumberClassTextBox.Name = "NumberClassTextBox";
-            this.NumberClassTextBox.ReadOnly = true;
-            this.NumberClassTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.NumberClassTextBox.Size = new System.Drawing.Size(42, 23);
-            this.NumberClassTextBox.TabIndex = 5;
-            this.NumberClassTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.ToolTip.SetToolTip(this.NumberClassTextBox, "Number class");
-            this.NumberClassTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
-            this.NumberClassTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
+            this.NthNumberDimensionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.NthNumberDimensionTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.NthNumberDimensionTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NthNumberDimensionTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.NthNumberDimensionTextBox.Location = new System.Drawing.Point(167, 27);
+            this.NthNumberDimensionTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.NthNumberDimensionTextBox.Name = "NthNumberDimensionTextBox";
+            this.NthNumberDimensionTextBox.ReadOnly = true;
+            this.NthNumberDimensionTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.NthNumberDimensionTextBox.Size = new System.Drawing.Size(68, 23);
+            this.NthNumberDimensionTextBox.TabIndex = 5;
+            this.NthNumberDimensionTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ToolTip.SetToolTip(this.NthNumberDimensionTextBox, "Dimension index");
+            this.NthNumberDimensionTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
+            this.NthNumberDimensionTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NthNumberDimensionTextBox_KeyDown);
+            this.NthNumberDimensionTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
             // 
             // dCircleLabel
             // 
@@ -1575,7 +1575,7 @@
             // 
             // ValuePanel
             // 
-            this.ValuePanel.Controls.Add(this.NumberClassTextBox);
+            this.ValuePanel.Controls.Add(this.NthNumberDimensionTextBox);
             this.ValuePanel.Controls.Add(this.SumOfDivisorDigitalRootsTextBox);
             this.ValuePanel.Controls.Add(this.SumOfDivisorDigitSumsTextBox);
             this.ValuePanel.Controls.Add(this.SumOfDivisorsTextBox);
@@ -1756,7 +1756,7 @@
             this.IndexPanel.Location = new System.Drawing.Point(4, 4);
             this.IndexPanel.Margin = new System.Windows.Forms.Padding(4);
             this.IndexPanel.Name = "IndexPanel";
-            this.IndexPanel.Size = new System.Drawing.Size(304, 230);
+            this.IndexPanel.Size = new System.Drawing.Size(304, 265);
             this.IndexPanel.TabIndex = 33;
             // 
             // EditionLabel
@@ -1924,7 +1924,7 @@
             this.FactorsTabPage.Margin = new System.Windows.Forms.Padding(4);
             this.FactorsTabPage.Name = "FactorsTabPage";
             this.FactorsTabPage.Padding = new System.Windows.Forms.Padding(4);
-            this.FactorsTabPage.Size = new System.Drawing.Size(312, 238);
+            this.FactorsTabPage.Size = new System.Drawing.Size(312, 299);
             this.FactorsTabPage.TabIndex = 0;
             this.FactorsTabPage.Text = "Factors";
             // 
@@ -1936,7 +1936,7 @@
             this.IndexTabPage.Margin = new System.Windows.Forms.Padding(4);
             this.IndexTabPage.Name = "IndexTabPage";
             this.IndexTabPage.Padding = new System.Windows.Forms.Padding(4);
-            this.IndexTabPage.Size = new System.Drawing.Size(312, 238);
+            this.IndexTabPage.Size = new System.Drawing.Size(312, 273);
             this.IndexTabPage.TabIndex = 1;
             this.IndexTabPage.Text = "Index";
             // 
@@ -1975,7 +1975,7 @@
             this.TriangleTabPage.Location = new System.Drawing.Point(4, 25);
             this.TriangleTabPage.Margin = new System.Windows.Forms.Padding(4);
             this.TriangleTabPage.Name = "TriangleTabPage";
-            this.TriangleTabPage.Size = new System.Drawing.Size(312, 238);
+            this.TriangleTabPage.Size = new System.Drawing.Size(312, 273);
             this.TriangleTabPage.TabIndex = 3;
             this.TriangleTabPage.Text = "Triangle";
             // 
@@ -2313,7 +2313,7 @@
             this.SphereTabPage.Location = new System.Drawing.Point(4, 25);
             this.SphereTabPage.Margin = new System.Windows.Forms.Padding(4);
             this.SphereTabPage.Name = "SphereTabPage";
-            this.SphereTabPage.Size = new System.Drawing.Size(312, 238);
+            this.SphereTabPage.Size = new System.Drawing.Size(312, 273);
             this.SphereTabPage.TabIndex = 4;
             this.SphereTabPage.Text = "Sphere";
             // 
@@ -2654,5 +2654,5 @@
     private System.Windows.Forms.TextBox SumOfDivisorDigitalRootsTextBox;
     private System.Windows.Forms.TextBox SumOfDivisorDigitSumsTextBox;
     private System.Windows.Forms.TextBox SumOfDivisorsTextBox;
-    private System.Windows.Forms.TextBox NumberClassTextBox;
+    private System.Windows.Forms.TextBox NthNumberDimensionTextBox;
 }

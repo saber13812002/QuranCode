@@ -370,6 +370,7 @@ public static class Numbers
             LoadNonAdditiveComposites();
             LoadDeficients();
             LoadAbundants();
+            LoadNumberDimensions();
         }
 
         LoadPerfectNumbers();
@@ -2918,6 +2919,68 @@ public static class Numbers
         }
     }
 
+    // Number Dimensions (Number of Factors): 1D, 2D, 3D, ..., 19D
+    public static Dictionary<int, List<long>> NumberDimensions;
+    public static bool IsNumberDimension(int dimension, long number)
+    {
+        if (number < 0L) number *= -1L;
+        if (NumberDimensions.ContainsKey(dimension))
+        {
+            return NumberDimensions[dimension].Contains(number);
+        }
+        return false;
+    }
+    public static int NumberDimensionIndexOf(int dimension, long number)
+    {
+        if (number < 0L) number *= -1L;
+        if (NumberDimensions.ContainsKey(dimension))
+        {
+            return BinarySearch(NumberDimensions[dimension], number);
+        }
+        return -1;
+    }
+    private static string s_number_dimensions_filename = "D.txt";
+    public static void LoadNumberDimensions()
+    {
+        try
+        {
+            NumberDimensions = new Dictionary<int, List<long>>();
+            for (int i = 1; i <= 19; i++)
+            {
+                string filename = Globals.NUMBERS_FOLDER + "/" + i.ToString() + s_number_dimensions_filename;
+                if (File.Exists(filename))
+                {
+                    FileHelper.WaitForReady(filename);
+
+                    List<long> NumberDimension = new List<long>();
+                    using (StreamReader reader = new StreamReader(filename))
+                    {
+                        string line = null;
+                        while (!reader.EndOfStream)
+                        {
+                            line = reader.ReadLine();
+                            if (!String.IsNullOrEmpty(line))
+                            {
+                                if (line.Length == 0) break;
+
+                                long number;
+                                if (long.TryParse(line, out number))
+                                {
+                                    NumberDimension.Add(number);
+                                }
+                            }
+                        }
+                    }
+                    NumberDimensions.Add(i, NumberDimension);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+
 
     // prime repeated units 1111111.....1111111 numbers
     public static List<long> PrimeRepunits;
@@ -3203,6 +3266,7 @@ public static class Numbers
             }
         }
     }
+
 
     private static int s_series_limit = 114;
     //http://en.wikipedia.org/wiki/Polygon_number

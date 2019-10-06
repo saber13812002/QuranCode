@@ -12,14 +12,6 @@ namespace Composites
             StreamWriter writer = null;
             try
             {
-                string folder = "Composites";
-                if (!Directory.Exists(folder))
-                {
-                    Directory.CreateDirectory(folder);
-                }
-                string filename = folder + "/" + DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss") + ".txt";
-                writer = System.IO.File.CreateText(filename);
-
                 Console.WriteLine("-------------------------------------------------------");
                 Console.WriteLine("Prime/Composite Number Indices - (c)2009-2019 Ali Adams");
                 Console.WriteLine("-------------------------------------------------------");
@@ -38,8 +30,18 @@ namespace Composites
                     int n = 0;
                     if (int.TryParse(n_str, out n))
                     {
+                        string folder = "Composites";
+                        if (!Directory.Exists(folder))
+                        {
+                            Directory.CreateDirectory(folder);
+                        }
+                        //string filename = folder + "/" + n.ToString() + "D.txt";
+                        string filename = folder + "/" + DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss") + ".txt";
+                        writer = System.IO.File.CreateText(filename);
+
                         if (n >= 0)
                         {
+                            //BuildNumberDimension(writer, n);
                             BuildFactors(writer, n);
                         }
                         else
@@ -61,6 +63,24 @@ namespace Composites
             finally
             {
                 writer.Close();
+            }
+        }
+        private static void BuildNumberDimension(StreamWriter writer, int n)
+        {
+            if (writer != null)
+            {
+                StringBuilder str = new StringBuilder();
+
+                for (int i = 2; i <= 1000000; i++)
+                {
+                    List<long> factors = Numbers.Factorize(i);
+                    if (factors.Count == n)
+                    {
+                        writer.WriteLine(i.ToString());
+                    }
+                }
+
+                writer.Flush();
             }
         }
         private static void BuildFactors(StreamWriter writer, int n)

@@ -611,7 +611,7 @@ partial class MainForm
         this.RadixValueDownLabel = new System.Windows.Forms.Label();
         this.RadixLabel = new System.Windows.Forms.Label();
         this.ValuePanel = new System.Windows.Forms.Panel();
-        this.NumberClassTextBox = new System.Windows.Forms.TextBox();
+        this.NthNumberDimensionTextBox = new System.Windows.Forms.TextBox();
         this.AddPositionsCheckBox = new System.Windows.Forms.CheckBox();
         this.AddDistancesToPreviousCheckBox = new System.Windows.Forms.CheckBox();
         this.AddDistancesToNextCheckBox = new System.Windows.Forms.CheckBox();
@@ -5698,7 +5698,7 @@ partial class MainForm
         this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 1);
         this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
         this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 207);
+        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 210);
         this.ScriptOutputGroupBox.TabIndex = 103;
         this.ScriptOutputGroupBox.TabStop = false;
         this.ScriptOutputGroupBox.Text = " Output ";
@@ -5714,7 +5714,7 @@ partial class MainForm
         this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
         this.ScriptOutputTextBox.ReadOnly = true;
         this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 179);
+        this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 182);
         this.ScriptOutputTextBox.TabIndex = 0;
         this.ScriptOutputTextBox.WordWrap = false;
         this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -10016,7 +10016,7 @@ partial class MainForm
         // 
         this.ValuePanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
         | System.Windows.Forms.AnchorStyles.Right)));
-        this.ValuePanel.Controls.Add(this.NumberClassTextBox);
+        this.ValuePanel.Controls.Add(this.NthNumberDimensionTextBox);
         this.ValuePanel.Controls.Add(this.AddPositionsCheckBox);
         this.ValuePanel.Controls.Add(this.AddDistancesToPreviousCheckBox);
         this.ValuePanel.Controls.Add(this.AddDistancesToNextCheckBox);
@@ -10082,22 +10082,23 @@ partial class MainForm
         this.ValuePanel.Size = new System.Drawing.Size(181, 276);
         this.ValuePanel.TabIndex = 5;
         // 
-        // NumberClassTextBox
+        // NthNumberDimensionTextBox
         // 
-        this.NumberClassTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.NumberClassTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
-        this.NumberClassTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.NumberClassTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-        this.NumberClassTextBox.Location = new System.Drawing.Point(1, 40);
-        this.NumberClassTextBox.Name = "NumberClassTextBox";
-        this.NumberClassTextBox.ReadOnly = true;
-        this.NumberClassTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-        this.NumberClassTextBox.Size = new System.Drawing.Size(27, 20);
-        this.NumberClassTextBox.TabIndex = 30;
-        this.NumberClassTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.NumberClassTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
-        this.NumberClassTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
-        this.NumberClassTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
+        this.NthNumberDimensionTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+        this.NthNumberDimensionTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
+        this.NthNumberDimensionTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.NthNumberDimensionTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+        this.NthNumberDimensionTextBox.Location = new System.Drawing.Point(95, 40);
+        this.NthNumberDimensionTextBox.Name = "NthNumberDimensionTextBox";
+        this.NthNumberDimensionTextBox.ReadOnly = true;
+        this.NthNumberDimensionTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
+        this.NthNumberDimensionTextBox.Size = new System.Drawing.Size(50, 20);
+        this.NthNumberDimensionTextBox.TabIndex = 31;
+        this.NthNumberDimensionTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+        this.NthNumberDimensionTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
+        this.NthNumberDimensionTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
+        this.NthNumberDimensionTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.NthNumberDimensionTextBox_KeyDown);
+        this.NthNumberDimensionTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
         // 
         // AddPositionsCheckBox
         // 
@@ -10230,9 +10231,9 @@ partial class MainForm
         this.CalculationModeLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.CalculationModeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.CalculationModeLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.CalculationModeLabel.Location = new System.Drawing.Point(56, 21);
+        this.CalculationModeLabel.Location = new System.Drawing.Point(55, 21);
         this.CalculationModeLabel.Name = "CalculationModeLabel";
-        this.CalculationModeLabel.Size = new System.Drawing.Size(6, 18);
+        this.CalculationModeLabel.Size = new System.Drawing.Size(7, 18);
         this.CalculationModeLabel.TabIndex = 26;
         this.CalculationModeLabel.Tag = "";
         this.CalculationModeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -10867,11 +10868,11 @@ partial class MainForm
         this.DigitalRootTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
         this.DigitalRootTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DigitalRootTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.DigitalRootTextBox.Location = new System.Drawing.Point(159, 40);
+        this.DigitalRootTextBox.Location = new System.Drawing.Point(163, 40);
         this.DigitalRootTextBox.Name = "DigitalRootTextBox";
         this.DigitalRootTextBox.ReadOnly = true;
         this.DigitalRootTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-        this.DigitalRootTextBox.Size = new System.Drawing.Size(20, 20);
+        this.DigitalRootTextBox.Size = new System.Drawing.Size(16, 20);
         this.DigitalRootTextBox.TabIndex = 33;
         this.DigitalRootTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.DigitalRootTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
@@ -10884,11 +10885,11 @@ partial class MainForm
         this.DigitSumTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
         this.DigitSumTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DigitSumTextBox.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.DigitSumTextBox.Location = new System.Drawing.Point(126, 40);
+        this.DigitSumTextBox.Location = new System.Drawing.Point(144, 40);
         this.DigitSumTextBox.Name = "DigitSumTextBox";
         this.DigitSumTextBox.ReadOnly = true;
         this.DigitSumTextBox.RightToLeft = System.Windows.Forms.RightToLeft.No;
-        this.DigitSumTextBox.Size = new System.Drawing.Size(35, 20);
+        this.DigitSumTextBox.Size = new System.Drawing.Size(21, 20);
         this.DigitSumTextBox.TabIndex = 32;
         this.DigitSumTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.DigitSumTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
@@ -11100,12 +11101,11 @@ partial class MainForm
         this.PrimeFactorsTextBox.BackColor = System.Drawing.SystemColors.ControlLight;
         this.PrimeFactorsTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.PrimeFactorsTextBox.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-        this.PrimeFactorsTextBox.Location = new System.Drawing.Point(26, 40);
+        this.PrimeFactorsTextBox.Location = new System.Drawing.Point(1, 40);
         this.PrimeFactorsTextBox.Name = "PrimeFactorsTextBox";
         this.PrimeFactorsTextBox.ReadOnly = true;
-        this.PrimeFactorsTextBox.Size = new System.Drawing.Size(102, 20);
-        this.PrimeFactorsTextBox.TabIndex = 31;
-        this.PrimeFactorsTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+        this.PrimeFactorsTextBox.Size = new System.Drawing.Size(96, 20);
+        this.PrimeFactorsTextBox.TabIndex = 30;
         this.PrimeFactorsTextBox.Click += new System.EventHandler(this.Control_CtrlClick);
         this.PrimeFactorsTextBox.Enter += new System.EventHandler(this.StatisticsControls_Enter);
         this.PrimeFactorsTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -12513,5 +12513,5 @@ partial class MainForm
     private System.Windows.Forms.Label FindByNumbersResultTypePartsLabel;
     private System.Windows.Forms.Label FindByNumbersResultTypeStationsLabel;
     private System.Windows.Forms.Label FindByNumbersResultTypePagesLabel;
-    private System.Windows.Forms.TextBox NumberClassTextBox;
+    private System.Windows.Forms.TextBox NthNumberDimensionTextBox;
 }

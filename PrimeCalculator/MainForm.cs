@@ -161,8 +161,8 @@ public partial class MainForm : Form
         this.Left = Screen.PrimaryScreen.WorkingArea.Left;
         this.Width = (m_dpi == 96.0F) ? 256 : 338;
         this.Height = (m_dpi == 96.0F) ? 420 : 512;
-        MultithreadingCheckBox.Top = (m_dpi == 96.0F) ? 367 : 448;
-        VersionLabel.Top = (m_dpi == 96.0F) ? 365 : 445;
+        MultithreadingCheckBox.Top = (m_dpi == 96.0F) ? 367 : 449;
+        VersionLabel.Top = (m_dpi == 96.0F) ? 365 : 446;
     }
 
     private void MainForm_Load(object sender, EventArgs e)
@@ -356,26 +356,27 @@ public partial class MainForm : Form
         DigitsLabel.Text = (digits == 0) ? "digits" : digits.ToString();
 
         long value = 0L;
-        long.TryParse(ValueTextBox.Text, out value);
+        if (long.TryParse(ValueTextBox.Text, out value))
+        {
+            long sum_of_numbers = Numbers.SumOfNumbers(value);
+            SumOfNumbersTextBox.Text = (sum_of_numbers == 0) ? "" : sum_of_numbers.ToString();
+            SumOfNumbersTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers);
+            SumOfNumbersTextBox.Refresh();
 
-        long sum_of_numbers = Numbers.SumOfNumbers(value);
-        SumOfNumbersTextBox.Text = (sum_of_numbers == 0) ? "" : sum_of_numbers.ToString();
-        SumOfNumbersTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers);
-        SumOfNumbersTextBox.Refresh();
+            long sum_of_digit_sums = Numbers.SumOfNumberDigitSums(value);
+            SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
+            SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
+            SumOfDigitSumsTextBox.Refresh();
 
-        long sum_of_digit_sums = Numbers.SumOfNumberDigitSums(value);
-        SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
-        SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
-        SumOfDigitSumsTextBox.Refresh();
+            long sum_of_digital_roots = Numbers.SumNumberDigitalRoots(value);
+            SumOfDigitalRootsTextBox.Text = (sum_of_digital_roots == 0) ? "" : sum_of_digital_roots.ToString();
+            SumOfDigitalRootsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digital_roots);
+            SumOfDigitalRootsTextBox.Refresh();
 
-        long sum_of_digital_roots = Numbers.SumNumberDigitalRoots(value);
-        SumOfDigitalRootsTextBox.Text = (sum_of_digital_roots == 0) ? "" : sum_of_digital_roots.ToString();
-        SumOfDigitalRootsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digital_roots);
-        SumOfDigitalRootsTextBox.Refresh();
-
-        UpdateNumberKind(value);
-        UpdateSumOfDivisors(value);
-        UpdateDigitSumRootPCChains(value);
+            UpdateNumberKind(value);
+            UpdateSumOfDivisors(value);
+            UpdateDigitSumRootPCChains(value);
+        }
 
         //this.ToolTip.SetToolTip(this.ValueTextBox, null);
     }
@@ -454,6 +455,72 @@ public partial class MainForm : Form
                 ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
                 ValueTextBox.Refresh();
                 //FactorizeValue(value);
+            }
+        }
+    }
+
+    private void NthNumberDimensionTextBox_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Up)
+        {
+            IncrementNumberDimension();
+        }
+        else if (e.KeyCode == Keys.Down)
+        {
+            DecrementNumberDimension();
+        }
+    }
+    private void IncrementNumberDimension()
+    {
+        int dimension = 0;
+        int index = 0;
+        int pos = NthNumberDimensionTextBox.Text.IndexOf("d");
+        if (pos > 0)
+        {
+            string dimension_str = NthNumberDimensionTextBox.Text.Substring(0, pos);
+            if (int.TryParse(dimension_str, out dimension))
+            {
+                string index_str = NthNumberDimensionTextBox.Text.Substring(pos + 1);
+                if (int.TryParse(index_str, out index))
+                {
+                    index--;
+                    if (dimension <= 19)
+                    {
+                        dimension++;
+                        if ((index >= 0) && (index < Numbers.NumberDimensions[dimension].Count))
+                        {
+                            long value = Numbers.NumberDimensions[dimension][index];
+                            FactorizeValue(value);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private void DecrementNumberDimension()
+    {
+        int dimension = 0;
+        int index = 0;
+        int pos = NthNumberDimensionTextBox.Text.IndexOf("d");
+        if (pos > 0)
+        {
+            string dimension_str = NthNumberDimensionTextBox.Text.Substring(0, pos);
+            if (int.TryParse(dimension_str, out dimension))
+            {
+                string index_str = NthNumberDimensionTextBox.Text.Substring(pos + 1);
+                if (int.TryParse(index_str, out index))
+                {
+                    index--;
+                    if (dimension > 1)
+                    {
+                        dimension--;
+                        if ((index >= 0) && (index < Numbers.NumberDimensions[dimension].Count))
+                        {
+                            long value = Numbers.NumberDimensions[dimension][index];
+                            FactorizeValue(value);
+                        }
+                    }
+                }
             }
         }
     }
@@ -1101,6 +1168,9 @@ public partial class MainForm : Form
 
             str.AppendLine();
             str.AppendLine("Prime Factors\t\t=\t" + Numbers.FactorizeToString(value));
+            str.AppendLine("Dimension Index\t\t=\t" + NthNumberDimensionTextBox.Text);
+            str.AppendLine();
+
             int nth_number_index = 0;
             int nth_additive_number_index = 0;
             int nth_non_additive_number_index = 0;
@@ -2362,10 +2432,14 @@ public partial class MainForm : Form
                             text = text.Replace("*", "");
                             value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                         }
-                        else if (text.EndsWith("D"))
+                        else if (text.Contains("d"))
                         {
-                            text = text.Replace("D", "");
-                            value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                            int pos = text.IndexOf("d");
+                            if (pos >= 0)
+                            {
+                                text = text.Substring(pos + 1);
+                                value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                            }
                         }
                         else
                         {
@@ -2408,6 +2482,8 @@ public partial class MainForm : Form
     }
     private void ClearNumberAnalyses()
     {
+        NthNumberDimensionTextBox.Text = "";
+
         Nth4n1NumberTextBox.Text = "";
         Nth4nPlus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
         Nth4nMinus1PrimeNumberLabel.BackColor = SystemColors.ControlLight;
@@ -2684,13 +2760,19 @@ public partial class MainForm : Form
                             PrimeFactorsTextBox.Text = result.Substring(pos + 2);
                             PrimeFactorsTextBox.Refresh();
 
-                            int factors = 1;
+                            int dimension = 1;
                             foreach (char c in result)
                             {
-                                if (c == '*') factors++;
+                                if (c == '*') dimension++;
                             }
-                            NumberClassTextBox.Text = factors.ToString() + "D";
-                            NumberClassTextBox.Refresh();
+
+                            long value = 0L;
+                            if (long.TryParse(ValueTextBox.Text, out value))
+                            {
+                                int nth_number_dimension_index = Numbers.NumberDimensionIndexOf(dimension, value) + 1;
+                                NthNumberDimensionTextBox.Text = dimension.ToString() + "d" + nth_number_dimension_index.ToString();
+                                NthNumberDimensionTextBox.Refresh();
+                            }
                         }
                     }
                 }
