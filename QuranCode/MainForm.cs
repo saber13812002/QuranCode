@@ -50551,9 +50551,10 @@ public partial class MainForm : Form, ISubscriber
     }
     private void ValueInspectLabel_Click(object sender, EventArgs e)
     {
-        InspectValueCalculations();
+        bool is_value = (ValueLabel.Text.EndsWith(L[l]["Value"]));
+        InspectValueCalculations(is_value);
     }
-    private void InspectValueCalculations()
+    private void InspectValueCalculations(bool is_value)
     {
         CleanCurrentText();
 
@@ -50566,20 +50567,25 @@ public partial class MainForm : Form, ISubscriber
                 {
                     string filename = DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss") + "_" + m_client.NumerologySystem.Name + ".txt";
 
-                    m_client.Logging = true;  // log Adjust letter/word/verse/chapter
-                    CalculateCurrentValue();  // Calculate value with logging - SLOW but very informative
+                    if (is_value)
+                    {
+                        m_client.Logging = true;  // log Adjust letter/word/verse/chapter
+                        CalculateCurrentValue();  // Calculate value with logging - SLOW but very informative
+                    }
 
                     long value = Radix.Decode(ValueTextBox.Text, m_radix);
                     StringBuilder str = new StringBuilder();
 
-                    str.AppendLine(m_current_text);
-                    str.AppendLine("---------------------------------------------------------------------------------------------------------------------------");
-                    str.AppendLine();
-
-                    str.AppendLine("Chapters           (" + m_radix + ")\t=\t" + ChaptersTextBox.Text);
-                    str.AppendLine("Verses             (" + m_radix + ")\t=\t" + VersesTextBox.Text);
-                    str.AppendLine("Words              (" + m_radix + ")\t=\t" + WordsTextBox.Text);
-                    str.AppendLine("Letters            (" + m_radix + ")\t=\t" + LettersTextBox.Text);
+                    if (is_value)
+                    {
+                        str.AppendLine(m_current_text);
+                        str.AppendLine("--------------------------------------------------------------------------------------------------");
+                        str.AppendLine();
+                        str.AppendLine("Chapters           (" + m_radix + ")\t=\t" + ChaptersTextBox.Text);
+                        str.AppendLine("Verses             (" + m_radix + ")\t=\t" + VersesTextBox.Text);
+                        str.AppendLine("Words              (" + m_radix + ")\t=\t" + WordsTextBox.Text);
+                        str.AppendLine("Letters            (" + m_radix + ")\t=\t" + LettersTextBox.Text);
+                    }
                     str.AppendLine("Value              (" + m_radix + ")\t=\t" + ValueTextBox.Text);
                     str.AppendLine("Digit Sum          (" + m_radix + ")\t=\t" + DigitSumTextBox.Text);
                     str.AppendLine("Digital Root       (" + m_radix + ")\t=\t" + DigitalRootTextBox.Text);
@@ -50725,7 +50731,7 @@ public partial class MainForm : Form, ISubscriber
                     str.AppendLine("---------------------------------------------------------------------------------------------------------------------------");
                     str.AppendLine();
 
-                    m_client.SaveValueCalculations(filename, str.ToString());
+                    m_client.SaveValueCalculations(filename, str.ToString(), is_value);
 
                     m_client.Logging = false;   // return to FAST calculations without logging
                 }
