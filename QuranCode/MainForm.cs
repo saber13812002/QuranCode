@@ -42079,8 +42079,8 @@ public partial class MainForm : Form, ISubscriber
         {
             if (m_client.FoundPhrases != null)
             {
-                int word_number_sum = -1;
-                int letter_number_sum = -1;
+                int word_number_sum = 0;
+                int letter_number_sum = 0;
                 int word_count = 0;
                 int letter_count = 0;
                 StringBuilder phrase_str = new StringBuilder();
@@ -47535,10 +47535,10 @@ public partial class MainForm : Form, ISubscriber
             RadixValueLabel.Text = m_radix.ToString();
 
             // display values in new radix
-            int chapter_number_sum = -1;
-            int verse_number_sum = -1;
-            int word_number_sum = -1;
-            int letter_number_sum = -1;
+            int chapter_number_sum = 0;
+            int verse_number_sum = 0;
+            int word_number_sum = 0;
+            int letter_number_sum = 0;
             if (
                  (ChapterNumberSumTextBox.Text.Length > 0) &&
                  (VerseNumberSumTextBox.Text.Length > 0) &&
@@ -47581,10 +47581,10 @@ public partial class MainForm : Form, ISubscriber
             RadixValueLabel.Text = m_radix.ToString();
 
             // display values in new radix
-            int chapter_number_sum = -1;
-            int verse_number_sum = -1;
-            int word_number_sum = -1;
-            int letter_number_sum = -1;
+            int chapter_number_sum = 0;
+            int verse_number_sum = 0;
+            int word_number_sum = 0;
+            int letter_number_sum = 0;
             if (
                  (ChapterNumberSumTextBox.Text.Length > 0) &&
                  (VerseNumberSumTextBox.Text.Length > 0) &&
@@ -47622,10 +47622,10 @@ public partial class MainForm : Form, ISubscriber
             RadixValueLabel.Text = m_radix.ToString();
 
             // display values in new radix
-            int chapter_number_sum = -1;
-            int verse_number_sum = -1;
-            int word_number_sum = -1;
-            int letter_number_sum = -1;
+            int chapter_number_sum = 0;
+            int verse_number_sum = 0;
+            int word_number_sum = 0;
+            int letter_number_sum = 0;
             if (
                  (ChapterNumberSumTextBox.Text.Length > 0) &&
                  (VerseNumberSumTextBox.Text.Length > 0) &&
