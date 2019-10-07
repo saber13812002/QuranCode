@@ -484,7 +484,7 @@ public partial class MainForm : Form
                 if (int.TryParse(index_str, out index))
                 {
                     index--;
-                    if (dimension <= 19)
+                    if (dimension < 19)
                     {
                         dimension++;
                         if ((index >= 0) && (index < Numbers.NumberDimensions[dimension].Count))
