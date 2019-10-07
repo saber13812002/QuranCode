@@ -50551,7 +50551,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void ValueInspectLabel_Click(object sender, EventArgs e)
     {
-        bool is_value = (ValueLabel.Text.EndsWith(L[l]["Value"]));
+        bool is_value = (ValueLabel.Text.EndsWith(L[l]["Value"])) || (ValueLabel.Text.EndsWith(L[l]["User"]));
         InspectValueCalculations(is_value);
     }
     private void InspectValueCalculations(bool is_value)
