@@ -59,7 +59,6 @@ public static class Constants
         'إ',
         'أ',
         'ٱ',
-        'آ',
         'ب',
         'ت',
         'ث',

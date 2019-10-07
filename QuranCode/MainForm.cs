@@ -26709,11 +26709,19 @@ public partial class MainForm : Form, ISubscriber
                     {
                         text = text.Replace(character.ToString(), "");
                     }
-                    foreach (char character in Constants.QURANMARKS)
+                    foreach (char character in Constants.ARABIC_DIGITS)
+                    {
+                        text = text.Replace(character.ToString(), "");
+                    }
+                    foreach (char character in Constants.SYMBOLS)
                     {
                         text = text.Replace(character.ToString(), "");
                     }
                     foreach (char character in Constants.STOPMARKS)
+                    {
+                        text = text.Replace(character.ToString(), "");
+                    }
+                    foreach (char character in Constants.QURANMARKS)
                     {
                         text = text.Replace(character.ToString(), "");
                     }
@@ -33519,11 +33527,19 @@ public partial class MainForm : Form, ISubscriber
                 {
                     text = text.Replace(character.ToString(), "");
                 }
-                foreach (char character in Constants.QURANMARKS)
+                foreach (char character in Constants.ARABIC_DIGITS)
+                {
+                    text = text.Replace(character.ToString(), "");
+                }
+                foreach (char character in Constants.SYMBOLS)
                 {
                     text = text.Replace(character.ToString(), "");
                 }
                 foreach (char character in Constants.STOPMARKS)
+                {
+                    text = text.Replace(character.ToString(), "");
+                }
+                foreach (char character in Constants.QURANMARKS)
                 {
                     text = text.Replace(character.ToString(), "");
                 }
@@ -34463,11 +34479,19 @@ public partial class MainForm : Form, ISubscriber
                     {
                         text = text.Replace(character.ToString(), "");
                     }
-                    foreach (char character in Constants.QURANMARKS)
+                    foreach (char character in Constants.ARABIC_DIGITS)
+                    {
+                        text = text.Replace(character.ToString(), "");
+                    }
+                    foreach (char character in Constants.SYMBOLS)
                     {
                         text = text.Replace(character.ToString(), "");
                     }
                     foreach (char character in Constants.STOPMARKS)
+                    {
+                        text = text.Replace(character.ToString(), "");
+                    }
+                    foreach (char character in Constants.QURANMARKS)
                     {
                         text = text.Replace(character.ToString(), "");
                     }

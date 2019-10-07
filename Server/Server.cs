@@ -863,11 +863,11 @@ public class Server : IPublisher
                 {
                     text = text.Replace(character.ToString(), "");
                 }
-                foreach (char character in Constants.DIACRITICS)
+                foreach (char character in Constants.ARABIC_DIGITS)
                 {
                     text = text.Replace(character.ToString(), "");
                 }
-                foreach (char character in Constants.ARABIC_DIGITS)
+                foreach (char character in Constants.SYMBOLS)
                 {
                     text = text.Replace(character.ToString(), "");
                 }
@@ -879,7 +879,7 @@ public class Server : IPublisher
                 {
                     text = text.Replace(character.ToString(), "");
                 }
-                foreach (char character in Constants.SYMBOLS)
+                foreach (char character in Constants.DIACRITICS)
                 {
                     text = text.Replace(character.ToString(), "");
                 }
@@ -20666,6 +20666,22 @@ public class Server : IPublisher
             {
                 text = text.Replace(character.ToString(), "");
             }
+            foreach (char character in Constants.ARABIC_DIGITS)
+            {
+                text = text.Replace(character.ToString(), "");
+            }
+            foreach (char character in Constants.SYMBOLS)
+            {
+                text = text.Replace(character.ToString(), "");
+            }
+            foreach (char character in Constants.STOPMARKS)
+            {
+                text = text.Replace(character.ToString(), "");
+            }
+            foreach (char character in Constants.QURANMARKS)
+            {
+                text = text.Replace(character.ToString(), "");
+            }
 
             if (!String.IsNullOrEmpty(text))
             {
@@ -20679,7 +20695,23 @@ public class Server : IPublisher
                 phrase = phrase.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
                 foreach (char character in Constants.INDIAN_DIGITS)
                 {
-                    phrase = phrase.Replace(character.ToString(), "");
+                    text = text.Replace(character.ToString(), "");
+                }
+                foreach (char character in Constants.ARABIC_DIGITS)
+                {
+                    text = text.Replace(character.ToString(), "");
+                }
+                foreach (char character in Constants.SYMBOLS)
+                {
+                    text = text.Replace(character.ToString(), "");
+                }
+                foreach (char character in Constants.STOPMARKS)
+                {
+                    text = text.Replace(character.ToString(), "");
+                }
+                foreach (char character in Constants.QURANMARKS)
+                {
+                    text = text.Replace(character.ToString(), "");
                 }
 
                 if (frequency_search_type == FrequencySearchType.UniqueLetters)
