@@ -18140,38 +18140,19 @@ public class Server : IPublisher
 
                 for (int r = 1; r <= limit; r++) // try all possible range lengths
                 {
+                    List<Word> words = new List<Word>();
                     foreach (Verse verse in source)
                     {
-                        for (int i = 0; i < verse.Words.Count - r + 1; i++)
-                        {
-                            // build required range
-                            List<Word> range = new List<Word>();
-                            for (int j = i; j < i + r; j++)
-                            {
-                                range.Add(verse.Words[j]);
-                            }
-
-                            // check range
-                            if (Compare(range, query))
-                            {
-                                result.Add(range);
-                            }
-                        }
+                        words.AddRange(verse.Words);
                     }
-                }
-            }
-            else // specified range length
-            {
-                int r = range_length;
-                foreach (Verse verse in source)
-                {
-                    for (int i = 0; i < verse.Words.Count - r + 1; i++)
+
+                    for (int i = 0; i < words.Count - r; i++)
                     {
                         // build required range
                         List<Word> range = new List<Word>();
                         for (int j = i; j < i + r; j++)
                         {
-                            range.Add(verse.Words[j]);
+                            range.Add(words[j]);
                         }
 
                         // check range
@@ -18179,6 +18160,32 @@ public class Server : IPublisher
                         {
                             result.Add(range);
                         }
+                    }
+                }
+            }
+            else // specified range length
+            {
+                int r = range_length;
+
+                List<Word> words = new List<Word>();
+                foreach (Verse verse in source)
+                {
+                    words.AddRange(verse.Words);
+                }
+
+                for (int i = 0; i < words.Count - r; i++)
+                {
+                    // build required range
+                    List<Word> range = new List<Word>();
+                    for (int j = i; j < i + r; j++)
+                    {
+                        range.Add(words[j]);
+                    }
+
+                    // check range
+                    if (Compare(range, query))
+                    {
+                        result.Add(range);
                     }
                 }
             }
@@ -18697,7 +18704,7 @@ public class Server : IPublisher
 
                 for (int r = 1; r <= limit; r++) // try all possible range lengths
                 {
-                    for (int i = 0; i < source.Count - r + 1; i++)
+                    for (int i = 0; i < source.Count - r; i++)
                     {
                         // build required range
                         List<Verse> range = new List<Verse>();
@@ -18717,7 +18724,7 @@ public class Server : IPublisher
             else // specified range length
             {
                 int r = range_length;
-                for (int i = 0; i < source.Count - r + 1; i++)
+                for (int i = 0; i < source.Count - r; i++)
                 {
                     // build required range
                     List<Verse> range = new List<Verse>();
@@ -18906,7 +18913,7 @@ public class Server : IPublisher
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i < chapters.Count - r + 1; i++)
+                                for (int i = 0; i < chapters.Count - r; i++)
                                 {
                                     // build required range
                                     List<Chapter> range = new List<Chapter>();
@@ -18926,7 +18933,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i < chapters.Count - r + 1; i++)
+                            for (int i = 0; i < chapters.Count - r; i++)
                             {
                                 // build required range
                                 List<Chapter> range = new List<Chapter>();
@@ -19119,7 +19126,7 @@ public class Server : IPublisher
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i < pages.Count - r + 1; i++)
+                                for (int i = 0; i < pages.Count - r; i++)
                                 {
                                     // build required range
                                     List<Page> range = new List<Page>();
@@ -19139,7 +19146,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i < pages.Count - r + 1; i++)
+                            for (int i = 0; i < pages.Count - r; i++)
                             {
                                 // build required range
                                 List<Page> range = new List<Page>();
@@ -19332,7 +19339,7 @@ public class Server : IPublisher
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i < stations.Count - r + 1; i++)
+                                for (int i = 0; i < stations.Count - r; i++)
                                 {
                                     // build required range
                                     List<Station> range = new List<Station>();
@@ -19352,7 +19359,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i < stations.Count - r + 1; i++)
+                            for (int i = 0; i < stations.Count - r; i++)
                             {
                                 // build required range
                                 List<Station> range = new List<Station>();
@@ -19545,7 +19552,7 @@ public class Server : IPublisher
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i < parts.Count - r + 1; i++)
+                                for (int i = 0; i < parts.Count - r; i++)
                                 {
                                     // build required range
                                     List<Part> range = new List<Part>();
@@ -19565,7 +19572,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i < parts.Count - r + 1; i++)
+                            for (int i = 0; i < parts.Count - r; i++)
                             {
                                 // build required range
                                 List<Part> range = new List<Part>();
@@ -19758,7 +19765,7 @@ public class Server : IPublisher
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i < chapters.Count - r + 1; i++)
+                                for (int i = 0; i < chapters.Count - r; i++)
                                 {
                                     // build required range
                                     List<Model.Group> range = new List<Model.Group>();
@@ -19778,7 +19785,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i < chapters.Count - r + 1; i++)
+                            for (int i = 0; i < chapters.Count - r; i++)
                             {
                                 // build required range
                                 List<Model.Group> range = new List<Model.Group>();
@@ -19971,7 +19978,7 @@ public class Server : IPublisher
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i < chapters.Count - r + 1; i++)
+                                for (int i = 0; i < chapters.Count - r; i++)
                                 {
                                     // build required range
                                     List<Half> range = new List<Half>();
@@ -19991,7 +19998,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i < chapters.Count - r + 1; i++)
+                            for (int i = 0; i < chapters.Count - r; i++)
                             {
                                 // build required range
                                 List<Half> range = new List<Half>();
@@ -20184,7 +20191,7 @@ public class Server : IPublisher
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i < chapters.Count - r + 1; i++)
+                                for (int i = 0; i < chapters.Count - r; i++)
                                 {
                                     // build required range
                                     List<Quarter> range = new List<Quarter>();
@@ -20204,7 +20211,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i < chapters.Count - r + 1; i++)
+                            for (int i = 0; i < chapters.Count - r; i++)
                             {
                                 // build required range
                                 List<Quarter> range = new List<Quarter>();
@@ -20397,7 +20404,7 @@ public class Server : IPublisher
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i < chapters.Count - r + 1; i++)
+                                for (int i = 0; i < chapters.Count - r; i++)
                                 {
                                     // build required range
                                     List<Bowing> range = new List<Bowing>();
@@ -20417,7 +20424,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i < chapters.Count - r + 1; i++)
+                            for (int i = 0; i < chapters.Count - r; i++)
                             {
                                 // build required range
                                 List<Bowing> range = new List<Bowing>();
