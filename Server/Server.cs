@@ -15750,6 +15750,11 @@ public class Server : IPublisher
                 }
             }
 
+            sum = 0;
+            foreach (Chapter chapter in chapters)
+            {
+                sum += chapter.LetterCount;
+            }
             if (query.LetterCountNumberType == NumberType.Natural)
             {
                 if (!Numbers.Compare(letter_sum, sum, query.LetterCountComparisonOperator, query.LetterCountRemainder))

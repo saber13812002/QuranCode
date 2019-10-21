@@ -446,7 +446,7 @@ public class Permutations<T> : IMetaCollection<T>
         int runCount = 1;
         List<int> divisors = new List<int>();
         List<int> numerators = new List<int>();
-        for (int i = 1; i < myLexicographicOrders.Length; ++i)
+        for (int i = 1; i < myLexicographicOrders.Length - 1; ++i)
         {
             numerators.AddRange(SmallPrimeUtility.Factor(i + 1));
             if (myLexicographicOrders[i] == myLexicographicOrders[i - 1])
@@ -455,14 +455,14 @@ public class Permutations<T> : IMetaCollection<T>
             }
             else
             {
-                for (int f = 2; f <= runCount; ++f)
+                for (int f = 2; f < runCount; ++f)
                 {
                     divisors.AddRange(SmallPrimeUtility.Factor(f));
                 }
                 runCount = 1;
             }
         }
-        for (int f = 2; f <= runCount; ++f)
+        for (int f = 2; f < runCount; ++f)
         {
             divisors.AddRange(SmallPrimeUtility.Factor(f));
         }

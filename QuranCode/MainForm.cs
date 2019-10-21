@@ -13886,20 +13886,20 @@ public partial class MainForm : Form, ISubscriber
                         DisplayFoundVerses(false);
                         break;
                     case NumbersResultType.VerseRanges:
-                        DisplayFoundVerseRanges(false);
+                        DisplayFoundVerseRanges(false, false);
                         break;
                     case NumbersResultType.VerseSets:
-                        DisplayFoundVerseSets(false);
+                        DisplayFoundVerseSets(false, false);
                         break;
 
                     case NumbersResultType.Chapters:
                         DisplayFoundChapters(false);
                         break;
                     case NumbersResultType.ChapterRanges:
-                        DisplayFoundChapterRanges(false);
+                        DisplayFoundChapterRanges(false, false);
                         break;
                     case NumbersResultType.ChapterSets:
-                        DisplayFoundChapterSets(false);
+                        DisplayFoundChapterSets(false, false);
                         break;
 
                     case NumbersResultType.Pages:
@@ -21494,20 +21494,20 @@ public partial class MainForm : Form, ISubscriber
                                     DisplayFoundVerses(false);
                                     break;
                                 case NumbersResultType.VerseRanges:
-                                    DisplayFoundVerseRanges(false);
+                                    DisplayFoundVerseRanges(false, false);
                                     break;
                                 case NumbersResultType.VerseSets:
-                                    DisplayFoundVerseSets(false);
+                                    DisplayFoundVerseSets(false, false);
                                     break;
 
                                 case NumbersResultType.Chapters:
                                     DisplayFoundChapters(false);
                                     break;
                                 case NumbersResultType.ChapterRanges:
-                                    DisplayFoundChapterRanges(false);
+                                    DisplayFoundChapterRanges(false, false);
                                     break;
                                 case NumbersResultType.ChapterSets:
-                                    DisplayFoundChapterSets(false);
+                                    DisplayFoundChapterSets(false, false);
                                     break;
 
                                 case NumbersResultType.Pages:
@@ -36661,7 +36661,7 @@ public partial class MainForm : Form, ISubscriber
                     int verse_count = m_client.FoundVerses.Count;
                     m_find_result_header = verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + find_by_similarity_method.ToString() + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
 
-                    DisplayFoundVerseRanges(true);
+                    DisplayFoundVerseRanges(true, false);
                 }
             }
             else
@@ -39821,7 +39821,9 @@ public partial class MainForm : Form, ISubscriber
                                 if (m_client.FoundVerses != null)
                                 {
                                     m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["word range"] : " " + L[l]["word ranges"]) + " " + L[l]["in"] + " " + m_client.FoundVerses.Count + ((m_client.FoundVerses.Count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                    DisplayFoundVerses(true);
+                                    DisplayFoundWordRangesTextFile();
+                                    UpdateHeaderLabel();
+                                    //DisplayFoundVerses(true);
                                 }
                             }
                         }
@@ -39835,7 +39837,8 @@ public partial class MainForm : Form, ISubscriber
                                 if (m_client.FoundVerses != null)
                                 {
                                     m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["word set"] : " " + L[l]["word sets"]) + " " + L[l]["in"] + " " + m_client.FoundVerses.Count + ((m_client.FoundVerses.Count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                    DisplayFoundVerses(true);
+                                    DisplayFoundWordSetsTextFile();
+                                    //DisplayFoundVerses(true);
                                 }
                             }
                         }
@@ -39869,7 +39872,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundVerseRanges != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["verse range"] : " " + L[l]["verse ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundVerseRanges(true);
+                                DisplayFoundVerseRanges(true, false);
                             }
                         }
                         break;
@@ -39880,7 +39883,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundVerseSets != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["verse set"] : " " + L[l]["verse sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundVerseSets(true);
+                                DisplayFoundVerseSets(true, false);
                             }
                         }
                         break;
@@ -39903,7 +39906,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundChapterRanges != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["chapter range"] : " " + L[l]["chapter ranges"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundChapterRanges(true);
+                                DisplayFoundChapterRanges(true, false);
                             }
                         }
                         break;
@@ -39914,7 +39917,7 @@ public partial class MainForm : Form, ISubscriber
                             if (m_client.FoundChapterSets != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["chapter set"] : " " + L[l]["chapter sets"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                                DisplayFoundChapterSets(true);
+                                DisplayFoundChapterSets(true, false);
                             }
                         }
                         break;
@@ -41161,9 +41164,9 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void DisplayFoundVerseRanges(bool add_to_history)
+    private void DisplayFoundVerseRanges(bool add_to_history, bool display_file)
     {
-        DisplayFoundVerseRangesTextFile();
+        if (display_file) DisplayFoundVerseRangesTextFile();
 
         this.Cursor = Cursors.WaitCursor;
         try
@@ -41272,9 +41275,9 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void DisplayFoundVerseSets(bool add_to_history)
+    private void DisplayFoundVerseSets(bool add_to_history, bool display_file)
     {
-        DisplayFoundVerseSetsTextFile();
+        if (display_file) DisplayFoundVerseSetsTextFile();
 
         this.Cursor = Cursors.WaitCursor;
         try
@@ -41507,9 +41510,9 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void DisplayFoundChapterRanges(bool add_to_history)
+    private void DisplayFoundChapterRanges(bool add_to_history, bool display_file)
     {
-        DisplayFoundChapterRangesTextFile();
+        if (display_file) DisplayFoundChapterRangesTextFile();
 
         this.Cursor = Cursors.WaitCursor;
         try
@@ -41636,9 +41639,9 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void DisplayFoundChapterSets(bool add_to_history)
+    private void DisplayFoundChapterSets(bool add_to_history, bool display_file)
     {
-        DisplayFoundChapterSetsTextFile();
+        if (display_file) DisplayFoundChapterSetsTextFile();
 
         this.Cursor = Cursors.WaitCursor;
         try
@@ -41771,11 +41774,11 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayFoundPageRanges(bool add_to_history)
     {
-        DisplayFoundVerseRanges(add_to_history);
+        DisplayFoundVerseRanges(add_to_history, false);
     }
     private void DisplayFoundPageSets(bool add_to_history)
     {
-        DisplayFoundVerseSets(add_to_history);
+        DisplayFoundVerseSets(add_to_history, false);
     }
     private void DisplayFoundStations(bool add_to_history)
     {
@@ -41783,11 +41786,11 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayFoundStationRanges(bool add_to_history)
     {
-        DisplayFoundVerseRanges(add_to_history);
+        DisplayFoundVerseRanges(add_to_history, false);
     }
     private void DisplayFoundStationSets(bool add_to_history)
     {
-        DisplayFoundVerseSets(add_to_history);
+        DisplayFoundVerseSets(add_to_history, false);
     }
     private void DisplayFoundParts(bool add_to_history)
     {
@@ -41795,11 +41798,11 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayFoundPartRanges(bool add_to_history)
     {
-        DisplayFoundVerseRanges(add_to_history);
+        DisplayFoundVerseRanges(add_to_history, false);
     }
     private void DisplayFoundPartSets(bool add_to_history)
     {
-        DisplayFoundVerseSets(add_to_history);
+        DisplayFoundVerseSets(add_to_history, false);
     }
     private void DisplayFoundGroups(bool add_to_history)
     {
@@ -41807,11 +41810,11 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayFoundGroupRanges(bool add_to_history)
     {
-        DisplayFoundVerseRanges(add_to_history);
+        DisplayFoundVerseRanges(add_to_history, false);
     }
     private void DisplayFoundGroupSets(bool add_to_history)
     {
-        DisplayFoundVerseSets(add_to_history);
+        DisplayFoundVerseSets(add_to_history, false);
     }
     private void DisplayFoundHalfs(bool add_to_history)
     {
@@ -41819,11 +41822,11 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayFoundHalfRanges(bool add_to_history)
     {
-        DisplayFoundVerseRanges(add_to_history);
+        DisplayFoundVerseRanges(add_to_history, false);
     }
     private void DisplayFoundHalfSets(bool add_to_history)
     {
-        DisplayFoundVerseSets(add_to_history);
+        DisplayFoundVerseSets(add_to_history, false);
     }
     private void DisplayFoundQuarters(bool add_to_history)
     {
@@ -41831,11 +41834,11 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayFoundQuarterRanges(bool add_to_history)
     {
-        DisplayFoundVerseRanges(add_to_history);
+        DisplayFoundVerseRanges(add_to_history, false);
     }
     private void DisplayFoundQuarterSets(bool add_to_history)
     {
-        DisplayFoundVerseSets(add_to_history);
+        DisplayFoundVerseSets(add_to_history, false);
     }
     private void DisplayFoundBowings(bool add_to_history)
     {
@@ -41843,11 +41846,127 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DisplayFoundBowingRanges(bool add_to_history)
     {
-        DisplayFoundVerseRanges(add_to_history);
+        DisplayFoundVerseRanges(add_to_history, false);
     }
     private void DisplayFoundBowingSets(bool add_to_history)
     {
-        DisplayFoundVerseSets(add_to_history);
+        DisplayFoundVerseSets(add_to_history, false);
+    }
+    private void DisplayFoundWordRangesTextFile()
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (m_client != null)
+            {
+                if (m_client.FoundWordRanges != null)
+                {
+                    if (m_client.FoundWordRanges.Count > 0)
+                    {
+                        StringBuilder str = new StringBuilder();
+                        int count = 0;
+                        foreach (List<Word> range in m_client.FoundWordRanges)
+                        {
+                            str.Append(++count + "\t");
+                            foreach (Word word in range)
+                            {
+                                if (word != null)
+                                {
+                                    str.Append(word.Text + "\t");
+                                }
+                            }
+                            if (range.Count > 0)
+                            {
+                                str.Remove(str.Length - 1, 1);
+                            }
+                            str.AppendLine();
+                        }
+
+                        string filename = "Found" + ((m_search_type == SearchType.Numbers) ? m_numbers_result_type.ToString() : "WordRanges") + ".txt";
+                        if (Directory.Exists(Globals.STATISTICS_FOLDER))
+                        {
+                            string path = Globals.STATISTICS_FOLDER + "/" + filename;
+                            FileHelper.SaveText(path, str.ToString());
+                            FileHelper.DisplayFile(path);
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            if (PictureBox.Visible)
+            {
+                PictureBox.Visible = false;
+            }
+            this.Cursor = Cursors.Default;
+        }
+    }
+    private void DisplayFoundWordSetsTextFile()
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (m_client != null)
+            {
+                if (m_client.FoundWordSets != null)
+                {
+                    if (m_client.FoundWordSets.Count > 0)
+                    {
+                        StringBuilder str = new StringBuilder();
+                        int count = 0;
+                        foreach (List<Word> set in m_client.FoundWordSets)
+                        {
+                            str.Append(++count + "\t");
+                            foreach (Word word in set)
+                            {
+                                if (word != null)
+                                {
+                                    str.Append(word.Text + "\t");
+                                }
+                            }
+                            if (set.Count > 0)
+                            {
+                                str.Remove(str.Length - 1, 1);
+                            }
+                            str.AppendLine();
+                        }
+
+                        string filename = "Found" + ((m_search_type == SearchType.Numbers) ? m_numbers_result_type.ToString() : "WordSets") + ".txt";
+                        if (Directory.Exists(Globals.STATISTICS_FOLDER))
+                        {
+                            string path = Globals.STATISTICS_FOLDER + "/" + filename;
+                            FileHelper.SaveText(path, str.ToString());
+                            FileHelper.DisplayFile(path);
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            if (PictureBox.Visible)
+            {
+                PictureBox.Visible = false;
+            }
+            this.Cursor = Cursors.Default;
+        }
     }
     private void DisplayFoundVerseRangesTextFile()
     {
@@ -41861,18 +41980,29 @@ public partial class MainForm : Form, ISubscriber
                     if (m_client.FoundVerseRanges.Count > 0)
                     {
                         StringBuilder str = new StringBuilder();
+                        int count = 0;
+
+                        str.Append("#");
+                        int r = m_client.FoundVerseRanges[0].Count;
+                        for (int i = 0; i < r; i++)
+                        {
+                            str.Append("\t" + "CC:VVV.W.L");
+                        }
+                        str.AppendLine();
+
                         foreach (List<Verse> range in m_client.FoundVerseRanges)
                         {
+                            str.Append(++count + "\t");
                             foreach (Verse verse in range)
                             {
                                 if (verse != null)
                                 {
-                                    str.Append(verse.Address + ", ");
+                                    str.Append(verse.Address + "." + verse.Words.Count + "." + verse.LetterCount + "\t");
                                 }
                             }
                             if (range.Count > 0)
                             {
-                                str.Remove(str.Length - 2, 2);
+                                str.Remove(str.Length - 1, 1);
                             }
                             str.AppendLine();
                         }
@@ -41917,18 +42047,29 @@ public partial class MainForm : Form, ISubscriber
                     if (m_client.FoundVerseSets.Count > 0)
                     {
                         StringBuilder str = new StringBuilder();
+                        int count = 0;
+
+                        str.Append("#");
+                        int s = m_client.FoundVerseSets[0].Count;
+                        for (int i = 0; i < s; i++)
+                        {
+                            str.Append("\t" + "CC:VVV.W.L");
+                        }
+                        str.AppendLine();
+
                         foreach (List<Verse> set in m_client.FoundVerseSets)
                         {
+                            str.Append(++count + "\t");
                             foreach (Verse verse in set)
                             {
                                 if (verse != null)
                                 {
-                                    str.Append(verse.Address + ", ");
+                                    str.Append(verse.Address + "." + verse.Words.Count + "." + verse.LetterCount + "\t");
                                 }
                             }
                             if (set.Count > 0)
                             {
-                                str.Remove(str.Length - 2, 2);
+                                str.Remove(str.Length - 1, 1);
                             }
                             str.AppendLine();
                         }
@@ -41973,18 +42114,29 @@ public partial class MainForm : Form, ISubscriber
                     if (m_client.FoundChapterRanges.Count > 0)
                     {
                         StringBuilder str = new StringBuilder();
+                        int count = 0;
+
+                        str.Append("#");
+                        int r = m_client.FoundChapterRanges[0].Count;
+                        for (int i = 0; i < r; i++)
+                        {
+                            str.Append("\t" + "CC.V.W.L");
+                        }
+                        str.AppendLine();
+
                         foreach (List<Chapter> range in m_client.FoundChapterRanges)
                         {
+                            str.Append(++count + "\t");
                             foreach (Chapter chapter in range)
                             {
                                 if (chapter != null)
                                 {
-                                    str.Append(chapter.SortedNumber + "." + chapter.Verses.Count + ", ");
+                                    str.Append(chapter.SortedNumber + "." + chapter.Verses.Count + "." + chapter.WordCount + "." + chapter.LetterCount + "\t");
                                 }
                             }
                             if (range.Count > 0)
                             {
-                                str.Remove(str.Length - 2, 2);
+                                str.Remove(str.Length - 1, 1);
                             }
                             str.AppendLine();
                         }
@@ -42029,18 +42181,29 @@ public partial class MainForm : Form, ISubscriber
                     if (m_client.FoundChapterSets.Count > 0)
                     {
                         StringBuilder str = new StringBuilder();
+                        int count = 0;
+
+                        str.Append("#");
+                        int s = m_client.FoundChapterSets[0].Count;
+                        for (int i = 0; i < s; i++)
+                        {
+                            str.Append("\t" + "CC.V.W.L");
+                        }
+                        str.AppendLine();
+
                         foreach (List<Chapter> set in m_client.FoundChapterSets)
                         {
+                            str.Append(++count + "\t");
                             foreach (Chapter chapter in set)
                             {
                                 if (chapter != null)
                                 {
-                                    str.Append(chapter.SortedNumber + "." + chapter.Verses.Count + ", ");
+                                    str.Append(chapter.SortedNumber + "." + chapter.Verses.Count + "." + chapter.WordCount + "." + chapter.LetterCount + "\t");
                                 }
                             }
                             if (set.Count > 0)
                             {
-                                str.Remove(str.Length - 2, 2);
+                                str.Remove(str.Length - 1, 1);
                             }
                             str.AppendLine();
                         }
