@@ -34,4 +34,5 @@ using System.Text;
         /// </summary>
         int LowerIndex { get; }
     }
+
 //}

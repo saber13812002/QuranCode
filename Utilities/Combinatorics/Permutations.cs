@@ -443,30 +443,37 @@ public class Permutations<T> : IMetaCollection<T>
     /// <returns>The number of permutations.</returns>
     private long GetCount()
     {
-        int runCount = 1;
-        List<int> divisors = new List<int>();
-        List<int> numerators = new List<int>();
-        for (int i = 1; i < myLexicographicOrders.Length - 1; ++i)
+        try
         {
-            numerators.AddRange(SmallPrimeUtility.Factor(i + 1));
-            if (myLexicographicOrders[i] == myLexicographicOrders[i - 1])
+            int runCount = 1;
+            List<int> divisors = new List<int>();
+            List<int> numerators = new List<int>();
+            for (int i = 1; i < myLexicographicOrders.Length; ++i)
             {
-                ++runCount;
-            }
-            else
-            {
-                for (int f = 2; f < runCount; ++f)
+                numerators.AddRange(SmallPrimeUtility.Factor(i + 1));
+                if (myLexicographicOrders[i] == myLexicographicOrders[i - 1])
                 {
-                    divisors.AddRange(SmallPrimeUtility.Factor(f));
+                    ++runCount;
                 }
-                runCount = 1;
+                else
+                {
+                    for (int f = 2; f <= runCount; ++f)
+                    {
+                        divisors.AddRange(SmallPrimeUtility.Factor(f));
+                    }
+                    runCount = 1;
+                }
             }
+            for (int f = 2; f <= runCount; ++f)
+            {
+                divisors.AddRange(SmallPrimeUtility.Factor(f));
+            }
+            return SmallPrimeUtility.EvaluatePrimeFactors(SmallPrimeUtility.DividePrimeFactors(numerators, divisors));
         }
-        for (int f = 2; f < runCount; ++f)
+        catch //????? Code above throws OutOfIndex exception. Needs investigation !!!!!
         {
-            divisors.AddRange(SmallPrimeUtility.Factor(f));
+            return 0L;
         }
-        return SmallPrimeUtility.EvaluatePrimeFactors(SmallPrimeUtility.DividePrimeFactors(numerators, divisors));
     }
 
     #endregion

@@ -39822,8 +39822,7 @@ public partial class MainForm : Form, ISubscriber
                                 {
                                     m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["word range"] : " " + L[l]["word ranges"]) + " " + L[l]["in"] + " " + m_client.FoundVerses.Count + ((m_client.FoundVerses.Count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
                                     DisplayFoundWordRangesTextFile();
-                                    UpdateHeaderLabel();
-                                    //DisplayFoundVerses(true);
+                                    DisplayFoundVerses(true);
                                 }
                             }
                         }
@@ -39838,7 +39837,6 @@ public partial class MainForm : Form, ISubscriber
                                 {
                                     m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["word set"] : " " + L[l]["word sets"]) + " " + L[l]["in"] + " " + m_client.FoundVerses.Count + ((m_client.FoundVerses.Count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
                                     DisplayFoundWordSetsTextFile();
-                                    //DisplayFoundVerses(true);
                                 }
                             }
                         }
@@ -45196,9 +45194,6 @@ public partial class MainForm : Form, ISubscriber
                                 LoadNumerologySystem(numerology_system_name);
 
                                 CalculateCurrentValue();
-
-                                //BuildLetterFrequencies();
-                                //DisplayLetterFrequencies();
 
                                 // re-sort chapters if sorted by Value
                                 if (Chapter.SortMethod == ChapterSortMethod.ByValue)
