@@ -13280,8 +13280,8 @@ public partial class MainForm : Form, ISubscriber
 
                         //if ((text_mode == "Original") || (text_mode.Contains("Dots")))
                         //{
-                        ApplyFont(m_quran_font);
-                        FontLabel.Enabled = true;
+                        //    ApplyFont(m_quran_font);
+                        //    FontLabel.Enabled = true;
                         //}
                         //else
                         //{
@@ -17727,35 +17727,40 @@ public partial class MainForm : Form, ISubscriber
     }
     private void MainTextBox_TextChanged(object sender, EventArgs e)
     {
-        if (
-             ((sender != null) && (sender == m_active_textbox)) &&
-             (
-               (m_active_textbox.Focused) ||
-               (ChaptersListBox.Focused) ||
-               (ChapterComboBox.Focused) ||
-               (ChapterVerseNumericUpDown.Focused) ||
-               (ChapterWordNumericUpDown.Focused) ||
-               (ChapterLetterNumericUpDown.Focused) ||
-               (PageNumericUpDown.Focused) ||
-               (StationNumericUpDown.Focused) ||
-               (PartNumericUpDown.Focused) ||
-               (GroupNumericUpDown.Focused) ||
-               (HalfNumericUpDown.Focused) ||
-               (QuarterNumericUpDown.Focused) ||
-               (BowingNumericUpDown.Focused) ||
-               (WordNumericUpDown.Focused) ||
-               (LetterNumericUpDown.Focused)
-             )
-           )
-        {
-            if (m_client != null)
-            {
-                CalculateCurrentValue();
+        ////////////////////////////////////////////////////////////
+        // DisplaySelection takes care of calculations
+        ////////////////////////////////////////////////////////////
 
-                BuildLetterFrequencies();
-                DisplayLetterFrequencies();
-            }
-        }
+        //if (
+        //     ((sender != null) && (sender == m_active_textbox)) &&
+        //     (
+        //       (m_active_textbox.Focused) ||
+        //       (TextModeComboBox.Focused) ||
+        //       (ChaptersListBox.Focused) ||
+        //       (ChapterComboBox.Focused) ||
+        //       (ChapterVerseNumericUpDown.Focused) ||
+        //       (ChapterWordNumericUpDown.Focused) ||
+        //       (ChapterLetterNumericUpDown.Focused) ||
+        //       (PageNumericUpDown.Focused) ||
+        //       (StationNumericUpDown.Focused) ||
+        //       (PartNumericUpDown.Focused) ||
+        //       (GroupNumericUpDown.Focused) ||
+        //       (HalfNumericUpDown.Focused) ||
+        //       (QuarterNumericUpDown.Focused) ||
+        //       (BowingNumericUpDown.Focused) ||
+        //       (WordNumericUpDown.Focused) ||
+        //       (LetterNumericUpDown.Focused)
+        //     )
+        //   )
+        //{
+        //    if (m_client != null)
+        //    {
+        //        CalculateCurrentValue();
+
+        //        BuildLetterFrequencies();
+        //        DisplayLetterFrequencies();
+        //    }
+        //}
     }
     private void MainTextBox_SelectionChanged(object sender, EventArgs e)
     {
@@ -17971,12 +17976,13 @@ public partial class MainForm : Form, ISubscriber
         this.AcceptButton = null;
         UpdateMouseCursor();
 
-        if (m_active_textbox != null)
-        {
-            CalculateCurrentValue();
-            BuildLetterFrequencies();
-            DisplayLetterFrequencies();
-        }
+        //if (m_active_textbox != null)
+        //{
+        //    CalculateCurrentValue();
+
+        //    BuildLetterFrequencies();
+        //    DisplayLetterFrequencies();
+        //}
     }
     private void MainTextBox_MouseEnter(object sender, EventArgs e)
     {
@@ -18192,6 +18198,7 @@ public partial class MainForm : Form, ISubscriber
                         UpdateNotifyIconText();
 
                         CalculateCurrentValue();
+
                         BuildLetterFrequencies();
                         DisplayLetterFrequencies();
 
@@ -22719,6 +22726,7 @@ public partial class MainForm : Form, ISubscriber
             DisplaySelectionText();
 
             CalculateCurrentValue();
+
             BuildLetterFrequencies();
             DisplayLetterFrequencies();
 
@@ -25325,6 +25333,7 @@ public partial class MainForm : Form, ISubscriber
             m_user_text_mode = true;
 
             CalculateCurrentValue();
+
             BuildLetterFrequencies();
             DisplayLetterFrequencies();
 
@@ -40465,6 +40474,7 @@ public partial class MainForm : Form, ISubscriber
     private void FindByFrequencyPhraseTextBox_KeyUp(object sender, KeyEventArgs e)
     {
         CalculateCurrentValue();
+
         BuildLetterFrequencies();
         DisplayLetterFrequencies();
     }
@@ -40476,6 +40486,7 @@ public partial class MainForm : Form, ISubscriber
             m_selected_text_length = FindByFrequencyPhraseTextBox.SelectionLength;
 
             CalculateCurrentValue();
+
             BuildLetterFrequencies();
             DisplayLetterFrequencies();
         }
@@ -40483,6 +40494,7 @@ public partial class MainForm : Form, ISubscriber
     private void FindByFrequencyPhraseTextBox_MouseUp(object sender, MouseEventArgs e)
     {
         CalculateCurrentValue();
+
         BuildLetterFrequencies();
         DisplayLetterFrequencies();
     }
@@ -40952,9 +40964,10 @@ public partial class MainForm : Form, ISubscriber
             MainTextBox.Visible = true;
             m_active_textbox = MainTextBox;
 
-            CalculateCurrentValue();
-            BuildLetterFrequencies();
-            DisplayLetterFrequencies();
+            //CalculateCurrentValue();
+
+            //BuildLetterFrequencies();
+            //DisplayLetterFrequencies();
 
             DisplayCurrentPositions();
 
@@ -40988,9 +41001,10 @@ public partial class MainForm : Form, ISubscriber
             SearchResultTextBox.Visible = true;
             m_active_textbox = SearchResultTextBox;
 
-            CalculateCurrentValue();
-            BuildLetterFrequencies();
-            DisplayLetterFrequencies();
+            //CalculateCurrentValue();
+
+            //BuildLetterFrequencies();
+            //DisplayLetterFrequencies();
 
             DisplayCurrentPositions();
 
@@ -41230,6 +41244,7 @@ public partial class MainForm : Form, ISubscriber
                     DuplicateLettersCheckBox.Visible = false;
 
                     CalculateCurrentValue();
+
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
 
@@ -41341,6 +41356,7 @@ public partial class MainForm : Form, ISubscriber
                     DuplicateLettersCheckBox.Visible = false;
 
                     CalculateCurrentValue();
+
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
 
@@ -41460,6 +41476,7 @@ public partial class MainForm : Form, ISubscriber
                     DuplicateLettersCheckBox.Visible = false;
 
                     CalculateCurrentValue();
+
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
 
@@ -41594,6 +41611,7 @@ public partial class MainForm : Form, ISubscriber
                     DuplicateLettersCheckBox.Visible = false;
 
                     CalculateCurrentValue();
+
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
 
@@ -41723,6 +41741,7 @@ public partial class MainForm : Form, ISubscriber
                     DuplicateLettersCheckBox.Visible = false;
 
                     CalculateCurrentValue();
+
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
 
@@ -44677,14 +44696,12 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (m_client.NumerologySystem != null)
                 {
+                    // populate new numerology systems
                     string backup_valuation_system = null;
                     if (NumerologySystemComboBox.SelectedItem != null)
                     {
                         backup_valuation_system = NumerologySystemComboBox.SelectedItem.ToString();
                     }
-
-                    BuildSimplifiedBookAndDisplaySelection();
-
                     PopulateNumerologySystemComboBox();
                     if (NumerologySystemComboBox.Items.Count > 0)
                     {
@@ -44708,6 +44725,9 @@ public partial class MainForm : Form, ISubscriber
                     {
                         NumerologySystemComboBox.SelectedIndex = -1;
                     }
+
+                    // and then simplify text
+                    BuildSimplifiedBookAndDisplaySelection();
                 }
             }
         }
@@ -45144,8 +45164,8 @@ public partial class MainForm : Form, ISubscriber
 
                             //if ((text_mode == "Original") || (text_mode.Contains("Dots")))
                             //{
-                            ApplyFont(m_quran_font);
-                            FontLabel.Enabled = true;
+                            //    ApplyFont(m_quran_font);
+                            //    FontLabel.Enabled = true;
                             //}
                             //else
                             //{
@@ -50966,6 +50986,7 @@ public partial class MainForm : Form, ISubscriber
                     m_user_text_mode = false;
 
                     CalculateCurrentValue();
+
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
 
