@@ -17727,40 +17727,32 @@ public partial class MainForm : Form, ISubscriber
     }
     private void MainTextBox_TextChanged(object sender, EventArgs e)
     {
-        ////////////////////////////////////////////////////////////
-        // DisplaySelection takes care of calculations
-        ////////////////////////////////////////////////////////////
+        if (
+             ((sender != null) && (sender == m_active_textbox)) &&
+             (
+               (m_active_textbox.Focused) ||
+               (ChaptersListBox.Focused) ||
+               (ChapterComboBox.Focused) ||
+               (ChapterVerseNumericUpDown.Focused) ||
+               (ChapterWordNumericUpDown.Focused) ||
+               (ChapterLetterNumericUpDown.Focused) ||
+               (PageNumericUpDown.Focused) ||
+               (StationNumericUpDown.Focused) ||
+               (PartNumericUpDown.Focused) ||
+               (GroupNumericUpDown.Focused) ||
+               (HalfNumericUpDown.Focused) ||
+               (QuarterNumericUpDown.Focused) ||
+               (BowingNumericUpDown.Focused) ||
+               (WordNumericUpDown.Focused) ||
+               (LetterNumericUpDown.Focused)
+             )
+           )
+        {
+            CalculateCurrentValue();
 
-        //if (
-        //     ((sender != null) && (sender == m_active_textbox)) &&
-        //     (
-        //       (m_active_textbox.Focused) ||
-        //       (TextModeComboBox.Focused) ||
-        //       (ChaptersListBox.Focused) ||
-        //       (ChapterComboBox.Focused) ||
-        //       (ChapterVerseNumericUpDown.Focused) ||
-        //       (ChapterWordNumericUpDown.Focused) ||
-        //       (ChapterLetterNumericUpDown.Focused) ||
-        //       (PageNumericUpDown.Focused) ||
-        //       (StationNumericUpDown.Focused) ||
-        //       (PartNumericUpDown.Focused) ||
-        //       (GroupNumericUpDown.Focused) ||
-        //       (HalfNumericUpDown.Focused) ||
-        //       (QuarterNumericUpDown.Focused) ||
-        //       (BowingNumericUpDown.Focused) ||
-        //       (WordNumericUpDown.Focused) ||
-        //       (LetterNumericUpDown.Focused)
-        //     )
-        //   )
-        //{
-        //    if (m_client != null)
-        //    {
-        //        CalculateCurrentValue();
-
-        //        BuildLetterFrequencies();
-        //        DisplayLetterFrequencies();
-        //    }
-        //}
+            BuildLetterFrequencies();
+            DisplayLetterFrequencies();
+        }
     }
     private void MainTextBox_SelectionChanged(object sender, EventArgs e)
     {
@@ -17976,13 +17968,13 @@ public partial class MainForm : Form, ISubscriber
         this.AcceptButton = null;
         UpdateMouseCursor();
 
-        //if (m_active_textbox != null)
-        //{
-        //    CalculateCurrentValue();
+        if (m_active_textbox != null)
+        {
+            CalculateCurrentValue();
 
-        //    BuildLetterFrequencies();
-        //    DisplayLetterFrequencies();
-        //}
+            BuildLetterFrequencies();
+            DisplayLetterFrequencies();
+        }
     }
     private void MainTextBox_MouseEnter(object sender, EventArgs e)
     {
@@ -40283,6 +40275,7 @@ public partial class MainForm : Form, ISubscriber
         FindByFrequencyButton.Enabled = ((m_find_by_phrase_letter_frequency) && (m_phrase_text.Length > 0));
 
         CalculateCurrentValue();
+
         BuildLetterFrequencies();
         DisplayLetterFrequencies();
     }
@@ -40964,10 +40957,10 @@ public partial class MainForm : Form, ISubscriber
             MainTextBox.Visible = true;
             m_active_textbox = MainTextBox;
 
-            //CalculateCurrentValue();
+            CalculateCurrentValue();
 
-            //BuildLetterFrequencies();
-            //DisplayLetterFrequencies();
+            BuildLetterFrequencies();
+            DisplayLetterFrequencies();
 
             DisplayCurrentPositions();
 
@@ -41001,10 +40994,10 @@ public partial class MainForm : Form, ISubscriber
             SearchResultTextBox.Visible = true;
             m_active_textbox = SearchResultTextBox;
 
-            //CalculateCurrentValue();
+            CalculateCurrentValue();
 
-            //BuildLetterFrequencies();
-            //DisplayLetterFrequencies();
+            BuildLetterFrequencies();
+            DisplayLetterFrequencies();
 
             DisplayCurrentPositions();
 
@@ -48055,6 +48048,8 @@ public partial class MainForm : Form, ISubscriber
     }
     private void CalculateAndDisplayCounts()
     {
+        m_current_text = "";
+
         List<Verse> verses = null;
         if (m_found_verses_displayed)
         {
@@ -48094,6 +48089,13 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (m_client.Book != null)
                 {
+                    StringBuilder str = new StringBuilder();
+                    foreach (Verse verse in verses)
+                    {
+                        str.AppendLine(verse.Text);
+                    }
+                    m_current_text = str.ToString();
+
                     List<Chapter> chapters = m_client.Book.GetChapters(verses);
                     if (chapters != null)
                     {
@@ -48155,6 +48157,13 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (m_client.Book != null)
                 {
+                    StringBuilder str = new StringBuilder();
+                    foreach (Verse verse in verses)
+                    {
+                        str.AppendLine(verse.Text);
+                    }
+                    m_current_text = str.ToString();
+
                     List<Chapter> chapters = m_client.Book.GetChapters(verses);
                     if (chapters != null)
                     {
@@ -50388,22 +50397,6 @@ public partial class MainForm : Form, ISubscriber
     {
         if (m_client != null)
         {
-            if ((!m_user_text_mode) &&
-                   (
-                     (m_text_display_mode == TextDisplayMode.None) ||
-                     (m_text_display_mode == TextDisplayMode.TranslationOnly)
-                   )
-               )
-            {
-                if (!m_found_verses_displayed)
-                {
-                    if (m_client.Selection != null)
-                    {
-                        m_current_text = m_client.Selection.Text;
-                    }
-                }
-            }
-
             if (!String.IsNullOrEmpty(m_current_text))
             {
                 if (m_find_by_phrase_letter_frequency)
