@@ -4263,7 +4263,7 @@ public class Server : IPublisher
                 {
                     if (s_numerology_system != null)
                     {
-                        if (s_numerology_system.TextMode == "Original")
+                        if ((s_numerology_system.TextMode == "Original") || (s_numerology_system.TextMode.Contains("Dots")))
                         {
                             phrase = OriginifyPhrase(phrase);
                         }
@@ -4372,7 +4372,7 @@ public class Server : IPublisher
 
             if (phrase_verse != null)
             {
-                if (to_text_mode == "Original")
+                if ((to_text_mode == "Original") || (to_text_mode.Contains("Dots")))
                 {
                     Verse original_verse = phrase_verse;
                     int letter_count = 0;
@@ -18355,7 +18355,7 @@ public class Server : IPublisher
                                 {
                                     if (!String.IsNullOrEmpty(s_numerology_system.TextMode))
                                     {
-                                        if (s_numerology_system.TextMode == "Original")
+                                        if ((s_numerology_system.TextMode == "Original") || (s_numerology_system.TextMode.Contains("Dots")))
                                         {
                                             str.Append(" " + stopmark_text);
                                         }
@@ -18416,7 +18416,7 @@ public class Server : IPublisher
                                             {
                                                 if (!String.IsNullOrEmpty(s_numerology_system.TextMode))
                                                 {
-                                                    if (s_numerology_system.TextMode == "Original")
+                                                    if ((s_numerology_system.TextMode == "Original") || (s_numerology_system.TextMode.Contains("Dots")))
                                                     {
                                                         stopmark_text = StopmarkHelper.GetStopmarkText(words[k].Stopmark);
                                                         k_str.Append(stopmark_text + " ");
@@ -18550,7 +18550,7 @@ public class Server : IPublisher
                                             {
                                                 if (!String.IsNullOrEmpty(s_numerology_system.TextMode))
                                                 {
-                                                    if (s_numerology_system.TextMode == "Original")
+                                                    if ((s_numerology_system.TextMode == "Original") || (s_numerology_system.TextMode.Contains("Dots")))
                                                     {
                                                         str.Append(" " + stopmark_text);
                                                         if (kk_str.Length > 0)
@@ -20875,7 +20875,7 @@ public class Server : IPublisher
                                 {
                                     if (!String.IsNullOrEmpty(s_numerology_system.TextMode))
                                     {
-                                        if (s_numerology_system.TextMode == "Original")
+                                        if ((s_numerology_system.TextMode == "Original") || (s_numerology_system.TextMode.Contains("Dots")))
                                         {
                                             str.Append(" " + stopmark_text);
                                         }
@@ -20938,7 +20938,7 @@ public class Server : IPublisher
                                             {
                                                 if (!String.IsNullOrEmpty(s_numerology_system.TextMode))
                                                 {
-                                                    if (s_numerology_system.TextMode == "Original")
+                                                    if ((s_numerology_system.TextMode == "Original") || (s_numerology_system.TextMode.Contains("Dots")))
                                                     {
                                                         stopmark_text = StopmarkHelper.GetStopmarkText(words[k].Stopmark);
                                                         k_str.Append(stopmark_text + " ");
@@ -21080,7 +21080,7 @@ public class Server : IPublisher
                                             {
                                                 if (!String.IsNullOrEmpty(s_numerology_system.TextMode))
                                                 {
-                                                    if (s_numerology_system.TextMode == "Original")
+                                                    if ((s_numerology_system.TextMode == "Original") || (s_numerology_system.TextMode.Contains("Dots")))
                                                     {
                                                         str.Append(" " + stopmark_text);
                                                         if (kk_str.Length > 0)

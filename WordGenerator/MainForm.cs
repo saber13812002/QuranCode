@@ -56,19 +56,22 @@ public partial class MainForm : Form
             m_client = new Client(m_numerology_system_name);
             if (m_client != null)
             {
-                string default_text_mode = m_client.NumerologySystem.TextMode;
-                m_client.BuildSimplifiedBook(default_text_mode, true, false, false, false, false, false, false, false);
-
-                PopulateTextModeComboBox();
-                if (TextModeComboBox.Items.Count > 0)
+                if (m_client.NumerologySystem != null)
                 {
-                    if (TextModeComboBox.Items.Contains(default_text_mode))
+                    string default_text_mode = m_client.NumerologySystem.TextMode;
+                    m_client.BuildSimplifiedBook(default_text_mode, true, false, false, false, false, false, false, false);
+
+                    PopulateTextModeComboBox();
+                    if (TextModeComboBox.Items.Count > 0)
                     {
-                        TextModeComboBox.SelectedItem = default_text_mode;
-                    }
-                    else
-                    {
-                        TextModeComboBox.SelectedIndex = 0;
+                        if (TextModeComboBox.Items.Contains(default_text_mode))
+                        {
+                            TextModeComboBox.SelectedItem = default_text_mode;
+                        }
+                        else
+                        {
+                            TextModeComboBox.SelectedIndex = 0;
+                        }
                     }
                 }
             }
@@ -104,25 +107,29 @@ public partial class MainForm : Form
 
             if (m_client != null)
             {
-                if (m_client.LoadedNumerologySystems != null)
+                if (m_client.NumerologySystem != null)
                 {
-                    TextModeComboBox.BeginUpdate();
+                    string default_text_mode = m_client.NumerologySystem.TextMode;
 
-                    TextModeComboBox.Items.Clear();
-                    foreach (NumerologySystem numerology_system in m_client.LoadedNumerologySystems.Values)
+                    if (m_client.LoadedNumerologySystems != null)
                     {
-                        string default_text_mode = m_client.NumerologySystem.TextMode;
-                        if (!numerology_system.Name.StartsWith(default_text_mode)) continue;
+                        TextModeComboBox.BeginUpdate();
 
-                        string[] parts = numerology_system.Name.Split('_');
-                        if (parts != null)
+                        TextModeComboBox.Items.Clear();
+                        foreach (NumerologySystem numerology_system in m_client.LoadedNumerologySystems.Values)
                         {
-                            if (parts.Length == 3)
+                            if (!numerology_system.Name.StartsWith(default_text_mode)) continue;
+
+                            string[] parts = numerology_system.Name.Split('_');
+                            if (parts != null)
                             {
-                                string text_mode = parts[0];
-                                if (!TextModeComboBox.Items.Contains(text_mode))
+                                if (parts.Length == 3)
                                 {
-                                    TextModeComboBox.Items.Add(text_mode);
+                                    string text_mode = parts[0];
+                                    if (!TextModeComboBox.Items.Contains(text_mode))
+                                    {
+                                        TextModeComboBox.Items.Add(text_mode);
+                                    }
                                 }
                             }
                         }
@@ -236,35 +243,38 @@ public partial class MainForm : Form
     }
     private void UpdateNumerologySystem()
     {
-        if (m_client.NumerologySystem != null)
+        if (m_client != null)
         {
-            m_client.NumerologySystem.AddToLetterLNumber = m_add_positions_to_letter_value;
-            m_client.NumerologySystem.AddToLetterWNumber = m_add_positions_to_letter_value;
-            m_client.NumerologySystem.AddToLetterVNumber = m_add_positions_to_letter_value;
-            m_client.NumerologySystem.AddToLetterCNumber = false;
-            m_client.NumerologySystem.AddToLetterLDistance = true;
-            m_client.NumerologySystem.AddToLetterWDistance = true;
-            m_client.NumerologySystem.AddToLetterVDistance = true;
-            m_client.NumerologySystem.AddToLetterCDistance = false;
-            m_client.NumerologySystem.AddToWordWNumber = m_add_positions_to_letter_value;
-            m_client.NumerologySystem.AddToWordVNumber = m_add_positions_to_letter_value;
-            m_client.NumerologySystem.AddToWordCNumber = false;
-            m_client.NumerologySystem.AddToWordWDistance = true;
-            m_client.NumerologySystem.AddToWordVDistance = true;
-            m_client.NumerologySystem.AddToWordCDistance = false;
-            m_client.NumerologySystem.AddToVerseVNumber = m_add_positions_to_letter_value;
-            m_client.NumerologySystem.AddToVerseCNumber = false;
-            m_client.NumerologySystem.AddToVerseVDistance = true;
-            m_client.NumerologySystem.AddToVerseCDistance = false;
-            m_client.NumerologySystem.AddToChapterCNumber = false;
-
-            m_client.NumerologySystem.AddPositions = m_add_positions_to_letter_value;
-            m_client.NumerologySystem.AddDistancesToPrevious = m_add_distances_to_previous_to_letter_value;
-            m_client.NumerologySystem.AddDistancesToNext = m_add_distances_to_next_to_letter_value;
-            m_client.NumerologySystem.AddDistancesWithinChapters = true;
-            if (m_client.Book != null)
+            if (m_client.NumerologySystem != null)
             {
-                m_client.Book.SetupDistances(m_client.NumerologySystem.AddDistancesWithinChapters);
+                m_client.NumerologySystem.AddToLetterLNumber = m_add_positions_to_letter_value;
+                m_client.NumerologySystem.AddToLetterWNumber = m_add_positions_to_letter_value;
+                m_client.NumerologySystem.AddToLetterVNumber = m_add_positions_to_letter_value;
+                m_client.NumerologySystem.AddToLetterCNumber = false;
+                m_client.NumerologySystem.AddToLetterLDistance = true;
+                m_client.NumerologySystem.AddToLetterWDistance = true;
+                m_client.NumerologySystem.AddToLetterVDistance = true;
+                m_client.NumerologySystem.AddToLetterCDistance = false;
+                m_client.NumerologySystem.AddToWordWNumber = m_add_positions_to_letter_value;
+                m_client.NumerologySystem.AddToWordVNumber = m_add_positions_to_letter_value;
+                m_client.NumerologySystem.AddToWordCNumber = false;
+                m_client.NumerologySystem.AddToWordWDistance = true;
+                m_client.NumerologySystem.AddToWordVDistance = true;
+                m_client.NumerologySystem.AddToWordCDistance = false;
+                m_client.NumerologySystem.AddToVerseVNumber = m_add_positions_to_letter_value;
+                m_client.NumerologySystem.AddToVerseCNumber = false;
+                m_client.NumerologySystem.AddToVerseVDistance = true;
+                m_client.NumerologySystem.AddToVerseCDistance = false;
+                m_client.NumerologySystem.AddToChapterCNumber = false;
+
+                m_client.NumerologySystem.AddPositions = m_add_positions_to_letter_value;
+                m_client.NumerologySystem.AddDistancesToPrevious = m_add_distances_to_previous_to_letter_value;
+                m_client.NumerologySystem.AddDistancesToNext = m_add_distances_to_next_to_letter_value;
+                m_client.NumerologySystem.AddDistancesWithinChapters = true;
+                if (m_client.Book != null)
+                {
+                    m_client.Book.SetupDistances(m_client.NumerologySystem.AddDistancesWithinChapters);
+                }
             }
         }
     }

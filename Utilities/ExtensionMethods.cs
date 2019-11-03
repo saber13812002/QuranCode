@@ -351,6 +351,10 @@ public static class StringExtensions
         {
             return source.Simplify36();
         }
+        else if (text_mode == "SimplifiedDots")
+        {
+            return source.Simplify36();
+        }
         else if (text_mode == "Original")
         {
             return source.Simplify29();

@@ -269,7 +269,7 @@
             this.TextModeComboBox.FormattingEnabled = true;
             this.TextModeComboBox.IntegralHeight = false;
             this.TextModeComboBox.Items.AddRange(new object[] {
-            "SimplifiedDots"});
+            "Simplified29"});
             this.TextModeComboBox.Location = new System.Drawing.Point(201, 1);
             this.TextModeComboBox.Name = "TextModeComboBox";
             this.TextModeComboBox.Size = new System.Drawing.Size(84, 21);

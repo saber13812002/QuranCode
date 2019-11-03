@@ -148,7 +148,7 @@ public partial class MainForm : Form
                             if (parts.Length == 3)
                             {
                                 string text_mode = parts[0];
-                                if (text_mode == "Original") continue;
+                                if ((text_mode == "Original") || (text_mode.Contains("Dots"))) continue;
 
                                 if (!TextModeComboBox.Items.Contains(text_mode))
                                 {
@@ -266,35 +266,38 @@ public partial class MainForm : Form
     }
     private void UpdateNumerologySystem()
     {
-        if (m_client.NumerologySystem != null)
+        if (m_client != null)
         {
-            m_client.NumerologySystem.AddToLetterLNumber = m_add_positions_to_letter_value;
-            m_client.NumerologySystem.AddToLetterWNumber = m_add_positions_to_letter_value;
-            m_client.NumerologySystem.AddToLetterVNumber = m_add_positions_to_letter_value;
-            m_client.NumerologySystem.AddToLetterCNumber = false;
-            m_client.NumerologySystem.AddToLetterLDistance = true;
-            m_client.NumerologySystem.AddToLetterWDistance = true;
-            m_client.NumerologySystem.AddToLetterVDistance = true;
-            m_client.NumerologySystem.AddToLetterCDistance = false;
-            m_client.NumerologySystem.AddToWordWNumber = m_add_positions_to_letter_value;
-            m_client.NumerologySystem.AddToWordVNumber = m_add_positions_to_letter_value;
-            m_client.NumerologySystem.AddToWordCNumber = false;
-            m_client.NumerologySystem.AddToWordWDistance = true;
-            m_client.NumerologySystem.AddToWordVDistance = true;
-            m_client.NumerologySystem.AddToWordCDistance = false;
-            m_client.NumerologySystem.AddToVerseVNumber = m_add_positions_to_letter_value;
-            m_client.NumerologySystem.AddToVerseCNumber = false;
-            m_client.NumerologySystem.AddToVerseVDistance = true;
-            m_client.NumerologySystem.AddToVerseCDistance = false;
-            m_client.NumerologySystem.AddToChapterCNumber = false;
-
-            m_client.NumerologySystem.AddPositions = m_add_positions_to_letter_value;
-            m_client.NumerologySystem.AddDistancesToPrevious = m_add_distances_to_previous_to_letter_value;
-            m_client.NumerologySystem.AddDistancesToNext = m_add_distances_to_next_to_letter_value;
-            m_client.NumerologySystem.AddDistancesWithinChapters = true;
-            if (m_client.Book != null)
+            if (m_client.NumerologySystem != null)
             {
-                m_client.Book.SetupDistances(m_client.NumerologySystem.AddDistancesWithinChapters);
+                m_client.NumerologySystem.AddToLetterLNumber = m_add_positions_to_letter_value;
+                m_client.NumerologySystem.AddToLetterWNumber = m_add_positions_to_letter_value;
+                m_client.NumerologySystem.AddToLetterVNumber = m_add_positions_to_letter_value;
+                m_client.NumerologySystem.AddToLetterCNumber = false;
+                m_client.NumerologySystem.AddToLetterLDistance = true;
+                m_client.NumerologySystem.AddToLetterWDistance = true;
+                m_client.NumerologySystem.AddToLetterVDistance = true;
+                m_client.NumerologySystem.AddToLetterCDistance = false;
+                m_client.NumerologySystem.AddToWordWNumber = m_add_positions_to_letter_value;
+                m_client.NumerologySystem.AddToWordVNumber = m_add_positions_to_letter_value;
+                m_client.NumerologySystem.AddToWordCNumber = false;
+                m_client.NumerologySystem.AddToWordWDistance = true;
+                m_client.NumerologySystem.AddToWordVDistance = true;
+                m_client.NumerologySystem.AddToWordCDistance = false;
+                m_client.NumerologySystem.AddToVerseVNumber = m_add_positions_to_letter_value;
+                m_client.NumerologySystem.AddToVerseCNumber = false;
+                m_client.NumerologySystem.AddToVerseVDistance = true;
+                m_client.NumerologySystem.AddToVerseCDistance = false;
+                m_client.NumerologySystem.AddToChapterCNumber = false;
+
+                m_client.NumerologySystem.AddPositions = m_add_positions_to_letter_value;
+                m_client.NumerologySystem.AddDistancesToPrevious = m_add_distances_to_previous_to_letter_value;
+                m_client.NumerologySystem.AddDistancesToNext = m_add_distances_to_next_to_letter_value;
+                m_client.NumerologySystem.AddDistancesWithinChapters = true;
+                if (m_client.Book != null)
+                {
+                    m_client.Book.SetupDistances(m_client.NumerologySystem.AddDistancesWithinChapters);
+                }
             }
         }
     }
@@ -867,103 +870,106 @@ public partial class MainForm : Form
     }
     private void GenerateLine()
     {
-        if (m_generated_lines != null)
+        if (m_client != null)
         {
-            if (m_fatiha_letters != null)
+            if (m_generated_lines != null)
             {
-                List<long> fatiha_letter_values = new List<long>();
-                List<long> infallible_letter_values = new List<long>();
-                for (int i = 0; i < m_fatiha_letters.Count; i++)
+                if (m_fatiha_letters != null)
                 {
-                    long value = m_client.CalculateValue(m_fatiha_letters[i]);
-                    if (m_add_verse_and_word_values_to_letter_value)
+                    List<long> fatiha_letter_values = new List<long>();
+                    List<long> infallible_letter_values = new List<long>();
+                    for (int i = 0; i < m_fatiha_letters.Count; i++)
                     {
-                        value += m_client.CalculateValue(m_fatiha_letters[i].Word);
-                        value += m_client.CalculateValue(m_fatiha_letters[i].Word.Verse);
-                    }
-                    if (m_use_ya_husein) value += m_ya_husein_letter_values[i];
-                    fatiha_letter_values.Add(value);
-
-                    value = m_client.CalculateValue(m_infallible_letters[i]);
-                    if (m_use_ya_husein) value -= m_ya_husein_letter_values[i];
-                    infallible_letter_values.Add(Math.Abs(value));
-                }
-
-                StringBuilder str = new StringBuilder();
-                if (m_client.NumerologySystem != null)
-                {
-                    string generated_line = "";
-                    if (fatiha_letter_values != null)
-                    {
-                        for (int j = 0; j < fatiha_letter_values.Count; j++)
+                        long value = m_client.CalculateValue(m_fatiha_letters[i]);
+                        if (m_add_verse_and_word_values_to_letter_value)
                         {
-                            long number = 0L;
-                            long AAA = fatiha_letter_values[j];
-                            long BBB = infallible_letter_values[j];
-                            switch (m_combination_method)
-                            {
-                                case CombinationMethod.Concatenate:
-                                    number = Numbers.Concatenate(AAA, BBB, m_value_combination_direction);
-                                    break;
-                                case CombinationMethod.InterlaceAB:
-                                    number = Numbers.Interlace(AAA, BBB, true, m_value_combination_direction);
-                                    break;
-                                case CombinationMethod.InterlaceBA:
-                                    number = Numbers.Interlace(AAA, BBB, false, m_value_combination_direction);
-                                    break;
-                                case CombinationMethod.CrossOverAB:
-                                    number = Numbers.CrossOver(AAA, BBB, true, m_value_combination_direction);
-                                    break;
-                                case CombinationMethod.CrossOverBA:
-                                    number = Numbers.CrossOver(AAA, BBB, false, m_value_combination_direction);
-                                    break;
-                            }
+                            value += m_client.CalculateValue(m_fatiha_letters[i].Word);
+                            value += m_client.CalculateValue(m_fatiha_letters[i].Word.Verse);
+                        }
+                        if (m_use_ya_husein) value += m_ya_husein_letter_values[i];
+                        fatiha_letter_values.Add(value);
 
-                            if (number != -1)
+                        value = m_client.CalculateValue(m_infallible_letters[i]);
+                        if (m_use_ya_husein) value -= m_ya_husein_letter_values[i];
+                        infallible_letter_values.Add(Math.Abs(value));
+                    }
+
+                    StringBuilder str = new StringBuilder();
+                    if (m_client.NumerologySystem != null)
+                    {
+                        string generated_line = "";
+                        if (fatiha_letter_values != null)
+                        {
+                            for (int j = 0; j < fatiha_letter_values.Count; j++)
                             {
-                                if (Numbers.IsNumberType(number, m_number_type))
+                                long number = 0L;
+                                long AAA = fatiha_letter_values[j];
+                                long BBB = infallible_letter_values[j];
+                                switch (m_combination_method)
                                 {
-                                    // mod 29 to select letter
-                                    int i = (int)((long)number % (long)m_client.NumerologySystem.Count);
-                                    char[] letters = new char[m_client.NumerologySystem.LetterValues.Count];
-                                    m_client.NumerologySystem.LetterValues.Keys.CopyTo(letters, 0);
-                                    generated_line += letters[i] + " ";
+                                    case CombinationMethod.Concatenate:
+                                        number = Numbers.Concatenate(AAA, BBB, m_value_combination_direction);
+                                        break;
+                                    case CombinationMethod.InterlaceAB:
+                                        number = Numbers.Interlace(AAA, BBB, true, m_value_combination_direction);
+                                        break;
+                                    case CombinationMethod.InterlaceBA:
+                                        number = Numbers.Interlace(AAA, BBB, false, m_value_combination_direction);
+                                        break;
+                                    case CombinationMethod.CrossOverAB:
+                                        number = Numbers.CrossOver(AAA, BBB, true, m_value_combination_direction);
+                                        break;
+                                    case CombinationMethod.CrossOverBA:
+                                        number = Numbers.CrossOver(AAA, BBB, false, m_value_combination_direction);
+                                        break;
+                                }
+
+                                if (number != -1)
+                                {
+                                    if (Numbers.IsNumberType(number, m_number_type))
+                                    {
+                                        // mod 29 to select letter
+                                        int i = (int)((long)number % (long)m_client.NumerologySystem.Count);
+                                        char[] letters = new char[m_client.NumerologySystem.LetterValues.Count];
+                                        m_client.NumerologySystem.LetterValues.Keys.CopyTo(letters, 0);
+                                        generated_line += letters[i] + " ";
+                                    }
+                                    else
+                                    {
+                                        generated_line += "  ";
+                                    }
                                 }
                                 else
                                 {
                                     generated_line += "  ";
                                 }
+                                generated_line.Remove(generated_line.Length - 1, 1);
                             }
-                            else
-                            {
-                                generated_line += "  ";
-                            }
-                            generated_line.Remove(generated_line.Length - 1, 1);
+
+                            Line1Label.Text = generated_line.Substring(0, 96);
+                            Line2Label.Text = generated_line.Substring(96, 96);
+                            Line3Label.Text = generated_line.Substring(192);
+
+                            string parameters =
+                            m_numerology_system_name + "_"
+                            + (m_add_verse_and_word_values_to_letter_value ? "vw" : "__")
+                            + (m_add_positions_to_letter_value ? "_n" : "__")
+                            + (m_add_distances_to_previous_to_letter_value ? "_-d" : "_-_")
+                            + (m_add_distances_to_next_to_letter_value ? "_d-" : "__-")
+                            + ("_" + m_combination_method.ToString().ToLower())
+                            + ((m_value_combination_direction == Direction.RightToLeft) ? "_r" : "_l")
+                            + ((m_number_type != NumberType.None) ? "_" : "")
+                            + (
+                                (m_number_type == NumberType.Prime) ? "P" :
+                                (m_number_type == NumberType.AdditivePrime) ? "AP" :
+                                (m_number_type == NumberType.NonAdditivePrime) ? "XP" :
+                                (m_number_type == NumberType.Composite) ? "C" :
+                                (m_number_type == NumberType.AdditiveComposite) ? "AC" :
+                                (m_number_type == NumberType.NonAdditiveComposite) ? "XC" : ""
+                                )
+                            ;
+                            m_generated_lines.Add(parameters + "\t" + generated_line);
                         }
-
-                        Line1Label.Text = generated_line.Substring(0, 96);
-                        Line2Label.Text = generated_line.Substring(96, 96);
-                        Line3Label.Text = generated_line.Substring(192);
-
-                        string parameters =
-                        m_numerology_system_name + "_"
-                        + (m_add_verse_and_word_values_to_letter_value ? "vw" : "__")
-                        + (m_add_positions_to_letter_value ? "_n" : "__")
-                        + (m_add_distances_to_previous_to_letter_value ? "_-d" : "_-_")
-                        + (m_add_distances_to_next_to_letter_value ? "_d-" : "__-")
-                        + ("_" + m_combination_method.ToString().ToLower())
-                        + ((m_value_combination_direction == Direction.RightToLeft) ? "_r" : "_l")
-                        + ((m_number_type != NumberType.None) ? "_" : "")
-                        + (
-                            (m_number_type == NumberType.Prime) ? "P" :
-                            (m_number_type == NumberType.AdditivePrime) ? "AP" :
-                            (m_number_type == NumberType.NonAdditivePrime) ? "XP" :
-                            (m_number_type == NumberType.Composite) ? "C" :
-                            (m_number_type == NumberType.AdditiveComposite) ? "AC" :
-                            (m_number_type == NumberType.NonAdditiveComposite) ? "XC" : ""
-                            )
-                        ;
-                        m_generated_lines.Add(parameters + "\t" + generated_line);
                     }
                 }
             }

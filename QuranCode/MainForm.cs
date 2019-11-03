@@ -13278,16 +13278,16 @@ public partial class MainForm : Form, ISubscriber
                         PerfectNumbersLabel.BackColor = Numbers.NUMBER_KIND_COLORS[1];
                         AbundantNumbersLabel.BackColor = Numbers.NUMBER_KIND_COLORS[2];
 
-                        if (text_mode == "Original")
-                        {
-                            ApplyFont(m_quran_font);
-                            FontLabel.Enabled = true;
-                        }
-                        else
-                        {
-                            ApplyFont("Courier New", 14.0F);
-                            FontLabel.Enabled = false;
-                        }
+                        //if ((text_mode == "Original") || (text_mode.Contains("Dots")))
+                        //{
+                        ApplyFont(m_quran_font);
+                        FontLabel.Enabled = true;
+                        //}
+                        //else
+                        //{
+                        //    ApplyFont("Courier New", 14.0F);
+                        //    FontLabel.Enabled = false;
+                        //}
 
                         ScriptLabel.Visible = ((Globals.EDITION == Edition.Research) || (Globals.EDITION == Edition.Ultimate));
 
@@ -19061,7 +19061,7 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (m_client.NumerologySystem != null)
                 {
-                    if (m_client.NumerologySystem.TextMode == "Original")
+                    if ((m_client.NumerologySystem.TextMode == "Original") || (m_client.NumerologySystem.TextMode.Contains("Dots")))
                     {
                         ColorizeGoldenRatiosInOriginalText();
                     }
@@ -36286,7 +36286,7 @@ public partial class MainForm : Form, ISubscriber
             FindByTextHamzaAboveWawLabel.Visible = true;
             FindByTextHamzaAboveYaaLabel.Visible = true;
         }
-        else if (text_mode == "Original")
+        else if ((text_mode == "Original") || (text_mode.Contains("Dots")))
         {
             FindByTextHamzaLabel.Visible = true;
 
@@ -45142,16 +45142,16 @@ public partial class MainForm : Form, ISubscriber
                                 //SearchResultTextBox.Refresh();
                             }
 
-                            if (text_mode == "Original")
-                            {
-                                ApplyFont(m_quran_font);
-                                FontLabel.Enabled = true;
-                            }
-                            else
-                            {
-                                ApplyFont("Courier New", 14.0F);
-                                FontLabel.Enabled = false;
-                            }
+                            //if ((text_mode == "Original") || (text_mode.Contains("Dots")))
+                            //{
+                            ApplyFont(m_quran_font);
+                            FontLabel.Enabled = true;
+                            //}
+                            //else
+                            //{
+                            //    ApplyFont("Courier New", 14.0F);
+                            //    FontLabel.Enabled = false;
+                            //}
                         }
                     }
                 }
@@ -45211,7 +45211,7 @@ public partial class MainForm : Form, ISubscriber
                                 {
                                     if (m_golden_ratio_type == GoldenRatioType.Value)
                                     {
-                                        if (text_mode == "Original")
+                                        if ((text_mode == "Original") || (text_mode.Contains("Dots")))
                                         {
                                             ColorizeGoldenRatiosInOriginalText();
                                         }

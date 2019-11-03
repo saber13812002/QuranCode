@@ -2178,7 +2178,7 @@ public class Client : IPublisher, ISubscriber
 
                                 // prepare found phrase text
                                 range_text += word.Text + " ";
-                                if (NumerologySystem.TextMode == "Original")
+                                if ((NumerologySystem.TextMode == "Original") || (NumerologySystem.TextMode.Contains("Dots")))
                                 {
                                     if (word.Stopmark != Stopmark.None)
                                     {
