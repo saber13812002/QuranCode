@@ -72,6 +72,9 @@
     <Content Include="Rules\Simplified29.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Rules\Simplified30.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Rules\Simplified31.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -273,12 +276,10 @@
     <Content Include="Values\Simplified36_Initials_Frequency.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\SimplifiedDots_Alphabets_Dots.txt">
+    <Content Include="Values\Simplified36_Alphabets_Dots.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Rules\Simplified30.txt">
+    <Content Include="Values\SimplifiedDots_Alphabets_Dots.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
