@@ -30,7 +30,10 @@ public enum NumberType
     Decic,                  // n*n*n*n*n*n*n*n*n*n
     Natural                 // natural number from 1 to MaxValue
 };
+
 public enum IndexType { Prime, Composite };
+public enum FactorsType { Any, Duplicate, Unique };
+
 public enum NumberKind { Deficient, Perfect, Abundant };
 
 //http://en.wikipedia.org/wiki/Polygon
@@ -370,12 +373,14 @@ public static class Numbers
             LoadNonAdditiveComposites();
             LoadDeficients();
             LoadAbundants();
-            LoadNumberDimensions();
         }
 
         LoadPerfectNumbers();
         LoadPrimeRepunits();
         LoadInterestingNumbers();
+        LoadNumberDimensions();
+        LoadDuplicateNumberDimensions();
+        LoadUniqueNumberDimensions();
     }
 
     public static bool IsNumberType(long number, NumberType number_type)
@@ -2919,35 +2924,35 @@ public static class Numbers
         }
     }
 
-    // Number Dimensions (Number of Factors): 1D, 2D, 3D, ..., 19D
-    public static Dictionary<int, List<long>> NumberDimensions;
+    // Number Dimensions (Number of Factors): 1a, 2a, 3a, ..., 19a
+    public static Dictionary<int, List<long>> NumberDimensions = null;
     public static bool IsNumberDimension(int dimension, long number)
     {
         if (number < 0L) number *= -1L;
-        if (NumberDimensions.ContainsKey(dimension))
+        if (NumberDimensions.ContainsKey(dimension - 1))
         {
-            return NumberDimensions[dimension].Contains(number);
+            return NumberDimensions[dimension - 1].Contains(number);
         }
         return false;
     }
     public static int NumberDimensionIndexOf(int dimension, long number)
     {
         if (number < 0L) number *= -1L;
-        if (NumberDimensions.ContainsKey(dimension))
+        if (NumberDimensions.ContainsKey(dimension - 1))
         {
-            return BinarySearch(NumberDimensions[dimension], number);
+            return BinarySearch(NumberDimensions[dimension - 1], number);
         }
         return -1;
     }
-    private static string s_number_dimensions_filename = "D.txt";
+    private static string s_number_dimensions_filename = "a.txt";
     public static void LoadNumberDimensions()
     {
         try
         {
             NumberDimensions = new Dictionary<int, List<long>>();
-            for (int i = 1; i <= 19; i++)
+            for (int i = 0; i < 19; i++)
             {
-                string filename = Globals.NUMBERS_FOLDER + "/" + i.ToString() + s_number_dimensions_filename;
+                string filename = Globals.NUMBERS_FOLDER + "/" + (i + 1).ToString() + s_number_dimensions_filename;
                 if (File.Exists(filename))
                 {
                     FileHelper.WaitForReady(filename);
@@ -2980,7 +2985,128 @@ public static class Numbers
             Console.WriteLine(ex.Message);
         }
     }
+    // Duplicate Number Dimensions (Number of Factors): 2d, 3d, ..., 19d
+    public static Dictionary<int, List<long>> DuplicateNumberDimensions = null;
+    public static bool IsDuplicateNumberDimension(int dimension, long number)
+    {
+        if (number < 0L) number *= -1L;
+        if (DuplicateNumberDimensions.ContainsKey(dimension - 1))
+        {
+            return DuplicateNumberDimensions[dimension - 1].Contains(number);
+        }
+        return false;
+    }
+    public static int DuplicateNumberDimensionIndexOf(int dimension, long number)
+    {
+        if (number < 0L) number *= -1L;
+        if (DuplicateNumberDimensions.ContainsKey(dimension - 1))
+        {
+            return BinarySearch(DuplicateNumberDimensions[dimension - 1], number);
+        }
+        return -1;
+    }
+    private static string s_duplicate_number_dimensions_filename = "d.txt";
+    public static void LoadDuplicateNumberDimensions()
+    {
+        try
+        {
+            DuplicateNumberDimensions = new Dictionary<int, List<long>>();
+            for (int i = 1; i < 19; i++)
+            {
+                string filename = Globals.NUMBERS_FOLDER + "/" + (i + 1).ToString() + s_duplicate_number_dimensions_filename;
+                if (File.Exists(filename))
+                {
+                    FileHelper.WaitForReady(filename);
 
+                    List<long> DuplicateNumberDimension = new List<long>();
+                    using (StreamReader reader = new StreamReader(filename))
+                    {
+                        string line = null;
+                        while (!reader.EndOfStream)
+                        {
+                            line = reader.ReadLine();
+                            if (!String.IsNullOrEmpty(line))
+                            {
+                                if (line.Length == 0) break;
+
+                                long number;
+                                if (long.TryParse(line, out number))
+                                {
+                                    DuplicateNumberDimension.Add(number);
+                                }
+                            }
+                        }
+                    }
+                    DuplicateNumberDimensions.Add(i, DuplicateNumberDimension);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
+    // Unique Number Dimensions (Number of Factors): 2u, 3u, ..., 7u
+    public static Dictionary<int, List<long>> UniqueNumberDimensions = null;
+    public static bool IsUniqueNumberDimension(int dimension, long number)
+    {
+        if (number < 0L) number *= -1L;
+        if (UniqueNumberDimensions.ContainsKey(dimension - 1))
+        {
+            return UniqueNumberDimensions[dimension - 1].Contains(number);
+        }
+        return false;
+    }
+    public static int UniqueNumberDimensionIndexOf(int dimension, long number)
+    {
+        if (number < 0L) number *= -1L;
+        if (UniqueNumberDimensions.ContainsKey(dimension - 1))
+        {
+            return BinarySearch(UniqueNumberDimensions[dimension - 1], number);
+        }
+        return -1;
+    }
+    private static string s_unique_number_dimensions_filename = "u.txt";
+    public static void LoadUniqueNumberDimensions()
+    {
+        try
+        {
+            UniqueNumberDimensions = new Dictionary<int, List<long>>();
+            for (int i = 1; i < 7; i++)
+            {
+                string filename = Globals.NUMBERS_FOLDER + "/" + (i + 1).ToString() + s_unique_number_dimensions_filename;
+                if (File.Exists(filename))
+                {
+                    FileHelper.WaitForReady(filename);
+
+                    List<long> UniqueNumberDimension = new List<long>();
+                    using (StreamReader reader = new StreamReader(filename))
+                    {
+                        string line = null;
+                        while (!reader.EndOfStream)
+                        {
+                            line = reader.ReadLine();
+                            if (!String.IsNullOrEmpty(line))
+                            {
+                                if (line.Length == 0) break;
+
+                                long number;
+                                if (long.TryParse(line, out number))
+                                {
+                                    UniqueNumberDimension.Add(number);
+                                }
+                            }
+                        }
+                    }
+                    UniqueNumberDimensions.Add(i, UniqueNumberDimension);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+        }
+    }
 
     // prime repeated units 1111111.....1111111 numbers
     public static List<long> PrimeRepunits;

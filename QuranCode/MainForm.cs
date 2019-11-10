@@ -561,6 +561,7 @@ public partial class MainForm : Form, ISubscriber
             this.ToolTip.SetToolTip(this.LetterNumericUpDown, "L, L-L, ...");
 
             UpdateToolTipNth4n1NumberTextBox();
+            UpdateToolTipNthNumberDimensionTextBox();
 
             // UserText labels' tooltips 
             for (int i = 0; i < 8; i++)
@@ -11396,7 +11397,7 @@ public partial class MainForm : Form, ISubscriber
         this.Nth4nPlus1PrimeNumberLabel.Size = new System.Drawing.Size(8, 4);
         this.Nth4nPlus1PrimeNumberLabel.TabIndex = 0;
         this.Nth4nPlus1PrimeNumberLabel.Tag = "";
-        this.ToolTip.SetToolTip(this.Nth4nPlus1PrimeNumberLabel, "4n+1 prime index");
+        this.ToolTip.SetToolTip(this.Nth4nPlus1PrimeNumberLabel, "4n+1 prime");
         this.Nth4nPlus1PrimeNumberLabel.Click += new System.EventHandler(this.Nth4nPlus1PrimeNumberLabel_Click);
         // 
         // Nth4n1NumberTextBox
@@ -46115,9 +46116,23 @@ public partial class MainForm : Form, ISubscriber
                 List<long> factors = Numbers.Factorize(value);
                 if (factors != null)
                 {
-                    int dimension = factors.Count;
-                    int nth_number_dimension_index = Numbers.NumberDimensionIndexOf(dimension, value) + 1;
-                    NthNumberDimensionTextBox.Text = dimension.ToString() + "d" + nth_number_dimension_index.ToString();
+                    m_number_dimension = factors.Count;
+                    int nth_number_dimension_index = -1;
+                    if (m_factros_type == FactorsType.Any)
+                    {
+                        nth_number_dimension_index = Numbers.NumberDimensionIndexOf(m_number_dimension, value) + 1;
+                        NthNumberDimensionTextBox.Text = m_number_dimension.ToString() + "a" + nth_number_dimension_index.ToString();
+                    }
+                    else if (m_factros_type == FactorsType.Duplicate)
+                    {
+                        nth_number_dimension_index = Numbers.DuplicateNumberDimensionIndexOf(m_number_dimension, value) + 1;
+                        NthNumberDimensionTextBox.Text = m_number_dimension.ToString() + "d" + nth_number_dimension_index.ToString();
+                    }
+                    else if (m_factros_type == FactorsType.Unique)
+                    {
+                        nth_number_dimension_index = Numbers.UniqueNumberDimensionIndexOf(m_number_dimension, value) + 1;
+                        NthNumberDimensionTextBox.Text = m_number_dimension.ToString() + "u" + nth_number_dimension_index.ToString();
+                    }
                     NthNumberDimensionTextBox.Refresh();
                 }
                 string factors_str = Numbers.FactorizeToString(value);
@@ -46245,6 +46260,7 @@ public partial class MainForm : Form, ISubscriber
             //MessageBox.Show(ex.Message, Application.ProductName);
         }
     }
+    private int m_number_dimension = 0;
     private void NthNumberDimensionTextBox_KeyDown(object sender, KeyEventArgs e)
     {
         if (e.KeyCode == Keys.Up)
@@ -46256,11 +46272,139 @@ public partial class MainForm : Form, ISubscriber
             DecrementNumberDimension();
         }
     }
+    private FactorsType m_factros_type = FactorsType.Any;
+    private void NthNumberDimensionLabel_Click(object sender, EventArgs e)
+    {
+        if (ModifierKeys == Keys.Control)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                string filename = Globals.NUMBERS_FOLDER + "/" + m_number_dimension.ToString() + "a.txt";
+                FileHelper.DisplayFile(filename);
+            }
+            catch (Exception ex)
+            {
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
+        else
+        {
+            m_factros_type = FactorsType.Any;
+            FactorizeValue(NthNumberDimensionTextBox);
+        }
+    }
+    private void NthDuplicateNumberDimensionLabel_Click(object sender, EventArgs e)
+    {
+        if (ModifierKeys == Keys.Control)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                string filename = Globals.NUMBERS_FOLDER + "/" + m_number_dimension.ToString() + "d.txt";
+                FileHelper.DisplayFile(filename);
+            }
+            catch (Exception ex)
+            {
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
+        else
+        {
+            m_factros_type = FactorsType.Duplicate;
+            FactorizeValue(NthNumberDimensionTextBox);
+        }
+    }
+    private void NthUniqueNumberDimensionLabel_Click(object sender, EventArgs e)
+    {
+        if (ModifierKeys == Keys.Control)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                string filename = Globals.NUMBERS_FOLDER + "/" + m_number_dimension.ToString() + "u.txt";
+                FileHelper.DisplayFile(filename);
+            }
+            catch (Exception ex)
+            {
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
+        else
+        {
+            m_factros_type = FactorsType.Unique;
+            FactorizeValue(NthNumberDimensionTextBox);
+        }
+    }
+    private void UpdateToolTipNthNumberDimensionTextBox()
+    {
+        long value = Radix.Decode(ValueTextBox.Text, m_radix);
+
+        NthNumberDimensionLabel.BackColor = SystemColors.ControlLight;
+        NthDuplicateNumberDimensionLabel.BackColor = SystemColors.ControlLight;
+        NthUniqueNumberDimensionLabel.BackColor = SystemColors.ControlLight;
+
+        if (m_factros_type == FactorsType.Any)
+        {
+            ToolTip.SetToolTip(NthNumberDimensionTextBox, L[l]["Dimension index"]);
+            NthNumberDimensionLabel.BackColor = SystemColors.ControlLightLight;
+            NthNumberDimensionLabel.Refresh();
+        }
+        else if (m_factros_type == FactorsType.Duplicate)
+        {
+            ToolTip.SetToolTip(NthNumberDimensionTextBox, L[l]["Duplicate dimension index"]);
+            NthDuplicateNumberDimensionLabel.BackColor = SystemColors.ControlLightLight;
+            NthDuplicateNumberDimensionLabel.Refresh();
+        }
+        else if (m_factros_type == FactorsType.Unique)
+        {
+            ToolTip.SetToolTip(NthNumberDimensionTextBox, L[l]["Unique dimension index"]);
+            NthUniqueNumberDimensionLabel.BackColor = SystemColors.ControlLightLight;
+            NthUniqueNumberDimensionLabel.Refresh();
+        }
+        else
+        {
+            ToolTip.SetToolTip(NthNumberDimensionLabel, null);
+            NthNumberDimensionLabel.Refresh();
+        }
+    }
     private void IncrementNumberDimension()
     {
         int dimension = 0;
         int index = 0;
-        int pos = NthNumberDimensionTextBox.Text.IndexOf("d");
+        int pos = NthNumberDimensionTextBox.Text.IndexOf("a");
+        if (pos == -1)
+        {
+            pos = NthNumberDimensionTextBox.Text.IndexOf("d");
+            if (pos == -1)
+            {
+                pos = NthNumberDimensionTextBox.Text.IndexOf("u");
+            }
+        }
         if (pos > 0)
         {
             string dimension_str = NthNumberDimensionTextBox.Text.Substring(0, pos);
@@ -46270,14 +46414,35 @@ public partial class MainForm : Form, ISubscriber
                 if (int.TryParse(index_str, out index))
                 {
                     index--;
-                    if (dimension < 19)
+
+                    if (ModifierKeys == Keys.Control)
                     {
-                        dimension++;
-                        if ((index >= 0) && (index < Numbers.NumberDimensions[dimension].Count))
+                        index++;
+                    }
+                    else
+                    {
+                        if (dimension < 19)
                         {
-                            long value = Numbers.NumberDimensions[dimension][index];
-                            FactorizeValue(value, "d↑", true);
+                            dimension++;
                         }
+                    }
+
+                    if ((index >= 0) && (index < Numbers.NumberDimensions[dimension - 1].Count))
+                    {
+                        long value = -1L;
+                        if (m_factros_type == FactorsType.Any)
+                        {
+                            value = Numbers.NumberDimensions[dimension - 1][index];
+                        }
+                        else if (m_factros_type == FactorsType.Duplicate)
+                        {
+                            value = Numbers.DuplicateNumberDimensions[dimension - 1][index];
+                        }
+                        else if (m_factros_type == FactorsType.Unique)
+                        {
+                            value = Numbers.UniqueNumberDimensions[dimension - 1][index];
+                        }
+                        FactorizeValue(value, "d↑", true);
                     }
                 }
             }
@@ -46287,7 +46452,15 @@ public partial class MainForm : Form, ISubscriber
     {
         int dimension = 0;
         int index = 0;
-        int pos = NthNumberDimensionTextBox.Text.IndexOf("d");
+        int pos = NthNumberDimensionTextBox.Text.IndexOf("a");
+        if (pos == -1)
+        {
+            pos = NthNumberDimensionTextBox.Text.IndexOf("d");
+            if (pos == -1)
+            {
+                pos = NthNumberDimensionTextBox.Text.IndexOf("u");
+            }
+        }
         if (pos > 0)
         {
             string dimension_str = NthNumberDimensionTextBox.Text.Substring(0, pos);
@@ -46297,14 +46470,38 @@ public partial class MainForm : Form, ISubscriber
                 if (int.TryParse(index_str, out index))
                 {
                     index--;
-                    if (dimension > 1)
+
+                    if (ModifierKeys == Keys.Control)
                     {
-                        dimension--;
-                        if ((index >= 0) && (index < Numbers.NumberDimensions[dimension].Count))
+                        if (index > 0)
                         {
-                            long value = Numbers.NumberDimensions[dimension][index];
-                            FactorizeValue(value, "d↓", true);
+                            index--;
                         }
+                    }
+                    else
+                    {
+                        if (dimension > 1)
+                        {
+                            dimension--;
+                        }
+                    }
+
+                    if ((index >= 0) && (index < Numbers.NumberDimensions[dimension - 1].Count))
+                    {
+                        long value = -1L;
+                        if (m_factros_type == FactorsType.Any)
+                        {
+                            value = Numbers.NumberDimensions[dimension - 1][index];
+                        }
+                        else if (m_factros_type == FactorsType.Duplicate)
+                        {
+                            value = Numbers.DuplicateNumberDimensions[dimension - 1][index];
+                        }
+                        else if (m_factros_type == FactorsType.Unique)
+                        {
+                            value = Numbers.UniqueNumberDimensions[dimension - 1][index];
+                        }
+                        FactorizeValue(value, "d↓", true);
                     }
                 }
             }
@@ -46694,9 +46891,27 @@ public partial class MainForm : Form, ISubscriber
                                 text = text.Replace("*", "");
                                 value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                             }
+                            else if (text.Contains("a"))
+                            {
+                                int pos = text.IndexOf("a");
+                                if (pos >= 0)
+                                {
+                                    text = text.Substring(pos + 1);
+                                    value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                                }
+                            }
                             else if (text.Contains("d"))
                             {
                                 int pos = text.IndexOf("d");
+                                if (pos >= 0)
+                                {
+                                    text = text.Substring(pos + 1);
+                                    value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                                }
+                            }
+                            else if (text.Contains("u"))
+                            {
+                                int pos = text.IndexOf("u");
                                 if (pos >= 0)
                                 {
                                     text = text.Substring(pos + 1);
@@ -47121,7 +47336,68 @@ public partial class MainForm : Form, ISubscriber
         }
         else
         {
-            FactorizeValue(0L, "Number", true);
+            if (control == NthNumberDimensionTextBox)
+            {
+                int pos = control.Text.IndexOf("a");
+                if (pos == -1)
+                {
+                    pos = control.Text.IndexOf("d");
+                    if (pos == -1)
+                    {
+                        pos = control.Text.IndexOf("u");
+                    }
+                }
+                if (pos > 0)
+                {
+                    int dimension = 0;
+                    string dimension_str = control.Text.Substring(0, pos);
+                    if (int.TryParse(dimension_str, out dimension))
+                    {
+                        string index_str = control.Text.Substring(pos + 1);
+                        if (int.TryParse(index_str, out index))
+                        {
+                            index--;
+                            if (m_factros_type == FactorsType.Any)
+                            {
+                                if ((dimension > 0) && (dimension <= Numbers.NumberDimensions.Count))
+                                {
+                                    if ((index >= 0) && (index < Numbers.NumberDimensions[dimension - 1].Count))
+                                    {
+                                        value = Numbers.NumberDimensions[dimension - 1][index];
+                                    }
+                                }
+                            }
+                            else if (m_factros_type == FactorsType.Duplicate)
+                            {
+                                if ((dimension > 1) && (dimension <= Numbers.DuplicateNumberDimensions.Count))
+                                {
+                                    if ((index >= 0) && (index < Numbers.DuplicateNumberDimensions[dimension - 1].Count))
+                                    {
+                                        value = Numbers.DuplicateNumberDimensions[dimension - 1][index];
+                                    }
+                                }
+                            }
+                            else if (m_factros_type == FactorsType.Unique)
+                            {
+                                if ((dimension > 1) && (dimension <= Numbers.UniqueNumberDimensions.Count))
+                                {
+                                    if ((index >= 0) && (index < Numbers.UniqueNumberDimensions[dimension - 1].Count))
+                                    {
+                                        value = Numbers.UniqueNumberDimensions[dimension - 1][index];
+                                    }
+                                }
+                            }
+
+                            UpdateToolTipNthNumberDimensionTextBox();
+                            FactorizeValue(value, "Number", true);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                FactorizeValue(0L, "Number", true);
+            }
         }
     }
     private void IncrementValue(Control control)

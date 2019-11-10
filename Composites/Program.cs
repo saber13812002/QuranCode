@@ -35,13 +35,11 @@ namespace Composites
                         {
                             Directory.CreateDirectory(folder);
                         }
-                        //string filename = folder + "/" + n.ToString() + "D.txt";
                         string filename = folder + "/" + DateTime.Now.ToString("yyyy-MM-dd_HH.mm.ss") + ".txt";
                         writer = System.IO.File.CreateText(filename);
 
                         if (n >= 0)
                         {
-                            //BuildNumberDimension(writer, n);
                             BuildFactors(writer, n);
                         }
                         else
@@ -58,29 +56,12 @@ namespace Composites
                     Console.Write("Try another? (y/n)");
                     exit = Console.ReadKey();
                     Console.WriteLine();
+
                 } while ((exit.KeyChar != 'N') && (exit.KeyChar != 'n'));
             }
             finally
             {
                 writer.Close();
-            }
-        }
-        private static void BuildNumberDimension(StreamWriter writer, int n)
-        {
-            if (writer != null)
-            {
-                StringBuilder str = new StringBuilder();
-
-                for (int i = 2; i <= 1000000; i++)
-                {
-                    List<long> factors = Numbers.Factorize(i);
-                    if (factors.Count == n)
-                    {
-                        writer.WriteLine(i.ToString());
-                    }
-                }
-
-                writer.Flush();
             }
         }
         private static void BuildFactors(StreamWriter writer, int n)
@@ -194,6 +175,127 @@ namespace Composites
                 {
                     Console.WriteLine("No matches were found!");
                     writer.WriteLine("No matches were found!");
+                }
+
+                writer.Flush();
+            }
+        }
+
+        public static void XXXMain(string[] args)
+        {
+            StreamWriter writer = null;
+            try
+            {
+                string folder = "Composites";
+                if (!Directory.Exists(folder))
+                {
+                    Directory.CreateDirectory(folder);
+                }
+
+                for (int n = 1; n <= 19; n++)
+                {
+                    string filename = folder + "/" + n.ToString() + "D.txt";
+                    writer = System.IO.File.CreateText(filename);
+                    BuildNumberDimension(writer, n);
+                }
+
+                for (int n = 2; n <= 19; n++)
+                {
+                    string filename = folder + "/" + n.ToString() + "Dd.txt";
+                    writer = System.IO.File.CreateText(filename);
+                    BuildDuplicateNumberDimension(writer, n);
+                }
+
+                for (int n = 2; n <= 7; n++)
+                {
+                    string filename = folder + "/" + n.ToString() + "Du.txt";
+                    writer = System.IO.File.CreateText(filename);
+                    BuildUniqueNumberDimension(writer, n);
+                }
+            }
+            finally
+            {
+                writer.Close();
+            }
+        }
+        private static void BuildNumberDimension(StreamWriter writer, int n)
+        {
+            if (writer != null)
+            {
+                StringBuilder str = new StringBuilder();
+
+                for (int i = 2; i <= 1000000; i++)
+                {
+                    List<long> factors = Numbers.Factorize(i);
+                    if (factors.Count == n)
+                    {
+                        writer.WriteLine(i.ToString());
+                    }
+                }
+
+                writer.Flush();
+            }
+        }
+        private static void BuildDuplicateNumberDimension(StreamWriter writer, int n)
+        {
+            if (writer != null)
+            {
+                StringBuilder str = new StringBuilder();
+
+                for (int i = 2; i <= 1000000; i++)
+                {
+                    List<long> factors = Numbers.Factorize(i);
+                    if (factors.Count == n)
+                    {
+                        bool all_are_duplicate = false;
+                        for (int j = 1; j < factors.Count; j++)
+                        {
+                            all_are_duplicate = (factors[0] == factors[j]);
+                        }
+
+                        if (all_are_duplicate)
+                        {
+                            writer.WriteLine(i.ToString());
+                        }
+                    }
+                }
+
+                writer.Flush();
+            }
+        }
+        private static void BuildUniqueNumberDimension(StreamWriter writer, int n)
+        {
+            if (writer != null)
+            {
+                StringBuilder str = new StringBuilder();
+
+                for (int i = 2; i <= 1000000; i++)
+                {
+                    List<long> factors = Numbers.Factorize(i);
+                    if (factors.Count == n)
+                    {
+                        bool all_are_unique = true;
+                        for (int j = 0; j < factors.Count; j++)
+                        {
+                            for (int k = j + 1; k < factors.Count; k++)
+                            {
+                                if (factors[j] == factors[k])
+                                {
+                                    all_are_unique = false;
+                                    break;
+                                }
+                            }
+                            if (!all_are_unique)
+                            {
+                                break;
+                            }
+                        }
+
+                        if (all_are_unique)
+                        {
+                            writer.WriteLine(i.ToString());
+                        }
+                    }
                 }
 
                 writer.Flush();
