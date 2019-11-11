@@ -474,7 +474,7 @@ public partial class MainForm : Form
     {
         int dimension = 0;
         int index = 0;
-        int pos = NthNumberDimensionTextBox.Text.IndexOf("d");
+        int pos = NthNumberDimensionTextBox.Text.IndexOf("a");
         if (pos > 0)
         {
             string dimension_str = NthNumberDimensionTextBox.Text.Substring(0, pos);
@@ -484,14 +484,23 @@ public partial class MainForm : Form
                 if (int.TryParse(index_str, out index))
                 {
                     index--;
-                    if (dimension < 19)
+
+                    if (ModifierKeys == Keys.Control)
                     {
-                        dimension++;
-                        if ((index >= 0) && (index < Numbers.NumberDimensions[dimension].Count))
+                        if (dimension < 19)
                         {
-                            long value = Numbers.NumberDimensions[dimension][index];
-                            FactorizeValue(value);
+                            dimension++;
                         }
+                    }
+                    else
+                    {
+                        index++;
+                    }
+
+                    long value = Numbers.NumberDimensions[dimension - 1][index];
+                    if (value > -1L)
+                    {
+                        FactorizeValue(value);
                     }
                 }
             }
@@ -501,7 +510,7 @@ public partial class MainForm : Form
     {
         int dimension = 0;
         int index = 0;
-        int pos = NthNumberDimensionTextBox.Text.IndexOf("d");
+        int pos = NthNumberDimensionTextBox.Text.IndexOf("a");
         if (pos > 0)
         {
             string dimension_str = NthNumberDimensionTextBox.Text.Substring(0, pos);
@@ -511,14 +520,26 @@ public partial class MainForm : Form
                 if (int.TryParse(index_str, out index))
                 {
                     index--;
-                    if (dimension > 1)
+
+                    if (ModifierKeys == Keys.Control)
                     {
-                        dimension--;
-                        if ((index >= 0) && (index < Numbers.NumberDimensions[dimension].Count))
+                        if (dimension > 1)
                         {
-                            long value = Numbers.NumberDimensions[dimension][index];
-                            FactorizeValue(value);
+                            dimension--;
                         }
+                    }
+                    else
+                    {
+                        if (index > 0)
+                        {
+                            index--;
+                        }
+                    }
+
+                    long value = Numbers.NumberDimensions[dimension - 1][index];
+                    if (value > -1L)
+                    {
+                        FactorizeValue(value);
                     }
                 }
             }
@@ -2432,9 +2453,9 @@ public partial class MainForm : Form
                             text = text.Replace("*", "");
                             value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                         }
-                        else if (text.Contains("d"))
+                        else if (text.Contains("a"))
                         {
-                            int pos = text.IndexOf("d");
+                            int pos = text.IndexOf("a");
                             if (pos >= 0)
                             {
                                 text = text.Substring(pos + 1);
@@ -2770,7 +2791,7 @@ public partial class MainForm : Form
                             if (long.TryParse(ValueTextBox.Text, out value))
                             {
                                 int nth_number_dimension_index = Numbers.NumberDimensionIndexOf(dimension, value) + 1;
-                                NthNumberDimensionTextBox.Text = dimension.ToString() + "d" + nth_number_dimension_index.ToString();
+                                NthNumberDimensionTextBox.Text = dimension.ToString() + "a" + nth_number_dimension_index.ToString();
                                 NthNumberDimensionTextBox.Refresh();
                             }
                         }
