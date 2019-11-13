@@ -630,40 +630,46 @@ public partial class MainForm : Form, ISubscriber
             TextBoxBase control = (sender as TextBoxBase);
             if (control != null)
             {
-                if (e.KeyCode == Keys.Enter)
+                if (control.Focused)
                 {
-                    if (control.Focused)
+                    if (e.KeyCode == Keys.Enter)
                     {
                         control.Text.Insert(control.SelectionStart, "\n");
                         e.Handled = true;
                         return;
                     }
-                }
-                else if (e.KeyCode == Keys.Tab)
-                {
-                    control.Text.Insert(control.SelectionStart, "\t");
-                    e.Handled = true;
-                    return;
-                }
-                else
-                {
-                    if (ModifierKeys == Keys.Control)
+                    else if (e.KeyCode == Keys.Tab)
                     {
-                        if (e.KeyCode == Keys.A)
+                        control.Text.Insert(control.SelectionStart, "\t");
+                        e.Handled = true;
+                        return;
+                    }
+                    else if (e.KeyCode == Keys.Escape)
+                    {
+                        control.SelectionLength = 0;
+                        e.Handled = true;
+                        return;
+                    }
+                    else
+                    {
+                        if (ModifierKeys == Keys.Control)
                         {
-                            control.SelectAll();
-                        }
-                        else if (e.KeyCode == Keys.F)
-                        {
-                            // Find dialog
-                        }
-                        else if (e.KeyCode == Keys.H)
-                        {
-                            // Replace dialog
-                        }
-                        else if (e.KeyCode == Keys.S)
-                        {
-                            // Save dialog
+                            if (e.KeyCode == Keys.A)
+                            {
+                                control.SelectAll();
+                            }
+                            else if (e.KeyCode == Keys.F)
+                            {
+                                // Find dialog
+                            }
+                            else if (e.KeyCode == Keys.H)
+                            {
+                                // Replace dialog
+                            }
+                            else if (e.KeyCode == Keys.S)
+                            {
+                                // Save dialog
+                            }
                         }
                     }
                 }
@@ -13888,6 +13894,10 @@ public partial class MainForm : Form, ISubscriber
         else if (ScriptTextBox.Visible)
         {
             CloseScript();
+        }
+        else if (UserTextTextBox.Focused)
+        {
+            // let UserTextTextBox handle it
         }
         else
         {
