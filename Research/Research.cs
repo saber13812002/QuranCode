@@ -59,6 +59,163 @@ public static class Research
         return verses;
     }
 
+    public static string _____________________________(Client client, string param, bool in_search_result)
+    {
+        return null;
+    }
+    public static string Half1EvenVerses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        List<Verse> verses = GetSourceVerses(client, in_search_result);
+        if (verses != null)
+        {
+            return DoHalf1EvenVerses(client, verses);
+        }
+        return null;
+    }
+    public static string Half2EvenVerses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        List<Verse> verses = GetSourceVerses(client, in_search_result);
+        if (verses != null)
+        {
+            return DoHalf2EvenVerses(client, verses);
+        }
+        return null;
+    }
+    public static string Half1OddVerses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        List<Verse> verses = GetSourceVerses(client, in_search_result);
+        if (verses != null)
+        {
+            return DoHalf1OddVerses(client, verses);
+        }
+        return null;
+    }
+    public static string Half2OddVerses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        List<Verse> verses = GetSourceVerses(client, in_search_result);
+        if (verses != null)
+        {
+            return DoHalf2OddVerses(client, verses);
+        }
+        return null;
+    }
+    private static string DoHalf1EvenVerses(Client client, List<Verse> verses)
+    {
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (verses == null) return null;
+        List<Chapter> chapters = client.Book.GetChapters(verses);
+
+        int chapter_count = 0;
+        int verse_count = 0;
+        int verse_sequence_sum = 0;
+        foreach (Chapter chapter in chapters)
+        {
+            if (chapter.SortedNumber <= (chapters.Count / 2))
+            {
+                if (Numbers.IsEven(chapter.Verses.Count))
+                {
+                    chapter_count++;
+                    foreach (Verse verse in chapter.Verses)
+                    {
+                        verse_count++;
+                        verse_sequence_sum += verse.Number;
+                    }
+                }
+            }
+        }
+
+        return (chapter_count + " chapters in 1st half of the Quran with even verses.\r\n" + verse_count + " verses with sum of Book-level verses numbers = " + verse_sequence_sum + ".");
+    }
+    private static string DoHalf2EvenVerses(Client client, List<Verse> verses)
+    {
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (verses == null) return null;
+        List<Chapter> chapters = client.Book.GetChapters(verses);
+
+        int chapter_count = 0;
+        int verse_count = 0;
+        int verse_sequence_sum = 0;
+        foreach (Chapter chapter in chapters)
+        {
+            if (chapter.SortedNumber > (chapters.Count / 2))
+            {
+                if (Numbers.IsEven(chapter.Verses.Count))
+                {
+                    chapter_count++;
+                    foreach (Verse verse in chapter.Verses)
+                    {
+                        verse_count++;
+                        verse_sequence_sum += verse.Number;
+                    }
+                }
+            }
+        }
+
+        return (chapter_count + " chapters in 1st half of the Quran with even verses.\r\n" + verse_count + " verses with sum of Book-level verses numbers = " + verse_sequence_sum + ".");
+    }
+    private static string DoHalf1OddVerses(Client client, List<Verse> verses)
+    {
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (verses == null) return null;
+        List<Chapter> chapters = client.Book.GetChapters(verses);
+
+        int chapter_count = 0;
+        int verse_count = 0;
+        int verse_sequence_sum = 0;
+        foreach (Chapter chapter in chapters)
+        {
+            if (chapter.SortedNumber <= (chapters.Count / 2))
+            {
+                if (Numbers.IsOdd(chapter.Verses.Count))
+                {
+                    chapter_count++;
+                    foreach (Verse verse in chapter.Verses)
+                    {
+                        verse_count++;
+                        verse_sequence_sum += verse.Number;
+                    }
+                }
+            }
+        }
+
+        return (chapter_count + " chapters in 1st half of the Quran with even verses.\r\n" + verse_count + " verses with sum of Book-level verses numbers = " + verse_sequence_sum + ".");
+    }
+    private static string DoHalf2OddVerses(Client client, List<Verse> verses)
+    {
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (verses == null) return null;
+        List<Chapter> chapters = client.Book.GetChapters(verses);
+
+        int chapter_count = 0;
+        int verse_count = 0;
+        int verse_sequence_sum = 0;
+        foreach (Chapter chapter in chapters)
+        {
+            if (chapter.SortedNumber > (chapters.Count / 2))
+            {
+                if (Numbers.IsOdd(chapter.Verses.Count))
+                {
+                    chapter_count++;
+                    foreach (Verse verse in chapter.Verses)
+                    {
+                        verse_count++;
+                        verse_sequence_sum += verse.Number;
+                    }
+                }
+            }
+        }
+
+        return (chapter_count + " chapters in 1st half of the Quran with even verses.\r\n" + verse_count + " verses with sum of Book-level verses numbers = " + verse_sequence_sum + ".");
+    }
+
     private static string ______________________________(Client client, string param, bool in_search_result)
     {
         return null;
