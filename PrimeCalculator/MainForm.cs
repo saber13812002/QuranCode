@@ -624,23 +624,29 @@ public partial class MainForm : Form
 
     private List<string> m_history_items = new List<string>();
     private int m_history_index = -1;
-    private void NextHistoryItem()
-    {
-        if ((m_history_index >= 0) && (m_history_index < m_history_items.Count - 1))
-        {
-            m_history_index++;
-            ValueTextBox.Text = m_history_items[m_history_index];
-            CallRun();
-        }
-        ValueTextBox.Focus();
-    }
     private void PreviousHistoryItem()
     {
         if ((m_history_index > 0) && (m_history_index < m_history_items.Count))
         {
             m_history_index--;
             ValueTextBox.Text = m_history_items[m_history_index];
-            CallRun();
+
+            ClearNumberAnalyses();
+            ClearFactors();
+            ClearProgress();
+        }
+        ValueTextBox.Focus();
+    }
+    private void NextHistoryItem()
+    {
+        if ((m_history_index >= 0) && (m_history_index < m_history_items.Count - 1))
+        {
+            m_history_index++;
+            ValueTextBox.Text = m_history_items[m_history_index];
+
+            ClearNumberAnalyses();
+            ClearFactors();
+            ClearProgress();
         }
         ValueTextBox.Focus();
     }
