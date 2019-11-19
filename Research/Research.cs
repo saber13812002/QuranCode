@@ -59,11 +59,11 @@ public static class Research
         return verses;
     }
 
-    public static string _____________________________(Client client, string param, bool in_search_result)
+    private static string _____________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
-    public static string Half1EvenVerses(Client client, string param, bool in_search_result)
+    private static string Half1EvenVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -73,7 +73,7 @@ public static class Research
         }
         return null;
     }
-    public static string Half2EvenVerses(Client client, string param, bool in_search_result)
+    private static string Half2EvenVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -83,7 +83,7 @@ public static class Research
         }
         return null;
     }
-    public static string Half1OddVerses(Client client, string param, bool in_search_result)
+    private static string Half1OddVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -93,7 +93,7 @@ public static class Research
         }
         return null;
     }
-    public static string Half2OddVerses(Client client, string param, bool in_search_result)
+    private static string Half2OddVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
