@@ -42745,120 +42745,244 @@ public partial class MainForm : Form, ISubscriber
         string filename = null;
         if (m_found_verses_displayed)
         {
-            switch (m_numbers_result_type)
+            if (m_search_type == SearchType.Text)
             {
-                case NumbersResultType.Letters:
-                    {
-                        result = DisplayInformation(m_client.FoundLetters);
-                    }
-                    break;
-                case NumbersResultType.Words:
-                case NumbersResultType.WordRanges:
-                case NumbersResultType.WordSets:
-                    {
-                        result = DisplayInformation(m_client.FoundWords);
-                    }
-                    break;
-                case NumbersResultType.Sentences:
-                    {
-                        result = DisplayInformation(m_client.FoundVerses); // Sentence and Phrase don't know about Words
-                    }
-                    break;
-                case NumbersResultType.Verses:
-                case NumbersResultType.VerseRanges:
-                case NumbersResultType.VerseSets:
-                    {
-                        result = DisplayInformation(m_client.FoundVerses);
-                    }
-                    break;
-                case NumbersResultType.Chapters:
-                case NumbersResultType.ChapterRanges:
-                case NumbersResultType.ChapterSets:
-                    {
-                        List<Chapter> chapters = m_client.Book.GetChapters(m_client.FoundVerses);
-                        if (chapters != null)
+                switch (m_text_search_block_size)
+                {
+                    case TextSearchBlockSize.Verse:
                         {
-                            result = DisplayInformation(chapters);
+                            result = DisplayInformation(m_client.FoundVerses);
                         }
-                    }
-                    break;
-                case NumbersResultType.Pages:
-                case NumbersResultType.PageRanges:
-                case NumbersResultType.PageSets:
-                    {
-                        List<Page> pages = m_client.Book.GetPages(m_client.FoundVerses);
-                        if (pages != null)
+                        break;
+                    case TextSearchBlockSize.Chapter:
                         {
-                            result = DisplayInformation(pages);
+                            List<Chapter> chapters = m_client.Book.GetChapters(m_client.FoundVerses);
+                            if (chapters != null)
+                            {
+                                result = DisplayInformation(chapters);
+                            }
                         }
-                    }
-                    break;
-                case NumbersResultType.Stations:
-                case NumbersResultType.StationRanges:
-                case NumbersResultType.StationSets:
-                    {
-                        List<Station> stations = m_client.Book.GetStations(m_client.FoundVerses);
-                        if (stations != null)
+                        break;
+                    case TextSearchBlockSize.Page:
                         {
-                            result = DisplayInformation(stations);
+                            List<Page> pages = m_client.Book.GetPages(m_client.FoundVerses);
+                            if (pages != null)
+                            {
+                                result = DisplayInformation(pages);
+                            }
                         }
-                    }
-                    break;
-                case NumbersResultType.Parts:
-                case NumbersResultType.PartRanges:
-                case NumbersResultType.PartSets:
-                    {
-                        List<Part> parts = m_client.Book.GetParts(m_client.FoundVerses);
-                        if (parts != null)
+                        break;
+                    case TextSearchBlockSize.Station:
                         {
-                            result = DisplayInformation(parts);
+                            List<Station> stations = m_client.Book.GetStations(m_client.FoundVerses);
+                            if (stations != null)
+                            {
+                                result = DisplayInformation(stations);
+                            }
                         }
-                    }
-                    break;
-                case NumbersResultType.Groups:
-                case NumbersResultType.GroupRanges:
-                case NumbersResultType.GroupSets:
-                    {
-                        List<Group> group = m_client.Book.GetGroups(m_client.FoundVerses);
-                        if (group != null)
+                        break;
+                    case TextSearchBlockSize.Part:
                         {
-                            result = DisplayInformation(group);
+                            List<Part> parts = m_client.Book.GetParts(m_client.FoundVerses);
+                            if (parts != null)
+                            {
+                                result = DisplayInformation(parts);
+                            }
                         }
-                    }
-                    break;
-                case NumbersResultType.Halfs:
-                case NumbersResultType.HalfRanges:
-                case NumbersResultType.HalfSets:
-                    {
-                        List<Half> halfs = m_client.Book.GetHalfs(m_client.FoundVerses);
-                        if (halfs != null)
+                        break;
+                    case TextSearchBlockSize.Group:
                         {
-                            result = DisplayInformation(halfs);
+                            List<Group> group = m_client.Book.GetGroups(m_client.FoundVerses);
+                            if (group != null)
+                            {
+                                result = DisplayInformation(group);
+                            }
                         }
-                    }
-                    break;
-                case NumbersResultType.Quarters:
-                case NumbersResultType.QuarterRanges:
-                case NumbersResultType.QuarterSets:
-                    {
-                        List<Quarter> quarters = m_client.Book.GetQuarters(m_client.FoundVerses);
-                        if (quarters != null)
+                        break;
+                    case TextSearchBlockSize.Half:
                         {
-                            result = DisplayInformation(quarters);
+                            List<Half> halfs = m_client.Book.GetHalfs(m_client.FoundVerses);
+                            if (halfs != null)
+                            {
+                                result = DisplayInformation(halfs);
+                            }
                         }
-                    }
-                    break;
-                case NumbersResultType.Bowings:
-                case NumbersResultType.BowingRanges:
-                case NumbersResultType.BowingSets:
-                    {
-                        List<Bowing> bowings = m_client.Book.GetBowings(m_client.FoundVerses);
-                        if (bowings != null)
+                        break;
+                    case TextSearchBlockSize.Quarter:
                         {
-                            result = DisplayInformation(bowings);
+                            List<Quarter> quarters = m_client.Book.GetQuarters(m_client.FoundVerses);
+                            if (quarters != null)
+                            {
+                                result = DisplayInformation(quarters);
+                            }
                         }
-                    }
-                    break;
+                        break;
+                    case TextSearchBlockSize.Bowing:
+                        {
+                            List<Bowing> bowings = m_client.Book.GetBowings(m_client.FoundVerses);
+                            if (bowings != null)
+                            {
+                                result = DisplayInformation(bowings);
+                            }
+                        }
+                        break;
+                }
+            }
+            else if (m_search_type == SearchType.Numbers)
+            {
+                switch (m_numbers_result_type)
+                {
+                    case NumbersResultType.Letters:
+                        {
+                            result = DisplayInformation(m_client.FoundLetters);
+                        }
+                        break;
+                    case NumbersResultType.Words:
+                    case NumbersResultType.WordRanges:
+                    case NumbersResultType.WordSets:
+                        {
+                            result = DisplayInformation(m_client.FoundWords);
+                        }
+                        break;
+                    case NumbersResultType.Sentences:
+                        {
+                            result = DisplayInformation(m_client.FoundVerses); // Sentence and Phrase don't know about Words
+                        }
+                        break;
+                    case NumbersResultType.Verses:
+                    case NumbersResultType.VerseRanges:
+                    case NumbersResultType.VerseSets:
+                        {
+                            result = DisplayInformation(m_client.FoundVerses);
+                        }
+                        break;
+                    case NumbersResultType.Chapters:
+                    case NumbersResultType.ChapterRanges:
+                    case NumbersResultType.ChapterSets:
+                        {
+                            List<Chapter> chapters = m_client.Book.GetChapters(m_client.FoundVerses);
+                            if (chapters != null)
+                            {
+                                result = DisplayInformation(chapters);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.Pages:
+                    case NumbersResultType.PageRanges:
+                    case NumbersResultType.PageSets:
+                        {
+                            List<Page> pages = m_client.Book.GetPages(m_client.FoundVerses);
+                            if (pages != null)
+                            {
+                                result = DisplayInformation(pages);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.Stations:
+                    case NumbersResultType.StationRanges:
+                    case NumbersResultType.StationSets:
+                        {
+                            List<Station> stations = m_client.Book.GetStations(m_client.FoundVerses);
+                            if (stations != null)
+                            {
+                                result = DisplayInformation(stations);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.Parts:
+                    case NumbersResultType.PartRanges:
+                    case NumbersResultType.PartSets:
+                        {
+                            List<Part> parts = m_client.Book.GetParts(m_client.FoundVerses);
+                            if (parts != null)
+                            {
+                                result = DisplayInformation(parts);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.Groups:
+                    case NumbersResultType.GroupRanges:
+                    case NumbersResultType.GroupSets:
+                        {
+                            List<Group> group = m_client.Book.GetGroups(m_client.FoundVerses);
+                            if (group != null)
+                            {
+                                result = DisplayInformation(group);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.Halfs:
+                    case NumbersResultType.HalfRanges:
+                    case NumbersResultType.HalfSets:
+                        {
+                            List<Half> halfs = m_client.Book.GetHalfs(m_client.FoundVerses);
+                            if (halfs != null)
+                            {
+                                result = DisplayInformation(halfs);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.Quarters:
+                    case NumbersResultType.QuarterRanges:
+                    case NumbersResultType.QuarterSets:
+                        {
+                            List<Quarter> quarters = m_client.Book.GetQuarters(m_client.FoundVerses);
+                            if (quarters != null)
+                            {
+                                result = DisplayInformation(quarters);
+                            }
+                        }
+                        break;
+                    case NumbersResultType.Bowings:
+                    case NumbersResultType.BowingRanges:
+                    case NumbersResultType.BowingSets:
+                        {
+                            List<Bowing> bowings = m_client.Book.GetBowings(m_client.FoundVerses);
+                            if (bowings != null)
+                            {
+                                result = DisplayInformation(bowings);
+                            }
+                        }
+                        break;
+                }
+            }
+            else if (m_search_type == SearchType.Similarity)
+            {
+                result = DisplayInformation(m_client.FoundVerses);
+            }
+            else if (m_search_type == SearchType.Frequency)
+            {
+                switch (m_frequency_result_type)
+                {
+                    case FrequencyResultType.Words:
+                        {
+                            result = DisplayInformation(m_client.FoundWords);
+                        }
+                        break;
+                    case FrequencyResultType.Sentences:
+                        {
+                            result = DisplayInformation(m_client.FoundVerses); // Sentence and Phrase don't know about Words
+                        }
+                        break;
+                    case FrequencyResultType.Verses:
+                        {
+                            result = DisplayInformation(m_client.FoundVerses);
+                        }
+                        break;
+                    case FrequencyResultType.Chapters:
+                        {
+                            List<Chapter> chapters = m_client.Book.GetChapters(m_client.FoundVerses);
+                            if (chapters != null)
+                            {
+                                result = DisplayInformation(chapters);
+                            }
+                        }
+                        break;
+                }
+            }
+            else // default
+            {
+                result = DisplayInformation(m_client.FoundVerses);
             }
 
             if (!String.IsNullOrEmpty(m_find_result_header))
@@ -43018,7 +43142,7 @@ public partial class MainForm : Form, ISubscriber
 
         StringBuilder str = new StringBuilder();
 
-        str.Append("#" + "\t" + "Number" + "\t" + "Chapter" + "\t" + "Verse" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
+        str.Append("#" + "\t" + "Number" + "\t" + "Chapter" + "\t" + "Verse" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t");
 
         NumerologySystem numerology_system = m_client.NumerologySystem;
         if (numerology_system != null)
@@ -43037,6 +43161,8 @@ public partial class MainForm : Form, ISubscriber
             int chapter_verse_sum = 0;
             int word_sum = 0;
             int letter_sum = 0;
+            int unique_letter_sum = 0;
+            long value = 0L;
             long value_sum = 0L;
             foreach (Verse verse in verses)
             {
@@ -43047,7 +43173,8 @@ public partial class MainForm : Form, ISubscriber
                 chapter_verse_sum += verse.NumberInChapter;
                 word_sum += verse.Words.Count;
                 letter_sum += verse.LetterCount;
-                long value = m_client.CalculateValue(verse);
+                unique_letter_sum += verse.UniqueLetters.Count;
+                value = m_client.CalculateValue(verse);
                 value_sum += value;
 
                 str.Append(count.ToString() + "\t");
@@ -43056,6 +43183,7 @@ public partial class MainForm : Form, ISubscriber
                 str.Append(verse.NumberInChapter.ToString() + "\t");
                 str.Append(verse.Words.Count.ToString() + "\t");
                 str.Append(verse.LetterCount.ToString() + "\t");
+                str.Append(verse.UniqueLetters.Count.ToString() + "\t");
                 str.Append(value.ToString() + "\t");
 
                 foreach (char character in numerology_system.LetterValues.Keys)
@@ -43078,7 +43206,7 @@ public partial class MainForm : Form, ISubscriber
             }
 
             str.AppendLine();
-            str.AppendLine(sum + "\t" + verse_sum + "\t" + chapter_sum + "\t" + chapter_verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
+            str.AppendLine(sum + "\t" + verse_sum + "\t" + chapter_sum + "\t" + chapter_verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + unique_letter_sum + "\t" + value_sum);
         }
         return str.ToString();
     }
@@ -43089,7 +43217,7 @@ public partial class MainForm : Form, ISubscriber
 
         StringBuilder str = new StringBuilder();
 
-        str.Append("#" + "\t" + "Name" + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
+        str.Append("#" + "\t" + "Name" + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t");
         NumerologySystem numerology_system = m_client.NumerologySystem;
         if (numerology_system != null)
         {
@@ -43105,13 +43233,15 @@ public partial class MainForm : Form, ISubscriber
                 }
                 str.AppendLine();
             }
+            int letter_sum = 0;
 
             int count = 0;
             int sum = 0;
             int chapter_sum = 0;
             int verse_sum = 0;
             int word_sum = 0;
-            int letter_sum = 0;
+            int unique_letter_sum = 0;
+            long value = 0L;
             long value_sum = 0L;
             foreach (Chapter chapter in chapters)
             {
@@ -43121,7 +43251,8 @@ public partial class MainForm : Form, ISubscriber
                 verse_sum += chapter.Verses.Count;
                 word_sum += chapter.WordCount;
                 letter_sum += chapter.LetterCount;
-                long value = m_client.CalculateValue(chapter);
+                unique_letter_sum += chapter.UniqueLetters.Count;
+                value = m_client.CalculateValue(chapter);
                 value_sum += value;
 
                 str.Append(count + "\t");
@@ -43130,6 +43261,7 @@ public partial class MainForm : Form, ISubscriber
                 str.Append(chapter.Verses.Count.ToString() + "\t");
                 str.Append(chapter.WordCount.ToString() + "\t");
                 str.Append(chapter.LetterCount.ToString() + "\t");
+                str.Append(chapter.UniqueLetters.Count.ToString() + "\t");
                 str.Append(value.ToString() + "\t");
                 if (numerology_system.LetterValues.Keys.Count > 0)
                 {
@@ -43150,7 +43282,7 @@ public partial class MainForm : Form, ISubscriber
             }
 
             str.AppendLine();
-            str.AppendLine(sum + "\t" + "Sum" + "\t" + chapter_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
+            str.AppendLine(sum + "\t" + "Sum" + "\t" + chapter_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + unique_letter_sum + "\t" + value_sum);
         }
         return str.ToString();
     }
@@ -43161,7 +43293,7 @@ public partial class MainForm : Form, ISubscriber
 
         StringBuilder str = new StringBuilder();
 
-        str.Append("#" + "\t" + "Name" + (m_found_verses_displayed ? "\t" + "Matches" : "") + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
+        str.Append("#" + "\t" + "Name" + (m_found_verses_displayed ? "\t" + "Matches" : "") + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t");
         NumerologySystem numerology_system = m_client.NumerologySystem;
         if (numerology_system != null)
         {
@@ -43185,6 +43317,8 @@ public partial class MainForm : Form, ISubscriber
             int verse_sum = 0;
             int word_sum = 0;
             int letter_sum = 0;
+            int unique_letter_sum = 0;
+            long value = 0L;
             long value_sum = 0L;
             foreach (Chapter chapter in chapters)
             {
@@ -43194,7 +43328,8 @@ public partial class MainForm : Form, ISubscriber
                 verse_sum += chapter.Verses.Count;
                 word_sum += chapter.WordCount;
                 letter_sum += chapter.LetterCount;
-                long value = m_client.CalculateValue(chapter);
+                unique_letter_sum += chapter.UniqueLetters.Count;
+                value = m_client.CalculateValue(chapter);
                 value_sum += value;
 
                 str.Append(count + "\t");
@@ -43216,6 +43351,7 @@ public partial class MainForm : Form, ISubscriber
                 str.Append(chapter.Verses.Count.ToString() + "\t");
                 str.Append(chapter.WordCount.ToString() + "\t");
                 str.Append(chapter.LetterCount.ToString() + "\t");
+                str.Append(chapter.UniqueLetters.Count.ToString() + "\t");
                 str.Append(value.ToString() + "\t");
                 if (numerology_system.LetterValues.Keys.Count > 0)
                 {
@@ -43236,7 +43372,7 @@ public partial class MainForm : Form, ISubscriber
             }
 
             str.AppendLine();
-            str.AppendLine(sum + "\t" + "Sum" + (m_found_verses_displayed ? "\t" + match_sum : "") + "\t" + chapter_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
+            str.AppendLine(sum + "\t" + "Sum" + (m_found_verses_displayed ? "\t" + match_sum : "") + "\t" + chapter_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + unique_letter_sum + "\t" + value_sum);
         }
         return str.ToString();
     }
@@ -43247,7 +43383,7 @@ public partial class MainForm : Form, ISubscriber
 
         StringBuilder str = new StringBuilder();
 
-        str.Append("#" + "\t" + "Page" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
+        str.Append("#" + "\t" + "Page" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t");
         NumerologySystem numerology_system = m_client.NumerologySystem;
         if (numerology_system != null)
         {
@@ -43270,6 +43406,8 @@ public partial class MainForm : Form, ISubscriber
             int verse_sum = 0;
             int word_sum = 0;
             int letter_sum = 0;
+            int unique_letter_sum = 0;
+            long value = 0L;
             long value_sum = 0L;
             foreach (Page page in pages)
             {
@@ -43279,7 +43417,8 @@ public partial class MainForm : Form, ISubscriber
                 verse_sum += page.Verses.Count;
                 word_sum += page.WordCount;
                 letter_sum += page.LetterCount;
-                long value = m_client.CalculateValue(page.Verses);
+                unique_letter_sum += page.UniqueLetters.Count;
+                value = m_client.CalculateValue(page.Verses);
                 value_sum += value;
 
                 str.Append(count + "\t");
@@ -43287,6 +43426,7 @@ public partial class MainForm : Form, ISubscriber
                 str.Append(page.Verses.Count.ToString() + "\t");
                 str.Append(page.WordCount.ToString() + "\t");
                 str.Append(page.LetterCount.ToString() + "\t");
+                str.Append(page.UniqueLetters.Count.ToString() + "\t");
                 str.Append(value.ToString() + "\t");
                 if (numerology_system.LetterValues.Keys.Count > 0)
                 {
@@ -43307,7 +43447,7 @@ public partial class MainForm : Form, ISubscriber
             }
 
             str.AppendLine();
-            str.AppendLine(sum + "\t" + page_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
+            str.AppendLine(sum + "\t" + page_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + unique_letter_sum + "\t" + value_sum);
         }
         return str.ToString();
     }
@@ -43318,7 +43458,7 @@ public partial class MainForm : Form, ISubscriber
 
         StringBuilder str = new StringBuilder();
 
-        str.Append("#" + "\t" + "Station" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
+        str.Append("#" + "\t" + "Station" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t");
         NumerologySystem numerology_system = m_client.NumerologySystem;
         if (numerology_system != null)
         {
@@ -43341,6 +43481,8 @@ public partial class MainForm : Form, ISubscriber
             int verse_sum = 0;
             int word_sum = 0;
             int letter_sum = 0;
+            int unique_letter_sum = 0;
+            long value = 0L;
             long value_sum = 0L;
             foreach (Station station in stations)
             {
@@ -43350,7 +43492,8 @@ public partial class MainForm : Form, ISubscriber
                 verse_sum += station.Verses.Count;
                 word_sum += station.WordCount;
                 letter_sum += station.LetterCount;
-                long value = m_client.CalculateValue(station.Verses);
+                unique_letter_sum += station.UniqueLetters.Count;
+                value = m_client.CalculateValue(station.Verses);
                 value_sum += value;
 
                 str.Append(count + "\t");
@@ -43358,6 +43501,7 @@ public partial class MainForm : Form, ISubscriber
                 str.Append(station.Verses.Count.ToString() + "\t");
                 str.Append(station.WordCount.ToString() + "\t");
                 str.Append(station.LetterCount.ToString() + "\t");
+                str.Append(station.UniqueLetters.Count.ToString() + "\t");
                 str.Append(value.ToString() + "\t");
                 if (numerology_system.LetterValues.Keys.Count > 0)
                 {
@@ -43378,7 +43522,7 @@ public partial class MainForm : Form, ISubscriber
             }
 
             str.AppendLine();
-            str.AppendLine(sum + "\t" + station_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
+            str.AppendLine(sum + "\t" + station_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + unique_letter_sum + "\t" + value_sum);
         }
         return str.ToString();
     }
@@ -43389,7 +43533,7 @@ public partial class MainForm : Form, ISubscriber
 
         StringBuilder str = new StringBuilder();
 
-        str.Append("#" + "\t" + "Part" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
+        str.Append("#" + "\t" + "Part" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t");
         NumerologySystem numerology_system = m_client.NumerologySystem;
         if (numerology_system != null)
         {
@@ -43412,6 +43556,8 @@ public partial class MainForm : Form, ISubscriber
             int verse_sum = 0;
             int word_sum = 0;
             int letter_sum = 0;
+            int unique_letter_sum = 0;
+            long value = 0L;
             long value_sum = 0L;
             foreach (Part part in parts)
             {
@@ -43421,7 +43567,8 @@ public partial class MainForm : Form, ISubscriber
                 verse_sum += part.Verses.Count;
                 word_sum += part.WordCount;
                 letter_sum += part.LetterCount;
-                long value = m_client.CalculateValue(part.Verses);
+                unique_letter_sum += part.UniqueLetters.Count;
+                value = m_client.CalculateValue(part.Verses);
                 value_sum += value;
 
                 str.Append(count + "\t");
@@ -43429,6 +43576,7 @@ public partial class MainForm : Form, ISubscriber
                 str.Append(part.Verses.Count.ToString() + "\t");
                 str.Append(part.WordCount.ToString() + "\t");
                 str.Append(part.LetterCount.ToString() + "\t");
+                str.Append(part.UniqueLetters.Count.ToString() + "\t");
                 str.Append(value.ToString() + "\t");
                 if (numerology_system.LetterValues.Keys.Count > 0)
                 {
@@ -43449,7 +43597,7 @@ public partial class MainForm : Form, ISubscriber
             }
 
             str.AppendLine();
-            str.AppendLine(sum + "\t" + part_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
+            str.AppendLine(sum + "\t" + part_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + unique_letter_sum + "\t" + value_sum);
         }
         return str.ToString();
     }
@@ -43460,7 +43608,7 @@ public partial class MainForm : Form, ISubscriber
 
         StringBuilder str = new StringBuilder();
 
-        str.Append("#" + "\t" + "Group" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
+        str.Append("#" + "\t" + "Group" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t");
         NumerologySystem numerology_system = m_client.NumerologySystem;
         if (numerology_system != null)
         {
@@ -43483,6 +43631,8 @@ public partial class MainForm : Form, ISubscriber
             int verse_sum = 0;
             int word_sum = 0;
             int letter_sum = 0;
+            int unique_letter_sum = 0;
+            long value = 0L;
             long value_sum = 0L;
             foreach (Group group in groups)
             {
@@ -43492,7 +43642,8 @@ public partial class MainForm : Form, ISubscriber
                 verse_sum += group.Verses.Count;
                 word_sum += group.WordCount;
                 letter_sum += group.LetterCount;
-                long value = m_client.CalculateValue(group.Verses);
+                unique_letter_sum += group.UniqueLetters.Count;
+                value = m_client.CalculateValue(group.Verses);
                 value_sum += value;
 
                 str.Append(count + "\t");
@@ -43500,6 +43651,7 @@ public partial class MainForm : Form, ISubscriber
                 str.Append(group.Verses.Count.ToString() + "\t");
                 str.Append(group.WordCount.ToString() + "\t");
                 str.Append(group.LetterCount.ToString() + "\t");
+                str.Append(group.UniqueLetters.Count.ToString() + "\t");
                 str.Append(value.ToString() + "\t");
                 if (numerology_system.LetterValues.Keys.Count > 0)
                 {
@@ -43520,7 +43672,7 @@ public partial class MainForm : Form, ISubscriber
             }
 
             str.AppendLine();
-            str.AppendLine(sum + "\t" + group_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
+            str.AppendLine(sum + "\t" + group_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + unique_letter_sum + "\t" + value_sum);
         }
         return str.ToString();
     }
@@ -43531,7 +43683,7 @@ public partial class MainForm : Form, ISubscriber
 
         StringBuilder str = new StringBuilder();
 
-        str.Append("#" + "\t" + "Half" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
+        str.Append("#" + "\t" + "Half" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t");
         NumerologySystem numerology_system = m_client.NumerologySystem;
         if (numerology_system != null)
         {
@@ -43554,6 +43706,8 @@ public partial class MainForm : Form, ISubscriber
             int verse_sum = 0;
             int word_sum = 0;
             int letter_sum = 0;
+            int unique_letter_sum = 0;
+            long value = 0L;
             long value_sum = 0L;
             foreach (Half half in halfs)
             {
@@ -43563,7 +43717,8 @@ public partial class MainForm : Form, ISubscriber
                 verse_sum += half.Verses.Count;
                 word_sum += half.WordCount;
                 letter_sum += half.LetterCount;
-                long value = m_client.CalculateValue(half.Verses);
+                unique_letter_sum += half.UniqueLetters.Count;
+                value = m_client.CalculateValue(half.Verses);
                 value_sum += value;
 
                 str.Append(count + "\t");
@@ -43571,6 +43726,7 @@ public partial class MainForm : Form, ISubscriber
                 str.Append(half.Verses.Count.ToString() + "\t");
                 str.Append(half.WordCount.ToString() + "\t");
                 str.Append(half.LetterCount.ToString() + "\t");
+                str.Append(half.UniqueLetters.Count.ToString() + "\t");
                 str.Append(value.ToString() + "\t");
                 if (numerology_system.LetterValues.Keys.Count > 0)
                 {
@@ -43591,7 +43747,7 @@ public partial class MainForm : Form, ISubscriber
             }
 
             str.AppendLine();
-            str.AppendLine(sum + "\t" + half_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
+            str.AppendLine(sum + "\t" + half_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + unique_letter_sum + "\t" + value_sum);
         }
         return str.ToString();
     }
@@ -43602,7 +43758,7 @@ public partial class MainForm : Form, ISubscriber
 
         StringBuilder str = new StringBuilder();
 
-        str.Append("#" + "\t" + "Quarter" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
+        str.Append("#" + "\t" + "Quarter" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t");
         NumerologySystem numerology_system = m_client.NumerologySystem;
         if (numerology_system != null)
         {
@@ -43625,6 +43781,8 @@ public partial class MainForm : Form, ISubscriber
             int verse_sum = 0;
             int word_sum = 0;
             int letter_sum = 0;
+            int unique_letter_sum = 0;
+            long value = 0L;
             long value_sum = 0L;
             foreach (Quarter quarter in quarters)
             {
@@ -43634,7 +43792,8 @@ public partial class MainForm : Form, ISubscriber
                 verse_sum += quarter.Verses.Count;
                 word_sum += quarter.WordCount;
                 letter_sum += quarter.LetterCount;
-                long value = m_client.CalculateValue(quarter.Verses);
+                unique_letter_sum += quarter.UniqueLetters.Count;
+                value = m_client.CalculateValue(quarter.Verses);
                 value_sum += value;
 
                 str.Append(count + "\t");
@@ -43642,6 +43801,7 @@ public partial class MainForm : Form, ISubscriber
                 str.Append(quarter.Verses.Count.ToString() + "\t");
                 str.Append(quarter.WordCount.ToString() + "\t");
                 str.Append(quarter.LetterCount.ToString() + "\t");
+                str.Append(quarter.UniqueLetters.Count.ToString() + "\t");
                 str.Append(value.ToString() + "\t");
                 if (numerology_system.LetterValues.Keys.Count > 0)
                 {
@@ -43662,7 +43822,7 @@ public partial class MainForm : Form, ISubscriber
             }
 
             str.AppendLine();
-            str.AppendLine(sum + "\t" + quarter_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
+            str.AppendLine(sum + "\t" + quarter_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + unique_letter_sum + "\t" + value_sum);
         }
         return str.ToString();
     }
@@ -43673,7 +43833,7 @@ public partial class MainForm : Form, ISubscriber
 
         StringBuilder str = new StringBuilder();
 
-        str.Append("#" + "\t" + "Bowing" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Value" + "\t");
+        str.Append("#" + "\t" + "Bowing" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t");
         NumerologySystem numerology_system = m_client.NumerologySystem;
         if (numerology_system != null)
         {
@@ -43696,6 +43856,8 @@ public partial class MainForm : Form, ISubscriber
             int verse_sum = 0;
             int word_sum = 0;
             int letter_sum = 0;
+            int unique_letter_sum = 0;
+            long value = 0L;
             long value_sum = 0L;
             foreach (Bowing bowing in bowings)
             {
@@ -43705,7 +43867,8 @@ public partial class MainForm : Form, ISubscriber
                 verse_sum += bowing.Verses.Count;
                 word_sum += bowing.WordCount;
                 letter_sum += bowing.LetterCount;
-                long value = m_client.CalculateValue(bowing.Verses);
+                unique_letter_sum += bowing.UniqueLetters.Count;
+                value = m_client.CalculateValue(bowing.Verses);
                 value_sum += value;
 
                 str.Append(count + "\t");
@@ -43713,6 +43876,7 @@ public partial class MainForm : Form, ISubscriber
                 str.Append(bowing.Verses.Count.ToString() + "\t");
                 str.Append(bowing.WordCount.ToString() + "\t");
                 str.Append(bowing.LetterCount.ToString() + "\t");
+                str.Append(bowing.UniqueLetters.Count.ToString() + "\t");
                 str.Append(value.ToString() + "\t");
                 if (numerology_system.LetterValues.Keys.Count > 0)
                 {
@@ -43733,7 +43897,7 @@ public partial class MainForm : Form, ISubscriber
             }
 
             str.AppendLine();
-            str.AppendLine(sum + "\t" + bowing_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + value_sum);
+            str.AppendLine(sum + "\t" + bowing_sum + "\t" + verse_sum + "\t" + word_sum + "\t" + letter_sum + "\t" + unique_letter_sum + "\t" + value_sum);
         }
         return str.ToString();
     }
