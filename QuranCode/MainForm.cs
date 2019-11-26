@@ -46948,18 +46948,6 @@ public partial class MainForm : Form, ISubscriber
                 FileHelper.DisplayFile(filename);
                 filename = Globals.NUMBERS_FOLDER + "/" + "non_additive_primes.txt";
                 FileHelper.DisplayFile(filename);
-                //string filename = "Primalogy.pdf";
-                //string path = Application.StartupPath + "/" + Globals.HELP_FOLDER + "/" + filename;
-                //if (!File.Exists(path))
-                //{
-                //    DownloadFile("http://heliwave.com/" + filename, path);
-                //}
-                //if (File.Exists(path))
-                //{
-                //    FileHelper.WaitForReady(path);
-
-                //    System.Diagnostics.Process.Start(path);
-                //}
             }
             catch (Exception ex)
             {
@@ -46993,18 +46981,6 @@ public partial class MainForm : Form, ISubscriber
                 FileHelper.DisplayFile(filename);
                 filename = Globals.NUMBERS_FOLDER + "/" + "non_additive_composites.txt";
                 FileHelper.DisplayFile(filename);
-                //string filename = "Primalogy_AR.pdf";
-                //string path = Application.StartupPath + "/" + Globals.HELP_FOLDER + "/" + filename;
-                //if (!File.Exists(path))
-                //{
-                //    DownloadFile("http://heliwave.com/" + filename, path);
-                //}
-                //if (File.Exists(path))
-                //{
-                //    FileHelper.WaitForReady(path);
-
-                //    System.Diagnostics.Process.Start(path);
-                //}
             }
             catch (Exception ex)
             {
@@ -51598,35 +51574,6 @@ public partial class MainForm : Form, ISubscriber
         {
             System.Diagnostics.Process.Start(Globals.HELP_FOLDER);
         }
-
-        //this.Cursor = Cursors.WaitCursor;
-        //try
-        //{
-        //    string filename = "EncryptedQuran.pdf";
-        //    string path = Application.StartupPath + "/" + Globals.HELP_FOLDER + "/" + filename;
-        //    if (!File.Exists(path))
-        //    {
-        //        DownloadFile("http://heliwave.com/" + filename, path);
-        //    }
-        //    if (File.Exists(path))
-        //    {
-        //        FileHelper.WaitForReady(path);
-
-        //        System.Diagnostics.Process.Start(path);
-        //    }
-        //}
-        //catch (Exception ex)
-        //{
-        //    while (ex != null)
-        //    {
-        //        MessageBox.Show(ex.Message, Application.ProductName);
-        //        ex = ex.InnerException;
-        //    }
-        //}
-        //finally
-        //{
-        //    this.Cursor = Cursors.Default;
-        //}
     }
     private void LinkLabel_Click(object sender, EventArgs e)
     {
