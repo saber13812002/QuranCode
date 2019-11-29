@@ -5147,7 +5147,6 @@ public static class Research
     public static string P_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         if (verses != null)
         {
@@ -5155,10 +5154,9 @@ public static class Research
         }
         return null;
     }
-    public static string AP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static string AP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         if (verses != null)
         {
@@ -5166,10 +5164,9 @@ public static class Research
         }
         return null;
     }
-    public static string XP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static string XP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         if (verses != null)
         {
@@ -5180,7 +5177,6 @@ public static class Research
     public static string C_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         if (verses != null)
         {
@@ -5188,10 +5184,9 @@ public static class Research
         }
         return null;
     }
-    public static string AC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static string AC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         if (verses != null)
         {
@@ -5199,10 +5194,9 @@ public static class Research
         }
         return null;
     }
-    public static string XC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static string XC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         if (verses != null)
         {
@@ -5739,6 +5733,2784 @@ public static class Research
             }
         }
         return result;
+    }
+    public static string _________________________________________________(Client client, string param, bool in_search_result)
+    {
+        return null;
+    }
+    public static string N_P_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("N" + "\t" + "P" + "\t" + "N:P" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int N_total = 0;
+        int P_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int N = i + 1;
+            int P = (int)Numbers.Primes[i];
+            N_total += N;
+            P_total += P;
+
+            string N_P = N + ":" + P;
+            if ((N >= 0) && (N < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[N - 1];
+                if (chapter != null)
+                {
+                    if ((P >= 0) && (P < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[P - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(N + "\t" + P + "\t" + N_P + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(N + "\t" + P + "\t" + N_P + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(N + "\t" + P + "\t" + N_P + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(N + "\t" + P + "\t" + N_P + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(N_total + "\t" + P_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string N_AP_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("N" + "\t" + "AP" + "\t" + "N:AP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int N_total = 0;
+        int AP_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int N = i + 1;
+            int AP = (int)Numbers.AdditivePrimes[i];
+            N_total += N;
+            AP_total += AP;
+
+            string N_AP = N + ":" + AP;
+            if ((N >= 0) && (N < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[N - 1];
+                if (chapter != null)
+                {
+                    if ((AP >= 0) && (AP < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[AP - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(N + "\t" + AP + "\t" + N_AP + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(N + "\t" + AP + "\t" + N_AP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(N + "\t" + AP + "\t" + N_AP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(N + "\t" + AP + "\t" + N_AP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(N_total + "\t" + AP_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string N_XP_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("N" + "\t" + "XP" + "\t" + "N:XP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int N_total = 0;
+        int XP_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int N = i + 1;
+            int XP = (int)Numbers.AdditivePrimes[i];
+            N_total += N;
+            XP_total += XP;
+
+            string N_XP = N + ":" + XP;
+            if ((N >= 0) && (N < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[N - 1];
+                if (chapter != null)
+                {
+                    if ((XP >= 0) && (XP < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[XP - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(N + "\t" + XP + "\t" + N_XP + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(N + "\t" + XP + "\t" + N_XP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(N + "\t" + XP + "\t" + N_XP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(N + "\t" + XP + "\t" + N_XP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(N_total + "\t" + XP_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    public static string N_C_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("N" + "\t" + "C" + "\t" + "N:C" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int N_total = 0;
+        int C_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int N = i + 1;
+            int C = (int)Numbers.Composites[i];
+            N_total += N;
+            C_total += C;
+
+            string N_C = N + ":" + C;
+            if ((N >= 0) && (N < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[N - 1];
+                if (chapter != null)
+                {
+                    if ((C >= 0) && (C < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[C - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(N + "\t" + C + "\t" + N_C + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(N + "\t" + C + "\t" + N_C + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(N + "\t" + C + "\t" + N_C + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(N + "\t" + C + "\t" + N_C + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(N_total + "\t" + C_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string N_AC_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("N" + "\t" + "AC" + "\t" + "N:AC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int N_total = 0;
+        int AC_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int N = i + 1;
+            int AC = (int)Numbers.AdditiveComposites[i];
+            N_total += N;
+            AC_total += AC;
+
+            string N_AC = N + ":" + AC;
+            if ((N >= 0) && (N < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[N - 1];
+                if (chapter != null)
+                {
+                    if ((AC >= 0) && (AC < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[AC - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(N + "\t" + AC + "\t" + N_AC + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(N + "\t" + AC + "\t" + N_AC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(N + "\t" + AC + "\t" + N_AC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(N + "\t" + AC + "\t" + N_AC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(N_total + "\t" + AC_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string N_XC_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("N" + "\t" + "XC" + "\t" + "N:XC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int N_total = 0;
+        int XC_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int N = i + 1;
+            int XC = (int)Numbers.AdditiveComposites[i];
+            N_total += N;
+            XC_total += XC;
+
+            string N_XC = N + ":" + XC;
+            if ((N >= 0) && (N < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[N - 1];
+                if (chapter != null)
+                {
+                    if ((XC >= 0) && (XC < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[XC - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(N + "\t" + XC + "\t" + N_XC + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(N + "\t" + XC + "\t" + N_XC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(N + "\t" + XC + "\t" + N_XC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(N + "\t" + XC + "\t" + N_XC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(N_total + "\t" + XC_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    public static string rN_P_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("N" + "\t" + "rN" + "\t" + "P" + "\t" + "rN:P" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int N_total = 0;
+        int rN_total = 0;
+        int P_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int N = i + 1;
+            int rN = 31 - i;
+            int P = (int)Numbers.Primes[i];
+            N_total += N;
+            rN_total += rN;
+            P_total += P;
+
+            string rN_P = rN + ":" + P;
+            if ((rN >= 0) && (rN < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[rN - 1];
+                if (chapter != null)
+                {
+                    if ((P >= 0) && (P < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[P - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(N + "\t" + rN + "\t" + P + "\t" + rN_P + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(N + "\t" + rN + "\t" + P + "\t" + rN_P + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(N + "\t" + rN + "\t" + P + "\t" + rN_P + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(N + "\t" + rN + "\t" + P + "\t" + rN_P + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(N_total + "\t" + rN_total + "\t" + P_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string rN_AP_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("N" + "\t" + "rN" + "\t" + "AP" + "\t" + "rN:AP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int N_total = 0;
+        int rN_total = 0;
+        int AP_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int N = i + 1;
+            int rN = 31 - i;
+            int AP = (int)Numbers.AdditivePrimes[i];
+            N_total += N;
+            rN_total += rN;
+            AP_total += AP;
+
+            string rN_AP = rN + ":" + AP;
+            if ((rN >= 0) && (rN < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[rN - 1];
+                if (chapter != null)
+                {
+                    if ((AP >= 0) && (AP < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[AP - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(N + "\t" + rN + "\t" + AP + "\t" + rN_AP + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(N + "\t" + rN + "\t" + AP + "\t" + rN_AP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(N + "\t" + rN + "\t" + AP + "\t" + rN_AP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(N + "\t" + rN + "\t" + AP + "\t" + rN_AP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(N_total + "\t" + rN_total + "\t" + AP_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string rN_XP_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("N" + "\t" + "rN" + "\t" + "XP" + "\t" + "rN:XP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int N_total = 0;
+        int rN_total = 0;
+        int XP_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int N = i + 1;
+            int rN = 31 - i;
+            int XP = (int)Numbers.AdditivePrimes[i];
+            N_total += N;
+            rN_total += rN;
+            XP_total += XP;
+
+            string rN_XP = rN + ":" + XP;
+            if ((rN >= 0) && (rN < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[rN - 1];
+                if (chapter != null)
+                {
+                    if ((XP >= 0) && (XP < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[XP - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(N + "\t" + rN + "\t" + XP + "\t" + rN_XP + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(N + "\t" + rN + "\t" + XP + "\t" + rN_XP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(N + "\t" + rN + "\t" + XP + "\t" + rN_XP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(N + "\t" + rN + "\t" + XP + "\t" + rN_XP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(N_total + "\t" + rN_total + "\t" + XP_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    public static string rN_C_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("N" + "\t" + "rN" + "\t" + "C" + "\t" + "rN:C" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int N_total = 0;
+        int rN_total = 0;
+        int C_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int N = i + 1;
+            int rN = 31 - i;
+            int C = (int)Numbers.Composites[i];
+            N_total += N;
+            rN_total += rN;
+            C_total += C;
+
+            string rN_C = rN + ":" + C;
+            if ((rN >= 0) && (rN < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[rN - 1];
+                if (chapter != null)
+                {
+                    if ((C >= 0) && (C < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[C - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(N + "\t" + rN + "\t" + C + "\t" + rN_C + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(N + "\t" + rN + "\t" + C + "\t" + rN_C + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(N + "\t" + rN + "\t" + C + "\t" + rN_C + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(N + "\t" + rN + "\t" + C + "\t" + rN_C + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(N_total + "\t" + rN_total + "\t" + C_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string rN_AC_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("N" + "\t" + "rN" + "\t" + "AC" + "\t" + "rN:AC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int N_total = 0;
+        int rN_total = 0;
+        int AC_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int N = i + 1;
+            int rN = 31 - i;
+            int AC = (int)Numbers.AdditiveComposites[i];
+            N_total += N;
+            rN_total += rN;
+            AC_total += AC;
+
+            string rN_AC = rN + ":" + AC;
+            if ((rN >= 0) && (rN < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[rN - 1];
+                if (chapter != null)
+                {
+                    if ((AC >= 0) && (AC < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[AC - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(N + "\t" + rN + "\t" + AC + "\t" + rN_AC + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(N + "\t" + rN + "\t" + AC + "\t" + rN_AC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(N + "\t" + rN + "\t" + AC + "\t" + rN_AC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(N + "\t" + rN + "\t" + AC + "\t" + rN_AC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(N_total + "\t" + rN_total + "\t" + AC_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string rN_XC_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("N" + "\t" + "rN" + "\t" + "XC" + "\t" + "rN:XC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int N_total = 0;
+        int rN_total = 0;
+        int XC_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int N = i + 1;
+            int rN = 31 - i;
+            int XC = (int)Numbers.AdditiveComposites[i];
+            N_total += N;
+            rN_total += rN;
+            XC_total += XC;
+
+            string rN_XC = rN + ":" + XC;
+            if ((rN >= 0) && (rN < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[rN - 1];
+                if (chapter != null)
+                {
+                    if ((XC >= 0) && (XC < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[XC - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(N + "\t" + rN + "\t" + XC + "\t" + rN_XC + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(N + "\t" + rN + "\t" + XC + "\t" + rN_XC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(N + "\t" + rN + "\t" + XC + "\t" + rN_XC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(N + "\t" + rN + "\t" + XC + "\t" + rN_XC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(N_total + "\t" + rN_total + "\t" + XC_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    public static string ________________________________________________(Client client, string param, bool in_search_result)
+    {
+        return null;
+    }
+    public static string M_P_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("M" + "\t" + "P" + "\t" + "M:P" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int M_total = 0;
+        int P_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int M = (int)Numbers.MercifulNumbers[i];
+            int P = (int)Numbers.Primes[i];
+            M_total += M;
+            P_total += P;
+
+            string M_P = M + ":" + P;
+            if ((M >= 0) && (M < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[M - 1];
+                if (chapter != null)
+                {
+                    if ((P >= 0) && (P < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[P - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(M + "\t" + P + "\t" + M_P + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(M + "\t" + P + "\t" + M_P + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(M + "\t" + P + "\t" + M_P + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(M + "\t" + P + "\t" + M_P + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(M_total + "\t" + P_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string M_AP_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("M" + "\t" + "AP" + "\t" + "M:AP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int M_total = 0;
+        int AP_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int M = (int)Numbers.MercifulNumbers[i];
+            int AP = (int)Numbers.AdditivePrimes[i];
+            M_total += M;
+            AP_total += AP;
+
+            string M_AP = M + ":" + AP;
+            if ((M >= 0) && (M < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[M - 1];
+                if (chapter != null)
+                {
+                    if ((AP >= 0) && (AP < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[AP - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(M + "\t" + AP + "\t" + M_AP + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(M + "\t" + AP + "\t" + M_AP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(M + "\t" + AP + "\t" + M_AP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(M + "\t" + AP + "\t" + M_AP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(M_total + "\t" + AP_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string M_XP_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("M" + "\t" + "XP" + "\t" + "M:XP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int M_total = 0;
+        int XP_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int M = (int)Numbers.MercifulNumbers[i];
+            int XP = (int)Numbers.AdditivePrimes[i];
+            M_total += M;
+            XP_total += XP;
+
+            string M_XP = M + ":" + XP;
+            if ((M >= 0) && (M < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[M - 1];
+                if (chapter != null)
+                {
+                    if ((XP >= 0) && (XP < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[XP - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(M + "\t" + XP + "\t" + M_XP + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(M + "\t" + XP + "\t" + M_XP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(M + "\t" + XP + "\t" + M_XP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(M + "\t" + XP + "\t" + M_XP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(M_total + "\t" + XP_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    public static string M_C_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("M" + "\t" + "C" + "\t" + "M:C" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int M_total = 0;
+        int C_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int M = (int)Numbers.MercifulNumbers[i];
+            int C = (int)Numbers.Composites[i];
+            M_total += M;
+            C_total += C;
+
+            string M_C = M + ":" + C;
+            if ((M >= 0) && (M < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[M - 1];
+                if (chapter != null)
+                {
+                    if ((C >= 0) && (C < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[C - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(M + "\t" + C + "\t" + M_C + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(M + "\t" + C + "\t" + M_C + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(M + "\t" + C + "\t" + M_C + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(M + "\t" + C + "\t" + M_C + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(M_total + "\t" + C_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string M_AC_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("M" + "\t" + "AC" + "\t" + "M:AC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int M_total = 0;
+        int AC_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int M = (int)Numbers.MercifulNumbers[i];
+            int AC = (int)Numbers.AdditiveComposites[i];
+            M_total += M;
+            AC_total += AC;
+
+            string M_AC = M + ":" + AC;
+            if ((M >= 0) && (M < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[M - 1];
+                if (chapter != null)
+                {
+                    if ((AC >= 0) && (AC < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[AC - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(M + "\t" + AC + "\t" + M_AC + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(M + "\t" + AC + "\t" + M_AC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(M + "\t" + AC + "\t" + M_AC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(M + "\t" + AC + "\t" + M_AC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(M_total + "\t" + AC_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string M_XC_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("M" + "\t" + "XC" + "\t" + "M:XC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int M_total = 0;
+        int XC_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int M = (int)Numbers.MercifulNumbers[i];
+            int XC = (int)Numbers.AdditiveComposites[i];
+            M_total += M;
+            XC_total += XC;
+
+            string M_XC = M + ":" + XC;
+            if ((M >= 0) && (M < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[M - 1];
+                if (chapter != null)
+                {
+                    if ((XC >= 0) && (XC < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[XC - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(M + "\t" + XC + "\t" + M_XC + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(M + "\t" + XC + "\t" + M_XC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(M + "\t" + XC + "\t" + M_XC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(M + "\t" + XC + "\t" + M_XC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(M_total + "\t" + XC_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    public static string rM_P_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("M" + "\t" + "rM" + "\t" + "P" + "\t" + "rM:P" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int M_total = 0;
+        int rM_total = 0;
+        int P_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int M = (int)Numbers.MercifulNumbers[i];
+            int rM = (int)Numbers.MercifulNumbers[31 - 1 - i];
+            int P = (int)Numbers.Primes[i];
+            M_total += M;
+            rM_total += rM;
+            P_total += P;
+
+            string rM_P = rM + ":" + P;
+            if ((rM >= 0) && (rM < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[rM - 1];
+                if (chapter != null)
+                {
+                    if ((P >= 0) && (P < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[P - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(M + "\t" + rM + "\t" + P + "\t" + rM_P + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(M + "\t" + rM + "\t" + P + "\t" + rM_P + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(M + "\t" + rM + "\t" + P + "\t" + rM_P + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(M + "\t" + rM + "\t" + P + "\t" + rM_P + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(M_total + "\t" + rM_total + "\t" + P_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string rM_AP_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("M" + "\t" + "rM" + "\t" + "AP" + "\t" + "rM:AP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int M_total = 0;
+        int rM_total = 0;
+        int AP_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int M = (int)Numbers.MercifulNumbers[i];
+            int rM = (int)Numbers.MercifulNumbers[31 - 1 - i];
+            int AP = (int)Numbers.AdditivePrimes[i];
+            M_total += M;
+            rM_total += rM;
+            AP_total += AP;
+
+            string rM_AP = rM + ":" + AP;
+            if ((rM >= 0) && (rM < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[rM - 1];
+                if (chapter != null)
+                {
+                    if ((AP >= 0) && (AP < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[AP - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(M + "\t" + rM + "\t" + AP + "\t" + rM_AP + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(M + "\t" + rM + "\t" + AP + "\t" + rM_AP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(M + "\t" + rM + "\t" + AP + "\t" + rM_AP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(M + "\t" + rM + "\t" + AP + "\t" + rM_AP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(M_total + "\t" + rM_total + "\t" + AP_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string rM_XP_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("M" + "\t" + "rM" + "\t" + "XP" + "\t" + "rM:XP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int M_total = 0;
+        int rM_total = 0;
+        int XP_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int M = (int)Numbers.MercifulNumbers[i];
+            int rM = (int)Numbers.MercifulNumbers[31 - 1 - i];
+            int XP = (int)Numbers.AdditivePrimes[i];
+            M_total += M;
+            rM_total += rM;
+            XP_total += XP;
+
+            string rM_XP = rM + ":" + XP;
+            if ((rM >= 0) && (rM < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[rM - 1];
+                if (chapter != null)
+                {
+                    if ((XP >= 0) && (XP < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[XP - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(M + "\t" + rM + "\t" + XP + "\t" + rM_XP + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(M + "\t" + rM + "\t" + XP + "\t" + rM_XP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(M + "\t" + rM + "\t" + XP + "\t" + rM_XP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(M + "\t" + rM + "\t" + XP + "\t" + rM_XP + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(M_total + "\t" + rM_total + "\t" + XP_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    public static string rM_C_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("M" + "\t" + "rM" + "\t" + "C" + "\t" + "rM:C" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int M_total = 0;
+        int rM_total = 0;
+        int C_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int M = (int)Numbers.MercifulNumbers[i];
+            int rM = (int)Numbers.MercifulNumbers[31 - 1 - i];
+            int C = (int)Numbers.Composites[i];
+            M_total += M;
+            rM_total += rM;
+            C_total += C;
+
+            string rM_C = rM + ":" + C;
+            if ((rM >= 0) && (rM < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[rM - 1];
+                if (chapter != null)
+                {
+                    if ((C >= 0) && (C < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[C - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(M + "\t" + rM + "\t" + C + "\t" + rM_C + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(M + "\t" + rM + "\t" + C + "\t" + rM_C + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(M + "\t" + rM + "\t" + C + "\t" + rM_C + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(M + "\t" + rM + "\t" + C + "\t" + rM_C + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(M_total + "\t" + rM_total + "\t" + C_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string rM_AC_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("M" + "\t" + "rM" + "\t" + "AC" + "\t" + "rM:AC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int M_total = 0;
+        int rM_total = 0;
+        int AC_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int M = (int)Numbers.MercifulNumbers[i];
+            int rM = (int)Numbers.MercifulNumbers[31 - 1 - i];
+            int AC = (int)Numbers.AdditiveComposites[i];
+            M_total += M;
+            rM_total += rM;
+            AC_total += AC;
+
+            string rM_AC = rM + ":" + AC;
+            if ((rM >= 0) && (rM < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[rM - 1];
+                if (chapter != null)
+                {
+                    if ((AC >= 0) && (AC < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[AC - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(M + "\t" + rM + "\t" + AC + "\t" + rM_AC + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(M + "\t" + rM + "\t" + AC + "\t" + rM_AC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(M + "\t" + rM + "\t" + AC + "\t" + rM_AC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(M + "\t" + rM + "\t" + AC + "\t" + rM_AC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(M_total + "\t" + rM_total + "\t" + AC_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    private static string rM_XC_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("M" + "\t" + "rM" + "\t" + "XC" + "\t" + "rM:XC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int M_total = 0;
+        int rM_total = 0;
+        int XC_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int M = (int)Numbers.MercifulNumbers[i];
+            int rM = (int)Numbers.MercifulNumbers[31 - 1 - i];
+            int XC = (int)Numbers.AdditiveComposites[i];
+            M_total += M;
+            rM_total += rM;
+            XC_total += XC;
+
+            string rM_XC = rM + ":" + XC;
+            if ((rM >= 0) && (rM < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[rM - 1];
+                if (chapter != null)
+                {
+                    if ((XC >= 0) && (XC < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[XC - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(M + "\t" + rM + "\t" + XC + "\t" + rM_XC + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(M + "\t" + rM + "\t" + XC + "\t" + rM_XC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(M + "\t" + rM + "\t" + XC + "\t" + rM_XC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(M + "\t" + rM + "\t" + XC + "\t" + rM_XC + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(M_total + "\t" + rM_total + "\t" + XC_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    public static string _______________________________________________(Client client, string param, bool in_search_result)
+    {
+        return null;
+    }
+    public static string N_M_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("N" + "\t" + "M" + "\t" + "N:M" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int N_total = 0;
+        int M_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int N = i + 1;
+            int M = (int)Numbers.MercifulNumbers[i];
+            N_total += N;
+            M_total += M;
+
+            string N_M = N + ":" + M;
+            if ((N >= 0) && (N < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[N - 1];
+                if (chapter != null)
+                {
+                    if ((M >= 0) && (M < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[M - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(N + "\t" + M + "\t" + N_M + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(N + "\t" + M + "\t" + N_M + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(N + "\t" + M + "\t" + N_M + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(N + "\t" + M + "\t" + N_M + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(N_total + "\t" + M_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
+    }
+    public static string N_rM_31Verses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        if (param == null) return null;
+        if (client.Book == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("N" + "\t" + "rM" + "\t" + "N:rM" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+
+        int N_total = 0;
+        int rM_total = 0;
+        int words_total = 0;
+        int letters_total = 0;
+        int unique_total = 0;
+        long value_total = 0L;
+        long positions_sum_total = 0L;
+        long distances_sum_total = 0L;
+        long all_positions_sum_total = 0L;
+        long all_distances_sum_total = 0L;
+
+        for (int i = 0; i < 31; i++)
+        {
+            int N = i + 1;
+            int rM = (int)Numbers.MercifulNumbers[31 - 1 - i];
+            N_total += N;
+            rM_total += rM;
+
+            string N_rM = N + ":" + rM;
+            if ((N >= 0) && (N < client.Book.Chapters.Count))
+            {
+                Chapter chapter = client.Book.Chapters[N - 1];
+                if (chapter != null)
+                {
+                    if ((rM >= 0) && (rM < chapter.Verses.Count))
+                    {
+                        Verse verse = chapter.Verses[rM - 1];
+                        if (verse != null)
+                        {
+                            int words = verse.Words.Count;
+                            int letters = verse.LetterCount;
+                            int unique = verse.UniqueLetters.Count;
+                            long value = client.CalculateValue(verse);
+                            long positions_sum = verse.Text.LetterPositionsSum();
+                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long all_positions_sum = 0;
+                            long all_distances_sum = 0;
+                            string verses_text = "";
+                            if (param == "0")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        all_positions_sum += v.Text.LetterPositionsSum();
+                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                            }
+                            else if (param == "1")
+                            {
+                                foreach (Verse v in client.Book.Verses)
+                                {
+                                    if (client.CalculateValue(v) == value)
+                                    {
+                                        verses_text += v.Text + "\t";
+                                    }
+                                }
+                                verses_text.Remove(verses_text.Length - 1, 1); // \t
+                                all_positions_sum = verses_text.LetterPositionsSum();
+                                all_distances_sum = verses_text.LetterDistancesSum();
+                            }
+
+                            words_total += words;
+                            letters_total += letters;
+                            unique_total += unique;
+                            value_total += value;
+                            positions_sum_total += positions_sum;
+                            distances_sum_total += distances_sum;
+                            all_positions_sum_total += all_positions_sum;
+                            all_distances_sum_total += all_distances_sum;
+
+                            str.Append(N + "\t" + rM + "\t" + N_rM + "\t" + words + "\t" + letters + "\t" + unique + "\t" + value + "\t" + positions_sum + "\t" + distances_sum + "\t" + all_positions_sum + "\t" + all_distances_sum + "\t" + verses_text + "\r\n");
+                        }
+                        else
+                        {
+                            str.Append(N + "\t" + rM + "\t" + N_rM + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                        }
+                    }
+                    else
+                    {
+                        str.Append(N + "\t" + rM + "\t" + N_rM + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+                    }
+                }
+            }
+            else
+            {
+                str.Append(N + "\t" + rM + "\t" + N_rM + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\t" + "" + "\r\n");
+            }
+        }
+        str.Append(N_total + "\t" + rM_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
+
+        return str.ToString();
     }
 
     public static string ___________________________________________(Client client, string param, bool in_search_result)

@@ -16958,6 +16958,12 @@ public partial class MainForm : Form, ISubscriber
                 ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Hz");
                 ResearchMethodParameterTextBox.Visible = true;
             }
+            else if (method_name.Contains("31"))
+            {
+                ResearchMethodParameterTextBox.Text = "0";
+                ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Positions and Distances\r\n0: Each verse separatly\r\n1: All verses as one long text.");
+                ResearchMethodParameterTextBox.Visible = true;
+            }
             else if (method_name == "nWords_kLetters")
             {
                 ResearchMethodParameterTextBox.Text = "7,29";

@@ -464,6 +464,114 @@ public static class StringExtensions
         return str.ToString();
     }
 
+    public static Dictionary<char, List<int>> LetterPositions(this string source)
+    {
+        Dictionary<char, List<int>> result = new Dictionary<char, List<int>>();
+
+        if (!String.IsNullOrEmpty(source))
+        {
+            int whitespaces = 0;
+            for (int i = 0; i < source.Length; i++)
+            {
+                if ((source[i] == '\0') || (source[i] == ' ') || (source[i] == '\t') || (source[i] == '\r') || (source[i] == '\n'))
+                {
+                    whitespaces++;
+                }
+                else
+                {
+                    char character = source[i];
+                    int position = i + 1 - whitespaces;
+                    if (result.ContainsKey(character)) // update existing entry
+                    {
+                        result[character].Add(position);
+                    }
+                    else // create new entry
+                    {
+                        result.Add(character, new List<int>() { position });
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+    public static long LetterPositionsSum(this string source)
+    {
+        long result = 0L;
+
+        if (!String.IsNullOrEmpty(source))
+        {
+            Dictionary<char, List<int>> positions = LetterPositions(source);
+            foreach (char key in positions.Keys)
+            {
+                foreach (int position in positions[key])
+                {
+                    result += position;
+                }
+            }
+        }
+
+        return result;
+    }
+    public static Dictionary<char, List<int>> LetterDistances(this string source)
+    {
+        Dictionary<char, List<int>> result = new Dictionary<char, List<int>>();
+
+        if (!String.IsNullOrEmpty(source))
+        {
+            Dictionary<char, int> last_position = new Dictionary<char, int>();
+
+            int whitespaces = 0;
+            for (int i = 0; i < source.Length; i++)
+            {
+                if ((source[i] == '\0') || (source[i] == ' ') || (source[i] == '\t') || (source[i] == '\r') || (source[i] == '\n'))
+                {
+                    whitespaces++;
+                }
+                else
+                {
+                    char character = source[i];
+                    int position = i + 1 - whitespaces;
+                    int distance = 0;
+                    if (result.ContainsKey(character)) // update existing entry
+                    {
+                        if (last_position.ContainsKey(character))
+                        {
+                            distance = position - last_position[character];
+                            result[character].Add(distance);
+                            last_position[character] = position;
+                        }
+                    }
+                    else // create new empty entry
+                    {
+                        last_position.Add(character, position);
+                        result.Add(character, new List<int>());
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+    public static long LetterDistancesSum(this string source)
+    {
+        long result = 0L;
+
+        if (!String.IsNullOrEmpty(source))
+        {
+            Dictionary<char, List<int>> distances = LetterDistances(source);
+            foreach (char key in distances.Keys)
+            {
+                foreach (int distance in distances[key])
+                {
+                    result += distance;
+                }
+            }
+        }
+
+        return result;
+    }
+
     public static bool Contains(this string source, string value, StringComparison string_comparison)
     {
         if (String.IsNullOrEmpty(source)) return false;

@@ -228,8 +228,7 @@ public static class Numbers
     public static int MAX_NUMBER = int.MaxValue / (
                                                     (Globals.EDITION == Edition.Lite) ? 1024 :
                                                     (Globals.EDITION == Edition.Standard) ? 256 :
-                                                    (Globals.EDITION == Edition.Research) ? 64 : 16
-        //(Globals.EDITION == Edition.Ultimate) ? 16
+                                                    (Globals.EDITION == Edition.Research) ? 64 : 16 // Edition.Ultimate
                                                   );
 
     // pi = circumference / diameter ~= 355/113
@@ -4510,6 +4509,37 @@ public static class Numbers
     {
         if (number < 0L) number *= -1L;
         return QuranNumbers.Contains(number);
+    }
+
+    private static List<long> s_merciful_numbers;
+    public static List<long> MercifulNumbers
+    {
+        get
+        {
+            if (s_merciful_numbers == null)
+            {
+                GenerateMercifulNumbers();
+            }
+            return s_merciful_numbers;
+        }
+    }
+    private static void GenerateMercifulNumbers()
+    {
+        s_merciful_numbers = new List<long>() 
+            {
+                13, 16, 18, 21, 23, 25, 28, 30, 32, 34, 36, 38, 40, 42, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77
+            };
+    }
+    /// <summary>
+    /// <para>Merciful Number is one of 31 verse numbers of the most repeated verse in the Quran</para>
+    /// <para>13, 16, 18, 21, 23, 25, 28, 30, 32, 34, 36, 38, 40, 42, 45, 47, 49, 51, 53, 55, 57, 59, 61, 63, 65, 67, 69, 71, 73, 75, 77</para>
+    /// </summary>
+    /// <param name="number"></param>
+    /// <returns>bool</returns>
+    public static bool IsMercifulNumber(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return MercifulNumbers.Contains(number);
     }
 
     private static List<long> s_mersenne_primes;
