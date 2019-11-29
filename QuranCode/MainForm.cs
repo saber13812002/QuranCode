@@ -16961,7 +16961,7 @@ public partial class MainForm : Form, ISubscriber
             else if (method_name.Contains("31"))
             {
                 ResearchMethodParameterTextBox.Text = "0";
-                ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Positions and Distances\r\n0: Each verse separatly\r\n1: All verses as one long text.");
+                ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Positions and Distances\r\n0: Each verse separately.\r\n1: All verses as one long text.");
                 ResearchMethodParameterTextBox.Visible = true;
             }
             else if (method_name == "nWords_kLetters")
@@ -51399,9 +51399,9 @@ public partial class MainForm : Form, ISubscriber
             {
                 switch (LetterFrequencyWithDiacriticsCheckBox.CheckState)
                 {
-                    case CheckState.Checked: m_count_diacritics = true; break;
-                    case CheckState.Indeterminate: m_count_diacritics = null; break;
-                    case CheckState.Unchecked: m_count_diacritics = false; break;
+                    case CheckState.Checked: { m_count_diacritics = true; m_with_diacritics = m_client.Book.WithDiacritics = true; } break;
+                    case CheckState.Indeterminate: { m_count_diacritics = null; m_with_diacritics = m_client.Book.WithDiacritics = true; } break;
+                    case CheckState.Unchecked: { m_count_diacritics = false; m_with_diacritics = m_client.Book.WithDiacritics = false; } break;
                 }
 
                 if (m_count_diacritics == true) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["with diacritics"]); }

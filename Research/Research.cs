@@ -5741,7 +5741,7 @@ public static class Research
     public static string N_P_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -5780,8 +5780,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -5791,8 +5791,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -5808,8 +5808,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -5846,7 +5846,7 @@ public static class Research
     private static string N_AP_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -5885,8 +5885,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -5896,8 +5896,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -5913,8 +5913,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -5951,7 +5951,7 @@ public static class Research
     private static string N_XP_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -5990,8 +5990,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -6001,8 +6001,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -6018,8 +6018,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -6056,7 +6056,7 @@ public static class Research
     public static string N_C_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -6095,8 +6095,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -6106,8 +6106,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -6123,8 +6123,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -6161,7 +6161,7 @@ public static class Research
     private static string N_AC_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -6200,8 +6200,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -6211,8 +6211,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -6228,8 +6228,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -6266,7 +6266,7 @@ public static class Research
     private static string N_XC_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -6305,8 +6305,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -6316,8 +6316,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -6333,8 +6333,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -6371,7 +6371,7 @@ public static class Research
     public static string rN_P_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -6413,8 +6413,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -6424,8 +6424,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -6441,8 +6441,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -6479,7 +6479,7 @@ public static class Research
     private static string rN_AP_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -6521,8 +6521,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -6532,8 +6532,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -6549,8 +6549,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -6587,7 +6587,7 @@ public static class Research
     private static string rN_XP_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -6629,8 +6629,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -6640,8 +6640,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -6657,8 +6657,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -6695,7 +6695,7 @@ public static class Research
     public static string rN_C_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -6737,8 +6737,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -6748,8 +6748,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -6765,8 +6765,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -6803,7 +6803,7 @@ public static class Research
     private static string rN_AC_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -6845,8 +6845,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -6856,8 +6856,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -6873,8 +6873,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -6911,7 +6911,7 @@ public static class Research
     private static string rN_XC_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -6953,8 +6953,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -6964,8 +6964,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -6981,8 +6981,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -7023,7 +7023,7 @@ public static class Research
     public static string M_P_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -7062,8 +7062,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -7073,8 +7073,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -7090,8 +7090,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -7128,7 +7128,7 @@ public static class Research
     private static string M_AP_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -7167,8 +7167,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -7178,8 +7178,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -7195,8 +7195,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -7233,7 +7233,7 @@ public static class Research
     private static string M_XP_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -7272,8 +7272,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -7283,8 +7283,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -7300,8 +7300,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -7338,7 +7338,7 @@ public static class Research
     public static string M_C_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -7377,8 +7377,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -7388,8 +7388,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -7405,8 +7405,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -7443,7 +7443,7 @@ public static class Research
     private static string M_AC_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -7482,8 +7482,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -7493,8 +7493,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -7510,8 +7510,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -7548,7 +7548,7 @@ public static class Research
     private static string M_XC_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -7587,8 +7587,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -7598,8 +7598,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -7615,8 +7615,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -7653,7 +7653,7 @@ public static class Research
     public static string rM_P_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -7695,8 +7695,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -7706,8 +7706,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -7723,8 +7723,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -7761,7 +7761,7 @@ public static class Research
     private static string rM_AP_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -7803,8 +7803,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -7814,8 +7814,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -7831,8 +7831,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -7869,7 +7869,7 @@ public static class Research
     private static string rM_XP_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -7911,8 +7911,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -7922,8 +7922,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -7939,8 +7939,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -7977,7 +7977,7 @@ public static class Research
     public static string rM_C_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -8019,8 +8019,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -8030,8 +8030,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -8047,8 +8047,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -8085,7 +8085,7 @@ public static class Research
     private static string rM_AC_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -8127,8 +8127,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -8138,8 +8138,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -8155,8 +8155,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -8193,7 +8193,7 @@ public static class Research
     private static string rM_XC_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -8235,8 +8235,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -8246,8 +8246,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -8263,8 +8263,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -8305,7 +8305,7 @@ public static class Research
     public static string N_M_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -8344,8 +8344,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -8355,8 +8355,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -8372,8 +8372,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
@@ -8410,7 +8410,7 @@ public static class Research
     public static string N_rM_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        if (param == null) return null;
+        if (String.IsNullOrEmpty(param)) return null;
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
@@ -8449,8 +8449,8 @@ public static class Research
                             int letters = verse.LetterCount;
                             int unique = verse.UniqueLetters.Count;
                             long value = client.CalculateValue(verse);
-                            long positions_sum = verse.Text.LetterPositionsSum();
-                            long distances_sum = verse.Text.LetterDistancesSum();
+                            long positions_sum = verse.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                            long distances_sum = verse.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             long all_positions_sum = 0;
                             long all_distances_sum = 0;
                             string verses_text = "";
@@ -8460,8 +8460,8 @@ public static class Research
                                 {
                                     if (client.CalculateValue(v) == value)
                                     {
-                                        all_positions_sum += v.Text.LetterPositionsSum();
-                                        all_distances_sum += v.Text.LetterDistancesSum();
+                                        all_positions_sum += v.Text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                        all_distances_sum += v.Text.LetterDistancesSum(false, client.Book.WithDiacritics);
                                         verses_text += v.Text + "\t";
                                     }
                                 }
@@ -8477,8 +8477,8 @@ public static class Research
                                     }
                                 }
                                 verses_text.Remove(verses_text.Length - 1, 1); // \t
-                                all_positions_sum = verses_text.LetterPositionsSum();
-                                all_distances_sum = verses_text.LetterDistancesSum();
+                                all_positions_sum = verses_text.LetterPositionsSum(false, client.Book.WithDiacritics);
+                                all_distances_sum = verses_text.LetterDistancesSum(false, client.Book.WithDiacritics);
                             }
 
                             words_total += words;
