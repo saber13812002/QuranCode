@@ -6838,7 +6838,8 @@ public class Server : IPublisher
         text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
         text = text.Trim();
 
-        string[] text_words = text.Split(text.Contains("|") ? '|' : ' ');
+        //????????????????????????? + or _ o space
+        string[] text_words = text.Split(text.Contains("+") ? '+' : ' ');
         foreach (string text_word in text_words)
         {
             if (text_word.StartsWith("-"))

@@ -54,8 +54,11 @@ public static class FileHelper
 
     public static void AppendLine(string path, string line)
     {
+        if (String.IsNullOrEmpty(path)) return;
+
         try
         {
+            path = path.Replace("|", "+"); // remove illegal char | in filename
             using (StreamWriter writer = new StreamWriter(path, true, Encoding.Unicode))
             {
                 writer.WriteLine(line);
@@ -68,8 +71,11 @@ public static class FileHelper
     }
     public static void SaveText(string path, string text)
     {
+        if (String.IsNullOrEmpty(path)) return;
+
         try
         {
+            path = path.Replace("|", "+"); // remove illegal char | in filename
             using (StreamWriter writer = new StreamWriter(path, false, Encoding.Unicode))
             {
                 writer.WriteLine(text);
@@ -83,8 +89,11 @@ public static class FileHelper
     }
     public static void SaveLetters(string path, char[] characters)
     {
+        if (String.IsNullOrEmpty(path)) return;
+
         try
         {
+            path = path.Replace("|", "+"); // remove illegal char | in filename
             using (StreamWriter writer = new StreamWriter(path, false, Encoding.Unicode))
             {
                 foreach (char character in characters)
@@ -104,8 +113,11 @@ public static class FileHelper
     }
     public static void SaveWords(string path, List<string> words)
     {
+        if (String.IsNullOrEmpty(path)) return;
+
         try
         {
+            path = path.Replace("|", "+"); // remove illegal char | in filename
             using (StreamWriter writer = new StreamWriter(path, false, Encoding.Unicode))
             {
                 foreach (string word in words)
@@ -125,8 +137,11 @@ public static class FileHelper
     }
     public static void SaveValues(string path, List<long> values)
     {
+        if (String.IsNullOrEmpty(path)) return;
+
         try
         {
+            path = path.Replace("|", "+"); // remove illegal char | in filename
             using (StreamWriter writer = new StreamWriter(path, false, Encoding.Unicode))
             {
                 foreach (long value in values)
@@ -143,9 +158,12 @@ public static class FileHelper
 
     public static List<string> LoadLines(string path)
     {
+        if (String.IsNullOrEmpty(path)) return null;
+
         List<string> result = new List<string>();
         try
         {
+            path = path.Replace("|", "+"); // remove illegal char | in filename
             if (File.Exists(path))
             {
                 FileHelper.WaitForReady(path);
@@ -168,9 +186,12 @@ public static class FileHelper
     }
     public static string LoadText(string path)
     {
+        if (String.IsNullOrEmpty(path)) return null;
+
         StringBuilder str = new StringBuilder();
         try
         {
+            path = path.Replace("|", "+"); // remove illegal char | in filename
             if (File.Exists(path))
             {
                 FileHelper.WaitForReady(path);
@@ -194,6 +215,9 @@ public static class FileHelper
 
     public static void DisplayFile(string path)
     {
+        if (String.IsNullOrEmpty(path)) return;
+
+        path = path.Replace("|", "+"); // remove illegal char | in filename
         if (File.Exists(path))
         {
             FileHelper.WaitForReady(path);
