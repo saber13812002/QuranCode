@@ -16319,13 +16319,12 @@ public partial class MainForm : Form, ISubscriber
                 m_current_word = GetWordAtCursor();
                 if (m_current_word != null)
                 {
-                    text = m_current_word.Text;
+                    DoFindRelatedWords(m_current_word);
                 }
             }
-            DoFindRelatedWords(text);
         }
     }
-    private void DoFindRelatedWords(string text)
+    private void DoFindRelatedWords(Word word)
     {
         if (m_emlaaei_text) return;
 
@@ -16334,7 +16333,7 @@ public partial class MainForm : Form, ISubscriber
         {
             if (m_client != null)
             {
-                FindByRoot(text);
+                FindByRoot(word);
             }
         }
         catch (Exception ex)
@@ -26652,7 +26651,7 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (word != null)
                 {
-                    FindByRoot(word.Text);
+                    FindByRoot(word);
                 }
             }
         }
@@ -35900,7 +35899,18 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
-    private void FindByRoot(string text)
+    private void FindByRoot(Word word)
+    {
+        if (word != null)
+        {
+            string root = word.BestRoot;
+            if (!String.IsNullOrEmpty(root))
+            {
+                FindByRoot(root);
+            }
+        }
+    }
+    private void FindByRoot(string root)
     {
         if (m_emlaaei_text) return;
 
@@ -35910,15 +35920,15 @@ public partial class MainForm : Form, ISubscriber
         {
             ClearFindMatches();
 
-            if (!String.IsNullOrEmpty(text))
+            if (!String.IsNullOrEmpty(root))
             {
-                text = text.Trim();
+                root = root.Trim();
 
                 FindByTextTextBox.TextChanged -= FindByTextTextBox_TextChanged;
-                FindByTextTextBox.Text = text;
+                FindByTextTextBox.Text = root;
                 FindByTextTextBox.TextChanged += FindByTextTextBox_TextChanged;
 
-                m_client.FindPhrases(m_text_search_block_size, text, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
+                m_client.FindPhrases(m_text_search_block_size, root, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
                 if (m_client.FoundPhrases != null)
                 {
                     string multiplicity_text = "";
@@ -35952,12 +35962,12 @@ public partial class MainForm : Form, ISubscriber
                     string block_name = ((m_multiplicity_comparison_operator == ComparisonOperator.Equal) && (m_text_search_block_size != TextSearchBlockSize.Verse)) ? m_text_search_block_size.ToString() : "verse";
                     if (m_multiplicity == 0)
                     {
-                        m_find_result_header = m_client.FoundVerses.Count + " " + ((m_client.FoundVerses.Count == 1) ? L[l][block_name] : (L[l][block_name + "s"])) + " " + L[l]["without"] + " " + multiplicity_text + " root " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                        m_find_result_header = m_client.FoundVerses.Count + " " + ((m_client.FoundVerses.Count == 1) ? L[l][block_name] : (L[l][block_name + "s"])) + " " + L[l]["without"] + " " + multiplicity_text + " root " + root + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
                     }
                     else
                     {
                         int block_count = ((m_multiplicity_comparison_operator == ComparisonOperator.Equal) && (m_text_search_block_size != TextSearchBlockSize.Verse)) ? phrase_count / Math.Abs(m_multiplicity) : m_client.FoundVerses.Count;
-                        m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + block_count + " " + ((block_count == 1) ? L[l][block_name] : (L[l][block_name + "s"])) + " " + L[l]["with"] + " " + multiplicity_text + " " + L[l]["root"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                        m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + block_count + " " + ((block_count == 1) ? L[l][block_name] : (L[l][block_name + "s"])) + " " + L[l]["with"] + " " + multiplicity_text + " " + L[l]["root"] + " " + root + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
                     }
                     DisplayFoundVerses(true);
 
@@ -37021,7 +37031,7 @@ public partial class MainForm : Form, ISubscriber
             FindByNumbersVersesNumericUpDown.Value = 0;
             FindByNumbersWordsNumericUpDown.Value = 0;
             FindByNumbersLettersNumericUpDown.Value = 1;
-            FindByNumbersUniqueLettersNumericUpDown.Value = 0;
+            //FindByNumbersUniqueLettersNumericUpDown.Value = 0;
             //FindByNumbersValueNumericUpDown.Value = 0;
             //FindByNumbersValueDigitSumNumericUpDown.Value = 0;
             //FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
@@ -37085,8 +37095,8 @@ public partial class MainForm : Form, ISubscriber
             FindByNumbersPartitionsNumericUpDown.Value = 0;
             FindByNumbersVersesNumericUpDown.Value = 0;
             FindByNumbersWordsNumericUpDown.Value = 1;
-            FindByNumbersLettersNumericUpDown.Value = 0;
-            FindByNumbersUniqueLettersNumericUpDown.Value = 0;
+            //FindByNumbersLettersNumericUpDown.Value = 0;
+            //FindByNumbersUniqueLettersNumericUpDown.Value = 0;
             //FindByNumbersValueNumericUpDown.Value = 0;
             //FindByNumbersValueDigitSumNumericUpDown.Value = 0;
             //FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
@@ -37150,8 +37160,8 @@ public partial class MainForm : Form, ISubscriber
             FindByNumbersPartitionsNumericUpDown.Value = 0;
             FindByNumbersVersesNumericUpDown.Value = 0;
             FindByNumbersWordsNumericUpDown.Value = 0; // 0 not 1 for any number of words in sentence
-            FindByNumbersLettersNumericUpDown.Value = 0;
-            FindByNumbersUniqueLettersNumericUpDown.Value = 0;
+            //FindByNumbersLettersNumericUpDown.Value = 0;
+            //FindByNumbersUniqueLettersNumericUpDown.Value = 0;
             //FindByNumbersValueNumericUpDown.Value = 0;
             //FindByNumbersValueDigitSumNumericUpDown.Value = 0;
             //FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
@@ -37213,10 +37223,10 @@ public partial class MainForm : Form, ISubscriber
 
             FindByNumbersNumberNumericUpDown.Value = 0;
             FindByNumbersPartitionsNumericUpDown.Value = 0;
-            FindByNumbersVersesNumericUpDown.Value = 1;
-            FindByNumbersWordsNumericUpDown.Value = 0;
-            FindByNumbersLettersNumericUpDown.Value = 0;
-            FindByNumbersUniqueLettersNumericUpDown.Value = 0;
+            //FindByNumbersVersesNumericUpDown.Value = 1;
+            //FindByNumbersWordsNumericUpDown.Value = 0;
+            //FindByNumbersLettersNumericUpDown.Value = 0;
+            //FindByNumbersUniqueLettersNumericUpDown.Value = 0;
             //FindByNumbersValueNumericUpDown.Value = 0;
             //FindByNumbersValueDigitSumNumericUpDown.Value = 0;
             //FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
@@ -37317,10 +37327,10 @@ public partial class MainForm : Form, ISubscriber
 
             FindByNumbersNumberNumericUpDown.Value = 0;
             FindByNumbersPartitionsNumericUpDown.Value = 1;
-            FindByNumbersVersesNumericUpDown.Value = 0;
-            FindByNumbersWordsNumericUpDown.Value = 0;
-            FindByNumbersLettersNumericUpDown.Value = 0;
-            FindByNumbersUniqueLettersNumericUpDown.Value = 0;
+            //FindByNumbersVersesNumericUpDown.Value = 0;
+            //FindByNumbersWordsNumericUpDown.Value = 0;
+            //FindByNumbersLettersNumericUpDown.Value = 0;
+            //FindByNumbersUniqueLettersNumericUpDown.Value = 0;
             //FindByNumbersValueNumericUpDown.Value = 0;
             //FindByNumbersValueDigitSumNumericUpDown.Value = 0;
             //FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
@@ -37477,53 +37487,53 @@ public partial class MainForm : Form, ISubscriber
         //    FindByNumbersValueDigitalRootNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
         //}
     }
-    private void ResetFindByNumbersControls()
-    {
-        FindByNumbersNumberComparisonOperatorLabel.Text = "=";
-        FindByNumbersNumberNumericUpDown.Value = 0;
-        FindByNumbersNumberNumberTypeLabel.Text = null;
+    //private void ResetFindByNumbersControls()
+    //{
+    //    FindByNumbersNumberComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersNumberNumericUpDown.Value = 0;
+    //    FindByNumbersNumberNumberTypeLabel.Text = null;
 
-        FindByNumbersPartitionsComparisonOperatorLabel.Text = "=";
-        FindByNumbersPartitionsNumericUpDown.Value = 0;
-        FindByNumbersPartitionsNumberTypeLabel.Text = null;
+    //    FindByNumbersPartitionsComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersPartitionsNumericUpDown.Value = 0;
+    //    FindByNumbersPartitionsNumberTypeLabel.Text = null;
 
-        FindByNumbersVersesComparisonOperatorLabel.Text = "=";
-        FindByNumbersVersesNumericUpDown.Value = 0;
-        FindByNumbersVersesNumberTypeLabel.Text = null;
+    //    FindByNumbersVersesComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersVersesNumericUpDown.Value = 0;
+    //    FindByNumbersVersesNumberTypeLabel.Text = null;
 
-        FindByNumbersWordsComparisonOperatorLabel.Text = "=";
-        FindByNumbersWordsNumericUpDown.Value = 0;
-        FindByNumbersWordsNumberTypeLabel.Text = null;
+    //    FindByNumbersWordsComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersWordsNumericUpDown.Value = 0;
+    //    FindByNumbersWordsNumberTypeLabel.Text = null;
 
-        FindByNumbersLettersComparisonOperatorLabel.Text = "=";
-        FindByNumbersLettersNumericUpDown.Value = 0;
-        FindByNumbersLettersNumberTypeLabel.Text = null;
+    //    FindByNumbersLettersComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersLettersNumericUpDown.Value = 0;
+    //    FindByNumbersLettersNumberTypeLabel.Text = null;
 
-        FindByNumbersUniqueLettersComparisonOperatorLabel.Text = "=";
-        FindByNumbersUniqueLettersNumericUpDown.Value = 0;
-        FindByNumbersUniqueLettersNumberTypeLabel.Text = null;
+    //    FindByNumbersUniqueLettersComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersUniqueLettersNumericUpDown.Value = 0;
+    //    FindByNumbersUniqueLettersNumberTypeLabel.Text = null;
 
-        FindByNumbersValueComparisonOperatorLabel.Text = "=";
-        FindByNumbersValueNumericUpDown.Value = 0;
-        FindByNumbersValueNumberTypeLabel.Text = null;
+    //    FindByNumbersValueComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersValueNumericUpDown.Value = 0;
+    //    FindByNumbersValueNumberTypeLabel.Text = null;
 
-        FindByNumbersValueDigitSumComparisonOperatorLabel.Text = "=";
-        FindByNumbersValueDigitSumNumericUpDown.Value = 0;
-        FindByNumbersValueDigitSumNumberTypeLabel.Text = null;
+    //    FindByNumbersValueDigitSumComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersValueDigitSumNumericUpDown.Value = 0;
+    //    FindByNumbersValueDigitSumNumberTypeLabel.Text = null;
 
-        FindByNumbersValueDigitalRootComparisonOperatorLabel.Text = "=";
-        FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
-        FindByNumbersValueDigitalRootNumberTypeLabel.Text = null;
-    }
-    private void ResetFindByNumbersNumberTypeControl(Control control)
-    {
-        if (control != null)
-        {
-            control.Text = null;
-            control.ForeColor = Color.Black;
-            ToolTip.SetToolTip(control, null);
-        }
-    }
+    //    FindByNumbersValueDigitalRootComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
+    //    FindByNumbersValueDigitalRootNumberTypeLabel.Text = null;
+    //}
+    //private void ResetFindByNumbersNumberTypeControl(Control control)
+    //{
+    //    if (control != null)
+    //    {
+    //        control.Text = null;
+    //        control.ForeColor = Color.Black;
+    //        ToolTip.SetToolTip(control, null);
+    //    }
+    //}
     private void ResetFindByNumbersResultTypeLabels()
     {
         FindByNumbersResultTypeLettersLabel.Text = "L";
@@ -37574,18 +37584,18 @@ public partial class MainForm : Form, ISubscriber
         FindByNumbersResultTypeBowingsLabel.BackColor = Color.DarkGray;
         FindByNumbersResultTypeBowingsLabel.BorderStyle = BorderStyle.None;
     }
-    private void ResetFindByNumbersComparisonOperatorLabels()
-    {
-        FindByNumbersNumberComparisonOperatorLabel.Text = "=";
-        FindByNumbersPartitionsComparisonOperatorLabel.Text = "=";
-        FindByNumbersVersesComparisonOperatorLabel.Text = "=";
-        FindByNumbersWordsComparisonOperatorLabel.Text = "=";
-        FindByNumbersLettersComparisonOperatorLabel.Text = "=";
-        FindByNumbersUniqueLettersComparisonOperatorLabel.Text = "=";
-        FindByNumbersValueComparisonOperatorLabel.Text = "=";
-        FindByNumbersValueDigitSumComparisonOperatorLabel.Text = "=";
-        FindByNumbersValueDigitalRootComparisonOperatorLabel.Text = "=";
-    }
+    //private void ResetFindByNumbersComparisonOperatorLabels()
+    //{
+    //    FindByNumbersNumberComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersPartitionsComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersVersesComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersWordsComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersLettersComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersUniqueLettersComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersValueComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersValueDigitSumComparisonOperatorLabel.Text = "=";
+    //    FindByNumbersValueDigitalRootComparisonOperatorLabel.Text = "=";
+    //}
     private void UpdateFindByNumbersResultType()
     {
         // toggle between normal and range types
@@ -37599,7 +37609,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         m_numbers_result_type = NumbersResultType.Words;
                     }
-                    else if ((FindByNumbersWordsNumericUpDown.Value > 1) || (FindByNumbersWordsNumberTypeLabel.Text.Length > 0))
+                    else
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37625,7 +37635,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         m_numbers_result_type = NumbersResultType.Verses;
                     }
-                    else if ((FindByNumbersVersesNumericUpDown.Value > 1) || (FindByNumbersVersesNumberTypeLabel.Text.Length > 0))
+                    else
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37647,7 +37657,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         m_numbers_result_type = NumbersResultType.Chapters;
                     }
-                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
+                    else
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37669,7 +37679,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         m_numbers_result_type = NumbersResultType.Pages;
                     }
-                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
+                    else
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37691,7 +37701,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         m_numbers_result_type = NumbersResultType.Stations;
                     }
-                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
+                    else
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37713,7 +37723,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         m_numbers_result_type = NumbersResultType.Parts;
                     }
-                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
+                    else
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37735,7 +37745,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         m_numbers_result_type = NumbersResultType.Groups;
                     }
-                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
+                    else
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37757,7 +37767,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         m_numbers_result_type = NumbersResultType.Halfs;
                     }
-                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
+                    else
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37779,7 +37789,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         m_numbers_result_type = NumbersResultType.Quarters;
                     }
-                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
+                    else
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -37801,7 +37811,7 @@ public partial class MainForm : Form, ISubscriber
                     {
                         m_numbers_result_type = NumbersResultType.Bowings;
                     }
-                    else if ((FindByNumbersPartitionsNumericUpDown.Value > 1) || (FindByNumbersPartitionsNumberTypeLabel.Text.Length > 0))
+                    else
                     {
                         if (!m_find_by_numbers_sets)
                         {
@@ -39141,19 +39151,49 @@ public partial class MainForm : Form, ISubscriber
 
         UpdateNumberTypeLabelTags();
 
-        // some operations take too long and may frustrate user
-        if (
-            (sender is NumericUpDown) &&
-            (m_numbers_result_type != NumbersResultType.Letters) &&
-            (m_numbers_result_type != NumbersResultType.WordRanges) &&
-            (m_numbers_result_type != NumbersResultType.WordSets) &&
-            (m_numbers_result_type != NumbersResultType.VerseRanges) &&
-            (m_numbers_result_type != NumbersResultType.VerseSets) &&
-            (m_numbers_result_type != NumbersResultType.ChapterRanges) &&
-            (m_numbers_result_type != NumbersResultType.ChapterSets)
-           )
+        // don't autorun unbounded range/set operations
+        if ((sender as NumericUpDown).Value != 0)
         {
-            FindByNumbers();
+            if
+              (
+                // finding letters and range/set operations are too slow so don't autorun
+                (
+                    (m_numbers_result_type != NumbersResultType.Letters) &&
+                    (m_numbers_result_type != NumbersResultType.WordRanges) &&
+                    (m_numbers_result_type != NumbersResultType.WordSets) &&
+                    (m_numbers_result_type != NumbersResultType.VerseRanges) &&
+                    (m_numbers_result_type != NumbersResultType.VerseSets) &&
+                    (m_numbers_result_type != NumbersResultType.ChapterRanges) &&
+                    (m_numbers_result_type != NumbersResultType.ChapterSets) &&
+                    (m_numbers_result_type != NumbersResultType.PageRanges) &&
+                    (m_numbers_result_type != NumbersResultType.PageSets) &&
+                    (m_numbers_result_type != NumbersResultType.StationRanges) &&
+                    (m_numbers_result_type != NumbersResultType.StationSets) &&
+                    (m_numbers_result_type != NumbersResultType.PartRanges) &&
+                    (m_numbers_result_type != NumbersResultType.PartSets) &&
+                    (m_numbers_result_type != NumbersResultType.GroupRanges) &&
+                    (m_numbers_result_type != NumbersResultType.GroupSets) &&
+                    (m_numbers_result_type != NumbersResultType.HalfRanges) &&
+                    (m_numbers_result_type != NumbersResultType.HalfSets) &&
+                    (m_numbers_result_type != NumbersResultType.QuarterRanges) &&
+                    (m_numbers_result_type != NumbersResultType.QuarterSets) &&
+                    (m_numbers_result_type != NumbersResultType.BowingRanges) &&
+                    (m_numbers_result_type != NumbersResultType.BowingSets)
+                )
+                || // allow autorun for most frequently used operations
+                (
+                    (sender == FindByNumbersVersesNumericUpDown) ||
+                    (sender == FindByNumbersWordsNumericUpDown) ||
+                    (sender == FindByNumbersLettersNumericUpDown) ||
+                    (sender == FindByNumbersUniqueLettersNumericUpDown) ||
+                    (sender == FindByNumbersValueNumericUpDown) ||
+                    (sender == FindByNumbersValueDigitSumNumericUpDown) ||
+                    (sender == FindByNumbersValueDigitalRootNumericUpDown)
+                )
+              )
+            {
+                FindByNumbers();
+            }
         }
     }
     private void UpdateNumberTypeLabelTags()
@@ -41309,7 +41349,7 @@ public partial class MainForm : Form, ISubscriber
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
 
-                    //ColorizeVerseRanges(); // too slow
+                    ColorizeVerseRanges(); // too slow
 
                     m_current_found_verse_index = 0;
                     DisplayCurrentPositions();
@@ -41421,7 +41461,7 @@ public partial class MainForm : Form, ISubscriber
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
 
-                    //ColorizeVerseSets(); // too slow
+                    ColorizeVerseSets(); // too slow
 
                     m_current_found_verse_index = 0;
                     DisplayCurrentPositions();
@@ -42584,161 +42624,161 @@ public partial class MainForm : Form, ISubscriber
         SearchResultTextBox.Select(0, 0);
         SearchResultTextBox.SelectionColor = Color.Navy;
     }
-    //private void ColorizeVerseSets()
-    //{
-    //    if (m_client != null)
-    //    {
-    //        if (m_client.FoundVerseSets != null)
-    //        {
-    //            if (m_client.FoundVerseSets.Count > 0)
-    //            {
-    //                bool colorize = true; // colorize sets alternatively
+    private void ColorizeVerseSets()
+    {
+        if (m_client != null)
+        {
+            if (m_client.FoundVerseSets != null)
+            {
+                if (m_client.FoundVerseSets.Count > 0)
+                {
+                    bool colorize = true; // colorize sets alternatively
 
-    //                int line_index = 0;
-    //                foreach (List<Verse> set in m_client.FoundVerseSets)
-    //                {
-    //                    colorize = !colorize; // alternate colorization of sets
+                    int line_index = 0;
+                    foreach (List<Verse> set in m_client.FoundVerseSets)
+                    {
+                        colorize = !colorize; // alternate colorization of sets
 
-    //                    int start = SearchResultTextBox.GetLinePosition(line_index);
-    //                    int length = 0;
-    //                    foreach (Verse verse in set)
-    //                    {
-    //                        length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
-    //                        line_index++;
-    //                    }
-    //                    SearchResultTextBox.Select(start, length);
-    //                    SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
-    //                }
-    //            }
-    //        }
-    //    }
+                        int start = SearchResultTextBox.GetLinePosition(line_index);
+                        int length = 0;
+                        foreach (Verse verse in set)
+                        {
+                            length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
+                            line_index++;
+                        }
+                        SearchResultTextBox.Select(start, length);
+                        SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
+                    }
+                }
+            }
+        }
 
-    //    //FIX to reset SelectionColor
-    //    SearchResultTextBox.Select(0, 1);
-    //    SearchResultTextBox.SelectionColor = Color.Navy;
-    //    SearchResultTextBox.Select(0, 0);
-    //    SearchResultTextBox.SelectionColor = Color.Navy;
-    //}
-    //private void ColorizeChapters()
-    //{
-    //    if (m_client != null)
-    //    {
-    //        if (m_client.FoundChapters != null)
-    //        {
-    //            if (m_client.FoundChapters.Count > 0)
-    //            {
-    //                bool colorize = true; // colorize chapters alternatively
+        //FIX to reset SelectionColor
+        SearchResultTextBox.Select(0, 1);
+        SearchResultTextBox.SelectionColor = Color.Navy;
+        SearchResultTextBox.Select(0, 0);
+        SearchResultTextBox.SelectionColor = Color.Navy;
+    }
+    private void ColorizeChapters()
+    {
+        if (m_client != null)
+        {
+            if (m_client.FoundChapters != null)
+            {
+                if (m_client.FoundChapters.Count > 0)
+                {
+                    bool colorize = true; // colorize chapters alternatively
 
-    //                int line_index = 0;
-    //                foreach (Chapter chapter in m_client.FoundChapters)
-    //                {
-    //                    if (chapter != null)
-    //                    {
-    //                        colorize = !colorize; // alternate colorization of chapters
+                    int line_index = 0;
+                    foreach (Chapter chapter in m_client.FoundChapters)
+                    {
+                        if (chapter != null)
+                        {
+                            colorize = !colorize; // alternate colorization of chapters
 
-    //                        int start = SearchResultTextBox.GetLinePosition(line_index);
-    //                        int length = 0;
-    //                        foreach (Verse verse in chapter.Verses)
-    //                        {
-    //                            length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
-    //                            line_index++;
-    //                        }
-    //                        SearchResultTextBox.Select(start, length);
-    //                        SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
+                            int start = SearchResultTextBox.GetLinePosition(line_index);
+                            int length = 0;
+                            foreach (Verse verse in chapter.Verses)
+                            {
+                                length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
+                                line_index++;
+                            }
+                            SearchResultTextBox.Select(start, length);
+                            SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
+                        }
+                    }
+                }
+            }
+        }
 
-    //    //FIX to reset SelectionColor
-    //    SearchResultTextBox.Select(0, 1);
-    //    SearchResultTextBox.SelectionColor = Color.Navy;
-    //    SearchResultTextBox.Select(0, 0);
-    //    SearchResultTextBox.SelectionColor = Color.Navy;
-    //}
-    //private void ColorizeChapterRanges()
-    //{
-    //    if (m_client != null)
-    //    {
-    //        if (m_client.FoundChapterRanges != null)
-    //        {
-    //            if (m_client.FoundChapterRanges.Count > 0)
-    //            {
-    //                bool colorize = true; // colorize ranges alternatively
+        //FIX to reset SelectionColor
+        SearchResultTextBox.Select(0, 1);
+        SearchResultTextBox.SelectionColor = Color.Navy;
+        SearchResultTextBox.Select(0, 0);
+        SearchResultTextBox.SelectionColor = Color.Navy;
+    }
+    private void ColorizeChapterRanges()
+    {
+        if (m_client != null)
+        {
+            if (m_client.FoundChapterRanges != null)
+            {
+                if (m_client.FoundChapterRanges.Count > 0)
+                {
+                    bool colorize = true; // colorize ranges alternatively
 
-    //                int line_index = 0;
-    //                foreach (List<Chapter> range in m_client.FoundChapterRanges)
-    //                {
-    //                    if (range != null)
-    //                    {
-    //                        colorize = !colorize; // alternate colorization of ranges
+                    int line_index = 0;
+                    foreach (List<Chapter> range in m_client.FoundChapterRanges)
+                    {
+                        if (range != null)
+                        {
+                            colorize = !colorize; // alternate colorization of ranges
 
-    //                        int start = SearchResultTextBox.GetLinePosition(line_index);
-    //                        int length = 0;
-    //                        foreach (Chapter chapter in range)
-    //                        {
-    //                            foreach (Verse verse in chapter.Verses)
-    //                            {
-    //                                length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
-    //                                line_index++;
-    //                            }
-    //                        }
-    //                        SearchResultTextBox.Select(start, length);
-    //                        SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
+                            int start = SearchResultTextBox.GetLinePosition(line_index);
+                            int length = 0;
+                            foreach (Chapter chapter in range)
+                            {
+                                foreach (Verse verse in chapter.Verses)
+                                {
+                                    length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
+                                    line_index++;
+                                }
+                            }
+                            SearchResultTextBox.Select(start, length);
+                            SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
+                        }
+                    }
+                }
+            }
+        }
 
-    //    //FIX to reset SelectionColor
-    //    SearchResultTextBox.Select(0, 1);
-    //    SearchResultTextBox.SelectionColor = Color.Navy;
-    //    SearchResultTextBox.Select(0, 0);
-    //    SearchResultTextBox.SelectionColor = Color.Navy;
-    //}
-    //private void ColorizeChapterSets()
-    //{
-    //    if (m_client != null)
-    //    {
-    //        if (m_client.FoundChapterSets != null)
-    //        {
-    //            if (m_client.FoundChapterSets.Count > 0)
-    //            {
-    //                bool colorize = true; // colorize sets alternatively
+        //FIX to reset SelectionColor
+        SearchResultTextBox.Select(0, 1);
+        SearchResultTextBox.SelectionColor = Color.Navy;
+        SearchResultTextBox.Select(0, 0);
+        SearchResultTextBox.SelectionColor = Color.Navy;
+    }
+    private void ColorizeChapterSets()
+    {
+        if (m_client != null)
+        {
+            if (m_client.FoundChapterSets != null)
+            {
+                if (m_client.FoundChapterSets.Count > 0)
+                {
+                    bool colorize = true; // colorize sets alternatively
 
-    //                int line_index = 0;
-    //                foreach (List<Chapter> set in m_client.FoundChapterSets)
-    //                {
-    //                    if (set != null)
-    //                    {
-    //                        colorize = !colorize; // alternate colorization of sets
+                    int line_index = 0;
+                    foreach (List<Chapter> set in m_client.FoundChapterSets)
+                    {
+                        if (set != null)
+                        {
+                            colorize = !colorize; // alternate colorization of sets
 
-    //                        int start = SearchResultTextBox.GetLinePosition(line_index);
-    //                        int length = 0;
-    //                        foreach (Chapter chapter in set)
-    //                        {
-    //                            foreach (Verse verse in chapter.Verses)
-    //                            {
-    //                                length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
-    //                                line_index++;
-    //                            }
-    //                        }
-    //                        SearchResultTextBox.Select(start, length);
-    //                        SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
-    //                    }
-    //                }
-    //            }
-    //        }
-    //    }
+                            int start = SearchResultTextBox.GetLinePosition(line_index);
+                            int length = 0;
+                            foreach (Chapter chapter in set)
+                            {
+                                foreach (Verse verse in chapter.Verses)
+                                {
+                                    length += SearchResultTextBox.Lines[line_index].Length + 1; // "\n"
+                                    line_index++;
+                                }
+                            }
+                            SearchResultTextBox.Select(start, length);
+                            SearchResultTextBox.SelectionColor = colorize ? Color.Blue : Color.Navy;
+                        }
+                    }
+                }
+            }
+        }
 
-    //    //FIX to reset SelectionColor
-    //    SearchResultTextBox.Select(0, 1);
-    //    SearchResultTextBox.SelectionColor = Color.Navy;
-    //    SearchResultTextBox.Select(0, 0);
-    //    SearchResultTextBox.SelectionColor = Color.Navy;
-    //}
+        //FIX to reset SelectionColor
+        SearchResultTextBox.Select(0, 1);
+        SearchResultTextBox.SelectionColor = Color.Navy;
+        SearchResultTextBox.Select(0, 0);
+        SearchResultTextBox.SelectionColor = Color.Navy;
+    }
 
     private void InspectVersesLabel_Click(object sender, EventArgs e)
     {

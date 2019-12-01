@@ -3612,7 +3612,7 @@ public static class Research
                             string word_address = word.Address;
                             string word_text = word.Text;
                             string word_lemma = word.Lemma;
-                            string root = client.Book.GetBestRoot(word_text);
+                            string root = word.BestRoot;
                             if (root != null)
                             {
                                 if (root.Length == 3)

@@ -480,13 +480,13 @@ public static class StringExtensions
         }
         return null;
     }
-    public static Dictionary<char, List<int>> LetterPositions(this string source, bool case_sensitive, bool with_diacritics)
+    public static Dictionary<char, List<int>> LetterPositions(this string source, bool case_sensitive, bool ignore_diacritics)
     {
         Dictionary<char, List<int>> result = new Dictionary<char, List<int>>();
         if (!String.IsNullOrEmpty(source))
         {
             if (!case_sensitive) source = source.ToUpper();
-            if (!with_diacritics) source = source.Simplify29();
+            if (ignore_diacritics && source.IsArabicWithDiacritics()) source = source.Simplify29(); // ignore_diacritics in Original text_mode
 
             int whitespaces = 0;
             for (int i = 0; i < source.Length; i++)
@@ -528,12 +528,12 @@ public static class StringExtensions
         }
         return 0L;
     }
-    public static long LetterPositionsSum(this string source, bool case_sensitive, bool with_diacritics)
+    public static long LetterPositionsSum(this string source, bool case_sensitive, bool ignore_diacritics)
     {
         long result = 0L;
         if (!String.IsNullOrEmpty(source))
         {
-            Dictionary<char, List<int>> positions = LetterPositions(source, case_sensitive, with_diacritics);
+            Dictionary<char, List<int>> positions = LetterPositions(source, case_sensitive, ignore_diacritics);
             if (positions != null)
             {
                 foreach (char key in positions.Keys)
@@ -563,7 +563,7 @@ public static class StringExtensions
         }
         return null;
     }
-    public static Dictionary<char, List<int>> LetterDistances(this string source, bool case_sensitive, bool with_diacritics)
+    public static Dictionary<char, List<int>> LetterDistances(this string source, bool case_sensitive, bool ignore_diacritics)
     {
         Dictionary<char, List<int>> result = new Dictionary<char, List<int>>();
         if (!String.IsNullOrEmpty(source))
@@ -571,7 +571,7 @@ public static class StringExtensions
             Dictionary<char, int> last_position = new Dictionary<char, int>();
 
             if (!case_sensitive) source = source.ToUpper();
-            if (!with_diacritics) source = source.Simplify29();
+            if (ignore_diacritics && source.IsArabicWithDiacritics()) source = source.Simplify29(); // ignore_diacritics in Original text_mode
 
             int whitespaces = 0;
             for (int i = 0; i < source.Length; i++)
@@ -620,12 +620,12 @@ public static class StringExtensions
         }
         return 0L;
     }
-    public static long LetterDistancesSum(this string source, bool case_sensitive, bool with_diacritics)
+    public static long LetterDistancesSum(this string source, bool case_sensitive, bool ignore_diacritics)
     {
         long result = 0L;
         if (!String.IsNullOrEmpty(source))
         {
-            Dictionary<char, List<int>> distances = LetterDistances(source, case_sensitive, with_diacritics);
+            Dictionary<char, List<int>> distances = LetterDistances(source, case_sensitive, ignore_diacritics);
             if (distances != null)
             {
                 foreach (char key in distances.Keys)

@@ -1951,10 +1951,10 @@ public class Client : IPublisher, ISubscriber
     /// <param name="root"></param>
     /// <param name="multiplicity"></param>
     /// <returns>Number of found phrases. Result is stored in FoundPhrases.</returns>
-    public int FindPhrases(TextSearchBlockSize text_search_block_size, string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    public int FindPhrases(TextSearchBlockSize text_search_block_size, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         ClearSearchResults();
-        m_found_phrases = Server.FindPhrases(m_search_scope, m_selection, m_found_verses, text_search_block_size, text, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+        m_found_phrases = Server.FindPhrases(m_search_scope, m_selection, m_found_verses, text_search_block_size, root, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
         if (m_found_phrases != null)
         {
             foreach (Phrase phrase in m_found_phrases)

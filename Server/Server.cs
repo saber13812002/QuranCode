@@ -9021,26 +9021,26 @@ public class Server : IPublisher
             }
         }
     }
-    public static List<Phrase> FindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    public static List<Phrase> FindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Phrase> result = new List<Phrase>();
-        if (String.IsNullOrEmpty(text)) return null;
-        text = text.Simplify36();   // roots use 36 letters
-        while (text.Contains("  "))
+        if (String.IsNullOrEmpty(root)) return null;
+        root = root.Simplify36();   // roots use 36 letters
+        while (root.Contains("  "))
         {
-            text = text.Replace("  ", " ");
+            root = root.Replace("  ", " ");
         }
 
         List<Phrase> current_result = null;
         List<string> negative_words = new List<string>();
         List<string> positive_words = new List<string>();
         List<string> unsigned_words = new List<string>();
-        BuildWordLists(text, out unsigned_words, out positive_words, out negative_words);
+        BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
 
         foreach (string negative_word in negative_words)
         {
             current_result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, negative_word, 0, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder); // multiplicity = 0 for exclude
-            if (text.Contains("|"))
+            if (root.Contains("|"))
             {
                 result.AddRange(current_result);
                 previous_verses.Union(GetVerses(current_result));
@@ -9055,7 +9055,7 @@ public class Server : IPublisher
         foreach (string positive_word in positive_words)
         {
             current_result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, positive_word, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
-            if (text.Contains("|"))
+            if (root.Contains("|"))
             {
                 result.AddRange(current_result);
                 previous_verses.Union(GetVerses(current_result));
@@ -9070,7 +9070,7 @@ public class Server : IPublisher
         foreach (string unsigned_word in unsigned_words)
         {
             current_result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, unsigned_word, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
-            if (text.Contains("|"))
+            if (root.Contains("|"))
             {
                 result.AddRange(current_result);
                 previous_verses.Union(GetVerses(current_result));
@@ -9083,7 +9083,7 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Phrase> DoFindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Phrase> DoFindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Verse> result = new List<Verse>();
         switch (text_search_block_size)
@@ -9091,11 +9091,11 @@ public class Server : IPublisher
             case TextSearchBlockSize.Verse:
                 {
                     List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
-                    return DoFindPhrases(source, text, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+                    return DoFindPhrases(source, root, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
                 }
             case TextSearchBlockSize.Chapter:
                 {
-                    List<Chapter> chapters = DoFindChapters(text, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+                    List<Chapter> chapters = DoFindChapters(root, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
                     if (chapters != null)
                     {
                         foreach (Chapter chapter in chapters)
@@ -9110,7 +9110,7 @@ public class Server : IPublisher
                 break;
             case TextSearchBlockSize.Page:
                 {
-                    List<Page> pages = DoFindPages(text, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+                    List<Page> pages = DoFindPages(root, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
                     if (pages != null)
                     {
                         foreach (Page page in pages)
@@ -9125,7 +9125,7 @@ public class Server : IPublisher
                 break;
             case TextSearchBlockSize.Station:
                 {
-                    List<Station> stations = DoFindStations(text, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+                    List<Station> stations = DoFindStations(root, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
                     if (stations != null)
                     {
                         foreach (Station station in stations)
@@ -9140,7 +9140,7 @@ public class Server : IPublisher
                 break;
             case TextSearchBlockSize.Part:
                 {
-                    List<Part> parts = DoFindParts(text, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+                    List<Part> parts = DoFindParts(root, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
                     if (parts != null)
                     {
                         foreach (Part part in parts)
@@ -9155,7 +9155,7 @@ public class Server : IPublisher
                 break;
             case TextSearchBlockSize.Group:
                 {
-                    List<Model.Group> groups = DoFindGroups(text, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+                    List<Model.Group> groups = DoFindGroups(root, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
                     if (groups != null)
                     {
                         foreach (Model.Group group in groups)
@@ -9170,7 +9170,7 @@ public class Server : IPublisher
                 break;
             case TextSearchBlockSize.Half:
                 {
-                    List<Half> halfs = DoFindHalfs(text, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+                    List<Half> halfs = DoFindHalfs(root, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
                     if (halfs != null)
                     {
                         foreach (Half half in halfs)
@@ -9185,7 +9185,7 @@ public class Server : IPublisher
                 break;
             case TextSearchBlockSize.Quarter:
                 {
-                    List<Quarter> quarters = DoFindQuarters(text, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+                    List<Quarter> quarters = DoFindQuarters(root, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
                     if (quarters != null)
                     {
                         foreach (Quarter quarter in quarters)
@@ -9200,7 +9200,7 @@ public class Server : IPublisher
                 break;
             case TextSearchBlockSize.Bowing:
                 {
-                    List<Bowing> bowings = DoFindBowings(text, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+                    List<Bowing> bowings = DoFindBowings(root, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
                     if (bowings != null)
                     {
                         foreach (Bowing bowing in bowings)
@@ -9216,16 +9216,16 @@ public class Server : IPublisher
             default:
                 break;
         }
-        return DoFindPhrases(result, text, -1, NumberType.None, ComparisonOperator.Equal, -1);
+        return DoFindPhrases(result, root, -1, NumberType.None, ComparisonOperator.Equal, -1);
     }
-    private static List<Phrase> DoFindPhrases(List<Verse> source, string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Phrase> DoFindPhrases(List<Verse> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Phrase> result = new List<Phrase>();
         if (source != null)
         {
             if (source.Count > 0)
             {
-                if (!String.IsNullOrEmpty(text))
+                if (!String.IsNullOrEmpty(root))
                 {
                     try
                     {
@@ -9235,21 +9235,11 @@ public class Server : IPublisher
                             if (root_words_dictionary != null)
                             {
                                 List<Word> root_words = null;
-                                if (root_words_dictionary.ContainsKey(text))
+                                if (root_words_dictionary.ContainsKey(root))
                                 {
                                     // get all pre-identified root_words
-                                    root_words = root_words_dictionary[text];
+                                    root_words = root_words_dictionary[root];
                                 }
-                                else // if no such root, search for the matching root_word by its verse position and get its root and then get all root_words
-                                {
-                                    string new_root = s_book.GetBestRoot(text);
-                                    if (!String.IsNullOrEmpty(new_root))
-                                    {
-                                        // get all pre-identified root_words for new root
-                                        root_words = root_words_dictionary[new_root];
-                                    }
-                                }
-
                                 if (root_words != null)
                                 {
                                     result = GetPhrasesWithRootWords(source, root_words, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
@@ -9337,26 +9327,26 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Chapter> DoFindChapters(string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Chapter> DoFindChapters(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Chapter> result = new List<Chapter>();
         if (s_book != null)
         {
             List<Chapter> source = s_book.Chapters;
 
-            if (String.IsNullOrEmpty(text)) return null;
-            while (text.Contains("  "))
+            if (String.IsNullOrEmpty(root)) return null;
+            while (root.Contains("  "))
             {
-                text = text.Replace("  ", " ");
+                root = root.Replace("  ", " ");
             }
 
-            string[] parts = text.Split();
+            string[] parts = root.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(text, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -9415,10 +9405,10 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Chapter> DoFindChapters(List<Chapter> source, string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Chapter> DoFindChapters(List<Chapter> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Chapter> result = new List<Chapter>();
-        if (!String.IsNullOrEmpty(text))
+        if (!String.IsNullOrEmpty(root))
         {
             try
             {
@@ -9428,21 +9418,11 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(text))
+                        if (root_words_dictionary.ContainsKey(root))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[text];
+                            root_words = root_words_dictionary[root];
                         }
-                        else // if no such root, search for the matching root_word by its verse position and get its root and then get all root_words
-                        {
-                            string new_root = s_book.GetBestRoot(text);
-                            if (!String.IsNullOrEmpty(new_root))
-                            {
-                                // get all pre-identified root_words for new root
-                                root_words = root_words_dictionary[new_root];
-                            }
-                        }
-
                         if (root_words != null)
                         {
                             result = GetChaptersWithRootWords(source, root_words, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
@@ -9512,26 +9492,26 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Page> DoFindPages(string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Page> DoFindPages(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Page> result = new List<Page>();
         if (s_book != null)
         {
             List<Page> source = s_book.Pages;
 
-            if (String.IsNullOrEmpty(text)) return null;
-            while (text.Contains("  "))
+            if (String.IsNullOrEmpty(root)) return null;
+            while (root.Contains("  "))
             {
-                text = text.Replace("  ", " ");
+                root = root.Replace("  ", " ");
             }
 
-            string[] parts = text.Split();
+            string[] parts = root.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(text, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -9590,10 +9570,10 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Page> DoFindPages(List<Page> source, string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Page> DoFindPages(List<Page> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Page> result = new List<Page>();
-        if (!String.IsNullOrEmpty(text))
+        if (!String.IsNullOrEmpty(root))
         {
             try
             {
@@ -9603,21 +9583,11 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(text))
+                        if (root_words_dictionary.ContainsKey(root))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[text];
+                            root_words = root_words_dictionary[root];
                         }
-                        else // if no such root, search for the matching root_word by its verse position and get its root and then get all root_words
-                        {
-                            string new_root = s_book.GetBestRoot(text);
-                            if (!String.IsNullOrEmpty(new_root))
-                            {
-                                // get all pre-identified root_words for new root
-                                root_words = root_words_dictionary[new_root];
-                            }
-                        }
-
                         if (root_words != null)
                         {
                             result = GetPagesWithRootWords(source, root_words, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
@@ -9687,26 +9657,26 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Station> DoFindStations(string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Station> DoFindStations(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Station> result = new List<Station>();
         if (s_book != null)
         {
             List<Station> source = s_book.Stations;
 
-            if (String.IsNullOrEmpty(text)) return null;
-            while (text.Contains("  "))
+            if (String.IsNullOrEmpty(root)) return null;
+            while (root.Contains("  "))
             {
-                text = text.Replace("  ", " ");
+                root = root.Replace("  ", " ");
             }
 
-            string[] parts = text.Split();
+            string[] parts = root.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(text, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -9765,10 +9735,10 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Station> DoFindStations(List<Station> source, string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Station> DoFindStations(List<Station> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Station> result = new List<Station>();
-        if (!String.IsNullOrEmpty(text))
+        if (!String.IsNullOrEmpty(root))
         {
             try
             {
@@ -9778,21 +9748,11 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(text))
+                        if (root_words_dictionary.ContainsKey(root))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[text];
+                            root_words = root_words_dictionary[root];
                         }
-                        else // if no such root, search for the matching root_word by its verse position and get its root and then get all root_words
-                        {
-                            string new_root = s_book.GetBestRoot(text);
-                            if (!String.IsNullOrEmpty(new_root))
-                            {
-                                // get all pre-identified root_words for new root
-                                root_words = root_words_dictionary[new_root];
-                            }
-                        }
-
                         if (root_words != null)
                         {
                             result = GetStationsWithRootWords(source, root_words, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
@@ -9862,26 +9822,26 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Part> DoFindParts(string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Part> DoFindParts(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Part> result = new List<Part>();
         if (s_book != null)
         {
             List<Part> source = s_book.Parts;
 
-            if (String.IsNullOrEmpty(text)) return null;
-            while (text.Contains("  "))
+            if (String.IsNullOrEmpty(root)) return null;
+            while (root.Contains("  "))
             {
-                text = text.Replace("  ", " ");
+                root = root.Replace("  ", " ");
             }
 
-            string[] parts = text.Split();
+            string[] parts = root.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(text, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -9940,10 +9900,10 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Part> DoFindParts(List<Part> source, string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Part> DoFindParts(List<Part> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Part> result = new List<Part>();
-        if (!String.IsNullOrEmpty(text))
+        if (!String.IsNullOrEmpty(root))
         {
             try
             {
@@ -9953,21 +9913,11 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(text))
+                        if (root_words_dictionary.ContainsKey(root))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[text];
+                            root_words = root_words_dictionary[root];
                         }
-                        else // if no such root, search for the matching root_word by its verse position and get its root and then get all root_words
-                        {
-                            string new_root = s_book.GetBestRoot(text);
-                            if (!String.IsNullOrEmpty(new_root))
-                            {
-                                // get all pre-identified root_words for new root
-                                root_words = root_words_dictionary[new_root];
-                            }
-                        }
-
                         if (root_words != null)
                         {
                             result = GetPartsWithRootWords(source, root_words, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
@@ -10037,26 +9987,26 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Model.Group> DoFindGroups(string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Model.Group> DoFindGroups(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Model.Group> result = new List<Model.Group>();
         if (s_book != null)
         {
             List<Model.Group> source = s_book.Groups;
 
-            if (String.IsNullOrEmpty(text)) return null;
-            while (text.Contains("  "))
+            if (String.IsNullOrEmpty(root)) return null;
+            while (root.Contains("  "))
             {
-                text = text.Replace("  ", " ");
+                root = root.Replace("  ", " ");
             }
 
-            string[] parts = text.Split();
+            string[] parts = root.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(text, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -10115,10 +10065,10 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Model.Group> DoFindGroups(List<Model.Group> source, string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Model.Group> DoFindGroups(List<Model.Group> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Model.Group> result = new List<Model.Group>();
-        if (!String.IsNullOrEmpty(text))
+        if (!String.IsNullOrEmpty(root))
         {
             try
             {
@@ -10128,21 +10078,11 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(text))
+                        if (root_words_dictionary.ContainsKey(root))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[text];
+                            root_words = root_words_dictionary[root];
                         }
-                        else // if no such root, search for the matching root_word by its verse position and get its root and then get all root_words
-                        {
-                            string new_root = s_book.GetBestRoot(text);
-                            if (!String.IsNullOrEmpty(new_root))
-                            {
-                                // get all pre-identified root_words for new root
-                                root_words = root_words_dictionary[new_root];
-                            }
-                        }
-
                         if (root_words != null)
                         {
                             result = GetGroupsWithRootWords(source, root_words, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
@@ -10212,26 +10152,26 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Half> DoFindHalfs(string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Half> DoFindHalfs(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Half> result = new List<Half>();
         if (s_book != null)
         {
             List<Half> source = s_book.Halfs;
 
-            if (String.IsNullOrEmpty(text)) return null;
-            while (text.Contains("  "))
+            if (String.IsNullOrEmpty(root)) return null;
+            while (root.Contains("  "))
             {
-                text = text.Replace("  ", " ");
+                root = root.Replace("  ", " ");
             }
 
-            string[] parts = text.Split();
+            string[] parts = root.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(text, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -10290,10 +10230,10 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Half> DoFindHalfs(List<Half> source, string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Half> DoFindHalfs(List<Half> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Half> result = new List<Half>();
-        if (!String.IsNullOrEmpty(text))
+        if (!String.IsNullOrEmpty(root))
         {
             try
             {
@@ -10303,21 +10243,11 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(text))
+                        if (root_words_dictionary.ContainsKey(root))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[text];
+                            root_words = root_words_dictionary[root];
                         }
-                        else // if no such root, search for the matching root_word by its verse position and get its root and then get all root_words
-                        {
-                            string new_root = s_book.GetBestRoot(text);
-                            if (!String.IsNullOrEmpty(new_root))
-                            {
-                                // get all pre-identified root_words for new root
-                                root_words = root_words_dictionary[new_root];
-                            }
-                        }
-
                         if (root_words != null)
                         {
                             result = GetHalfsWithRootWords(source, root_words, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
@@ -10387,26 +10317,26 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Quarter> DoFindQuarters(string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Quarter> DoFindQuarters(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Quarter> result = new List<Quarter>();
         if (s_book != null)
         {
             List<Quarter> source = s_book.Quarters;
 
-            if (String.IsNullOrEmpty(text)) return null;
-            while (text.Contains("  "))
+            if (String.IsNullOrEmpty(root)) return null;
+            while (root.Contains("  "))
             {
-                text = text.Replace("  ", " ");
+                root = root.Replace("  ", " ");
             }
 
-            string[] parts = text.Split();
+            string[] parts = root.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(text, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -10465,10 +10395,10 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Quarter> DoFindQuarters(List<Quarter> source, string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Quarter> DoFindQuarters(List<Quarter> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Quarter> result = new List<Quarter>();
-        if (!String.IsNullOrEmpty(text))
+        if (!String.IsNullOrEmpty(root))
         {
             try
             {
@@ -10478,21 +10408,11 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(text))
+                        if (root_words_dictionary.ContainsKey(root))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[text];
+                            root_words = root_words_dictionary[root];
                         }
-                        else // if no such root, search for the matching root_word by its verse position and get its root and then get all root_words
-                        {
-                            string new_root = s_book.GetBestRoot(text);
-                            if (!String.IsNullOrEmpty(new_root))
-                            {
-                                // get all pre-identified root_words for new root
-                                root_words = root_words_dictionary[new_root];
-                            }
-                        }
-
                         if (root_words != null)
                         {
                             result = GetQuartersWithRootWords(source, root_words, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
@@ -10562,26 +10482,26 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Bowing> DoFindBowings(string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Bowing> DoFindBowings(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Bowing> result = new List<Bowing>();
         if (s_book != null)
         {
             List<Bowing> source = s_book.Bowings;
 
-            if (String.IsNullOrEmpty(text)) return null;
-            while (text.Contains("  "))
+            if (String.IsNullOrEmpty(root)) return null;
+            while (root.Contains("  "))
             {
-                text = text.Replace("  ", " ");
+                root = root.Replace("  ", " ");
             }
 
-            string[] parts = text.Split();
+            string[] parts = root.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(text, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -10640,10 +10560,10 @@ public class Server : IPublisher
         }
         return result;
     }
-    private static List<Bowing> DoFindBowings(List<Bowing> source, string text, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Bowing> DoFindBowings(List<Bowing> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Bowing> result = new List<Bowing>();
-        if (!String.IsNullOrEmpty(text))
+        if (!String.IsNullOrEmpty(root))
         {
             try
             {
@@ -10653,21 +10573,11 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(text))
+                        if (root_words_dictionary.ContainsKey(root))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[text];
+                            root_words = root_words_dictionary[root];
                         }
-                        else // if no such root, search for the matching root_word by its verse position and get its root and then get all root_words
-                        {
-                            string new_root = s_book.GetBestRoot(text);
-                            if (!String.IsNullOrEmpty(new_root))
-                            {
-                                // get all pre-identified root_words for new root
-                                root_words = root_words_dictionary[new_root];
-                            }
-                        }
-
                         if (root_words != null)
                         {
                             result = GetBowingsWithRootWords(source, root_words, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
@@ -18135,11 +18045,11 @@ public class Server : IPublisher
                 int limit = word_count - 1;
                 if (query.LetterCount > 0)
                 {
-                    limit = query.LetterCount / 3;
+                    limit = query.LetterCount / 2;
                 }
                 if (query.Value > 0L)
                 {
-                    limit = (int)(query.Value / 7L);
+                    limit = (int)(query.Value / 5L);
                 }
                 if (limit == 0) limit = 1;
 
@@ -18233,7 +18143,7 @@ public class Server : IPublisher
 
                         if (set_size == 0) // non-specified set size
                         {
-                            // limit range length to minimum
+                            // limit set length to minimum
                             int word_count = 0;
                             foreach (Verse verse in source)
                             {
@@ -18243,12 +18153,13 @@ public class Server : IPublisher
                             int limit = word_count - 1;
                             if (query.LetterCount > 0)
                             {
-                                limit = query.LetterCount / 3;
+                                limit = query.LetterCount / 2;
                             }
                             if (query.Value > 0L)
                             {
-                                limit = (int)(query.Value / 114L);
+                                limit = (int)(query.Value / 5L);
                             }
+                            if (limit == 0) limit = 1;
 
                             for (int i = 0; i < limit; i++) // try all possible set sizes
                             {
@@ -18688,22 +18599,18 @@ public class Server : IPublisher
 
             if (range_length == 0) // non-specified range length
             {
-                int limit = source.Count;
-                if (query.VerseCount > 0)
-                {
-                    limit = query.VerseCount;
-                }
+                int limit = source.Count - 1;
                 if (query.WordCount > 0)
                 {
-                    limit = query.WordCount / 7;
+                    limit = query.WordCount / 3;
                 }
                 if (query.LetterCount > 0)
                 {
-                    limit = query.LetterCount / 29;
+                    limit = query.LetterCount / 7;
                 }
                 if (query.Value > 0L)
                 {
-                    limit = (int)(query.Value / 114L);
+                    limit = (int)(query.Value / 19L);
                 }
                 if (limit == 0) limit = 1;
 
@@ -18779,23 +18686,20 @@ public class Server : IPublisher
 
                         if (set_size == 0) // non-specified set size
                         {
-                            int limit = source.Count;
-                            if (query.VerseCount > 0)
-                            {
-                                limit = query.VerseCount;
-                            }
+                            int limit = source.Count - 1;
                             if (query.WordCount > 0)
                             {
-                                limit = query.WordCount / 7;
+                                limit = query.WordCount / 3;
                             }
                             if (query.LetterCount > 0)
                             {
-                                limit = query.LetterCount / 29;
+                                limit = query.LetterCount / 7;
                             }
                             if (query.Value > 0L)
                             {
-                                limit = (int)(query.Value / 449L);
+                                limit = (int)(query.Value / 19L);
                             }
+                            if (limit == 0) limit = 1;
 
                             for (int i = 0; i < limit; i++) // try all possible set sizes
                             {
@@ -18897,24 +18801,7 @@ public class Server : IPublisher
                         if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
-                            int limit = chapters.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 506L);
-                            //}
-                            //if (limit == 0) limit = 1;
+                            int limit = chapters.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
@@ -18991,24 +18878,8 @@ public class Server : IPublisher
 
                         if (set_size == 0) // non-specified set size
                         {
-                            // limit range length to minimum
-                            int limit = chapters.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 10L);
-                            //}
+                            // limit set length to minimum
+                            int limit = chapters.Count - 1;
 
                             for (int i = 0; i < limit; i++) // try all possible set sizes
                             {
@@ -19110,24 +18981,7 @@ public class Server : IPublisher
                         if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
-                            int limit = pages.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 506L);
-                            //}
-                            //if (limit == 0) limit = 1;
+                            int limit = pages.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
@@ -19204,24 +19058,8 @@ public class Server : IPublisher
 
                         if (set_size == 0) // non-specified set size
                         {
-                            // limit range length to minimum
-                            int limit = pages.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 10L);
-                            //}
+                            // limit set length to minimum
+                            int limit = pages.Count - 1;
 
                             for (int i = 0; i < limit; i++) // try all possible set sizes
                             {
@@ -19323,24 +19161,7 @@ public class Server : IPublisher
                         if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
-                            int limit = stations.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 506L);
-                            //}
-                            //if (limit == 0) limit = 1;
+                            int limit = stations.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
@@ -19417,24 +19238,8 @@ public class Server : IPublisher
 
                         if (set_size == 0) // non-specified set size
                         {
-                            // limit range length to minimum
-                            int limit = stations.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 10L);
-                            //}
+                            // limit set length to minimum
+                            int limit = stations.Count - 1;
 
                             for (int i = 0; i < limit; i++) // try all possible set sizes
                             {
@@ -19536,24 +19341,7 @@ public class Server : IPublisher
                         if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
-                            int limit = parts.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 506L);
-                            //}
-                            //if (limit == 0) limit = 1;
+                            int limit = parts.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
@@ -19630,24 +19418,8 @@ public class Server : IPublisher
 
                         if (set_size == 0) // non-specified set size
                         {
-                            // limit range length to minimum
-                            int limit = parts.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 10L);
-                            //}
+                            // limit set length to minimum
+                            int limit = parts.Count - 1;
 
                             for (int i = 0; i < limit; i++) // try all possible set sizes
                             {
@@ -19749,24 +19521,7 @@ public class Server : IPublisher
                         if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
-                            int limit = groups.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 506L);
-                            //}
-                            //if (limit == 0) limit = 1;
+                            int limit = groups.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
@@ -19831,8 +19586,8 @@ public class Server : IPublisher
             {
                 if (s_book != null)
                 {
-                    List<Model.Group> chapters = s_book.GetGroups(source);
-                    if (chapters != null)
+                    List<Model.Group> groups = s_book.GetGroups(source);
+                    if (groups != null)
                     {
                         int set_size = query.PartitionCount;
                         if (set_size == 1)
@@ -19843,29 +19598,13 @@ public class Server : IPublisher
 
                         if (set_size == 0) // non-specified set size
                         {
-                            // limit range length to minimum
-                            int limit = chapters.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 10L);
-                            //}
+                            // limit set length to minimum
+                            int limit = groups.Count - 1;
 
                             for (int i = 0; i < limit; i++) // try all possible set sizes
                             {
                                 int size = i + 1;
-                                Combinations<Model.Group> sets = new Combinations<Model.Group>(chapters, size, GenerateOption.WithoutRepetition);
+                                Combinations<Model.Group> sets = new Combinations<Model.Group>(groups, size, GenerateOption.WithoutRepetition);
                                 foreach (List<Model.Group> set in sets)
                                 {
                                     // check set against query
@@ -19878,7 +19617,7 @@ public class Server : IPublisher
                         }
                         else // specified set size
                         {
-                            Combinations<Model.Group> sets = new Combinations<Model.Group>(chapters, set_size, GenerateOption.WithoutRepetition);
+                            Combinations<Model.Group> sets = new Combinations<Model.Group>(groups, set_size, GenerateOption.WithoutRepetition);
                             foreach (List<Model.Group> set in sets)
                             {
                                 // check set against query
@@ -19962,24 +19701,7 @@ public class Server : IPublisher
                         if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
-                            int limit = halfs.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 506L);
-                            //}
-                            //if (limit == 0) limit = 1;
+                            int limit = halfs.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
@@ -20044,8 +19766,8 @@ public class Server : IPublisher
             {
                 if (s_book != null)
                 {
-                    List<Half> chapters = s_book.GetHalfs(source);
-                    if (chapters != null)
+                    List<Half> halfs = s_book.GetHalfs(source);
+                    if (halfs != null)
                     {
                         int set_size = query.PartitionCount;
                         if (set_size == 1)
@@ -20056,29 +19778,13 @@ public class Server : IPublisher
 
                         if (set_size == 0) // non-specified set size
                         {
-                            // limit range length to minimum
-                            int limit = chapters.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 10L);
-                            //}
+                            // limit set length to minimum
+                            int limit = halfs.Count - 1;
 
                             for (int i = 0; i < limit; i++) // try all possible set sizes
                             {
                                 int size = i + 1;
-                                Combinations<Half> sets = new Combinations<Half>(chapters, size, GenerateOption.WithoutRepetition);
+                                Combinations<Half> sets = new Combinations<Half>(halfs, size, GenerateOption.WithoutRepetition);
                                 foreach (List<Half> set in sets)
                                 {
                                     // check set against query
@@ -20091,7 +19797,7 @@ public class Server : IPublisher
                         }
                         else // specified set size
                         {
-                            Combinations<Half> sets = new Combinations<Half>(chapters, set_size, GenerateOption.WithoutRepetition);
+                            Combinations<Half> sets = new Combinations<Half>(halfs, set_size, GenerateOption.WithoutRepetition);
                             foreach (List<Half> set in sets)
                             {
                                 // check set against query
@@ -20175,24 +19881,7 @@ public class Server : IPublisher
                         if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
-                            int limit = quarters.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 506L);
-                            //}
-                            //if (limit == 0) limit = 1;
+                            int limit = quarters.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
@@ -20257,8 +19946,8 @@ public class Server : IPublisher
             {
                 if (s_book != null)
                 {
-                    List<Quarter> chapters = s_book.GetQuarters(source);
-                    if (chapters != null)
+                    List<Quarter> quarters = s_book.GetQuarters(source);
+                    if (quarters != null)
                     {
                         int set_size = query.PartitionCount;
                         if (set_size == 1)
@@ -20269,29 +19958,13 @@ public class Server : IPublisher
 
                         if (set_size == 0) // non-specified set size
                         {
-                            // limit range length to minimum
-                            int limit = chapters.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 10L);
-                            //}
+                            // limit set length to minimum
+                            int limit = quarters.Count - 1;
 
                             for (int i = 0; i < limit; i++) // try all possible set sizes
                             {
                                 int size = i + 1;
-                                Combinations<Quarter> sets = new Combinations<Quarter>(chapters, size, GenerateOption.WithoutRepetition);
+                                Combinations<Quarter> sets = new Combinations<Quarter>(quarters, size, GenerateOption.WithoutRepetition);
                                 foreach (List<Quarter> set in sets)
                                 {
                                     // check set against query
@@ -20304,7 +19977,7 @@ public class Server : IPublisher
                         }
                         else // specified set size
                         {
-                            Combinations<Quarter> sets = new Combinations<Quarter>(chapters, set_size, GenerateOption.WithoutRepetition);
+                            Combinations<Quarter> sets = new Combinations<Quarter>(quarters, set_size, GenerateOption.WithoutRepetition);
                             foreach (List<Quarter> set in sets)
                             {
                                 // check set against query
@@ -20388,24 +20061,7 @@ public class Server : IPublisher
                         if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
-                            int limit = bowings.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 506L);
-                            //}
-                            //if (limit == 0) limit = 1;
+                            int limit = bowings.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
@@ -20470,8 +20126,8 @@ public class Server : IPublisher
             {
                 if (s_book != null)
                 {
-                    List<Bowing> chapters = s_book.GetBowings(source);
-                    if (chapters != null)
+                    List<Bowing> bowings = s_book.GetBowings(source);
+                    if (bowings != null)
                     {
                         int set_size = query.PartitionCount;
                         if (set_size == 1)
@@ -20482,29 +20138,13 @@ public class Server : IPublisher
 
                         if (set_size == 0) // non-specified set size
                         {
-                            // limit range length to minimum
-                            int limit = chapters.Count;
-                            //if (query.VerseCount > 0)
-                            //{
-                            //    limit = query.VerseCount;
-                            //}
-                            //if (query.WordCount > 0)
-                            //{
-                            //    limit = query.WordCount;
-                            //}
-                            //if (query.LetterCount > 0)
-                            //{
-                            //    limit = query.LetterCount;
-                            //}
-                            //if (query.Value > 0L)
-                            //{
-                            //    limit = (int)(query.Value / 10L);
-                            //}
+                            // limit set length to minimum
+                            int limit = bowings.Count - 1;
 
                             for (int i = 0; i < limit; i++) // try all possible set sizes
                             {
                                 int size = i + 1;
-                                Combinations<Bowing> sets = new Combinations<Bowing>(chapters, size, GenerateOption.WithoutRepetition);
+                                Combinations<Bowing> sets = new Combinations<Bowing>(bowings, size, GenerateOption.WithoutRepetition);
                                 foreach (List<Bowing> set in sets)
                                 {
                                     // check set against query
@@ -20517,7 +20157,7 @@ public class Server : IPublisher
                         }
                         else // specified set size
                         {
-                            Combinations<Bowing> sets = new Combinations<Bowing>(chapters, set_size, GenerateOption.WithoutRepetition);
+                            Combinations<Bowing> sets = new Combinations<Bowing>(bowings, set_size, GenerateOption.WithoutRepetition);
                             foreach (List<Bowing> set in sets)
                             {
                                 // check set against query
