@@ -3363,7 +3363,7 @@ public static class Research
         return str.ToString();
     }
 
-    private static string ____________________________(Client client, string param, bool in_search_result)
+    private static string _______________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
@@ -5140,29 +5140,29 @@ public static class Research
     {
         return null;
     }
-    public static string FirstWordFrequencyEqualsVerseNumber(Client client, string param, bool in_search_result)
+    public static string FirstWordFrequency_VerseNumber(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         if (verses != null)
         {
-            return DoFirstWordFrequencyEqualsVerseNumber(client, verses, param);
+            return DoFirstWordFrequency_VerseNumber(client, verses, param);
         }
         return null;
     }
-    public static string LastWordFrequencyEqualsVerseNumber(Client client, string param, bool in_search_result)
+    public static string LastWordFrequency_VerseNumber(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.NumerologySystem == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         if (verses != null)
         {
-            return DoLastWordFrequencyEqualsVerseNumber(client, verses, param);
+            return DoLastWordFrequency_VerseNumber(client, verses, param);
         }
         return null;
     }
-    private static string DoFirstWordFrequencyEqualsVerseNumber(Client client, List<Verse> verses, string param)
+    private static string DoFirstWordFrequency_VerseNumber(Client client, List<Verse> verses, string param)
     {
         if (client == null) return null;
         if (verses == null) return null;
@@ -5212,7 +5212,7 @@ public static class Research
         }
         return str.ToString();
     }
-    private static string DoLastWordFrequencyEqualsVerseNumber(Client client, List<Verse> verses, string param)
+    private static string DoLastWordFrequency_VerseNumber(Client client, List<Verse> verses, string param)
     {
         if (client == null) return null;
         if (verses == null) return null;
@@ -5857,6 +5857,7 @@ public static class Research
         }
         return result;
     }
+
     public static string _________________________________________________(Client client, string param, bool in_search_result)
     {
         return null;
@@ -7139,10 +7140,6 @@ public static class Research
 
         return str.ToString();
     }
-    public static string ________________________________________________(Client client, string param, bool in_search_result)
-    {
-        return null;
-    }
     public static string M_P_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
@@ -8421,10 +8418,6 @@ public static class Research
 
         return str.ToString();
     }
-    public static string _______________________________________________(Client client, string param, bool in_search_result)
-    {
-        return null;
-    }
     public static string N_M_31Verses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
@@ -8633,6 +8626,265 @@ public static class Research
         }
         str.Append(N_total + "\t" + rM_total + "\t" + "" + "\t" + words_total + "\t" + letters_total + "\t" + unique_total + "\t" + value_total + "\t" + positions_sum_total + "\t" + distances_sum_total + "\t" + all_positions_sum_total + "\t" + all_distances_sum_total + "\t" + "" + "\r\n");
 
+        return str.ToString();
+    }
+
+    public static string __________________________________(Client client, string param, bool in_search_result)
+    {
+        return null;
+    }
+    public static string PolygonalValueWords(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        List<Verse> verses = GetSourceVerses(client, in_search_result);
+        if (verses != null)
+        {
+            List<Word> words = new List<Word>();
+            foreach (Verse verse in verses)
+            {
+                words.AddRange(verse.Words);
+            }
+
+            int sides = 3;
+            if (int.TryParse(param, out sides))
+            {
+                if ((sides >= 3) && (sides <= 24))
+                {
+                    return DoPolygonalValueWords(client, words, sides);
+                }
+            }
+        }
+        return null;
+    }
+    public static string CenteredPolygonalValueWords(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        List<Verse> verses = GetSourceVerses(client, in_search_result);
+        if (verses != null)
+        {
+            List<Word> words = new List<Word>();
+            foreach (Verse verse in verses)
+            {
+                words.AddRange(verse.Words);
+            }
+
+            int sides = 3;
+            if (int.TryParse(param, out sides))
+            {
+                if ((sides >= 3) && (sides <= 24))
+                {
+                    return DoCenteredPolygonalValueWords(client, words, sides);
+                }
+            }
+        }
+        return null;
+    }
+    public static string PlatonicSolidValueWords(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        List<Verse> verses = GetSourceVerses(client, in_search_result);
+        if (verses != null)
+        {
+            List<Word> words = new List<Word>();
+            foreach (Verse verse in verses)
+            {
+                words.AddRange(verse.Words);
+            }
+
+            int faces = 4;
+            if (int.TryParse(param, out faces))
+            {
+                if ((faces == 4) || (faces == 6) || (faces == 8) || (faces == 12) || (faces == 20))
+                {
+                    return DoPlatonicSolidValueWords(client, words, faces);
+                }
+            }
+        }
+        return null;
+    }
+    private static string DoPolygonalValueWords(Client client, List<Word> words, int sides)
+    {
+        if (client == null) return null;
+        if (words == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        if (words.Count > 0)
+        {
+            str.AppendLine
+            (
+                "#" + "\t" +
+                "Number" + "\t" +
+                "Chapter" + "\t" +
+                "Verse" + "\t" +
+                "Word" + "\t" +
+                "Text" + "\t" +
+                "Value" + "\t" +
+                "Index"
+            );
+
+            int count = 0;
+            foreach (Word word in words)
+            {
+                if (word.Text != "و")
+                {
+                    long value = client.CalculateValue(word);
+                    if (Numbers.IsPolygonalNumber(sides, value))
+                    {
+                        count++;
+
+                        int index = Numbers.PolygonalNumbers(sides).IndexOf(value);
+                        str.Append
+                        (
+                            count + "\t" +
+                            word.Number + "\t" +
+                            word.Verse.Chapter.SortedNumber + "\t" +
+                            word.Verse.NumberInChapter + "\t" +
+                            word.NumberInVerse + "\t" +
+                            word.Text + "\t" +
+                            value.ToString() + "\t" +
+                            (index + 1).ToString()
+                        );
+                        str.AppendLine();
+                    }
+                }
+            }
+        }
+        return str.ToString();
+    }
+    private static string DoCenteredPolygonalValueWords(Client client, List<Word> words, int sides)
+    {
+        if (client == null) return null;
+        if (words == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        if (words.Count > 0)
+        {
+            str.AppendLine
+            (
+                "#" + "\t" +
+                "Number" + "\t" +
+                "Chapter" + "\t" +
+                "Verse" + "\t" +
+                "Word" + "\t" +
+                "Text" + "\t" +
+                "Value" + "\t" +
+                "Index"
+            );
+
+            int count = 0;
+            foreach (Word word in words)
+            {
+                if (word.Text != "و")
+                {
+                    long value = client.CalculateValue(word);
+                    if (Numbers.IsCenteredPolygonalNumber(sides, value))
+                    {
+                        count++;
+
+                        int index = Numbers.CenteredPolygonalNumbers(sides).IndexOf(value);
+                        str.Append
+                        (
+                            count + "\t" +
+                            word.Number + "\t" +
+                            word.Verse.Chapter.SortedNumber + "\t" +
+                            word.Verse.NumberInChapter + "\t" +
+                            word.NumberInVerse + "\t" +
+                            word.Text + "\t" +
+                            value.ToString() + "\t" +
+                            (index + 1).ToString()
+                        );
+                        str.AppendLine();
+                    }
+                }
+            }
+        }
+        return str.ToString();
+    }
+    private static string DoPlatonicSolidValueWords(Client client, List<Word> words, int faces)
+    {
+        if (client == null) return null;
+        if (words == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        if (words.Count > 0)
+        {
+            str.AppendLine
+            (
+                "#" + "\t" +
+                "Number" + "\t" +
+                "Chapter" + "\t" +
+                "Verse" + "\t" +
+                "Word" + "\t" +
+                "Text" + "\t" +
+                "Value" + "\t" +
+                "Index"
+            );
+
+            int count = 0;
+            foreach (Word word in words)
+            {
+                if (word.Text != "و")
+                {
+                    long value = client.CalculateValue(word);
+                    int index = -1;
+                    switch (faces)
+                    {
+                        case 4:
+                            if (Numbers.IsCenteredTetrahedralNumber(value))
+                            {
+                                index = Numbers.CenteredTetrahedralNumbers.IndexOf(value);
+                            }
+                            break;
+                        case 6:
+                            if (Numbers.IsCenteredHexahedronNumber(value))
+                            {
+                                index = Numbers.CenteredHexahedronNumbers.IndexOf(value);
+                            }
+                            break;
+                        case 8:
+                            if (Numbers.IsCenteredOctahedralNumber(value))
+                            {
+                                index = Numbers.CenteredOctahedralNumbers.IndexOf(value);
+                            }
+                            break;
+                        case 12:
+                            if (Numbers.IsCenteredDodecahedralNumber(value))
+                            {
+                                index = Numbers.CenteredDodecahedralNumbers.IndexOf(value);
+                            }
+                            break;
+                        case 20:
+                            if (Numbers.IsCenteredIcosahedralNumber(value))
+                            {
+                                index = Numbers.CenteredIcosahedralNumbers.IndexOf(value);
+                            }
+                            break;
+                        default:
+                            {
+                                index = -1;
+                            }
+                            break;
+                    }
+
+                    if (index > -1)
+                    {
+                        count++;
+                        str.Append
+                        (
+                            count + "\t" +
+                            word.Number + "\t" +
+                            word.Verse.Chapter.SortedNumber + "\t" +
+                            word.Verse.NumberInChapter + "\t" +
+                            word.NumberInVerse + "\t" +
+                            word.Text + "\t" +
+                            value.ToString() + "\t" +
+                            (index + 1).ToString()
+                        );
+                        str.AppendLine();
+                    }
+                }
+            }
+        }
         return str.ToString();
     }
 
@@ -9026,7 +9278,7 @@ public static class Research
         public long AlFatihaValue = -1L;
         public int BookValueIndex = -1; // PrimeIndex | AdditivePrimeIndex
     }
-    private static string FindSystemOfBismAllahEqualsAlFatihaIndex(Client client, string param, bool in_search_result)
+    private static string FindSystemOfBismAllah_AlFatihaIndex(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.Book == null) return null;
@@ -9197,7 +9449,7 @@ public static class Research
 
         return null;
     }
-    private static string FindSystemOfAlFatihaEqualsQuranIndex(Client client, string param, bool in_search_result)
+    private static string FindSystemOfAlFatiha_QuranIndex(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.Book == null) return null;

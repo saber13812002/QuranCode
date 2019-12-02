@@ -374,6 +374,12 @@ public static class Numbers
             LoadAbundants();
         }
 
+        for (int sides = 3; sides <= 24; sides++)
+        {
+            GeneratePolygonalNumbers(sides);
+            GenerateCenteredPolygonalNumbers(sides);
+        }
+
         LoadPerfectNumbers();
         LoadPrimeRepunits();
         LoadInterestingNumbers();
@@ -3394,8 +3400,8 @@ public static class Numbers
 
 
     private static int s_series_limit = 114;
-    //http://en.wikipedia.org/wiki/Polygon_number
-    //ith number of Polygon(sides=N) = ( (N - 2)*i*i - (N - 4)*i ) / 2
+    //http://en.wikipedia.org/wiki/Polygonal_number
+    //ith number of Polygonal(sides=N) = ( (N - 2)*i*i - (N - 4)*i ) / 2
     //----------------------------------------------------------------------------------------
     //N   Name            Formula            i = 1 2 3 4 5 6 7 8 9 10             OEIS number
     //----------------------------------------------------------------------------------------
@@ -3422,617 +3428,609 @@ public static class Numbers
     //23  Icositrigonal   ½(21n² - 19n)       1 23 66 130 215 321 448 596 765 955  A051875 
     //24  Icositetragonal ½(22n² - 20n)       1 24 69 136 225 336 469 624 801 1000 A051876 
     //----------------------------------------------------------------------------------------
-    private static Dictionary<int, List<long>> s_polygon_numbers_dictionary = new Dictionary<int, List<long>>();
-    public static List<long> PolygonNumbers(int sides)
+    private static Dictionary<int, List<long>> s_polygonal_numbers_dictionary = new Dictionary<int, List<long>>();
+    public static List<long> PolygonalNumbers(int sides)
     {
-        if (!s_polygon_numbers_dictionary.ContainsKey(sides))
+        if (!s_polygonal_numbers_dictionary.ContainsKey(sides))
         {
-            GeneratePolygonNumbers(sides);
+            GeneratePolygonalNumbers(sides);
         }
 
-        if (s_polygon_numbers_dictionary.ContainsKey(sides))
+        if (s_polygonal_numbers_dictionary.ContainsKey(sides))
         {
-            return s_polygon_numbers_dictionary[sides];
+            return s_polygonal_numbers_dictionary[sides];
         }
         else
         {
             return null;
         }
     }
-    private static void GeneratePolygonNumbers(int sides)
+    private static void GeneratePolygonalNumbers(int sides)
     {
-        List<long> polygon_numbers = new List<long>(s_series_limit);
+        List<long> polygonal_numbers = new List<long>(s_series_limit);
         for (int n = 1; n <= s_series_limit; n++)
         {
             long number = ((sides - 2) * n * n - (sides - 4) * n) / 2L;
-            polygon_numbers.Add(number);
+            polygonal_numbers.Add(number);
         }
-        s_polygon_numbers_dictionary.Add(sides, polygon_numbers);
+        s_polygonal_numbers_dictionary.Add(sides, polygonal_numbers);
     }
-    public static bool IsPolygonNumber(int sides, long number)
+    public static bool IsPolygonalNumber(int sides, long number)
     {
         if (number < 0L) number *= -1L;
-
-        if (s_polygon_numbers_dictionary.ContainsKey(sides))
+        if (s_polygonal_numbers_dictionary.ContainsKey(sides))
         {
-            return (s_polygon_numbers_dictionary[sides].Contains(number));
+            return (s_polygonal_numbers_dictionary[sides].Contains(number));
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
     public static List<long> Triangulars
     {
         get
         {
-            return PolygonNumbers(3);
+            return PolygonalNumbers(3);
         }
     }
     public static List<long> Squares
     {
         get
         {
-            return PolygonNumbers(4);
+            return PolygonalNumbers(4);
         }
     }
     public static List<long> Pentagonals
     {
         get
         {
-            return PolygonNumbers(5);
+            return PolygonalNumbers(5);
         }
     }
     public static List<long> Hexagonals
     {
         get
         {
-            return PolygonNumbers(6);
+            return PolygonalNumbers(6);
         }
     }
     public static List<long> Heptagonals
     {
         get
         {
-            return PolygonNumbers(7);
+            return PolygonalNumbers(7);
         }
     }
     public static List<long> Octagonals
     {
         get
         {
-            return PolygonNumbers(8);
+            return PolygonalNumbers(8);
         }
     }
     public static List<long> Nonagonals
     {
         get
         {
-            return PolygonNumbers(9);
+            return PolygonalNumbers(9);
         }
     }
     public static List<long> Decagonals
     {
         get
         {
-            return PolygonNumbers(10);
+            return PolygonalNumbers(10);
         }
     }
     public static List<long> Hendecagonals
     {
         get
         {
-            return PolygonNumbers(11);
+            return PolygonalNumbers(11);
         }
     }
     public static List<long> Dodecagonals
     {
         get
         {
-            return PolygonNumbers(12);
+            return PolygonalNumbers(12);
         }
     }
     public static List<long> Tridecagonals
     {
         get
         {
-            return PolygonNumbers(13);
+            return PolygonalNumbers(13);
         }
     }
     public static List<long> Tetradecagonals
     {
         get
         {
-            return PolygonNumbers(14);
+            return PolygonalNumbers(14);
         }
     }
     public static List<long> Pentadecagonals
     {
         get
         {
-            return PolygonNumbers(15);
+            return PolygonalNumbers(15);
         }
     }
     public static List<long> Hexadecagonals
     {
         get
         {
-            return PolygonNumbers(16);
+            return PolygonalNumbers(16);
         }
     }
     public static List<long> Heptadecagonals
     {
         get
         {
-            return PolygonNumbers(17);
+            return PolygonalNumbers(17);
         }
     }
     public static List<long> Octadecagonals
     {
         get
         {
-            return PolygonNumbers(18);
+            return PolygonalNumbers(18);
         }
     }
     public static List<long> Nonadecagonals
     {
         get
         {
-            return PolygonNumbers(19);
+            return PolygonalNumbers(19);
         }
     }
     public static List<long> Icosagonals
     {
         get
         {
-            return PolygonNumbers(20);
+            return PolygonalNumbers(20);
         }
     }
     public static List<long> Icosihenagonals
     {
         get
         {
-            return PolygonNumbers(21);
+            return PolygonalNumbers(21);
         }
     }
     public static List<long> Icosidigonals
     {
         get
         {
-            return PolygonNumbers(22);
+            return PolygonalNumbers(22);
         }
     }
     public static List<long> Icositrigonals
     {
         get
         {
-            return PolygonNumbers(23);
+            return PolygonalNumbers(23);
         }
     }
     public static List<long> Icositetragonals
     {
         get
         {
-            return PolygonNumbers(24);
+            return PolygonalNumbers(24);
         }
     }
     public static bool IsTriangular(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(3).Contains(number));
+        return (PolygonalNumbers(3).Contains(number));
     }
     public static bool IsSquare(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(4).Contains(number));
+        return (PolygonalNumbers(4).Contains(number));
     }
     public static bool IsPentagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(5).Contains(number));
+        return (PolygonalNumbers(5).Contains(number));
     }
     public static bool IsHexagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(6).Contains(number));
+        return (PolygonalNumbers(6).Contains(number));
     }
     public static bool IsHeptagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(7).Contains(number));
+        return (PolygonalNumbers(7).Contains(number));
     }
     public static bool IsOctagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(8).Contains(number));
+        return (PolygonalNumbers(8).Contains(number));
     }
     public static bool IsNonagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(9).Contains(number));
+        return (PolygonalNumbers(9).Contains(number));
     }
     public static bool IsDecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(10).Contains(number));
+        return (PolygonalNumbers(10).Contains(number));
     }
     public static bool IsHendecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(11).Contains(number));
+        return (PolygonalNumbers(11).Contains(number));
     }
     public static bool IsDodecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(12).Contains(number));
+        return (PolygonalNumbers(12).Contains(number));
     }
     public static bool IsTridecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(13).Contains(number));
+        return (PolygonalNumbers(13).Contains(number));
     }
     public static bool IsTetradecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(14).Contains(number));
+        return (PolygonalNumbers(14).Contains(number));
     }
     public static bool IsPentadecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(15).Contains(number));
+        return (PolygonalNumbers(15).Contains(number));
     }
     public static bool IsHexadecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(16).Contains(number));
+        return (PolygonalNumbers(16).Contains(number));
     }
     public static bool IsHeptadecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(17).Contains(number));
+        return (PolygonalNumbers(17).Contains(number));
     }
     public static bool IsOctadecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(18).Contains(number));
+        return (PolygonalNumbers(18).Contains(number));
     }
     public static bool IsNonadecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(19).Contains(number));
+        return (PolygonalNumbers(19).Contains(number));
     }
     public static bool IsIcosagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(20).Contains(number));
+        return (PolygonalNumbers(20).Contains(number));
     }
     public static bool IsIcosihenagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(21).Contains(number));
+        return (PolygonalNumbers(21).Contains(number));
     }
     public static bool IsIcosidigonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(22).Contains(number));
+        return (PolygonalNumbers(22).Contains(number));
     }
     public static bool IsIcositrigonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(23).Contains(number));
+        return (PolygonalNumbers(23).Contains(number));
     }
     public static bool IsIcositetragonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (PolygonNumbers(24).Contains(number));
+        return (PolygonalNumbers(24).Contains(number));
     }
 
     //http://en.wikipedia.org/wiki/Centered_polygonal_number
-    // ith number of CenteredPolygon(sides=N) = (((N * i)/2) * (i-1)) + 1
-    // Whereas a prime number p cannot be a polygon number, many centered polygon numbers are primes.
-    private static Dictionary<int, List<long>> s_centered_polygon_numbers_dictionary = new Dictionary<int, List<long>>();
-    public static List<long> CenteredPolygonNumbers(int sides)
+    // ith number of CenteredPolygonal(sides=N) = (((N * i)/2) * (i-1)) + 1
+    // Whereas a prime number p cannot be a polygonal number, many centered polygonal numbers are primes.
+    private static Dictionary<int, List<long>> s_centered_polygonal_numbers_dictionary = new Dictionary<int, List<long>>();
+    public static List<long> CenteredPolygonalNumbers(int sides)
     {
-        if (!s_centered_polygon_numbers_dictionary.ContainsKey(sides))
+        if (!s_centered_polygonal_numbers_dictionary.ContainsKey(sides))
         {
-            GenerateCenteredPolygonNumbers(sides);
+            GenerateCenteredPolygonalNumbers(sides);
         }
 
-        if (s_centered_polygon_numbers_dictionary.ContainsKey(sides))
+        if (s_centered_polygonal_numbers_dictionary.ContainsKey(sides))
         {
-            return s_centered_polygon_numbers_dictionary[sides];
+            return s_centered_polygonal_numbers_dictionary[sides];
         }
         else
         {
             return null;
         }
     }
-    private static void GenerateCenteredPolygonNumbers(int sides)
+    private static void GenerateCenteredPolygonalNumbers(int sides)
     {
-        List<long> polygon_numbers = new List<long>(s_series_limit);
+        List<long> centered_polygonal_numbers = new List<long>(s_series_limit);
         for (int n = 1; n <= s_series_limit; n++)
         {
             long number = (int)(((sides * n) / 2.0D) * (n - 1)) + 1L;
-            polygon_numbers.Add(number);
+            centered_polygonal_numbers.Add(number);
         }
-        s_centered_polygon_numbers_dictionary.Add(sides, polygon_numbers);
+        s_centered_polygonal_numbers_dictionary.Add(sides, centered_polygonal_numbers);
     }
-    public static bool IsCenteredPolygonNumber(int sides, long number)
+    public static bool IsCenteredPolygonalNumber(int sides, long number)
     {
         if (number < 0L) number *= -1L;
-
-        if (s_centered_polygon_numbers_dictionary.ContainsKey(sides))
+        if (s_centered_polygonal_numbers_dictionary.ContainsKey(sides))
         {
-            return (s_centered_polygon_numbers_dictionary[sides].Contains(number));
+            return (s_centered_polygonal_numbers_dictionary[sides].Contains(number));
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
     public static List<long> CenteredTriangulars
     {
         get
         {
-            return CenteredPolygonNumbers(3);
+            return CenteredPolygonalNumbers(3);
         }
     }
     public static List<long> CenteredSquares
     {
         get
         {
-            return CenteredPolygonNumbers(4);
+            return CenteredPolygonalNumbers(4);
         }
     }
     public static List<long> CenteredPentagonals
     {
         get
         {
-            return CenteredPolygonNumbers(5);
+            return CenteredPolygonalNumbers(5);
         }
     }
     public static List<long> CenteredHexagonals
     {
         get
         {
-            return CenteredPolygonNumbers(6);
+            return CenteredPolygonalNumbers(6);
         }
     }
     public static List<long> CenteredHeptagonals
     {
         get
         {
-            return CenteredPolygonNumbers(7);
+            return CenteredPolygonalNumbers(7);
         }
     }
     public static List<long> CenteredOctagonals
     {
         get
         {
-            return CenteredPolygonNumbers(8);
+            return CenteredPolygonalNumbers(8);
         }
     }
     public static List<long> CenteredNonagonals
     {
         get
         {
-            return CenteredPolygonNumbers(9);
+            return CenteredPolygonalNumbers(9);
         }
     }
     public static List<long> CenteredDecagonals
     {
         get
         {
-            return CenteredPolygonNumbers(10);
+            return CenteredPolygonalNumbers(10);
         }
     }
     public static List<long> CenteredHendecagonals
     {
         get
         {
-            return CenteredPolygonNumbers(11);
+            return CenteredPolygonalNumbers(11);
         }
     }
     public static List<long> CenteredDodecagonals
     {
         get
         {
-            return CenteredPolygonNumbers(12);
+            return CenteredPolygonalNumbers(12);
         }
     }
     public static List<long> CenteredTridecagonals
     {
         get
         {
-            return CenteredPolygonNumbers(13);
+            return CenteredPolygonalNumbers(13);
         }
     }
     public static List<long> CenteredTetradecagonals
     {
         get
         {
-            return CenteredPolygonNumbers(14);
+            return CenteredPolygonalNumbers(14);
         }
     }
     public static List<long> CenteredPentadecagonals
     {
         get
         {
-            return CenteredPolygonNumbers(15);
+            return CenteredPolygonalNumbers(15);
         }
     }
     public static List<long> CenteredHexadecagonals
     {
         get
         {
-            return CenteredPolygonNumbers(16);
+            return CenteredPolygonalNumbers(16);
         }
     }
     public static List<long> CenteredHeptadecagonals
     {
         get
         {
-            return CenteredPolygonNumbers(17);
+            return CenteredPolygonalNumbers(17);
         }
     }
     public static List<long> CenteredOctadecagonals
     {
         get
         {
-            return CenteredPolygonNumbers(18);
+            return CenteredPolygonalNumbers(18);
         }
     }
     public static List<long> CenteredNonadecagonals
     {
         get
         {
-            return CenteredPolygonNumbers(19);
+            return CenteredPolygonalNumbers(19);
         }
     }
     public static List<long> CenteredIcosagonals
     {
         get
         {
-            return CenteredPolygonNumbers(20);
+            return CenteredPolygonalNumbers(20);
         }
     }
     public static List<long> CenteredIcosihenagonals
     {
         get
         {
-            return CenteredPolygonNumbers(21);
+            return CenteredPolygonalNumbers(21);
         }
     }
     public static List<long> CenteredIcosidigonals
     {
         get
         {
-            return CenteredPolygonNumbers(22);
+            return CenteredPolygonalNumbers(22);
         }
     }
     public static List<long> CenteredIcositrigonals
     {
         get
         {
-            return CenteredPolygonNumbers(23);
+            return CenteredPolygonalNumbers(23);
         }
     }
     public static List<long> CenteredIcositetragonals
     {
         get
         {
-            return CenteredPolygonNumbers(24);
+            return CenteredPolygonalNumbers(24);
         }
     }
     public static bool IsCenteredTriangular(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(3).Contains(number));
+        return (CenteredPolygonalNumbers(3).Contains(number));
     }
     public static bool IsCenteredSquare(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(4).Contains(number));
+        return (CenteredPolygonalNumbers(4).Contains(number));
     }
     public static bool IsCenteredPentagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(5).Contains(number));
+        return (CenteredPolygonalNumbers(5).Contains(number));
     }
     public static bool IsCenteredHexagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(6).Contains(number));
+        return (CenteredPolygonalNumbers(6).Contains(number));
     }
     public static bool IsCenteredHeptagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(7).Contains(number));
+        return (CenteredPolygonalNumbers(7).Contains(number));
     }
     public static bool IsCenteredOctagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(8).Contains(number));
+        return (CenteredPolygonalNumbers(8).Contains(number));
     }
     public static bool IsCenteredNonagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(9).Contains(number));
+        return (CenteredPolygonalNumbers(9).Contains(number));
     }
     public static bool IsCenteredDecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(10).Contains(number));
+        return (CenteredPolygonalNumbers(10).Contains(number));
     }
     public static bool IsCenteredHendecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(11).Contains(number));
+        return (CenteredPolygonalNumbers(11).Contains(number));
     }
     public static bool IsCenteredDodecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(12).Contains(number));
+        return (CenteredPolygonalNumbers(12).Contains(number));
     }
     public static bool IsCenteredTridecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(13).Contains(number));
+        return (CenteredPolygonalNumbers(13).Contains(number));
     }
     public static bool IsCenteredTetradecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(14).Contains(number));
+        return (CenteredPolygonalNumbers(14).Contains(number));
     }
     public static bool IsCenteredPentadecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(15).Contains(number));
+        return (CenteredPolygonalNumbers(15).Contains(number));
     }
     public static bool IsCenteredHexadecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(16).Contains(number));
+        return (CenteredPolygonalNumbers(16).Contains(number));
     }
     public static bool IsCenteredHeptadecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(17).Contains(number));
+        return (CenteredPolygonalNumbers(17).Contains(number));
     }
     public static bool IsCenteredOctadecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(18).Contains(number));
+        return (CenteredPolygonalNumbers(18).Contains(number));
     }
     public static bool IsCenteredNonadecagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(19).Contains(number));
+        return (CenteredPolygonalNumbers(19).Contains(number));
     }
     public static bool IsCenteredIcosagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(20).Contains(number));
+        return (CenteredPolygonalNumbers(20).Contains(number));
     }
     public static bool IsCenteredIcosihenagonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(21).Contains(number));
+        return (CenteredPolygonalNumbers(21).Contains(number));
     }
     public static bool IsCenteredIcosidigonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(22).Contains(number));
+        return (CenteredPolygonalNumbers(22).Contains(number));
     }
     public static bool IsCenteredIcositrigonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(23).Contains(number));
+        return (CenteredPolygonalNumbers(23).Contains(number));
     }
     public static bool IsCenteredIcositetragonal(long number)
     {
         if (number < 0L) number *= -1L;
-        return (CenteredPolygonNumbers(24).Contains(number));
+        return (CenteredPolygonalNumbers(24).Contains(number));
     }
 
     //http://en.wikipedia.org/wiki/Platonic_solid
@@ -4072,107 +4070,95 @@ public static class Numbers
     //http://oeis.org/A005902
     //(2*n+1)*(5*n^2+5*n+3)/3
     //1, 13, 55, 147, 309, 561, 923, 1415, 2057, 2869, 3871, 5083, 6525, 8217, 10179, 12431, 14993, 17885, 21127, 24739, 28741, 33153, 37995, 43287, 49049, 55301, 62063, 69355, 77197, 85609, 94611, 104223, 114465, 125357, 136919, 149171, ...
-    private static List<long> s_polyhedral_4_numbers = null;
-    private static List<long> s_polyhedral_6_numbers = null;
-    private static List<long> s_polyhedral_8_numbers = null;
-    private static List<long> s_polyhedral_12_numbers = null;
-    private static List<long> s_polyhedral_20_numbers = null;
+    private static List<long> s_polyhedral_4_faces = null;
+    private static List<long> s_polyhedral_6_faces = null;
+    private static List<long> s_polyhedral_8_faces = null;
+    private static List<long> s_polyhedral_12_faces = null;
+    private static List<long> s_polyhedral_20_faces = null;
     public static List<long> CenteredTetrahedralNumbers
     {
         get
         {
-            if (s_polyhedral_4_numbers == null)
+            if (s_polyhedral_4_faces == null)
             {
-                s_polyhedral_4_numbers = new List<long>(s_series_limit);
+                s_polyhedral_4_faces = new List<long>(s_series_limit);
                 for (int n = 0; n < s_series_limit; n++)
                 {
                     long number = ((2 * n + 1) * ((n * n) + n + 3)) / 3;
-                    s_polyhedral_4_numbers.Add(number);
+                    s_polyhedral_4_faces.Add(number);
                 }
             }
-            return s_polyhedral_4_numbers;
-        }
-    }
-    public static List<long> CenteredCubeNumbers
-    {
-        get
-        {
-            return CenteredHexahedronNumbers;
+            return s_polyhedral_4_faces;
         }
     }
     public static List<long> CenteredHexahedronNumbers
     {
         get
         {
-            if (s_polyhedral_6_numbers == null)
+            if (s_polyhedral_6_faces == null)
             {
-                s_polyhedral_6_numbers = new List<long>(s_series_limit);
+                s_polyhedral_6_faces = new List<long>(s_series_limit);
                 for (int n = 0; n < s_series_limit; n++)
                 {
                     long number = (n * n * n) + ((n + 1) * (n + 1) * (n + 1));
-                    s_polyhedral_6_numbers.Add(number);
+                    s_polyhedral_6_faces.Add(number);
                 }
             }
-            return s_polyhedral_6_numbers;
+            return s_polyhedral_6_faces;
         }
     }
     public static List<long> CenteredOctahedralNumbers
     {
         get
         {
-            if (s_polyhedral_8_numbers == null)
+            if (s_polyhedral_8_faces == null)
             {
-                s_polyhedral_8_numbers = new List<long>(s_series_limit);
+                s_polyhedral_8_faces = new List<long>(s_series_limit);
                 for (int n = 0; n < s_series_limit; n++)
                 {
                     long number = (2 * n + 1) * (2 * (n * n) + 2 * n + 3) / 3;
-                    s_polyhedral_8_numbers.Add(number);
+                    s_polyhedral_8_faces.Add(number);
                 }
             }
-            return s_polyhedral_8_numbers;
+            return s_polyhedral_8_faces;
         }
     }
     public static List<long> CenteredDodecahedralNumbers
     {
         get
         {
-            if (s_polyhedral_12_numbers == null)
+            if (s_polyhedral_12_faces == null)
             {
-                s_polyhedral_12_numbers = new List<long>(s_series_limit);
+                s_polyhedral_12_faces = new List<long>(s_series_limit);
                 for (int n = 0; n < s_series_limit; n++)
                 {
                     long number = (2 * n + 1) * (5 * (n * n) + 5 * n + 1);
-                    s_polyhedral_12_numbers.Add(number);
+                    s_polyhedral_12_faces.Add(number);
                 }
             }
-            return s_polyhedral_12_numbers;
+            return s_polyhedral_12_faces;
         }
     }
     public static List<long> CenteredIcosahedralNumbers
     {
         get
         {
-            if (s_polyhedral_20_numbers == null)
+            if (s_polyhedral_20_faces == null)
             {
-                s_polyhedral_20_numbers = new List<long>(s_series_limit);
+                s_polyhedral_20_faces = new List<long>(s_series_limit);
                 for (int n = 0; n < s_series_limit; n++)
                 {
                     long number = (2 * n + 1) * (5 * (n * n) + 5 * n + 3) / 3;
-                    s_polyhedral_20_numbers.Add(number);
+                    s_polyhedral_20_faces.Add(number);
                 }
             }
-            return s_polyhedral_20_numbers;
+            return s_polyhedral_20_faces;
         }
     }
     public static bool IsCenteredTetrahedralNumber(long number)
     {
         if (number < 0L) number *= -1L;
         return (CenteredTetrahedralNumbers.Contains(number));
-    }
-    public static bool IsCenteredCubeNumber(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return IsCenteredHexahedronNumber(number);
     }
     public static bool IsCenteredHexahedronNumber(long number)
     {
@@ -4245,15 +4231,11 @@ public static class Numbers
     public static bool IsPolyhexNumber(int hexagons, long number)
     {
         if (number < 0L) number *= -1L;
-
         if (s_polyhex_numbers_dictionary.ContainsKey(hexagons))
         {
             return (s_polyhex_numbers_dictionary[hexagons].Contains(number));
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
     public static List<long> C2hPolyhexHydrocarbons
     {

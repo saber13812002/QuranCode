@@ -16987,6 +16987,18 @@ public partial class MainForm : Form, ISubscriber
                 ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Pivot");
                 ResearchMethodParameterTextBox.Visible = true;
             }
+            else if (method_name.Contains("Polygon"))
+            {
+                ResearchMethodParameterTextBox.Text = "3";
+                ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Regular polygon sides (3 to 24)");
+                ResearchMethodParameterTextBox.Visible = true;
+            }
+            else if (method_name.Contains("Platonic"))
+            {
+                ResearchMethodParameterTextBox.Text = "4";
+                ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Platonic solid faces (4, 6, 8, 12, 20)");
+                ResearchMethodParameterTextBox.Visible = true;
+            }
             else if (method_name.Contains("Index"))
             {
                 ResearchMethodParameterTextBox.Text = "0";
