@@ -774,11 +774,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LICENSE">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Help\AmazingQuran.xls">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

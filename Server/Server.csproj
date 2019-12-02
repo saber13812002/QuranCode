@@ -96,6 +96,9 @@
     <Content Include="Values\Original_Frequency_Linear.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Values\Original_Initials_Frequency.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Values\Simplified28_Abjad_Composites.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -108,7 +111,7 @@
     <Content Include="Values\Simplified28_Abjad_Primes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified28_Alphabets_Dots.txt">
+    <Content Include="Values\Simplified28_Letters_Dots.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Values\Simplified28_Alphabet_Composites.txt">
@@ -159,7 +162,7 @@
     <Content Include="Values\Simplified29_Abjad_Primes.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified29_Alphabets_Dots.txt">
+    <Content Include="Values\Simplified29_Letters_Dots.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Values\Simplified29_Alphabet_Composites.txt">
@@ -201,7 +204,7 @@
     <Content Include="Values\Simplified29_T29A29C19G23_DNA.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified30_Alphabets_Dots.txt">
+    <Content Include="Values\Simplified30_Letters_Dots.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Values\Simplified30_Alphabet_QuranNumbers.txt">
@@ -213,7 +216,7 @@
     <Content Include="Values\Simplified30_Frequency_QuranNumbers.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified31_Alphabets_Dots.txt">
+    <Content Include="Values\Simplified31_Letters_Dots.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Values\Simplified31_Alphabet_Composites.txt">
@@ -297,10 +300,10 @@
     <Content Include="Values\Simplified36_Initials_Frequency.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\Simplified36_Alphabets_Dots.txt">
+    <Content Include="Values\Simplified36_Letters_Dots.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Values\SimplifiedDots_Alphabets_Dots.txt">
+    <Content Include="Values\SimplifiedDots_Letters_Dots.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
