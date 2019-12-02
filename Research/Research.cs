@@ -59,18 +59,141 @@ public static class Research
         return verses;
     }
 
-    private static string _____________________________(Client client, string param, bool in_search_result)
+    public static string ___________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
-    private static string Half1EvenVerses(Client client, string param, bool in_search_result)
+    public static string WordNumber_WordValue(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
         if (verses != null)
         {
-            return DoHalf1EvenVerses(client, verses);
+            return DoWordNumber_WordValue(client, verses);
         }
+        return null;
+    }
+    public static string LetterNumber_WordValue(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        List<Verse> verses = GetSourceVerses(client, in_search_result);
+        if (verses != null)
+        {
+            return DoLetterNumber_WordValue(client, verses);
+        }
+        return null;
+    }
+    public static string LetterNumber_LetterValues(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        List<Verse> verses = GetSourceVerses(client, in_search_result);
+        if (verses != null)
+        {
+            return DoLetterNumber_LetterValues(client, verses);
+        }
+        return null;
+    }
+    private static string DoWordNumber_WordValue(Client client, List<Verse> verses)
+    {
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (verses == null) return null;
+        List<Chapter> chapters = client.Book.GetChapters(verses);
+
+        StringBuilder str = new StringBuilder();
+        foreach (Chapter chapter in chapters)
+        {
+            str.Append(chapter.SortedNumber);
+            foreach (Verse verse in chapter.Verses)
+            {
+                foreach (Word word in verse.Words)
+                {
+                    long value = client.CalculateValue(word);
+                    if (word.NumberInChapter == value)
+                    {
+                        str.Append("\t" + word.Text);
+                    }
+                }
+            }
+            str.AppendLine();
+        }
+        return str.ToString();
+    }
+    private static string DoLetterNumber_WordValue(Client client, List<Verse> verses)
+    {
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (verses == null) return null;
+        List<Chapter> chapters = client.Book.GetChapters(verses);
+
+        StringBuilder str = new StringBuilder();
+        foreach (Chapter chapter in chapters)
+        {
+            str.Append(chapter.SortedNumber);
+            foreach (Verse verse in chapter.Verses)
+            {
+                foreach (Word word in verse.Words)
+                {
+                    long value = 0L;
+                    value += client.CalculateValue(word);
+                    if (word.Letters[0].NumberInChapter == value)
+                    {
+                        str.Append("\t" + word.Text);
+                    }
+                }
+            }
+            str.AppendLine();
+        }
+        return str.ToString();
+    }
+    private static string DoLetterNumber_LetterValues(Client client, List<Verse> verses)
+    {
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (verses == null) return null;
+        List<Chapter> chapters = client.Book.GetChapters(verses);
+
+        StringBuilder str = new StringBuilder();
+        foreach (Chapter chapter in chapters)
+        {
+            str.Append(chapter.SortedNumber);
+            foreach (Verse verse in chapter.Verses)
+            {
+                foreach (Word word in verse.Words)
+                {
+                    long value = 0L;
+                    string word_start = null;
+                    for (int i = 0; i < word.Letters.Count; i++)
+                    {
+                        value += client.CalculateValue(word.Letters[i]);
+                        word_start += word.Letters[i].Character;
+                        if (word.Letters[0].NumberInChapter == value)
+                        {
+                            if (i == word.Letters.Count - 1) // full word
+                            {
+                                str.Append("\t" + word_start);
+                            }
+                            else // partial word
+                            {
+                                string word_end = null;
+                                for (int j = i + 1; j < word.Letters.Count; j++)
+                                {
+                                    word_end += word.Letters[j];
+                                }
+                                str.Append("\t" + word_start + "." + word_end);
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            str.AppendLine();
+        }
+        return str.ToString();
+    }
+
+    private static string _____________________________(Client client, string param, bool in_search_result)
+    {
         return null;
     }
     private static string Half2EvenVerses(Client client, string param, bool in_search_result)
