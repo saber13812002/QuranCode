@@ -399,33 +399,37 @@ public partial class MainForm : Form
             {
                 NextHistoryItem();
             }
-            else if (e.KeyCode == Keys.Up)
-            {
-                NextPrimeNumber();
-            }
             else if (e.KeyCode == Keys.Down)
             {
                 PreviousPrimeNumber();
             }
-            else if (e.KeyCode == Keys.Delete)
+            else if (e.KeyCode == Keys.Up)
             {
+                NextPrimeNumber();
             }
-        }
-        else if (e.KeyCode == Keys.Up)
-        {
-            IncrementValue();
-        }
-        else if (e.KeyCode == Keys.Down)
-        {
-            DecrementValue();
-        }
-        else if (e.KeyCode == Keys.Enter)
-        {
-            CallRun();
+            else
+            {
+                ValueTextBox.ForeColor = Color.DarkGray;
+            }
         }
         else
         {
-            ValueTextBox.ForeColor = Color.DarkGray;
+            if (e.KeyCode == Keys.Up)
+            {
+                IncrementValue();
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                DecrementValue();
+            }
+            else if (e.KeyCode == Keys.Enter)
+            {
+                CallRun();
+            }
+            else
+            {
+                ValueTextBox.ForeColor = Color.DarkGray;
+            }
         }
     }
     private void IncrementValue()
@@ -439,7 +443,8 @@ public partial class MainForm : Form
                 ValueTextBox.Text = value.ToString();
                 ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
                 ValueTextBox.Refresh();
-                //FactorizeValue(value);
+
+                CallRun();
             }
         }
     }
@@ -454,260 +459,123 @@ public partial class MainForm : Form
                 ValueTextBox.Text = value.ToString();
                 ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
                 ValueTextBox.Refresh();
-                //FactorizeValue(value);
+
+                CallRun();
             }
-        }
-    }
-
-    private void NthNumberDimensionTextBox_KeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.Up)
-        {
-            IncrementNumberDimension();
-        }
-        else if (e.KeyCode == Keys.Down)
-        {
-            DecrementNumberDimension();
-        }
-    }
-    private void IncrementNumberDimension()
-    {
-        int dimension = 0;
-        int index = 0;
-        int pos = NthNumberDimensionTextBox.Text.IndexOf("a");
-        if (pos > 0)
-        {
-            string dimension_str = NthNumberDimensionTextBox.Text.Substring(0, pos);
-            if (int.TryParse(dimension_str, out dimension))
-            {
-                string index_str = NthNumberDimensionTextBox.Text.Substring(pos + 1);
-                if (int.TryParse(index_str, out index))
-                {
-                    index--;
-
-                    if (ModifierKeys == Keys.Control)
-                    {
-                        if (dimension < 19)
-                        {
-                            dimension++;
-                        }
-                    }
-                    else
-                    {
-                        index++;
-                    }
-
-                    long value = Numbers.NumberDimensions[dimension - 1][index];
-                    if (value > -1L)
-                    {
-                        FactorizeValue(value);
-                    }
-                }
-            }
-        }
-    }
-    private void DecrementNumberDimension()
-    {
-        int dimension = 0;
-        int index = 0;
-        int pos = NthNumberDimensionTextBox.Text.IndexOf("a");
-        if (pos > 0)
-        {
-            string dimension_str = NthNumberDimensionTextBox.Text.Substring(0, pos);
-            if (int.TryParse(dimension_str, out dimension))
-            {
-                string index_str = NthNumberDimensionTextBox.Text.Substring(pos + 1);
-                if (int.TryParse(index_str, out index))
-                {
-                    index--;
-
-                    if (ModifierKeys == Keys.Control)
-                    {
-                        if (dimension > 1)
-                        {
-                            dimension--;
-                        }
-                    }
-                    else
-                    {
-                        if (index > 0)
-                        {
-                            index--;
-                        }
-                    }
-
-                    long value = Numbers.NumberDimensions[dimension - 1][index];
-                    if (value > -1L)
-                    {
-                        FactorizeValue(value);
-                    }
-                }
-            }
-        }
-    }
-
-    private void NextPrimeNumber()
-    {
-        // guard against multiple runs on multiple ENTER keys
-        if ((m_worker_thread != null) && (m_worker_thread.IsAlive)) return;
-
-        this.Cursor = Cursors.WaitCursor;
-        try
-        {
-            if (ValueTextBox.Text.Length == 0) ValueTextBox.Text = "1";
-            string value = ValueTextBox.Text;
-
-            BeforeProcessing();
-
-            try
-            {
-                m_factorizer = new Factorizer(this, "nextprime", value, m_multithreading);
-                if (m_factorizer != null)
-                {
-                    m_worker_thread = new Thread(new ThreadStart(m_factorizer.Run));
-                    m_worker_thread.Priority = ThreadPriority.Highest;
-                    m_worker_thread.IsBackground = false;
-                    m_worker_thread.Start();
-                }
-            }
-            catch
-            {
-                Cancel();
-            }
-        }
-        finally
-        {
-            this.Cursor = Cursors.Default;
-        }
-    }
-    private void PreviousPrimeNumber()
-    {
-        // guard against multiple runs on multiple ENTER keys
-        if ((m_worker_thread != null) && (m_worker_thread.IsAlive)) return;
-
-        this.Cursor = Cursors.WaitCursor;
-        try
-        {
-            string value = ValueTextBox.Text + ",0"; // previousprime = nextprime(n,0), thanks to Benjamin Buhrow (bbuhrow@gmail.com) for telling me that.
-
-            BeforeProcessing();
-
-            try
-            {
-                m_factorizer = new Factorizer(this, "nextprime", value, m_multithreading);
-                if (m_factorizer != null)
-                {
-                    m_worker_thread = new Thread(new ThreadStart(m_factorizer.Run));
-                    m_worker_thread.Priority = ThreadPriority.Highest;
-                    m_worker_thread.IsBackground = false;
-                    m_worker_thread.Start();
-                }
-            }
-            catch
-            {
-                Cancel();
-            }
-        }
-        finally
-        {
-            this.Cursor = Cursors.Default;
-        }
-    }
-    private void NextPrimeLabel_Click(object sender, EventArgs e)
-    {
-        NextPrimeNumber();
-    }
-    private void PreviousPrimeLabel_Click(object sender, EventArgs e)
-    {
-        PreviousPrimeNumber();
-    }
-
-    private List<string> m_history_items = new List<string>();
-    private int m_history_index = -1;
-    private void PreviousHistoryItem()
-    {
-        if ((m_history_index > 0) && (m_history_index < m_history_items.Count))
-        {
-            m_history_index--;
-            ValueTextBox.Text = m_history_items[m_history_index];
-
-            ClearNumberAnalyses();
-            ClearFactors();
-            ClearProgress();
-        }
-        ValueTextBox.Focus();
-    }
-    private void NextHistoryItem()
-    {
-        if ((m_history_index >= 0) && (m_history_index < m_history_items.Count - 1))
-        {
-            m_history_index++;
-            ValueTextBox.Text = m_history_items[m_history_index];
-
-            ClearNumberAnalyses();
-            ClearFactors();
-            ClearProgress();
-        }
-        ValueTextBox.Focus();
-    }
-
-    private double m_double_value = 0.0D;
-    private double CalculateValue(string expression)
-    {
-        double result = 0D;
-        try
-        {
-            result = Radix.Decode(expression, Numbers.DEFAULT_RADIX);
-            //this.ToolTip.SetToolTip(this.ValueTextBox, result.ToString());
-        }
-        catch // if expression
-        {
-            string text = CalculateExpression(expression);
-            //this.ToolTip.SetToolTip(this.ValueTextBox, text); // display the decimal expansion
-
-            try
-            {
-                result = double.Parse(text);
-            }
-            catch
-            {
-                result = 0L;
-            }
-        }
-        return result;
-    }
-    private string CalculateExpression(string expression)
-    {
-        try
-        {
-            return Evaluator.Evaluate(expression, Numbers.DEFAULT_RADIX);
-        }
-        catch
-        {
-            return expression;
         }
     }
     private void FactorizeValue(long value)
     {
-        if (value < 0L) value *= -1L;
-
-        ValueTextBox.Text = Radix.Encode(value, Numbers.DEFAULT_RADIX);
-        ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
-        ValueTextBox.Refresh();
-
-        CallRun();
-    }
-    private void AnalyzeValue(long value)
-    {
-        if (value < 0L) value *= -1L;
-
-        this.Cursor = Cursors.WaitCursor;
         try
         {
+            PrimeFactorsTextBox.Text = "";
+            NthNumberDimensionTextBox.Text = "";
+            NthNumberTextBox.Text = "";
+            NthAdditiveNumberTextBox.Text = "";
+            NthNonAdditiveNumberTextBox.Text = "";
+            SquareSumTextBox.Text = "";
+            Nth4n1NumberTextBox.Text = "";
+            PrimeFactorsTextBox.Refresh();
+            NthNumberTextBox.Refresh();
+            NthAdditiveNumberTextBox.Refresh();
+            NthNonAdditiveNumberTextBox.Refresh();
+            SquareSumTextBox.Refresh();
+
+            ValueTextBox.Text = value.ToString();
+            ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
             ValueTextBox.SelectionStart = ValueTextBox.Text.Length;
             ValueTextBox.SelectionLength = 0;
-            ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(value);
             ValueTextBox.Refresh();
+
+            int digit_sum = Numbers.DigitSum(value);
+            DigitSumTextBox.Text = (digit_sum == 0) ? "" : digit_sum.ToString();
+            DigitSumTextBox.ForeColor = Numbers.GetNumberTypeColor(digit_sum);
+            DigitSumTextBox.Refresh();
+
+            int digital_root = Numbers.DigitalRoot(value);
+            DigitalRootTextBox.Text = (digital_root == 0) ? "" : digital_root.ToString();
+            DigitalRootTextBox.ForeColor = Numbers.GetNumberTypeColor(digital_root);
+            DigitalRootTextBox.Refresh();
+
+            long sum_of_numbers = Numbers.SumOfNumbers(value);
+            SumOfNumbersTextBox.Text = (sum_of_numbers == 0) ? "" : sum_of_numbers.ToString();
+            SumOfNumbersTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_numbers);
+            SumOfNumbersTextBox.Refresh();
+
+            long sum_of_digit_sums = Numbers.SumOfNumberDigitSums(value);
+            SumOfDigitSumsTextBox.Text = (sum_of_digit_sums == 0) ? "" : sum_of_digit_sums.ToString();
+            SumOfDigitSumsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
+            SumOfDigitSumsTextBox.Refresh();
+
+            long sum_of_digital_roots = Numbers.SumNumberDigitalRoots(value);
+            SumOfDigitalRootsTextBox.Text = (sum_of_digital_roots == 0) ? "" : sum_of_digital_roots.ToString();
+            SumOfDigitalRootsTextBox.ForeColor = Numbers.GetNumberTypeColor(sum_of_digital_roots);
+            SumOfDigitalRootsTextBox.Refresh();
+
+            List<long> factors = Numbers.Factorize(value);
+            if (factors != null)
+            {
+                m_number_dimension = factors.Count;
+                int nth_number_dimension_index = -1;
+                if (m_factros_type == FactorsType.Any)
+                {
+                    nth_number_dimension_index = Numbers.NumberDimensionIndexOf(m_number_dimension, value) + 1;
+                    NthNumberDimensionTextBox.Text = m_number_dimension.ToString() + "a" + nth_number_dimension_index.ToString();
+                }
+                else if (m_factros_type == FactorsType.Duplicate)
+                {
+                    nth_number_dimension_index = Numbers.DuplicateNumberDimensionIndexOf(m_number_dimension, value) + 1;
+                    NthNumberDimensionTextBox.Text = m_number_dimension.ToString() + "d" + nth_number_dimension_index.ToString();
+                }
+                else if (m_factros_type == FactorsType.Unique)
+                {
+                    nth_number_dimension_index = Numbers.UniqueNumberDimensionIndexOf(m_number_dimension, value) + 1;
+                    NthNumberDimensionTextBox.Text = m_number_dimension.ToString() + "u" + nth_number_dimension_index.ToString();
+                }
+                NthNumberDimensionTextBox.Refresh();
+            }
+            string factors_str = Numbers.FactorizeToString(value);
+            PrimeFactorsTextBox.Text = factors_str;
+            PrimeFactorsTextBox.Refresh();
+
+            int nth_number_index = 0;
+            int nth_additive_number_index = 0;
+            int nth_non_additive_number_index = 0;
+            if (Numbers.IsPrime(value))
+            {
+                m_index_type = IndexType.Prime;
+                nth_number_index = Numbers.PrimeIndexOf(value) + 1;
+                nth_additive_number_index = Numbers.AdditivePrimeIndexOf(value) + 1;
+                nth_non_additive_number_index = Numbers.NonAdditivePrimeIndexOf(value) + 1;
+                NthNumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
+                NthAdditiveNumberTextBox.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime];
+                NthNonAdditiveNumberTextBox.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
+                ToolTip.SetToolTip(NthNumberTextBox, "Prime index");
+                ToolTip.SetToolTip(NthAdditiveNumberTextBox, "Additive prime index");
+                ToolTip.SetToolTip(NthNonAdditiveNumberTextBox, "Non-additive prime index");
+            }
+            else // any other index type will be treated as IndexNumberType.Composite
+            {
+                m_index_type = IndexType.Composite;
+                nth_number_index = Numbers.CompositeIndexOf(value) + 1;
+                nth_additive_number_index = Numbers.AdditiveCompositeIndexOf(value) + 1;
+                nth_non_additive_number_index = Numbers.NonAdditiveCompositeIndexOf(value) + 1;
+                NthNumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
+                NthAdditiveNumberTextBox.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite];
+                NthNonAdditiveNumberTextBox.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
+                ToolTip.SetToolTip(NthNumberTextBox, "Composite index");
+                ToolTip.SetToolTip(NthAdditiveNumberTextBox, "Additive composite index");
+                ToolTip.SetToolTip(NthNonAdditiveNumberTextBox, "Non-additive composite index");
+            }
+            NthNumberTextBox.Text = (nth_number_index > 0) ? nth_number_index.ToString() : "";
+            NthNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(nth_number_index);
+            NthNumberTextBox.Refresh();
+            NthAdditiveNumberTextBox.Text = (nth_additive_number_index > 0) ? nth_additive_number_index.ToString() : "";
+            NthAdditiveNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(nth_additive_number_index);
+            NthAdditiveNumberTextBox.Refresh();
+            NthNonAdditiveNumberTextBox.Text = (nth_non_additive_number_index > 0) ? nth_non_additive_number_index.ToString() : "";
+            NthNonAdditiveNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(nth_non_additive_number_index);
+            NthNonAdditiveNumberTextBox.Refresh();
 
             int plus1_index = -1;
             int minus1_index = -1;
@@ -753,7 +621,7 @@ public partial class MainForm : Form
                 }
             }
             Color n_color = Numbers.GetNumberTypeColor(n);
-            //double scale = 0.8d;
+            //double scale = 0.8D;
             //n_color = Color.FromArgb((int)(n_color.R * scale), (int)(n_color.G * scale), (int)(n_color.B * scale));
             SquareSumTextBox.ForeColor = n_color;
             SquareSumTextBox.Refresh();
@@ -761,156 +629,405 @@ public partial class MainForm : Form
             int _4n1_index = (plus1_index > 0) ? plus1_index : (minus1_index > 0) ? minus1_index : 0;
             Nth4n1NumberTextBox.Text = (_4n1_index > 0) ? _4n1_index.ToString() : "";
             Nth4n1NumberTextBox.ForeColor = Numbers.GetNumberTypeColor(_4n1_index);
+            //if (Nth4n1NumberTextBox.Text == "")
+            //{
+            //    Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
+            //}
+            //else
+            //{
+            //    if (Numbers.IsPrime(value))
+            //    {
+            //        Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
+            //    }
+            //    else // any other index type will be treated as IndexNumberType.Composite
+            //    {
+            //        Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
+            //    }
+            //}
+            UpdateToolTipNth4n1NumberTextBox();
             Nth4n1NumberTextBox.Refresh();
-
-            if (long.TryParse(m_factorizer.Number, out value))
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.Message, Application.ProductName);
+        }
+    }
+    private int m_number_dimension = 0;
+    private void NthNumberDimensionTextBox_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Up)
+        {
+            IncrementNumberDimension();
+        }
+        else if (e.KeyCode == Keys.Down)
+        {
+            DecrementNumberDimension();
+        }
+    }
+    private FactorsType m_factros_type = FactorsType.Any;
+    private void NthNumberDimensionLabel_Click(object sender, EventArgs e)
+    {
+        if (ModifierKeys == Keys.Control)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            try
             {
-                if (value <= 0L)
-                {
-                    m_index_type = IndexType.Prime;
-                }
-                else if (value == 1L)
-                {
-                    m_index_type = IndexType.Prime;
-                }
-                else
-                {
-                    int nth_number_index = 0;
-                    int nth_additive_number_index = 0;
-                    int nth_non_additive_number_index = 0;
-                    if (m_factorizer.IsPrime)
-                    {
-                        m_index_type = IndexType.Prime;
-                        nth_number_index = Numbers.PrimeIndexOf(value) + 1;
-                        nth_additive_number_index = Numbers.AdditivePrimeIndexOf(value) + 1;
-                        nth_non_additive_number_index = Numbers.NonAdditivePrimeIndexOf(value) + 1;
-                        NthNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(nth_number_index);
-                        NthAdditiveNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(nth_additive_number_index);
-                        NthNonAdditiveNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(nth_non_additive_number_index);
-                        NthNumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
-                        NthAdditiveNumberTextBox.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime];
-                        NthNonAdditiveNumberTextBox.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
-                        NthNumberTextBox.Text = (nth_number_index > 0) ? nth_number_index.ToString() : "";
-                        NthAdditiveNumberTextBox.Text = (nth_additive_number_index > 0) ? nth_additive_number_index.ToString() : "";
-                        NthNonAdditiveNumberTextBox.Text = (nth_non_additive_number_index > 0) ? nth_non_additive_number_index.ToString() : "";
-                        ToolTip.SetToolTip(NthNumberTextBox, "Prime index");
-                        ToolTip.SetToolTip(NthAdditiveNumberTextBox, "Additive prime index");
-                        ToolTip.SetToolTip(NthNonAdditiveNumberTextBox, "Non-additive prime index");
-
-                        //if (Nth4n1NumberTextBox.Text == "")
-                        //{
-                        //    Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
-                        //}
-                        //else
-                        //{
-                        //    if (Numbers.IsPrime(value))
-                        //    {
-                        //        Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditivePrime] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditivePrime];
-                        //    }
-                        //    else // any other index type will be treated as IndexNumberType.Composite
-                        //    {
-                        //        Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
-                        //    }
-                        //}
-                        //Nth4n1NumberTextBox.Refresh();
-                    }
-                    else // Composite
-                    {
-                        m_index_type = IndexType.Composite;
-                        nth_number_index = Numbers.CompositeIndexOf(value) + 1;
-                        nth_additive_number_index = Numbers.AdditiveCompositeIndexOf(value) + 1;
-                        nth_non_additive_number_index = Numbers.NonAdditiveCompositeIndexOf(value) + 1;
-                        NthNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(nth_number_index);
-                        NthAdditiveNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(nth_additive_number_index);
-                        NthNonAdditiveNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(nth_non_additive_number_index);
-                        NthNumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
-                        NthAdditiveNumberTextBox.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite];
-                        NthNonAdditiveNumberTextBox.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
-                        NthNumberTextBox.Text = (nth_number_index > 0) ? nth_number_index.ToString() : "";
-                        NthAdditiveNumberTextBox.Text = (nth_additive_number_index > 0) ? nth_additive_number_index.ToString() : "";
-                        NthNonAdditiveNumberTextBox.Text = (nth_non_additive_number_index > 0) ? nth_non_additive_number_index.ToString() : "";
-                        ToolTip.SetToolTip(NthNumberTextBox, "Composite index");
-                        ToolTip.SetToolTip(NthAdditiveNumberTextBox, "Additive composite index");
-                        ToolTip.SetToolTip(NthNonAdditiveNumberTextBox, "Non-additive composite index");
-
-                        //if (Nth4n1NumberTextBox.Text == "")
-                        //{
-                        //    Nth4n1NumberTextBox.BackColor = SystemColors.ControlLight;
-                        //}
-                        //else
-                        //{
-                        //    Nth4n1NumberTextBox.BackColor = (nth_additive_number_index > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.AdditiveComposite] : Numbers.NUMBER_TYPE_BACKCOLORS[(int)NumberType.NonAdditiveComposite];
-                        //}
-                        //Nth4n1NumberTextBox.Refresh();
-                    }
-                }
-
-                UpdateToolTipNth4n1NumberTextBox();
+                string filename = Globals.NUMBERS_FOLDER + "/" + m_number_dimension.ToString() + "a.txt";
+                FileHelper.DisplayFile(filename);
             }
-            else  // BigIntegr so Yafu tool is used
+            catch (Exception ex)
             {
-                if (m_factorizer.IsPrime)
+                while (ex != null)
                 {
-                    m_index_type = IndexType.Prime;
-
-                    ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(73L);
-                    if (Numbers.IsPrime(Numbers.DigitSum(m_factorizer.Number)))
-                    {
-                        ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(29L);
-                    }
-                    ValueTextBox.Refresh();
-
-                    NthNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(-1L);
-                    NthAdditiveNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(-1L);
-                    NthNonAdditiveNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(-1L);
-                    NthNumberTextBox.Text = "-1";
-                    NthAdditiveNumberTextBox.Text = "-1";
-                    NthNonAdditiveNumberTextBox.Text = "-1";
-                    ToolTip.SetToolTip(NthNumberTextBox, "Prime index");
-                    ToolTip.SetToolTip(NthAdditiveNumberTextBox, "Additive prime index");
-                    ToolTip.SetToolTip(NthNonAdditiveNumberTextBox, "Non-additive prime index");
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
                 }
-                else // Composite BigInteger
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
+        else
+        {
+            m_factros_type = FactorsType.Any;
+            FactorizeValue(NthNumberDimensionTextBox);
+        }
+    }
+    private void NthDuplicateNumberDimensionLabel_Click(object sender, EventArgs e)
+    {
+        if (ModifierKeys == Keys.Control)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                string filename = Globals.NUMBERS_FOLDER + "/" + m_number_dimension.ToString() + "d.txt";
+                FileHelper.DisplayFile(filename);
+            }
+            catch (Exception ex)
+            {
+                while (ex != null)
                 {
-                    m_index_type = IndexType.Composite;
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
+        else
+        {
+            m_factros_type = FactorsType.Duplicate;
+            FactorizeValue(NthNumberDimensionTextBox);
+        }
+    }
+    private void NthUniqueNumberDimensionLabel_Click(object sender, EventArgs e)
+    {
+        if (ModifierKeys == Keys.Control)
+        {
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                string filename = Globals.NUMBERS_FOLDER + "/" + m_number_dimension.ToString() + "u.txt";
+                FileHelper.DisplayFile(filename);
+            }
+            catch (Exception ex)
+            {
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
+        else
+        {
+            m_factros_type = FactorsType.Unique;
+            FactorizeValue(NthNumberDimensionTextBox);
+        }
+    }
+    private void UpdateToolTipNthNumberDimensionTextBox()
+    {
+        long value = 0L;
+        if (long.TryParse(ValueTextBox.Text, out value))
+        {
+            NthNumberDimensionLabel.BackColor = SystemColors.ControlLight;
+            NthDuplicateNumberDimensionLabel.BackColor = SystemColors.ControlLight;
+            NthUniqueNumberDimensionLabel.BackColor = SystemColors.ControlLight;
 
-                    ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(21L);
-                    if (Numbers.IsComposite(Numbers.DigitSum(m_factorizer.Number)))
+            if (m_factros_type == FactorsType.Any)
+            {
+                ToolTip.SetToolTip(NthNumberDimensionTextBox, "Dimension index");
+                NthNumberDimensionLabel.BackColor = SystemColors.ControlLightLight;
+                NthNumberDimensionLabel.Refresh();
+            }
+            else if (m_factros_type == FactorsType.Duplicate)
+            {
+                ToolTip.SetToolTip(NthNumberDimensionTextBox, "Duplicate dimension index");
+                NthDuplicateNumberDimensionLabel.BackColor = SystemColors.ControlLightLight;
+                NthDuplicateNumberDimensionLabel.Refresh();
+            }
+            else if (m_factros_type == FactorsType.Unique)
+            {
+                ToolTip.SetToolTip(NthNumberDimensionTextBox, "Unique dimension index");
+                NthUniqueNumberDimensionLabel.BackColor = SystemColors.ControlLightLight;
+                NthUniqueNumberDimensionLabel.Refresh();
+            }
+            else
+            {
+                ToolTip.SetToolTip(NthNumberDimensionLabel, null);
+                NthNumberDimensionLabel.Refresh();
+            }
+        }
+    }
+    private void IncrementNumberDimension()
+    {
+        int dimension = 0;
+        int index = 0;
+        int pos = NthNumberDimensionTextBox.Text.IndexOf("a");
+        if (pos == -1)
+        {
+            pos = NthNumberDimensionTextBox.Text.IndexOf("d");
+            if (pos == -1)
+            {
+                pos = NthNumberDimensionTextBox.Text.IndexOf("u");
+            }
+        }
+        if (pos > 0)
+        {
+            string dimension_str = NthNumberDimensionTextBox.Text.Substring(0, pos);
+            if (int.TryParse(dimension_str, out dimension))
+            {
+                string index_str = NthNumberDimensionTextBox.Text.Substring(pos + 1);
+                if (int.TryParse(index_str, out index))
+                {
+                    index--;
+
+                    if (ModifierKeys == Keys.Control)
                     {
-                        ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(15L);
-
-                        if (Numbers.IsCompositeDigits(m_factorizer.Number))
+                        if (dimension < 19)
                         {
-                            ValueTextBox.ForeColor = Numbers.GetNumberTypeColor(4L);
+                            dimension++;
                         }
                     }
-                    ValueTextBox.Refresh();
+                    else
+                    {
+                        index++;
+                    }
 
-                    NthNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(-1L);
-                    NthAdditiveNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(-1L);
-                    NthNonAdditiveNumberTextBox.ForeColor = Numbers.GetNumberTypeColor(-1L);
-                    NthNumberTextBox.Text = "-1";
-                    NthAdditiveNumberTextBox.Text = "-1";
-                    NthNonAdditiveNumberTextBox.Text = "-1";
-                    ToolTip.SetToolTip(NthNumberTextBox, "Composite index");
-                    ToolTip.SetToolTip(NthAdditiveNumberTextBox, "Additive composite index");
-                    ToolTip.SetToolTip(NthNonAdditiveNumberTextBox, "Non-additive composite index");
+                    long value = GetDimensionValue(dimension, index);
+                    if (value > -1L)
+                    {
+                        FactorizeValue(value);
+                    }
                 }
             }
-
-            NthNumberTextBox.Refresh();
-            NthAdditiveNumberTextBox.Refresh();
-            NthNonAdditiveNumberTextBox.Refresh();
         }
-        catch //(Exception ex)
+    }
+    private void DecrementNumberDimension()
+    {
+        int dimension = 0;
+        int index = 0;
+        int pos = NthNumberDimensionTextBox.Text.IndexOf("a");
+        if (pos == -1)
         {
-            //MessageBox.Show(ex.Message, Application.ProductName);
+            pos = NthNumberDimensionTextBox.Text.IndexOf("d");
+            if (pos == -1)
+            {
+                pos = NthNumberDimensionTextBox.Text.IndexOf("u");
+            }
+        }
+        if (pos > 0)
+        {
+            string dimension_str = NthNumberDimensionTextBox.Text.Substring(0, pos);
+            if (int.TryParse(dimension_str, out dimension))
+            {
+                string index_str = NthNumberDimensionTextBox.Text.Substring(pos + 1);
+                if (int.TryParse(index_str, out index))
+                {
+                    index--;
+
+                    if (ModifierKeys == Keys.Control)
+                    {
+                        if (dimension > 1)
+                        {
+                            dimension--;
+                        }
+                    }
+                    else
+                    {
+                        if (index > 0)
+                        {
+                            index--;
+                        }
+                    }
+
+                    long value = GetDimensionValue(dimension, index);
+                    if (value > -1L)
+                    {
+                        FactorizeValue(value);
+                    }
+                }
+            }
+        }
+    }
+    private long GetDimensionValue(int dimension, int index)
+    {
+        long value = -1L;
+        if (m_factros_type == FactorsType.Any)
+        {
+            if ((dimension >= 1) && (dimension <= Numbers.NumberDimensions.Count))
+            {
+                if ((index >= 0) && (index < Numbers.NumberDimensions[dimension - 1].Count))
+                {
+                    value = Numbers.NumberDimensions[dimension - 1][index];
+                }
+            }
+        }
+        else if (m_factros_type == FactorsType.Duplicate)
+        {
+            if (dimension == 1) dimension = 2;
+            if ((dimension >= 2) && (dimension <= Numbers.DuplicateNumberDimensions.Count + 1))
+            {
+                if ((index >= 0) && (index < Numbers.DuplicateNumberDimensions[dimension - 1].Count))
+                {
+                    value = Numbers.DuplicateNumberDimensions[dimension - 1][index];
+                }
+            }
+        }
+        else if (m_factros_type == FactorsType.Unique)
+        {
+            if (dimension == 1) dimension = 2;
+            if ((dimension >= 2) && (dimension <= Numbers.UniqueNumberDimensions.Count + 1))
+            {
+                if ((index >= 0) && (index < Numbers.UniqueNumberDimensions[dimension - 1].Count))
+                {
+                    value = Numbers.UniqueNumberDimensions[dimension - 1][index];
+                }
+            }
+        }
+        return value;
+    }
+
+    private void PreviousPrimeNumber()
+    {
+        // guard against multiple runs on multiple ENTER keys
+        if ((m_worker_thread != null) && (m_worker_thread.IsAlive)) return;
+
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            string value = ValueTextBox.Text + ",0"; // previousprime = nextprime(n,0), thanks to Benjamin Buhrow (bbuhrow@gmail.com) for telling me that.
+
+            BeforeProcessing();
+
+            try
+            {
+                m_factorizer = new Factorizer(this, "nextprime", value, m_multithreading);
+                if (m_factorizer != null)
+                {
+                    m_worker_thread = new Thread(new ThreadStart(m_factorizer.Run));
+                    m_worker_thread.Priority = ThreadPriority.Highest;
+                    m_worker_thread.IsBackground = false;
+                    m_worker_thread.Start();
+                }
+
+                CallRun();
+            }
+            catch
+            {
+                Cancel();
+            }
         }
         finally
         {
             this.Cursor = Cursors.Default;
         }
     }
+    private void NextPrimeNumber()
+    {
+        // guard against multiple runs on multiple ENTER keys
+        if ((m_worker_thread != null) && (m_worker_thread.IsAlive)) return;
+
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (ValueTextBox.Text.Length == 0) ValueTextBox.Text = "1";
+            string value = ValueTextBox.Text;
+
+            BeforeProcessing();
+
+            try
+            {
+                m_factorizer = new Factorizer(this, "nextprime", value, m_multithreading);
+                if (m_factorizer != null)
+                {
+                    m_worker_thread = new Thread(new ThreadStart(m_factorizer.Run));
+                    m_worker_thread.Priority = ThreadPriority.Highest;
+                    m_worker_thread.IsBackground = false;
+                    m_worker_thread.Start();
+                }
+
+                CallRun();
+            }
+            catch
+            {
+                Cancel();
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
+    }
+    private void PreviousPrimeLabel_Click(object sender, EventArgs e)
+    {
+        PreviousPrimeNumber();
+    }
+    private void NextPrimeLabel_Click(object sender, EventArgs e)
+    {
+        NextPrimeNumber();
+    }
+
+    private List<string> m_history_items = new List<string>();
+    private int m_history_index = -1;
+    private void PreviousHistoryItem()
+    {
+        if ((m_history_index > 0) && (m_history_index < m_history_items.Count))
+        {
+            m_history_index--;
+            ValueTextBox.Text = m_history_items[m_history_index];
+
+            ClearNumberAnalyses();
+            ClearFactors();
+            ClearProgress();
+
+            CallRun();
+        }
+        ValueTextBox.Focus();
+    }
+    private void NextHistoryItem()
+    {
+        if ((m_history_index >= 0) && (m_history_index < m_history_items.Count - 1))
+        {
+            m_history_index++;
+            ValueTextBox.Text = m_history_items[m_history_index];
+
+            ClearNumberAnalyses();
+            ClearFactors();
+            ClearProgress();
+
+            CallRun();
+        }
+        ValueTextBox.Focus();
+    }
+
     private void UpdateDigitSumRootPCChains(long value)
     {
         if (value < 0L) value *= -1L;
@@ -1787,7 +1904,7 @@ public partial class MainForm : Form
         }
         SaveIndexChainLength(filename, NumberType.Natural, length, str.ToString());
     }
-    public void SaveNumberIndexChain(string filename, long value, int chain_length, string text)
+    private void SaveNumberIndexChain(string filename, long value, int chain_length, string text)
     {
         if (value < 0L) value *= -1L;
 
@@ -1816,7 +1933,7 @@ public partial class MainForm : Form
             FileHelper.DisplayFile(filename);
         }
     }
-    public void SaveIndexChainLength(string filename, NumberType number_type, int chain_length, string text)
+    private void SaveIndexChainLength(string filename, NumberType number_type, int chain_length, string text)
     {
         if (Directory.Exists(Globals.NUMBERS_FOLDER))
         {
@@ -1952,7 +2069,7 @@ public partial class MainForm : Form
                             // do nothing
                         }
                     }
-                    else if (m_index_type == IndexType.Composite)
+                    else // any other index type will be treated as IndexNumberType.Composite
                     {
                         if (m_plus1_index)
                         {
@@ -1972,10 +2089,6 @@ public partial class MainForm : Form
                         {
                             // do nothing
                         }
-                    }
-                    else
-                    {
-                        // do nothing
                     }
 
                     UpdateToolTipNth4n1NumberTextBox();
@@ -2028,7 +2141,42 @@ public partial class MainForm : Form
         }
         else
         {
-            FactorizeValue(0L);
+            if (control == NthNumberDimensionTextBox)
+            {
+                UpdateToolTipNthNumberDimensionTextBox();
+
+                int pos = control.Text.IndexOf("a");
+                if (pos == -1)
+                {
+                    pos = control.Text.IndexOf("d");
+                    if (pos == -1)
+                    {
+                        pos = control.Text.IndexOf("u");
+                    }
+                }
+                if (pos > 0)
+                {
+                    int dimension = 0;
+                    string dimension_str = control.Text.Substring(0, pos);
+                    if (int.TryParse(dimension_str, out dimension))
+                    {
+                        string index_str = control.Text.Substring(pos + 1);
+                        if (int.TryParse(index_str, out index))
+                        {
+                            index--;
+                            value = GetDimensionValue(dimension, index);
+                            if (value > -1L)
+                            {
+                                FactorizeValue(value);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                FactorizeValue(0L);
+            }
         }
     }
     private void IncrementValue(Control control)
@@ -2468,6 +2616,24 @@ public partial class MainForm : Form
                                 value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
                             }
                         }
+                        else if (text.Contains("d"))
+                        {
+                            int pos = text.IndexOf("d");
+                            if (pos >= 0)
+                            {
+                                text = text.Substring(pos + 1);
+                                value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                            }
+                        }
+                        else if (text.Contains("u"))
+                        {
+                            int pos = text.IndexOf("u");
+                            if (pos >= 0)
+                            {
+                                text = text.Substring(pos + 1);
+                                value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
+                            }
+                        }
                         else
                         {
                             value = Radix.Decode(text, Numbers.DEFAULT_RADIX);
@@ -2550,35 +2716,31 @@ public partial class MainForm : Form
         ClearFactors();
         ClearProgress();
     }
-    private void CallRun()
-    {
-        ValueTextBox.Text = ValueTextBox.Text.Replace(" ", "");
-
-        long value = 0L;
-        string expression = ValueTextBox.Text;
-        if (long.TryParse(expression, out value))
-        {
-            m_double_value = (double)value;
-        }
-        else
-        {
-            m_double_value = CalculateValue(expression);
-            value = (long)Math.Round(m_double_value);
-        }
-
-        if (m_double_value != value)
-        {
-            PrimeFactorsTextBox.Text = m_double_value.ToString();
-        }
-
-        Run();
-    }
     private bool m_multithreading = true;
     private void MultithreadingCheckBox_CheckedChanged(object sender, EventArgs e)
     {
         m_multithreading = MultithreadingCheckBox.Checked;
     }
-    public void Run()
+    private void CallRun()
+    {
+        long value = 0L;
+        if (long.TryParse(ValueTextBox.Text, out value))
+        {
+            if (value <= 1000000)
+            {
+                FactorizeValue(value);
+            }
+            else
+            {
+                Run();
+            }
+        }
+        else
+        {
+            Run();
+        }
+    }
+    private void Run()
     {
         // guard against multiple runs on multiple ENTER keys
         if ((m_worker_thread != null) && (m_worker_thread.IsAlive)) return;
@@ -2659,14 +2821,9 @@ public partial class MainForm : Form
         if (m_factorizer != null)
         {
             EnableEntryControls();
-
-            long value = 0L;
-            if (long.TryParse(m_factorizer.Number, out value))
-            {
-                AnalyzeValue(value);
-            }
         }
-        //ValueTextBox.Focus();
+
+        ValueTextBox.Focus();
     }
 
     private enum TimeDisplayMode { Elapsed, Remaining }

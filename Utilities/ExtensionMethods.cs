@@ -62,7 +62,7 @@ public static class StringExtensions
     }
 
     //http://www.codeproject.com/Articles/2270/Inside-C-Second-Edition-String-Handling-and-Regula
-    public static bool IsPalindrome(string source)
+    public static bool IsPalindrome(this string source)
     {
         if (String.IsNullOrEmpty(source)) return false;
 
@@ -71,6 +71,18 @@ public static class StringExtensions
         for (int i = 0; i <= halflength; i++)
         {
             if (source.Substring(i, 1) != source.Substring(fulllength - i, 1))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static bool IsDigitsOnly(this string source)
+    {
+        foreach (char c in source)
+        {
+            if (!Char.IsDigit(c))
             {
                 return false;
             }
@@ -448,7 +460,7 @@ public static class StringExtensions
         }
         return result;
     }
-    public static string GetDiacriticsOnly(this string source)
+    public static string GetDiacritics(this string source)
     {
         if (String.IsNullOrEmpty(source)) return source;
 

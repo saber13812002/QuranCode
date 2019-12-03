@@ -3595,7 +3595,7 @@ public class Client : IPublisher, ISubscriber
             if (m_letter_statistics != null)
             {
                 if (m_count_diacritics == true) { /* do nothing */ }
-                else if (m_count_diacritics == null) { text = text.GetDiacriticsOnly(); }
+                else if (m_count_diacritics == null) { text = text.GetDiacritics(); }
                 else if (m_count_diacritics == false) { text = text.SimplifyTo(NumerologySystem.TextMode); }
 
                 text = text.Replace("\r", "");
@@ -3844,7 +3844,7 @@ public class Client : IPublisher, ISubscriber
             if (m_letter_statistics != null)
             {
                 if (m_count_diacritics == true) { /* do nothing */ }
-                else if (m_count_diacritics == null) { text = text.GetDiacriticsOnly(); }
+                else if (m_count_diacritics == null) { text = text.GetDiacritics(); }
                 else if (m_count_diacritics == false) { text = text.SimplifyTo(NumerologySystem.TextMode); }
 
                 text = text.Replace("\r", "");
@@ -3876,7 +3876,7 @@ public class Client : IPublisher, ISubscriber
                 }
 
                 if (m_count_diacritics == true) { /* do nothing */ }
-                else if (m_count_diacritics == null) { phrase = phrase.GetDiacriticsOnly(); }
+                else if (m_count_diacritics == null) { phrase = phrase.GetDiacritics(); }
                 else if (m_count_diacritics == false) { phrase = phrase.SimplifyTo(NumerologySystem.TextMode); }
 
                 phrase = phrase.Replace("\r", "");
