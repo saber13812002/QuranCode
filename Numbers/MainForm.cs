@@ -36,7 +36,7 @@ public partial class MainForm : Form
     {
         this.Top = Screen.PrimaryScreen.WorkingArea.Top;
         this.Left = Screen.PrimaryScreen.WorkingArea.Left;
-        this.Width = (m_dpi == 96.0F) ? 1051 : 1181;
+        this.Width = (m_dpi == 96.0F) ? 1126 : 1281;
         this.Height = (m_dpi == 96.0F) ? 681 : 752;
     }
     private void LoadSettings()

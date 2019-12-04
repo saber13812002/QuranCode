@@ -167,26 +167,10 @@
         ggAAAABJRU5ErkJggg==
 </value>
   </data>
-  <data name="AppCompositesLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAI3SURBVDhPrZPvT1JRGMfv/9IL0csorsDlIjrMrLA5Y7XQ
-        EMqh/A43Zz/MN7VhzTcOKzbUCeYMypxs5UZEXKQNdW2t0rBQN1tbzjf9Dd/uOaYxgXed7bPd+z3P+Zxz
-        nrvLMP9ztM4pQOhY0OPCPI9Dt2mhkWbnYqcoFfdsiSoxsurCYjGIzd8xnJ9uPCo8OyVgbT+I7M8QousB
-        mF7oyyVNYRbxHQeeb3uR+OEvE7zbG6FzhPYZQ7mgIaTAq90hzBU9mN/xoyfRAf6RnHIr1Yvcr3E8K3oR
-        2/LSrOwaRJDde4xIwY2ZTZ+EF0+/ETw0ixa8NI8V+8E9qIMh+K9HTNtkC9SjSuT3ZzFZcGFaKqzG7JYf
-        noQV4m6cipjmsSaE1l0If72BJxs+jH224+6aEQP5Zrjfa+BY5nAzf5q+j37swvgXJyY2/BTdQy2Y9pCR
-        hvc/XEFvph59ohoOUVoo8nBmCVr6TCBzhDurRklmw+WIEYx8SAHzaxXl2hsBdlELe6Y6jpyAS4tqivI2
-        d9BMdpCFfFCO4dx1dKd52NJCVXqWdbSWHTj2JU70yRDZvgdzSgXLW0ESCTgzxcEQqsfFlxp0ZwSaWzM6
-        yPql5h0fRBD4ZIc5qcFV6So2USp010HmY1HrVsC21EpzS0qAzMVWFljEBnRKu5iTOnSlJcHfQm5YhYnv
-        0umSAjpTOqgDJ8sFNe5atMX5I6w5PWqcB0clAteKAaYlLQxhjp6o4g/FkuaUUFpEFh1Smv8BCv2xrCw+
-        +SEAAAAASUVORK5CYII=
-</value>
-  </data>
   <data name="AppIndicesLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsIAAA7CARUoSoAAAALLSURBVDhPhZNrSFNhGMePDa8wMyovTVdCXgjCyL6UhH2K
+        YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAALLSURBVDhPhZNrSFNhGMePDa8wMyovTVdCXgjCyL6UhH2K
         CD8ofogQSkhF6EJ96KZWJupUzNs0daZJlhrNgcy7R3PL3XQbzlKn7jRxhlPBSJcmhf/ec4SJsOiFl+fl
         Pc//d/7Pw/NSlIsVeascofF3QJ1P4TZ7Zu9c5e69i0lG9EMJCpkZVC85UGXdRoUNKLH+QIZhDMfv1YAi
         OS5B7B9yFmYwsL6J5MFvONM6iWKDHUk9DGLaZqBaB3p+biBNb3LhJjYNxYtWSJhlXJRNI6rFjInVTbCL
@@ -204,7 +188,7 @@
   <data name="AppNumbersLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAG3SURBVDhPjZLbK4NhHMf9Ey6YxJaQcqhNElLckKLccGFk
+        YQUAAAAJcEhZcwAADsAAAA7AAWrWiQkAAAG3SURBVDhPjZLbK4NhHMf9Ey6YxJaQcqhNElLckKLccGFk
         phVxISlqEa4cLoTYBXKIZAdtJlsb6m2ZHEoy5rQ5zGYii83h4ut5X2UW8jz1qed5+n0/7+/X+4SFkdXG
         eCG33KGNoYOtbVq/BZvlVsuaB1bPOwyuVypW3W9oMLmDgmaTCxvkcuX6NQQDOf+GmdTWGb8J8sfsmD/y
         QX8R4Fi+DGDy4BFpAwcQDtp+ICJ3GcOHwQ7YMfIUNhJ8gdbh51hy+lE+dwph315o4dfgv2yEPbuQm6+g
@@ -213,6 +197,22 @@
         wllTDmTPOJA17YSgdun/ttm/GS1WopO5gWj8HOkT50hRnCBaqgevQgWe+CdRYjViqxeDclaQu+BE/Iid
         gz94hNihv+GPHiNKpg8VZM46EDNwSMewHTypNiiIrNaAJZy0S0WlGhGSzxE+AOHx3pykKJfqAAAAAElF
         TkSuQmCC
+</value>
+  </data>
+  <data name="AppCompositesLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAAI3SURBVDhPrZPvT1JRGMfv/9IL0csorsDlIjrMrLA5Y7XQ
+        EMqh/A43Zz/MN7VhzTcOKzbUCeYMypxs5UZEXKQNdW2t0rBQN1tbzjf9Dd/uOaYxgXed7bPd+z3P+Zxz
+        nrvLMP9ztM4pQOhY0OPCPI9Dt2mhkWbnYqcoFfdsiSoxsurCYjGIzd8xnJ9uPCo8OyVgbT+I7M8QousB
+        mF7oyyVNYRbxHQeeb3uR+OEvE7zbG6FzhPYZQ7mgIaTAq90hzBU9mN/xoyfRAf6RnHIr1Yvcr3E8K3oR
+        2/LSrOwaRJDde4xIwY2ZTZ+EF0+/ETw0ixa8NI8V+8E9qIMh+K9HTNtkC9SjSuT3ZzFZcGFaKqzG7JYf
+        noQV4m6cipjmsSaE1l0If72BJxs+jH224+6aEQP5Zrjfa+BY5nAzf5q+j37swvgXJyY2/BTdQy2Y9pCR
+        hvc/XEFvph59ohoOUVoo8nBmCVr6TCBzhDurRklmw+WIEYx8SAHzaxXl2hsBdlELe6Y6jpyAS4tqivI2
+        d9BMdpCFfFCO4dx1dKd52NJCVXqWdbSWHTj2JU70yRDZvgdzSgXLW0ESCTgzxcEQqsfFlxp0ZwSaWzM6
+        yPql5h0fRBD4ZIc5qcFV6So2USp010HmY1HrVsC21EpzS0qAzMVWFljEBnRKu5iTOnSlJcHfQm5YhYnv
+        0umSAjpTOqgDJ8sFNe5atMX5I6w5PWqcB0clAteKAaYlLQxhjp6o4g/FkuaUUFpEFh1Smv8BCv2xrCw+
+        +SEAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="AppQuranLabLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

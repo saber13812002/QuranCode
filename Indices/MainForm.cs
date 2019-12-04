@@ -36,7 +36,7 @@ public partial class MainForm : Form
     {
         this.Top = Screen.PrimaryScreen.WorkingArea.Top;
         this.Left = Screen.PrimaryScreen.WorkingArea.Left;
-        this.Width = (m_dpi == 96.0F) ? 1051 : 1181;
+        this.Width = (m_dpi == 96.0F) ? 1126 : 1281;
         this.Height = (m_dpi == 96.0F) ? 681 : 752;
     }
     private void LoadSettings()
@@ -127,7 +127,7 @@ public partial class MainForm : Form
             Label control = new Label();
             if (control != null)
             {
-                control.Width = 14;
+                control.Width = 16;
                 control.Height = 12;
                 control.Top = -3;
                 control.Left = 0;
@@ -148,7 +148,7 @@ public partial class MainForm : Form
             Label control = new Label();
             if (control != null)
             {
-                control.Width = 14;
+                control.Width = 16;
                 control.Height = 12;
                 control.Top = 8;
                 control.Left = 0;
@@ -190,7 +190,7 @@ public partial class MainForm : Form
             Label control = new Label();
             if (control != null)
             {
-                control.Width = (m_dpi == 96.0F) ? 53 : 65;
+                control.Width = (m_dpi == 96.0F) ? 57 : 69;
                 control.Height = 19;
                 control.Top = 0;
                 control.Left = 19 + (j * control.Width + 2);
@@ -232,7 +232,7 @@ public partial class MainForm : Form
                 TextBox control = new TextBox();
                 if (control != null)
                 {
-                    control.Width = (m_dpi == 96.0F) ? 53 : 65;
+                    control.Width = (m_dpi == 96.0F) ? 57 : 69;
                     control.Height = 21;
                     control.Top = 19 + (i * control.Height + 1);
                     control.Left = 19 + (j * control.Width + 2);
