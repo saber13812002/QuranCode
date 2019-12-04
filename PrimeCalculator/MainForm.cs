@@ -191,11 +191,11 @@ public partial class MainForm : Form
         XCLabel.ForeColor = Numbers.NUMBER_TYPE_COLORS[7];
         //DFLabel.ForeColor = Numbers.NUMBER_KIND_COLORS[0];
         //ABLabel.ForeColor = Numbers.NUMBER_KIND_COLORS[2];
-        DeficientNumbersLabel.BackColor = Numbers.NUMBER_KIND_COLORS[0];
-        PerfectNumbersLabel.BackColor = Numbers.NUMBER_KIND_COLORS[1];
-        AbundantNumbersLabel.BackColor = Numbers.NUMBER_KIND_COLORS[2];
-        DFTextBox.BackColor = Numbers.NUMBER_KIND_COLORS[0];
-        ABTextBox.BackColor = Numbers.NUMBER_KIND_COLORS[2];
+        DeficientNumbersLabel.BackColor = Numbers.NUMBER_KIND_BACKCOLORS[0];
+        PerfectNumbersLabel.BackColor = Numbers.NUMBER_KIND_BACKCOLORS[1];
+        AbundantNumbersLabel.BackColor = Numbers.NUMBER_KIND_BACKCOLORS[2];
+        DFTextBox.BackColor = Numbers.NUMBER_KIND_BACKCOLORS[0];
+        ABTextBox.BackColor = Numbers.NUMBER_KIND_BACKCOLORS[2];
     }
     private void MainForm_Shown(object sender, EventArgs e)
     {
@@ -1101,19 +1101,19 @@ public partial class MainForm : Form
             case NumberKind.Deficient:
                 {
                     number_kind_index = Numbers.DeficientIndexOf(value) + 1;
-                    NumberKindIndexTextBox.BackColor = Numbers.NUMBER_KIND_COLORS[0];
+                    NumberKindIndexTextBox.BackColor = Numbers.NUMBER_KIND_BACKCOLORS[0];
                 }
                 break;
             case NumberKind.Perfect:
                 {
                     number_kind_index = Numbers.PerfectIndexOf(value) + 1;
-                    NumberKindIndexTextBox.BackColor = Numbers.NUMBER_KIND_COLORS[1];
+                    NumberKindIndexTextBox.BackColor = Numbers.NUMBER_KIND_BACKCOLORS[1];
                 }
                 break;
             case NumberKind.Abundant:
                 {
                     number_kind_index = Numbers.AbundantIndexOf(value) + 1;
-                    NumberKindIndexTextBox.BackColor = Numbers.NUMBER_KIND_COLORS[2];
+                    NumberKindIndexTextBox.BackColor = Numbers.NUMBER_KIND_BACKCOLORS[2];
                 }
                 break;
             default:

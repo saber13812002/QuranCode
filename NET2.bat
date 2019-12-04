@@ -14,6 +14,7 @@ XCOPY /O /X /E /H /K /Y QuranLab\*.* NET2\QuranLab\
 XCOPY /O /X /E /H /K /Y InitialLetters\*.* NET2\InitialLetters\
 XCOPY /O /X /E /H /K /Y Composites\*.* NET2\Composites\
 XCOPY /O /X /E /H /K /Y Numbers\*.* NET2\Numbers\
+XCOPY /O /X /E /H /K /Y Indices\*.* NET2\Indices\
 XCOPY /O /X /E /H /K /Y WordGenerator\*.* NET2\WordGenerator\
 XCOPY /O /X /E /H /K /Y AhlulBayt\*.* NET2\AhlulBayt\
 XCOPY /O /X /E /H /K /Y Tools\NET2sln\*.* NET2\

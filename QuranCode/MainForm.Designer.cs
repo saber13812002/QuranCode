@@ -34,8 +34,9 @@ partial class MainForm
             this.AppWordGeneratorLabel = new System.Windows.Forms.Label();
             this.AppInitialLettersLabel = new System.Windows.Forms.Label();
             this.AppCompositesLabel = new System.Windows.Forms.Label();
-            this.AppQuranLabLabel = new System.Windows.Forms.Label();
+            this.AppIndicesLabel = new System.Windows.Forms.Label();
             this.AppNumbersLabel = new System.Windows.Forms.Label();
+            this.AppQuranLabLabel = new System.Windows.Forms.Label();
             this.AppPrimeCalculatorLabel = new System.Windows.Forms.Label();
             this.ShowToolTipsCheckBox = new System.Windows.Forms.CheckBox();
             this.ChapterSortPanel = new System.Windows.Forms.Panel();
@@ -839,15 +840,16 @@ partial class MainForm
             this.AppPanel.Controls.Add(this.AppAhlulBaytLabel);
             this.AppPanel.Controls.Add(this.AppWordGeneratorLabel);
             this.AppPanel.Controls.Add(this.AppInitialLettersLabel);
+            this.AppPanel.Controls.Add(this.AppIndicesLabel);
+            this.AppPanel.Controls.Add(this.AppNumbersLabel);
             this.AppPanel.Controls.Add(this.AppCompositesLabel);
             this.AppPanel.Controls.Add(this.AppQuranLabLabel);
-            this.AppPanel.Controls.Add(this.AppNumbersLabel);
             this.AppPanel.Controls.Add(this.AppPrimeCalculatorLabel);
             this.AppPanel.Dock = System.Windows.Forms.DockStyle.Right;
             this.AppPanel.ForeColor = System.Drawing.Color.Navy;
-            this.AppPanel.Location = new System.Drawing.Point(943, 0);
+            this.AppPanel.Location = new System.Drawing.Point(919, 0);
             this.AppPanel.Name = "AppPanel";
-            this.AppPanel.Size = new System.Drawing.Size(143, 21);
+            this.AppPanel.Size = new System.Drawing.Size(167, 21);
             this.AppPanel.TabIndex = 110;
             // 
             // AppAhlulBaytLabel
@@ -858,14 +860,13 @@ partial class MainForm
             this.AppAhlulBaytLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AppAhlulBaytLabel.ForeColor = System.Drawing.Color.Transparent;
             this.AppAhlulBaytLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppAhlulBaytLabel.Image")));
-            this.AppAhlulBaytLabel.Location = new System.Drawing.Point(120, 0);
+            this.AppAhlulBaytLabel.Location = new System.Drawing.Point(140, 0);
             this.AppAhlulBaytLabel.Name = "AppAhlulBaytLabel";
             this.AppAhlulBaytLabel.Size = new System.Drawing.Size(20, 21);
-            this.AppAhlulBaytLabel.TabIndex = 7;
+            this.AppAhlulBaytLabel.TabIndex = 8;
             this.AppAhlulBaytLabel.Tag = "";
             this.AppAhlulBaytLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ToolTip.SetToolTip(this.AppAhlulBaytLabel, "Ahlul-Bayt (as)");
-            this.AppAhlulBaytLabel.AutoSizeChanged += new System.EventHandler(this.AppLauncherLabel_Click);
             this.AppAhlulBaytLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
             // 
             // AppWordGeneratorLabel
@@ -876,14 +877,13 @@ partial class MainForm
             this.AppWordGeneratorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AppWordGeneratorLabel.ForeColor = System.Drawing.Color.Transparent;
             this.AppWordGeneratorLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppWordGeneratorLabel.Image")));
-            this.AppWordGeneratorLabel.Location = new System.Drawing.Point(100, 0);
+            this.AppWordGeneratorLabel.Location = new System.Drawing.Point(120, 0);
             this.AppWordGeneratorLabel.Name = "AppWordGeneratorLabel";
             this.AppWordGeneratorLabel.Size = new System.Drawing.Size(20, 21);
-            this.AppWordGeneratorLabel.TabIndex = 6;
+            this.AppWordGeneratorLabel.TabIndex = 7;
             this.AppWordGeneratorLabel.Tag = "";
             this.AppWordGeneratorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ToolTip.SetToolTip(this.AppWordGeneratorLabel, "Word Generator");
-            this.AppWordGeneratorLabel.AutoSizeChanged += new System.EventHandler(this.AppLauncherLabel_Click);
             this.AppWordGeneratorLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
             // 
             // AppInitialLettersLabel
@@ -894,14 +894,13 @@ partial class MainForm
             this.AppInitialLettersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AppInitialLettersLabel.ForeColor = System.Drawing.Color.Transparent;
             this.AppInitialLettersLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppInitialLettersLabel.Image")));
-            this.AppInitialLettersLabel.Location = new System.Drawing.Point(80, 0);
+            this.AppInitialLettersLabel.Location = new System.Drawing.Point(100, 0);
             this.AppInitialLettersLabel.Name = "AppInitialLettersLabel";
             this.AppInitialLettersLabel.Size = new System.Drawing.Size(20, 21);
-            this.AppInitialLettersLabel.TabIndex = 5;
+            this.AppInitialLettersLabel.TabIndex = 6;
             this.AppInitialLettersLabel.Tag = "";
             this.AppInitialLettersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ToolTip.SetToolTip(this.AppInitialLettersLabel, "Initial Letters");
-            this.AppInitialLettersLabel.AutoSizeChanged += new System.EventHandler(this.AppLauncherLabel_Click);
             this.AppInitialLettersLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
             // 
             // AppCompositesLabel
@@ -912,15 +911,47 @@ partial class MainForm
             this.AppCompositesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AppCompositesLabel.ForeColor = System.Drawing.Color.Transparent;
             this.AppCompositesLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppCompositesLabel.Image")));
-            this.AppCompositesLabel.Location = new System.Drawing.Point(60, 0);
+            this.AppCompositesLabel.Location = new System.Drawing.Point(80, 0);
             this.AppCompositesLabel.Name = "AppCompositesLabel";
             this.AppCompositesLabel.Size = new System.Drawing.Size(20, 21);
-            this.AppCompositesLabel.TabIndex = 4;
+            this.AppCompositesLabel.TabIndex = 3;
             this.AppCompositesLabel.Tag = "";
             this.AppCompositesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ToolTip.SetToolTip(this.AppCompositesLabel, "Composites");
-            this.AppCompositesLabel.AutoSizeChanged += new System.EventHandler(this.AppLauncherLabel_Click);
             this.AppCompositesLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
+            // 
+            // AppIndicesLabel
+            // 
+            this.AppIndicesLabel.BackColor = System.Drawing.Color.Transparent;
+            this.AppIndicesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AppIndicesLabel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.AppIndicesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AppIndicesLabel.ForeColor = System.Drawing.Color.Transparent;
+            this.AppIndicesLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppIndicesLabel.Image")));
+            this.AppIndicesLabel.Location = new System.Drawing.Point(60, 0);
+            this.AppIndicesLabel.Name = "AppIndicesLabel";
+            this.AppIndicesLabel.Size = new System.Drawing.Size(20, 21);
+            this.AppIndicesLabel.TabIndex = 5;
+            this.AppIndicesLabel.Tag = "";
+            this.AppIndicesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.AppIndicesLabel, "Indices");
+            // 
+            // AppNumbersLabel
+            // 
+            this.AppNumbersLabel.BackColor = System.Drawing.Color.Transparent;
+            this.AppNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AppNumbersLabel.Dock = System.Windows.Forms.DockStyle.Left;
+            this.AppNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AppNumbersLabel.ForeColor = System.Drawing.Color.Transparent;
+            this.AppNumbersLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppNumbersLabel.Image")));
+            this.AppNumbersLabel.Location = new System.Drawing.Point(40, 0);
+            this.AppNumbersLabel.Name = "AppNumbersLabel";
+            this.AppNumbersLabel.Size = new System.Drawing.Size(20, 21);
+            this.AppNumbersLabel.TabIndex = 4;
+            this.AppNumbersLabel.Tag = "";
+            this.AppNumbersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.AppNumbersLabel, "Numbers");
+            this.AppNumbersLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
             // 
             // AppQuranLabLabel
             // 
@@ -931,33 +962,14 @@ partial class MainForm
             this.AppQuranLabLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.AppQuranLabLabel.ForeColor = System.Drawing.Color.Transparent;
             this.AppQuranLabLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppQuranLabLabel.Image")));
-            this.AppQuranLabLabel.Location = new System.Drawing.Point(40, 0);
+            this.AppQuranLabLabel.Location = new System.Drawing.Point(20, 0);
             this.AppQuranLabLabel.Name = "AppQuranLabLabel";
             this.AppQuranLabLabel.Size = new System.Drawing.Size(20, 21);
-            this.AppQuranLabLabel.TabIndex = 3;
+            this.AppQuranLabLabel.TabIndex = 2;
             this.AppQuranLabLabel.Tag = "";
             this.AppQuranLabLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ToolTip.SetToolTip(this.AppQuranLabLabel, "Quran Lab");
-            this.AppQuranLabLabel.AutoSizeChanged += new System.EventHandler(this.AppLauncherLabel_Click);
             this.AppQuranLabLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
-            // 
-            // AppNumbersLabel
-            // 
-            this.AppNumbersLabel.BackColor = System.Drawing.Color.Transparent;
-            this.AppNumbersLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AppNumbersLabel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.AppNumbersLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.AppNumbersLabel.ForeColor = System.Drawing.Color.Transparent;
-            this.AppNumbersLabel.Image = ((System.Drawing.Image)(resources.GetObject("AppNumbersLabel.Image")));
-            this.AppNumbersLabel.Location = new System.Drawing.Point(20, 0);
-            this.AppNumbersLabel.Name = "AppNumbersLabel";
-            this.AppNumbersLabel.Size = new System.Drawing.Size(20, 21);
-            this.AppNumbersLabel.TabIndex = 2;
-            this.AppNumbersLabel.Tag = "";
-            this.AppNumbersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTip.SetToolTip(this.AppNumbersLabel, "Numbers");
-            this.AppNumbersLabel.AutoSizeChanged += new System.EventHandler(this.AppLauncherLabel_Click);
-            this.AppNumbersLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
             // 
             // AppPrimeCalculatorLabel
             // 
@@ -974,7 +986,6 @@ partial class MainForm
             this.AppPrimeCalculatorLabel.Tag = "";
             this.AppPrimeCalculatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ToolTip.SetToolTip(this.AppPrimeCalculatorLabel, "Prime Calculator");
-            this.AppPrimeCalculatorLabel.AutoSizeChanged += new System.EventHandler(this.AppLauncherLabel_Click);
             this.AppPrimeCalculatorLabel.Click += new System.EventHandler(this.AppLauncherLabel_Click);
             // 
             // ShowToolTipsCheckBox
@@ -1221,7 +1232,7 @@ partial class MainForm
             this.BookmarkPanel.Controls.Add(this.BookmarkTextBox);
             this.BookmarkPanel.Location = new System.Drawing.Point(266, 0);
             this.BookmarkPanel.Name = "BookmarkPanel";
-            this.BookmarkPanel.Size = new System.Drawing.Size(677, 21);
+            this.BookmarkPanel.Size = new System.Drawing.Size(651, 21);
             this.BookmarkPanel.TabIndex = 109;
             // 
             // DeleteBookmarkLabel
@@ -1233,7 +1244,7 @@ partial class MainForm
             this.DeleteBookmarkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DeleteBookmarkLabel.ForeColor = System.Drawing.Color.DarkGray;
             this.DeleteBookmarkLabel.Image = ((System.Drawing.Image)(resources.GetObject("DeleteBookmarkLabel.Image")));
-            this.DeleteBookmarkLabel.Location = new System.Drawing.Point(653, 0);
+            this.DeleteBookmarkLabel.Location = new System.Drawing.Point(627, 0);
             this.DeleteBookmarkLabel.Name = "DeleteBookmarkLabel";
             this.DeleteBookmarkLabel.Size = new System.Drawing.Size(18, 21);
             this.DeleteBookmarkLabel.TabIndex = 100;
@@ -1249,7 +1260,7 @@ partial class MainForm
             this.ClearBookmarksLabel.Dock = System.Windows.Forms.DockStyle.Right;
             this.ClearBookmarksLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ClearBookmarksLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.ClearBookmarksLabel.Location = new System.Drawing.Point(671, 0);
+            this.ClearBookmarksLabel.Location = new System.Drawing.Point(645, 0);
             this.ClearBookmarksLabel.Name = "ClearBookmarksLabel";
             this.ClearBookmarksLabel.Size = new System.Drawing.Size(6, 21);
             this.ClearBookmarksLabel.TabIndex = 101;
@@ -1325,7 +1336,7 @@ partial class MainForm
             this.BookmarkTextBox.ForeColor = System.Drawing.Color.DarkGray;
             this.BookmarkTextBox.Location = new System.Drawing.Point(104, -1);
             this.BookmarkTextBox.Name = "BookmarkTextBox";
-            this.BookmarkTextBox.Size = new System.Drawing.Size(549, 23);
+            this.BookmarkTextBox.Size = new System.Drawing.Size(523, 23);
             this.BookmarkTextBox.TabIndex = 99;
             this.BookmarkTextBox.Text = "write a note";
             this.BookmarkTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -5701,7 +5712,7 @@ partial class MainForm
             this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 1);
             this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
             this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-            this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 213);
+            this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 216);
             this.ScriptOutputGroupBox.TabIndex = 103;
             this.ScriptOutputGroupBox.TabStop = false;
             this.ScriptOutputGroupBox.Text = " Output ";
@@ -5717,7 +5728,7 @@ partial class MainForm
             this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
             this.ScriptOutputTextBox.ReadOnly = true;
             this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 185);
+            this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 188);
             this.ScriptOutputTextBox.TabIndex = 0;
             this.ScriptOutputTextBox.WordWrap = false;
             this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -5742,7 +5753,7 @@ partial class MainForm
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
             this.TabControl.ShowToolTips = true;
-            this.TabControl.Size = new System.Drawing.Size(825, 190);
+            this.TabControl.Size = new System.Drawing.Size(825, 191);
             this.TabControl.TabIndex = 102;
             this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             this.TabControl.Click += new System.EventHandler(this.TabControl_Click);
@@ -5755,7 +5766,7 @@ partial class MainForm
             this.TranslationTabPage.Location = new System.Drawing.Point(4, 22);
             this.TranslationTabPage.Name = "TranslationTabPage";
             this.TranslationTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.TranslationTabPage.Size = new System.Drawing.Size(817, 164);
+            this.TranslationTabPage.Size = new System.Drawing.Size(817, 165);
             this.TranslationTabPage.TabIndex = 190;
             this.TranslationTabPage.Text = "Translation";
             this.TranslationTabPage.ToolTipText = "Translations for current selection/verse\r\nترجمة الءاية أو الءايات المظللة";
@@ -5971,7 +5982,7 @@ partial class MainForm
             this.GrammarTabPage.Controls.Add(this.GrammarTextBox);
             this.GrammarTabPage.Location = new System.Drawing.Point(4, 22);
             this.GrammarTabPage.Name = "GrammarTabPage";
-            this.GrammarTabPage.Size = new System.Drawing.Size(817, 164);
+            this.GrammarTabPage.Size = new System.Drawing.Size(817, 165);
             this.GrammarTabPage.TabIndex = 193;
             this.GrammarTabPage.Text = " Grammar";
             this.GrammarTabPage.ToolTipText = "Grammar details of the current word in Arabic and English\r\nإعراب الكلمة بالعربي و" +
@@ -6005,7 +6016,7 @@ partial class MainForm
             this.RelatedWordsTabPage.Controls.Add(this.RelatedWordsTextBox);
             this.RelatedWordsTabPage.Location = new System.Drawing.Point(4, 22);
             this.RelatedWordsTabPage.Name = "RelatedWordsTabPage";
-            this.RelatedWordsTabPage.Size = new System.Drawing.Size(817, 164);
+            this.RelatedWordsTabPage.Size = new System.Drawing.Size(817, 165);
             this.RelatedWordsTabPage.TabIndex = 192;
             this.RelatedWordsTabPage.Text = "Related Words";
             this.RelatedWordsTabPage.ToolTipText = "Related words from the same root as the current word\r\nالكلمات المشتقة من نفس جذر " +
@@ -6060,7 +6071,7 @@ partial class MainForm
             this.SymmetryTabPage.Controls.Add(this.SymmetryTextBox);
             this.SymmetryTabPage.Location = new System.Drawing.Point(4, 22);
             this.SymmetryTabPage.Name = "SymmetryTabPage";
-            this.SymmetryTabPage.Size = new System.Drawing.Size(817, 164);
+            this.SymmetryTabPage.Size = new System.Drawing.Size(817, 165);
             this.SymmetryTabPage.TabIndex = 201;
             this.SymmetryTabPage.Text = "Symmetry";
             this.SymmetryTabPage.ToolTipText = "Text symmetries starting from both ends [Dr Waleed S. Mohammed]\r\nتناظر النص من ال" +
@@ -6140,7 +6151,7 @@ partial class MainForm
             this.ValuesSequenceTabPage.Controls.Add(this.ValuesSequenceTextBox);
             this.ValuesSequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.ValuesSequenceTabPage.Name = "ValuesSequenceTabPage";
-            this.ValuesSequenceTabPage.Size = new System.Drawing.Size(817, 164);
+            this.ValuesSequenceTabPage.Size = new System.Drawing.Size(817, 165);
             this.ValuesSequenceTabPage.TabIndex = 198;
             this.ValuesSequenceTabPage.Text = "Values";
             this.ValuesSequenceTabPage.ToolTipText = "Values of letter/word/verse/chapter values in bases 2 to 36\r\nقيم الحروف والكلمات " +
@@ -6261,7 +6272,7 @@ partial class MainForm
             this.CVWLSequenceTabPage.Controls.Add(this.CVWLSequenceTextBox);
             this.CVWLSequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.CVWLSequenceTabPage.Name = "CVWLSequenceTabPage";
-            this.CVWLSequenceTabPage.Size = new System.Drawing.Size(817, 164);
+            this.CVWLSequenceTabPage.Size = new System.Drawing.Size(817, 165);
             this.CVWLSequenceTabPage.TabIndex = 200;
             this.CVWLSequenceTabPage.Text = "CVWL";
             this.CVWLSequenceTabPage.ToolTipText = "Concatenated chapter/verse/word/letter numbers and counts\r\nرصف أرقام وأعداد الحرو" +
@@ -6356,7 +6367,7 @@ partial class MainForm
             this.DNASequenceTabPage.Controls.Add(this.DNASequenceTextBox);
             this.DNASequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.DNASequenceTabPage.Name = "DNASequenceTabPage";
-            this.DNASequenceTabPage.Size = new System.Drawing.Size(817, 164);
+            this.DNASequenceTabPage.Size = new System.Drawing.Size(817, 165);
             this.DNASequenceTabPage.TabIndex = 195;
             this.DNASequenceTabPage.Text = "DNA";
             this.DNASequenceTabPage.ToolTipText = "Convert text into a DNA sequence to compare with the human genome [Belkacem Meghz" +
@@ -6434,7 +6445,7 @@ partial class MainForm
             this.MathsTabPage.Controls.Add(this.MathsPanel);
             this.MathsTabPage.Location = new System.Drawing.Point(4, 22);
             this.MathsTabPage.Name = "MathsTabPage";
-            this.MathsTabPage.Size = new System.Drawing.Size(817, 164);
+            this.MathsTabPage.Size = new System.Drawing.Size(817, 165);
             this.MathsTabPage.TabIndex = 197;
             this.MathsTabPage.Text = "C+V";
             this.MathsTabPage.ToolTipText = "Chapter +/- Verse calculations\r\nحسابات مجاميع وفروق الءايات والسُوَر";
@@ -6548,7 +6559,7 @@ partial class MainForm
             this.MathsPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MathsPanel.Location = new System.Drawing.Point(0, 0);
             this.MathsPanel.Name = "MathsPanel";
-            this.MathsPanel.Size = new System.Drawing.Size(817, 164);
+            this.MathsPanel.Size = new System.Drawing.Size(817, 165);
             this.MathsPanel.TabIndex = 0;
             // 
             // MathsInterestingNumbersEditLabel
@@ -7836,7 +7847,7 @@ partial class MainForm
             this.DistancesTabPage.Controls.Add(this.DistancesPanel);
             this.DistancesTabPage.Location = new System.Drawing.Point(4, 22);
             this.DistancesTabPage.Name = "DistancesTabPage";
-            this.DistancesTabPage.Size = new System.Drawing.Size(817, 164);
+            this.DistancesTabPage.Size = new System.Drawing.Size(817, 165);
             this.DistancesTabPage.TabIndex = 199;
             this.DistancesTabPage.Text = "Distances";
             this.DistancesTabPage.ToolTipText = "Distances to the start and end of Book, current chapter/verse/word\r\nالمسافات الى " +
@@ -7913,7 +7924,7 @@ partial class MainForm
             this.DistancesPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DistancesPanel.Location = new System.Drawing.Point(0, 0);
             this.DistancesPanel.Name = "DistancesPanel";
-            this.DistancesPanel.Size = new System.Drawing.Size(817, 164);
+            this.DistancesPanel.Size = new System.Drawing.Size(817, 165);
             this.DistancesPanel.TabIndex = 1;
             // 
             // DistancesInterestingNumbersEditLabel
@@ -8772,7 +8783,7 @@ partial class MainForm
             this.UserTextTabPage.Controls.Add(this.UserTextTextBox);
             this.UserTextTabPage.Location = new System.Drawing.Point(4, 22);
             this.UserTextTabPage.Name = "UserTextTabPage";
-            this.UserTextTabPage.Size = new System.Drawing.Size(817, 164);
+            this.UserTextTabPage.Size = new System.Drawing.Size(817, 165);
             this.UserTextTabPage.TabIndex = 194;
             this.UserTextTabPage.Text = " User Text ";
             this.UserTextTabPage.ToolTipText = "Calculate the value of any given text or find all words with a given value\r\nحساب " +
@@ -12571,4 +12582,5 @@ partial class MainForm
     private System.Windows.Forms.Label NthUniqueNumberDimensionLabel;
     private System.Windows.Forms.Label NthDuplicateNumberDimensionLabel;
     private System.Windows.Forms.Label NthNumberDimensionLabel;
+    private System.Windows.Forms.Label AppIndicesLabel;
 }

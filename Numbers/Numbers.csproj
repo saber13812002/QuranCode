@@ -5,7 +5,7 @@
     <Platform Condition="">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{66E904EA-0398-466A-AF1A-F0E5F005881F}</ProjectGuid>
+    <ProjectGuid>{86FE4303-1F08-4AA9-8483-1F20CC9CC0B3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Numbers</RootNamespace>
@@ -61,10 +61,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App.ico" />
     <Content Include="Numbers\Numbers.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="App.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Globals\Globals.csproj">

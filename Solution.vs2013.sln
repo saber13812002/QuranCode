@@ -26,7 +26,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InitialLetters", "InitialLe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Composites", "Composites\Composites.csproj", "{27338AD2-3D52-4F64-8B62-CCF43D6B8529}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Numbers", "Numbers\Numbers.csproj", "{66E904EA-0398-466A-AF1A-F0E5F005881F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indices", "Indices\Indices.csproj", "{66E904EA-0398-466A-AF1A-F0E5F005881F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{CDC54194-E83C-49EF-9E42-2D73B08E99F6}"
 EndProject
@@ -45,6 +45,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Setup.bat = Setup.bat
 		Version.bat = Version.bat
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Numbers", "Numbers\Numbers.csproj", "{86FE4303-1F08-4AA9-8483-1F20CC9CC0B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -226,6 +228,16 @@ Global
 		{61438304-4125-4174-AF1C-49E81800DAA6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{61438304-4125-4174-AF1C-49E81800DAA6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{61438304-4125-4174-AF1C-49E81800DAA6}.Release|x86.ActiveCfg = Release|Any CPU
+		{86FE4303-1F08-4AA9-8483-1F20CC9CC0B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86FE4303-1F08-4AA9-8483-1F20CC9CC0B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86FE4303-1F08-4AA9-8483-1F20CC9CC0B3}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{86FE4303-1F08-4AA9-8483-1F20CC9CC0B3}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{86FE4303-1F08-4AA9-8483-1F20CC9CC0B3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{86FE4303-1F08-4AA9-8483-1F20CC9CC0B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86FE4303-1F08-4AA9-8483-1F20CC9CC0B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86FE4303-1F08-4AA9-8483-1F20CC9CC0B3}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{86FE4303-1F08-4AA9-8483-1F20CC9CC0B3}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{86FE4303-1F08-4AA9-8483-1F20CC9CC0B3}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
