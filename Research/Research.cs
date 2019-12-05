@@ -8645,10 +8645,10 @@ public static class Research
                 words.AddRange(verse.Words);
             }
 
-            int sides = 3;
+            int sides = 0;
             if (int.TryParse(param, out sides))
             {
-                if ((sides >= 3) && (sides <= 24))
+                if ((sides >= 3) && (sides <= 8317))
                 {
                     return DoPolygonalValueWords(client, words, sides);
                 }
@@ -8668,12 +8668,35 @@ public static class Research
                 words.AddRange(verse.Words);
             }
 
-            int sides = 3;
+            int sides = 0;
             if (int.TryParse(param, out sides))
             {
-                if ((sides >= 3) && (sides <= 24))
+                if ((sides >= 3) && (sides <= 8317))
                 {
                     return DoCenteredPolygonalValueWords(client, words, sides);
+                }
+            }
+        }
+        return null;
+    }
+    public static string PyramidalValueWords(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        List<Verse> verses = GetSourceVerses(client, in_search_result);
+        if (verses != null)
+        {
+            List<Word> words = new List<Word>();
+            foreach (Verse verse in verses)
+            {
+                words.AddRange(verse.Words);
+            }
+
+            int sides = 0;
+            if (int.TryParse(param, out sides))
+            {
+                if ((sides >= 3) && (sides <= 8317))
+                {
+                    return DoPyramidalValueWords(client, words, sides);
                 }
             }
         }
@@ -8691,7 +8714,7 @@ public static class Research
                 words.AddRange(verse.Words);
             }
 
-            int faces = 4;
+            int faces = 0;
             if (int.TryParse(param, out faces))
             {
                 if ((faces == 4) || (faces == 6) || (faces == 8) || (faces == 12) || (faces == 20))
@@ -8782,6 +8805,55 @@ public static class Research
                         count++;
 
                         int index = Numbers.CenteredPolygonalNumbers(sides).IndexOf(value);
+                        str.Append
+                        (
+                            count + "\t" +
+                            word.Number + "\t" +
+                            word.Verse.Chapter.SortedNumber + "\t" +
+                            word.Verse.NumberInChapter + "\t" +
+                            word.NumberInVerse + "\t" +
+                            word.Text + "\t" +
+                            value.ToString() + "\t" +
+                            (index + 1).ToString()
+                        );
+                        str.AppendLine();
+                    }
+                }
+            }
+        }
+        return str.ToString();
+    }
+    private static string DoPyramidalValueWords(Client client, List<Word> words, int sides)
+    {
+        if (client == null) return null;
+        if (words == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        if (words.Count > 0)
+        {
+            str.AppendLine
+            (
+                "#" + "\t" +
+                "Number" + "\t" +
+                "Chapter" + "\t" +
+                "Verse" + "\t" +
+                "Word" + "\t" +
+                "Text" + "\t" +
+                "Value" + "\t" +
+                "Index"
+            );
+
+            int count = 0;
+            foreach (Word word in words)
+            {
+                if (word.Text != "و")
+                {
+                    long value = client.CalculateValue(word);
+                    if (Numbers.IsPyramidalNumber(sides, value))
+                    {
+                        count++;
+
+                        int index = Numbers.PyramidalNumbers(sides).IndexOf(value);
                         str.Append
                         (
                             count + "\t" +

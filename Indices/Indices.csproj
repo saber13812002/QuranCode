@@ -62,6 +62,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.ico" />
+    <Content Include="Help\Numbers.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Globals\Globals.csproj">

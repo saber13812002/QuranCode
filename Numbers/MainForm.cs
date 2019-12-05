@@ -254,57 +254,85 @@ public partial class MainForm : Form
                     if (j == 0) control.DragEnter += Control_DragEnter;
                     if (j == 0) control.DragDrop += Control_DragDrop;
                     control.MouseHover += Control_MouseHover;
-
-                    switch (j)
-                    {
-                        case 0:
-                            control.BackColor = Color.White;
-                            break;
-                        case 1:
-                        case 2:
-                        case 3:
-                            control.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[3];
-                            break;
-                        case 4:
-                            control.BackColor = Numbers.NUMBER_KIND_BACKCOLORS[0];
-                            break;
-                        case 5:
-                            control.BackColor = Color.FromArgb(240, 240, 255);
-                            break;
-                        case 6:
-                            control.BackColor = Color.FromArgb(255, 255, 192);
-                            break;
-                        case 7:
-                            control.BackColor = Color.FromArgb(255, 255, 144);
-                            break;
-                        case 8:
-                            control.BackColor = Color.FromArgb(192, 255, 192);
-                            break;
-                        case 9:
-                        case 10:
-                        case 11:
-                        case 12:
-                        case 13:
-                            control.BackColor = Color.FromArgb(192, 192, 224);
-                            break;
-                        case 14:
-                        case 15:
-                            control.BackColor = Color.FromArgb(208, 160, 255);
-                            break;
-                        default:
-                            control.BackColor = SystemColors.Control;
-                            break;
-                    }
-
                     controls[i, j] = control;
                 }
             }
         }
+        ClearCells();
 
         AboutToolStripMenuItem.Font = new Font(AboutToolStripMenuItem.Font, AboutToolStripMenuItem.Font.Style | FontStyle.Bold);
 
         m_filename = AppDomain.CurrentDomain.FriendlyName.Replace(".exe", ".ini");
         LoadSettings();
+    }
+    private void ClearCells()
+    {
+        if (controls != null)
+        {
+            for (int i = 0; i < ROWS; i++)
+            {
+                ClearCells(i);
+            }
+        }
+    }
+    private void ClearCells(int row)
+    {
+        if (controls != null)
+        {
+            int i = row;
+            {
+                for (int j = 0; j < COLS; j++)
+                {
+                    TextBox control = controls[i, j];
+                    if (control != null)
+                    {
+                        control.Text = "";
+                        switch (j)
+                        {
+                            case 0:
+                                control.BackColor = Color.White;
+                                break;
+                            case 1:
+                            case 2:
+                            case 3:
+                                control.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[3];
+                                break;
+                            case 4:
+                                control.BackColor = Numbers.NUMBER_KIND_BACKCOLORS[0];
+                                break;
+                            case 5:
+                                control.BackColor = Color.FromArgb(240, 240, 255);
+                                break;
+                            case 6:
+                                control.BackColor = Color.FromArgb(255, 255, 192);
+                                break;
+                            case 7:
+                                control.BackColor = Color.FromArgb(255, 255, 144);
+                                break;
+                            case 8:
+                                control.BackColor = Color.FromArgb(192, 255, 192);
+                                break;
+                            case 9:
+                            case 10:
+                            case 11:
+                            case 12:
+                            case 13:
+                                control.BackColor = Color.FromArgb(192, 192, 224);
+                                break;
+                            case 14:
+                            case 15:
+                                control.BackColor = Color.FromArgb(208, 160, 255);
+                                break;
+                            default:
+                                control.BackColor = SystemColors.Control;
+                                break;
+                        }
+
+                        controls[i, j] = control;
+                    }
+                }
+            }
+        }
     }
 
     private void Label_Click(object sender, EventArgs e)
@@ -344,12 +372,13 @@ public partial class MainForm : Form
     private void ClearLabel_Click(object sender, EventArgs e)
     {
         batch_number = -1;
+        ClearCells();
         if (controls != null)
         {
-            for (int i = 0; i < ROWS; i++)
-            {
-                controls[i, 0].Text = "";
-            }
+            //for (int i = 0; i < ROWS; i++)
+            //{
+            //    controls[i, 0].Text = "";
+            //}
             controls[0, 0].Focus();
         }
     }
@@ -534,17 +563,17 @@ public partial class MainForm : Form
         Control control = sender as Control;
         if (control != null)
         {
-            try
+            if (control.Text.Length > 0)
             {
-                string text = control.Text;
-                if (!String.IsNullOrEmpty(text))
+                string[] parts = control.Text.Split(',');
+                long sum = 0L;
+                foreach (string part in parts)
                 {
-                    long number = (long)double.Parse(text);
-                    string factors_str = Numbers.FactorizeToString(number);
-                    ToolTip.SetToolTip(control, factors_str);
+                    sum += long.Parse(part);
                 }
+                ToolTip.SetToolTip(control, control.Text + " | sum = " + sum);
             }
-            catch
+            else
             {
                 ToolTip.SetToolTip(control, null);
             }
@@ -821,7 +850,7 @@ public partial class MainForm : Form
                             {
                                 controls[point.X, 5].Text = "";
                                 controls[point.X, 5].ForeColor = Color.Black;
-                                controls[point.X, 5].BackColor = Color.FromArgb(240, 240, 255);
+                                controls[point.X, 5].BackColor = SystemColors.Control;
                                 MainPanel.Controls[33 + count].Text = "P=4n+1";
                                 ToolTip.SetToolTip(MainPanel.Controls[33 + count], "4n+1 Prime index");
                             }
@@ -830,29 +859,31 @@ public partial class MainForm : Form
 
 
                             // Polygons
-                            bool found = false;
+                            bool no_match_yet = true;
                             controls[point.X, 6].Text = "";
-                            MainPanel.Controls[33 + count].Text = "";
+                            MainPanel.Controls[33 + count].Text = "-gon";
                             ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Polygon index");
-                            for (int sides = 3; sides <= 1034; sides++)
+                            long sum = 0L;
+                            for (int sides = 3; sides <= 114; sides++)
                             {
                                 long polygon = Numbers.PolygonalNumbers(sides).IndexOf(number) + 1;
-                                if (polygon > 1L)
+                                if (polygon > 0L)
                                 {
-                                    if (!found)
+                                    sum += sides;
+                                    if (no_match_yet)
                                     {
                                         controls[point.X, 6].Text = polygon.ToString();
                                         controls[point.X, 6].ForeColor = Numbers.GetNumberTypeColor(polygon);
                                         MainPanel.Controls[33 + count].Text = sides.ToString() + "-gon";
                                         ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Polygon index");
-                                        found = true;
+                                        no_match_yet = false;
                                     }
                                     else
                                     {
                                         controls[point.X, 6].Text += "," + polygon.ToString();
                                         string text = MainPanel.Controls[33 + count].Text.Replace("-gon", "") + "," + sides.ToString();
                                         MainPanel.Controls[33 + count].Text = text;
-                                        ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Polygon indices: " + text);
+                                        ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Polygon indices: " + text + " | sum = " + sum);
                                     }
                                 }
                             }
@@ -860,29 +891,31 @@ public partial class MainForm : Form
                             backup_count = count;
 
                             // Centered Polygons
-                            found = false;
+                            no_match_yet = true;
                             controls[point.X, 7].Text = "";
-                            MainPanel.Controls[33 + count].Text = "";
+                            MainPanel.Controls[33 + count].Text = "-cgon";
                             ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Centered Polygon index");
-                            for (int sides = 3; sides <= 1034; sides++)
+                            sum = 0L;
+                            for (int sides = 3; sides <= 114; sides++)
                             {
                                 long centered_polygon = Numbers.CenteredPolygonalNumbers(sides).IndexOf(number) + 1;
-                                if (centered_polygon > 1L)
+                                if (centered_polygon > 0L)
                                 {
-                                    if (!found)
+                                    sum += sides;
+                                    if (no_match_yet)
                                     {
                                         controls[point.X, 7].Text = centered_polygon.ToString();
                                         controls[point.X, 7].ForeColor = Numbers.GetNumberTypeColor(centered_polygon);
                                         MainPanel.Controls[33 + count].Text = sides.ToString() + "-cgon";
                                         ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Centered Polygon index");
-                                        found = true;
+                                        no_match_yet = false;
                                     }
                                     else
                                     {
                                         controls[point.X, 7].Text += "," + centered_polygon.ToString();
                                         string text = MainPanel.Controls[33 + count].Text.Replace("-cgon", "") + "," + sides.ToString();
                                         MainPanel.Controls[33 + count].Text = text;
-                                        ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Centered Polygon indices: " + text);
+                                        ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Centered Polygon indices: " + text + " | sum = " + sum);
                                     }
                                 }
                             }
@@ -890,29 +923,31 @@ public partial class MainForm : Form
                             backup_count = count;
 
                             // Pyramids
-                            found = false;
+                            no_match_yet = true;
                             controls[point.X, 8].Text = "";
-                            MainPanel.Controls[33 + count].Text = "";
+                            MainPanel.Controls[33 + count].Text = "-pyramid";
                             ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Pyramid index");
-                            for (int sides = 3; sides <= 1034; sides++)
+                            sum = 0L;
+                            for (int sides = 3; sides <= 114; sides++)
                             {
                                 long pyramid = Numbers.PyramidalNumbers(sides).IndexOf(number) + 1;
-                                if (pyramid > 1L)
+                                if (pyramid > 0L)
                                 {
-                                    if (!found)
+                                    sum += sides;
+                                    if (no_match_yet)
                                     {
                                         controls[point.X, 8].Text = pyramid.ToString();
                                         controls[point.X, 8].ForeColor = Numbers.GetNumberTypeColor(pyramid);
                                         MainPanel.Controls[33 + count].Text = sides.ToString() + "-pyramid";
                                         ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Pyramid index");
-                                        found = true;
+                                        no_match_yet = false;
                                     }
                                     else
                                     {
                                         controls[point.X, 8].Text += "," + pyramid.ToString();
                                         string text = MainPanel.Controls[33 + count].Text.Replace("-pyramid", "") + "," + sides.ToString();
                                         MainPanel.Controls[33 + count].Text = text;
-                                        ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Pyramid indices: " + text);
+                                        ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Pyramid indices: " + text + " | sum = " + sum);
                                     }
                                 }
                             }
@@ -1002,22 +1037,7 @@ public partial class MainForm : Form
                         }
                         catch
                         {
-                            controls[point.X, 1].Text = "";
-                            controls[point.X, 2].Text = "";
-                            controls[point.X, 3].Text = "";
-                            controls[point.X, 4].Text = "";
-                            controls[point.X, 5].Text = "";
-                            controls[point.X, 6].Text = "";
-                            controls[point.X, 7].Text = "";
-                            controls[point.X, 8].Text = "";
-                            controls[point.X, 9].Text = "";
-                            controls[point.X, 10].Text = "";
-                            controls[point.X, 11].Text = "";
-                            controls[point.X, 12].Text = "";
-                            controls[point.X, 13].Text = "";
-                            controls[point.X, 14].Text = "";
-                            controls[point.X, 15].Text = "";
-                            controls[point.X, 16].Text = "";
+                            ClearCells(point.X);
                         }
                         finally
                         {
@@ -1026,42 +1046,12 @@ public partial class MainForm : Form
                     }
                     else
                     {
-                        controls[point.X, 1].Text = "";
-                        controls[point.X, 2].Text = "";
-                        controls[point.X, 3].Text = "";
-                        controls[point.X, 4].Text = "";
-                        controls[point.X, 5].Text = "";
-                        controls[point.X, 6].Text = "";
-                        controls[point.X, 7].Text = "";
-                        controls[point.X, 8].Text = "";
-                        controls[point.X, 9].Text = "";
-                        controls[point.X, 10].Text = "";
-                        controls[point.X, 11].Text = "";
-                        controls[point.X, 12].Text = "";
-                        controls[point.X, 13].Text = "";
-                        controls[point.X, 14].Text = "";
-                        controls[point.X, 15].Text = "";
-                        controls[point.X, 16].Text = "";
+                        ClearCells(point.X);
                     }
                 }
                 else
                 {
-                    controls[point.X, 1].Text = "";
-                    controls[point.X, 2].Text = "";
-                    controls[point.X, 3].Text = "";
-                    controls[point.X, 4].Text = "";
-                    controls[point.X, 5].Text = "";
-                    controls[point.X, 6].Text = "";
-                    controls[point.X, 7].Text = "";
-                    controls[point.X, 8].Text = "";
-                    controls[point.X, 9].Text = "";
-                    controls[point.X, 10].Text = "";
-                    controls[point.X, 11].Text = "";
-                    controls[point.X, 12].Text = "";
-                    controls[point.X, 13].Text = "";
-                    controls[point.X, 14].Text = "";
-                    controls[point.X, 15].Text = "";
-                    controls[point.X, 16].Text = "";
+                    ClearCells(point.X);
                 }
             }
         }

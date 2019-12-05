@@ -374,14 +374,11 @@ public static class Numbers
             LoadAbundants();
         }
 
-        for (int sides = 3; sides <= 1034; sides++)
+        for (int sides = 3; sides <= 8317; sides++)
         {
             GeneratePolygonalNumbers(sides);
             GenerateCenteredPolygonalNumbers(sides);
-        }
-        for (int faces = 3; faces <= 1034; faces++)
-        {
-            GeneratePyramidalNumbers(faces);
+            GeneratePyramidalNumbers(sides);
         }
 
         LoadPerfectNumbers();
