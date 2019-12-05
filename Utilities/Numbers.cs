@@ -374,10 +374,14 @@ public static class Numbers
             LoadAbundants();
         }
 
-        for (int sides = 3; sides <= 24; sides++)
+        for (int sides = 3; sides <= 1034; sides++)
         {
             GeneratePolygonalNumbers(sides);
             GenerateCenteredPolygonalNumbers(sides);
+        }
+        for (int faces = 3; faces <= 1034; faces++)
+        {
+            GeneratePyramidalNumbers(faces);
         }
 
         LoadPerfectNumbers();
@@ -3399,7 +3403,65 @@ public static class Numbers
     }
 
 
-    private static int s_series_limit = 1000;
+    private static int s_series_limit = 1034;
+
+    //public static bool IsSquare(long number)
+    //{
+    //    return (IsNthPower(number, 2));
+    //}
+    public static bool IsCubic(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (IsNthPower(number, 3));
+    }
+    public static bool IsQuartic(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (IsNthPower(number, 4));
+    }
+    public static bool IsQuintic(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (IsNthPower(number, 5));
+    }
+    public static bool IsSextic(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (IsNthPower(number, 6));
+    }
+    public static bool IsSeptic(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (IsNthPower(number, 7));
+    }
+    public static bool IsOctic(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (IsNthPower(number, 8));
+    }
+    public static bool IsNonic(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (IsNthPower(number, 9));
+    }
+    public static bool IsDecic(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (IsNthPower(number, 10));
+    }
+    public static bool IsNthPower(long number, int power)
+    {
+        if (number < 0L) number *= -1L;
+
+        long root = (long)Math.Round(Math.Pow(number, (1.0D / power)));
+        long total = 1L;
+        for (int i = 0; i < power; i++)
+        {
+            total *= root;
+        }
+        return (number == total);
+    }
+
     //http://en.wikipedia.org/wiki/Polygonal_number
     //ith number of Polygonal(sides=N) = ( (N - 2)*i*i - (N - 4)*i ) / 2
     //--------------------------------------------------------------------------------------------
@@ -4033,6 +4095,330 @@ public static class Numbers
         return (CenteredPolygonalNumbers(24).Contains(number));
     }
 
+    //https://en.wikipedia.org/wiki/Pyramidal_number
+    //r-gonal pyramidal numbers = a(r, n) = ( 3*n*n + n*n*n*(r-2) - n*(r-5) ) / 6
+    //A000292    Triangular pyramidal numbers: a(n) = n*(n+1)*(n+2)/6
+    //1, 4, 10, 20, 35, 56, 84, 120, 165, 220, 286, 364, 455, 560, 680, 816, 969, 1140, 1330, 1540, 1771, 2024, 2300, 2600, 2925, 3276, 3654, 4060, 4495, 4960, 5456, 5984, 6545, 7140, 7770, 8436, 9139, 9880, 10660, 11480, 12341, 13244, 14190, 15180
+    //A000330    Square pyramidal numbers: a(n) = n*(n+1)*(2*n+1)/6
+    //1, 5, 14, 30, 55, 91, 140, 204, 285, 385, 506, 650, 819, 1015, 1240, 1496, 1785, 2109, 2470, 2870, 3311, 3795, 4324, 4900, 5525, 6201, 6930, 7714, 8555, 9455, 10416, 11440, 12529, 13685, 14910, 16206, 17575, 19019, 20540, 22140, 23821, 25585, 27434, 29370
+    //A002411    Pentagonal pyramidal numbers: a(n) = n^2*(n+1)/2
+    //1, 6, 18, 40, 75, 126, 196, 288, 405, 550, 726, 936, 1183, 1470, 1800, 2176, 2601, 3078, 3610, 4200, 4851, 5566, 6348, 7200, 8125, 9126, 10206, 11368, 12615, 13950, 15376, 16896, 18513, 20230, 22050, 23976, 26011, 28158, 30420, 32800, 35301, 37926, 40678
+    //A002412    Hexagonal pyramidal numbers: a(n) = n*(n+1)*(4n-1)/6 
+    //1, 7, 22, 50, 95, 161, 252, 372, 525, 715, 946, 1222, 1547, 1925, 2360, 2856, 3417, 4047, 4750, 5530, 6391, 7337, 8372, 9500, 10725, 12051, 13482, 15022, 16675, 18445, 20336, 22352, 24497, 26775, 29190, 31746, 34447, 37297, 40300
+    //A002413    Heptagonal pyramidal numbers: a(n) = n*(n+1)*(5*n-2)/6
+    //1, 8, 26, 60, 115, 196, 308, 456, 645, 880, 1166, 1508, 1911, 2380, 2920, 3536, 4233, 5016, 5890, 6860, 7931, 9108, 10396, 11800, 13325, 14976, 16758, 18676, 20735, 22940, 25296, 27808, 30481, 33320, 36330, 39516, 42883, 46436, 50180, 54120
+    //A002414    Octagonal pyramidal numbers: a(n) = n*(n+1)*(2*n-1)/2
+    //1, 9, 30, 70, 135, 231, 364, 540, 765, 1045, 1386, 1794, 2275, 2835, 3480, 4216, 5049, 5985, 7030, 8190, 9471, 10879, 12420, 14100, 15925, 17901, 20034, 22330, 24795, 27435, 30256, 33264, 36465, 39865, 43470, 47286, 51319, 55575, 60060, 64780
+    //A007584    Enneagonal pyramidal numbers: a(n) = n*(n+1)*(7*n-4)/6
+    //1, 10, 34, 80, 155, 266, 420, 624, 885, 1210, 1606, 2080, 2639, 3290, 4040, 4896, 5865, 6954, 8170, 9520, 11011, 12650, 14444, 16400, 18525, 20826, 23310, 25984, 28855, 31930, 35216, 38720, 42449, 46410, 50610, 55056, 59755, 64714, 69940, 75440, 81221
+    //A007585    Decagonal pyramidal numbers: a(n) = n*(n + 1)*(8*n - 5)/6
+    //1, 11, 38, 90, 175, 301, 476, 708, 1005, 1375, 1826, 2366, 3003, 3745, 4600, 5576, 6681, 7923, 9310, 10850, 12551, 14421, 16468, 18700, 21125, 23751, 26586, 29638, 32915, 36425, 40176, 44176, 48433, 52955, 57750
+    //A007586    Hendecagonal pyramidal numbers: n*(n+1)*(3*n-2)/2
+    //1, 12, 42, 100, 195, 336, 532, 792, 1125, 1540, 2046, 2652, 3367, 4200, 5160, 6256, 7497, 8892, 10450, 12180, 14091, 16192, 18492, 21000, 23725, 26676, 29862, 33292, 36975, 40920, 45136, 49632, 54417, 59500, 64890, 70596, 76627, 82992, 89700, 96760, 104181
+    //A007587    Dodecagonal pyramidal numbers: n*(n+1)*(10*n-7)/6
+    //1, 13, 46, 110, 215, 371, 588, 876, 1245, 1705, 2266, 2938, 3731, 4655, 5720, 6936, 8313, 9861, 11590, 13510, 15631, 17963, 20516, 23300, 26325, 29601, 33138, 36946, 41035, 45415, 50096, 55088, 60401, 66045, 72030, 78366, 85063, 92131, 99580, 107420, 115661
+    private static Dictionary<int, List<long>> s_pyramidal_numbers_dictionary = new Dictionary<int, List<long>>();
+    public static List<long> PyramidalNumbers(int sides)
+    {
+        if (!s_pyramidal_numbers_dictionary.ContainsKey(sides))
+        {
+            GeneratePyramidalNumbers(sides);
+        }
+
+        if (s_pyramidal_numbers_dictionary.ContainsKey(sides))
+        {
+            return s_pyramidal_numbers_dictionary[sides];
+        }
+        else
+        {
+            return null;
+        }
+    }
+    private static void GeneratePyramidalNumbers(int sides)
+    {
+        List<long> pyramidal_numbers = new List<long>(s_series_limit);
+        for (int n = 1; n <= s_series_limit; n++)
+        {
+            long number = (3 * n * n + n * n * n * (sides - 2) - n * (sides - 5)) / 6;
+            pyramidal_numbers.Add(number);
+        }
+        s_pyramidal_numbers_dictionary.Add(sides, pyramidal_numbers);
+    }
+    public static bool IsPyramidalNumber(int sides, long number)
+    {
+        if (number < 0L) number *= -1L;
+        if (s_pyramidal_numbers_dictionary.ContainsKey(sides))
+        {
+            return (s_pyramidal_numbers_dictionary[sides].Contains(number));
+        }
+        return false;
+    }
+    public static List<long> TriangularPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(3);
+        }
+    }
+    public static List<long> SquarePyramids
+    {
+        get
+        {
+            return PyramidalNumbers(4);
+        }
+    }
+    public static List<long> PentagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(5);
+        }
+    }
+    public static List<long> HexagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(6);
+        }
+    }
+    public static List<long> HeptagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(7);
+        }
+    }
+    public static List<long> OctagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(8);
+        }
+    }
+    public static List<long> NonagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(9);
+        }
+    }
+    public static List<long> DecagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(10);
+        }
+    }
+    public static List<long> HendecagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(11);
+        }
+    }
+    public static List<long> DodecagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(12);
+        }
+    }
+    public static List<long> TridecagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(13);
+        }
+    }
+    public static List<long> TetradecagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(14);
+        }
+    }
+    public static List<long> PentadecagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(15);
+        }
+    }
+    public static List<long> HexadecagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(16);
+        }
+    }
+    public static List<long> HeptadecagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(17);
+        }
+    }
+    public static List<long> OctadecagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(18);
+        }
+    }
+    public static List<long> NonadecagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(19);
+        }
+    }
+    public static List<long> IcosagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(20);
+        }
+    }
+    public static List<long> IcosihenagonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(21);
+        }
+    }
+    public static List<long> IcosidigonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(22);
+        }
+    }
+    public static List<long> IcositrigonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(23);
+        }
+    }
+    public static List<long> IcositetragonalPyramids
+    {
+        get
+        {
+            return PyramidalNumbers(24);
+        }
+    }
+    public static bool IsTriangularPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(3).Contains(number));
+    }
+    public static bool IsSquarePyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(4).Contains(number));
+    }
+    public static bool IsPentagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(5).Contains(number));
+    }
+    public static bool IsHexagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(6).Contains(number));
+    }
+    public static bool IsHeptagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(7).Contains(number));
+    }
+    public static bool IsOctagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(8).Contains(number));
+    }
+    public static bool IsNonagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(9).Contains(number));
+    }
+    public static bool IsDecagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(10).Contains(number));
+    }
+    public static bool IsHendecagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(11).Contains(number));
+    }
+    public static bool IsDodecagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(12).Contains(number));
+    }
+    public static bool IsTridecagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(13).Contains(number));
+    }
+    public static bool IsTetradecagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(14).Contains(number));
+    }
+    public static bool IsPentadecagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(15).Contains(number));
+    }
+    public static bool IsHexadecagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(16).Contains(number));
+    }
+    public static bool IsHeptadecagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(17).Contains(number));
+    }
+    public static bool IsOctadecagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(18).Contains(number));
+    }
+    public static bool IsNonadecagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(19).Contains(number));
+    }
+    public static bool IsIcosagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(20).Contains(number));
+    }
+    public static bool IsIcosihenagonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(21).Contains(number));
+    }
+    public static bool IsIcosidigonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(22).Contains(number));
+    }
+    public static bool IsIcositrigonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(23).Contains(number));
+    }
+    public static bool IsIcositetragonalPyramid(long number)
+    {
+        if (number < 0L) number *= -1L;
+        return (PyramidalNumbers(24).Contains(number));
+    }
+
+
     //http://en.wikipedia.org/wiki/Platonic_solid
     //http://en.wikipedia.org/wiki/Centered_polyhedral_number
     // 4 Faces: Centered tetrahedral  numbers
@@ -4046,25 +4432,21 @@ public static class Numbers
     //http://oeis.org/A005894
     //(2*n+1)*(n^2+n+3)/3
     //1, 5, 15, 35, 69, 121, 195, 295, 425, 589, 791, 1035, 1325, 1665, 2059, 2511, 3025, 3605, 4255, 4979, 5781, 6665, 7635, 8695, 9849, 11101, 12455, 13915, 15485, 17169, 18971, 20895, 22945, 25125, 27439, 29891, 32485, 35225, 38115, ...
-
     //Centered Hexahedron Numbers / Centered Cube Numbers
     //http://en.wikipedia.org/wiki/Centered_cube_number
     //http://oeis.org/A005898
     //n^3 + (n+1)^3
     //1, 9, 35, 91, 189, 341, 559, 855, 1241, 1729, 2331, 3059, 3925, 4941, 6119, 7471, 9009, 10745, 12691, 14859, 17261, 19909, 22815, 25991, 29449, 33201, 37259, 41635, 46341, 51389, 56791, 62559, 68705, 75241, 82179, 89531, 97309, 105525, ...
-
     //Centered Octahedral Numbers
     //http://en.wikipedia.org/wiki/Centered_octahedral_number
     //http://oeis.org/A001845
     //(2*n+1)*(2*n^2 + 2*n + 3)/3
     //1, 7, 25, 63, 129, 231, 377, 575, 833, 1159, 1561, 2047, 2625, 3303, 4089, 4991, 6017, 7175, 8473, 9919, 11521, 13287, 15225, 17343, 19649, 22151, 24857, 27775, 30913, 34279, 37881, 41727, 45825, 50183, 54809, 59711, 64897, 70375, 76153, 82239, ...
-
     //Centered Dodecahedral Numbers
     //http://en.wikipedia.org/wiki/Centered_dodecahedral_number
     //http://oeis.org/A005904
     //(2*n+1)*(5*n^2+5*n+1)
     //1, 33, 155, 427, 909, 1661, 2743, 4215, 6137, 8569, 11571, 15203, 19525, 24597, 30479, 37231, 44913, 53585, 63307, 74139, 86141, 99373, 113895, 129767, 147049, 165801, 186083, 207955, 231477, 256709, 283711, 312543, 343265, 375937, 410619, 447371, ...
-
     //Centered Icosahedral Numbers
     //http://en.wikipedia.org/wiki/Centered_icosahedral_number
     //http://oeis.org/A005902
@@ -4262,123 +4644,6 @@ public static class Numbers
     {
         if (number < 0L) number *= -1L;
         return (PolyhexNumbers(2).Contains(number));
-    }
-
-    //Tetrahedral,            // n*(n+1)*(n+2)/6   = 1, 4, 10, 20, 35, 56, 84, 120, 165, 220, 286, 364, 455, 560, 680, 816, 969, 1140, 1330, 1540, 1771, 2024, 2300, 2600, 2925, 3276, 3654, 4060, 4495, 4960, 5456, 5984, 6545, 7140, 7770, 8436, 9139, 9880, 10660, 11480, 12341, 13244, 14190, 15180, ...
-    private static int s_tetrahedrals_limit = s_series_limit;
-    private static List<long> s_tetrahedrals;
-    public static List<long> Tetrahedrals
-    {
-        get
-        {
-            if (s_tetrahedrals == null)
-            {
-                GenerateTetrahedrals();
-            }
-            return s_tetrahedrals;
-        }
-    }
-    private static void GenerateTetrahedrals()
-    {
-        int max = s_tetrahedrals_limit;
-        s_tetrahedrals = new List<long>(max);
-        for (int n = 1; n <= max; n++)
-        {
-            long result = (n * (n + 1) * (n + 2)) / 6L;
-            s_tetrahedrals.Add(result);
-        }
-    }
-    public static bool IsTetrahedral(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return (Tetrahedrals.Contains(number));
-    }
-
-    //Pyramidal,              // n*(n+1)*(2*n+1)/6 = 1, 5, 14, 30, 55, 91, 140, 204, 285, 385, 506, 650, 819, 1015, 1240, 1496, 1785, 2109, 2470, 2870, 3311, 3795, 4324, 4900, 5525, 6201, 6930, 7714, 8555, 9455, 10416, 11440, 12529, 13685, 14910, 16206, 17575, 19019, 20540, 22140, 23821, 25585, 27434, 29370, ...
-    private static int s_pyramidals_limit = s_series_limit;
-    private static List<long> s_pyramidals;
-    public static List<long> Pyramidals
-    {
-        get
-        {
-            if (s_pyramidals == null)
-            {
-                GeneratePyramidals();
-            }
-            return s_pyramidals;
-        }
-    }
-    private static void GeneratePyramidals()
-    {
-        int max = s_pyramidals_limit;
-        s_pyramidals = new List<long>(max);
-        for (int n = 1; n <= max; n++)
-        {
-            long result = (n * (n + 1) * ((2 * n) + 1)) / 6L;
-            s_pyramidals.Add(result);
-        }
-    }
-    public static bool IsPyramidal(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return (Pyramidals.Contains(number));
-    }
-
-    //public static bool IsSquare(long number)
-    //{
-    //    return (IsNthPower(number, 2));
-    //}
-    public static bool IsCubic(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return (IsNthPower(number, 3));
-    }
-    public static bool IsQuartic(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return (IsNthPower(number, 4));
-    }
-    public static bool IsQuintic(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return (IsNthPower(number, 5));
-    }
-    public static bool IsSextic(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return (IsNthPower(number, 6));
-    }
-    public static bool IsSeptic(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return (IsNthPower(number, 7));
-    }
-    public static bool IsOctic(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return (IsNthPower(number, 8));
-    }
-    public static bool IsNonic(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return (IsNthPower(number, 9));
-    }
-    public static bool IsDecic(long number)
-    {
-        if (number < 0L) number *= -1L;
-        return (IsNthPower(number, 10));
-    }
-    public static bool IsNthPower(long number, int power)
-    {
-        if (number < 0L) number *= -1L;
-
-        long root = (long)Math.Round(Math.Pow(number, (1.0D / power)));
-        long total = 1L;
-        for (int i = 0; i < power; i++)
-        {
-            total *= root;
-        }
-        return (number == total);
     }
 
     //Collatz Conjecture: Starting with any positive integer n, do 3n+1 if n=Odd, do n/2 if n=Even, if continue this process, n must reach 1

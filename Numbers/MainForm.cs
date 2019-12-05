@@ -28,7 +28,7 @@ public partial class MainForm : Form
     }
 
     private static int ROWS = 30;
-    private static int COLS = 19;
+    private static int COLS = 17;
     private TextBox[,] controls = new TextBox[ROWS, COLS];
 
     private string m_filename = null;
@@ -127,7 +127,7 @@ public partial class MainForm : Form
             Label control = new Label();
             if (control != null)
             {
-                control.Width = 16;
+                control.Width = 21;
                 control.Height = 12;
                 control.Top = -3;
                 control.Left = 0;
@@ -148,7 +148,7 @@ public partial class MainForm : Form
             Label control = new Label();
             if (control != null)
             {
-                control.Width = 16;
+                control.Width = 21;
                 control.Height = 12;
                 control.Top = 8;
                 control.Left = 0;
@@ -190,12 +190,14 @@ public partial class MainForm : Form
             Label control = new Label();
             if (control != null)
             {
-                control.Width = (m_dpi == 96.0F) ? 57 : 69;
+                control.Width = (m_dpi == 96.0F) ? 64 : 76;
                 control.Height = 19;
                 control.Top = 0;
                 control.Left = 19 + (j * control.Width + 2);
                 control.TextAlign = ContentAlignment.MiddleCenter;
                 control.Font = new Font("Arial", 8);
+                control.Click += Label_Click;
+                control.Cursor = Cursors.Hand;
                 MainPanel.Controls.Add(control);
 
                 switch (j)
@@ -206,19 +208,17 @@ public partial class MainForm : Form
                     case 3: { control.Text = "XP"; ToolTip.SetToolTip(control, "Non-additive Prime index"); break; }
                     case 4: { control.Text = "AB"; ToolTip.SetToolTip(control, "Abundant index"); break; }
                     case 5: { control.Text = "4n+1"; ToolTip.SetToolTip(control, "4n+1 Prime index"); break; }
-                    case 6: { control.Text = "Polygon"; ToolTip.SetToolTip(control, "Polygon indices"); break; }
-                    case 7: { control.Text = "CPolygon"; ToolTip.SetToolTip(control, "Centered Polygon indices"); break; }
-                    case 8: { control.Text = "Platonic"; ToolTip.SetToolTip(control, "Platonic Solid indices"); break; }
-                    case 9: { control.Text = "P=4n+1"; ToolTip.SetToolTip(control, "ith 4n+1 Prime"); break; }
-                    case 10: { control.Text = "P=4n-1"; ToolTip.SetToolTip(control, "ith 4n-1 Prime"); break; }
-                    case 11: { control.Text = "C=4n+1"; ToolTip.SetToolTip(control, "ith 4n+1 Composite"); break; }
-                    case 12: { control.Text = "C=4n-1"; ToolTip.SetToolTip(control, "ith 4n-1 Composite"); break; }
-                    case 13: { control.Text = "∑"; ToolTip.SetToolTip(control, "Sum(1..i)"); break; }
-                    case 14: { control.Text = "∑ds"; ToolTip.SetToolTip(control, "Sum(DigitSum(1..i))"); break; }
-                    case 15: { control.Text = "∑dr"; ToolTip.SetToolTip(control, "Sum(DigitalRoot(1..i))"); break; }
-                    case 16: { control.Text = "Half"; ToolTip.SetToolTip(control, "i/2"); break; }
-                    case 17: { control.Text = "Median"; ToolTip.SetToolTip(control, "Median(1..i/2)"); break; }
-                    case 18: { control.Text = "Product"; ToolTip.SetToolTip(control, "Half * Median"); break; }
+                    case 6: { control.Text = "-gon"; ToolTip.SetToolTip(control, "Polygon index"); break; }
+                    case 7: { control.Text = "-cgon"; ToolTip.SetToolTip(control, "Centered Polygon index"); break; }
+                    case 8: { control.Text = "-pyramid"; ToolTip.SetToolTip(control, "Pyramid index"); break; }
+                    case 9: { control.Text = "4-platonic"; ToolTip.SetToolTip(control, "4-faces platonic solid index"); break; }
+                    case 10: { control.Text = "6-platonic"; ToolTip.SetToolTip(control, "6-faces platonic solid index"); break; }
+                    case 11: { control.Text = "8-platonic"; ToolTip.SetToolTip(control, "8-faces platonic solid index"); break; }
+                    case 12: { control.Text = "12-platonic"; ToolTip.SetToolTip(control, "12-faces platonic solid index"); break; }
+                    case 13: { control.Text = "20-platonic"; ToolTip.SetToolTip(control, "20-faces platonic solid index"); break; }
+                    case 14: { control.Text = "19-hex C2h"; ToolTip.SetToolTip(control, "C(2h) polyhex hydrocarbon index with 19 hexagons"); break; }
+                    case 15: { control.Text = "19-hex C2v"; ToolTip.SetToolTip(control, "C(2v) polyhex hydrocarbon index with 19 hexagons"); break; }
+                    case 16: { control.Text = "---"; ToolTip.SetToolTip(control, "Reserved index"); break; }
                     default: break;
                 }
             }
@@ -232,7 +232,7 @@ public partial class MainForm : Form
                 TextBox control = new TextBox();
                 if (control != null)
                 {
-                    control.Width = (m_dpi == 96.0F) ? 57 : 69;
+                    control.Width = (m_dpi == 96.0F) ? 64 : 75;
                     control.Height = 21;
                     control.Top = 19 + (i * control.Height + 1);
                     control.Left = 19 + (j * control.Width + 2);
@@ -240,6 +240,7 @@ public partial class MainForm : Form
                     control.Font = new Font("Arial", 11);
                     control.MaxLength = 7;
                     if (j > 0) control.ReadOnly = true;
+                    if (j > 0) control.BackColor = SystemColors.Control;
                     MainPanel.Controls.Add(control);
 
                     control.KeyPress += FixMicrosoft;
@@ -256,32 +257,42 @@ public partial class MainForm : Form
 
                     switch (j)
                     {
-                        //case 0:
-                        //    control.BackColor = Color.White;
-                        //    break;
-                        //case 1:
-                        //case 2:
-                        //case 3:
-                        //    control.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[3];
-                        //    break;
-                        //case 4:
-                        //    control.BackColor = Numbers.NUMBER_KIND_BACKCOLORS[0];
-                        //    break;
-                        //case 5:
-                        //    control.BackColor = Color.FromArgb(240, 240, 255);
-                        //    break;
+                        case 0:
+                            control.BackColor = Color.White;
+                            break;
+                        case 1:
+                        case 2:
+                        case 3:
+                            control.BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[3];
+                            break;
+                        case 4:
+                            control.BackColor = Numbers.NUMBER_KIND_BACKCOLORS[0];
+                            break;
+                        case 5:
+                            control.BackColor = Color.FromArgb(240, 240, 255);
+                            break;
+                        case 6:
+                            control.BackColor = Color.FromArgb(255, 255, 192);
+                            break;
+                        case 7:
+                            control.BackColor = Color.FromArgb(255, 255, 144);
+                            break;
+                        case 8:
+                            control.BackColor = Color.FromArgb(192, 255, 192);
+                            break;
+                        case 9:
+                        case 10:
+                        case 11:
+                        case 12:
                         case 13:
+                            control.BackColor = Color.FromArgb(192, 192, 224);
+                            break;
                         case 14:
                         case 15:
-                            control.BackColor = Color.LightYellow;
-                            break;
-                        case 16:
-                        case 17:
-                        case 18:
-                            control.BackColor = Color.Snow;
+                            control.BackColor = Color.FromArgb(208, 160, 255);
                             break;
                         default:
-                            control.BackColor = SystemColors.Window;
+                            control.BackColor = SystemColors.Control;
                             break;
                     }
 
@@ -296,6 +307,17 @@ public partial class MainForm : Form
         LoadSettings();
     }
 
+    private void Label_Click(object sender, EventArgs e)
+    {
+        if (sender is Label)
+        {
+            Clipboard.SetText(ToolTip.GetToolTip(sender as Label));
+            string text = this.Text;
+            this.Text = "Tooltip has been copied.";
+            Thread.Sleep(500);
+            this.Text = text;
+        }
+    }
     private void DeleteRowLabel_Click(object sender, EventArgs e)
     {
         if (ModifierKeys == Keys.Control)
@@ -358,7 +380,7 @@ public partial class MainForm : Form
 
                 StringBuilder str = new StringBuilder();
                 str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
-                str.AppendLine("i" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "C" + "\t" + "AC" + "\t" + "XC" + "\t" + "DF" + "\t" + "AB" + "\t" + "P=4n+1" + "\t" + "P=4n-1" + "\t" + "C=4n+1" + "\t" + "C=4n-1" + "\t" + "∑i" + "\t" + "∑ds(i)" + "\t" + "∑dr(i)" + "\t" + "Half" + "\t" + "Median" + "\t" + "Product");
+                str.AppendLine("N" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "DF" + "\t" + "P=4n+1" + "\t" + "-gon" + "\t" + "-cgon" + "\t" + "-prymd" + "\t" + "4-plato" + "\t" + "6-plato" + "\t" + "8-plato" + "\t" + "12-plat" + "\t" + "20-plat" + "\t" + "19-xC2h" + "\t" + "19-xC2v" + "\t" + "---");
                 str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
                 for (int i = 0; i < ROWS; i++)
                 {
@@ -642,30 +664,13 @@ public partial class MainForm : Form
         Point point = GetControlLocation(sender);
         if (point != null)
         {
-            // clear headings and tooltips
-            for (int j = 33; j <= 50 - 6; j++)
-            {
-                MainPanel.Controls[j].Text = "";
-                ToolTip.SetToolTip(MainPanel.Controls[j], null);
-            }
-            // clear cells of current row
-            for (int j = 1; j < COLS - 6; j++)
-            {
-                if (controls != null)
-                {
-                    controls[point.X, j].Text = "";
-                    controls[point.X, j].ForeColor = Numbers.GetNumberTypeColor(0L);
-                    controls[point.X, j].BackColor = SystemColors.Window;
-                }
-            }
-
             TextBox number_control = controls[point.X, 0];
             if (number_control != null)
             {
                 number_control.Text = number_control.Text.Replace(" ", "");
 
-                int number = 0;
-                if (int.TryParse(number_control.Text, out number))
+                long number = 0;
+                if (long.TryParse(number_control.Text, out number))
                 {
                     number_control.ForeColor = Numbers.GetNumberTypeColor(number);
 
@@ -686,17 +691,17 @@ public partial class MainForm : Form
                                 controls[point.X, 1].BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[1];
                                 controls[point.X, 2].BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[1];
                                 controls[point.X, 3].BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[1];
-                                MainPanel.Controls[33 + count++].Text = "U";
-                                MainPanel.Controls[33 + count++].Text = "U";
-                                MainPanel.Controls[33 + count++].Text = "U";
-                                ToolTip.SetToolTip(MainPanel.Controls[33], "Unit index");
-                                ToolTip.SetToolTip(MainPanel.Controls[34], "Unit index");
-                                ToolTip.SetToolTip(MainPanel.Controls[35], "Unit index");
+                                MainPanel.Controls[33 + count + 0].Text = "U";
+                                MainPanel.Controls[33 + count + 1].Text = "U";
+                                MainPanel.Controls[33 + count + 2].Text = "U";
+                                ToolTip.SetToolTip(MainPanel.Controls[33 + count++], "Unit index");
+                                ToolTip.SetToolTip(MainPanel.Controls[33 + count++], "Unit index");
+                                ToolTip.SetToolTip(MainPanel.Controls[33 + count++], "Unit index");
                             }
                             else
                             {
                                 long p = Numbers.PrimeIndexOf(number) + 1;
-                                if (p > 0)
+                                if (p > 0L)
                                 {
                                     long ap = Numbers.AdditivePrimeIndexOf(number) + 1;
                                     long xp = Numbers.NonAdditivePrimeIndexOf(number) + 1;
@@ -709,12 +714,12 @@ public partial class MainForm : Form
                                     controls[point.X, 1].BackColor = (ap > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[3] : Numbers.NUMBER_TYPE_BACKCOLORS[4];
                                     controls[point.X, 2].BackColor = (ap > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[3] : Numbers.NUMBER_TYPE_BACKCOLORS[4];
                                     controls[point.X, 3].BackColor = (ap > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[3] : Numbers.NUMBER_TYPE_BACKCOLORS[4];
-                                    MainPanel.Controls[33 + count++].Text = "P";
-                                    MainPanel.Controls[33 + count++].Text = "AP";
-                                    MainPanel.Controls[33 + count++].Text = "XP";
-                                    ToolTip.SetToolTip(MainPanel.Controls[33], "Prime index");
-                                    ToolTip.SetToolTip(MainPanel.Controls[34], "Additive Prime index");
-                                    ToolTip.SetToolTip(MainPanel.Controls[35], "Non-additive Prime index");
+                                    MainPanel.Controls[33 + count + 0].Text = "P";
+                                    MainPanel.Controls[33 + count + 1].Text = "AP";
+                                    MainPanel.Controls[33 + count + 2].Text = "XP";
+                                    ToolTip.SetToolTip(MainPanel.Controls[33 + count++], "Prime index");
+                                    ToolTip.SetToolTip(MainPanel.Controls[33 + count++], "Additive Prime index");
+                                    ToolTip.SetToolTip(MainPanel.Controls[33 + count++], "Non-additive Prime index");
                                 }
                                 else
                                 {
@@ -730,237 +735,270 @@ public partial class MainForm : Form
                                     controls[point.X, 1].BackColor = (ac > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[6] : Numbers.NUMBER_TYPE_BACKCOLORS[7];
                                     controls[point.X, 2].BackColor = (ac > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[6] : Numbers.NUMBER_TYPE_BACKCOLORS[7];
                                     controls[point.X, 3].BackColor = (ac > 0) ? Numbers.NUMBER_TYPE_BACKCOLORS[6] : Numbers.NUMBER_TYPE_BACKCOLORS[7];
-                                    MainPanel.Controls[33 + count++].Text = "C";
-                                    MainPanel.Controls[33 + count++].Text = "AC";
-                                    MainPanel.Controls[33 + count++].Text = "XC";
-                                    ToolTip.SetToolTip(MainPanel.Controls[33], "Composite index");
-                                    ToolTip.SetToolTip(MainPanel.Controls[34], "Composite Prime index");
-                                    ToolTip.SetToolTip(MainPanel.Controls[35], "Non-composite Prime index");
+                                    MainPanel.Controls[33 + count + 0].Text = "C";
+                                    MainPanel.Controls[33 + count + 1].Text = "AC";
+                                    MainPanel.Controls[33 + count + 3].Text = "XC";
+                                    ToolTip.SetToolTip(MainPanel.Controls[33 + count++], "Composite index");
+                                    ToolTip.SetToolTip(MainPanel.Controls[33 + count++], "Composite Prime index");
+                                    ToolTip.SetToolTip(MainPanel.Controls[33 + count++], "Non-composite Prime index");
                                 }
                             }
 
                             long df = Numbers.DeficientIndexOf(number) + 1;
                             long pf = Numbers.PerfectIndexOf(number) + 1;
                             long ab = Numbers.AbundantIndexOf(number) + 1;
-                            if (df > 0)
+                            if (df > 0L)
                             {
                                 controls[point.X, 4].Text = df.ToString();
                                 controls[point.X, 4].ForeColor = Numbers.GetNumberTypeColor(df);
                                 controls[point.X, 4].BackColor = Numbers.NUMBER_KIND_BACKCOLORS[0];
-                                MainPanel.Controls[33 + count++].Text = "Deficient";
-                                ToolTip.SetToolTip(MainPanel.Controls[36], "Deficient index");
+                                MainPanel.Controls[33 + count].Text = "Deficient";
+                                ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Deficient index");
                             }
-                            else if (pf > 0)
+                            else if (pf > 0L)
                             {
                                 controls[point.X, 4].Text = pf.ToString();
                                 controls[point.X, 4].ForeColor = Numbers.GetNumberTypeColor(pf);
                                 controls[point.X, 4].BackColor = Numbers.NUMBER_KIND_BACKCOLORS[1];
-                                MainPanel.Controls[33 + count++].Text = "Perfect";
-                                ToolTip.SetToolTip(MainPanel.Controls[36], "Perfect index");
+                                MainPanel.Controls[33 + count].Text = "Perfect";
+                                ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Perfect index");
                             }
-                            else if (ab > 0)
+                            else if (ab > 0L)
                             {
                                 controls[point.X, 4].Text = ab.ToString();
                                 controls[point.X, 4].ForeColor = Numbers.GetNumberTypeColor(ab);
                                 controls[point.X, 4].BackColor = Numbers.NUMBER_KIND_BACKCOLORS[2];
-                                MainPanel.Controls[33 + count++].Text = "Abundant";
-                                ToolTip.SetToolTip(MainPanel.Controls[36], "Abundant index");
+                                MainPanel.Controls[33 + count].Text = "Abundant";
+                                ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Abundant index");
                             }
                             else // default
                             {
                                 controls[point.X, 4].Text = ab.ToString();
                                 controls[point.X, 4].ForeColor = Color.Black;
                                 controls[point.X, 4].BackColor = Numbers.NUMBER_KIND_BACKCOLORS[0];
-                                MainPanel.Controls[33 + count++].Text = "";
-                                ToolTip.SetToolTip(MainPanel.Controls[37], null);
+                                MainPanel.Controls[33 + count].Text = "";
+                                ToolTip.SetToolTip(MainPanel.Controls[33 + count], null);
                             }
+                            count++;
 
                             long p4nplus1 = Numbers.Primes4nPlus1.IndexOf(number) + 1;
                             long p4nminus1 = Numbers.Primes4nMinus1.IndexOf(number) + 1;
                             long c4nplus1 = Numbers.Composites4nPlus1.IndexOf(number) + 1;
                             long c4nminus1 = Numbers.Composites4nMinus1.IndexOf(number) + 1;
-                            if (p4nplus1 > 0)
+                            if (p4nplus1 > 0L)
                             {
                                 controls[point.X, 5].Text = p4nplus1.ToString();
                                 controls[point.X, 5].ForeColor = Numbers.GetNumberTypeColor(p4nplus1);
                                 controls[point.X, 5].BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[3];
-                                MainPanel.Controls[33 + count++].Text = "P=4n+1";
-                                ToolTip.SetToolTip(MainPanel.Controls[37], "4n+1 Prime index");
+                                MainPanel.Controls[33 + count].Text = "P=4n+1";
+                                ToolTip.SetToolTip(MainPanel.Controls[33 + count], "4n+1 Prime index");
                             }
-                            else if (p4nminus1 > 0)
+                            else if (p4nminus1 > 0L)
                             {
                                 controls[point.X, 5].Text = p4nminus1.ToString();
                                 controls[point.X, 5].ForeColor = Numbers.GetNumberTypeColor(p4nminus1);
                                 controls[point.X, 5].BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[4];
-                                MainPanel.Controls[33 + count++].Text = "P=4n-1";
-                                ToolTip.SetToolTip(MainPanel.Controls[37], "4n-1 Prime index");
+                                MainPanel.Controls[33 + count].Text = "P=4n-1";
+                                ToolTip.SetToolTip(MainPanel.Controls[33 + count], "4n-1 Prime index");
                             }
-                            else if (c4nplus1 > 0)
+                            else if (c4nplus1 > 0L)
                             {
                                 controls[point.X, 5].Text = c4nplus1.ToString();
                                 controls[point.X, 5].ForeColor = Numbers.GetNumberTypeColor(c4nplus1);
                                 controls[point.X, 5].BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[6];
-                                MainPanel.Controls[33 + count++].Text = "C=4n+1";
-                                ToolTip.SetToolTip(MainPanel.Controls[37], "4n+1 Composite index");
+                                MainPanel.Controls[33 + count].Text = "C=4n+1";
+                                ToolTip.SetToolTip(MainPanel.Controls[33 + count], "4n+1 Composite index");
                             }
-                            else if (c4nminus1 > 0)
+                            else if (c4nminus1 > 0L)
                             {
                                 controls[point.X, 5].Text = c4nminus1.ToString();
                                 controls[point.X, 5].ForeColor = Numbers.GetNumberTypeColor(c4nminus1);
                                 controls[point.X, 5].BackColor = Numbers.NUMBER_TYPE_BACKCOLORS[7];
-                                MainPanel.Controls[33 + count++].Text = "C=4n-1";
-                                ToolTip.SetToolTip(MainPanel.Controls[37], "4n-1 Composite index");
+                                MainPanel.Controls[33 + count].Text = "C=4n-1";
+                                ToolTip.SetToolTip(MainPanel.Controls[33 + count], "4n-1 Composite index");
                             }
                             else // default
                             {
                                 controls[point.X, 5].Text = "";
                                 controls[point.X, 5].ForeColor = Color.Black;
-                                controls[point.X, 5].BackColor = Color.White;
-                                MainPanel.Controls[33 + count++].Text = "P=4n+1";
-                                ToolTip.SetToolTip(MainPanel.Controls[37], "4n+1 Prime index");
+                                controls[point.X, 5].BackColor = Color.FromArgb(240, 240, 255);
+                                MainPanel.Controls[33 + count].Text = "P=4n+1";
+                                ToolTip.SetToolTip(MainPanel.Controls[33 + count], "4n+1 Prime index");
                             }
+                            count++;
+                            int backup_count = count;
 
-                            count = 0;
-                            for (int side = 3; side <= 24; side++)
+
+                            // Polygons
+                            bool found = false;
+                            controls[point.X, 6].Text = "";
+                            MainPanel.Controls[33 + count].Text = "";
+                            ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Polygon index");
+                            for (int sides = 3; sides <= 1034; sides++)
                             {
-                                long polygon = Numbers.PolygonalNumbers(side).IndexOf(number) + 1;
-                                if (polygon > 1)
+                                long polygon = Numbers.PolygonalNumbers(sides).IndexOf(number) + 1;
+                                if (polygon > 1L)
                                 {
-                                    controls[point.X, 6 + count].Text = polygon.ToString();
-                                    controls[point.X, 6 + count].ForeColor = Numbers.GetNumberTypeColor(polygon);
-                                    controls[point.X, 6 + count].BackColor = Color.FromArgb(255, 255, 192);
-                                    MainPanel.Controls[38 + count].Text = side.ToString() + "-gon";
-                                    ToolTip.SetToolTip(MainPanel.Controls[38 + count], "Polygon index");
-                                    count++;
+                                    if (!found)
+                                    {
+                                        controls[point.X, 6].Text = polygon.ToString();
+                                        controls[point.X, 6].ForeColor = Numbers.GetNumberTypeColor(polygon);
+                                        MainPanel.Controls[33 + count].Text = sides.ToString() + "-gon";
+                                        ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Polygon index");
+                                        found = true;
+                                    }
+                                    else
+                                    {
+                                        controls[point.X, 6].Text += "," + polygon.ToString();
+                                        string text = MainPanel.Controls[33 + count].Text.Replace("-gon", "") + "," + sides.ToString();
+                                        MainPanel.Controls[33 + count].Text = text;
+                                        ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Polygon indices: " + text);
+                                    }
                                 }
                             }
+                            count++;
+                            backup_count = count;
 
-                            for (int side = 3; side <= 24; side++)
+                            // Centered Polygons
+                            found = false;
+                            controls[point.X, 7].Text = "";
+                            MainPanel.Controls[33 + count].Text = "";
+                            ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Centered Polygon index");
+                            for (int sides = 3; sides <= 1034; sides++)
                             {
-                                long centered_polygon = Numbers.CenteredPolygonalNumbers(side).IndexOf(number) + 1;
-                                if (centered_polygon > 1)
+                                long centered_polygon = Numbers.CenteredPolygonalNumbers(sides).IndexOf(number) + 1;
+                                if (centered_polygon > 1L)
                                 {
-                                    controls[point.X, 6 + count].Text = centered_polygon.ToString();
-                                    controls[point.X, 6 + count].ForeColor = Numbers.GetNumberTypeColor(centered_polygon);
-                                    controls[point.X, 6 + count].BackColor = Color.FromArgb(255, 255, 144);
-                                    MainPanel.Controls[38 + count].Text = side.ToString() + "-cgon";
-                                    ToolTip.SetToolTip(MainPanel.Controls[38 + count], "Centered Polygon index");
-                                    count++;
+                                    if (!found)
+                                    {
+                                        controls[point.X, 7].Text = centered_polygon.ToString();
+                                        controls[point.X, 7].ForeColor = Numbers.GetNumberTypeColor(centered_polygon);
+                                        MainPanel.Controls[33 + count].Text = sides.ToString() + "-cgon";
+                                        ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Centered Polygon index");
+                                        found = true;
+                                    }
+                                    else
+                                    {
+                                        controls[point.X, 7].Text += "," + centered_polygon.ToString();
+                                        string text = MainPanel.Controls[33 + count].Text.Replace("-cgon", "") + "," + sides.ToString();
+                                        MainPanel.Controls[33 + count].Text = text;
+                                        ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Centered Polygon indices: " + text);
+                                    }
                                 }
                             }
+                            count++;
+                            backup_count = count;
 
+                            // Pyramids
+                            found = false;
+                            controls[point.X, 8].Text = "";
+                            MainPanel.Controls[33 + count].Text = "";
+                            ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Pyramid index");
+                            for (int sides = 3; sides <= 1034; sides++)
+                            {
+                                long pyramid = Numbers.PyramidalNumbers(sides).IndexOf(number) + 1;
+                                if (pyramid > 1L)
+                                {
+                                    if (!found)
+                                    {
+                                        controls[point.X, 8].Text = pyramid.ToString();
+                                        controls[point.X, 8].ForeColor = Numbers.GetNumberTypeColor(pyramid);
+                                        MainPanel.Controls[33 + count].Text = sides.ToString() + "-pyramid";
+                                        ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Pyramid index");
+                                        found = true;
+                                    }
+                                    else
+                                    {
+                                        controls[point.X, 8].Text += "," + pyramid.ToString();
+                                        string text = MainPanel.Controls[33 + count].Text.Replace("-pyramid", "") + "," + sides.ToString();
+                                        MainPanel.Controls[33 + count].Text = text;
+                                        ToolTip.SetToolTip(MainPanel.Controls[33 + count], "Pyramid indices: " + text);
+                                    }
+                                }
+                            }
+                            count++;
+                            backup_count = count;
+
+                            // Platonic Solids
                             long polyhedral_4_faces = Numbers.CenteredTetrahedralNumbers.IndexOf(number) + 1;
                             if (polyhedral_4_faces > 1)
                             {
-                                controls[point.X, 6 + count].Text = polyhedral_4_faces.ToString();
-                                controls[point.X, 6 + count].ForeColor = Numbers.GetNumberTypeColor(polyhedral_4_faces);
-                                controls[point.X, 6 + count].BackColor = Color.FromArgb(255, 255, 0);
-                                MainPanel.Controls[38 + count].Text = "4-chedra";
-                                ToolTip.SetToolTip(MainPanel.Controls[38 + count], "Centered Tetrahedral index");
-                                count++;
+                                controls[point.X, 9].Text = polyhedral_4_faces.ToString();
+                                controls[point.X, 9].ForeColor = Numbers.GetNumberTypeColor(polyhedral_4_faces);
+                            }
+                            else
+                            {
+                                controls[point.X, 9].Text = "";
+                                controls[point.X, 9].ForeColor = Numbers.GetNumberTypeColor(0L);
                             }
                             long polyhedral_6_faces = Numbers.CenteredHexahedronNumbers.IndexOf(number) + 1;
                             if (polyhedral_6_faces > 1)
                             {
-                                controls[point.X, 6 + count].Text = polyhedral_6_faces.ToString();
-                                controls[point.X, 6 + count].ForeColor = Numbers.GetNumberTypeColor(polyhedral_6_faces);
-                                controls[point.X, 6 + count].BackColor = Color.FromArgb(255, 255, 0);
-                                MainPanel.Controls[38 + count].Text = "6-chedra";
-                                ToolTip.SetToolTip(MainPanel.Controls[38 + count], "Centered Hexahedron index");
-                                count++;
+                                controls[point.X, 10].Text = polyhedral_6_faces.ToString();
+                                controls[point.X, 10].ForeColor = Numbers.GetNumberTypeColor(polyhedral_6_faces);
+                            }
+                            else
+                            {
+                                controls[point.X, 10].Text = "";
+                                controls[point.X, 10].ForeColor = Numbers.GetNumberTypeColor(0L);
                             }
                             long polyhedral_8_faces = Numbers.CenteredOctahedralNumbers.IndexOf(number) + 1;
                             if (polyhedral_8_faces > 1)
                             {
-                                controls[point.X, 6 + count].Text = polyhedral_8_faces.ToString();
-                                controls[point.X, 6 + count].ForeColor = Numbers.GetNumberTypeColor(polyhedral_8_faces);
-                                controls[point.X, 6 + count].BackColor = Color.FromArgb(255, 255, 0);
-                                MainPanel.Controls[38 + count].Text = "8-chedra";
-                                ToolTip.SetToolTip(MainPanel.Controls[38 + count], "Centered Octahedral index");
-                                count++;
+                                controls[point.X, 11].Text = polyhedral_8_faces.ToString();
+                                controls[point.X, 11].ForeColor = Numbers.GetNumberTypeColor(polyhedral_8_faces);
+                            }
+                            else
+                            {
+                                controls[point.X, 11].Text = "";
+                                controls[point.X, 11].ForeColor = Numbers.GetNumberTypeColor(0L);
                             }
                             long polyhedral_12_faces = Numbers.CenteredDodecahedralNumbers.IndexOf(number) + 1;
                             if (polyhedral_12_faces > 1)
                             {
-                                controls[point.X, 6 + count].Text = polyhedral_12_faces.ToString();
-                                controls[point.X, 6 + count].ForeColor = Numbers.GetNumberTypeColor(polyhedral_12_faces);
-                                controls[point.X, 6 + count].BackColor = Color.FromArgb(255, 255, 0);
-                                MainPanel.Controls[38 + count].Text = "12-chedra";
-                                ToolTip.SetToolTip(MainPanel.Controls[38 + count], "Centered Dodecahedral index");
-                                count++;
+                                controls[point.X, 12].Text = polyhedral_12_faces.ToString();
+                                controls[point.X, 12].ForeColor = Numbers.GetNumberTypeColor(polyhedral_12_faces);
+                            }
+                            else
+                            {
+                                controls[point.X, 12].Text = "";
+                                controls[point.X, 12].ForeColor = Numbers.GetNumberTypeColor(0L);
                             }
                             long polyhedral_20_faces = Numbers.CenteredIcosahedralNumbers.IndexOf(number) + 1;
                             if (polyhedral_20_faces > 1)
                             {
-                                controls[point.X, 6 + count].Text = polyhedral_20_faces.ToString();
-                                controls[point.X, 6 + count].ForeColor = Numbers.GetNumberTypeColor(polyhedral_20_faces);
-                                controls[point.X, 6 + count].BackColor = Color.FromArgb(255, 255, 0);
-                                MainPanel.Controls[38 + count].Text = "20-chedra";
-                                ToolTip.SetToolTip(MainPanel.Controls[38 + count], "Centered Icosahedral index");
-                                count++;
+                                controls[point.X, 13].Text = polyhedral_20_faces.ToString();
+                                controls[point.X, 13].ForeColor = Numbers.GetNumberTypeColor(polyhedral_20_faces);
+                            }
+                            else
+                            {
+                                controls[point.X, 13].Text = "";
+                                controls[point.X, 13].ForeColor = Numbers.GetNumberTypeColor(0L);
                             }
 
-                            long tetrahedral = Numbers.Tetrahedrals.IndexOf(number) + 1;
-                            if (tetrahedral > 1)
-                            {
-                                controls[point.X, 6 + count].Text = tetrahedral.ToString();
-                                controls[point.X, 6 + count].ForeColor = Numbers.GetNumberTypeColor(tetrahedral);
-                                controls[point.X, 6 + count].BackColor = Color.FromArgb(192, 255, 255);
-                                MainPanel.Controls[38 + count].Text = "4-hedra";
-                                ToolTip.SetToolTip(MainPanel.Controls[38 + count], "Tetrahedral index");
-                                count++;
-                            }
-                            long pyramidal = Numbers.Pyramidals.IndexOf(number) + 1;
-                            if (pyramidal > 1)
-                            {
-                                controls[point.X, 6 + count].Text = pyramidal.ToString();
-                                controls[point.X, 6 + count].ForeColor = Numbers.GetNumberTypeColor(pyramidal);
-                                controls[point.X, 6 + count].BackColor = Color.FromArgb(0, 255, 255);
-                                MainPanel.Controls[38 + count].Text = "4-pyramid";
-                                ToolTip.SetToolTip(MainPanel.Controls[38 + count], "Pyramidal index");
-                                count++;
-                            }
-
+                            // Chemical Compounds based-19
                             long hex19c2h = Numbers.PolyhexNumbers(1).IndexOf(number) + 1;
                             if (hex19c2h > 1)
                             {
-                                controls[point.X, 6 + count].Text = hex19c2h.ToString();
-                                controls[point.X, 6 + count].ForeColor = Numbers.GetNumberTypeColor(hex19c2h);
-                                controls[point.X, 6 + count].BackColor = Color.FromArgb(64, 255, 64);
-                                MainPanel.Controls[38 + count].Text = "19-hex.h";
-                                ToolTip.SetToolTip(MainPanel.Controls[38 + count], "Index of Isomers of polyhex hydrocarbons with C_(2h) symmetry with 19 hexagons");
-                                count++;
+                                controls[point.X, 14].Text = hex19c2h.ToString();
+                                controls[point.X, 14].ForeColor = Numbers.GetNumberTypeColor(hex19c2h);
+                            }
+                            else
+                            {
+                                controls[point.X, 14].Text = "";
+                                controls[point.X, 14].ForeColor = Numbers.GetNumberTypeColor(0L);
                             }
                             long hex19c2v = Numbers.PolyhexNumbers(2).IndexOf(number) + 1;
                             if (hex19c2v > 1)
                             {
-                                controls[point.X, 6 + count].Text = hex19c2v.ToString();
-                                controls[point.X, 6 + count].ForeColor = Numbers.GetNumberTypeColor(hex19c2v);
-                                controls[point.X, 6 + count].BackColor = Color.FromArgb(64, 208, 64);
-                                MainPanel.Controls[38 + count].Text = "19-hex.v";
-                                ToolTip.SetToolTip(MainPanel.Controls[38 + count], "Index of Isomers of polyhex hydrocarbons with C_(2v) symmetry with 19 hexagons");
-                                count++;
+                                controls[point.X, 15].Text = hex19c2v.ToString();
+                                controls[point.X, 15].ForeColor = Numbers.GetNumberTypeColor(hex19c2v);
                             }
-
-                            int sum = (number * (number + 1)) / 2;
-                            long sum_of_digit_sums = Numbers.SumOfNumberDigitSums(number);
-                            long sum_of_digital_roots = Numbers.SumNumberDigitalRoots(number);
-                            controls[point.X, 13].Text = sum.ToString();
-                            controls[point.X, 14].Text = (sum_of_digit_sums > 0) ? sum_of_digit_sums.ToString() : "";
-                            controls[point.X, 15].Text = (sum_of_digital_roots > 0) ? sum_of_digital_roots.ToString() : "";
-                            controls[point.X, 13].ForeColor = Numbers.GetNumberTypeColor(sum);
-                            controls[point.X, 14].ForeColor = Numbers.GetNumberTypeColor(sum_of_digit_sums);
-                            controls[point.X, 15].ForeColor = Numbers.GetNumberTypeColor(sum_of_digital_roots);
-
-                            int half = ((number % 2) == 0) ? number / 2 : 0;
-                            int median = ((half % 2) == 1) ? (half + 1) / 2 : 0;
-                            int product = half * median;
-                            controls[point.X, 16].Text = (half > 0) ? half.ToString() : "";
-                            controls[point.X, 17].Text = (median > 0) ? median.ToString() : "";
-                            controls[point.X, 18].Text = (product > 0) ? product.ToString() : "";
-                            controls[point.X, 16].ForeColor = Numbers.GetNumberTypeColor(half);
-                            controls[point.X, 17].ForeColor = Numbers.GetNumberTypeColor(median);
-                            controls[point.X, 18].ForeColor = Numbers.GetNumberTypeColor(product);
+                            else
+                            {
+                                controls[point.X, 15].Text = "";
+                                controls[point.X, 15].ForeColor = Numbers.GetNumberTypeColor(0L);
+                            }
                         }
                         catch
                         {
@@ -980,8 +1018,6 @@ public partial class MainForm : Form
                             controls[point.X, 14].Text = "";
                             controls[point.X, 15].Text = "";
                             controls[point.X, 16].Text = "";
-                            controls[point.X, 17].Text = "";
-                            controls[point.X, 18].Text = "";
                         }
                         finally
                         {
@@ -1006,8 +1042,6 @@ public partial class MainForm : Form
                         controls[point.X, 14].Text = "";
                         controls[point.X, 15].Text = "";
                         controls[point.X, 16].Text = "";
-                        controls[point.X, 17].Text = "";
-                        controls[point.X, 18].Text = "";
                     }
                 }
                 else
@@ -1028,8 +1062,6 @@ public partial class MainForm : Form
                     controls[point.X, 14].Text = "";
                     controls[point.X, 15].Text = "";
                     controls[point.X, 16].Text = "";
-                    controls[point.X, 17].Text = "";
-                    controls[point.X, 18].Text = "";
                 }
             }
         }
@@ -1043,62 +1075,6 @@ public partial class MainForm : Form
         else if (e.KeyCode == Keys.Down)
         {
             DecrementIndex(sender);
-        }
-        else if (e.KeyCode == Keys.Enter)
-        {
-            Point point = GetControlLocation(sender);
-            if (point != null)
-            {
-                if (point.Y > 0)
-                {
-                    Control number_control = controls[point.X, 0] as TextBox;
-                    if (number_control != null)
-                    {
-                        int index = 0;
-                        if (int.TryParse((sender as TextBox).Text, out index))
-                        {
-                            long number = 0L;
-                            switch (point.Y)
-                            {
-                                case 1:
-                                    number = Numbers.Primes[index - 1];
-                                    break;
-                                case 2:
-                                    number = Numbers.AdditivePrimes[index - 1];
-                                    break;
-                                case 3:
-                                    number = Numbers.NonAdditivePrimes[index - 1];
-                                    break;
-                                case 4:
-                                    number = Numbers.Composites[index - 1];
-                                    break;
-                                case 5:
-                                    number = Numbers.AdditiveComposites[index - 1];
-                                    break;
-                                case 6:
-                                    number = Numbers.NonAdditiveComposites[index - 1];
-                                    break;
-                                case 7:
-                                    number = Numbers.Deficients[index - 1];
-                                    break;
-                                case 8:
-                                    number = Numbers.Abundants[index - 1];
-                                    break;
-                                default:
-                                    number = 0L;
-                                    break;
-                            }
-                            number_control.Text = number.ToString();
-
-                            if (number == 0L)
-                            {
-                                (sender as TextBox).Text = "";
-                                number_control.Text = "";
-                            }
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -1190,7 +1166,7 @@ public partial class MainForm : Form
 
                 StringBuilder str = new StringBuilder();
                 str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
-                str.AppendLine("i" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "C" + "\t" + "AC" + "\t" + "XC" + "\t" + "DF" + "\t" + "AB" + "\t" + "P=4n+1" + "\t" + "P=4n-1" + "\t" + "C=4n+1" + "\t" + "C=4n-1" + "\t" + "∑i" + "\t" + "∑ds(i)" + "\t" + "∑dr(i)" + "\t" + "Half" + "\t" + "Median" + "\t" + "Product");
+                //?????str.AppendLine("i" + "\t" + "P" + "\t" + "AP" + "\t" + "XP" + "\t" + "C" + "\t" + "AC" + "\t" + "XC" + "\t" + "DF" + "\t" + "AB" + "\t" + "P=4n+1" + "\t" + "P=4n-1" + "\t" + "C=4n+1" + "\t" + "C=4n-1" + "\t" + "∑i" + "\t" + "∑ds(i)" + "\t" + "∑dr(i)" + "\t" + "Half" + "\t" + "Median" + "\t" + "Product");
                 str.AppendLine("----------------------------------------------------------------------------------------------------------------------------------------------------------------");
 
                 if (controls != null)
