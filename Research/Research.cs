@@ -5333,7 +5333,7 @@ public static class Research
         if (verses == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "N" + "\t" + "M*N" + "\t" + "P" + "\t" + "MN+P" + "\r\n");
+        str.Append("Pivot" + "\t" + "M" + "\t" + "N" + "\t" + "M*N" + "\t" + "P" + "\t" + "MN+P" + "\r\n");
 
         int pivot = 0;
         if (param.Length > 0)
@@ -5396,7 +5396,7 @@ public static class Research
                     if (!text.Contains(text4)) text += text4;
                     if (!text.Contains(text5)) text += text5;
 
-                    str.Append(M + "\t" + N + "\t" + MN + "\t" + P + "\t" + MN_P + "\t" + text + "\r\n");
+                    str.Append(i + "\t" + M + "\t" + N + "\t" + MN + "\t" + P + "\t" + MN_P + "\t" + text + "\r\n");
 
                     M++;
                     N--;
@@ -5414,7 +5414,7 @@ public static class Research
         if (verses == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "N" + "\t" + "M*N" + "\t" + "AP" + "\t" + "MN+AP" + "\r\n");
+        str.Append("Pivot" + "\t" + "M" + "\t" + "N" + "\t" + "M*N" + "\t" + "AP" + "\t" + "MN+AP" + "\r\n");
 
         int pivot = 0;
         if (param.Length > 0)
@@ -5477,7 +5477,7 @@ public static class Research
                     if (!text.Contains(text4)) text += text4;
                     if (!text.Contains(text5)) text += text5;
 
-                    str.Append(M + "\t" + N + "\t" + MN + "\t" + AP + "\t" + MN_AP + "\t" + text + "\r\n");
+                    str.Append(i + "\t" + M + "\t" + N + "\t" + MN + "\t" + AP + "\t" + MN_AP + "\t" + text + "\r\n");
 
                     M++;
                     N--;
@@ -5495,7 +5495,7 @@ public static class Research
         if (verses == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "N" + "\t" + "M*N" + "\t" + "XP" + "\t" + "MN+XP" + "\r\n");
+        str.Append("Pivot" + "\t" + "M" + "\t" + "N" + "\t" + "M*N" + "\t" + "XP" + "\t" + "MN+XP" + "\r\n");
 
         int pivot = 0;
         if (param.Length > 0)
@@ -5558,7 +5558,7 @@ public static class Research
                     if (!text.Contains(text4)) text += text4;
                     if (!text.Contains(text5)) text += text5;
 
-                    str.Append(M + "\t" + N + "\t" + MN + "\t" + XP + "\t" + MN_XP + "\t" + text + "\r\n");
+                    str.Append(i + "\t" + M + "\t" + N + "\t" + MN + "\t" + XP + "\t" + MN_XP + "\t" + text + "\r\n");
 
                     M++;
                     N--;
@@ -5576,7 +5576,7 @@ public static class Research
         if (verses == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "N" + "\t" + "M*N" + "\t" + "C" + "\t" + "MN+C" + "\r\n");
+        str.Append("Pivot" + "\t" + "M" + "\t" + "N" + "\t" + "M*N" + "\t" + "C" + "\t" + "MN+C" + "\r\n");
 
         int pivot = 0;
         if (param.Length > 0)
@@ -5639,7 +5639,7 @@ public static class Research
                     if (!text.Contains(text4)) text += text4;
                     if (!text.Contains(text5)) text += text5;
 
-                    str.Append(M + "\t" + N + "\t" + MN + "\t" + C + "\t" + MN_C + "\t" + text + "\r\n");
+                    str.Append(i + "\t" + M + "\t" + N + "\t" + MN + "\t" + C + "\t" + MN_C + "\t" + text + "\r\n");
 
                     M++;
                     N--;
@@ -5657,7 +5657,7 @@ public static class Research
         if (verses == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "N" + "\t" + "M*N" + "\t" + "AC" + "\t" + "MN+AC" + "\r\n");
+        str.Append("Pivot" + "\t" + "M" + "\t" + "N" + "\t" + "M*N" + "\t" + "AC" + "\t" + "MN+AC" + "\r\n");
 
         int pivot = 0;
         if (param.Length > 0)
@@ -5720,7 +5720,7 @@ public static class Research
                     if (!text.Contains(text4)) text += text4;
                     if (!text.Contains(text5)) text += text5;
 
-                    str.Append(M + "\t" + N + "\t" + MN + "\t" + AC + "\t" + MN_AC + "\t" + text + "\r\n");
+                    str.Append(i + "\t" + M + "\t" + N + "\t" + MN + "\t" + AC + "\t" + MN_AC + "\t" + text + "\r\n");
 
                     M++;
                     N--;
@@ -5738,7 +5738,7 @@ public static class Research
         if (verses == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "N" + "\t" + "M*N" + "\t" + "XC" + "\t" + "MN+XC" + "\r\n");
+        str.Append("Pivot" + "\t" + "M" + "\t" + "N" + "\t" + "M*N" + "\t" + "XC" + "\t" + "MN+XC" + "\r\n");
 
         int pivot = 0;
         if (param.Length > 0)
@@ -5801,7 +5801,7 @@ public static class Research
                     if (!text.Contains(text4)) text += text4;
                     if (!text.Contains(text5)) text += text5;
 
-                    str.Append(M + "\t" + N + "\t" + MN + "\t" + XC + "\t" + MN_XC + "\t" + text + "\r\n");
+                    str.Append(i + "\t" + M + "\t" + N + "\t" + MN + "\t" + XC + "\t" + MN_XC + "\t" + text + "\r\n");
 
                     M++;
                     N--;
@@ -5856,6 +5856,106 @@ public static class Research
             }
         }
         return result;
+    }
+
+    public static string P_PivotSiratMustaqeemVerses(Client client, string param, bool in_search_result)
+    {
+        if (client == null) return null;
+        List<Verse> verses = GetSourceVerses(client, in_search_result);
+        if (verses != null)
+        {
+            return DoP_PivotSiratMustaqeemVerses(client, verses, param);
+        }
+        return null;
+    }
+    private static string DoP_PivotSiratMustaqeemVerses(Client client, List<Verse> verses, string param)
+    {
+        if (client == null) return null;
+        if (verses == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        str.Append("Pivot" + "\t" + "M" + "\t" + "N" + "\t" + "M*N" + "\t" + "P" + "\t" + "MN+P" + "\r\n");
+
+        int pivot = 0;
+        if (param.Length > 0)
+        {
+            int min = 16;
+            int max = 16;
+
+            if (int.TryParse(param, out pivot))
+            {
+                if (pivot == 0)
+                {
+                    min = 1;
+                    max = 114;
+                }
+                else
+                {
+                    min = pivot;
+                    max = pivot;
+                }
+            }
+            else
+            {
+                string[] parts = param.Split('-');
+                if (parts.Length == 2)
+                {
+                    int.TryParse(parts[0], out min);
+                    int.TryParse(parts[1], out max);
+                }
+            }
+
+            for (int i = min; i <= max; i++)
+            {
+                int M = 1;
+                int N = (i * 2) - 1;
+
+                do
+                {
+                    long MN = M * N;
+                    long P = Numbers.Primes[M - 1];
+                    long MN_P = MN + P;
+
+                    string text1 = GetSiratMustaqeemVerses(client, MN_P);
+
+                    string text = "";
+                    if (!text.Contains(text1)) text += text1;
+
+                    str.Append(i + "\t" + M + "\t" + N + "\t" + MN + "\t" + P + "\t" + MN_P + "\t" + text + "\r\n");
+
+                    M++;
+                    N--;
+                } while (N > 0);
+
+                str.AppendLine();
+                str.AppendLine();
+            }
+        }
+        return str.ToString();
+    }
+    private static string GetSiratMustaqeemVerses(Client client, long MN_P)
+    {
+        if (client == null) return null;
+        if (client.Book == null) return null;
+        if (client.Book.Verses == null) return null;
+
+        StringBuilder str = new StringBuilder();
+        foreach (Verse verse in client.Book.Verses)
+        {
+            long value = client.CalculateValue(verse);
+            if (value == MN_P)
+            {
+                if (verse.Text.Contains("صراط") || verse.Text.Contains("مستقيم"))
+                {
+                    str.Append(verse.Text + "\t");
+                }
+            }
+        }
+        if (str.Length > 0) // remove last '\t'
+        {
+            str.Remove(str.Length - 1, 1);
+        }
+        return str.ToString();
     }
 
     public static string _________________________________________________(Client client, string param, bool in_search_result)
