@@ -16928,12 +16928,7 @@ public partial class MainForm : Form, ISubscriber
             string method_name = ResearchMethodsComboBox.SelectedItem.ToString();
 
             ResearchMethodParameterTextBox.BringToFront();
-            if (method_name == "NewResearchMethod")
-            {
-                ResearchMethodParameterTextBox.Text = "";
-                ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Script \"param\" parameter [text | number | P | AP | XP | C | AC | XC]");
-            }
-            else if ((method_name.Contains("ByX")) || (method_name.Contains("WithX")))
+            if ((method_name.Contains("ByX")) || (method_name.Contains("WithX")))
             {
                 ResearchMethodParameterTextBox.Text = "7";
                 ToolTip.SetToolTip(ResearchMethodParameterTextBox, "X");
@@ -16981,6 +16976,12 @@ public partial class MainForm : Form, ISubscriber
                 ToolTip.SetToolTip(ResearchMethodParameterTextBox, "chapters,verses");
                 ResearchMethodParameterTextBox.Visible = true;
             }
+            else if (method_name.Contains("WithText"))
+            {
+                ResearchMethodParameterTextBox.Text = "مستقيم";
+                ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Text");
+                ResearchMethodParameterTextBox.Visible = true;
+            }
             else if (method_name.Contains("Pivot"))
             {
                 ResearchMethodParameterTextBox.Text = "16";
@@ -16990,7 +16991,7 @@ public partial class MainForm : Form, ISubscriber
             else if (method_name.Contains("Polygon"))
             {
                 ResearchMethodParameterTextBox.Text = "3";
-                ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Regular polygon sides (3 to 24)");
+                ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Regular polygon sides");
                 ResearchMethodParameterTextBox.Visible = true;
             }
             else if (method_name.Contains("Platonic"))
@@ -16999,16 +17000,16 @@ public partial class MainForm : Form, ISubscriber
                 ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Platonic solid faces (4, 6, 8, 12, 20)");
                 ResearchMethodParameterTextBox.Visible = true;
             }
-            else if (method_name.Contains("Index"))
-            {
-                ResearchMethodParameterTextBox.Text = "0";
-                ToolTip.SetToolTip(ResearchMethodParameterTextBox, "to within");
-                ResearchMethodParameterTextBox.Visible = true;
-            }
             else if (method_name == "LetterFrequencySums")
             {
                 ResearchMethodParameterTextBox.Text = "";
                 ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Phrase");
+                ResearchMethodParameterTextBox.Visible = true;
+            }
+            else if (method_name.Contains("Index"))
+            {
+                ResearchMethodParameterTextBox.Text = "0";
+                ToolTip.SetToolTip(ResearchMethodParameterTextBox, "Error margin");
                 ResearchMethodParameterTextBox.Visible = true;
             }
             else // method doesn't need parameters

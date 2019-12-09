@@ -226,9 +226,9 @@ public static class Numbers
 
     //                             int.MaxValue = 2^32 - 1 = 2147483647;
     public static int MAX_NUMBER = int.MaxValue / (
-                                                    (Globals.EDITION == Edition.Lite) ? 1024 :
-                                                    (Globals.EDITION == Edition.Standard) ? 256 :
-                                                    (Globals.EDITION == Edition.Research) ? 64 : 16 // Edition.Ultimate
+                                                    (Globals.EDITION == Edition.Lite) ? 4096 :
+                                                    (Globals.EDITION == Edition.Standard) ? 1024 :
+                                                    (Globals.EDITION == Edition.Research) ? 256 : 64 // Edition.Ultimate
                                                   );
 
     // pi = circumference / diameter ~= 355/113

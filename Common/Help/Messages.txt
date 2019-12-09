@@ -1,4 +1,4 @@
-﻿ESC key to switch between search results and Quran text. Click = Next | Shift+Click = Previous
+﻿ESC key to switch between search results and Quran text.
 F1 = Help | F2 = Bookmarks | F3 = Find Next | Shift+F3 = Find Previous 
 F4 = Related Words | F5 = Related Verses
 F6 = Same Text|F7 = Same Text and Harakat|F8 = Same Verses
