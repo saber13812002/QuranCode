@@ -118,7 +118,7 @@ namespace Model
             this.start_position = start_position;
             this.last_verse = last_verse;
             this.end_position = end_position;
-            this.text = text;
+            this.text = text.Trim();
 
             this.chapter_count = last_verse.Chapter.SortedNumber - first_verse.Chapter.SortedNumber + 1;
 

@@ -13325,6 +13325,8 @@ public partial class MainForm : Form, ISubscriber
                                 MainTextBox.Text = "Fast Mode";
                                 MainTextBox.Refresh();
 
+                                WordsListBoxLabel.Visible = false;
+                                WordsListBox.Visible = false;
                                 GenerateSentencesLabel.Visible = false;
                                 DuplicateLettersCheckBox.Visible = false;
                                 GenerateSentencesLabel.Refresh();
@@ -16580,7 +16582,6 @@ public partial class MainForm : Form, ISubscriber
             {
                 ClearFindMatches();
 
-                List<Verse> verses = new List<Verse>();
                 List<Phrase> phrases = new List<Phrase>();
                 string text = "value" + "" + "=" + value.ToString();
 
@@ -16620,6 +16621,75 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
+    //private void DoFindSameValue(long value)
+    //{
+    //    this.Cursor = Cursors.WaitCursor;
+    //    try
+    //    {
+    //        if (m_client != null)
+    //        {
+    //            ClearFindMatches();
+
+    //            int match_count = 0;
+    //            List<Phrase> found_phrases = new List<Phrase>();
+    //            List<Verse> found_verses = new List<Verse>();
+    //            string text = "value" + "" + "=" + value.ToString();
+
+    //            NumberQuery query = new NumberQuery();
+    //            query.Value = value;
+
+    //            int w_match_count = m_client.FindWords(query);
+    //            if (w_match_count > 0)
+    //            {
+    //                if (m_client.FoundPhrases != null)
+    //                {
+    //                    match_count += w_match_count;
+    //                    found_phrases.InsertRange(0, new List<Phrase>(m_client.FoundPhrases));
+    //                    found_verses.InsertRange(0, new List<Verse>(m_client.FoundVerses));
+    //                }
+    //            }
+
+    //            int s_match_count = m_client.FindSentences(query);
+    //            if (s_match_count > 0)
+    //            {
+    //                match_count += s_match_count;
+    //                found_phrases.InsertRange(0, new List<Phrase>(m_client.FoundPhrases));
+    //                found_verses.InsertRange(0, new List<Verse>(m_client.FoundVerses));
+    //            }
+
+    //            int v_match_count = m_client.FindVerses(query);
+    //            if (v_match_count > 0)
+    //            {
+    //                match_count += v_match_count;
+    //                found_phrases.InsertRange(0, new List<Phrase>(m_client.FoundPhrases));
+    //                found_verses.InsertRange(0, new List<Verse>(m_client.FoundVerses));
+    //            }
+
+    //            if (found_phrases.Count > 0)
+    //            {
+    //                m_client.FoundPhrases = found_phrases;
+    //                m_client.FoundVerses = found_verses;
+    //                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["match"] : " " + L[l]["matches"]) + " " + L[l]["in"] + " " + m_client.FoundVerses.Count + ((m_client.FoundVerses.Count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+    //                DisplayFoundVerses(true);
+
+    //                //SearchResultTextBox.Focus();
+    //                //SearchResultTextBox.Refresh();
+    //            }
+    //        }
+    //    }
+    //    catch (Exception ex)
+    //    {
+    //        while (ex != null)
+    //        {
+    //            MessageBox.Show(ex.Message, Application.ProductName);
+    //            ex = ex.InnerException;
+    //        }
+    //    }
+    //    finally
+    //    {
+    //        this.Cursor = Cursors.Default;
+    //    }
+    //}
     public static List<Verse> GetVerses(List<Phrase> phrases)
     {
         List<Verse> result = new List<Verse>();
@@ -23106,6 +23176,9 @@ public partial class MainForm : Form, ISubscriber
 
                     MainTextBox.Text = m_current_text;
                     MainTextBox.Refresh();
+
+                    WordsListBoxLabel.Visible = false;
+                    WordsListBox.Visible = false;
                     GenerateSentencesLabel.Visible = false;
                     DuplicateLettersCheckBox.Visible = false;
 
@@ -41216,6 +41289,9 @@ public partial class MainForm : Form, ISubscriber
                     UpdateHeaderLabel();
                     SearchResultTextBox.Text = m_current_text;
                     SearchResultTextBox.Refresh();
+
+                    WordsListBoxLabel.Visible = false;
+                    WordsListBox.Visible = false;
                     GenerateSentencesLabel.Visible = false;
                     DuplicateLettersCheckBox.Visible = false;
 
@@ -41354,6 +41430,9 @@ public partial class MainForm : Form, ISubscriber
                     UpdateHeaderLabel();
                     SearchResultTextBox.Text = m_current_text;
                     SearchResultTextBox.Refresh();
+
+                    WordsListBoxLabel.Visible = false;
+                    WordsListBox.Visible = false;
                     GenerateSentencesLabel.Visible = false;
                     DuplicateLettersCheckBox.Visible = false;
 
@@ -41466,6 +41545,9 @@ public partial class MainForm : Form, ISubscriber
                     UpdateHeaderLabel();
                     SearchResultTextBox.Text = m_current_text;
                     SearchResultTextBox.Refresh();
+
+                    WordsListBoxLabel.Visible = false;
+                    WordsListBox.Visible = false;
                     GenerateSentencesLabel.Visible = false;
                     DuplicateLettersCheckBox.Visible = false;
 
@@ -41586,6 +41668,9 @@ public partial class MainForm : Form, ISubscriber
                     UpdateHeaderLabel();
                     SearchResultTextBox.Text = m_current_text;
                     SearchResultTextBox.Refresh();
+
+                    WordsListBoxLabel.Visible = false;
+                    WordsListBox.Visible = false;
                     GenerateSentencesLabel.Visible = false;
                     DuplicateLettersCheckBox.Visible = false;
 
@@ -41721,6 +41806,9 @@ public partial class MainForm : Form, ISubscriber
                     UpdateHeaderLabel();
                     SearchResultTextBox.Text = m_current_text;
                     SearchResultTextBox.Refresh();
+
+                    WordsListBoxLabel.Visible = false;
+                    WordsListBox.Visible = false;
                     GenerateSentencesLabel.Visible = false;
                     DuplicateLettersCheckBox.Visible = false;
 
@@ -41851,6 +41939,9 @@ public partial class MainForm : Form, ISubscriber
                     UpdateHeaderLabel();
                     SearchResultTextBox.Text = m_current_text;
                     SearchResultTextBox.Refresh();
+
+                    WordsListBoxLabel.Visible = false;
+                    WordsListBox.Visible = false;
                     GenerateSentencesLabel.Visible = false;
                     DuplicateLettersCheckBox.Visible = false;
 
@@ -42573,11 +42664,26 @@ public partial class MainForm : Form, ISubscriber
                                         {
                                             blue = 0;
                                         }
-                                        m_found_verse_backcolors.Add(verse, Color.FromArgb(red, green, blue));
+
+                                        if (m_found_verse_backcolors.ContainsKey(verse))
+                                        {
+                                            m_found_verse_backcolors[verse] = Color.FromArgb(red, green, blue);
+                                        }
+                                        else
+                                        {
+                                            m_found_verse_backcolors.Add(verse, Color.FromArgb(red, green, blue));
+                                        }
                                     }
                                     else
                                     {
-                                        m_found_verse_backcolors.Add(verse, SearchResultTextBox.BackColor);
+                                        if (m_found_verse_backcolors.ContainsKey(verse))
+                                        {
+                                            m_found_verse_backcolors[verse] = SearchResultTextBox.BackColor;
+                                        }
+                                        else
+                                        {
+                                            m_found_verse_backcolors.Add(verse, SearchResultTextBox.BackColor);
+                                        }
                                     }
                                     SearchResultTextBox.Highlight(start, length - 1, m_found_verse_backcolors[verse]);
                                 }
@@ -44297,6 +44403,9 @@ public partial class MainForm : Form, ISubscriber
                 {
                     SearchResultTextBox.Text = "";
                     SearchResultTextBox.Refresh();
+
+                    WordsListBoxLabel.Visible = false;
+                    WordsListBox.Visible = false;
                     GenerateSentencesLabel.Visible = false;
                     DuplicateLettersCheckBox.Visible = false;
 

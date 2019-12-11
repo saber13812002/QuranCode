@@ -1438,6 +1438,7 @@ public class Server : IPublisher
         if (character == '\n') return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             string s = character.ToString().SimplifyTo(s_numerology_system.TextMode);
@@ -1447,6 +1448,7 @@ public class Server : IPublisher
                 result = s_numerology_system.CalculateValue(c);
             }
         }
+
         return result;
     }
     public static long CalculateValue(string text)
@@ -1454,6 +1456,7 @@ public class Server : IPublisher
         if (string.IsNullOrEmpty(text)) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             text = text.Replace("\r\n", "\n");
@@ -1591,6 +1594,7 @@ public class Server : IPublisher
                     break;
             }
         }
+
         return result;
     }
     public static long CalculateValueWithLogging(char character)
@@ -1600,6 +1604,7 @@ public class Server : IPublisher
         if (character == '\n') return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             string s = character.ToString().SimplifyTo(s_numerology_system.TextMode);
@@ -1612,6 +1617,7 @@ public class Server : IPublisher
                 Log.AppendLine("\t" + value);
             }
         }
+
         return result;
     }
     public static long CalculateValueWithLogging(string text)
@@ -1619,6 +1625,7 @@ public class Server : IPublisher
         if (string.IsNullOrEmpty(text)) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             text = text.Replace("\r\n", "\n");
@@ -1813,6 +1820,7 @@ public class Server : IPublisher
                     break;
             }
         }
+
         return result;
     }
     // used for Quran text for non-CalculationMode.SumOfUniqueLetterValues
@@ -1821,6 +1829,7 @@ public class Server : IPublisher
         if (letter == null) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             result = s_numerology_system.CalculateValue(letter.Character);
@@ -1850,6 +1859,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValue(List<Letter> letters)
@@ -1858,6 +1868,7 @@ public class Server : IPublisher
         if (letters.Count == 0) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             foreach (Letter letter in letters)
@@ -1895,6 +1906,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValue(Word word)
@@ -1902,6 +1914,7 @@ public class Server : IPublisher
         if (word == null) return 0L;
 
         long result = 0L;
+
         long value = 0L;
         if (s_numerology_system != null)
         {
@@ -2050,6 +2063,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValue(List<Word> words)
@@ -2058,6 +2072,7 @@ public class Server : IPublisher
         if (words.Count == 0) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             foreach (Word word in words)
@@ -2085,6 +2100,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValue(Sentence sentence)
@@ -2092,6 +2108,7 @@ public class Server : IPublisher
         if (sentence == null) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             if (s_numerology_system.LetterValue.StartsWith("Base"))
@@ -2146,6 +2163,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValue(Verse verse)
@@ -2153,6 +2171,7 @@ public class Server : IPublisher
         if (verse == null) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             if (s_numerology_system.LetterValue.StartsWith("Base"))
@@ -2214,6 +2233,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValue(Verse verse, Letter from_letter, Letter to_letter)
@@ -2223,6 +2243,7 @@ public class Server : IPublisher
         if (to_letter == null) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             if (s_numerology_system.LetterValue.StartsWith("Base"))
@@ -2315,6 +2336,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValue(List<Verse> verses)
@@ -2323,6 +2345,7 @@ public class Server : IPublisher
         if (verses.Count == 0) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             if (CalculationMode == CalculationMode.SumOfUniqueLetterValues)
@@ -2358,6 +2381,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValue(List<Verse> verses, Letter start_letter, Letter end_letter)
@@ -2368,6 +2392,7 @@ public class Server : IPublisher
         if (end_letter == null) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             if (verses.Count == 1)
@@ -2500,6 +2525,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValue(Chapter chapter)
@@ -2507,6 +2533,7 @@ public class Server : IPublisher
         if (chapter == null) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             if (CalculationMode == CalculationMode.SumOfUniqueLetterValues)
@@ -2523,6 +2550,7 @@ public class Server : IPublisher
 
             chapter.Value = result; // update chapter values for ChapterSortMethod.ByValue
         }
+
         return result;
     }
     public static long CalculateValue(List<Chapter> chapters)
@@ -2531,6 +2559,7 @@ public class Server : IPublisher
         if (chapters.Count == 0) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             if (CalculationMode == CalculationMode.SumOfUniqueLetterValues)
@@ -2553,6 +2582,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValue(Book book)
@@ -2560,6 +2590,7 @@ public class Server : IPublisher
         if (book == null) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             if (CalculationMode == CalculationMode.SumOfUniqueLetterValues)
@@ -2574,6 +2605,7 @@ public class Server : IPublisher
                 result += CalculateValue(book.Chapters);
             }
         }
+
         return result;
     }
     public static long CalculateValueWithLogging(Letter letter)
@@ -2581,6 +2613,7 @@ public class Server : IPublisher
         if (letter == null) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             Log.Append(letter.ToString());
@@ -2628,6 +2661,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValueWithLogging(List<Letter> letters)
@@ -2636,6 +2670,7 @@ public class Server : IPublisher
         if (letters.Count == 0) return 0L;
 
         long result = 0L;
+
         long value = 0L;
         if (s_numerology_system != null)
         {
@@ -2680,6 +2715,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValueWithLogging(Word word)
@@ -2687,6 +2723,7 @@ public class Server : IPublisher
         if (word == null) return 0L;
 
         long result = 0L;
+
         long value = 0L;
         if (s_numerology_system != null)
         {
@@ -2803,6 +2840,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValueWithLogging(List<Word> words)
@@ -2811,6 +2849,7 @@ public class Server : IPublisher
         if (words.Count == 0) return 0L;
 
         long result = 0L;
+
         long value = 0L;
         if (s_numerology_system != null)
         {
@@ -2843,6 +2882,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValueWithLogging(Sentence sentence)
@@ -2850,6 +2890,7 @@ public class Server : IPublisher
         if (sentence == null) return 0L;
 
         long result = 0L;
+
         long value = 0L;
         if (s_numerology_system != null)
         {
@@ -2909,6 +2950,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValueWithLogging(Verse verse)
@@ -2916,6 +2958,7 @@ public class Server : IPublisher
         if (verse == null) return 0L;
 
         long result = 0L;
+
         long value = 0L;
         if (s_numerology_system != null)
         {
@@ -2981,6 +3024,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValueWithLogging(Verse verse, Letter from_letter, Letter to_letter)
@@ -2990,6 +3034,7 @@ public class Server : IPublisher
         if (to_letter == null) return 0L;
 
         long result = 0L;
+
         long value = 0L;
         if (s_numerology_system != null)
         {
@@ -3099,6 +3144,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValueWithLogging(List<Verse> verses)
@@ -3107,6 +3153,7 @@ public class Server : IPublisher
         if (verses.Count == 0) return 0L;
 
         long result = 0L;
+
         long value = 0L;
         if (s_numerology_system != null)
         {
@@ -3153,6 +3200,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValueWithLogging(List<Verse> verses, Letter start_letter, Letter end_letter)
@@ -3163,6 +3211,7 @@ public class Server : IPublisher
         if (end_letter == null) return 0L;
 
         long result = 0L;
+
         long value = 0L;
         if (s_numerology_system != null)
         {
@@ -3308,6 +3357,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValueWithLogging(Chapter chapter)
@@ -3315,6 +3365,7 @@ public class Server : IPublisher
         if (chapter == null) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             if (CalculationMode == CalculationMode.SumOfUniqueLetterValues)
@@ -3335,6 +3386,7 @@ public class Server : IPublisher
 
             chapter.Value = result; // update chapter values for ChapterSortMethod.ByValue
         }
+
         return result;
     }
     public static long CalculateValueWithLogging(List<Chapter> chapters)
@@ -3343,6 +3395,7 @@ public class Server : IPublisher
         if (chapters.Count == 0) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             if (CalculationMode == CalculationMode.SumOfUniqueLetterValues)
@@ -3365,6 +3418,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static long CalculateValueWithLogging(Book book)
@@ -3372,6 +3426,7 @@ public class Server : IPublisher
         if (book == null) return 0L;
 
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             if (CalculationMode == CalculationMode.SumOfUniqueLetterValues)
@@ -3386,6 +3441,7 @@ public class Server : IPublisher
                 result = CalculateValueWithLogging(book.Chapters);
             }
         }
+
         return result;
     }
     // get complete words/verses/chapters
@@ -3395,6 +3451,7 @@ public class Server : IPublisher
         if (letters.Count == 0) return null;
 
         List<Word> result = new List<Word>();
+
         for (int i = 0; i < letters.Count; i++)
         {
             bool complete = true;
@@ -3425,6 +3482,7 @@ public class Server : IPublisher
         if (String.IsNullOrEmpty(sentence.Text)) return null;
 
         List<Word> result = new List<Word>();
+
         if (sentence.FirstVerse.Number == sentence.LastVerse.Number)
         {
             foreach (Word word in sentence.FirstVerse.Words)
@@ -3466,6 +3524,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Verse> GetCompleteVerses(List<Word> words)
@@ -3474,6 +3533,7 @@ public class Server : IPublisher
         if (words.Count == 0) return null;
 
         List<Verse> result = new List<Verse>();
+
         for (int i = 0; i < words.Count; i++)
         {
             bool complete = true;
@@ -3504,6 +3564,7 @@ public class Server : IPublisher
         if (String.IsNullOrEmpty(sentence.Text)) return null;
 
         List<Verse> result = new List<Verse>();
+
         if (sentence.FirstVerse.Number == sentence.LastVerse.Number)
         {
             if ((sentence.StartPosition == 0) && (sentence.EndPosition == sentence.Text.Length - 1))
@@ -3536,6 +3597,7 @@ public class Server : IPublisher
                 result.Add(sentence.LastVerse);
             }
         }
+
         return result;
     }
     private static List<Chapter> GetCompleteChapters(List<Verse> verses)
@@ -3544,6 +3606,7 @@ public class Server : IPublisher
         if (verses.Count == 0) return null;
 
         List<Chapter> result = new List<Chapter>();
+
         for (int i = 0; i < verses.Count; i++)
         {
             bool complete = true;
@@ -3574,8 +3637,8 @@ public class Server : IPublisher
         if (verses.Count == 0) return null;
 
         List<Chapter> result = new List<Chapter>();
-        List<Verse> copy_verses = new List<Verse>(verses); // make a copy so we don't change the passed verses
 
+        List<Verse> copy_verses = new List<Verse>(verses); // make a copy so we don't change the passed verses
         if (copy_verses != null)
         {
             if (copy_verses.Count > 0)
@@ -3630,6 +3693,7 @@ public class Server : IPublisher
     private static long AdjustValue(Letter letter)
     {
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             if (letter != null)
@@ -3695,11 +3759,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static long AdjustValue(Word word)
     {
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             if (word != null)
@@ -3750,11 +3816,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static long AdjustValue(Verse verse)
     {
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             if (verse != null)
@@ -3790,11 +3858,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static long AdjustValue(Chapter chapter)
     {
         long result = 0L;
+
         if (s_numerology_system != null)
         {
             if (chapter != null)
@@ -3805,11 +3875,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static long AdjustValueWithLogging(Letter letter)
     {
         long result = 0L;
+
         long value = 0L;
         if (s_numerology_system != null)
         {
@@ -3916,11 +3988,13 @@ public class Server : IPublisher
                 Log.AppendLine();
             }
         }
+
         return result;
     }
     private static long AdjustValueWithLogging(Word word)
     {
         long result = 0L;
+
         long value = 0L;
         if (s_numerology_system != null)
         {
@@ -4006,11 +4080,13 @@ public class Server : IPublisher
                 Log.AppendLine();
             }
         }
+
         return result;
     }
     private static long AdjustValueWithLogging(Verse verse)
     {
         long result = 0L;
+
         long value = 0L;
         if (s_numerology_system != null)
         {
@@ -4075,11 +4151,13 @@ public class Server : IPublisher
                 Log.AppendLine();
             }
         }
+
         return result;
     }
     private static long AdjustValueWithLogging(Chapter chapter)
     {
         long result = 0L;
+
         long value = 0L;
         if (s_numerology_system != null)
         {
@@ -4101,12 +4179,15 @@ public class Server : IPublisher
                 Log.AppendLine();
             }
         }
+
         return result;
     }
 
     // helper methods for finds
     public static List<Verse> GetSourceVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextLocationInChapter text_location_in_chapter)
     {
+        List<Verse> result = new List<Verse>();
+
         List<Verse> verses = new List<Verse>();
         if (s_book != null)
         {
@@ -4127,7 +4208,6 @@ public class Server : IPublisher
             }
         }
 
-        List<Verse> result = new List<Verse>();
         switch (text_location_in_chapter)
         {
             case TextLocationInChapter.AtStart:
@@ -4170,11 +4250,13 @@ public class Server : IPublisher
                 }
                 break;
         }
+
         return result;
     }
     public static List<Verse> GetVerses(List<Phrase> phrases)
     {
         List<Verse> result = new List<Verse>();
+
         if (phrases != null)
         {
             foreach (Phrase phrase in phrases)
@@ -4188,11 +4270,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static List<Chapter> GetSourceChapters(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses)
     {
         List<Chapter> result = new List<Chapter>();
+
         if (s_book != null)
         {
             if (search_scope == SearchScope.Book)
@@ -4211,11 +4295,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static List<Chapter> GetChapters(List<Phrase> phrases)
     {
         List<Chapter> result = new List<Chapter>();
+
         if (phrases != null)
         {
             foreach (Phrase phrase in phrases)
@@ -4229,11 +4315,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static List<Phrase> BuildPhrases(Verse verse, MatchCollection matches)
     {
         List<Phrase> result = new List<Phrase>();
+
         foreach (Match match in matches)
         {
             foreach (Capture capture in match.Captures)
@@ -4247,11 +4335,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Phrase> BuildPhrasesAndOriginify(Verse verse, MatchCollection matches)
     {
         List<Phrase> result = new List<Phrase>();
+
         foreach (Match match in matches)
         {
             foreach (Capture capture in match.Captures)
@@ -4276,6 +4366,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static Phrase OriginifyPhrase(Phrase phrase)
@@ -5159,6 +5250,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Phrase> DoFindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string text, LanguageType language_type, string translation, TextLocationInChapter text_location_in_chapter, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness, bool case_sensitive, bool with_diacritics, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder, bool try_emlaaei_if_nothing_found)
@@ -5385,6 +5477,7 @@ public class Server : IPublisher
     private static List<Phrase> DoFindPhrases(List<Verse> source, Selection current_selection, List<Verse> previous_verses, string text, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness, bool case_sensitive, bool with_diacritics, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder, bool try_emlaaei_if_nothing_found)
     {
         List<Phrase> result = new List<Phrase>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -5535,6 +5628,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Phrase> DoFindPhrases(string translation, List<Verse> source, Selection current_selection, List<Verse> previous_verses, string text, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness, bool case_sensitive, bool with_diacritics, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
@@ -5542,6 +5636,7 @@ public class Server : IPublisher
         if (String.IsNullOrEmpty(translation)) return null;
 
         List<Phrase> result = new List<Phrase>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -5585,6 +5680,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Chapter> DoFindChapters(string text, TextLocationInVerse text_location_in_verse, TextLocationInWord text_location_in_word, TextWordness text_wordness, bool case_sensitive, bool with_diacritics, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder, bool try_emlaaei_if_nothing_found)
@@ -6896,6 +6992,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Phrase> DoFindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string text, LanguageType language_type, string translation, TextProximityType text_proximity_type, TextWordness text_wordness, bool case_sensitive, bool with_diacritics, bool try_emlaaei_if_nothing_found)
@@ -7925,11 +8022,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Phrase> DoFindPhrases(string translation, List<Verse> source, Selection current_selection, List<Verse> previous_verses, string text, TextProximityType text_proximity_type, TextWordness text_wordness, bool case_sensitive, bool with_diacritics)
     {
         List<Phrase> result = new List<Phrase>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -8102,6 +8201,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Chapter> DoFindChapters(string text, TextProximityType text_proximity_type)
@@ -9025,6 +9125,7 @@ public class Server : IPublisher
     public static List<Phrase> FindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Phrase> result = new List<Phrase>();
+
         if (String.IsNullOrEmpty(root)) return null;
         root = root.Simplify36();   // roots use 36 letters
         while (root.Contains("  "))
@@ -9082,6 +9183,7 @@ public class Server : IPublisher
                 search_scope = SearchScope.Result;
             }
         }
+
         return result;
     }
     private static List<Phrase> DoFindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
@@ -9222,6 +9324,7 @@ public class Server : IPublisher
     private static List<Phrase> DoFindPhrases(List<Verse> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Phrase> result = new List<Phrase>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -9255,11 +9358,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Phrase> GetPhrasesWithRootWords(List<Verse> source, List<Word> root_words, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Phrase> result = new List<Phrase>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -9326,11 +9431,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Chapter> DoFindChapters(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Chapter> result = new List<Chapter>();
+
         if (s_book != null)
         {
             List<Chapter> source = s_book.Chapters;
@@ -9404,11 +9511,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Chapter> DoFindChapters(List<Chapter> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Chapter> result = new List<Chapter>();
+
         if (!String.IsNullOrEmpty(root))
         {
             try
@@ -9436,11 +9545,13 @@ public class Server : IPublisher
                 // log exception
             }
         }
+
         return result;
     }
     private static List<Chapter> GetChaptersWithRootWords(List<Chapter> source, List<Word> root_words, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Chapter> result = new List<Chapter>();
+
         if (source != null)
         {
             Dictionary<Chapter, int> multiplicity_dictionary = new Dictionary<Chapter, int>();
@@ -9491,11 +9602,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Page> DoFindPages(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Page> result = new List<Page>();
+
         if (s_book != null)
         {
             List<Page> source = s_book.Pages;
@@ -9569,11 +9682,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Page> DoFindPages(List<Page> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Page> result = new List<Page>();
+
         if (!String.IsNullOrEmpty(root))
         {
             try
@@ -9601,11 +9716,13 @@ public class Server : IPublisher
                 // log exception
             }
         }
+
         return result;
     }
     private static List<Page> GetPagesWithRootWords(List<Page> source, List<Word> root_words, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Page> result = new List<Page>();
+
         if (source != null)
         {
             Dictionary<Page, int> multiplicity_dictionary = new Dictionary<Page, int>();
@@ -9656,11 +9773,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Station> DoFindStations(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Station> result = new List<Station>();
+
         if (s_book != null)
         {
             List<Station> source = s_book.Stations;
@@ -9734,11 +9853,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Station> DoFindStations(List<Station> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Station> result = new List<Station>();
+
         if (!String.IsNullOrEmpty(root))
         {
             try
@@ -9766,11 +9887,13 @@ public class Server : IPublisher
                 // log exception
             }
         }
+
         return result;
     }
     private static List<Station> GetStationsWithRootWords(List<Station> source, List<Word> root_words, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Station> result = new List<Station>();
+
         if (source != null)
         {
             Dictionary<Station, int> multiplicity_dictionary = new Dictionary<Station, int>();
@@ -9821,11 +9944,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Part> DoFindParts(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Part> result = new List<Part>();
+
         if (s_book != null)
         {
             List<Part> source = s_book.Parts;
@@ -9899,11 +10024,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Part> DoFindParts(List<Part> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Part> result = new List<Part>();
+
         if (!String.IsNullOrEmpty(root))
         {
             try
@@ -9931,11 +10058,13 @@ public class Server : IPublisher
                 // log exception
             }
         }
+
         return result;
     }
     private static List<Part> GetPartsWithRootWords(List<Part> source, List<Word> root_words, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Part> result = new List<Part>();
+
         if (source != null)
         {
             Dictionary<Part, int> multiplicity_dictionary = new Dictionary<Part, int>();
@@ -9986,11 +10115,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Model.Group> DoFindGroups(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Model.Group> result = new List<Model.Group>();
+
         if (s_book != null)
         {
             List<Model.Group> source = s_book.Groups;
@@ -10064,11 +10195,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Model.Group> DoFindGroups(List<Model.Group> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Model.Group> result = new List<Model.Group>();
+
         if (!String.IsNullOrEmpty(root))
         {
             try
@@ -10096,11 +10229,13 @@ public class Server : IPublisher
                 // log exception
             }
         }
+
         return result;
     }
     private static List<Model.Group> GetGroupsWithRootWords(List<Model.Group> source, List<Word> root_words, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Model.Group> result = new List<Model.Group>();
+
         if (source != null)
         {
             Dictionary<Model.Group, int> multiplicity_dictionary = new Dictionary<Model.Group, int>();
@@ -10151,11 +10286,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Half> DoFindHalfs(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Half> result = new List<Half>();
+
         if (s_book != null)
         {
             List<Half> source = s_book.Halfs;
@@ -10229,11 +10366,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Half> DoFindHalfs(List<Half> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Half> result = new List<Half>();
+
         if (!String.IsNullOrEmpty(root))
         {
             try
@@ -10261,11 +10400,13 @@ public class Server : IPublisher
                 // log exception
             }
         }
+
         return result;
     }
     private static List<Half> GetHalfsWithRootWords(List<Half> source, List<Word> root_words, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Half> result = new List<Half>();
+
         if (source != null)
         {
             Dictionary<Half, int> multiplicity_dictionary = new Dictionary<Half, int>();
@@ -10316,11 +10457,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Quarter> DoFindQuarters(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Quarter> result = new List<Quarter>();
+
         if (s_book != null)
         {
             List<Quarter> source = s_book.Quarters;
@@ -10394,11 +10537,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Quarter> DoFindQuarters(List<Quarter> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Quarter> result = new List<Quarter>();
+
         if (!String.IsNullOrEmpty(root))
         {
             try
@@ -10426,11 +10571,13 @@ public class Server : IPublisher
                 // log exception
             }
         }
+
         return result;
     }
     private static List<Quarter> GetQuartersWithRootWords(List<Quarter> source, List<Word> root_words, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Quarter> result = new List<Quarter>();
+
         if (source != null)
         {
             Dictionary<Quarter, int> multiplicity_dictionary = new Dictionary<Quarter, int>();
@@ -10481,11 +10628,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Bowing> DoFindBowings(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Bowing> result = new List<Bowing>();
+
         if (s_book != null)
         {
             List<Bowing> source = s_book.Bowings;
@@ -10559,11 +10708,13 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Bowing> DoFindBowings(List<Bowing> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Bowing> result = new List<Bowing>();
+
         if (!String.IsNullOrEmpty(root))
         {
             try
@@ -10591,11 +10742,13 @@ public class Server : IPublisher
                 // log exception
             }
         }
+
         return result;
     }
     private static List<Bowing> GetBowingsWithRootWords(List<Bowing> source, List<Word> root_words, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Bowing> result = new List<Bowing>();
+
         if (source != null)
         {
             Dictionary<Bowing, int> multiplicity_dictionary = new Dictionary<Bowing, int>();
@@ -10646,6 +10799,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by root - verses with related words
@@ -10661,6 +10815,7 @@ public class Server : IPublisher
     private static List<Verse> DoFindRelatedVerses(List<Verse> source, Selection current_selection, List<Verse> previous_result, Verse verse)
     {
         List<Verse> result = new List<Verse>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -10677,6 +10832,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by text - consecutively repeated phrases
@@ -10690,6 +10846,7 @@ public class Server : IPublisher
     private static List<Phrase> FindRepeatedPhrases(List<Verse> source, int phrase_word_count, bool with_diacritics)
     {
         List<Phrase> result = new List<Phrase>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -10733,6 +10890,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -10740,8 +10898,8 @@ public class Server : IPublisher
     public static List<Phrase> FindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, string text, double similarity_percentage)
     {
         List<Phrase> result = new List<Phrase>();
-        List<Verse> found_verses = previous_result;
 
+        List<Verse> found_verses = previous_result;
         while (text.Contains("  "))
         {
             text = text.Replace("  ", " ");
@@ -10760,11 +10918,11 @@ public class Server : IPublisher
         {
             return result;
         }
-        else if (word_texts.Length == 1)
+        if (word_texts.Length == 1)
         {
             return DoFindPhrases(search_scope, current_selection, previous_result, text, similarity_percentage);
         }
-        else if (word_texts.Length > 1) // enable nested searches
+        if (word_texts.Length > 1) // enable nested searches
         {
             if (text.Length > 1) // enable nested searches
             {
@@ -10806,6 +10964,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     private static List<Phrase> DoFindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, string text, double similarity_percentage)
@@ -10816,6 +10975,7 @@ public class Server : IPublisher
     private static List<Phrase> DoFindPhrases(List<Verse> source, Selection current_selection, List<Verse> previous_result, string text, double similarity_percentage)
     {
         List<Phrase> result = new List<Phrase>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -10835,6 +10995,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by similarity - verses similar to given verse
@@ -10850,6 +11011,7 @@ public class Server : IPublisher
     private static List<Verse> DoFindVerses(List<Verse> source, Selection current_selection, List<Verse> previous_result, Verse verse, SimilarityMethod find_similarity_method, double similarity_percentage)
     {
         List<Verse> result = new List<Verse>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -10930,6 +11092,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by similarity - all similar verses to each other throughout the book
@@ -10945,6 +11108,7 @@ public class Server : IPublisher
     private static List<List<Verse>> DoFindVersess(List<Verse> source, Selection current_selection, List<Verse> previous_result, SimilarityMethod find_similarity_method, double similarity_percentage)
     {
         List<List<Verse>> result = new List<List<Verse>>();
+
         Dictionary<Verse, List<Verse>> verse_ranges = new Dictionary<Verse, List<Verse>>(); // need dictionary to check if key exist
         bool[] already_compared = new bool[source.Count];
         if (source != null)
@@ -11091,6 +11255,7 @@ public class Server : IPublisher
                 result.Add(verse_range);
             }
         }
+
         return result;
     }
 
@@ -17965,6 +18130,7 @@ public class Server : IPublisher
     private static List<Letter> DoFindLetters(List<Verse> source, NumberQuery query)
     {
         List<Letter> result = new List<Letter>();
+
         if (source != null)
         {
             foreach (Verse verse in source)
@@ -17981,6 +18147,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -17997,6 +18164,7 @@ public class Server : IPublisher
     private static List<Word> DoFindWords(List<Verse> source, NumberQuery query)
     {
         List<Word> result = new List<Word>();
+
         if (source != null)
         {
             foreach (Verse verse in source)
@@ -18010,6 +18178,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - WordRanges
@@ -18025,43 +18194,24 @@ public class Server : IPublisher
     private static List<List<Word>> DoFindWordRanges(List<Verse> source, NumberQuery query)
     {
         List<List<Word>> result = new List<List<Word>>();
+
         if (source != null)
         {
+            List<Word> words = new List<Word>();
+            foreach (Verse verse in source)
+            {
+                words.AddRange(verse.Words);
+            }
+
             int range_length = query.WordCount;
             if (range_length == 1)
             {
                 result.Add(DoFindWords(source, query));
-                return result;
             }
-
-            if (range_length == 0) // non-specified range length
+            else if (range_length == 0) // non-specified range length
             {
-                // limit range length to minimum
-                int word_count = 0;
-                foreach (Verse verse in source)
+                for (int r = 1; r <= 29; r++) // try all possible range lengths
                 {
-                    word_count += verse.Words.Count;
-                }
-
-                int limit = word_count - 1;
-                if (query.LetterCount > 0)
-                {
-                    limit = query.LetterCount / 2;
-                }
-                if (query.Value > 0L)
-                {
-                    limit = (int)(query.Value / 5L);
-                }
-                if (limit == 0) limit = 1;
-
-                for (int r = 1; r <= limit; r++) // try all possible range lengths
-                {
-                    List<Word> words = new List<Word>();
-                    foreach (Verse verse in source)
-                    {
-                        words.AddRange(verse.Words);
-                    }
-
                     for (int i = 0; i <= words.Count - r; i++)
                     {
                         // build required range
@@ -18082,13 +18232,6 @@ public class Server : IPublisher
             else // specified range length
             {
                 int r = range_length;
-
-                List<Word> words = new List<Word>();
-                foreach (Verse verse in source)
-                {
-                    words.AddRange(verse.Words);
-                }
-
                 for (int i = 0; i <= words.Count - r; i++)
                 {
                     // build required range
@@ -18106,6 +18249,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - WordSets
@@ -18121,6 +18265,7 @@ public class Server : IPublisher
     private static List<List<Word>> DoFindWordSets(List<Verse> source, NumberQuery query)
     {
         List<List<Word>> result = new List<List<Word>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -18130,39 +18275,19 @@ public class Server : IPublisher
                     List<Word> words = new List<Word>();
                     if (words != null)
                     {
-                        int set_size = query.WordCount;
-                        if (set_size == 1)
-                        {
-                            result.Add(DoFindWords(source, query));
-                            return result;
-                        }
-
                         foreach (Verse verse in source)
                         {
                             words.AddRange(verse.Words);
                         }
 
-                        if (set_size == 0) // non-specified set size
+                        int set_size = query.WordCount;
+                        if (set_size == 1)
                         {
-                            // limit set length to minimum
-                            int word_count = 0;
-                            foreach (Verse verse in source)
-                            {
-                                word_count += verse.Words.Count;
-                            }
-
-                            int limit = word_count - 1;
-                            if (query.LetterCount > 0)
-                            {
-                                limit = query.LetterCount / 2;
-                            }
-                            if (query.Value > 0L)
-                            {
-                                limit = (int)(query.Value / 5L);
-                            }
-                            if (limit == 0) limit = 1;
-
-                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            result.Add(DoFindWords(source, query));
+                        }
+                        else if (set_size == 0) // non-specified set size
+                        {
+                            for (int i = 0; i < 29; i++) // try all possible set sizes
                             {
                                 int size = i + 1;
                                 Combinations<Word> sets = new Combinations<Word>(words, size, GenerateOption.WithoutRepetition);
@@ -18192,6 +18317,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -18208,6 +18334,7 @@ public class Server : IPublisher
     private static List<Sentence> DoFindSentences(List<Verse> source, NumberQuery query)
     {
         List<Sentence> result = new List<Sentence>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -18548,6 +18675,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -18564,6 +18692,7 @@ public class Server : IPublisher
     private static List<Verse> DoFindVerses(List<Verse> source, NumberQuery query)
     {
         List<Verse> result = new List<Verse>();
+
         if (source != null)
         {
             foreach (Verse verse in source)
@@ -18574,6 +18703,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - VerseRanges
@@ -18589,35 +18719,19 @@ public class Server : IPublisher
     private static List<List<Verse>> DoFindVerseRanges(List<Verse> source, NumberQuery query)
     {
         List<List<Verse>> result = new List<List<Verse>>();
+
         if (source != null)
         {
             int range_length = query.VerseCount;
             if (range_length == 1)
             {
                 result.Add(DoFindVerses(source, query));
-                return result;
             }
-
-            if (range_length == 0) // non-specified range length
+            else if (range_length == 0) // non-specified range length
             {
-                int limit = source.Count - 1;
-                if (query.WordCount > 0)
+                for (int r = 1; r <= 29; r++) // try all possible range lengths
                 {
-                    limit = query.WordCount / 3;
-                }
-                if (query.LetterCount > 0)
-                {
-                    limit = query.LetterCount / 7;
-                }
-                if (query.Value > 0L)
-                {
-                    limit = (int)(query.Value / 19L);
-                }
-                if (limit == 0) limit = 1;
-
-                for (int r = 1; r <= limit; r++) // try all possible range lengths
-                {
-                    for (int i = 0; i <= source.Count - r; i++)
+                    for (int i = 0; i < source.Count - r + 1; i++)
                     {
                         // build required range
                         List<Verse> range = new List<Verse>();
@@ -18637,7 +18751,7 @@ public class Server : IPublisher
             else // specified range length
             {
                 int r = range_length;
-                for (int i = 0; i <= source.Count - r; i++)
+                for (int i = 0; i < source.Count - r + 1; i++)
                 {
                     // build required range
                     List<Verse> range = new List<Verse>();
@@ -18654,6 +18768,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - VerseSets
@@ -18669,6 +18784,7 @@ public class Server : IPublisher
     private static List<List<Verse>> DoFindVerseSets(List<Verse> source, NumberQuery query)
     {
         List<List<Verse>> result = new List<List<Verse>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -18682,27 +18798,10 @@ public class Server : IPublisher
                         if (set_size == 1)
                         {
                             result.Add(DoFindVerses(source, query));
-                            return result;
                         }
-
-                        if (set_size == 0) // non-specified set size
+                        else if (set_size == 0) // non-specified set size
                         {
-                            int limit = source.Count - 1;
-                            if (query.WordCount > 0)
-                            {
-                                limit = query.WordCount / 3;
-                            }
-                            if (query.LetterCount > 0)
-                            {
-                                limit = query.LetterCount / 7;
-                            }
-                            if (query.Value > 0L)
-                            {
-                                limit = (int)(query.Value / 19L);
-                            }
-                            if (limit == 0) limit = 1;
-
-                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            for (int i = 0; i < 29; i++) // try all possible set sizes
                             {
                                 int size = i + 1;
                                 Combinations<Verse> sets = new Combinations<Verse>(verses, size, GenerateOption.WithoutRepetition);
@@ -18732,6 +18831,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -18748,6 +18848,7 @@ public class Server : IPublisher
     private static List<Chapter> DoFindChapters(List<Verse> source, NumberQuery query)
     {
         List<Chapter> result = new List<Chapter>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -18768,6 +18869,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - ChapterRanges
@@ -18783,6 +18885,7 @@ public class Server : IPublisher
     private static List<List<Chapter>> DoFindChapterRanges(List<Verse> source, NumberQuery query)
     {
         List<List<Chapter>> result = new List<List<Chapter>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -18796,17 +18899,15 @@ public class Server : IPublisher
                         if (range_length == 1)
                         {
                             result.Add(DoFindChapters(source, query));
-                            return result;
                         }
-
-                        if (range_length == 0) // non-specified range length
+                        else if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
                             int limit = chapters.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i <= chapters.Count - r; i++)
+                                for (int i = 0; i < chapters.Count - r + 1; i++)
                                 {
                                     // build required range
                                     List<Chapter> range = new List<Chapter>();
@@ -18826,7 +18927,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i <= chapters.Count - r; i++)
+                            for (int i = 0; i < chapters.Count - r + 1; i++)
                             {
                                 // build required range
                                 List<Chapter> range = new List<Chapter>();
@@ -18846,6 +18947,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - ChapterSets
@@ -18861,6 +18963,7 @@ public class Server : IPublisher
     private static List<List<Chapter>> DoFindChapterSets(List<Verse> source, NumberQuery query)
     {
         List<List<Chapter>> result = new List<List<Chapter>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -18874,15 +18977,13 @@ public class Server : IPublisher
                         if (set_size == 1)
                         {
                             result.Add(DoFindChapters(source, query));
-                            return result;
                         }
-
-                        if (set_size == 0) // non-specified set size
+                        else if (set_size == 0) // non-specified set size
                         {
                             // limit set length to minimum
                             int limit = chapters.Count - 1;
 
-                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            for (int i = 0; i <= limit; i++) // try all possible set sizes
                             {
                                 int size = i + 1;
                                 Combinations<Chapter> sets = new Combinations<Chapter>(chapters, size, GenerateOption.WithoutRepetition);
@@ -18912,6 +19013,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -18928,6 +19030,7 @@ public class Server : IPublisher
     private static List<Page> DoFindPages(List<Verse> source, NumberQuery query)
     {
         List<Page> result = new List<Page>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -18948,6 +19051,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - PageRanges
@@ -18963,6 +19067,7 @@ public class Server : IPublisher
     private static List<List<Page>> DoFindPageRanges(List<Verse> source, NumberQuery query)
     {
         List<List<Page>> result = new List<List<Page>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -18976,17 +19081,15 @@ public class Server : IPublisher
                         if (range_length == 1)
                         {
                             result.Add(DoFindPages(source, query));
-                            return result;
                         }
-
-                        if (range_length == 0) // non-specified range length
+                        else if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
                             int limit = pages.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i <= pages.Count - r; i++)
+                                for (int i = 0; i < pages.Count - r + 1; i++)
                                 {
                                     // build required range
                                     List<Page> range = new List<Page>();
@@ -19006,7 +19109,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i <= pages.Count - r; i++)
+                            for (int i = 0; i < pages.Count - r + 1; i++)
                             {
                                 // build required range
                                 List<Page> range = new List<Page>();
@@ -19026,6 +19129,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - PageSets
@@ -19041,6 +19145,7 @@ public class Server : IPublisher
     private static List<List<Page>> DoFindPageSets(List<Verse> source, NumberQuery query)
     {
         List<List<Page>> result = new List<List<Page>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19054,15 +19159,13 @@ public class Server : IPublisher
                         if (set_size == 1)
                         {
                             result.Add(DoFindPages(source, query));
-                            return result;
                         }
-
-                        if (set_size == 0) // non-specified set size
+                        else if (set_size == 0) // non-specified set size
                         {
                             // limit set length to minimum
                             int limit = pages.Count - 1;
 
-                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            for (int i = 0; i <= limit; i++) // try all possible set sizes
                             {
                                 int size = i + 1;
                                 Combinations<Page> sets = new Combinations<Page>(pages, size, GenerateOption.WithoutRepetition);
@@ -19092,6 +19195,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -19108,6 +19212,7 @@ public class Server : IPublisher
     private static List<Station> DoFindStations(List<Verse> source, NumberQuery query)
     {
         List<Station> result = new List<Station>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19128,6 +19233,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - StationRanges
@@ -19143,6 +19249,7 @@ public class Server : IPublisher
     private static List<List<Station>> DoFindStationRanges(List<Verse> source, NumberQuery query)
     {
         List<List<Station>> result = new List<List<Station>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19156,17 +19263,15 @@ public class Server : IPublisher
                         if (range_length == 1)
                         {
                             result.Add(DoFindStations(source, query));
-                            return result;
                         }
-
-                        if (range_length == 0) // non-specified range length
+                        else if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
                             int limit = stations.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i <= stations.Count - r; i++)
+                                for (int i = 0; i < stations.Count - r + 1; i++)
                                 {
                                     // build required range
                                     List<Station> range = new List<Station>();
@@ -19186,7 +19291,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i <= stations.Count - r; i++)
+                            for (int i = 0; i < stations.Count - r + 1; i++)
                             {
                                 // build required range
                                 List<Station> range = new List<Station>();
@@ -19206,6 +19311,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - StationSets
@@ -19221,6 +19327,7 @@ public class Server : IPublisher
     private static List<List<Station>> DoFindStationSets(List<Verse> source, NumberQuery query)
     {
         List<List<Station>> result = new List<List<Station>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19234,15 +19341,13 @@ public class Server : IPublisher
                         if (set_size == 1)
                         {
                             result.Add(DoFindStations(source, query));
-                            return result;
                         }
-
-                        if (set_size == 0) // non-specified set size
+                        else if (set_size == 0) // non-specified set size
                         {
                             // limit set length to minimum
                             int limit = stations.Count - 1;
 
-                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            for (int i = 0; i <= limit; i++) // try all possible set sizes
                             {
                                 int size = i + 1;
                                 Combinations<Station> sets = new Combinations<Station>(stations, size, GenerateOption.WithoutRepetition);
@@ -19272,6 +19377,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -19288,6 +19394,7 @@ public class Server : IPublisher
     private static List<Part> DoFindParts(List<Verse> source, NumberQuery query)
     {
         List<Part> result = new List<Part>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19308,6 +19415,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - PartRanges
@@ -19323,6 +19431,7 @@ public class Server : IPublisher
     private static List<List<Part>> DoFindPartRanges(List<Verse> source, NumberQuery query)
     {
         List<List<Part>> result = new List<List<Part>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19336,17 +19445,15 @@ public class Server : IPublisher
                         if (range_length == 1)
                         {
                             result.Add(DoFindParts(source, query));
-                            return result;
                         }
-
-                        if (range_length == 0) // non-specified range length
+                        else if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
                             int limit = parts.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i <= parts.Count - r; i++)
+                                for (int i = 0; i < parts.Count - r + 1; i++)
                                 {
                                     // build required range
                                     List<Part> range = new List<Part>();
@@ -19366,7 +19473,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i <= parts.Count - r; i++)
+                            for (int i = 0; i < parts.Count - r + 1; i++)
                             {
                                 // build required range
                                 List<Part> range = new List<Part>();
@@ -19386,6 +19493,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - PartSets
@@ -19401,6 +19509,7 @@ public class Server : IPublisher
     private static List<List<Part>> DoFindPartSets(List<Verse> source, NumberQuery query)
     {
         List<List<Part>> result = new List<List<Part>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19414,15 +19523,13 @@ public class Server : IPublisher
                         if (set_size == 1)
                         {
                             result.Add(DoFindParts(source, query));
-                            return result;
                         }
-
-                        if (set_size == 0) // non-specified set size
+                        else if (set_size == 0) // non-specified set size
                         {
                             // limit set length to minimum
                             int limit = parts.Count - 1;
 
-                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            for (int i = 0; i <= limit; i++) // try all possible set sizes
                             {
                                 int size = i + 1;
                                 Combinations<Part> sets = new Combinations<Part>(parts, size, GenerateOption.WithoutRepetition);
@@ -19452,6 +19559,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -19468,6 +19576,7 @@ public class Server : IPublisher
     private static List<Model.Group> DoFindGroups(List<Verse> source, NumberQuery query)
     {
         List<Model.Group> result = new List<Model.Group>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19488,6 +19597,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - GroupRanges
@@ -19503,6 +19613,7 @@ public class Server : IPublisher
     private static List<List<Model.Group>> DoFindGroupRanges(List<Verse> source, NumberQuery query)
     {
         List<List<Model.Group>> result = new List<List<Model.Group>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19516,17 +19627,15 @@ public class Server : IPublisher
                         if (range_length == 1)
                         {
                             result.Add(DoFindGroups(source, query));
-                            return result;
                         }
-
-                        if (range_length == 0) // non-specified range length
+                        else if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
                             int limit = groups.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i <= groups.Count - r; i++)
+                                for (int i = 0; i < groups.Count - r + 1; i++)
                                 {
                                     // build required range
                                     List<Model.Group> range = new List<Model.Group>();
@@ -19546,7 +19655,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i <= groups.Count - r; i++)
+                            for (int i = 0; i < groups.Count - r + 1; i++)
                             {
                                 // build required range
                                 List<Model.Group> range = new List<Model.Group>();
@@ -19566,6 +19675,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - GroupSets
@@ -19581,6 +19691,7 @@ public class Server : IPublisher
     private static List<List<Model.Group>> DoFindGroupSets(List<Verse> source, NumberQuery query)
     {
         List<List<Model.Group>> result = new List<List<Model.Group>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19594,15 +19705,13 @@ public class Server : IPublisher
                         if (set_size == 1)
                         {
                             result.Add(DoFindGroups(source, query));
-                            return result;
                         }
-
-                        if (set_size == 0) // non-specified set size
+                        else if (set_size == 0) // non-specified set size
                         {
                             // limit set length to minimum
                             int limit = groups.Count - 1;
 
-                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            for (int i = 0; i <= limit; i++) // try all possible set sizes
                             {
                                 int size = i + 1;
                                 Combinations<Model.Group> sets = new Combinations<Model.Group>(groups, size, GenerateOption.WithoutRepetition);
@@ -19632,6 +19741,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -19648,6 +19758,7 @@ public class Server : IPublisher
     private static List<Half> DoFindHalfs(List<Verse> source, NumberQuery query)
     {
         List<Half> result = new List<Half>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19668,6 +19779,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - HalfRanges
@@ -19683,6 +19795,7 @@ public class Server : IPublisher
     private static List<List<Half>> DoFindHalfRanges(List<Verse> source, NumberQuery query)
     {
         List<List<Half>> result = new List<List<Half>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19696,17 +19809,15 @@ public class Server : IPublisher
                         if (range_length == 1)
                         {
                             result.Add(DoFindHalfs(source, query));
-                            return result;
                         }
-
-                        if (range_length == 0) // non-specified range length
+                        else if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
                             int limit = halfs.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i <= halfs.Count - r; i++)
+                                for (int i = 0; i < halfs.Count - r + 1; i++)
                                 {
                                     // build required range
                                     List<Half> range = new List<Half>();
@@ -19726,7 +19837,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i < halfs.Count - r; i++)
+                            for (int i = 0; i < halfs.Count - r + 1; i++)
                             {
                                 // build required range
                                 List<Half> range = new List<Half>();
@@ -19746,6 +19857,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - HalfSets
@@ -19761,6 +19873,7 @@ public class Server : IPublisher
     private static List<List<Half>> DoFindHalfSets(List<Verse> source, NumberQuery query)
     {
         List<List<Half>> result = new List<List<Half>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19774,15 +19887,13 @@ public class Server : IPublisher
                         if (set_size == 1)
                         {
                             result.Add(DoFindHalfs(source, query));
-                            return result;
                         }
-
-                        if (set_size == 0) // non-specified set size
+                        else if (set_size == 0) // non-specified set size
                         {
                             // limit set length to minimum
                             int limit = halfs.Count - 1;
 
-                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            for (int i = 0; i <= limit; i++) // try all possible set sizes
                             {
                                 int size = i + 1;
                                 Combinations<Half> sets = new Combinations<Half>(halfs, size, GenerateOption.WithoutRepetition);
@@ -19812,6 +19923,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -19828,6 +19940,7 @@ public class Server : IPublisher
     private static List<Quarter> DoFindQuarters(List<Verse> source, NumberQuery query)
     {
         List<Quarter> result = new List<Quarter>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19848,6 +19961,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - QuarterRanges
@@ -19863,6 +19977,7 @@ public class Server : IPublisher
     private static List<List<Quarter>> DoFindQuarterRanges(List<Verse> source, NumberQuery query)
     {
         List<List<Quarter>> result = new List<List<Quarter>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19876,17 +19991,15 @@ public class Server : IPublisher
                         if (range_length == 1)
                         {
                             result.Add(DoFindQuarters(source, query));
-                            return result;
                         }
-
-                        if (range_length == 0) // non-specified range length
+                        else if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
                             int limit = quarters.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i <= quarters.Count - r; i++)
+                                for (int i = 0; i < quarters.Count - r + 1; i++)
                                 {
                                     // build required range
                                     List<Quarter> range = new List<Quarter>();
@@ -19906,7 +20019,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i <= quarters.Count - r; i++)
+                            for (int i = 0; i < quarters.Count - r + 1; i++)
                             {
                                 // build required range
                                 List<Quarter> range = new List<Quarter>();
@@ -19926,6 +20039,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - QuarterSets
@@ -19941,6 +20055,7 @@ public class Server : IPublisher
     private static List<List<Quarter>> DoFindQuarterSets(List<Verse> source, NumberQuery query)
     {
         List<List<Quarter>> result = new List<List<Quarter>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -19954,15 +20069,13 @@ public class Server : IPublisher
                         if (set_size == 1)
                         {
                             result.Add(DoFindQuarters(source, query));
-                            return result;
                         }
-
-                        if (set_size == 0) // non-specified set size
+                        else if (set_size == 0) // non-specified set size
                         {
                             // limit set length to minimum
                             int limit = quarters.Count - 1;
 
-                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            for (int i = 0; i <= limit; i++) // try all possible set sizes
                             {
                                 int size = i + 1;
                                 Combinations<Quarter> sets = new Combinations<Quarter>(quarters, size, GenerateOption.WithoutRepetition);
@@ -19992,6 +20105,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -20008,6 +20122,7 @@ public class Server : IPublisher
     private static List<Bowing> DoFindBowings(List<Verse> source, NumberQuery query)
     {
         List<Bowing> result = new List<Bowing>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -20028,6 +20143,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - BowingRanges
@@ -20043,6 +20159,7 @@ public class Server : IPublisher
     private static List<List<Bowing>> DoFindBowingRanges(List<Verse> source, NumberQuery query)
     {
         List<List<Bowing>> result = new List<List<Bowing>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -20056,17 +20173,15 @@ public class Server : IPublisher
                         if (range_length == 1)
                         {
                             result.Add(DoFindBowings(source, query));
-                            return result;
                         }
-
-                        if (range_length == 0) // non-specified range length
+                        else if (range_length == 0) // non-specified range length
                         {
                             // limit range length to minimum
                             int limit = bowings.Count - 1;
 
                             for (int r = 1; r <= limit; r++) // try all possible range lengths
                             {
-                                for (int i = 0; i <= bowings.Count - r; i++)
+                                for (int i = 0; i < bowings.Count - r + 1; i++)
                                 {
                                     // build required range
                                     List<Bowing> range = new List<Bowing>();
@@ -20086,7 +20201,7 @@ public class Server : IPublisher
                         else // specified range length
                         {
                             int r = range_length;
-                            for (int i = 0; i <= bowings.Count - r; i++)
+                            for (int i = 0; i < bowings.Count - r + 1; i++)
                             {
                                 // build required range
                                 List<Bowing> range = new List<Bowing>();
@@ -20106,6 +20221,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by numbers - BowingSets
@@ -20121,6 +20237,7 @@ public class Server : IPublisher
     private static List<List<Bowing>> DoFindBowingSets(List<Verse> source, NumberQuery query)
     {
         List<List<Bowing>> result = new List<List<Bowing>>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -20134,15 +20251,13 @@ public class Server : IPublisher
                         if (set_size == 1)
                         {
                             result.Add(DoFindBowings(source, query));
-                            return result;
                         }
-
-                        if (set_size == 0) // non-specified set size
+                        else if (set_size == 0) // non-specified set size
                         {
                             // limit set length to minimum
                             int limit = bowings.Count - 1;
 
-                            for (int i = 0; i < limit; i++) // try all possible set sizes
+                            for (int i = 0; i <= limit; i++) // try all possible set sizes
                             {
                                 int size = i + 1;
                                 Combinations<Bowing> sets = new Combinations<Bowing>(bowings, size, GenerateOption.WithoutRepetition);
@@ -20172,6 +20287,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -20189,6 +20305,7 @@ public class Server : IPublisher
     private static List<Verse> DoFindVerses(List<Verse> source, ProstrationType prostration_type)
     {
         List<Verse> result = new List<Verse>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -20202,6 +20319,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -20218,6 +20336,7 @@ public class Server : IPublisher
     private static List<Chapter> DoFindChapters(List<Verse> source, RevelationPlace revelation_place)
     {
         List<Chapter> result = new List<Chapter>();
+
         List<Verse> result_verses = new List<Verse>();
         if (source != null)
         {
@@ -20248,6 +20367,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -20264,6 +20384,7 @@ public class Server : IPublisher
     private static List<Verse> DoFindVerses(List<Verse> source, InitializationType initialization_type)
     {
         List<Verse> result = new List<Verse>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -20277,6 +20398,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
@@ -20305,6 +20427,7 @@ public class Server : IPublisher
         if (String.IsNullOrEmpty(phrase)) return 0;
 
         int result = 0;
+
         if (s_numerology_system != null)
         {
             if (!with_diacritics) text = text.SimplifyTo(s_numerology_system.TextMode);
@@ -20395,6 +20518,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by frequency - Words
@@ -20410,6 +20534,7 @@ public class Server : IPublisher
     private static List<Word> DoFindWords(List<Verse> source, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
     {
         List<Word> result = new List<Word>();
+
         if (!string.IsNullOrEmpty(phrase))
         {
             if (source != null)
@@ -20440,6 +20565,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by frequency - Sentences
@@ -20455,6 +20581,7 @@ public class Server : IPublisher
     private static List<Sentence> DoFindSentences(List<Verse> source, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
     {
         List<Sentence> result = new List<Sentence>();
+
         if (source != null)
         {
             if (source.Count > 0)
@@ -20815,6 +20942,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by frequency - Verses
@@ -20830,6 +20958,7 @@ public class Server : IPublisher
     private static List<Verse> DoFindVerses(List<Verse> source, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
     {
         List<Verse> result = new List<Verse>();
+
         if (!string.IsNullOrEmpty(phrase))
         {
             if (source != null)
@@ -20854,6 +20983,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     // find by frequency - Chapters
@@ -20869,6 +20999,7 @@ public class Server : IPublisher
     private static List<Chapter> DoFindChapters(List<Verse> source, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
     {
         List<Chapter> result = new List<Chapter>();
+
         if (!string.IsNullOrEmpty(phrase))
         {
             if (source != null)
@@ -20897,12 +21028,14 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
 
     public static string GetTranslationKey(string translation)
     {
         string result = null;
+
         if (s_book != null)
         {
             if (s_book.TranslationInfos != null)
@@ -20916,6 +21049,7 @@ public class Server : IPublisher
                 }
             }
         }
+
         return result;
     }
     public static void LoadTranslation(string translation)
