@@ -283,7 +283,7 @@ namespace Model
             {
                 if (s_include_number)
                 {
-                    return (" " + Constants.ORNATE_RIGHT_PARENTHESIS + NumberInChapter.ToString().ToArabicNumber() + Constants.ORNATE_LEFT_PARENTHESIS + " ");
+                    return (" " + Constants.ORNATE_RIGHT_PARENTHESIS + NumberInChapter.ToArabic() + Constants.ORNATE_LEFT_PARENTHESIS + " ");
                 }
                 else
                 {

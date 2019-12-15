@@ -773,44 +773,6 @@ public static class StringExtensions
         return source.Length <= length ? source : source.Substring(0, length - 3) + "...";
     }
 
-    public static string ToArabicNumber(this string source)
-    {
-        if (String.IsNullOrEmpty(source)) return "";
-
-        try
-        {
-            int number = int.Parse(source);
-            return number.ToArabic();
-        }
-        catch
-        {
-            throw new ArgumentException();
-        }
-    }
-    //public static string ToArabicNumber(this string source)
-    //{
-    //    System.Text.UTF8Encoding utf8Encoder = new UTF8Encoding();
-    //    System.Text.Decoder utf8Decoder = utf8Encoder.GetDecoder();
-    //    System.Text.StringBuilder convertedChars = new System.Text.StringBuilder();
-    //    char[] convertedChar = new char[1];
-    //    byte[] bytes = new byte[] { 217, 160 };
-    //    char[] inputCharArray = source.ToCharArray();
-    //    foreach (char c in inputCharArray)
-    //    {
-    //        if (char.IsDigit(c))
-    //        {
-    //            bytes[1] = Convert.ToByte(160 + char.GetNumericValue(c));
-    //            utf8Decoder.GetChars(bytes, 0, 2, convertedChar, 0);
-    //            convertedChars.Append(convertedChar[0]);
-    //        }
-    //        else
-    //        {
-    //            convertedChars.Append(c);
-    //        }
-    //    }
-    //    return convertedChars.ToString();
-    //}
-
     /// <summary> 
     /// returns true if source contains target inside it not at start or end, else false. 
     /// </summary>

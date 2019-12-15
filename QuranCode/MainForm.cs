@@ -13338,16 +13338,16 @@ public partial class MainForm : Form, ISubscriber
                         PerfectNumbersLabel.BackColor = Numbers.NUMBER_KIND_BACKCOLORS[1];
                         AbundantNumbersLabel.BackColor = Numbers.NUMBER_KIND_BACKCOLORS[2];
 
-                        //if ((text_mode == "Original") || (text_mode.Contains("Dots")))
-                        //{
-                        //    ApplyFont(m_quran_font);
-                        //    FontLabel.Enabled = true;
-                        //}
-                        //else
-                        //{
-                        //    ApplyFont("Courier New", 14.0F);
-                        //    FontLabel.Enabled = false;
-                        //}
+                        if (text_mode == "Original")
+                        {
+                            ApplyFont(m_quran_font);
+                            FontLabel.Enabled = true;
+                        }
+                        else
+                        {
+                            ApplyFont("Courier New", 12.0F);
+                            FontLabel.Enabled = false;
+                        }
 
                         ScriptLabel.Visible = ((Globals.EDITION == Edition.Research) || (Globals.EDITION == Edition.Ultimate));
 
@@ -17651,7 +17651,7 @@ public partial class MainForm : Form, ISubscriber
             DirectoryInfo folder = new DirectoryInfo(fonts_folder);
             if (folder != null)
             {
-                FileInfo[] files = folder.GetFiles("*.ttf");
+                FileInfo[] files = folder.GetFiles("*.*");
                 if ((files != null) && (files.Length > 0))
                 {
                     foreach (FileInfo file in files)
@@ -41280,7 +41280,7 @@ public partial class MainForm : Form, ISubscriber
                     }
                     if (str.Length > 1)
                     {
-                        str.Remove(str.Length - 1, 1);
+                        str.Remove(str.Length - 1, 1); // last space in " {###} "   OR  \n
                     }
                     m_current_text = str.ToString();
 
@@ -41421,7 +41421,7 @@ public partial class MainForm : Form, ISubscriber
                     }
                     if (str.Length > 1)
                     {
-                        str.Remove(str.Length - 1, 1);
+                        str.Remove(str.Length - 1, 1); // last space in " {###} "   OR  \n
                     }
                     m_current_text = str.ToString();
 
@@ -41536,7 +41536,7 @@ public partial class MainForm : Form, ISubscriber
                     }
                     if (str.Length > 1)
                     {
-                        str.Remove(str.Length - 1, 1);
+                        str.Remove(str.Length - 1, 1); // last space in " {###} "   OR  \n
                     }
                     m_current_text = str.ToString();
 
@@ -41556,7 +41556,7 @@ public partial class MainForm : Form, ISubscriber
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
 
-                    ColorizeVerseSets(); // too slow
+                    //ColorizeVerseSets(); // too too slow
 
                     m_current_found_verse_index = 0;
                     DisplayCurrentPositions();
@@ -41659,7 +41659,7 @@ public partial class MainForm : Form, ISubscriber
                     }
                     if (str.Length > 1)
                     {
-                        str.Remove(str.Length - 1, 1);
+                        str.Remove(str.Length - 1, 1); // last space in " {###} "   OR  \n
                     }
                     m_current_text = str.ToString();
 
@@ -41679,7 +41679,7 @@ public partial class MainForm : Form, ISubscriber
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
 
-                    //ColorizeChapters(); // too too slow
+                    ColorizeChapters(); // too slow
 
                     m_current_found_verse_index = 0;
                     DisplayCurrentPositions();
@@ -41798,6 +41798,10 @@ public partial class MainForm : Form, ISubscriber
                         {
                             str.Append(verse.ArabicAddress + "\t" + verse.Text + "\n");
                         }
+                    }
+                    if (str.Length > 1)
+                    {
+                        str.Remove(str.Length - 1, 1); // last space in " {###} "   OR  \n
                     }
                     m_current_text = str.ToString();
 
@@ -41932,6 +41936,10 @@ public partial class MainForm : Form, ISubscriber
                             str.Append(verse.ArabicAddress + "\t" + verse.Text + "\n");
                         }
                     }
+                    if (str.Length > 1)
+                    {
+                        str.Remove(str.Length - 1, 1); // last space in " {###} "   OR  \n
+                    }
                     m_current_text = str.ToString();
 
                     m_user_text_mode = false;
@@ -41950,7 +41958,7 @@ public partial class MainForm : Form, ISubscriber
                     BuildLetterFrequencies();
                     DisplayLetterFrequencies();
 
-                    //ColorizeChapterSets(); // too too slow
+                    ////ColorizeChapterSets(); // too too too slow
 
                     m_current_found_verse_index = 0;
                     DisplayCurrentPositions();
@@ -45549,16 +45557,16 @@ public partial class MainForm : Form, ISubscriber
                                 //SearchResultTextBox.Refresh();
                             }
 
-                            //if ((text_mode == "Original") || (text_mode.Contains("Dots")))
-                            //{
-                            //    ApplyFont(m_quran_font);
-                            //    FontLabel.Enabled = true;
-                            //}
-                            //else
-                            //{
-                            //    ApplyFont("Courier New", 14.0F);
-                            //    FontLabel.Enabled = false;
-                            //}
+                            if (text_mode == "Original")
+                            {
+                                ApplyFont(m_quran_font);
+                                FontLabel.Enabled = true;
+                            }
+                            else
+                            {
+                                ApplyFont("Courier New", 12.0F);
+                                FontLabel.Enabled = false;
+                            }
                         }
                     }
                 }
@@ -45714,15 +45722,6 @@ public partial class MainForm : Form, ISubscriber
                     else // cursor inside line OR some text is highlighted
                     {
                         CalculateCurrentText();
-
-                        if (m_user_text_mode)
-                        {
-                            CalculateAndDisplayCounts(m_current_text);
-                        }
-                        else
-                        {
-                            CalculateSelectedTextValue(); // take into account all Adjusts
-                        }
 
                         if (m_active_textbox.SelectionLength == 0) // cursor inside line
                         {
@@ -49556,8 +49555,6 @@ public partial class MainForm : Form, ISubscriber
                     MainTextBox.SelectionChanged += new EventHandler(MainTextBox_SelectionChanged);
                     MainTextBox.TextChanged += new EventHandler(MainTextBox_TextChanged);
                 }
-
-
             }
         }
     }

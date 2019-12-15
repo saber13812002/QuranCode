@@ -355,8 +355,9 @@ public partial class MainForm : Form
         }
         DigitsLabel.Text = (digits == 0) ? "digits" : digits.ToString();
 
+        string input = ValueTextBox.Text.Replace(" ", "");
         long value = 0L;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        if (long.TryParse(input, out value))
         {
             long sum_of_numbers = Numbers.SumOfNumbers(value);
             SumOfNumbersTextBox.Text = (sum_of_numbers == 0) ? "" : sum_of_numbers.ToString();
@@ -434,8 +435,9 @@ public partial class MainForm : Form
     }
     private void IncrementValue()
     {
+        string input = ValueTextBox.Text.Replace(" ", "");
         long value = 0L;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        if (long.TryParse(input, out value))
         {
             if (value < long.MaxValue)
             {
@@ -450,8 +452,9 @@ public partial class MainForm : Form
     }
     private void DecrementValue()
     {
+        string input = ValueTextBox.Text.Replace(" ", "");
         long value = 0L;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        if (long.TryParse(input, out value))
         {
             if (value > 0L)
             {
@@ -754,8 +757,9 @@ public partial class MainForm : Form
     }
     private void UpdateToolTipNthNumberDimensionTextBox()
     {
+        string input = ValueTextBox.Text.Replace(" ", "");
         long value = 0L;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        if (long.TryParse(input, out value))
         {
             NthNumberDimensionLabel.BackColor = SystemColors.ControlLight;
             NthDuplicateNumberDimensionLabel.BackColor = SystemColors.ControlLight;
@@ -1300,9 +1304,10 @@ public partial class MainForm : Form
     }
     private void InspectValueCalculations()
     {
-        long value = 0;
         StringBuilder str = new StringBuilder();
-        if (long.TryParse(ValueTextBox.Text, out value))
+        string input = ValueTextBox.Text.Replace(" ", "");
+        long value = 0L;
+        if (long.TryParse(input, out value))
         {
             str.AppendLine("Number\t\t\t=\t" + ValueTextBox.Text);
             long digit_sum = Numbers.DigitSum(value);
@@ -2492,32 +2497,36 @@ public partial class MainForm : Form
     }
     private void PCIndexChainL2RTextBox_TextChanged(object sender, EventArgs e)
     {
+        string input = ValueTextBox.Text.Replace(" ", "");
         long value = 0L;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        if (long.TryParse(input, out value))
         {
             this.ToolTip.SetToolTip(this.PCIndexChainL2RTextBox, "Left-to-right prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainL2R(value) + "  =  " + DecimalPCIndexChainL2R(value));
         }
     }
     private void PCIndexChainR2LTextBox_TextChanged(object sender, EventArgs e)
     {
+        string input = ValueTextBox.Text.Replace(" ", "");
         long value = 0L;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        if (long.TryParse(input, out value))
         {
             this.ToolTip.SetToolTip(this.PCIndexChainR2LTextBox, "Right-to-left prime/composite index chain | P=0 C=1\r\n" + GetPCIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryPCIndexChainR2L(value) + "  =  " + DecimalPCIndexChainR2L(value));
         }
     }
     private void CPIndexChainL2RTextBox_TextChanged(object sender, EventArgs e)
     {
+        string input = ValueTextBox.Text.Replace(" ", "");
         long value = 0L;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        if (long.TryParse(input, out value))
         {
             this.ToolTip.SetToolTip(this.CPIndexChainL2RTextBox, "Left-to-right composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainL2R(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainL2R(value) + "  =  " + DecimalCPIndexChainL2R(value));
         }
     }
     private void CPIndexChainR2LTextBox_TextChanged(object sender, EventArgs e)
     {
+        string input = ValueTextBox.Text.Replace(" ", "");
         long value = 0L;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        if (long.TryParse(input, out value))
         {
             this.ToolTip.SetToolTip(this.CPIndexChainR2LTextBox, "Right-to-left composite/prime index chain | C=0 P=1\r\n" + GetCPIndexChainR2L(value) + "\r\n" + "Chain length = " + IndexChainLength(value) + "\t\t" + BinaryCPIndexChainR2L(value) + "  =  " + DecimalCPIndexChainR2L(value));
         }
@@ -2721,19 +2730,66 @@ public partial class MainForm : Form
     {
         m_multithreading = MultithreadingCheckBox.Checked;
     }
+    private double m_double_value = 0.0D;
+    private double CalculateValue(string expression)
+    {
+        double result = 0.0D;
+        try
+        {
+            result = Radix.Decode(expression, Numbers.DEFAULT_RADIX);
+            //this.ToolTip.SetToolTip(this.ValueTextBox, result.ToString());
+        }
+        catch // if expression
+        {
+            string text = CalculateExpression(expression);
+            //this.ToolTip.SetToolTip(this.ValueTextBox, text); // display the decimal expansion
+
+            try
+            {
+                result = double.Parse(text);
+            }
+            catch
+            {
+                result = 0.0D;
+            }
+        }
+        return result;
+    }
+    private string CalculateExpression(string expression)
+    {
+        try
+        {
+            return Evaluator.Evaluate(expression, Numbers.DEFAULT_RADIX);
+        }
+        catch
+        {
+            return expression;
+        }
+    }
     private void CallRun()
     {
+        ValueTextBox.Text = ValueTextBox.Text.Replace(" ", "");
+
         long value = 0L;
-        if (long.TryParse(ValueTextBox.Text, out value))
+        string expression = ValueTextBox.Text;
+        if (long.TryParse(expression, out value))
         {
-            if (value <= 1000000)
-            {
-                FactorizeValue(value);
-            }
-            else
-            {
-                Run();
-            }
+            m_double_value = (double)value;
+        }
+        else
+        {
+            m_double_value = CalculateValue(expression);
+            value = (long)Math.Round(m_double_value);
+        }
+
+        if (m_double_value != value)
+        {
+            ValueTextBox.Text = value.ToString();
+            PrimeFactorsTextBox.Text = m_double_value.ToString();
+        }
+        else if (value <= 1000000)
+        {
+            FactorizeValue(value);
         }
         else
         {
