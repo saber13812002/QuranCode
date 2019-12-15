@@ -46162,6 +46162,7 @@ public partial class MainForm : Form, ISubscriber
             IndexChainLengthTextBox.Text = "";
 
             m_double_value = DoCalculateExpression(ValueTextBox.Text, m_radix);
+            if (Math.Abs(m_double_value) < Numbers.ERROR_MARGIN) m_double_value = 0.0D;
             long value = (long)Math.Round(m_double_value);
 
             int digit_sum = Numbers.DigitSum(ValueTextBox.Text, m_radix);
@@ -46287,13 +46288,13 @@ public partial class MainForm : Form, ISubscriber
                 string input = ValueTextBox.Text;
 
                 long value = 0L;
-                if (input.IsArabic() || ((m_radix <= 10) && input.IsEnglish()))
+                if (input.IsArabic())
                 {
                     m_double_value = m_client.CalculateValue(input);
                     value = (long)Math.Round(m_double_value);
                     FactorizeValue(value, "Text", true);
                 }
-                else if ((m_radix == 10) && (input.ToUpper().ContainsInside("P")))
+                else if ((m_radix == 10) && (input.ContainsInside("P")))
                 {
                     string[] parts = input.ToUpper().Split('P');
                     if (parts.Length == 2)
@@ -46310,7 +46311,7 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
                 }
-                else if ((m_radix == 10) && (input.ToUpper().ContainsInside("C")))
+                else if ((m_radix == 10) && (input.ContainsInside("C")))
                 {
                     string[] parts = input.ToUpper().Split('C');
                     if (parts.Length == 2)
@@ -46330,12 +46331,16 @@ public partial class MainForm : Form, ISubscriber
                 else
                 {
                     m_double_value = DoCalculateExpression(input, m_radix);
+                    if (Math.Abs(m_double_value) < Numbers.ERROR_MARGIN) m_double_value = 0.0D;
                     value = (long)Math.Round(m_double_value);
+
+                    ValueTextBox.TextChanged -= ValueTextBox_TextChanged;
+                    ValueTextBox.Text = value.ToString();
+                    ValueTextBox.TextChanged += ValueTextBox_TextChanged;
                     FactorizeValue(value, "Math", false);
                 }
 
-                // if result has fraction, display it as is
-                // PrimeFactorsTextBox_DoubleClick will toggle it back to long
+                // if result has fraction, display it as a fraction
                 if (m_double_value != value)
                 {
                     PrimeFactorsTextBox.Text = m_double_value.ToString();
@@ -46356,7 +46361,6 @@ public partial class MainForm : Form, ISubscriber
             try
             {
                 result = Radix.Decode(input, radix);
-                this.ToolTip.SetToolTip(this.ValueTextBox, result.ToString());
             }
             catch
             {
@@ -46373,12 +46377,10 @@ public partial class MainForm : Form, ISubscriber
                 try
                 {
                     result = double.Parse(output);
-                    this.ToolTip.SetToolTip(this.ValueTextBox, result.ToString());
                 }
                 catch // text
                 {
                     result = m_client.CalculateValue(input);
-                    this.ToolTip.SetToolTip(this.ValueTextBox, null);
                 }
             }
         }

@@ -101,6 +101,8 @@ public enum ArithmeticOperator { Plus, Minus, Multiply, Divide, Modulus };
 
 public static class Numbers
 {
+    public const double ERROR_MARGIN = 0.000000000000001D;
+
     public const int DEFAULT_RADIX = 10;                               // base for current number system. Decimal by default.
     public const int RADIX_NINETEEN = 19;                               // base for current number system. 19 for OverItNineteen.
     public const int DEFAULT_DIVISOR = 19;                             // 19 for OverItNineteen.

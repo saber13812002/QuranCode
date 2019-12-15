@@ -2737,34 +2737,16 @@ public partial class MainForm : Form
         try
         {
             result = Radix.Decode(expression, Numbers.DEFAULT_RADIX);
-            //this.ToolTip.SetToolTip(this.ValueTextBox, result.ToString());
         }
         catch // if expression
         {
-            string text = CalculateExpression(expression);
-            //this.ToolTip.SetToolTip(this.ValueTextBox, text); // display the decimal expansion
-
-            try
-            {
-                result = double.Parse(text);
-            }
-            catch
+            string text = Evaluator.Evaluate(expression, Numbers.DEFAULT_RADIX);
+            if (!double.TryParse(text, out result))
             {
                 result = 0.0D;
             }
         }
         return result;
-    }
-    private string CalculateExpression(string expression)
-    {
-        try
-        {
-            return Evaluator.Evaluate(expression, Numbers.DEFAULT_RADIX);
-        }
-        catch
-        {
-            return expression;
-        }
     }
     private void CallRun()
     {
@@ -2779,6 +2761,7 @@ public partial class MainForm : Form
         else
         {
             m_double_value = CalculateValue(expression);
+            if (Math.Abs(m_double_value) < Numbers.ERROR_MARGIN) m_double_value = 0.0D;
             value = (long)Math.Round(m_double_value);
         }
 
