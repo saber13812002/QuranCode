@@ -2731,48 +2731,43 @@ public partial class MainForm : Form
         m_multithreading = MultithreadingCheckBox.Checked;
     }
     private double m_double_value = 0.0D;
-    private double CalculateValue(string expression)
-    {
-        double result = 0.0D;
-        try
-        {
-            result = Radix.Decode(expression, Numbers.DEFAULT_RADIX);
-        }
-        catch // if expression
-        {
-            string text = Evaluator.Evaluate(expression, Numbers.DEFAULT_RADIX);
-            if (!double.TryParse(text, out result))
-            {
-                result = 0.0D;
-            }
-        }
-        return result;
-    }
     private void CallRun()
     {
         ValueTextBox.Text = ValueTextBox.Text.Replace(" ", "");
 
-        long value = 0L;
-        string expression = ValueTextBox.Text;
-        if (long.TryParse(expression, out value))
+        string text = Evaluator.Evaluate(ValueTextBox.Text, Numbers.DEFAULT_RADIX);
+        if (text != "Infinity")
         {
-            m_double_value = (double)value;
-        }
-        else
-        {
-            m_double_value = CalculateValue(expression);
-            if (Math.Abs(m_double_value) < Numbers.ERROR_MARGIN) m_double_value = 0.0D;
-            value = (long)Math.Round(m_double_value);
-        }
+            long value = 0L;
+            if (long.TryParse(text, out value))
+            {
+                m_double_value = (double)value;
+                if (Math.Abs(m_double_value) < Numbers.ERROR_MARGIN) m_double_value = 0.0D;
+                value = (long)Math.Round(m_double_value);
 
-        if (m_double_value != value)
-        {
-            ValueTextBox.Text = value.ToString();
-            PrimeFactorsTextBox.Text = m_double_value.ToString();
-        }
-        else if (value <= 1000000)
-        {
-            FactorizeValue(value);
+                // if result has fraction, display it as a fraction
+                if (Math.Abs((m_double_value - value)) > Numbers.ERROR_MARGIN)
+                {
+                    ValueTextBox.Text = value.ToString();
+                    ValueTextBox.Refresh();
+
+                    PrimeFactorsTextBox.Text = m_double_value.ToString();
+                    PrimeFactorsTextBox.Refresh();
+                }
+
+                if (Math.Abs((m_double_value - value)) < Numbers.ERROR_MARGIN)
+                {
+                    FactorizeValue(value);
+                }
+                else
+                {
+                    Run();
+                }
+            }
+            else
+            {
+                Run();
+            }
         }
         else
         {

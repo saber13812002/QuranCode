@@ -39987,7 +39987,7 @@ public partial class MainForm : Form, ISubscriber
                             {
                                 if (m_client.FoundVerses != null)
                                 {
-                                    m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["letter"] : " " + L[l]["words"]) + " " + L[l]["in"] + " " + m_client.FoundVerses.Count + ((m_client.FoundVerses.Count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                    m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["letter"] : " " + L[l]["letters"]) + " " + L[l]["in"] + " " + m_client.FoundVerses.Count + ((m_client.FoundVerses.Count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
                                     DisplayFoundVerses(true);
                                 }
                             }
@@ -41295,16 +41295,9 @@ public partial class MainForm : Form, ISubscriber
                     GenerateSentencesLabel.Visible = false;
                     DuplicateLettersCheckBox.Visible = false;
 
-                    if (phrase_texts.Length > 0)
-                    {
-                        m_current_text = phrase_texts.ToString(); // must be assigned here
-                        CalculateCurrentValue();
-                        m_current_text = phrase_texts.ToString(); // must be restored again
-                    }
-                    else
-                    {
-                        CalculateCurrentValue();
-                    }
+                    m_current_text = phrase_texts.ToString(); // must be assigned here
+                    CalculateCurrentValue();
+                    m_current_text = phrase_texts.ToString(); // must be restored again
 
                     // phrase statistics
                     if (m_client.FoundPhrases != null)
@@ -44161,32 +44154,29 @@ public partial class MainForm : Form, ISubscriber
         {
             if (m_client.FoundVerses != null)
             {
-                if (m_client.FoundVerses.Count > 0)
+                SearchHistoryItem item = new SearchHistoryItem();
+                item.SearchType = m_search_type;
+                item.NumbersResultType = m_numbers_result_type;
+                item.Text = (m_search_type == SearchType.Numbers) ? null : FindByTextTextBox.Text;
+                item.LanguageType = m_language_type;
+
+                if (TranslatorComboBox.SelectedItem != null)
                 {
-                    SearchHistoryItem item = new SearchHistoryItem();
-                    item.SearchType = m_search_type;
-                    item.NumbersResultType = m_numbers_result_type;
-                    item.Text = (m_search_type == SearchType.Numbers) ? null : FindByTextTextBox.Text;
-                    item.LanguageType = m_language_type;
-
-                    if (TranslatorComboBox.SelectedItem != null)
-                    {
-                        item.Translation = TranslatorComboBox.SelectedItem.ToString();
-                    }
-
-                    item.Verses = new List<Verse>(m_client.FoundVerses);
-                    if (m_client.FoundPhrases == null)
-                    {
-                        item.Phrases = null;
-                    }
-                    else
-                    {
-                        item.Phrases = new List<Phrase>(m_client.FoundPhrases);
-                    }
-                    item.Header = m_find_result_header;
-                    m_client.AddHistoryItem(item);
-                    UpdateBrowseHistoryButtons();
+                    item.Translation = TranslatorComboBox.SelectedItem.ToString();
                 }
+
+                item.Verses = new List<Verse>(m_client.FoundVerses);
+                if (m_client.FoundPhrases == null)
+                {
+                    item.Phrases = null;
+                }
+                else
+                {
+                    item.Phrases = new List<Phrase>(m_client.FoundPhrases);
+                }
+                item.Header = m_find_result_header;
+                m_client.AddHistoryItem(item);
+                UpdateBrowseHistoryButtons();
             }
         }
     }
@@ -44400,7 +44390,7 @@ public partial class MainForm : Form, ISubscriber
         {
             if (m_client.HistoryItems != null)
             {
-                BrowseHistoryBackwardButton.Enabled = (m_client.HistoryItems.Count > 0) && (m_client.HistoryItemIndex > 0);
+                BrowseHistoryBackwardButton.Enabled = (m_client.HistoryItems.Count > 0) && (m_client.HistoryItemIndex >= 0);
                 BrowseHistoryForwardButton.Enabled = (m_client.HistoryItems.Count >= 0) && (m_client.HistoryItemIndex < m_client.HistoryItems.Count - 1);
                 BrowseHistoryDeleteLabel.Enabled = (m_client.HistoryItems.Count > 0);
                 BrowseHistoryClearLabel.Enabled = (m_client.HistoryItems.Count > 0);
@@ -46341,7 +46331,7 @@ public partial class MainForm : Form, ISubscriber
                 }
 
                 // if result has fraction, display it as a fraction
-                if (m_double_value != value)
+                if (Math.Abs((m_double_value - value)) > Numbers.ERROR_MARGIN)
                 {
                     PrimeFactorsTextBox.Text = m_double_value.ToString();
                     PrimeFactorsTextBox.Refresh();
