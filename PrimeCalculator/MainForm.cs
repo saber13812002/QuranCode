@@ -2134,7 +2134,7 @@ public partial class MainForm : Form
                 }
                 else
                 {
-                    // do nothing
+                    value = index + 1;
                 }
 
                 FactorizeValue(value);
@@ -3196,6 +3196,7 @@ public partial class MainForm : Form
         {
             if (index < int.MaxValue) index++;
             IndexTextBox.Text = index.ToString();
+            FactorizeValue(index);
         }
     }
     private void DecrementIndex()
@@ -3205,6 +3206,7 @@ public partial class MainForm : Form
         {
             if (index > 0) index--;
             IndexTextBox.Text = index.ToString();
+            FactorizeValue(index);
         }
     }
     private void PTextBox_KeyDown(object sender, KeyEventArgs e)
