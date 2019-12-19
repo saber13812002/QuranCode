@@ -75,9 +75,13 @@ namespace Model
                     {
                         return
                         (
+                            IsValidNumberSearch()
+                            ||
+                            (
                             (WordCount != 1)
                             &&
                             IsValidWordSearch()
+                            )
                         );
                     }
                 case NumbersResultType.Sentences:
@@ -101,9 +105,13 @@ namespace Model
                     {
                         return
                         (
+                            IsValidNumberSearch()
+                            ||
+                            (
                             (VerseCount != 1)
                             &&
                             IsValidVerseSearch()
+                            )
                         );
                     }
                 case NumbersResultType.Chapters:
@@ -141,9 +149,13 @@ namespace Model
                     {
                         return
                         (
+                            IsValidNumberSearch()
+                            ||
+                            (
                             (PartitionCount != 1)
                             &&
                             IsValidPartitionSearch()
+                            )
                         );
                     }
                 default:

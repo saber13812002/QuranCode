@@ -1,4 +1,5 @@
-﻿// Modified by Ali Adams - heliwave@yahoo.com
+﻿//http://geekswithblogs.net/pvidler/archive/2003/10/14/182.aspx
+// Modified by Ali Adams - heliwave@yahoo.com
 
 using System;
 using System.Collections.Generic;
@@ -404,7 +405,7 @@ public class RichTextBoxEx : RichTextBox
             return;
 
         // Prevent the control from raising any events.
-        m_old_event_mask = SendMessage(this.Handle, EM_GETEVENTMASK, (IntPtr)0, IntPtr.Zero);
+        m_old_event_mask = SendMessage(this.Handle, EM_SETEVENTMASK, (IntPtr)0, IntPtr.Zero);
 
         // Prevent the control from redrawing itself.
         SendMessage(this.Handle, WM_SETREDRAW, (IntPtr)0, IntPtr.Zero);

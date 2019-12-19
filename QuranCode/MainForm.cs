@@ -788,6 +788,12 @@ public partial class MainForm : Form, ISubscriber
         }
         this.SetStyle(ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint | ControlStyles.DoubleBuffer, true);
 
+        // unligate the word "Allah" in Simplified text modes to be able to select letters independently
+        //MainTextBox.Rtf
+        //Rich Text Format Specification:
+        //\zwj    Zero-width joiner. This is used for ligating (joining) characters.
+        //\zwnj   Zero-width nonjoiner. This is used for unligating a character.
+
         InstallLanguages();
 
         InstallFonts();
@@ -45599,6 +45605,9 @@ public partial class MainForm : Form, ISubscriber
                                 LoadNumerologySystem(numerology_system_name);
 
                                 CalculateCurrentValue();
+
+                                BuildLetterFrequencies();
+                                DisplayLetterFrequencies();
 
                                 // re-sort chapters if sorted by Value
                                 if (Chapter.SortMethod == ChapterSortMethod.ByValue)

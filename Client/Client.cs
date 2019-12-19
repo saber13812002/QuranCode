@@ -3598,6 +3598,9 @@ public class Client : IPublisher, ISubscriber
                 else if (m_count_diacritics == null) { text = text.GetDiacritics(); }
                 else if (m_count_diacritics == false) { text = text.SimplifyTo(NumerologySystem.TextMode); }
 
+                // count Hamza as an Elf
+                if (NumerologySystem.LetterValue.EndsWith("0")) text = text.Replace("ء", "ا");
+
                 text = text.Replace("\r", "");
                 text = text.Replace("\n", "");
                 text = text.Replace("\t", "");
