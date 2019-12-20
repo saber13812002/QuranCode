@@ -72,7 +72,7 @@
     <Content Include="Help\114.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\14.png">
+    <Content Include="Help\14.pdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Help\175.png">
