@@ -5,7 +5,7 @@ using System.Text;
 namespace Model
 {
     public enum ChapterSortOrder { Ascending, Descending }
-    public enum ChapterSortMethod { ByCompilation, ByRevelation, ByVerses, ByWords, ByLetters, ByValue }
+    public enum ChapterSortMethod { ByCompilation, ByRevelation, ByVerses, ByWords, ByLetters, ByValue, ByCPlusV, ByCMinusV, ByCMultiplyV }
     public class Chapter : IComparable<Chapter>
     {
         private static ChapterSortMethod s_sort_method = ChapterSortMethod.ByCompilation;
@@ -43,18 +43,10 @@ namespace Model
                 {
                     case ChapterSortMethod.ByCompilation:
                         {
-                            if (this.Number.CompareTo(obj.Number) == 0)
-                            {
-                                return this.SortedNumber.CompareTo(obj.SortedNumber);
-                            }
                             return this.Number.CompareTo(obj.Number);
                         }
                     case ChapterSortMethod.ByRevelation:
                         {
-                            if (this.RevelationOrder.CompareTo(obj.RevelationOrder) == 0)
-                            {
-                                return this.SortedNumber.CompareTo(obj.SortedNumber);
-                            }
                             return this.RevelationOrder.CompareTo(obj.RevelationOrder);
                         }
                     case ChapterSortMethod.ByVerses:
@@ -89,6 +81,39 @@ namespace Model
                             }
                             return this.Value.CompareTo(obj.Value);
                         }
+                    case ChapterSortMethod.ByCPlusV:
+                        {
+                            int this_cv = this.Number + this.verses.Count;
+                            int obj_cv = obj.Number + obj.verses.Count;
+
+                            if (this_cv.CompareTo(obj_cv) == 0)
+                            {
+                                return this.Number.CompareTo(obj.Number);
+                            }
+                            return this_cv.CompareTo(obj_cv);
+                        }
+                    case ChapterSortMethod.ByCMinusV:
+                        {
+                            int this_cv = this.Number - this.verses.Count;
+                            int obj_cv = obj.Number - obj.verses.Count;
+
+                            if (this_cv.CompareTo(obj_cv) == 0)
+                            {
+                                return this.Number.CompareTo(obj.Number);
+                            }
+                            return this_cv.CompareTo(obj_cv);
+                        }
+                    case ChapterSortMethod.ByCMultiplyV:
+                        {
+                            int this_cv = this.Number * this.verses.Count;
+                            int obj_cv = obj.Number * obj.verses.Count;
+
+                            if (this_cv.CompareTo(obj_cv) == 0)
+                            {
+                                return this.Number.CompareTo(obj.Number);
+                            }
+                            return this_cv.CompareTo(obj_cv);
+                        }
                     default:
                         {
                             return this.SortedNumber.CompareTo(obj.SortedNumber);
@@ -101,18 +126,10 @@ namespace Model
                 {
                     case ChapterSortMethod.ByCompilation:
                         {
-                            if (obj.Number.CompareTo(this.Number) == 0)
-                            {
-                                return obj.SortedNumber.CompareTo(this.SortedNumber);
-                            }
                             return obj.Number.CompareTo(this.Number);
                         }
                     case ChapterSortMethod.ByRevelation:
                         {
-                            if (obj.RevelationOrder.CompareTo(this.RevelationOrder) == 0)
-                            {
-                                return obj.SortedNumber.CompareTo(this.SortedNumber);
-                            }
                             return obj.RevelationOrder.CompareTo(this.RevelationOrder);
                         }
                     case ChapterSortMethod.ByVerses:
@@ -146,6 +163,39 @@ namespace Model
                                 return obj.SortedNumber.CompareTo(this.SortedNumber);
                             }
                             return obj.Value.CompareTo(this.Value);
+                        }
+                    case ChapterSortMethod.ByCPlusV:
+                        {
+                            int this_cv = this.Number + this.verses.Count;
+                            int obj_cv = obj.Number + obj.verses.Count;
+
+                            if (obj_cv.CompareTo(this_cv) == 0)
+                            {
+                                return obj.Number.CompareTo(this.Number);
+                            }
+                            return obj_cv.CompareTo(this_cv);
+                        }
+                    case ChapterSortMethod.ByCMinusV:
+                        {
+                            int this_cv = this.Number - this.verses.Count;
+                            int obj_cv = obj.Number - obj.verses.Count;
+
+                            if (obj_cv.CompareTo(this_cv) == 0)
+                            {
+                                return obj.Number.CompareTo(this.Number);
+                            }
+                            return obj_cv.CompareTo(this_cv);
+                        }
+                    case ChapterSortMethod.ByCMultiplyV:
+                        {
+                            int this_cv = this.Number * this.verses.Count;
+                            int obj_cv = obj.Number * obj.verses.Count;
+
+                            if (obj_cv.CompareTo(this_cv) == 0)
+                            {
+                                return obj.Number.CompareTo(this.Number);
+                            }
+                            return obj_cv.CompareTo(this_cv);
                         }
                     default:
                         {

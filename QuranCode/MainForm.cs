@@ -20004,6 +20004,9 @@ public partial class MainForm : Form, ISubscriber
             ChapterSortComboBox.Items.Add("By Words");
             ChapterSortComboBox.Items.Add("By Letters");
             ChapterSortComboBox.Items.Add("By Value");
+            ChapterSortComboBox.Items.Add("By C+V");
+            ChapterSortComboBox.Items.Add("By C-V");
+            ChapterSortComboBox.Items.Add("By C×V");
 
             ChapterSortComboBox.SelectedIndex = 0;
         }
@@ -21813,91 +21816,128 @@ public partial class MainForm : Form, ISubscriber
     }
     private void ChapterSortComboBox_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if (m_client != null)
+        this.Cursor = Cursors.WaitCursor;
+        try
         {
-            if (m_client.Book != null)
+            if (m_client != null)
             {
-                if (m_client.Selection != null)
+                if (m_client.Book != null)
                 {
-                    // backup selection
-                    List<Verse> backup_verses = new List<Verse>();
-                    if (m_client.Selection.Scope == SelectionScope.Verse)
+                    if (m_client.Selection != null)
                     {
-                        if (m_client.Selection.Indexes != null)
+                        // backup selection
+                        List<Verse> backup_verses = new List<Verse>();
+                        if (m_client.Selection.Scope == SelectionScope.Verse)
                         {
-                            foreach (int index in m_client.Selection.Indexes)
+                            if (m_client.Selection.Indexes != null)
                             {
-                                backup_verses.Add(m_client.Book.Verses[index]);
+                                foreach (int index in m_client.Selection.Indexes)
+                                {
+                                    backup_verses.Add(m_client.Book.Verses[index]);
+                                }
                             }
                         }
-                    }
 
-                    // do chapter sorting
-                    switch (ChapterSortComboBox.SelectedIndex)
-                    {
-                        case 0:
-                            {
-                                m_chapter_sort_method = ChapterSortMethod.ByCompilation;
-                                ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Compilation"]);
-                                PinChapter1CheckBox.Visible = false;
-                            }
-                            break;
-                        case 1:
-                            {
-                                m_chapter_sort_method = ChapterSortMethod.ByRevelation;
-                                ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Revelation"]);
-                                PinChapter1CheckBox.Visible = false;
-                            }
-                            break;
-                        case 2:
-                            {
-                                m_chapter_sort_method = ChapterSortMethod.ByVerses;
-                                ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Verses"]);
-                                PinChapter1CheckBox.Visible = true;
-                            }
-                            break;
-                        case 3:
-                            {
-                                m_chapter_sort_method = ChapterSortMethod.ByWords;
-                                ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Words"]);
-                                PinChapter1CheckBox.Visible = true;
-                            }
-                            break;
-                        case 4:
-                            {
-                                m_chapter_sort_method = ChapterSortMethod.ByLetters;
-                                ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Letters"]);
-                                PinChapter1CheckBox.Visible = true;
-                            }
-                            break;
-                        case 5:
-                            {
-                                m_chapter_sort_method = ChapterSortMethod.ByValue;
-                                ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Value"]);
-                                PinChapter1CheckBox.Visible = true;
-                            }
-                            break;
-                    }
-                    m_client.Book.SortChapters(m_chapter_sort_method, m_chapter_sort_order, m_pin_chapter1);
-
-                    // restore selection
-                    if (m_client.Selection.Scope == SelectionScope.Verse)
-                    {
-                        if (m_client.Selection.Indexes != null)
+                        // do chapter sorting
+                        switch (ChapterSortComboBox.SelectedIndex)
                         {
-                            List<int> verse_indexes = new List<int>();
-                            foreach (Verse verse in backup_verses)
-                            {
-                                verse_indexes.Add(verse.Number - 1);
-                            }
-                            m_client.Selection = new Selection(m_client.Book, SelectionScope.Verse, verse_indexes);
+                            case 0:
+                                {
+                                    m_chapter_sort_method = ChapterSortMethod.ByCompilation;
+                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Compilation"]);
+                                    PinChapter1CheckBox.Visible = false;
+                                }
+                                break;
+                            case 1:
+                                {
+                                    m_chapter_sort_method = ChapterSortMethod.ByRevelation;
+                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Revelation"]);
+                                    PinChapter1CheckBox.Visible = false;
+                                }
+                                break;
+                            case 2:
+                                {
+                                    m_chapter_sort_method = ChapterSortMethod.ByVerses;
+                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Verses"]);
+                                    PinChapter1CheckBox.Visible = true;
+                                }
+                                break;
+                            case 3:
+                                {
+                                    m_chapter_sort_method = ChapterSortMethod.ByWords;
+                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Words"]);
+                                    PinChapter1CheckBox.Visible = true;
+                                }
+                                break;
+                            case 4:
+                                {
+                                    m_chapter_sort_method = ChapterSortMethod.ByLetters;
+                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Letters"]);
+                                    PinChapter1CheckBox.Visible = true;
+                                }
+                                break;
+                            case 5:
+                                {
+                                    m_chapter_sort_method = ChapterSortMethod.ByValue;
+                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Value"]);
+                                    PinChapter1CheckBox.Visible = true;
+                                }
+                                break;
+                            case 6:
+                                {
+                                    m_chapter_sort_method = ChapterSortMethod.ByCPlusV;
+                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C+V"]);
+                                    PinChapter1CheckBox.Visible = true;
+                                }
+                                break;
+                            case 7:
+                                {
+                                    m_chapter_sort_method = ChapterSortMethod.ByCMinusV;
+                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C-V"]);
+                                    PinChapter1CheckBox.Visible = true;
+                                }
+                                break;
+                            case 8:
+                                {
+                                    m_chapter_sort_method = ChapterSortMethod.ByCMultiplyV;
+                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C×V"]);
+                                    PinChapter1CheckBox.Visible = true;
+                                }
+                                break;
                         }
-                    }
+                        m_client.Book.SortChapters(m_chapter_sort_method, m_chapter_sort_order, m_pin_chapter1);
 
-                    // display chapters in new order
-                    DisplaySortedChapters();
+                        // restore selection
+                        if (m_client.Selection.Scope == SelectionScope.Verse)
+                        {
+                            if (m_client.Selection.Indexes != null)
+                            {
+                                List<int> verse_indexes = new List<int>();
+                                foreach (Verse verse in backup_verses)
+                                {
+                                    verse_indexes.Add(verse.Number - 1);
+                                }
+                                m_client.Selection = new Selection(m_client.Book, SelectionScope.Verse, verse_indexes);
+                            }
+                        }
+
+                        // display chapters in new order
+                        DisplaySortedChapters();
+                    }
                 }
             }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
         }
     }
     private void ChapterSortLabel_Click(object sender, EventArgs e)
@@ -21979,6 +22019,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void UpdateChapterSortControls()
     {
+        this.Cursor = Cursors.WaitCursor;
         try
         {
             for (int i = 0; i < 3; i++) PinChapter1CheckBox.CheckStateChanged -= new EventHandler(PinChapter1CheckBox_CheckStateChanged);
@@ -21990,53 +22031,71 @@ public partial class MainForm : Form, ISubscriber
             //////////////////////////////////////////////////////////
 
             //////////////////////////////////////////////////////////
-            if (ChapterSortComboBox.Items.Count == 6)
+            switch (Chapter.SortMethod)
             {
-                switch (Chapter.SortMethod)
-                {
-                    case ChapterSortMethod.ByCompilation:
-                        {
-                            ChapterSortComboBox.SelectedIndex = 0;
-                            ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Compilation"]);
-                            PinChapter1CheckBox.Visible = false;
-                        }
-                        break;
-                    case ChapterSortMethod.ByRevelation:
-                        {
-                            ChapterSortComboBox.SelectedIndex = 1;
-                            ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Revelation"]);
-                            PinChapter1CheckBox.Visible = false;
-                        }
-                        break;
-                    case ChapterSortMethod.ByVerses:
-                        {
-                            ChapterSortComboBox.SelectedIndex = 2;
-                            ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Verses"]);
-                            PinChapter1CheckBox.Visible = true;
-                        }
-                        break;
-                    case ChapterSortMethod.ByWords:
-                        {
-                            ChapterSortComboBox.SelectedIndex = 3;
-                            ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Words"]);
-                            PinChapter1CheckBox.Visible = true;
-                        }
-                        break;
-                    case ChapterSortMethod.ByLetters:
-                        {
-                            ChapterSortComboBox.SelectedIndex = 4;
-                            ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Letters"]);
-                            PinChapter1CheckBox.Visible = true;
-                        }
-                        break;
-                    case ChapterSortMethod.ByValue:
-                        {
-                            ChapterSortComboBox.SelectedIndex = 5;
-                            ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Value"]);
-                            PinChapter1CheckBox.Visible = true;
-                        }
-                        break;
-                }
+                case ChapterSortMethod.ByCompilation:
+                    {
+                        ChapterSortComboBox.SelectedIndex = 0;
+                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Compilation"]);
+                        PinChapter1CheckBox.Visible = false;
+                    }
+                    break;
+                case ChapterSortMethod.ByRevelation:
+                    {
+                        ChapterSortComboBox.SelectedIndex = 1;
+                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Revelation"]);
+                        PinChapter1CheckBox.Visible = false;
+                    }
+                    break;
+                case ChapterSortMethod.ByVerses:
+                    {
+                        ChapterSortComboBox.SelectedIndex = 2;
+                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Verses"]);
+                        PinChapter1CheckBox.Visible = true;
+                    }
+                    break;
+                case ChapterSortMethod.ByWords:
+                    {
+                        ChapterSortComboBox.SelectedIndex = 3;
+                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Words"]);
+                        PinChapter1CheckBox.Visible = true;
+                    }
+                    break;
+                case ChapterSortMethod.ByLetters:
+                    {
+                        ChapterSortComboBox.SelectedIndex = 4;
+                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Letters"]);
+                        PinChapter1CheckBox.Visible = true;
+                    }
+                    break;
+                case ChapterSortMethod.ByValue:
+                    {
+                        ChapterSortComboBox.SelectedIndex = 5;
+                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Value"]);
+                        PinChapter1CheckBox.Visible = true;
+                    }
+                    break;
+                case ChapterSortMethod.ByCPlusV:
+                    {
+                        ChapterSortComboBox.SelectedIndex = 6;
+                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C+V"]);
+                        PinChapter1CheckBox.Visible = true;
+                    }
+                    break;
+                case ChapterSortMethod.ByCMinusV:
+                    {
+                        ChapterSortComboBox.SelectedIndex = 7;
+                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C-V"]);
+                        PinChapter1CheckBox.Visible = true;
+                    }
+                    break;
+                case ChapterSortMethod.ByCMultiplyV:
+                    {
+                        ChapterSortComboBox.SelectedIndex = 8;
+                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C×V"]);
+                        PinChapter1CheckBox.Visible = true;
+                    }
+                    break;
             }
             //////////////////////////////////////////////////////////
 
@@ -22072,6 +22131,7 @@ public partial class MainForm : Form, ISubscriber
             ChapterSortLabel.Click += new EventHandler(ChapterSortLabel_Click);
             PinChapter1CheckBox.CheckStateChanged += new EventHandler(PinChapter1CheckBox_CheckStateChanged);
             ChapterSortComboBox.SelectedIndexChanged += new EventHandler(ChapterSortComboBox_SelectedIndexChanged);
+            this.Cursor = Cursors.Default;
         }
     }
     private void DisplaySortedChapters()
