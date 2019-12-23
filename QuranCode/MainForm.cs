@@ -20004,9 +20004,10 @@ public partial class MainForm : Form, ISubscriber
             ChapterSortComboBox.Items.Add("By Words");
             ChapterSortComboBox.Items.Add("By Letters");
             ChapterSortComboBox.Items.Add("By Value");
-            ChapterSortComboBox.Items.Add("By C+V");
-            ChapterSortComboBox.Items.Add("By C-V");
-            ChapterSortComboBox.Items.Add("By C×V");
+            ChapterSortComboBox.Items.Add("By C + V");
+            ChapterSortComboBox.Items.Add("By C - V");
+            ChapterSortComboBox.Items.Add("By C × V");
+            ChapterSortComboBox.Items.Add("By C ÷ V");
 
             ChapterSortComboBox.SelectedIndex = 0;
         }
@@ -21886,22 +21887,36 @@ public partial class MainForm : Form, ISubscriber
                             case 6:
                                 {
                                     m_chapter_sort_method = ChapterSortMethod.ByCPlusV;
-                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C+V"]);
+                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C + V"]);
                                     PinChapter1CheckBox.Visible = true;
                                 }
                                 break;
                             case 7:
                                 {
                                     m_chapter_sort_method = ChapterSortMethod.ByCMinusV;
-                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C-V"]);
+                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C - V"]);
                                     PinChapter1CheckBox.Visible = true;
                                 }
                                 break;
                             case 8:
                                 {
                                     m_chapter_sort_method = ChapterSortMethod.ByCMultiplyV;
-                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C×V"]);
+                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C × V"]);
                                     PinChapter1CheckBox.Visible = true;
+                                }
+                                break;
+                            case 9:
+                                {
+                                    m_chapter_sort_method = ChapterSortMethod.ByCDivideV;
+                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C ÷ V"]);
+                                    PinChapter1CheckBox.Visible = true;
+                                }
+                                break;
+                            default:
+                                {
+                                    m_chapter_sort_method = ChapterSortMethod.ByCompilation;
+                                    ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Compilation"]);
+                                    PinChapter1CheckBox.Visible = false;
                                 }
                                 break;
                         }
@@ -22078,22 +22093,36 @@ public partial class MainForm : Form, ISubscriber
                 case ChapterSortMethod.ByCPlusV:
                     {
                         ChapterSortComboBox.SelectedIndex = 6;
-                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C+V"]);
+                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C + V"]);
                         PinChapter1CheckBox.Visible = true;
                     }
                     break;
                 case ChapterSortMethod.ByCMinusV:
                     {
                         ChapterSortComboBox.SelectedIndex = 7;
-                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C-V"]);
+                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C - V"]);
                         PinChapter1CheckBox.Visible = true;
                     }
                     break;
                 case ChapterSortMethod.ByCMultiplyV:
                     {
                         ChapterSortComboBox.SelectedIndex = 8;
-                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C×V"]);
+                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C × V"]);
                         PinChapter1CheckBox.Visible = true;
+                    }
+                    break;
+                case ChapterSortMethod.ByCDivideV:
+                    {
+                        ChapterSortComboBox.SelectedIndex = 9;
+                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By C ÷ V"]);
+                        PinChapter1CheckBox.Visible = true;
+                    }
+                    break;
+                default:
+                    {
+                        ChapterSortComboBox.SelectedIndex = 0;
+                        ToolTip.SetToolTip(ChapterSortComboBox, L[l]["By Compilation"]);
+                        PinChapter1CheckBox.Visible = false;
                     }
                     break;
             }

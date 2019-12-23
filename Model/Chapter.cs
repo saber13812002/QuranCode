@@ -5,7 +5,7 @@ using System.Text;
 namespace Model
 {
     public enum ChapterSortOrder { Ascending, Descending }
-    public enum ChapterSortMethod { ByCompilation, ByRevelation, ByVerses, ByWords, ByLetters, ByValue, ByCPlusV, ByCMinusV, ByCMultiplyV }
+    public enum ChapterSortMethod { ByCompilation, ByRevelation, ByVerses, ByWords, ByLetters, ByValue, ByCPlusV, ByCMinusV, ByCMultiplyV, ByCDivideV }
     public class Chapter : IComparable<Chapter>
     {
         private static ChapterSortMethod s_sort_method = ChapterSortMethod.ByCompilation;
@@ -53,7 +53,7 @@ namespace Model
                         {
                             if (this.verses.Count.CompareTo(obj.Verses.Count) == 0)
                             {
-                                return this.SortedNumber.CompareTo(obj.SortedNumber);
+                                return this.Number.CompareTo(obj.Number);
                             }
                             return this.verses.Count.CompareTo(obj.Verses.Count);
                         }
@@ -61,7 +61,7 @@ namespace Model
                         {
                             if (this.WordCount.CompareTo(obj.WordCount) == 0)
                             {
-                                return this.SortedNumber.CompareTo(obj.SortedNumber);
+                                return this.Number.CompareTo(obj.Number);
                             }
                             return this.WordCount.CompareTo(obj.WordCount);
                         }
@@ -69,7 +69,7 @@ namespace Model
                         {
                             if (this.LetterCount.CompareTo(obj.LetterCount) == 0)
                             {
-                                return this.SortedNumber.CompareTo(obj.SortedNumber);
+                                return this.Number.CompareTo(obj.Number);
                             }
                             return this.LetterCount.CompareTo(obj.LetterCount);
                         }
@@ -77,7 +77,7 @@ namespace Model
                         {
                             if (this.Value.CompareTo(obj.Value) == 0)
                             {
-                                return this.SortedNumber.CompareTo(obj.SortedNumber);
+                                return this.Number.CompareTo(obj.Number);
                             }
                             return this.Value.CompareTo(obj.Value);
                         }
@@ -114,9 +114,20 @@ namespace Model
                             }
                             return this_cv.CompareTo(obj_cv);
                         }
+                    case ChapterSortMethod.ByCDivideV:
+                        {
+                            int this_cv = (this.Number * 1000000) / this.verses.Count;
+                            int obj_cv = (obj.Number * 1000000) / obj.verses.Count;
+
+                            if (this_cv.CompareTo(obj_cv) == 0)
+                            {
+                                return this.Number.CompareTo(obj.Number);
+                            }
+                            return this_cv.CompareTo(obj_cv);
+                        }
                     default:
                         {
-                            return this.SortedNumber.CompareTo(obj.SortedNumber);
+                            return this.Number.CompareTo(obj.Number);
                         }
                 }
             }
@@ -136,7 +147,7 @@ namespace Model
                         {
                             if (obj.Verses.Count.CompareTo(this.verses.Count) == 0)
                             {
-                                return obj.SortedNumber.CompareTo(this.SortedNumber);
+                                return this.Number.CompareTo(obj.Number);
                             }
                             return obj.Verses.Count.CompareTo(this.verses.Count);
                         }
@@ -144,7 +155,7 @@ namespace Model
                         {
                             if (obj.WordCount.CompareTo(this.WordCount) == 0)
                             {
-                                return obj.SortedNumber.CompareTo(this.SortedNumber);
+                                return this.Number.CompareTo(obj.Number);
                             }
                             return obj.WordCount.CompareTo(this.WordCount);
                         }
@@ -152,7 +163,7 @@ namespace Model
                         {
                             if (obj.LetterCount.CompareTo(this.LetterCount) == 0)
                             {
-                                return obj.SortedNumber.CompareTo(this.SortedNumber);
+                                return this.Number.CompareTo(obj.Number);
                             }
                             return obj.LetterCount.CompareTo(this.LetterCount);
                         }
@@ -160,7 +171,7 @@ namespace Model
                         {
                             if (obj.Value.CompareTo(this.Value) == 0)
                             {
-                                return obj.SortedNumber.CompareTo(this.SortedNumber);
+                                return this.Number.CompareTo(obj.Number);
                             }
                             return obj.Value.CompareTo(this.Value);
                         }
@@ -171,7 +182,7 @@ namespace Model
 
                             if (obj_cv.CompareTo(this_cv) == 0)
                             {
-                                return obj.Number.CompareTo(this.Number);
+                                return this.Number.CompareTo(obj.Number);
                             }
                             return obj_cv.CompareTo(this_cv);
                         }
@@ -182,7 +193,7 @@ namespace Model
 
                             if (obj_cv.CompareTo(this_cv) == 0)
                             {
-                                return obj.Number.CompareTo(this.Number);
+                                return this.Number.CompareTo(obj.Number);
                             }
                             return obj_cv.CompareTo(this_cv);
                         }
@@ -193,13 +204,24 @@ namespace Model
 
                             if (obj_cv.CompareTo(this_cv) == 0)
                             {
-                                return obj.Number.CompareTo(this.Number);
+                                return this.Number.CompareTo(obj.Number);
+                            }
+                            return obj_cv.CompareTo(this_cv);
+                        }
+                    case ChapterSortMethod.ByCDivideV:
+                        {
+                            int this_cv = (this.Number * 1000000) / this.verses.Count;
+                            int obj_cv = (obj.Number * 1000000) / obj.verses.Count;
+
+                            if (obj_cv.CompareTo(this_cv) == 0)
+                            {
+                                return this.Number.CompareTo(obj.Number);
                             }
                             return obj_cv.CompareTo(this_cv);
                         }
                     default:
                         {
-                            return obj.SortedNumber.CompareTo(this.SortedNumber);
+                            return obj.Number.CompareTo(this.Number);
                         }
                 }
             }
