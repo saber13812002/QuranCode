@@ -10792,6 +10792,7 @@ public partial class MainForm : Form, ISubscriber
         // LetterPositionSumColumnHeader
         // 
         this.LetterPositionSumColumnHeader.Text = "∑Pos";
+        this.LetterPositionSumColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.LetterPositionSumColumnHeader.Width = 48;
         // 
         // LetterDistanceSumColumnHeader
@@ -10803,11 +10804,13 @@ public partial class MainForm : Form, ISubscriber
         // LetterReversePositionSumColumnHeader
         // 
         this.LetterReversePositionSumColumnHeader.Text = "ƩrPos";
+        this.LetterReversePositionSumColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.LetterReversePositionSumColumnHeader.Width = 0;
         // 
         // LetterReverseDistanceSumColumnHeader
         // 
         this.LetterReverseDistanceSumColumnHeader.Text = "ƩrΔ";
+        this.LetterReverseDistanceSumColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.LetterReverseDistanceSumColumnHeader.Width = 0;
         // 
         // FindByFrequncyPanel

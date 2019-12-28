@@ -9616,11 +9616,13 @@ partial class MainForm
             // LetterReversePositionSumColumnHeader
             // 
             this.LetterReversePositionSumColumnHeader.Text = "ƩrPos";
+            this.LetterReversePositionSumColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.LetterReversePositionSumColumnHeader.Width = 0;
             // 
             // LetterReverseDistanceSumColumnHeader
             // 
             this.LetterReverseDistanceSumColumnHeader.Text = "ƩrΔ";
+            this.LetterReverseDistanceSumColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.LetterReverseDistanceSumColumnHeader.Width = 0;
             // 
             // LetterFrequencyContextMenuStrip

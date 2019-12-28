@@ -59,19 +59,6 @@ public static class Research
         return verses;
     }
 
-    private static string _________________________________________________________(Client client, string param, bool in_search_result)
-    {
-        return null;
-    }
-    public static string FullList_in_ResearchEdition(Client client, string param, bool in_search_result)
-    {
-        return (
-                "Standard Edition: Letter-value systems with 19 options.\t[Start normally]" + "\r\n" +
-                "Research Edition: Research methods and C# scripting.\t[Start with Shift]" + "\r\n" +
-                "Ultimate Edition: Big prime and composite numbers.\t[Start with Ctrl+Shift]" + "\r\n"
-               );
-    }
-
     public static string _______________________________________________________(Client client, string param, bool in_search_result)
     {
         return null;
@@ -3104,11 +3091,11 @@ public static class Research
         }
     }
 
-    public static string __________________________________________________(Client client, string param, bool in_search_result)
+    private static string __________________________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
-    public static string P_PivotVersesWithText(Client client, string param, bool in_search_result)
+    private static string P_PivotVersesWithText(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3138,7 +3125,7 @@ public static class Research
         }
         return null;
     }
-    public static string C_PivotVersesWithText(Client client, string param, bool in_search_result)
+    private static string C_PivotVersesWithText(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3378,7 +3365,7 @@ public static class Research
         }
         return str.ToString();
     }
-    public static string P_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static string P_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3408,7 +3395,7 @@ public static class Research
         }
         return null;
     }
-    public static string C_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    private static string C_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -10093,5 +10080,18 @@ public static class Research
         client.NumerologySystem = backup_numerology_system;
 
         return null;
+    }
+
+    private static string _________________________________________________________(Client client, string param, bool in_search_result)
+    {
+        return null;
+    }
+    public static string More_in_Research_Edition(Client client, string param, bool in_search_result)
+    {
+        return (
+                "Standard Edition: Letter-value systems with 19 options.\t[Start normally]" + "\r\n" +
+                "Research Edition: Research methods and C# scripting.\t[Start with Shift]" + "\r\n" +
+                "Ultimate Edition: Big prime and composite numbers.\t[Start with Ctrl+Shift]" + "\r\n"
+               );
     }
 }
