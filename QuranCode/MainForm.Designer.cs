@@ -176,7 +176,7 @@ partial class MainForm
             this.FindBySimilarityTextRadioButton = new System.Windows.Forms.RadioButton();
             this.FindBySimilarityPercentageTrackBar = new System.Windows.Forms.TrackBar();
             this.FindByTextPanel = new System.Windows.Forms.Panel();
-            this.DrawSearchTermsLabel = new System.Windows.Forms.Label();
+            this.FindByTextDrawSearchTermsLabel = new System.Windows.Forms.Label();
             this.FindByTextWithDiacriticsCheckBox = new System.Windows.Forms.CheckBox();
             this.FindByTextSearchBlockSizeBowingLabel = new System.Windows.Forms.Label();
             this.FindByTextMultiplicityNumberTypeLabel = new System.Windows.Forms.Label();
@@ -3278,7 +3278,8 @@ partial class MainForm
             this.FindByTextPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.FindByTextPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.FindByTextPanel.Controls.Add(this.DrawSearchTermsLabel);
+            this.FindByTextPanel.Controls.Add(this.FindByTextButton);
+            this.FindByTextPanel.Controls.Add(this.FindByTextDrawSearchTermsLabel);
             this.FindByTextPanel.Controls.Add(this.NoorsoftLinkLabel);
             this.FindByTextPanel.Controls.Add(this.FindByTextWithDiacriticsCheckBox);
             this.FindByTextPanel.Controls.Add(this.FindByTextSearchBlockSizeBowingLabel);
@@ -3289,7 +3290,6 @@ partial class MainForm
             this.FindByTextPanel.Controls.Add(this.TextLocationLabel);
             this.FindByTextPanel.Controls.Add(this.TextLocationWithinChapterPanel);
             this.FindByTextPanel.Controls.Add(this.FindByTextSearchBlockSizeChapterLabel);
-            this.FindByTextPanel.Controls.Add(this.FindByTextButton);
             this.FindByTextPanel.Controls.Add(this.TextLocationInWordPanel);
             this.FindByTextPanel.Controls.Add(this.FindByTextSearchBlockSizeQuarterLabel);
             this.FindByTextPanel.Controls.Add(this.TextLocationWithinVersePanel);
@@ -3316,22 +3316,6 @@ partial class MainForm
             this.FindByTextPanel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
             this.FindByTextPanel.Leave += new System.EventHandler(this.FindByTextPanel_Leave);
             // 
-            // DrawSearchTermsLabel
-            // 
-            this.DrawSearchTermsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.DrawSearchTermsLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DrawSearchTermsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.DrawSearchTermsLabel.ForeColor = System.Drawing.Color.Crimson;
-            this.DrawSearchTermsLabel.Image = ((System.Drawing.Image)(resources.GetObject("DrawSearchTermsLabel.Image")));
-            this.DrawSearchTermsLabel.Location = new System.Drawing.Point(60, 2);
-            this.DrawSearchTermsLabel.Name = "DrawSearchTermsLabel";
-            this.DrawSearchTermsLabel.Size = new System.Drawing.Size(16, 16);
-            this.DrawSearchTermsLabel.TabIndex = 154;
-            this.DrawSearchTermsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ToolTip.SetToolTip(this.DrawSearchTermsLabel, "Draw search terms");
-            this.DrawSearchTermsLabel.Click += new System.EventHandler(this.DrawSearchTermsLabel_Click);
-            this.DrawSearchTermsLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
-            // 
             // FindByTextWithDiacriticsCheckBox
             // 
             this.FindByTextWithDiacriticsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -3339,7 +3323,7 @@ partial class MainForm
             this.FindByTextWithDiacriticsCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.FindByTextWithDiacriticsCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FindByTextWithDiacriticsCheckBox.ForeColor = System.Drawing.Color.Navy;
-            this.FindByTextWithDiacriticsCheckBox.Location = new System.Drawing.Point(79, 2);
+            this.FindByTextWithDiacriticsCheckBox.Location = new System.Drawing.Point(68, 2);
             this.FindByTextWithDiacriticsCheckBox.Name = "FindByTextWithDiacriticsCheckBox";
             this.FindByTextWithDiacriticsCheckBox.Size = new System.Drawing.Size(15, 17);
             this.FindByTextWithDiacriticsCheckBox.TabIndex = 21;
@@ -3347,6 +3331,22 @@ partial class MainForm
             this.FindByTextWithDiacriticsCheckBox.UseVisualStyleBackColor = false;
             this.FindByTextWithDiacriticsCheckBox.CheckedChanged += new System.EventHandler(this.FindByTextWithDiacriticsCheckBox_CheckedChanged);
             this.FindByTextWithDiacriticsCheckBox.Enter += new System.EventHandler(this.FindByTextControls_Enter);
+            // 
+            // FindByTextDrawSearchTermsLabel
+            // 
+            this.FindByTextDrawSearchTermsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FindByTextDrawSearchTermsLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.FindByTextDrawSearchTermsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByTextDrawSearchTermsLabel.ForeColor = System.Drawing.Color.Crimson;
+            this.FindByTextDrawSearchTermsLabel.Image = ((System.Drawing.Image)(resources.GetObject("FindByTextDrawSearchTermsLabel.Image")));
+            this.FindByTextDrawSearchTermsLabel.Location = new System.Drawing.Point(82, 2);
+            this.FindByTextDrawSearchTermsLabel.Name = "FindByTextDrawSearchTermsLabel";
+            this.FindByTextDrawSearchTermsLabel.Size = new System.Drawing.Size(16, 16);
+            this.FindByTextDrawSearchTermsLabel.TabIndex = 22;
+            this.FindByTextDrawSearchTermsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ToolTip.SetToolTip(this.FindByTextDrawSearchTermsLabel, "Draw search terms");
+            this.FindByTextDrawSearchTermsLabel.Click += new System.EventHandler(this.FindByTextDrawSearchTermsLabel_Click);
+            this.FindByTextDrawSearchTermsLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
             // 
             // FindByTextSearchBlockSizeBowingLabel
             // 
@@ -5713,7 +5713,7 @@ partial class MainForm
             this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 1);
             this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
             this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-            this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 217);
+            this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 218);
             this.ScriptOutputGroupBox.TabIndex = 103;
             this.ScriptOutputGroupBox.TabStop = false;
             this.ScriptOutputGroupBox.Text = " Output ";
@@ -5729,7 +5729,7 @@ partial class MainForm
             this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
             this.ScriptOutputTextBox.ReadOnly = true;
             this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 189);
+            this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 190);
             this.ScriptOutputTextBox.TabIndex = 0;
             this.ScriptOutputTextBox.WordWrap = false;
             this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -5754,7 +5754,7 @@ partial class MainForm
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
             this.TabControl.ShowToolTips = true;
-            this.TabControl.Size = new System.Drawing.Size(825, 189);
+            this.TabControl.Size = new System.Drawing.Size(825, 191);
             this.TabControl.TabIndex = 102;
             this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             this.TabControl.Click += new System.EventHandler(this.TabControl_Click);
@@ -12490,7 +12490,7 @@ partial class MainForm
     private System.Windows.Forms.Label UserTextValueLabel;
     private System.Windows.Forms.Button UserTextValueButton;
     private System.Windows.Forms.CheckBox LetterFrequencyWithDiacriticsCheckBox;
-    private System.Windows.Forms.Label DrawSearchTermsLabel;
+    private System.Windows.Forms.Label FindByTextDrawSearchTermsLabel;
     private System.Windows.Forms.Label GenerateSentencesLabel;
     private System.Windows.Forms.CheckBox DuplicateLettersCheckBox;
     private System.Windows.Forms.ComboBox LanguageComboBox;

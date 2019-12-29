@@ -734,10 +734,13 @@ public partial class MainForm : Form, ISubscriber
         /* InitializationType.DoublyInitialized */    Color.FromArgb(x+96, x+64,  0),
         /* InitializationType.NonInitialized */       Color.FromArgb(  64,   64, 64),
     };
-    private const int DEFAULT_WINDOW_WIDTH = 1293;
-    private const int DEFAULT_WINDOW_HEIGHT = 768;
+
+    private const int DEFAULT_WINDOW_TOP = 13;
+    private const int DEFAULT_WINDOW_LEFT = 162;
+    private const int DEFAULT_WINDOW_WIDTH = 1127;
+    private const int DEFAULT_WINDOW_HEIGHT = 722;
     private const string DEFAULT_LANGUAGE = "English";
-    private const int DEFAULT_INFORMATION_BOX_TOP = 464;
+    private const int DEFAULT_INFORMATION_BOX_TOP = 431;
     private const int DEFAULT_AUDIO_VOLUME = 1000;
     private const string VERSE_ADDRESS_TRANSLATION_SEPARATOR = " ";
     private const string VERSE_ADDRESS_MAIN_SEPARATOR = "\t";
@@ -746,7 +749,7 @@ public partial class MainForm : Form, ISubscriber
     private const int MAX_SELECTON_SCOPE_LENGTH = 16;
     private const string DEFAULT_QURAN_FONT_NAME = "me_quran";
     private const float DEFAULT_QURAN_FONT_SIZE = 14.0F;
-    private const int DEFAULT_TRANSLATION_BOX_WIDTH = 545;
+    private const int DEFAULT_TRANSLATION_BOX_WIDTH = 435;//545;
     private const string DEFAULT_TRANSALTION_FONT_NAME = "Microsoft Sans Serif";
     private const float DEFAULT_TRANSALTION_FONT_SIZE = 11.0F;
     private static Color DEFAULT_TRANSALTION_FONT_COLOR = Color.Navy;
@@ -994,7 +997,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindBySimilarityLabel = new System.Windows.Forms.Label();
         this.FindBySimilarityTextRadioButton = new System.Windows.Forms.RadioButton();
         this.FindByTextPanel = new System.Windows.Forms.Panel();
-        this.DrawSearchTermsLabel = new System.Windows.Forms.Label();
+        this.FindByTextDrawSearchTermsLabel = new System.Windows.Forms.Label();
         this.FindByTextWithDiacriticsCheckBox = new System.Windows.Forms.CheckBox();
         this.FindByTextSearchBlockSizeBowingLabel = new System.Windows.Forms.Label();
         this.FindByTextMultiplicityNumberTypeLabel = new System.Windows.Forms.Label();
@@ -4086,7 +4089,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByTextPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
         | System.Windows.Forms.AnchorStyles.Right)));
         this.FindByTextPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-        this.FindByTextPanel.Controls.Add(this.DrawSearchTermsLabel);
+        this.FindByTextPanel.Controls.Add(this.FindByTextDrawSearchTermsLabel);
         this.FindByTextPanel.Controls.Add(this.NoorsoftLinkLabel);
         this.FindByTextPanel.Controls.Add(this.FindByTextWithDiacriticsCheckBox);
         this.FindByTextPanel.Controls.Add(this.FindByTextSearchBlockSizeBowingLabel);
@@ -4125,22 +4128,6 @@ public partial class MainForm : Form, ISubscriber
         this.FindByTextPanel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
         this.FindByTextPanel.Leave += new System.EventHandler(this.FindByTextPanel_Leave);
         // 
-        // DrawSearchTermsLabel
-        // 
-        this.DrawSearchTermsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.DrawSearchTermsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.DrawSearchTermsLabel.ForeColor = System.Drawing.Color.Crimson;
-        this.DrawSearchTermsLabel.Image = ((System.Drawing.Image)(resources.GetObject("DrawSearchTermsLabel.Image")));
-        this.DrawSearchTermsLabel.Location = new System.Drawing.Point(85, 1);
-        this.DrawSearchTermsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.DrawSearchTermsLabel.Name = "DrawSearchTermsLabel";
-        this.DrawSearchTermsLabel.Size = new System.Drawing.Size(19, 20);
-        this.DrawSearchTermsLabel.TabIndex = 160;
-        this.DrawSearchTermsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.DrawSearchTermsLabel, "Draw search terms");
-        this.DrawSearchTermsLabel.Click += new System.EventHandler(this.DrawSearchTermsLabel_Click);
-        this.DrawSearchTermsLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
-        // 
         // FindByTextWithDiacriticsCheckBox
         // 
         this.FindByTextWithDiacriticsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -4148,7 +4135,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByTextWithDiacriticsCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByTextWithDiacriticsCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByTextWithDiacriticsCheckBox.ForeColor = System.Drawing.Color.Navy;
-        this.FindByTextWithDiacriticsCheckBox.Location = new System.Drawing.Point(105, 1);
+        this.FindByTextWithDiacriticsCheckBox.Location = new System.Drawing.Point(95, 1);
         this.FindByTextWithDiacriticsCheckBox.Margin = new System.Windows.Forms.Padding(4);
         this.FindByTextWithDiacriticsCheckBox.Name = "FindByTextWithDiacriticsCheckBox";
         this.FindByTextWithDiacriticsCheckBox.Size = new System.Drawing.Size(20, 21);
@@ -4157,6 +4144,22 @@ public partial class MainForm : Form, ISubscriber
         this.FindByTextWithDiacriticsCheckBox.UseVisualStyleBackColor = false;
         this.FindByTextWithDiacriticsCheckBox.CheckedChanged += new System.EventHandler(this.FindByTextWithDiacriticsCheckBox_CheckedChanged);
         this.FindByTextWithDiacriticsCheckBox.Enter += new System.EventHandler(this.FindByTextControls_Enter);
+        // 
+        // FindByTextDrawSearchTermsLabel
+        // 
+        this.FindByTextDrawSearchTermsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.FindByTextDrawSearchTermsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByTextDrawSearchTermsLabel.ForeColor = System.Drawing.Color.Crimson;
+        this.FindByTextDrawSearchTermsLabel.Image = ((System.Drawing.Image)(resources.GetObject("FindByTextDrawSearchTermsLabel.Image")));
+        this.FindByTextDrawSearchTermsLabel.Location = new System.Drawing.Point(115, 1);
+        this.FindByTextDrawSearchTermsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+        this.FindByTextDrawSearchTermsLabel.Name = "FindByTextDrawSearchTermsLabel";
+        this.FindByTextDrawSearchTermsLabel.Size = new System.Drawing.Size(19, 20);
+        this.FindByTextDrawSearchTermsLabel.TabIndex = 22;
+        this.FindByTextDrawSearchTermsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.ToolTip.SetToolTip(this.FindByTextDrawSearchTermsLabel, "Draw search terms");
+        this.FindByTextDrawSearchTermsLabel.Click += new System.EventHandler(this.FindByTextDrawSearchTermsLabel_Click);
+        this.FindByTextDrawSearchTermsLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
         // 
         // FindByTextSearchBlockSizeBowingLabel
         // 
@@ -15754,9 +15757,13 @@ public partial class MainForm : Form, ISubscriber
                     else // first Application launch
                     {
                         // MainForm doesn't want to start at ScreenCenter :(
-                        this.StartPosition = FormStartPosition.Manual;
-                        this.Top = Screen.PrimaryScreen.WorkingArea.Top;
-                        this.Left = Screen.PrimaryScreen.WorkingArea.Left;
+                        //this.StartPosition = FormStartPosition.Manual;
+                        //this.Top = Screen.PrimaryScreen.WorkingArea.Top;
+                        //this.Left = Screen.PrimaryScreen.WorkingArea.Left;
+                        this.Top = DEFAULT_WINDOW_TOP;
+                        this.Left = DEFAULT_WINDOW_LEFT;
+                        this.Width = DEFAULT_WINDOW_WIDTH;
+                        this.Height = DEFAULT_WINDOW_HEIGHT;
 
                         ApplyFont(DEFAULT_QURAN_FONT_NAME, DEFAULT_QURAN_FONT_SIZE);
                         m_translation_font = new Font(DEFAULT_TRANSALTION_FONT_NAME, DEFAULT_TRANSALTION_FONT_SIZE);
@@ -15864,8 +15871,8 @@ public partial class MainForm : Form, ISubscriber
                     if (this.WindowState == FormWindowState.Minimized)
                     {
                         // restore or width/height will be saved as 0
-                        writer.WriteLine("Top" + "=" + (Screen.PrimaryScreen.WorkingArea.Height - DEFAULT_WINDOW_HEIGHT) / 2);
-                        writer.WriteLine("Left" + "=" + (Screen.PrimaryScreen.WorkingArea.Width - DEFAULT_WINDOW_WIDTH) / 2);
+                        writer.WriteLine("Top" + "=" + DEFAULT_WINDOW_TOP);
+                        writer.WriteLine("Left" + "=" + DEFAULT_WINDOW_LEFT);
                         writer.WriteLine("Width" + "=" + DEFAULT_WINDOW_WIDTH);
                         writer.WriteLine("Height" + "=" + DEFAULT_WINDOW_HEIGHT);
                     }
@@ -21758,10 +21765,18 @@ public partial class MainForm : Form, ISubscriber
                     else
                     {
                         UpdateClientSelection();
-                        DisplaySelection(true);
                         if (ChapterSelectionComboBox.Items.Count > 0)
                         {
                             ChapterSelectionComboBox.SelectedIndex = 0;
+                        }
+
+                        if (PictureBox.Visible)
+                        {
+                            RedrawImage();
+                        }
+                        else
+                        {
+                            DisplaySelection(true);
                         }
                     }
 
@@ -49738,7 +49753,7 @@ public partial class MainForm : Form, ISubscriber
                 }
                 break;
         }
-        DrawSearchTermsLabel.Image = ChangeDrawingShapeLabel.Image;
+        FindByTextDrawSearchTermsLabel.Image = ChangeDrawingShapeLabel.Image;
     }
     private void GotoPreviousShape()
     {
@@ -49750,7 +49765,7 @@ public partial class MainForm : Form, ISubscriber
                     if (File.Exists(Globals.IMAGES_FOLDER + "/" + "cube.png"))
                     {
                         ChangeDrawingShapeLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "cube.png");
-                        DrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "cube.png");
+                        FindByTextDrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "cube.png");
                     }
                 }
                 break;
@@ -49760,7 +49775,7 @@ public partial class MainForm : Form, ISubscriber
                     if (File.Exists(Globals.IMAGES_FOLDER + "/" + "lines.png"))
                     {
                         ChangeDrawingShapeLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "lines.png");
-                        DrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "lines.png");
+                        FindByTextDrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "lines.png");
                     }
                 }
                 break;
@@ -49770,7 +49785,7 @@ public partial class MainForm : Form, ISubscriber
                     if (File.Exists(Globals.IMAGES_FOLDER + "/" + "spiral.png"))
                     {
                         ChangeDrawingShapeLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "spiral.png");
-                        DrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "spiral.png");
+                        FindByTextDrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "spiral.png");
                     }
                 }
                 break;
@@ -49780,7 +49795,7 @@ public partial class MainForm : Form, ISubscriber
                     if (File.Exists(Globals.IMAGES_FOLDER + "/" + "squarespiral.png"))
                     {
                         ChangeDrawingShapeLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "squarespiral.png");
-                        DrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "squarespiral.png");
+                        FindByTextDrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "squarespiral.png");
                     }
                 }
                 break;
@@ -49790,7 +49805,7 @@ public partial class MainForm : Form, ISubscriber
                     if (File.Exists(Globals.IMAGES_FOLDER + "/" + "square.png"))
                     {
                         ChangeDrawingShapeLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "square.png");
-                        DrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "square.png");
+                        FindByTextDrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "square.png");
                     }
                 }
                 break;
@@ -49800,7 +49815,7 @@ public partial class MainForm : Form, ISubscriber
                     if (File.Exists(Globals.IMAGES_FOLDER + "/" + "hgoldenrect.png"))
                     {
                         ChangeDrawingShapeLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "hgoldenrect.png");
-                        DrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "hgoldenrect.png");
+                        FindByTextDrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "hgoldenrect.png");
                     }
                 }
                 break;
@@ -49810,7 +49825,7 @@ public partial class MainForm : Form, ISubscriber
                     if (File.Exists(Globals.IMAGES_FOLDER + "/" + "vgoldenrect.png"))
                     {
                         ChangeDrawingShapeLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "vgoldenrect.png");
-                        DrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "vgoldenrect.png");
+                        FindByTextDrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "vgoldenrect.png");
                     }
                 }
                 break;
@@ -49830,29 +49845,9 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else
                 {
-                    switch (m_client.SearchScope)
+                    if (m_client.Selection != null)
                     {
-                        case SearchScope.Book:
-                            {
-                                if (m_client.Book != null)
-                                {
-                                    verses = m_client.Book.Verses;
-                                }
-                            }
-                            break;
-                        case SearchScope.Selection:
-                            {
-                                if (m_client.Selection != null)
-                                {
-                                    verses = m_client.Selection.Verses;
-                                }
-                            }
-                            break;
-                        case SearchScope.Result:
-                            {
-                                verses = m_client.FoundVerses;
-                            }
-                            break;
+                        verses = m_client.Selection.Verses;
                     }
                 }
 
@@ -49923,29 +49918,9 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else
                 {
-                    switch (m_client.SearchScope)
+                    if (m_client.Selection != null)
                     {
-                        case SearchScope.Book:
-                            {
-                                if (m_client.Book != null)
-                                {
-                                    verses = m_client.Book.Verses;
-                                }
-                            }
-                            break;
-                        case SearchScope.Selection:
-                            {
-                                if (m_client.Selection != null)
-                                {
-                                    verses = m_client.Selection.Verses;
-                                }
-                            }
-                            break;
-                        case SearchScope.Result:
-                            {
-                                verses = m_client.FoundVerses;
-                            }
-                            break;
+                        verses = m_client.Selection.Verses;
                     }
                 }
 
@@ -49996,7 +49971,7 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void DrawSearchTermsLabel_Click(object sender, EventArgs e)
+    private void FindByTextDrawSearchTermsLabel_Click(object sender, EventArgs e)
     {
         this.Cursor = Cursors.WaitCursor;
         try
@@ -50041,9 +50016,15 @@ public partial class MainForm : Form, ISubscriber
 
                         int count = 0;
                         int given_word_count = 0;
-                        string text = FindByTextTextBox.Text.Trim().Simplify29();
+                        string text = FindByTextTextBox.Text;
+                        if (m_client.NumerologySystem != null)
+                        {
+                            text = text.SimplifyTo(m_client.NumerologySystem.TextMode);
+                        }
                         text = text.Replace("  ", " ");
-                        string[] terms = text.Split(' ');
+
+                        char[] separators = new char[] { ' ' };
+                        string[] terms = text.Split(separators, StringSplitOptions.RemoveEmptyEntries);
 
                         List<Page> pages = new List<Page>();
                         if (pages != null)
@@ -50083,7 +50064,7 @@ public partial class MainForm : Form, ISubscriber
                                                         {
                                                             case TextWordness.Any:
                                                                 {
-                                                                    if (word.Text.Simplify29().Contains(terms[i]))
+                                                                    if (word.Text.Contains(terms[i]))
                                                                     {
                                                                         values.Add(i + 1L);
                                                                         given_word_count++;
@@ -50094,7 +50075,7 @@ public partial class MainForm : Form, ISubscriber
                                                                 break;
                                                             case TextWordness.WholeWord:
                                                                 {
-                                                                    if (word.Text.Simplify29() == terms[i])
+                                                                    if (word.Text == terms[i])
                                                                     {
                                                                         values.Add(i + 1L);
                                                                         given_word_count++;
@@ -50105,7 +50086,7 @@ public partial class MainForm : Form, ISubscriber
                                                                 break;
                                                             case TextWordness.PartOfWord:
                                                                 {
-                                                                    if ((word.Text.Simplify29().Contains(terms[i])) && (word.Text.Simplify29() != terms[i]))
+                                                                    if ((word.Text.Contains(terms[i])) && (word.Text != terms[i]))
                                                                     {
                                                                         values.Add(i + 1L);
                                                                         given_word_count++;
@@ -50266,29 +50247,9 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else
                 {
-                    switch (m_client.SearchScope)
+                    if (m_client.Selection != null)
                     {
-                        case SearchScope.Book:
-                            {
-                                if (m_client.Book != null)
-                                {
-                                    verses = m_client.Book.Verses;
-                                }
-                            }
-                            break;
-                        case SearchScope.Selection:
-                            {
-                                if (m_client.Selection != null)
-                                {
-                                    verses = m_client.Selection.Verses;
-                                }
-                            }
-                            break;
-                        case SearchScope.Result:
-                            {
-                                verses = m_client.FoundVerses;
-                            }
-                            break;
+                        verses = m_client.Selection.Verses;
                     }
                 }
 
@@ -50310,7 +50271,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             foreach (Word word in verse.Words)
                             {
-                                // always simplify29 for Allah word comparison
+                                // always Simplify29 for Allah word comparison
                                 string simplified_text = word.Text.Simplify29();
 
                                 if (simplified_text == "الله")
@@ -50343,7 +50304,7 @@ public partial class MainForm : Form, ISubscriber
                     if (m_drawing_shape == DrawingShape.Lines)
                     {
                         FindByTextTextBox.Text = "الله";
-                        DrawSearchTermsLabel_Click(null, null);
+                        FindByTextDrawSearchTermsLabel_Click(null, null);
                     }
                     else
                     {
@@ -50376,29 +50337,9 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else
                 {
-                    switch (m_client.SearchScope)
+                    if (m_client.Selection != null)
                     {
-                        case SearchScope.Book:
-                            {
-                                if (m_client.Book != null)
-                                {
-                                    verses = m_client.Book.Verses;
-                                }
-                            }
-                            break;
-                        case SearchScope.Selection:
-                            {
-                                if (m_client.Selection != null)
-                                {
-                                    verses = m_client.Selection.Verses;
-                                }
-                            }
-                            break;
-                        case SearchScope.Result:
-                            {
-                                verses = m_client.FoundVerses;
-                            }
-                            break;
+                        verses = m_client.Selection.Verses;
                     }
                 }
 
@@ -50422,7 +50363,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             foreach (Word word in verse.Words)
                             {
-                                // always simplify29 for Allah word comparison
+                                // always Simplify29 for Allah word comparison
                                 string simplified_text = word.Text.Simplify29();
 
                                 if (simplified_text == "الله") // "Allah"
@@ -50512,7 +50453,7 @@ public partial class MainForm : Form, ISubscriber
                     if (m_drawing_shape == DrawingShape.Lines)
                     {
                         FindByTextTextBox.Text = "الله لله";
-                        DrawSearchTermsLabel_Click(null, null);
+                        FindByTextDrawSearchTermsLabel_Click(null, null);
                     }
                     else
                     {
@@ -50760,7 +50701,7 @@ public partial class MainForm : Form, ISubscriber
                     DrawWordValuesLabel_Click(null, null);
                     break;
                 case DrawingType.SearchTerms:
-                    DrawSearchTermsLabel_Click(null, null);
+                    FindByTextDrawSearchTermsLabel_Click(null, null);
                     break;
                 case DrawingType.AllahWords:
                     DrawWordAllahLabel_Click(null, null);

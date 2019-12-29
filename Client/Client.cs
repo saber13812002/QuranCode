@@ -1774,7 +1774,7 @@ public class Client : IPublisher, ISubscriber
         if (Book != null)
         {
             Book.WithDiacritics = with_diacritics;
-            result = Book.GetNextWords(source, text, text_location_in_verse, text_location_in_word);
+            result = Book.GetNextWords(source, text, text_location_in_verse, text_location_in_word, text_wordness);
         }
         return result;
     }
