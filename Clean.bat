@@ -15,7 +15,6 @@ del /F /S /Q *.resources
 del /F /S /Q *.vshost.exe
 del /F /S /Q *.vshost.exe.manifest
 del /F /S /Q *.exe.config
-#del /F /S /Q /AH *.suo
 rd /S /Q Build\Debug
 
 del /F /Q Build\Release\Translations\*.txt
