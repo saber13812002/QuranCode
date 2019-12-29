@@ -1,4 +1,5 @@
 RD /S /Q NET2
+
 XCOPY /O /X /E /H /K /Y Globals\*.* NET2\Globals\
 XCOPY /O /X /E /H /K /Y Utilities\*.* NET2\Utilities\
 XCOPY /O /X /E /H /K /Y Model\*.* NET2\Model\

@@ -54,6 +54,7 @@ CD Build\Release
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Readme.txt
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Features.txt
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Clean.bat
+
 MOVE QuranCode1433.zip ..\..\QuranCode1433.zip
 CD ..\..
 

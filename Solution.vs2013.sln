@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{C30D3354-74E8-4818-A898-229B4640FE0A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{CDC54194-E83C-49EF-9E42-2D73B08E99F6}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Research", "Research\Research.csproj", "{C5B10851-DDCC-4336-A1D2-56B31FEABAFC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PrimeCalculator", "PrimeCalculator\PrimeCalculator.csproj", "{A3890C6B-4433-467F-8B1C-B2D69B3FEDB6}"
@@ -27,8 +29,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Composites", "Composites\Composites.csproj", "{27338AD2-3D52-4F64-8B62-CCF43D6B8529}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Indices", "Indices\Indices.csproj", "{66E904EA-0398-466A-AF1A-F0E5F005881F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{CDC54194-E83C-49EF-9E42-2D73B08E99F6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WordGenerator", "WordGenerator\WordGenerator.csproj", "{40E583CA-1D55-4519-9B8D-5E1A5FD27A8A}"
 EndProject
@@ -128,6 +128,16 @@ Global
 		{C30D3354-74E8-4818-A898-229B4640FE0A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{C30D3354-74E8-4818-A898-229B4640FE0A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{C30D3354-74E8-4818-A898-229B4640FE0A}.Release|x86.ActiveCfg = Release|Any CPU
+		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Release|x86.ActiveCfg = Release|Any CPU
 		{C5B10851-DDCC-4336-A1D2-56B31FEABAFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C5B10851-DDCC-4336-A1D2-56B31FEABAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5B10851-DDCC-4336-A1D2-56B31FEABAFC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -188,16 +198,6 @@ Global
 		{66E904EA-0398-466A-AF1A-F0E5F005881F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{66E904EA-0398-466A-AF1A-F0E5F005881F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{66E904EA-0398-466A-AF1A-F0E5F005881F}.Release|x86.ActiveCfg = Release|Any CPU
-		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{CDC54194-E83C-49EF-9E42-2D73B08E99F6}.Release|x86.ActiveCfg = Release|Any CPU
 		{40E583CA-1D55-4519-9B8D-5E1A5FD27A8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{40E583CA-1D55-4519-9B8D-5E1A5FD27A8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{40E583CA-1D55-4519-9B8D-5E1A5FD27A8A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
