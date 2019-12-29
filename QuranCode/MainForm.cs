@@ -748,8 +748,8 @@ public partial class MainForm : Form, ISubscriber
     private const string SPACE_GAP = "     ";
     private const int MAX_SELECTON_SCOPE_LENGTH = 16;
     private const string DEFAULT_QURAN_FONT_NAME = "me_quran";
-    private const float DEFAULT_QURAN_FONT_SIZE = 14.0F;
-    private const int DEFAULT_TRANSLATION_BOX_WIDTH = 435;//545;
+    private const float DEFAULT_QURAN_FONT_SIZE = 13.0F;
+    private const int DEFAULT_TRANSLATION_BOX_WIDTH = 435;
     private const string DEFAULT_TRANSALTION_FONT_NAME = "Microsoft Sans Serif";
     private const float DEFAULT_TRANSALTION_FONT_SIZE = 11.0F;
     private static Color DEFAULT_TRANSALTION_FONT_COLOR = Color.Navy;
@@ -997,7 +997,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindBySimilarityLabel = new System.Windows.Forms.Label();
         this.FindBySimilarityTextRadioButton = new System.Windows.Forms.RadioButton();
         this.FindByTextPanel = new System.Windows.Forms.Panel();
-        this.FindByTextDrawSearchTermsLabel = new System.Windows.Forms.Label();
+        this.DrawSearchTermsLabel = new System.Windows.Forms.Label();
         this.FindByTextWithDiacriticsCheckBox = new System.Windows.Forms.CheckBox();
         this.FindByTextSearchBlockSizeBowingLabel = new System.Windows.Forms.Label();
         this.FindByTextMultiplicityNumberTypeLabel = new System.Windows.Forms.Label();
@@ -4089,7 +4089,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByTextPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
         | System.Windows.Forms.AnchorStyles.Right)));
         this.FindByTextPanel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-        this.FindByTextPanel.Controls.Add(this.FindByTextDrawSearchTermsLabel);
+        this.FindByTextPanel.Controls.Add(this.DrawSearchTermsLabel);
         this.FindByTextPanel.Controls.Add(this.NoorsoftLinkLabel);
         this.FindByTextPanel.Controls.Add(this.FindByTextWithDiacriticsCheckBox);
         this.FindByTextPanel.Controls.Add(this.FindByTextSearchBlockSizeBowingLabel);
@@ -4145,21 +4145,21 @@ public partial class MainForm : Form, ISubscriber
         this.FindByTextWithDiacriticsCheckBox.CheckedChanged += new System.EventHandler(this.FindByTextWithDiacriticsCheckBox_CheckedChanged);
         this.FindByTextWithDiacriticsCheckBox.Enter += new System.EventHandler(this.FindByTextControls_Enter);
         // 
-        // FindByTextDrawSearchTermsLabel
+        // DrawSearchTermsLabel
         // 
-        this.FindByTextDrawSearchTermsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.FindByTextDrawSearchTermsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByTextDrawSearchTermsLabel.ForeColor = System.Drawing.Color.Crimson;
-        this.FindByTextDrawSearchTermsLabel.Image = ((System.Drawing.Image)(resources.GetObject("FindByTextDrawSearchTermsLabel.Image")));
-        this.FindByTextDrawSearchTermsLabel.Location = new System.Drawing.Point(115, 1);
-        this.FindByTextDrawSearchTermsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.FindByTextDrawSearchTermsLabel.Name = "FindByTextDrawSearchTermsLabel";
-        this.FindByTextDrawSearchTermsLabel.Size = new System.Drawing.Size(19, 20);
-        this.FindByTextDrawSearchTermsLabel.TabIndex = 22;
-        this.FindByTextDrawSearchTermsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.FindByTextDrawSearchTermsLabel, "Draw search terms");
-        this.FindByTextDrawSearchTermsLabel.Click += new System.EventHandler(this.FindByTextDrawSearchTermsLabel_Click);
-        this.FindByTextDrawSearchTermsLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
+        this.DrawSearchTermsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.DrawSearchTermsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.DrawSearchTermsLabel.ForeColor = System.Drawing.Color.Crimson;
+        this.DrawSearchTermsLabel.Image = ((System.Drawing.Image)(resources.GetObject("DrawSearchTermsLabel.Image")));
+        this.DrawSearchTermsLabel.Location = new System.Drawing.Point(115, 1);
+        this.DrawSearchTermsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+        this.DrawSearchTermsLabel.Name = "DrawSearchTermsLabel";
+        this.DrawSearchTermsLabel.Size = new System.Drawing.Size(19, 20);
+        this.DrawSearchTermsLabel.TabIndex = 22;
+        this.DrawSearchTermsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.ToolTip.SetToolTip(this.DrawSearchTermsLabel, "Draw search terms");
+        this.DrawSearchTermsLabel.Click += new System.EventHandler(this.DrawSearchTermsLabel_Click);
+        this.DrawSearchTermsLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
         // 
         // FindByTextSearchBlockSizeBowingLabel
         // 
@@ -13353,12 +13353,10 @@ public partial class MainForm : Form, ISubscriber
                         if (text_mode == "Original")
                         {
                             ApplyFont(m_quran_font);
-                            FontLabel.Enabled = true;
                         }
                         else
                         {
-                            ApplyFont("Courier New", 12.0F);
-                            FontLabel.Enabled = false;
+                            ApplyFont("Microsoft Sans Serif", 14.0F);
                         }
 
                         ScriptLabel.Visible = ((Globals.EDITION == Edition.Research) || (Globals.EDITION == Edition.Ultimate));
@@ -17691,6 +17689,28 @@ public partial class MainForm : Form, ISubscriber
                     }
                 }
             }
+
+            m_quran_fonts.Add(new Font("Andalus", 17.0F, FontStyle.Regular));
+            m_quran_fonts.Add(new Font("Microsoft Sans Serif", 14.0F, FontStyle.Regular));
+            m_quran_fonts.Add(new Font("Tahoma", 12.0F, FontStyle.Regular));
+            m_quran_fonts.Add(new Font("Courier New", 11.0F, FontStyle.Bold));
+
+            //// add system fonts
+            //using (InstalledFontCollection fontsCollection = new InstalledFontCollection())
+            //{
+            //    FontFamily[] fontFamilies = fontsCollection.Families;
+            //    foreach (FontFamily family in fontFamilies)
+            //    {
+            //        try
+            //        {
+            //            m_quran_fonts.Add(new Font(family.Name, 12.0F, FontStyle.Bold));
+            //        }
+            //        catch
+            //        {
+            //            // skip non-conformant font
+            //        }
+            //    }
+            //}
         }
     }
     private void PopulateFontComboBox()
@@ -45659,17 +45679,6 @@ public partial class MainForm : Form, ISubscriber
                                 //SearchResultTextBox.Focus();
                                 //SearchResultTextBox.Refresh();
                             }
-
-                            if (text_mode == "Original")
-                            {
-                                ApplyFont(m_quran_font);
-                                FontLabel.Enabled = true;
-                            }
-                            else
-                            {
-                                ApplyFont("Courier New", 12.0F);
-                                FontLabel.Enabled = false;
-                            }
                         }
                     }
                 }
@@ -49753,7 +49762,7 @@ public partial class MainForm : Form, ISubscriber
                 }
                 break;
         }
-        FindByTextDrawSearchTermsLabel.Image = ChangeDrawingShapeLabel.Image;
+        DrawSearchTermsLabel.Image = ChangeDrawingShapeLabel.Image;
     }
     private void GotoPreviousShape()
     {
@@ -49765,7 +49774,7 @@ public partial class MainForm : Form, ISubscriber
                     if (File.Exists(Globals.IMAGES_FOLDER + "/" + "cube.png"))
                     {
                         ChangeDrawingShapeLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "cube.png");
-                        FindByTextDrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "cube.png");
+                        DrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "cube.png");
                     }
                 }
                 break;
@@ -49775,7 +49784,7 @@ public partial class MainForm : Form, ISubscriber
                     if (File.Exists(Globals.IMAGES_FOLDER + "/" + "lines.png"))
                     {
                         ChangeDrawingShapeLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "lines.png");
-                        FindByTextDrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "lines.png");
+                        DrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "lines.png");
                     }
                 }
                 break;
@@ -49785,7 +49794,7 @@ public partial class MainForm : Form, ISubscriber
                     if (File.Exists(Globals.IMAGES_FOLDER + "/" + "spiral.png"))
                     {
                         ChangeDrawingShapeLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "spiral.png");
-                        FindByTextDrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "spiral.png");
+                        DrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "spiral.png");
                     }
                 }
                 break;
@@ -49795,7 +49804,7 @@ public partial class MainForm : Form, ISubscriber
                     if (File.Exists(Globals.IMAGES_FOLDER + "/" + "squarespiral.png"))
                     {
                         ChangeDrawingShapeLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "squarespiral.png");
-                        FindByTextDrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "squarespiral.png");
+                        DrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "squarespiral.png");
                     }
                 }
                 break;
@@ -49805,7 +49814,7 @@ public partial class MainForm : Form, ISubscriber
                     if (File.Exists(Globals.IMAGES_FOLDER + "/" + "square.png"))
                     {
                         ChangeDrawingShapeLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "square.png");
-                        FindByTextDrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "square.png");
+                        DrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "square.png");
                     }
                 }
                 break;
@@ -49815,7 +49824,7 @@ public partial class MainForm : Form, ISubscriber
                     if (File.Exists(Globals.IMAGES_FOLDER + "/" + "hgoldenrect.png"))
                     {
                         ChangeDrawingShapeLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "hgoldenrect.png");
-                        FindByTextDrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "hgoldenrect.png");
+                        DrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "hgoldenrect.png");
                     }
                 }
                 break;
@@ -49825,7 +49834,7 @@ public partial class MainForm : Form, ISubscriber
                     if (File.Exists(Globals.IMAGES_FOLDER + "/" + "vgoldenrect.png"))
                     {
                         ChangeDrawingShapeLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "vgoldenrect.png");
-                        FindByTextDrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "vgoldenrect.png");
+                        DrawSearchTermsLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "vgoldenrect.png");
                     }
                 }
                 break;
@@ -49971,7 +49980,7 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void FindByTextDrawSearchTermsLabel_Click(object sender, EventArgs e)
+    private void DrawSearchTermsLabel_Click(object sender, EventArgs e)
     {
         this.Cursor = Cursors.WaitCursor;
         try
@@ -50017,9 +50026,12 @@ public partial class MainForm : Form, ISubscriber
                         int count = 0;
                         int given_word_count = 0;
                         string text = FindByTextTextBox.Text;
-                        if (m_client.NumerologySystem != null)
+                        if (!m_with_diacritics)
                         {
-                            text = text.SimplifyTo(m_client.NumerologySystem.TextMode);
+                            if (m_client.NumerologySystem != null)
+                            {
+                                text = text.SimplifyTo(m_client.NumerologySystem.TextMode);
+                            }
                         }
                         text = text.Replace("  ", " ");
 
@@ -50057,6 +50069,15 @@ public partial class MainForm : Form, ISubscriber
                                             {
                                                 foreach (Word word in words)
                                                 {
+                                                    string word_text = word.Text;
+                                                    if (!m_with_diacritics)
+                                                    {
+                                                        if (m_client.NumerologySystem != null)
+                                                        {
+                                                            word_text = word_text.SimplifyTo(m_client.NumerologySystem.TextMode);
+                                                        }
+                                                    }
+
                                                     bool found = false;
                                                     for (int i = 0; i < terms.Length; i++)
                                                     {
@@ -50064,7 +50085,7 @@ public partial class MainForm : Form, ISubscriber
                                                         {
                                                             case TextWordness.Any:
                                                                 {
-                                                                    if (word.Text.Contains(terms[i]))
+                                                                    if (word_text.Contains(terms[i]))
                                                                     {
                                                                         values.Add(i + 1L);
                                                                         given_word_count++;
@@ -50075,7 +50096,7 @@ public partial class MainForm : Form, ISubscriber
                                                                 break;
                                                             case TextWordness.WholeWord:
                                                                 {
-                                                                    if (word.Text == terms[i])
+                                                                    if (word_text == terms[i])
                                                                     {
                                                                         values.Add(i + 1L);
                                                                         given_word_count++;
@@ -50086,7 +50107,7 @@ public partial class MainForm : Form, ISubscriber
                                                                 break;
                                                             case TextWordness.PartOfWord:
                                                                 {
-                                                                    if ((word.Text.Contains(terms[i])) && (word.Text != terms[i]))
+                                                                    if ((word_text.Contains(terms[i])) && (word_text != terms[i]))
                                                                     {
                                                                         values.Add(i + 1L);
                                                                         given_word_count++;
@@ -50304,7 +50325,7 @@ public partial class MainForm : Form, ISubscriber
                     if (m_drawing_shape == DrawingShape.Lines)
                     {
                         FindByTextTextBox.Text = "الله";
-                        FindByTextDrawSearchTermsLabel_Click(null, null);
+                        DrawSearchTermsLabel_Click(null, null);
                     }
                     else
                     {
@@ -50453,7 +50474,7 @@ public partial class MainForm : Form, ISubscriber
                     if (m_drawing_shape == DrawingShape.Lines)
                     {
                         FindByTextTextBox.Text = "الله لله";
-                        FindByTextDrawSearchTermsLabel_Click(null, null);
+                        DrawSearchTermsLabel_Click(null, null);
                     }
                     else
                     {
@@ -50701,7 +50722,7 @@ public partial class MainForm : Form, ISubscriber
                     DrawWordValuesLabel_Click(null, null);
                     break;
                 case DrawingType.SearchTerms:
-                    FindByTextDrawSearchTermsLabel_Click(null, null);
+                    DrawSearchTermsLabel_Click(null, null);
                     break;
                 case DrawingType.AllahWords:
                     DrawWordAllahLabel_Click(null, null);
@@ -51592,9 +51613,12 @@ public partial class MainForm : Form, ISubscriber
             {
                 switch (LetterFrequencyWithDiacriticsCheckBox.CheckState)
                 {
-                    case CheckState.Checked: { m_count_diacritics = true; m_with_diacritics = m_client.Book.WithDiacritics = true; } break;
-                    case CheckState.Indeterminate: { m_count_diacritics = null; m_with_diacritics = m_client.Book.WithDiacritics = true; } break;
-                    case CheckState.Unchecked: { m_count_diacritics = false; m_with_diacritics = m_client.Book.WithDiacritics = false; } break;
+                    case CheckState.Checked: { m_count_diacritics = true; } break;
+                    case CheckState.Indeterminate: { m_count_diacritics = null; } break;
+                    case CheckState.Unchecked: { m_count_diacritics = false; } break;
+                    //case CheckState.Checked: { m_count_diacritics = true; m_with_diacritics = m_client.Book.WithDiacritics = true; } break;
+                    //case CheckState.Indeterminate: { m_count_diacritics = null; m_with_diacritics = m_client.Book.WithDiacritics = true; } break;
+                    //case CheckState.Unchecked: { m_count_diacritics = false; m_with_diacritics = m_client.Book.WithDiacritics = false; } break;
                 }
 
                 if (m_count_diacritics == true) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["with diacritics"]); }

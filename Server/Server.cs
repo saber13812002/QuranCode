@@ -5488,7 +5488,7 @@ public class Server : IPublisher
 
                     try
                     {
-                        if (with_diacritics)
+                        if ((with_diacritics) && (s_numerology_system.TextMode == "Original"))
                         {
                             string pattern = BuildPattern(text, text_location_in_verse, text_location_in_word, text_wordness);
                             if (!String.IsNullOrEmpty(pattern))
@@ -5522,9 +5522,7 @@ public class Server : IPublisher
                                 } // end for
                             }
                         }
-
-                        // if without diacritics or nothing found
-                        if ((multiplicity != 0) && (result.Count == 0))
+                        else // without diacritics
                         {
                             if (s_numerology_system != null)
                             {
@@ -5572,7 +5570,7 @@ public class Server : IPublisher
                         // if nothing found
                         if ((multiplicity != 0) && (result.Count == 0))
                         {
-                            //  search in emlaaei
+                            // search in emlaaei
                             if (try_emlaaei_if_nothing_found)
                             {
                                 if (s_numerology_system != null)
@@ -5695,7 +5693,7 @@ public class Server : IPublisher
             {
                 if (s_book != null)
                 {
-                    if (with_diacritics)
+                    if ((with_diacritics) && (s_numerology_system.TextMode == "Original"))
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
@@ -5731,9 +5729,7 @@ public class Server : IPublisher
                             } // end for
                         }
                     }
-
-                    // if without diacritics or nothing found
-                    if ((multiplicity != 0) && (result.Count == 0))
+                    else // without diacritics
                     {
                         if (s_numerology_system != null)
                         {
@@ -5776,58 +5772,58 @@ public class Server : IPublisher
                         }
                     }
 
-                    //// if nothing found
-                    //if ((multiplicity != 0) && (result.Count == 0))
-                    //{
-                    //    //  search in emlaaei
-                    //    if (try_emlaaei_if_nothing_found)
-                    //    {
-                    //        if (s_numerology_system != null)
-                    //        {
-                    //            text = text.SimplifyTo(s_numerology_system.TextMode);
-                    //            if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
-                    //            {
-                    //                foreach (Chapter chapter in s_book.Chapters)
-                    //                {
-                    //                    string emlaaei_text = "";
-                    //                    foreach (Verse verse in chapter.Verses)
-                    //                    {
-                    //                        emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
-                    //                    }
-                    //                    emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
-                    //                    emlaaei_text = emlaaei_text.Trim();
-                    //                    while (emlaaei_text.Contains("  "))
-                    //                    {
-                    //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
-                    //                    }
+                    // if nothing found
+                    if ((multiplicity != 0) && (result.Count == 0))
+                    {
+                        // search in emlaaei
+                        if (try_emlaaei_if_nothing_found)
+                        {
+                            if (s_numerology_system != null)
+                            {
+                                text = text.SimplifyTo(s_numerology_system.TextMode);
+                                if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
+                                {
+                                    foreach (Chapter chapter in s_book.Chapters)
+                                    {
+                                        string emlaaei_text = "";
+                                        foreach (Verse verse in chapter.Verses)
+                                        {
+                                            emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
+                                        }
+                                        emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
+                                        emlaaei_text = emlaaei_text.Trim();
+                                        while (emlaaei_text.Contains("  "))
+                                        {
+                                            emlaaei_text = emlaaei_text.Replace("  ", " ");
+                                        }
 
-                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
-                    //                    if (multiplicity == -1) // without multiplicity
-                    //                    {
-                    //                        if (matches.Count > 0)
-                    //                        {
-                    //                            if (!result.Contains(chapter))
-                    //                            {
-                    //                                result.Add(chapter);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                    else // with multiplicity
-                    //                    {
-                    //                        if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
-                    //                        {
-                    //                            if (!result.Contains(chapter))
-                    //                            {
-                    //                                result.Add(chapter);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                } // end for
-                    //            }
-                    //        }
-                    //    }
-                    //}
+                                        RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                                        MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                                        if (multiplicity == -1) // without multiplicity
+                                        {
+                                            if (matches.Count > 0)
+                                            {
+                                                if (!result.Contains(chapter))
+                                                {
+                                                    result.Add(chapter);
+                                                }
+                                            }
+                                        }
+                                        else // with multiplicity
+                                        {
+                                            if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
+                                            {
+                                                if (!result.Contains(chapter))
+                                                {
+                                                    result.Add(chapter);
+                                                }
+                                            }
+                                        }
+                                    } // end for
+                                }
+                            }
+                        }
+                    }
                 }
             }
             catch
@@ -5850,7 +5846,7 @@ public class Server : IPublisher
             {
                 if (s_book != null)
                 {
-                    if (with_diacritics)
+                    if ((with_diacritics) && (s_numerology_system.TextMode == "Original"))
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
@@ -5886,9 +5882,7 @@ public class Server : IPublisher
                             } // end for
                         }
                     }
-
-                    // if without diacritics or nothing found
-                    if ((multiplicity != 0) && (result.Count == 0))
+                    else // without diacritics
                     {
                         if (s_numerology_system != null)
                         {
@@ -5931,58 +5925,58 @@ public class Server : IPublisher
                         }
                     }
 
-                    //// if nothing found
-                    //if ((multiplicity != 0) && (result.Count == 0))
-                    //{
-                    //    //  search in emlaaei
-                    //    if (try_emlaaei_if_nothing_found)
-                    //    {
-                    //        if (s_numerology_system != null)
-                    //        {
-                    //            text = text.SimplifyTo(s_numerology_system.TextMode);
-                    //            if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
-                    //            {
-                    //                foreach (Page page in s_book.Pages)
-                    //                {
-                    //                    string emlaaei_text = "";
-                    //                    foreach (Verse verse in page.Verses)
-                    //                    {
-                    //                        emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
-                    //                    }
-                    //                    emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
-                    //                    emlaaei_text = emlaaei_text.Trim();
-                    //                    while (emlaaei_text.Contains("  "))
-                    //                    {
-                    //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
-                    //                    }
+                    // if nothing found
+                    if ((multiplicity != 0) && (result.Count == 0))
+                    {
+                        // search in emlaaei
+                        if (try_emlaaei_if_nothing_found)
+                        {
+                            if (s_numerology_system != null)
+                            {
+                                text = text.SimplifyTo(s_numerology_system.TextMode);
+                                if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
+                                {
+                                    foreach (Page page in s_book.Pages)
+                                    {
+                                        string emlaaei_text = "";
+                                        foreach (Verse verse in page.Verses)
+                                        {
+                                            emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
+                                        }
+                                        emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
+                                        emlaaei_text = emlaaei_text.Trim();
+                                        while (emlaaei_text.Contains("  "))
+                                        {
+                                            emlaaei_text = emlaaei_text.Replace("  ", " ");
+                                        }
 
-                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
-                    //                    if (multiplicity == -1) // without multiplicity
-                    //                    {
-                    //                        if (matches.Count > 0)
-                    //                        {
-                    //                            if (!result.Contains(page))
-                    //                            {
-                    //                                result.Add(page);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                    else // with multiplicity
-                    //                    {
-                    //                        if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
-                    //                        {
-                    //                            if (!result.Contains(page))
-                    //                            {
-                    //                                result.Add(page);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                } // end for
-                    //            }
-                    //        }
-                    //    }
-                    //}
+                                        RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                                        MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                                        if (multiplicity == -1) // without multiplicity
+                                        {
+                                            if (matches.Count > 0)
+                                            {
+                                                if (!result.Contains(page))
+                                                {
+                                                    result.Add(page);
+                                                }
+                                            }
+                                        }
+                                        else // with multiplicity
+                                        {
+                                            if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
+                                            {
+                                                if (!result.Contains(page))
+                                                {
+                                                    result.Add(page);
+                                                }
+                                            }
+                                        }
+                                    } // end for
+                                }
+                            }
+                        }
+                    }
                 }
             }
             catch
@@ -6005,7 +5999,7 @@ public class Server : IPublisher
             {
                 if (s_book != null)
                 {
-                    if (with_diacritics)
+                    if ((with_diacritics) && (s_numerology_system.TextMode == "Original"))
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
@@ -6041,9 +6035,7 @@ public class Server : IPublisher
                             } // end for
                         }
                     }
-
-                    // if without diacritics or nothing found
-                    if ((multiplicity != 0) && (result.Count == 0))
+                    else // without diacritics
                     {
                         if (s_numerology_system != null)
                         {
@@ -6086,58 +6078,58 @@ public class Server : IPublisher
                         }
                     }
 
-                    //// if nothing found
-                    //if ((multiplicity != 0) && (result.Count == 0))
-                    //{
-                    //    //  search in emlaaei
-                    //    if (try_emlaaei_if_nothing_found)
-                    //    {
-                    //        if (s_numerology_system != null)
-                    //        {
-                    //            text = text.SimplifyTo(s_numerology_system.TextMode);
-                    //            if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
-                    //            {
-                    //                foreach (Station station in s_book.Stations)
-                    //                {
-                    //                    string emlaaei_text = "";
-                    //                    foreach (Verse verse in station.Verses)
-                    //                    {
-                    //                        emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
-                    //                    }
-                    //                    emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
-                    //                    emlaaei_text = emlaaei_text.Trim();
-                    //                    while (emlaaei_text.Contains("  "))
-                    //                    {
-                    //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
-                    //                    }
+                    // if nothing found
+                    if ((multiplicity != 0) && (result.Count == 0))
+                    {
+                        // search in emlaaei
+                        if (try_emlaaei_if_nothing_found)
+                        {
+                            if (s_numerology_system != null)
+                            {
+                                text = text.SimplifyTo(s_numerology_system.TextMode);
+                                if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
+                                {
+                                    foreach (Station station in s_book.Stations)
+                                    {
+                                        string emlaaei_text = "";
+                                        foreach (Verse verse in station.Verses)
+                                        {
+                                            emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
+                                        }
+                                        emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
+                                        emlaaei_text = emlaaei_text.Trim();
+                                        while (emlaaei_text.Contains("  "))
+                                        {
+                                            emlaaei_text = emlaaei_text.Replace("  ", " ");
+                                        }
 
-                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
-                    //                    if (multiplicity == -1) // without multiplicity
-                    //                    {
-                    //                        if (matches.Count > 0)
-                    //                        {
-                    //                            if (!result.Contains(station))
-                    //                            {
-                    //                                result.Add(station);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                    else // with multiplicity
-                    //                    {
-                    //                        if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
-                    //                        {
-                    //                            if (!result.Contains(station))
-                    //                            {
-                    //                                result.Add(station);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                } // end for
-                    //            }
-                    //        }
-                    //    }
-                    //}
+                                        RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                                        MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                                        if (multiplicity == -1) // without multiplicity
+                                        {
+                                            if (matches.Count > 0)
+                                            {
+                                                if (!result.Contains(station))
+                                                {
+                                                    result.Add(station);
+                                                }
+                                            }
+                                        }
+                                        else // with multiplicity
+                                        {
+                                            if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
+                                            {
+                                                if (!result.Contains(station))
+                                                {
+                                                    result.Add(station);
+                                                }
+                                            }
+                                        }
+                                    } // end for
+                                }
+                            }
+                        }
+                    }
                 }
             }
             catch
@@ -6160,7 +6152,7 @@ public class Server : IPublisher
             {
                 if (s_book != null)
                 {
-                    if (with_diacritics)
+                    if ((with_diacritics) && (s_numerology_system.TextMode == "Original"))
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
@@ -6196,9 +6188,7 @@ public class Server : IPublisher
                             } // end for
                         }
                     }
-
-                    // if without diacritics or nothing found
-                    if ((multiplicity != 0) && (result.Count == 0))
+                    else // without diacritics
                     {
                         if (s_numerology_system != null)
                         {
@@ -6241,58 +6231,58 @@ public class Server : IPublisher
                         }
                     }
 
-                    //// if nothing found
-                    //if ((multiplicity != 0) && (result.Count == 0))
-                    //{
-                    //    //  search in emlaaei
-                    //    if (try_emlaaei_if_nothing_found)
-                    //    {
-                    //        if (s_numerology_system != null)
-                    //        {
-                    //            text = text.SimplifyTo(s_numerology_system.TextMode);
-                    //            if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
-                    //            {
-                    //                foreach (Part part in s_book.Parts)
-                    //                {
-                    //                    string emlaaei_text = "";
-                    //                    foreach (Verse verse in part.Verses)
-                    //                    {
-                    //                        emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
-                    //                    }
-                    //                    emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
-                    //                    emlaaei_text = emlaaei_text.Trim();
-                    //                    while (emlaaei_text.Contains("  "))
-                    //                    {
-                    //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
-                    //                    }
+                    // if nothing found
+                    if ((multiplicity != 0) && (result.Count == 0))
+                    {
+                        // search in emlaaei
+                        if (try_emlaaei_if_nothing_found)
+                        {
+                            if (s_numerology_system != null)
+                            {
+                                text = text.SimplifyTo(s_numerology_system.TextMode);
+                                if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
+                                {
+                                    foreach (Part part in s_book.Parts)
+                                    {
+                                        string emlaaei_text = "";
+                                        foreach (Verse verse in part.Verses)
+                                        {
+                                            emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
+                                        }
+                                        emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
+                                        emlaaei_text = emlaaei_text.Trim();
+                                        while (emlaaei_text.Contains("  "))
+                                        {
+                                            emlaaei_text = emlaaei_text.Replace("  ", " ");
+                                        }
 
-                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
-                    //                    if (multiplicity == -1) // without multiplicity
-                    //                    {
-                    //                        if (matches.Count > 0)
-                    //                        {
-                    //                            if (!result.Contains(part))
-                    //                            {
-                    //                                result.Add(part);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                    else // with multiplicity
-                    //                    {
-                    //                        if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
-                    //                        {
-                    //                            if (!result.Contains(part))
-                    //                            {
-                    //                                result.Add(part);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                } // end for
-                    //            }
-                    //        }
-                    //    }
-                    //}
+                                        RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                                        MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                                        if (multiplicity == -1) // without multiplicity
+                                        {
+                                            if (matches.Count > 0)
+                                            {
+                                                if (!result.Contains(part))
+                                                {
+                                                    result.Add(part);
+                                                }
+                                            }
+                                        }
+                                        else // with multiplicity
+                                        {
+                                            if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
+                                            {
+                                                if (!result.Contains(part))
+                                                {
+                                                    result.Add(part);
+                                                }
+                                            }
+                                        }
+                                    } // end for
+                                }
+                            }
+                        }
+                    }
                 }
             }
             catch
@@ -6315,7 +6305,7 @@ public class Server : IPublisher
             {
                 if (s_book != null)
                 {
-                    if (with_diacritics)
+                    if ((with_diacritics) && (s_numerology_system.TextMode == "Original"))
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
@@ -6351,9 +6341,7 @@ public class Server : IPublisher
                             } // end for
                         }
                     }
-
-                    // if without diacritics or nothing found
-                    if ((multiplicity != 0) && (result.Count == 0))
+                    else // without diacritics
                     {
                         if (s_numerology_system != null)
                         {
@@ -6396,58 +6384,58 @@ public class Server : IPublisher
                         }
                     }
 
-                    //// if nothing found
-                    //if ((multiplicity != 0) && (result.Count == 0))
-                    //{
-                    //    //  search in emlaaei
-                    //    if (try_emlaaei_if_nothing_found)
-                    //    {
-                    //        if (s_numerology_system != null)
-                    //        {
-                    //            text = text.SimplifyTo(s_numerology_system.TextMode);
-                    //            if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
-                    //            {
-                    //                foreach (Model.Group group in s_book.Groups)
-                    //                {
-                    //                    string emlaaei_text = "";
-                    //                    foreach (Verse verse in group.Verses)
-                    //                    {
-                    //                        emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
-                    //                    }
-                    //                    emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
-                    //                    emlaaei_text = emlaaei_text.Trim();
-                    //                    while (emlaaei_text.Contains("  "))
-                    //                    {
-                    //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
-                    //                    }
+                    // if nothing found
+                    if ((multiplicity != 0) && (result.Count == 0))
+                    {
+                        // search in emlaaei
+                        if (try_emlaaei_if_nothing_found)
+                        {
+                            if (s_numerology_system != null)
+                            {
+                                text = text.SimplifyTo(s_numerology_system.TextMode);
+                                if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
+                                {
+                                    foreach (Model.Group group in s_book.Groups)
+                                    {
+                                        string emlaaei_text = "";
+                                        foreach (Verse verse in group.Verses)
+                                        {
+                                            emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
+                                        }
+                                        emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
+                                        emlaaei_text = emlaaei_text.Trim();
+                                        while (emlaaei_text.Contains("  "))
+                                        {
+                                            emlaaei_text = emlaaei_text.Replace("  ", " ");
+                                        }
 
-                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
-                    //                    if (multiplicity == -1) // without multiplicity
-                    //                    {
-                    //                        if (matches.Count > 0)
-                    //                        {
-                    //                            if (!result.Contains(group))
-                    //                            {
-                    //                                result.Add(group);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                    else // with multiplicity
-                    //                    {
-                    //                        if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
-                    //                        {
-                    //                            if (!result.Contains(group))
-                    //                            {
-                    //                                result.Add(group);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                } // end for
-                    //            }
-                    //        }
-                    //    }
-                    //}
+                                        RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                                        MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                                        if (multiplicity == -1) // without multiplicity
+                                        {
+                                            if (matches.Count > 0)
+                                            {
+                                                if (!result.Contains(group))
+                                                {
+                                                    result.Add(group);
+                                                }
+                                            }
+                                        }
+                                        else // with multiplicity
+                                        {
+                                            if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
+                                            {
+                                                if (!result.Contains(group))
+                                                {
+                                                    result.Add(group);
+                                                }
+                                            }
+                                        }
+                                    } // end for
+                                }
+                            }
+                        }
+                    }
                 }
             }
             catch
@@ -6470,7 +6458,7 @@ public class Server : IPublisher
             {
                 if (s_book != null)
                 {
-                    if (with_diacritics)
+                    if ((with_diacritics) && (s_numerology_system.TextMode == "Original"))
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
@@ -6506,9 +6494,7 @@ public class Server : IPublisher
                             } // end for
                         }
                     }
-
-                    // if without diacritics or nothing found
-                    if ((multiplicity != 0) && (result.Count == 0))
+                    else // without diacritics
                     {
                         if (s_numerology_system != null)
                         {
@@ -6551,58 +6537,58 @@ public class Server : IPublisher
                         }
                     }
 
-                    //// if nothing found
-                    //if ((multiplicity != 0) && (result.Count == 0))
-                    //{
-                    //    //  search in emlaaei
-                    //    if (try_emlaaei_if_nothing_found)
-                    //    {
-                    //        if (s_numerology_system != null)
-                    //        {
-                    //            text = text.SimplifyTo(s_numerology_system.TextMode);
-                    //            if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
-                    //            {
-                    //                foreach (Half half in s_book.Halfs)
-                    //                {
-                    //                    string emlaaei_text = "";
-                    //                    foreach (Verse verse in half.Verses)
-                    //                    {
-                    //                        emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
-                    //                    }
-                    //                    emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
-                    //                    emlaaei_text = emlaaei_text.Trim();
-                    //                    while (emlaaei_text.Contains("  "))
-                    //                    {
-                    //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
-                    //                    }
+                    // if nothing found
+                    if ((multiplicity != 0) && (result.Count == 0))
+                    {
+                        // search in emlaaei
+                        if (try_emlaaei_if_nothing_found)
+                        {
+                            if (s_numerology_system != null)
+                            {
+                                text = text.SimplifyTo(s_numerology_system.TextMode);
+                                if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
+                                {
+                                    foreach (Half half in s_book.Halfs)
+                                    {
+                                        string emlaaei_text = "";
+                                        foreach (Verse verse in half.Verses)
+                                        {
+                                            emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
+                                        }
+                                        emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
+                                        emlaaei_text = emlaaei_text.Trim();
+                                        while (emlaaei_text.Contains("  "))
+                                        {
+                                            emlaaei_text = emlaaei_text.Replace("  ", " ");
+                                        }
 
-                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
-                    //                    if (multiplicity == -1) // without multiplicity
-                    //                    {
-                    //                        if (matches.Count > 0)
-                    //                        {
-                    //                            if (!result.Contains(half))
-                    //                            {
-                    //                                result.Add(half);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                    else // with multiplicity
-                    //                    {
-                    //                        if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
-                    //                        {
-                    //                            if (!result.Contains(half))
-                    //                            {
-                    //                                result.Add(half);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                } // end for
-                    //            }
-                    //        }
-                    //    }
-                    //}
+                                        RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                                        MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                                        if (multiplicity == -1) // without multiplicity
+                                        {
+                                            if (matches.Count > 0)
+                                            {
+                                                if (!result.Contains(half))
+                                                {
+                                                    result.Add(half);
+                                                }
+                                            }
+                                        }
+                                        else // with multiplicity
+                                        {
+                                            if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
+                                            {
+                                                if (!result.Contains(half))
+                                                {
+                                                    result.Add(half);
+                                                }
+                                            }
+                                        }
+                                    } // end for
+                                }
+                            }
+                        }
+                    }
                 }
             }
             catch
@@ -6625,7 +6611,7 @@ public class Server : IPublisher
             {
                 if (s_book != null)
                 {
-                    if (with_diacritics)
+                    if ((with_diacritics) && (s_numerology_system.TextMode == "Original"))
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
@@ -6661,9 +6647,7 @@ public class Server : IPublisher
                             } // end for
                         }
                     }
-
-                    // if without diacritics or nothing found
-                    if ((multiplicity != 0) && (result.Count == 0))
+                    else // without diacritics
                     {
                         if (s_numerology_system != null)
                         {
@@ -6706,58 +6690,58 @@ public class Server : IPublisher
                         }
                     }
 
-                    //// if nothing found
-                    //if ((multiplicity != 0) && (result.Count == 0))
-                    //{
-                    //    //  search in emlaaei
-                    //    if (try_emlaaei_if_nothing_found)
-                    //    {
-                    //        if (s_numerology_system != null)
-                    //        {
-                    //            text = text.SimplifyTo(s_numerology_system.TextMode);
-                    //            if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
-                    //            {
-                    //                foreach (Quarter quarter in s_book.Quarters)
-                    //                {
-                    //                    string emlaaei_text = "";
-                    //                    foreach (Verse verse in quarter.Verses)
-                    //                    {
-                    //                        emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
-                    //                    }
-                    //                    emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
-                    //                    emlaaei_text = emlaaei_text.Trim();
-                    //                    while (emlaaei_text.Contains("  "))
-                    //                    {
-                    //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
-                    //                    }
+                    // if nothing found
+                    if ((multiplicity != 0) && (result.Count == 0))
+                    {
+                        // search in emlaaei
+                        if (try_emlaaei_if_nothing_found)
+                        {
+                            if (s_numerology_system != null)
+                            {
+                                text = text.SimplifyTo(s_numerology_system.TextMode);
+                                if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
+                                {
+                                    foreach (Quarter quarter in s_book.Quarters)
+                                    {
+                                        string emlaaei_text = "";
+                                        foreach (Verse verse in quarter.Verses)
+                                        {
+                                            emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
+                                        }
+                                        emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
+                                        emlaaei_text = emlaaei_text.Trim();
+                                        while (emlaaei_text.Contains("  "))
+                                        {
+                                            emlaaei_text = emlaaei_text.Replace("  ", " ");
+                                        }
 
-                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
-                    //                    if (multiplicity == -1) // without multiplicity
-                    //                    {
-                    //                        if (matches.Count > 0)
-                    //                        {
-                    //                            if (!result.Contains(quarter))
-                    //                            {
-                    //                                result.Add(quarter);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                    else // with multiplicity
-                    //                    {
-                    //                        if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
-                    //                        {
-                    //                            if (!result.Contains(quarter))
-                    //                            {
-                    //                                result.Add(quarter);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                } // end for
-                    //            }
-                    //        }
-                    //    }
-                    //}
+                                        RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                                        MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                                        if (multiplicity == -1) // without multiplicity
+                                        {
+                                            if (matches.Count > 0)
+                                            {
+                                                if (!result.Contains(quarter))
+                                                {
+                                                    result.Add(quarter);
+                                                }
+                                            }
+                                        }
+                                        else // with multiplicity
+                                        {
+                                            if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
+                                            {
+                                                if (!result.Contains(quarter))
+                                                {
+                                                    result.Add(quarter);
+                                                }
+                                            }
+                                        }
+                                    } // end for
+                                }
+                            }
+                        }
+                    }
                 }
             }
             catch
@@ -6780,7 +6764,7 @@ public class Server : IPublisher
             {
                 if (s_book != null)
                 {
-                    if (with_diacritics)
+                    if ((with_diacritics) && (s_numerology_system.TextMode == "Original"))
                     {
                         if (!String.IsNullOrEmpty(text))
                         {
@@ -6816,9 +6800,7 @@ public class Server : IPublisher
                             } // end for
                         }
                     }
-
-                    // if without diacritics or nothing found
-                    if ((multiplicity != 0) && (result.Count == 0))
+                    else // without diacritics
                     {
                         if (s_numerology_system != null)
                         {
@@ -6861,58 +6843,58 @@ public class Server : IPublisher
                         }
                     }
 
-                    //// if nothing found
-                    //if ((multiplicity != 0) && (result.Count == 0))
-                    //{
-                    //    //  search in emlaaei
-                    //    if (try_emlaaei_if_nothing_found)
-                    //    {
-                    //        if (s_numerology_system != null)
-                    //        {
-                    //            text = text.SimplifyTo(s_numerology_system.TextMode);
-                    //            if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
-                    //            {
-                    //                foreach (Bowing bowing in s_book.Bowings)
-                    //                {
-                    //                    string emlaaei_text = "";
-                    //                    foreach (Verse verse in bowing.Verses)
-                    //                    {
-                    //                        emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
-                    //                    }
-                    //                    emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
-                    //                    emlaaei_text = emlaaei_text.Trim();
-                    //                    while (emlaaei_text.Contains("  "))
-                    //                    {
-                    //                        emlaaei_text = emlaaei_text.Replace("  ", " ");
-                    //                    }
+                    // if nothing found
+                    if ((multiplicity != 0) && (result.Count == 0))
+                    {
+                        // search in emlaaei
+                        if (try_emlaaei_if_nothing_found)
+                        {
+                            if (s_numerology_system != null)
+                            {
+                                text = text.SimplifyTo(s_numerology_system.TextMode);
+                                if (!String.IsNullOrEmpty(text)) // re-test in case text was just harakaat which is simplifed to nothing
+                                {
+                                    foreach (Bowing bowing in s_book.Bowings)
+                                    {
+                                        string emlaaei_text = "";
+                                        foreach (Verse verse in bowing.Verses)
+                                        {
+                                            emlaaei_text += verse.Translations[DEFAULT_EMLAAEI_TEXT] + "\r\n";
+                                        }
+                                        emlaaei_text = emlaaei_text.SimplifyTo(s_numerology_system.TextMode);
+                                        emlaaei_text = emlaaei_text.Trim();
+                                        while (emlaaei_text.Contains("  "))
+                                        {
+                                            emlaaei_text = emlaaei_text.Replace("  ", " ");
+                                        }
 
-                    //                    RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
-                    //                    MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
-                    //                    if (multiplicity == -1) // without multiplicity
-                    //                    {
-                    //                        if (matches.Count > 0)
-                    //                        {
-                    //                            if (!result.Contains(bowing))
-                    //                            {
-                    //                                result.Add(bowing);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                    else // with multiplicity
-                    //                    {
-                    //                        if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
-                    //                        {
-                    //                            if (!result.Contains(bowing))
-                    //                            {
-                    //                                result.Add(bowing);
-                    //                            }
-                    //                        }
-                    //                    }
-                    //                } // end for
-                    //            }
-                    //        }
-                    //    }
-                    //}
+                                        RegexOptions regex_options = case_sensitive ? RegexOptions.None : RegexOptions.IgnoreCase;// | RegexOptions.RightToLeft;
+                                        MatchCollection matches = Regex.Matches(emlaaei_text, text, regex_options);
+                                        if (multiplicity == -1) // without multiplicity
+                                        {
+                                            if (matches.Count > 0)
+                                            {
+                                                if (!result.Contains(bowing))
+                                                {
+                                                    result.Add(bowing);
+                                                }
+                                            }
+                                        }
+                                        else // with multiplicity
+                                        {
+                                            if (Compare(matches.Count, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder))
+                                            {
+                                                if (!result.Contains(bowing))
+                                                {
+                                                    result.Add(bowing);
+                                                }
+                                            }
+                                        }
+                                    } // end for
+                                }
+                            }
+                        }
+                    }
                 }
             }
             catch
@@ -7161,7 +7143,7 @@ public class Server : IPublisher
 
                     try
                     {
-                        if (with_diacritics)
+                        if ((with_diacritics) && (s_numerology_system.TextMode == "Original"))
                         {
                             BuildWordLists(text, out unsigned_words, out positive_words, out negative_words);
 
@@ -7499,9 +7481,7 @@ public class Server : IPublisher
                                 }
                             } // end for
                         }
-
-                        // if without diacritics or nothing found
-                        if (result.Count == 0)
+                        else // without diacritics
                         {
                             if (s_numerology_system != null)
                             {
@@ -7854,10 +7834,10 @@ public class Server : IPublisher
                             }
                         }
 
-                        // if nothing found, try emlaaei
+                        // if nothing found
                         if (result.Count == 0)
                         {
-                            //  search in emlaaei
+                            // search in emlaaei
                             if (try_emlaaei_if_nothing_found)
                             {
                                 if (s_numerology_system != null)
