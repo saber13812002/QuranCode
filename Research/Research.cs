@@ -59,7 +59,7 @@ public static class Research
         return verses;
     }
 
-    public static string _______________________________________________________(Client client, string param, bool in_search_result)
+    public static string __________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
@@ -93,7 +93,7 @@ public static class Research
         }
         return null;
     }
-    private static string AllWords(Client client, string param, bool in_search_result)
+    public static string AllWords(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -103,7 +103,7 @@ public static class Research
         }
         return null;
     }
-    private static string WordVerbForms(Client client, string param, bool in_search_result)
+    public static string WordVerbForms(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -113,7 +113,7 @@ public static class Research
         }
         return null;
     }
-    private static string VerbForms(Client client, string param, bool in_search_result)
+    public static string VerbForms(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -123,7 +123,7 @@ public static class Research
         }
         return null;
     }
-    private static string Stopmarks(Client client, string param, bool in_search_result)
+    public static string Stopmarks(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -133,7 +133,7 @@ public static class Research
         }
         return null;
     }
-    private static string ASCII_Text(Client client, string param, bool in_search_result)
+    public static string ASCII_Text(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -711,36 +711,36 @@ public static class Research
         return str.ToString();
     }
 
-    public static string ___________________________________________(Client client, string param, bool in_search_result)
+    public static string ___________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
-    public static string VersesWithIntialLetters(Client client, string param, bool in_search_result)
+    public static string VersesUsingIntialLetters(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        return DoVersesWithIntialLetters(client, param, in_search_result);
+        return DoVersesUsingIntialLetters(client, param, in_search_result);
     }
-    public static string VersesWithOnlyIntialLetters(Client client, string param, bool in_search_result)
+    public static string VersesUsingOnlyIntialLetters(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        return DoVersesWithOnlyIntialLetters(client, param, in_search_result);
+        return DoVersesUsingOnlyIntialLetters(client, param, in_search_result);
     }
-    public static string VersesWithAllIntialLetters(Client client, string param, bool in_search_result)
+    public static string VersesUsingAllIntialLetters(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        return DoVersesWithAllIntialLetters(client, param, in_search_result);
+        return DoVersesUsingAllIntialLetters(client, param, in_search_result);
     }
-    public static string VersesWithOnlyAllIntialLetters(Client client, string param, bool in_search_result)
+    public static string VersesUsingOnlyAllIntialLetters(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        return DoVersesWithOnlyAllIntialLetters(client, param, in_search_result);
+        return DoVersesUsingOnlyAllIntialLetters(client, param, in_search_result);
     }
-    public static string VersesWithNoIntialLetters(Client client, string param, bool in_search_result)
+    public static string VersesUsingNoIntialLetters(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
-        return DoVersesWithNoIntialLetters(client, param, in_search_result);
+        return DoVersesUsingNoIntialLetters(client, param, in_search_result);
     }
-    private static string DoVersesWithIntialLetters(Client client, string param, bool in_search_result)
+    private static string DoVersesUsingIntialLetters(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.Book == null) return null;
@@ -781,7 +781,7 @@ public static class Research
         }
         return str.ToString();
     }
-    private static string DoVersesWithOnlyIntialLetters(Client client, string param, bool in_search_result)
+    private static string DoVersesUsingOnlyIntialLetters(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.NumerologySystem == null) return null;
@@ -825,7 +825,7 @@ public static class Research
         }
         return str.ToString();
     }
-    private static string DoVersesWithAllIntialLetters(Client client, string param, bool in_search_result)
+    private static string DoVersesUsingAllIntialLetters(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.Book == null) return null;
@@ -866,7 +866,7 @@ public static class Research
         }
         return str.ToString();
     }
-    private static string DoVersesWithOnlyAllIntialLetters(Client client, string param, bool in_search_result)
+    private static string DoVersesUsingOnlyAllIntialLetters(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.NumerologySystem == null) return null;
@@ -923,7 +923,7 @@ public static class Research
         }
         return str.ToString();
     }
-    private static string DoVersesWithNoIntialLetters(Client client, string param, bool in_search_result)
+    private static string DoVersesUsingNoIntialLetters(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.Book == null) return null;
@@ -965,7 +965,7 @@ public static class Research
         return str.ToString();
     }
 
-    private static string ___________________________(Client client, string param, bool in_search_result)
+    private static string ____________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
@@ -1098,7 +1098,7 @@ public static class Research
         return str.ToString();
     }
 
-    public static string ___________________________________(Client client, string param, bool in_search_result)
+    public static string _____________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
@@ -2157,7 +2157,7 @@ public static class Research
         }
         return null;
     }
-    private static string RelatedWordsMeanings(Client client, string param, bool in_search_result)
+    public static string RelatedWordsMeanings(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -2167,7 +2167,7 @@ public static class Research
         }
         return null;
     }
-    private static string RelatedWordAddresses(Client client, string param, bool in_search_result)
+    public static string RelatedWordAddresses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -2187,7 +2187,7 @@ public static class Research
         }
         return null;
     }
-    private static string RelatedWordsVerseMeanings(Client client, string param, bool in_search_result)
+    public static string RelatedWordsVerseMeanings(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -2197,7 +2197,7 @@ public static class Research
         }
         return null;
     }
-    private static string RelatedWordVerseAddresses(Client client, string param, bool in_search_result)
+    public static string RelatedWordVerseAddresses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -2537,7 +2537,7 @@ public static class Research
         return str.ToString();
     }
 
-    private static string _____________________________________________________(Client client, string param, bool in_search_result)
+    private static string _______________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
@@ -2664,11 +2664,11 @@ public static class Research
         return str.ToString();
     }
 
-    public static string _________________________________(Client client, string param, bool in_search_result)
+    public static string _________________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
-    private static string ChapterVersesSound(Client client, string param, bool in_search_result)
+    public static string ChapterVersesSound(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.Book == null) return null;
@@ -2696,7 +2696,7 @@ public static class Research
         }
         return str.ToString();
     }
-    private static string ChapterWordsSound(Client client, string param, bool in_search_result)
+    public static string ChapterWordsSound(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.Book == null) return null;
@@ -2724,7 +2724,7 @@ public static class Research
         }
         return str.ToString();
     }
-    private static string ChapterLettersSound(Client client, string param, bool in_search_result)
+    public static string ChapterLettersSound(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.Book == null) return null;
@@ -2752,7 +2752,7 @@ public static class Research
         }
         return str.ToString();
     }
-    private static string ChapterValuesSound(Client client, string param, bool in_search_result)
+    public static string ChapterValuesSound(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.Book == null) return null;
@@ -2780,7 +2780,7 @@ public static class Research
         }
         return str.ToString();
     }
-    private static string VerseWordsSound(Client client, string param, bool in_search_result)
+    public static string VerseWordsSound(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.NumerologySystem == null) return null;
@@ -2806,7 +2806,7 @@ public static class Research
         }
         return str.ToString();
     }
-    private static string VerseLettersSound(Client client, string param, bool in_search_result)
+    public static string VerseLettersSound(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.NumerologySystem == null) return null;
@@ -2832,7 +2832,7 @@ public static class Research
         }
         return str.ToString();
     }
-    private static string VerseValuesSound(Client client, string param, bool in_search_result)
+    public static string VerseValuesSound(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.NumerologySystem == null) return null;
@@ -2858,7 +2858,7 @@ public static class Research
         }
         return str.ToString();
     }
-    private static string VerseDistancesSound(Client client, string param, bool in_search_result)
+    public static string VerseDistancesSound(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.NumerologySystem == null) return null;
@@ -3091,11 +3091,11 @@ public static class Research
         }
     }
 
-    private static string __________________________________________________(Client client, string param, bool in_search_result)
+    public static string __________________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
-    private static string P_PivotVersesWithText(Client client, string param, bool in_search_result)
+    public static string P_PivotVersesWithText(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3105,7 +3105,7 @@ public static class Research
         }
         return null;
     }
-    private static string AP_PivotVersesWithText(Client client, string param, bool in_search_result)
+    public static string AP_PivotVersesWithText(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3115,7 +3115,7 @@ public static class Research
         }
         return null;
     }
-    private static string XP_PivotVersesWithText(Client client, string param, bool in_search_result)
+    public static string XP_PivotVersesWithText(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3125,7 +3125,7 @@ public static class Research
         }
         return null;
     }
-    private static string C_PivotVersesWithText(Client client, string param, bool in_search_result)
+    public static string C_PivotVersesWithText(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3135,7 +3135,7 @@ public static class Research
         }
         return null;
     }
-    private static string AC_PivotVersesWithText(Client client, string param, bool in_search_result)
+    public static string AC_PivotVersesWithText(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3145,7 +3145,7 @@ public static class Research
         }
         return null;
     }
-    private static string XC_PivotVersesWithText(Client client, string param, bool in_search_result)
+    public static string XC_PivotVersesWithText(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3365,7 +3365,7 @@ public static class Research
         }
         return str.ToString();
     }
-    private static string P_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    public static string P_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3375,7 +3375,7 @@ public static class Research
         }
         return null;
     }
-    private static string AP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    public static string AP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3385,7 +3385,7 @@ public static class Research
         }
         return null;
     }
-    private static string XP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    public static string XP_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3395,7 +3395,7 @@ public static class Research
         }
         return null;
     }
-    private static string C_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    public static string C_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3405,7 +3405,7 @@ public static class Research
         }
         return null;
     }
-    private static string AC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    public static string AC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3415,7 +3415,7 @@ public static class Research
         }
         return null;
     }
-    private static string XC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
+    public static string XC_PivotConsecutiveVerses(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -3956,7 +3956,7 @@ public static class Research
         return str.ToString();
     }
 
-    private static string _________________________________________________(Client client, string param, bool in_search_result)
+    private static string ____________________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
@@ -6727,11 +6727,11 @@ public static class Research
         return str.ToString();
     }
 
-    private static string __________________________________(Client client, string param, bool in_search_result)
+    public static string ______________________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
-    private static string PolygonalValueWords(Client client, string param, bool in_search_result)
+    public static string PolygonalValueWords(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -6754,7 +6754,7 @@ public static class Research
         }
         return null;
     }
-    private static string CenteredPolygonalValueWords(Client client, string param, bool in_search_result)
+    public static string CenteredPolygonalValueWords(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -6777,7 +6777,7 @@ public static class Research
         }
         return null;
     }
-    private static string PyramidalValueWords(Client client, string param, bool in_search_result)
+    public static string PyramidalValueWords(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -6800,7 +6800,7 @@ public static class Research
         }
         return null;
     }
-    private static string PlatonicSolidValueWords(Client client, string param, bool in_search_result)
+    public static string PlatonicSolidValueWords(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -7058,7 +7058,7 @@ public static class Research
         return str.ToString();
     }
 
-    private static string __________________________(Client client, string param, bool in_search_result)
+    private static string _______________________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
@@ -7187,7 +7187,7 @@ public static class Research
         return null;
     }
 
-    private static string _______________________________________(Client client, string param, bool in_search_result)
+    private static string ________________________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
@@ -7976,7 +7976,7 @@ public static class Research
         return str.ToString();
     }
 
-    private static string _______________________________(Client client, string param, bool in_search_result)
+    private static string _________________________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
@@ -8482,11 +8482,11 @@ public static class Research
         return result;
     }
 
-    private static string ________________________________(Client client, string param, bool in_search_result)
+    public static string __________________________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
-    private static string PrimeWords(Client client, string param, bool in_search_result)
+    public static string PrimeWords(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -8502,7 +8502,7 @@ public static class Research
         }
         return null;
     }
-    private static string AdditivePrimeWords(Client client, string param, bool in_search_result)
+    public static string AdditivePrimeWords(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -8518,7 +8518,7 @@ public static class Research
         }
         return null;
     }
-    private static string NonAdditivePrimeWords(Client client, string param, bool in_search_result)
+    public static string NonAdditivePrimeWords(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -8534,7 +8534,7 @@ public static class Research
         }
         return null;
     }
-    private static string CompositeWords(Client client, string param, bool in_search_result)
+    public static string CompositeWords(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -8550,7 +8550,7 @@ public static class Research
         }
         return null;
     }
-    private static string AdditiveCompositeWords(Client client, string param, bool in_search_result)
+    public static string AdditiveCompositeWords(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -8566,7 +8566,7 @@ public static class Research
         }
         return null;
     }
-    private static string NonAdditiveCompositeWords(Client client, string param, bool in_search_result)
+    public static string NonAdditiveCompositeWords(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -8582,7 +8582,7 @@ public static class Research
         }
         return null;
     }
-    private static string FibonacciWords(Client client, string param, bool in_search_result)
+    public static string FibonacciWords(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         List<Verse> verses = GetSourceVerses(client, in_search_result);
@@ -8739,7 +8739,7 @@ public static class Research
         return result;
     }
 
-    private static string _____________________________(Client client, string param, bool in_search_result)
+    private static string ___________________________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
@@ -8896,11 +8896,11 @@ public static class Research
         return (chapter_count + " chapters in 1st half of the Quran with even verses.\r\n" + verse_count + " verses with sum of Book-level verses numbers = " + verse_sequence_sum + ".");
     }
 
-    private static string ________________________________________(Client client, string param, bool in_search_result)
+    private static string ____________________________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
-    private static string ChapterVerseWordLetterFactors(Client client, string param, bool in_search_result)
+    public static string ChapterVerseWordLetterFactors(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.Book == null) return null;
@@ -8915,7 +8915,7 @@ public static class Research
         }
         return null;
     }
-    private static string ChapterVerseSumFactors(Client client, string param, bool in_search_result)
+    public static string ChapterVerseSumFactors(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.Book == null) return null;
@@ -8930,7 +8930,7 @@ public static class Research
         }
         return null;
     }
-    private static string ChapterVerseSquaresSumFactors(Client client, string param, bool in_search_result)
+    public static string ChapterVerseSquaresSumFactors(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.Book == null) return null;
@@ -8945,7 +8945,7 @@ public static class Research
         }
         return null;
     }
-    private static string ChapterVerseCubesSumFactors(Client client, string param, bool in_search_result)
+    public static string ChapterVerseCubesSumFactors(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.Book == null) return null;
@@ -8960,7 +8960,7 @@ public static class Research
         }
         return null;
     }
-    private static string ChapterVerseWordLetterSumAZ(Client client, string param, bool in_search_result)
+    public static string ChapterVerseWordLetterSum(Client client, string param, bool in_search_result)
     {
         if (client == null) return null;
         if (client.Book == null) return null;
@@ -8970,22 +8970,7 @@ public static class Research
             List<Chapter> chapters = client.Book.GetChapters(verses);
             if (chapters != null)
             {
-                return DoChapterVerseWordLetterSumAZ(client, chapters);
-            }
-        }
-        return null;
-    }
-    private static string ChapterVerseWordLetterSumZA(Client client, string param, bool in_search_result)
-    {
-        if (client == null) return null;
-        if (client.Book == null) return null;
-        List<Verse> verses = GetSourceVerses(client, in_search_result);
-        if (verses != null)
-        {
-            List<Chapter> chapters = client.Book.GetChapters(verses);
-            if (chapters != null)
-            {
-                return DoChapterVerseWordLetterSumZA(client, chapters);
+                return DoChapterVerseWordLetterSum(client, chapters);
             }
         }
         return null;
@@ -8999,7 +8984,7 @@ public static class Research
 
         str.AppendLine("Name" + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" +
                                        "CFactors" + "\t" + "VFactors" + "\t" + "WFactors" + "\t" + "LFactors" + "\t" +
-                                       "CIndex" + "\t" + "VIndex" + "\t" + "WIndex" + "\t" + "LIndex"
+                                       "CIndex" + "\t\t\t" + "VIndex" + "\t\t\t" + "WIndex" + "\t\t\t" + "LIndex" + "\t\t"
                       );
 
         foreach (Chapter chapter in chapters)
@@ -9023,15 +9008,15 @@ public static class Research
             int xc_index = Numbers.NonAdditiveCompositeIndexOf(chapter.SortedNumber) + 1;
             if (Numbers.IsUnit(chapter.SortedNumber))
             {
-                str.Append("U1" + "\t");
+                str.Append("U1" + "\t" + "\t" + "\t");
             }
             else if (Numbers.IsPrime(chapter.SortedNumber))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
             }
 
             p_index = Numbers.PrimeIndexOf(chapter.Verses.Count) + 1;
@@ -9042,11 +9027,11 @@ public static class Research
             xc_index = Numbers.NonAdditiveCompositeIndexOf(chapter.Verses.Count) + 1;
             if (Numbers.IsPrime(chapter.Verses.Count))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
             }
 
             p_index = Numbers.PrimeIndexOf(chapter.WordCount) + 1;
@@ -9057,11 +9042,11 @@ public static class Research
             xc_index = Numbers.NonAdditiveCompositeIndexOf(chapter.WordCount) + 1;
             if (Numbers.IsPrime(chapter.WordCount))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
             }
 
             p_index = Numbers.PrimeIndexOf(chapter.LetterCount) + 1;
@@ -9072,12 +9057,14 @@ public static class Research
             xc_index = Numbers.NonAdditiveCompositeIndexOf(chapter.LetterCount) + 1;
             if (Numbers.IsPrime(chapter.LetterCount))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : ""));
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : ""));
             }
+
+            str.AppendLine();
         }
         return str.ToString();
     }
@@ -9088,7 +9075,8 @@ public static class Research
 
         StringBuilder str = new StringBuilder();
 
-        str.AppendLine("Name" + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "Sum" + "\t" + "Factors" + "\t" + "CType" + "\t" + "VType" + "\t" + "SumType");
+        str.AppendLine("Name" + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "C^3+V^3" + "\t" + "Factors" + "\t" +
+                               "CIndex" + "\t\t\t" + "VIndex" + "\t\t\t" + "SumIndex" + "\t\t\t");
 
         foreach (Chapter chapter in chapters)
         {
@@ -9108,15 +9096,15 @@ public static class Research
             int xc_index = Numbers.NonAdditiveCompositeIndexOf(chapter.SortedNumber) + 1;
             if (Numbers.IsUnit(chapter.SortedNumber))
             {
-                str.Append("U1" + "\t");
+                str.Append("U1" + "\t" + "\t" + "\t");
             }
             else if (Numbers.IsPrime(chapter.SortedNumber))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
             }
 
             p_index = Numbers.PrimeIndexOf(chapter.Verses.Count) + 1;
@@ -9127,11 +9115,11 @@ public static class Research
             xc_index = Numbers.NonAdditiveCompositeIndexOf(chapter.Verses.Count) + 1;
             if (Numbers.IsPrime(chapter.Verses.Count))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
             }
 
             p_index = Numbers.PrimeIndexOf(sum) + 1;
@@ -9142,12 +9130,14 @@ public static class Research
             xc_index = Numbers.NonAdditiveCompositeIndexOf(sum) + 1;
             if (Numbers.IsPrime(sum))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : ""));
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : ""));
             }
+
+            str.AppendLine();
         }
         return str.ToString();
     }
@@ -9158,7 +9148,8 @@ public static class Research
 
         StringBuilder str = new StringBuilder();
 
-        str.AppendLine("Name" + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "C^2+V^2" + "\t" + "Factors" + "\t" + "CType" + "\t" + "VType" + "\t" + "SumType");
+        str.AppendLine("Name" + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "C^3+V^3" + "\t" + "Factors" + "\t" +
+                               "CIndex" + "\t\t\t" + "VIndex" + "\t\t\t" + "SumIndex" + "\t\t\t");
 
         foreach (Chapter chapter in chapters)
         {
@@ -9178,15 +9169,15 @@ public static class Research
             int xc_index = Numbers.NonAdditiveCompositeIndexOf(chapter.SortedNumber) + 1;
             if (Numbers.IsUnit(chapter.SortedNumber))
             {
-                str.Append("U1" + "\t");
+                str.Append("U1" + "\t" + "\t" + "\t");
             }
             else if (Numbers.IsPrime(chapter.SortedNumber))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
             }
 
             p_index = Numbers.PrimeIndexOf(chapter.Verses.Count) + 1;
@@ -9197,11 +9188,11 @@ public static class Research
             xc_index = Numbers.NonAdditiveCompositeIndexOf(chapter.Verses.Count) + 1;
             if (Numbers.IsPrime(chapter.Verses.Count))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
             }
 
             p_index = Numbers.PrimeIndexOf(sum) + 1;
@@ -9212,12 +9203,14 @@ public static class Research
             xc_index = Numbers.NonAdditiveCompositeIndexOf(sum) + 1;
             if (Numbers.IsPrime(sum))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : ""));
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : ""));
             }
+
+            str.AppendLine();
         }
         return str.ToString();
     }
@@ -9228,7 +9221,8 @@ public static class Research
 
         StringBuilder str = new StringBuilder();
 
-        str.AppendLine("Name" + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "C^3+V^3" + "\t" + "Factors" + "\t" + "CType" + "\t" + "VType" + "\t" + "SumType");
+        str.AppendLine("Name" + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "C^3+V^3" + "\t" + "Factors" + "\t" +
+                               "CIndex" + "\t\t\t" + "VIndex" + "\t\t\t" + "SumIndex" + "\t\t\t");
 
         foreach (Chapter chapter in chapters)
         {
@@ -9248,15 +9242,15 @@ public static class Research
             int xc_index = Numbers.NonAdditiveCompositeIndexOf(chapter.SortedNumber) + 1;
             if (Numbers.IsUnit(chapter.SortedNumber))
             {
-                str.Append("U1" + "\t");
+                str.Append("U1" + "\t" + "\t" + "\t");
             }
             else if (Numbers.IsPrime(chapter.SortedNumber))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
             }
 
             p_index = Numbers.PrimeIndexOf(chapter.Verses.Count) + 1;
@@ -9267,11 +9261,11 @@ public static class Research
             xc_index = Numbers.NonAdditiveCompositeIndexOf(chapter.Verses.Count) + 1;
             if (Numbers.IsPrime(chapter.Verses.Count))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
             }
 
             p_index = Numbers.PrimeIndexOf(sum) + 1;
@@ -9282,16 +9276,18 @@ public static class Research
             xc_index = Numbers.NonAdditiveCompositeIndexOf(sum) + 1;
             if (Numbers.IsPrime(sum))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : ""));
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : ""));
             }
+
+            str.AppendLine();
         }
         return str.ToString();
     }
-    private static string DoChapterVerseWordLetterSumAZ(Client client, List<Chapter> chapters)
+    private static string DoChapterVerseWordLetterSum(Client client, List<Chapter> chapters)
     {
         if (client == null) return null;
         if (chapters == null) return null;
@@ -9300,7 +9296,7 @@ public static class Research
 
         str.AppendLine("Name" + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" +
                                        "CFactors" + "\t" + "VFactors" + "\t" + "WFactors" + "\t" + "LFactors" + "\t" +
-                                       "CIndex" + "\t" + "VIndex" + "\t" + "WIndex" + "\t" + "LIndex" + "\t"
+                                       "CIndex" + "\t\t\t" + "VIndex" + "\t\t\t" + "WIndex" + "\t\t\t" + "LIndex" + "\t\t"
                       );
 
         long c_sum = 0L;
@@ -9334,15 +9330,15 @@ public static class Research
             int xc_index = Numbers.NonAdditiveCompositeIndexOf(c_sum) + 1;
             if (Numbers.IsUnit(c_sum))
             {
-                str.Append("U1" + "\t");
+                str.Append("U1" + "\t" + "\t" + "\t");
             }
             else if (Numbers.IsPrime(c_sum))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
             }
 
             p_index = Numbers.PrimeIndexOf(v_sum) + 1;
@@ -9353,11 +9349,11 @@ public static class Research
             xc_index = Numbers.NonAdditiveCompositeIndexOf(v_sum) + 1;
             if (Numbers.IsPrime(v_sum))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
             }
 
             p_index = Numbers.PrimeIndexOf(w_sum) + 1;
@@ -9368,11 +9364,11 @@ public static class Research
             xc_index = Numbers.NonAdditiveCompositeIndexOf(w_sum) + 1;
             if (Numbers.IsPrime(w_sum))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
             }
 
             p_index = Numbers.PrimeIndexOf(l_sum) + 1;
@@ -9383,118 +9379,19 @@ public static class Research
             xc_index = Numbers.NonAdditiveCompositeIndexOf(l_sum) + 1;
             if (Numbers.IsPrime(l_sum))
             {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
+                str.Append("P" + p_index + "\t" + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : ""));
             }
             else
             {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
-            }
-        }
-        return str.ToString();
-    }
-    private static string DoChapterVerseWordLetterSumZA(Client client, List<Chapter> chapters)
-    {
-        if (client == null) return null;
-        if (chapters == null) return null;
-
-        StringBuilder str = new StringBuilder();
-
-        str.AppendLine("Name" + "\t" + "Chapter" + "\t" + "Verses" + "\t" + "Words" + "\t" + "Letters" + "\t" +
-                                       "CFactors" + "\t" + "VFactors" + "\t" + "WFactors" + "\t" + "LFactors" + "\t" +
-                                       "CIndex" + "\t" + "VIndex" + "\t" + "WIndex" + "\t" + "LIndex" + "\t"
-                      );
-
-        long c_sum = 0L;
-        long v_sum = 0L;
-        long w_sum = 0L;
-        long l_sum = 0L;
-        for (int i = chapters.Count - 1; i >= 0; i--)
-        {
-            str.Append(chapters[i].Name + "\t");
-
-            c_sum += chapters[i].SortedNumber;
-            v_sum += chapters[i].Verses.Count;
-            w_sum += chapters[i].WordCount;
-            l_sum += chapters[i].LetterCount;
-
-            str.Append(c_sum.ToString() + "\t");
-            str.Append(v_sum.ToString() + "\t");
-            str.Append(w_sum.ToString() + "\t");
-            str.Append(l_sum.ToString() + "\t");
-
-            str.Append(Numbers.FactorizeToString(c_sum) + "\t");
-            str.Append(Numbers.FactorizeToString(v_sum) + "\t");
-            str.Append(Numbers.FactorizeToString(w_sum) + "\t");
-            str.Append(Numbers.FactorizeToString(l_sum) + "\t");
-
-            int p_index = Numbers.PrimeIndexOf(c_sum) + 1;
-            int ap_index = Numbers.AdditivePrimeIndexOf(c_sum) + 1;
-            int xp_index = Numbers.NonAdditivePrimeIndexOf(c_sum) + 1;
-            int c_index = Numbers.CompositeIndexOf(c_sum) + 1;
-            int ac_index = Numbers.AdditiveCompositeIndexOf(c_sum) + 1;
-            int xc_index = Numbers.NonAdditiveCompositeIndexOf(c_sum) + 1;
-            if (Numbers.IsUnit(c_sum))
-            {
-                str.Append("U1" + "\t");
-            }
-            else if (Numbers.IsPrime(c_sum))
-            {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
-            }
-            else
-            {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
+                str.Append("C" + c_index + "\t" + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : ""));
             }
 
-            p_index = Numbers.PrimeIndexOf(v_sum) + 1;
-            ap_index = Numbers.AdditivePrimeIndexOf(v_sum) + 1;
-            xp_index = Numbers.NonAdditivePrimeIndexOf(v_sum) + 1;
-            c_index = Numbers.CompositeIndexOf(v_sum) + 1;
-            ac_index = Numbers.AdditiveCompositeIndexOf(v_sum) + 1;
-            xc_index = Numbers.NonAdditiveCompositeIndexOf(v_sum) + 1;
-            if (Numbers.IsPrime(v_sum))
-            {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
-            }
-            else
-            {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
-            }
-
-            p_index = Numbers.PrimeIndexOf(w_sum) + 1;
-            ap_index = Numbers.AdditivePrimeIndexOf(w_sum) + 1;
-            xp_index = Numbers.NonAdditivePrimeIndexOf(w_sum) + 1;
-            c_index = Numbers.CompositeIndexOf(w_sum) + 1;
-            ac_index = Numbers.AdditiveCompositeIndexOf(w_sum) + 1;
-            xc_index = Numbers.NonAdditiveCompositeIndexOf(w_sum) + 1;
-            if (Numbers.IsPrime(w_sum))
-            {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
-            }
-            else
-            {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
-            }
-
-            p_index = Numbers.PrimeIndexOf(l_sum) + 1;
-            ap_index = Numbers.AdditivePrimeIndexOf(l_sum) + 1;
-            xp_index = Numbers.NonAdditivePrimeIndexOf(l_sum) + 1;
-            c_index = Numbers.CompositeIndexOf(l_sum) + 1;
-            ac_index = Numbers.AdditiveCompositeIndexOf(l_sum) + 1;
-            xc_index = Numbers.NonAdditiveCompositeIndexOf(l_sum) + 1;
-            if (Numbers.IsPrime(l_sum))
-            {
-                str.Append("P" + p_index + " " + ((ap_index > 0) ? ("AP" + ap_index) : "") + "\t" + ((xp_index > 0) ? ("XP" + xp_index) : "") + "\t");
-            }
-            else
-            {
-                str.Append("C" + c_index + " " + ((ac_index > 0) ? ("AC" + ac_index) : "") + "\t" + ((xc_index > 0) ? ("XC" + xc_index) : "") + "\t");
-            }
+            str.AppendLine();
         }
         return str.ToString();
     }
 
-    private static string _________________________________________(Client client, string param, bool in_search_result)
+    private static string _____________________________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
@@ -9613,7 +9510,7 @@ public static class Research
         return str.ToString();
     }
 
-    private static string __________________________________________(Client client, string param, bool in_search_result)
+    private static string ______________________________________________________(Client client, string param, bool in_search_result)
     {
         return null;
     }
@@ -10080,18 +9977,5 @@ public static class Research
         client.NumerologySystem = backup_numerology_system;
 
         return null;
-    }
-
-    private static string _________________________________________________________(Client client, string param, bool in_search_result)
-    {
-        return null;
-    }
-    public static string More_in_Research_Edition(Client client, string param, bool in_search_result)
-    {
-        return (
-                "Standard Edition: Letter-value systems with 19 options.\t[Start normally]" + "\r\n" +
-                "Research Edition: Research methods and C# scripting.\t[Start with Shift]" + "\r\n" +
-                "Ultimate Edition: Big prime and composite numbers.\t[Start with Ctrl+Shift]" + "\r\n"
-               );
     }
 }

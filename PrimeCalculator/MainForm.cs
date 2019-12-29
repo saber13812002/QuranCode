@@ -1346,11 +1346,11 @@ public partial class MainForm : Form
 
             str.AppendLine();
             long sum_of_numbers = Numbers.SumOfNumbers(value);
-            str.AppendLine("Sum Of Numbers       " + "\t=\t" + sum_of_numbers + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetNumbersString(value)) : ""));
+            str.AppendLine("Sum of Numbers\t\t=\t" + sum_of_numbers + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetNumbersString(value)) : ""));
             long sum_of_number_digit_sums = Numbers.SumOfNumberDigitSums(value);
-            str.AppendLine("Sum Of Number DSums  " + "\t=\t" + sum_of_number_digit_sums + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetNumberDigitSumsString(value)) : ""));
+            str.AppendLine("Sum of Number DSums\t=\t" + sum_of_number_digit_sums + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetNumberDigitSumsString(value)) : ""));
             long sum_of_number_digital_roots = Numbers.SumNumberDigitalRoots(value);
-            str.AppendLine("Sum Of Number DRoots " + "\t=\t" + sum_of_number_digital_roots + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetNumberDigitalRootsString(value)) : ""));
+            str.AppendLine("Sum of Number DRoots\t=\t" + sum_of_number_digital_roots + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetNumberDigitalRootsString(value)) : ""));
 
             str.AppendLine();
             m_number_kind = Numbers.GetNumberKind(value);
@@ -1380,13 +1380,13 @@ public partial class MainForm : Form
             }
             str.AppendLine(m_number_kind.ToString() + " Index\t\t=\t" + number_kind_index);
             long sum_of_proper_divisors = Numbers.SumOfProperDivisors(value);
-            str.AppendLine("Sum Of Proper Divisors" + "\t=\t" + sum_of_proper_divisors + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetProperDivisorsString(value)) : ""));
+            str.AppendLine("Sum of Proper Divisors\t=\t" + sum_of_proper_divisors + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetProperDivisorsString(value)) : ""));
             long sum_of_divisors = Numbers.SumOfDivisors(value);
-            str.AppendLine("Sum Of Divisors       " + "\t=\t" + sum_of_divisors + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetDivisorsString(value)) : ""));
+            str.AppendLine("Sum of Divisors\t\t=\t" + sum_of_divisors + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetDivisorsString(value)) : ""));
             long sum_of_divisor_digit_sums = Numbers.SumOfDivisorDigitSums(value);
-            str.AppendLine("Sum Of Divisor DSums  " + "\t=\t" + sum_of_divisor_digit_sums + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetDivisorDigitSumsString(value)) : ""));
+            str.AppendLine("Sum of Divisor DSums\t=\t" + sum_of_divisor_digit_sums + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetDivisorDigitSumsString(value)) : ""));
             long sum_of_divisor_digital_roots = Numbers.SumOfDivisorDigitalRoots(value);
-            str.AppendLine("Sum Of Divisor DRoots " + "\t=\t" + sum_of_divisor_digital_roots + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetDivisorDigitalRootsString(value)) : ""));
+            str.AppendLine("Sum of Divisor DRoots\t=\t" + sum_of_divisor_digital_roots + ((ModifierKeys == Keys.Control) ? (" = " + Numbers.GetDivisorDigitalRootsString(value)) : ""));
 
             str.AppendLine();
             int plus1_index = -1;
