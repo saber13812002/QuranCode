@@ -35,7 +35,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("ٱللَّهُمَّ صَلِّ عَلَىٰ مُحَمَّدٍ وَءَالِ مُحَمَّدٍ")]
 [assembly: AssemblyProduct("QuranCode")]
-[assembly: AssemblyCopyright("©2009-2019 Ali Adams - علي عبد الرزاق عبد الكريم القره غولي")]
+[assembly: AssemblyCopyright("©2009-2020 Ali Adams - علي عبد الرزاق عبد الكريم القره غولي")]
 [assembly: AssemblyTrademark("http://qurancode.com/")]
 [assembly: AssemblyCulture("")]
 

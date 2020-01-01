@@ -889,7 +889,7 @@ public partial class MainForm : Form
         MessageBox.Show
         (
             Application.ProductName + "  v" + Application.ProductVersion + "\r\n" +
-            "©2009-2019 Ali Adams - علي عبد الرزاق عبد الكريم القره غولي" + "\r\n" + "\r\n" +
+            "©2009-2020 Ali Adams - علي عبد الرزاق عبد الكريم القره غولي" + "\r\n" + "\r\n" +
             "God >",
             "About",
             MessageBoxButtons.OK,

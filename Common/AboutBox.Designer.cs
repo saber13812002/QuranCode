@@ -102,7 +102,7 @@ partial class AboutBox
             this.CopyrightLabel.Tag = "http://qurancode.com/";
             this.CopyrightLabel.Text = "Copyright";
             this.CopyrightLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.ToolTip.SetToolTip(this.CopyrightLabel, "©2009-2019 Ali Adams");
+            this.ToolTip.SetToolTip(this.CopyrightLabel, "©2009-2020 Ali Adams");
             this.CopyrightLabel.Click += new System.EventHandler(this.LinkLabel_Click);
             // 
             // DescriptionTextBox

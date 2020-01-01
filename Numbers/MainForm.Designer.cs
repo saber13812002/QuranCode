@@ -62,7 +62,7 @@
             this.WebsiteLabel.Size = new System.Drawing.Size(624, 14);
             this.WebsiteLabel.TabIndex = 999;
             this.WebsiteLabel.Tag = "http://qurancode.com";
-            this.WebsiteLabel.Text = "©2009-2019 Ali Adams      Numbers are the DNA that controls the materialization o" +
+            this.WebsiteLabel.Text = "©2009-2020 Ali Adams      Numbers are the DNA that controls the materialization o" +
     "f light to form our Universe.";
             this.WebsiteLabel.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.WebsiteLabel.Click += new System.EventHandler(this.LinkLabel_Click);
