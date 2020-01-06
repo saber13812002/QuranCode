@@ -83,6 +83,58 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Languages
     ///////////////////////////////////////////////////////////////////////////////
+    private Dictionary<string, string> m_language_metadata = null;
+    private void LoadLanguageMetadata()
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (Directory.Exists(Globals.LANGUAGES_FOLDER))
+            {
+                if (m_language_metadata == null)
+                {
+                    m_language_metadata = new Dictionary<string, string>();
+                }
+                if (m_language_metadata != null)
+                {
+                    m_language_metadata.Clear();
+
+                    string filename = Globals.LANGUAGES_FOLDER + "/" + "metadata" + ".txt";
+                    List<string> lines = FileHelper.LoadLines(filename);
+                    foreach (string line in lines)
+                    {
+                        string[] parts = line.Split('\t');
+                        if (parts.Length >= 2)
+                        {
+                            if (parts[0] == "Dictionary")
+                            {
+                                if (parts.Length > 2)
+                                {
+                                    if ((parts[1].Length > 0) && (parts[2].Length > 0))
+                                    {
+                                        m_language_metadata.Add(parts[1], parts[2]);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
+    }
+
     private string l = DEFAULT_LANGUAGE;
     private string previous_l = null;
     private List<string> m_language_names = null;
@@ -96,7 +148,7 @@ public partial class MainForm : Form, ISubscriber
             {
                 previous_l = l;
 
-                l = control.Name.Remove(pos);
+                l = m_language_metadata[control.Name.Remove(pos)];
                 LoadLanguage(l);
 
                 LanguageComboBox.SelectedIndexChanged -= new EventHandler(LanguageComboBox_SelectedIndexChanged);
@@ -138,7 +190,15 @@ public partial class MainForm : Form, ISubscriber
                                 int pos = file.Name.IndexOf(file.Extension);
                                 if (pos > -1)
                                 {
-                                    m_language_names.Add(file.Name.Remove(pos));
+                                    string language_name = file.Name.Remove(pos);
+                                    if (language_name == "metadata")
+                                    {
+                                        LoadLanguageMetadata();
+                                    }
+                                    else
+                                    {
+                                        m_language_names.Add(language_name);
+                                    }
                                 }
                             }
                         }
