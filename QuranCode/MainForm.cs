@@ -26787,7 +26787,7 @@ public partial class MainForm : Form, ISubscriber
             // diplay word info at application caption
             result += SPACE_GAP +
             (
-                word.Verse.Chapter.Name + SPACE_GAP +
+                L[l]["chapter"] + "  " + word.Verse.Chapter.Name + SPACE_GAP +
                 L[l]["verse"] + " " + word.Verse.NumberInChapter + "-" + word.Verse.Number + SPACE_GAP +
                 L[l]["word"] + " " + word.NumberInVerse + "-" + word.NumberInChapter + "-" + word.Number + SPACE_GAP +
                 word.Transliteration + SPACE_GAP +
@@ -41306,8 +41306,8 @@ public partial class MainForm : Form, ISubscriber
         if (verse != null)
         {
             //string text = L[l]["Chapter"] + "   " + verse.Chapter.SortedNumber + ": " + L[l][verse.Chapter.TransliteratedName] + "   "
-            string text = L[l][verse.Chapter.TransliteratedName] + " "
-                 + ((l == "Arabic") ? "     " : verse.Chapter.Name + "     ")
+            string text = ((l == m_language_metadata["Arabic"]) ? L[l]["chapter"] : L[l][verse.Chapter.TransliteratedName]) + " "
+                 + verse.Chapter.Name + "    "
                  + L[l]["Verse"] + " " + verse.NumberInChapter //+ "/" + verse.Chapter.Verses.Count + "   "
                 //+ L[l]["Station"] + " " + ((verse.Station != null) ? verse.Station.Number : -1) + "   "
                 //+ L[l]["Part"] + " " + ((verse.Part != null) ? verse.Part.Number : -1) + "   "
