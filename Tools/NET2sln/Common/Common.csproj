@@ -838,7 +838,7 @@
     <Content Include="Languages\עברית.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Languages\اردو.txt">
+    <Content Include="Languages\اُردُو.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Languages\عربي.txt">
