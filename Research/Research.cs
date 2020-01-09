@@ -16,6 +16,16 @@
 // Client.Selection         // readonly, current selection (chapter, station, part, ... , verse, word, letter)
 // Client.LetterStatistics  // readonly, statistics for current selection or highlighted text
 #endregion
+// odd composites
+//StringBuilder x = new StringBuilder();
+//for (int i = 4; i <= 1000000; i++)
+//{
+//    if (Numbers.IsComposite(i) && Numbers.IsOdd(i))
+//    {
+//        x.AppendLine(i.ToString());
+//    }
+//}
+//return x.ToString();
 
 using System;
 using System.Collections.Generic;

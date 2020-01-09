@@ -13015,7 +13015,7 @@ public partial class MainForm : Form, ISubscriber
         this.RecitationsDownloadGroupBox.Size = new System.Drawing.Size(240, 415);
         this.RecitationsDownloadGroupBox.TabIndex = 31;
         this.RecitationsDownloadGroupBox.TabStop = false;
-        this.RecitationsDownloadGroupBox.Text = "Recitatation Full CD/DVD";
+        this.RecitationsDownloadGroupBox.Text = "Recitation Full CD/DVD";
         this.RecitationsDownloadGroupBox.Visible = false;
         // 
         // ToolTip

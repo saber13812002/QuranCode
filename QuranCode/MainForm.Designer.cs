@@ -11710,7 +11710,7 @@ partial class MainForm
             this.RecitationsDownloadGroupBox.Size = new System.Drawing.Size(180, 337);
             this.RecitationsDownloadGroupBox.TabIndex = 31;
             this.RecitationsDownloadGroupBox.TabStop = false;
-            this.RecitationsDownloadGroupBox.Text = "Recitatation Full CD/DVD";
+            this.RecitationsDownloadGroupBox.Text = "Recitation Full CD/DVD";
             this.RecitationsDownloadGroupBox.Visible = false;
             // 
             // ToolTip
