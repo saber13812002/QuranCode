@@ -97,10 +97,7 @@ partial class MainForm
             this.FindByNumbersResultTypeLettersLabel = new System.Windows.Forms.Label();
             this.BrowseHistoryCounterLabel = new System.Windows.Forms.Label();
             this.BrowseGroupBox = new System.Windows.Forms.GroupBox();
-            this.RussianLanguageLabel = new System.Windows.Forms.Label();
-            this.ChineseLanguageLabel = new System.Windows.Forms.Label();
-            this.ArabicLanguageLabel = new System.Windows.Forms.Label();
-            this.EnglishLanguageLabel = new System.Windows.Forms.Label();
+            this.EditLanguageLabel = new System.Windows.Forms.Label();
             this.BrowseHistoryClearLabel = new System.Windows.Forms.Label();
             this.BrowseHistoryForwardButton = new System.Windows.Forms.Button();
             this.BrowseHistoryBackwardButton = new System.Windows.Forms.Button();
@@ -176,12 +173,13 @@ partial class MainForm
             this.FindBySimilarityTextRadioButton = new System.Windows.Forms.RadioButton();
             this.FindBySimilarityPercentageTrackBar = new System.Windows.Forms.TrackBar();
             this.FindByTextPanel = new System.Windows.Forms.Panel();
+            this.FindByTextMultiplicityNumberTypeLabel = new System.Windows.Forms.Label();
+            this.FindByTextMultiplicityComparisonOperatorLabel = new System.Windows.Forms.Label();
+            this.FindByTextMultiplicityNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.FindByTextButton = new System.Windows.Forms.Button();
             this.DrawSearchTermsLabel = new System.Windows.Forms.Label();
             this.FindByTextWithDiacriticsCheckBox = new System.Windows.Forms.CheckBox();
             this.FindByTextSearchBlockSizeBowingLabel = new System.Windows.Forms.Label();
-            this.FindByTextMultiplicityNumberTypeLabel = new System.Windows.Forms.Label();
-            this.FindByTextMultiplicityComparisonOperatorLabel = new System.Windows.Forms.Label();
             this.FindByTextSearchBlockSizeVerseLabel = new System.Windows.Forms.Label();
             this.TextLocationLabel = new System.Windows.Forms.Label();
             this.TextLocationWithinChapterPanel = new System.Windows.Forms.Panel();
@@ -251,7 +249,6 @@ partial class MainForm
             this.FindByTextSearchBlockSizePageLabel = new System.Windows.Forms.Label();
             this.FindByTextSearchBlockSizeStationLabel = new System.Windows.Forms.Label();
             this.FindByTextRootSearchTypeLabel = new System.Windows.Forms.Label();
-            this.FindByTextMultiplicityNumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.FindByTextLabel = new System.Windows.Forms.Label();
             this.PositionsGroupBox = new System.Windows.Forms.GroupBox();
             this.DifferenceStatisticsLabel = new System.Windows.Forms.Label();
@@ -744,11 +741,11 @@ partial class MainForm
             this.FindBySimilarityPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.FindBySimilarityPercentageTrackBar)).BeginInit();
             this.FindByTextPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FindByTextMultiplicityNumericUpDown)).BeginInit();
             this.TextLocationWithinChapterPanel.SuspendLayout();
             this.TextLocationInWordPanel.SuspendLayout();
             this.TextLocationWithinVersePanel.SuspendLayout();
             this.KeyboardPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FindByTextMultiplicityNumericUpDown)).BeginInit();
             this.PositionsGroupBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LetterNumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.WordNumericUpDown)).BeginInit();
@@ -1925,10 +1922,7 @@ partial class MainForm
             this.BrowseGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.BrowseGroupBox.BackColor = System.Drawing.SystemColors.WindowText;
-            this.BrowseGroupBox.Controls.Add(this.RussianLanguageLabel);
-            this.BrowseGroupBox.Controls.Add(this.ChineseLanguageLabel);
-            this.BrowseGroupBox.Controls.Add(this.ArabicLanguageLabel);
-            this.BrowseGroupBox.Controls.Add(this.EnglishLanguageLabel);
+            this.BrowseGroupBox.Controls.Add(this.EditLanguageLabel);
             this.BrowseGroupBox.Controls.Add(this.BrowseHistoryClearLabel);
             this.BrowseGroupBox.Controls.Add(this.BrowseHistoryForwardButton);
             this.BrowseGroupBox.Controls.Add(this.BrowseHistoryBackwardButton);
@@ -1947,73 +1941,21 @@ partial class MainForm
             this.ToolTip.SetToolTip(this.BrowseGroupBox, "Book              = Key + Message\r\n114 chapters =    1   +      113\r\n6236 verses " +
         "  =    7   +    6229");
             // 
-            // RussianLanguageLabel
+            // EditLanguageLabel
             // 
-            this.RussianLanguageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.RussianLanguageLabel.BackColor = System.Drawing.Color.Transparent;
-            this.RussianLanguageLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.RussianLanguageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.RussianLanguageLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.RussianLanguageLabel.Image = ((System.Drawing.Image)(resources.GetObject("RussianLanguageLabel.Image")));
-            this.RussianLanguageLabel.Location = new System.Drawing.Point(102, 0);
-            this.RussianLanguageLabel.Name = "RussianLanguageLabel";
-            this.RussianLanguageLabel.Size = new System.Drawing.Size(16, 14);
-            this.RussianLanguageLabel.TabIndex = 3;
-            this.RussianLanguageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTip.SetToolTip(this.RussianLanguageLabel, "Pусский");
-            this.RussianLanguageLabel.Click += new System.EventHandler(this.LanguageLabel_Click);
-            // 
-            // ChineseLanguageLabel
-            // 
-            this.ChineseLanguageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ChineseLanguageLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ChineseLanguageLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ChineseLanguageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ChineseLanguageLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.ChineseLanguageLabel.Image = ((System.Drawing.Image)(resources.GetObject("ChineseLanguageLabel.Image")));
-            this.ChineseLanguageLabel.Location = new System.Drawing.Point(121, 0);
-            this.ChineseLanguageLabel.Name = "ChineseLanguageLabel";
-            this.ChineseLanguageLabel.Size = new System.Drawing.Size(16, 14);
-            this.ChineseLanguageLabel.TabIndex = 4;
-            this.ChineseLanguageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTip.SetToolTip(this.ChineseLanguageLabel, "中文");
-            this.ChineseLanguageLabel.Click += new System.EventHandler(this.LanguageLabel_Click);
-            // 
-            // ArabicLanguageLabel
-            // 
-            this.ArabicLanguageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.ArabicLanguageLabel.BackColor = System.Drawing.Color.Transparent;
-            this.ArabicLanguageLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.ArabicLanguageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ArabicLanguageLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.ArabicLanguageLabel.Image = ((System.Drawing.Image)(resources.GetObject("ArabicLanguageLabel.Image")));
-            this.ArabicLanguageLabel.Location = new System.Drawing.Point(139, 0);
-            this.ArabicLanguageLabel.Name = "ArabicLanguageLabel";
-            this.ArabicLanguageLabel.Size = new System.Drawing.Size(16, 14);
-            this.ArabicLanguageLabel.TabIndex = 5;
-            this.ArabicLanguageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTip.SetToolTip(this.ArabicLanguageLabel, "عربي");
-            this.ArabicLanguageLabel.Click += new System.EventHandler(this.LanguageLabel_Click);
-            // 
-            // EnglishLanguageLabel
-            // 
-            this.EnglishLanguageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.EnglishLanguageLabel.BackColor = System.Drawing.Color.Transparent;
-            this.EnglishLanguageLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.EnglishLanguageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.EnglishLanguageLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.EnglishLanguageLabel.Image = ((System.Drawing.Image)(resources.GetObject("EnglishLanguageLabel.Image")));
-            this.EnglishLanguageLabel.Location = new System.Drawing.Point(83, 0);
-            this.EnglishLanguageLabel.Name = "EnglishLanguageLabel";
-            this.EnglishLanguageLabel.Size = new System.Drawing.Size(16, 14);
-            this.EnglishLanguageLabel.TabIndex = 2;
-            this.EnglishLanguageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTip.SetToolTip(this.EnglishLanguageLabel, "English");
-            this.EnglishLanguageLabel.Click += new System.EventHandler(this.LanguageLabel_Click);
+            this.EditLanguageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.EditLanguageLabel.BackColor = System.Drawing.SystemColors.Control;
+            this.EditLanguageLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EditLanguageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.EditLanguageLabel.ForeColor = System.Drawing.SystemColors.Control;
+            this.EditLanguageLabel.Image = ((System.Drawing.Image)(resources.GetObject("EditLanguageLabel.Image")));
+            this.EditLanguageLabel.Location = new System.Drawing.Point(133, -3);
+            this.EditLanguageLabel.Name = "EditLanguageLabel";
+            this.EditLanguageLabel.Size = new System.Drawing.Size(21, 18);
+            this.EditLanguageLabel.TabIndex = 2;
+            this.EditLanguageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.EditLanguageLabel, "Edit");
+            this.EditLanguageLabel.Click += new System.EventHandler(this.EditLanguageLabel_Click);
             // 
             // BrowseHistoryClearLabel
             // 
@@ -2069,12 +2011,14 @@ partial class MainForm
             // 
             // LanguageComboBox
             // 
+            this.LanguageComboBox.DropDownHeight = 1000;
             this.LanguageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.LanguageComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LanguageComboBox.FormattingEnabled = true;
+            this.LanguageComboBox.IntegralHeight = false;
             this.LanguageComboBox.Location = new System.Drawing.Point(5, -3);
             this.LanguageComboBox.Name = "LanguageComboBox";
-            this.LanguageComboBox.Size = new System.Drawing.Size(75, 20);
+            this.LanguageComboBox.Size = new System.Drawing.Size(128, 20);
             this.LanguageComboBox.TabIndex = 1;
             this.LanguageComboBox.SelectedIndexChanged += new System.EventHandler(this.LanguageComboBox_SelectedIndexChanged);
             // 
@@ -3315,6 +3259,72 @@ partial class MainForm
             this.FindByTextPanel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
             this.FindByTextPanel.Leave += new System.EventHandler(this.FindByTextPanel_Leave);
             // 
+            // FindByTextMultiplicityNumberTypeLabel
+            // 
+            this.FindByTextMultiplicityNumberTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.FindByTextMultiplicityNumberTypeLabel.BackColor = System.Drawing.Color.LightGray;
+            this.FindByTextMultiplicityNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.FindByTextMultiplicityNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByTextMultiplicityNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
+            this.FindByTextMultiplicityNumberTypeLabel.Location = new System.Drawing.Point(125, 253);
+            this.FindByTextMultiplicityNumberTypeLabel.Name = "FindByTextMultiplicityNumberTypeLabel";
+            this.FindByTextMultiplicityNumberTypeLabel.Size = new System.Drawing.Size(24, 19);
+            this.FindByTextMultiplicityNumberTypeLabel.TabIndex = 20;
+            this.FindByTextMultiplicityNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.FindByTextMultiplicityNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByTextControl_EnabledChanged);
+            this.FindByTextMultiplicityNumberTypeLabel.Click += new System.EventHandler(this.FindByTextMultiplicityNumberTypeLabel_Click);
+            this.FindByTextMultiplicityNumberTypeLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
+            // 
+            // FindByTextMultiplicityComparisonOperatorLabel
+            // 
+            this.FindByTextMultiplicityComparisonOperatorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.FindByTextMultiplicityComparisonOperatorLabel.BackColor = System.Drawing.Color.LightGray;
+            this.FindByTextMultiplicityComparisonOperatorLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.FindByTextMultiplicityComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.FindByTextMultiplicityComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByTextMultiplicityComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
+            this.FindByTextMultiplicityComparisonOperatorLabel.Location = new System.Drawing.Point(51, 253);
+            this.FindByTextMultiplicityComparisonOperatorLabel.Name = "FindByTextMultiplicityComparisonOperatorLabel";
+            this.FindByTextMultiplicityComparisonOperatorLabel.Size = new System.Drawing.Size(18, 19);
+            this.FindByTextMultiplicityComparisonOperatorLabel.TabIndex = 18;
+            this.FindByTextMultiplicityComparisonOperatorLabel.Text = "=";
+            this.FindByTextMultiplicityComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ToolTip.SetToolTip(this.FindByTextMultiplicityComparisonOperatorLabel, "equals to");
+            this.FindByTextMultiplicityComparisonOperatorLabel.EnabledChanged += new System.EventHandler(this.FindByTextControl_EnabledChanged);
+            this.FindByTextMultiplicityComparisonOperatorLabel.Click += new System.EventHandler(this.FindByTextMultiplicityComparisonOperatorLabel_Click);
+            this.FindByTextMultiplicityComparisonOperatorLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
+            // 
+            // FindByTextMultiplicityNumericUpDown
+            // 
+            this.FindByTextMultiplicityNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.FindByTextMultiplicityNumericUpDown.BackColor = System.Drawing.Color.LightGray;
+            this.FindByTextMultiplicityNumericUpDown.Enabled = false;
+            this.FindByTextMultiplicityNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FindByTextMultiplicityNumericUpDown.Location = new System.Drawing.Point(69, 253);
+            this.FindByTextMultiplicityNumericUpDown.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.FindByTextMultiplicityNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.FindByTextMultiplicityNumericUpDown.Name = "FindByTextMultiplicityNumericUpDown";
+            this.FindByTextMultiplicityNumericUpDown.Size = new System.Drawing.Size(56, 20);
+            this.FindByTextMultiplicityNumericUpDown.TabIndex = 19;
+            this.FindByTextMultiplicityNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.FindByTextMultiplicityNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+            this.FindByTextMultiplicityNumericUpDown.ValueChanged += new System.EventHandler(this.FindByTextMultiplicityNumericUpDown_ValueChanged);
+            this.FindByTextMultiplicityNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByTextControl_EnabledChanged);
+            this.FindByTextMultiplicityNumericUpDown.Enter += new System.EventHandler(this.FindByTextControls_Enter);
+            this.FindByTextMultiplicityNumericUpDown.Leave += new System.EventHandler(this.FindByTextControls_Leave);
+            // 
             // FindByTextButton
             // 
             this.FindByTextButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -3375,41 +3385,6 @@ partial class MainForm
             this.FindByTextSearchBlockSizeBowingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.FindByTextSearchBlockSizeBowingLabel.Click += new System.EventHandler(this.FindByTextSearchBlockSizeBowingLabel_Click);
             this.FindByTextSearchBlockSizeBowingLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
-            // 
-            // FindByTextMultiplicityNumberTypeLabel
-            // 
-            this.FindByTextMultiplicityNumberTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.FindByTextMultiplicityNumberTypeLabel.BackColor = System.Drawing.Color.LightGray;
-            this.FindByTextMultiplicityNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.FindByTextMultiplicityNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByTextMultiplicityNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByTextMultiplicityNumberTypeLabel.Location = new System.Drawing.Point(125, 253);
-            this.FindByTextMultiplicityNumberTypeLabel.Name = "FindByTextMultiplicityNumberTypeLabel";
-            this.FindByTextMultiplicityNumberTypeLabel.Size = new System.Drawing.Size(24, 19);
-            this.FindByTextMultiplicityNumberTypeLabel.TabIndex = 20;
-            this.FindByTextMultiplicityNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.FindByTextMultiplicityNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByTextControl_EnabledChanged);
-            this.FindByTextMultiplicityNumberTypeLabel.Click += new System.EventHandler(this.FindByTextMultiplicityNumberTypeLabel_Click);
-            this.FindByTextMultiplicityNumberTypeLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
-            // 
-            // FindByTextMultiplicityComparisonOperatorLabel
-            // 
-            this.FindByTextMultiplicityComparisonOperatorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.FindByTextMultiplicityComparisonOperatorLabel.BackColor = System.Drawing.Color.LightGray;
-            this.FindByTextMultiplicityComparisonOperatorLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.FindByTextMultiplicityComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.FindByTextMultiplicityComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByTextMultiplicityComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-            this.FindByTextMultiplicityComparisonOperatorLabel.Location = new System.Drawing.Point(51, 253);
-            this.FindByTextMultiplicityComparisonOperatorLabel.Name = "FindByTextMultiplicityComparisonOperatorLabel";
-            this.FindByTextMultiplicityComparisonOperatorLabel.Size = new System.Drawing.Size(18, 19);
-            this.FindByTextMultiplicityComparisonOperatorLabel.TabIndex = 18;
-            this.FindByTextMultiplicityComparisonOperatorLabel.Text = "=";
-            this.FindByTextMultiplicityComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ToolTip.SetToolTip(this.FindByTextMultiplicityComparisonOperatorLabel, "equals to");
-            this.FindByTextMultiplicityComparisonOperatorLabel.EnabledChanged += new System.EventHandler(this.FindByTextControl_EnabledChanged);
-            this.FindByTextMultiplicityComparisonOperatorLabel.Click += new System.EventHandler(this.FindByTextMultiplicityComparisonOperatorLabel_Click);
-            this.FindByTextMultiplicityComparisonOperatorLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
             // 
             // FindByTextSearchBlockSizeVerseLabel
             // 
@@ -4567,37 +4542,6 @@ partial class MainForm
             this.FindByTextRootSearchTypeLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
             this.FindByTextRootSearchTypeLabel.Leave += new System.EventHandler(this.FindByTextPanel_Leave);
             // 
-            // FindByTextMultiplicityNumericUpDown
-            // 
-            this.FindByTextMultiplicityNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.FindByTextMultiplicityNumericUpDown.BackColor = System.Drawing.Color.LightGray;
-            this.FindByTextMultiplicityNumericUpDown.Enabled = false;
-            this.FindByTextMultiplicityNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.FindByTextMultiplicityNumericUpDown.Location = new System.Drawing.Point(69, 253);
-            this.FindByTextMultiplicityNumericUpDown.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.FindByTextMultiplicityNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.FindByTextMultiplicityNumericUpDown.Name = "FindByTextMultiplicityNumericUpDown";
-            this.FindByTextMultiplicityNumericUpDown.Size = new System.Drawing.Size(56, 20);
-            this.FindByTextMultiplicityNumericUpDown.TabIndex = 19;
-            this.FindByTextMultiplicityNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.FindByTextMultiplicityNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-            this.FindByTextMultiplicityNumericUpDown.ValueChanged += new System.EventHandler(this.FindByTextMultiplicityNumericUpDown_ValueChanged);
-            this.FindByTextMultiplicityNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByTextControl_EnabledChanged);
-            this.FindByTextMultiplicityNumericUpDown.Enter += new System.EventHandler(this.FindByTextControls_Enter);
-            this.FindByTextMultiplicityNumericUpDown.Leave += new System.EventHandler(this.FindByTextControls_Leave);
-            // 
             // FindByTextLabel
             // 
             this.FindByTextLabel.BackColor = System.Drawing.Color.Transparent;
@@ -5712,7 +5656,7 @@ partial class MainForm
             this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 1);
             this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
             this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-            this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 219);
+            this.ScriptOutputGroupBox.Size = new System.Drawing.Size(817, 221);
             this.ScriptOutputGroupBox.TabIndex = 103;
             this.ScriptOutputGroupBox.TabStop = false;
             this.ScriptOutputGroupBox.Text = " Output ";
@@ -5728,7 +5672,7 @@ partial class MainForm
             this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
             this.ScriptOutputTextBox.ReadOnly = true;
             this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 191);
+            this.ScriptOutputTextBox.Size = new System.Drawing.Size(797, 193);
             this.ScriptOutputTextBox.TabIndex = 0;
             this.ScriptOutputTextBox.WordWrap = false;
             this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -5753,7 +5697,7 @@ partial class MainForm
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
             this.TabControl.ShowToolTips = true;
-            this.TabControl.Size = new System.Drawing.Size(825, 191);
+            this.TabControl.Size = new System.Drawing.Size(825, 193);
             this.TabControl.TabIndex = 102;
             this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             this.TabControl.Click += new System.EventHandler(this.TabControl_Click);
@@ -5766,7 +5710,7 @@ partial class MainForm
             this.TranslationTabPage.Location = new System.Drawing.Point(4, 22);
             this.TranslationTabPage.Name = "TranslationTabPage";
             this.TranslationTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.TranslationTabPage.Size = new System.Drawing.Size(817, 166);
+            this.TranslationTabPage.Size = new System.Drawing.Size(817, 167);
             this.TranslationTabPage.TabIndex = 190;
             this.TranslationTabPage.Text = "Translation";
             this.TranslationTabPage.ToolTipText = "Translations for current selection/verse\r\nترجمة الءاية أو الءايات المظللة";
@@ -5982,7 +5926,7 @@ partial class MainForm
             this.GrammarTabPage.Controls.Add(this.GrammarTextBox);
             this.GrammarTabPage.Location = new System.Drawing.Point(4, 22);
             this.GrammarTabPage.Name = "GrammarTabPage";
-            this.GrammarTabPage.Size = new System.Drawing.Size(817, 166);
+            this.GrammarTabPage.Size = new System.Drawing.Size(817, 167);
             this.GrammarTabPage.TabIndex = 193;
             this.GrammarTabPage.Text = " Grammar";
             this.GrammarTabPage.ToolTipText = "Grammar details of the current word in Arabic and English\r\nإعراب الكلمة بالعربي و" +
@@ -6016,7 +5960,7 @@ partial class MainForm
             this.RelatedWordsTabPage.Controls.Add(this.RelatedWordsTextBox);
             this.RelatedWordsTabPage.Location = new System.Drawing.Point(4, 22);
             this.RelatedWordsTabPage.Name = "RelatedWordsTabPage";
-            this.RelatedWordsTabPage.Size = new System.Drawing.Size(817, 166);
+            this.RelatedWordsTabPage.Size = new System.Drawing.Size(817, 167);
             this.RelatedWordsTabPage.TabIndex = 192;
             this.RelatedWordsTabPage.Text = "Related Words";
             this.RelatedWordsTabPage.ToolTipText = "Related words from the same root as the current word\r\nالكلمات المشتقة من نفس جذر " +
@@ -6071,7 +6015,7 @@ partial class MainForm
             this.SymmetryTabPage.Controls.Add(this.SymmetryTextBox);
             this.SymmetryTabPage.Location = new System.Drawing.Point(4, 22);
             this.SymmetryTabPage.Name = "SymmetryTabPage";
-            this.SymmetryTabPage.Size = new System.Drawing.Size(817, 166);
+            this.SymmetryTabPage.Size = new System.Drawing.Size(817, 167);
             this.SymmetryTabPage.TabIndex = 201;
             this.SymmetryTabPage.Text = "Symmetry";
             this.SymmetryTabPage.ToolTipText = "Text symmetries starting from both ends [Dr Waleed S. Mohammed]\r\nتناظر النص من ال" +
@@ -6151,7 +6095,7 @@ partial class MainForm
             this.ValuesSequenceTabPage.Controls.Add(this.ValuesSequenceTextBox);
             this.ValuesSequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.ValuesSequenceTabPage.Name = "ValuesSequenceTabPage";
-            this.ValuesSequenceTabPage.Size = new System.Drawing.Size(817, 166);
+            this.ValuesSequenceTabPage.Size = new System.Drawing.Size(817, 167);
             this.ValuesSequenceTabPage.TabIndex = 198;
             this.ValuesSequenceTabPage.Text = "Values";
             this.ValuesSequenceTabPage.ToolTipText = "Values of letter/word/verse/chapter values in bases 2 to 36\r\nقيم الحروف والكلمات " +
@@ -6272,7 +6216,7 @@ partial class MainForm
             this.CVWLSequenceTabPage.Controls.Add(this.CVWLSequenceTextBox);
             this.CVWLSequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.CVWLSequenceTabPage.Name = "CVWLSequenceTabPage";
-            this.CVWLSequenceTabPage.Size = new System.Drawing.Size(817, 166);
+            this.CVWLSequenceTabPage.Size = new System.Drawing.Size(817, 167);
             this.CVWLSequenceTabPage.TabIndex = 200;
             this.CVWLSequenceTabPage.Text = "CVWL";
             this.CVWLSequenceTabPage.ToolTipText = "Concatenated chapter/verse/word/letter numbers and counts\r\nرصف أرقام وأعداد الحرو" +
@@ -6367,7 +6311,7 @@ partial class MainForm
             this.DNASequenceTabPage.Controls.Add(this.DNASequenceTextBox);
             this.DNASequenceTabPage.Location = new System.Drawing.Point(4, 22);
             this.DNASequenceTabPage.Name = "DNASequenceTabPage";
-            this.DNASequenceTabPage.Size = new System.Drawing.Size(817, 166);
+            this.DNASequenceTabPage.Size = new System.Drawing.Size(817, 167);
             this.DNASequenceTabPage.TabIndex = 195;
             this.DNASequenceTabPage.Text = "DNA";
             this.DNASequenceTabPage.ToolTipText = "Convert text into a DNA sequence to compare with the human genome [Belkacem Meghz" +
@@ -6445,7 +6389,7 @@ partial class MainForm
             this.MathsTabPage.Controls.Add(this.MathsPanel);
             this.MathsTabPage.Location = new System.Drawing.Point(4, 22);
             this.MathsTabPage.Name = "MathsTabPage";
-            this.MathsTabPage.Size = new System.Drawing.Size(817, 166);
+            this.MathsTabPage.Size = new System.Drawing.Size(817, 167);
             this.MathsTabPage.TabIndex = 197;
             this.MathsTabPage.Text = "C+V";
             this.MathsTabPage.ToolTipText = "Chapter +/- Verse calculations\r\nحسابات مجاميع وفروق الءايات والسُوَر";
@@ -6559,7 +6503,7 @@ partial class MainForm
             this.MathsPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MathsPanel.Location = new System.Drawing.Point(0, 0);
             this.MathsPanel.Name = "MathsPanel";
-            this.MathsPanel.Size = new System.Drawing.Size(817, 166);
+            this.MathsPanel.Size = new System.Drawing.Size(817, 167);
             this.MathsPanel.TabIndex = 0;
             // 
             // MathsInterestingNumbersEditLabel
@@ -7847,7 +7791,7 @@ partial class MainForm
             this.DistancesTabPage.Controls.Add(this.DistancesPanel);
             this.DistancesTabPage.Location = new System.Drawing.Point(4, 22);
             this.DistancesTabPage.Name = "DistancesTabPage";
-            this.DistancesTabPage.Size = new System.Drawing.Size(817, 166);
+            this.DistancesTabPage.Size = new System.Drawing.Size(817, 167);
             this.DistancesTabPage.TabIndex = 199;
             this.DistancesTabPage.Text = "Distances";
             this.DistancesTabPage.ToolTipText = "Distances to the start and end of Book, current chapter/verse/word\r\nالمسافات الى " +
@@ -7924,7 +7868,7 @@ partial class MainForm
             this.DistancesPanel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DistancesPanel.Location = new System.Drawing.Point(0, 0);
             this.DistancesPanel.Name = "DistancesPanel";
-            this.DistancesPanel.Size = new System.Drawing.Size(817, 166);
+            this.DistancesPanel.Size = new System.Drawing.Size(817, 167);
             this.DistancesPanel.TabIndex = 1;
             // 
             // DistancesInterestingNumbersEditLabel
@@ -8783,7 +8727,7 @@ partial class MainForm
             this.UserTextTabPage.Controls.Add(this.UserTextTextBox);
             this.UserTextTabPage.Location = new System.Drawing.Point(4, 22);
             this.UserTextTabPage.Name = "UserTextTabPage";
-            this.UserTextTabPage.Size = new System.Drawing.Size(817, 166);
+            this.UserTextTabPage.Size = new System.Drawing.Size(817, 167);
             this.UserTextTabPage.TabIndex = 194;
             this.UserTextTabPage.Text = " User Text ";
             this.UserTextTabPage.ToolTipText = "Calculate the value of any given text or find all words with a given value\r\nحساب " +
@@ -11805,12 +11749,12 @@ partial class MainForm
             this.FindBySimilarityPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.FindBySimilarityPercentageTrackBar)).EndInit();
             this.FindByTextPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.FindByTextMultiplicityNumericUpDown)).EndInit();
             this.TextLocationWithinChapterPanel.ResumeLayout(false);
             this.TextLocationInWordPanel.ResumeLayout(false);
             this.TextLocationWithinVersePanel.ResumeLayout(false);
             this.KeyboardPanel.ResumeLayout(false);
             this.KeyboardPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.FindByTextMultiplicityNumericUpDown)).EndInit();
             this.PositionsGroupBox.ResumeLayout(false);
             this.PositionsGroupBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LetterNumericUpDown)).EndInit();
@@ -12492,8 +12436,7 @@ partial class MainForm
     private System.Windows.Forms.Label GenerateSentencesLabel;
     private System.Windows.Forms.CheckBox DuplicateLettersCheckBox;
     private System.Windows.Forms.ComboBox LanguageComboBox;
-    private System.Windows.Forms.Label ArabicLanguageLabel;
-    private System.Windows.Forms.Label EnglishLanguageLabel;
+    private System.Windows.Forms.Label EditLanguageLabel;
     private System.Windows.Forms.Label FindByTextQuranHealingLabel;
     private System.Windows.Forms.Label DisplayProstrationVersesLabel;
     private System.Windows.Forms.Label AuthorLabel;
@@ -12531,8 +12474,6 @@ partial class MainForm
     private System.Windows.Forms.ColumnHeader LetterReversePositionSumColumnHeader;
     private System.Windows.Forms.ColumnHeader LetterReverseDistanceSumColumnHeader;
     private System.Windows.Forms.Label LetterFrequencyDistanceSumSumLabel;
-    private System.Windows.Forms.Label ChineseLanguageLabel;
-    private System.Windows.Forms.Label RussianLanguageLabel;
     private System.Windows.Forms.TextBox Nth4n1NumberTextBox;
     private System.Windows.Forms.ContextMenuStrip WordsListBoxContextMenuStrip;
     private System.Windows.Forms.ToolStripMenuItem FindSelectedWordsMenuItem;

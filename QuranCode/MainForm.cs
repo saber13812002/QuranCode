@@ -83,80 +83,10 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Languages
     ///////////////////////////////////////////////////////////////////////////////
-    private Dictionary<string, string> m_language_metadata = null;
-    private void LoadLanguageMetadata()
-    {
-        this.Cursor = Cursors.WaitCursor;
-        try
-        {
-            if (Directory.Exists(Globals.LANGUAGES_FOLDER))
-            {
-                if (m_language_metadata == null)
-                {
-                    m_language_metadata = new Dictionary<string, string>();
-                }
-                if (m_language_metadata != null)
-                {
-                    m_language_metadata.Clear();
-
-                    string filename = Globals.LANGUAGES_FOLDER + "/" + "metadata" + ".txt";
-                    List<string> lines = FileHelper.LoadLines(filename);
-                    foreach (string line in lines)
-                    {
-                        string[] parts = line.Split('\t');
-                        if (parts.Length >= 2)
-                        {
-                            if (parts[0] == "Dictionary")
-                            {
-                                if (parts.Length > 2)
-                                {
-                                    if ((parts[1].Length > 0) && (parts[2].Length > 0))
-                                    {
-                                        m_language_metadata.Add(parts[1], parts[2]);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            while (ex != null)
-            {
-                MessageBox.Show(ex.Message, Application.ProductName);
-                ex = ex.InnerException;
-            }
-        }
-        finally
-        {
-            this.Cursor = Cursors.Default;
-        }
-    }
-
+    private Dictionary<string, Dictionary<string, string>> L = new Dictionary<string, Dictionary<string, string>>();
     private string l = DEFAULT_LANGUAGE;
     private string previous_l = null;
     private List<string> m_language_names = null;
-    private void LanguageLabel_Click(object sender, EventArgs e)
-    {
-        Control control = sender as Control;
-        if (control != null)
-        {
-            int pos = control.Name.IndexOf("LanguageLabel");
-            if (pos > -1)
-            {
-                previous_l = l;
-
-                l = m_language_metadata[control.Name.Remove(pos)];
-                LoadLanguage(l);
-
-                LanguageComboBox.SelectedIndexChanged -= new EventHandler(LanguageComboBox_SelectedIndexChanged);
-                LanguageComboBox.SelectedItem = l;
-                LanguageComboBox.SelectedIndexChanged += new EventHandler(LanguageComboBox_SelectedIndexChanged);
-            }
-        }
-    }
     private void InstallLanguages()
     {
         if (Directory.Exists(Globals.LANGUAGES_FOLDER))
@@ -191,12 +121,10 @@ public partial class MainForm : Form, ISubscriber
                                 if (pos > -1)
                                 {
                                     string language_name = file.Name.Remove(pos);
-                                    if (language_name == "metadata")
+                                    if (!String.IsNullOrEmpty(language_name))
                                     {
-                                        LoadLanguageMetadata();
-                                    }
-                                    else
-                                    {
+                                        if (language_name == "metadata") continue;
+
                                         m_language_names.Add(language_name);
                                     }
                                 }
@@ -265,7 +193,6 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
-    private Dictionary<string, Dictionary<string, string>> L = new Dictionary<string, Dictionary<string, string>>();
     private void LoadLanguage(string language_name)
     {
         this.Cursor = Cursors.WaitCursor;
@@ -497,6 +424,7 @@ public partial class MainForm : Form, ISubscriber
         try
         {
             this.ToolTip.SetToolTip(this.FontLabel, L[l]["Font"]);
+            this.ToolTip.SetToolTip(this.EditLanguageLabel, L[l]["Edit"]);
             this.ToolTip.SetToolTip(this.ResearchMethodsRunButton, L[l]["Run"]);
             this.ToolTip.SetToolTip(this.InspectChaptersLabel, L[l]["Inspect chapters"]);
             this.ToolTip.SetToolTip(this.InspectVersesLabel, L[l]["Inspect verses"]);
@@ -658,6 +586,14 @@ public partial class MainForm : Form, ISubscriber
         catch
         {
             // ignore
+        }
+    }
+    private void EditLanguageLabel_Click(object sender, EventArgs e)
+    {
+        if (LanguageComboBox.SelectedIndex != -1)
+        {
+            string filename = Globals.LANGUAGES_FOLDER + "/" + LanguageComboBox.SelectedItem.ToString() + ".txt";
+            FileHelper.DisplayFile(filename);
         }
     }
     /////////////////////////////////////////////////////////////////////////////
@@ -978,10 +914,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByNumbersResultTypeLettersLabel = new System.Windows.Forms.Label();
         this.BrowseHistoryCounterLabel = new System.Windows.Forms.Label();
         this.BrowseGroupBox = new System.Windows.Forms.GroupBox();
-        this.ChineseLanguageLabel = new System.Windows.Forms.Label();
-        this.ArabicLanguageLabel = new System.Windows.Forms.Label();
-        this.RussianLanguageLabel = new System.Windows.Forms.Label();
-        this.EnglishLanguageLabel = new System.Windows.Forms.Label();
+        this.EditLanguageLabel = new System.Windows.Forms.Label();
         this.BrowseHistoryClearLabel = new System.Windows.Forms.Label();
         this.BrowseHistoryForwardButton = new System.Windows.Forms.Button();
         this.BrowseHistoryBackwardButton = new System.Windows.Forms.Button();
@@ -2722,10 +2655,7 @@ public partial class MainForm : Form, ISubscriber
         this.BrowseGroupBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
         | System.Windows.Forms.AnchorStyles.Right)));
         this.BrowseGroupBox.BackColor = System.Drawing.SystemColors.WindowText;
-        this.BrowseGroupBox.Controls.Add(this.ChineseLanguageLabel);
-        this.BrowseGroupBox.Controls.Add(this.ArabicLanguageLabel);
-        this.BrowseGroupBox.Controls.Add(this.RussianLanguageLabel);
-        this.BrowseGroupBox.Controls.Add(this.EnglishLanguageLabel);
+        this.BrowseGroupBox.Controls.Add(this.EditLanguageLabel);
         this.BrowseGroupBox.Controls.Add(this.BrowseHistoryClearLabel);
         this.BrowseGroupBox.Controls.Add(this.BrowseHistoryForwardButton);
         this.BrowseGroupBox.Controls.Add(this.BrowseHistoryBackwardButton);
@@ -2746,77 +2676,23 @@ public partial class MainForm : Form, ISubscriber
         this.ToolTip.SetToolTip(this.BrowseGroupBox, "Book              = Key + Message\r\n114 chapters =    1   +      113\r\n6236 verses " +
     "  =    7   +    6229");
         // 
-        // ChineseLanguageLabel
+        // EditLanguageLabel
         // 
-        this.ChineseLanguageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+        this.EditLanguageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
         | System.Windows.Forms.AnchorStyles.Right)));
-        this.ChineseLanguageLabel.BackColor = System.Drawing.Color.Transparent;
-        this.ChineseLanguageLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.ChineseLanguageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.ChineseLanguageLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.ChineseLanguageLabel.Image = ((System.Drawing.Image)(resources.GetObject("ChineseLanguageLabel.Image")));
-        this.ChineseLanguageLabel.Location = new System.Drawing.Point(168, 2);
-        this.ChineseLanguageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.ChineseLanguageLabel.Name = "ChineseLanguageLabel";
-        this.ChineseLanguageLabel.Size = new System.Drawing.Size(21, 14);
-        this.ChineseLanguageLabel.TabIndex = 7;
-        this.ChineseLanguageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.ChineseLanguageLabel, "中文");
-        this.ChineseLanguageLabel.Click += new System.EventHandler(this.LanguageLabel_Click);
-        // 
-        // ArabicLanguageLabel
-        // 
-        this.ArabicLanguageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-        | System.Windows.Forms.AnchorStyles.Right)));
-        this.ArabicLanguageLabel.BackColor = System.Drawing.Color.Transparent;
-        this.ArabicLanguageLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.ArabicLanguageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.ArabicLanguageLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.ArabicLanguageLabel.Image = ((System.Drawing.Image)(resources.GetObject("ArabicLanguageLabel.Image")));
-        this.ArabicLanguageLabel.Location = new System.Drawing.Point(188, 2);
-        this.ArabicLanguageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.ArabicLanguageLabel.Name = "ArabicLanguageLabel";
-        this.ArabicLanguageLabel.Size = new System.Drawing.Size(21, 14);
-        this.ArabicLanguageLabel.TabIndex = 2;
-        this.ArabicLanguageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.ArabicLanguageLabel, "عربي");
-        this.ArabicLanguageLabel.Click += new System.EventHandler(this.LanguageLabel_Click);
-        // 
-        // RussianLanguageLabel
-        // 
-        this.RussianLanguageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-        | System.Windows.Forms.AnchorStyles.Right)));
-        this.RussianLanguageLabel.BackColor = System.Drawing.Color.Transparent;
-        this.RussianLanguageLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.RussianLanguageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.RussianLanguageLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.RussianLanguageLabel.Image = ((System.Drawing.Image)(resources.GetObject("RussianLanguageLabel.Image")));
-        this.RussianLanguageLabel.Location = new System.Drawing.Point(149, 2);
-        this.RussianLanguageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.RussianLanguageLabel.Name = "RussianLanguageLabel";
-        this.RussianLanguageLabel.Size = new System.Drawing.Size(21, 14);
-        this.RussianLanguageLabel.TabIndex = 6;
-        this.RussianLanguageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.RussianLanguageLabel, "Pусский");
-        this.RussianLanguageLabel.Click += new System.EventHandler(this.LanguageLabel_Click);
-        // 
-        // EnglishLanguageLabel
-        // 
-        this.EnglishLanguageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-        | System.Windows.Forms.AnchorStyles.Right)));
-        this.EnglishLanguageLabel.BackColor = System.Drawing.Color.Transparent;
-        this.EnglishLanguageLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.EnglishLanguageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.EnglishLanguageLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.EnglishLanguageLabel.Image = ((System.Drawing.Image)(resources.GetObject("EnglishLanguageLabel.Image")));
-        this.EnglishLanguageLabel.Location = new System.Drawing.Point(128, 2);
-        this.EnglishLanguageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.EnglishLanguageLabel.Name = "EnglishLanguageLabel";
-        this.EnglishLanguageLabel.Size = new System.Drawing.Size(21, 14);
-        this.EnglishLanguageLabel.TabIndex = 1;
-        this.EnglishLanguageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.EnglishLanguageLabel, "English");
-        this.EnglishLanguageLabel.Click += new System.EventHandler(this.LanguageLabel_Click);
+        this.EditLanguageLabel.BackColor = System.Drawing.Color.Transparent;
+        this.EditLanguageLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.EditLanguageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.EditLanguageLabel.ForeColor = System.Drawing.SystemColors.WindowText;
+        this.EditLanguageLabel.Image = ((System.Drawing.Image)(resources.GetObject("EditLanguageLabel.Image")));
+        this.EditLanguageLabel.Location = new System.Drawing.Point(188, 2);
+        this.EditLanguageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+        this.EditLanguageLabel.Name = "EditLanguageLabel";
+        this.EditLanguageLabel.Size = new System.Drawing.Size(21, 14);
+        this.EditLanguageLabel.TabIndex = 2;
+        this.EditLanguageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.ToolTip.SetToolTip(this.EditLanguageLabel, "Edit");
+        this.EditLanguageLabel.Click += new System.EventHandler(this.EditLanguageLabel_Click);
         // 
         // BrowseHistoryClearLabel
         // 
