@@ -41305,25 +41305,21 @@ public partial class MainForm : Form, ISubscriber
     {
         if (verse != null)
         {
-            if (m_language_metadata != null)
-            {
-                //string text = L[l]["Chapter"] + "   " + verse.Chapter.SortedNumber + ": " + L[l][verse.Chapter.TransliteratedName] + "   "
-                string text = ((l == m_language_metadata["Arabic"]) ? L[l]["chapter"] : L[l][verse.Chapter.TransliteratedName]) + " "
-                     + verse.Chapter.Name + "    "
-                     + L[l]["Verse"] + " " + verse.NumberInChapter //+ "/" + verse.Chapter.Verses.Count + "   "
-                    //+ L[l]["Station"] + " " + ((verse.Station != null) ? verse.Station.Number : -1) + "   "
-                    //+ L[l]["Part"] + " " + ((verse.Part != null) ? verse.Part.Number : -1) + "   "
-                    //+ L[l]["Group"] + " " + ((verse.Group != null) ? verse.Group.Number : -1) + "   "
-                    //+ L[l]["Half"] + " " + ((verse.Half != null) ? verse.Half.Number : -1) + "   "
-                    //+ L[l]["Quarter"] + " " + ((verse.Quarter != null) ? verse.Quarter.Number : -1) + "   "
-                    //+ L[l]["Bowing"] + " " + ((verse.Bowing != null) ? verse.Bowing.Number : -1) + "   "
-                     + "     "
-                     + L[l]["Page"] + " " + ((verse.Page != null) ? verse.Page.Number : -1)
-                ;
-                return text;
-            }
+            //string text = L[l]["Chapter"] + " " + verse.Chapter.SortedNumber + " " + L[l][verse.Chapter.TransliteratedName] + "     "
+            string text = L[l][verse.Chapter.TransliteratedName] + "     "
+                 + L[l]["Verse"] + " " + verse.NumberInChapter //+ "/" + verse.Chapter.Verses.Count + "   "
+                //+ L[l]["Station"] + " " + ((verse.Station != null) ? verse.Station.Number : -1) + "   "
+                //+ L[l]["Part"] + " " + ((verse.Part != null) ? verse.Part.Number : -1) + "   "
+                //+ L[l]["Group"] + " " + ((verse.Group != null) ? verse.Group.Number : -1) + "   "
+                //+ L[l]["Half"] + " " + ((verse.Half != null) ? verse.Half.Number : -1) + "   "
+                //+ L[l]["Quarter"] + " " + ((verse.Quarter != null) ? verse.Quarter.Number : -1) + "   "
+                //+ L[l]["Bowing"] + " " + ((verse.Bowing != null) ? verse.Bowing.Number : -1) + "   "
+                 + "     "
+                 + L[l]["Page"] + " " + ((verse.Page != null) ? verse.Page.Number : -1)
+            ;
+            return text;
         }
-        return null;
+        return "";
     }
 
     private RichTextBoxEx m_active_textbox = null;
