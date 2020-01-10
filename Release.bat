@@ -51,10 +51,9 @@ CD Build\Release
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip UserText\*.*
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Values\*.*
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Scripts\*.*
-"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Readme.txt
-"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Features.txt
-"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Clean.bat
-
+"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip    -mx5 QuranCode1433.zip Readme.txt
+"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip    -mx5 QuranCode1433.zip Features.txt
+"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip    -mx5 QuranCode1433.zip Clean.bat
 MOVE QuranCode1433.zip ..\..\QuranCode1433.zip
 CD ..\..
 
@@ -68,7 +67,7 @@ COPY /Y NET2\Build\Release\*.dll Files\NET2\
 COPY /Y      Build\Release\*.exe Files\NET4\
 COPY /Y      Build\Release\*.dll Files\NET4\
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Files\*.*
-"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Setup.bat
+"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip    -mx5 QuranCode1433.zip Setup.bat
 RD /S /Q Files
 
 CALL Version.bat

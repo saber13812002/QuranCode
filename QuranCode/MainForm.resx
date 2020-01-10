@@ -170,7 +170,7 @@
   <data name="AppIndicesLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADr0AAA69AUf7kK0AAALLSURBVDhPhZNrSFNhGMePDa8wMyovTVdCXgjCyL6UhH2K
+        YQUAAAAJcEhZcwAADrwAAA68AZW8ckkAAALLSURBVDhPhZNrSFNhGMePDa8wMyovTVdCXgjCyL6UhH2K
         CD8ofogQSkhF6EJ96KZWJupUzNs0daZJlhrNgcy7R3PL3XQbzlKn7jRxhlPBSJcmhf/ec4SJsOiFl+fl
         Pc//d/7Pw/NSlIsVeascofF3QJ1P4TZ7Zu9c5e69i0lG9EMJCpkZVC85UGXdRoUNKLH+QIZhDMfv1YAi
         OS5B7B9yFmYwsL6J5MFvONM6iWKDHUk9DGLaZqBaB3p+biBNb3LhJjYNxYtWSJhlXJRNI6rFjInVTbCL
@@ -334,15 +334,17 @@
   </data>
   <data name="EditLanguageLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAJcEhZcwAADsEAAA7BAbiRa+0AAAF3SURBVDhPY2AgAZyPlP7/YoL5/2flpv9J0AZRejGI9/+U
-        jrL/N2IE/391FPj/SZaDeEPOBwj9X9eR+B8EJpYn/f+mwPn/kzDb/wemgoQNOebC9//N1dr/f76z/G+v
-        8v//+fv//5OTIv9fYGT4f9dCCL8BR5whmr99ZPn/7QXj/19HGf7XF/r9//wPaEhK7P/TgeK4DThgx4PQ
-        /Byi+cd2hv8Pa/n+N0bb/j8dJopb80Fbvv/PDydCbIZp3sEM1nyznOv/KW8B3Jp3WwtAbP7EitAMtflh
-        k+j/oz5iuDXvNOcHa/6OrBlq841Szv+HPfE4e6sJxM8omuE2i/zf4ySM2+bjSWp4bcarGZTKQAaAwM/z
-        qKH9oEnk/w4bIhLLy8MT/v//evv/v8vG8Ki6Vc75f4s1H+GUBnLBp3MT//9/ter//6uF//9fS/h/Np7v
-        /1ItTuI0T1Rj/Z/OyvD/497E//9O+f+/Uy4LxkTnNpAB/WpsxGtAMxkAIjIpvYQUWNYAAAAASUVORK5C
-        YII=
+        iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
+        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAISSURBVDhPjZNNaxNRFIarv0LEgiDoouDG0r0UpH6A
+        FBSkrRUp6KKKO6sRFy6yqEqxEEELRVAKRUrFIgoFg2gkxC5sm6SJ2JiYJraJNJnMZGYy+fDx3iGJiTat
+        Ay9zuXPOc885d942oE08+4SOCHXtoP3i+26ZU5O9kMmFQkEplUqVcrnMVhLfcblc4yK2CVIDdMnkfD6P
+        rut15XI5stksqVTKhiaCM4SnzvH1pZPFyWMsPewYlKfvkmXLANM0sSzLfktpmoaiKKTTabTEC9bdIyjL
+        r0BLkl2ewXu/Z6MJIJNrkgDDMFBVlY0v02RW7mCtzbH+7h6Gf5ZyzIP/ySWzCSDaqPcv17JvZW2eTOA2
+        FcODEbnC5qerhJ4N8fnxgOIZO32oCfD38NTkWzL+m1RML/rqBcx4P+qKg/jTXoZPHBiotv9nBo2AZED0
+        vDBSTR7E/N5HLnCLyMRJ9GRAXp28cjm/fwHJ4Byh+eui7PeY0SEK8fMoopLVR8dRU9/sNlsCQh+mCL52
+        sPTmAQnfWfRoP5uLN4hM9qL/jNpz2RbwfLQb1BjhiTO4HXv5KE71jvWg/QjbyTsCnJcPY3ldWL5xfM6j
+        zA4fJBMPUCwW69q2gr7uPYxe7MB99xQL09fIpWLIK21UK8CvVj7YYr8ih2j7qGqmTvEH6iKwpZkaIBUR
+        q0kDNgLaxUbnf9i5Zndp/XYJ+A0hbp0s3C/xLAAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="BrowseHistoryForwardButton.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
@@ -640,13 +642,16 @@
   <data name="EditSaveTranslationLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29m
-        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAFrSURBVDhPY/j//z8DJZhozU926XPeXuX/6tTkgL8n
-        Jvj9vzRX//69JaaSRBtwc0XA/xtLs/5/f3jy/4/Hp/+fmur0/1CT4TqiDADa/v/LleX/fzw8+v/n4zNg
-        /P323v8nJ/j/JWgASPOPt4f//3i04v/ddTn/v5xfCsYgA05PDv6O1wCY5j9fNv//ejPj/+fz+f8vzI38
-        f3d18f+TE/2BYf+fAacBKJrvJPz/cs3l/693ff+fbYn9f7PfGqwZpwHEasZqwP4J6mA/g52Nx2asLtjZ
-        qfb/07N9RGuGu2BGsoICSPPD0xv+n1iZTpTNKC6YnCv3/9PDE/9/Pb/4f2utyf/DMw3/3zmS+//8HK//
-        x5tN4AGGLcmDQxJkwE9g6nqzKvH/ixkO/w+li/5flSD2f0uZDl7NcC9EOgn9vzIn9v/X88v+vzm/8v/B
-        bg+iNMMNiHAQ/h/nJPp/TqYqWOOubuu1xOZQgkmZkEEAVVz3JvPhoV4AAAAASUVORK5CYII=
+        dHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAISSURBVDhPjZNNaxNRFIarv0LEgiDoouDG0r0UpH6A
+        FBSkrRUp6KKKO6sRFy6yqEqxEEELRVAKRUrFIgoFg2gkxC5sm6SJ2JiYJraJNJnMZGYy+fDx3iGJiTat
+        Ay9zuXPOc885d942oE08+4SOCHXtoP3i+26ZU5O9kMmFQkEplUqVcrnMVhLfcblc4yK2CVIDdMnkfD6P
+        rut15XI5stksqVTKhiaCM4SnzvH1pZPFyWMsPewYlKfvkmXLANM0sSzLfktpmoaiKKTTabTEC9bdIyjL
+        r0BLkl2ewXu/Z6MJIJNrkgDDMFBVlY0v02RW7mCtzbH+7h6Gf5ZyzIP/ySWzCSDaqPcv17JvZW2eTOA2
+        FcODEbnC5qerhJ4N8fnxgOIZO32oCfD38NTkWzL+m1RML/rqBcx4P+qKg/jTXoZPHBiotv9nBo2AZED0
+        vDBSTR7E/N5HLnCLyMRJ9GRAXp28cjm/fwHJ4Byh+eui7PeY0SEK8fMoopLVR8dRU9/sNlsCQh+mCL52
+        sPTmAQnfWfRoP5uLN4hM9qL/jNpz2RbwfLQb1BjhiTO4HXv5KE71jvWg/QjbyTsCnJcPY3ldWL5xfM6j
+        zA4fJBMPUCwW69q2gr7uPYxe7MB99xQL09fIpWLIK21UK8CvVj7YYr8ih2j7qGqmTvEH6iKwpZkaIBUR
+        q0kDNgLaxUbnf9i5Zndp/XYJ+A0hbp0s3C/xLAAAAABJRU5ErkJggg==
 </value>
   </data>
   <data name="TranslationsApplySettingsLabel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

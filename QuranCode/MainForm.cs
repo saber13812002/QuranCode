@@ -83,7 +83,48 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Languages
     ///////////////////////////////////////////////////////////////////////////////
-    private Dictionary<string, Dictionary<string, string>> L = new Dictionary<string, Dictionary<string, string>>();
+    private Dictionary<string, string> m_english_native_names = null;
+    private Dictionary<string, string> m_native_english_names = null;
+    private void LoadNativeLanguageNames(string language_name)
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (Directory.Exists(Globals.LANGUAGES_FOLDER))
+            {
+                m_english_native_names = new Dictionary<string, string>();
+                m_native_english_names = new Dictionary<string, string>();
+
+                string filename = Globals.LANGUAGES_FOLDER + "/" + language_name + ".txt";
+                List<string> lines = FileHelper.LoadLines(filename);
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split('\t');
+                    if (parts.Length == 2)
+                    {
+                        if ((parts[0].Length > 0) && (parts[1].Length > 0))
+                        {
+                            m_english_native_names.Add(parts[0], parts[1]);
+                            m_native_english_names.Add(parts[1], parts[0]);
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
+    }
+    private Dictionary<string, Dictionary<string, string>> L = null;
     private string l = DEFAULT_LANGUAGE;
     private string previous_l = null;
     private List<string> m_language_names = null;
@@ -123,9 +164,14 @@ public partial class MainForm : Form, ISubscriber
                                     string language_name = file.Name.Remove(pos);
                                     if (!String.IsNullOrEmpty(language_name))
                                     {
-                                        if (language_name == "metadata") continue;
-
-                                        m_language_names.Add(language_name);
+                                        if (language_name == "metadata")
+                                        {
+                                            LoadNativeLanguageNames(language_name);
+                                        }
+                                        else
+                                        {
+                                            m_language_names.Add(language_name);
+                                        }
                                     }
                                 }
                             }
@@ -151,7 +197,12 @@ public partial class MainForm : Form, ISubscriber
                 LanguageComboBox.Items.Clear();
                 foreach (string language_name in m_language_names)
                 {
-                    LanguageComboBox.Items.Add(language_name);
+                    if (m_native_english_names.ContainsKey(language_name))
+                    {
+                        string english_name = m_native_english_names[language_name];
+                        LanguageComboBox.Items.Add(english_name + LANGUAGE_SEPARATOR + language_name);
+                    }
+                    LanguageComboBox.Sorted = true;
                 }
             }
         }
@@ -173,22 +224,15 @@ public partial class MainForm : Form, ISubscriber
     {
         if (LanguageComboBox.SelectedIndex > -1)
         {
-            ApplyLanguage(LanguageComboBox.SelectedIndex);
-        }
-    }
-    private void ApplyLanguage(int index)
-    {
-        if (m_language_names != null)
-        {
-            if ((index >= 0) && (index < m_language_names.Count))
+            string item = LanguageComboBox.SelectedItem.ToString();
+            int i = item.IndexOf(LANGUAGE_SEPARATOR);
+            if (i > -1)
             {
                 previous_l = l;
-
-                l = m_language_names[index];
-                if (l != null)
+                l = item.Substring(i + LANGUAGE_SEPARATOR.Length);
+                if (!String.IsNullOrEmpty(l))
                 {
                     LoadLanguage(l);
-                    //LanguageComboBox.SelectedItem = l;
                 }
             }
         }
@@ -200,210 +244,218 @@ public partial class MainForm : Form, ISubscriber
         {
             if (Directory.Exists(Globals.LANGUAGES_FOLDER))
             {
-                Dictionary<string, string> language = new Dictionary<string, string>();
-                List<Control> controls = GetDescendentControls(this);
-
-                string filename = Globals.LANGUAGES_FOLDER + "/" + language_name + ".txt";
-                List<string> lines = FileHelper.LoadLines(filename);
-                foreach (string line in lines)
+                if (L == null)
                 {
-                    string[] parts = line.Split('\t');
-                    if (parts.Length >= 2)
-                    {
-                        if (parts[0] == "Dictionary")
-                        {
-                            if (parts.Length > 2)
-                            {
-                                if ((parts[1].Length > 0) && (parts[2].Length > 0))
-                                {
-                                    language.Add(parts[1], parts[2]);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            foreach (Control control in controls)
-                            {
-                                if (parts[0] == control.Name)
-                                {
-                                    // set Text
-                                    if (parts.Length > 2)
-                                    {
-                                        if (parts[2].Length > 0)
-                                        {
-                                            control.Text = parts[2];
-                                        }
-                                    }
+                    L = new Dictionary<string, Dictionary<string, string>>();
+                }
 
-                                    // set ToolTip
-                                    if (parts.Length > 4)
+                if (L != null)
+                {
+                    Dictionary<string, string> language = new Dictionary<string, string>();
+                    List<Control> controls = GetDescendentControls(this);
+
+                    string filename = Globals.LANGUAGES_FOLDER + "/" + language_name + ".txt";
+                    List<string> lines = FileHelper.LoadLines(filename);
+                    foreach (string line in lines)
+                    {
+                        string[] parts = line.Split('\t');
+                        if (parts.Length >= 2)
+                        {
+                            if (parts[0] == "Dictionary")
+                            {
+                                if (parts.Length > 2)
+                                {
+                                    if ((parts[1].Length > 0) && (parts[2].Length > 0))
                                     {
-                                        if (parts[4].Length > 0)
-                                        {
-                                            if (control is TabPage)
-                                            {
-                                                (control as TabPage).ToolTipText = parts[4];
-                                            }
-                                            else
-                                            {
-                                                ToolTip.SetToolTip(control, parts[4]);
-                                            }
-                                        }
+                                        language.Add(parts[1], parts[2]);
                                     }
                                 }
-                            }
-                        }
-                    }
-                }
-
-                if (L.ContainsKey(l))
-                {
-                    L[l] = language;
-                }
-                else
-                {
-                    L.Add(language_name, language);
-                }
-
-                UpdateHeaderLabel();
-                PopulateChaptersListBox();
-                DisplayChapterRevelationInfo();
-
-                UpdateGoldenRatioScopeLabel();
-                UpdateGoldenRatioOrderLabel();
-                UpdateGoldenRatioTypeLabel();
-
-                UpdateFindByNumbersResultType();
-                UpdateDistancesOptions();
-                foreach (Control control in controls)
-                {
-                    if (control.Name.Contains("ComparisonOperator"))
-                    {
-                        if (control.Text.Length > 0)
-                        {
-                            ToolTip.SetToolTip(control, L[l][control.Text]);
-                        }
-                    }
-                    else if (control.Name.Contains("NumberType"))
-                    {
-                        if (control.Text.Length > 0)
-                        {
-                            int remainder;
-                            if (int.TryParse(control.Text, out remainder))
-                            {
-                                ToolTip.SetToolTip(control, L[l]["remainder"]);
                             }
                             else
+                            {
+                                foreach (Control control in controls)
+                                {
+                                    if (parts[0] == control.Name)
+                                    {
+                                        // set Text
+                                        if (parts.Length > 2)
+                                        {
+                                            if (parts[2].Length > 0)
+                                            {
+                                                control.Text = parts[2];
+                                            }
+                                        }
+
+                                        // set ToolTip
+                                        if (parts.Length > 4)
+                                        {
+                                            if (parts[4].Length > 0)
+                                            {
+                                                if (control is TabPage)
+                                                {
+                                                    (control as TabPage).ToolTipText = parts[4];
+                                                }
+                                                else
+                                                {
+                                                    ToolTip.SetToolTip(control, parts[4]);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (L.ContainsKey(l))
+                    {
+                        L[l] = language;
+                    }
+                    else
+                    {
+                        L.Add(language_name, language);
+                    }
+
+                    UpdateHeaderLabel();
+                    PopulateChaptersListBox();
+                    DisplayChapterRevelationInfo();
+
+                    UpdateGoldenRatioScopeLabel();
+                    UpdateGoldenRatioOrderLabel();
+                    UpdateGoldenRatioTypeLabel();
+
+                    UpdateFindByNumbersResultType();
+                    UpdateDistancesOptions();
+                    foreach (Control control in controls)
+                    {
+                        if (control.Name.Contains("ComparisonOperator"))
+                        {
+                            if (control.Text.Length > 0)
                             {
                                 ToolTip.SetToolTip(control, L[l][control.Text]);
                             }
                         }
-                    }
-                }
-
-                ToolTip.SetToolTip(CalculationModeLabel, L[l][m_client.CalculationMode.ToString()]);
-
-                ToolTip.SetToolTip(NumberKindIndexTextBox, L[l][m_number_kind.ToString() + " number index"]);
-                if (ChapterSortComboBox.SelectedItem != null) ToolTip.SetToolTip(ChapterSortComboBox, L[l][ChapterSortComboBox.SelectedItem.ToString()]);
-                ToolTip.SetToolTip(ChapterSortLabel, L[l][Chapter.SortOrder.ToString()]);
-
-                if (ChapterSelectionComboBox.SelectedItem != null) ToolTip.SetToolTip(ChapterSelectionComboBox, L[l][(m_chapter_selection.ToString() + " " + "chapters")]);
-
-                if (m_found_verses_displayed)
-                {
-                    if (m_word_wrap_search_textbox)
-                    {
-                        ToolTip.SetToolTip(WordWrapLabel, L[l]["Unwrap"]);
-                    }
-                    else
-                    {
-                        ToolTip.SetToolTip(WordWrapLabel, L[l]["Wrap"]);
-                    }
-                }
-                else
-                {
-                    if (m_word_wrap_main_textbox)
-                    {
-                        ToolTip.SetToolTip(WordWrapLabel, L[l]["Unwrap"]);
-                    }
-                    else
-                    {
-                        ToolTip.SetToolTip(WordWrapLabel, L[l]["Wrap"]);
-                    }
-                }
-
-                if (m_word_wrap_translation_textbox)
-                {
-                    ToolTip.SetToolTip(TranslationWordWrapLabel, L[l]["Unwrap"]);
-                }
-                else
-                {
-                    ToolTip.SetToolTip(TranslationWordWrapLabel, L[l]["Wrap"]);
-                }
-
-                if (m_find_by_phrase_letter_frequency)
-                {
-                    ToolTip.SetToolTip(LetterFrequencyPositionSumSumLabel, L[l]["<-- letter frequency concatenation"]);
-                    ToolTip.SetToolTip(LetterFrequencyDistanceSumSumLabel, L[l]["--> letter frequency concatenation"]);
-                }
-                else
-                {
-                    ToolTip.SetToolTip(LetterFrequencyPositionSumSumLabel, L[l]["Sum of letter position sums"]);
-                    ToolTip.SetToolTip(LetterFrequencyDistanceSumSumLabel, L[l]["Sum of letter distance sums"]);
-                }
-
-                if (m_count_diacritics == true) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["with diacritics"]); }
-                else if (m_count_diacritics == null) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["diacritics only"]); }
-                else if (m_count_diacritics == false) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["no diacritics"]); }
-
-                int pos = ValueLabel.Text.IndexOf(" ");
-                string text = ValueLabel.Text.Substring(pos + 1).Trim();
-                if (L[l].ContainsKey(text))
-                {
-                    text = L[l][text];
-                }
-                else // reverse dictionary
-                {
-                    foreach (string key in L[l].Keys)
-                    {
-                        if (L[previous_l].ContainsKey(key))
+                        else if (control.Name.Contains("NumberType"))
                         {
-                            if (text == L[previous_l][key])
+                            if (control.Text.Length > 0)
                             {
-                                text = L[l][key];
-                                break;
+                                int remainder;
+                                if (int.TryParse(control.Text, out remainder))
+                                {
+                                    ToolTip.SetToolTip(control, L[l]["remainder"]);
+                                }
+                                else
+                                {
+                                    ToolTip.SetToolTip(control, L[l][control.Text]);
+                                }
                             }
                         }
                     }
+
+                    ToolTip.SetToolTip(CalculationModeLabel, L[l][m_client.CalculationMode.ToString()]);
+
+                    ToolTip.SetToolTip(NumberKindIndexTextBox, L[l][m_number_kind.ToString() + " number index"]);
+                    if (ChapterSortComboBox.SelectedItem != null) ToolTip.SetToolTip(ChapterSortComboBox, L[l][ChapterSortComboBox.SelectedItem.ToString()]);
+                    ToolTip.SetToolTip(ChapterSortLabel, L[l][Chapter.SortOrder.ToString()]);
+
+                    if (ChapterSelectionComboBox.SelectedItem != null) ToolTip.SetToolTip(ChapterSelectionComboBox, L[l][(m_chapter_selection.ToString() + " " + "chapters")]);
+
+                    if (m_found_verses_displayed)
+                    {
+                        if (m_word_wrap_search_textbox)
+                        {
+                            ToolTip.SetToolTip(WordWrapLabel, L[l]["Unwrap"]);
+                        }
+                        else
+                        {
+                            ToolTip.SetToolTip(WordWrapLabel, L[l]["Wrap"]);
+                        }
+                    }
+                    else
+                    {
+                        if (m_word_wrap_main_textbox)
+                        {
+                            ToolTip.SetToolTip(WordWrapLabel, L[l]["Unwrap"]);
+                        }
+                        else
+                        {
+                            ToolTip.SetToolTip(WordWrapLabel, L[l]["Wrap"]);
+                        }
+                    }
+
+                    if (m_word_wrap_translation_textbox)
+                    {
+                        ToolTip.SetToolTip(TranslationWordWrapLabel, L[l]["Unwrap"]);
+                    }
+                    else
+                    {
+                        ToolTip.SetToolTip(TranslationWordWrapLabel, L[l]["Wrap"]);
+                    }
+
+                    if (m_find_by_phrase_letter_frequency)
+                    {
+                        ToolTip.SetToolTip(LetterFrequencyPositionSumSumLabel, L[l]["<-- letter frequency concatenation"]);
+                        ToolTip.SetToolTip(LetterFrequencyDistanceSumSumLabel, L[l]["--> letter frequency concatenation"]);
+                    }
+                    else
+                    {
+                        ToolTip.SetToolTip(LetterFrequencyPositionSumSumLabel, L[l]["Sum of letter position sums"]);
+                        ToolTip.SetToolTip(LetterFrequencyDistanceSumSumLabel, L[l]["Sum of letter distance sums"]);
+                    }
+
+                    if (m_count_diacritics == true) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["with diacritics"]); }
+                    else if (m_count_diacritics == null) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["diacritics only"]); }
+                    else if (m_count_diacritics == false) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["no diacritics"]); }
+
+                    int pos = ValueLabel.Text.IndexOf(" ");
+                    string text = ValueLabel.Text.Substring(pos + 1).Trim();
+                    if (L[l].ContainsKey(text))
+                    {
+                        text = L[l][text];
+                    }
+                    else // reverse dictionary
+                    {
+                        foreach (string key in L[l].Keys)
+                        {
+                            if (L[previous_l].ContainsKey(key))
+                            {
+                                if (text == L[previous_l][key])
+                                {
+                                    text = L[l][key];
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if (m_show_add_controls)
+                    {
+                        ValueLabel.Text = "-- " + text;
+                        ToolTip.SetToolTip(ValueLabel, L[l]["Hide value-added positions and distances"]);
+                    }
+                    else
+                    {
+                        ValueLabel.Text = "+ " + text;
+                        ToolTip.SetToolTip(ValueLabel, L[l]["Show value-added positions and distances"]);
+                    }
+
+                    UpdateEmlaaeiLabel();
+
+                    LetterFrequencyColumnHeader.Text = L[l]["Freq"];// +"  "; // + 2 spaces for sort marker after them
+
+                    m_note_writing_instruction = L[l]["write a note for "];
+                    DisplayNoteWritingInstruction();
+
+                    long value = Radix.Decode(ValueTextBox.Text, m_radix);
+                    UpdateValueNavigator(value);
+
+                    RegisterContextMenus();
+                    SetToolTipPlayerVerseSilenceGapTrackBar();
+                    SetToolTipPlayerSelectionSilenceGapTrackBar();
+
+                    UpdateNumberTypeLabelTooltips();
+
+                    SetToolTips();
                 }
-                if (m_show_add_controls)
-                {
-                    ValueLabel.Text = "-- " + text;
-                    ToolTip.SetToolTip(ValueLabel, L[l]["Hide value-added positions and distances"]);
-                }
-                else
-                {
-                    ValueLabel.Text = "+ " + text;
-                    ToolTip.SetToolTip(ValueLabel, L[l]["Show value-added positions and distances"]);
-                }
-
-                UpdateEmlaaeiLabel();
-
-                LetterFrequencyColumnHeader.Text = L[l]["Freq"];// +"  "; // + 2 spaces for sort marker after them
-
-                m_note_writing_instruction = L[l]["write a note for "];
-                DisplayNoteWritingInstruction();
-
-                long value = Radix.Decode(ValueTextBox.Text, m_radix);
-                UpdateValueNavigator(value);
-
-                RegisterContextMenus();
-                SetToolTipPlayerVerseSilenceGapTrackBar();
-                SetToolTipPlayerSelectionSilenceGapTrackBar();
-
-                UpdateNumberTypeLabelTooltips();
-
-                SetToolTips();
             }
         }
         catch (Exception ex)
@@ -592,8 +644,11 @@ public partial class MainForm : Form, ISubscriber
     {
         if (LanguageComboBox.SelectedIndex != -1)
         {
-            string filename = Globals.LANGUAGES_FOLDER + "/" + LanguageComboBox.SelectedItem.ToString() + ".txt";
-            FileHelper.DisplayFile(filename);
+            if (!String.IsNullOrEmpty(l))
+            {
+                string filename = Globals.LANGUAGES_FOLDER + "/" + l + ".txt";
+                FileHelper.DisplayFile(filename);
+            }
         }
     }
     /////////////////////////////////////////////////////////////////////////////
@@ -735,7 +790,8 @@ public partial class MainForm : Form, ISubscriber
     private const int DEFAULT_WINDOW_LEFT = 162;
     private const int DEFAULT_WINDOW_WIDTH = 1127;
     private const int DEFAULT_WINDOW_HEIGHT = 722;
-    private const string DEFAULT_LANGUAGE = "English";
+    private const string LANGUAGE_SEPARATOR = "-";
+    private const string DEFAULT_LANGUAGE = "English" + LANGUAGE_SEPARATOR + "English";
     private const int DEFAULT_INFORMATION_BOX_TOP = 431;
     private const int DEFAULT_AUDIO_VOLUME = 1000;
     private const string VERSE_ADDRESS_TRANSLATION_SEPARATOR = " ";
@@ -990,11 +1046,12 @@ public partial class MainForm : Form, ISubscriber
         this.FindBySimilarityLabel = new System.Windows.Forms.Label();
         this.FindBySimilarityTextRadioButton = new System.Windows.Forms.RadioButton();
         this.FindByTextPanel = new System.Windows.Forms.Panel();
+        this.FindByTextMultiplicityNumberTypeLabel = new System.Windows.Forms.Label();
+        this.FindByTextMultiplicityComparisonOperatorLabel = new System.Windows.Forms.Label();
+        this.FindByTextMultiplicityNumericUpDown = new System.Windows.Forms.NumericUpDown();
         this.DrawSearchTermsLabel = new System.Windows.Forms.Label();
         this.FindByTextWithDiacriticsCheckBox = new System.Windows.Forms.CheckBox();
         this.FindByTextSearchBlockSizeBowingLabel = new System.Windows.Forms.Label();
-        this.FindByTextMultiplicityNumberTypeLabel = new System.Windows.Forms.Label();
-        this.FindByTextMultiplicityComparisonOperatorLabel = new System.Windows.Forms.Label();
         this.FindByTextSearchBlockSizeVerseLabel = new System.Windows.Forms.Label();
         this.TextLocationLabel = new System.Windows.Forms.Label();
         this.TextLocationWithinChapterPanel = new System.Windows.Forms.Panel();
@@ -1065,7 +1122,6 @@ public partial class MainForm : Form, ISubscriber
         this.FindByTextSearchBlockSizePageLabel = new System.Windows.Forms.Label();
         this.FindByTextSearchBlockSizeStationLabel = new System.Windows.Forms.Label();
         this.FindByTextRootSearchTypeLabel = new System.Windows.Forms.Label();
-        this.FindByTextMultiplicityNumericUpDown = new System.Windows.Forms.NumericUpDown();
         this.FindByTextLabel = new System.Windows.Forms.Label();
         this.PositionsGroupBox = new System.Windows.Forms.GroupBox();
         this.DifferenceStatisticsLabel = new System.Windows.Forms.Label();
@@ -1557,11 +1613,11 @@ public partial class MainForm : Form, ISubscriber
         this.FindBySimilarityPanel.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)(this.FindBySimilarityPercentageTrackBar)).BeginInit();
         this.FindByTextPanel.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)(this.FindByTextMultiplicityNumericUpDown)).BeginInit();
         this.TextLocationWithinChapterPanel.SuspendLayout();
         this.TextLocationInWordPanel.SuspendLayout();
         this.TextLocationWithinVersePanel.SuspendLayout();
         this.KeyboardPanel.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByTextMultiplicityNumericUpDown)).BeginInit();
         this.PositionsGroupBox.SuspendLayout();
         ((System.ComponentModel.ISupportInitialize)(this.LetterNumericUpDown)).BeginInit();
         ((System.ComponentModel.ISupportInitialize)(this.WordNumericUpDown)).BeginInit();
@@ -1657,7 +1713,7 @@ public partial class MainForm : Form, ISubscriber
         this.ShowToolTipsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
         this.ShowToolTipsCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.ShowToolTipsCheckBox.ForeColor = System.Drawing.Color.Navy;
-        this.ShowToolTipsCheckBox.Location = new System.Drawing.Point(1024, 15);
+        this.ShowToolTipsCheckBox.Location = new System.Drawing.Point(1024, 16);
         this.ShowToolTipsCheckBox.Name = "ShowToolTipsCheckBox";
         this.ShowToolTipsCheckBox.Size = new System.Drawing.Size(10, 10);
         this.ShowToolTipsCheckBox.TabIndex = 10000;
@@ -2546,7 +2602,7 @@ public partial class MainForm : Form, ISubscriber
         this.BrowseHistoryDeleteLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.BrowseHistoryDeleteLabel.ForeColor = System.Drawing.Color.DarkGray;
         this.BrowseHistoryDeleteLabel.Image = ((System.Drawing.Image)(resources.GetObject("BrowseHistoryDeleteLabel.Image")));
-        this.BrowseHistoryDeleteLabel.Location = new System.Drawing.Point(175, 17);
+        this.BrowseHistoryDeleteLabel.Location = new System.Drawing.Point(175, 21);
         this.BrowseHistoryDeleteLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.BrowseHistoryDeleteLabel.Name = "BrowseHistoryDeleteLabel";
         this.BrowseHistoryDeleteLabel.Size = new System.Drawing.Size(24, 23);
@@ -2640,7 +2696,7 @@ public partial class MainForm : Form, ISubscriber
         this.BrowseHistoryCounterLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.BrowseHistoryCounterLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.BrowseHistoryCounterLabel.ForeColor = System.Drawing.Color.MidnightBlue;
-        this.BrowseHistoryCounterLabel.Location = new System.Drawing.Point(47, 17);
+        this.BrowseHistoryCounterLabel.Location = new System.Drawing.Point(47, 21);
         this.BrowseHistoryCounterLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.BrowseHistoryCounterLabel.Name = "BrowseHistoryCounterLabel";
         this.BrowseHistoryCounterLabel.Size = new System.Drawing.Size(89, 23);
@@ -2678,17 +2734,16 @@ public partial class MainForm : Form, ISubscriber
         // 
         // EditLanguageLabel
         // 
-        this.EditLanguageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-        | System.Windows.Forms.AnchorStyles.Right)));
-        this.EditLanguageLabel.BackColor = System.Drawing.Color.Transparent;
+        this.EditLanguageLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+        this.EditLanguageLabel.BackColor = System.Drawing.SystemColors.ControlLight;
         this.EditLanguageLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.EditLanguageLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.EditLanguageLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.EditLanguageLabel.Image = ((System.Drawing.Image)(resources.GetObject("EditLanguageLabel.Image")));
-        this.EditLanguageLabel.Location = new System.Drawing.Point(188, 2);
+        this.EditLanguageLabel.Location = new System.Drawing.Point(185, 1);
         this.EditLanguageLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.EditLanguageLabel.Name = "EditLanguageLabel";
-        this.EditLanguageLabel.Size = new System.Drawing.Size(21, 14);
+        this.EditLanguageLabel.Size = new System.Drawing.Size(22, 19);
         this.EditLanguageLabel.TabIndex = 2;
         this.EditLanguageLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.ToolTip.SetToolTip(this.EditLanguageLabel, "Edit");
@@ -2700,7 +2755,7 @@ public partial class MainForm : Form, ISubscriber
         this.BrowseHistoryClearLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.BrowseHistoryClearLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.BrowseHistoryClearLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.BrowseHistoryClearLabel.Location = new System.Drawing.Point(199, 17);
+        this.BrowseHistoryClearLabel.Location = new System.Drawing.Point(199, 21);
         this.BrowseHistoryClearLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.BrowseHistoryClearLabel.Name = "BrowseHistoryClearLabel";
         this.BrowseHistoryClearLabel.Size = new System.Drawing.Size(8, 23);
@@ -2719,7 +2774,7 @@ public partial class MainForm : Form, ISubscriber
         this.BrowseHistoryForwardButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.BrowseHistoryForwardButton.ForeColor = System.Drawing.Color.Black;
         this.BrowseHistoryForwardButton.Image = ((System.Drawing.Image)(resources.GetObject("BrowseHistoryForwardButton.Image")));
-        this.BrowseHistoryForwardButton.Location = new System.Drawing.Point(136, 17);
+        this.BrowseHistoryForwardButton.Location = new System.Drawing.Point(136, 21);
         this.BrowseHistoryForwardButton.Margin = new System.Windows.Forms.Padding(4);
         this.BrowseHistoryForwardButton.Name = "BrowseHistoryForwardButton";
         this.BrowseHistoryForwardButton.Size = new System.Drawing.Size(39, 23);
@@ -2739,7 +2794,7 @@ public partial class MainForm : Form, ISubscriber
         this.BrowseHistoryBackwardButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.BrowseHistoryBackwardButton.ForeColor = System.Drawing.Color.Black;
         this.BrowseHistoryBackwardButton.Image = ((System.Drawing.Image)(resources.GetObject("BrowseHistoryBackwardButton.Image")));
-        this.BrowseHistoryBackwardButton.Location = new System.Drawing.Point(8, 17);
+        this.BrowseHistoryBackwardButton.Location = new System.Drawing.Point(8, 21);
         this.BrowseHistoryBackwardButton.Margin = new System.Windows.Forms.Padding(4);
         this.BrowseHistoryBackwardButton.Name = "BrowseHistoryBackwardButton";
         this.BrowseHistoryBackwardButton.Size = new System.Drawing.Size(39, 23);
@@ -2754,10 +2809,10 @@ public partial class MainForm : Form, ISubscriber
         this.LanguageComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         this.LanguageComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.LanguageComboBox.FormattingEnabled = true;
-        this.LanguageComboBox.Location = new System.Drawing.Point(7, -4);
+        this.LanguageComboBox.Location = new System.Drawing.Point(7, -1);
         this.LanguageComboBox.Margin = new System.Windows.Forms.Padding(4);
         this.LanguageComboBox.Name = "LanguageComboBox";
-        this.LanguageComboBox.Size = new System.Drawing.Size(117, 23);
+        this.LanguageComboBox.Size = new System.Drawing.Size(177, 23);
         this.LanguageComboBox.TabIndex = 1;
         this.LanguageComboBox.SelectedIndexChanged += new System.EventHandler(this.LanguageComboBox_SelectedIndexChanged);
         // 
@@ -4063,6 +4118,75 @@ public partial class MainForm : Form, ISubscriber
         this.FindByTextPanel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
         this.FindByTextPanel.Leave += new System.EventHandler(this.FindByTextPanel_Leave);
         // 
+        // FindByTextMultiplicityNumberTypeLabel
+        // 
+        this.FindByTextMultiplicityNumberTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+        this.FindByTextMultiplicityNumberTypeLabel.BackColor = System.Drawing.Color.LightGray;
+        this.FindByTextMultiplicityNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+        this.FindByTextMultiplicityNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByTextMultiplicityNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
+        this.FindByTextMultiplicityNumberTypeLabel.Location = new System.Drawing.Point(167, 309);
+        this.FindByTextMultiplicityNumberTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+        this.FindByTextMultiplicityNumberTypeLabel.Name = "FindByTextMultiplicityNumberTypeLabel";
+        this.FindByTextMultiplicityNumberTypeLabel.Size = new System.Drawing.Size(32, 22);
+        this.FindByTextMultiplicityNumberTypeLabel.TabIndex = 20;
+        this.FindByTextMultiplicityNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.FindByTextMultiplicityNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByTextControl_EnabledChanged);
+        this.FindByTextMultiplicityNumberTypeLabel.Click += new System.EventHandler(this.FindByTextMultiplicityNumberTypeLabel_Click);
+        this.FindByTextMultiplicityNumberTypeLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
+        // 
+        // FindByTextMultiplicityComparisonOperatorLabel
+        // 
+        this.FindByTextMultiplicityComparisonOperatorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+        this.FindByTextMultiplicityComparisonOperatorLabel.BackColor = System.Drawing.Color.LightGray;
+        this.FindByTextMultiplicityComparisonOperatorLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+        this.FindByTextMultiplicityComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+        this.FindByTextMultiplicityComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByTextMultiplicityComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
+        this.FindByTextMultiplicityComparisonOperatorLabel.Location = new System.Drawing.Point(68, 309);
+        this.FindByTextMultiplicityComparisonOperatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+        this.FindByTextMultiplicityComparisonOperatorLabel.Name = "FindByTextMultiplicityComparisonOperatorLabel";
+        this.FindByTextMultiplicityComparisonOperatorLabel.Size = new System.Drawing.Size(24, 22);
+        this.FindByTextMultiplicityComparisonOperatorLabel.TabIndex = 18;
+        this.FindByTextMultiplicityComparisonOperatorLabel.Text = "=";
+        this.FindByTextMultiplicityComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+        this.ToolTip.SetToolTip(this.FindByTextMultiplicityComparisonOperatorLabel, "equals to");
+        this.FindByTextMultiplicityComparisonOperatorLabel.EnabledChanged += new System.EventHandler(this.FindByTextControl_EnabledChanged);
+        this.FindByTextMultiplicityComparisonOperatorLabel.Click += new System.EventHandler(this.FindByTextMultiplicityComparisonOperatorLabel_Click);
+        this.FindByTextMultiplicityComparisonOperatorLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
+        // 
+        // FindByTextMultiplicityNumericUpDown
+        // 
+        this.FindByTextMultiplicityNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+        this.FindByTextMultiplicityNumericUpDown.BackColor = System.Drawing.Color.LightGray;
+        this.FindByTextMultiplicityNumericUpDown.Enabled = false;
+        this.FindByTextMultiplicityNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.FindByTextMultiplicityNumericUpDown.Location = new System.Drawing.Point(92, 309);
+        this.FindByTextMultiplicityNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
+        this.FindByTextMultiplicityNumericUpDown.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+        this.FindByTextMultiplicityNumericUpDown.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+        this.FindByTextMultiplicityNumericUpDown.Name = "FindByTextMultiplicityNumericUpDown";
+        this.FindByTextMultiplicityNumericUpDown.Size = new System.Drawing.Size(75, 23);
+        this.FindByTextMultiplicityNumericUpDown.TabIndex = 19;
+        this.FindByTextMultiplicityNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+        this.FindByTextMultiplicityNumericUpDown.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            -2147483648});
+        this.FindByTextMultiplicityNumericUpDown.ValueChanged += new System.EventHandler(this.FindByTextMultiplicityNumericUpDown_ValueChanged);
+        this.FindByTextMultiplicityNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByTextControl_EnabledChanged);
+        this.FindByTextMultiplicityNumericUpDown.Enter += new System.EventHandler(this.FindByTextControls_Enter);
+        this.FindByTextMultiplicityNumericUpDown.Leave += new System.EventHandler(this.FindByTextControls_Leave);
+        // 
         // DrawSearchTermsLabel
         // 
         this.DrawSearchTermsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -4111,43 +4235,6 @@ public partial class MainForm : Form, ISubscriber
         this.FindByTextSearchBlockSizeBowingLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByTextSearchBlockSizeBowingLabel.Click += new System.EventHandler(this.FindByTextSearchBlockSizeBowingLabel_Click);
         this.FindByTextSearchBlockSizeBowingLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
-        // 
-        // FindByTextMultiplicityNumberTypeLabel
-        // 
-        this.FindByTextMultiplicityNumberTypeLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.FindByTextMultiplicityNumberTypeLabel.BackColor = System.Drawing.Color.LightGray;
-        this.FindByTextMultiplicityNumberTypeLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-        this.FindByTextMultiplicityNumberTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByTextMultiplicityNumberTypeLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByTextMultiplicityNumberTypeLabel.Location = new System.Drawing.Point(167, 309);
-        this.FindByTextMultiplicityNumberTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.FindByTextMultiplicityNumberTypeLabel.Name = "FindByTextMultiplicityNumberTypeLabel";
-        this.FindByTextMultiplicityNumberTypeLabel.Size = new System.Drawing.Size(32, 22);
-        this.FindByTextMultiplicityNumberTypeLabel.TabIndex = 20;
-        this.FindByTextMultiplicityNumberTypeLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.FindByTextMultiplicityNumberTypeLabel.EnabledChanged += new System.EventHandler(this.FindByTextControl_EnabledChanged);
-        this.FindByTextMultiplicityNumberTypeLabel.Click += new System.EventHandler(this.FindByTextMultiplicityNumberTypeLabel_Click);
-        this.FindByTextMultiplicityNumberTypeLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
-        // 
-        // FindByTextMultiplicityComparisonOperatorLabel
-        // 
-        this.FindByTextMultiplicityComparisonOperatorLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.FindByTextMultiplicityComparisonOperatorLabel.BackColor = System.Drawing.Color.LightGray;
-        this.FindByTextMultiplicityComparisonOperatorLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-        this.FindByTextMultiplicityComparisonOperatorLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.FindByTextMultiplicityComparisonOperatorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByTextMultiplicityComparisonOperatorLabel.ForeColor = System.Drawing.Color.Black;
-        this.FindByTextMultiplicityComparisonOperatorLabel.Location = new System.Drawing.Point(68, 309);
-        this.FindByTextMultiplicityComparisonOperatorLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-        this.FindByTextMultiplicityComparisonOperatorLabel.Name = "FindByTextMultiplicityComparisonOperatorLabel";
-        this.FindByTextMultiplicityComparisonOperatorLabel.Size = new System.Drawing.Size(24, 22);
-        this.FindByTextMultiplicityComparisonOperatorLabel.TabIndex = 18;
-        this.FindByTextMultiplicityComparisonOperatorLabel.Text = "=";
-        this.FindByTextMultiplicityComparisonOperatorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-        this.ToolTip.SetToolTip(this.FindByTextMultiplicityComparisonOperatorLabel, "equals to");
-        this.FindByTextMultiplicityComparisonOperatorLabel.EnabledChanged += new System.EventHandler(this.FindByTextControl_EnabledChanged);
-        this.FindByTextMultiplicityComparisonOperatorLabel.Click += new System.EventHandler(this.FindByTextMultiplicityComparisonOperatorLabel_Click);
-        this.FindByTextMultiplicityComparisonOperatorLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
         // 
         // FindByTextSearchBlockSizeVerseLabel
         // 
@@ -5389,38 +5476,6 @@ public partial class MainForm : Form, ISubscriber
         this.FindByTextRootSearchTypeLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
         this.FindByTextRootSearchTypeLabel.Leave += new System.EventHandler(this.FindByTextPanel_Leave);
         // 
-        // FindByTextMultiplicityNumericUpDown
-        // 
-        this.FindByTextMultiplicityNumericUpDown.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-        this.FindByTextMultiplicityNumericUpDown.BackColor = System.Drawing.Color.LightGray;
-        this.FindByTextMultiplicityNumericUpDown.Enabled = false;
-        this.FindByTextMultiplicityNumericUpDown.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-        this.FindByTextMultiplicityNumericUpDown.Location = new System.Drawing.Point(92, 309);
-        this.FindByTextMultiplicityNumericUpDown.Margin = new System.Windows.Forms.Padding(4);
-        this.FindByTextMultiplicityNumericUpDown.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-        this.FindByTextMultiplicityNumericUpDown.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-        this.FindByTextMultiplicityNumericUpDown.Name = "FindByTextMultiplicityNumericUpDown";
-        this.FindByTextMultiplicityNumericUpDown.Size = new System.Drawing.Size(75, 23);
-        this.FindByTextMultiplicityNumericUpDown.TabIndex = 19;
-        this.FindByTextMultiplicityNumericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-        this.FindByTextMultiplicityNumericUpDown.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            -2147483648});
-        this.FindByTextMultiplicityNumericUpDown.ValueChanged += new System.EventHandler(this.FindByTextMultiplicityNumericUpDown_ValueChanged);
-        this.FindByTextMultiplicityNumericUpDown.EnabledChanged += new System.EventHandler(this.FindByTextControl_EnabledChanged);
-        this.FindByTextMultiplicityNumericUpDown.Enter += new System.EventHandler(this.FindByTextControls_Enter);
-        this.FindByTextMultiplicityNumericUpDown.Leave += new System.EventHandler(this.FindByTextControls_Leave);
-        // 
         // FindByTextLabel
         // 
         this.FindByTextLabel.BackColor = System.Drawing.Color.Transparent;
@@ -6121,7 +6176,7 @@ public partial class MainForm : Form, ISubscriber
         this.ClientSplitContainer.Panel2.Controls.Add(this.ScriptOutputGroupBox);
         this.ClientSplitContainer.Panel2.Controls.Add(this.TabControl);
         this.ClientSplitContainer.Panel2MinSize = 0;
-        this.ClientSplitContainer.Size = new System.Drawing.Size(678, 636);
+        this.ClientSplitContainer.Size = new System.Drawing.Size(677, 636);
         this.ClientSplitContainer.SplitterDistance = 399;
         this.ClientSplitContainer.TabIndex = 6;
         this.ClientSplitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.ClientSplitContainer_SplitterMoved);
@@ -6136,7 +6191,7 @@ public partial class MainForm : Form, ISubscriber
         this.ScriptTextBox.Location = new System.Drawing.Point(0, 17);
         this.ScriptTextBox.Name = "ScriptTextBox";
         this.ScriptTextBox.SelectionAlignment = RichTextBoxEx.TextAlign.Left;
-        this.ScriptTextBox.Size = new System.Drawing.Size(678, 382);
+        this.ScriptTextBox.Size = new System.Drawing.Size(677, 382);
         this.ScriptTextBox.TabIndex = 110;
         this.ScriptTextBox.Text = "";
         this.ScriptTextBox.Visible = false;
@@ -6177,7 +6232,7 @@ public partial class MainForm : Form, ISubscriber
         this.MainTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         this.MainTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
         this.MainTextBox.SelectionAlignment = RichTextBoxEx.TextAlign.Right;
-        this.MainTextBox.Size = new System.Drawing.Size(674, 384);
+        this.MainTextBox.Size = new System.Drawing.Size(673, 384);
         this.MainTextBox.TabIndex = 69;
         this.MainTextBox.Text = "";
         this.MainTextBox.WordWrap = false;
@@ -6210,7 +6265,7 @@ public partial class MainForm : Form, ISubscriber
         this.SearchResultTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         this.SearchResultTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedBoth;
         this.SearchResultTextBox.SelectionAlignment = RichTextBoxEx.TextAlign.Right;
-        this.SearchResultTextBox.Size = new System.Drawing.Size(674, 384);
+        this.SearchResultTextBox.Size = new System.Drawing.Size(673, 384);
         this.SearchResultTextBox.TabIndex = 70;
         this.SearchResultTextBox.Text = "";
         this.SearchResultTextBox.WordWrap = false;
@@ -6255,7 +6310,7 @@ public partial class MainForm : Form, ISubscriber
         this.HeaderPanel.Location = new System.Drawing.Point(0, 0);
         this.HeaderPanel.Margin = new System.Windows.Forms.Padding(4);
         this.HeaderPanel.Name = "HeaderPanel";
-        this.HeaderPanel.Size = new System.Drawing.Size(678, 17);
+        this.HeaderPanel.Size = new System.Drawing.Size(677, 17);
         this.HeaderPanel.TabIndex = 88;
         // 
         // ScriptSaveAsLabel
@@ -6350,7 +6405,7 @@ public partial class MainForm : Form, ISubscriber
         this.GoldenRatioScopeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.GoldenRatioScopeLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.GoldenRatioScopeLabel.Image = ((System.Drawing.Image)(resources.GetObject("GoldenRatioScopeLabel.Image")));
-        this.GoldenRatioScopeLabel.Location = new System.Drawing.Point(598, -1);
+        this.GoldenRatioScopeLabel.Location = new System.Drawing.Point(597, -1);
         this.GoldenRatioScopeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.GoldenRatioScopeLabel.Name = "GoldenRatioScopeLabel";
         this.GoldenRatioScopeLabel.Size = new System.Drawing.Size(24, 4);
@@ -6367,7 +6422,7 @@ public partial class MainForm : Form, ISubscriber
         this.GoldenRatioTypeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.GoldenRatioTypeLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.GoldenRatioTypeLabel.Image = ((System.Drawing.Image)(resources.GetObject("GoldenRatioTypeLabel.Image")));
-        this.GoldenRatioTypeLabel.Location = new System.Drawing.Point(598, 5);
+        this.GoldenRatioTypeLabel.Location = new System.Drawing.Point(597, 5);
         this.GoldenRatioTypeLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.GoldenRatioTypeLabel.Name = "GoldenRatioTypeLabel";
         this.GoldenRatioTypeLabel.Size = new System.Drawing.Size(24, 4);
@@ -6385,7 +6440,7 @@ public partial class MainForm : Form, ISubscriber
         this.GoldenRatioOrderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.GoldenRatioOrderLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.GoldenRatioOrderLabel.Image = ((System.Drawing.Image)(resources.GetObject("GoldenRatioOrderLabel.Image")));
-        this.GoldenRatioOrderLabel.Location = new System.Drawing.Point(598, 11);
+        this.GoldenRatioOrderLabel.Location = new System.Drawing.Point(597, 11);
         this.GoldenRatioOrderLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.GoldenRatioOrderLabel.Name = "GoldenRatioOrderLabel";
         this.GoldenRatioOrderLabel.Size = new System.Drawing.Size(24, 4);
@@ -6401,7 +6456,7 @@ public partial class MainForm : Form, ISubscriber
         this.DisplayProstrationVersesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.DisplayProstrationVersesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DisplayProstrationVersesLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.DisplayProstrationVersesLabel.Location = new System.Drawing.Point(644, -2);
+        this.DisplayProstrationVersesLabel.Location = new System.Drawing.Point(643, -2);
         this.DisplayProstrationVersesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.DisplayProstrationVersesLabel.Name = "DisplayProstrationVersesLabel";
         this.DisplayProstrationVersesLabel.Size = new System.Drawing.Size(20, 20);
@@ -6419,7 +6474,7 @@ public partial class MainForm : Form, ISubscriber
         this.GenerateSentencesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.GenerateSentencesLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.GenerateSentencesLabel.Image = ((System.Drawing.Image)(resources.GetObject("GenerateSentencesLabel.Image")));
-        this.GenerateSentencesLabel.Location = new System.Drawing.Point(561, -2);
+        this.GenerateSentencesLabel.Location = new System.Drawing.Point(560, -2);
         this.GenerateSentencesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.GenerateSentencesLabel.Name = "GenerateSentencesLabel";
         this.GenerateSentencesLabel.Size = new System.Drawing.Size(20, 20);
@@ -6435,7 +6490,7 @@ public partial class MainForm : Form, ISubscriber
         this.DuplicateLettersCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.DuplicateLettersCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DuplicateLettersCheckBox.ForeColor = System.Drawing.Color.Navy;
-        this.DuplicateLettersCheckBox.Location = new System.Drawing.Point(574, -2);
+        this.DuplicateLettersCheckBox.Location = new System.Drawing.Point(573, -2);
         this.DuplicateLettersCheckBox.Margin = new System.Windows.Forms.Padding(4);
         this.DuplicateLettersCheckBox.Name = "DuplicateLettersCheckBox";
         this.DuplicateLettersCheckBox.Size = new System.Drawing.Size(20, 20);
@@ -6452,7 +6507,7 @@ public partial class MainForm : Form, ISubscriber
         this.WordWrapLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.WordWrapLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.WordWrapLabel.Image = ((System.Drawing.Image)(resources.GetObject("WordWrapLabel.Image")));
-        this.WordWrapLabel.Location = new System.Drawing.Point(658, -2);
+        this.WordWrapLabel.Location = new System.Drawing.Point(657, -2);
         this.WordWrapLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.WordWrapLabel.Name = "WordWrapLabel";
         this.WordWrapLabel.Size = new System.Drawing.Size(20, 20);
@@ -6514,7 +6569,7 @@ public partial class MainForm : Form, ISubscriber
         this.InspectVersesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.InspectVersesLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.InspectVersesLabel.Image = ((System.Drawing.Image)(resources.GetObject("InspectVersesLabel.Image")));
-        this.InspectVersesLabel.Location = new System.Drawing.Point(623, -3);
+        this.InspectVersesLabel.Location = new System.Drawing.Point(622, -3);
         this.InspectVersesLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.InspectVersesLabel.Name = "InspectVersesLabel";
         this.InspectVersesLabel.Size = new System.Drawing.Size(20, 20);
@@ -6565,7 +6620,7 @@ public partial class MainForm : Form, ISubscriber
         this.HeaderLabel.Location = new System.Drawing.Point(24, -5);
         this.HeaderLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.HeaderLabel.Name = "HeaderLabel";
-        this.HeaderLabel.Size = new System.Drawing.Size(700, 20);
+        this.HeaderLabel.Size = new System.Drawing.Size(699, 20);
         this.HeaderLabel.TabIndex = 1;
         this.HeaderLabel.Text = "Header Information";
         this.HeaderLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -6600,7 +6655,7 @@ public partial class MainForm : Form, ISubscriber
         this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 0);
         this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
         this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(687, 239);
+        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(686, 235);
         this.ScriptOutputGroupBox.TabIndex = 111;
         this.ScriptOutputGroupBox.TabStop = false;
         this.ScriptOutputGroupBox.Text = " Output ";
@@ -6616,7 +6671,7 @@ public partial class MainForm : Form, ISubscriber
         this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
         this.ScriptOutputTextBox.ReadOnly = true;
         this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.ScriptOutputTextBox.Size = new System.Drawing.Size(667, 209);
+        this.ScriptOutputTextBox.Size = new System.Drawing.Size(666, 205);
         this.ScriptOutputTextBox.TabIndex = 0;
         this.ScriptOutputTextBox.WordWrap = false;
         this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -6642,7 +6697,7 @@ public partial class MainForm : Form, ISubscriber
         this.TabControl.Name = "TabControl";
         this.TabControl.SelectedIndex = 0;
         this.TabControl.ShowToolTips = true;
-        this.TabControl.Size = new System.Drawing.Size(682, 231);
+        this.TabControl.Size = new System.Drawing.Size(681, 231);
         this.TabControl.TabIndex = 102;
         this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
         this.TabControl.Click += new System.EventHandler(this.TabControl_Click);
@@ -6656,7 +6711,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslationTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.TranslationTabPage.Name = "TranslationTabPage";
         this.TranslationTabPage.Padding = new System.Windows.Forms.Padding(4);
-        this.TranslationTabPage.Size = new System.Drawing.Size(674, 201);
+        this.TranslationTabPage.Size = new System.Drawing.Size(673, 201);
         this.TranslationTabPage.TabIndex = 190;
         this.TranslationTabPage.Text = "Translation";
         this.TranslationTabPage.ToolTipText = "Translations for current selection/verse\r\nترجمة الءاية أو الءايات المظللة";
@@ -6735,7 +6790,7 @@ public partial class MainForm : Form, ISubscriber
         this.EditSaveTranslationLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.EditSaveTranslationLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.EditSaveTranslationLabel.Image = ((System.Drawing.Image)(resources.GetObject("EditSaveTranslationLabel.Image")));
-        this.EditSaveTranslationLabel.Location = new System.Drawing.Point(436, 178);
+        this.EditSaveTranslationLabel.Location = new System.Drawing.Point(434, 178);
         this.EditSaveTranslationLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.EditSaveTranslationLabel.Name = "EditSaveTranslationLabel";
         this.EditSaveTranslationLabel.Size = new System.Drawing.Size(21, 22);
@@ -6786,7 +6841,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslationsApplySettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.TranslationsApplySettingsLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.TranslationsApplySettingsLabel.Image = ((System.Drawing.Image)(resources.GetObject("TranslationsApplySettingsLabel.Image")));
-        this.TranslationsApplySettingsLabel.Location = new System.Drawing.Point(187, 179);
+        this.TranslationsApplySettingsLabel.Location = new System.Drawing.Point(186, 179);
         this.TranslationsApplySettingsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.TranslationsApplySettingsLabel.Name = "TranslationsApplySettingsLabel";
         this.TranslationsApplySettingsLabel.Size = new System.Drawing.Size(20, 22);
@@ -6803,7 +6858,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslationsCancelSettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.TranslationsCancelSettingsLabel.ForeColor = System.Drawing.SystemColors.WindowText;
         this.TranslationsCancelSettingsLabel.Image = ((System.Drawing.Image)(resources.GetObject("TranslationsCancelSettingsLabel.Image")));
-        this.TranslationsCancelSettingsLabel.Location = new System.Drawing.Point(187, 160);
+        this.TranslationsCancelSettingsLabel.Location = new System.Drawing.Point(186, 160);
         this.TranslationsCancelSettingsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.TranslationsCancelSettingsLabel.Name = "TranslationsCancelSettingsLabel";
         this.TranslationsCancelSettingsLabel.Size = new System.Drawing.Size(20, 22);
@@ -6820,7 +6875,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslatorsCheckedListBox.BackColor = System.Drawing.SystemColors.ControlLight;
         this.TranslatorsCheckedListBox.CheckOnClick = true;
         this.TranslatorsCheckedListBox.FormattingEnabled = true;
-        this.TranslatorsCheckedListBox.Location = new System.Drawing.Point(-1, 0);
+        this.TranslatorsCheckedListBox.Location = new System.Drawing.Point(-2, 0);
         this.TranslatorsCheckedListBox.Margin = new System.Windows.Forms.Padding(4);
         this.TranslatorsCheckedListBox.Name = "TranslatorsCheckedListBox";
         this.TranslatorsCheckedListBox.Size = new System.Drawing.Size(186, 202);
@@ -6832,7 +6887,7 @@ public partial class MainForm : Form, ISubscriber
         this.AllTranslatorsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
         this.AllTranslatorsCheckBox.AutoSize = true;
         this.AllTranslatorsCheckBox.BackColor = System.Drawing.SystemColors.ControlLight;
-        this.AllTranslatorsCheckBox.Location = new System.Drawing.Point(147, 182);
+        this.AllTranslatorsCheckBox.Location = new System.Drawing.Point(146, 182);
         this.AllTranslatorsCheckBox.Margin = new System.Windows.Forms.Padding(4);
         this.AllTranslatorsCheckBox.Name = "AllTranslatorsCheckBox";
         this.AllTranslatorsCheckBox.Size = new System.Drawing.Size(18, 17);
@@ -6848,7 +6903,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslatorsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         this.TranslatorsComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.TranslatorsComboBox.FormattingEnabled = true;
-        this.TranslatorsComboBox.Location = new System.Drawing.Point(-1, 179);
+        this.TranslatorsComboBox.Location = new System.Drawing.Point(-2, 179);
         this.TranslatorsComboBox.Margin = new System.Windows.Forms.Padding(4);
         this.TranslatorsComboBox.Name = "TranslatorsComboBox";
         this.TranslatorsComboBox.Size = new System.Drawing.Size(186, 23);
@@ -6870,7 +6925,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslationsTextBox.Name = "TranslationsTextBox";
         this.TranslationsTextBox.ReadOnly = true;
         this.TranslationsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.TranslationsTextBox.Size = new System.Drawing.Size(209, 212);
+        this.TranslationsTextBox.Size = new System.Drawing.Size(208, 212);
         this.TranslationsTextBox.TabIndex = 106;
         this.TranslationsTextBox.WordWrap = false;
         this.TranslationsTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
@@ -6882,7 +6937,7 @@ public partial class MainForm : Form, ISubscriber
         this.GrammarTabPage.Location = new System.Drawing.Point(4, 26);
         this.GrammarTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.GrammarTabPage.Name = "GrammarTabPage";
-        this.GrammarTabPage.Size = new System.Drawing.Size(674, 201);
+        this.GrammarTabPage.Size = new System.Drawing.Size(673, 201);
         this.GrammarTabPage.TabIndex = 193;
         this.GrammarTabPage.Text = " Grammar";
         this.GrammarTabPage.ToolTipText = "Grammar details of the current word in Arabic and English\r\nإعراب الكلمة بالعربي و" +
@@ -6902,7 +6957,7 @@ public partial class MainForm : Form, ISubscriber
         this.GrammarTextBox.Name = "GrammarTextBox";
         this.GrammarTextBox.ReadOnly = true;
         this.GrammarTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.GrammarTextBox.Size = new System.Drawing.Size(674, 201);
+        this.GrammarTextBox.Size = new System.Drawing.Size(673, 201);
         this.GrammarTextBox.TabIndex = 1;
         this.GrammarTextBox.Text = "Click a word to display its grammar information in Arabic and English.";
         this.GrammarTextBox.WordWrap = false;
@@ -6916,7 +6971,7 @@ public partial class MainForm : Form, ISubscriber
         this.RelatedWordsTabPage.Location = new System.Drawing.Point(4, 26);
         this.RelatedWordsTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.RelatedWordsTabPage.Name = "RelatedWordsTabPage";
-        this.RelatedWordsTabPage.Size = new System.Drawing.Size(674, 201);
+        this.RelatedWordsTabPage.Size = new System.Drawing.Size(673, 201);
         this.RelatedWordsTabPage.TabIndex = 192;
         this.RelatedWordsTabPage.Text = "Related Words";
         this.RelatedWordsTabPage.ToolTipText = "Related words from the same root as the current word\r\nالكلمات المشتقة من نفس جذر " +
@@ -6955,7 +7010,7 @@ public partial class MainForm : Form, ISubscriber
         this.RelatedWordsTextBox.Name = "RelatedWordsTextBox";
         this.RelatedWordsTextBox.ReadOnly = true;
         this.RelatedWordsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.RelatedWordsTextBox.Size = new System.Drawing.Size(674, 201);
+        this.RelatedWordsTextBox.Size = new System.Drawing.Size(673, 201);
         this.RelatedWordsTextBox.TabIndex = 1;
         this.RelatedWordsTextBox.Text = "Click a word to display words from the same root and all verses.";
         this.RelatedWordsTextBox.WordWrap = false;
@@ -6972,7 +7027,7 @@ public partial class MainForm : Form, ISubscriber
         this.SymmetryTabPage.Location = new System.Drawing.Point(4, 26);
         this.SymmetryTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.SymmetryTabPage.Name = "SymmetryTabPage";
-        this.SymmetryTabPage.Size = new System.Drawing.Size(674, 201);
+        this.SymmetryTabPage.Size = new System.Drawing.Size(673, 201);
         this.SymmetryTabPage.TabIndex = 201;
         this.SymmetryTabPage.Text = "Symmetry";
         this.SymmetryTabPage.ToolTipText = "Text symmetries starting from both ends [Dr Waleed S. Mohammed]\r\nتناظر النص من ال" +
@@ -7038,7 +7093,7 @@ public partial class MainForm : Form, ISubscriber
         this.SymmetryTextBox.Name = "SymmetryTextBox";
         this.SymmetryTextBox.ReadOnly = true;
         this.SymmetryTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.SymmetryTextBox.Size = new System.Drawing.Size(674, 201);
+        this.SymmetryTextBox.Size = new System.Drawing.Size(673, 201);
         this.SymmetryTextBox.TabIndex = 7;
         this.SymmetryTextBox.Text = "Select text to display its front/back symmetry.";
         this.SymmetryTextBox.WordWrap = false;
@@ -7056,7 +7111,7 @@ public partial class MainForm : Form, ISubscriber
         this.ValuesSequenceTabPage.Location = new System.Drawing.Point(4, 26);
         this.ValuesSequenceTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.ValuesSequenceTabPage.Name = "ValuesSequenceTabPage";
-        this.ValuesSequenceTabPage.Size = new System.Drawing.Size(674, 201);
+        this.ValuesSequenceTabPage.Size = new System.Drawing.Size(673, 201);
         this.ValuesSequenceTabPage.TabIndex = 198;
         this.ValuesSequenceTabPage.Text = "Values";
         this.ValuesSequenceTabPage.ToolTipText = "Values of letter/word/verse/chapter values in bases 2 to 36\r\nقيم الحروف والكلمات " +
@@ -7165,7 +7220,7 @@ public partial class MainForm : Form, ISubscriber
         this.ValuesSequenceTextBox.Name = "ValuesSequenceTextBox";
         this.ValuesSequenceTextBox.ReadOnly = true;
         this.ValuesSequenceTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.ValuesSequenceTextBox.Size = new System.Drawing.Size(674, 201);
+        this.ValuesSequenceTextBox.Size = new System.Drawing.Size(673, 201);
         this.ValuesSequenceTextBox.TabIndex = 1;
         this.ValuesSequenceTextBox.Text = "Select text to convert its letter/word/verse/chapter values into a number sequenc" +
 "e in the specified base.";
@@ -7183,7 +7238,7 @@ public partial class MainForm : Form, ISubscriber
         this.CVWLSequenceTabPage.Location = new System.Drawing.Point(4, 26);
         this.CVWLSequenceTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.CVWLSequenceTabPage.Name = "CVWLSequenceTabPage";
-        this.CVWLSequenceTabPage.Size = new System.Drawing.Size(674, 201);
+        this.CVWLSequenceTabPage.Size = new System.Drawing.Size(673, 201);
         this.CVWLSequenceTabPage.TabIndex = 200;
         this.CVWLSequenceTabPage.Text = "CVWL";
         this.CVWLSequenceTabPage.ToolTipText = "Concatenated chapter/verse/word/letter numbers and counts\r\nرصف أرقام وأعداد الحرو" +
@@ -7266,7 +7321,7 @@ public partial class MainForm : Form, ISubscriber
         this.CVWLSequenceTextBox.Name = "CVWLSequenceTextBox";
         this.CVWLSequenceTextBox.ReadOnly = true;
         this.CVWLSequenceTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.CVWLSequenceTextBox.Size = new System.Drawing.Size(674, 201);
+        this.CVWLSequenceTextBox.Size = new System.Drawing.Size(673, 201);
         this.CVWLSequenceTextBox.TabIndex = 1;
         this.CVWLSequenceTextBox.Text = "Select text to display concatenated chapter/verse/word/letter numbers and counts." +
 "";
@@ -7283,7 +7338,7 @@ public partial class MainForm : Form, ISubscriber
         this.DNASequenceTabPage.Location = new System.Drawing.Point(4, 26);
         this.DNASequenceTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.DNASequenceTabPage.Name = "DNASequenceTabPage";
-        this.DNASequenceTabPage.Size = new System.Drawing.Size(674, 201);
+        this.DNASequenceTabPage.Size = new System.Drawing.Size(673, 201);
         this.DNASequenceTabPage.TabIndex = 195;
         this.DNASequenceTabPage.Text = "DNA";
         this.DNASequenceTabPage.ToolTipText = "Convert text into a DNA sequence to compare with the human genome [Belkacem Meghz" +
@@ -7351,7 +7406,7 @@ public partial class MainForm : Form, ISubscriber
         this.DNASequenceTextBox.Name = "DNASequenceTextBox";
         this.DNASequenceTextBox.ReadOnly = true;
         this.DNASequenceTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.DNASequenceTextBox.Size = new System.Drawing.Size(674, 201);
+        this.DNASequenceTextBox.Size = new System.Drawing.Size(673, 201);
         this.DNASequenceTextBox.TabIndex = 1;
         this.DNASequenceTextBox.Text = "Select text to convert into a DNA sequence.";
         this.DNASequenceTextBox.WordWrap = false;
@@ -7364,7 +7419,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsTabPage.Location = new System.Drawing.Point(4, 26);
         this.MathsTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.MathsTabPage.Name = "MathsTabPage";
-        this.MathsTabPage.Size = new System.Drawing.Size(674, 201);
+        this.MathsTabPage.Size = new System.Drawing.Size(673, 201);
         this.MathsTabPage.TabIndex = 197;
         this.MathsTabPage.Text = "C+V";
         this.MathsTabPage.ToolTipText = "Chapter +/- Verse calculations\r\nحسابات مجاميع وفروق الءايات والسُوَر";
@@ -7480,7 +7535,7 @@ public partial class MainForm : Form, ISubscriber
         this.MathsPanel.Location = new System.Drawing.Point(0, 0);
         this.MathsPanel.Margin = new System.Windows.Forms.Padding(4);
         this.MathsPanel.Name = "MathsPanel";
-        this.MathsPanel.Size = new System.Drawing.Size(674, 201);
+        this.MathsPanel.Size = new System.Drawing.Size(673, 201);
         this.MathsPanel.TabIndex = 0;
         // 
         // MathsInterestingNumbersEditLabel
@@ -8871,7 +8926,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesTabPage.Location = new System.Drawing.Point(4, 26);
         this.DistancesTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.DistancesTabPage.Name = "DistancesTabPage";
-        this.DistancesTabPage.Size = new System.Drawing.Size(674, 201);
+        this.DistancesTabPage.Size = new System.Drawing.Size(673, 201);
         this.DistancesTabPage.TabIndex = 199;
         this.DistancesTabPage.Text = "Distances";
         this.DistancesTabPage.ToolTipText = "Distances to the start and end of Book, current chapter/verse/word\r\nالمسافات الى " +
@@ -8950,7 +9005,7 @@ public partial class MainForm : Form, ISubscriber
         this.DistancesPanel.Location = new System.Drawing.Point(0, 0);
         this.DistancesPanel.Margin = new System.Windows.Forms.Padding(4);
         this.DistancesPanel.Name = "DistancesPanel";
-        this.DistancesPanel.Size = new System.Drawing.Size(674, 201);
+        this.DistancesPanel.Size = new System.Drawing.Size(673, 201);
         this.DistancesPanel.TabIndex = 1;
         // 
         // DistancesInterestingNumbersEditLabel
@@ -9874,7 +9929,7 @@ public partial class MainForm : Form, ISubscriber
         this.UserTextTabPage.Location = new System.Drawing.Point(4, 26);
         this.UserTextTabPage.Margin = new System.Windows.Forms.Padding(4);
         this.UserTextTabPage.Name = "UserTextTabPage";
-        this.UserTextTabPage.Size = new System.Drawing.Size(674, 201);
+        this.UserTextTabPage.Size = new System.Drawing.Size(673, 201);
         this.UserTextTabPage.TabIndex = 194;
         this.UserTextTabPage.Text = " User Text ";
         this.UserTextTabPage.ToolTipText = "Calculate the value of any given text or find all words with a given value\r\nحساب " +
@@ -12987,12 +13042,12 @@ public partial class MainForm : Form, ISubscriber
         this.FindBySimilarityPanel.ResumeLayout(false);
         ((System.ComponentModel.ISupportInitialize)(this.FindBySimilarityPercentageTrackBar)).EndInit();
         this.FindByTextPanel.ResumeLayout(false);
+        ((System.ComponentModel.ISupportInitialize)(this.FindByTextMultiplicityNumericUpDown)).EndInit();
         this.TextLocationWithinChapterPanel.ResumeLayout(false);
         this.TextLocationInWordPanel.ResumeLayout(false);
         this.TextLocationWithinVersePanel.ResumeLayout(false);
         this.KeyboardPanel.ResumeLayout(false);
         this.KeyboardPanel.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByTextMultiplicityNumericUpDown)).EndInit();
         this.PositionsGroupBox.ResumeLayout(false);
         this.PositionsGroupBox.PerformLayout();
         ((System.ComponentModel.ISupportInitialize)(this.LetterNumericUpDown)).EndInit();
@@ -14539,10 +14594,10 @@ public partial class MainForm : Form, ISubscriber
                                                 break;
                                             case "Language":
                                                 {
-                                                    int index = int.Parse(parts[1].Trim());
-                                                    if ((index >= 0) && (index < this.LanguageComboBox.Items.Count))
+                                                    string language = parts[1].Trim();
+                                                    if (this.LanguageComboBox.Items.Contains(language))
                                                     {
-                                                        this.LanguageComboBox.SelectedIndex = index;
+                                                        this.LanguageComboBox.SelectedItem = language;
                                                     }
                                                     else if (this.LanguageComboBox.Items.Contains(DEFAULT_LANGUAGE))
                                                     {
@@ -15817,7 +15872,7 @@ public partial class MainForm : Form, ISubscriber
                     }
                     writer.WriteLine("DrawingWidth" + "=" + Drawing.WIDTH);
                     writer.WriteLine("DrawingHeight" + "=" + Drawing.HEIGHT);
-                    writer.WriteLine("Language" + "=" + this.LanguageComboBox.SelectedIndex);
+                    writer.WriteLine("Language" + "=" + this.LanguageComboBox.SelectedItem.ToString());
                     writer.WriteLine("InformationBoxTop" + "=" + m_information_box_top);
                     writer.WriteLine("InformationPageIndex" + "=" + m_information_page_index);
                     writer.WriteLine("TranslationBoxWidth" + "=" + m_translation_box_width);
@@ -26066,9 +26121,9 @@ public partial class MainForm : Form, ISubscriber
 
         if (m_translation_readonly)
         {
-            if (File.Exists(Globals.IMAGES_FOLDER + "/" + "text_unlocked.png"))
+            if (File.Exists(Globals.IMAGES_FOLDER + "/" + "page_white_edit.png"))
             {
-                EditSaveTranslationLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "text_unlocked.png");
+                EditSaveTranslationLabel.Image = new Bitmap(Globals.IMAGES_FOLDER + "/" + "page_white_edit.png");
             }
             ToolTip.SetToolTip(EditSaveTranslationLabel, L[l]["Edit translation"]);
         }
@@ -37149,24 +37204,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FindByNumbersResultTypeLettersLabel_Click(object sender, EventArgs e)
     {
-        m_numbers_result_type = NumbersResultType.Letters;
-        UpdateNumberTypeLabelTooltips();
-
-        //                          num   Cs     Vs     Ws    Ls    uLs   value dsum  droot
-        EnableFindByNumbersControls(true, false, false, false, false, false, true, true, true);
-        FindByNumbersControls_Enter(null, null);
-        ////ResetFindByNumbersResultTypeLabels(); // already called on FindByNumbersControls_Enter
-        //ResetFindByNumbersComparisonOperatorLabels();
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersNumberNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersPartitionsNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersVersesNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersWordsNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersLettersNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersUniqueLettersNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersValueNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitSumNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitalRootNumberTypeLabel);
-
         try
         {
             for (int i = 0; i < 3; i++) FindByNumbersNumberNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -37188,6 +37225,24 @@ public partial class MainForm : Form, ISubscriber
             //FindByNumbersValueNumericUpDown.Value = 0;
             //FindByNumbersValueDigitSumNumericUpDown.Value = 0;
             //FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
+
+            m_numbers_result_type = NumbersResultType.Letters;
+            UpdateNumberTypeLabelTooltips();
+
+            //                          num   Cs     Vs     Ws    Ls    uLs   value dsum  droot
+            EnableFindByNumbersControls(true, false, false, false, false, false, true, true, true);
+            FindByNumbersControls_Enter(null, null);
+            ////ResetFindByNumbersResultTypeLabels(); // already called on FindByNumbersControls_Enter
+            //ResetFindByNumbersComparisonOperatorLabels();
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersNumberNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersPartitionsNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersVersesNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersWordsNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersLettersNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersUniqueLettersNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersValueNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitSumNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitalRootNumberTypeLabel);
         }
         catch (Exception ex)
         {
@@ -37214,24 +37269,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FindByNumbersResultTypeWordsLabel_Click(object sender, EventArgs e)
     {
-        m_numbers_result_type = NumbersResultType.Words;
-        UpdateNumberTypeLabelTooltips();
-
-        //                          num   Cs     Vs     Ws    Ls    uLs   value dsum  droot
-        EnableFindByNumbersControls(true, false, false, true, true, true, true, true, true);
-        FindByNumbersControls_Enter(null, null);
-        ////ResetFindByNumbersResultTypeLabels(); // already called on FindByNumbersControls_Enter
-        //ResetFindByNumbersComparisonOperatorLabels();
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersNumberNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersPartitionsNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersVersesNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersWordsNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersLettersNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersUniqueLettersNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersValueNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitSumNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitalRootNumberTypeLabel);
-
         try
         {
             for (int i = 0; i < 3; i++) FindByNumbersNumberNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -37253,6 +37290,24 @@ public partial class MainForm : Form, ISubscriber
             //FindByNumbersValueNumericUpDown.Value = 0;
             //FindByNumbersValueDigitSumNumericUpDown.Value = 0;
             //FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
+
+            m_numbers_result_type = NumbersResultType.Words;
+            UpdateNumberTypeLabelTooltips();
+
+            //                          num   Cs     Vs     Ws    Ls    uLs   value dsum  droot
+            EnableFindByNumbersControls(true, false, false, true, true, true, true, true, true);
+            FindByNumbersControls_Enter(null, null);
+            ////ResetFindByNumbersResultTypeLabels(); // already called on FindByNumbersControls_Enter
+            //ResetFindByNumbersComparisonOperatorLabels();
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersNumberNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersPartitionsNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersVersesNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersWordsNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersLettersNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersUniqueLettersNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersValueNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitSumNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitalRootNumberTypeLabel);
         }
         catch (Exception ex)
         {
@@ -37279,24 +37334,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FindByNumbersResultTypeSentencesLabel_Click(object sender, EventArgs e)
     {
-        m_numbers_result_type = NumbersResultType.Sentences;
-        UpdateNumberTypeLabelTooltips();
-
-        //                           num   Cs     Vs     Ws    Ls    uLs   value dsum  droot
-        EnableFindByNumbersControls(true, false, false, true, true, true, true, true, true);
-        FindByNumbersControls_Enter(null, null);
-        ////ResetFindByNumbersResultTypeLabels(); // already called on FindByNumbersControls_Enter
-        //ResetFindByNumbersComparisonOperatorLabels();
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersNumberNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersPartitionsNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersVersesNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersWordsNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersLettersNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersUniqueLettersNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersValueNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitSumNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitalRootNumberTypeLabel);
-
         try
         {
             for (int i = 0; i < 3; i++) FindByNumbersNumberNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -37318,6 +37355,24 @@ public partial class MainForm : Form, ISubscriber
             //FindByNumbersValueNumericUpDown.Value = 0;
             //FindByNumbersValueDigitSumNumericUpDown.Value = 0;
             //FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
+
+            m_numbers_result_type = NumbersResultType.Sentences;
+            UpdateNumberTypeLabelTooltips();
+
+            //                           num   Cs     Vs     Ws    Ls    uLs   value dsum  droot
+            EnableFindByNumbersControls(true, false, false, true, true, true, true, true, true);
+            FindByNumbersControls_Enter(null, null);
+            ////ResetFindByNumbersResultTypeLabels(); // already called on FindByNumbersControls_Enter
+            //ResetFindByNumbersComparisonOperatorLabels();
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersNumberNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersPartitionsNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersVersesNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersWordsNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersLettersNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersUniqueLettersNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersValueNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitSumNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitalRootNumberTypeLabel);
         }
         catch (Exception ex)
         {
@@ -37344,24 +37399,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FindByNumbersResultTypeVersesLabel_Click(object sender, EventArgs e)
     {
-        m_numbers_result_type = NumbersResultType.Verses;
-        UpdateNumberTypeLabelTooltips();
-
-        //                           num   Cs     Vs    Ws    Ls    uLs   value dsum  droot
-        EnableFindByNumbersControls(true, false, true, true, true, true, true, true, true);
-        FindByNumbersControls_Enter(null, null);
-        ////ResetFindByNumbersResultTypeLabels(); // already called on FindByNumbersControls_Enter
-        //ResetFindByNumbersComparisonOperatorLabels();
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersNumberNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersPartitionsNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersVersesNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersWordsNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersLettersNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersUniqueLettersNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersValueNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitSumNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitalRootNumberTypeLabel);
-
         try
         {
             for (int i = 0; i < 3; i++) FindByNumbersNumberNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -37376,13 +37413,31 @@ public partial class MainForm : Form, ISubscriber
 
             FindByNumbersNumberNumericUpDown.Value = 0;
             FindByNumbersPartitionsNumericUpDown.Value = 0;
-            //FindByNumbersVersesNumericUpDown.Value = 1;
+            FindByNumbersVersesNumericUpDown.Value = 1;
             //FindByNumbersWordsNumericUpDown.Value = 0;
             //FindByNumbersLettersNumericUpDown.Value = 0;
             //FindByNumbersUniqueLettersNumericUpDown.Value = 0;
             //FindByNumbersValueNumericUpDown.Value = 0;
             //FindByNumbersValueDigitSumNumericUpDown.Value = 0;
             //FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
+
+            m_numbers_result_type = NumbersResultType.Verses;
+            UpdateNumberTypeLabelTooltips();
+
+            //                           num   Cs     Vs    Ws    Ls    uLs   value dsum  droot
+            EnableFindByNumbersControls(true, false, true, true, true, true, true, true, true);
+            FindByNumbersControls_Enter(null, null);
+            ////ResetFindByNumbersResultTypeLabels(); // already called on FindByNumbersControls_Enter
+            //ResetFindByNumbersComparisonOperatorLabels();
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersNumberNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersPartitionsNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersVersesNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersWordsNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersLettersNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersUniqueLettersNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersValueNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitSumNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitalRootNumberTypeLabel);
         }
         catch (Exception ex)
         {
@@ -37449,23 +37504,6 @@ public partial class MainForm : Form, ISubscriber
     }
     private void DoResultTypeC_SPGHQB()
     {
-        UpdateNumberTypeLabelTooltips();
-
-        //                           num   Cs    Vs    Ws    Ls    uLs   value dsum  droot
-        EnableFindByNumbersControls(true, true, true, true, true, true, true, true, true);
-        FindByNumbersControls_Enter(null, null);
-        ////ResetFindByNumbersResultTypeLabels(); // already called on FindByNumbersControls_Enter
-        //ResetFindByNumbersComparisonOperatorLabels();
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersNumberNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersPartitionsNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersVersesNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersWordsNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersLettersNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersUniqueLettersNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersValueNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitSumNumberTypeLabel);
-        //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitalRootNumberTypeLabel);
-
         try
         {
             for (int i = 0; i < 3; i++) FindByNumbersNumberNumericUpDown.ValueChanged -= new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
@@ -37487,6 +37525,23 @@ public partial class MainForm : Form, ISubscriber
             //FindByNumbersValueNumericUpDown.Value = 0;
             //FindByNumbersValueDigitSumNumericUpDown.Value = 0;
             //FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
+
+            UpdateNumberTypeLabelTooltips();
+
+            //                           num   Cs    Vs    Ws    Ls    uLs   value dsum  droot
+            EnableFindByNumbersControls(true, true, true, true, true, true, true, true, true);
+            FindByNumbersControls_Enter(null, null);
+            ////ResetFindByNumbersResultTypeLabels(); // already called on FindByNumbersControls_Enter
+            //ResetFindByNumbersComparisonOperatorLabels();
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersNumberNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersPartitionsNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersVersesNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersWordsNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersLettersNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersUniqueLettersNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersValueNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitSumNumberTypeLabel);
+            //ResetFindByNumbersNumberTypeControl(FindByNumbersValueDigitalRootNumberTypeLabel);
         }
         catch (Exception ex)
         {
@@ -37640,53 +37695,6 @@ public partial class MainForm : Form, ISubscriber
         //    FindByNumbersValueDigitalRootNumericUpDown.ValueChanged += new EventHandler(FindByNumbersNumericUpDown_ValueChanged);
         //}
     }
-    //private void ResetFindByNumbersControls()
-    //{
-    //    FindByNumbersNumberComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersNumberNumericUpDown.Value = 0;
-    //    FindByNumbersNumberNumberTypeLabel.Text = null;
-
-    //    FindByNumbersPartitionsComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersPartitionsNumericUpDown.Value = 0;
-    //    FindByNumbersPartitionsNumberTypeLabel.Text = null;
-
-    //    FindByNumbersVersesComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersVersesNumericUpDown.Value = 0;
-    //    FindByNumbersVersesNumberTypeLabel.Text = null;
-
-    //    FindByNumbersWordsComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersWordsNumericUpDown.Value = 0;
-    //    FindByNumbersWordsNumberTypeLabel.Text = null;
-
-    //    FindByNumbersLettersComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersLettersNumericUpDown.Value = 0;
-    //    FindByNumbersLettersNumberTypeLabel.Text = null;
-
-    //    FindByNumbersUniqueLettersComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersUniqueLettersNumericUpDown.Value = 0;
-    //    FindByNumbersUniqueLettersNumberTypeLabel.Text = null;
-
-    //    FindByNumbersValueComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersValueNumericUpDown.Value = 0;
-    //    FindByNumbersValueNumberTypeLabel.Text = null;
-
-    //    FindByNumbersValueDigitSumComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersValueDigitSumNumericUpDown.Value = 0;
-    //    FindByNumbersValueDigitSumNumberTypeLabel.Text = null;
-
-    //    FindByNumbersValueDigitalRootComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersValueDigitalRootNumericUpDown.Value = 0;
-    //    FindByNumbersValueDigitalRootNumberTypeLabel.Text = null;
-    //}
-    //private void ResetFindByNumbersNumberTypeControl(Control control)
-    //{
-    //    if (control != null)
-    //    {
-    //        control.Text = null;
-    //        control.ForeColor = Color.Black;
-    //        ToolTip.SetToolTip(control, null);
-    //    }
-    //}
     private void ResetFindByNumbersResultTypeLabels()
     {
         FindByNumbersResultTypeLettersLabel.Text = "L";
@@ -37737,18 +37745,6 @@ public partial class MainForm : Form, ISubscriber
         FindByNumbersResultTypeBowingsLabel.BackColor = Color.DarkGray;
         FindByNumbersResultTypeBowingsLabel.BorderStyle = BorderStyle.None;
     }
-    //private void ResetFindByNumbersComparisonOperatorLabels()
-    //{
-    //    FindByNumbersNumberComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersPartitionsComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersVersesComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersWordsComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersLettersComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersUniqueLettersComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersValueComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersValueDigitSumComparisonOperatorLabel.Text = "=";
-    //    FindByNumbersValueDigitalRootComparisonOperatorLabel.Text = "=";
-    //}
     private void UpdateFindByNumbersResultType()
     {
         // toggle between normal and range types
