@@ -59,7 +59,9 @@ public static class Globals
 
     // Global Folders
     public static string LANGUAGES_FOLDER = "Languages";
-    public static string FLAGS_FOLDER = "Flags";
+    public static string USERTEXT_FOLDER = "UserText";
+    public static string TRANSLATIONS_FOLDER = "Translations";
+    public static string TRANSLATIONS_OFFLINE_FOLDER = "Translations/Offline";
     public static string IMAGES_FOLDER = "Images";
     public static string FONTS_FOLDER = "Fonts";
     public static string DATA_FOLDER = "Data";
@@ -74,7 +76,4 @@ public static class Globals
     public static string BOOKMARKS_FOLDER = "Bookmarks";
     public static string HISTORY_FOLDER = "History";
     public static string HELP_FOLDER = "Help";
-    public static string USERTEXT_FOLDER = "UserText";
-    public static string TRANSLATIONS_FOLDER = "Translations";
-    public static string TRANSLATIONS_OFFLINE_FOLDER = "Translations/Offline";
 }

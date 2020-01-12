@@ -23,7 +23,6 @@ rd /S /Q Build\Release\History
 rd /S /Q Build\Release\Drawings
 rd /S /Q Build\Release\Statistics
 rd /S /Q Build\Release\Research
-rd /S /Q Build\Release\Composites
 
 rd /S /Q Globals\obj
 rd /S /Q Utilities\obj
@@ -35,13 +34,5 @@ rd /S /Q Research\obj
 rd /S /Q Common\obj
 rd /S /Q QuranCode\obj
 rd /S /Q ScriptRunner\obj
-rd /S /Q PrimeCalculator\obj
-rd /S /Q QuranLab\obj
-rd /S /Q InitialLetters\obj
-rd /S /Q Composites\obj
-rd /S /Q Numbers\obj
-rd /S /Q Indices\obj
-rd /S /Q WordGenerator\obj
-rd /S /Q AhlulBayt\obj
 
 :END
