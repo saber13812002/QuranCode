@@ -733,7 +733,7 @@ public partial class MainForm : Form, ISubscriber
         this.Cursor = Cursors.WaitCursor;
         try
         {
-            Downloader.Download(uri, path, 30000);
+            Downloader.Download(uri, path, 10000);
         }
         catch (Exception ex)
         {
@@ -25706,7 +25706,6 @@ public partial class MainForm : Form, ISubscriber
                                             if (
                                                 (key == Client.DEFAULT_EMLAAEI_TEXT) ||
                                                 (key == Client.DEFAULT_TRANSLATION) ||
-                                                (key == Client.DEFAULT_OLD_TRANSLATION) ||
                                                 (key == Client.DEFAULT_TRANSLITERATION) ||
                                                 (key == Client.DEFAULT_WORD_MEANINGS) ||
                                                 (key == Client.DEFAULT_TRANSLATION_1) ||
@@ -25715,7 +25714,8 @@ public partial class MainForm : Form, ISubscriber
                                                 (key == Client.DEFAULT_TRANSLATION_4) ||
                                                 (key == Client.DEFAULT_TRANSLATION_5) ||
                                                 (key == Client.DEFAULT_TRANSLATION_6) ||
-                                                (key == Client.DEFAULT_TRANSLATION_7)
+                                                (key == Client.DEFAULT_TRANSLATION_7) ||
+                                                (key == Client.DEFAULT_TRANSLATION_8)
                                                )
                                             {
                                                 TranslatorsCheckedListBox.SetItemCheckState(i, CheckState.Indeterminate);
@@ -26193,7 +26193,6 @@ public partial class MainForm : Form, ISubscriber
                             if (
                                 (key == Client.DEFAULT_EMLAAEI_TEXT) ||
                                 (key == Client.DEFAULT_TRANSLATION) ||
-                                (key == Client.DEFAULT_OLD_TRANSLATION) ||
                                 (key == Client.DEFAULT_TRANSLITERATION) ||
                                 (key == Client.DEFAULT_WORD_MEANINGS) ||
                                 (key == Client.DEFAULT_TRANSLATION_1) ||
@@ -26202,7 +26201,8 @@ public partial class MainForm : Form, ISubscriber
                                 (key == Client.DEFAULT_TRANSLATION_4) ||
                                 (key == Client.DEFAULT_TRANSLATION_5) ||
                                 (key == Client.DEFAULT_TRANSLATION_6) ||
-                                (key == Client.DEFAULT_TRANSLATION_7)
+                                (key == Client.DEFAULT_TRANSLATION_7) ||
+                                (key == Client.DEFAULT_TRANSLATION_8)
                                )
                             {
                                 m_selected_translations.Add(key);

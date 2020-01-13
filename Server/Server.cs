@@ -125,16 +125,16 @@ public class Server : IPublisher
     public const string DEFAULT_QURAN_TEXT = "quran-uthmani";
     public const string DEFAULT_EMLAAEI_TEXT = "ar.emlaaei";
     public const string DEFAULT_TRANSLATION = "en.qarai";
-    public const string DEFAULT_OLD_TRANSLATION = "en.pickthall";
     public const string DEFAULT_TRANSLITERATION = "en.transliteration";
     public const string DEFAULT_WORD_MEANINGS = "en.wordbyword";
-    public const string DEFAULT_TRANSLATION_1 = "en.sarwar";
+    public const string DEFAULT_TRANSLATION_1 = "es.garcia";
     public const string DEFAULT_TRANSLATION_2 = "fa.khorramdel";
     public const string DEFAULT_TRANSLATION_3 = "id.muntakhab";
-    public const string DEFAULT_TRANSLATION_4 = "ml.abdulhameed";
-    public const string DEFAULT_TRANSLATION_5 = "tr.yildirim";
-    public const string DEFAULT_TRANSLATION_6 = "ur.jawadi";
-    public const string DEFAULT_TRANSLATION_7 = "zh.jian";
+    public const string DEFAULT_TRANSLATION_4 = "ja.japanese";
+    public const string DEFAULT_TRANSLATION_5 = "ml.abdulhameed";
+    public const string DEFAULT_TRANSLATION_6 = "tr.yildirim";
+    public const string DEFAULT_TRANSLATION_7 = "ur.jawadi";
+    public const string DEFAULT_TRANSLATION_8 = "zh.jian";
 
     static Server()
     {

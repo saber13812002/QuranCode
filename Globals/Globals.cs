@@ -62,6 +62,7 @@ public static class Globals
     public static string USERTEXT_FOLDER = "UserText";
     public static string TRANSLATIONS_FOLDER = "Translations";
     public static string TRANSLATIONS_OFFLINE_FOLDER = "Translations/Offline";
+    public static string TRANSLATIONS_FLAGS_FOLDER = "Translations/Flags";
     public static string IMAGES_FOLDER = "Images";
     public static string FONTS_FOLDER = "Fonts";
     public static string DATA_FOLDER = "Data";

@@ -313,6 +313,7 @@ partial class MainForm
             this.EditSaveTranslationLabel = new System.Windows.Forms.Label();
             this.TranslatorComboBox = new System.Windows.Forms.ComboBox();
             this.TranslationTextBox = new System.Windows.Forms.TextBox();
+            this.TanzilTranslationsLabel = new System.Windows.Forms.Label();
             this.TranslatorsCheckedListBox = new System.Windows.Forms.CheckedListBox();
             this.TranslationsApplySettingsLabel = new System.Windows.Forms.Label();
             this.TranslationsCancelSettingsLabel = new System.Windows.Forms.Label();
@@ -5531,7 +5532,7 @@ partial class MainForm
             this.TabControl.Name = "TabControl";
             this.TabControl.SelectedIndex = 0;
             this.TabControl.ShowToolTips = true;
-            this.TabControl.Size = new System.Drawing.Size(661, 191);
+            this.TabControl.Size = new System.Drawing.Size(661, 192);
             this.TabControl.TabIndex = 102;
             this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
             this.TabControl.Click += new System.EventHandler(this.TabControl_Click);
@@ -5569,6 +5570,7 @@ partial class MainForm
             // 
             // TranslationSplitContainer.Panel2
             // 
+            this.TranslationSplitContainer.Panel2.Controls.Add(this.TanzilTranslationsLabel);
             this.TranslationSplitContainer.Panel2.Controls.Add(this.TranslatorsCheckedListBox);
             this.TranslationSplitContainer.Panel2.Controls.Add(this.TranslationsApplySettingsLabel);
             this.TranslationSplitContainer.Panel2.Controls.Add(this.TranslationsCancelSettingsLabel);
@@ -5664,6 +5666,22 @@ partial class MainForm
             this.TranslationTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
             this.TranslationTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TranslationTextBox_KeyPress);
             // 
+            // TanzilTranslationsLabel
+            // 
+            this.TanzilTranslationsLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.TanzilTranslationsLabel.BackColor = System.Drawing.Color.Pink;
+            this.TanzilTranslationsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.TanzilTranslationsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TanzilTranslationsLabel.ForeColor = System.Drawing.SystemColors.Window;
+            this.TanzilTranslationsLabel.Location = new System.Drawing.Point(190, 119);
+            this.TanzilTranslationsLabel.Name = "TanzilTranslationsLabel";
+            this.TanzilTranslationsLabel.Size = new System.Drawing.Size(7, 4);
+            this.TanzilTranslationsLabel.TabIndex = 7;
+            this.TanzilTranslationsLabel.Tag = "http://tanzil.net/trans";
+            this.TanzilTranslationsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.ToolTip.SetToolTip(this.TanzilTranslationsLabel, "©2013 Tanzil Quran Translations");
+            this.TanzilTranslationsLabel.Click += new System.EventHandler(this.LinkLabel_Click);
+            // 
             // TranslatorsCheckedListBox
             // 
             this.TranslatorsCheckedListBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -5671,7 +5689,7 @@ partial class MainForm
             this.TranslatorsCheckedListBox.BackColor = System.Drawing.SystemColors.ControlLight;
             this.TranslatorsCheckedListBox.CheckOnClick = true;
             this.TranslatorsCheckedListBox.FormattingEnabled = true;
-            this.TranslatorsCheckedListBox.Location = new System.Drawing.Point(6, -1);
+            this.TranslatorsCheckedListBox.Location = new System.Drawing.Point(7, 0);
             this.TranslatorsCheckedListBox.Name = "TranslatorsCheckedListBox";
             this.TranslatorsCheckedListBox.Size = new System.Drawing.Size(178, 169);
             this.TranslatorsCheckedListBox.TabIndex = 16;
@@ -5715,7 +5733,7 @@ partial class MainForm
             this.AllTranslatorsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.AllTranslatorsCheckBox.AutoSize = true;
             this.AllTranslatorsCheckBox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.AllTranslatorsCheckBox.Location = new System.Drawing.Point(157, 149);
+            this.AllTranslatorsCheckBox.Location = new System.Drawing.Point(158, 149);
             this.AllTranslatorsCheckBox.Name = "AllTranslatorsCheckBox";
             this.AllTranslatorsCheckBox.Size = new System.Drawing.Size(15, 14);
             this.AllTranslatorsCheckBox.TabIndex = 13;
@@ -5730,7 +5748,7 @@ partial class MainForm
             this.TranslatorsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TranslatorsComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TranslatorsComboBox.FormattingEnabled = true;
-            this.TranslatorsComboBox.Location = new System.Drawing.Point(6, 145);
+            this.TranslatorsComboBox.Location = new System.Drawing.Point(7, 145);
             this.TranslatorsComboBox.Name = "TranslatorsComboBox";
             this.TranslatorsComboBox.Size = new System.Drawing.Size(178, 20);
             this.TranslatorsComboBox.TabIndex = 12;
@@ -5750,7 +5768,7 @@ partial class MainForm
             this.TranslationsTextBox.Name = "TranslationsTextBox";
             this.TranslationsTextBox.ReadOnly = true;
             this.TranslationsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TranslationsTextBox.Size = new System.Drawing.Size(203, 165);
+            this.TranslationsTextBox.Size = new System.Drawing.Size(204, 165);
             this.TranslationsTextBox.TabIndex = 11;
             this.TranslationsTextBox.WordWrap = false;
             this.TranslationsTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
@@ -8903,7 +8921,7 @@ partial class MainForm
             this.TanzilLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ToolTip.SetToolTip(this.TanzilLabel, "©2008 Tanzil Quran Text");
             this.TanzilLabel.Click += new System.EventHandler(this.LinkLabel_Click);
-            this.TanzilLabel.Enter += new System.EventHandler(this.FindByTextControls_Enter);
+            this.TanzilLabel.Enter += new System.EventHandler(this.StatisticsControls_Enter);
             // 
             // EmlaaeiTextLabel
             // 
@@ -12350,4 +12368,5 @@ partial class MainForm
     private System.Windows.Forms.Label NthUniqueNumberDimensionLabel;
     private System.Windows.Forms.Label NthDuplicateNumberDimensionLabel;
     private System.Windows.Forms.Label NthNumberDimensionLabel;
+    private System.Windows.Forms.Label TanzilTranslationsLabel;
 }
