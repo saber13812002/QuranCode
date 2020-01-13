@@ -1,4 +1,4 @@
-In the name of Allah, the Beneficent, the Merciful.
+﻿In the name of Allah, the Beneficent, the Merciful.
 Praise be to Allah, Lord of the Worlds,
 The Beneficent, the Merciful.
 Master of the Day of Judgment,
@@ -3834,7 +3834,7 @@ A cup from a gushing spring is brought round for them,
 White, delicious to the drinkers,
 Wherein there is no headache nor are they made mad thereby.
 And with them are those of modest gaze, with lovely eyes,
-(Pure) as they were hidden eggs (of the ostrich).
+As if they were protected eggs (inside their shells).
 And some of them draw near unto others, mutually questioning.
 A speaker of them saith: Lo! I had a comrade
 Who used to say: Art thou in truth of those who put faith (in his words)?
@@ -6234,16 +6234,3 @@ The god of mankind,
 From the evil of the sneaking whisperer,
 Who whispereth in the hearts of mankind,
 Of the jinn and of mankind.
-
-
-#=====================================================================
-#
-#  Quran Translation
-#  Name: Pickthall
-#  Translator: Mohammed Marmaduke William Pickthall
-#  Language: English
-#  ID: en.pickthall
-#  Last Update: September 4, 2010
-#  Source: Tanzil.net
-#
-#=====================================================================

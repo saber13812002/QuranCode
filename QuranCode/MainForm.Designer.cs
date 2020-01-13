@@ -5594,7 +5594,7 @@ partial class MainForm
             this.TranslationWordWrapLabel.Image = ((System.Drawing.Image)(resources.GetObject("TranslationWordWrapLabel.Image")));
             this.TranslationWordWrapLabel.Location = new System.Drawing.Point(427, 19);
             this.TranslationWordWrapLabel.Name = "TranslationWordWrapLabel";
-            this.TranslationWordWrapLabel.Size = new System.Drawing.Size(17, 17);
+            this.TranslationWordWrapLabel.Size = new System.Drawing.Size(15, 17);
             this.TranslationWordWrapLabel.TabIndex = 6;
             this.TranslationWordWrapLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ToolTip.SetToolTip(this.TranslationWordWrapLabel, "Wrap");
@@ -5673,7 +5673,7 @@ partial class MainForm
             this.TanzilTranslationsLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.TanzilTranslationsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TanzilTranslationsLabel.ForeColor = System.Drawing.SystemColors.Window;
-            this.TanzilTranslationsLabel.Location = new System.Drawing.Point(190, 119);
+            this.TanzilTranslationsLabel.Location = new System.Drawing.Point(191, 119);
             this.TanzilTranslationsLabel.Name = "TanzilTranslationsLabel";
             this.TanzilTranslationsLabel.Size = new System.Drawing.Size(7, 4);
             this.TanzilTranslationsLabel.TabIndex = 7;
@@ -5689,9 +5689,9 @@ partial class MainForm
             this.TranslatorsCheckedListBox.BackColor = System.Drawing.SystemColors.ControlLight;
             this.TranslatorsCheckedListBox.CheckOnClick = true;
             this.TranslatorsCheckedListBox.FormattingEnabled = true;
-            this.TranslatorsCheckedListBox.Location = new System.Drawing.Point(7, 0);
+            this.TranslatorsCheckedListBox.Location = new System.Drawing.Point(3, 0);
             this.TranslatorsCheckedListBox.Name = "TranslatorsCheckedListBox";
-            this.TranslatorsCheckedListBox.Size = new System.Drawing.Size(178, 169);
+            this.TranslatorsCheckedListBox.Size = new System.Drawing.Size(183, 169);
             this.TranslatorsCheckedListBox.TabIndex = 16;
             this.TranslatorsCheckedListBox.Visible = false;
             // 
@@ -5703,7 +5703,7 @@ partial class MainForm
             this.TranslationsApplySettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TranslationsApplySettingsLabel.ForeColor = System.Drawing.SystemColors.WindowText;
             this.TranslationsApplySettingsLabel.Image = ((System.Drawing.Image)(resources.GetObject("TranslationsApplySettingsLabel.Image")));
-            this.TranslationsApplySettingsLabel.Location = new System.Drawing.Point(185, 145);
+            this.TranslationsApplySettingsLabel.Location = new System.Drawing.Point(186, 145);
             this.TranslationsApplySettingsLabel.Name = "TranslationsApplySettingsLabel";
             this.TranslationsApplySettingsLabel.Size = new System.Drawing.Size(18, 18);
             this.TranslationsApplySettingsLabel.TabIndex = 14;
@@ -5719,7 +5719,7 @@ partial class MainForm
             this.TranslationsCancelSettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TranslationsCancelSettingsLabel.ForeColor = System.Drawing.SystemColors.WindowText;
             this.TranslationsCancelSettingsLabel.Image = ((System.Drawing.Image)(resources.GetObject("TranslationsCancelSettingsLabel.Image")));
-            this.TranslationsCancelSettingsLabel.Location = new System.Drawing.Point(186, 127);
+            this.TranslationsCancelSettingsLabel.Location = new System.Drawing.Point(187, 127);
             this.TranslationsCancelSettingsLabel.Name = "TranslationsCancelSettingsLabel";
             this.TranslationsCancelSettingsLabel.Size = new System.Drawing.Size(18, 18);
             this.TranslationsCancelSettingsLabel.TabIndex = 15;
@@ -5733,7 +5733,7 @@ partial class MainForm
             this.AllTranslatorsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.AllTranslatorsCheckBox.AutoSize = true;
             this.AllTranslatorsCheckBox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.AllTranslatorsCheckBox.Location = new System.Drawing.Point(158, 149);
+            this.AllTranslatorsCheckBox.Location = new System.Drawing.Point(158, 148);
             this.AllTranslatorsCheckBox.Name = "AllTranslatorsCheckBox";
             this.AllTranslatorsCheckBox.Size = new System.Drawing.Size(15, 14);
             this.AllTranslatorsCheckBox.TabIndex = 13;
@@ -5748,9 +5748,9 @@ partial class MainForm
             this.TranslatorsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TranslatorsComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TranslatorsComboBox.FormattingEnabled = true;
-            this.TranslatorsComboBox.Location = new System.Drawing.Point(7, 145);
+            this.TranslatorsComboBox.Location = new System.Drawing.Point(3, 145);
             this.TranslatorsComboBox.Name = "TranslatorsComboBox";
-            this.TranslatorsComboBox.Size = new System.Drawing.Size(178, 20);
+            this.TranslatorsComboBox.Size = new System.Drawing.Size(183, 20);
             this.TranslatorsComboBox.TabIndex = 12;
             this.TranslatorsComboBox.SelectedIndexChanged += new System.EventHandler(this.TranslatorComboBox_SelectedIndexChanged);
             // 
@@ -5768,7 +5768,7 @@ partial class MainForm
             this.TranslationsTextBox.Name = "TranslationsTextBox";
             this.TranslationsTextBox.ReadOnly = true;
             this.TranslationsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TranslationsTextBox.Size = new System.Drawing.Size(204, 165);
+            this.TranslationsTextBox.Size = new System.Drawing.Size(205, 165);
             this.TranslationsTextBox.TabIndex = 11;
             this.TranslationsTextBox.WordWrap = false;
             this.TranslationsTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);

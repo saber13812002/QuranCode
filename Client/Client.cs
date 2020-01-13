@@ -72,14 +72,14 @@ public class Client : IPublisher, ISubscriber
     public const string DEFAULT_TRANSLATION = Server.DEFAULT_TRANSLATION;
     public const string DEFAULT_TRANSLITERATION = Server.DEFAULT_TRANSLITERATION;
     public const string DEFAULT_WORD_MEANINGS = Server.DEFAULT_WORD_MEANINGS;
-    public const string DEFAULT_TRANSLATION_1 = Server.DEFAULT_TRANSLATION_1;
-    public const string DEFAULT_TRANSLATION_2 = Server.DEFAULT_TRANSLATION_2;
-    public const string DEFAULT_TRANSLATION_3 = Server.DEFAULT_TRANSLATION_3;
-    public const string DEFAULT_TRANSLATION_4 = Server.DEFAULT_TRANSLATION_4;
-    public const string DEFAULT_TRANSLATION_5 = Server.DEFAULT_TRANSLATION_5;
-    public const string DEFAULT_TRANSLATION_6 = Server.DEFAULT_TRANSLATION_6;
-    public const string DEFAULT_TRANSLATION_7 = Server.DEFAULT_TRANSLATION_7;
-    public const string DEFAULT_TRANSLATION_8 = Server.DEFAULT_TRANSLATION_8;
+    //public const string DEFAULT_TRANSLATION_1 = Server.DEFAULT_TRANSLATION_1;
+    //public const string DEFAULT_TRANSLATION_2 = Server.DEFAULT_TRANSLATION_2;
+    //public const string DEFAULT_TRANSLATION_3 = Server.DEFAULT_TRANSLATION_3;
+    //public const string DEFAULT_TRANSLATION_4 = Server.DEFAULT_TRANSLATION_4;
+    //public const string DEFAULT_TRANSLATION_5 = Server.DEFAULT_TRANSLATION_5;
+    //public const string DEFAULT_TRANSLATION_6 = Server.DEFAULT_TRANSLATION_6;
+    //public const string DEFAULT_TRANSLATION_7 = Server.DEFAULT_TRANSLATION_7;
+    //public const string DEFAULT_TRANSLATION_8 = Server.DEFAULT_TRANSLATION_8;
 
     public Client(string numerology_system_name)
     {

@@ -83,17 +83,17 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Languages
     ///////////////////////////////////////////////////////////////////////////////
-    private Dictionary<string, string> m_english_to_native_dictionary = new Dictionary<string, string>();
-    private void LoadNativeLanguageNames(string language_name)
+    private Dictionary<string, string> m_english_to_native_language_names = new Dictionary<string, string>();
+    private void LoadNativeLanguageNames(string english_language_name)
     {
         this.Cursor = Cursors.WaitCursor;
         try
         {
             if (Directory.Exists(Globals.LANGUAGES_FOLDER))
             {
-                if (m_english_to_native_dictionary != null)
+                if (m_english_to_native_language_names != null)
                 {
-                    string filename = Globals.LANGUAGES_FOLDER + "/" + language_name + ".txt";
+                    string filename = Globals.LANGUAGES_FOLDER + "/" + english_language_name + ".txt";
                     List<string> lines = FileHelper.LoadLines(filename);
                     foreach (string line in lines)
                     {
@@ -102,7 +102,7 @@ public partial class MainForm : Form, ISubscriber
                         {
                             if ((parts[0].Length > 0) && (parts[1].Length > 0))
                             {
-                                m_english_to_native_dictionary.Add(parts[0], parts[1]);
+                                m_english_to_native_language_names.Add(parts[0], parts[1]);
                             }
                         }
                     }
@@ -125,7 +125,7 @@ public partial class MainForm : Form, ISubscriber
     private Dictionary<string, Dictionary<string, string>> L = new Dictionary<string, Dictionary<string, string>>();
     private string l = DEFAULT_LANGUAGE;
     private string previous_l = String.Empty;
-    private List<string> m_language_names = new List<string>();
+    private List<string> m_english_language_names = new List<string>();
     private void InstallLanguages()
     {
         if (Directory.Exists(Globals.LANGUAGES_FOLDER))
@@ -137,9 +137,9 @@ public partial class MainForm : Form, ISubscriber
     }
     private void LoadLanguageNames(string languages_folder)
     {
-        if (m_language_names != null)
+        if (m_english_language_names != null)
         {
-            m_language_names.Clear();
+            m_english_language_names.Clear();
 
             DirectoryInfo folder = new DirectoryInfo(languages_folder);
             if (folder != null)
@@ -149,31 +149,24 @@ public partial class MainForm : Form, ISubscriber
                 {
                     foreach (FileInfo file in files)
                     {
-                        try
+                        if (!String.IsNullOrEmpty(file.Name))
                         {
-                            if (!String.IsNullOrEmpty(file.Name))
+                            int pos = file.Name.IndexOf(file.Extension);
+                            if (pos > -1)
                             {
-                                int pos = file.Name.IndexOf(file.Extension);
-                                if (pos > -1)
+                                string english_language_name = file.Name.Remove(pos);
+                                if (!String.IsNullOrEmpty(english_language_name))
                                 {
-                                    string language_name = file.Name.Remove(pos);
-                                    if (!String.IsNullOrEmpty(language_name))
+                                    if (english_language_name == "metadata")
                                     {
-                                        if (language_name == "metadata")
-                                        {
-                                            LoadNativeLanguageNames(language_name);
-                                        }
-                                        else
-                                        {
-                                            m_language_names.Add(language_name);
-                                        }
+                                        LoadNativeLanguageNames(english_language_name);
+                                    }
+                                    else
+                                    {
+                                        m_english_language_names.Add(english_language_name);
                                     }
                                 }
                             }
-                        }
-                        catch
-                        {
-                            // skip non-conformant language
                         }
                     }
                 }
@@ -186,19 +179,19 @@ public partial class MainForm : Form, ISubscriber
         {
             for (int i = 0; i < 3; i++) LanguageComboBox.SelectedIndexChanged -= new EventHandler(LanguageComboBox_SelectedIndexChanged);
             LanguageComboBox.BeginUpdate();
+            LanguageComboBox.Sorted = true;
 
-            if (m_language_names != null)
+            if (m_english_language_names != null)
             {
-                if (m_english_to_native_dictionary != null)
+                if (m_english_to_native_language_names != null)
                 {
-                    LanguageComboBox.Sorted = true;
                     LanguageComboBox.Items.Clear();
-                    foreach (string language_name in m_language_names)
+                    foreach (string english_language_name in m_english_language_names)
                     {
-                        if (m_english_to_native_dictionary.ContainsKey(language_name))
+                        if (m_english_to_native_language_names.ContainsKey(english_language_name))
                         {
-                            string native_name = m_english_to_native_dictionary[language_name];
-                            LanguageComboBox.Items.Add(language_name + LANGUAGE_SEPARATOR + native_name);
+                            string native_labguage_name = m_english_to_native_language_names[english_language_name];
+                            LanguageComboBox.Items.Add(english_language_name + LANGUAGE_SEPARATOR + native_labguage_name);
                         }
                     }
                 }
@@ -235,7 +228,7 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
-    private void LoadLanguage(string language_name)
+    private void LoadLanguage(string english_language_name)
     {
         this.Cursor = Cursors.WaitCursor;
         try
@@ -244,10 +237,10 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (L != null)
                 {
-                    Dictionary<string, string> language_data = new Dictionary<string, string>();
+                    Dictionary<string, string> language_entries = new Dictionary<string, string>();
                     List<Control> controls = GetDescendentControls(this);
 
-                    string filename = Globals.LANGUAGES_FOLDER + "/" + language_name + ".txt";
+                    string filename = Globals.LANGUAGES_FOLDER + "/" + english_language_name + ".txt";
                     List<string> lines = FileHelper.LoadLines(filename);
                     foreach (string line in lines)
                     {
@@ -260,7 +253,7 @@ public partial class MainForm : Form, ISubscriber
                                 {
                                     if ((parts[1].Length > 0) && (parts[2].Length > 0))
                                     {
-                                        language_data.Add(parts[1], parts[2]);
+                                        language_entries.Add(parts[1], parts[2]);
                                     }
                                 }
                             }
@@ -302,11 +295,11 @@ public partial class MainForm : Form, ISubscriber
 
                     if (L.ContainsKey(l))
                     {
-                        L[l] = language_data;
+                        L[l] = language_entries;
                     }
                     else
                     {
-                        L.Add(language_name, language_data);
+                        L.Add(english_language_name, language_entries);
                     }
 
                     UpdateHeaderLabel();
@@ -14568,18 +14561,23 @@ public partial class MainForm : Form, ISubscriber
                                                 break;
                                             case "Language":
                                                 {
-                                                    string language = parts[1].Trim();
-                                                    if (this.LanguageComboBox.Items.Contains(language))
+                                                    string english_language_name = parts[1].Trim();
+                                                    string english_native_language_name = String.Empty;
+                                                    if (m_english_to_native_language_names != null)
                                                     {
-                                                        this.LanguageComboBox.SelectedItem = language;
-                                                    }
-                                                    else if (this.LanguageComboBox.Items.Contains(DEFAULT_LANGUAGE + LANGUAGE_SEPARATOR + DEFAULT_NATIVE_LANGUAGE))
-                                                    {
-                                                        this.LanguageComboBox.SelectedItem = DEFAULT_LANGUAGE + LANGUAGE_SEPARATOR + DEFAULT_NATIVE_LANGUAGE;
-                                                    }
-                                                    else
-                                                    {
-                                                        this.LanguageComboBox.SelectedIndex = 0;
+                                                        if (m_english_to_native_language_names.ContainsKey(english_language_name))
+                                                        {
+                                                            string native_name = m_english_to_native_language_names[english_language_name];
+                                                            english_native_language_name = english_language_name + LANGUAGE_SEPARATOR + native_name;
+                                                        }
+                                                        else
+                                                        {
+                                                            english_native_language_name = DEFAULT_LANGUAGE + LANGUAGE_SEPARATOR + DEFAULT_LANGUAGE;
+                                                        }
+                                                        if (this.LanguageComboBox.Items.Contains(english_native_language_name))
+                                                        {
+                                                            this.LanguageComboBox.SelectedItem = english_native_language_name;
+                                                        }
                                                     }
                                                 }
                                                 break;
@@ -15730,15 +15728,12 @@ public partial class MainForm : Form, ISubscriber
                         m_translation_font = new Font(DEFAULT_TRANSALTION_FONT_NAME, DEFAULT_TRANSALTION_FONT_SIZE);
                         AllTranslatorsCheckBox.Checked = m_show_all_translations;
 
-                        if (this.LanguageComboBox.Items.Count > 0)
+                        if (m_english_to_native_language_names.ContainsKey(DEFAULT_LANGUAGE))
                         {
-                            if (this.LanguageComboBox.Items.Contains(DEFAULT_LANGUAGE + LANGUAGE_SEPARATOR + DEFAULT_NATIVE_LANGUAGE))
+                            string english_native_language_name = DEFAULT_LANGUAGE + LANGUAGE_SEPARATOR + DEFAULT_LANGUAGE;
+                            if (this.LanguageComboBox.Items.Contains(english_native_language_name))
                             {
-                                this.LanguageComboBox.SelectedItem = DEFAULT_LANGUAGE + LANGUAGE_SEPARATOR + DEFAULT_NATIVE_LANGUAGE;
-                            }
-                            else
-                            {
-                                this.LanguageComboBox.SelectedIndex = 0;
+                                this.LanguageComboBox.SelectedItem = english_native_language_name;
                             }
                         }
 
@@ -15846,7 +15841,7 @@ public partial class MainForm : Form, ISubscriber
                     }
                     writer.WriteLine("DrawingWidth" + "=" + Drawing.WIDTH);
                     writer.WriteLine("DrawingHeight" + "=" + Drawing.HEIGHT);
-                    writer.WriteLine("Language" + "=" + this.LanguageComboBox.SelectedItem.ToString());
+                    writer.WriteLine("Language" + "=" + this.l);
                     writer.WriteLine("InformationBoxTop" + "=" + m_information_box_top);
                     writer.WriteLine("InformationPageIndex" + "=" + m_information_page_index);
                     writer.WriteLine("TranslationBoxWidth" + "=" + m_translation_box_width);
@@ -25704,15 +25699,15 @@ public partial class MainForm : Form, ISubscriber
                                                 (key == Client.DEFAULT_EMLAAEI_TEXT) ||
                                                 (key == Client.DEFAULT_TRANSLATION) ||
                                                 (key == Client.DEFAULT_TRANSLITERATION) ||
-                                                (key == Client.DEFAULT_WORD_MEANINGS) ||
-                                                (key == Client.DEFAULT_TRANSLATION_1) ||
-                                                (key == Client.DEFAULT_TRANSLATION_2) ||
-                                                (key == Client.DEFAULT_TRANSLATION_3) ||
-                                                (key == Client.DEFAULT_TRANSLATION_4) ||
-                                                (key == Client.DEFAULT_TRANSLATION_5) ||
-                                                (key == Client.DEFAULT_TRANSLATION_6) ||
-                                                (key == Client.DEFAULT_TRANSLATION_7) ||
-                                                (key == Client.DEFAULT_TRANSLATION_8)
+                                                (key == Client.DEFAULT_WORD_MEANINGS) //||
+                                                //(key == Client.DEFAULT_TRANSLATION_1) ||
+                                                //(key == Client.DEFAULT_TRANSLATION_2) ||
+                                                //(key == Client.DEFAULT_TRANSLATION_3) ||
+                                                //(key == Client.DEFAULT_TRANSLATION_4) ||
+                                                //(key == Client.DEFAULT_TRANSLATION_5) ||
+                                                //(key == Client.DEFAULT_TRANSLATION_6) ||
+                                                //(key == Client.DEFAULT_TRANSLATION_7) ||
+                                                //(key == Client.DEFAULT_TRANSLATION_8)
                                                )
                                             {
                                                 TranslatorsCheckedListBox.SetItemCheckState(i, CheckState.Indeterminate);
@@ -26191,15 +26186,15 @@ public partial class MainForm : Form, ISubscriber
                                 (key == Client.DEFAULT_EMLAAEI_TEXT) ||
                                 (key == Client.DEFAULT_TRANSLATION) ||
                                 (key == Client.DEFAULT_TRANSLITERATION) ||
-                                (key == Client.DEFAULT_WORD_MEANINGS) ||
-                                (key == Client.DEFAULT_TRANSLATION_1) ||
-                                (key == Client.DEFAULT_TRANSLATION_2) ||
-                                (key == Client.DEFAULT_TRANSLATION_3) ||
-                                (key == Client.DEFAULT_TRANSLATION_4) ||
-                                (key == Client.DEFAULT_TRANSLATION_5) ||
-                                (key == Client.DEFAULT_TRANSLATION_6) ||
-                                (key == Client.DEFAULT_TRANSLATION_7) ||
-                                (key == Client.DEFAULT_TRANSLATION_8)
+                                (key == Client.DEFAULT_WORD_MEANINGS) //||
+                                //(key == Client.DEFAULT_TRANSLATION_1) ||
+                                //(key == Client.DEFAULT_TRANSLATION_2) ||
+                                //(key == Client.DEFAULT_TRANSLATION_3) ||
+                                //(key == Client.DEFAULT_TRANSLATION_4) ||
+                                //(key == Client.DEFAULT_TRANSLATION_5) ||
+                                //(key == Client.DEFAULT_TRANSLATION_6) ||
+                                //(key == Client.DEFAULT_TRANSLATION_7) ||
+                                //(key == Client.DEFAULT_TRANSLATION_8)
                                )
                             {
                                 m_selected_translations.Add(key);
