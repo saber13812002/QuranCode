@@ -83,8 +83,7 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Languages
     ///////////////////////////////////////////////////////////////////////////////
-    private Dictionary<string, string> m_english_native_names = null;
-    private Dictionary<string, string> m_native_english_names = null;
+    private Dictionary<string, string> m_english_to_native_dictionary = new Dictionary<string, string>();
     private void LoadNativeLanguageNames(string language_name)
     {
         this.Cursor = Cursors.WaitCursor;
@@ -92,20 +91,19 @@ public partial class MainForm : Form, ISubscriber
         {
             if (Directory.Exists(Globals.LANGUAGES_FOLDER))
             {
-                m_english_native_names = new Dictionary<string, string>();
-                m_native_english_names = new Dictionary<string, string>();
-
-                string filename = Globals.LANGUAGES_FOLDER + "/" + language_name + ".txt";
-                List<string> lines = FileHelper.LoadLines(filename);
-                foreach (string line in lines)
+                if (m_english_to_native_dictionary != null)
                 {
-                    string[] parts = line.Split('\t');
-                    if (parts.Length == 2)
+                    string filename = Globals.LANGUAGES_FOLDER + "/" + language_name + ".txt";
+                    List<string> lines = FileHelper.LoadLines(filename);
+                    foreach (string line in lines)
                     {
-                        if ((parts[0].Length > 0) && (parts[1].Length > 0))
+                        string[] parts = line.Split('\t');
+                        if (parts.Length == 2)
                         {
-                            m_english_native_names.Add(parts[0], parts[1]);
-                            m_native_english_names.Add(parts[1], parts[0]);
+                            if ((parts[0].Length > 0) && (parts[1].Length > 0))
+                            {
+                                m_english_to_native_dictionary.Add(parts[0], parts[1]);
+                            }
                         }
                     }
                 }
@@ -124,24 +122,21 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private Dictionary<string, Dictionary<string, string>> L = null;
+    private Dictionary<string, Dictionary<string, string>> L = new Dictionary<string, Dictionary<string, string>>();
     private string l = DEFAULT_LANGUAGE;
-    private string previous_l = null;
-    private List<string> m_language_names = null;
+    private string previous_l = String.Empty;
+    private List<string> m_language_names = new List<string>();
     private void InstallLanguages()
     {
         if (Directory.Exists(Globals.LANGUAGES_FOLDER))
         {
             LoadLanguageNames(Globals.LANGUAGES_FOLDER);
             PopulateLanguageComboBox();
+            LoadLanguage(l);
         }
     }
     private void LoadLanguageNames(string languages_folder)
     {
-        if (m_language_names == null)
-        {
-            m_language_names = new List<string>();
-        }
         if (m_language_names != null)
         {
             m_language_names.Clear();
@@ -194,15 +189,18 @@ public partial class MainForm : Form, ISubscriber
 
             if (m_language_names != null)
             {
-                LanguageComboBox.Items.Clear();
-                foreach (string language_name in m_language_names)
+                if (m_english_to_native_dictionary != null)
                 {
-                    if (m_native_english_names.ContainsKey(language_name))
-                    {
-                        string english_name = m_native_english_names[language_name];
-                        LanguageComboBox.Items.Add(english_name + LANGUAGE_SEPARATOR + language_name);
-                    }
                     LanguageComboBox.Sorted = true;
+                    LanguageComboBox.Items.Clear();
+                    foreach (string language_name in m_language_names)
+                    {
+                        if (m_english_to_native_dictionary.ContainsKey(language_name))
+                        {
+                            string native_name = m_english_to_native_dictionary[language_name];
+                            LanguageComboBox.Items.Add(language_name + LANGUAGE_SEPARATOR + native_name);
+                        }
+                    }
                 }
             }
         }
@@ -225,11 +223,11 @@ public partial class MainForm : Form, ISubscriber
         if (LanguageComboBox.SelectedIndex > -1)
         {
             string item = LanguageComboBox.SelectedItem.ToString();
-            int i = item.IndexOf(LANGUAGE_SEPARATOR);
-            if (i > -1)
+            int index = item.IndexOf(LANGUAGE_SEPARATOR);
+            if (index > -1)
             {
                 previous_l = l;
-                l = item.Substring(i + LANGUAGE_SEPARATOR.Length);
+                l = item.Substring(0, index);
                 if (!String.IsNullOrEmpty(l))
                 {
                     LoadLanguage(l);
@@ -244,14 +242,9 @@ public partial class MainForm : Form, ISubscriber
         {
             if (Directory.Exists(Globals.LANGUAGES_FOLDER))
             {
-                if (L == null)
-                {
-                    L = new Dictionary<string, Dictionary<string, string>>();
-                }
-
                 if (L != null)
                 {
-                    Dictionary<string, string> language = new Dictionary<string, string>();
+                    Dictionary<string, string> language_data = new Dictionary<string, string>();
                     List<Control> controls = GetDescendentControls(this);
 
                     string filename = Globals.LANGUAGES_FOLDER + "/" + language_name + ".txt";
@@ -267,7 +260,7 @@ public partial class MainForm : Form, ISubscriber
                                 {
                                     if ((parts[1].Length > 0) && (parts[2].Length > 0))
                                     {
-                                        language.Add(parts[1], parts[2]);
+                                        language_data.Add(parts[1], parts[2]);
                                     }
                                 }
                             }
@@ -309,11 +302,11 @@ public partial class MainForm : Form, ISubscriber
 
                     if (L.ContainsKey(l))
                     {
-                        L[l] = language;
+                        L[l] = language_data;
                     }
                     else
                     {
-                        L.Add(language_name, language);
+                        L.Add(language_name, language_data);
                     }
 
                     UpdateHeaderLabel();
@@ -352,7 +345,10 @@ public partial class MainForm : Form, ISubscriber
                         }
                     }
 
-                    ToolTip.SetToolTip(CalculationModeLabel, L[l][m_client.CalculationMode.ToString()]);
+                    if (m_client != null)
+                    {
+                        ToolTip.SetToolTip(CalculationModeLabel, L[l][m_client.CalculationMode.ToString()]);
+                    }
 
                     ToolTip.SetToolTip(NumberKindIndexTextBox, L[l][m_number_kind.ToString() + " number index"]);
                     if (ChapterSortComboBox.SelectedItem != null) ToolTip.SetToolTip(ChapterSortComboBox, L[l][ChapterSortComboBox.SelectedItem.ToString()]);
@@ -790,8 +786,9 @@ public partial class MainForm : Form, ISubscriber
     private const int DEFAULT_WINDOW_LEFT = 162;
     private const int DEFAULT_WINDOW_WIDTH = 1127;
     private const int DEFAULT_WINDOW_HEIGHT = 722;
+    private const string DEFAULT_LANGUAGE = "English";
     private const string LANGUAGE_SEPARATOR = "-";
-    private const string DEFAULT_LANGUAGE = "English" + LANGUAGE_SEPARATOR + "English";
+    private const string DEFAULT_NATIVE_LANGUAGE = "English";
     private const int DEFAULT_INFORMATION_BOX_TOP = 418;
     private const int DEFAULT_AUDIO_VOLUME = 1000;
     private const string VERSE_ADDRESS_TRANSLATION_SEPARATOR = " ";
@@ -1594,46 +1591,46 @@ public partial class MainForm : Form, ISubscriber
         this.ResearchPanel.SuspendLayout();
         this.BrowseGroupBox.SuspendLayout();
         this.ToolbarPanel.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).BeginInit();
         this.MainSplitContainer.Panel1.SuspendLayout();
         this.MainSplitContainer.Panel2.SuspendLayout();
         this.MainSplitContainer.SuspendLayout();
         this.SearchGroupBox.SuspendLayout();
         this.FindByNumbersPanel.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitalRootNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitSumNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersPartitionsNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersNumberNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersUniqueLettersNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersVersesNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersLettersNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersWordsNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitalRootNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitSumNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersPartitionsNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersNumberNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersUniqueLettersNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersVersesNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersLettersNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersWordsNumericUpDown)).BeginInit();
         this.FindBySimilarityPanel.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.FindBySimilarityPercentageTrackBar)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindBySimilarityPercentageTrackBar)).BeginInit();
         this.FindByTextPanel.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByTextMultiplicityNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByTextMultiplicityNumericUpDown)).BeginInit();
         this.TextLocationWithinChapterPanel.SuspendLayout();
         this.TextLocationInWordPanel.SuspendLayout();
         this.TextLocationWithinVersePanel.SuspendLayout();
         this.KeyboardPanel.SuspendLayout();
         this.PositionsGroupBox.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.LetterNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.WordNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.VerseNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.BowingNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.QuarterNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.HalfNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.GroupNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.PartNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.StationNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.PageNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.ChapterLetterNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.ChapterWordNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.ChapterVerseNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.LetterNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.WordNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.VerseNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.BowingNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.QuarterNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.HalfNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.GroupNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.PartNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.StationNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.PageNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.ChapterLetterNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.ChapterWordNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.ChapterVerseNumericUpDown)).BeginInit();
         this.ChapterGroupBox.SuspendLayout();
         this.WordsListBoxContextMenuStrip.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.ClientSplitContainer)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.ClientSplitContainer)).BeginInit();
         this.ClientSplitContainer.Panel1.SuspendLayout();
         this.ClientSplitContainer.Panel2.SuspendLayout();
         this.ClientSplitContainer.SuspendLayout();
@@ -1641,7 +1638,7 @@ public partial class MainForm : Form, ISubscriber
         this.ScriptOutputGroupBox.SuspendLayout();
         this.TabControl.SuspendLayout();
         this.TranslationTabPage.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.TranslationSplitContainer)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.TranslationSplitContainer)).BeginInit();
         this.TranslationSplitContainer.Panel1.SuspendLayout();
         this.TranslationSplitContainer.Panel2.SuspendLayout();
         this.TranslationSplitContainer.SuspendLayout();
@@ -1649,18 +1646,18 @@ public partial class MainForm : Form, ISubscriber
         this.RelatedWordsTabPage.SuspendLayout();
         this.SymmetryTabPage.SuspendLayout();
         this.ValuesSequenceTabPage.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.ValuesSequenceRadixNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.ValuesSequenceRadixNumericUpDown)).BeginInit();
         this.CVWLSequenceTabPage.SuspendLayout();
         this.DNASequenceTabPage.SuspendLayout();
         this.MathsTabPage.SuspendLayout();
         this.MathsPanel.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.MathsDivisorNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.MathsDivisorNumericUpDown)).BeginInit();
         this.DistancesTabPage.SuspendLayout();
         this.DistancesPanel.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.DistancesDivisorNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.DistancesDivisorNumericUpDown)).BeginInit();
         this.UserTextTabPage.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.UserTextValueNumericUpDown)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByFrequencySumNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.UserTextValueNumericUpDown)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByFrequencySumNumericUpDown)).BeginInit();
         this.StatisticsGroupBox.SuspendLayout();
         this.ValueNavigatorPanel.SuspendLayout();
         this.LetterFrequencyPanel.SuspendLayout();
@@ -1668,13 +1665,13 @@ public partial class MainForm : Form, ISubscriber
         this.ValuePanel.SuspendLayout();
         this.PCIndexChainPanel.SuspendLayout();
         this.LetterFrequencyContextMenuStrip.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.StatisticsSplitContainer)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.StatisticsSplitContainer)).BeginInit();
         this.StatisticsSplitContainer.Panel1.SuspendLayout();
         this.StatisticsSplitContainer.SuspendLayout();
         this.RecitationGroupBox.SuspendLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.PlayerVolumeTrackBar)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.PlayerVerseSilenceGapTrackBar)).BeginInit();
-        ((System.ComponentModel.ISupportInitialize)(this.PlayerSelectionSilenceGapTrackBar)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.PlayerVolumeTrackBar)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.PlayerVerseSilenceGapTrackBar)).BeginInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.PlayerSelectionSilenceGapTrackBar)).BeginInit();
         this.RecitationsDownloadGroupBox.SuspendLayout();
         this.NotifyIconContextMenuStrip.SuspendLayout();
         this.SuspendLayout();
@@ -13003,23 +13000,23 @@ public partial class MainForm : Form, ISubscriber
         this.ToolbarPanel.ResumeLayout(false);
         this.MainSplitContainer.Panel1.ResumeLayout(false);
         this.MainSplitContainer.Panel2.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.MainSplitContainer)).EndInit();
         this.MainSplitContainer.ResumeLayout(false);
         this.SearchGroupBox.ResumeLayout(false);
         this.FindByNumbersPanel.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitalRootNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitSumNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersPartitionsNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersNumberNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersUniqueLettersNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersVersesNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersLettersNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByNumbersWordsNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitalRootNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueDigitSumNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersPartitionsNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersNumberNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersUniqueLettersNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersVersesNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersValueNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersLettersNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByNumbersWordsNumericUpDown)).EndInit();
         this.FindBySimilarityPanel.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)(this.FindBySimilarityPercentageTrackBar)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindBySimilarityPercentageTrackBar)).EndInit();
         this.FindByTextPanel.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)(this.FindByTextMultiplicityNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByTextMultiplicityNumericUpDown)).EndInit();
         this.TextLocationWithinChapterPanel.ResumeLayout(false);
         this.TextLocationInWordPanel.ResumeLayout(false);
         this.TextLocationWithinVersePanel.ResumeLayout(false);
@@ -13027,25 +13024,25 @@ public partial class MainForm : Form, ISubscriber
         this.KeyboardPanel.PerformLayout();
         this.PositionsGroupBox.ResumeLayout(false);
         this.PositionsGroupBox.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.LetterNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.WordNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.VerseNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.BowingNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.QuarterNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.HalfNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.GroupNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.PartNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.StationNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.PageNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.ChapterLetterNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.ChapterWordNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.ChapterVerseNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.LetterNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.WordNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.VerseNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.BowingNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.QuarterNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.HalfNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.GroupNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.PartNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.StationNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.PageNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.ChapterLetterNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.ChapterWordNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.ChapterVerseNumericUpDown)).EndInit();
         this.ChapterGroupBox.ResumeLayout(false);
         this.ChapterGroupBox.PerformLayout();
         this.WordsListBoxContextMenuStrip.ResumeLayout(false);
         this.ClientSplitContainer.Panel1.ResumeLayout(false);
         this.ClientSplitContainer.Panel2.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)(this.ClientSplitContainer)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.ClientSplitContainer)).EndInit();
         this.ClientSplitContainer.ResumeLayout(false);
         this.HeaderPanel.ResumeLayout(false);
         this.ScriptOutputGroupBox.ResumeLayout(false);
@@ -13056,7 +13053,7 @@ public partial class MainForm : Form, ISubscriber
         this.TranslationSplitContainer.Panel1.PerformLayout();
         this.TranslationSplitContainer.Panel2.ResumeLayout(false);
         this.TranslationSplitContainer.Panel2.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.TranslationSplitContainer)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.TranslationSplitContainer)).EndInit();
         this.TranslationSplitContainer.ResumeLayout(false);
         this.GrammarTabPage.ResumeLayout(false);
         this.GrammarTabPage.PerformLayout();
@@ -13066,7 +13063,7 @@ public partial class MainForm : Form, ISubscriber
         this.SymmetryTabPage.PerformLayout();
         this.ValuesSequenceTabPage.ResumeLayout(false);
         this.ValuesSequenceTabPage.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.ValuesSequenceRadixNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.ValuesSequenceRadixNumericUpDown)).EndInit();
         this.CVWLSequenceTabPage.ResumeLayout(false);
         this.CVWLSequenceTabPage.PerformLayout();
         this.DNASequenceTabPage.ResumeLayout(false);
@@ -13074,15 +13071,15 @@ public partial class MainForm : Form, ISubscriber
         this.MathsTabPage.ResumeLayout(false);
         this.MathsPanel.ResumeLayout(false);
         this.MathsPanel.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.MathsDivisorNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.MathsDivisorNumericUpDown)).EndInit();
         this.DistancesTabPage.ResumeLayout(false);
         this.DistancesPanel.ResumeLayout(false);
         this.DistancesPanel.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.DistancesDivisorNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.DistancesDivisorNumericUpDown)).EndInit();
         this.UserTextTabPage.ResumeLayout(false);
         this.UserTextTabPage.PerformLayout();
-        ((System.ComponentModel.ISupportInitialize)(this.UserTextValueNumericUpDown)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.FindByFrequencySumNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.UserTextValueNumericUpDown)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.FindByFrequencySumNumericUpDown)).EndInit();
         this.StatisticsGroupBox.ResumeLayout(false);
         this.StatisticsGroupBox.PerformLayout();
         this.ValueNavigatorPanel.ResumeLayout(false);
@@ -13095,12 +13092,12 @@ public partial class MainForm : Form, ISubscriber
         this.PCIndexChainPanel.PerformLayout();
         this.LetterFrequencyContextMenuStrip.ResumeLayout(false);
         this.StatisticsSplitContainer.Panel1.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)(this.StatisticsSplitContainer)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.StatisticsSplitContainer)).EndInit();
         this.StatisticsSplitContainer.ResumeLayout(false);
         this.RecitationGroupBox.ResumeLayout(false);
-        ((System.ComponentModel.ISupportInitialize)(this.PlayerVolumeTrackBar)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.PlayerVerseSilenceGapTrackBar)).EndInit();
-        ((System.ComponentModel.ISupportInitialize)(this.PlayerSelectionSilenceGapTrackBar)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.PlayerVolumeTrackBar)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.PlayerVerseSilenceGapTrackBar)).EndInit();
+        ////((System.ComponentModel.ISupportInitialize)(this.PlayerSelectionSilenceGapTrackBar)).EndInit();
         this.RecitationsDownloadGroupBox.ResumeLayout(false);
         this.NotifyIconContextMenuStrip.ResumeLayout(false);
         this.ResumeLayout(false);
@@ -14576,9 +14573,9 @@ public partial class MainForm : Form, ISubscriber
                                                     {
                                                         this.LanguageComboBox.SelectedItem = language;
                                                     }
-                                                    else if (this.LanguageComboBox.Items.Contains(DEFAULT_LANGUAGE))
+                                                    else if (this.LanguageComboBox.Items.Contains(DEFAULT_LANGUAGE + LANGUAGE_SEPARATOR + DEFAULT_NATIVE_LANGUAGE))
                                                     {
-                                                        this.LanguageComboBox.SelectedItem = DEFAULT_LANGUAGE;
+                                                        this.LanguageComboBox.SelectedItem = DEFAULT_LANGUAGE + LANGUAGE_SEPARATOR + DEFAULT_NATIVE_LANGUAGE;
                                                     }
                                                     else
                                                     {
@@ -15735,9 +15732,9 @@ public partial class MainForm : Form, ISubscriber
 
                         if (this.LanguageComboBox.Items.Count > 0)
                         {
-                            if (this.LanguageComboBox.Items.Contains(DEFAULT_LANGUAGE))
+                            if (this.LanguageComboBox.Items.Contains(DEFAULT_LANGUAGE + LANGUAGE_SEPARATOR + DEFAULT_NATIVE_LANGUAGE))
                             {
-                                this.LanguageComboBox.SelectedItem = DEFAULT_LANGUAGE;
+                                this.LanguageComboBox.SelectedItem = DEFAULT_LANGUAGE + LANGUAGE_SEPARATOR + DEFAULT_NATIVE_LANGUAGE;
                             }
                             else
                             {
