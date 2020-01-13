@@ -16774,12 +16774,10 @@ public partial class MainForm : Form, ISubscriber
             if (m_active_textbox.SelectionLength == 0)
             {
                 m_active_textbox.ContextMenu.MenuItems[0].Text = L[l]["Copy Verse"] + "\t\tCtrl+C";
-                m_active_textbox.ContextMenu.MenuItems[1].Visible = false;
             }
             else
             {
                 m_active_textbox.ContextMenu.MenuItems[0].Text = L[l]["Copy"] + "\t\tCtrl+C";
-                m_active_textbox.ContextMenu.MenuItems[1].Visible = true;
             }
         }
     }
@@ -50811,9 +50809,9 @@ public partial class MainForm : Form, ISubscriber
             }
 
             string filename = letter.ToString() + "_" + "LetterPositionsAndDistances" + ".txt";
-            if (Directory.Exists(Globals.RESEARCH_FOLDER))
+            if (Directory.Exists(Globals.STATISTICS_FOLDER))
             {
-                string path = Globals.RESEARCH_FOLDER + "/" + filename;
+                string path = Globals.STATISTICS_FOLDER + "/" + filename;
                 FileHelper.SaveText(path, str.ToString());
                 FileHelper.DisplayFile(path);
             }
@@ -50887,9 +50885,9 @@ public partial class MainForm : Form, ISubscriber
             }
 
             string filename = "LetterPositions" + ".txt";
-            if (Directory.Exists(Globals.RESEARCH_FOLDER))
+            if (Directory.Exists(Globals.STATISTICS_FOLDER))
             {
-                string path = Globals.RESEARCH_FOLDER + "/" + filename;
+                string path = Globals.STATISTICS_FOLDER + "/" + filename;
                 FileHelper.SaveText(path, str.ToString());
                 FileHelper.DisplayFile(path);
             }
@@ -50967,9 +50965,9 @@ public partial class MainForm : Form, ISubscriber
             }
 
             string filename = "LetterDistances" + ".txt";
-            if (Directory.Exists(Globals.RESEARCH_FOLDER))
+            if (Directory.Exists(Globals.STATISTICS_FOLDER))
             {
-                string path = Globals.RESEARCH_FOLDER + "/" + filename;
+                string path = Globals.STATISTICS_FOLDER + "/" + filename;
                 FileHelper.SaveText(path, str.ToString());
                 FileHelper.DisplayFile(path);
             }
