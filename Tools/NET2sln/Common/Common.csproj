@@ -528,9 +528,6 @@
     <Content Include="Help\263.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\InitialLetters.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Help\Symmetry.xls">
@@ -539,9 +536,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Help\EncryptedQuran.pdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Help\InitialLetters.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\1.png">
@@ -581,9 +575,6 @@
     <Content Include="Help\561.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Al-Mehdi.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Help\114_AR.pdf">
@@ -600,12 +591,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Help\110.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Help\114.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Help\12.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -643,9 +628,6 @@
     <Content Include="Help\Card_EN.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\CropCircle.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Help\175.png">
@@ -661,7 +643,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Help\1NotPrime.txt">
+    <Content Include="Help\506.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Help\AliAdams.txt">
@@ -670,7 +652,7 @@
     <Content Include="Help\Mankind.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\TheKey.pdf">
+    <Content Include="Help\TheKey.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Images\padlock.png">
