@@ -35568,7 +35568,7 @@ public partial class MainForm : Form, ISubscriber
         PopulateWordsListBox();
         if (FindByTextTextBox.Text.Length > 0)
         {
-            FindByExact();
+            FindByTextButton_Click(null, null);
         }
         else
         {
