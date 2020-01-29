@@ -49412,6 +49412,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void PictureBox_MouseMove(object sender, MouseEventArgs e)
     {
+        m_current_letter = null;
         if (m_drawing_shape == DrawingShape.Lines)
         {
             int page_index = e.Y - PictureBox.Image_Y;
@@ -49530,6 +49531,10 @@ public partial class MainForm : Form, ISubscriber
                     }
                 }
             }
+        }
+        else
+        {
+            ToolTip.SetToolTip(PictureBox, null);
         }
     }
     private void PictureBox_DoubleClick(object sender, EventArgs e)
@@ -49956,85 +49961,115 @@ public partial class MainForm : Form, ISubscriber
 
                                 List<long> values = new List<long>();
 
-                                if (m_word_frequency_dictionary != null)
+                                switch (m_text_search_type)
                                 {
-                                    switch (m_text_search_type)
-                                    {
-                                        case TextSearchType.Exact:
-                                        case TextSearchType.Proximity:
+                                    case TextSearchType.Exact:
+                                    case TextSearchType.Proximity:
+                                        {
+                                            foreach (Word word in words)
                                             {
-                                                foreach (Word word in words)
+                                                string word_text = word.Text;
+                                                if (!m_with_diacritics)
                                                 {
-                                                    string word_text = word.Text;
-                                                    if (!m_with_diacritics)
+                                                    if (m_client.NumerologySystem != null)
                                                     {
-                                                        if (m_client.NumerologySystem != null)
-                                                        {
-                                                            word_text = word_text.SimplifyTo(m_client.NumerologySystem.TextMode);
-                                                        }
+                                                        word_text = word_text.SimplifyTo(m_client.NumerologySystem.TextMode);
                                                     }
-
-                                                    bool found = false;
-                                                    for (int i = 0; i < terms.Length; i++)
-                                                    {
-                                                        switch (m_text_wordness)
-                                                        {
-                                                            case TextWordness.Any:
-                                                                {
-                                                                    if (word_text.Contains(terms[i]))
-                                                                    {
-                                                                        values.Add(i + 1L);
-                                                                        given_word_count++;
-                                                                        found = true;
-                                                                        break;
-                                                                    }
-                                                                }
-                                                                break;
-                                                            case TextWordness.WholeWord:
-                                                                {
-                                                                    if (word_text == terms[i])
-                                                                    {
-                                                                        values.Add(i + 1L);
-                                                                        given_word_count++;
-                                                                        found = true;
-                                                                        break;
-                                                                    }
-                                                                }
-                                                                break;
-                                                            case TextWordness.PartOfWord:
-                                                                {
-                                                                    if ((word_text.Contains(terms[i])) && (word_text != terms[i]))
-                                                                    {
-                                                                        values.Add(i + 1L);
-                                                                        given_word_count++;
-                                                                        found = true;
-                                                                        break;
-                                                                    }
-                                                                }
-                                                                break;
-                                                        }
-                                                    }
-
-                                                    if (!found)
-                                                    {
-                                                        values.Add(0L);
-                                                    }
-                                                    count++;
                                                 }
+
+                                                bool found = false;
+                                                for (int i = 0; i < terms.Length; i++)
+                                                {
+                                                    switch (m_text_wordness)
+                                                    {
+                                                        case TextWordness.Any:
+                                                            {
+                                                                if (word_text.Contains(terms[i]))
+                                                                {
+                                                                    values.Add(i + 1L);
+                                                                    given_word_count++;
+                                                                    found = true;
+                                                                    break;
+                                                                }
+                                                            }
+                                                            break;
+                                                        case TextWordness.WholeWord:
+                                                            {
+                                                                if (word_text == terms[i])
+                                                                {
+                                                                    values.Add(i + 1L);
+                                                                    given_word_count++;
+                                                                    found = true;
+                                                                    break;
+                                                                }
+                                                            }
+                                                            break;
+                                                        case TextWordness.PartOfWord:
+                                                            {
+                                                                if ((word_text.Contains(terms[i])) && (word_text != terms[i]))
+                                                                {
+                                                                    values.Add(i + 1L);
+                                                                    given_word_count++;
+                                                                    found = true;
+                                                                    break;
+                                                                }
+                                                            }
+                                                            break;
+                                                    }
+                                                }
+
+                                                if (!found)
+                                                {
+                                                    //values.Add(0L);
+                                                    if (Numbers.IsOdd(word.Verse.Chapter.SortedNumber))
+                                                    {
+                                                        values.Add(-1L);
+                                                    }
+                                                    else
+                                                    {
+                                                        values.Add(-2L);
+                                                    }
+                                                }
+                                                count++;
                                             }
-                                            break;
-                                        case TextSearchType.Root:
+                                        }
+                                        break;
+                                    case TextSearchType.Root:
+                                        {
+                                            foreach (Word word in words)
                                             {
-                                                foreach (Word word in words)
+                                                bool found = false;
+                                                for (int i = 0; i < terms.Length; i++)
                                                 {
-                                                    bool found = false;
-                                                    for (int i = 0; i < terms.Length; i++)
+                                                    switch (m_text_wordness)
                                                     {
-                                                        switch (m_text_wordness)
-                                                        {
-                                                            case TextWordness.Any:
+                                                        case TextWordness.Any:
+                                                            {
+                                                                if (word.Roots.Contains(terms[i])) // List.Contains(string) same as ==
                                                                 {
-                                                                    if (word.Roots.Contains(terms[i])) // List.Contains(string) same as ==
+                                                                    values.Add(i + 1L);
+                                                                    given_word_count++;
+                                                                    found = true;
+                                                                    break;
+                                                                }
+                                                            }
+                                                            break;
+                                                        case TextWordness.WholeWord:
+                                                            {
+                                                                if (word.Roots.Contains(terms[i]))
+                                                                {
+                                                                    values.Add(i + 1L);
+                                                                    given_word_count++;
+                                                                    found = true;
+                                                                    break;
+                                                                }
+                                                            }
+                                                            break;
+                                                        case TextWordness.PartOfWord:
+                                                            {
+                                                                foreach (string root in word.Roots)
+                                                                {
+                                                                    if ((root.Contains(terms[i])) && (root != terms[i]))
                                                                     {
                                                                         values.Add(i + 1L);
                                                                         given_word_count++;
@@ -50042,48 +50077,31 @@ public partial class MainForm : Form, ISubscriber
                                                                         break;
                                                                     }
                                                                 }
-                                                                break;
-                                                            case TextWordness.WholeWord:
-                                                                {
-                                                                    if (word.Roots.Contains(terms[i]))
-                                                                    {
-                                                                        values.Add(i + 1L);
-                                                                        given_word_count++;
-                                                                        found = true;
-                                                                        break;
-                                                                    }
-                                                                }
-                                                                break;
-                                                            case TextWordness.PartOfWord:
-                                                                {
-                                                                    foreach (string root in word.Roots)
-                                                                    {
-                                                                        if ((root.Contains(terms[i])) && (root != terms[i]))
-                                                                        {
-                                                                            values.Add(i + 1L);
-                                                                            given_word_count++;
-                                                                            found = true;
-                                                                            break;
-                                                                        }
-                                                                    }
-                                                                    if (found) break;
-                                                                }
-                                                                break;
-                                                        }
+                                                                if (found) break;
+                                                            }
+                                                            break;
                                                     }
-
-                                                    if (!found)
-                                                    {
-                                                        values.Add(0L);
-                                                    }
-                                                    count++;
                                                 }
-                                            }
-                                            break;
-                                    }
 
-                                    valuess.Add(values);
+                                                if (!found)
+                                                {
+                                                    //values.Add(0L);
+                                                    if (Numbers.IsOdd(word.Verse.Chapter.SortedNumber))
+                                                    {
+                                                        values.Add(-1L);
+                                                    }
+                                                    else
+                                                    {
+                                                        values.Add(-2L);
+                                                    }
+                                                }
+                                                count++;
+                                            }
+                                        }
+                                        break;
                                 }
+
+                                valuess.Add(values);
                             }
 
                             List<List<long>> lengthss = new List<List<long>>();
@@ -50104,7 +50122,9 @@ public partial class MainForm : Form, ISubscriber
                             }
 
                             Dictionary<long, Color> colors = new Dictionary<long, Color>();
-                            colors.Add(0L, Color.FromArgb(48, 48, 48));
+                            colors.Add(-2L, Color.FromArgb(64, 64, 64));
+                            colors.Add(-1L, Color.FromArgb(96, 96, 96));
+                            //colors.Add(0L, Color.FromArgb(32, 32, 32));
                             colors.Add(1L, Color.Pink);
                             colors.Add(2L, Color.LightBlue);
                             colors.Add(3L, Color.Lime);
@@ -50198,7 +50218,15 @@ public partial class MainForm : Form, ISubscriber
                                 }
                                 else
                                 {
-                                    values.Add(0L);
+                                    //values.Add(0L);
+                                    if (Numbers.IsOdd(word.Verse.Chapter.SortedNumber))
+                                    {
+                                        values.Add(-1L);
+                                    }
+                                    else
+                                    {
+                                        values.Add(-2L);
+                                    }
                                 }
                                 count++;
                             }
@@ -50216,7 +50244,9 @@ public partial class MainForm : Form, ISubscriber
                     }
 
                     Dictionary<long, Color> colors = new Dictionary<long, Color>();
-                    colors.Add(0L, Color.FromArgb(32, 32, 32));
+                    colors.Add(-2L, Color.FromArgb(64, 64, 64));
+                    colors.Add(-1L, Color.FromArgb(96, 96, 96));
+                    //colors.Add(0L, Color.FromArgb(32, 32, 32));
                     colors.Add(1L, Color.Pink);
                     if (m_drawing_shape == DrawingShape.Lines)
                     {
@@ -50314,7 +50344,15 @@ public partial class MainForm : Form, ISubscriber
                                 }
                                 else
                                 {
-                                    values.Add(0L);
+                                    //values.Add(0L);
+                                    if (Numbers.IsOdd(word.Verse.Chapter.SortedNumber))
+                                    {
+                                        values.Add(-1L);
+                                    }
+                                    else
+                                    {
+                                        values.Add(-2L);
+                                    }
                                 }
                                 count++;
                             }
@@ -50363,7 +50401,9 @@ public partial class MainForm : Form, ISubscriber
                     }
 
                     Dictionary<long, Color> colors = new Dictionary<long, Color>();
-                    colors.Add(0L, Color.FromArgb(32, 32, 32));
+                    colors.Add(-2L, Color.FromArgb(64, 64, 64));
+                    colors.Add(-1L, Color.FromArgb(96, 96, 96));
+                    //colors.Add(0L, Color.FromArgb(32, 32, 32));
                     colors.Add(1L, Color.Pink);
                     colors.Add(2L, Color.LightBlue);
                     colors.Add(3L, Color.Lime);
