@@ -20261,9 +20261,47 @@ public partial class MainForm : Form, ISubscriber
                         {
                             foreach (Chapter chapter in m_client.Book.Chapters)
                             {
-                                if ((chapter.InitializationType == InitializationType.PartiallyInitialized) ||
+                                if (
+                                    (chapter.InitializationType == InitializationType.PartiallyInitialized) ||
                                     (chapter.InitializationType == InitializationType.FullyInitialized) ||
-                                    (chapter.InitializationType == InitializationType.DoublyInitialized))
+                                    (chapter.InitializationType == InitializationType.DoublyInitialized)
+                                   )
+                                {
+                                    indexes.Add(chapter.Number - 1);
+                                }
+                            }
+                        }
+                        break;
+                    case ChapterSelection.PartiallyInitialized:
+                        {
+                            foreach (Chapter chapter in m_client.Book.Chapters)
+                            {
+                                if (chapter.InitializationType == InitializationType.PartiallyInitialized)
+                                {
+                                    indexes.Add(chapter.Number - 1);
+                                }
+                            }
+                        }
+                        break;
+                    case ChapterSelection.FullyInitialized:
+                        {
+                            foreach (Chapter chapter in m_client.Book.Chapters)
+                            {
+                                if (
+                                    (chapter.InitializationType == InitializationType.FullyInitialized) ||
+                                    (chapter.InitializationType == InitializationType.DoublyInitialized)
+                                   )
+                                {
+                                    indexes.Add(chapter.Number - 1);
+                                }
+                            }
+                        }
+                        break;
+                    case ChapterSelection.DoublyInitialized:
+                        {
+                            foreach (Chapter chapter in m_client.Book.Chapters)
+                            {
+                                if (chapter.InitializationType == InitializationType.DoublyInitialized)
                                 {
                                     indexes.Add(chapter.Number - 1);
                                 }

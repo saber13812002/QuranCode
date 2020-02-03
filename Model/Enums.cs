@@ -52,7 +52,7 @@ namespace Model
         Any,
         Key,
         Makkah, Medina,
-        Initialized, NonInitialized,
+        Initialized, PartiallyInitialized, FullyInitialized, DoublyInitialized, NonInitialized,
         Even, Odd, Any_E, Any_O, E_E, E_O, O_O, O_E, E_E_and_O_O, E_O_and_O_E,
         Composite, Prime, Any_C, Any_P, C_C, C_P, P_P, P_C, C_C_and_P_P, C_P_and_P_C,
         AdditiveComposite, AdditivePrime, Any_AC, Any_AP, AC_AC, AC_AP, AP_AP, AP_AC, AC_AC_and_AP_AP, AC_AP_and_AP_AC,
