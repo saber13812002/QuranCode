@@ -78,7 +78,7 @@ public static class FileHelper
             path = path.Replace("|", "+"); // remove illegal char | in filename
             using (StreamWriter writer = new StreamWriter(path, false, Encoding.Unicode))
             {
-                writer.WriteLine(text);
+                writer.Write(text);
                 writer.Close();
             }
         }
@@ -126,7 +126,7 @@ public static class FileHelper
                     {
                         break;
                     }
-                    writer.Write(word);
+                    writer.Write(word + " ");
                 }
             }
         }
