@@ -45817,6 +45817,7 @@ public partial class MainForm : Form, ISubscriber
                             }
                             else
                             {
+                                CalculateAndDisplayCounts(m_current_text);
                                 CalculateValueAndDisplayFactors(m_current_text);
                             }
                         }
@@ -48671,40 +48672,40 @@ public partial class MainForm : Form, ISubscriber
         m_display_total_chapter_counts = TotalChapterCountsCheckBox.Checked;
         CalculateCurrentValue();
     }
-    private void CalculateAndDisplayCounts(string user_text)
+    private void CalculateAndDisplayCounts(string text)
     {
         ChapterNumberSumTextBox.Text = "";
         VerseNumberSumTextBox.Text = "";
         WordNumberSumTextBox.Text = "";
         LetterNumberSumTextBox.Text = "";
 
-        if (!String.IsNullOrEmpty(user_text))
+        if (!String.IsNullOrEmpty(text))
         {
             if (m_client != null)
             {
-                if (!user_text.IsArabic())  // eg English
+                if (!text.IsArabic())  // eg English
                 {
-                    user_text = user_text.ToUpper();
+                    text = text.ToUpper();
                 }
 
                 // in all cases
                 if (m_client.NumerologySystem != null)
                 {
                     // simplify all text_modes
-                    user_text = user_text.SimplifyTo(m_client.NumerologySystem.TextMode);
-                    user_text = user_text.Replace("_", "");
-                    user_text = user_text.Replace("\t", "");
-                    while (user_text.Contains("  "))
+                    text = text.SimplifyTo(m_client.NumerologySystem.TextMode);
+                    text = text.Replace("_", "");
+                    text = text.Replace("\t", "");
+                    while (text.Contains("  "))
                     {
-                        user_text = user_text.Replace("  ", " ");
+                        text = text.Replace("  ", " ");
                     }
-                    user_text = user_text.Replace("\r\n", "\n");
+                    text = text.Replace("\r\n", "\n");
 
                     int chapter_count = 1;
                     int verse_count = 1;
                     int word_count = 1;
                     int letter_count = 0;
-                    foreach (char c in user_text)
+                    foreach (char c in text)
                     {
                         if (c == '\n')
                         {
