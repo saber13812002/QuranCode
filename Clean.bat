@@ -34,5 +34,7 @@ rd /S /Q Research\obj
 rd /S /Q Common\obj
 rd /S /Q QuranCode\obj
 rd /S /Q ScriptRunner\obj
+rd /S /Q AhlulBayt\obj
+rd /S /Q WordGenerator\obj
 
 :END

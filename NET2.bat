@@ -10,6 +10,8 @@ XCOPY /O /X /E /H /K /Y Research\*.* NET2\Research\
 XCOPY /O /X /E /H /K /Y Common\*.* NET2\Common\
 XCOPY /O /X /E /H /K /Y QuranCode\*.* NET2\QuranCode\
 XCOPY /O /X /E /H /K /Y ScriptRunner\*.* NET2\ScriptRunner\
+XCOPY /O /X /E /H /K /Y AhlulBayt\*.* NET2\AhlulBayt\
+XCOPY /O /X /E /H /K /Y WordGenerator\*.* NET2\WordGenerator\
 XCOPY /O /X /E /H /K /Y Tools\NET2sln\*.* NET2\
 COPY *.txt NET2\
 
