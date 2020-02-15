@@ -18538,7 +18538,52 @@ public partial class MainForm : Form, ISubscriber
     {
         if (!String.IsNullOrEmpty(m_current_text))
         {
-            string filename = Globals.DATA_FOLDER + "/" + "dictionary.txt";
+            string filename = Globals.DATA_FOLDER + "/" + "quran-words-" + m_client.NumerologySystem.TextMode + ".txt";
+            if (!File.Exists(filename))
+            {
+                Dictionary<string, int> word_frequency_dictionary = new Dictionary<string, int>();
+                if (word_frequency_dictionary != null)
+                {
+                    foreach (Chapter chapter in m_client.Book.Chapters)
+                    {
+                        foreach (Verse verse in chapter.Verses)
+                        {
+                            foreach (Word word in verse.Words)
+                            {
+                                string word_text = word.Text.SimplifyTo(m_client.NumerologySystem.TextMode);
+                                if (word_frequency_dictionary.ContainsKey(word_text))
+                                {
+                                    word_frequency_dictionary[word_text]++;
+                                }
+                                else
+                                {
+                                    word_frequency_dictionary.Add(word_text, 1);
+                                }
+                            }
+                        }
+                    }
+
+                    // sort dictionary by frequency
+                    List<KeyValuePair<string, int>> list = new List<KeyValuePair<string, int>>(word_frequency_dictionary);
+                    if (list != null)
+                    {
+                        list.Sort(
+                            delegate(KeyValuePair<string, int> firstPair, KeyValuePair<string, int> nextPair)
+                            {
+                                return nextPair.Value.CompareTo(firstPair.Value);
+                            }
+                        );
+
+                        StringBuilder str = new StringBuilder();
+                        foreach (KeyValuePair<string, int> pair in list)
+                        {
+                            str.AppendLine(pair.Key.ToString());
+                        }
+                        FileHelper.SaveText(filename, str.ToString());
+                    }
+                }
+            }
+
             if (File.Exists(filename))
             {
                 string text = m_current_text.SimplifyTo(m_client.NumerologySystem.TextMode);
@@ -34439,75 +34484,78 @@ public partial class MainForm : Form, ISubscriber
                     {
                         // sort dictionary by value or key
                         List<KeyValuePair<string, int>> list = new List<KeyValuePair<string, int>>(m_word_frequency_dictionary);
-                        if (m_sort_by_word_frequency)
+                        if (list != null)
                         {
-                            list.Sort(
-                                delegate(KeyValuePair<string, int> firstPair, KeyValuePair<string, int> nextPair)
-                                {
-                                    return nextPair.Value.CompareTo(firstPair.Value);
-                                }
-                            );
-                        }
-                        else
-                        {
-                            list.Sort(
-                                delegate(KeyValuePair<string, int> firstPair, KeyValuePair<string, int> nextPair)
-                                {
-                                    return firstPair.Key.CompareTo(nextPair.Key);
-                                }
-                            );
-                        }
-
-                        int count = 0;
-                        int total = 0;
-                        foreach (KeyValuePair<string, int> pair in list)
-                        {
-                            //string value_str = found_words[key].ToString().PadRight(3, ' ');
-                            //string key_str = key.PadLeft(10, ' ');
-                            //string entry = String.Format("{0} {1}", value_str, key_str);
-                            string entry = String.Format("{0,-3} {1,10}", pair.Value, pair.Key);
-                            WordsListBox.Items.Add(entry);
-                            total += pair.Value;
-                            count++;
-                        }
-
-                        if (WordsListBox.Items.Count > 0)
-                        {
-                            WordsListBox.SelectedIndex = 0;
-                        }
-                        else // no match [either current text_mode doesn't have a match or it was last word in verse]
-                        {
-                            // m_word_frequency_list_double_click == false if input was via keyboard
-                            // m_word_frequency_list_double_click == true  if input was via double click
-                            // if no more word when double click, then it means it was the last word in the verse
-                            // else the user has entered non-matching text
-
-                            // if last word in verse, remove the extra space after it
-                            if ((m_word_double_click) && (WordsListBox.Items.Count == 0) && (FindByTextTextBox.Text.EndsWith(" ")))
+                            if (m_sort_by_word_frequency)
                             {
-                                for (int i = 0; i < 3; i++) FindByTextTextBox.TextChanged -= new EventHandler(FindByTextTextBox_TextChanged);
-                                try
-                                {
-                                    FindByTextTextBox.Text = FindByTextTextBox.Text.Remove(FindByTextTextBox.Text.Length - 1);
-                                }
-                                catch (Exception ex)
-                                {
-                                    while (ex != null)
+                                list.Sort(
+                                    delegate(KeyValuePair<string, int> firstPair, KeyValuePair<string, int> nextPair)
                                     {
-                                        MessageBox.Show(ex.Message, Application.ProductName);
-                                        ex = ex.InnerException;
+                                        return nextPair.Value.CompareTo(firstPair.Value);
+                                    }
+                                );
+                            }
+                            else
+                            {
+                                list.Sort(
+                                    delegate(KeyValuePair<string, int> firstPair, KeyValuePair<string, int> nextPair)
+                                    {
+                                        return firstPair.Key.CompareTo(nextPair.Key);
+                                    }
+                                );
+                            }
+
+                            int count = 0;
+                            int total = 0;
+                            foreach (KeyValuePair<string, int> pair in list)
+                            {
+                                //string value_str = found_words[key].ToString().PadRight(3, ' ');
+                                //string key_str = key.PadLeft(10, ' ');
+                                //string entry = String.Format("{0} {1}", value_str, key_str);
+                                string entry = String.Format("{0,-3} {1,10}", pair.Value, pair.Key);
+                                WordsListBox.Items.Add(entry);
+                                total += pair.Value;
+                                count++;
+                            }
+
+                            if (WordsListBox.Items.Count > 0)
+                            {
+                                WordsListBox.SelectedIndex = 0;
+                            }
+                            else // no match [either current text_mode doesn't have a match or it was last word in verse]
+                            {
+                                // m_word_frequency_list_double_click == false if input was via keyboard
+                                // m_word_frequency_list_double_click == true  if input was via double click
+                                // if no more word when double click, then it means it was the last word in the verse
+                                // else the user has entered non-matching text
+
+                                // if last word in verse, remove the extra space after it
+                                if ((m_word_double_click) && (WordsListBox.Items.Count == 0) && (FindByTextTextBox.Text.EndsWith(" ")))
+                                {
+                                    for (int i = 0; i < 3; i++) FindByTextTextBox.TextChanged -= new EventHandler(FindByTextTextBox_TextChanged);
+                                    try
+                                    {
+                                        FindByTextTextBox.Text = FindByTextTextBox.Text.Remove(FindByTextTextBox.Text.Length - 1);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        while (ex != null)
+                                        {
+                                            MessageBox.Show(ex.Message, Application.ProductName);
+                                            ex = ex.InnerException;
+                                        }
+                                    }
+                                    finally
+                                    {
+                                        FindByTextTextBox.TextChanged += new EventHandler(FindByTextTextBox_TextChanged);
                                     }
                                 }
-                                finally
-                                {
-                                    FindByTextTextBox.TextChanged += new EventHandler(FindByTextTextBox_TextChanged);
-                                }
                             }
-                        }
 
-                        WordsListBoxLabel.Text = total.ToString() + " (" + count.ToString() + ")";
-                        WordsListBoxLabel.ForeColor = Numbers.GetNumberTypeColor(total);
-                        WordsListBoxLabel.Refresh();
+                            WordsListBoxLabel.Text = total.ToString() + " (" + count.ToString() + ")";
+                            WordsListBoxLabel.ForeColor = Numbers.GetNumberTypeColor(total);
+                            WordsListBoxLabel.Refresh();
+                        }
                     }
                 }
             }
