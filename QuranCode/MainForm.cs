@@ -2493,7 +2493,7 @@ public partial class MainForm : Form, ISubscriber
         | System.Windows.Forms.AnchorStyles.Right)));
         this.SearchScopeBookLabel.BackColor = System.Drawing.Color.DarkGray;
         this.SearchScopeBookLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.SearchScopeBookLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.SearchScopeBookLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.SearchScopeBookLabel.ForeColor = System.Drawing.Color.White;
         this.SearchScopeBookLabel.Location = new System.Drawing.Point(5, 1);
         this.SearchScopeBookLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -3807,7 +3807,7 @@ public partial class MainForm : Form, ISubscriber
         | System.Windows.Forms.AnchorStyles.Right)));
         this.SearchScopeResultLabel.BackColor = System.Drawing.Color.DarkGray;
         this.SearchScopeResultLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.SearchScopeResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.SearchScopeResultLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.SearchScopeResultLabel.ForeColor = System.Drawing.Color.White;
         this.SearchScopeResultLabel.Location = new System.Drawing.Point(149, 1);
         this.SearchScopeResultLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -3825,7 +3825,7 @@ public partial class MainForm : Form, ISubscriber
         | System.Windows.Forms.AnchorStyles.Right)));
         this.SearchScopeSelectionLabel.BackColor = System.Drawing.Color.DarkGray;
         this.SearchScopeSelectionLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-        this.SearchScopeSelectionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+        this.SearchScopeSelectionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.SearchScopeSelectionLabel.ForeColor = System.Drawing.Color.White;
         this.SearchScopeSelectionLabel.Location = new System.Drawing.Point(63, 1);
         this.SearchScopeSelectionLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
@@ -4184,7 +4184,7 @@ public partial class MainForm : Form, ISubscriber
         this.DrawSearchTermsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.DrawSearchTermsLabel.ForeColor = System.Drawing.Color.Crimson;
         this.DrawSearchTermsLabel.Image = ((System.Drawing.Image)(resources.GetObject("DrawSearchTermsLabel.Image")));
-        this.DrawSearchTermsLabel.Location = new System.Drawing.Point(115, 1);
+        this.DrawSearchTermsLabel.Location = new System.Drawing.Point(112, 1);
         this.DrawSearchTermsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.DrawSearchTermsLabel.Name = "DrawSearchTermsLabel";
         this.DrawSearchTermsLabel.Size = new System.Drawing.Size(19, 20);
@@ -4201,7 +4201,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindByTextWithDiacriticsCheckBox.CheckAlign = System.Drawing.ContentAlignment.MiddleCenter;
         this.FindByTextWithDiacriticsCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByTextWithDiacriticsCheckBox.ForeColor = System.Drawing.Color.Navy;
-        this.FindByTextWithDiacriticsCheckBox.Location = new System.Drawing.Point(95, 1);
+        this.FindByTextWithDiacriticsCheckBox.Location = new System.Drawing.Point(92, 1);
         this.FindByTextWithDiacriticsCheckBox.Margin = new System.Windows.Forms.Padding(4);
         this.FindByTextWithDiacriticsCheckBox.Name = "FindByTextWithDiacriticsCheckBox";
         this.FindByTextWithDiacriticsCheckBox.Size = new System.Drawing.Size(20, 21);
