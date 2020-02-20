@@ -25786,15 +25786,15 @@ public partial class MainForm : Form, ISubscriber
                                                 (key == Client.DEFAULT_EMLAAEI_TEXT) ||
                                                 (key == Client.DEFAULT_TRANSLATION) ||
                                                 (key == Client.DEFAULT_TRANSLITERATION) ||
-                                                (key == Client.DEFAULT_WORD_MEANINGS) //||
-                                                //(key == Client.DEFAULT_TRANSLATION_1) ||
-                                                //(key == Client.DEFAULT_TRANSLATION_2) ||
-                                                //(key == Client.DEFAULT_TRANSLATION_3) ||
-                                                //(key == Client.DEFAULT_TRANSLATION_4) ||
-                                                //(key == Client.DEFAULT_TRANSLATION_5) ||
-                                                //(key == Client.DEFAULT_TRANSLATION_6) ||
-                                                //(key == Client.DEFAULT_TRANSLATION_7) ||
-                                                //(key == Client.DEFAULT_TRANSLATION_8)
+                                                (key == Client.DEFAULT_WORD_MEANINGS) ||
+                                                (key == Client.DEFAULT_TRANSLATION_1) ||
+                                                (key == Client.DEFAULT_TRANSLATION_2) ||
+                                                (key == Client.DEFAULT_TRANSLATION_3) ||
+                                                (key == Client.DEFAULT_TRANSLATION_4) ||
+                                                (key == Client.DEFAULT_TRANSLATION_5) ||
+                                                (key == Client.DEFAULT_TRANSLATION_6) ||
+                                                (key == Client.DEFAULT_TRANSLATION_7) ||
+                                                (key == Client.DEFAULT_TRANSLATION_8)
                                                )
                                             {
                                                 TranslatorsCheckedListBox.SetItemCheckState(i, CheckState.Indeterminate);
@@ -26273,15 +26273,15 @@ public partial class MainForm : Form, ISubscriber
                                 (key == Client.DEFAULT_EMLAAEI_TEXT) ||
                                 (key == Client.DEFAULT_TRANSLATION) ||
                                 (key == Client.DEFAULT_TRANSLITERATION) ||
-                                (key == Client.DEFAULT_WORD_MEANINGS) //||
-                                //(key == Client.DEFAULT_TRANSLATION_1) ||
-                                //(key == Client.DEFAULT_TRANSLATION_2) ||
-                                //(key == Client.DEFAULT_TRANSLATION_3) ||
-                                //(key == Client.DEFAULT_TRANSLATION_4) ||
-                                //(key == Client.DEFAULT_TRANSLATION_5) ||
-                                //(key == Client.DEFAULT_TRANSLATION_6) ||
-                                //(key == Client.DEFAULT_TRANSLATION_7) ||
-                                //(key == Client.DEFAULT_TRANSLATION_8)
+                                (key == Client.DEFAULT_WORD_MEANINGS) ||
+                                (key == Client.DEFAULT_TRANSLATION_1) ||
+                                (key == Client.DEFAULT_TRANSLATION_2) ||
+                                (key == Client.DEFAULT_TRANSLATION_3) ||
+                                (key == Client.DEFAULT_TRANSLATION_4) ||
+                                (key == Client.DEFAULT_TRANSLATION_5) ||
+                                (key == Client.DEFAULT_TRANSLATION_6) ||
+                                (key == Client.DEFAULT_TRANSLATION_7) ||
+                                (key == Client.DEFAULT_TRANSLATION_8)
                                )
                             {
                                 m_selected_translations.Add(key);

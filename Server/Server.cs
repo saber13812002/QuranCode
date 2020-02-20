@@ -127,14 +127,14 @@ public class Server : IPublisher
     public const string DEFAULT_TRANSLATION = "en.qarai";
     public const string DEFAULT_TRANSLITERATION = "en.transliteration";
     public const string DEFAULT_WORD_MEANINGS = "en.wordbyword";
-    //public const string DEFAULT_TRANSLATION_1 = "es.garcia";
-    //public const string DEFAULT_TRANSLATION_2 = "fa.khorramdel";
-    //public const string DEFAULT_TRANSLATION_3 = "hi.hindi";
-    //public const string DEFAULT_TRANSLATION_4 = "id.muntakhab";
-    //public const string DEFAULT_TRANSLATION_5 = "ja.japanese";
-    //public const string DEFAULT_TRANSLATION_6 = "tr.yildirim";
-    //public const string DEFAULT_TRANSLATION_7 = "ur.jawadi";
-    //public const string DEFAULT_TRANSLATION_8 = "zh.jian";
+    public const string DEFAULT_TRANSLATION_1 = "es.garcia";
+    public const string DEFAULT_TRANSLATION_2 = "fa.makarem";
+    public const string DEFAULT_TRANSLATION_3 = "hi.hindi";
+    public const string DEFAULT_TRANSLATION_4 = "id.muntakhab";
+    public const string DEFAULT_TRANSLATION_5 = "ja.japanese";
+    public const string DEFAULT_TRANSLATION_6 = "tr.yildirim";
+    public const string DEFAULT_TRANSLATION_7 = "ur.jawadi";
+    public const string DEFAULT_TRANSLATION_8 = "zh.jian";
 
     static Server()
     {

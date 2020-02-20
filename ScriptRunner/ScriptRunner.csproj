@@ -71,9 +71,6 @@
     <Compile Include="ScriptRunner.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Scripts\DigitSums.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Scripts\Template.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

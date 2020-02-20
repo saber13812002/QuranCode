@@ -2,11 +2,6 @@
 
 CALL Version.bat
 
-CALL Clean.bat
-CD NET2
-CALL Clean.bat
-CD ..
-
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip    -mx5 QuranCode1433.Source.zip LICENSE
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip    -mx5 QuranCode1433.Source.zip *.md
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip    -mx5 QuranCode1433.Source.zip *.bat
@@ -24,12 +19,6 @@ CD ..
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.Source.zip Common\*.*
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.Source.zip QuranCode\*.*
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.Source.zip ScriptRunner\*.*
-"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.Source.zip AhlulBayt\*.*
-"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.Source.zip WordGenerator\*.*
-
-CD NET2
-CALL Version.bat
-CD ..
 
 CD Build\Release
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Audio\*.*
@@ -50,18 +39,5 @@ CD Build\Release
 "%PROGRAMFILES%\7-Zip\7z.exe" a -tzip    -mx5 QuranCode1433.zip Clean.bat
 MOVE QuranCode1433.zip ..\..\QuranCode1433.zip
 CD ..\..
-
-MD Files
-CD Files
-MD NET2
-MD NET4
-CD ..
-COPY /Y NET2\Build\Release\*.exe Files\NET2\
-COPY /Y NET2\Build\Release\*.dll Files\NET2\
-COPY /Y      Build\Release\*.exe Files\NET4\
-COPY /Y      Build\Release\*.dll Files\NET4\
-"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip -r -mx5 QuranCode1433.zip Files\*.*
-"%PROGRAMFILES%\7-Zip\7z.exe" a -tzip    -mx5 QuranCode1433.zip Setup.bat
-RD /S /Q Files
 
 CALL Version.bat
