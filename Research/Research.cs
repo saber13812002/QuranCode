@@ -1241,71 +1241,75 @@ public static class Research
     {
         if (client == null) return null;
         if (client.Book == null) return null;
-        List<Chapter> chapters = client.Book.Chapters;
-        if (chapters != null)
+        List<Verse> verses = GetSourceVerses(client, in_search_result);
+        if (verses != null)
         {
-            Dictionary<Chapter, List<string>> unique_chapter_words = new Dictionary<Chapter, List<string>>();
-            foreach (Chapter chapter in chapters)
+            List<Chapter> chapters = client.Book.GetChapters(verses);
+            if (chapters != null)
             {
-                unique_chapter_words.Add(chapter, new List<string>());
-            }
-
-            foreach (Chapter chapter in chapters)
-            {
-                foreach (Verse verse in chapter.Verses)
+                Dictionary<Chapter, List<string>> unique_chapter_words = new Dictionary<Chapter, List<string>>();
+                foreach (Chapter chapter in chapters)
                 {
-                    foreach (Word word in verse.Words)
+                    unique_chapter_words.Add(chapter, new List<string>());
+                }
+
+                foreach (Chapter chapter in chapters)
+                {
+                    foreach (Verse verse in chapter.Verses)
                     {
-                        bool unique = true;
-
-                        foreach (Chapter c in chapters)
+                        foreach (Word word in verse.Words)
                         {
-                            if (c == chapter) continue;
+                            bool unique = true;
 
-                            foreach (Verse v in c.Verses)
+                            foreach (Chapter c in client.Book.Chapters)
                             {
-                                foreach (Word w in v.Words)
+                                if (c == chapter) continue;
+
+                                foreach (Verse v in c.Verses)
                                 {
-                                    if (w.Text == word.Text)
+                                    foreach (Word w in v.Words)
                                     {
-                                        unique = false;
-                                        break;
+                                        if (w.Text == word.Text)
+                                        {
+                                            unique = false;
+                                            break;
+                                        }
                                     }
+                                    if (!unique) break;
                                 }
                                 if (!unique) break;
                             }
-                            if (!unique) break;
-                        }
 
-                        if (unique)
-                        {
-                            if (!unique_chapter_words[chapter].Contains(word.Text))
+                            if (unique)
                             {
-                                unique_chapter_words[chapter].Add(word.Text);
+                                if (!unique_chapter_words[chapter].Contains(word.Text))
+                                {
+                                    unique_chapter_words[chapter].Add(word.Text);
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            StringBuilder str = new StringBuilder();
-            int i = 0;
-            foreach (List<string> word_texts in unique_chapter_words.Values)
-            {
-                str.Append("Chapter " + chapters[i++].SortedNumber.ToString() + "\t");
-                str.Append(word_texts.Count + "\t");
-                foreach (string word_text in word_texts)
+                StringBuilder str = new StringBuilder();
+                int i = 0;
+                foreach (List<string> word_texts in unique_chapter_words.Values)
                 {
-                    str.Append(word_text + "\t");
+                    str.Append("Chapter " + chapters[i++].SortedNumber.ToString() + "\t");
+                    str.Append(word_texts.Count + "\t");
+                    foreach (string word_text in word_texts)
+                    {
+                        str.Append(word_text + "\t");
+                    }
+                    if (str.Length > 0)
+                    {
+                        str.Remove(str.Length - 1, 1);
+                    }
+                    str.AppendLine();
                 }
-                if (str.Length > 0)
-                {
-                    str.Remove(str.Length - 1, 1);
-                }
-                str.AppendLine();
-            }
 
-            return str.ToString();
+                return str.ToString();
+            }
         }
         return null;
     }
@@ -1313,71 +1317,75 @@ public static class Research
     {
         if (client == null) return null;
         if (client.Book == null) return null;
-        List<Chapter> chapters = client.Book.Chapters;
-        if (chapters != null)
+        List<Verse> verses = GetSourceVerses(client, in_search_result);
+        if (verses != null)
         {
-            Dictionary<Chapter, List<string>> unique_chapter_roots = new Dictionary<Chapter, List<string>>();
-            foreach (Chapter chapter in chapters)
+            List<Chapter> chapters = client.Book.GetChapters(verses);
+            if (chapters != null)
             {
-                unique_chapter_roots.Add(chapter, new List<string>());
-            }
-
-            foreach (Chapter chapter in chapters)
-            {
-                foreach (Verse verse in chapter.Verses)
+                Dictionary<Chapter, List<string>> unique_chapter_roots = new Dictionary<Chapter, List<string>>();
+                foreach (Chapter chapter in chapters)
                 {
-                    foreach (Word word in verse.Words)
+                    unique_chapter_roots.Add(chapter, new List<string>());
+                }
+
+                foreach (Chapter chapter in chapters)
+                {
+                    foreach (Verse verse in chapter.Verses)
                     {
-                        bool unique = true;
-
-                        foreach (Chapter c in chapters)
+                        foreach (Word word in verse.Words)
                         {
-                            if (c == chapter) continue;
+                            bool unique = true;
 
-                            foreach (Verse v in c.Verses)
+                            foreach (Chapter c in client.Book.Chapters)
                             {
-                                foreach (Word w in v.Words)
+                                if (c == chapter) continue;
+
+                                foreach (Verse v in c.Verses)
                                 {
-                                    if (w.BestRoot == word.BestRoot)
+                                    foreach (Word w in v.Words)
                                     {
-                                        unique = false;
-                                        break;
+                                        if (w.BestRoot == word.BestRoot)
+                                        {
+                                            unique = false;
+                                            break;
+                                        }
                                     }
+                                    if (!unique) break;
                                 }
                                 if (!unique) break;
                             }
-                            if (!unique) break;
-                        }
 
-                        if (unique)
-                        {
-                            if (!unique_chapter_roots[chapter].Contains(word.BestRoot))
+                            if (unique)
                             {
-                                unique_chapter_roots[chapter].Add(word.BestRoot);
+                                if (!unique_chapter_roots[chapter].Contains(word.BestRoot))
+                                {
+                                    unique_chapter_roots[chapter].Add(word.BestRoot);
+                                }
                             }
                         }
                     }
                 }
-            }
 
-            StringBuilder str = new StringBuilder();
-            int i = 0;
-            foreach (List<string> roots in unique_chapter_roots.Values)
-            {
-                str.Append("Chapter " + chapters[i++].SortedNumber.ToString() + "\t");
-                str.Append(roots.Count + "\t");
-                foreach (string root in roots)
+                StringBuilder str = new StringBuilder();
+                int i = 0;
+                foreach (List<string> roots in unique_chapter_roots.Values)
                 {
-                    str.Append(root + "\t");
+                    str.Append("Chapter " + chapters[i++].SortedNumber.ToString() + "\t");
+                    str.Append(roots.Count + "\t");
+                    foreach (string root in roots)
+                    {
+                        str.Append(root + "\t");
+                    }
+                    if (str.Length > 0)
+                    {
+                        str.Remove(str.Length - 1, 1);
+                    }
+                    str.AppendLine();
                 }
-                if (str.Length > 0)
-                {
-                    str.Remove(str.Length - 1, 1);
-                }
-                str.AppendLine();
-            }
 
-            return str.ToString();
+                return str.ToString();
+            }
         }
         return null;
     }

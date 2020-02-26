@@ -8,7 +8,7 @@
   QuranCode Editions:
     Standard Edition	Letter-value systems with 19 options.	[Start normally]
     Research Edition	Research methods and C# scripting.      [Start with Shift]
-    Ultimate Edition	Big prime and composite numbers.	[Start with Ctrl+Shift]
+    Ultimate Edition	More research methods and big numbers.	[Start with Ctrl+Shift]
   ------------------------------------------------------------------------------
 
   Initial Letter Sentences (جمل الحروف المقطعة)

@@ -16848,14 +16848,29 @@ public partial class MainForm : Form, ISubscriber
                     if (class_type != null)
                     {
                         MethodInfo[] method_infos = null;
-                        if ((Globals.EDITION == Edition.Lite) || (Globals.EDITION == Edition.Standard))
+                        if (Globals.EDITION == Edition.Research)
                         {
                             method_infos = class_type.GetMethods(BindingFlags.Static | BindingFlags.Public);
                         }
-                        else
+                        else if (Globals.EDITION == Edition.Ultimate)
                         {
                             method_infos = class_type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
                         }
+                        else
+                        {
+                            // WARNING:
+                            // no support for research methods in Lite and Standard Editions
+                            // to protect users from attackers who may replace Research.dll with a malicious one by the same name.
+                            // QuranCode cannot differentiate between the two and would blindly runs any research method in any Research.dll
+
+                            ResearchMethodsComboBox.Visible = false;
+                            ResearchMethodParameterTextBox.Visible = false;
+                            ResearchMethodsRunButton.Visible = false;
+                            ChapterGroupBox.Height += 20;
+                            ResearchPanel.Controls.Add(ChapterSelectionComboBox);
+                            ChapterSelectionComboBox.Dock = DockStyle.Fill;
+                        }
+
                         if (method_infos != null)
                         {
                             ResearchMethodsComboBox.Items.Clear();

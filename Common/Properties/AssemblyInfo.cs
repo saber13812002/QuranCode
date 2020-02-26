@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
     "\r\n" +
     "Standard Edition	Letter-value systems with 19 options." + "\r\n" +
     "Research Edition	Research methods and C# scripting." + "\r\n" +
-    "Ultimate Edition	Big prime and composite numbers." + "\r\n" +
+    "Ultimate Edition	More research methods and big numbers." + "\r\n" +
     "\r\n" +
     "CREDITS:" + "\r\n" +
     "http://tanzil.net for the Quran text and translations." + "\r\n" +
