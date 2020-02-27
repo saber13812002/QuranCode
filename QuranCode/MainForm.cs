@@ -9922,6 +9922,7 @@ public partial class MainForm : Form, ISubscriber
         this.UserTextValueButton.Text = "Find";
         this.UserTextValueButton.UseVisualStyleBackColor = true;
         this.UserTextValueButton.Click += new System.EventHandler(this.UserTextValueButton_Click);
+        this.UserTextValueButton.Enter += new System.EventHandler(this.UserTextTextBox_Enter);
         // 
         // UserText8SaveLabel
         // 
@@ -10048,6 +10049,7 @@ public partial class MainForm : Form, ISubscriber
         this.UserTextInspectLabel.TabIndex = 119;
         this.ToolTip.SetToolTip(this.UserTextInspectLabel, "Inspect");
         this.UserTextInspectLabel.Click += new System.EventHandler(this.UserTextInspectLabel_Click);
+        this.UserTextInspectLabel.Enter += new System.EventHandler(this.UserTextTextBox_Enter);
         // 
         // UserTextValueNumericUpDown
         // 
@@ -10068,6 +10070,7 @@ public partial class MainForm : Form, ISubscriber
         this.ToolTip.SetToolTip(this.UserTextValueNumericUpDown, "Value");
         this.UserTextValueNumericUpDown.ValueChanged += new System.EventHandler(this.UserTextValueNumericUpDown_ValueChanged);
         this.UserTextValueNumericUpDown.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserTextValueNumericUpDown_KeyDown);
+        this.UserTextValueNumericUpDown.Enter += new System.EventHandler(this.UserTextTextBox_Enter);
         // 
         // UserTextValueLabel
         // 
@@ -10082,6 +10085,7 @@ public partial class MainForm : Form, ISubscriber
         this.UserTextValueLabel.TabIndex = 5;
         this.UserTextValueLabel.Text = "Find By Value";
         this.UserTextValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+        this.UserTextValueLabel.Enter += new System.EventHandler(this.UserTextTextBox_Enter);
         // 
         // UserTextTextBox
         // 
@@ -33987,6 +33991,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void UserTextTextBox_Enter(object sender, EventArgs e)
     {
+        this.AcceptButton = UserTextValueButton;
         m_user_text_mode = true;
         CalculateUserTextValue(m_caret_position);
     }

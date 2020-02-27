@@ -5485,7 +5485,7 @@ partial class MainForm
         this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 1);
         this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
         this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(651, 191);
+        this.ScriptOutputGroupBox.Size = new System.Drawing.Size(651, 192);
         this.ScriptOutputGroupBox.TabIndex = 103;
         this.ScriptOutputGroupBox.TabStop = false;
         this.ScriptOutputGroupBox.Text = " Output ";
@@ -5501,7 +5501,7 @@ partial class MainForm
         this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
         this.ScriptOutputTextBox.ReadOnly = true;
         this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.ScriptOutputTextBox.Size = new System.Drawing.Size(631, 163);
+        this.ScriptOutputTextBox.Size = new System.Drawing.Size(631, 164);
         this.ScriptOutputTextBox.TabIndex = 0;
         this.ScriptOutputTextBox.WordWrap = false;
         this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -5526,7 +5526,7 @@ partial class MainForm
         this.TabControl.Name = "TabControl";
         this.TabControl.SelectedIndex = 0;
         this.TabControl.ShowToolTips = true;
-        this.TabControl.Size = new System.Drawing.Size(661, 190);
+        this.TabControl.Size = new System.Drawing.Size(661, 189);
         this.TabControl.TabIndex = 102;
         this.TabControl.SelectedIndexChanged += new System.EventHandler(this.TabControl_SelectedIndexChanged);
         this.TabControl.Click += new System.EventHandler(this.TabControl_Click);
@@ -5727,7 +5727,7 @@ partial class MainForm
         this.AllTranslatorsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
         this.AllTranslatorsCheckBox.AutoSize = true;
         this.AllTranslatorsCheckBox.BackColor = System.Drawing.SystemColors.ControlLight;
-        this.AllTranslatorsCheckBox.Location = new System.Drawing.Point(188, 148);
+        this.AllTranslatorsCheckBox.Location = new System.Drawing.Point(189, 148);
         this.AllTranslatorsCheckBox.Name = "AllTranslatorsCheckBox";
         this.AllTranslatorsCheckBox.Size = new System.Drawing.Size(15, 14);
         this.AllTranslatorsCheckBox.TabIndex = 13;
@@ -5742,7 +5742,7 @@ partial class MainForm
         this.TranslatorsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
         this.TranslatorsComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.TranslatorsComboBox.FormattingEnabled = true;
-        this.TranslatorsComboBox.Location = new System.Drawing.Point(3, 145);
+        this.TranslatorsComboBox.Location = new System.Drawing.Point(4, 145);
         this.TranslatorsComboBox.Name = "TranslatorsComboBox";
         this.TranslatorsComboBox.Size = new System.Drawing.Size(182, 20);
         this.TranslatorsComboBox.TabIndex = 12;
@@ -5762,7 +5762,7 @@ partial class MainForm
         this.TranslationsTextBox.Name = "TranslationsTextBox";
         this.TranslationsTextBox.ReadOnly = true;
         this.TranslationsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-        this.TranslationsTextBox.Size = new System.Drawing.Size(208, 165);
+        this.TranslationsTextBox.Size = new System.Drawing.Size(209, 165);
         this.TranslationsTextBox.TabIndex = 11;
         this.TranslationsTextBox.WordWrap = false;
         this.TranslationsTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
@@ -8825,6 +8825,7 @@ partial class MainForm
         this.UserTextInspectLabel.TabIndex = 5;
         this.ToolTip.SetToolTip(this.UserTextInspectLabel, "Inspect");
         this.UserTextInspectLabel.Click += new System.EventHandler(this.UserTextInspectLabel_Click);
+        this.UserTextInspectLabel.Enter += new System.EventHandler(this.UserTextTextBox_Enter);
         // 
         // UserTextValueButton
         // 
@@ -8839,6 +8840,7 @@ partial class MainForm
         this.UserTextValueButton.Text = "Find";
         this.UserTextValueButton.UseVisualStyleBackColor = true;
         this.UserTextValueButton.Click += new System.EventHandler(this.UserTextValueButton_Click);
+        this.UserTextValueButton.Enter += new System.EventHandler(this.UserTextTextBox_Enter);
         // 
         // UserTextValueNumericUpDown
         // 
@@ -8858,6 +8860,7 @@ partial class MainForm
         this.ToolTip.SetToolTip(this.UserTextValueNumericUpDown, "Value");
         this.UserTextValueNumericUpDown.ValueChanged += new System.EventHandler(this.UserTextValueNumericUpDown_ValueChanged);
         this.UserTextValueNumericUpDown.KeyDown += new System.Windows.Forms.KeyEventHandler(this.UserTextValueNumericUpDown_KeyDown);
+        this.UserTextValueNumericUpDown.Enter += new System.EventHandler(this.UserTextTextBox_Enter);
         // 
         // UserTextValueLabel
         // 
@@ -8871,6 +8874,7 @@ partial class MainForm
         this.UserTextValueLabel.TabIndex = 2;
         this.UserTextValueLabel.Text = "Word Value";
         this.UserTextValueLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+        this.UserTextValueLabel.Enter += new System.EventHandler(this.UserTextTextBox_Enter);
         // 
         // UserTextTextBox
         // 
