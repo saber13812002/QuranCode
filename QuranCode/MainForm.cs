@@ -10100,13 +10100,14 @@ public partial class MainForm : Form, ISubscriber
         this.UserTextTextBox.HideSelection = false;
         this.UserTextTextBox.Location = new System.Drawing.Point(29, 1);
         this.UserTextTextBox.Margin = new System.Windows.Forms.Padding(4);
+        this.UserTextTextBox.MaxLength = 99999999;
+        this.UserTextTextBox.WordWrap = true;
         this.UserTextTextBox.Multiline = true;
         this.UserTextTextBox.Name = "UserTextTextBox";
         this.UserTextTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
         this.UserTextTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
         this.UserTextTextBox.Size = new System.Drawing.Size(647, 200);
         this.UserTextTextBox.TabIndex = 1;
-        this.UserTextTextBox.WordWrap = false;
         this.UserTextTextBox.TextChanged += new System.EventHandler(this.UserTextTextBox_TextChanged);
         this.UserTextTextBox.Enter += new System.EventHandler(this.UserTextTextBox_Enter);
         this.UserTextTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
@@ -14095,7 +14096,15 @@ public partial class MainForm : Form, ISubscriber
                 DuplicateLettersCheckBox.Refresh();
             }
 
+            m_current_letter = GetLetterAtCursor();
+            m_current_word = GetWordAtCursor();
+            m_current_verse = GetCurrentVerse();
+            m_current_chapter = GetCurrentChapter();
             UpdateHeaderLabel();
+            if (m_current_word != null)
+            {
+                this.Text = GetCurrentWordDetails(m_current_word);
+            }
 
             //m_active_textbox.Focus(); // keep focus in NumericUpDown search options
             MainTextBox_SelectionChanged(m_active_textbox, null);
@@ -15325,6 +15334,18 @@ public partial class MainForm : Form, ISubscriber
                                                 }
                                                 break;
                                             // [Display]
+                                            case "HeaderDisplayMode":
+                                                {
+                                                    try
+                                                    {
+                                                        m_header_display_mode = (HeaderDisplayMode)Enum.Parse(typeof(HeaderDisplayMode), parts[1].Trim());
+                                                    }
+                                                    catch
+                                                    {
+                                                        m_header_display_mode = HeaderDisplayMode.Info;
+                                                    }
+                                                }
+                                                break;
                                             case "MainTextWordWrap":
                                                 {
                                                     try
@@ -15931,6 +15952,7 @@ public partial class MainForm : Form, ISubscriber
                     writer.WriteLine();
 
                     writer.WriteLine("[Display]");
+                    writer.WriteLine("HeaderDisplayMode" + "=" + m_header_display_mode);
                     writer.WriteLine("MainTextWordWrap" + "=" + m_word_wrap_main_textbox);
                     writer.WriteLine("SearchResultWordWrap" + "=" + m_word_wrap_search_textbox);
                     writer.WriteLine("TranslationWordWrap" + "=" + m_word_wrap_translation_textbox);
@@ -16514,10 +16536,10 @@ public partial class MainForm : Form, ISubscriber
     {
         if (sender is TextBoxBase)
         {
-            Verse verse = GetVerseAtCursor();
-            if (verse != null)
+            m_current_verse = GetVerseAtCursor();
+            if (m_current_verse != null)
             {
-                DoFindSameText(verse.Text);
+                DoFindSameText(m_current_verse.Text);
             }
         }
     }
@@ -16541,10 +16563,10 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else
                 {
-                    Verse verse = GetVerseAtCursor();
-                    if (verse != null)
+                    m_current_verse = GetVerseAtCursor();
+                    if (m_current_verse != null)
                     {
-                        value = m_client.CalculateValue(verse);
+                        value = m_client.CalculateValue(m_current_verse);
                     }
                     else
                     {
@@ -17892,6 +17914,11 @@ public partial class MainForm : Form, ISubscriber
             UserTextTextBox.Refresh();
         }
     }
+
+    private Letter m_current_letter = null;
+    private Word m_current_word = null;
+    private Verse m_current_verse = null;
+    private Chapter m_current_chapter = null;
     private void MainTextBox_TextChanged(object sender, EventArgs e)
     {
         if (
@@ -17916,6 +17943,14 @@ public partial class MainForm : Form, ISubscriber
            )
         {
             m_current_letter = GetLetterAtCursor();
+            m_current_word = GetWordAtCursor();
+            m_current_verse = GetCurrentVerse();
+            m_current_chapter = GetCurrentChapter();
+            UpdateHeaderLabel();
+            if (m_current_word != null)
+            {
+                this.Text = GetCurrentWordDetails(m_current_word);
+            }
 
             CalculateCurrentValue();
 
@@ -17942,13 +17977,22 @@ public partial class MainForm : Form, ISubscriber
                 m_selection_mode = false;
 
                 Verse previous_verse = GetCurrentVerse();
-                Verse verse = GetVerseAtCursor();
-                if (verse != null)
+                m_current_verse = GetVerseAtCursor();
+                if (m_current_verse != null)
                 {
-                    CurrentVerseIndex = GetVerseIndex(verse);
-                    UpdatePlayerButtons(verse);
+                    CurrentVerseIndex = GetVerseIndex(m_current_verse);
+                    UpdatePlayerButtons(m_current_verse);
                 }
+
+                m_current_letter = GetLetterAtCursor();
+                m_current_word = GetWordAtCursor();
+                m_current_verse = GetCurrentVerse();
+                m_current_chapter = GetCurrentChapter();
                 UpdateHeaderLabel();
+                if (m_current_word != null)
+                {
+                    this.Text = GetCurrentWordDetails(m_current_word);
+                }
 
                 CalculateCurrentValue();
 
@@ -18077,6 +18121,16 @@ public partial class MainForm : Form, ISubscriber
                 // to keep all verse translations visible until the user clicks a verse then show one verse translation
                 if (m_active_textbox != null)
                 {
+                    m_current_letter = GetLetterAtCursor();
+                    m_current_word = GetWordAtCursor();
+                    m_current_verse = GetCurrentVerse();
+                    m_current_chapter = GetCurrentChapter();
+                    UpdateHeaderLabel();
+                    if (m_current_word != null)
+                    {
+                        this.Text = GetCurrentWordDetails(m_current_word);
+                    }
+
                     if (m_active_textbox.SelectionLength == 0)
                     {
                         Verse verse = GetCurrentVerse();
@@ -18119,7 +18173,6 @@ public partial class MainForm : Form, ISubscriber
             if (ChapterComboBox.Focused) return;
             if (BookmarkTextBox.Focused) return;
             if (FindByFrequencyPhraseTextBox.Focused) return;
-            m_current_letter = GetLetterAtCursor();
 
             if (m_player != null)
             {
@@ -18206,17 +18259,17 @@ public partial class MainForm : Form, ISubscriber
 
         UpdateMouseCursor();
 
-        Word word = GetWordAtPointer(e);
-        if (word != null)
-        {
-            this.Text = GetCurrentWordDetails(word);
-            m_current_word = word;
-        }
-
         if (ModifierKeys == Keys.Control)
         {
             m_current_letter = GetLetterAtPointer(e);
+            m_current_word = GetWordAtPointer(e);
+            m_current_verse = GetCurrentVerse();
+            m_current_chapter = GetCurrentChapter();
             UpdateHeaderLabel();
+            if (m_current_word != null)
+            {
+                this.Text = GetCurrentWordDetails(m_current_word);
+            }
         }
     }
     private void MainTextBox_MouseUp(object sender, MouseEventArgs e)
@@ -18272,6 +18325,16 @@ public partial class MainForm : Form, ISubscriber
         // to keep all verse translations visible until the user clicks a verse then show one verse translation
         if (m_active_textbox != null)
         {
+            m_current_letter = GetLetterAtCursor();
+            m_current_word = GetWordAtCursor();
+            m_current_verse = GetCurrentVerse();
+            m_current_chapter = GetCurrentChapter();
+            UpdateHeaderLabel();
+            if (m_current_word != null)
+            {
+                this.Text = GetCurrentWordDetails(m_current_word);
+            }
+
             if (m_active_textbox.SelectionLength == 0)
             {
                 Verse verse = GetCurrentVerse();
@@ -18361,9 +18424,18 @@ public partial class MainForm : Form, ISubscriber
                         MainTextBox.ClearHighlight();
                         MainTextBox.AlignToStart();
                         HighlightVerse(verse);
-                        UpdateHeaderLabel();
                         UpdateProgressBar(verse);
                         UpdateNotifyIconText();
+
+                        m_current_letter = GetLetterAtCursor();
+                        m_current_word = GetWordAtCursor();
+                        m_current_verse = GetCurrentVerse();
+                        m_current_chapter = GetCurrentChapter();
+                        UpdateHeaderLabel();
+                        if (m_current_word != null)
+                        {
+                            this.Text = GetCurrentWordDetails(m_current_word);
+                        }
 
                         CalculateCurrentValue();
 
@@ -19019,10 +19091,9 @@ public partial class MainForm : Form, ISubscriber
             }
             finally
             {
-                //// ####### already re-wired above
-                //m_active_textbox.EndUpdate();
-                //m_active_textbox.SelectionChanged += new EventHandler(MainTextBox_SelectionChanged);
-                //m_active_textbox.TextChanged += new EventHandler(MainTextBox_TextChanged);
+                m_active_textbox.EndUpdate();
+                m_active_textbox.SelectionChanged += new EventHandler(MainTextBox_SelectionChanged);
+                m_active_textbox.TextChanged += new EventHandler(MainTextBox_TextChanged);
             }
         }
     }
@@ -23055,8 +23126,6 @@ public partial class MainForm : Form, ISubscriber
         {
             SwitchToMainTextBox();
 
-            for (int i = 0; i < 3; i++) MainTextBox.TextChanged -= new EventHandler(MainTextBox_TextChanged);
-            for (int i = 0; i < 3; i++) MainTextBox.SelectionChanged -= new EventHandler(MainTextBox_SelectionChanged);
             MainTextBox.BeginUpdate();
 
             BookmarkTextBox.Enabled = true;
@@ -23085,7 +23154,16 @@ public partial class MainForm : Form, ISubscriber
 
             m_current_selection_verse_index = 0;
             CurrentVerseIndex = 0;
+
+            m_current_letter = GetLetterAtCursor();
+            m_current_word = GetWordAtCursor();
+            m_current_verse = GetCurrentVerse();
+            m_current_chapter = GetCurrentChapter();
             UpdateHeaderLabel();
+            if (m_current_word != null)
+            {
+                this.Text = GetCurrentWordDetails(m_current_word);
+            }
 
             if (m_client != null)
             {
@@ -23137,8 +23215,6 @@ public partial class MainForm : Form, ISubscriber
             }
 
             MainTextBox.EndUpdate();
-            MainTextBox.SelectionChanged += new EventHandler(MainTextBox_SelectionChanged);
-            MainTextBox.TextChanged += new EventHandler(MainTextBox_TextChanged);
             this.Cursor = Cursors.Default;
         }
     }
@@ -25763,6 +25839,10 @@ public partial class MainForm : Form, ISubscriber
 
         TranslationTextBox.WordWrap = m_word_wrap_translation_textbox;
         TranslationsTextBox.WordWrap = m_word_wrap_translation_textbox && !m_show_all_translations;
+
+        //GrammarTextBox.WordWrap = m_word_wrap_translation_textbox;
+        //RelatedWordsTextBox.WordWrap = m_word_wrap_translation_textbox;
+        //UserTextTextBox.WordWrap = m_word_wrap_translation_textbox;
     }
     // translation
     private List<string> m_selected_translations = new List<string>();
@@ -26667,7 +26747,6 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Grammar/RelatedWords
     ///////////////////////////////////////////////////////////////////////////////
-    private Word m_current_word = null;
     private Word m_info_word = null;
     private string GetWordInformation(Word word)
     {
@@ -29807,10 +29886,10 @@ public partial class MainForm : Form, ISubscriber
     private void DistancesDivisorNumericUpDown_ValueChanged(object sender, EventArgs e)
     {
         m_distances_divisor = (int)DistancesDivisorNumericUpDown.Value;
-        Verse verse = GetVerseAtCursor();
-        if (verse != null)
+        m_current_verse = GetVerseAtCursor();
+        if (m_current_verse != null)
         {
-            UpdateVerseDistances(verse);
+            UpdateVerseDistances(m_current_verse);
         }
 
         if (m_distances_update_global_divisor)
@@ -29860,8 +29939,8 @@ public partial class MainForm : Form, ISubscriber
     private NumberScope m_distances_running_word_number_scope = NumberScope.Number;
     private void DistancesRunningPartitionNumberScopeLabel_Click(object sender, EventArgs e)
     {
-        Verse verse = GetVerseAtCursor();
-        if (verse != null)
+        m_current_verse = GetVerseAtCursor();
+        if (m_current_verse != null)
         {
             switch (m_distances_running_chapter_number_scope)
             {
@@ -29874,13 +29953,13 @@ public partial class MainForm : Form, ISubscriber
                     }
                     break;
             }
-            UpdateVerseDistances(verse);
+            UpdateVerseDistances(m_current_verse);
         }
     }
     private void DistancesRunningVerseNumberScopeLabel_Click(object sender, EventArgs e)
     {
-        Verse verse = GetVerseAtCursor();
-        if (verse != null)
+        m_current_verse = GetVerseAtCursor();
+        if (m_current_verse != null)
         {
             switch (m_distances_running_verse_number_scope)
             {
@@ -29898,13 +29977,13 @@ public partial class MainForm : Form, ISubscriber
                     }
                     break;
             }
-            UpdateVerseDistances(verse);
+            UpdateVerseDistances(m_current_verse);
         }
     }
     private void DistancesRunningWordNumberScopeLabel_Click(object sender, EventArgs e)
     {
-        Verse verse = GetVerseAtCursor();
-        if (verse != null)
+        m_current_verse = GetVerseAtCursor();
+        if (m_current_verse != null)
         {
             switch (m_distances_running_word_number_scope)
             {
@@ -29928,7 +30007,7 @@ public partial class MainForm : Form, ISubscriber
                     }
                     break;
             }
-            UpdateVerseDistances(verse);
+            UpdateVerseDistances(m_current_verse);
         }
     }
     private void UpdateDistancesOptions()
@@ -41223,8 +41302,8 @@ public partial class MainForm : Form, ISubscriber
         }
     }
 
-    private enum DistanceMode { Letter, Word, Verse, Chapter };
-    private DistanceMode m_distance_mode = DistanceMode.Letter;
+    private enum HeaderDisplayMode { Info, Letter, Word, Verse, Chapter };
+    private HeaderDisplayMode m_header_display_mode = HeaderDisplayMode.Info;
     private string m_find_result_header = null;
     private void UpdateHeaderLabel()
     {
@@ -41250,11 +41329,24 @@ public partial class MainForm : Form, ISubscriber
             else
             {
                 HeaderLabel.Text = "";
-                switch (m_distance_mode)
+                switch (m_header_display_mode)
                 {
-                    case DistanceMode.Letter:
+                    case HeaderDisplayMode.Info:
                         {
-                            m_current_letter = GetLetterAtCursor();
+                            Verse verse = GetCurrentVerse();
+                            if (verse != null)
+                            {
+                                if (verse.Chapter != null)
+                                {
+                                    HeaderLabel.Text = GetVerseSummary(verse);
+                                    HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(verse.NumberInChapter);
+                                    HeaderLabel.Refresh();
+                                }
+                            }
+                        }
+                        break;
+                    case HeaderDisplayMode.Letter:
+                        {
                             if (m_current_letter != null)
                             {
                                 int to_book_start = m_current_letter.Number - 1;
@@ -41272,9 +41364,9 @@ public partial class MainForm : Form, ISubscriber
                                                    to_chapter_end.ToString() + "  " +
                                                    to_verse_end.ToString() + "  " +
                                                    to_word_end.ToString() + "  " +
-                                                   "            " +
+                                                   "             " +
                                                    m_current_letter.Address +
-                                                   "            " +
+                                                   "             " +
                                                    to_book_start.ToString() + "  " +
                                                    to_chapter_start.ToString() + "  " +
                                                    to_verse_start.ToString() + "  " +
@@ -41285,9 +41377,8 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                         break;
-                    case DistanceMode.Word:
+                    case HeaderDisplayMode.Word:
                         {
-                            m_current_word = GetWordAtCursor();
                             if (m_current_word != null)
                             {
                                 int to_book_start = m_current_word.Number - 1;
@@ -41302,9 +41393,9 @@ public partial class MainForm : Form, ISubscriber
                                                    to_book_end.ToString() + "  " +
                                                    to_chapter_end.ToString() + "  " +
                                                    to_verse_end.ToString() + "  " +
-                                                   "            " +
+                                                   "                    " +
                                                    m_current_word.Address +
-                                                   "            " +
+                                                   "                    " +
                                                    to_book_start.ToString() + "  " +
                                                    to_chapter_start.ToString() + "  " +
                                                    to_verse_start.ToString();
@@ -41314,65 +41405,51 @@ public partial class MainForm : Form, ISubscriber
                             }
                         }
                         break;
-                    case DistanceMode.Verse:
+                    case HeaderDisplayMode.Verse:
                         {
-                            Verse verse = GetCurrentVerse();
-                            if (verse != null)
+                            if (m_current_verse != null)
                             {
-                                int to_book_start = verse.Number - 1;
-                                int to_chapter_start = verse.NumberInChapter - 1;
+                                int to_book_start = m_current_verse.Number - 1;
+                                int to_chapter_start = m_current_verse.NumberInChapter - 1;
 
-                                int to_book_end = m_client.Book.Verses.Count - verse.Number;
-                                int to_chapter_end = verse.Chapter.Verses.Count - verse.NumberInChapter;
+                                int to_book_end = m_client.Book.Verses.Count - m_current_verse.Number;
+                                int to_chapter_end = m_current_verse.Chapter.Verses.Count - m_current_verse.NumberInChapter;
 
                                 HeaderLabel.Text =
                                                    to_book_end.ToString() + "  " +
                                                    to_chapter_end.ToString() + "  " +
-                                                   "            " +
-                                                   verse.Address +
-                                                   "            " +
+                                                   "                        " +
+                                                   m_current_verse.Address +
+                                                   "                        " +
                                                    to_book_start.ToString() + "  " +
                                                    to_chapter_start.ToString();
 
-                                HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(verse.Number);
+                                HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(m_current_verse.Number);
                                 HeaderLabel.Refresh();
                             }
                         }
                         break;
-                    case DistanceMode.Chapter:
+                    case HeaderDisplayMode.Chapter:
                         {
-                            Chapter chapter = GetCurrentChapter();
-                            if (chapter != null)
+                            if (m_current_chapter != null)
                             {
-                                int to_book_start = chapter.SortedNumber - 1;
+                                int to_book_start = m_current_chapter.SortedNumber - 1;
 
-                                int to_book_end = m_client.Book.Chapters.Count - chapter.SortedNumber;
+                                int to_book_end = m_client.Book.Chapters.Count - m_current_chapter.SortedNumber;
 
                                 HeaderLabel.Text =
                                                    to_book_end.ToString() + "  " +
-                                                   "            " +
-                                                   chapter.SortedNumber +
-                                                   "            " +
+                                                   "                           " +
+                                                   m_current_chapter.SortedNumber +
+                                                   "                           " +
                                                    to_book_start.ToString();
 
-                                HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(chapter.SortedNumber);
+                                HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(m_current_chapter.SortedNumber);
                                 HeaderLabel.Refresh();
                             }
                         }
                         break;
                 }
-
-
-                //Verse verse = GetCurrentVerse();
-                //if (verse != null)
-                //{
-                //    if (verse.Chapter != null)
-                //    {
-                //        HeaderLabel.Text = GetVerseSummary(verse);
-                //        HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(verse.NumberInChapter);
-                //        HeaderLabel.Refresh();
-                //    }
-                //}
             }
         }
     }
@@ -44672,7 +44749,15 @@ public partial class MainForm : Form, ISubscriber
                     DuplicateLettersCheckBox.Visible = false;
 
                     m_find_result_header = "";
+                    m_current_letter = GetLetterAtCursor();
+                    m_current_word = GetWordAtCursor();
+                    m_current_verse = GetCurrentVerse();
+                    m_current_chapter = GetCurrentChapter();
                     UpdateHeaderLabel();
+                    if (m_current_word != null)
+                    {
+                        this.Text = GetCurrentWordDetails(m_current_word);
+                    }
                 }
             }
         }
@@ -48799,10 +48884,10 @@ public partial class MainForm : Form, ISubscriber
     {
         try
         {
-            Verse verse = GetVerseAtCursor();
-            if (verse != null)
+            m_current_verse = GetVerseAtCursor();
+            if (m_current_verse != null)
             {
-                UpdateVersePositions(verse);
+                UpdateVersePositions(m_current_verse);
             }
 
             long value = long.Parse(ValueTextBox.Text);
@@ -49640,7 +49725,6 @@ public partial class MainForm : Form, ISubscriber
     private enum DrawingType { None, LetterValues, WordValues, WordLengths, SearchTerms, AllahWords, WithAllahWords, Primes, AdditivePrimes, NonAdditivePrimes, GeneratePrimeDrawings };
     private DrawingShape m_drawing_shape = DrawingShape.Lines;
     private DrawingType m_current_drawing_type = DrawingType.None;
-    private Letter m_current_letter = null;
     private Bitmap m_bitmap = null;
     private void PictureBox_MouseHover(object sender, EventArgs e)
     {
@@ -51854,22 +51938,24 @@ public partial class MainForm : Form, ISubscriber
 
                     if (ModifierKeys == Keys.Shift)
                     {
-                        switch (m_distance_mode)
+                        switch (m_header_display_mode)
                         {
-                            case DistanceMode.Letter: m_distance_mode = DistanceMode.Chapter; break;
-                            case DistanceMode.Word: m_distance_mode = DistanceMode.Letter; break;
-                            case DistanceMode.Verse: m_distance_mode = DistanceMode.Word; break;
-                            case DistanceMode.Chapter: m_distance_mode = DistanceMode.Verse; break;
+                            case HeaderDisplayMode.Info: m_header_display_mode = HeaderDisplayMode.Chapter; break;
+                            case HeaderDisplayMode.Letter: m_header_display_mode = HeaderDisplayMode.Info; break;
+                            case HeaderDisplayMode.Word: m_header_display_mode = HeaderDisplayMode.Letter; break;
+                            case HeaderDisplayMode.Verse: m_header_display_mode = HeaderDisplayMode.Word; break;
+                            case HeaderDisplayMode.Chapter: m_header_display_mode = HeaderDisplayMode.Verse; break;
                         }
                     }
                     else
                     {
-                        switch (m_distance_mode)
+                        switch (m_header_display_mode)
                         {
-                            case DistanceMode.Letter: m_distance_mode = DistanceMode.Word; break;
-                            case DistanceMode.Word: m_distance_mode = DistanceMode.Verse; break;
-                            case DistanceMode.Verse: m_distance_mode = DistanceMode.Chapter; break;
-                            case DistanceMode.Chapter: m_distance_mode = DistanceMode.Letter; break;
+                            case HeaderDisplayMode.Info: m_header_display_mode = HeaderDisplayMode.Letter; break;
+                            case HeaderDisplayMode.Letter: m_header_display_mode = HeaderDisplayMode.Word; break;
+                            case HeaderDisplayMode.Word: m_header_display_mode = HeaderDisplayMode.Verse; break;
+                            case HeaderDisplayMode.Verse: m_header_display_mode = HeaderDisplayMode.Chapter; break;
+                            case HeaderDisplayMode.Chapter: m_header_display_mode = HeaderDisplayMode.Info; break;
                         }
                     }
                     UpdateHeaderLabel();

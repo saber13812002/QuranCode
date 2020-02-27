@@ -169,7 +169,7 @@ static class Program
             }
             else if (Control.ModifierKeys == Keys.Control)
             {
-                Globals.EDITION = Edition.Lite;
+                Globals.EDITION = Edition.Research;
             }
             else // default
             {
