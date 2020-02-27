@@ -5446,7 +5446,7 @@ partial class MainForm
         this.HeaderLabel.BackColor = System.Drawing.Color.Transparent;
         this.HeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.HeaderLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.HeaderLabel.Location = new System.Drawing.Point(70, -5);
+        this.HeaderLabel.Location = new System.Drawing.Point(70, -4);
         this.HeaderLabel.Name = "HeaderLabel";
         this.HeaderLabel.Size = new System.Drawing.Size(515, 20);
         this.HeaderLabel.TabIndex = 1;

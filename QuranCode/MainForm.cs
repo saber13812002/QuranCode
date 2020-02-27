@@ -6592,7 +6592,7 @@ public partial class MainForm : Form, ISubscriber
         this.HeaderLabel.BackColor = System.Drawing.Color.Transparent;
         this.HeaderLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.HeaderLabel.ForeColor = System.Drawing.SystemColors.WindowText;
-        this.HeaderLabel.Location = new System.Drawing.Point(3, -5);
+        this.HeaderLabel.Location = new System.Drawing.Point(3, -4);
         this.HeaderLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
         this.HeaderLabel.Name = "HeaderLabel";
         this.HeaderLabel.Size = new System.Drawing.Size(677, 20);
@@ -17915,6 +17915,8 @@ public partial class MainForm : Form, ISubscriber
              )
            )
         {
+            m_current_letter = GetLetterAtCursor();
+
             CalculateCurrentValue();
 
             BuildLetterFrequencies();
@@ -18117,6 +18119,7 @@ public partial class MainForm : Form, ISubscriber
             if (ChapterComboBox.Focused) return;
             if (BookmarkTextBox.Focused) return;
             if (FindByFrequencyPhraseTextBox.Focused) return;
+            m_current_letter = GetLetterAtCursor();
 
             if (m_player != null)
             {
@@ -18208,6 +18211,12 @@ public partial class MainForm : Form, ISubscriber
         {
             this.Text = GetCurrentWordDetails(word);
             m_current_word = word;
+        }
+
+        if (ModifierKeys == Keys.Control)
+        {
+            m_current_letter = GetLetterAtPointer(e);
+            UpdateHeaderLabel();
         }
     }
     private void MainTextBox_MouseUp(object sender, MouseEventArgs e)
@@ -19718,7 +19727,7 @@ public partial class MainForm : Form, ISubscriber
         if (m_active_textbox != null)
         {
             int char_index = m_active_textbox.SelectionStart;
-            if (char_index > 0)
+            if (char_index >= 0)
             {
                 return GetWordAtChar(char_index);
             }
@@ -19730,7 +19739,7 @@ public partial class MainForm : Form, ISubscriber
         if (m_active_textbox != null)
         {
             int char_index = m_active_textbox.SelectionStart;
-            if (char_index > 0)
+            if (char_index >= 0)
             {
                 return GetLetterAtChar(char_index);
             }
@@ -19754,7 +19763,7 @@ public partial class MainForm : Form, ISubscriber
         if (m_active_textbox != null)
         {
             int char_index = m_active_textbox.GetCharIndexFromPosition(mouse_location);
-            if (char_index > 0)
+            if (char_index >= 0)
             {
                 return GetVerseAtChar(char_index);
             }
@@ -19766,7 +19775,7 @@ public partial class MainForm : Form, ISubscriber
         if (m_active_textbox != null)
         {
             int char_index = m_active_textbox.GetCharIndexFromPosition(mouse_location);
-            if (char_index > 0)
+            if (char_index >= 0)
             {
                 return GetWordAtChar(char_index);
             }
@@ -19778,7 +19787,7 @@ public partial class MainForm : Form, ISubscriber
         if (m_active_textbox != null)
         {
             int char_index = m_active_textbox.GetCharIndexFromPosition(mouse_location);
-            if (char_index > 0)
+            if (char_index >= 0)
             {
                 return GetLetterAtChar(char_index);
             }
@@ -41214,6 +41223,8 @@ public partial class MainForm : Form, ISubscriber
         }
     }
 
+    private enum DistanceMode { Letter, Word, Verse, Chapter };
+    private DistanceMode m_distance_mode = DistanceMode.Letter;
     private string m_find_result_header = null;
     private void UpdateHeaderLabel()
     {
@@ -41238,39 +41249,151 @@ public partial class MainForm : Form, ISubscriber
             }
             else
             {
-                Verse verse = GetCurrentVerse();
-                if (verse != null)
+                HeaderLabel.Text = "";
+                switch (m_distance_mode)
                 {
-                    if (verse.Chapter != null)
-                    {
-                        HeaderLabel.Text = GetVerseSummary(verse);
-                        HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(verse.NumberInChapter);
-                        HeaderLabel.Refresh();
-                    }
-                }
-            }
+                    case DistanceMode.Letter:
+                        {
+                            m_current_letter = GetLetterAtCursor();
+                            if (m_current_letter != null)
+                            {
+                                int to_book_start = m_current_letter.Number - 1;
+                                int to_chapter_start = m_current_letter.NumberInChapter - 1;
+                                int to_verse_start = m_current_letter.NumberInVerse - 1;
+                                int to_word_start = m_current_letter.NumberInWord - 1;
 
+                                int to_book_end = m_client.Book.LetterCount - m_current_letter.Number;
+                                int to_chapter_end = m_current_letter.Word.Verse.Chapter.LetterCount - m_current_letter.NumberInChapter;
+                                int to_verse_end = m_current_letter.Word.Verse.LetterCount - m_current_letter.NumberInVerse;
+                                int to_word_end = m_current_letter.Word.Letters.Count - m_current_letter.NumberInWord;
+
+                                HeaderLabel.Text =
+                                                   to_book_end.ToString() + "  " +
+                                                   to_chapter_end.ToString() + "  " +
+                                                   to_verse_end.ToString() + "  " +
+                                                   to_word_end.ToString() + "  " +
+                                                   "            " +
+                                                   m_current_letter.Address +
+                                                   "            " +
+                                                   to_book_start.ToString() + "  " +
+                                                   to_chapter_start.ToString() + "  " +
+                                                   to_verse_start.ToString() + "  " +
+                                                   to_word_start.ToString();
+
+                                HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(m_current_letter.Number);
+                                HeaderLabel.Refresh();
+                            }
+                        }
+                        break;
+                    case DistanceMode.Word:
+                        {
+                            m_current_word = GetWordAtCursor();
+                            if (m_current_word != null)
+                            {
+                                int to_book_start = m_current_word.Number - 1;
+                                int to_chapter_start = m_current_word.NumberInChapter - 1;
+                                int to_verse_start = m_current_word.NumberInVerse - 1;
+
+                                int to_book_end = m_client.Book.WordCount - m_current_word.Number;
+                                int to_chapter_end = m_current_word.Verse.Chapter.WordCount - m_current_word.NumberInChapter;
+                                int to_verse_end = m_current_word.Verse.Words.Count - m_current_word.NumberInVerse;
+
+                                HeaderLabel.Text =
+                                                   to_book_end.ToString() + "  " +
+                                                   to_chapter_end.ToString() + "  " +
+                                                   to_verse_end.ToString() + "  " +
+                                                   "            " +
+                                                   m_current_word.Address +
+                                                   "            " +
+                                                   to_book_start.ToString() + "  " +
+                                                   to_chapter_start.ToString() + "  " +
+                                                   to_verse_start.ToString();
+
+                                HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(m_current_word.Number);
+                                HeaderLabel.Refresh();
+                            }
+                        }
+                        break;
+                    case DistanceMode.Verse:
+                        {
+                            Verse verse = GetCurrentVerse();
+                            if (verse != null)
+                            {
+                                int to_book_start = verse.Number - 1;
+                                int to_chapter_start = verse.NumberInChapter - 1;
+
+                                int to_book_end = m_client.Book.Verses.Count - verse.Number;
+                                int to_chapter_end = verse.Chapter.Verses.Count - verse.NumberInChapter;
+
+                                HeaderLabel.Text =
+                                                   to_book_end.ToString() + "  " +
+                                                   to_chapter_end.ToString() + "  " +
+                                                   "            " +
+                                                   verse.Address +
+                                                   "            " +
+                                                   to_book_start.ToString() + "  " +
+                                                   to_chapter_start.ToString();
+
+                                HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(verse.Number);
+                                HeaderLabel.Refresh();
+                            }
+                        }
+                        break;
+                    case DistanceMode.Chapter:
+                        {
+                            Chapter chapter = GetCurrentChapter();
+                            if (chapter != null)
+                            {
+                                int to_book_start = chapter.SortedNumber - 1;
+
+                                int to_book_end = m_client.Book.Chapters.Count - chapter.SortedNumber;
+
+                                HeaderLabel.Text =
+                                                   to_book_end.ToString() + "  " +
+                                                   "            " +
+                                                   chapter.SortedNumber +
+                                                   "            " +
+                                                   to_book_start.ToString();
+
+                                HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(chapter.SortedNumber);
+                                HeaderLabel.Refresh();
+                            }
+                        }
+                        break;
+                }
+
+
+                //Verse verse = GetCurrentVerse();
+                //if (verse != null)
+                //{
+                //    if (verse.Chapter != null)
+                //    {
+                //        HeaderLabel.Text = GetVerseSummary(verse);
+                //        HeaderLabel.ForeColor = Numbers.GetNumberTypeColor(verse.NumberInChapter);
+                //        HeaderLabel.Refresh();
+                //    }
+                //}
+            }
         }
     }
     private string GetVerseSummary(Verse verse)
     {
-        if (verse != null)
-        {
-            //string text = L[l]["Chapter"] + " " + verse.Chapter.SortedNumber + " " + L[l][verse.Chapter.TransliteratedName] + "     "
-            string text = L[l][verse.Chapter.TransliteratedName] + "     "
-                 + L[l]["Verse"] + " " + verse.NumberInChapter //+ "/" + verse.Chapter.Verses.Count + "   "
-                //+ L[l]["Station"] + " " + ((verse.Station != null) ? verse.Station.Number : -1) + "   "
-                //+ L[l]["Part"] + " " + ((verse.Part != null) ? verse.Part.Number : -1) + "   "
-                //+ L[l]["Group"] + " " + ((verse.Group != null) ? verse.Group.Number : -1) + "   "
-                //+ L[l]["Half"] + " " + ((verse.Half != null) ? verse.Half.Number : -1) + "   "
-                //+ L[l]["Quarter"] + " " + ((verse.Quarter != null) ? verse.Quarter.Number : -1) + "   "
-                //+ L[l]["Bowing"] + " " + ((verse.Bowing != null) ? verse.Bowing.Number : -1) + "   "
-                 + "     "
-                 + L[l]["Page"] + " " + ((verse.Page != null) ? verse.Page.Number : -1)
-            ;
-            return text;
-        }
-        return "";
+        if (verse == null) return null;
+
+        //string text = L[l]["Chapter"] + " " + verse.Chapter.SortedNumber + " " + L[l][verse.Chapter.TransliteratedName] + "     "
+        string text = L[l][verse.Chapter.TransliteratedName] + "     "
+             + L[l]["Verse"] + " " + verse.NumberInChapter //+ "/" + verse.Chapter.Verses.Count + "   "
+            //+ L[l]["Station"] + " " + ((verse.Station != null) ? verse.Station.Number : -1) + "   "
+            //+ L[l]["Part"] + " " + ((verse.Part != null) ? verse.Part.Number : -1) + "   "
+            //+ L[l]["Group"] + " " + ((verse.Group != null) ? verse.Group.Number : -1) + "   "
+            //+ L[l]["Half"] + " " + ((verse.Half != null) ? verse.Half.Number : -1) + "   "
+            //+ L[l]["Quarter"] + " " + ((verse.Quarter != null) ? verse.Quarter.Number : -1) + "   "
+            //+ L[l]["Bowing"] + " " + ((verse.Bowing != null) ? verse.Bowing.Number : -1) + "   "
+             + "     "
+             + L[l]["Page"] + " " + ((verse.Page != null) ? verse.Page.Number : -1)
+        ;
+
+        return text;
     }
 
     private RichTextBoxEx m_active_textbox = null;
@@ -51728,6 +51851,28 @@ public partial class MainForm : Form, ISubscriber
                         WordsListBoxLabel.Visible = false;
                         WordsListBox.Visible = false;
                     }
+
+                    if (ModifierKeys == Keys.Shift)
+                    {
+                        switch (m_distance_mode)
+                        {
+                            case DistanceMode.Letter: m_distance_mode = DistanceMode.Chapter; break;
+                            case DistanceMode.Word: m_distance_mode = DistanceMode.Letter; break;
+                            case DistanceMode.Verse: m_distance_mode = DistanceMode.Word; break;
+                            case DistanceMode.Chapter: m_distance_mode = DistanceMode.Verse; break;
+                        }
+                    }
+                    else
+                    {
+                        switch (m_distance_mode)
+                        {
+                            case DistanceMode.Letter: m_distance_mode = DistanceMode.Word; break;
+                            case DistanceMode.Word: m_distance_mode = DistanceMode.Verse; break;
+                            case DistanceMode.Verse: m_distance_mode = DistanceMode.Chapter; break;
+                            case DistanceMode.Chapter: m_distance_mode = DistanceMode.Letter; break;
+                        }
+                    }
+                    UpdateHeaderLabel();
                 }
             }
         }
