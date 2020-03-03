@@ -2675,11 +2675,15 @@ namespace Model
             }
             return result;
         }
-        public Dictionary<string, int> GetWordRoots(List<Verse> verses, string text)
+        public Dictionary<string, int> GetRoots(string text)
         {
-            return GetWordRoots(verses, text, TextLocationInWord.Any);
+            return GetRoots(this.Verses, text, TextLocationInWord.Any);
         }
-        public Dictionary<string, int> GetWordRoots(List<Verse> verses, string text, TextLocationInWord text_location_in_word)
+        public Dictionary<string, int> GetRoots(List<Verse> verses, string text)
+        {
+            return GetRoots(verses, text, TextLocationInWord.Any);
+        }
+        public Dictionary<string, int> GetRoots(List<Verse> verses, string text, TextLocationInWord text_location_in_word)
         {
             Dictionary<string, int> result = new Dictionary<string, int>();
             if (verses != null)
@@ -2794,6 +2798,172 @@ namespace Model
             }
             return result;
         }
+        public string GetBestRoot(string text)
+        {
+            foreach (Verse verse in this.Verses)
+            {
+                foreach (Word word in verse.Words)
+                {
+                    if (text == word.Text)
+                    {
+                        return word.BestRoot;
+                    }
+                }
+            }
+
+            // if not found, try
+            foreach (Verse verse in this.Verses)
+            {
+                foreach (Word word in verse.Words)
+                {
+                    if (text.Simplify36() == word.Text.Simplify36())
+                    {
+                        return word.BestRoot;
+                    }
+                }
+            }
+
+            // if not found, try
+            foreach (Verse verse in this.Verses)
+            {
+                foreach (Word word in verse.Words)
+                {
+                    if (text.Simplify31() == word.Text.Simplify31())
+                    {
+                        return word.BestRoot;
+                    }
+                }
+            }
+
+            // if not found, try
+            foreach (Verse verse in this.Verses)
+            {
+                foreach (Word word in verse.Words)
+                {
+                    if (text.Simplify29() == word.Text.Simplify29())
+                    {
+                        return word.BestRoot;
+                    }
+                }
+            }
+
+            // if not found, try
+            foreach (Verse verse in this.Verses)
+            {
+                foreach (Word word in verse.Words)
+                {
+                    if (text.Simplify28() == word.Text.Simplify28())
+                    {
+                        return word.BestRoot;
+                    }
+                }
+            }
+
+            // if not found, try
+            GetApproximateRoot(text);
+
+            return null;
+        }
+        private string GetApproximateRoot(string text)
+        {
+            if (!String.IsNullOrEmpty(text))
+            {
+                string simple_word_text = text.Simplify29();
+
+                // special case:
+                if (
+                     (simple_word_text == "بسم") ||
+                     (simple_word_text == "باسماء") ||
+                     (simple_word_text == "باسمايهم") ||
+                     (simple_word_text == "اسمه") ||
+                     (simple_word_text == "مسمي") ||
+                     (simple_word_text == "سميتها") ||
+                     (simple_word_text == "اسم") ||
+                     (simple_word_text == "اسماء") ||
+                     (simple_word_text == "سميتموها") ||
+                     (simple_word_text == "اسميه") ||
+                     (simple_word_text == "سموهم") ||
+                     (simple_word_text == "للمتوسمين") ||
+                     (simple_word_text == "سميا") ||
+                     (simple_word_text == "الاسماء") ||
+                     (simple_word_text == "سميكم") ||
+                     (simple_word_text == "الاسم") ||
+                     (simple_word_text == "ليسمون") ||
+                     (simple_word_text == "تسميه") ||
+                     (simple_word_text == "باسم") ||
+                     (simple_word_text == "سنسمه") ||
+                     (simple_word_text == "تسمي")
+                   )
+                {
+                    return "وسم"; // instead of "سمو"
+                }
+
+                // try all roots in case word_text is a root
+                SortedDictionary<string, List<Word>> root_words_dictionary = this.RootWords;
+                if (root_words_dictionary != null)
+                {
+                    foreach (string key in root_words_dictionary.Keys)
+                    {
+                        if (
+                                (key.Length >= 3)
+                                ||
+                                (key.Length == simple_word_text.Length - 1)
+                                ||
+                                (key.Length == simple_word_text.Length)
+                                ||
+                                (key.Length == simple_word_text.Length + 1)
+                           )
+                        {
+                            List<Word> root_words = root_words_dictionary[key];
+                            foreach (Word root_word in root_words)
+                            {
+                                int verse_index = root_word.Verse.Number - 1;
+                                if ((verse_index >= 0) && (verse_index < this.verses.Count))
+                                {
+                                    Verse verse = this.verses[verse_index];
+                                    int word_index = root_word.NumberInVerse - 1;
+                                    if ((word_index >= 0) && (word_index < verse.Words.Count))
+                                    {
+                                        Word verse_word = verse.Words[word_index];
+                                        if ((this.text_mode == "Original") && (!with_diacritics))
+                                        {
+                                            if (verse_word.Text.Simplify29() == simple_word_text)
+                                            {
+                                                return key;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (verse_word.Text == simple_word_text)
+                                            {
+                                                return key;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // get most similar root to word_text
+                string best_root = null;
+                double max_similirity = double.MinValue;
+                Dictionary<string, int> roots = GetRoots(text);
+                foreach (string root in roots.Keys)
+                {
+                    double similirity = root.SimilarityTo(simple_word_text);
+                    if (similirity > max_similirity)
+                    {
+                        max_similirity = similirity;
+                        best_root = root;
+                    }
+                }
+                return best_root;
+            }
+            return null;
+        }
+        // get related words and verses
         public List<Word> GetRelatedWords(Word word)
         {
             List<Word> result = new List<Word>();

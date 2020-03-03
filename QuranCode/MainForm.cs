@@ -16328,6 +16328,10 @@ public partial class MainForm : Form, ISubscriber
                     DoFindRelatedWords(m_current_word);
                 }
             }
+            else
+            {
+                DoFindRelatedWords(text);
+            }
         }
     }
     private void DoFindRelatedWords(Word word)
@@ -16340,6 +16344,47 @@ public partial class MainForm : Form, ISubscriber
             if (m_client != null)
             {
                 FindByRoot(word);
+            }
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
+    }
+    private void DoFindRelatedWords(string text)
+    {
+        if (m_emlaaei_text) return;
+
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            if (m_client != null)
+            {
+                if (m_client.Book != null)
+                {
+                    char[] separators = { ' ', '\n' };
+                    string[] words = text.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+
+                    string roots = "";
+                    foreach (string word in words)
+                    {
+                        roots += m_client.Book.GetBestRoot(word) + " ";
+                    }
+                    if (roots.Length > 0)
+                    {
+                        roots = roots.Remove(roots.Length - 1, 1);
+                    }
+
+                    FindByRoot(roots);
+                }
             }
         }
         catch (Exception ex)
@@ -34813,17 +34858,17 @@ public partial class MainForm : Form, ISubscriber
                         {
                             case SearchScope.Book:
                                 {
-                                    m_word_frequency_dictionary = m_client.Book.GetWordRoots(m_client.Book.Verses, text, m_text_location_in_word);
+                                    m_word_frequency_dictionary = m_client.Book.GetRoots(m_client.Book.Verses, text, m_text_location_in_word);
                                 }
                                 break;
                             case SearchScope.Selection:
                                 {
-                                    m_word_frequency_dictionary = m_client.Book.GetWordRoots(m_client.Selection.Verses, text, m_text_location_in_word);
+                                    m_word_frequency_dictionary = m_client.Book.GetRoots(m_client.Selection.Verses, text, m_text_location_in_word);
                                 }
                                 break;
                             case SearchScope.Result:
                                 {
-                                    m_word_frequency_dictionary = m_client.Book.GetWordRoots(m_client.FoundVerses, text, m_text_location_in_word);
+                                    m_word_frequency_dictionary = m_client.Book.GetRoots(m_client.FoundVerses, text, m_text_location_in_word);
                                 }
                                 break;
                         }
@@ -36301,6 +36346,8 @@ public partial class MainForm : Form, ISubscriber
 
                 FindByTextTextBox.TextChanged -= FindByTextTextBox_TextChanged;
                 FindByTextTextBox.Text = root;
+                FindByTextRootSearchTypeLabel_Click(null, null);
+                FindByTextRootSearchTypeLabel.Refresh();
                 FindByTextTextBox.TextChanged += FindByTextTextBox_TextChanged;
 
                 m_client.FindPhrases(m_text_search_block_size, root, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
@@ -36795,6 +36842,11 @@ public partial class MainForm : Form, ISubscriber
         FindByTextAtVerseEndRadioButton.Enabled = (m_text_search_type == TextSearchType.Exact);
         FindByTextAtVerseAnyRadioButton.Enabled = (m_text_search_type == TextSearchType.Exact);
 
+        FindByTextAtWordStartRadioButton.Enabled = (m_text_search_type == TextSearchType.Exact);
+        FindByTextAtWordMiddleRadioButton.Enabled = (m_text_search_type == TextSearchType.Exact);
+        FindByTextAtWordEndRadioButton.Enabled = (m_text_search_type == TextSearchType.Exact);
+        FindByTextAtWordAnyRadioButton.Enabled = (m_text_search_type == TextSearchType.Exact);
+
         FindByTextAllWordsRadioButton.Enabled = (m_text_search_type == TextSearchType.Proximity);
         FindByTextAnyWordRadioButton.Enabled = (m_text_search_type == TextSearchType.Proximity)
                                                 && (!FindByTextTextBox.Text.Contains("-"))
@@ -36803,11 +36855,6 @@ public partial class MainForm : Form, ISubscriber
         FindByTextMinusLabel.Visible = ((m_text_search_type == TextSearchType.Proximity) || (m_text_search_type == TextSearchType.Root));
 
         FindByTextWordnessCheckBox.Enabled = ((m_text_search_type == TextSearchType.Exact) || (m_text_search_type == TextSearchType.Proximity));
-
-        FindByTextAtWordStartRadioButton.Enabled = ((m_text_search_type == TextSearchType.Exact) || (m_text_search_type == TextSearchType.Root));
-        FindByTextAtWordMiddleRadioButton.Enabled = ((m_text_search_type == TextSearchType.Exact) || (m_text_search_type == TextSearchType.Root));
-        FindByTextAtWordEndRadioButton.Enabled = ((m_text_search_type == TextSearchType.Exact) || (m_text_search_type == TextSearchType.Root));
-        FindByTextAtWordAnyRadioButton.Enabled = ((m_text_search_type == TextSearchType.Exact) || (m_text_search_type == TextSearchType.Root));
 
         FindByTextMultiplicityCheckBox.Enabled = ((m_text_search_type == TextSearchType.Exact) || (m_text_search_type == TextSearchType.Root));
         FindByTextMultiplicityComparisonOperatorLabel.Enabled = (FindByTextMultiplicityCheckBox.Enabled) && (FindByTextMultiplicityCheckBox.Checked);

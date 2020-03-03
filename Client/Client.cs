@@ -1786,7 +1786,7 @@ public class Client : IPublisher, ISubscriber
         List<Verse> source = Server.GetSourceVerses(m_search_scope, m_selection, m_found_verses, TextLocationInChapter.Any);
         if (Book != null)
         {
-            result = Book.GetWordRoots(source, text, text_location_in_word);
+            result = Book.GetRoots(source, text, text_location_in_word);
         }
         return result;
     }
