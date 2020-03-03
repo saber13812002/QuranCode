@@ -26986,18 +26986,13 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (word != null)
                 {
-                    RelatedWordsTextBox.Text = GetRelatedWordsInformation(m_current_word) + "\r\n" + GetRelatedVersesInformation(m_current_word);
-                    RelatedWordsTextBox.Refresh();
-
-                    m_info_word = word;
+                    RelatedWordsTextBox.Text = GetRelatedWordsInformation(m_current_word) + "\r\n" + GetRelatedVersesInformation(word);
                 }
                 else
                 {
                     RelatedWordsTextBox.Text = L[l]["Click a word to display words from the same root."];
-                    RelatedWordsTextBox.Refresh();
-
-                    m_info_word = null;
                 }
+                RelatedWordsTextBox.Refresh();
             }
         }
     }
@@ -27018,26 +27013,13 @@ public partial class MainForm : Form, ISubscriber
             {
                 if (word != null)
                 {
-                    string word_grammar = GetGrammarInformation(m_current_word);
-                    if (!String.IsNullOrEmpty(word_grammar))
-                    {
-                        GrammarTextBox.Text = word_grammar;
-                    }
-                    else
-                    {
-                        GrammarTextBox.Text = L[l]["Click a word to display its grammar information in Arabic and English"];
-                    }
-                    GrammarTextBox.Refresh();
-
-                    m_info_word = word;
+                    GrammarTextBox.Text = GetGrammarInformation(word);
                 }
                 else
                 {
-                    GrammarTextBox.Text = L[l]["Click a word to display its grammar information in Arabic and English"];
-                    GrammarTextBox.Refresh();
-
-                    m_info_word = null;
+                    GrammarTextBox.Text = L[l]["Click a word to display its grammar information in Arabic and English."];
                 }
+                GrammarTextBox.Refresh();
             }
         }
     }
@@ -36189,15 +36171,23 @@ public partial class MainForm : Form, ISubscriber
                             m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + block_count + " " + ((block_count == 1) ? L[l][block_name] : (L[l][block_name + "s"])) + " " + L[l]["with"] + " " + multiplicity_text + " " + text + " C_" + m_text_location_in_chapter.ToString() + " V_" + m_text_location_in_verse.ToString() + " W_" + m_text_location_in_word.ToString() + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
                         }
                         DisplayFoundVerses(true);
-
-                        //SearchResultTextBox.Focus();
-                        //SearchResultTextBox.Refresh();
-
-                        WordsListBoxLabel.Visible = false;
-                        WordsListBox.Visible = false;
+                    }
+                    else
+                    {
+                        DisplayFoundVerses(false);
                     }
                 }
+                else
+                {
+                    DisplayFoundVerses(false);
+                }
             }
+
+            //SearchResultTextBox.Focus();
+            //SearchResultTextBox.Refresh();
+
+            WordsListBoxLabel.Visible = false;
+            WordsListBox.Visible = false;
         }
     }
     private void FindByProximity()
@@ -36255,15 +36245,23 @@ public partial class MainForm : Form, ISubscriber
                         int block_count = ((m_multiplicity_comparison_operator == ComparisonOperator.Equal) && (m_text_search_block_size != TextSearchBlockSize.Verse)) ? phrase_count / Math.Abs(m_multiplicity) : m_client.FoundVerses.Count;
                         m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + block_count + " " + ((block_count == 1) ? L[l][block_name] : (L[l][block_name + "s"])) + " " + L[l]["with"] + " " + text_proximity_type.ToString() + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
                         DisplayFoundVerses(true);
-
-                        //SearchResultTextBox.Focus();
-                        //SearchResultTextBox.Refresh();
-
-                        WordsListBoxLabel.Visible = false;
-                        WordsListBox.Visible = false;
+                    }
+                    else
+                    {
+                        DisplayFoundVerses(false);
                     }
                 }
+                else
+                {
+                    DisplayFoundVerses(false);
+                }
             }
+
+            //SearchResultTextBox.Focus();
+            //SearchResultTextBox.Refresh();
+
+            WordsListBoxLabel.Visible = false;
+            WordsListBox.Visible = false;
         }
     }
     private void FindByRoot()
@@ -36347,7 +36345,6 @@ public partial class MainForm : Form, ISubscriber
                 FindByTextTextBox.TextChanged -= FindByTextTextBox_TextChanged;
                 FindByTextTextBox.Text = root;
                 FindByTextRootSearchTypeLabel_Click(null, null);
-                FindByTextRootSearchTypeLabel.Refresh();
                 FindByTextTextBox.TextChanged += FindByTextTextBox_TextChanged;
 
                 m_client.FindPhrases(m_text_search_block_size, root, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
@@ -36392,11 +36389,22 @@ public partial class MainForm : Form, ISubscriber
                         m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + block_count + " " + ((block_count == 1) ? L[l][block_name] : (L[l][block_name + "s"])) + " " + L[l]["with"] + " " + multiplicity_text + " " + L[l]["root"] + " " + root + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
                     }
                     DisplayFoundVerses(true);
-
-                    //SearchResultTextBox.Focus();
-                    //SearchResultTextBox.Refresh();
+                }
+                else
+                {
+                    DisplayFoundVerses(false);
                 }
             }
+            else
+            {
+                DisplayFoundVerses(false);
+            }
+
+            //SearchResultTextBox.Focus();
+            //SearchResultTextBox.Refresh();
+
+            WordsListBoxLabel.Visible = false;
+            WordsListBox.Visible = false;
         }
     }
     private void FindByTextKeyboardLabel_Click(object sender, EventArgs e)
