@@ -3586,7 +3586,7 @@ public class Client : IPublisher, ISubscriber
     /// <param name="phrase"></param>
     /// <param name="frequency_search_type"></param>
     /// <returns>Result is stored in LetterStatistics.</returns>
-    public void BuildLetterStatistics(string text, bool? m_count_diacritics)
+    public void BuildLetterStatistics(string text, bool? include_diacritics)
     {
         if (String.IsNullOrEmpty(text)) return;
 
@@ -3594,9 +3594,9 @@ public class Client : IPublisher, ISubscriber
         {
             if (m_letter_statistics != null)
             {
-                if (m_count_diacritics == true) { /* do nothing */ }
-                else if (m_count_diacritics == null) { text = text.GetDiacritics(); }
-                else if (m_count_diacritics == false) { text = text.SimplifyTo(NumerologySystem.TextMode); }
+                if (include_diacritics == true) { /* do nothing */ }
+                else if (include_diacritics == null) { text = text.GetDiacritics(); }
+                else if (include_diacritics == false) { text = text.SimplifyTo(NumerologySystem.TextMode); }
 
                 // count Hamza as an Elf
                 if (NumerologySystem.LetterValue.EndsWith("0")) text = text.Replace("ء", "ا");
@@ -3837,7 +3837,7 @@ public class Client : IPublisher, ISubscriber
     /// <param name="phrase"></param>
     /// <param name="frequency_search_type"></param>
     /// <returns>Letter frequency sum. Result is stored in LetterStatistics.</returns>
-    public void BuildLetterStatistics(string text, string phrase, FrequencySearchType frequency_search_type, bool? m_count_diacritics)
+    public void BuildLetterStatistics(string text, string phrase, FrequencySearchType frequency_search_type, bool? include_diacritics)
     {
         if (String.IsNullOrEmpty(text)) return;
         if (String.IsNullOrEmpty(phrase)) return;
@@ -3846,9 +3846,9 @@ public class Client : IPublisher, ISubscriber
         {
             if (m_letter_statistics != null)
             {
-                if (m_count_diacritics == true) { /* do nothing */ }
-                else if (m_count_diacritics == null) { text = text.GetDiacritics(); }
-                else if (m_count_diacritics == false) { text = text.SimplifyTo(NumerologySystem.TextMode); }
+                if (include_diacritics == true) { /* do nothing */ }
+                else if (include_diacritics == null) { text = text.GetDiacritics(); }
+                else if (include_diacritics == false) { text = text.SimplifyTo(NumerologySystem.TextMode); }
 
                 text = text.Replace("\r", "");
                 text = text.Replace("\n", "");
@@ -3878,9 +3878,9 @@ public class Client : IPublisher, ISubscriber
                     text = text.Replace(character.ToString(), "");
                 }
 
-                if (m_count_diacritics == true) { /* do nothing */ }
-                else if (m_count_diacritics == null) { phrase = phrase.GetDiacritics(); }
-                else if (m_count_diacritics == false) { phrase = phrase.SimplifyTo(NumerologySystem.TextMode); }
+                if (include_diacritics == true) { /* do nothing */ }
+                else if (include_diacritics == null) { phrase = phrase.GetDiacritics(); }
+                else if (include_diacritics == false) { phrase = phrase.SimplifyTo(NumerologySystem.TextMode); }
 
                 phrase = phrase.Replace("\r", "");
                 phrase = phrase.Replace("\n", "");
@@ -3891,28 +3891,28 @@ public class Client : IPublisher, ISubscriber
                 phrase = phrase.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
                 foreach (char character in Constants.INDIAN_DIGITS)
                 {
-                    text = text.Replace(character.ToString(), "");
+                    phrase = phrase.Replace(character.ToString(), "");
                 }
                 foreach (char character in Constants.ARABIC_DIGITS)
                 {
-                    text = text.Replace(character.ToString(), "");
+                    phrase = phrase.Replace(character.ToString(), "");
                 }
                 foreach (char character in Constants.SYMBOLS)
                 {
-                    text = text.Replace(character.ToString(), "");
+                    phrase = phrase.Replace(character.ToString(), "");
                 }
                 foreach (char character in Constants.STOPMARKS)
                 {
-                    text = text.Replace(character.ToString(), "");
+                    phrase = phrase.Replace(character.ToString(), "");
                 }
                 foreach (char character in Constants.QURANMARKS)
                 {
-                    text = text.Replace(character.ToString(), "");
+                    phrase = phrase.Replace(character.ToString(), "");
                 }
 
                 if (frequency_search_type == FrequencySearchType.UniqueLetters)
                 {
-                    phrase = phrase.SimplifyTo(NumerologySystem.TextMode).RemoveDuplicates();
+                    phrase = phrase.RemoveDuplicates();
                 }
 
                 m_letter_statistics.Clear();
@@ -4009,6 +4009,228 @@ public class Client : IPublisher, ISubscriber
             // show file content after save
             FileHelper.DisplayFile(filename);
         }
+    }
+
+    /// <summary>
+    /// returns true if source contains target letters (optionally with the same frequency), else false. 
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="phrase"></param>
+    /// <param name="frequency_matching_type"></param>
+    /// <param name="same_frequency"></param>
+    /// <returns></returns>
+    public bool ContainsLetters(string text, string phrase, FrequencySearchType frequency_search_type, FrequencyMatchingType frequency_matching_type, bool same_frequency, bool? include_diacritics)
+    {
+        if (String.IsNullOrEmpty(text)) return false;
+        if (String.IsNullOrEmpty(phrase)) return true;
+
+        if (include_diacritics == true) { /* do nothing */ }
+        else if (include_diacritics == null) { text = text.GetDiacritics(); }
+        else if (include_diacritics == false) { text = text.SimplifyTo(NumerologySystem.TextMode); }
+
+        text = text.Replace("\r", "");
+        text = text.Replace("\n", "");
+        text = text.Replace("\t", "");
+        text = text.Replace("_", "");
+        text = text.Replace(" ", "");
+        text = text.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+        text = text.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
+        foreach (char character in Constants.INDIAN_DIGITS)
+        {
+            text = text.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.ARABIC_DIGITS)
+        {
+            text = text.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.SYMBOLS)
+        {
+            text = text.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.STOPMARKS)
+        {
+            text = text.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.QURANMARKS)
+        {
+            text = text.Replace(character.ToString(), "");
+        }
+
+        if (include_diacritics == true) { /* do nothing */ }
+        else if (include_diacritics == null) { phrase = phrase.GetDiacritics(); }
+        else if (include_diacritics == false) { phrase = phrase.SimplifyTo(NumerologySystem.TextMode); }
+
+        phrase = phrase.Replace("\r", "");
+        phrase = phrase.Replace("\n", "");
+        phrase = phrase.Replace("\t", "");
+        phrase = phrase.Replace("_", "");
+        phrase = phrase.Replace(" ", "");
+        phrase = phrase.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+        phrase = phrase.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
+        foreach (char character in Constants.INDIAN_DIGITS)
+        {
+            phrase = phrase.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.ARABIC_DIGITS)
+        {
+            phrase = phrase.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.SYMBOLS)
+        {
+            phrase = phrase.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.STOPMARKS)
+        {
+            phrase = phrase.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.QURANMARKS)
+        {
+            phrase = phrase.Replace(character.ToString(), "");
+        }
+
+        if (frequency_search_type == FrequencySearchType.UniqueLetters)
+        {
+            phrase = phrase.RemoveDuplicates();
+        }
+
+        Dictionary<char, int> source_letter_statistics = new Dictionary<char, int>();
+        if (source_letter_statistics != null)
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (source_letter_statistics.ContainsKey(text[i]))
+                {
+                    source_letter_statistics[text[i]]++;
+                }
+                else
+                {
+                    source_letter_statistics.Add(text[i], 1);
+                }
+            }
+        }
+
+        Dictionary<char, int> target_letter_statistics = new Dictionary<char, int>();
+        if (target_letter_statistics != null)
+        {
+            for (int i = 0; i < phrase.Length; i++)
+            {
+                if (target_letter_statistics.ContainsKey(phrase[i]))
+                {
+                    target_letter_statistics[phrase[i]]++;
+                }
+                else
+                {
+                    target_letter_statistics.Add(phrase[i], 1);
+                }
+            }
+        }
+
+        if ((source_letter_statistics != null) && (target_letter_statistics != null))
+        {
+            switch (frequency_matching_type)
+            {
+                case FrequencyMatchingType.AllTargetLetters:
+                    {
+                        for (int i = 0; i < phrase.Length; i++)
+                        {
+                            if (!source_letter_statistics.ContainsKey(phrase[i]))
+                            {
+                                return false;
+                            }
+
+                            if (same_frequency)
+                            {
+                                if (source_letter_statistics[phrase[i]] != source_letter_statistics[phrase[i]])
+                                {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case FrequencyMatchingType.AnyTargetLetter:
+                    {
+                        int count = 0;
+                        for (int i = 0; i < phrase.Length; i++)
+                        {
+                            if (source_letter_statistics.ContainsKey(phrase[i]))
+                            {
+                                if (same_frequency)
+                                {
+                                    if (source_letter_statistics[phrase[i]] == source_letter_statistics[phrase[i]])
+                                    {
+                                        count++;
+                                    }
+                                }
+                                else
+                                {
+                                    count++;
+                                }
+                            }
+                        }
+                        if (count == 0) return false;
+                    }
+                    break;
+                case FrequencyMatchingType.OnlyTargetLetters:
+                    {
+                        int count = 0;
+                        for (int i = 0; i < phrase.Length; i++)
+                        {
+                            if (source_letter_statistics.ContainsKey(phrase[i]))
+                            {
+                                if (same_frequency)
+                                {
+                                    if (source_letter_statistics[phrase[i]] == source_letter_statistics[phrase[i]])
+                                    {
+                                        count++;
+                                    }
+                                }
+                                else
+                                {
+                                    count++;
+                                }
+                            }
+                        }
+                        if (count != source_letter_statistics.Count) return false;
+                    }
+                    break;
+                case FrequencyMatchingType.NoneOfTargetLetters:
+                    {
+                        int count = 0;
+                        for (int i = 0; i < phrase.Length; i++)
+                        {
+                            if (source_letter_statistics.ContainsKey(phrase[i]))
+                            {
+                                if (same_frequency)
+                                {
+                                    if (source_letter_statistics[phrase[i]] == source_letter_statistics[phrase[i]])
+                                    {
+                                        count++;
+                                    }
+                                }
+                                else
+                                {
+                                    count++;
+                                }
+                            }
+                        }
+                        if (count > 0) return false;
+                    }
+                    break;
+                default:
+                    {
+                        for (int i = 0; i < phrase.Length; i++)
+                        {
+                            if (!source_letter_statistics.ContainsKey(phrase[i]))
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                    break;
+            }
+        }
+        return true; // success
     }
 
     private StringBuilder m_word_symmetry_str = null;

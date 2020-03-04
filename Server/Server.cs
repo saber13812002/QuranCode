@@ -20451,23 +20451,23 @@ public class Server : IPublisher
                 phrase = phrase.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
                 foreach (char character in Constants.INDIAN_DIGITS)
                 {
-                    text = text.Replace(character.ToString(), "");
+                    phrase = phrase.Replace(character.ToString(), "");
                 }
                 foreach (char character in Constants.ARABIC_DIGITS)
                 {
-                    text = text.Replace(character.ToString(), "");
+                    phrase = phrase.Replace(character.ToString(), "");
                 }
                 foreach (char character in Constants.SYMBOLS)
                 {
-                    text = text.Replace(character.ToString(), "");
+                    phrase = phrase.Replace(character.ToString(), "");
                 }
                 foreach (char character in Constants.STOPMARKS)
                 {
-                    text = text.Replace(character.ToString(), "");
+                    phrase = phrase.Replace(character.ToString(), "");
                 }
                 foreach (char character in Constants.QURANMARKS)
                 {
-                    text = text.Replace(character.ToString(), "");
+                    phrase = phrase.Replace(character.ToString(), "");
                 }
 
                 if (frequency_search_type == FrequencySearchType.UniqueLetters)

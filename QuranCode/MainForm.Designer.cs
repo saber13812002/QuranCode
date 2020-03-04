@@ -830,9 +830,9 @@ partial class MainForm
             this.ShowToolTipsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ShowToolTipsCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ShowToolTipsCheckBox.ForeColor = System.Drawing.Color.Navy;
-            this.ShowToolTipsCheckBox.Location = new System.Drawing.Point(1098, 10);
+            this.ShowToolTipsCheckBox.Location = new System.Drawing.Point(1100, 12);
             this.ShowToolTipsCheckBox.Name = "ShowToolTipsCheckBox";
-            this.ShowToolTipsCheckBox.Size = new System.Drawing.Size(14, 14);
+            this.ShowToolTipsCheckBox.Size = new System.Drawing.Size(10, 10);
             this.ShowToolTipsCheckBox.TabIndex = 114;
             this.ToolTip.SetToolTip(this.ShowToolTipsCheckBox, "Show tooltips");
             this.ShowToolTipsCheckBox.UseVisualStyleBackColor = false;
@@ -1674,6 +1674,7 @@ partial class MainForm
             this.FindByFrequencySumLabel.Size = new System.Drawing.Size(173, 21);
             this.FindByFrequencySumLabel.TabIndex = 0;
             this.FindByFrequencySumLabel.Text = "Sum";
+            this.FindByFrequencySumLabel.DoubleClick += new System.EventHandler(this.FindByFrequencySumLabel_DoubleClick);
             this.FindByFrequencySumLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
             // 
             // FindByTextAllWordsRadioButton
@@ -5485,7 +5486,7 @@ partial class MainForm
             this.ScriptOutputGroupBox.Location = new System.Drawing.Point(0, 1);
             this.ScriptOutputGroupBox.Name = "ScriptOutputGroupBox";
             this.ScriptOutputGroupBox.Padding = new System.Windows.Forms.Padding(10, 5, 10, 10);
-            this.ScriptOutputGroupBox.Size = new System.Drawing.Size(651, 193);
+            this.ScriptOutputGroupBox.Size = new System.Drawing.Size(651, 194);
             this.ScriptOutputGroupBox.TabIndex = 103;
             this.ScriptOutputGroupBox.TabStop = false;
             this.ScriptOutputGroupBox.Text = " Output ";
@@ -5501,7 +5502,7 @@ partial class MainForm
             this.ScriptOutputTextBox.Name = "ScriptOutputTextBox";
             this.ScriptOutputTextBox.ReadOnly = true;
             this.ScriptOutputTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.ScriptOutputTextBox.Size = new System.Drawing.Size(631, 165);
+            this.ScriptOutputTextBox.Size = new System.Drawing.Size(631, 166);
             this.ScriptOutputTextBox.TabIndex = 0;
             this.ScriptOutputTextBox.WordWrap = false;
             this.ScriptOutputTextBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.FixMicrosoft);
@@ -5727,7 +5728,7 @@ partial class MainForm
             this.AllTranslatorsCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.AllTranslatorsCheckBox.AutoSize = true;
             this.AllTranslatorsCheckBox.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.AllTranslatorsCheckBox.Location = new System.Drawing.Point(190, 148);
+            this.AllTranslatorsCheckBox.Location = new System.Drawing.Point(191, 148);
             this.AllTranslatorsCheckBox.Name = "AllTranslatorsCheckBox";
             this.AllTranslatorsCheckBox.Size = new System.Drawing.Size(15, 14);
             this.AllTranslatorsCheckBox.TabIndex = 13;
@@ -5742,7 +5743,7 @@ partial class MainForm
             this.TranslatorsComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.TranslatorsComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TranslatorsComboBox.FormattingEnabled = true;
-            this.TranslatorsComboBox.Location = new System.Drawing.Point(5, 145);
+            this.TranslatorsComboBox.Location = new System.Drawing.Point(6, 145);
             this.TranslatorsComboBox.Name = "TranslatorsComboBox";
             this.TranslatorsComboBox.Size = new System.Drawing.Size(182, 20);
             this.TranslatorsComboBox.TabIndex = 12;
@@ -5762,7 +5763,7 @@ partial class MainForm
             this.TranslationsTextBox.Name = "TranslationsTextBox";
             this.TranslationsTextBox.ReadOnly = true;
             this.TranslationsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TranslationsTextBox.Size = new System.Drawing.Size(210, 165);
+            this.TranslationsTextBox.Size = new System.Drawing.Size(211, 165);
             this.TranslationsTextBox.TabIndex = 11;
             this.TranslationsTextBox.WordWrap = false;
             this.TranslationsTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyDown);
@@ -8890,7 +8891,6 @@ partial class MainForm
             this.UserTextTextBox.Location = new System.Drawing.Point(31, 0);
             this.UserTextTextBox.MaxLength = 99999999;
             this.UserTextTextBox.Multiline = true;
-            this.UserTextTextBox.WordWrap = true;
             this.UserTextTextBox.Name = "UserTextTextBox";
             this.UserTextTextBox.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.UserTextTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;

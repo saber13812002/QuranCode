@@ -392,9 +392,9 @@ public partial class MainForm : Form, ISubscriber
                         ToolTip.SetToolTip(LetterFrequencyDistanceSumSumLabel, L[l]["Sum of letter distance sums"]);
                     }
 
-                    if (m_count_diacritics == true) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["with diacritics"]); }
-                    else if (m_count_diacritics == null) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["diacritics only"]); }
-                    else if (m_count_diacritics == false) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["no diacritics"]); }
+                    if (m_include_diacritics == true) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["with diacritics"]); }
+                    else if (m_include_diacritics == null) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["diacritics only"]); }
+                    else if (m_include_diacritics == false) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["no diacritics"]); }
 
                     int pos = ValueLabel.Text.IndexOf(" ");
                     string text = ValueLabel.Text.Substring(pos + 1).Trim();
@@ -3939,7 +3939,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindBySimilarityPercentageTrackBar.TabIndex = 79;
         this.FindBySimilarityPercentageTrackBar.TickFrequency = 10;
         this.FindBySimilarityPercentageTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
-        this.FindBySimilarityPercentageTrackBar.Value = 73;
+        this.FindBySimilarityPercentageTrackBar.Value = 67;
         this.FindBySimilarityPercentageTrackBar.Scroll += new System.EventHandler(this.FindBySimilarityPercentageTrackBar_ValueChanged);
         this.FindBySimilarityPercentageTrackBar.ValueChanged += new System.EventHandler(this.FindBySimilarityPercentageTrackBar_ValueChanged);
         this.FindBySimilarityPercentageTrackBar.Enter += new System.EventHandler(this.FindBySimilarityControls_Enter);
@@ -36324,7 +36324,26 @@ public partial class MainForm : Form, ISubscriber
             string root = word.BestRoot;
             if (!String.IsNullOrEmpty(root))
             {
-                FindByRoot(root);
+                this.Cursor = Cursors.WaitCursor;
+                try
+                {
+                    if (m_client != null)
+                    {
+                        FindByRoot(root);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    while (ex != null)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName);
+                        ex = ex.InnerException;
+                    }
+                }
+                finally
+                {
+                    this.Cursor = Cursors.Default;
+                }
             }
         }
     }
@@ -36996,190 +37015,6 @@ public partial class MainForm : Form, ISubscriber
                     WordsListBox.Visible = false;
                 }
             }
-        }
-    }
-    ///////////////////////////////////////////////////////////////////////////////
-    #endregion
-    #region Search By Similarity
-    ///////////////////////////////////////////////////////////////////////////////
-    private SimilaritySearchSource m_similarity_search_source = SimilaritySearchSource.CurrentVerse;
-    private void FindBySimilarityCurrentVerseTypeLabel_Click(object sender, EventArgs e)
-    {
-        m_similarity_search_source = SimilaritySearchSource.CurrentVerse;
-        FindBySimilarityPercentageTrackBar.Value = 73;
-        FindBySimilarityControls_Enter(null, null);
-    }
-    private void FindBySimilarityAllVersesTypeLabel_Click(object sender, EventArgs e)
-    {
-        m_similarity_search_source = SimilaritySearchSource.AllVerses;
-        FindBySimilarityPercentageTrackBar.Value = 100;
-        FindBySimilarityControls_Enter(null, null);
-    }
-    private void FindBySimilarityRadioButton_CheckedChanged(object sender, EventArgs e)
-    {
-        RadioButton radio_button = (sender as RadioButton);
-        if ((radio_button != null) && (radio_button.Checked))
-        {
-            //if (m_similarity_search_source == SimilaritySearchSource.CurrentVerse)
-            //{
-            //    FindBySimilarityButton_Click(null, null);
-            //}
-        }
-    }
-    private void FindBySimilarityPercentageTrackBar_ValueChanged(object sender, EventArgs e)
-    {
-        if (sender is TrackBar)
-        {
-            FindBySimilarityPercentageLabel.Text = FindBySimilarityPercentageTrackBar.Value + "%";
-            if (m_similarity_search_source == SimilaritySearchSource.CurrentVerse)
-            {
-                FindBySimilarity();
-            }
-        }
-    }
-    private void FindBySimilarityControls_Enter(object sender, EventArgs e)
-    {
-        this.AcceptButton = FindBySimilarityButton;
-
-        FindByTextButton.Enabled = false;
-        FindBySimilarityButton.Enabled = true;
-        FindByNumbersButton.Enabled = false;
-        FindByFrequencyButton.Enabled = false;
-
-        ToolTip.SetToolTip(InspectChaptersLabel, L[l]["Inspect chapters"]);
-        WordsListBoxLabel.Visible = false;
-        WordsListBox.Visible = false;
-
-        ResetFindByTextSearchBlockSizeLabels();
-        ResetFindByTextSearchTypeLabels();
-        ResetFindBySimilarityResultTypeLabels();
-        ResetFindByNumbersResultTypeLabels();
-        ResetFindByFrequencyResultTypeLabels();
-
-        switch (m_similarity_search_source)
-        {
-            case SimilaritySearchSource.CurrentVerse:
-                {
-                    FindBySimilarityCurrentVerseTypeLabel.BackColor = Color.SteelBlue;
-                    FindBySimilarityCurrentVerseTypeLabel.BorderStyle = BorderStyle.Fixed3D;
-                }
-                break;
-            case SimilaritySearchSource.AllVerses:
-                {
-                    FindBySimilarityAllVersesTypeLabel.BackColor = Color.SteelBlue;
-                    FindBySimilarityAllVersesTypeLabel.BorderStyle = BorderStyle.Fixed3D;
-                }
-                break;
-        }
-    }
-    private void ResetFindBySimilarityResultTypeLabels()
-    {
-        FindBySimilarityCurrentVerseTypeLabel.BackColor = Color.DarkGray;
-        FindBySimilarityCurrentVerseTypeLabel.BorderStyle = BorderStyle.None;
-        FindBySimilarityAllVersesTypeLabel.BackColor = Color.DarkGray;
-        FindBySimilarityAllVersesTypeLabel.BorderStyle = BorderStyle.None;
-    }
-    private void FindBySimilarityButton_Click(object sender, EventArgs e)
-    {
-        this.Cursor = Cursors.WaitCursor;
-        try
-        {
-            FindBySimilarity();
-        }
-        catch (Exception ex)
-        {
-            while (ex != null)
-            {
-                MessageBox.Show(ex.Message, Application.ProductName);
-                ex = ex.InnerException;
-            }
-        }
-        finally
-        {
-            this.Cursor = Cursors.Default;
-        }
-    }
-    private void FindBySimilarity()
-    {
-        m_search_type = SearchType.Similarity;
-
-        if (m_client != null)
-        {
-            ClearFindMatches();
-
-            SimilarityMethod find_by_similarity_method = SimilarityMethod.SimilarText;
-            if (FindBySimilarityTextRadioButton.Checked)
-            {
-                find_by_similarity_method = SimilarityMethod.SimilarText;
-            }
-            else if (FindBySimilarityWordsRadioButton.Checked)
-            {
-                find_by_similarity_method = SimilarityMethod.SimilarWords;
-            }
-            else if (FindBySimilarityFirstHalfRadioButton.Checked)
-            {
-                find_by_similarity_method = SimilarityMethod.SimilarFirstHalf;
-            }
-            else if (FindBySimilarityLastHalfRadioButton.Checked)
-            {
-                find_by_similarity_method = SimilarityMethod.SimilarLastHalf;
-            }
-            else if (FindBySimilarityFirstWordRadioButton.Checked)
-            {
-                find_by_similarity_method = SimilarityMethod.SimilarFirstWord;
-            }
-            else if (FindBySimilarityLastWordRadioButton.Checked)
-            {
-                find_by_similarity_method = SimilarityMethod.SimilarLastWord;
-            }
-            else
-            {
-                //
-            }
-
-            double similarity_percentage = (double)FindBySimilarityPercentageTrackBar.Value / 100.0D;
-
-            string text = null;
-            if (m_similarity_search_source == SimilaritySearchSource.CurrentVerse)
-            {
-                Verse verse = GetCurrentVerse();
-                if (verse != null)
-                {
-                    if (verse.Chapter != null)
-                    {
-                        m_client.FindVerses(verse, find_by_similarity_method, similarity_percentage);
-                        text = " to verse " + verse.Chapter.Name + " " + verse.NumberInChapter + " ";
-                    }
-
-                    if (m_client.FoundVerses != null)
-                    {
-                        int verse_count = m_client.FoundVerses.Count;
-                        m_find_result_header = verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + find_by_similarity_method.ToString() + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-
-                        DisplayFoundVerses(true);
-                    }
-                }
-            }
-            else if (m_similarity_search_source == SimilaritySearchSource.AllVerses)
-            {
-                m_client.FindVerses(find_by_similarity_method, similarity_percentage);
-                text = null;
-
-                if (m_client.FoundVerses != null)
-                {
-                    int verse_count = m_client.FoundVerses.Count;
-                    m_find_result_header = verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + find_by_similarity_method.ToString() + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-
-                    DisplayFoundVerseRanges(true, false);
-                }
-            }
-            else
-            {
-                //
-            }
-
-            //SearchResultTextBox.Focus();
-            //SearchResultTextBox.Refresh();
         }
     }
     ///////////////////////////////////////////////////////////////////////////////
@@ -39563,7 +39398,23 @@ public partial class MainForm : Form, ISubscriber
                 )
               )
             {
-                FindByNumbers();
+                this.Cursor = Cursors.WaitCursor;
+                try
+                {
+                    FindByNumbers();
+                }
+                catch (Exception ex)
+                {
+                    while (ex != null)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName);
+                        ex = ex.InnerException;
+                    }
+                }
+                finally
+                {
+                    this.Cursor = Cursors.Default;
+                }
             }
         }
     }
@@ -40650,7 +40501,207 @@ public partial class MainForm : Form, ISubscriber
     }
     ///////////////////////////////////////////////////////////////////////////////
     #endregion
-    #region Search By Letter Frequency Sum
+    #region Search By Similarity
+    ///////////////////////////////////////////////////////////////////////////////
+    private SimilaritySearchSource m_similarity_search_source = SimilaritySearchSource.CurrentVerse;
+    private void FindBySimilarityCurrentVerseTypeLabel_Click(object sender, EventArgs e)
+    {
+        m_similarity_search_source = SimilaritySearchSource.CurrentVerse;
+        FindBySimilarityPercentageTrackBar.Value = 67;
+        FindBySimilarityControls_Enter(null, null);
+    }
+    private void FindBySimilarityAllVersesTypeLabel_Click(object sender, EventArgs e)
+    {
+        m_similarity_search_source = SimilaritySearchSource.AllVerses;
+        FindBySimilarityPercentageTrackBar.Value = 100;
+        FindBySimilarityControls_Enter(null, null);
+    }
+    private void FindBySimilarityRadioButton_CheckedChanged(object sender, EventArgs e)
+    {
+        RadioButton radio_button = (sender as RadioButton);
+        if ((radio_button != null) && (radio_button.Checked))
+        {
+            //if (m_similarity_search_source == SimilaritySearchSource.CurrentVerse)
+            //{
+            //    FindBySimilarityButton_Click(null, null);
+            //}
+        }
+    }
+    private void FindBySimilarityPercentageTrackBar_ValueChanged(object sender, EventArgs e)
+    {
+        if (sender is TrackBar)
+        {
+            FindBySimilarityPercentageLabel.Text = FindBySimilarityPercentageTrackBar.Value + "%";
+            if (m_similarity_search_source == SimilaritySearchSource.CurrentVerse)
+            {
+                this.Cursor = Cursors.WaitCursor;
+                try
+                {
+                    FindBySimilarity();
+                }
+                catch (Exception ex)
+                {
+                    while (ex != null)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName);
+                        ex = ex.InnerException;
+                    }
+                }
+                finally
+                {
+                    this.Cursor = Cursors.Default;
+                }
+            }
+        }
+    }
+    private void FindBySimilarityControls_Enter(object sender, EventArgs e)
+    {
+        this.AcceptButton = FindBySimilarityButton;
+
+        FindByTextButton.Enabled = false;
+        FindBySimilarityButton.Enabled = true;
+        FindByNumbersButton.Enabled = false;
+        FindByFrequencyButton.Enabled = false;
+
+        ToolTip.SetToolTip(InspectChaptersLabel, L[l]["Inspect chapters"]);
+        WordsListBoxLabel.Visible = false;
+        WordsListBox.Visible = false;
+
+        ResetFindByTextSearchBlockSizeLabels();
+        ResetFindByTextSearchTypeLabels();
+        ResetFindBySimilarityResultTypeLabels();
+        ResetFindByNumbersResultTypeLabels();
+        ResetFindByFrequencyResultTypeLabels();
+
+        switch (m_similarity_search_source)
+        {
+            case SimilaritySearchSource.CurrentVerse:
+                {
+                    FindBySimilarityCurrentVerseTypeLabel.BackColor = Color.SteelBlue;
+                    FindBySimilarityCurrentVerseTypeLabel.BorderStyle = BorderStyle.Fixed3D;
+                }
+                break;
+            case SimilaritySearchSource.AllVerses:
+                {
+                    FindBySimilarityAllVersesTypeLabel.BackColor = Color.SteelBlue;
+                    FindBySimilarityAllVersesTypeLabel.BorderStyle = BorderStyle.Fixed3D;
+                }
+                break;
+        }
+    }
+    private void ResetFindBySimilarityResultTypeLabels()
+    {
+        FindBySimilarityCurrentVerseTypeLabel.BackColor = Color.DarkGray;
+        FindBySimilarityCurrentVerseTypeLabel.BorderStyle = BorderStyle.None;
+        FindBySimilarityAllVersesTypeLabel.BackColor = Color.DarkGray;
+        FindBySimilarityAllVersesTypeLabel.BorderStyle = BorderStyle.None;
+    }
+    private void FindBySimilarityButton_Click(object sender, EventArgs e)
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            FindBySimilarity();
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
+    }
+    private void FindBySimilarity()
+    {
+        m_search_type = SearchType.Similarity;
+
+        if (m_client != null)
+        {
+            ClearFindMatches();
+
+            SimilarityMethod find_by_similarity_method = SimilarityMethod.SimilarText;
+            if (FindBySimilarityTextRadioButton.Checked)
+            {
+                find_by_similarity_method = SimilarityMethod.SimilarText;
+            }
+            else if (FindBySimilarityWordsRadioButton.Checked)
+            {
+                find_by_similarity_method = SimilarityMethod.SimilarWords;
+            }
+            else if (FindBySimilarityFirstHalfRadioButton.Checked)
+            {
+                find_by_similarity_method = SimilarityMethod.SimilarFirstHalf;
+            }
+            else if (FindBySimilarityLastHalfRadioButton.Checked)
+            {
+                find_by_similarity_method = SimilarityMethod.SimilarLastHalf;
+            }
+            else if (FindBySimilarityFirstWordRadioButton.Checked)
+            {
+                find_by_similarity_method = SimilarityMethod.SimilarFirstWord;
+            }
+            else if (FindBySimilarityLastWordRadioButton.Checked)
+            {
+                find_by_similarity_method = SimilarityMethod.SimilarLastWord;
+            }
+            else
+            {
+                //
+            }
+
+            double similarity_percentage = (double)FindBySimilarityPercentageTrackBar.Value / 100.0D;
+
+            string text = null;
+            if (m_similarity_search_source == SimilaritySearchSource.CurrentVerse)
+            {
+                Verse verse = GetCurrentVerse();
+                if (verse != null)
+                {
+                    if (verse.Chapter != null)
+                    {
+                        m_client.FindVerses(verse, find_by_similarity_method, similarity_percentage);
+                        text = " to verse " + verse.Chapter.Name + " " + verse.NumberInChapter + " ";
+                    }
+
+                    if (m_client.FoundVerses != null)
+                    {
+                        int verse_count = m_client.FoundVerses.Count;
+                        m_find_result_header = verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + find_by_similarity_method.ToString() + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+
+                        DisplayFoundVerses(true);
+                    }
+                }
+            }
+            else if (m_similarity_search_source == SimilaritySearchSource.AllVerses)
+            {
+                m_client.FindVerses(find_by_similarity_method, similarity_percentage);
+                text = null;
+
+                if (m_client.FoundVerses != null)
+                {
+                    int verse_count = m_client.FoundVerses.Count;
+                    m_find_result_header = verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + find_by_similarity_method.ToString() + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+
+                    DisplayFoundVerseRanges(true, false);
+                }
+            }
+            else
+            {
+                //
+            }
+
+            //SearchResultTextBox.Focus();
+            //SearchResultTextBox.Refresh();
+        }
+    }
+    ///////////////////////////////////////////////////////////////////////////////
+    #endregion
+    #region Search By LetterFrequencySum
     ///////////////////////////////////////////////////////////////////////////////
     private FrequencyResultType m_frequency_result_type = FrequencyResultType.Chapters;
     private void FindByFrequencyResultTypeWordsLabel_Click(object sender, EventArgs e)
@@ -40705,7 +40756,7 @@ public partial class MainForm : Form, ISubscriber
         UpdateKeyboard(m_client.NumerologySystem.TextMode);
 
         ResetFindByFrequencyResultTypeLabels();
-        m_frequency_result_type = (m_find_by_phrase_letter_frequency) ? FrequencyResultType.Sentences : FrequencyResultType.Chapters;
+        m_frequency_result_type = (m_find_by_phrase_letter_frequency) ? FrequencyResultType.Verses : FrequencyResultType.Chapters;
         FindByFrequencyControls_Enter(null, null);
 
         int shift = (m_dpi_x == 120.0F) ? 42 : 52;
@@ -40977,7 +41028,23 @@ public partial class MainForm : Form, ISubscriber
 
         if (sender is NumericUpDown)
         {
-            FindByFrequencySum();
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                FindByFrequencySum();
+            }
+            catch (Exception ex)
+            {
+                while (ex != null)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                    ex = ex.InnerException;
+                }
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
         }
     }
     private void UpdateSumNumberTypeLabelTag()
@@ -41178,6 +41245,73 @@ public partial class MainForm : Form, ISubscriber
             //SearchResultTextBox.Focus();
             //SearchResultTextBox.Refresh();
         }
+    }
+    private void FindByFrequencySumLabel_DoubleClick(object sender, EventArgs e)
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            FindByFrequencySumVersesWithPhraseLetters();
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            this.Cursor = Cursors.Default;
+        }
+    }
+    private static int s_loop = 0;
+    private void FindByFrequencySumVersesWithPhraseLetters()
+    {
+        s_loop++; if (s_loop == 4) s_loop = 0;
+
+        m_search_type = SearchType.Frequency;
+
+        if (m_client != null)
+        {
+            ClearFindMatches();
+            m_client.ClearSearchResults();
+
+            string phrase = "";
+            if (FindByFrequencyPhraseTextBox.Text.Length > 0)
+            {
+                if (FindByFrequencyPhraseTextBox.SelectionLength > 0)
+                {
+                    phrase = FindByFrequencyPhraseTextBox.SelectedText.Trim();
+                }
+                else
+                {
+                    phrase = FindByFrequencyPhraseTextBox.Text.Trim();
+                }
+            }
+
+            if (!String.IsNullOrEmpty(phrase))
+            {
+                foreach (Verse verse in m_client.Book.Verses)
+                {
+                    if (m_client.ContainsLetters(verse.Text, phrase, m_frequency_search_type, (FrequencyMatchingType)s_loop, (m_frequency_search_type == FrequencySearchType.DuplicateLetters), m_include_diacritics))
+                    {
+                        m_client.FoundVerses.Add(verse);
+                    }
+                }
+
+                int match_count = m_client.FoundVerses.Count;
+                if (m_client.FoundVerses.Count > 0)
+                {
+                    m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + phrase + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                    DisplayFoundVerses(true);
+                }
+            }
+        }
+
+        //SearchResultTextBox.Focus();
+        //SearchResultTextBox.Refresh();
     }
     ///////////////////////////////////////////////////////////////////////////////
     #endregion
@@ -51059,7 +51193,7 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Statistics
     ///////////////////////////////////////////////////////////////////////////////
-    private bool? m_count_diacritics = false;
+    private bool? m_include_diacritics = false;
     private List<char> m_selected_letters = new List<char>();
     private void LetterFrequencyListView_ColumnClick(object sender, ColumnClickEventArgs e)
     {
@@ -51416,7 +51550,7 @@ public partial class MainForm : Form, ISubscriber
                     }
                     if (m_current_phrase.Length > 0)
                     {
-                        m_client.BuildLetterStatistics(m_current_text, m_current_phrase, m_frequency_search_type, m_count_diacritics);
+                        m_client.BuildLetterStatistics(m_current_text, m_current_phrase, m_frequency_search_type, m_include_diacritics);
                     }
                     else
                     {
@@ -51425,7 +51559,7 @@ public partial class MainForm : Form, ISubscriber
                 }
                 else
                 {
-                    m_client.BuildLetterStatistics(m_current_text, m_count_diacritics);
+                    m_client.BuildLetterStatistics(m_current_text, m_include_diacritics);
                 }
             }
             else
@@ -51924,17 +52058,17 @@ public partial class MainForm : Form, ISubscriber
             {
                 switch (LetterFrequencyWithDiacriticsCheckBox.CheckState)
                 {
-                    case CheckState.Checked: { m_count_diacritics = true; } break;
-                    case CheckState.Indeterminate: { m_count_diacritics = null; } break;
-                    case CheckState.Unchecked: { m_count_diacritics = false; } break;
-                    //case CheckState.Checked: { m_count_diacritics = true; m_with_diacritics = m_client.Book.WithDiacritics = true; } break;
-                    //case CheckState.Indeterminate: { m_count_diacritics = null; m_with_diacritics = m_client.Book.WithDiacritics = true; } break;
-                    //case CheckState.Unchecked: { m_count_diacritics = false; m_with_diacritics = m_client.Book.WithDiacritics = false; } break;
+                    case CheckState.Checked: { m_include_diacritics = true; } break;
+                    case CheckState.Indeterminate: { m_include_diacritics = null; } break;
+                    case CheckState.Unchecked: { m_include_diacritics = false; } break;
+                    //case CheckState.Checked: { m_include_diacritics = true; m_with_diacritics = m_client.Book.WithDiacritics = true; } break;
+                    //case CheckState.Indeterminate: { m_include_diacritics = null; m_with_diacritics = m_client.Book.WithDiacritics = true; } break;
+                    //case CheckState.Unchecked: { m_include_diacritics = false; m_with_diacritics = m_client.Book.WithDiacritics = false; } break;
                 }
 
-                if (m_count_diacritics == true) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["with diacritics"]); }
-                else if (m_count_diacritics == null) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["diacritics only"]); }
-                else if (m_count_diacritics == false) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["no diacritics"]); }
+                if (m_include_diacritics == true) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["with diacritics"]); }
+                else if (m_include_diacritics == null) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["diacritics only"]); }
+                else if (m_include_diacritics == false) { ToolTip.SetToolTip(LetterFrequencyWithDiacriticsCheckBox, L[l]["no diacritics"]); }
 
                 BuildLetterFrequencies();
                 DisplayLetterFrequencies();
@@ -52192,48 +52326,6 @@ public partial class MainForm : Form, ISubscriber
     private void VersionLabel_MouseHover(object sender, EventArgs e)
     {
         this.ToolTip.SetToolTip(VersionLabel, Globals.LONG_VERSION);
-    }
-    /////////////////////////////////////////////////////////////////////////////
-    #endregion
-    #region Apps
-    ///////////////////////////////////////////////////////////////////////////////
-    private void AppLauncherLabel_Click(object sender, EventArgs e)
-    {
-        this.Cursor = Cursors.WaitCursor;
-        string process_name = "";
-        try
-        {
-            if (sender is Label)
-            {
-                string label_name = (sender as Label).Name;
-                if (!String.IsNullOrEmpty(label_name))
-                {
-                    if ((label_name.StartsWith("App")) && (label_name.EndsWith("Label")))
-                    {
-                        int start = "App".Length;
-                        int pos = label_name.IndexOf("Label");
-                        process_name = label_name.Substring(start, pos - start);
-                        if (!String.IsNullOrEmpty(process_name))
-                        {
-                            System.Diagnostics.Process.Start(process_name + ".exe");
-                        }
-                    }
-                }
-            }
-        }
-        catch //(Exception ex)
-        {
-            MessageBox.Show("Cannot find " + process_name + ".exe", Application.ProductName);
-            //while (ex != null)
-            //{
-            //    MessageBox.Show(ex.Message, Application.ProductName);
-            //    ex = ex.InnerException;
-            //}
-        }
-        finally
-        {
-            this.Cursor = Cursors.Default;
-        }
     }
     /////////////////////////////////////////////////////////////////////////////
     #endregion
