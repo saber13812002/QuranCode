@@ -6916,7 +6916,7 @@ public class Server : IPublisher
         text = Regex.Replace(text, @"\s+", " "); // remove double space or higher if any
         text = text.Trim();
 
-        //????????????????????????? + or _ o space
+        //????????????????????????? "+" or "_" or " "
         string[] text_words = text.Split(text.Contains("+") ? '+' : ' ');
         foreach (string text_word in text_words)
         {
@@ -9102,27 +9102,27 @@ public class Server : IPublisher
             }
         }
     }
-    public static List<Phrase> FindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    public static List<Phrase> FindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Phrase> result = new List<Phrase>();
 
-        if (String.IsNullOrEmpty(root)) return null;
-        root = root.Simplify36();   // roots use 36 letters
-        while (root.Contains("  "))
+        if (String.IsNullOrEmpty(roots)) return null;
+        roots = roots.Simplify36();   // roots use 36 letters
+        while (roots.Contains("  "))
         {
-            root = root.Replace("  ", " ");
+            roots = roots.Replace("  ", " ");
         }
 
         List<Phrase> current_result = null;
         List<string> negative_words = new List<string>();
         List<string> positive_words = new List<string>();
         List<string> unsigned_words = new List<string>();
-        BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
+        BuildWordLists(roots, out unsigned_words, out positive_words, out negative_words);
 
         foreach (string negative_word in negative_words)
         {
             current_result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, negative_word, 0, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder); // multiplicity = 0 for exclude
-            if (root.Contains("|"))
+            if (roots.Contains("|"))
             {
                 result.AddRange(current_result);
                 previous_verses.Union(GetVerses(current_result));
@@ -9137,7 +9137,7 @@ public class Server : IPublisher
         foreach (string positive_word in positive_words)
         {
             current_result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, positive_word, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
-            if (root.Contains("|"))
+            if (roots.Contains("|"))
             {
                 result.AddRange(current_result);
                 previous_verses.Union(GetVerses(current_result));
@@ -9152,7 +9152,7 @@ public class Server : IPublisher
         foreach (string unsigned_word in unsigned_words)
         {
             current_result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, unsigned_word, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
-            if (root.Contains("|"))
+            if (roots.Contains("|"))
             {
                 result.AddRange(current_result);
                 previous_verses.Union(GetVerses(current_result));
@@ -9328,6 +9328,21 @@ public class Server : IPublisher
                                 {
                                     result = GetPhrasesWithRootWords(source, root_words, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
                                 }
+                                else // root is a text, not a real root
+                                {
+                                    foreach (Verse verse in s_book.Verses)
+                                    {
+                                        foreach (Word word in verse.Words)
+                                        {
+                                            string best_root = s_book.GetBestRoot(root);
+                                            return DoFindPhrases(source, best_root, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+                                        }
+                                    }
+
+                                    // must not come here !!!
+                                    throw new Exception(root + " is not a root and no best root found!");
+                                    // GIVE UP for now :(
+                                }
                             }
                         }
                     }
@@ -9414,7 +9429,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Chapter> DoFindChapters(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Chapter> DoFindChapters(string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Chapter> result = new List<Chapter>();
 
@@ -9422,19 +9437,19 @@ public class Server : IPublisher
         {
             List<Chapter> source = s_book.Chapters;
 
-            if (String.IsNullOrEmpty(root)) return null;
-            while (root.Contains("  "))
+            if (String.IsNullOrEmpty(roots)) return null;
+            while (roots.Contains("  "))
             {
-                root = root.Replace("  ", " ");
+                roots = roots.Replace("  ", " ");
             }
 
-            string[] parts = root.Split();
+            string[] parts = roots.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(roots, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -9494,11 +9509,11 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Chapter> DoFindChapters(List<Chapter> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Chapter> DoFindChapters(List<Chapter> source, string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Chapter> result = new List<Chapter>();
 
-        if (!String.IsNullOrEmpty(root))
+        if (!String.IsNullOrEmpty(roots))
         {
             try
             {
@@ -9508,10 +9523,10 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(root))
+                        if (root_words_dictionary.ContainsKey(roots))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[root];
+                            root_words = root_words_dictionary[roots];
                         }
                         if (root_words != null)
                         {
@@ -9585,7 +9600,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Page> DoFindPages(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Page> DoFindPages(string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Page> result = new List<Page>();
 
@@ -9593,19 +9608,19 @@ public class Server : IPublisher
         {
             List<Page> source = s_book.Pages;
 
-            if (String.IsNullOrEmpty(root)) return null;
-            while (root.Contains("  "))
+            if (String.IsNullOrEmpty(roots)) return null;
+            while (roots.Contains("  "))
             {
-                root = root.Replace("  ", " ");
+                roots = roots.Replace("  ", " ");
             }
 
-            string[] parts = root.Split();
+            string[] parts = roots.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(roots, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -9665,11 +9680,11 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Page> DoFindPages(List<Page> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Page> DoFindPages(List<Page> source, string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Page> result = new List<Page>();
 
-        if (!String.IsNullOrEmpty(root))
+        if (!String.IsNullOrEmpty(roots))
         {
             try
             {
@@ -9679,10 +9694,10 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(root))
+                        if (root_words_dictionary.ContainsKey(roots))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[root];
+                            root_words = root_words_dictionary[roots];
                         }
                         if (root_words != null)
                         {
@@ -9756,7 +9771,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Station> DoFindStations(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Station> DoFindStations(string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Station> result = new List<Station>();
 
@@ -9764,19 +9779,19 @@ public class Server : IPublisher
         {
             List<Station> source = s_book.Stations;
 
-            if (String.IsNullOrEmpty(root)) return null;
-            while (root.Contains("  "))
+            if (String.IsNullOrEmpty(roots)) return null;
+            while (roots.Contains("  "))
             {
-                root = root.Replace("  ", " ");
+                roots = roots.Replace("  ", " ");
             }
 
-            string[] parts = root.Split();
+            string[] parts = roots.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(roots, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -9836,11 +9851,11 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Station> DoFindStations(List<Station> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Station> DoFindStations(List<Station> source, string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Station> result = new List<Station>();
 
-        if (!String.IsNullOrEmpty(root))
+        if (!String.IsNullOrEmpty(roots))
         {
             try
             {
@@ -9850,10 +9865,10 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(root))
+                        if (root_words_dictionary.ContainsKey(roots))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[root];
+                            root_words = root_words_dictionary[roots];
                         }
                         if (root_words != null)
                         {
@@ -9927,7 +9942,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Part> DoFindParts(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Part> DoFindParts(string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Part> result = new List<Part>();
 
@@ -9935,19 +9950,19 @@ public class Server : IPublisher
         {
             List<Part> source = s_book.Parts;
 
-            if (String.IsNullOrEmpty(root)) return null;
-            while (root.Contains("  "))
+            if (String.IsNullOrEmpty(roots)) return null;
+            while (roots.Contains("  "))
             {
-                root = root.Replace("  ", " ");
+                roots = roots.Replace("  ", " ");
             }
 
-            string[] parts = root.Split();
+            string[] parts = roots.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(roots, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -10007,11 +10022,11 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Part> DoFindParts(List<Part> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Part> DoFindParts(List<Part> source, string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Part> result = new List<Part>();
 
-        if (!String.IsNullOrEmpty(root))
+        if (!String.IsNullOrEmpty(roots))
         {
             try
             {
@@ -10021,10 +10036,10 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(root))
+                        if (root_words_dictionary.ContainsKey(roots))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[root];
+                            root_words = root_words_dictionary[roots];
                         }
                         if (root_words != null)
                         {
@@ -10098,7 +10113,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Model.Group> DoFindGroups(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Model.Group> DoFindGroups(string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Model.Group> result = new List<Model.Group>();
 
@@ -10106,19 +10121,19 @@ public class Server : IPublisher
         {
             List<Model.Group> source = s_book.Groups;
 
-            if (String.IsNullOrEmpty(root)) return null;
-            while (root.Contains("  "))
+            if (String.IsNullOrEmpty(roots)) return null;
+            while (roots.Contains("  "))
             {
-                root = root.Replace("  ", " ");
+                roots = roots.Replace("  ", " ");
             }
 
-            string[] parts = root.Split();
+            string[] parts = roots.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(roots, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -10178,11 +10193,11 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Model.Group> DoFindGroups(List<Model.Group> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Model.Group> DoFindGroups(List<Model.Group> source, string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Model.Group> result = new List<Model.Group>();
 
-        if (!String.IsNullOrEmpty(root))
+        if (!String.IsNullOrEmpty(roots))
         {
             try
             {
@@ -10192,10 +10207,10 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(root))
+                        if (root_words_dictionary.ContainsKey(roots))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[root];
+                            root_words = root_words_dictionary[roots];
                         }
                         if (root_words != null)
                         {
@@ -10269,7 +10284,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Half> DoFindHalfs(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Half> DoFindHalfs(string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Half> result = new List<Half>();
 
@@ -10277,19 +10292,19 @@ public class Server : IPublisher
         {
             List<Half> source = s_book.Halfs;
 
-            if (String.IsNullOrEmpty(root)) return null;
-            while (root.Contains("  "))
+            if (String.IsNullOrEmpty(roots)) return null;
+            while (roots.Contains("  "))
             {
-                root = root.Replace("  ", " ");
+                roots = roots.Replace("  ", " ");
             }
 
-            string[] parts = root.Split();
+            string[] parts = roots.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(roots, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -10349,11 +10364,11 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Half> DoFindHalfs(List<Half> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Half> DoFindHalfs(List<Half> source, string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Half> result = new List<Half>();
 
-        if (!String.IsNullOrEmpty(root))
+        if (!String.IsNullOrEmpty(roots))
         {
             try
             {
@@ -10363,10 +10378,10 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(root))
+                        if (root_words_dictionary.ContainsKey(roots))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[root];
+                            root_words = root_words_dictionary[roots];
                         }
                         if (root_words != null)
                         {
@@ -10440,7 +10455,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Quarter> DoFindQuarters(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Quarter> DoFindQuarters(string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Quarter> result = new List<Quarter>();
 
@@ -10448,19 +10463,19 @@ public class Server : IPublisher
         {
             List<Quarter> source = s_book.Quarters;
 
-            if (String.IsNullOrEmpty(root)) return null;
-            while (root.Contains("  "))
+            if (String.IsNullOrEmpty(roots)) return null;
+            while (roots.Contains("  "))
             {
-                root = root.Replace("  ", " ");
+                roots = roots.Replace("  ", " ");
             }
 
-            string[] parts = root.Split();
+            string[] parts = roots.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(roots, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -10520,11 +10535,11 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Quarter> DoFindQuarters(List<Quarter> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Quarter> DoFindQuarters(List<Quarter> source, string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Quarter> result = new List<Quarter>();
 
-        if (!String.IsNullOrEmpty(root))
+        if (!String.IsNullOrEmpty(roots))
         {
             try
             {
@@ -10534,10 +10549,10 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(root))
+                        if (root_words_dictionary.ContainsKey(roots))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[root];
+                            root_words = root_words_dictionary[roots];
                         }
                         if (root_words != null)
                         {
@@ -10611,7 +10626,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Bowing> DoFindBowings(string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Bowing> DoFindBowings(string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Bowing> result = new List<Bowing>();
 
@@ -10619,19 +10634,19 @@ public class Server : IPublisher
         {
             List<Bowing> source = s_book.Bowings;
 
-            if (String.IsNullOrEmpty(root)) return null;
-            while (root.Contains("  "))
+            if (String.IsNullOrEmpty(roots)) return null;
+            while (roots.Contains("  "))
             {
-                root = root.Replace("  ", " ");
+                roots = roots.Replace("  ", " ");
             }
 
-            string[] parts = root.Split();
+            string[] parts = roots.Split();
             if (parts.Length > 0) // enable nested searches
             {
                 List<string> negative_words = new List<string>();
                 List<string> positive_words = new List<string>();
                 List<string> unsigned_words = new List<string>();
-                BuildWordLists(root, out unsigned_words, out positive_words, out negative_words);
+                BuildWordLists(roots, out unsigned_words, out positive_words, out negative_words);
 
                 if (negative_words.Count > 0)
                 {
@@ -10691,11 +10706,11 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Bowing> DoFindBowings(List<Bowing> source, string root, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    private static List<Bowing> DoFindBowings(List<Bowing> source, string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Bowing> result = new List<Bowing>();
 
-        if (!String.IsNullOrEmpty(root))
+        if (!String.IsNullOrEmpty(roots))
         {
             try
             {
@@ -10705,10 +10720,10 @@ public class Server : IPublisher
                     if (root_words_dictionary != null)
                     {
                         List<Word> root_words = null;
-                        if (root_words_dictionary.ContainsKey(root))
+                        if (root_words_dictionary.ContainsKey(roots))
                         {
                             // get all pre-identified root_words
-                            root_words = root_words_dictionary[root];
+                            root_words = root_words_dictionary[roots];
                         }
                         if (root_words != null)
                         {
@@ -10782,7 +10797,7 @@ public class Server : IPublisher
 
         return result;
     }
-    // find by root - verses with related words
+    // find by text - Related words
     public static List<Verse> FindRelatedVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, Verse verse)
     {
         return DoFindRelatedVerses(search_scope, current_selection, previous_result, verse);
@@ -10815,15 +10830,15 @@ public class Server : IPublisher
 
         return result;
     }
-    // find by text - consecutively repeated phrases
-    public static List<Phrase> FindRepeatedPhrases(int phrase_word_count, bool with_diacritics)
+    // find by text - Repeated words
+    public static List<Phrase> FindConsecutivelyRepeatedWords(int word_count, bool with_diacritics)
     {
         if (s_book == null) return null;
 
         List<Verse> source = s_book.Verses;
-        return FindRepeatedPhrases(source, phrase_word_count, with_diacritics);
+        return DoFindConsecutivelyRepeatedWords(source, word_count, with_diacritics);
     }
-    private static List<Phrase> FindRepeatedPhrases(List<Verse> source, int phrase_word_count, bool with_diacritics)
+    private static List<Phrase> DoFindConsecutivelyRepeatedWords(List<Verse> source, int word_count, bool with_diacritics)
     {
         List<Phrase> result = new List<Phrase>();
 
@@ -10831,7 +10846,7 @@ public class Server : IPublisher
         {
             if (source.Count > 0)
             {
-                if (phrase_word_count > 0)
+                if (word_count > 0)
                 {
                     List<Word> words = new List<Word>();
                     foreach (Verse verse in source)
@@ -10839,7 +10854,7 @@ public class Server : IPublisher
                         words.AddRange(verse.Words);
                     }
 
-                    int n = phrase_word_count;
+                    int n = word_count;
                     for (int i = 0; i <= words.Count - (2 * n); i++)
                     {
                         string original_phrase1 = null;

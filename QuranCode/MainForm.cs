@@ -26852,7 +26852,6 @@ public partial class MainForm : Form, ISubscriber
     #endregion
     #region Grammar/RelatedWords
     ///////////////////////////////////////////////////////////////////////////////
-    private Word m_info_word = null;
     private string GetWordInformation(Word word)
     {
         if (m_emlaaei_text) return null;
@@ -27093,38 +27092,14 @@ public partial class MainForm : Form, ISubscriber
     {
         if (m_emlaaei_text) return;
 
-        if (m_info_word != null)
+        if (m_current_word != null)
         {
-            FindRelatedWords(m_info_word);
+            FindRelatedWords(m_current_word);
         }
     }
     private void FindRelatedWords(Word word)
     {
-        if (m_emlaaei_text) return;
-
-        this.Cursor = Cursors.WaitCursor;
-        try
-        {
-            if (m_client != null)
-            {
-                if (word != null)
-                {
-                    FindByRoot(word);
-                }
-            }
-        }
-        catch (Exception ex)
-        {
-            while (ex != null)
-            {
-                MessageBox.Show(ex.Message, Application.ProductName);
-                ex = ex.InnerException;
-            }
-        }
-        finally
-        {
-            this.Cursor = Cursors.Default;
-        }
+        DoFindRelatedWords(word);
     }
     private void UpdateMouseCursor()
     {
@@ -36328,53 +36303,10 @@ public partial class MainForm : Form, ISubscriber
     {
         if (m_emlaaei_text) return;
 
-        if (m_client != null)
+        string text = FindByTextTextBox.Text;
+        if (text.Length > 0)
         {
-            ClearFindMatches();
-
-            if (FindByTextTextBox.Text.Length > 0)
-            {
-                // get startup text from FindTextBox
-                string[] startup_words = FindByTextTextBox.Text.Split();
-                int count = startup_words.Length;
-
-                string text = "";
-                if (m_auto_complete_mode)
-                {
-                    for (int i = 0; i < count; i++)
-                    {
-                        text += startup_words[i] + " ";
-                    }
-                    text = text.Trim();
-                }
-
-                // update m_text_location_in_verse and m_text_location_in_word
-                //UpdateFindByTextOptions();
-
-                text = text.Trim();
-                if (!String.IsNullOrEmpty(text))
-                {
-                    m_client.FindPhrases(TextSearchBlockSize.Verse, text, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
-                }
-
-                // display results
-                if (m_client.FoundPhrases != null)
-                {
-                    int phrase_count = GetPhraseCount(m_client.FoundPhrases);
-                    if (m_client.FoundVerses != null)
-                    {
-                        int verse_count = m_client.FoundVerses.Count;
-                        m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + verse_count + ((verse_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " C_" + m_text_location_in_chapter.ToString() + " V_" + m_text_location_in_verse.ToString() + " W_" + m_text_location_in_word.ToString() + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                        DisplayFoundVerses(true);
-
-                        //SearchResultTextBox.Focus();
-                        //SearchResultTextBox.Refresh();
-
-                        WordsListBoxLabel.Visible = false;
-                        WordsListBox.Visible = false;
-                    }
-                }
-            }
+            FindByRoot(text);
         }
     }
     private void FindByRoot(Word word)
@@ -36407,7 +36339,7 @@ public partial class MainForm : Form, ISubscriber
             }
         }
     }
-    private void FindByRoot(string root)
+    private void FindByRoot(string roots)
     {
         if (m_emlaaei_text) return;
 
@@ -36417,16 +36349,16 @@ public partial class MainForm : Form, ISubscriber
         {
             ClearFindMatches();
 
-            if (!String.IsNullOrEmpty(root))
+            if (!String.IsNullOrEmpty(roots))
             {
-                root = root.Trim();
+                roots = roots.Trim();
 
                 FindByTextTextBox.TextChanged -= FindByTextTextBox_TextChanged;
-                FindByTextTextBox.Text = root;
+                FindByTextTextBox.Text = roots;
                 FindByTextRootSearchTypeLabel_Click(null, null);
                 FindByTextTextBox.TextChanged += FindByTextTextBox_TextChanged;
 
-                m_client.FindPhrases(m_text_search_block_size, root, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
+                m_client.FindPhrases(m_text_search_block_size, roots, m_multiplicity, m_multiplicity_number_type, m_multiplicity_comparison_operator, m_multiplicity_remainder);
                 if (m_client.FoundPhrases != null)
                 {
                     string multiplicity_text = "";
@@ -36460,12 +36392,12 @@ public partial class MainForm : Form, ISubscriber
                     string block_name = ((m_multiplicity_comparison_operator == ComparisonOperator.Equal) && (m_text_search_block_size != TextSearchBlockSize.Verse)) ? m_text_search_block_size.ToString() : "verse";
                     if (m_multiplicity == 0)
                     {
-                        m_find_result_header = m_client.FoundVerses.Count + " " + ((m_client.FoundVerses.Count == 1) ? L[l][block_name] : (L[l][block_name + "s"])) + " " + L[l]["without"] + " " + multiplicity_text + " root " + root + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                        m_find_result_header = m_client.FoundVerses.Count + " " + ((m_client.FoundVerses.Count == 1) ? L[l][block_name] : (L[l][block_name + "s"])) + " " + L[l]["without"] + " " + multiplicity_text + " root " + roots + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
                     }
                     else
                     {
                         int block_count = ((m_multiplicity_comparison_operator == ComparisonOperator.Equal) && (m_text_search_block_size != TextSearchBlockSize.Verse)) ? phrase_count / Math.Abs(m_multiplicity) : m_client.FoundVerses.Count;
-                        m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + block_count + " " + ((block_count == 1) ? L[l][block_name] : (L[l][block_name + "s"])) + " " + L[l]["with"] + " " + multiplicity_text + " " + L[l]["root"] + " " + root + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                        m_find_result_header = phrase_count + " " + L[l]["matches"] + " " + L[l]["in"] + " " + block_count + " " + ((block_count == 1) ? L[l][block_name] : (L[l][block_name + "s"])) + " " + L[l]["with"] + " " + multiplicity_text + " " + L[l]["root"] + " " + roots + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
                     }
                     DisplayFoundVerses(true);
                 }
@@ -36965,7 +36897,7 @@ public partial class MainForm : Form, ISubscriber
             if (m_multiplicity > 0)
             {
                 int phrase_word_count = m_multiplicity;
-                m_client.FindRepeatedPhrases(phrase_word_count, m_with_diacritics);
+                m_client.FindConsecutivelyRepeatedWords(phrase_word_count, m_with_diacritics);
                 if (m_client.FoundPhrases != null)
                 {
                     if (m_client.FoundVerses != null)
