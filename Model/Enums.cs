@@ -61,7 +61,7 @@ namespace Model
         All
     };
 
-    public enum FrequencyMatchingType { AllTargetLetters, AnyTargetLetter, OnlyTargetLetters, NoneOfTargetLetters };
+    public enum FrequencyMatchingType { AllLettersOf, AnyLetterOf, OnlyLettersOf, NoLetterOf };
     public enum FrequencySearchType { DuplicateLetters, UniqueLetters };
     public enum FrequencyResultType { Words, Sentences, Verses, Chapters };
 

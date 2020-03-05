@@ -2008,75 +2008,6 @@ public class Client : IPublisher, ISubscriber
         return 0;
     }
 
-    // find by similarity - phrases similar to given text
-    /// <summary>
-    /// Find phrases with similar text to given text to given similarity percentage or above.
-    /// </summary>
-    /// <param name="text"></param>
-    /// <param name="similarity_percentage"></param>
-    /// <returns>Number of found phrases. Result is stored in FoundPhrases.</returns>
-    public int FindPhrases(string text, double similarity_percentage)
-    {
-        ClearSearchResults();
-        m_found_phrases = Server.FindPhrases(m_search_scope, m_selection, m_found_verses, text, similarity_percentage);
-        if (m_found_phrases != null)
-        {
-            foreach (Phrase phrase in m_found_phrases)
-            {
-                if (phrase != null)
-                {
-                    if (!m_found_verses.Contains(phrase.Verse))
-                    {
-                        m_found_verses.Add(phrase.Verse);
-                    }
-                }
-            }
-
-            return m_found_phrases.Count;
-        }
-        return 0;
-    }
-    // find by similarity - verses similar to given verse
-    /// <summary>
-    /// Find verses with similar text to verse text to given similarity percentage or above with given similarity method
-    /// </summary>
-    /// <param name="verse"></param>
-    /// <param name="similarity_method"></param>
-    /// <param name="similarity_percentage"></param>
-    /// <returns>Number of found verses. Result is stored in FoundVerses.</returns>
-    public int FindVerses(Verse verse, SimilarityMethod similarity_method, double similarity_percentage)
-    {
-        ClearSearchResults();
-        m_found_verses = Server.FindVerses(m_search_scope, m_selection, m_found_verses, verse, similarity_method, similarity_percentage);
-        if (m_found_verses != null)
-        {
-            return m_found_verses.Count;
-        }
-        return 0;
-    }
-    // find by similarity - all similar verses to each other throughout the book
-    /// <summary>
-    /// Find verse ranges with similar text to each other to given similarity percentage or above.
-    /// </summary>
-    /// <param name="similarity_method"></param>
-    /// <param name="similarity_percentage"></param>
-    /// <returns>Number of found verse ranges. Result is stored in FoundVerseRanges.</returns>
-    public int FindVerses(SimilarityMethod similarity_method, double similarity_percentage)
-    {
-        ClearSearchResults();
-        m_found_verse_ranges = Server.FindVersess(m_search_scope, m_selection, m_found_verses, similarity_method, similarity_percentage);
-        if (m_found_verse_ranges != null)
-        {
-            foreach (List<Verse> verse_range in m_found_verse_ranges)
-            {
-                m_found_verses.AddRange(verse_range);
-            }
-
-            return m_found_verse_ranges.Count;
-        }
-        return 0;
-    }
-
 
     // find by numbers - Letters
     /// <summary>
@@ -2977,6 +2908,75 @@ public class Client : IPublisher, ISubscriber
         return 0;
     }
 
+
+    // find by similarity - phrases similar to given text
+    /// <summary>
+    /// Find phrases with similar text to given text to given similarity percentage or above.
+    /// </summary>
+    /// <param name="text"></param>
+    /// <param name="similarity_percentage"></param>
+    /// <returns>Number of found phrases. Result is stored in FoundPhrases.</returns>
+    public int FindPhrases(string text, double similarity_percentage)
+    {
+        ClearSearchResults();
+        m_found_phrases = Server.FindPhrases(m_search_scope, m_selection, m_found_verses, text, similarity_percentage);
+        if (m_found_phrases != null)
+        {
+            foreach (Phrase phrase in m_found_phrases)
+            {
+                if (phrase != null)
+                {
+                    if (!m_found_verses.Contains(phrase.Verse))
+                    {
+                        m_found_verses.Add(phrase.Verse);
+                    }
+                }
+            }
+
+            return m_found_phrases.Count;
+        }
+        return 0;
+    }
+    // find by similarity - verses similar to given verse
+    /// <summary>
+    /// Find verses with similar text to verse text to given similarity percentage or above with given similarity method
+    /// </summary>
+    /// <param name="verse"></param>
+    /// <param name="similarity_method"></param>
+    /// <param name="similarity_percentage"></param>
+    /// <returns>Number of found verses. Result is stored in FoundVerses.</returns>
+    public int FindVerses(Verse verse, SimilarityMethod similarity_method, double similarity_percentage)
+    {
+        ClearSearchResults();
+        m_found_verses = Server.FindVerses(m_search_scope, m_selection, m_found_verses, verse, similarity_method, similarity_percentage);
+        if (m_found_verses != null)
+        {
+            return m_found_verses.Count;
+        }
+        return 0;
+    }
+    // find by similarity - all similar verses to each other throughout the book
+    /// <summary>
+    /// Find verse ranges with similar text to each other to given similarity percentage or above.
+    /// </summary>
+    /// <param name="similarity_method"></param>
+    /// <param name="similarity_percentage"></param>
+    /// <returns>Number of found verse ranges. Result is stored in FoundVerseRanges.</returns>
+    public int FindVerses(SimilarityMethod similarity_method, double similarity_percentage)
+    {
+        ClearSearchResults();
+        m_found_verse_ranges = Server.FindVersess(m_search_scope, m_selection, m_found_verses, similarity_method, similarity_percentage);
+        if (m_found_verse_ranges != null)
+        {
+            foreach (List<Verse> verse_range in m_found_verse_ranges)
+            {
+                m_found_verses.AddRange(verse_range);
+            }
+
+            return m_found_verse_ranges.Count;
+        }
+        return 0;
+    }
 
     // find by prostration type
     /// <summary>
@@ -4019,7 +4019,7 @@ public class Client : IPublisher, ISubscriber
     /// <param name="frequency_matching_type"></param>
     /// <param name="same_frequency"></param>
     /// <returns></returns>
-    public bool ContainsLetters(string text, string phrase, FrequencySearchType frequency_search_type, FrequencyMatchingType frequency_matching_type, bool same_frequency, bool? include_diacritics)
+    public bool ContainsLetters(string text, string phrase, FrequencySearchType frequency_search_type, FrequencyMatchingType frequency_matching_type, bool? include_diacritics)
     {
         if (String.IsNullOrEmpty(text)) return false;
         if (String.IsNullOrEmpty(phrase)) return true;
@@ -4093,54 +4093,54 @@ public class Client : IPublisher, ISubscriber
             phrase = phrase.RemoveDuplicates();
         }
 
-        Dictionary<char, int> source_letter_statistics = new Dictionary<char, int>();
-        if (source_letter_statistics != null)
+        Dictionary<char, int> text_letter_statistics = new Dictionary<char, int>();
+        if (text_letter_statistics != null)
         {
             for (int i = 0; i < text.Length; i++)
             {
-                if (source_letter_statistics.ContainsKey(text[i]))
+                if (text_letter_statistics.ContainsKey(text[i]))
                 {
-                    source_letter_statistics[text[i]]++;
+                    text_letter_statistics[text[i]]++;
                 }
                 else
                 {
-                    source_letter_statistics.Add(text[i], 1);
+                    text_letter_statistics.Add(text[i], 1);
                 }
             }
         }
 
-        Dictionary<char, int> target_letter_statistics = new Dictionary<char, int>();
-        if (target_letter_statistics != null)
+        Dictionary<char, int> phrase_letter_statistics = new Dictionary<char, int>();
+        if (phrase_letter_statistics != null)
         {
             for (int i = 0; i < phrase.Length; i++)
             {
-                if (target_letter_statistics.ContainsKey(phrase[i]))
+                if (phrase_letter_statistics.ContainsKey(phrase[i]))
                 {
-                    target_letter_statistics[phrase[i]]++;
+                    phrase_letter_statistics[phrase[i]]++;
                 }
                 else
                 {
-                    target_letter_statistics.Add(phrase[i], 1);
+                    phrase_letter_statistics.Add(phrase[i], 1);
                 }
             }
         }
 
-        if ((source_letter_statistics != null) && (target_letter_statistics != null))
+        if ((text_letter_statistics != null) && (phrase_letter_statistics != null))
         {
             switch (frequency_matching_type)
             {
-                case FrequencyMatchingType.AllTargetLetters:
+                case FrequencyMatchingType.AllLettersOf:
                     {
                         for (int i = 0; i < phrase.Length; i++)
                         {
-                            if (!source_letter_statistics.ContainsKey(phrase[i]))
+                            if (!text_letter_statistics.ContainsKey(phrase[i]))
                             {
                                 return false;
                             }
 
-                            if (same_frequency)
+                            if (frequency_search_type == FrequencySearchType.DuplicateLetters)
                             {
-                                if (source_letter_statistics[phrase[i]] != source_letter_statistics[phrase[i]])
+                                if (text_letter_statistics[phrase[i]] != phrase_letter_statistics[phrase[i]])
                                 {
                                     return false;
                                 }
@@ -4148,16 +4148,16 @@ public class Client : IPublisher, ISubscriber
                         }
                     }
                     break;
-                case FrequencyMatchingType.AnyTargetLetter:
+                case FrequencyMatchingType.AnyLetterOf:
                     {
                         int count = 0;
                         for (int i = 0; i < phrase.Length; i++)
                         {
-                            if (source_letter_statistics.ContainsKey(phrase[i]))
+                            if (text_letter_statistics.ContainsKey(phrase[i]))
                             {
-                                if (same_frequency)
+                                if (frequency_search_type == FrequencySearchType.DuplicateLetters)
                                 {
-                                    if (source_letter_statistics[phrase[i]] == source_letter_statistics[phrase[i]])
+                                    if (text_letter_statistics[phrase[i]] == phrase_letter_statistics[phrase[i]])
                                     {
                                         count++;
                                     }
@@ -4171,16 +4171,16 @@ public class Client : IPublisher, ISubscriber
                         if (count == 0) return false;
                     }
                     break;
-                case FrequencyMatchingType.OnlyTargetLetters:
+                case FrequencyMatchingType.OnlyLettersOf:
                     {
                         int count = 0;
-                        for (int i = 0; i < phrase.Length; i++)
+                        for (int i = 0; i < text.Length; i++)
                         {
-                            if (source_letter_statistics.ContainsKey(phrase[i]))
+                            if (phrase_letter_statistics.ContainsKey(text[i]))
                             {
-                                if (same_frequency)
+                                if (frequency_search_type == FrequencySearchType.DuplicateLetters)
                                 {
-                                    if (source_letter_statistics[phrase[i]] == source_letter_statistics[phrase[i]])
+                                    if (text_letter_statistics[text[i]] == phrase_letter_statistics[text[i]])
                                     {
                                         count++;
                                     }
@@ -4190,20 +4190,24 @@ public class Client : IPublisher, ISubscriber
                                     count++;
                                 }
                             }
+                            else
+                            {
+                                return false;
+                            }
                         }
-                        if (count != source_letter_statistics.Count) return false;
+                        if (count < text.Length) return false;
                     }
                     break;
-                case FrequencyMatchingType.NoneOfTargetLetters:
+                case FrequencyMatchingType.NoLetterOf:
                     {
                         int count = 0;
-                        for (int i = 0; i < phrase.Length; i++)
+                        for (int i = 0; i < text.Length; i++)
                         {
-                            if (source_letter_statistics.ContainsKey(phrase[i]))
+                            if (phrase_letter_statistics.ContainsKey(text[i]))
                             {
-                                if (same_frequency)
+                                if (frequency_search_type == FrequencySearchType.DuplicateLetters)
                                 {
-                                    if (source_letter_statistics[phrase[i]] == source_letter_statistics[phrase[i]])
+                                    if (text_letter_statistics[text[i]] == phrase_letter_statistics[text[i]])
                                     {
                                         count++;
                                     }
@@ -4219,15 +4223,8 @@ public class Client : IPublisher, ISubscriber
                     break;
                 default:
                     {
-                        for (int i = 0; i < phrase.Length; i++)
-                        {
-                            if (!source_letter_statistics.ContainsKey(phrase[i]))
-                            {
-                                return false;
-                            }
-                        }
+                        return false;
                     }
-                    break;
             }
         }
         return true; // success

@@ -10874,370 +10874,6 @@ public class Server : IPublisher
         return result;
     }
 
-    // find by similarity - phrases similar to given text
-    public static List<Phrase> FindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, string text, double similarity_percentage)
-    {
-        List<Phrase> result = new List<Phrase>();
-
-        List<Verse> found_verses = previous_result;
-        while (text.Contains("  "))
-        {
-            text = text.Replace("  ", " ");
-        }
-        while (text.Contains("+"))
-        {
-            text = text.Replace("+", "");
-        }
-        while (text.Contains("-"))
-        {
-            text = text.Replace("-", "");
-        }
-
-        string[] word_texts = text.Split();
-        if (word_texts.Length == 0)
-        {
-            return result;
-        }
-        if (word_texts.Length == 1)
-        {
-            return DoFindPhrases(search_scope, current_selection, previous_result, text, similarity_percentage);
-        }
-        if (word_texts.Length > 1) // enable nested searches
-        {
-            if (text.Length > 1) // enable nested searches
-            {
-                List<Phrase> phrases = null;
-                List<Verse> verses = null;
-
-                foreach (string word_text in word_texts)
-                {
-                    phrases = DoFindPhrases(search_scope, current_selection, found_verses, word_text, similarity_percentage);
-                    verses = new List<Verse>(GetVerses(phrases));
-
-                    // if first result
-                    if (found_verses == null)
-                    {
-                        // fill it up with a copy of the first similar word search result
-                        result = new List<Phrase>(phrases);
-                        found_verses = new List<Verse>(verses);
-
-                        // prepare for nested search by search
-                        search_scope = SearchScope.Result;
-                    }
-                    else // subsequent search result
-                    {
-                        found_verses = new List<Verse>(verses);
-
-                        List<Phrase> union_phrases = new List<Phrase>(phrases);
-                        foreach (Phrase phrase in result)
-                        {
-                            if (phrase != null)
-                            {
-                                if (verses.Contains(phrase.Verse))
-                                {
-                                    union_phrases.Add(phrase);
-                                }
-                            }
-                        }
-                        result = union_phrases;
-                    }
-                }
-            }
-        }
-
-        return result;
-    }
-    private static List<Phrase> DoFindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, string text, double similarity_percentage)
-    {
-        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_result, TextLocationInChapter.Any);
-        return DoFindPhrases(source, current_selection, previous_result, text, similarity_percentage);
-    }
-    private static List<Phrase> DoFindPhrases(List<Verse> source, Selection current_selection, List<Verse> previous_result, string text, double similarity_percentage)
-    {
-        List<Phrase> result = new List<Phrase>();
-
-        if (source != null)
-        {
-            if (source.Count > 0)
-            {
-                if (!String.IsNullOrEmpty(text))
-                {
-                    foreach (Verse verse in source)
-                    {
-                        foreach (Word word in verse.Words)
-                        {
-                            if (word.Text.IsSimilarTo(text, similarity_percentage))
-                            {
-                                result.Add(new Phrase(verse, word.Position, word.Text));
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return result;
-    }
-    // find by similarity - verses similar to given verse
-    public static List<Verse> FindVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, Verse verse, SimilarityMethod similarity_method, double similarity_percentage)
-    {
-        return DoFindVerses(search_scope, current_selection, previous_result, verse, similarity_method, similarity_percentage);
-    }
-    private static List<Verse> DoFindVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, Verse verse, SimilarityMethod similarity_method, double similarity_percentage)
-    {
-        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_result, TextLocationInChapter.Any);
-        return DoFindVerses(source, current_selection, previous_result, verse, similarity_method, similarity_percentage);
-    }
-    private static List<Verse> DoFindVerses(List<Verse> source, Selection current_selection, List<Verse> previous_result, Verse verse, SimilarityMethod find_similarity_method, double similarity_percentage)
-    {
-        List<Verse> result = new List<Verse>();
-
-        if (source != null)
-        {
-            if (source.Count > 0)
-            {
-                if (verse != null)
-                {
-                    switch (find_similarity_method)
-                    {
-                        case SimilarityMethod.SimilarText:
-                            {
-                                for (int j = 0; j < source.Count; j++)
-                                {
-                                    if (verse.Text.IsSimilarTo(source[j].Text, similarity_percentage))
-                                    {
-                                        result.Add(source[j]);
-                                    }
-                                }
-                            }
-                            break;
-                        case SimilarityMethod.SimilarWords:
-                            {
-                                for (int j = 0; j < source.Count; j++)
-                                {
-                                    if (verse.Text.HasSimilarWordsTo(source[j].Text, (int)Math.Round((Math.Min(verse.Words.Count, source[j].Words.Count) * similarity_percentage)), similarity_percentage))
-                                    {
-                                        result.Add(source[j]);
-                                    }
-                                }
-                            }
-                            break;
-                        case SimilarityMethod.SimilarFirstHalf:
-                            {
-                                for (int j = 0; j < source.Count; j++)
-                                {
-                                    if (verse.Text.HasSimilarFirstHalfTo(source[j].Text, similarity_percentage))
-                                    {
-                                        result.Add(source[j]);
-                                    }
-                                }
-                            }
-                            break;
-                        case SimilarityMethod.SimilarLastHalf:
-                            {
-                                for (int j = 0; j < source.Count; j++)
-                                {
-                                    if (verse.Text.HasSimilarLastHalfTo(source[j].Text, similarity_percentage))
-                                    {
-                                        result.Add(source[j]);
-                                    }
-                                }
-                            }
-                            break;
-                        case SimilarityMethod.SimilarFirstWord:
-                            {
-                                for (int j = 0; j < source.Count; j++)
-                                {
-                                    if (verse.Text.HasSimilarFirstWordTo(source[j].Text, similarity_percentage))
-                                    {
-                                        result.Add(source[j]);
-                                    }
-                                }
-                            }
-                            break;
-                        case SimilarityMethod.SimilarLastWord:
-                            {
-                                for (int j = 0; j < source.Count; j++)
-                                {
-                                    if (verse.Text.HasSimilarLastWordTo(source[j].Text, similarity_percentage))
-                                    {
-                                        result.Add(source[j]);
-                                    }
-                                }
-                            }
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-        }
-
-        return result;
-    }
-    // find by similarity - all similar verses to each other throughout the book
-    public static List<List<Verse>> FindVersess(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, SimilarityMethod similarity_method, double similarity_percentage)
-    {
-        return DoFindVersess(search_scope, current_selection, previous_result, similarity_method, similarity_percentage);
-    }
-    private static List<List<Verse>> DoFindVersess(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, SimilarityMethod similarity_method, double similarity_percentage)
-    {
-        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_result, TextLocationInChapter.Any);
-        return DoFindVersess(source, current_selection, previous_result, similarity_method, similarity_percentage);
-    }
-    private static List<List<Verse>> DoFindVersess(List<Verse> source, Selection current_selection, List<Verse> previous_result, SimilarityMethod find_similarity_method, double similarity_percentage)
-    {
-        List<List<Verse>> result = new List<List<Verse>>();
-
-        Dictionary<Verse, List<Verse>> verse_ranges = new Dictionary<Verse, List<Verse>>(); // need dictionary to check if key exist
-        bool[] already_compared = new bool[source.Count];
-        if (source != null)
-        {
-            if (source.Count > 0)
-            {
-                switch (find_similarity_method)
-                {
-                    case SimilarityMethod.SimilarText:
-                        {
-                            for (int i = 0; i < source.Count - 1; i++)
-                            {
-                                for (int j = i + 1; j < source.Count; j++)
-                                {
-                                    if (!already_compared[j])
-                                    {
-                                        if (source[i].Text.IsSimilarTo(source[j].Text, similarity_percentage))
-                                        {
-                                            if (!verse_ranges.ContainsKey(source[i])) // first time matching verses found
-                                            {
-                                                List<Verse> similar_verses = new List<Verse>();
-                                                verse_ranges.Add(source[i], similar_verses);
-                                                similar_verses.Add(source[i]);
-                                                similar_verses.Add(source[j]);
-                                                already_compared[i] = true;
-                                                already_compared[j] = true;
-                                            }
-                                            else // matching verses already exists
-                                            {
-                                                List<Verse> similar_verses = verse_ranges[source[i]];
-                                                similar_verses.Add(source[j]);
-                                                already_compared[j] = true;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case SimilarityMethod.SimilarWords:
-                        {
-                            for (int i = 0; i < source.Count - 1; i++)
-                            {
-                                for (int j = i + 1; j < source.Count; j++)
-                                {
-                                    if (!already_compared[j])
-                                    {
-                                        if (source[i].Text.HasSimilarWordsTo(source[j].Text, (int)Math.Round((Math.Min(source[i].Words.Count, source[j].Words.Count) * similarity_percentage)), similarity_percentage))
-                                        {
-                                            if (!verse_ranges.ContainsKey(source[i])) // first time matching verses found
-                                            {
-                                                List<Verse> similar_verses = new List<Verse>();
-                                                verse_ranges.Add(source[i], similar_verses);
-                                                similar_verses.Add(source[i]);
-                                                similar_verses.Add(source[j]);
-                                                already_compared[i] = true;
-                                                already_compared[j] = true;
-                                            }
-                                            else // matching verses already exists
-                                            {
-                                                List<Verse> similar_verses = verse_ranges[source[i]];
-                                                similar_verses.Add(source[j]);
-                                                already_compared[j] = true;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case SimilarityMethod.SimilarFirstWord:
-                        {
-                            for (int i = 0; i < source.Count - 1; i++)
-                            {
-                                for (int j = i + 1; j < source.Count; j++)
-                                {
-                                    if (!already_compared[j])
-                                    {
-                                        if (source[j].Text.HasSimilarFirstWordTo(source[j].Text, similarity_percentage))
-                                        {
-                                            if (!verse_ranges.ContainsKey(source[i])) // first time matching verses found
-                                            {
-                                                List<Verse> similar_verses = new List<Verse>();
-                                                verse_ranges.Add(source[i], similar_verses);
-                                                similar_verses.Add(source[i]);
-                                                similar_verses.Add(source[j]);
-                                                already_compared[i] = true;
-                                                already_compared[j] = true;
-                                            }
-                                            else // matching verses already exists
-                                            {
-                                                List<Verse> similar_verses = verse_ranges[source[i]];
-                                                similar_verses.Add(source[j]);
-                                                already_compared[j] = true;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    case SimilarityMethod.SimilarLastWord:
-                        {
-                            for (int i = 0; i < source.Count - 1; i++)
-                            {
-                                for (int j = i + 1; j < source.Count; j++)
-                                {
-                                    if (!already_compared[j])
-                                    {
-                                        if (source[i].Text.HasSimilarLastWordTo(source[j].Text, similarity_percentage))
-                                        {
-                                            if (!verse_ranges.ContainsKey(source[i])) // first time matching verses found
-                                            {
-                                                List<Verse> similar_verses = new List<Verse>();
-                                                verse_ranges.Add(source[i], similar_verses);
-                                                similar_verses.Add(source[i]);
-                                                similar_verses.Add(source[j]);
-                                                already_compared[i] = true;
-                                                already_compared[j] = true;
-                                            }
-                                            else // matching verses already exists
-                                            {
-                                                List<Verse> similar_verses = verse_ranges[source[i]];
-                                                similar_verses.Add(source[j]);
-                                                already_compared[j] = true;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
-        // copy dictionary to list of list
-        if (verse_ranges.Count > 0)
-        {
-            foreach (List<Verse> verse_range in verse_ranges.Values)
-            {
-                result.Add(verse_range);
-            }
-        }
-
-        return result;
-    }
 
     // find by numbers - helper methods
     private static void CalculateSums(Word word, out int letter_sum)
@@ -20271,6 +19907,371 @@ public class Server : IPublisher
         return result;
     }
 
+
+    // find by similarity - phrases similar to given text
+    public static List<Phrase> FindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, string text, double similarity_percentage)
+    {
+        List<Phrase> result = new List<Phrase>();
+
+        List<Verse> found_verses = previous_result;
+        while (text.Contains("  "))
+        {
+            text = text.Replace("  ", " ");
+        }
+        while (text.Contains("+"))
+        {
+            text = text.Replace("+", "");
+        }
+        while (text.Contains("-"))
+        {
+            text = text.Replace("-", "");
+        }
+
+        string[] word_texts = text.Split();
+        if (word_texts.Length == 0)
+        {
+            return result;
+        }
+        if (word_texts.Length == 1)
+        {
+            return DoFindPhrases(search_scope, current_selection, previous_result, text, similarity_percentage);
+        }
+        if (word_texts.Length > 1) // enable nested searches
+        {
+            if (text.Length > 1) // enable nested searches
+            {
+                List<Phrase> phrases = null;
+                List<Verse> verses = null;
+
+                foreach (string word_text in word_texts)
+                {
+                    phrases = DoFindPhrases(search_scope, current_selection, found_verses, word_text, similarity_percentage);
+                    verses = new List<Verse>(GetVerses(phrases));
+
+                    // if first result
+                    if (found_verses == null)
+                    {
+                        // fill it up with a copy of the first similar word search result
+                        result = new List<Phrase>(phrases);
+                        found_verses = new List<Verse>(verses);
+
+                        // prepare for nested search by search
+                        search_scope = SearchScope.Result;
+                    }
+                    else // subsequent search result
+                    {
+                        found_verses = new List<Verse>(verses);
+
+                        List<Phrase> union_phrases = new List<Phrase>(phrases);
+                        foreach (Phrase phrase in result)
+                        {
+                            if (phrase != null)
+                            {
+                                if (verses.Contains(phrase.Verse))
+                                {
+                                    union_phrases.Add(phrase);
+                                }
+                            }
+                        }
+                        result = union_phrases;
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+    private static List<Phrase> DoFindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, string text, double similarity_percentage)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_result, TextLocationInChapter.Any);
+        return DoFindPhrases(source, current_selection, previous_result, text, similarity_percentage);
+    }
+    private static List<Phrase> DoFindPhrases(List<Verse> source, Selection current_selection, List<Verse> previous_result, string text, double similarity_percentage)
+    {
+        List<Phrase> result = new List<Phrase>();
+
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (!String.IsNullOrEmpty(text))
+                {
+                    foreach (Verse verse in source)
+                    {
+                        foreach (Word word in verse.Words)
+                        {
+                            if (word.Text.IsSimilarTo(text, similarity_percentage))
+                            {
+                                result.Add(new Phrase(verse, word.Position, word.Text));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+    // find by similarity - verses similar to given verse
+    public static List<Verse> FindVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, Verse verse, SimilarityMethod similarity_method, double similarity_percentage)
+    {
+        return DoFindVerses(search_scope, current_selection, previous_result, verse, similarity_method, similarity_percentage);
+    }
+    private static List<Verse> DoFindVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, Verse verse, SimilarityMethod similarity_method, double similarity_percentage)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_result, TextLocationInChapter.Any);
+        return DoFindVerses(source, current_selection, previous_result, verse, similarity_method, similarity_percentage);
+    }
+    private static List<Verse> DoFindVerses(List<Verse> source, Selection current_selection, List<Verse> previous_result, Verse verse, SimilarityMethod find_similarity_method, double similarity_percentage)
+    {
+        List<Verse> result = new List<Verse>();
+
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                if (verse != null)
+                {
+                    switch (find_similarity_method)
+                    {
+                        case SimilarityMethod.SimilarText:
+                            {
+                                for (int j = 0; j < source.Count; j++)
+                                {
+                                    if (verse.Text.IsSimilarTo(source[j].Text, similarity_percentage))
+                                    {
+                                        result.Add(source[j]);
+                                    }
+                                }
+                            }
+                            break;
+                        case SimilarityMethod.SimilarWords:
+                            {
+                                for (int j = 0; j < source.Count; j++)
+                                {
+                                    if (verse.Text.HasSimilarWordsTo(source[j].Text, (int)Math.Round((Math.Min(verse.Words.Count, source[j].Words.Count) * similarity_percentage)), similarity_percentage))
+                                    {
+                                        result.Add(source[j]);
+                                    }
+                                }
+                            }
+                            break;
+                        case SimilarityMethod.SimilarFirstHalf:
+                            {
+                                for (int j = 0; j < source.Count; j++)
+                                {
+                                    if (verse.Text.HasSimilarFirstHalfTo(source[j].Text, similarity_percentage))
+                                    {
+                                        result.Add(source[j]);
+                                    }
+                                }
+                            }
+                            break;
+                        case SimilarityMethod.SimilarLastHalf:
+                            {
+                                for (int j = 0; j < source.Count; j++)
+                                {
+                                    if (verse.Text.HasSimilarLastHalfTo(source[j].Text, similarity_percentage))
+                                    {
+                                        result.Add(source[j]);
+                                    }
+                                }
+                            }
+                            break;
+                        case SimilarityMethod.SimilarFirstWord:
+                            {
+                                for (int j = 0; j < source.Count; j++)
+                                {
+                                    if (verse.Text.HasSimilarFirstWordTo(source[j].Text, similarity_percentage))
+                                    {
+                                        result.Add(source[j]);
+                                    }
+                                }
+                            }
+                            break;
+                        case SimilarityMethod.SimilarLastWord:
+                            {
+                                for (int j = 0; j < source.Count; j++)
+                                {
+                                    if (verse.Text.HasSimilarLastWordTo(source[j].Text, similarity_percentage))
+                                    {
+                                        result.Add(source[j]);
+                                    }
+                                }
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+    // find by similarity - all similar verses to each other throughout the book
+    public static List<List<Verse>> FindVersess(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, SimilarityMethod similarity_method, double similarity_percentage)
+    {
+        return DoFindVersess(search_scope, current_selection, previous_result, similarity_method, similarity_percentage);
+    }
+    private static List<List<Verse>> DoFindVersess(SearchScope search_scope, Selection current_selection, List<Verse> previous_result, SimilarityMethod similarity_method, double similarity_percentage)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_result, TextLocationInChapter.Any);
+        return DoFindVersess(source, current_selection, previous_result, similarity_method, similarity_percentage);
+    }
+    private static List<List<Verse>> DoFindVersess(List<Verse> source, Selection current_selection, List<Verse> previous_result, SimilarityMethod find_similarity_method, double similarity_percentage)
+    {
+        List<List<Verse>> result = new List<List<Verse>>();
+
+        Dictionary<Verse, List<Verse>> verse_ranges = new Dictionary<Verse, List<Verse>>(); // need dictionary to check if key exist
+        bool[] already_compared = new bool[source.Count];
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                switch (find_similarity_method)
+                {
+                    case SimilarityMethod.SimilarText:
+                        {
+                            for (int i = 0; i < source.Count - 1; i++)
+                            {
+                                for (int j = i + 1; j < source.Count; j++)
+                                {
+                                    if (!already_compared[j])
+                                    {
+                                        if (source[i].Text.IsSimilarTo(source[j].Text, similarity_percentage))
+                                        {
+                                            if (!verse_ranges.ContainsKey(source[i])) // first time matching verses found
+                                            {
+                                                List<Verse> similar_verses = new List<Verse>();
+                                                verse_ranges.Add(source[i], similar_verses);
+                                                similar_verses.Add(source[i]);
+                                                similar_verses.Add(source[j]);
+                                                already_compared[i] = true;
+                                                already_compared[j] = true;
+                                            }
+                                            else // matching verses already exists
+                                            {
+                                                List<Verse> similar_verses = verse_ranges[source[i]];
+                                                similar_verses.Add(source[j]);
+                                                already_compared[j] = true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case SimilarityMethod.SimilarWords:
+                        {
+                            for (int i = 0; i < source.Count - 1; i++)
+                            {
+                                for (int j = i + 1; j < source.Count; j++)
+                                {
+                                    if (!already_compared[j])
+                                    {
+                                        if (source[i].Text.HasSimilarWordsTo(source[j].Text, (int)Math.Round((Math.Min(source[i].Words.Count, source[j].Words.Count) * similarity_percentage)), similarity_percentage))
+                                        {
+                                            if (!verse_ranges.ContainsKey(source[i])) // first time matching verses found
+                                            {
+                                                List<Verse> similar_verses = new List<Verse>();
+                                                verse_ranges.Add(source[i], similar_verses);
+                                                similar_verses.Add(source[i]);
+                                                similar_verses.Add(source[j]);
+                                                already_compared[i] = true;
+                                                already_compared[j] = true;
+                                            }
+                                            else // matching verses already exists
+                                            {
+                                                List<Verse> similar_verses = verse_ranges[source[i]];
+                                                similar_verses.Add(source[j]);
+                                                already_compared[j] = true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case SimilarityMethod.SimilarFirstWord:
+                        {
+                            for (int i = 0; i < source.Count - 1; i++)
+                            {
+                                for (int j = i + 1; j < source.Count; j++)
+                                {
+                                    if (!already_compared[j])
+                                    {
+                                        if (source[j].Text.HasSimilarFirstWordTo(source[j].Text, similarity_percentage))
+                                        {
+                                            if (!verse_ranges.ContainsKey(source[i])) // first time matching verses found
+                                            {
+                                                List<Verse> similar_verses = new List<Verse>();
+                                                verse_ranges.Add(source[i], similar_verses);
+                                                similar_verses.Add(source[i]);
+                                                similar_verses.Add(source[j]);
+                                                already_compared[i] = true;
+                                                already_compared[j] = true;
+                                            }
+                                            else // matching verses already exists
+                                            {
+                                                List<Verse> similar_verses = verse_ranges[source[i]];
+                                                similar_verses.Add(source[j]);
+                                                already_compared[j] = true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    case SimilarityMethod.SimilarLastWord:
+                        {
+                            for (int i = 0; i < source.Count - 1; i++)
+                            {
+                                for (int j = i + 1; j < source.Count; j++)
+                                {
+                                    if (!already_compared[j])
+                                    {
+                                        if (source[i].Text.HasSimilarLastWordTo(source[j].Text, similarity_percentage))
+                                        {
+                                            if (!verse_ranges.ContainsKey(source[i])) // first time matching verses found
+                                            {
+                                                List<Verse> similar_verses = new List<Verse>();
+                                                verse_ranges.Add(source[i], similar_verses);
+                                                similar_verses.Add(source[i]);
+                                                similar_verses.Add(source[j]);
+                                                already_compared[i] = true;
+                                                already_compared[j] = true;
+                                            }
+                                            else // matching verses already exists
+                                            {
+                                                List<Verse> similar_verses = verse_ranges[source[i]];
+                                                similar_verses.Add(source[j]);
+                                                already_compared[j] = true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+        // copy dictionary to list of list
+        if (verse_ranges.Count > 0)
+        {
+            foreach (List<Verse> verse_range in verse_ranges.Values)
+            {
+                result.Add(verse_range);
+            }
+        }
+
+        return result;
+    }
 
     // find by prostration type
     public static List<Verse> FindVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, ProstrationType prostration_type)
