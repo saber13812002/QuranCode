@@ -1,4 +1,4 @@
-public enum Edition { Standard, Lite, Research, Ultimate }
+public enum Edition { Lite, Standard, Research, Ultimate }
 
 public static class Globals
 {
@@ -19,13 +19,13 @@ public static class Globals
                 }
             }
 
-            if (EDITION == Edition.Standard)
-            {
-                return (version + "");
-            }
-            else if (EDITION == Edition.Lite)
+            if (EDITION == Edition.Lite)
             {
                 return (version + "L");
+            }
+            else if (EDITION == Edition.Standard)
+            {
+                return (version + "");
             }
             else if (EDITION == Edition.Research)
             {

@@ -6,6 +6,7 @@ using System.Text;
 using System.IO;
 using System.Security.Cryptography;
 
+
 public enum Direction { LeftToRight, RightToLeft };
 public enum NumberType
 {

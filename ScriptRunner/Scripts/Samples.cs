@@ -45,13 +45,13 @@ public class MyScript : IScriptRunner
             //if (Numbers.IsAdditiveComposite(verse.NumberInChapter))    // 2824
             //if (Numbers.IsNonAdditiveComposite(verse.NumberInChapter)) // 1568
 
-            //if ((verse.Number % 19) == 0)                              // verse number in the Quran is divisble by 19
+            if ((verse.Number % 19) == 0)                              // verse number in the Quran is divisble by 19
             //if (verse.NumberInChapter == verse.Words.Count)            // verse number = verse words
             //if (verse.NumberInChapter == verse.LetterCount)            // verse number = verse letters
             //if (client.CalculateValue(verse) == 114)                   // verse value = 114 in current Client.NumerologySystem
-            //{
-            //    client.FoundVerses.Add(verse);
-            //}
+            {
+                client.FoundVerses.Add(verse);
+            }
         }
         return true; // to close Script window and show client.FoundVerses
     }
