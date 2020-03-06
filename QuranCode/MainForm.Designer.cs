@@ -9141,7 +9141,7 @@ partial class MainForm
         this.TotalChapterCountsCheckBox.Name = "TotalChapterCountsCheckBox";
         this.TotalChapterCountsCheckBox.Size = new System.Drawing.Size(31, 16);
         this.TotalChapterCountsCheckBox.TabIndex = 1;
-        this.TotalChapterCountsCheckBox.Text = "∑";
+        this.TotalChapterCountsCheckBox.Text = "Σ";
         this.ToolTip.SetToolTip(this.TotalChapterCountsCheckBox, "Display total chapter counts");
         this.TotalChapterCountsCheckBox.UseVisualStyleBackColor = false;
         this.TotalChapterCountsCheckBox.CheckedChanged += new System.EventHandler(this.TotalChapterCountsCheckBox_CheckedChanged);
@@ -10169,7 +10169,7 @@ partial class MainForm
         this.SumOfNumbersLabel.Name = "SumOfNumbersLabel";
         this.SumOfNumbersLabel.Size = new System.Drawing.Size(14, 18);
         this.SumOfNumbersLabel.TabIndex = 0;
-        this.SumOfNumbersLabel.Text = "∑";
+        this.SumOfNumbersLabel.Text = "Σ";
         this.SumOfNumbersLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
         // 
         // Nth4nMinus1CompositeNumberLabel
@@ -11561,11 +11561,12 @@ partial class MainForm
         this.FindByFrequencyNoLetterOfLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByFrequencyNoLetterOfLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByFrequencyNoLetterOfLabel.ForeColor = System.Drawing.Color.White;
-        this.FindByFrequencyNoLetterOfLabel.Location = new System.Drawing.Point(47, 36);
+        this.FindByFrequencyNoLetterOfLabel.Location = new System.Drawing.Point(47, 51);
         this.FindByFrequencyNoLetterOfLabel.Name = "FindByFrequencyNoLetterOfLabel";
         this.FindByFrequencyNoLetterOfLabel.Size = new System.Drawing.Size(6, 5);
-        this.FindByFrequencyNoLetterOfLabel.TabIndex = 231;
+        this.FindByFrequencyNoLetterOfLabel.TabIndex = 0;
         this.FindByFrequencyNoLetterOfLabel.Click += new System.EventHandler(this.FindByFrequencyNoLetterOfLabel_Click);
+        this.FindByFrequencyNoLetterOfLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
         // 
         // FindByFrequencyAnyLetterOfLabel
         // 
@@ -11573,11 +11574,12 @@ partial class MainForm
         this.FindByFrequencyAnyLetterOfLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByFrequencyAnyLetterOfLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByFrequencyAnyLetterOfLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.FindByFrequencyAnyLetterOfLabel.Location = new System.Drawing.Point(47, 41);
+        this.FindByFrequencyAnyLetterOfLabel.Location = new System.Drawing.Point(47, 46);
         this.FindByFrequencyAnyLetterOfLabel.Name = "FindByFrequencyAnyLetterOfLabel";
         this.FindByFrequencyAnyLetterOfLabel.Size = new System.Drawing.Size(6, 5);
-        this.FindByFrequencyAnyLetterOfLabel.TabIndex = 232;
+        this.FindByFrequencyAnyLetterOfLabel.TabIndex = 0;
         this.FindByFrequencyAnyLetterOfLabel.Click += new System.EventHandler(this.FindByFrequencyAnyLetterOfLabel_Click);
+        this.FindByFrequencyAnyLetterOfLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
         // 
         // FindByFrequencyAllLettersOfLabel
         // 
@@ -11585,11 +11587,12 @@ partial class MainForm
         this.FindByFrequencyAllLettersOfLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByFrequencyAllLettersOfLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByFrequencyAllLettersOfLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.FindByFrequencyAllLettersOfLabel.Location = new System.Drawing.Point(47, 46);
+        this.FindByFrequencyAllLettersOfLabel.Location = new System.Drawing.Point(47, 41);
         this.FindByFrequencyAllLettersOfLabel.Name = "FindByFrequencyAllLettersOfLabel";
         this.FindByFrequencyAllLettersOfLabel.Size = new System.Drawing.Size(6, 5);
-        this.FindByFrequencyAllLettersOfLabel.TabIndex = 233;
+        this.FindByFrequencyAllLettersOfLabel.TabIndex = 0;
         this.FindByFrequencyAllLettersOfLabel.Click += new System.EventHandler(this.FindByFrequencyAllLettersOfLabel_Click);
+        this.FindByFrequencyAllLettersOfLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
         // 
         // FindByFrequencyOnlyLettersOfLabel
         // 
@@ -11597,11 +11600,12 @@ partial class MainForm
         this.FindByFrequencyOnlyLettersOfLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByFrequencyOnlyLettersOfLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByFrequencyOnlyLettersOfLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.FindByFrequencyOnlyLettersOfLabel.Location = new System.Drawing.Point(47, 51);
+        this.FindByFrequencyOnlyLettersOfLabel.Location = new System.Drawing.Point(47, 36);
         this.FindByFrequencyOnlyLettersOfLabel.Name = "FindByFrequencyOnlyLettersOfLabel";
         this.FindByFrequencyOnlyLettersOfLabel.Size = new System.Drawing.Size(6, 5);
-        this.FindByFrequencyOnlyLettersOfLabel.TabIndex = 234;
+        this.FindByFrequencyOnlyLettersOfLabel.TabIndex = 0;
         this.FindByFrequencyOnlyLettersOfLabel.Click += new System.EventHandler(this.FindByFrequencyOnlyLettersOfLabel_Click);
+        this.FindByFrequencyOnlyLettersOfLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
         // 
         // MainForm
         // 

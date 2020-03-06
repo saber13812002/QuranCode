@@ -3986,7 +3986,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("N" + "\t" + "P" + "\t" + "N:P" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("N" + "\t" + "P" + "\t" + "N:P" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int N_total = 0;
         int P_total = 0;
@@ -4091,7 +4091,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("N" + "\t" + "AP" + "\t" + "N:AP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("N" + "\t" + "AP" + "\t" + "N:AP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int N_total = 0;
         int AP_total = 0;
@@ -4196,7 +4196,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("N" + "\t" + "XP" + "\t" + "N:XP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("N" + "\t" + "XP" + "\t" + "N:XP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int N_total = 0;
         int XP_total = 0;
@@ -4301,7 +4301,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("N" + "\t" + "C" + "\t" + "N:C" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("N" + "\t" + "C" + "\t" + "N:C" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int N_total = 0;
         int C_total = 0;
@@ -4406,7 +4406,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("N" + "\t" + "AC" + "\t" + "N:AC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("N" + "\t" + "AC" + "\t" + "N:AC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int N_total = 0;
         int AC_total = 0;
@@ -4511,7 +4511,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("N" + "\t" + "XC" + "\t" + "N:XC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("N" + "\t" + "XC" + "\t" + "N:XC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int N_total = 0;
         int XC_total = 0;
@@ -4616,7 +4616,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("N" + "\t" + "rN" + "\t" + "P" + "\t" + "rN:P" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("N" + "\t" + "rN" + "\t" + "P" + "\t" + "rN:P" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int N_total = 0;
         int rN_total = 0;
@@ -4724,7 +4724,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("N" + "\t" + "rN" + "\t" + "AP" + "\t" + "rN:AP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("N" + "\t" + "rN" + "\t" + "AP" + "\t" + "rN:AP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int N_total = 0;
         int rN_total = 0;
@@ -4832,7 +4832,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("N" + "\t" + "rN" + "\t" + "XP" + "\t" + "rN:XP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("N" + "\t" + "rN" + "\t" + "XP" + "\t" + "rN:XP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int N_total = 0;
         int rN_total = 0;
@@ -4940,7 +4940,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("N" + "\t" + "rN" + "\t" + "C" + "\t" + "rN:C" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("N" + "\t" + "rN" + "\t" + "C" + "\t" + "rN:C" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int N_total = 0;
         int rN_total = 0;
@@ -5048,7 +5048,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("N" + "\t" + "rN" + "\t" + "AC" + "\t" + "rN:AC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("N" + "\t" + "rN" + "\t" + "AC" + "\t" + "rN:AC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int N_total = 0;
         int rN_total = 0;
@@ -5156,7 +5156,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("N" + "\t" + "rN" + "\t" + "XC" + "\t" + "rN:XC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("N" + "\t" + "rN" + "\t" + "XC" + "\t" + "rN:XC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int N_total = 0;
         int rN_total = 0;
@@ -5264,7 +5264,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "P" + "\t" + "M:P" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("M" + "\t" + "P" + "\t" + "M:P" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int M_total = 0;
         int P_total = 0;
@@ -5369,7 +5369,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "AP" + "\t" + "M:AP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("M" + "\t" + "AP" + "\t" + "M:AP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int M_total = 0;
         int AP_total = 0;
@@ -5474,7 +5474,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "XP" + "\t" + "M:XP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("M" + "\t" + "XP" + "\t" + "M:XP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int M_total = 0;
         int XP_total = 0;
@@ -5579,7 +5579,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "C" + "\t" + "M:C" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("M" + "\t" + "C" + "\t" + "M:C" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int M_total = 0;
         int C_total = 0;
@@ -5684,7 +5684,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "AC" + "\t" + "M:AC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("M" + "\t" + "AC" + "\t" + "M:AC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int M_total = 0;
         int AC_total = 0;
@@ -5789,7 +5789,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "XC" + "\t" + "M:XC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("M" + "\t" + "XC" + "\t" + "M:XC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int M_total = 0;
         int XC_total = 0;
@@ -5894,7 +5894,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "rM" + "\t" + "P" + "\t" + "rM:P" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("M" + "\t" + "rM" + "\t" + "P" + "\t" + "rM:P" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int M_total = 0;
         int rM_total = 0;
@@ -6002,7 +6002,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "rM" + "\t" + "AP" + "\t" + "rM:AP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("M" + "\t" + "rM" + "\t" + "AP" + "\t" + "rM:AP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int M_total = 0;
         int rM_total = 0;
@@ -6110,7 +6110,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "rM" + "\t" + "XP" + "\t" + "rM:XP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("M" + "\t" + "rM" + "\t" + "XP" + "\t" + "rM:XP" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int M_total = 0;
         int rM_total = 0;
@@ -6218,7 +6218,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "rM" + "\t" + "C" + "\t" + "rM:C" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("M" + "\t" + "rM" + "\t" + "C" + "\t" + "rM:C" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int M_total = 0;
         int rM_total = 0;
@@ -6326,7 +6326,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "rM" + "\t" + "AC" + "\t" + "rM:AC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("M" + "\t" + "rM" + "\t" + "AC" + "\t" + "rM:AC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int M_total = 0;
         int rM_total = 0;
@@ -6434,7 +6434,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("M" + "\t" + "rM" + "\t" + "XC" + "\t" + "rM:XC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("M" + "\t" + "rM" + "\t" + "XC" + "\t" + "rM:XC" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int M_total = 0;
         int rM_total = 0;
@@ -6542,7 +6542,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("N" + "\t" + "M" + "\t" + "N:M" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("N" + "\t" + "M" + "\t" + "N:M" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int N_total = 0;
         int M_total = 0;
@@ -6647,7 +6647,7 @@ public static class Research
         if (client.Book == null) return null;
 
         StringBuilder str = new StringBuilder();
-        str.Append("N" + "\t" + "rM" + "\t" + "N:rM" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "∑Pos" + "\t" + "∑∆" + "\t" + "All∑Pos" + "\t" + "All∑∆" + "\t" + "Text" + "\r\n");
+        str.Append("N" + "\t" + "rM" + "\t" + "N:rM" + "\t" + "Words" + "\t" + "Letters" + "\t" + "Unique" + "\t" + "Value" + "\t" + "ΣPos" + "\t" + "Σ∆" + "\t" + "AllΣPos" + "\t" + "AllΣ∆" + "\t" + "Text" + "\r\n");
 
         int N_total = 0;
         int rM_total = 0;

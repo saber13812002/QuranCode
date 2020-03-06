@@ -10770,13 +10770,13 @@ public partial class MainForm : Form, ISubscriber
         // 
         // LetterPositionSumColumnHeader
         // 
-        this.LetterPositionSumColumnHeader.Text = "∑Pos";
+        this.LetterPositionSumColumnHeader.Text = "ΣPos";
         this.LetterPositionSumColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.LetterPositionSumColumnHeader.Width = 48;
         // 
         // LetterDistanceSumColumnHeader
         // 
-        this.LetterDistanceSumColumnHeader.Text = "∑Δ";
+        this.LetterDistanceSumColumnHeader.Text = "ΣΔ";
         this.LetterDistanceSumColumnHeader.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
         this.LetterDistanceSumColumnHeader.Width = 42;
         // 
@@ -10827,11 +10827,12 @@ public partial class MainForm : Form, ISubscriber
         this.FindByFrequencyOnlyLettersOfLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByFrequencyOnlyLettersOfLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByFrequencyOnlyLettersOfLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.FindByFrequencyOnlyLettersOfLabel.Location = new System.Drawing.Point(60, 62);
+        this.FindByFrequencyOnlyLettersOfLabel.Location = new System.Drawing.Point(60, 45);
         this.FindByFrequencyOnlyLettersOfLabel.Name = "FindByFrequencyOnlyLettersOfLabel";
         this.FindByFrequencyOnlyLettersOfLabel.Size = new System.Drawing.Size(8, 6);
-        this.FindByFrequencyOnlyLettersOfLabel.TabIndex = 234;
+        this.FindByFrequencyOnlyLettersOfLabel.TabIndex = 0;
         this.FindByFrequencyOnlyLettersOfLabel.Click += new System.EventHandler(this.FindByFrequencyOnlyLettersOfLabel_Click);
+        this.FindByFrequencyOnlyLettersOfLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
         // 
         // FindByFrequencyAllLettersOfLabel
         // 
@@ -10839,11 +10840,12 @@ public partial class MainForm : Form, ISubscriber
         this.FindByFrequencyAllLettersOfLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByFrequencyAllLettersOfLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByFrequencyAllLettersOfLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.FindByFrequencyAllLettersOfLabel.Location = new System.Drawing.Point(60, 56);
+        this.FindByFrequencyAllLettersOfLabel.Location = new System.Drawing.Point(60, 51);
         this.FindByFrequencyAllLettersOfLabel.Name = "FindByFrequencyAllLettersOfLabel";
         this.FindByFrequencyAllLettersOfLabel.Size = new System.Drawing.Size(8, 6);
-        this.FindByFrequencyAllLettersOfLabel.TabIndex = 233;
+        this.FindByFrequencyAllLettersOfLabel.TabIndex = 0;
         this.FindByFrequencyAllLettersOfLabel.Click += new System.EventHandler(this.FindByFrequencyAllLettersOfLabel_Click);
+        this.FindByFrequencyAllLettersOfLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
         // 
         // FindByFrequencyAnyLetterOfLabel
         // 
@@ -10851,11 +10853,12 @@ public partial class MainForm : Form, ISubscriber
         this.FindByFrequencyAnyLetterOfLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByFrequencyAnyLetterOfLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByFrequencyAnyLetterOfLabel.ForeColor = System.Drawing.SystemColors.Window;
-        this.FindByFrequencyAnyLetterOfLabel.Location = new System.Drawing.Point(60, 51);
+        this.FindByFrequencyAnyLetterOfLabel.Location = new System.Drawing.Point(60, 56);
         this.FindByFrequencyAnyLetterOfLabel.Name = "FindByFrequencyAnyLetterOfLabel";
         this.FindByFrequencyAnyLetterOfLabel.Size = new System.Drawing.Size(8, 6);
-        this.FindByFrequencyAnyLetterOfLabel.TabIndex = 232;
+        this.FindByFrequencyAnyLetterOfLabel.TabIndex = 0;
         this.FindByFrequencyAnyLetterOfLabel.Click += new System.EventHandler(this.FindByFrequencyAnyLetterOfLabel_Click);
+        this.FindByFrequencyAnyLetterOfLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
         // 
         // FindByFrequencyNoLetterOfLabel
         // 
@@ -10863,11 +10866,12 @@ public partial class MainForm : Form, ISubscriber
         this.FindByFrequencyNoLetterOfLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.FindByFrequencyNoLetterOfLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
         this.FindByFrequencyNoLetterOfLabel.ForeColor = System.Drawing.Color.White;
-        this.FindByFrequencyNoLetterOfLabel.Location = new System.Drawing.Point(60, 45);
+        this.FindByFrequencyNoLetterOfLabel.Location = new System.Drawing.Point(60, 62);
         this.FindByFrequencyNoLetterOfLabel.Name = "FindByFrequencyNoLetterOfLabel";
         this.FindByFrequencyNoLetterOfLabel.Size = new System.Drawing.Size(8, 6);
-        this.FindByFrequencyNoLetterOfLabel.TabIndex = 231;
+        this.FindByFrequencyNoLetterOfLabel.TabIndex = 0;
         this.FindByFrequencyNoLetterOfLabel.Click += new System.EventHandler(this.FindByFrequencyNoLetterOfLabel_Click);
+        this.FindByFrequencyNoLetterOfLabel.Enter += new System.EventHandler(this.FindByFrequencyControls_Enter);
         // 
         // FindByFrequencyLinkLabel
         // 
@@ -12418,7 +12422,7 @@ public partial class MainForm : Form, ISubscriber
         this.SumOfNumbersLabel.Name = "SumOfNumbersLabel";
         this.SumOfNumbersLabel.Size = new System.Drawing.Size(14, 23);
         this.SumOfNumbersLabel.TabIndex = 0;
-        this.SumOfNumbersLabel.Text = "∑";
+        this.SumOfNumbersLabel.Text = "Σ";
         // 
         // VersesTextBox
         // 
@@ -12587,7 +12591,7 @@ public partial class MainForm : Form, ISubscriber
         this.TotalChapterCountsCheckBox.Name = "TotalChapterCountsCheckBox";
         this.TotalChapterCountsCheckBox.Size = new System.Drawing.Size(38, 17);
         this.TotalChapterCountsCheckBox.TabIndex = 1;
-        this.TotalChapterCountsCheckBox.Text = "∑";
+        this.TotalChapterCountsCheckBox.Text = "Σ";
         this.ToolTip.SetToolTip(this.TotalChapterCountsCheckBox, "Display total chapter counts");
         this.TotalChapterCountsCheckBox.UseVisualStyleBackColor = false;
         this.TotalChapterCountsCheckBox.CheckedChanged += new System.EventHandler(this.TotalChapterCountsCheckBox_CheckedChanged);
@@ -35871,8 +35875,6 @@ public partial class MainForm : Form, ISubscriber
         ResetFindByNumbersResultTypeLabels();
         ResetFindByFrequencyResultTypeLabels();
 
-        UpdateFindByNumbersResultType();
-
         switch (m_text_search_type)
         {
             case TextSearchType.Exact:
@@ -40693,7 +40695,7 @@ public partial class MainForm : Form, ISubscriber
     }
     ///////////////////////////////////////////////////////////////////////////////
     #endregion
-    #region Search By LetterFrequencySum
+    #region Search By LetterFrequency
     ///////////////////////////////////////////////////////////////////////////////
     private FrequencyResultType m_frequency_result_type = FrequencyResultType.Chapters;
     private void FindByFrequencyResultTypeWordsLabel_Click(object sender, EventArgs e)
@@ -41208,7 +41210,7 @@ public partial class MainForm : Form, ISubscriber
                 {
                     case FrequencyResultType.Words:
                         {
-                            int match_count = m_client.FindWords(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_with_diacritics);
+                            int match_count = m_client.FindWords(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_include_diacritics);
                             if (m_client.FoundWords != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["word"] : " " + L[l]["words"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
@@ -41218,7 +41220,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case FrequencyResultType.Sentences:
                         {
-                            int match_count = m_client.FindSentences(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_with_diacritics);
+                            int match_count = m_client.FindSentences(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_include_diacritics);
                             if (m_client.FoundSentences != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["sentence"] : " " + L[l]["sentences"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
@@ -41228,7 +41230,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case FrequencyResultType.Verses:
                         {
-                            int match_count = m_client.FindVerses(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_with_diacritics);
+                            int match_count = m_client.FindVerses(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_include_diacritics);
                             if (m_client.FoundVerses != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
@@ -41238,7 +41240,7 @@ public partial class MainForm : Form, ISubscriber
                         break;
                     case FrequencyResultType.Chapters:
                         {
-                            int match_count = m_client.FindChapters(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_with_diacritics);
+                            int match_count = m_client.FindChapters(phrase, sum, sum_number_type, sum_comparison_operator, sum_remainder, m_frequency_search_type, m_include_diacritics);
                             if (m_client.FoundChapters != null)
                             {
                                 m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["chapter"] : " " + L[l]["chapters"]) + " " + L[l]["with"] + " " + text + " " + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
@@ -41259,7 +41261,7 @@ public partial class MainForm : Form, ISubscriber
         this.Cursor = Cursors.WaitCursor;
         try
         {
-            FindByFrequencySumVersesWithPhraseLetters(FrequencyMatchingType.NoLetterOf);
+            DoFindByFrequencySumOfLetters(FrequencyMatchingType.NoLetterOf);
         }
         catch (Exception ex)
         {
@@ -41279,7 +41281,7 @@ public partial class MainForm : Form, ISubscriber
         this.Cursor = Cursors.WaitCursor;
         try
         {
-            FindByFrequencySumVersesWithPhraseLetters(FrequencyMatchingType.AnyLetterOf);
+            DoFindByFrequencySumOfLetters(FrequencyMatchingType.AnyLetterOf);
         }
         catch (Exception ex)
         {
@@ -41299,7 +41301,7 @@ public partial class MainForm : Form, ISubscriber
         this.Cursor = Cursors.WaitCursor;
         try
         {
-            FindByFrequencySumVersesWithPhraseLetters(FrequencyMatchingType.AllLettersOf);
+            DoFindByFrequencySumOfLetters(FrequencyMatchingType.AllLettersOf);
         }
         catch (Exception ex)
         {
@@ -41319,7 +41321,7 @@ public partial class MainForm : Form, ISubscriber
         this.Cursor = Cursors.WaitCursor;
         try
         {
-            FindByFrequencySumVersesWithPhraseLetters(FrequencyMatchingType.OnlyLettersOf);
+            DoFindByFrequencySumOfLetters(FrequencyMatchingType.OnlyLettersOf);
         }
         catch (Exception ex)
         {
@@ -41334,7 +41336,7 @@ public partial class MainForm : Form, ISubscriber
             this.Cursor = Cursors.Default;
         }
     }
-    private void FindByFrequencySumVersesWithPhraseLetters(FrequencyMatchingType frequency_matching_type)
+    private void DoFindByFrequencySumOfLetters(FrequencyMatchingType frequency_matching_type)
     {
         m_search_type = SearchType.Frequency;
 
@@ -41358,17 +41360,53 @@ public partial class MainForm : Form, ISubscriber
 
             if (!String.IsNullOrEmpty(phrase))
             {
-                foreach (Verse verse in m_client.Book.Verses)
-                {
-                    if (m_client.ContainsLetters(verse.Text, phrase, m_frequency_search_type, frequency_matching_type, m_include_diacritics))
-                    {
-                        m_client.FoundVerses.Add(verse);
-                    }
-                }
+                phrase = phrase.Replace("\r", "");
+                phrase = phrase.Replace("\n", " ");
+                phrase = phrase.Replace("\t", "");
 
-                int match_count = m_client.FoundVerses.Count;
-                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + frequency_matching_type + " " + phrase + " " + ((m_frequency_search_type == FrequencySearchType.DuplicateLetters) ? L[l]["with"] + " " + L[l]["same"] + " " + L[l]["frequency"] + " " : "") + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
-                DisplayFoundVerses(true);
+                switch (m_frequency_result_type)
+                {
+                    case FrequencyResultType.Words:
+                        {
+                            int match_count = m_client.FindWords(phrase, frequency_matching_type, m_frequency_search_type, m_include_diacritics);
+                            if (m_client.FoundWords != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["word"] : " " + L[l]["words"]) + " " + L[l]["with"] + " " + frequency_matching_type + " " + phrase + " " + ((m_frequency_search_type == FrequencySearchType.DuplicateLetters) ? L[l]["with"] + " " + L[l]["same"] + " " + L[l]["frequency"] + " " : "") + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundVerses(true);
+                            }
+                        }
+                        break;
+                    case FrequencyResultType.Sentences:
+                        {
+                            int match_count = m_client.FindSentences(phrase, frequency_matching_type, m_frequency_search_type, m_include_diacritics);
+                            if (m_client.FoundSentences != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["sentence"] : " " + L[l]["sentences"]) + " " + L[l]["with"] + " " + frequency_matching_type + " " + phrase + " " + ((m_frequency_search_type == FrequencySearchType.DuplicateLetters) ? L[l]["with"] + " " + L[l]["same"] + " " + L[l]["frequency"] + " " : "") + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundVerses(true);
+                            }
+                        }
+                        break;
+                    case FrequencyResultType.Verses:
+                        {
+                            int match_count = m_client.FindVerses(phrase, frequency_matching_type, m_frequency_search_type, m_include_diacritics);
+                            if (m_client.FoundVerses != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["verse"] : " " + L[l]["verses"]) + " " + L[l]["with"] + " " + frequency_matching_type + " " + phrase + " " + ((m_frequency_search_type == FrequencySearchType.DuplicateLetters) ? L[l]["with"] + " " + L[l]["same"] + " " + L[l]["frequency"] + " " : "") + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundVerses(true);
+                            }
+                        }
+                        break;
+                    case FrequencyResultType.Chapters:
+                        {
+                            int match_count = m_client.FindChapters(phrase, frequency_matching_type, m_frequency_search_type, m_include_diacritics);
+                            if (m_client.FoundChapters != null)
+                            {
+                                m_find_result_header = match_count + ((match_count == 1) ? " " + L[l]["chapter"] : " " + L[l]["chapters"]) + " " + L[l]["with"] + " " + frequency_matching_type + " " + phrase + " " + ((m_frequency_search_type == FrequencySearchType.DuplicateLetters) ? L[l]["with"] + " " + L[l]["same"] + " " + L[l]["frequency"] + " " : "") + L[l]["in"] + " " + L[l][m_client.SearchScope.ToString()];
+                                DisplayFoundChapters(true);
+                            }
+                        }
+                        break;
+                }
             }
         }
 
@@ -51698,7 +51736,7 @@ public partial class MainForm : Form, ISubscriber
                 {
                     if ((FindByFrequencyPhraseTextBox.Focused) || (FindByFrequencyPhraseTextBox.SelectionLength > 0))
                     {
-                        FactorizeValue(m_letter_frequency_sum, "∑", true);
+                        FactorizeValue(m_letter_frequency_sum, "ΣLF", true);
                     }
                 }
             }

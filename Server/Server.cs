@@ -4183,6 +4183,7 @@ public class Server : IPublisher
         return result;
     }
 
+
     // helper methods for finds
     public static List<Verse> GetSourceVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextLocationInChapter text_location_in_chapter)
     {
@@ -20288,6 +20289,7 @@ public class Server : IPublisher
         return result;
     }
 
+
     // find by prostration type
     public static List<Verse> FindVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, ProstrationType prostration_type)
     {
@@ -20318,6 +20320,7 @@ public class Server : IPublisher
 
         return result;
     }
+
 
     // find by revelation place
     public static List<Chapter> FindChapters(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, RevelationPlace revelation_place)
@@ -20367,6 +20370,7 @@ public class Server : IPublisher
         return result;
     }
 
+
     // find by initialization type
     public static List<Verse> FindVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, InitializationType initialization_type)
     {
@@ -20398,6 +20402,7 @@ public class Server : IPublisher
         return result;
     }
 
+
     // find by frequency - helper methods   
     private static bool Compare(int number1, int number2, NumberType number_type, ComparisonOperator comparison_operator, int remainder)
     {
@@ -20418,7 +20423,7 @@ public class Server : IPublisher
 
         return false;
     }
-    public static int CalculateLetterFrequencySum(string text, string phrase, FrequencySearchType frequency_search_type, bool with_diacritics)
+    public static int CalculateLetterFrequencySum(string text, string phrase, FrequencySearchType frequency_search_type, bool? include_diacritics)
     {
         if (String.IsNullOrEmpty(phrase)) return 0;
 
@@ -20426,7 +20431,7 @@ public class Server : IPublisher
 
         if (s_numerology_system != null)
         {
-            if (!with_diacritics) text = text.SimplifyTo(s_numerology_system.TextMode);
+            if (include_diacritics == false) text = text.SimplifyTo(s_numerology_system.TextMode);
             text = text.Replace("\r", "");
             text = text.Replace("\n", "");
             text = text.Replace("\t", "");
@@ -20457,7 +20462,7 @@ public class Server : IPublisher
 
             if (!String.IsNullOrEmpty(text))
             {
-                if (!with_diacritics) phrase = phrase.SimplifyTo(s_numerology_system.TextMode);
+                if (include_diacritics == false) phrase = phrase.SimplifyTo(s_numerology_system.TextMode);
                 phrase = phrase.Replace("\r", "");
                 phrase = phrase.Replace("\n", "");
                 phrase = phrase.Replace("\t", "");
@@ -20518,16 +20523,16 @@ public class Server : IPublisher
         return result;
     }
     // find by frequency - Words
-    public static List<Word> FindWords(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
+    public static List<Word> FindWords(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool? include_diacritics)
     {
-        return DoFindWords(search_scope, current_selection, previous_verses, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, with_diacritics);
+        return DoFindWords(search_scope, current_selection, previous_verses, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, include_diacritics);
     }
-    private static List<Word> DoFindWords(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
+    private static List<Word> DoFindWords(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool? include_diacritics)
     {
         List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
-        return DoFindWords(source, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, with_diacritics);
+        return DoFindWords(source, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, include_diacritics);
     }
-    private static List<Word> DoFindWords(List<Verse> source, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
+    private static List<Word> DoFindWords(List<Verse> source, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool? include_diacritics)
     {
         List<Word> result = new List<Word>();
 
@@ -20546,10 +20551,10 @@ public class Server : IPublisher
                                 foreach (Word word in verse.Words)
                                 {
                                     string text = word.Text;
-                                    if (!with_diacritics) text = text.SimplifyTo(s_numerology_system.TextMode);
-                                    if (!with_diacritics) phrase = phrase.SimplifyTo(s_numerology_system.TextMode);
+                                    if (include_diacritics == false) text = text.SimplifyTo(s_numerology_system.TextMode);
+                                    if (include_diacritics == false) phrase = phrase.SimplifyTo(s_numerology_system.TextMode);
 
-                                    int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, with_diacritics);
+                                    int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, include_diacritics);
                                     if (Compare(letter_frequency_sum, sum, number_type, comparison_operator, sum_remainder))
                                     {
                                         result.Add(word);
@@ -20565,16 +20570,16 @@ public class Server : IPublisher
         return result;
     }
     // find by frequency - Sentences
-    public static List<Sentence> FindSentences(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
+    public static List<Sentence> FindSentences(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool? include_diacritics)
     {
-        return DoFindSentences(search_scope, current_selection, previous_verses, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, with_diacritics);
+        return DoFindSentences(search_scope, current_selection, previous_verses, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, include_diacritics);
     }
-    private static List<Sentence> DoFindSentences(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
+    private static List<Sentence> DoFindSentences(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool? include_diacritics)
     {
         List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
-        return DoFindSentences(source, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, with_diacritics);
+        return DoFindSentences(source, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, include_diacritics);
     }
-    private static List<Sentence> DoFindSentences(List<Verse> source, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
+    private static List<Sentence> DoFindSentences(List<Verse> source, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool? include_diacritics)
     {
         List<Sentence> result = new List<Sentence>();
 
@@ -20611,7 +20616,7 @@ public class Server : IPublisher
                         if (sentence != null)
                         {
                             string text = sentence.ToString();
-                            int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, with_diacritics);
+                            int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, include_diacritics);
                             if (Compare(letter_frequency_sum, sum, number_type, comparison_operator, sum_remainder))
                             {
                                 result.Add(sentence);
@@ -20674,7 +20679,7 @@ public class Server : IPublisher
                                     if (sentence != null)
                                     {
                                         string text = sentence.ToString();
-                                        int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, with_diacritics);
+                                        int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, include_diacritics);
                                         if (Compare(letter_frequency_sum, sum, number_type, comparison_operator, sum_remainder))
                                         {
                                             result.Add(sentence);
@@ -20718,7 +20723,7 @@ public class Server : IPublisher
                                             if (sentence != null)
                                             {
                                                 string text = sentence.ToString();
-                                                int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, with_diacritics);
+                                                int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, include_diacritics);
                                                 if (Compare(letter_frequency_sum, sum, number_type, comparison_operator, sum_remainder))
                                                 {
                                                     result.Add(sentence);
@@ -20763,7 +20768,7 @@ public class Server : IPublisher
                                     if (sentence != null)
                                     {
                                         string text = sentence.ToString();
-                                        int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, with_diacritics);
+                                        int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, include_diacritics);
                                         if (Compare(letter_frequency_sum, sum, number_type, comparison_operator, sum_remainder))
                                         {
                                             result.Add(sentence);
@@ -20792,7 +20797,7 @@ public class Server : IPublisher
                                         if (sentence != null)
                                         {
                                             string text = sentence.ToString();
-                                            int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, with_diacritics);
+                                            int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, include_diacritics);
                                             if (Compare(letter_frequency_sum, sum, number_type, comparison_operator, sum_remainder))
                                             {
                                                 result.Add(sentence);
@@ -20815,7 +20820,7 @@ public class Server : IPublisher
                                     if (sentence != null)
                                     {
                                         string text = sentence.ToString();
-                                        int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, with_diacritics);
+                                        int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, include_diacritics);
                                         if (Compare(letter_frequency_sum, sum, number_type, comparison_operator, sum_remainder))
                                         {
                                             result.Add(sentence);
@@ -20864,7 +20869,7 @@ public class Server : IPublisher
                                                 if (sentence != null)
                                                 {
                                                     string text = sentence.ToString();
-                                                    int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, with_diacritics);
+                                                    int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, include_diacritics);
                                                     if (Compare(letter_frequency_sum, sum, number_type, comparison_operator, sum_remainder))
                                                     {
                                                         result.Add(sentence);
@@ -20881,7 +20886,7 @@ public class Server : IPublisher
                                                 if (sentence != null)
                                                 {
                                                     string text = sentence.ToString();
-                                                    int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, with_diacritics);
+                                                    int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, include_diacritics);
                                                     if (Compare(letter_frequency_sum, sum, number_type, comparison_operator, sum_remainder))
                                                     {
                                                         result.Add(sentence);
@@ -20893,7 +20898,7 @@ public class Server : IPublisher
                                                 if (sentence != null)
                                                 {
                                                     string text = sentence.ToString();
-                                                    int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, with_diacritics);
+                                                    int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, include_diacritics);
                                                     if (Compare(letter_frequency_sum, sum, number_type, comparison_operator, sum_remainder))
                                                     {
                                                         result.Add(sentence);
@@ -20918,7 +20923,7 @@ public class Server : IPublisher
                                     if (sentence != null)
                                     {
                                         string text = sentence.ToString();
-                                        int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, with_diacritics);
+                                        int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, include_diacritics);
                                         if (Compare(letter_frequency_sum, sum, number_type, comparison_operator, sum_remainder))
                                         {
                                             result.Add(sentence);
@@ -20942,16 +20947,16 @@ public class Server : IPublisher
         return result;
     }
     // find by frequency - Verses
-    public static List<Verse> FindVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
+    public static List<Verse> FindVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool? include_diacritics)
     {
-        return DoFindVerses(search_scope, current_selection, previous_verses, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, with_diacritics);
+        return DoFindVerses(search_scope, current_selection, previous_verses, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, include_diacritics);
     }
-    private static List<Verse> DoFindVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
+    private static List<Verse> DoFindVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool? include_diacritics)
     {
         List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
-        return DoFindVerses(source, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, with_diacritics);
+        return DoFindVerses(source, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, include_diacritics);
     }
-    private static List<Verse> DoFindVerses(List<Verse> source, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
+    private static List<Verse> DoFindVerses(List<Verse> source, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool? include_diacritics)
     {
         List<Verse> result = new List<Verse>();
 
@@ -20968,7 +20973,7 @@ public class Server : IPublisher
                             if (verse != null)
                             {
                                 string text = verse.Text;
-                                int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, with_diacritics);
+                                int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, include_diacritics);
                                 if (Compare(letter_frequency_sum, sum, number_type, comparison_operator, sum_remainder))
                                 {
                                     result.Add(verse);
@@ -20983,16 +20988,16 @@ public class Server : IPublisher
         return result;
     }
     // find by frequency - Chapters
-    public static List<Chapter> FindChapters(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
+    public static List<Chapter> FindChapters(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool? include_diacritics)
     {
-        return DoFindChapters(search_scope, current_selection, previous_verses, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, with_diacritics);
+        return DoFindChapters(search_scope, current_selection, previous_verses, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, include_diacritics);
     }
-    private static List<Chapter> DoFindChapters(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
+    private static List<Chapter> DoFindChapters(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool? include_diacritics)
     {
         List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
-        return DoFindChapters(source, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, with_diacritics);
+        return DoFindChapters(source, phrase, sum, number_type, comparison_operator, sum_remainder, frequency_search_type, include_diacritics);
     }
-    private static List<Chapter> DoFindChapters(List<Verse> source, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool with_diacritics)
+    private static List<Chapter> DoFindChapters(List<Verse> source, string phrase, int sum, NumberType number_type, ComparisonOperator comparison_operator, int sum_remainder, FrequencySearchType frequency_search_type, bool? include_diacritics)
     {
         List<Chapter> result = new List<Chapter>();
 
@@ -21012,7 +21017,7 @@ public class Server : IPublisher
                                 if (chapter != null)
                                 {
                                     string text = chapter.Text;
-                                    int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, with_diacritics);
+                                    int letter_frequency_sum = CalculateLetterFrequencySum(text, phrase, frequency_search_type, include_diacritics);
                                     if (Compare(letter_frequency_sum, sum, number_type, comparison_operator, sum_remainder))
                                     {
                                         result.Add(chapter);
@@ -21027,6 +21032,712 @@ public class Server : IPublisher
 
         return result;
     }
+
+    // find by frequency matching letters - Words
+    public static List<Word> FindWords(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, FrequencyMatchingType frequency_matching_type, FrequencySearchType frequency_search_type, bool? include_diacritics)
+    {
+        return DoFindWords(search_scope, current_selection, previous_verses, phrase, frequency_matching_type, frequency_search_type, include_diacritics);
+    }
+    private static List<Word> DoFindWords(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, FrequencyMatchingType frequency_matching_type, FrequencySearchType frequency_search_type, bool? include_diacritics)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindWords(source, phrase, frequency_matching_type, frequency_search_type, include_diacritics);
+    }
+    private static List<Word> DoFindWords(List<Verse> source, string phrase, FrequencyMatchingType frequency_matching_type, FrequencySearchType frequency_search_type, bool? include_diacritics)
+    {
+        List<Word> result = new List<Word>();
+
+        if (!string.IsNullOrEmpty(phrase))
+        {
+            if (source != null)
+            {
+                if (source.Count > 0)
+                {
+                    if (!String.IsNullOrEmpty(phrase))
+                    {
+                        foreach (Verse verse in source)
+                        {
+                            if (verse != null)
+                            {
+                                foreach (Word word in verse.Words)
+                                {
+                                    string text = word.Text;
+                                    if (IsMatchingLetters(s_numerology_system.TextMode, text, phrase, frequency_matching_type, frequency_search_type, include_diacritics))
+                                    {
+                                        result.Add(word);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+    // find by frequency matching letters - Sentences
+    public static List<Sentence> FindSentences(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, FrequencyMatchingType frequency_matching_type, FrequencySearchType frequency_search_type, bool? include_diacritics)
+    {
+        return DoFindSentences(search_scope, current_selection, previous_verses, phrase, frequency_matching_type, frequency_search_type, include_diacritics);
+    }
+    private static List<Sentence> DoFindSentences(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, FrequencyMatchingType frequency_matching_type, FrequencySearchType frequency_search_type, bool? include_diacritics)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindSentences(source, phrase, frequency_matching_type, frequency_search_type, include_diacritics);
+    }
+    private static List<Sentence> DoFindSentences(List<Verse> source, string phrase, FrequencyMatchingType frequency_matching_type, FrequencySearchType frequency_search_type, bool? include_diacritics)
+    {
+        List<Sentence> result = new List<Sentence>();
+
+        if (source != null)
+        {
+            if (source.Count > 0)
+            {
+                List<Word> words = new List<Word>();
+                foreach (Verse verse in source)
+                {
+                    words.AddRange(verse.Words);
+                }
+
+                // scan linearly for sequence of words with total Text matching query
+                bool done_MustContinue = false;
+                for (int i = 0; i < words.Count - 1; i++)
+                {
+                    StringBuilder str = new StringBuilder();
+
+                    // start building word sequence
+                    str.Append(words[i].Text);
+
+                    string stopmark_text = StopmarkHelper.GetStopmarkText(words[i].Stopmark);
+
+                    // 1-word sentence
+                    if (
+                         (words[i].Stopmark != Stopmark.None) &&
+                         (words[i].Stopmark != Stopmark.CanStopAtEither) &&
+                         (words[i].Stopmark != Stopmark.MustPause) //&&
+                        //(words[i].Stopmark != Stopmark.MustContinue)
+                       )
+                    {
+                        Sentence sentence = new Sentence(words[i].Verse, words[i].Position, words[i].Verse, words[i].Position + words[i].Text.Length, str.ToString());
+                        if (sentence != null)
+                        {
+                            string text = sentence.ToString();
+                            if (IsMatchingLetters(s_numerology_system.TextMode, text, phrase, frequency_matching_type, frequency_search_type, include_diacritics))
+                            {
+                                result.Add(sentence);
+                            }
+                        }
+                    }
+                    else // multi-word sentence
+                    {
+                        // mark the start of 1-to-m MustContinue stopmarks
+                        int backup_i = i;
+
+                        // continue building with next words until a stopmark
+                        bool done_CanStopAtEither = false;
+                        for (int j = i + 1; j < words.Count; j++)
+                        {
+                            str.Append(" " + words[j].Text);
+
+                            if (words[j].Stopmark == Stopmark.None)
+                            {
+                                continue; // continue building longer senetence
+                            }
+                            else // there is a real stopmark
+                            {
+                                if (s_numerology_system != null)
+                                {
+                                    if (!String.IsNullOrEmpty(s_numerology_system.TextMode))
+                                    {
+                                        if ((s_numerology_system.TextMode == "Original") || (s_numerology_system.TextMode.Contains("Dots")))
+                                        {
+                                            str.Append(" " + stopmark_text);
+                                        }
+                                    }
+                                }
+
+                                if (words[j].Stopmark == Stopmark.MustContinue)
+                                {
+                                    // TEST Stopmark.MustContinue
+                                    //----1 2 3 4 sentences
+                                    //1268
+                                    //4153
+                                    //1799
+                                    //2973
+                                    //----1 12 123 1234 sentences
+                                    //1268
+                                    //5421
+                                    //7220
+                                    //10193
+                                    //-------------
+                                    //ERRORS
+                                    //# duplicate 1
+                                    //# short str
+                                    //  in 123 1234
+                                    //-------------
+                                    //// not needed yet
+                                    //// multi-mid sentences
+                                    //5952
+                                    //4772
+
+                                    Sentence sentence = new Sentence(words[i].Verse, words[i].Position, words[j].Verse, words[j].Position + words[j].Text.Length, str.ToString());
+                                    if (sentence != null)
+                                    {
+                                        string text = sentence.ToString();
+                                        if (IsMatchingLetters(s_numerology_system.TextMode, text, phrase, frequency_matching_type, frequency_search_type, include_diacritics))
+                                        {
+                                            result.Add(sentence);
+                                        }
+                                    }
+
+                                    if (done_MustContinue)
+                                    {
+                                        done_MustContinue = false;
+                                        continue; // get all overlapping long sentence
+                                    }
+
+                                    StringBuilder k_str = new StringBuilder();
+                                    for (int k = j + 1; k < words.Count; k++)
+                                    {
+                                        k_str.Append(words[k].Text + " ");
+
+                                        if (words[k].Stopmark == Stopmark.None)
+                                        {
+                                            continue; // next k
+                                        }
+                                        else // there is a stopmark
+                                        {
+                                            if (s_numerology_system != null)
+                                            {
+                                                if (!String.IsNullOrEmpty(s_numerology_system.TextMode))
+                                                {
+                                                    if ((s_numerology_system.TextMode == "Original") || (s_numerology_system.TextMode.Contains("Dots")))
+                                                    {
+                                                        stopmark_text = StopmarkHelper.GetStopmarkText(words[k].Stopmark);
+                                                        k_str.Append(stopmark_text + " ");
+                                                    }
+                                                }
+                                            }
+                                            if (k_str.Length > 0)
+                                            {
+                                                k_str.Remove(k_str.Length - 1, 1);
+                                            }
+
+                                            sentence = new Sentence(words[j + 1].Verse, words[j + 1].Position, words[k].Verse, words[k].Position + words[k].Text.Length, k_str.ToString());
+                                            if (sentence != null)
+                                            {
+                                                string text = sentence.ToString();
+                                                if (IsMatchingLetters(s_numerology_system.TextMode, text, phrase, frequency_matching_type, frequency_search_type, include_diacritics))
+                                                {
+                                                    result.Add(sentence);
+                                                }
+                                            }
+
+                                            if (
+                                                 (words[k].Stopmark == Stopmark.ShouldContinue) ||
+                                                 (words[k].Stopmark == Stopmark.CanStop) ||
+                                                 (words[k].Stopmark == Stopmark.ShouldStop)
+                                               )
+                                            {
+                                                done_MustContinue = true;   // restart from beginning skipping any MustContinue
+                                            }
+                                            else
+                                            {
+                                                done_MustContinue = false;   // keep building ever-longer multi-MustContinue sentence
+                                            }
+
+                                            j = k;
+                                            break; // next j
+                                        }
+                                    }
+
+                                    if (done_MustContinue)
+                                    {
+                                        i = backup_i - 1;  // start new sentence from beginning
+                                        break; // next i
+                                    }
+                                    else
+                                    {
+                                        continue; // next j
+                                    }
+                                }
+                                else if (
+                                     (words[j].Stopmark == Stopmark.ShouldContinue) ||
+                                     (words[j].Stopmark == Stopmark.CanStop) ||
+                                     (words[j].Stopmark == Stopmark.ShouldStop)
+                                   )
+                                {
+                                    Sentence sentence = new Sentence(words[i].Verse, words[i].Position, words[j].Verse, words[j].Position + words[j].Text.Length, str.ToString());
+                                    if (sentence != null)
+                                    {
+                                        string text = sentence.ToString();
+                                        if (IsMatchingLetters(s_numerology_system.TextMode, text, phrase, frequency_matching_type, frequency_search_type, include_diacritics))
+                                        {
+                                            result.Add(sentence);
+                                        }
+                                    }
+
+                                    i = j; // start new sentence after j
+                                    break; // next i
+                                }
+                                else if (words[j].Stopmark == Stopmark.MustPause)
+                                {
+                                    if (
+                                         (words[j].Text.Simplify29() == "مَنْ".Simplify29()) ||
+                                         (words[j].Text.Simplify29() == "بَلْ".Simplify29())
+                                       )
+                                    {
+                                        continue; // continue building longer senetence
+                                    }
+                                    else if (
+                                              (words[j].Text.Simplify29() == "عِوَجَا".Simplify29()) ||
+                                              (words[j].Text.Simplify29() == "مَّرْقَدِنَا".Simplify29()) ||
+                                              (words[j].Text.Simplify29() == "مَالِيَهْ".Simplify29())
+                                            )
+                                    {
+                                        Sentence sentence = new Sentence(words[i].Verse, words[i].Position, words[j].Verse, words[j].Position + words[j].Text.Length, str.ToString());
+                                        if (sentence != null)
+                                        {
+                                            string text = sentence.ToString();
+                                            if (IsMatchingLetters(s_numerology_system.TextMode, text, phrase, frequency_matching_type, frequency_search_type, include_diacritics))
+                                            {
+                                                result.Add(sentence);
+                                            }
+                                        }
+
+                                        i = j; // start new sentence after j
+                                        break; // next i
+                                    }
+                                    else // unknown case
+                                    {
+                                        throw new Exception("Unknown paused Quran word.");
+                                    }
+                                }
+                                // first CanStopAtEither found at j
+                                else if ((!done_CanStopAtEither) && (words[j].Stopmark == Stopmark.CanStopAtEither))
+                                {
+                                    // ^ ذَٰلِكَ ٱلْكِتَٰبُ لَا رَيْبَ
+                                    Sentence sentence = new Sentence(words[i].Verse, words[i].Position, words[j].Verse, words[j].Position + words[j].Text.Length, str.ToString());
+                                    if (sentence != null)
+                                    {
+                                        string text = sentence.ToString();
+                                        if (IsMatchingLetters(s_numerology_system.TextMode, text, phrase, frequency_matching_type, frequency_search_type, include_diacritics))
+                                        {
+                                            result.Add(sentence);
+                                        }
+                                    }
+
+                                    int kk = -1; // start after ^ (e.g. هُدًۭى)
+                                    StringBuilder kk_str = new StringBuilder();
+                                    StringBuilder kkk_str = new StringBuilder();
+                                    for (int k = j + 1; k < words.Count; k++)
+                                    {
+                                        str.Append(" " + words[k].Text);
+                                        if (kkk_str.Length > 0) // skip first k loop
+                                        {
+                                            kk_str.Append(" " + words[k].Text);
+                                        }
+                                        kkk_str.Append(" " + words[k].Text);
+
+                                        if (words[k].Stopmark == Stopmark.None)
+                                        {
+                                            continue; // next k
+                                        }
+                                        else // there is a stopmark
+                                        {
+                                            if (s_numerology_system != null)
+                                            {
+                                                if (!String.IsNullOrEmpty(s_numerology_system.TextMode))
+                                                {
+                                                    if ((s_numerology_system.TextMode == "Original") || (s_numerology_system.TextMode.Contains("Dots")))
+                                                    {
+                                                        str.Append(" " + stopmark_text);
+                                                        if (kk_str.Length > 0)
+                                                        {
+                                                            kk_str.Append(" " + stopmark_text);
+                                                        }
+                                                        kkk_str.Append(" " + stopmark_text);
+                                                    }
+                                                }
+                                            }
+
+                                            // second CanStopAtEither found at k
+                                            if (words[k].Stopmark == Stopmark.CanStopAtEither)
+                                            {
+                                                // ^ ذَٰلِكَ ٱلْكِتَٰبُ لَا رَيْبَ ۛ^ فِيهِ
+                                                sentence = new Sentence(words[i].Verse, words[i].Position, words[k].Verse, words[k].Position + words[k].Text.Length, str.ToString());
+                                                if (sentence != null)
+                                                {
+                                                    string text = sentence.ToString();
+                                                    if (IsMatchingLetters(s_numerology_system.TextMode, text, phrase, frequency_matching_type, frequency_search_type, include_diacritics))
+                                                    {
+                                                        result.Add(sentence);
+                                                    }
+                                                }
+
+                                                kk = k + 1; // backup k after second ^
+                                                continue; // next k
+                                            }
+                                            else // non-CanStopAtEither stopmark
+                                            {
+                                                // kkk_str   فِيهِ ۛ^ هُدًۭى لِّلْمُتَّقِينَ
+                                                sentence = new Sentence(words[j + 1].Verse, words[j + 1].Position, words[k].Verse, words[k].Position + words[k].Text.Length, kkk_str.ToString());
+                                                if (sentence != null)
+                                                {
+                                                    string text = sentence.ToString();
+                                                    if (IsMatchingLetters(s_numerology_system.TextMode, text, phrase, frequency_matching_type, frequency_search_type, include_diacritics))
+                                                    {
+                                                        result.Add(sentence);
+                                                    }
+                                                }
+
+                                                // kk_str   هُدًۭى لِّلْمُتَّقِينَ
+                                                sentence = new Sentence(words[kk].Verse, words[kk].Position, words[k].Verse, words[k].Position + words[k].Text.Length, kk_str.ToString());
+                                                if (sentence != null)
+                                                {
+                                                    string text = sentence.ToString();
+                                                    if (IsMatchingLetters(s_numerology_system.TextMode, text, phrase, frequency_matching_type, frequency_search_type, include_diacritics))
+                                                    {
+                                                        result.Add(sentence);
+                                                    }
+                                                }
+
+                                                // skip the whole surrounding non-CanStopAtEither sentence
+                                                j = k;
+                                                break; // next j
+                                            }
+                                        }
+                                    }
+
+                                    // restart from last
+                                    str.Length = 0;
+                                    j = i - 1; // will be j++ by reloop
+                                    done_CanStopAtEither = true;
+                                }
+                                else if (words[j].Stopmark == Stopmark.MustStop)
+                                {
+                                    Sentence sentence = new Sentence(words[i].Verse, words[i].Position, words[j].Verse, words[j].Position + words[j].Text.Length, str.ToString());
+                                    if (sentence != null)
+                                    {
+                                        string text = sentence.ToString();
+                                        if (IsMatchingLetters(s_numerology_system.TextMode, text, phrase, frequency_matching_type, frequency_search_type, include_diacritics))
+                                        {
+                                            result.Add(sentence);
+                                        }
+                                    }
+
+                                    i = j; // start new sentence after j
+                                    break; // next i
+                                }
+                                else // unknown case
+                                {
+                                    continue;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+    // find by frequency matching letters - Verses
+    public static List<Verse> FindVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, FrequencyMatchingType frequency_matching_type, FrequencySearchType frequency_search_type, bool? include_diacritics)
+    {
+        return DoFindVerses(search_scope, current_selection, previous_verses, phrase, frequency_matching_type, frequency_search_type, include_diacritics);
+    }
+    private static List<Verse> DoFindVerses(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, FrequencyMatchingType frequency_matching_type, FrequencySearchType frequency_search_type, bool? include_diacritics)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindVerses(source, phrase, frequency_matching_type, frequency_search_type, include_diacritics);
+    }
+    private static List<Verse> DoFindVerses(List<Verse> source, string phrase, FrequencyMatchingType frequency_matching_type, FrequencySearchType frequency_search_type, bool? include_diacritics)
+    {
+        List<Verse> result = new List<Verse>();
+
+        if (!string.IsNullOrEmpty(phrase))
+        {
+            if (source != null)
+            {
+                if (source.Count > 0)
+                {
+                    if (!String.IsNullOrEmpty(phrase))
+                    {
+                        foreach (Verse verse in source)
+                        {
+                            if (verse != null)
+                            {
+                                string text = verse.Text;
+                                if (IsMatchingLetters(s_numerology_system.TextMode, text, phrase, frequency_matching_type, frequency_search_type, include_diacritics))
+                                {
+                                    result.Add(verse);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+    // find by frequency matching letters - Chapters
+    public static List<Chapter> FindChapters(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, FrequencyMatchingType frequency_matching_type, FrequencySearchType frequency_search_type, bool? include_diacritics)
+    {
+        return DoFindChapters(search_scope, current_selection, previous_verses, phrase, frequency_matching_type, frequency_search_type, include_diacritics);
+    }
+    private static List<Chapter> DoFindChapters(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, string phrase, FrequencyMatchingType frequency_matching_type, FrequencySearchType frequency_search_type, bool? include_diacritics)
+    {
+        List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
+        return DoFindChapters(source, phrase, frequency_matching_type, frequency_search_type, include_diacritics);
+    }
+    private static List<Chapter> DoFindChapters(List<Verse> source, string phrase, FrequencyMatchingType frequency_matching_type, FrequencySearchType frequency_search_type, bool? include_diacritics)
+    {
+        List<Chapter> result = new List<Chapter>();
+
+        if (!string.IsNullOrEmpty(phrase))
+        {
+            if (source != null)
+            {
+                if (source.Count > 0)
+                {
+                    if (s_book != null)
+                    {
+                        List<Chapter> source_chapters = s_book.GetChapters(source);
+                        if (!String.IsNullOrEmpty(phrase))
+                        {
+                            foreach (Chapter chapter in source_chapters)
+                            {
+                                if (chapter != null)
+                                {
+                                    string text = chapter.Text;
+                                    if (IsMatchingLetters(s_numerology_system.TextMode, text, phrase, frequency_matching_type, frequency_search_type, include_diacritics))
+                                    {
+                                        result.Add(chapter);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return result;
+    }
+    public static bool IsMatchingLetters(string text_mode, string text, string phrase, FrequencyMatchingType frequency_matching_type, FrequencySearchType frequency_search_type, bool? include_diacritics)
+    {
+        if (String.IsNullOrEmpty(text)) return false;
+        if (String.IsNullOrEmpty(phrase)) return false;
+
+        if (include_diacritics == true) { /* do nothing */ }
+        else if (include_diacritics == null) { text = text.GetDiacritics(); }
+        else if (include_diacritics == false) { text = text.SimplifyTo(text_mode); }
+
+        text = text.Replace("\r", "");
+        text = text.Replace("\n", "");
+        text = text.Replace("\t", "");
+        text = text.Replace("_", "");
+        text = text.Replace(" ", "");
+        text = text.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+        text = text.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
+        foreach (char character in Constants.INDIAN_DIGITS)
+        {
+            text = text.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.ARABIC_DIGITS)
+        {
+            text = text.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.SYMBOLS)
+        {
+            text = text.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.STOPMARKS)
+        {
+            text = text.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.QURANMARKS)
+        {
+            text = text.Replace(character.ToString(), "");
+        }
+
+        if (include_diacritics == true) { /* do nothing */ }
+        else if (include_diacritics == null) { phrase = phrase.GetDiacritics(); }
+        else if (include_diacritics == false) { phrase = phrase.SimplifyTo(text_mode); }
+
+        phrase = phrase.Replace("\r", "");
+        phrase = phrase.Replace("\n", "");
+        phrase = phrase.Replace("\t", "");
+        phrase = phrase.Replace("_", "");
+        phrase = phrase.Replace(" ", "");
+        phrase = phrase.Replace(Constants.ORNATE_RIGHT_PARENTHESIS, "");
+        phrase = phrase.Replace(Constants.ORNATE_LEFT_PARENTHESIS, "");
+        foreach (char character in Constants.INDIAN_DIGITS)
+        {
+            phrase = phrase.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.ARABIC_DIGITS)
+        {
+            phrase = phrase.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.SYMBOLS)
+        {
+            phrase = phrase.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.STOPMARKS)
+        {
+            phrase = phrase.Replace(character.ToString(), "");
+        }
+        foreach (char character in Constants.QURANMARKS)
+        {
+            phrase = phrase.Replace(character.ToString(), "");
+        }
+
+        if (frequency_search_type == FrequencySearchType.UniqueLetters)
+        {
+            phrase = phrase.RemoveDuplicates();
+        }
+
+        Dictionary<char, int> text_letter_statistics = new Dictionary<char, int>();
+        if (text_letter_statistics != null)
+        {
+            for (int i = 0; i < text.Length; i++)
+            {
+                if (text_letter_statistics.ContainsKey(text[i]))
+                {
+                    text_letter_statistics[text[i]]++;
+                }
+                else
+                {
+                    text_letter_statistics.Add(text[i], 1);
+                }
+            }
+        }
+
+        Dictionary<char, int> phrase_letter_statistics = new Dictionary<char, int>();
+        if (phrase_letter_statistics != null)
+        {
+            for (int i = 0; i < phrase.Length; i++)
+            {
+                if (phrase_letter_statistics.ContainsKey(phrase[i]))
+                {
+                    phrase_letter_statistics[phrase[i]]++;
+                }
+                else
+                {
+                    phrase_letter_statistics.Add(phrase[i], 1);
+                }
+            }
+        }
+
+        if ((text_letter_statistics != null) && (phrase_letter_statistics != null))
+        {
+            switch (frequency_matching_type)
+            {
+                case FrequencyMatchingType.AllLettersOf:
+                    {
+                        for (int i = 0; i < phrase.Length; i++)
+                        {
+                            if (!text_letter_statistics.ContainsKey(phrase[i]))
+                            {
+                                return false;
+                            }
+
+                            if (frequency_search_type == FrequencySearchType.DuplicateLetters)
+                            {
+                                if (text_letter_statistics[phrase[i]] != phrase_letter_statistics[phrase[i]])
+                                {
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+                    break;
+                case FrequencyMatchingType.AnyLetterOf:
+                    {
+                        int count = 0;
+                        for (int i = 0; i < phrase.Length; i++)
+                        {
+                            if (text_letter_statistics.ContainsKey(phrase[i]))
+                            {
+                                if (frequency_search_type == FrequencySearchType.DuplicateLetters)
+                                {
+                                    if (text_letter_statistics[phrase[i]] == phrase_letter_statistics[phrase[i]])
+                                    {
+                                        count++;
+                                    }
+                                }
+                                else
+                                {
+                                    count++;
+                                }
+                            }
+                        }
+                        if (count == 0) return false;
+                    }
+                    break;
+                case FrequencyMatchingType.OnlyLettersOf:
+                    {
+                        int count = 0;
+                        for (int i = 0; i < text.Length; i++)
+                        {
+                            if (phrase_letter_statistics.ContainsKey(text[i]))
+                            {
+                                if (frequency_search_type == FrequencySearchType.DuplicateLetters)
+                                {
+                                    if (text_letter_statistics[text[i]] == phrase_letter_statistics[text[i]])
+                                    {
+                                        count++;
+                                    }
+                                }
+                                else
+                                {
+                                    count++;
+                                }
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                        if (count < text.Length) return false;
+                    }
+                    break;
+                case FrequencyMatchingType.NoLetterOf:
+                    {
+                        int count = 0;
+                        for (int i = 0; i < text.Length; i++)
+                        {
+                            if (phrase_letter_statistics.ContainsKey(text[i]))
+                            {
+                                if (frequency_search_type == FrequencySearchType.DuplicateLetters)
+                                {
+                                    //if (text_letter_statistics[text[i]] == phrase_letter_statistics[text[i]])
+                                    {
+                                        count++;
+                                    }
+                                }
+                                else
+                                {
+                                    count++;
+                                }
+                            }
+                        }
+                        if (count > 0) return false;
+                    }
+                    break;
+                default:
+                    {
+                        return false;
+                    }
+            }
+        }
+        return true;
+    }
+
 
     public static string GetTranslationKey(string translation)
     {
@@ -21060,6 +21771,7 @@ public class Server : IPublisher
     {
         DataAccess.SaveTranslation(s_book, translation);
     }
+
 
     // help messages
     private static List<string> s_help_messages = new List<string>();
