@@ -5041,7 +5041,7 @@ partial class MainForm
         this.ClientSplitContainer.Panel2.Controls.Add(this.TabControl);
         this.ClientSplitContainer.Panel2MinSize = 0;
         this.ClientSplitContainer.Size = new System.Drawing.Size(653, 608);
-        this.ClientSplitContainer.SplitterDistance = 418;
+        this.ClientSplitContainer.SplitterDistance = 413;
         this.ClientSplitContainer.SplitterWidth = 3;
         this.ClientSplitContainer.TabIndex = 6;
         this.ClientSplitContainer.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.ClientSplitContainer_SplitterMoved);
