@@ -4594,7 +4594,7 @@ public class Server : IPublisher
 
         /*
         =====================================================================
-        Regular Expressions (RegEx)
+        Regular Expressions
         =====================================================================
         Best Reference: http://www.regular-expressions.info/
         =====================================================================
@@ -6943,19 +6943,19 @@ public class Server : IPublisher
             }
         }
     }
-    public static List<Phrase> FindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string text, LanguageType language_type, string translation, TextProximityType text_proximity_type, TextWordness text_wordness, bool case_sensitive, bool with_diacritics)
+    public static List<Phrase> FindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string text, LanguageType language_type, string translation, TextWordGrouping text_word_grouping, TextWordness text_wordness, bool case_sensitive, bool with_diacritics)
     {
         List<Phrase> result = new List<Phrase>();
 
         if (language_type == LanguageType.RightToLeft)
         {
-            result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, text, language_type, translation, text_proximity_type, text_wordness, case_sensitive, with_diacritics, true);
+            result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, text, language_type, translation, text_word_grouping, text_wordness, case_sensitive, with_diacritics, true);
         }
         else if (language_type == LanguageType.LeftToRight)
         {
             if (!String.IsNullOrEmpty(translation))
             {
-                result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, text, language_type, translation, text_proximity_type, text_wordness, case_sensitive, with_diacritics, false);
+                result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, text, language_type, translation, text_word_grouping, text_wordness, case_sensitive, with_diacritics, false);
             }
             else
             {
@@ -6967,7 +6967,7 @@ public class Server : IPublisher
                         {
                             foreach (string key in s_book.Verses[0].Translations.Keys)
                             {
-                                List<Phrase> new_phrases = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, text, language_type, key, text_proximity_type, text_wordness, case_sensitive, with_diacritics, false);
+                                List<Phrase> new_phrases = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, text, language_type, key, text_word_grouping, text_wordness, case_sensitive, with_diacritics, false);
                                 result.AddRange(new_phrases);
                             }
                         }
@@ -6978,7 +6978,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Phrase> DoFindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string text, LanguageType language_type, string translation, TextProximityType text_proximity_type, TextWordness text_wordness, bool case_sensitive, bool with_diacritics, bool try_emlaaei_if_nothing_found)
+    private static List<Phrase> DoFindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string text, LanguageType language_type, string translation, TextWordGrouping text_word_grouping, TextWordness text_wordness, bool case_sensitive, bool with_diacritics, bool try_emlaaei_if_nothing_found)
     {
         List<Verse> result = new List<Verse>();
         switch (text_search_block_size)
@@ -6988,16 +6988,16 @@ public class Server : IPublisher
                     List<Verse> source = GetSourceVerses(search_scope, current_selection, previous_verses, TextLocationInChapter.Any);
                     if (language_type == LanguageType.RightToLeft)
                     {
-                        return DoFindPhrases(source, current_selection, previous_verses, text, text_proximity_type, text_wordness, case_sensitive, with_diacritics, try_emlaaei_if_nothing_found);
+                        return DoFindPhrases(source, current_selection, previous_verses, text, text_word_grouping, text_wordness, case_sensitive, with_diacritics, try_emlaaei_if_nothing_found);
                     }
                     else //if (language_type == FindByTextLanguageType.LeftToRight)
                     {
-                        return DoFindPhrases(translation, source, current_selection, previous_verses, text, text_proximity_type, text_wordness, case_sensitive, with_diacritics);
+                        return DoFindPhrases(translation, source, current_selection, previous_verses, text, text_word_grouping, text_wordness, case_sensitive, with_diacritics);
                     }
                 }
             case TextSearchBlockSize.Chapter:
                 {
-                    List<Chapter> chapters = DoFindChapters(text, text_proximity_type);
+                    List<Chapter> chapters = DoFindChapters(text, text_word_grouping);
                     if (chapters != null)
                     {
                         foreach (Chapter chapter in chapters)
@@ -7012,7 +7012,7 @@ public class Server : IPublisher
                 break;
             case TextSearchBlockSize.Page:
                 {
-                    List<Page> pages = DoFindPages(text, text_proximity_type);
+                    List<Page> pages = DoFindPages(text, text_word_grouping);
                     if (pages != null)
                     {
                         foreach (Page page in pages)
@@ -7027,7 +7027,7 @@ public class Server : IPublisher
                 break;
             case TextSearchBlockSize.Station:
                 {
-                    List<Station> stations = DoFindStations(text, text_proximity_type);
+                    List<Station> stations = DoFindStations(text, text_word_grouping);
                     if (stations != null)
                     {
                         foreach (Station station in stations)
@@ -7042,7 +7042,7 @@ public class Server : IPublisher
                 break;
             case TextSearchBlockSize.Part:
                 {
-                    List<Part> parts = DoFindParts(text, text_proximity_type);
+                    List<Part> parts = DoFindParts(text, text_word_grouping);
                     if (parts != null)
                     {
                         foreach (Part part in parts)
@@ -7057,7 +7057,7 @@ public class Server : IPublisher
                 break;
             case TextSearchBlockSize.Group:
                 {
-                    List<Model.Group> groups = DoFindGroups(text, text_proximity_type);
+                    List<Model.Group> groups = DoFindGroups(text, text_word_grouping);
                     if (groups != null)
                     {
                         foreach (Model.Group group in groups)
@@ -7072,7 +7072,7 @@ public class Server : IPublisher
                 break;
             case TextSearchBlockSize.Half:
                 {
-                    List<Half> halfs = DoFindHalfs(text, text_proximity_type);
+                    List<Half> halfs = DoFindHalfs(text, text_word_grouping);
                     if (halfs != null)
                     {
                         foreach (Half half in halfs)
@@ -7087,7 +7087,7 @@ public class Server : IPublisher
                 break;
             case TextSearchBlockSize.Quarter:
                 {
-                    List<Quarter> quarters = DoFindQuarters(text, text_proximity_type);
+                    List<Quarter> quarters = DoFindQuarters(text, text_word_grouping);
                     if (quarters != null)
                     {
                         foreach (Quarter quarter in quarters)
@@ -7102,7 +7102,7 @@ public class Server : IPublisher
                 break;
             case TextSearchBlockSize.Bowing:
                 {
-                    List<Bowing> bowings = DoFindBowings(text, text_proximity_type);
+                    List<Bowing> bowings = DoFindBowings(text, text_word_grouping);
                     if (bowings != null)
                     {
                         foreach (Bowing bowing in bowings)
@@ -7120,14 +7120,14 @@ public class Server : IPublisher
         }
         if (language_type == LanguageType.RightToLeft)
         {
-            return DoFindPhrases(result, current_selection, null, text, TextProximityType.AnyWord, TextWordness.Any, false, false, true);
+            return DoFindPhrases(result, current_selection, null, text, TextWordGrouping.Or, TextWordness.Any, false, false, true);
         }
         else //if (language_type == FindByTextLanguageType.LeftToRight)
         {
-            return DoFindPhrases(translation, result, current_selection, null, text, TextProximityType.AnyWord, TextWordness.Any, false, false);
+            return DoFindPhrases(translation, result, current_selection, null, text, TextWordGrouping.Or, TextWordness.Any, false, false);
         }
     }
-    private static List<Phrase> DoFindPhrases(List<Verse> source, Selection current_selection, List<Verse> previous_verses, string text, TextProximityType text_proximity_type, TextWordness text_wordness, bool case_sensitive, bool with_diacritics, bool try_emlaaei_if_nothing_found)
+    private static List<Phrase> DoFindPhrases(List<Verse> source, Selection current_selection, List<Verse> previous_verses, string text, TextWordGrouping text_word_grouping, TextWordness text_wordness, bool case_sensitive, bool with_diacritics, bool try_emlaaei_if_nothing_found)
     {
         List<Phrase> result = new List<Phrase>();
         if (source != null)
@@ -7249,7 +7249,7 @@ public class Server : IPublisher
                                 //////////////////////////////////////////////////////////
                                 // FindByText WORDS Any
                                 //////////////////////////////////////////////////////////
-                                if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
+                                if ((text.Contains("|")) || (text_word_grouping == TextWordGrouping.Or))
                                 {
                                     bool found = false;
                                     foreach (string unsigned_word in unsigned_words)
@@ -7368,7 +7368,7 @@ public class Server : IPublisher
                                 //////////////////////////////////////////////////////////
                                 // FindByText WORDS All
                                 //////////////////////////////////////////////////////////
-                                else if (text_proximity_type == TextProximityType.AllWords)
+                                else if (text_word_grouping == TextWordGrouping.And)
                                 {
                                     int match_count = 0;
                                     foreach (string unsigned_word in unsigned_words)
@@ -7593,7 +7593,7 @@ public class Server : IPublisher
                                         //////////////////////////////////////////////////////////
                                         // FindByText WORDS Any
                                         //////////////////////////////////////////////////////////
-                                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
+                                        if ((text.Contains("|")) || (text_word_grouping == TextWordGrouping.Or))
                                         {
                                             bool found = false;
                                             foreach (string unsigned_word in unsigned_words)
@@ -7715,7 +7715,7 @@ public class Server : IPublisher
                                         //////////////////////////////////////////////////////////
                                         // FindByText WORDS All
                                         //////////////////////////////////////////////////////////
-                                        else if (text_proximity_type == TextProximityType.AllWords)
+                                        else if (text_word_grouping == TextWordGrouping.And)
                                         {
                                             int match_count = 0;
                                             foreach (string unsigned_word in unsigned_words)
@@ -7848,7 +7848,7 @@ public class Server : IPublisher
                                         foreach (Verse verse in source)
                                         {
                                             string verse_emlaaei_text = verse.Translations[DEFAULT_EMLAAEI_TEXT].SimplifyTo(s_numerology_system.TextMode);
-                                            if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
+                                            if ((text.Contains("|")) || (text_word_grouping == TextWordGrouping.Or))
                                             {
                                                 bool found = false;
                                                 foreach (string negative_word in negative_words)
@@ -7921,7 +7921,7 @@ public class Server : IPublisher
                                                     result.Add(new Phrase(verse, 0, ""));
                                                 }
                                             }
-                                            else if (text_proximity_type == TextProximityType.AllWords)
+                                            else if (text_word_grouping == TextWordGrouping.And)
                                             {
                                                 bool found = false;
                                                 foreach (string negative_word in negative_words)
@@ -8006,7 +8006,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Phrase> DoFindPhrases(string translation, List<Verse> source, Selection current_selection, List<Verse> previous_verses, string text, TextProximityType text_proximity_type, TextWordness text_wordness, bool case_sensitive, bool with_diacritics)
+    private static List<Phrase> DoFindPhrases(string translation, List<Verse> source, Selection current_selection, List<Verse> previous_verses, string text, TextWordGrouping text_word_grouping, TextWordness text_wordness, bool case_sensitive, bool with_diacritics)
     {
         List<Phrase> result = new List<Phrase>();
 
@@ -8031,7 +8031,7 @@ public class Server : IPublisher
 
                         foreach (Verse verse in source)
                         {
-                            if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
+                            if ((text.Contains("|")) || (text_word_grouping == TextWordGrouping.Or))
                             {
                                 bool found = false;
                                 foreach (string negative_word in negative_words)
@@ -8104,7 +8104,7 @@ public class Server : IPublisher
                                     result.Add(new Phrase(verse, 0, ""));
                                 }
                             }
-                            else if (text_proximity_type == TextProximityType.AllWords)
+                            else if (text_word_grouping == TextWordGrouping.And)
                             {
                                 bool found = false;
                                 foreach (string negative_word in negative_words)
@@ -8185,7 +8185,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Chapter> DoFindChapters(string text, TextProximityType text_proximity_type)
+    private static List<Chapter> DoFindChapters(string text, TextWordGrouping text_word_grouping)
     {
         List<Chapter> result = new List<Chapter>();
 
@@ -8212,7 +8212,7 @@ public class Server : IPublisher
                         chapter_text = chapter_text.SimplifyTo(s_numerology_system.TextMode);
                         chapter_text = chapter_text.Trim();
 
-                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
+                        if ((text.Contains("|")) || (text_word_grouping == TextWordGrouping.Or))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8250,7 +8250,7 @@ public class Server : IPublisher
                                 }
                             }
                         }
-                        else if (text_proximity_type == TextProximityType.AllWords)
+                        else if (text_word_grouping == TextWordGrouping.And)
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8295,7 +8295,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Page> DoFindPages(string text, TextProximityType text_proximity_type)
+    private static List<Page> DoFindPages(string text, TextWordGrouping text_word_grouping)
     {
         List<Page> result = new List<Page>();
 
@@ -8322,7 +8322,7 @@ public class Server : IPublisher
                         page_text = page_text.SimplifyTo(s_numerology_system.TextMode);
                         page_text = page_text.Trim();
 
-                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
+                        if ((text.Contains("|")) || (text_word_grouping == TextWordGrouping.Or))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8360,7 +8360,7 @@ public class Server : IPublisher
                                 }
                             }
                         }
-                        else if (text_proximity_type == TextProximityType.AllWords)
+                        else if (text_word_grouping == TextWordGrouping.And)
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8405,7 +8405,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Station> DoFindStations(string text, TextProximityType text_proximity_type)
+    private static List<Station> DoFindStations(string text, TextWordGrouping text_word_grouping)
     {
         List<Station> result = new List<Station>();
 
@@ -8432,7 +8432,7 @@ public class Server : IPublisher
                         station_text = station_text.SimplifyTo(s_numerology_system.TextMode);
                         station_text = station_text.Trim();
 
-                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
+                        if ((text.Contains("|")) || (text_word_grouping == TextWordGrouping.Or))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8470,7 +8470,7 @@ public class Server : IPublisher
                                 }
                             }
                         }
-                        else if (text_proximity_type == TextProximityType.AllWords)
+                        else if (text_word_grouping == TextWordGrouping.And)
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8515,7 +8515,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Part> DoFindParts(string text, TextProximityType text_proximity_type)
+    private static List<Part> DoFindParts(string text, TextWordGrouping text_word_grouping)
     {
         List<Part> result = new List<Part>();
 
@@ -8542,7 +8542,7 @@ public class Server : IPublisher
                         part_text = part_text.SimplifyTo(s_numerology_system.TextMode);
                         part_text = part_text.Trim();
 
-                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
+                        if ((text.Contains("|")) || (text_word_grouping == TextWordGrouping.Or))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8580,7 +8580,7 @@ public class Server : IPublisher
                                 }
                             }
                         }
-                        else if (text_proximity_type == TextProximityType.AllWords)
+                        else if (text_word_grouping == TextWordGrouping.And)
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8625,7 +8625,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Model.Group> DoFindGroups(string text, TextProximityType text_proximity_type)
+    private static List<Model.Group> DoFindGroups(string text, TextWordGrouping text_word_grouping)
     {
         List<Model.Group> result = new List<Model.Group>();
 
@@ -8652,7 +8652,7 @@ public class Server : IPublisher
                         group_text = group_text.SimplifyTo(s_numerology_system.TextMode);
                         group_text = group_text.Trim();
 
-                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
+                        if ((text.Contains("|")) || (text_word_grouping == TextWordGrouping.Or))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8690,7 +8690,7 @@ public class Server : IPublisher
                                 }
                             }
                         }
-                        else if (text_proximity_type == TextProximityType.AllWords)
+                        else if (text_word_grouping == TextWordGrouping.And)
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8735,7 +8735,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Half> DoFindHalfs(string text, TextProximityType text_proximity_type)
+    private static List<Half> DoFindHalfs(string text, TextWordGrouping text_word_grouping)
     {
         List<Half> result = new List<Half>();
 
@@ -8762,7 +8762,7 @@ public class Server : IPublisher
                         half_text = half_text.SimplifyTo(s_numerology_system.TextMode);
                         half_text = half_text.Trim();
 
-                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
+                        if ((text.Contains("|")) || (text_word_grouping == TextWordGrouping.Or))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8800,7 +8800,7 @@ public class Server : IPublisher
                                 }
                             }
                         }
-                        else if (text_proximity_type == TextProximityType.AllWords)
+                        else if (text_word_grouping == TextWordGrouping.And)
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8845,7 +8845,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Quarter> DoFindQuarters(string text, TextProximityType text_proximity_type)
+    private static List<Quarter> DoFindQuarters(string text, TextWordGrouping text_word_grouping)
     {
         List<Quarter> result = new List<Quarter>();
 
@@ -8872,7 +8872,7 @@ public class Server : IPublisher
                         quarter_text = quarter_text.SimplifyTo(s_numerology_system.TextMode);
                         quarter_text = quarter_text.Trim();
 
-                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
+                        if ((text.Contains("|")) || (text_word_grouping == TextWordGrouping.Or))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8910,7 +8910,7 @@ public class Server : IPublisher
                                 }
                             }
                         }
-                        else if (text_proximity_type == TextProximityType.AllWords)
+                        else if (text_word_grouping == TextWordGrouping.And)
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -8955,7 +8955,7 @@ public class Server : IPublisher
 
         return result;
     }
-    private static List<Bowing> DoFindBowings(string text, TextProximityType text_proximity_type)
+    private static List<Bowing> DoFindBowings(string text, TextWordGrouping text_word_grouping)
     {
         List<Bowing> result = new List<Bowing>();
 
@@ -8982,7 +8982,7 @@ public class Server : IPublisher
                         bowing_text = bowing_text.SimplifyTo(s_numerology_system.TextMode);
                         bowing_text = bowing_text.Trim();
 
-                        if ((text.Contains("|")) || (text_proximity_type == TextProximityType.AnyWord))
+                        if ((text.Contains("|")) || (text_word_grouping == TextWordGrouping.Or))
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -9020,7 +9020,7 @@ public class Server : IPublisher
                                 }
                             }
                         }
-                        else if (text_proximity_type == TextProximityType.AllWords)
+                        else if (text_word_grouping == TextWordGrouping.And)
                         {
                             bool found = false;
                             foreach (string word in negative_words)
@@ -9103,7 +9103,7 @@ public class Server : IPublisher
             }
         }
     }
-    public static List<Phrase> FindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    public static List<Phrase> FindPhrases(SearchScope search_scope, Selection current_selection, List<Verse> previous_verses, TextSearchBlockSize text_search_block_size, string roots, TextWordGrouping text_word_grouping, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         List<Phrase> result = new List<Phrase>();
 
@@ -9123,12 +9123,12 @@ public class Server : IPublisher
         foreach (string negative_word in negative_words)
         {
             current_result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, negative_word, 0, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder); // multiplicity = 0 for exclude
-            if (roots.Contains("|"))
+            if (text_word_grouping == TextWordGrouping.Or)
             {
                 result.AddRange(current_result);
                 previous_verses.Union(GetVerses(current_result));
             }
-            else
+            else if (text_word_grouping == TextWordGrouping.And)
             {
                 MergePhrases(current_result, ref previous_verses, ref result);
                 search_scope = SearchScope.Result;
@@ -9138,12 +9138,12 @@ public class Server : IPublisher
         foreach (string positive_word in positive_words)
         {
             current_result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, positive_word, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
-            if (roots.Contains("|"))
+            if (text_word_grouping == TextWordGrouping.Or)
             {
                 result.AddRange(current_result);
                 previous_verses.Union(GetVerses(current_result));
             }
-            else
+            else if (text_word_grouping == TextWordGrouping.And)
             {
                 MergePhrases(current_result, ref previous_verses, ref result);
                 search_scope = SearchScope.Result;
@@ -9153,12 +9153,12 @@ public class Server : IPublisher
         foreach (string unsigned_word in unsigned_words)
         {
             current_result = DoFindPhrases(search_scope, current_selection, previous_verses, text_search_block_size, unsigned_word, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
-            if (roots.Contains("|"))
+            if (text_word_grouping == TextWordGrouping.Or)
             {
                 result.AddRange(current_result);
                 previous_verses.Union(GetVerses(current_result));
             }
-            else
+            else if (text_word_grouping == TextWordGrouping.And)
             {
                 MergePhrases(current_result, ref previous_verses, ref result);
                 search_scope = SearchScope.Result;

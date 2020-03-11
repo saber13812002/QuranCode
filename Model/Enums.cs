@@ -28,7 +28,7 @@ namespace Model
     public enum TextLocationInChapter { Any, AtStart, AtMiddle, AtEnd };
     public enum TextLocationInVerse { Any, AtStart, AtMiddle, AtEnd };
     public enum TextLocationInWord { Any, AtStart, AtMiddle, AtEnd };
-    public enum TextProximityType { AnyWord, AllWords };
+    public enum TextWordGrouping { Or, And };
     public enum TextWordness { Any, WholeWord, PartOfWord };
 
     public enum SimilaritySearchSource { CurrentVerse, AllVerses };

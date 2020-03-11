@@ -1924,10 +1924,10 @@ public class Client : IPublisher, ISubscriber
     /// <param name="multiplicity"></param>
     /// <param name="at_word_start"></param>
     /// <returns>Number of found phrases. Result is stored in FoundPhrases.</returns>
-    public int FindPhrases(TextSearchBlockSize text_search_block_size, string text, LanguageType language_type, string translation, TextProximityType text_proximity_type, TextWordness text_wordness, bool case_sensitive, bool with_diacritics)
+    public int FindPhrases(TextSearchBlockSize text_search_block_size, string text, LanguageType language_type, string translation, TextWordGrouping text_word_grouping, TextWordness text_wordness, bool case_sensitive, bool with_diacritics)
     {
         ClearSearchResults();
-        m_found_phrases = Server.FindPhrases(m_search_scope, m_selection, m_found_verses, text_search_block_size, text, language_type, translation, text_proximity_type, text_wordness, case_sensitive, with_diacritics);
+        m_found_phrases = Server.FindPhrases(m_search_scope, m_selection, m_found_verses, text_search_block_size, text, language_type, translation, text_word_grouping, text_wordness, case_sensitive, with_diacritics);
         if (m_found_phrases != null)
         {
             foreach (Phrase phrase in m_found_phrases)
@@ -1951,10 +1951,10 @@ public class Client : IPublisher, ISubscriber
     /// <param name="roots"></param>
     /// <param name="multiplicity"></param>
     /// <returns>Number of found phrases. Result is stored in FoundPhrases.</returns>
-    public int FindPhrases(TextSearchBlockSize text_search_block_size, string roots, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
+    public int FindPhrases(TextSearchBlockSize text_search_block_size, string roots, TextWordGrouping text_word_grouping, int multiplicity, NumberType multiplicity_number_type, ComparisonOperator multiplicity_comparison_operator, int multiplicity_remainder)
     {
         ClearSearchResults();
-        m_found_phrases = Server.FindPhrases(m_search_scope, m_selection, m_found_verses, text_search_block_size, roots, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
+        m_found_phrases = Server.FindPhrases(m_search_scope, m_selection, m_found_verses, text_search_block_size, roots, text_word_grouping, multiplicity, multiplicity_number_type, multiplicity_comparison_operator, multiplicity_remainder);
         if (m_found_phrases != null)
         {
             foreach (Phrase phrase in m_found_phrases)
@@ -4335,7 +4335,7 @@ public class Client : IPublisher, ISubscriber
         }
     }
 
-    
+
     private List<Bookmark> m_bookmarks = new List<Bookmark>();
     public List<Bookmark> Bookmarks
     {
