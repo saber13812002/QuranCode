@@ -782,7 +782,7 @@ public partial class MainForm : Form, ISubscriber
     private const string DEFAULT_LANGUAGE = "English";
     private const string LANGUAGE_SEPARATOR = "-";
     private const string DEFAULT_NATIVE_LANGUAGE = "English";
-    private const int DEFAULT_INFORMATION_BOX_TOP = 413;
+    private const int DEFAULT_INFORMATION_BOX_TOP = 411;
     private const int DEFAULT_AUDIO_VOLUME = 1000;
     private const string VERSE_ADDRESS_TRANSLATION_SEPARATOR = " ";
     private const string VERSE_ADDRESS_MAIN_SEPARATOR = "\t";
@@ -791,7 +791,7 @@ public partial class MainForm : Form, ISubscriber
     private const int MAX_SELECTON_SCOPE_LENGTH = 16;
     private const string DEFAULT_QURAN_FONT_NAME = "me_quran";
     private const float DEFAULT_QURAN_FONT_SIZE = 13.0F;
-    private const int DEFAULT_TRANSLATION_BOX_WIDTH = 444;
+    private const int DEFAULT_TRANSLATION_BOX_WIDTH = 447;
     private const string DEFAULT_TRANSALTION_FONT_NAME = "Microsoft Sans Serif";
     private const float DEFAULT_TRANSALTION_FONT_SIZE = 11.0F;
     private static Color DEFAULT_TRANSALTION_FONT_COLOR = Color.Navy;
