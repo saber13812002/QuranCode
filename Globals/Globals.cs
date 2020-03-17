@@ -21,7 +21,7 @@ public static class Globals
 
             if (EDITION == Edition.Lite)
             {
-                return (version + "L");
+                return (version + " L");
             }
             else if (EDITION == Edition.Standard)
             {
@@ -29,15 +29,15 @@ public static class Globals
             }
             else if (EDITION == Edition.Research)
             {
-                return (version + "R");
+                return (version + " R");
             }
             else if (EDITION == Edition.Ultimate)
             {
-                return (version + "U");
+                return (version + " U");
             }
             else
             {
-                return (version + "!"); // Invalid Edition
+                return (version + " !"); // Invalid Edition
             }
         }
     }

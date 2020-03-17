@@ -778,11 +778,11 @@ public partial class MainForm : Form, ISubscriber
     private const int DEFAULT_WINDOW_TOP = 13;
     private const int DEFAULT_WINDOW_LEFT = 162;
     private const int DEFAULT_WINDOW_WIDTH = 1127;
-    private const int DEFAULT_WINDOW_HEIGHT = 722;
+    private const int DEFAULT_WINDOW_HEIGHT = 751;
     private const string DEFAULT_LANGUAGE = "English";
     private const string LANGUAGE_SEPARATOR = "-";
     private const string DEFAULT_NATIVE_LANGUAGE = "English";
-    private const int DEFAULT_INFORMATION_BOX_TOP = 411;
+    private const int DEFAULT_INFORMATION_BOX_TOP = 449;
     private const int DEFAULT_AUDIO_VOLUME = 1000;
     private const string VERSE_ADDRESS_TRANSLATION_SEPARATOR = " ";
     private const string VERSE_ADDRESS_MAIN_SEPARATOR = "\t";
@@ -3854,6 +3854,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityButton);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityPercentageLabel);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityAllVersesTypeLabel);
+        this.FindBySimilarityPanel.Controls.Add(this.DisplayProstrationVersesLabel);
         this.FindBySimilarityPanel.Controls.Add(this.AuthorLabel);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityPercentageTrackBar);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityWordsRadioButton);
@@ -3948,7 +3949,7 @@ public partial class MainForm : Form, ISubscriber
         this.FindBySimilarityPercentageTrackBar.TabIndex = 79;
         this.FindBySimilarityPercentageTrackBar.TickFrequency = 10;
         this.FindBySimilarityPercentageTrackBar.TickStyle = System.Windows.Forms.TickStyle.None;
-        this.FindBySimilarityPercentageTrackBar.Value = 67;
+        this.FindBySimilarityPercentageTrackBar.Value = 70;
         this.FindBySimilarityPercentageTrackBar.Scroll += new System.EventHandler(this.FindBySimilarityPercentageTrackBar_ValueChanged);
         this.FindBySimilarityPercentageTrackBar.ValueChanged += new System.EventHandler(this.FindBySimilarityPercentageTrackBar_ValueChanged);
         this.FindBySimilarityPercentageTrackBar.Enter += new System.EventHandler(this.FindBySimilarityControls_Enter);
@@ -6278,7 +6279,6 @@ public partial class MainForm : Form, ISubscriber
         this.HeaderPanel.Controls.Add(this.GoldenRatioScopeLabel);
         this.HeaderPanel.Controls.Add(this.GoldenRatioTypeLabel);
         this.HeaderPanel.Controls.Add(this.GoldenRatioOrderLabel);
-        this.HeaderPanel.Controls.Add(this.DisplayProstrationVersesLabel);
         this.HeaderPanel.Controls.Add(this.GenerateSentencesLabel);
         this.HeaderPanel.Controls.Add(this.DuplicateLettersCheckBox);
         this.HeaderPanel.Controls.Add(this.WordWrapLabel);
@@ -6435,7 +6435,7 @@ public partial class MainForm : Form, ISubscriber
         // 
         // DisplayProstrationVersesLabel
         // 
-        this.DisplayProstrationVersesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+        this.DisplayProstrationVersesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
         this.DisplayProstrationVersesLabel.BackColor = System.Drawing.Color.Transparent;
         this.DisplayProstrationVersesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.DisplayProstrationVersesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -13225,7 +13225,7 @@ public partial class MainForm : Form, ISubscriber
                         splash_form.Information = "Building book ...";
                         string text_mode = m_client.NumerologySystem.TextMode;
                         m_client.BuildSimplifiedBook(text_mode, m_with_bism_Allah, m_waw_as_word, m_shadda_as_letter, m_hamza_above_horizontal_line_as_letter, m_elf_above_horizontal_line_as_letter, m_yaa_above_horizontal_line_as_letter, m_noon_above_horizontal_line_as_letter, m_emlaaei_text);
-                        EnableFindByTextControls();
+                        UpdateFindByTextControls();
                         splash_form.Progress = 40;
                         Thread.Sleep(100);
 
@@ -17362,7 +17362,6 @@ public partial class MainForm : Form, ISubscriber
             ScriptSaveLabel.Visible = true;
             ScriptSaveAsLabel.Visible = true;
             WordWrapLabel.Visible = false;
-            DisplayProstrationVersesLabel.Visible = false;
             InspectVersesLabel.Visible = false;
             GoldenRatioScopeLabel.Visible = false;
             GoldenRatioTypeLabel.Visible = false;
@@ -17605,7 +17604,6 @@ public partial class MainForm : Form, ISubscriber
             ScriptSaveLabel.Visible = false;
             ScriptSaveAsLabel.Visible = false;
             WordWrapLabel.Visible = true;
-            DisplayProstrationVersesLabel.Visible = true;
             InspectVersesLabel.Visible = true;
             GoldenRatioScopeLabel.Visible = (m_active_textbox == MainTextBox);
             GoldenRatioTypeLabel.Visible = (m_active_textbox == MainTextBox);
@@ -22527,1688 +22525,6 @@ public partial class MainForm : Form, ISubscriber
     }
     ///////////////////////////////////////////////////////////////////////////////
     #endregion
-    #region Display Selection
-    ///////////////////////////////////////////////////////////////////////////////
-    private bool m_selection_mode = false;
-    private int m_word_number_in_verse = -1;
-    private int m_letter_number_in_verse = -1;
-    private int m_word_number_in_chapter = -1;
-    private int m_letter_number_in_chapter = -1;
-    private void NumericUpDown_Enter(object sender, EventArgs e)
-    {
-        SearchGroupBox_Leave(null, null);
-        this.AcceptButton = null;
-
-        if (sender == HeaderLabel)
-        {
-            m_active_textbox.Focus();
-            CalculateCurrentValue();
-        }
-
-        // Ctrl+Click factorizes number
-        if (ModifierKeys == Keys.Control)
-        {
-            long value = 0L;
-            if (sender == ChapterComboBox)
-            {
-                if (ChapterComboBox.SelectedIndex != -1)
-                {
-                    string[] parts = ChapterComboBox.Text.Split('-');
-                    if (parts.Length > 0)
-                    {
-                        value = long.Parse(parts[0]);
-                    }
-                }
-            }
-            else if (sender is NumericUpDown)
-            {
-                try
-                {
-                    value = (int)(sender as NumericUpDown).Value;
-                }
-                catch
-                {
-                    value = -1L; // error
-                }
-            }
-            else
-            {
-                value = -1L; // error
-            }
-
-            FactorizeValue(value, "Position", true);
-        }
-    }
-    private void NumericUpDown_Leave(object sender, EventArgs e)
-    {
-        this.AcceptButton = null;
-    }
-    private void NumericUpDown_KeyDown(object sender, KeyEventArgs e)
-    {
-        if (e.KeyCode == Keys.Enter)
-        {
-            if (sender is NumericUpDown)
-            {
-                Control control = (sender as NumericUpDown);
-                if (control != null)
-                {
-                    try
-                    {
-                        for (int i = 0; i < 3; i++) ChapterVerseNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                        for (int i = 0; i < 3; i++) ChapterWordNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                        for (int i = 0; i < 3; i++) ChapterLetterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                        for (int i = 0; i < 3; i++) PageNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                        for (int i = 0; i < 3; i++) StationNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                        for (int i = 0; i < 3; i++) PartNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                        for (int i = 0; i < 3; i++) GroupNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                        for (int i = 0; i < 3; i++) HalfNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                        for (int i = 0; i < 3; i++) QuarterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                        for (int i = 0; i < 3; i++) BowingNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                        for (int i = 0; i < 3; i++) VerseNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                        for (int i = 0; i < 3; i++) WordNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                        for (int i = 0; i < 3; i++) LetterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-
-                        SelectionScope scope = SelectionScope.Book;
-                        if ((control == ChapterVerseNumericUpDown) || (control == VerseNumericUpDown))
-                        {
-                            scope = SelectionScope.Verse;
-                        }
-                        else if ((control == ChapterWordNumericUpDown) || (control == WordNumericUpDown))
-                        {
-                            scope = SelectionScope.Word;
-                        }
-                        else if ((control == ChapterLetterNumericUpDown) || (control == LetterNumericUpDown))
-                        {
-                            scope = SelectionScope.Letter;
-                        }
-                        else if (control == PageNumericUpDown)
-                        {
-                            scope = SelectionScope.Page;
-                        }
-                        else if (control == StationNumericUpDown)
-                        {
-                            scope = SelectionScope.Station;
-                        }
-                        else if (control == PartNumericUpDown)
-                        {
-                            scope = SelectionScope.Part;
-                        }
-                        else if (control == GroupNumericUpDown)
-                        {
-                            scope = SelectionScope.Group;
-                        }
-                        else if (control == HalfNumericUpDown)
-                        {
-                            scope = SelectionScope.Half;
-                        }
-                        else if (control == QuarterNumericUpDown)
-                        {
-                            scope = SelectionScope.Quarter;
-                        }
-                        else if (control == BowingNumericUpDown)
-                        {
-                            scope = SelectionScope.Bowing;
-                        }
-                        else
-                        {
-                            scope = SelectionScope.Book;
-                        }
-
-                        if (m_client != null)
-                        {
-                            if (m_client.Book != null)
-                            {
-                                if (m_client.Selection != null)
-                                {
-                                    // varaibles for word/letter highlight
-                                    int highlight_word_number = 0;
-                                    int highlight_letter_number = 0;
-
-                                    // XXXs before chapter for ChapterXXXNumericUpDown
-                                    Chapter chapter = null;
-                                    int verses_before_chapter = 0;
-                                    int words_before_chapter = 0;
-                                    int letters_before_chapter = 0;
-                                    if (m_client.Selection.Chapters.Count > 0)
-                                    {
-                                        chapter = m_client.Selection.Chapters[0];
-                                        if (chapter != null)
-                                        {
-                                            if (chapter.Verses.Count > 0)
-                                            {
-                                                verses_before_chapter += chapter.Verses[0].Number - 1;
-                                                if (chapter.Verses[0].Words.Count > 0)
-                                                {
-                                                    words_before_chapter += chapter.Verses[0].Words[0].Number - 1;
-                                                    if (chapter.Verses[0].Words[0].Letters.Count > 0)
-                                                    {
-                                                        letters_before_chapter += chapter.Verses[0].Words[0].Letters[0].Number - 1;
-                                                    }
-                                                }
-                                            }
-
-                                            // split by , then by -
-                                            List<int> indexes = new List<int>();
-                                            string text = (sender as NumericUpDown).Text;
-                                            string[] parts = text.Split(',');
-                                            foreach (string part in parts)
-                                            {
-                                                string[] sub_parts = part.Split('-');
-                                                if (sub_parts.Length == 1)
-                                                {
-                                                    int number;
-                                                    if (int.TryParse(sub_parts[0], out number))
-                                                    {
-                                                        if (scope == SelectionScope.Verse)
-                                                        {
-                                                            if (control == ChapterVerseNumericUpDown)
-                                                            {
-                                                                if (chapter.Verses != null)
-                                                                {
-                                                                    if (number > chapter.Verses.Count)
-                                                                    {
-                                                                        number = chapter.Verses.Count;
-                                                                    }
-                                                                    number += verses_before_chapter;
-                                                                }
-                                                            }
-                                                        }
-                                                        else if (scope == SelectionScope.Word)
-                                                        {
-                                                            if (control == ChapterWordNumericUpDown)
-                                                            {
-                                                                if (number > chapter.WordCount)
-                                                                {
-                                                                    number = chapter.WordCount;
-                                                                }
-                                                                number += words_before_chapter;
-                                                            }
-
-                                                            // number = number of verse containing the word
-                                                            if (m_client.Book != null)
-                                                            {
-                                                                Word word = m_client.Book.GetWord(number - 1);
-                                                                if (word != null)
-                                                                {
-                                                                    if (highlight_word_number == 0)
-                                                                    {
-                                                                        highlight_word_number = word.Number;
-                                                                    }
-
-                                                                    if (word.Verse != null)
-                                                                    {
-                                                                        number = word.Verse.Number;
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-                                                        else if (scope == SelectionScope.Letter)
-                                                        {
-                                                            if (control == ChapterLetterNumericUpDown)
-                                                            {
-                                                                if (number > chapter.LetterCount)
-                                                                {
-                                                                    number = chapter.LetterCount;
-                                                                }
-                                                                number += letters_before_chapter;
-                                                            }
-
-                                                            // number = number of verse containing the letter
-                                                            Letter letter = m_client.Book.GetLetter(number - 1);
-                                                            if (letter != null)
-                                                            {
-                                                                if (highlight_letter_number == 0)
-                                                                {
-                                                                    highlight_letter_number = letter.Number;
-                                                                }
-
-                                                                if (letter.Word != null)
-                                                                {
-                                                                    if (letter.Word.Verse != null)
-                                                                    {
-                                                                        number = letter.Word.Verse.Number;
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
-
-                                                        // add number to indexes
-                                                        if (!indexes.Contains(number - 1))
-                                                        {
-                                                            indexes.Add(number - 1);
-                                                        }
-                                                    }
-                                                }
-                                                else if (sub_parts.Length == 2)
-                                                {
-                                                    int number;
-                                                    int min, max;
-                                                    if (int.TryParse(sub_parts[0], out min))
-                                                    {
-                                                        if (int.TryParse(sub_parts[1], out max))
-                                                        {
-                                                            int temp = -1;
-                                                            if (min > max) // reverse range, e.g. min-max: 100-90
-                                                            {
-                                                                temp = max;
-                                                                max = min;
-                                                                min = temp;
-                                                            }
-                                                            for (int i = min; i <= max; i++)
-                                                            {
-                                                                if (temp == -1)
-                                                                {
-                                                                    number = i;
-                                                                }
-                                                                else // reversed min-max: 90-100
-                                                                {
-                                                                    // from 100 to 90 i--
-                                                                    number = max - (i - min);
-                                                                }
-
-                                                                if (scope == SelectionScope.Verse)
-                                                                {
-                                                                    if (control == ChapterVerseNumericUpDown)
-                                                                    {
-                                                                        if (chapter.Verses != null)
-                                                                        {
-                                                                            if (number > chapter.Verses.Count)
-                                                                            {
-                                                                                number = chapter.Verses.Count;
-                                                                            }
-                                                                            number += verses_before_chapter;
-                                                                        }
-                                                                    }
-                                                                }
-                                                                else if (scope == SelectionScope.Word)
-                                                                {
-                                                                    if (control == ChapterWordNumericUpDown)
-                                                                    {
-                                                                        if (number > chapter.WordCount)
-                                                                        {
-                                                                            number = chapter.WordCount;
-                                                                        }
-                                                                        number += words_before_chapter;
-                                                                    }
-
-                                                                    // number = number of verse containing the word
-                                                                    if (m_client.Book != null)
-                                                                    {
-                                                                        Word word = m_client.Book.GetWord(number - 1);
-                                                                        if (word != null)
-                                                                        {
-                                                                            if (highlight_word_number == 0)
-                                                                            {
-                                                                                highlight_word_number = word.Number;
-                                                                            }
-
-                                                                            if (word.Verse != null)
-                                                                            {
-                                                                                number = word.Verse.Number;
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-                                                                else if (scope == SelectionScope.Letter)
-                                                                {
-                                                                    if (control == ChapterLetterNumericUpDown)
-                                                                    {
-                                                                        if (number > chapter.LetterCount)
-                                                                        {
-                                                                            number = chapter.LetterCount;
-                                                                        }
-                                                                        number += letters_before_chapter;
-                                                                    }
-
-                                                                    // number = number of verse containing the letter
-                                                                    Letter letter = m_client.Book.GetLetter(number - 1);
-                                                                    if (letter != null)
-                                                                    {
-                                                                        if (highlight_letter_number == 0)
-                                                                        {
-                                                                            highlight_letter_number = letter.Number;
-                                                                        }
-
-                                                                        if (letter.Word != null)
-                                                                        {
-                                                                            if (letter.Word.Verse != null)
-                                                                            {
-                                                                                number = letter.Word.Verse.Number;
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                }
-
-                                                                if (!indexes.Contains(number - 1))
-                                                                {
-                                                                    indexes.Add(number - 1);
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    // do nothing
-                                                }
-                                            }
-
-                                            // always display selection
-                                            if (indexes.Count > 0)
-                                            {
-                                                if ((scope == SelectionScope.Word) || (scope == SelectionScope.Letter))
-                                                {
-                                                    scope = SelectionScope.Verse;
-                                                }
-                                                m_client.Selection = new Selection(m_client.Book, scope, indexes);
-
-                                                PlayerStopLabel_Click(null, null);
-
-                                                DisplaySelection(true);
-
-                                                // highlight first word/letter only
-                                                if ((control == WordNumericUpDown) || (control == ChapterWordNumericUpDown))
-                                                {
-                                                    HighlightWord(highlight_word_number);
-                                                }
-                                                else if ((control == LetterNumericUpDown) || (control == ChapterLetterNumericUpDown))
-                                                {
-                                                    HighlightLetter(highlight_letter_number);
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                        e.SuppressKeyPress = true; // stop annoying beep due to parent not having an AcceptButton
-                    }
-                    catch (Exception ex)
-                    {
-                        while (ex != null)
-                        {
-                            MessageBox.Show(ex.Message, Application.ProductName);
-                            ex = ex.InnerException;
-                        }
-                    }
-                    finally
-                    {
-                        ChapterVerseNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                        ChapterWordNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                        ChapterLetterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                        PageNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                        StationNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                        PartNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                        GroupNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                        HalfNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                        QuarterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                        BowingNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                        VerseNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                        WordNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                        LetterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    }
-                }
-            }
-        }
-    }
-    private void NumericUpDown_ValueChanged(object sender, EventArgs e)
-    {
-        Control control = sender as NumericUpDown;
-        if (control != null)
-        {
-            if (control.Focused)
-            {
-                DisplayNumericSelection(control);
-
-                if (ChapterSelectionComboBox.Items.Count > 0)
-                {
-                    ChapterSelectionComboBox.SelectedIndex = 0;
-                }
-            }
-        }
-    }
-    private void DisplayNumericSelection(Control control)
-    {
-        if (control is NumericUpDown)
-        {
-            if (control.Focused)
-            {
-                try
-                {
-                    for (int i = 0; i < 3; i++) ChapterVerseNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) ChapterWordNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) ChapterLetterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) PageNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) StationNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) PartNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) GroupNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) HalfNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) QuarterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) BowingNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) VerseNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) WordNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) LetterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-
-                    int number = (int)((control as NumericUpDown).Value);
-
-                    // backup number before as it will be overwritten with verse.Number
-                    // if control is WordNumericUpDown OR LetterNumericUpDown or
-                    // if control is ChapterWordNumericUpDown OR ChapterLetterNumericUpDown 
-                    int word_number = 0;
-                    int letter_number = 0;
-                    if ((control == WordNumericUpDown) || (control == ChapterLetterNumericUpDown))
-                    {
-                        word_number = number;
-                    }
-                    else if ((control == LetterNumericUpDown) || (control == ChapterLetterNumericUpDown))
-                    {
-                        letter_number = number;
-                    }
-
-                    if (m_client != null)
-                    {
-                        if (m_client.Book != null)
-                        {
-                            if (m_client.Book.Verses != null)
-                            {
-                                SelectionScope scope = SelectionScope.Book;
-
-                                if (control == ChapterVerseNumericUpDown)
-                                {
-                                    scope = SelectionScope.Verse;
-
-                                    if (m_client.Book.Chapters != null)
-                                    {
-                                        int verse_number_in_chapter = (int)ChapterVerseNumericUpDown.Value;
-
-                                        int selected_index = ChapterComboBox.SelectedIndex;
-                                        if ((selected_index >= 0) && (selected_index < m_client.Book.Chapters.Count))
-                                        {
-                                            Chapter chapter = m_client.Book.Chapters[selected_index];
-                                            if (chapter != null)
-                                            {
-                                                if (chapter.Verses != null)
-                                                {
-                                                    if (chapter.Verses != null)
-                                                    {
-                                                        if (chapter.Verses.Count > verse_number_in_chapter - 1)
-                                                        {
-                                                            Verse verse = chapter.Verses[verse_number_in_chapter - 1];
-                                                            if (verse != null)
-                                                            {
-                                                                number = verse.Number;
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                else if ((control == ChapterWordNumericUpDown) || (control == ChapterLetterNumericUpDown))
-                                {
-                                    scope = SelectionScope.Verse;
-
-                                    if (m_client.Book.Chapters != null)
-                                    {
-                                        int selected_index = ChapterComboBox.SelectedIndex;
-                                        if ((selected_index >= 0) && (selected_index < m_client.Book.Chapters.Count))
-                                        {
-                                            Chapter chapter = m_client.Book.Chapters[selected_index];
-                                            if (chapter != null)
-                                            {
-                                                if (chapter.Verses != null)
-                                                {
-                                                    if (chapter.Verses.Count > 0)
-                                                    {
-                                                        if (chapter.Verses.Count > 0)
-                                                        {
-                                                            Verse verse = null;
-                                                            if (chapter.Verses[0].Words.Count > 0)
-                                                            {
-                                                                if (control == ChapterWordNumericUpDown)
-                                                                {
-                                                                    word_number = number + chapter.Verses[0].Words[0].Number - 1;
-                                                                    verse = m_client.Book.GetVerseByWordNumber(word_number);
-                                                                }
-                                                                else if (control == ChapterLetterNumericUpDown)
-                                                                {
-                                                                    if (chapter.Verses[0].Words[0].Letters.Count > 0)
-                                                                    {
-                                                                        letter_number = number + chapter.Verses[0].Words[0].Letters[0].Number - 1;
-                                                                        verse = m_client.Book.GetVerseByLetterNumber(letter_number);
-                                                                    }
-                                                                }
-                                                            }
-                                                            if (verse != null)
-                                                            {
-                                                                number = verse.Number;
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
-                                        }
-                                    }
-                                }
-                                else if (control == PageNumericUpDown)
-                                {
-                                    if (m_client.Book.Pages != null)
-                                    {
-                                        scope = SelectionScope.Page;
-                                    }
-                                }
-                                else if (control == StationNumericUpDown)
-                                {
-                                    if (m_client.Book.Stations != null)
-                                    {
-                                        scope = SelectionScope.Station;
-                                    }
-                                }
-                                else if (control == PartNumericUpDown)
-                                {
-                                    if (m_client.Book.Parts != null)
-                                    {
-                                        scope = SelectionScope.Part;
-                                    }
-                                }
-                                else if (control == GroupNumericUpDown)
-                                {
-                                    if (m_client.Book.Groups != null)
-                                    {
-                                        scope = SelectionScope.Group;
-                                    }
-                                }
-                                else if (control == HalfNumericUpDown)
-                                {
-                                    if (m_client.Book.Halfs != null)
-                                    {
-                                        scope = SelectionScope.Half;
-                                    }
-                                }
-                                else if (control == QuarterNumericUpDown)
-                                {
-                                    if (m_client.Book.Quarters != null)
-                                    {
-                                        scope = SelectionScope.Quarter;
-                                    }
-                                }
-                                else if (control == BowingNumericUpDown)
-                                {
-                                    if (m_client.Book.Bowings != null)
-                                    {
-                                        scope = SelectionScope.Bowing;
-                                    }
-                                }
-                                else if (control == VerseNumericUpDown)
-                                {
-                                    if (m_client.Book.Verses != null)
-                                    {
-                                        scope = SelectionScope.Verse;
-                                    }
-                                }
-                                else if (control == WordNumericUpDown)
-                                {
-                                    Verse verse = m_client.Book.GetVerseByWordNumber(word_number);
-                                    if (verse != null)
-                                    {
-                                        scope = SelectionScope.Verse;
-                                        number = verse.Number;
-                                    }
-                                }
-                                else if (control == LetterNumericUpDown)
-                                {
-                                    Verse verse = m_client.Book.GetVerseByLetterNumber(letter_number);
-                                    if (verse != null)
-                                    {
-                                        scope = SelectionScope.Verse;
-                                        number = verse.Number;
-                                    }
-                                }
-                                else
-                                {
-                                    // do nothing
-                                }
-
-                                if (m_client.Selection != null)
-                                {
-                                    // if selection has changed
-                                    if (
-                                        (m_client.Selection.Scope != scope)
-                                        ||
-                                        ((m_client.Selection.Indexes.Count > 0) && (m_client.Selection.Indexes[0] != (number - 1)))
-                                       )
-                                    {
-                                        PlayerStopLabel_Click(null, null);
-
-                                        List<int> indexes = new List<int>() { number - 1 };
-                                        m_client.Selection = new Selection(m_client.Book, scope, indexes);
-
-                                        DisplaySelection(true);
-                                    }
-                                }
-
-                                if ((control == WordNumericUpDown) || (control == ChapterWordNumericUpDown))
-                                {
-                                    HighlightWord(word_number);
-                                }
-                                else if ((control == LetterNumericUpDown) || (control == ChapterLetterNumericUpDown))
-                                {
-                                    HighlightLetter(letter_number);
-                                }
-                            }
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    while (ex != null)
-                    {
-                        MessageBox.Show(ex.Message, Application.ProductName);
-                        ex = ex.InnerException;
-                    }
-                }
-                finally
-                {
-                    ChapterVerseNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    ChapterWordNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    ChapterLetterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    PageNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    StationNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    PartNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    GroupNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    HalfNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    QuarterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    BowingNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    VerseNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    WordNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    LetterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                }
-            }
-        }
-    }
-    private void DisplaySelection(bool add_to_history)
-    {
-        this.Cursor = Cursors.WaitCursor;
-        try
-        {
-            SwitchToMainTextBox();
-
-            MainTextBox.BeginUpdate();
-
-            BookmarkTextBox.Enabled = true;
-
-            m_user_text_mode = false;
-            m_selection_mode = true;
-
-            ToolTip.SetToolTip(InspectChaptersLabel, L[l]["Inspect chapters"]);
-            WordsListBoxLabel.Visible = false;
-            WordsListBox.Visible = false;
-
-            this.Text = Application.ProductName + " ║ " + GetSelectionSummary();
-            UpdateSearchScope();
-
-            DisplaySelectionText();
-
-            CalculateCurrentValue();
-
-            BuildLetterFrequencies();
-            DisplayLetterFrequencies();
-
-            DisplaySelectionPositions();
-
-            MainTextBox.ClearHighlight();
-            MainTextBox.AlignToStart();
-
-            m_current_selection_verse_index = 0;
-            CurrentVerseIndex = 0;
-
-            m_current_letter = GetLetterAtCursor();
-            m_current_word = GetWordAtCursor();
-            m_current_verse = GetCurrentVerse();
-            m_current_chapter = GetCurrentChapter();
-            UpdateHeaderLabel();
-            if (m_current_word != null)
-            {
-                this.Text = GetCurrentWordDetails(m_current_word);
-            }
-
-            if (m_client != null)
-            {
-                if (m_client.Selection != null)
-                {
-                    DisplayTranslations(m_client.Selection.Verses);
-                    DisplaySymmetry();
-                    DisplayCVWLSequence();
-                    DisplayValuesSequence();
-                    DisplayDNASequence();
-
-                    if (m_client.Selection.Verses.Count > 0)
-                    {
-                        Verse verse = m_client.Selection.Verses[0];
-                        UpdatePlayerButtons(verse);
-                    }
-
-                    if (add_to_history)
-                    {
-                        AddBrowseHistoryItem();
-                    }
-
-                    // display selection's note (if any)
-                    DisplayNote(m_client.GetBookmark(m_client.Selection));
-                }
-            }
-
-            if (PictureBox.Visible)
-            {
-                RedrawImage();
-            }
-
-            // update nofity icon text
-            UpdateNotifyIconText();
-        }
-        catch (Exception ex)
-        {
-            while (ex != null)
-            {
-                MessageBox.Show(ex.Message, Application.ProductName);
-                ex = ex.InnerException;
-            }
-        }
-        finally
-        {
-            if (PictureBox.Visible)
-            {
-                PictureBox.Visible = false;
-            }
-
-            MainTextBox.EndUpdate();
-            this.Cursor = Cursors.Default;
-        }
-    }
-    private void UpdateNotifyIconText()
-    {
-        if (m_client != null)
-        {
-            if (m_client.NumerologySystem != null)
-            {
-                NotifyIcon.Text = Application.ProductName + " ║ " + m_client.NumerologySystem.TextMode + " ║ " + GetSelectionSummary();
-            }
-        }
-    }
-    private string GetSelectionSummary()
-    {
-        string result = null;
-        if (m_client != null)
-        {
-            if (m_client.Book != null)
-            {
-                if (m_client.Selection != null)
-                {
-                    if (m_client.Book.Verses != null)
-                    {
-                        if (m_client.Selection.Indexes != null)
-                        {
-                            if ((m_client.Selection.Scope == SelectionScope.Word) || (m_client.Selection.Scope == SelectionScope.Letter))
-                            {
-                                int verse_number = (int)VerseNumericUpDown.Value;
-                                result = L[l]["Verse"] + " " + m_client.Book.Verses[verse_number - 1].Address;
-                            }
-                            else // if scope is Chapter, Page, Station, Part, Group, Half, Quarter, Bowing, Verse
-                            {
-                                StringBuilder str = new StringBuilder();
-
-                                List<int> selection_indexes = new List<int>();
-                                if (m_client.Selection.Scope == SelectionScope.Chapter)
-                                {
-                                    foreach (Chapter chapter in m_client.Selection.Chapters)
-                                    {
-                                        selection_indexes.Add(chapter.SortedNumber - 1);
-                                    }
-                                }
-                                else
-                                {
-                                    selection_indexes = m_client.Selection.Indexes;
-                                }
-
-                                if (Numbers.AreConsecutive(selection_indexes))
-                                {
-                                    if (m_client.Selection.Indexes.Count > 1)
-                                    {
-                                        int first_index = m_client.Selection.Indexes[0];
-                                        int last_index = m_client.Selection.Indexes[m_client.Selection.Indexes.Count - 1];
-
-                                        if (m_client.Selection.Scope == SelectionScope.Verse)
-                                        {
-                                            str.Append(m_client.Book.Verses[first_index].Address + " - ");
-                                            str.Append(m_client.Book.Verses[last_index].Address);
-                                        }
-                                        else if (m_client.Selection.Scope == SelectionScope.Chapter)
-                                        {
-                                            int from_chapter_sorted_number = -1;
-                                            int to_chapter_sorted_number = -1;
-                                            int from_chapter_number = first_index + 1;
-                                            int to_chapter_number = last_index + 1;
-                                            if (m_client.Book.Chapters != null)
-                                            {
-                                                foreach (Chapter chapter in m_client.Book.Chapters)
-                                                {
-                                                    if (chapter.Number == from_chapter_number)
-                                                    {
-                                                        from_chapter_sorted_number = chapter.SortedNumber;
-                                                        break;
-                                                    }
-                                                }
-                                                foreach (Chapter chapter in m_client.Book.Chapters)
-                                                {
-                                                    if (chapter.Number == to_chapter_number)
-                                                    {
-                                                        to_chapter_sorted_number = chapter.SortedNumber;
-                                                        break;
-                                                    }
-                                                }
-                                                str.Append(from_chapter_sorted_number.ToString() + " - ");
-                                                str.Append(to_chapter_sorted_number.ToString());
-                                            }
-                                        }
-                                        else
-                                        {
-                                            str.Append((first_index + 1).ToString() + "-");
-                                            str.Append((last_index + 1).ToString());
-                                        }
-                                    }
-                                    else if (m_client.Selection.Indexes.Count == 1)
-                                    {
-                                        int index = m_client.Selection.Indexes[0];
-                                        if (m_client.Selection.Scope == SelectionScope.Verse)
-                                        {
-                                            str.Append(m_client.Book.Verses[index].Address);
-                                        }
-                                        else if (m_client.Selection.Scope == SelectionScope.Chapter)
-                                        {
-                                            int chapter_sorted_number = 0;
-                                            int chapter_number = index + 1;
-                                            if (m_client.Book.Chapters != null)
-                                            {
-                                                foreach (Chapter chapter in m_client.Book.Chapters)
-                                                {
-                                                    if (chapter.Number == chapter_number)
-                                                    {
-                                                        chapter_sorted_number = chapter.SortedNumber;
-                                                        break;
-                                                    }
-                                                }
-                                                str.Append(chapter_sorted_number.ToString());
-                                            }
-                                        }
-                                        else
-                                        {
-                                            str.Append((index + 1).ToString());
-                                        }
-                                    }
-                                    else
-                                    {
-                                        // do nothing
-                                    }
-                                }
-                                else
-                                {
-                                    if (m_client.Selection.Indexes.Count > 0)
-                                    {
-                                        foreach (int index in m_client.Selection.Indexes)
-                                        {
-                                            if (m_client.Selection.Scope == SelectionScope.Verse)
-                                            {
-                                                str.Append(m_client.Book.Verses[index].Address + " ");
-                                            }
-                                            else if (m_client.Selection.Scope == SelectionScope.Chapter)
-                                            {
-                                                int chapter_sorted_number = 0;
-                                                int chapter_number = index + 1;
-                                                if (m_client.Book.Chapters != null)
-                                                {
-                                                    foreach (Chapter chapter in m_client.Book.Chapters)
-                                                    {
-                                                        if (chapter.Number == chapter_number)
-                                                        {
-                                                            chapter_sorted_number = chapter.SortedNumber;
-                                                            break;
-                                                        }
-                                                    }
-                                                    str.Append(chapter_sorted_number.ToString() + " ");
-                                                }
-                                            }
-                                            else
-                                            {
-                                                str.Append((index + 1).ToString() + " ");
-                                            }
-                                        }
-                                        if (str.Length > 1)
-                                        {
-                                            str.Remove(str.Length - 1, 1);
-                                        }
-                                    }
-
-                                    if (m_client.Selection.Scope == SelectionScope.Verse)
-                                    {
-                                    }
-                                    else if (m_client.Selection.Scope == SelectionScope.Chapter)
-                                    {
-                                    }
-                                    else
-                                    {
-                                    }
-                                }
-
-                                if (m_client.Selection.Indexes.Count == 1)
-                                {
-                                    result = m_client.Selection.Scope.ToString() + " " + str.ToString();
-                                }
-                                else if (m_client.Selection.Indexes.Count > 1)
-                                {
-                                    result = m_client.Selection.Scope.ToString() + "s" + " " + str.ToString();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (result != null)
-            {
-                // trim if too long
-                if (result.Length > SELECTON_SCOPE_TEXT_MAX_LENGTH)
-                {
-                    result = result.Substring(0, SELECTON_SCOPE_TEXT_MAX_LENGTH) + " ...";
-                }
-            }
-        }
-        return result;
-    }
-    private void DisplaySelectionText()
-    {
-        if (
-             (m_text_display_mode == TextDisplayMode.Both) ||
-             (m_text_display_mode == TextDisplayMode.QuranOnly)
-           )
-        {
-            if (m_client != null)
-            {
-                if (m_client.Selection != null)
-                {
-                    //Chapter chapter = null;
-                    List<Verse> verses = m_client.Selection.Verses;
-                    if (verses != null)
-                    {
-                        if (verses.Count > 0)
-                        {
-                            //chapter = verses[0].Chapter;
-                            StringBuilder str = new StringBuilder();
-                            foreach (Verse verse in verses)
-                            {
-                                if (verse != null)
-                                {
-                                    //if (chapter != verse.Chapter)
-                                    //{
-                                    //    chapter = verse.Chapter;
-                                    //    str.AppendLine();
-                                    //}
-                                    str.Append(verse.Text + verse.Endmark);
-                                }
-                            }
-                            if (str.Length > 1)
-                            {
-                                str.Remove(str.Length - 1, 1); // last space in " {###} "   OR  \n
-                            }
-                            m_current_text = str.ToString();
-                        }
-                    }
-
-                    MainTextBox.Text = m_current_text;
-                    MainTextBox.Refresh();
-
-                    WordsListBoxLabel.Visible = false;
-                    WordsListBox.Visible = false;
-                    GenerateSentencesLabel.Visible = false;
-                    DuplicateLettersCheckBox.Visible = false;
-
-                    ColorizeGoldenRatios();
-                }
-            }
-        }
-    }
-    private void UpdateLanguageType(string text)
-    {
-        if (text.IsArabic())
-        {
-            SetLanguageType(LanguageType.RightToLeft);
-        }
-        else
-        {
-            SetLanguageType(LanguageType.LeftToRight);
-        }
-        EnableFindByTextControls();
-    }
-    private void DisplaySelectionPositions()
-    {
-        if (m_client != null)
-        {
-            if (m_client.Selection != null)
-            {
-                List<Verse> verses = m_client.Selection.Verses;
-                if (verses != null)
-                {
-                    if (verses.Count > 0)
-                    {
-                        Verse verse = verses[0];
-                        if (verse != null)
-                        {
-                            // show position of selection in the Quran visually
-                            UpdateProgressBar(verse);
-
-                            if (verse.Chapter != null)
-                            {
-                                UpdateMinMaxChapterVerseWordLetter(verse.Chapter.SortedNumber - 1);
-                            }
-
-                            if (ChapterComboBox.Items.Count > 0)
-                            {
-                                // without this guard, we cannot select more than 1 chapter in ChaptersListBox and
-                                // we cannot move backward/forward inside the ChaptersListBox using Backspace
-                                if (!ChaptersListBox.Focused)
-                                {
-                                    UpdateChaptersListBoxSelectionIndexes();
-                                }
-                            }
-                            UpdateVersePositions(verse);
-
-                            Model.Bookmark bookmark = m_client.GotoBookmark(m_client.Selection.Scope, m_client.Selection.Indexes);
-                            if (bookmark != null)
-                            {
-                                BookmarkTextBox.ForeColor = m_note_view_color;
-                                BookmarkTextBox.Text = bookmark.Note;
-                                string hint = "Creation Time" + "\t" + bookmark.CreatedTime + "\r\n"
-                                            + "Last Modified" + "\t" + bookmark.LastModifiedTime;
-                                ToolTip.SetToolTip(BookmarkTextBox, hint);
-                                UpdateBookmarkButtons();
-                            }
-                            else
-                            {
-                                DisplayNoteWritingInstruction();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-    private Chapter m_old_chapter = null;
-    private Verse m_old_verse = null;
-    private void DisplayCurrentPositions()
-    {
-        if (m_active_textbox != null)
-        {
-            if (m_active_textbox.Lines != null)
-            {
-                if (m_active_textbox.Lines.Length > 0)
-                {
-                    Verse verse = GetCurrentVerse();
-                    if (verse != null)
-                    {
-                        if (m_old_verse != verse)
-                        {
-                            m_old_verse = verse;
-
-                            // show position of verse in the Quran visually
-                            ProgressBar.Minimum = 1;
-                            ProgressBar.Maximum = verse.Book.Verses.Count;
-                            ProgressBar.Value = verse.Number;
-                            ProgressBar.Refresh();
-
-                            if (verse.Chapter != null)
-                            {
-                                if (m_old_chapter != verse.Chapter)
-                                {
-                                    m_old_chapter = verse.Chapter;
-                                    UpdateMinMaxChapterVerseWordLetter(verse.Chapter.SortedNumber - 1);
-                                }
-                            }
-
-                            if (ChapterComboBox.Items.Count > 0)
-                            {
-                                // without this guard, we cannot select more than 1 chapter in ChaptersListBox and
-                                // we cannot move backward/forward inside the ChaptersListBox using Backspace
-                                if (!ChaptersListBox.Focused)
-                                {
-                                    UpdateChaptersListBoxSelectionIndexes();
-                                }
-                            }
-                        }
-                        UpdateVersePositions(verse);
-                    }
-                }
-            }
-        }
-    }
-    private void UpdateVersePositions(Verse verse)
-    {
-        if (m_active_textbox != null)
-        {
-            if (verse != null)
-            {
-                try
-                {
-                    for (int i = 0; i < 3; i++) ChapterComboBox.SelectedIndexChanged -= new EventHandler(ChapterComboBox_SelectedIndexChanged);
-                    for (int i = 0; i < 3; i++) ChapterVerseNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) ChapterWordNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) ChapterLetterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) PageNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) StationNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) PartNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) GroupNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) HalfNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) QuarterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) BowingNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) VerseNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) WordNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-                    for (int i = 0; i < 3; i++) LetterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
-
-                    if (verse.Chapter != null)
-                    {
-                        if (ChapterComboBox.SelectedIndex != verse.Chapter.SortedNumber - 1)
-                        {
-                            ChapterComboBox.SelectedIndex = verse.Chapter.SortedNumber - 1;
-                            DisplayChapterRevelationInfo();
-                        }
-                    }
-
-                    if ((verse.NumberInChapter >= 1) && (verse.NumberInChapter <= verse.Chapter.Verses.Count))
-                    {
-                        if (verse.Chapter != null)
-                        {
-                            if (ChapterVerseNumericUpDown.Value != verse.NumberInChapter)
-                            {
-                                ChapterVerseNumericUpDown.Value = (verse.NumberInChapter > ChapterVerseNumericUpDown.Maximum) ? ChapterVerseNumericUpDown.Maximum : verse.NumberInChapter;
-                            }
-                        }
-                    }
-
-                    if (verse.Page != null)
-                    {
-                        if (PageNumericUpDown.Value != verse.Page.Number)
-                        {
-                            PageNumericUpDown.Value = verse.Page.Number;
-                        }
-                    }
-                    if (verse.Station != null)
-                    {
-                        if (StationNumericUpDown.Value != verse.Station.Number)
-                        {
-                            StationNumericUpDown.Value = verse.Station.Number;
-                        }
-                    }
-                    if (verse.Part != null)
-                    {
-                        if (PartNumericUpDown.Value != verse.Part.Number)
-                        {
-                            PartNumericUpDown.Value = verse.Part.Number;
-                        }
-                    }
-                    if (verse.Group != null)
-                    {
-                        if (GroupNumericUpDown.Value != verse.Group.Number)
-                        {
-                            GroupNumericUpDown.Value = verse.Group.Number;
-                        }
-                    }
-                    if (verse.Half != null)
-                    {
-                        if (HalfNumericUpDown.Value != verse.Half.Number)
-                        {
-                            HalfNumericUpDown.Value = verse.Half.Number;
-                        }
-                    }
-                    if (verse.Quarter != null)
-                    {
-                        if (QuarterNumericUpDown.Value != verse.Quarter.Number)
-                        {
-                            QuarterNumericUpDown.Value = verse.Quarter.Number;
-                        }
-                    }
-                    if (verse.Bowing != null)
-                    {
-                        if (BowingNumericUpDown.Value != verse.Bowing.Number)
-                        {
-                            BowingNumericUpDown.Value = verse.Bowing.Number;
-                        }
-                    }
-                    if (VerseNumericUpDown.Value != verse.Number)
-                    {
-                        VerseNumericUpDown.Value = verse.Number;
-                    }
-
-                    int char_index = m_active_textbox.SelectionStart;
-                    int line_index = m_active_textbox.GetLineFromCharIndex(char_index);
-
-                    Word word = GetWordAtChar(char_index);
-                    if (word != null)
-                    {
-                        int word_index_in_verse = word.NumberInVerse - 1;
-                        Letter letter = GetLetterAtChar(char_index);
-                        if (letter == null) letter = GetLetterAtChar(char_index - 1); // (Ctrl_End)
-                        if (letter != null)
-                        {
-                            int letter_index_in_verse = letter.NumberInVerse - 1;
-                            int word_number = verse.Words[0].Number + word_index_in_verse;
-                            if (word_number > WordNumericUpDown.Maximum)
-                            {
-                                WordNumericUpDown.Value = WordNumericUpDown.Maximum;
-                            }
-                            else if (word_number < WordNumericUpDown.Minimum)
-                            {
-                                WordNumericUpDown.Value = WordNumericUpDown.Minimum;
-                            }
-                            else
-                            {
-                                if (WordNumericUpDown.Value != word_number)
-                                {
-                                    WordNumericUpDown.Value = word_number;
-                                }
-                            }
-
-                            if (verse.Words.Count > 0)
-                            {
-                                if (verse.Words[0].Letters.Count > 0)
-                                {
-                                    int letter_number = verse.Words[0].Letters[0].Number + letter_index_in_verse;
-                                    if (letter_number > LetterNumericUpDown.Maximum)
-                                    {
-                                        LetterNumericUpDown.Value = LetterNumericUpDown.Maximum;
-                                    }
-                                    else if (letter_number < LetterNumericUpDown.Minimum)
-                                    {
-                                        LetterNumericUpDown.Value = LetterNumericUpDown.Minimum;
-                                    }
-                                    else
-                                    {
-                                        if (LetterNumericUpDown.Value != letter_number)
-                                        {
-                                            LetterNumericUpDown.Value = letter_number;
-                                        }
-                                    }
-                                }
-                            }
-
-                            m_word_number_in_verse = word_index_in_verse + 1;
-                            m_letter_number_in_verse = letter_index_in_verse + 1;
-                            int word_count = 0;
-                            int letter_count = 0;
-                            if (verse.Chapter != null)
-                            {
-                                foreach (Verse chapter_verse in verse.Chapter.Verses)
-                                {
-                                    if (chapter_verse.NumberInChapter < verse.NumberInChapter)
-                                    {
-                                        word_count += chapter_verse.Words.Count;
-                                        letter_count += chapter_verse.LetterCount;
-                                    }
-                                }
-                            }
-                            m_word_number_in_chapter = word_count + m_word_number_in_verse;
-                            m_letter_number_in_chapter = letter_count + m_letter_number_in_verse;
-
-                            if (m_word_number_in_chapter > ChapterWordNumericUpDown.Maximum)
-                            {
-                                ChapterWordNumericUpDown.Value = ChapterWordNumericUpDown.Maximum;
-                            }
-                            else if (m_word_number_in_chapter < ChapterWordNumericUpDown.Minimum)
-                            {
-                                ChapterWordNumericUpDown.Value = ChapterWordNumericUpDown.Minimum;
-                            }
-                            else
-                            {
-                                if (ChapterWordNumericUpDown.Value != m_word_number_in_chapter)
-                                {
-                                    ChapterWordNumericUpDown.Value = m_word_number_in_chapter;
-                                }
-                            }
-
-                            if (m_letter_number_in_chapter > ChapterLetterNumericUpDown.Maximum)
-                            {
-                                ChapterLetterNumericUpDown.Value = ChapterLetterNumericUpDown.Maximum;
-                            }
-                            else if (m_letter_number_in_chapter < ChapterLetterNumericUpDown.Minimum)
-                            {
-                                ChapterLetterNumericUpDown.Value = ChapterLetterNumericUpDown.Minimum;
-                            }
-                            else
-                            {
-                                if (ChapterLetterNumericUpDown.Value != m_letter_number_in_chapter)
-                                {
-                                    ChapterLetterNumericUpDown.Value = m_letter_number_in_chapter;
-                                }
-                            }
-
-                            ColorizePositionNumbers();
-                            ColorizePositionControls();
-
-                            UpdateVerseDistances(verse);
-
-                            UpdatePlayerButtons(verse);
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    // ignore poosible error due to non-Arabic search result
-                    // showing verses with more words than the words in the Arabic verse
-                    // and throwing exception when assigned to WordNumericUpDown.Value or LetterNumericUpDown.Value
-                    while (ex != null)
-                    {
-                        MessageBox.Show(ex.Message, Application.ProductName);
-                        ex = ex.InnerException;
-                    }
-                }
-                finally
-                {
-                    ChapterComboBox.SelectedIndexChanged += new EventHandler(ChapterComboBox_SelectedIndexChanged);
-                    ChapterVerseNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    ChapterWordNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    ChapterLetterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    PageNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    StationNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    PartNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    GroupNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    HalfNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    QuarterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    BowingNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    VerseNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    WordNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                    LetterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
-                }
-            }
-        }
-    }
-    private void ColorizePositionNumbers()
-    {
-        if (m_client != null)
-        {
-            if (m_client.Book != null)
-            {
-                if ((ChapterComboBox.SelectedIndex >= 0) && (ChapterComboBox.SelectedIndex < m_client.Book.Chapters.Count))
-                {
-                    int chapter_number = m_client.Book.Chapters[ChapterComboBox.SelectedIndex].SortedNumber;
-                    //ChapterComboBox.ForeColor = ChaptersListBox.GetItemColor(chapter_number - 1);
-                    ChapterComboBox.ForeColor = Numbers.GetNumberTypeColor(chapter_number);
-                    ChapterComboBox.BackColor = (Numbers.Compare(chapter_number, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-                }
-            }
-        }
-
-        ChapterVerseNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)ChapterVerseNumericUpDown.Value);
-        ChapterWordNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)ChapterWordNumericUpDown.Value);
-        ChapterLetterNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)ChapterLetterNumericUpDown.Value);
-        PageNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)PageNumericUpDown.Value);
-        StationNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)StationNumericUpDown.Value);
-        PartNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)PartNumericUpDown.Value);
-        GroupNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)GroupNumericUpDown.Value);
-        HalfNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)HalfNumericUpDown.Value);
-        QuarterNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)QuarterNumericUpDown.Value);
-        BowingNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)BowingNumericUpDown.Value);
-        VerseNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)VerseNumericUpDown.Value);
-        WordNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)WordNumericUpDown.Value);
-        LetterNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)LetterNumericUpDown.Value);
-
-        ChapterVerseNumericUpDown.BackColor = (Numbers.Compare((int)ChapterVerseNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-        ChapterWordNumericUpDown.BackColor = (Numbers.Compare((int)ChapterWordNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-        ChapterLetterNumericUpDown.BackColor = (Numbers.Compare((int)ChapterLetterNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-        PageNumericUpDown.BackColor = (Numbers.Compare((int)PageNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-        StationNumericUpDown.BackColor = (Numbers.Compare((int)StationNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-        PartNumericUpDown.BackColor = (Numbers.Compare((int)PartNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-        GroupNumericUpDown.BackColor = (Numbers.Compare((int)GroupNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-        HalfNumericUpDown.BackColor = (Numbers.Compare((int)HalfNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-        QuarterNumericUpDown.BackColor = (Numbers.Compare((int)QuarterNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-        BowingNumericUpDown.BackColor = (Numbers.Compare((int)BowingNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-        VerseNumericUpDown.BackColor = (Numbers.Compare((int)VerseNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-        WordNumericUpDown.BackColor = (Numbers.Compare((int)WordNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-        LetterNumericUpDown.BackColor = (Numbers.Compare((int)LetterNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
-
-        ChapterComboBox.Refresh();
-        ChapterVerseNumericUpDown.Refresh();
-        ChapterWordNumericUpDown.Refresh();
-        ChapterLetterNumericUpDown.Refresh();
-        PageNumericUpDown.Refresh();
-        StationNumericUpDown.Refresh();
-        PartNumericUpDown.Refresh();
-        GroupNumericUpDown.Refresh();
-        HalfNumericUpDown.Refresh();
-        QuarterNumericUpDown.Refresh();
-        BowingNumericUpDown.Refresh();
-        VerseNumericUpDown.Refresh();
-        WordNumericUpDown.Refresh();
-        LetterNumericUpDown.Refresh();
-    }
-    private void ColorizePositionControls()
-    {
-        if (m_client != null)
-        {
-            // reset colors
-            ChapterPositionLabel.ForeColor = Color.CornflowerBlue;
-            ChapterVerseWordLetterPositionLabel.ForeColor = Color.CornflowerBlue;
-            PagePositionLabel.ForeColor = Color.LightSkyBlue;
-            StationPositionLabel.ForeColor = Color.LightSteelBlue;
-            PartPositionLabel.ForeColor = Color.LightSteelBlue;
-            GroupPositionLabel.ForeColor = Color.LightSteelBlue;
-            HalfPositionLabel.ForeColor = Color.LightSteelBlue;
-            QuarterPositionLabel.ForeColor = Color.LightSteelBlue;
-            BowingPositionLabel.ForeColor = Color.LightSteelBlue;
-            VerseWordLetterPositionLabel.ForeColor = Color.LightSteelBlue;
-
-            // set selected color
-            if (m_client.Selection != null)
-            {
-                switch (m_client.Selection.Scope)
-                {
-                    case SelectionScope.Book:
-                        {
-                        }
-                        break;
-                    case SelectionScope.Station:
-                        {
-                            StationPositionLabel.ForeColor = Color.LightCoral;
-                        }
-                        break;
-                    case SelectionScope.Part:
-                        {
-                            PartPositionLabel.ForeColor = Color.LightCoral;
-                        }
-                        break;
-                    case SelectionScope.Group:
-                        {
-                            GroupPositionLabel.ForeColor = Color.LightCoral;
-                        }
-                        break;
-                    case SelectionScope.Half:
-                        {
-                            HalfPositionLabel.ForeColor = Color.LightCoral;
-                        }
-                        break;
-                    case SelectionScope.Quarter:
-                        {
-                            QuarterPositionLabel.ForeColor = Color.LightCoral;
-                        }
-                        break;
-                    case SelectionScope.Bowing:
-                        {
-                            BowingPositionLabel.ForeColor = Color.LightCoral;
-                        }
-                        break;
-                    case SelectionScope.Chapter:
-                        {
-                            ChapterPositionLabel.ForeColor = Color.LightCoral;
-                        }
-                        break;
-                    case SelectionScope.Verse:
-                    case SelectionScope.Word:
-                    case SelectionScope.Letter:
-                        {
-                            ChapterVerseWordLetterPositionLabel.ForeColor = Color.LightCoral;
-                            VerseWordLetterPositionLabel.ForeColor = Color.LightCoral;
-                        }
-                        break;
-                    case SelectionScope.Page:
-                        {
-                            PagePositionLabel.ForeColor = Color.LightCoral;
-                        }
-                        break;
-                    default: // Unknown
-                        break;
-                }
-            }
-        }
-    }
-    private void HighlightWord(int word_number)
-    {
-        if (m_active_textbox != null)
-        {
-            if (m_client != null)
-            {
-                if (m_client.Book != null)
-                {
-                    Verse verse = m_client.Book.GetVerseByWordNumber(word_number);
-                    if (verse != null)
-                    {
-                        word_number -= verse.Words[0].Number;
-                        if ((word_number >= 0) && (word_number < verse.Words.Count))
-                        {
-                            Word word = verse.Words[word_number];
-                            m_active_textbox.Select(word.Position, word.Text.Length);
-                        }
-                    }
-                }
-            }
-        }
-    }
-    private void HighlightLetter(int letter_number)
-    {
-        if (m_active_textbox != null)
-        {
-            if (m_client != null)
-            {
-                if (m_client.Book != null)
-                {
-                    Word word = m_client.Book.GetWordByLetterNumber(letter_number);
-                    if (word != null)
-                    {
-                        if (word.Letters.Count > 0)
-                        {
-                            letter_number -= word.Letters[0].Number;
-                            if ((letter_number >= 0) && (letter_number < word.Letters.Count))
-                            {
-                                int letter_position = word.Position + letter_number;
-                                int letter_length = 1;
-                                m_active_textbox.Select(letter_position, letter_length);
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private int m_progressbar_X = 0;
-    private Verse m_progressbar_verse = null;
-    private void ProgressBar_MouseMove(object sender, MouseEventArgs e)
-    {
-        if (e.X == m_progressbar_X) return;
-        m_progressbar_X = e.X;
-
-        if (m_client != null)
-        {
-            if (m_client.Book != null)
-            {
-                int delta = (int)((double)ProgressBar.Maximum / (double)ProgressBar.Width);
-                int index = (int)(((double)m_progressbar_X / (double)ProgressBar.Width) * (ProgressBar.Maximum + delta));
-                if ((index >= 0) && (index < m_client.Book.Verses.Count))
-                {
-                    m_progressbar_verse = m_client.Book.Verses[index];
-                    string info_text = "Page " + m_progressbar_verse.Page.Number + "     " + m_progressbar_verse.Address + "\t" + m_progressbar_verse.Text;
-                    ToolTip.SetToolTip(ProgressBar, info_text);
-                }
-            }
-        }
-    }
-    private void ProgressBar_Click(object sender, EventArgs e)
-    {
-        if (m_progressbar_verse != null)
-        {
-            GotoVerse(m_progressbar_verse);
-            UpdateProgressBar(m_progressbar_verse);
-        }
-    }
-    private void UpdateProgressBar(Verse verse)
-    {
-        if (m_client != null)
-        {
-            if (m_client.Selection != null)
-            {
-                switch (m_client.Selection.Scope)
-                {
-                    case SelectionScope.Book:
-                        {
-                        }
-                        break;
-                    case SelectionScope.Station:
-                        {
-                        }
-                        break;
-                    case SelectionScope.Part:
-                        {
-                        }
-                        break;
-                    case SelectionScope.Group:
-                        {
-                        }
-                        break;
-                    case SelectionScope.Half:
-                        {
-                        }
-                        break;
-                    case SelectionScope.Quarter:
-                        {
-                        }
-                        break;
-                    case SelectionScope.Bowing:
-                        {
-                        }
-                        break;
-                    case SelectionScope.Chapter:
-                        {
-                        }
-                        break;
-                    case SelectionScope.Verse:
-                    case SelectionScope.Word:
-                    case SelectionScope.Letter:
-                        {
-                        }
-                        break;
-                    case SelectionScope.Page:
-                        {
-                        }
-                        break;
-                }
-
-                // show position of verse in the Quran visually
-                ProgressBar.Minimum = 1;
-                ProgressBar.Maximum = verse.Book.Verses.Count;
-                ProgressBar.Value = verse.Number;
-                ProgressBar.Refresh();
-            }
-        }
-    }
-    ///////////////////////////////////////////////////////////////////////////////
-    #endregion
     #region Bookmarks/Notes
     ///////////////////////////////////////////////////////////////////////////////
     private string m_note_writing_instruction = "";
@@ -26854,7 +25170,7 @@ public partial class MainForm : Form, ISubscriber
     }
     ///////////////////////////////////////////////////////////////////////////////
     #endregion
-    #region Grammar/RelatedWords
+    #region Grammar
     ///////////////////////////////////////////////////////////////////////////////
     private string GetWordInformation(Word word)
     {
@@ -34419,7 +32735,7 @@ public partial class MainForm : Form, ISubscriber
     }
     ///////////////////////////////////////////////////////////////////////////////
     #endregion
-    #region Autocomplete/WordFrequency
+    #region Autocomplete
     ///////////////////////////////////////////////////////////////////////////////
     private bool m_auto_complete_mode = false;
     private bool m_word_double_click = false;
@@ -35095,7 +33411,7 @@ public partial class MainForm : Form, ISubscriber
     private void DisplayWordFrequencies()
     {
         PopulateWordsListBoxWithHighlightedWords();
-        EnableFindByTextControls();
+        UpdateFindByTextControls();
         FindByTextControls_Enter(null, null);
     }
     private void DisplayWordVerses(string item_text)
@@ -35598,7 +33914,7 @@ public partial class MainForm : Form, ISubscriber
         PopulateWordsListBoxWithCurrentOrNextWords();
         FindByTextAtVerseAnyRadioButton.Checked = true;
 
-        EnableFindByTextControls();
+        UpdateFindByTextControls();
         UpdateKeyboard(m_client.NumerologySystem.TextMode);
         FindByTextControls_Enter(null, null);
 
@@ -35616,7 +33932,7 @@ public partial class MainForm : Form, ISubscriber
         PopulateWordsListBoxWithCurrentWords();
         FindByTextAllWordsRadioButton.Checked = true;
 
-        EnableFindByTextControls();
+        UpdateFindByTextControls();
         UpdateKeyboard(m_client.NumerologySystem.TextMode);
         FindByTextControls_Enter(null, null);
 
@@ -35633,7 +33949,7 @@ public partial class MainForm : Form, ISubscriber
         m_text_search_type = TextSearchType.Root;
         PopulateWordsListBoxWithRoots();
 
-        EnableFindByTextControls();
+        UpdateFindByTextControls();
         UpdateKeyboard("Original");
         FindByTextControls_Enter(null, null);
 
@@ -35984,7 +34300,7 @@ public partial class MainForm : Form, ISubscriber
     }
     private void FindByTextTextBox_TextChanged(object sender, EventArgs e)
     {
-        EnableFindByTextControls();
+        UpdateFindByTextControls();
 
         PopulateWordsListBox();
 
@@ -36013,19 +34329,19 @@ public partial class MainForm : Form, ISubscriber
         {
             case SearchScope.Book:
                 {
-                    SearchScopeBookLabel.BackColor = Color.RosyBrown;
+                    SearchScopeBookLabel.BackColor = Color.SteelBlue;
                     SearchScopeBookLabel.BorderStyle = BorderStyle.Fixed3D;
                 }
                 break;
             case SearchScope.Selection:
                 {
-                    SearchScopeSelectionLabel.BackColor = Color.RosyBrown;
+                    SearchScopeSelectionLabel.BackColor = Color.SteelBlue;
                     SearchScopeSelectionLabel.BorderStyle = BorderStyle.Fixed3D;
                 }
                 break;
             case SearchScope.Result:
                 {
-                    SearchScopeResultLabel.BackColor = Color.RosyBrown;
+                    SearchScopeResultLabel.BackColor = Color.SteelBlue;
                     SearchScopeResultLabel.BorderStyle = BorderStyle.Fixed3D;
                 }
                 break;
@@ -36836,7 +35152,7 @@ public partial class MainForm : Form, ISubscriber
             // do nothing
         }
     }
-    private void EnableFindByTextControls()
+    private void UpdateFindByTextControls()
     {
         FindByTextExactSearchTypeLabel.BackColor = (m_text_search_type == TextSearchType.Exact) ? Color.SteelBlue : Color.DarkGray;
         FindByTextExactSearchTypeLabel.BorderStyle = (m_text_search_type == TextSearchType.Exact) ? BorderStyle.Fixed3D : BorderStyle.None;
@@ -40508,7 +38824,7 @@ public partial class MainForm : Form, ISubscriber
     private void FindBySimilarityCurrentVerseTypeLabel_Click(object sender, EventArgs e)
     {
         m_similarity_search_source = SimilaritySearchSource.CurrentVerse;
-        FindBySimilarityPercentageTrackBar.Value = 67;
+        FindBySimilarityPercentageTrackBar.Value = 70;
         FindBySimilarityControls_Enter(null, null);
     }
     private void FindBySimilarityAllVersesTypeLabel_Click(object sender, EventArgs e)
@@ -41689,9 +40005,9 @@ public partial class MainForm : Form, ISubscriber
                                                    to_book_end.ToString() + "  " +
                                                    to_chapter_end.ToString() + "  " +
                                                    to_verse_end.ToString() + "  " +
-                                                   "                    " +
+                                                   "                  " +
                                                    m_current_word.Address +
-                                                   "                    " +
+                                                   "                  " +
                                                    to_book_start.ToString() + "  " +
                                                    to_chapter_start.ToString() + "  " +
                                                    to_verse_start.ToString();
@@ -44779,6 +43095,1688 @@ public partial class MainForm : Form, ISubscriber
         finally
         {
             SearchResultTextBox.SelectionChanged += MainTextBox_SelectionChanged;
+        }
+    }
+    ///////////////////////////////////////////////////////////////////////////////
+    #endregion
+    #region Display Selection
+    ///////////////////////////////////////////////////////////////////////////////
+    private bool m_selection_mode = false;
+    private int m_word_number_in_verse = -1;
+    private int m_letter_number_in_verse = -1;
+    private int m_word_number_in_chapter = -1;
+    private int m_letter_number_in_chapter = -1;
+    private void NumericUpDown_Enter(object sender, EventArgs e)
+    {
+        SearchGroupBox_Leave(null, null);
+        this.AcceptButton = null;
+
+        if (sender == HeaderLabel)
+        {
+            m_active_textbox.Focus();
+            CalculateCurrentValue();
+        }
+
+        // Ctrl+Click factorizes number
+        if (ModifierKeys == Keys.Control)
+        {
+            long value = 0L;
+            if (sender == ChapterComboBox)
+            {
+                if (ChapterComboBox.SelectedIndex != -1)
+                {
+                    string[] parts = ChapterComboBox.Text.Split('-');
+                    if (parts.Length > 0)
+                    {
+                        value = long.Parse(parts[0]);
+                    }
+                }
+            }
+            else if (sender is NumericUpDown)
+            {
+                try
+                {
+                    value = (int)(sender as NumericUpDown).Value;
+                }
+                catch
+                {
+                    value = -1L; // error
+                }
+            }
+            else
+            {
+                value = -1L; // error
+            }
+
+            FactorizeValue(value, "Position", true);
+        }
+    }
+    private void NumericUpDown_Leave(object sender, EventArgs e)
+    {
+        this.AcceptButton = null;
+    }
+    private void NumericUpDown_KeyDown(object sender, KeyEventArgs e)
+    {
+        if (e.KeyCode == Keys.Enter)
+        {
+            if (sender is NumericUpDown)
+            {
+                Control control = (sender as NumericUpDown);
+                if (control != null)
+                {
+                    try
+                    {
+                        for (int i = 0; i < 3; i++) ChapterVerseNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                        for (int i = 0; i < 3; i++) ChapterWordNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                        for (int i = 0; i < 3; i++) ChapterLetterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                        for (int i = 0; i < 3; i++) PageNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                        for (int i = 0; i < 3; i++) StationNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                        for (int i = 0; i < 3; i++) PartNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                        for (int i = 0; i < 3; i++) GroupNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                        for (int i = 0; i < 3; i++) HalfNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                        for (int i = 0; i < 3; i++) QuarterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                        for (int i = 0; i < 3; i++) BowingNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                        for (int i = 0; i < 3; i++) VerseNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                        for (int i = 0; i < 3; i++) WordNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                        for (int i = 0; i < 3; i++) LetterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+
+                        SelectionScope scope = SelectionScope.Book;
+                        if ((control == ChapterVerseNumericUpDown) || (control == VerseNumericUpDown))
+                        {
+                            scope = SelectionScope.Verse;
+                        }
+                        else if ((control == ChapterWordNumericUpDown) || (control == WordNumericUpDown))
+                        {
+                            scope = SelectionScope.Word;
+                        }
+                        else if ((control == ChapterLetterNumericUpDown) || (control == LetterNumericUpDown))
+                        {
+                            scope = SelectionScope.Letter;
+                        }
+                        else if (control == PageNumericUpDown)
+                        {
+                            scope = SelectionScope.Page;
+                        }
+                        else if (control == StationNumericUpDown)
+                        {
+                            scope = SelectionScope.Station;
+                        }
+                        else if (control == PartNumericUpDown)
+                        {
+                            scope = SelectionScope.Part;
+                        }
+                        else if (control == GroupNumericUpDown)
+                        {
+                            scope = SelectionScope.Group;
+                        }
+                        else if (control == HalfNumericUpDown)
+                        {
+                            scope = SelectionScope.Half;
+                        }
+                        else if (control == QuarterNumericUpDown)
+                        {
+                            scope = SelectionScope.Quarter;
+                        }
+                        else if (control == BowingNumericUpDown)
+                        {
+                            scope = SelectionScope.Bowing;
+                        }
+                        else
+                        {
+                            scope = SelectionScope.Book;
+                        }
+
+                        if (m_client != null)
+                        {
+                            if (m_client.Book != null)
+                            {
+                                if (m_client.Selection != null)
+                                {
+                                    // varaibles for word/letter highlight
+                                    int highlight_word_number = 0;
+                                    int highlight_letter_number = 0;
+
+                                    // XXXs before chapter for ChapterXXXNumericUpDown
+                                    Chapter chapter = null;
+                                    int verses_before_chapter = 0;
+                                    int words_before_chapter = 0;
+                                    int letters_before_chapter = 0;
+                                    if (m_client.Selection.Chapters.Count > 0)
+                                    {
+                                        chapter = m_client.Selection.Chapters[0];
+                                        if (chapter != null)
+                                        {
+                                            if (chapter.Verses.Count > 0)
+                                            {
+                                                verses_before_chapter += chapter.Verses[0].Number - 1;
+                                                if (chapter.Verses[0].Words.Count > 0)
+                                                {
+                                                    words_before_chapter += chapter.Verses[0].Words[0].Number - 1;
+                                                    if (chapter.Verses[0].Words[0].Letters.Count > 0)
+                                                    {
+                                                        letters_before_chapter += chapter.Verses[0].Words[0].Letters[0].Number - 1;
+                                                    }
+                                                }
+                                            }
+
+                                            // split by , then by -
+                                            List<int> indexes = new List<int>();
+                                            string text = (sender as NumericUpDown).Text;
+                                            string[] parts = text.Split(',');
+                                            foreach (string part in parts)
+                                            {
+                                                string[] sub_parts = part.Split('-');
+                                                if (sub_parts.Length == 1)
+                                                {
+                                                    int number;
+                                                    if (int.TryParse(sub_parts[0], out number))
+                                                    {
+                                                        if (scope == SelectionScope.Verse)
+                                                        {
+                                                            if (control == ChapterVerseNumericUpDown)
+                                                            {
+                                                                if (chapter.Verses != null)
+                                                                {
+                                                                    if (number > chapter.Verses.Count)
+                                                                    {
+                                                                        number = chapter.Verses.Count;
+                                                                    }
+                                                                    number += verses_before_chapter;
+                                                                }
+                                                            }
+                                                        }
+                                                        else if (scope == SelectionScope.Word)
+                                                        {
+                                                            if (control == ChapterWordNumericUpDown)
+                                                            {
+                                                                if (number > chapter.WordCount)
+                                                                {
+                                                                    number = chapter.WordCount;
+                                                                }
+                                                                number += words_before_chapter;
+                                                            }
+
+                                                            // number = number of verse containing the word
+                                                            if (m_client.Book != null)
+                                                            {
+                                                                Word word = m_client.Book.GetWord(number - 1);
+                                                                if (word != null)
+                                                                {
+                                                                    if (highlight_word_number == 0)
+                                                                    {
+                                                                        highlight_word_number = word.Number;
+                                                                    }
+
+                                                                    if (word.Verse != null)
+                                                                    {
+                                                                        number = word.Verse.Number;
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                        else if (scope == SelectionScope.Letter)
+                                                        {
+                                                            if (control == ChapterLetterNumericUpDown)
+                                                            {
+                                                                if (number > chapter.LetterCount)
+                                                                {
+                                                                    number = chapter.LetterCount;
+                                                                }
+                                                                number += letters_before_chapter;
+                                                            }
+
+                                                            // number = number of verse containing the letter
+                                                            Letter letter = m_client.Book.GetLetter(number - 1);
+                                                            if (letter != null)
+                                                            {
+                                                                if (highlight_letter_number == 0)
+                                                                {
+                                                                    highlight_letter_number = letter.Number;
+                                                                }
+
+                                                                if (letter.Word != null)
+                                                                {
+                                                                    if (letter.Word.Verse != null)
+                                                                    {
+                                                                        number = letter.Word.Verse.Number;
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+
+                                                        // add number to indexes
+                                                        if (!indexes.Contains(number - 1))
+                                                        {
+                                                            indexes.Add(number - 1);
+                                                        }
+                                                    }
+                                                }
+                                                else if (sub_parts.Length == 2)
+                                                {
+                                                    int number;
+                                                    int min, max;
+                                                    if (int.TryParse(sub_parts[0], out min))
+                                                    {
+                                                        if (int.TryParse(sub_parts[1], out max))
+                                                        {
+                                                            int temp = -1;
+                                                            if (min > max) // reverse range, e.g. min-max: 100-90
+                                                            {
+                                                                temp = max;
+                                                                max = min;
+                                                                min = temp;
+                                                            }
+                                                            for (int i = min; i <= max; i++)
+                                                            {
+                                                                if (temp == -1)
+                                                                {
+                                                                    number = i;
+                                                                }
+                                                                else // reversed min-max: 90-100
+                                                                {
+                                                                    // from 100 to 90 i--
+                                                                    number = max - (i - min);
+                                                                }
+
+                                                                if (scope == SelectionScope.Verse)
+                                                                {
+                                                                    if (control == ChapterVerseNumericUpDown)
+                                                                    {
+                                                                        if (chapter.Verses != null)
+                                                                        {
+                                                                            if (number > chapter.Verses.Count)
+                                                                            {
+                                                                                number = chapter.Verses.Count;
+                                                                            }
+                                                                            number += verses_before_chapter;
+                                                                        }
+                                                                    }
+                                                                }
+                                                                else if (scope == SelectionScope.Word)
+                                                                {
+                                                                    if (control == ChapterWordNumericUpDown)
+                                                                    {
+                                                                        if (number > chapter.WordCount)
+                                                                        {
+                                                                            number = chapter.WordCount;
+                                                                        }
+                                                                        number += words_before_chapter;
+                                                                    }
+
+                                                                    // number = number of verse containing the word
+                                                                    if (m_client.Book != null)
+                                                                    {
+                                                                        Word word = m_client.Book.GetWord(number - 1);
+                                                                        if (word != null)
+                                                                        {
+                                                                            if (highlight_word_number == 0)
+                                                                            {
+                                                                                highlight_word_number = word.Number;
+                                                                            }
+
+                                                                            if (word.Verse != null)
+                                                                            {
+                                                                                number = word.Verse.Number;
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                                else if (scope == SelectionScope.Letter)
+                                                                {
+                                                                    if (control == ChapterLetterNumericUpDown)
+                                                                    {
+                                                                        if (number > chapter.LetterCount)
+                                                                        {
+                                                                            number = chapter.LetterCount;
+                                                                        }
+                                                                        number += letters_before_chapter;
+                                                                    }
+
+                                                                    // number = number of verse containing the letter
+                                                                    Letter letter = m_client.Book.GetLetter(number - 1);
+                                                                    if (letter != null)
+                                                                    {
+                                                                        if (highlight_letter_number == 0)
+                                                                        {
+                                                                            highlight_letter_number = letter.Number;
+                                                                        }
+
+                                                                        if (letter.Word != null)
+                                                                        {
+                                                                            if (letter.Word.Verse != null)
+                                                                            {
+                                                                                number = letter.Word.Verse.Number;
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+
+                                                                if (!indexes.Contains(number - 1))
+                                                                {
+                                                                    indexes.Add(number - 1);
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    // do nothing
+                                                }
+                                            }
+
+                                            // always display selection
+                                            if (indexes.Count > 0)
+                                            {
+                                                if ((scope == SelectionScope.Word) || (scope == SelectionScope.Letter))
+                                                {
+                                                    scope = SelectionScope.Verse;
+                                                }
+                                                m_client.Selection = new Selection(m_client.Book, scope, indexes);
+
+                                                PlayerStopLabel_Click(null, null);
+
+                                                DisplaySelection(true);
+
+                                                // highlight first word/letter only
+                                                if ((control == WordNumericUpDown) || (control == ChapterWordNumericUpDown))
+                                                {
+                                                    HighlightWord(highlight_word_number);
+                                                }
+                                                else if ((control == LetterNumericUpDown) || (control == ChapterLetterNumericUpDown))
+                                                {
+                                                    HighlightLetter(highlight_letter_number);
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                        e.SuppressKeyPress = true; // stop annoying beep due to parent not having an AcceptButton
+                    }
+                    catch (Exception ex)
+                    {
+                        while (ex != null)
+                        {
+                            MessageBox.Show(ex.Message, Application.ProductName);
+                            ex = ex.InnerException;
+                        }
+                    }
+                    finally
+                    {
+                        ChapterVerseNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                        ChapterWordNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                        ChapterLetterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                        PageNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                        StationNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                        PartNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                        GroupNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                        HalfNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                        QuarterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                        BowingNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                        VerseNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                        WordNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                        LetterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    }
+                }
+            }
+        }
+    }
+    private void NumericUpDown_ValueChanged(object sender, EventArgs e)
+    {
+        Control control = sender as NumericUpDown;
+        if (control != null)
+        {
+            if (control.Focused)
+            {
+                DisplayNumericSelection(control);
+
+                if (ChapterSelectionComboBox.Items.Count > 0)
+                {
+                    ChapterSelectionComboBox.SelectedIndex = 0;
+                }
+            }
+        }
+    }
+    private void DisplayNumericSelection(Control control)
+    {
+        if (control is NumericUpDown)
+        {
+            if (control.Focused)
+            {
+                try
+                {
+                    for (int i = 0; i < 3; i++) ChapterVerseNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) ChapterWordNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) ChapterLetterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) PageNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) StationNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) PartNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) GroupNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) HalfNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) QuarterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) BowingNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) VerseNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) WordNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) LetterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+
+                    int number = (int)((control as NumericUpDown).Value);
+
+                    // backup number before as it will be overwritten with verse.Number
+                    // if control is WordNumericUpDown OR LetterNumericUpDown or
+                    // if control is ChapterWordNumericUpDown OR ChapterLetterNumericUpDown 
+                    int word_number = 0;
+                    int letter_number = 0;
+                    if ((control == WordNumericUpDown) || (control == ChapterLetterNumericUpDown))
+                    {
+                        word_number = number;
+                    }
+                    else if ((control == LetterNumericUpDown) || (control == ChapterLetterNumericUpDown))
+                    {
+                        letter_number = number;
+                    }
+
+                    if (m_client != null)
+                    {
+                        if (m_client.Book != null)
+                        {
+                            if (m_client.Book.Verses != null)
+                            {
+                                SelectionScope scope = SelectionScope.Book;
+
+                                if (control == ChapterVerseNumericUpDown)
+                                {
+                                    scope = SelectionScope.Verse;
+
+                                    if (m_client.Book.Chapters != null)
+                                    {
+                                        int verse_number_in_chapter = (int)ChapterVerseNumericUpDown.Value;
+
+                                        int selected_index = ChapterComboBox.SelectedIndex;
+                                        if ((selected_index >= 0) && (selected_index < m_client.Book.Chapters.Count))
+                                        {
+                                            Chapter chapter = m_client.Book.Chapters[selected_index];
+                                            if (chapter != null)
+                                            {
+                                                if (chapter.Verses != null)
+                                                {
+                                                    if (chapter.Verses != null)
+                                                    {
+                                                        if (chapter.Verses.Count > verse_number_in_chapter - 1)
+                                                        {
+                                                            Verse verse = chapter.Verses[verse_number_in_chapter - 1];
+                                                            if (verse != null)
+                                                            {
+                                                                number = verse.Number;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else if ((control == ChapterWordNumericUpDown) || (control == ChapterLetterNumericUpDown))
+                                {
+                                    scope = SelectionScope.Verse;
+
+                                    if (m_client.Book.Chapters != null)
+                                    {
+                                        int selected_index = ChapterComboBox.SelectedIndex;
+                                        if ((selected_index >= 0) && (selected_index < m_client.Book.Chapters.Count))
+                                        {
+                                            Chapter chapter = m_client.Book.Chapters[selected_index];
+                                            if (chapter != null)
+                                            {
+                                                if (chapter.Verses != null)
+                                                {
+                                                    if (chapter.Verses.Count > 0)
+                                                    {
+                                                        if (chapter.Verses.Count > 0)
+                                                        {
+                                                            Verse verse = null;
+                                                            if (chapter.Verses[0].Words.Count > 0)
+                                                            {
+                                                                if (control == ChapterWordNumericUpDown)
+                                                                {
+                                                                    word_number = number + chapter.Verses[0].Words[0].Number - 1;
+                                                                    verse = m_client.Book.GetVerseByWordNumber(word_number);
+                                                                }
+                                                                else if (control == ChapterLetterNumericUpDown)
+                                                                {
+                                                                    if (chapter.Verses[0].Words[0].Letters.Count > 0)
+                                                                    {
+                                                                        letter_number = number + chapter.Verses[0].Words[0].Letters[0].Number - 1;
+                                                                        verse = m_client.Book.GetVerseByLetterNumber(letter_number);
+                                                                    }
+                                                                }
+                                                            }
+                                                            if (verse != null)
+                                                            {
+                                                                number = verse.Number;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                                else if (control == PageNumericUpDown)
+                                {
+                                    if (m_client.Book.Pages != null)
+                                    {
+                                        scope = SelectionScope.Page;
+                                    }
+                                }
+                                else if (control == StationNumericUpDown)
+                                {
+                                    if (m_client.Book.Stations != null)
+                                    {
+                                        scope = SelectionScope.Station;
+                                    }
+                                }
+                                else if (control == PartNumericUpDown)
+                                {
+                                    if (m_client.Book.Parts != null)
+                                    {
+                                        scope = SelectionScope.Part;
+                                    }
+                                }
+                                else if (control == GroupNumericUpDown)
+                                {
+                                    if (m_client.Book.Groups != null)
+                                    {
+                                        scope = SelectionScope.Group;
+                                    }
+                                }
+                                else if (control == HalfNumericUpDown)
+                                {
+                                    if (m_client.Book.Halfs != null)
+                                    {
+                                        scope = SelectionScope.Half;
+                                    }
+                                }
+                                else if (control == QuarterNumericUpDown)
+                                {
+                                    if (m_client.Book.Quarters != null)
+                                    {
+                                        scope = SelectionScope.Quarter;
+                                    }
+                                }
+                                else if (control == BowingNumericUpDown)
+                                {
+                                    if (m_client.Book.Bowings != null)
+                                    {
+                                        scope = SelectionScope.Bowing;
+                                    }
+                                }
+                                else if (control == VerseNumericUpDown)
+                                {
+                                    if (m_client.Book.Verses != null)
+                                    {
+                                        scope = SelectionScope.Verse;
+                                    }
+                                }
+                                else if (control == WordNumericUpDown)
+                                {
+                                    Verse verse = m_client.Book.GetVerseByWordNumber(word_number);
+                                    if (verse != null)
+                                    {
+                                        scope = SelectionScope.Verse;
+                                        number = verse.Number;
+                                    }
+                                }
+                                else if (control == LetterNumericUpDown)
+                                {
+                                    Verse verse = m_client.Book.GetVerseByLetterNumber(letter_number);
+                                    if (verse != null)
+                                    {
+                                        scope = SelectionScope.Verse;
+                                        number = verse.Number;
+                                    }
+                                }
+                                else
+                                {
+                                    // do nothing
+                                }
+
+                                if (m_client.Selection != null)
+                                {
+                                    // if selection has changed
+                                    if (
+                                        (m_client.Selection.Scope != scope)
+                                        ||
+                                        ((m_client.Selection.Indexes.Count > 0) && (m_client.Selection.Indexes[0] != (number - 1)))
+                                       )
+                                    {
+                                        PlayerStopLabel_Click(null, null);
+
+                                        List<int> indexes = new List<int>() { number - 1 };
+                                        m_client.Selection = new Selection(m_client.Book, scope, indexes);
+
+                                        DisplaySelection(true);
+                                    }
+                                }
+
+                                if ((control == WordNumericUpDown) || (control == ChapterWordNumericUpDown))
+                                {
+                                    HighlightWord(word_number);
+                                }
+                                else if ((control == LetterNumericUpDown) || (control == ChapterLetterNumericUpDown))
+                                {
+                                    HighlightLetter(letter_number);
+                                }
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    while (ex != null)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName);
+                        ex = ex.InnerException;
+                    }
+                }
+                finally
+                {
+                    ChapterVerseNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    ChapterWordNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    ChapterLetterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    PageNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    StationNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    PartNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    GroupNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    HalfNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    QuarterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    BowingNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    VerseNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    WordNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    LetterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                }
+            }
+        }
+    }
+    private void DisplaySelection(bool add_to_history)
+    {
+        this.Cursor = Cursors.WaitCursor;
+        try
+        {
+            SwitchToMainTextBox();
+
+            MainTextBox.BeginUpdate();
+
+            BookmarkTextBox.Enabled = true;
+
+            m_user_text_mode = false;
+            m_selection_mode = true;
+
+            ToolTip.SetToolTip(InspectChaptersLabel, L[l]["Inspect chapters"]);
+            WordsListBoxLabel.Visible = false;
+            WordsListBox.Visible = false;
+
+            this.Text = Application.ProductName + " ║ " + GetSelectionSummary();
+            UpdateSearchScope();
+
+            DisplaySelectionText();
+
+            CalculateCurrentValue();
+
+            BuildLetterFrequencies();
+            DisplayLetterFrequencies();
+
+            DisplaySelectionPositions();
+
+            MainTextBox.ClearHighlight();
+            MainTextBox.AlignToStart();
+
+            m_current_selection_verse_index = 0;
+            CurrentVerseIndex = 0;
+
+            m_current_letter = GetLetterAtCursor();
+            m_current_word = GetWordAtCursor();
+            m_current_verse = GetCurrentVerse();
+            m_current_chapter = GetCurrentChapter();
+            UpdateHeaderLabel();
+            if (m_current_word != null)
+            {
+                this.Text = GetCurrentWordDetails(m_current_word);
+            }
+
+            if (m_client != null)
+            {
+                if (m_client.Selection != null)
+                {
+                    DisplayTranslations(m_client.Selection.Verses);
+                    DisplaySymmetry();
+                    DisplayCVWLSequence();
+                    DisplayValuesSequence();
+                    DisplayDNASequence();
+
+                    if (m_client.Selection.Verses.Count > 0)
+                    {
+                        Verse verse = m_client.Selection.Verses[0];
+                        UpdatePlayerButtons(verse);
+                    }
+
+                    if (add_to_history)
+                    {
+                        AddBrowseHistoryItem();
+                    }
+
+                    // display selection's note (if any)
+                    DisplayNote(m_client.GetBookmark(m_client.Selection));
+                }
+            }
+
+            if (PictureBox.Visible)
+            {
+                RedrawImage();
+            }
+
+            // update nofity icon text
+            UpdateNotifyIconText();
+        }
+        catch (Exception ex)
+        {
+            while (ex != null)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+                ex = ex.InnerException;
+            }
+        }
+        finally
+        {
+            if (PictureBox.Visible)
+            {
+                PictureBox.Visible = false;
+            }
+
+            MainTextBox.EndUpdate();
+            this.Cursor = Cursors.Default;
+        }
+    }
+    private void UpdateNotifyIconText()
+    {
+        if (m_client != null)
+        {
+            if (m_client.NumerologySystem != null)
+            {
+                NotifyIcon.Text = Application.ProductName + " ║ " + m_client.NumerologySystem.TextMode + " ║ " + GetSelectionSummary();
+            }
+        }
+    }
+    private string GetSelectionSummary()
+    {
+        string result = null;
+        if (m_client != null)
+        {
+            if (m_client.Book != null)
+            {
+                if (m_client.Selection != null)
+                {
+                    if (m_client.Book.Verses != null)
+                    {
+                        if (m_client.Selection.Indexes != null)
+                        {
+                            if ((m_client.Selection.Scope == SelectionScope.Word) || (m_client.Selection.Scope == SelectionScope.Letter))
+                            {
+                                int verse_number = (int)VerseNumericUpDown.Value;
+                                result = L[l]["Verse"] + " " + m_client.Book.Verses[verse_number - 1].Address;
+                            }
+                            else // if scope is Chapter, Page, Station, Part, Group, Half, Quarter, Bowing, Verse
+                            {
+                                StringBuilder str = new StringBuilder();
+
+                                List<int> selection_indexes = new List<int>();
+                                if (m_client.Selection.Scope == SelectionScope.Chapter)
+                                {
+                                    foreach (Chapter chapter in m_client.Selection.Chapters)
+                                    {
+                                        selection_indexes.Add(chapter.SortedNumber - 1);
+                                    }
+                                }
+                                else
+                                {
+                                    selection_indexes = m_client.Selection.Indexes;
+                                }
+
+                                if (Numbers.AreConsecutive(selection_indexes))
+                                {
+                                    if (m_client.Selection.Indexes.Count > 1)
+                                    {
+                                        int first_index = m_client.Selection.Indexes[0];
+                                        int last_index = m_client.Selection.Indexes[m_client.Selection.Indexes.Count - 1];
+
+                                        if (m_client.Selection.Scope == SelectionScope.Verse)
+                                        {
+                                            str.Append(m_client.Book.Verses[first_index].Address + " - ");
+                                            str.Append(m_client.Book.Verses[last_index].Address);
+                                        }
+                                        else if (m_client.Selection.Scope == SelectionScope.Chapter)
+                                        {
+                                            int from_chapter_sorted_number = -1;
+                                            int to_chapter_sorted_number = -1;
+                                            int from_chapter_number = first_index + 1;
+                                            int to_chapter_number = last_index + 1;
+                                            if (m_client.Book.Chapters != null)
+                                            {
+                                                foreach (Chapter chapter in m_client.Book.Chapters)
+                                                {
+                                                    if (chapter.Number == from_chapter_number)
+                                                    {
+                                                        from_chapter_sorted_number = chapter.SortedNumber;
+                                                        break;
+                                                    }
+                                                }
+                                                foreach (Chapter chapter in m_client.Book.Chapters)
+                                                {
+                                                    if (chapter.Number == to_chapter_number)
+                                                    {
+                                                        to_chapter_sorted_number = chapter.SortedNumber;
+                                                        break;
+                                                    }
+                                                }
+                                                str.Append(from_chapter_sorted_number.ToString() + " - ");
+                                                str.Append(to_chapter_sorted_number.ToString());
+                                            }
+                                        }
+                                        else
+                                        {
+                                            str.Append((first_index + 1).ToString() + "-");
+                                            str.Append((last_index + 1).ToString());
+                                        }
+                                    }
+                                    else if (m_client.Selection.Indexes.Count == 1)
+                                    {
+                                        int index = m_client.Selection.Indexes[0];
+                                        if (m_client.Selection.Scope == SelectionScope.Verse)
+                                        {
+                                            str.Append(m_client.Book.Verses[index].Address);
+                                        }
+                                        else if (m_client.Selection.Scope == SelectionScope.Chapter)
+                                        {
+                                            int chapter_sorted_number = 0;
+                                            int chapter_number = index + 1;
+                                            if (m_client.Book.Chapters != null)
+                                            {
+                                                foreach (Chapter chapter in m_client.Book.Chapters)
+                                                {
+                                                    if (chapter.Number == chapter_number)
+                                                    {
+                                                        chapter_sorted_number = chapter.SortedNumber;
+                                                        break;
+                                                    }
+                                                }
+                                                str.Append(chapter_sorted_number.ToString());
+                                            }
+                                        }
+                                        else
+                                        {
+                                            str.Append((index + 1).ToString());
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // do nothing
+                                    }
+                                }
+                                else
+                                {
+                                    if (m_client.Selection.Indexes.Count > 0)
+                                    {
+                                        foreach (int index in m_client.Selection.Indexes)
+                                        {
+                                            if (m_client.Selection.Scope == SelectionScope.Verse)
+                                            {
+                                                str.Append(m_client.Book.Verses[index].Address + " ");
+                                            }
+                                            else if (m_client.Selection.Scope == SelectionScope.Chapter)
+                                            {
+                                                int chapter_sorted_number = 0;
+                                                int chapter_number = index + 1;
+                                                if (m_client.Book.Chapters != null)
+                                                {
+                                                    foreach (Chapter chapter in m_client.Book.Chapters)
+                                                    {
+                                                        if (chapter.Number == chapter_number)
+                                                        {
+                                                            chapter_sorted_number = chapter.SortedNumber;
+                                                            break;
+                                                        }
+                                                    }
+                                                    str.Append(chapter_sorted_number.ToString() + " ");
+                                                }
+                                            }
+                                            else
+                                            {
+                                                str.Append((index + 1).ToString() + " ");
+                                            }
+                                        }
+                                        if (str.Length > 1)
+                                        {
+                                            str.Remove(str.Length - 1, 1);
+                                        }
+                                    }
+
+                                    if (m_client.Selection.Scope == SelectionScope.Verse)
+                                    {
+                                    }
+                                    else if (m_client.Selection.Scope == SelectionScope.Chapter)
+                                    {
+                                    }
+                                    else
+                                    {
+                                    }
+                                }
+
+                                if (m_client.Selection.Indexes.Count == 1)
+                                {
+                                    result = m_client.Selection.Scope.ToString() + " " + str.ToString();
+                                }
+                                else if (m_client.Selection.Indexes.Count > 1)
+                                {
+                                    result = m_client.Selection.Scope.ToString() + "s" + " " + str.ToString();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            if (result != null)
+            {
+                // trim if too long
+                if (result.Length > SELECTON_SCOPE_TEXT_MAX_LENGTH)
+                {
+                    result = result.Substring(0, SELECTON_SCOPE_TEXT_MAX_LENGTH) + " ...";
+                }
+            }
+        }
+        return result;
+    }
+    private void DisplaySelectionText()
+    {
+        if (
+             (m_text_display_mode == TextDisplayMode.Both) ||
+             (m_text_display_mode == TextDisplayMode.QuranOnly)
+           )
+        {
+            if (m_client != null)
+            {
+                if (m_client.Selection != null)
+                {
+                    //Chapter chapter = null;
+                    List<Verse> verses = m_client.Selection.Verses;
+                    if (verses != null)
+                    {
+                        if (verses.Count > 0)
+                        {
+                            //chapter = verses[0].Chapter;
+                            StringBuilder str = new StringBuilder();
+                            foreach (Verse verse in verses)
+                            {
+                                if (verse != null)
+                                {
+                                    //if (chapter != verse.Chapter)
+                                    //{
+                                    //    chapter = verse.Chapter;
+                                    //    str.AppendLine();
+                                    //}
+                                    str.Append(verse.Text + verse.Endmark);
+                                }
+                            }
+                            if (str.Length > 1)
+                            {
+                                str.Remove(str.Length - 1, 1); // last space in " {###} "   OR  \n
+                            }
+                            m_current_text = str.ToString();
+                        }
+                    }
+
+                    MainTextBox.Text = m_current_text;
+                    MainTextBox.Refresh();
+
+                    WordsListBoxLabel.Visible = false;
+                    WordsListBox.Visible = false;
+                    GenerateSentencesLabel.Visible = false;
+                    DuplicateLettersCheckBox.Visible = false;
+
+                    ColorizeGoldenRatios();
+                }
+            }
+        }
+    }
+    private void UpdateLanguageType(string text)
+    {
+        if (text.IsArabic())
+        {
+            SetLanguageType(LanguageType.RightToLeft);
+        }
+        else
+        {
+            SetLanguageType(LanguageType.LeftToRight);
+        }
+        UpdateFindByTextControls();
+    }
+    private void DisplaySelectionPositions()
+    {
+        if (m_client != null)
+        {
+            if (m_client.Selection != null)
+            {
+                List<Verse> verses = m_client.Selection.Verses;
+                if (verses != null)
+                {
+                    if (verses.Count > 0)
+                    {
+                        Verse verse = verses[0];
+                        if (verse != null)
+                        {
+                            // show position of selection in the Quran visually
+                            UpdateProgressBar(verse);
+
+                            if (verse.Chapter != null)
+                            {
+                                UpdateMinMaxChapterVerseWordLetter(verse.Chapter.SortedNumber - 1);
+                            }
+
+                            if (ChapterComboBox.Items.Count > 0)
+                            {
+                                // without this guard, we cannot select more than 1 chapter in ChaptersListBox and
+                                // we cannot move backward/forward inside the ChaptersListBox using Backspace
+                                if (!ChaptersListBox.Focused)
+                                {
+                                    UpdateChaptersListBoxSelectionIndexes();
+                                }
+                            }
+                            UpdateVersePositions(verse);
+
+                            Model.Bookmark bookmark = m_client.GotoBookmark(m_client.Selection.Scope, m_client.Selection.Indexes);
+                            if (bookmark != null)
+                            {
+                                BookmarkTextBox.ForeColor = m_note_view_color;
+                                BookmarkTextBox.Text = bookmark.Note;
+                                string hint = "Creation Time" + "\t" + bookmark.CreatedTime + "\r\n"
+                                            + "Last Modified" + "\t" + bookmark.LastModifiedTime;
+                                ToolTip.SetToolTip(BookmarkTextBox, hint);
+                                UpdateBookmarkButtons();
+                            }
+                            else
+                            {
+                                DisplayNoteWritingInstruction();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private Chapter m_old_chapter = null;
+    private Verse m_old_verse = null;
+    private void DisplayCurrentPositions()
+    {
+        if (m_active_textbox != null)
+        {
+            if (m_active_textbox.Lines != null)
+            {
+                if (m_active_textbox.Lines.Length > 0)
+                {
+                    Verse verse = GetCurrentVerse();
+                    if (verse != null)
+                    {
+                        if (m_old_verse != verse)
+                        {
+                            m_old_verse = verse;
+
+                            // show position of verse in the Quran visually
+                            ProgressBar.Minimum = 1;
+                            ProgressBar.Maximum = verse.Book.Verses.Count;
+                            ProgressBar.Value = verse.Number;
+                            ProgressBar.Refresh();
+
+                            if (verse.Chapter != null)
+                            {
+                                if (m_old_chapter != verse.Chapter)
+                                {
+                                    m_old_chapter = verse.Chapter;
+                                    UpdateMinMaxChapterVerseWordLetter(verse.Chapter.SortedNumber - 1);
+                                }
+                            }
+
+                            if (ChapterComboBox.Items.Count > 0)
+                            {
+                                // without this guard, we cannot select more than 1 chapter in ChaptersListBox and
+                                // we cannot move backward/forward inside the ChaptersListBox using Backspace
+                                if (!ChaptersListBox.Focused)
+                                {
+                                    UpdateChaptersListBoxSelectionIndexes();
+                                }
+                            }
+                        }
+                        UpdateVersePositions(verse);
+                    }
+                }
+            }
+        }
+    }
+    private void UpdateVersePositions(Verse verse)
+    {
+        if (m_active_textbox != null)
+        {
+            if (verse != null)
+            {
+                try
+                {
+                    for (int i = 0; i < 3; i++) ChapterComboBox.SelectedIndexChanged -= new EventHandler(ChapterComboBox_SelectedIndexChanged);
+                    for (int i = 0; i < 3; i++) ChapterVerseNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) ChapterWordNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) ChapterLetterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) PageNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) StationNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) PartNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) GroupNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) HalfNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) QuarterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) BowingNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) VerseNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) WordNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+                    for (int i = 0; i < 3; i++) LetterNumericUpDown.ValueChanged -= new EventHandler(NumericUpDown_ValueChanged);
+
+                    if (verse.Chapter != null)
+                    {
+                        if (ChapterComboBox.SelectedIndex != verse.Chapter.SortedNumber - 1)
+                        {
+                            ChapterComboBox.SelectedIndex = verse.Chapter.SortedNumber - 1;
+                            DisplayChapterRevelationInfo();
+                        }
+                    }
+
+                    if ((verse.NumberInChapter >= 1) && (verse.NumberInChapter <= verse.Chapter.Verses.Count))
+                    {
+                        if (verse.Chapter != null)
+                        {
+                            if (ChapterVerseNumericUpDown.Value != verse.NumberInChapter)
+                            {
+                                ChapterVerseNumericUpDown.Value = (verse.NumberInChapter > ChapterVerseNumericUpDown.Maximum) ? ChapterVerseNumericUpDown.Maximum : verse.NumberInChapter;
+                            }
+                        }
+                    }
+
+                    if (verse.Page != null)
+                    {
+                        if (PageNumericUpDown.Value != verse.Page.Number)
+                        {
+                            PageNumericUpDown.Value = verse.Page.Number;
+                        }
+                    }
+                    if (verse.Station != null)
+                    {
+                        if (StationNumericUpDown.Value != verse.Station.Number)
+                        {
+                            StationNumericUpDown.Value = verse.Station.Number;
+                        }
+                    }
+                    if (verse.Part != null)
+                    {
+                        if (PartNumericUpDown.Value != verse.Part.Number)
+                        {
+                            PartNumericUpDown.Value = verse.Part.Number;
+                        }
+                    }
+                    if (verse.Group != null)
+                    {
+                        if (GroupNumericUpDown.Value != verse.Group.Number)
+                        {
+                            GroupNumericUpDown.Value = verse.Group.Number;
+                        }
+                    }
+                    if (verse.Half != null)
+                    {
+                        if (HalfNumericUpDown.Value != verse.Half.Number)
+                        {
+                            HalfNumericUpDown.Value = verse.Half.Number;
+                        }
+                    }
+                    if (verse.Quarter != null)
+                    {
+                        if (QuarterNumericUpDown.Value != verse.Quarter.Number)
+                        {
+                            QuarterNumericUpDown.Value = verse.Quarter.Number;
+                        }
+                    }
+                    if (verse.Bowing != null)
+                    {
+                        if (BowingNumericUpDown.Value != verse.Bowing.Number)
+                        {
+                            BowingNumericUpDown.Value = verse.Bowing.Number;
+                        }
+                    }
+                    if (VerseNumericUpDown.Value != verse.Number)
+                    {
+                        VerseNumericUpDown.Value = verse.Number;
+                    }
+
+                    int char_index = m_active_textbox.SelectionStart;
+                    int line_index = m_active_textbox.GetLineFromCharIndex(char_index);
+
+                    Word word = GetWordAtChar(char_index);
+                    if (word != null)
+                    {
+                        int word_index_in_verse = word.NumberInVerse - 1;
+                        Letter letter = GetLetterAtChar(char_index);
+                        if (letter == null) letter = GetLetterAtChar(char_index - 1); // (Ctrl_End)
+                        if (letter != null)
+                        {
+                            int letter_index_in_verse = letter.NumberInVerse - 1;
+                            int word_number = verse.Words[0].Number + word_index_in_verse;
+                            if (word_number > WordNumericUpDown.Maximum)
+                            {
+                                WordNumericUpDown.Value = WordNumericUpDown.Maximum;
+                            }
+                            else if (word_number < WordNumericUpDown.Minimum)
+                            {
+                                WordNumericUpDown.Value = WordNumericUpDown.Minimum;
+                            }
+                            else
+                            {
+                                if (WordNumericUpDown.Value != word_number)
+                                {
+                                    WordNumericUpDown.Value = word_number;
+                                }
+                            }
+
+                            if (verse.Words.Count > 0)
+                            {
+                                if (verse.Words[0].Letters.Count > 0)
+                                {
+                                    int letter_number = verse.Words[0].Letters[0].Number + letter_index_in_verse;
+                                    if (letter_number > LetterNumericUpDown.Maximum)
+                                    {
+                                        LetterNumericUpDown.Value = LetterNumericUpDown.Maximum;
+                                    }
+                                    else if (letter_number < LetterNumericUpDown.Minimum)
+                                    {
+                                        LetterNumericUpDown.Value = LetterNumericUpDown.Minimum;
+                                    }
+                                    else
+                                    {
+                                        if (LetterNumericUpDown.Value != letter_number)
+                                        {
+                                            LetterNumericUpDown.Value = letter_number;
+                                        }
+                                    }
+                                }
+                            }
+
+                            m_word_number_in_verse = word_index_in_verse + 1;
+                            m_letter_number_in_verse = letter_index_in_verse + 1;
+                            int word_count = 0;
+                            int letter_count = 0;
+                            if (verse.Chapter != null)
+                            {
+                                foreach (Verse chapter_verse in verse.Chapter.Verses)
+                                {
+                                    if (chapter_verse.NumberInChapter < verse.NumberInChapter)
+                                    {
+                                        word_count += chapter_verse.Words.Count;
+                                        letter_count += chapter_verse.LetterCount;
+                                    }
+                                }
+                            }
+                            m_word_number_in_chapter = word_count + m_word_number_in_verse;
+                            m_letter_number_in_chapter = letter_count + m_letter_number_in_verse;
+
+                            if (m_word_number_in_chapter > ChapterWordNumericUpDown.Maximum)
+                            {
+                                ChapterWordNumericUpDown.Value = ChapterWordNumericUpDown.Maximum;
+                            }
+                            else if (m_word_number_in_chapter < ChapterWordNumericUpDown.Minimum)
+                            {
+                                ChapterWordNumericUpDown.Value = ChapterWordNumericUpDown.Minimum;
+                            }
+                            else
+                            {
+                                if (ChapterWordNumericUpDown.Value != m_word_number_in_chapter)
+                                {
+                                    ChapterWordNumericUpDown.Value = m_word_number_in_chapter;
+                                }
+                            }
+
+                            if (m_letter_number_in_chapter > ChapterLetterNumericUpDown.Maximum)
+                            {
+                                ChapterLetterNumericUpDown.Value = ChapterLetterNumericUpDown.Maximum;
+                            }
+                            else if (m_letter_number_in_chapter < ChapterLetterNumericUpDown.Minimum)
+                            {
+                                ChapterLetterNumericUpDown.Value = ChapterLetterNumericUpDown.Minimum;
+                            }
+                            else
+                            {
+                                if (ChapterLetterNumericUpDown.Value != m_letter_number_in_chapter)
+                                {
+                                    ChapterLetterNumericUpDown.Value = m_letter_number_in_chapter;
+                                }
+                            }
+
+                            ColorizePositionNumbers();
+                            ColorizePositionControls();
+
+                            UpdateVerseDistances(verse);
+
+                            UpdatePlayerButtons(verse);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // ignore poosible error due to non-Arabic search result
+                    // showing verses with more words than the words in the Arabic verse
+                    // and throwing exception when assigned to WordNumericUpDown.Value or LetterNumericUpDown.Value
+                    while (ex != null)
+                    {
+                        MessageBox.Show(ex.Message, Application.ProductName);
+                        ex = ex.InnerException;
+                    }
+                }
+                finally
+                {
+                    ChapterComboBox.SelectedIndexChanged += new EventHandler(ChapterComboBox_SelectedIndexChanged);
+                    ChapterVerseNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    ChapterWordNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    ChapterLetterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    PageNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    StationNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    PartNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    GroupNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    HalfNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    QuarterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    BowingNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    VerseNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    WordNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                    LetterNumericUpDown.ValueChanged += new EventHandler(NumericUpDown_ValueChanged);
+                }
+            }
+        }
+    }
+    private void ColorizePositionNumbers()
+    {
+        if (m_client != null)
+        {
+            if (m_client.Book != null)
+            {
+                if ((ChapterComboBox.SelectedIndex >= 0) && (ChapterComboBox.SelectedIndex < m_client.Book.Chapters.Count))
+                {
+                    int chapter_number = m_client.Book.Chapters[ChapterComboBox.SelectedIndex].SortedNumber;
+                    //ChapterComboBox.ForeColor = ChaptersListBox.GetItemColor(chapter_number - 1);
+                    ChapterComboBox.ForeColor = Numbers.GetNumberTypeColor(chapter_number);
+                    ChapterComboBox.BackColor = (Numbers.Compare(chapter_number, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+                }
+            }
+        }
+
+        ChapterVerseNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)ChapterVerseNumericUpDown.Value);
+        ChapterWordNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)ChapterWordNumericUpDown.Value);
+        ChapterLetterNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)ChapterLetterNumericUpDown.Value);
+        PageNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)PageNumericUpDown.Value);
+        StationNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)StationNumericUpDown.Value);
+        PartNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)PartNumericUpDown.Value);
+        GroupNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)GroupNumericUpDown.Value);
+        HalfNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)HalfNumericUpDown.Value);
+        QuarterNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)QuarterNumericUpDown.Value);
+        BowingNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)BowingNumericUpDown.Value);
+        VerseNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)VerseNumericUpDown.Value);
+        WordNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)WordNumericUpDown.Value);
+        LetterNumericUpDown.ForeColor = Numbers.GetNumberTypeColor((int)LetterNumericUpDown.Value);
+
+        ChapterVerseNumericUpDown.BackColor = (Numbers.Compare((int)ChapterVerseNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        ChapterWordNumericUpDown.BackColor = (Numbers.Compare((int)ChapterWordNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        ChapterLetterNumericUpDown.BackColor = (Numbers.Compare((int)ChapterLetterNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        PageNumericUpDown.BackColor = (Numbers.Compare((int)PageNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        StationNumericUpDown.BackColor = (Numbers.Compare((int)StationNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        PartNumericUpDown.BackColor = (Numbers.Compare((int)PartNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        GroupNumericUpDown.BackColor = (Numbers.Compare((int)GroupNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        HalfNumericUpDown.BackColor = (Numbers.Compare((int)HalfNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        QuarterNumericUpDown.BackColor = (Numbers.Compare((int)QuarterNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        BowingNumericUpDown.BackColor = (Numbers.Compare((int)BowingNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        VerseNumericUpDown.BackColor = (Numbers.Compare((int)VerseNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        WordNumericUpDown.BackColor = (Numbers.Compare((int)WordNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+        LetterNumericUpDown.BackColor = (Numbers.Compare((int)LetterNumericUpDown.Value, m_divisor, ComparisonOperator.DivisibleBy, 0)) ? Numbers.DIVISOR_COLOR : SystemColors.Window;
+
+        ChapterComboBox.Refresh();
+        ChapterVerseNumericUpDown.Refresh();
+        ChapterWordNumericUpDown.Refresh();
+        ChapterLetterNumericUpDown.Refresh();
+        PageNumericUpDown.Refresh();
+        StationNumericUpDown.Refresh();
+        PartNumericUpDown.Refresh();
+        GroupNumericUpDown.Refresh();
+        HalfNumericUpDown.Refresh();
+        QuarterNumericUpDown.Refresh();
+        BowingNumericUpDown.Refresh();
+        VerseNumericUpDown.Refresh();
+        WordNumericUpDown.Refresh();
+        LetterNumericUpDown.Refresh();
+    }
+    private void ColorizePositionControls()
+    {
+        if (m_client != null)
+        {
+            // reset colors
+            ChapterPositionLabel.ForeColor = Color.CornflowerBlue;
+            ChapterVerseWordLetterPositionLabel.ForeColor = Color.CornflowerBlue;
+            PagePositionLabel.ForeColor = Color.LightSkyBlue;
+            StationPositionLabel.ForeColor = Color.LightSteelBlue;
+            PartPositionLabel.ForeColor = Color.LightSteelBlue;
+            GroupPositionLabel.ForeColor = Color.LightSteelBlue;
+            HalfPositionLabel.ForeColor = Color.LightSteelBlue;
+            QuarterPositionLabel.ForeColor = Color.LightSteelBlue;
+            BowingPositionLabel.ForeColor = Color.LightSteelBlue;
+            VerseWordLetterPositionLabel.ForeColor = Color.LightSteelBlue;
+
+            // set selected color
+            if (m_client.Selection != null)
+            {
+                switch (m_client.Selection.Scope)
+                {
+                    case SelectionScope.Book:
+                        {
+                        }
+                        break;
+                    case SelectionScope.Station:
+                        {
+                            StationPositionLabel.ForeColor = Color.LightCoral;
+                        }
+                        break;
+                    case SelectionScope.Part:
+                        {
+                            PartPositionLabel.ForeColor = Color.LightCoral;
+                        }
+                        break;
+                    case SelectionScope.Group:
+                        {
+                            GroupPositionLabel.ForeColor = Color.LightCoral;
+                        }
+                        break;
+                    case SelectionScope.Half:
+                        {
+                            HalfPositionLabel.ForeColor = Color.LightCoral;
+                        }
+                        break;
+                    case SelectionScope.Quarter:
+                        {
+                            QuarterPositionLabel.ForeColor = Color.LightCoral;
+                        }
+                        break;
+                    case SelectionScope.Bowing:
+                        {
+                            BowingPositionLabel.ForeColor = Color.LightCoral;
+                        }
+                        break;
+                    case SelectionScope.Chapter:
+                        {
+                            ChapterPositionLabel.ForeColor = Color.LightCoral;
+                        }
+                        break;
+                    case SelectionScope.Verse:
+                    case SelectionScope.Word:
+                    case SelectionScope.Letter:
+                        {
+                            ChapterVerseWordLetterPositionLabel.ForeColor = Color.LightCoral;
+                            VerseWordLetterPositionLabel.ForeColor = Color.LightCoral;
+                        }
+                        break;
+                    case SelectionScope.Page:
+                        {
+                            PagePositionLabel.ForeColor = Color.LightCoral;
+                        }
+                        break;
+                    default: // Unknown
+                        break;
+                }
+            }
+        }
+    }
+    private void HighlightWord(int word_number)
+    {
+        if (m_active_textbox != null)
+        {
+            if (m_client != null)
+            {
+                if (m_client.Book != null)
+                {
+                    Verse verse = m_client.Book.GetVerseByWordNumber(word_number);
+                    if (verse != null)
+                    {
+                        word_number -= verse.Words[0].Number;
+                        if ((word_number >= 0) && (word_number < verse.Words.Count))
+                        {
+                            Word word = verse.Words[word_number];
+                            m_active_textbox.Select(word.Position, word.Text.Length);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private void HighlightLetter(int letter_number)
+    {
+        if (m_active_textbox != null)
+        {
+            if (m_client != null)
+            {
+                if (m_client.Book != null)
+                {
+                    Word word = m_client.Book.GetWordByLetterNumber(letter_number);
+                    if (word != null)
+                    {
+                        if (word.Letters.Count > 0)
+                        {
+                            letter_number -= word.Letters[0].Number;
+                            if ((letter_number >= 0) && (letter_number < word.Letters.Count))
+                            {
+                                int letter_position = word.Position + letter_number;
+                                int letter_length = 1;
+                                m_active_textbox.Select(letter_position, letter_length);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private int m_progressbar_X = 0;
+    private Verse m_progressbar_verse = null;
+    private void ProgressBar_MouseMove(object sender, MouseEventArgs e)
+    {
+        if (e.X == m_progressbar_X) return;
+        m_progressbar_X = e.X;
+
+        if (m_client != null)
+        {
+            if (m_client.Book != null)
+            {
+                int delta = (int)((double)ProgressBar.Maximum / (double)ProgressBar.Width);
+                int index = (int)(((double)m_progressbar_X / (double)ProgressBar.Width) * (ProgressBar.Maximum + delta));
+                if ((index >= 0) && (index < m_client.Book.Verses.Count))
+                {
+                    m_progressbar_verse = m_client.Book.Verses[index];
+                    string info_text = "Page " + m_progressbar_verse.Page.Number + "     " + m_progressbar_verse.Address + "\t" + m_progressbar_verse.Text;
+                    ToolTip.SetToolTip(ProgressBar, info_text);
+                }
+            }
+        }
+    }
+    private void ProgressBar_Click(object sender, EventArgs e)
+    {
+        if (m_progressbar_verse != null)
+        {
+            GotoVerse(m_progressbar_verse);
+            UpdateProgressBar(m_progressbar_verse);
+        }
+    }
+    private void UpdateProgressBar(Verse verse)
+    {
+        if (m_client != null)
+        {
+            if (m_client.Selection != null)
+            {
+                switch (m_client.Selection.Scope)
+                {
+                    case SelectionScope.Book:
+                        {
+                        }
+                        break;
+                    case SelectionScope.Station:
+                        {
+                        }
+                        break;
+                    case SelectionScope.Part:
+                        {
+                        }
+                        break;
+                    case SelectionScope.Group:
+                        {
+                        }
+                        break;
+                    case SelectionScope.Half:
+                        {
+                        }
+                        break;
+                    case SelectionScope.Quarter:
+                        {
+                        }
+                        break;
+                    case SelectionScope.Bowing:
+                        {
+                        }
+                        break;
+                    case SelectionScope.Chapter:
+                        {
+                        }
+                        break;
+                    case SelectionScope.Verse:
+                    case SelectionScope.Word:
+                    case SelectionScope.Letter:
+                        {
+                        }
+                        break;
+                    case SelectionScope.Page:
+                        {
+                        }
+                        break;
+                }
+
+                // show position of verse in the Quran visually
+                ProgressBar.Minimum = 1;
+                ProgressBar.Maximum = verse.Book.Verses.Count;
+                ProgressBar.Value = verse.Number;
+                ProgressBar.Refresh();
+            }
         }
     }
     ///////////////////////////////////////////////////////////////////////////////
@@ -52232,29 +52230,32 @@ public partial class MainForm : Form, ISubscriber
                         WordsListBox.Visible = false;
                     }
 
-                    if (ModifierKeys == Keys.Shift)
+                    if (!m_found_verses_displayed)
                     {
-                        switch (m_header_display_mode)
+                        if (ModifierKeys == Keys.Shift)
                         {
-                            case HeaderDisplayMode.Info: m_header_display_mode = HeaderDisplayMode.Chapter; break;
-                            case HeaderDisplayMode.Letter: m_header_display_mode = HeaderDisplayMode.Info; break;
-                            case HeaderDisplayMode.Word: m_header_display_mode = HeaderDisplayMode.Letter; break;
-                            case HeaderDisplayMode.Verse: m_header_display_mode = HeaderDisplayMode.Word; break;
-                            case HeaderDisplayMode.Chapter: m_header_display_mode = HeaderDisplayMode.Verse; break;
+                            switch (m_header_display_mode)
+                            {
+                                case HeaderDisplayMode.Info: m_header_display_mode = HeaderDisplayMode.Chapter; break;
+                                case HeaderDisplayMode.Letter: m_header_display_mode = HeaderDisplayMode.Info; break;
+                                case HeaderDisplayMode.Word: m_header_display_mode = HeaderDisplayMode.Letter; break;
+                                case HeaderDisplayMode.Verse: m_header_display_mode = HeaderDisplayMode.Word; break;
+                                case HeaderDisplayMode.Chapter: m_header_display_mode = HeaderDisplayMode.Verse; break;
+                            }
                         }
-                    }
-                    else
-                    {
-                        switch (m_header_display_mode)
+                        else
                         {
-                            case HeaderDisplayMode.Info: m_header_display_mode = HeaderDisplayMode.Letter; break;
-                            case HeaderDisplayMode.Letter: m_header_display_mode = HeaderDisplayMode.Word; break;
-                            case HeaderDisplayMode.Word: m_header_display_mode = HeaderDisplayMode.Verse; break;
-                            case HeaderDisplayMode.Verse: m_header_display_mode = HeaderDisplayMode.Chapter; break;
-                            case HeaderDisplayMode.Chapter: m_header_display_mode = HeaderDisplayMode.Info; break;
+                            switch (m_header_display_mode)
+                            {
+                                case HeaderDisplayMode.Info: m_header_display_mode = HeaderDisplayMode.Letter; break;
+                                case HeaderDisplayMode.Letter: m_header_display_mode = HeaderDisplayMode.Word; break;
+                                case HeaderDisplayMode.Word: m_header_display_mode = HeaderDisplayMode.Verse; break;
+                                case HeaderDisplayMode.Verse: m_header_display_mode = HeaderDisplayMode.Chapter; break;
+                                case HeaderDisplayMode.Chapter: m_header_display_mode = HeaderDisplayMode.Info; break;
+                            }
                         }
+                        UpdateHeaderLabel();
                     }
-                    UpdateHeaderLabel();
                 }
             }
         }
