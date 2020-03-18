@@ -3854,7 +3854,6 @@ public partial class MainForm : Form, ISubscriber
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityButton);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityPercentageLabel);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityAllVersesTypeLabel);
-        this.FindBySimilarityPanel.Controls.Add(this.DisplayProstrationVersesLabel);
         this.FindBySimilarityPanel.Controls.Add(this.AuthorLabel);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityPercentageTrackBar);
         this.FindBySimilarityPanel.Controls.Add(this.FindBySimilarityWordsRadioButton);
@@ -6279,6 +6278,7 @@ public partial class MainForm : Form, ISubscriber
         this.HeaderPanel.Controls.Add(this.GoldenRatioScopeLabel);
         this.HeaderPanel.Controls.Add(this.GoldenRatioTypeLabel);
         this.HeaderPanel.Controls.Add(this.GoldenRatioOrderLabel);
+        this.HeaderPanel.Controls.Add(this.DisplayProstrationVersesLabel);
         this.HeaderPanel.Controls.Add(this.GenerateSentencesLabel);
         this.HeaderPanel.Controls.Add(this.DuplicateLettersCheckBox);
         this.HeaderPanel.Controls.Add(this.WordWrapLabel);
@@ -6435,7 +6435,7 @@ public partial class MainForm : Form, ISubscriber
         // 
         // DisplayProstrationVersesLabel
         // 
-        this.DisplayProstrationVersesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+        this.DisplayProstrationVersesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
         this.DisplayProstrationVersesLabel.BackColor = System.Drawing.Color.Transparent;
         this.DisplayProstrationVersesLabel.Cursor = System.Windows.Forms.Cursors.Hand;
         this.DisplayProstrationVersesLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
