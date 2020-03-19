@@ -40090,6 +40090,7 @@ public partial class MainForm : Form, ISubscriber
     private void SwitchToMainTextBox()
     {
         CloseScript();
+        HelpMessageLabel.SendToBack();
 
         if (m_active_textbox != null)
         {
@@ -40127,6 +40128,7 @@ public partial class MainForm : Form, ISubscriber
     private void SwitchToSearchResultTextBox()
     {
         CloseScript();
+        HelpMessageLabel.BringToFront();
 
         if (m_active_textbox != null)
         {
@@ -40162,6 +40164,7 @@ public partial class MainForm : Form, ISubscriber
     private void SwitchToPictureBox()
     {
         CloseScript();
+        HelpMessageLabel.BringToFront();
 
         ShowPictureBox();
     }
